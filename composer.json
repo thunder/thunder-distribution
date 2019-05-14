@@ -38,6 +38,7 @@
         }
     ],
     "extra": {
+        "installer-name": "thunder",
         "installer-paths": {
             "docroot/core": [
                 "type:drupal-core"
