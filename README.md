@@ -12,7 +12,7 @@ Instructions on how to install Thunder can be found at the [installation guide](
 To start quickly, run this in your terminal to install Thunder from command line:
 
 ```
-composer create-project burdamagazinorg/thunder-project thunder --no-interaction
+composer create-project thunder/thunder-project thunder --no-interaction
 cd thunder/docroot
 php core/scripts/drupal quick-start thunder
 ```
