@@ -35,6 +35,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'thunder_riddle',
     'harbourmaster',
     'simple_gmap',
+    'search_api',
 
     // Additional modules.
     // 'nexx_integration',
@@ -91,6 +92,14 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_view_mode.taxonomy_term.token',
     'core.entity_view_mode.user.token',
     'core.entity_view_mode.path_alias.token',
+
+    // SearchAPI tour.
+    'tour.tour.search-api-index',
+    'tour.tour.search-api-index-fields',
+    'tour.tour.search-api-index-form',
+    'tour.tour.search-api-index-processors',
+    'tour.tour.search-api-server',
+    'tour.tour.search-api-server-form',
   ];
 
   /**
@@ -136,6 +145,9 @@ class InstalledConfigurationTest extends ThunderTestBase {
     ],
 
     // Changed on installation.
+    'views.view.content' => [
+      'status' => TRUE,
+    ],
     'views.view.glossary' => [
       'dependencies' => [
         'config' => TRUE,
