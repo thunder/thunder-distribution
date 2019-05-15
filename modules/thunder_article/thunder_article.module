@@ -35,3 +35,12 @@ function thunder_article_form_node_form_alter(&$form, FormStateInterface $form_s
     ->getInstanceFromDefinition(ThunderNodeForm::class)
     ->formAlter($form, $form_state);
 }
+
+/**
+ * Implements hook_metatag_tags_alter().
+ */
+function thunder_article_metatag_tags_alter(array &$definition) {
+  foreach (\Drupal::config('thunder_article.settings')->get('thunder_article_metatags') as $tag) {
+    $definition[$tag]['group'] = 'thunder_article';
+  }
+}
