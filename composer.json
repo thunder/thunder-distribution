@@ -79,6 +79,12 @@
             },
             "drupal/linkit": {
                 "Drupal 8.7 no longer has a dedicated canonical route for media entities, breaks entity matcher deriver": "https://www.drupal.org/files/issues/2019-05-03/linkit-media-87-3040749-8.patch"
+            },
+            "drupal/search_api": {
+                "SearchApiQuery does not implement getCacheTags()": "https://www.drupal.org/files/issues/2019-03-13/3034996-7.patch"
+            },
+            "drupal/select2": {
+                "Support for AJAX Facets": "https://patch-diff.githubusercontent.com/raw/thunder/select2/pull/54.patch"
             }
         }
     },
@@ -108,6 +114,7 @@
         "drupal/entity_browser": "^2.0",
         "drupal/entity_reference_revisions": "^1.0",
         "drupal/fb_instant_articles": "^1.0",
+        "drupal/facets": "^1.0",
         "drupal/field_group": "^1.0",
         "drupal/focal_point": "^1.0",
         "drupal/google_analytics": "^2.0",
@@ -131,6 +138,7 @@
         "drupal/redirect": "^1.0",
         "drupal/scheduler": "1.0",
         "drupal/scheduler_content_moderation_integration": "~1.0",
+        "drupal/search_api": "dev-1.x",
         "drupal/select2": "^1.0",
         "drupal/simple_sitemap": "^2.0",
         "drupal/shariff": "^1.0",
@@ -139,6 +147,7 @@
         "drupal/thunder_admin": "3.x-dev",
         "drupal/token": "^1.0",
         "drupal/update_helper": "^1.0",
+        "drupal/views_bulk_operations": "^2.4",
         "npm-asset/dropzone": "^5.5",
         "npm-asset/exif-js": "^2.3.0",
         "npm-asset/blazy": "^1.8",
