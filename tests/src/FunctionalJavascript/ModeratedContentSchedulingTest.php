@@ -24,7 +24,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $this->articleFillNew([
       'field_channel' => 1,
       'title[0][value]' => 'Test workflow article 1 - Published',
-      'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
+      'field_seo_title[0][value]' => 'Massive gaining seo traffic text 1',
       'moderation_state[0]' => 'draft',
       'publish_on[0][value][date]' => date('Y-m-d', $publish_timestamp),
       'publish_on[0][value][time]' => date('H:i:s', $publish_timestamp),
@@ -74,20 +74,23 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
    * Tests moderated nodes unpublish scheduling.
    */
   public function testUnpublishStateSchedule() {
-    $publish_timestamp = strtotime('yesterday');
 
     $this->articleFillNew([
       'field_channel' => 1,
       'title[0][value]' => 'Test workflow article 2 - Published',
-      'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
+      'field_seo_title[0][value]' => 'Massive gaining seo traffic text 2',
       'moderation_state[0]' => 'published',
-      'unpublish_on[0][value][date]' => date('Y-m-d', $publish_timestamp),
-      'unpublish_on[0][value][time]' => date('H:i:s', $publish_timestamp),
+      'unpublish_on[0][value][date]' => date('Y-m-d', strtotime('tomorrow')),
       'unpublish_state[0]' => 'unpublished',
     ]);
     $this->clickSave();
 
     $node = $this->getNodeByTitle('Test workflow article 2 - Published');
+
+    // Set date manually, unpublish cannot be in the past.
+    $node->unpublish_on->value = strtotime('yesterday');
+    $node->save();
+
     $revision_id = $node->getRevisionId();
     // Make sure node is published.
     $this->assertEquals(TRUE, Node::load($node->id())->isPublished());
@@ -108,38 +111,37 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $this->articleFillNew([
       'field_channel' => 1,
       'title[0][value]' => 'Test workflow article 3 - Published',
-      'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
+      'field_seo_title[0][value]' => 'Massive gaining seo traffic text 3',
       'moderation_state[0]' => 'published',
     ]);
     $this->clickSave();
 
     $node = $this->getNodeByTitle('Test workflow article 3 - Published');
-
     $nid = $node->id();
+
     // Assert node is published.
     $this->assertEquals('Test workflow article 3 - Published', Node::load($nid)->getTitle());
 
     // Create a new pending revision and validate it's not the default published
     // one.
-    $this->setFieldValues($this->getSession()->getPage(), [
-      'title[0][value]' => 'Test workflow article 3 - Draft',
-      'moderation_state[0]' => 'draft',
-      'publish_on[0][value][date]' => date('Y-m-d', $publish_timestamp),
-      'publish_on[0][value][time]' => date('H:i:s', $publish_timestamp),
-      'publish_state[0]' => 'published',
-    ]);
-    $this->clickSave();
-
-    $node = $this->getNodeByTitle('Test workflow article 3 - Draft');
+    $node->setTitle('Test workflow article 3 - Draft');
+    $node->set('publish_on', strtotime('yesterday'));
+    $node->set('moderation_state', 'draft');
+    $node->set('publish_state', 'published');
+    $node->save();
     $revision_id = $node->getRevisionId();
+
     // Test latest revision is not the published one.
     $this->assertEquals('Test workflow article 3 - Published', Node::load($nid)->getTitle());
+
     $this->container->get('cron')->run();
 
     // Test latest revision is now the published one.
     $this->assertEquals('Test workflow article 3 - Draft', Node::load($nid)->getTitle());
+
     // Assert only one revision is created during the operation.
     $this->assertEquals($revision_id + 1, Node::load($node->id())->getRevisionId());
+
   }
 
 }
