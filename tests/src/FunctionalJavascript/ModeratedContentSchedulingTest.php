@@ -106,8 +106,6 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
    * Tests publish scheduling for a draft of a published node.
    */
   public function testPublishOfDraft() {
-    $publish_timestamp = strtotime('yesterday');
-
     $this->articleFillNew([
       'field_channel' => 1,
       'title[0][value]' => 'Test workflow article 3 - Published',
