@@ -75,6 +75,7 @@ install:
   - redirect:redirect
   - scheduler:scheduler
   - scheduler:scheduler_content_moderation_integration
+  - schema_article:schema_article
   - shariff:shariff
   - select2:select2
   - simple_sitemap:simple_sitemap
