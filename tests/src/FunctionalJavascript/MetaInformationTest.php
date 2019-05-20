@@ -27,10 +27,8 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @var array
    */
   protected static $globalMetaTags = [
-    'basic title' => 'Global Title',
-    'basic keywords' => 'Thunder,CMS,Burda',
-    'basic abstract' => '[random]',
-    'basic description' => '[random]',
+    'thunder_article title' => 'Global Title',
+    'thunder_article description' => '[random]',
   ];
 
   /**
@@ -39,8 +37,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @var array
    */
   protected static $contentMetaTags = [
-    'basic title' => '[node:title]',
-    'basic abstract' => '[random]',
+    'thunder_article title' => '[node:title]',
   ];
 
   /**
@@ -49,19 +46,19 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @var array
    */
   protected static $articleMetaTags = [
-    'basic title' => 'Test [node:field_teaser_text]',
-    'basic description' => '[random]',
-    'advanced robots' => 'index, follow, noydir',
-    'advanced referrer' => 'no-referrer-when-downgrade',
+    'thunder_article title' => 'Test [node:field_teaser_text]',
+    'thunder_article description' => '[random]',
+    'thunder_article robots' => 'index, follow, noydir',
+    'thunder_article referrer' => 'no-referrer-when-downgrade',
 
     // OpenGraph Meta Tags.
-    'open_graph og:image' => '[node:field_teaser_media:entity:field_image:facebook]',
-    'open_graph og:image:type' => '[node:field_teaser_media:entity:field_image:facebook:mimetype]',
-    'open_graph og:image:height' => '[node:field_teaser_media:entity:field_image:facebook:height]',
-    'open_graph og:image:width' => '[node:field_teaser_media:entity:field_image:facebook:width]',
-    'open_graph og:description' => '[node:field_teaser_text]',
-    'open_graph og:title' => '[node:field_seo_title]',
-    'open_graph og:site_name' => '[node:title]',
+    'thunder_article og:image' => '[node:field_teaser_media:entity:field_image:facebook]',
+    'thunder_article og:image:type' => '[node:field_teaser_media:entity:field_image:facebook:mimetype]',
+    'thunder_article og:image:height' => '[node:field_teaser_media:entity:field_image:facebook:height]',
+    'thunder_article og:image:width' => '[node:field_teaser_media:entity:field_image:facebook:width]',
+    'thunder_article og:description' => '[node:field_teaser_text]',
+    'thunder_article og:title' => '[node:field_seo_title]',
+    'thunder_article og:site_name' => '[node:title]',
   ];
 
   /**
@@ -70,10 +67,10 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @var array
    */
   protected static $customMetaTags = [
-    'basic title' => 'Custom [node:field_teaser_text]',
-    'basic description' => '[random]',
-    'advanced robots' => 'follow',
-    'advanced referrer' => 'no-referrer',
+    'thunder_article title' => 'Custom [node:field_teaser_text]',
+    'thunder_article description' => '[random]',
+    'thunder_article robots' => 'follow',
+    'thunder_article referrer' => 'no-referrer',
   ];
 
   /**
