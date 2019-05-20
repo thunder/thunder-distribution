@@ -62,7 +62,6 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     'open_graph og:description' => '[node:field_teaser_text]',
     'open_graph og:title' => '[node:field_seo_title]',
     'open_graph og:site_name' => '[node:title]',
-    'open_graph og:type' => 'article',
   ];
 
   /**
