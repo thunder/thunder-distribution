@@ -75,7 +75,7 @@
             },
             "drupal/password_policy": {
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch",
-                "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2018-07-30/password_policy-config_import_field_error-2771129-57.patch"
+                "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2019-05-20/password_policy-config_import_field_error-2771129-80.patch"
             },
             "drupal/linkit": {
                 "Drupal 8.7 no longer has a dedicated canonical route for media entities, breaks entity matcher deriver": "https://www.drupal.org/files/issues/2019-05-03/linkit-media-87-3040749-8.patch"
@@ -144,7 +144,7 @@
         "npm-asset/blazy": "^1.8",
         "npm-asset/slick-carousel": "^1.8",
         "npm-asset/shariff": "^3.1.1",
-        "npm-asset/select2": "4.0.4"
+        "npm-asset/select2": "^4.0.7"
     },
     "suggest": {
         "drupal/riddle_marketplace": "Riddle marketplace integration",
@@ -160,9 +160,7 @@
         "npm-asset/jqueryui": "*",
         "npm-asset/backbone": "*",
         "npm-asset/underscore": "*",
-        "npm-asset/fortawesome--fontawesome-free-webfonts": "*",
-        "npm-asset/jquery-mousewheel": "*",
-        "npm-asset/almond": "*"
+        "npm-asset/fortawesome--fontawesome-free": "*"
     },
     "require-dev": {
         "burdamagazinorg/thunder-dev-tools": "dev-master",
