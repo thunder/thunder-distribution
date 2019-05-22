@@ -13,6 +13,8 @@ use Drupal\Tests\thunder\Functional\ThunderTestBase;
 class ContentTranslationTest extends ThunderTestBase {
 
   protected static $modules = [
+    'thunder_demo',
+    'content_moderation',
     'content_translation',
   ];
 
@@ -37,7 +39,7 @@ class ContentTranslationTest extends ThunderTestBase {
   /**
    * Test that basic translation creation works.
    */
-  public function testEmptyMenuEntriesAreGone() {
+  public function testBasicContentTranslation() {
 
     $this->logWithRole('editor');
 
