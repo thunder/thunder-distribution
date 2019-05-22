@@ -298,6 +298,25 @@ function thunder_modules_installed($modules) {
       \Drupal::logger('thunder')->info(t('Could not add ivw field to channel taxonomy: "@message"', ['@message' => $e->getMessage()]));
     }
   }
+
+  // When enabling content_translation, grant permissions to Thunder user roles.
+  if (_thunder_check_triggering_modules($modules, ['content_translation'])) {
+    /** @var \Drupal\user\Entity\Role[] $roles */
+    $roles = Role::loadMultiple(['editor', 'seo', 'restricted_editor']);
+    foreach ($roles as $role) {
+      try {
+        $role->grantPermission('create content translations');
+        $role->grantPermission('update content translations');
+        $role->grantPermission('translate any entity');
+        if (in_array($role->id(), ['editor', 'seo'])) {
+          $role->grantPermission('delete content translations');
+        }
+        $role->save();
+      }
+       catch (EntityStorageException $storageException) {
+      }
+    }
+  }
 }
 
 /**
