@@ -313,7 +313,7 @@ function thunder_modules_installed($modules) {
         }
         $role->save();
       }
-       catch (EntityStorageException $storageException) {
+      catch (EntityStorageException $storageException) {
       }
     }
   }
