@@ -38,7 +38,7 @@ jobs:
       before_script:
         - bash -x -e ./scripts/travis/04-install-thunder.sh
       script:
-        - bash -x -e ./scripts/travis/07-upload-assets-to-s3.sh
+        - bash -x -e ./scripts/travis/07-upload-artifacts-to-s3.sh
 
     - stage: sanity checks
       name: Verify makefile, check coding standards, check for deprecated code
