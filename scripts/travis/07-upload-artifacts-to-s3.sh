@@ -8,6 +8,7 @@ gzip < "${DEPLOYMENT_DUMP_FILE}" > "${DB_ARTIFACT_FILE}"
 # Cleanup project
 cd "${TEST_DIR}"
 composer install --no-dev
+rm -rf "${TEST_DIR}/bin"
 rm -rf "${TEST_DIR}/docroot/sites/default/files/*"
 find "${TEST_DIR}" -type d -name ".git" | xargs rm -rf
 find "${THUNDER_DIST_DIR}" -type d -name ".git" | xargs rm -rf
