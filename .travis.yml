@@ -35,6 +35,8 @@ jobs:
   include:
     - stage: build project
       name: Build project with composer and package it
+      install:
+        - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
       before_script:
         - bash -x -e ./scripts/travis/04-install-thunder.sh
       script:
@@ -85,7 +87,7 @@ before_install:
   - bash -x -e ./scripts/travis/02-before-install.sh
 
 install:
-  - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
+  - bash -x -e ./scripts/travis/03-use-thunder-artifact.sh
 
 before_script:
   - bash -x -e ./scripts/travis/04-install-thunder.sh
