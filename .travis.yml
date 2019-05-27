@@ -90,7 +90,7 @@ install:
   - bash -x -e ./scripts/travis/03-use-thunder-artifact.sh
 
 before_script:
-  - bash -x -e ./scripts/travis/04-install-thunder.sh
+  - bash -x -e ./scripts/travis/04-use-database-artifact.sh
   - bash -x -e ./scripts/travis/05-setup-tests.sh
 
 script:
