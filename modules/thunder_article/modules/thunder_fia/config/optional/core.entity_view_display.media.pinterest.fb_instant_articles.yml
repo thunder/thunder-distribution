@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.media.fb_instant_articles
+  - field.field.media.pinterest.field_url
+  - media.type.pinterest
+  module:
+  - empty_fields
+  - fb_instant_articles
+id: media.pinterest.fb_instant_articles
+targetEntityType: media
+bundle: pinterest
+mode: fb_instant_articles
+content:
+  field_url:
+    weight: 0
+    label: hidden
+    settings:
+      width: null
+      height: null
+      margin: no-margin
+    third_party_settings:
+      empty_fields:
+        handler: ''
+    type: fbia_interactive_link
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

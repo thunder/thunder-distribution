@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.paragraph.fb_instant_articles
+  - field.field.paragraph.gallery.field_media
+  - paragraphs.paragraphs_type.gallery
+  module:
+  - empty_fields
+  - fb_instant_articles
+id: paragraph.gallery.fb_instant_articles
+targetEntityType: paragraph
+bundle: gallery
+mode: fb_instant_articles
+content:
+  field_media:
+    type: fbia_entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: fb_instant_articles
+    third_party_settings:
+      empty_fields:
+        handler: ''
+    region: content
+hidden:
+  created: true
+  uid: true

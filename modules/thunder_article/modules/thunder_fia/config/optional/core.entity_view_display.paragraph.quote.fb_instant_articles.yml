@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.paragraph.fb_instant_articles
+  - field.field.paragraph.quote.field_text
+  - paragraphs.paragraphs_type.quote
+  module:
+  - fb_instant_articles
+id: paragraph.quote.fb_instant_articles
+targetEntityType: paragraph
+bundle: quote
+mode: fb_instant_articles
+content:
+  field_text:
+    type: fbia_transformer
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  uid: true

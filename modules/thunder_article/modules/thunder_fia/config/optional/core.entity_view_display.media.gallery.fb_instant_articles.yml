@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.media.fb_instant_articles
+  - field.field.media.gallery.field_media_images
+  - media.type.gallery
+  module:
+  - fb_instant_articles
+id: media.gallery.fb_instant_articles
+targetEntityType: media
+bundle: gallery
+mode: fb_instant_articles
+content:
+  field_media_images:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: fb_instant_articles
+    third_party_settings: {  }
+    type: fbia_entity_reference_entity_view
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

@@ -3,7 +3,7 @@ status: true
 dependencies:
   module:
     - media
-id: media.facebook_instant_articles_rss
-label: 'Facebook Instant Articles: RSS'
+id: media.fb_instant_articles
+label: 'Facebook Instant Articles'
 targetEntityType: media
 cache: true

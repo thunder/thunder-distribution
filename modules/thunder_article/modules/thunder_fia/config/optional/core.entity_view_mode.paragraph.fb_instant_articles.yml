@@ -3,7 +3,7 @@ status: true
 dependencies:
   module:
     - paragraphs
-id: paragraph.facebook_instant_articles_rss
-label: 'Facebook Instant Articles: RSS'
+id: paragraph.fb_instant_articles
+label: 'Facebook Instant Articles'
 targetEntityType: paragraph
 cache: true

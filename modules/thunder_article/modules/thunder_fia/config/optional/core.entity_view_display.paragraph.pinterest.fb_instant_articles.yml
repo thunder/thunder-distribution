@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.paragraph.fb_instant_articles
+  - field.field.paragraph.pinterest.field_media
+  - paragraphs.paragraphs_type.pinterest
+  module:
+  - empty_fields
+  - fb_instant_articles
+id: paragraph.pinterest.fb_instant_articles
+targetEntityType: paragraph
+bundle: pinterest
+mode: fb_instant_articles
+content:
+  field_media:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: fb_instant_articles
+    third_party_settings:
+      empty_fields:
+        handler: ''
+    type: fbia_entity_reference_entity_view
+    region: content
+hidden: {  }

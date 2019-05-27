@@ -6,5 +6,5 @@ dependencies:
   - thunder:thunder_article
   - thunder:thunder_paragraphs
   - thunder:thunder_media
-  - fb_instant_articles:fb_instant_articles_rss
+  - fb_instant_articles:fb_instant_articles_views
 package: Thunder

@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.paragraph.fb_instant_articles
+  - field.field.paragraph.video.field_video
+  - paragraphs.paragraphs_type.video
+  module:
+  - fb_instant_articles
+id: paragraph.video.fb_instant_articles
+targetEntityType: paragraph
+bundle: video
+mode: fb_instant_articles
+content:
+  field_video:
+    type: fbia_entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: fb_instant_articles
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  uid: true

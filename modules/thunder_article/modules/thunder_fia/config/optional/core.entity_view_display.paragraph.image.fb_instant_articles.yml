@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.paragraph.fb_instant_articles
+  - field.field.paragraph.image.field_image
+  - paragraphs.paragraphs_type.image
+  module:
+  - fb_instant_articles
+id: paragraph.image.fb_instant_articles
+targetEntityType: paragraph
+bundle: image
+mode: fb_instant_articles
+content:
+  field_image:
+    type: fbia_entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: fb_instant_articles
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  uid: true

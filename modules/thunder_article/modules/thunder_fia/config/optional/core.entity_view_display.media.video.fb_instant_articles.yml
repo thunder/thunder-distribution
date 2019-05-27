@@ -1,0 +1,56 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.media.fb_instant_articles
+  - field.field.media.video.field_author
+  - field.field.media.video.field_caption
+  - field.field.media.video.field_copyright
+  - field.field.media.video.field_description
+  - field.field.media.video.field_media_video_embed_field
+  - field.field.media.video.field_source
+  - media.type.video
+  module:
+  - empty_fields
+  - fb_instant_articles
+id: media.video.fb_instant_articles
+targetEntityType: media
+bundle: video
+mode: fb_instant_articles
+content:
+  field_copyright:
+    type: fbia_copyright
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_description:
+    type: fbia_transformer
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_media_video_embed_field:
+    weight: 0
+    label: hidden
+    settings:
+      source_type: url
+      width: 854
+      height: 480
+      margin: no-margin
+    third_party_settings:
+      empty_fields:
+        handler: ''
+    type: fbia_interactive
+    region: content
+hidden:
+  created: true
+  field_author: true
+  field_caption: true
+  field_source: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

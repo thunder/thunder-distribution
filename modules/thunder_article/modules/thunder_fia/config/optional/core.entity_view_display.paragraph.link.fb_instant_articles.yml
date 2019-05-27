@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.paragraph.fb_instant_articles
+  - field.field.paragraph.link.field_link
+  - paragraphs.paragraphs_type.link
+  module:
+  - fb_instant_articles
+id: paragraph.link.fb_instant_articles
+targetEntityType: paragraph
+bundle: link
+mode: fb_instant_articles
+content:
+  field_link:
+    type: fbia_interactive_link
+    weight: 0
+    label: hidden
+    settings:
+      width: null
+      height: null
+      margin: no-margin
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  uid: true

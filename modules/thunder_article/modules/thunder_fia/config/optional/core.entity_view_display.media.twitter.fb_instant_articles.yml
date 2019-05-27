@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.media.fb_instant_articles
+  - field.field.media.twitter.field_author
+  - field.field.media.twitter.field_content
+  - field.field.media.twitter.field_url
+  - media.type.twitter
+  module:
+  - fb_instant_articles
+id: media.twitter.fb_instant_articles
+targetEntityType: media
+bundle: twitter
+mode: fb_instant_articles
+content:
+  field_url:
+    type: fbia_interactive_link
+    weight: 0
+    label: hidden
+    settings:
+      width: null
+      height: null
+      margin: no-margin
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  field_author: true
+  field_content: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true
