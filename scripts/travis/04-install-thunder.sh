@@ -5,7 +5,8 @@
 install_thunder() {
     cd $1
 
-    /usr/bin/env PHP_OPTIONS="-d sendmail_path=`which true`" drush si thunder --db-url=mysql://travis@127.0.0.1/drupal -y thunder_module_configure_form.install_modules_thunder_demo
+    ls -al
+    /usr/bin/env PHP_OPTIONS="-d sendmail_path=`which true`" drush si thunder -vvv --db-url=mysql://travis@127.0.0.1/drupal -y thunder_module_configure_form.install_modules_thunder_demo
     drush en simpletest -y
 
     drush -y sql-dump --result-file=${DEPLOYMENT_DUMP_FILE}
