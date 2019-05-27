@@ -32,35 +32,12 @@ env:
 
 jobs:
   include:
-    - stage: sanity checks
-      name: Verify makefile, check coding standards, check for deprecated code
-      install:
-        # Install drupalorg_drush module and verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
-        - drush dl drupalorg_drush-7.x && drush verify-makefile
-        - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
-      before_script: skip
-      script:
-        - bash -x -e ./scripts/travis/06-test-source-code.sh
-
-    - stage: sanity checks
-      name: Check config for composer build
-      script:
-        - bash -x -e ./scripts/travis/06-run-config-tests.sh
-
-    - stage: sanity checks
-      name: Check config for drush_make build
-      install:
-        - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
-      script:
-        - bash -x -e ./scripts/travis/06-run-config-tests.sh
-
     - stage: test
       name: Run tests with composer build
-
-    - stage: test
-      name: Run tests with drush_make build
       install:
-        - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
+        - bash -x -e ./scripts/travis/03-build-thunder2.sh
+      script:
+        - bash -x -e ./scripts/travis/05-update-2-3.sh
 
 # In the Thunder 8.x-3.x branch we have to wait for an actual releases to be able to test updates. That is why we
 # currently disable those tests. TODO: re-enable them after release of Thunder 3
