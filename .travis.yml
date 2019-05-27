@@ -61,6 +61,9 @@ jobs:
       name: Check config for drush_make build
       install:
         - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
+      before_script:
+        - bash -x -e ./scripts/travis/04-install-thunder.sh
+        - bash -x -e ./scripts/travis/05-setup-tests.sh
       script:
         - bash -x -e ./scripts/travis/06-run-config-tests.sh
 
@@ -71,6 +74,9 @@ jobs:
       name: Run tests with drush_make build
       install:
         - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
+      before_script:
+        - bash -x -e ./scripts/travis/04-install-thunder.sh
+        - bash -x -e ./scripts/travis/05-setup-tests.sh
 
 # In the Thunder 8.x-3.x branch we have to wait for an actual releases to be able to test updates. That is why we
 # currently disable those tests. TODO: re-enable them after release of Thunder 3
