@@ -88,7 +88,6 @@
         "drupal/amp": "1.2",
         "drupal/amptheme": "^1.1",
         "marc1706/fast-image-size": "^1.1.0",
-        "symfony/browser-kit": "^4.0.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0-alpha7",
         "drupal/adsense": "^1.0",
@@ -118,7 +117,7 @@
         "drupal/length_indicator": "^1.0-rc2",
         "drupal/libraries": "^3.0-alpha1",
         "drupal/linkit": "5.0-beta8",
-        "drupal/liveblog": "^1.0-alpha13",
+        "drupal/liveblog": "^1.0-alpha14",
         "drupal/media_entity_instagram": "^2.0-alpha1",
         "drupal/media_entity_pinterest": "^2.0",
         "drupal/media_entity_slideshow": "^2.0-alpha1",
@@ -135,6 +134,7 @@
         "drupal/scheduler_content_moderation_integration": "^1.0-beta1",
         "drupal/select2": "^1.0",
         "drupal/simple_sitemap": "^2.11",
+        "drupal/simple_gmap": "^1.3",
         "drupal/shariff": "^1.5",
         "drupal/slick": "^1.0",
         "drupal/slick_media": "^2.0-alpha2",
@@ -168,7 +168,8 @@
         "burdamagazinorg/thunder-dev-tools": "dev-master",
         "drupal/config_profile": "^1.0",
         "mglaman/phpstan-drupal": "^0.11.1",
-        "phpstan/phpstan-deprecation-rules": "^0.11.0"
+        "phpstan/phpstan-deprecation-rules": "^0.11.0",
+        "symfony/browser-kit": "^4.0.0"
     },
     "conflict": {
         "masterminds/html5": "^2.4.0"
