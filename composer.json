@@ -88,7 +88,7 @@
         "drupal/amp": "1.2",
         "drupal/amptheme": "^1.1",
         "marc1706/fast-image-size": "^1.1.0",
-        "fabpot/goutte": "^3.2.3",
+        "symfony/browser-kit": "^4.0.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0-alpha7",
         "drupal/adsense": "^1.0",
