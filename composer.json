@@ -128,7 +128,7 @@
         "drupal/paragraphs_features": "^1.0",
         "drupal/password_policy": "3.x-dev",
         "drupal/pathauto": "^1.0",
-        "drupal/responsive_preview": "^1.0-alpha5",
+        "drupal/responsive_preview": "^1.0-alpha7",
         "drupal/redirect": "^1.0",
         "drupal/scheduler": "1.0",
         "drupal/scheduler_content_moderation_integration": "^1.0-beta1",
