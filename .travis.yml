@@ -29,11 +29,13 @@ stages:
 env:
   global:
     - THUNDER_ADMIN_BRANCH=8.x-3.x
+    - PREFER_LOWEST=""
 
 jobs:
   include:
     - stage: test
-      name: Run tests with composer build
+      name: Run tests with composer (min) build
+      env: PREFER_LOWEST="--prefer-lowest"
 
 # In the Thunder 8.x-3.x branch we have to wait for an actual releases to be able to test updates. That is why we
 # currently disable those tests. TODO: re-enable them after release of Thunder 3
