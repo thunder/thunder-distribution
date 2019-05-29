@@ -38,7 +38,6 @@ exports.command = function startMeasurement(
     browser
       .setCookie({
         domain,
-        expiry: 3533274000,
         httpOnly: false,
         path: "/",
         name: "traceId",
@@ -46,7 +45,6 @@ exports.command = function startMeasurement(
       })
       .setCookie({
         domain,
-        expiry: 3533274000,
         httpOnly: false,
         path: "/",
         name: "serverUrl",
@@ -54,7 +52,6 @@ exports.command = function startMeasurement(
       })
       .setCookie({
         domain,
-        expiry: 3533274000,
         httpOnly: false,
         path: "/",
         name: "branchTag",

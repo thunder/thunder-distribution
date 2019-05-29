@@ -28,7 +28,6 @@ exports.command = function endMark() {
 
     browser.setCookie({
       domain: browser.apmDomain,
-      expiry: 3533274000,
       httpOnly: false,
       name: "spanId",
       path: "/",
