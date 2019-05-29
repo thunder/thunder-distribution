@@ -38,8 +38,6 @@ jobs:
       name: Build project with composer and package it
       install:
         - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
-      before_script:
-        - bash -x -e ./scripts/travis/04-install-thunder.sh
       script:
         - bash -x -e ./scripts/travis/07-upload-artifacts-to-s3.sh
 
@@ -57,7 +55,6 @@ jobs:
       name: Check config for composer build
       before_script:
         - bash -x -e ./scripts/travis/04-use-database-artifact.sh
-        - bash -x -e ./scripts/travis/05-setup-tests.sh
       script:
         - bash -x -e ./scripts/travis/06-run-config-tests.sh
 
@@ -72,15 +69,11 @@ jobs:
       name: Run tests with composer (max) build
       before_script:
         - bash -x -e ./scripts/travis/04-use-database-artifact.sh
-        - bash -x -e ./scripts/travis/05-setup-tests.sh
 
     - stage: test
       name: Run tests with drush_make build
       install:
         - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
-      before_script:
-        - bash -x -e ./scripts/travis/04-install-thunder.sh
-        - bash -x -e ./scripts/travis/05-setup-tests.sh
 
     - stage: test
       name: Run tests with composer (min) build
@@ -109,7 +102,7 @@ install:
 
 before_script:
   - bash -x -e ./scripts/travis/04-install-thunder.sh
-  - bash -x -e ./scripts/travis/05-setup-tests.sh
 
 script:
+  - bash -x -e ./scripts/travis/05-setup-tests.sh
   - bash -x -e ./scripts/travis/06-run-tests.sh
