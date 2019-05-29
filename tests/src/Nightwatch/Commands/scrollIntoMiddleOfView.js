@@ -16,7 +16,7 @@ exports.command = function scrollIntoMiddleOfView(selector) {
   const browser = this;
 
   browser.executeAsync(
-    (selectorInBrowser, done) => {
+    function inBrowser(selectorInBrowser, done) {
       const elem = document.evaluate(selectorInBrowser, document).iterateNext();
       const viewPortHeight = Math.max(
         document.documentElement.clientHeight,

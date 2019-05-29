@@ -17,7 +17,7 @@ exports.command = function waitBrowser(maxWait) {
   maxWait = maxWait || 10000;
 
   browser.timeoutsAsyncScript(maxWait).executeAsync(
-    done => {
+    function inBrowser(done) {
       const checkBrowserTransaction = () => {
         if (typeof elasticApm === "undefined") {
           setTimeout(checkBrowserTransaction, 100);

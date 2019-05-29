@@ -28,6 +28,7 @@ exports.command = function add(fieldName, type, position) {
     .scrollIntoMiddleOfView(
       `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${addButtonPosition}]//input`
     )
+    .pause(10000)
     .click(
       `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${addButtonPosition}]//input`
     )

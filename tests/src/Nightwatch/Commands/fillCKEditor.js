@@ -16,7 +16,7 @@ exports.command = function fillCKEditor(selector, value) {
   const browser = this;
 
   browser.executeAsync(
-    (selectorInBrowser, valueInBrowser, done) => {
+    function inBrowser(selectorInBrowser, valueInBrowser, done) {
       const elem = document.evaluate(selectorInBrowser, document).iterateNext();
 
       CKEDITOR.instances[jQuery(elem)[0].id].insertHtml(valueInBrowser);
