@@ -2,6 +2,11 @@
 
 cd ${TEST_DIR}
 
+composer update
+cd ${TEST_DIR}/docroot
+drush updb -y
+
+cd ${TEST_DIR}
 composer config repositories.thunder path ${THUNDER_DIST_DIR}
 
 composer remove burdamagazinorg/thunder --no-update
