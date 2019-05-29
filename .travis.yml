@@ -56,6 +56,7 @@ jobs:
       before_script:
         - bash -x -e ./scripts/travis/04-use-database-artifact.sh
       script:
+        - bash -x -e ./scripts/travis/05-setup-tests.sh
         - bash -x -e ./scripts/travis/06-run-config-tests.sh
 
     - stage: sanity checks
@@ -63,6 +64,7 @@ jobs:
       install:
         - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
       script:
+        - bash -x -e ./scripts/travis/05-setup-tests.sh
         - bash -x -e ./scripts/travis/06-run-config-tests.sh
 
     - stage: test
