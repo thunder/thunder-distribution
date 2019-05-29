@@ -2,7 +2,7 @@
  * @file
  * Start performance measurement for test.
  *
- * This provides a custom command, .performanceMeasurementStart()
+ * This provides a custom command, .performance.measurementStart()
  *
  * @param {string} serverUrl
  *   The Elastic APM server URL.
@@ -17,7 +17,7 @@
  *   The 'browser' object.
  */
 
-exports.command = function performanceMeasurementStart(
+exports.command = function measurementStart(
   serverUrl,
   serviceName,
   transactionName,
@@ -60,7 +60,7 @@ exports.command = function performanceMeasurementStart(
         name: "branchTag",
         value: process.env.THUNDER_BRANCH
       })
-      .performanceSetLabel("branch", process.env.THUNDER_BRANCH);
+      .performance.setLabel("branch", process.env.THUNDER_BRANCH);
   });
 
   return browser;

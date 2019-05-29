@@ -2,7 +2,7 @@
  * @file
  * Sets tag for element. It can be existing tag or new one.
  *
- * This provides a custom command, .thunderSelectTag()
+ * This provides a custom command, .setSelect2Value()
  *
  * @param {string} field
  *   The element selector.
@@ -14,8 +14,7 @@
  * @return {object}
  *   The 'browser' object.
  */
-
-exports.command = function thunderSelectTag(field, name, waitFor) {
+exports.command = function setSelect2Value(field, name, waitFor) {
   const browser = this;
 
   browser

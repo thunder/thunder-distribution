@@ -2,16 +2,15 @@
  * @file
  * Ends last performance measurement mark.
  *
- * This provides a custom command, .performanceMarkEnd()
+ * This provides a custom command, .performance.markEnd()
  *
  * @return {object}
  *   The 'browser' object.
  */
-
-exports.command = function performanceMarkEnd() {
+exports.command = function markEnd() {
   const browser = this;
 
-  browser.performanceWaitBrowser().perform(() => {
+  browser.performance.waitBrowser().perform(() => {
     let span = browser.apmSpans.pop();
 
     if (!span) {

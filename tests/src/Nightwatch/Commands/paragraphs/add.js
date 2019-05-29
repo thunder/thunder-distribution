@@ -2,7 +2,7 @@
  * @file
  * Create empty paragraph for defined paragraph type.
  *
- * This provides a custom command, .paragraphsAddEmpty()
+ * This provides a custom command, .paragraphs.add()
  *
  * @param {string} fieldName
  *   The paragraphs field name.
@@ -14,8 +14,7 @@
  * @return {object}
  *   The 'browser' object.
  */
-
-exports.command = function paragraphsAddEmpty(fieldName, type, position) {
+exports.command = function add(fieldName, type, position) {
   const browser = this;
 
   if (position < 1) {
@@ -26,7 +25,7 @@ exports.command = function paragraphsAddEmpty(fieldName, type, position) {
   const addButtonPosition = position * 2 - 1;
 
   browser
-    .thunderScrollIntoView(
+    .scrollIntoMiddleOfView(
       `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${addButtonPosition}]//input`
     )
     .click(

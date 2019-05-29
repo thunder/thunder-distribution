@@ -2,7 +2,7 @@
  * @file
  * Sets performance measurement mark.
  *
- * This provides a custom command, .performanceMarkStart()
+ * This provides a custom command, .performance.markStart()
  *
  * @param {string} markName
  *   The mark name used for naming of time spans.
@@ -11,7 +11,7 @@
  *   The 'browser' object.
  */
 
-exports.command = function performanceMarkStart(markName) {
+exports.command = function markStart(markName) {
   const browser = this;
 
   browser.perform(() => {

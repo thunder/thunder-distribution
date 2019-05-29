@@ -4,7 +4,7 @@
  *
  * NOTE: This function works only with XPATH!!!
  *
- * This provides a custom command, .thunderScrollIntoView()
+ * This provides a custom command, .scrollIntoMiddleOfView()
  *
  * @param {string} selector
  *   The XPATH selector for element.
@@ -12,13 +12,11 @@
  * @return {object}
  *   The 'browser' object.
  */
-
-/* eslint-disable func-names */
-exports.command = function thunderScrollIntoView(selector) {
+exports.command = function scrollIntoMiddleOfView(selector) {
   const browser = this;
 
   browser.executeAsync(
-    function(selectorInBrowser, done) {
+    (selectorInBrowser, done) => {
       const elem = document.evaluate(selectorInBrowser, document).iterateNext();
       const viewPortHeight = Math.max(
         document.documentElement.clientHeight,
@@ -42,7 +40,7 @@ exports.command = function thunderScrollIntoView(selector) {
       done();
     },
     [selector],
-    function() {}
+    () => {}
   );
 
   return browser;

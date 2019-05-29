@@ -2,17 +2,17 @@
  * @file
  * Ends performance measurement for a test.
  *
- * This provides a custom command, .performanceMeasurementEnd()
+ * This provides a custom command, .performance.measurementEnd()
  *
  * @return {object}
  *   The 'browser' object.
  */
-
-exports.command = function performanceMeasurementEnd() {
+exports.command = function measurementEnd() {
   const browser = this;
 
+  browser.performance.waitBrowser();
+
   browser
-    .performanceWaitBrowser()
     .perform(() => {
       let span = browser.apmSpans.pop();
 

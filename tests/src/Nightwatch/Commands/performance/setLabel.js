@@ -2,7 +2,7 @@
  * @file
  * Sets labels for performance test execution.
  *
- * This provides a custom command, .performanceSetLabel()
+ * This provides a custom command, .performance.setLabel()
  *
  * @param {string} name
  *   The label name.
@@ -13,7 +13,7 @@
  *   The 'browser' object.
  */
 
-exports.command = function performanceSetLabel(name, value) {
+exports.command = function setLabel(name, value) {
   const browser = this;
 
   browser.perform(() => {

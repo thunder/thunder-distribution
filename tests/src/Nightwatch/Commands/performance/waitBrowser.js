@@ -2,7 +2,7 @@
  * @file
  * Waits for browser performance metrics to be sent.
  *
- * This provides a custom command, .performanceWaitBrowser()
+ * This provides a custom command, .performance.waitBrowser()
  *
  * @param {int} maxWait
  *   The maximum time for waiting for browser to send data to APM Server.
@@ -11,15 +11,13 @@
  * @return {object}
  *   The 'browser' object.
  */
-
-/* eslint-disable func-names */
-exports.command = function performanceWaitBrowser(maxWait) {
+exports.command = function waitBrowser(maxWait) {
   const browser = this;
 
   maxWait = maxWait || 10000;
 
   browser.timeoutsAsyncScript(maxWait).executeAsync(
-    function(done) {
+    done => {
       const checkBrowserTransaction = () => {
         if (typeof elasticApm === "undefined") {
           setTimeout(checkBrowserTransaction, 100);
@@ -47,7 +45,7 @@ exports.command = function performanceWaitBrowser(maxWait) {
       setTimeout(checkBrowserTransaction, 200);
     },
     [],
-    function() {}
+    () => {}
   );
 
   return browser;

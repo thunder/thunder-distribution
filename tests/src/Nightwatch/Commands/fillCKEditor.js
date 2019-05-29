@@ -2,7 +2,7 @@
  * @file
  * Sets tag for element. It can be existing tag or new one.
  *
- * This provides a custom command, .thunderFillCKEditor()
+ * This provides a custom command, .fillCKEditor()
  *
  * @param {string} selector
  *   The element selector.
@@ -12,13 +12,11 @@
  * @return {object}
  *   The 'browser' object.
  */
-
-/* eslint-disable func-names */
-exports.command = function thunderFillCKEditor(selector, value) {
+exports.command = function fillCKEditor(selector, value) {
   const browser = this;
 
   browser.executeAsync(
-    function(selectorInBrowser, valueInBrowser, done) {
+    (selectorInBrowser, valueInBrowser, done) => {
       const elem = document.evaluate(selectorInBrowser, document).iterateNext();
 
       CKEDITOR.instances[jQuery(elem)[0].id].insertHtml(valueInBrowser);
@@ -26,7 +24,7 @@ exports.command = function thunderFillCKEditor(selector, value) {
       done();
     },
     [selector, value],
-    function() {}
+    () => {}
   );
 
   return browser;
