@@ -30,6 +30,7 @@ stages:
 env:
   global:
     - THUNDER_ADMIN_BRANCH=8.x-3.x
+    - ADDITIONAL_COMPOSER_PARAMETERS=""
 
 jobs:
   include:
@@ -68,7 +69,7 @@ jobs:
         - bash -x -e ./scripts/travis/06-run-config-tests.sh
 
     - stage: test
-      name: Run tests with composer build
+      name: Run tests with composer (max) build
 
     - stage: test
       name: Run tests with drush_make build
@@ -77,6 +78,12 @@ jobs:
       before_script:
         - bash -x -e ./scripts/travis/04-install-thunder.sh
         - bash -x -e ./scripts/travis/05-setup-tests.sh
+
+    - stage: test
+      name: Run tests with composer (min) build
+      env: ADDITIONAL_COMPOSER_PARAMETERS="--prefer-lowest"
+      php: 7.1
+      if: commit_message =~ ^\[TEST_MIN|TEST_EVERYTHING\] OR type = cron
 
 # In the Thunder 8.x-3.x branch we have to wait for an actual releases to be able to test updates. That is why we
 # currently disable those tests. TODO: re-enable them after release of Thunder 3
