@@ -60,7 +60,7 @@ exports.command = function performanceMeasurementStart(
         name: "branchTag",
         value: process.env.THUNDER_BRANCH
       })
-      .performanceSetTag("branch", process.env.THUNDER_BRANCH);
+      .performanceSetLabel("branch", process.env.THUNDER_BRANCH);
   });
 
   return browser;
