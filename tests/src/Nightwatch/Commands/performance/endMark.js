@@ -2,12 +2,12 @@
  * @file
  * Ends last performance measurement mark.
  *
- * This provides a custom command, .performance.markEnd()
+ * This provides a custom command, .performance.endMark()
  *
  * @return {object}
  *   The 'browser' object.
  */
-exports.command = function markEnd() {
+exports.command = function endMark() {
   const browser = this;
 
   browser.performance.waitBrowser().perform(() => {

@@ -25,24 +25,24 @@ module.exports = {
     browser
       .resizeWindow(1024, 1024)
       .drupalRelativeURL("/user/login")
-      .performance.measurementStart(
+      .performance.startMeasurement(
         process.env.THUNDER_APM_URL,
         "NightwatchJS - Test",
         "Create an article with paragraphs",
         `.${process.env.THUNDER_SITE_HOSTNAME}`
       )
-      .performance.markStart("full task")
-      .performance.markStart("login")
+      .performance.startMark("full task")
+      .performance.startMark("login")
       .drupalLogin({ name: "test-editor", password: "test-editor" })
-      .performance.markEnd()
+      .performance.endMark()
 
-      .performance.markStart("create article")
+      .performance.startMark("create article")
       .drupalRelativeURL("/node/add/article")
       // Start using XPATH!!!
       .useXpath()
       .waitForElementVisible('//*[@id="field-paragraphs-values"]', 1000)
       // Set base vaues for an Article.
-      .performance.markStart("create article basic fields")
+      .performance.startMark("create article basic fields")
       .click('//*[@id="edit-field-channel"]/option[3]')
       .setValue(
         '//*[@id="edit-title-0-value"]',
@@ -67,10 +67,10 @@ module.exports = {
         "Cats",
         '//*[@id="select2-edit-field-tags-results"]/li[contains(@class, "highlighted")]'
       )
-      .performance.markEnd()
+      .performance.endMark()
 
       // Set teaser information for an Article.
-      .performance.markStart("create article teaser information")
+      .performance.startMark("create article teaser information")
       .setValue(
         '//*[@id="edit-field-teaser-text-0-value"]',
         "The cat (Felis catus) is a small carnivorous mammal. It is the only domesticated species in the family Felidae and often referred to as the domestic cat to distinguish it from wild members of the family. The cat is either a house cat, kept as a pet, or a feral cat, freely ranging and avoiding human contact.[5] A house cat is valued by humans for companionship and for its ability to hunt rodents. About 60 cat breeds are recognized by various cat registries."
@@ -96,11 +96,11 @@ module.exports = {
         '//*[contains(@id, "edit-field-teaser-media-current-items-0")]/article/div/img',
         10000
       )
-      .performance.markEnd()
+      .performance.endMark()
 
       // Create paragraphs for an Article.
-      .performance.markStart("create paragraphs")
-      .performance.markStart("create paragraphs - set 1")
+      .performance.startMark("create paragraphs")
+      .performance.startMark("create paragraphs - set 1")
       .paragraphs.addText(
         "field_paragraphs",
         1,
@@ -114,9 +114,9 @@ module.exports = {
         3,
         "https://www.instagram.com/p/BtlH0ysgGLs/?utm_source=ig_web_copy_link"
       )
-      .performance.markEnd()
+      .performance.endMark()
 
-      .performance.markStart("create paragraphs - set 2")
+      .performance.startMark("create paragraphs - set 2")
       .paragraphs.addText(
         "field_paragraphs",
         4,
@@ -130,9 +130,9 @@ module.exports = {
         6,
         "https://www.instagram.com/p/BtSRBAgAYod/?utm_source=ig_web_copy_link"
       )
-      .performance.markEnd()
+      .performance.endMark()
 
-      .performance.markStart("create paragraphs - set 3")
+      .performance.startMark("create paragraphs - set 3")
       .paragraphs.addText(
         "field_paragraphs",
         7,
@@ -146,9 +146,9 @@ module.exports = {
         9,
         "https://www.instagram.com/p/BtH8DB3g3GL/?utm_source=ig_web_copy_link"
       )
-      .performance.markEnd()
+      .performance.endMark()
 
-      .performance.markStart("create paragraphs - set 4")
+      .performance.startMark("create paragraphs - set 4")
       .paragraphs.addText(
         "field_paragraphs",
         10,
@@ -162,9 +162,9 @@ module.exports = {
         12,
         "https://www.instagram.com/p/Btv_rtKF8mU/?utm_source=ig_web_copy_link"
       )
-      .performance.markEnd()
+      .performance.endMark()
 
-      .performance.markStart("create paragraphs - set 5")
+      .performance.startMark("create paragraphs - set 5")
       .paragraphs.addText(
         "field_paragraphs",
         13,
@@ -181,9 +181,9 @@ module.exports = {
 
       // End creation of paragraphs
       // Close: create paragraphs - set 5.
-      .performance.markEnd()
+      .performance.endMark()
       // Close: create paragraphs.
-      .performance.markEnd()
+      .performance.endMark()
 
       // Submit form.
       .click('//*[@id="edit-submit"]')
@@ -191,7 +191,7 @@ module.exports = {
         '//*[@id="block-thunder-base-content"]/div/article/div/div[1]/div[13]/div/div/p[1]/strong/span',
         60000
       )
-      .performance.measurementEnd();
+      .performance.endMeasurement();
 
     browser.end();
   }

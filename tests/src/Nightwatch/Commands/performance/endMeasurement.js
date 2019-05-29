@@ -2,12 +2,12 @@
  * @file
  * Ends performance measurement for a test.
  *
- * This provides a custom command, .performance.measurementEnd()
+ * This provides a custom command, .performance.endMeasurement()
  *
  * @return {object}
  *   The 'browser' object.
  */
-exports.command = function measurementEnd() {
+exports.command = function endMeasurement() {
   const browser = this;
 
   browser.performance.waitBrowser();

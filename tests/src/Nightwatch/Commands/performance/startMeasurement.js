@@ -2,7 +2,7 @@
  * @file
  * Start performance measurement for test.
  *
- * This provides a custom command, .performance.measurementStart()
+ * This provides a custom command, .performance.startMeasurement()
  *
  * @param {string} serverUrl
  *   The Elastic APM server URL.
@@ -17,7 +17,7 @@
  *   The 'browser' object.
  */
 
-exports.command = function measurementStart(
+exports.command = function startMeasurement(
   serverUrl,
   serviceName,
   transactionName,
