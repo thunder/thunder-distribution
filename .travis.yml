@@ -24,8 +24,8 @@ addons:
 
 stages:
   - build project
-#  - sanity checks
-#  - test
+  - sanity checks
+  - test
   - build docker image
 
 env:
