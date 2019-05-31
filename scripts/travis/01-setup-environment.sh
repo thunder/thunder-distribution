@@ -27,4 +27,4 @@ export PROJECT_ARTIFACT_FILE_NAME="${TRAVIS_BUILD_ID}-thunder.tar.gz"
 export PROJECT_ARTIFACT_FILE="${THUNDER_DIST_DIR}/../${PROJECT_ARTIFACT_FILE_NAME}"
 
 # Branch name related to Travis CI job
-BRANCH_NAME=$([[ "${TRAVIS_EVENT_TYPE}" == "pull_request" ]] && echo "${TRAVIS_PULL_REQUEST_BRANCH}" || echo "${TRAVIS_BRANCH}")
+export BRANCH_NAME=$([[ "${TRAVIS_EVENT_TYPE}" == "pull_request" ]] && echo "${TRAVIS_PULL_REQUEST_BRANCH}" || echo "${TRAVIS_BRANCH}")
