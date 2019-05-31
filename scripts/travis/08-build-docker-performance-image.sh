@@ -17,7 +17,8 @@ tar -zxf "${PROJECT_ARTIFACT_FILE}" -C "${THUNDER_PERFORMANCE}/www"
 cd "${THUNDER_PERFORMANCE}"
 
 # Build Docker image and tag it
-./build.sh --tag "thunder-performance:${BRANCH_NAME}"
+DOCKER_IMAGE_TAG=$(echo "thunder-performance:${BRANCH_NAME}-${TRAVIS_JOB_ID}" | sed 's/\//_/g')
+./build.sh --tag "${DOCKER_IMAGE_TAG}"
 
 # list Docker images
 docker images
