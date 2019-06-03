@@ -18,5 +18,7 @@ composer update
 COMPOSER_MEMORY_LIMIT=-1 composer require "drupal/media_entity:^2.0" "drupal/video_embed_field:^2.0"
 
 cd ${TEST_DIR}/docroot
+drush cr
+drush updb -y
 drush updb -y
 
