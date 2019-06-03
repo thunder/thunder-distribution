@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
+cd ${TEST_DIR}
 composer update
+
 cd ${TEST_DIR}/docroot
-drush cr
 drush updb -y
 drush entup -y
 
