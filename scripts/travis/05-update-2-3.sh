@@ -15,7 +15,7 @@ composer remove drupal/dropzonejs --no-update
 
 composer update
 
-composer require "drupal/media_entity:^2.0" "drupal/video_embed_field:^2.0"
+COMPOSER_MEMORY_LIMIT=-1 composer require "drupal/media_entity:^2.0" "drupal/video_embed_field:^2.0"
 
 cd ${TEST_DIR}/docroot
 drush updb -y
