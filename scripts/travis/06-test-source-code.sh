@@ -12,8 +12,7 @@ if ! [ -x "$(command -v eslint)" ]; then
 fi
 
 # Install ESLint requirements
-npm install -g eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-import
-npm install -g prettier eslint-config-prettier eslint-plugin-prettier
+npm install -g eslint-config-drupal-bundle
 
 # Execute JavaScript code check
 eslint .
