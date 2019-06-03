@@ -18,7 +18,14 @@ cd "${THUNDER_PERFORMANCE}"
 
 # Build Docker image and tag it
 DOCKER_IMAGE_TAG=$(echo "thunder-performance:${BRANCH_NAME}-${TRAVIS_JOB_ID}" | sed 's/\//_/g')
+DOCKER_IMAGE_TAG=$(echo "burda/${DOCKER_IMAGE_TAG}")
 ./build.sh --tag "${DOCKER_IMAGE_TAG}"
 
 # list Docker images
 docker images
+
+# Login to Docker HUB
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+# Push to Docker HUB
+docker push "${DOCKER_IMAGE_TAG}"
