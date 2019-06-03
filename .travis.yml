@@ -23,6 +23,7 @@ addons:
       - /tmp/thunder-travis-ci
 
 stages:
+  - build project
   - sanity checks
   - test
 
@@ -56,11 +57,10 @@ before_install:
   - bash -x -e ./scripts/travis/02-before-install.sh
 
 install:
-  - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
+  - bash -x -e ./scripts/travis/03-use-thunder-artifact.sh
 
 before_script:
   - bash -x -e ./scripts/travis/04-install-thunder.sh
-  - bash -x -e ./scripts/travis/05-setup-tests.sh
 
 script:
   - bash -x -e ./scripts/travis/06-run-tests.sh
