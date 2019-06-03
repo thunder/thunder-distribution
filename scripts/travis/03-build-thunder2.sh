@@ -8,3 +8,4 @@ cd ${TEST_DIR}
 composer require "BurdaMagazinOrg/thunder:^8.2.10" "webflo/drupal-core-require-dev:^8.4" "drupal/dropzonejs:^1.0-alpha3" "drupal/liveblog:^1.0-alpha2" "cweagans/composer-patches:^1.6.6" "drupal-composer/drupal-scaffold:^2.5.3" "zaporylie/composer-drupal-optimizations:^1.1.0" --no-progress --no-update
 cp ${THUNDER_DIST_DIR}/tests/fixtures/thunder2.composer.lock composer.lock
 composer install
+composer drupal-scaffold
