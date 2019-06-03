@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-cd ${TEST_DIR}
-drush cr
-
 composer update
 cd ${TEST_DIR}/docroot
 drush updb -y
