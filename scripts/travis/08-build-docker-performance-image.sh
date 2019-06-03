@@ -25,7 +25,7 @@ DOCKER_IMAGE_TAG=$(echo "burda/${DOCKER_IMAGE_TAG}")
 docker images
 
 # Login to Docker HUB
-echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+echo "${DOCKER_PASSWORD_BASE64}" | base64 -d | docker login -u "${DOCKER_USERNAME}" --password-stdin
 
 # Push to Docker HUB
 docker push "${DOCKER_IMAGE_TAG}"
