@@ -16,6 +16,7 @@ exports.command = function fillCKEditor(selector, value) {
   const browser = this;
 
   browser.executeAsync(
+    // eslint-disable-next-line prefer-arrow-callback
     function inBrowser(selectorInBrowser, valueInBrowser, done) {
       const elem = document.evaluate(selectorInBrowser, document).iterateNext();
 

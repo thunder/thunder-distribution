@@ -17,6 +17,7 @@ exports.command = function waitBrowser(maxWait) {
   maxWait = maxWait || 10000;
 
   browser.timeoutsAsyncScript(maxWait).executeAsync(
+    // eslint-disable-next-line prefer-arrow-callback
     function inBrowser(done) {
       const checkBrowserTransaction = () => {
         if (typeof elasticApm === "undefined") {

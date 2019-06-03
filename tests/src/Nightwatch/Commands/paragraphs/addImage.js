@@ -64,6 +64,7 @@ exports.command = function addImage(fieldName, position, config) {
       .click('//a[text()="Import image"]')
       .waitForElementVisible('//*[@id="edit-upload"]/div/a', 10000)
       .executeAsync(
+        // eslint-disable-next-line prefer-arrow-callback
         function inBrowser(done) {
           const elem = document
             .evaluate('//input[@type="file"]', document)

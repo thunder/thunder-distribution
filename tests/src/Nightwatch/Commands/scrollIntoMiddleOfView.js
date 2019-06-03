@@ -16,6 +16,7 @@ exports.command = function scrollIntoMiddleOfView(selector) {
   const browser = this;
 
   browser.executeAsync(
+    // eslint-disable-next-line prefer-arrow-callback
     function inBrowser(selectorInBrowser, done) {
       const elem = document.evaluate(selectorInBrowser, document).iterateNext();
       const viewPortHeight = Math.max(
