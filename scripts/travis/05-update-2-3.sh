@@ -23,5 +23,4 @@ cd ${TEST_DIR}/docroot
 drush cr
 drush updb -y
 drush en vem_migrate_oembed -y
-drush cr
-drush vemmo -y
+drush vem:migrate_oembed
