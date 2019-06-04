@@ -42,49 +42,49 @@ jobs:
       script:
         - bash -x -e ./scripts/travis/07-upload-artifacts-to-s3.sh
 
-#    - stage: sanity checks
-#      name: Verify makefile, check coding standards, check for deprecated code
-#      install:
-#        # Install drupalorg_drush module and verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
-#        - drush dl drupalorg_drush-7.x && drush verify-makefile
-#        - bash -x -e ./scripts/travis/03-use-thunder-artifact.sh
-#      before_script: skip
-#      script:
-#        - bash -x -e ./scripts/travis/06-test-source-code.sh
-#
-#    - stage: sanity checks
-#      name: Check config for composer build
-#      before_script:
-#        - bash -x -e ./scripts/travis/04-use-database-artifact.sh
-#      script:
-#        - bash -x -e ./scripts/travis/06-run-config-tests.sh
-#
-#    - stage: test
-#      name: Run tests with composer (max) build
-#      before_script:
-#        - bash -x -e ./scripts/travis/04-use-database-artifact.sh
-#
-#    - stage: sanity checks
-#      name: Check config for drush_make build
-#      install:
-#        - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
-#      script:
-#        - bash -x -e ./scripts/travis/06-run-config-tests.sh
-#      if: commit_message =~ ^\[(TEST_DRUSH_MAKE|TEST_EVERYTHING)\] OR type = cron OR head_branch =~ ^release
-#
-#    - stage: test
-#      name: Run tests with drush_make build
-#      install:
-#        - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
-#      if: commit_message =~ ^\[(TEST_DRUSH_MAKE|TEST_EVERYTHING)\] OR type = cron OR head_branch =~ ^release
-#
-#    - stage: test
-#      name: Run tests with composer (min) build
-#      env: ADDITIONAL_COMPOSER_PARAMETERS="--prefer-lowest"
-#      php: 7.1
-#      if: commit_message =~ ^\[(TEST_MIN|TEST_EVERYTHING)\] OR type = cron
-#      install:
-#        - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
+    - stage: sanity checks
+      name: Verify makefile, check coding standards, check for deprecated code
+      install:
+        # Install drupalorg_drush module and verify, that makefile is accepted by drupal.org, otherwise we do not need to go any further
+        - drush dl drupalorg_drush-7.x && drush verify-makefile
+        - bash -x -e ./scripts/travis/03-use-thunder-artifact.sh
+      before_script: skip
+      script:
+        - bash -x -e ./scripts/travis/06-test-source-code.sh
+
+    - stage: sanity checks
+      name: Check config for composer build
+      before_script:
+        - bash -x -e ./scripts/travis/04-use-database-artifact.sh
+      script:
+        - bash -x -e ./scripts/travis/06-run-config-tests.sh
+
+    - stage: test
+      name: Run tests with composer (max) build
+      before_script:
+        - bash -x -e ./scripts/travis/04-use-database-artifact.sh
+
+    - stage: sanity checks
+      name: Check config for drush_make build
+      install:
+        - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
+      script:
+        - bash -x -e ./scripts/travis/06-run-config-tests.sh
+      if: commit_message =~ ^\[(TEST_DRUSH_MAKE|TEST_EVERYTHING)\] OR type = cron OR head_branch =~ ^release
+
+    - stage: test
+      name: Run tests with drush_make build
+      install:
+        - bash -x -e ./scripts/travis/03-build-thunder-drush.sh
+      if: commit_message =~ ^\[(TEST_DRUSH_MAKE|TEST_EVERYTHING)\] OR type = cron OR head_branch =~ ^release
+
+    - stage: test
+      name: Run tests with composer (min) build
+      env: ADDITIONAL_COMPOSER_PARAMETERS="--prefer-lowest"
+      php: 7.1
+      if: commit_message =~ ^\[(TEST_MIN|TEST_EVERYTHING)\] OR type = cron
+      install:
+        - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
 
     - stage: performance test
       name: Build performance testing Docker image
