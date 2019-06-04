@@ -89,7 +89,7 @@
         "drupal/amptheme": "^1.1",
         "marc1706/fast-image-size": "^1.1.0",
         "oomphinc/composer-installers-extender": "^1.1",
-        "drupal/access_unpublished": "^1.0-alpha7",
+        "drupal/access_unpublished": "^1.0-alpha8",
         "drupal/adsense": "^1.0",
         "drupal/admin_toolbar": "^1.22",
         "drupal/better_normalizers": "^1.0-beta3",
@@ -166,6 +166,7 @@
     },
     "require-dev": {
         "burdamagazinorg/thunder-dev-tools": "dev-master",
+        "thunder/thunder_performance_measurement": "dev-master",
         "drupal/config_profile": "^1.0",
         "mglaman/phpstan-drupal": "^0.11.1",
         "phpstan/phpstan-deprecation-rules": "^0.11.0"
