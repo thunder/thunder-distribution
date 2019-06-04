@@ -26,7 +26,7 @@ stages:
   - build project
   - sanity checks
   - test
-  - build docker image
+  - performance test
 
 env:
   global:
@@ -86,8 +86,9 @@ jobs:
       install:
         - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
 
-    - stage: build docker image
+    - stage: performance test
       name: Build performance testing Docker image
+      if: commit_message =~ ^\[TEST_PERFORMANCE\] OR type = cron
       install: skip
       before_script: skip
       script:
