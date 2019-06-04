@@ -40,6 +40,7 @@ jobs:
         - bash -x -e ./scripts/travis/03-build-thunder2.sh
       script:
         - bash -x -e ./scripts/travis/05-update-2-3.sh
+        - bash -x -e ./scripts/travis/06-run-tests.sh
       php: 7.1
 
 # In the Thunder 8.x-3.x branch we have to wait for an actual releases to be able to test updates. That is why we
