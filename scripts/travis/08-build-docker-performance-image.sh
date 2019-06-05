@@ -2,6 +2,8 @@
 #
 # Download stored project artifact on S3 and pack it into Thunder performance docker image
 
+exit 1
+
 # Get Thunder performance Docker project for packaging
 THUNDER_PERFORMANCE="${TEST_DIR}/../docker-thunder-performance"
 git clone https://github.com/thunder/docker-thunder-performance.git "${THUNDER_PERFORMANCE}"
