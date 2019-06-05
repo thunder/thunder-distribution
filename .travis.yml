@@ -34,6 +34,9 @@ env:
     - ADDITIONAL_COMPOSER_PARAMETERS=""
 
 jobs:
+  allow_failures:
+    - stage: performance test
+
   include:
     - stage: build project
       name: Build project with composer and package it
