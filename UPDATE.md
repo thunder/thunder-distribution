@@ -51,13 +51,9 @@ See here for more information:
 
 ### Execute the media update
 All you need to do now is:
+
 ```
-drush updb
-```
-Then you will be informed that all your media_entiy code has to be
-media in core compatible now. If you are sure that you are ready for the
-migration, call the drush command again.
-```
+drush cr
 drush updb
 ```
 
