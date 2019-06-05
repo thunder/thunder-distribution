@@ -35,8 +35,7 @@ env:
 
 jobs:
   allow_failures:
-    - stage: performance test
-      script:
+    - script:
         - bash -x -e ./scripts/travis/08-build-docker-performance-image.sh
 
   include:
