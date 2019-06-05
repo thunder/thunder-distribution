@@ -31,6 +31,12 @@ echo "${DOCKER_PASSWORD_BASE64}" | base64 -d | docker login -u "${DOCKER_USERNAM
 docker push "${DOCKER_IMAGE_TAG}"
 
 # Trigger AWS create ECS task function
-echo $(curl -X GET \
+API_CALL_HTTP_CODE=$(curl -X GET \
   "https://qnxrqizu3k.execute-api.eu-central-1.amazonaws.com/default/createEcsTaskDefinition?docker_image=${DOCKER_IMAGE_TAG}&task_defintion_template=thunder_performance_runner&elastic_apm_context_tag_branch=${BRANCH_NAME}" \
-  -H "x-api-key: ${AWS_API_KEY_CREATE_ECS_TASK}")
+  -H "x-api-key: ${AWS_API_KEY_CREATE_ECS_TASK}" \
+  --output /dev/stderr \
+  --write-out "%{http_code}")
+
+if [[ "${API_CALL_HTTP_CODE}" != "200" ]]; then
+    exit 1
+fi
