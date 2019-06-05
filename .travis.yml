@@ -34,9 +34,6 @@ env:
     - ADDITIONAL_COMPOSER_PARAMETERS=""
 
 jobs:
-  allow_failures:
-    - script: bash -x -e ./scripts/travis/08-build-docker-performance-image.sh
-
   include:
     - stage: build project
       name: Build project with composer and package it
@@ -94,7 +91,8 @@ jobs:
       if: commit_message =~ ^\[TEST_PERFORMANCE\] OR type = cron
       install: skip
       before_script: skip
-      script: bash -x -e ./scripts/travis/08-build-docker-performance-image.sh
+      script:
+        - bash -x -e ./scripts/travis/08-build-docker-performance-image.sh
 
 # In the Thunder 8.x-3.x branch we have to wait for an actual releases to be able to test updates. That is why we
 # currently disable those tests. TODO: re-enable them after release of Thunder 3
