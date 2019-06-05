@@ -38,8 +38,9 @@ in the composer.json of your project.
 
 ### Pre-requirements for the media update
 After that the following steps should be done for the update:
-* Add drupal/media_entity ^2.0 to your composer.json
-* Add drupal/video_embed_field ^2.0 to your composer.json
+* Add "drupal/media_entity": "^2.0" to your composer.json
+* Add "drupal/media_entity_image": "^1.3" to your composer.json
+* Add "drupal/video_embed_field": "^2.0" to your composer.json
 * Make sure that you use the "Media in core" branch for all your
 media_* modules. (For the media modules in Thunder, we take care of that)
 * Make sure that all your media_entity related code is moved to media.
