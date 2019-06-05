@@ -2,8 +2,6 @@
 #
 # Download stored project artifact on S3 and pack it into Thunder performance docker image
 
-exit 1
-
 # Get Thunder performance Docker project for packaging
 THUNDER_PERFORMANCE="${TEST_DIR}/../docker-thunder-performance"
 git clone https://github.com/thunder/docker-thunder-performance.git "${THUNDER_PERFORMANCE}"
@@ -33,6 +31,6 @@ echo "${DOCKER_PASSWORD_BASE64}" | base64 -d | docker login -u "${DOCKER_USERNAM
 docker push "${DOCKER_IMAGE_TAG}"
 
 # Trigger AWS create ECS task function
-curl -X GET \
+echo $(curl -X GET \
   "https://qnxrqizu3k.execute-api.eu-central-1.amazonaws.com/default/createEcsTaskDefinition?docker_image=${DOCKER_IMAGE_TAG}&task_defintion_template=thunder_performance_runner&elastic_apm_context_tag_branch=${BRANCH_NAME}" \
-  -H "x-api-key: ${AWS_API_KEY_CREATE_ECS_TASK}"
+  -H "x-api-key: ${AWS_API_KEY_CREATE_ECS_TASK}")
