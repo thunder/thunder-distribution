@@ -7,7 +7,7 @@ THUNDER_PERFORMANCE="${TEST_DIR}/../docker-thunder-performance"
 git clone https://github.com/thunder/docker-thunder-performance.git "${THUNDER_PERFORMANCE}"
 
 # Download project artifact from S3
-AWS_ACCESS_KEY_ID="${ARTIFACTS_KEY}" AWS_SECRET_ACCESS_KEY="${ARTIFACTS_SECRET}" aws s3 cp "s3://thunder-builds/${PROJECT_ARTIFACT_FILE_NAME}" "${PROJECT_ARTIFACT_FILE}"
+aws s3 cp "s3://thunder-builds/${PROJECT_ARTIFACT_FILE_NAME}" "${PROJECT_ARTIFACT_FILE}"
 
 # Extract files to www directory for Docker image packaging
 mkdir -p "${THUNDER_PERFORMANCE}/www"

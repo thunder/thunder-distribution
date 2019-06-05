@@ -21,5 +21,5 @@ find "${THUNDER_DIST_DIR}" -type d -name ".git" | xargs rm -rf
 cd "${TEST_DIR}" && tar -czhf "${PROJECT_ARTIFACT_FILE}" .
 
 # Upload files to S3 bucket
-AWS_ACCESS_KEY_ID="${ARTIFACTS_KEY}" AWS_SECRET_ACCESS_KEY="${ARTIFACTS_SECRET}" aws s3 cp "${DB_ARTIFACT_FILE}" "s3://thunder-builds/${DB_ARTIFACT_FILE_NAME}"
-AWS_ACCESS_KEY_ID="${ARTIFACTS_KEY}" AWS_SECRET_ACCESS_KEY="${ARTIFACTS_SECRET}" aws s3 cp "${PROJECT_ARTIFACT_FILE}" "s3://thunder-builds/${PROJECT_ARTIFACT_FILE_NAME}"
+aws s3 cp "${DB_ARTIFACT_FILE}" "s3://thunder-builds/${DB_ARTIFACT_FILE_NAME}"
+aws s3 cp "${PROJECT_ARTIFACT_FILE}" "s3://thunder-builds/${PROJECT_ARTIFACT_FILE_NAME}"
