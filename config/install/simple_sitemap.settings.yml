@@ -8,3 +8,7 @@ enabled_entity_types:
 skip_untranslated: false
 base_url: ''
 default_variant: default
+cron_generate_interval: 0
+xsl: true
+excluded_languages: {  }
+generate_duration: 10000
