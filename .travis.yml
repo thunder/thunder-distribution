@@ -26,6 +26,7 @@ stages:
   - build project
   - sanity checks
   - test
+  - performance test
 
 env:
   global:
