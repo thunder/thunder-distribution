@@ -133,7 +133,7 @@
         "drupal/scheduler": "1.0",
         "drupal/scheduler_content_moderation_integration": "^1.0-beta1",
         "drupal/select2": "^1.0",
-        "drupal/simple_sitemap": "^2.11",
+        "drupal/simple_sitemap": "^3.2",
         "drupal/simple_gmap": "^1.4",
         "drupal/shariff": "^1.5",
         "drupal/slick": "^1.0",
