@@ -7,3 +7,4 @@ enabled_entity_types:
   - taxonomy_term
 skip_untranslated: false
 base_url: ''
+default_variant: default
