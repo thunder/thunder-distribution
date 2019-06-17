@@ -336,7 +336,8 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->setModerationState('published');
     $this->clickSave();
 
-    // Do not add html transformation information to prevent rendering of the sitemap in html.
+    // Do not add html transformation information to prevent rendering of the
+    // sitemap in html.
     $this->sitemapGenerator->saveSetting('xsl', FALSE);
     $this->sitemapGenerator->generateSitemap('backend');
 
