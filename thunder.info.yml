@@ -13,7 +13,7 @@ distribution:
 
 # Required modules
 dependencies:
-#  - config_selector:config_selector
+  - config_selector:config_selector
   - drupal:media
   - drupal:node
   - drupal:views
