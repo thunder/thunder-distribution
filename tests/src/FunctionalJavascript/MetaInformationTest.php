@@ -361,7 +361,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->clickSave();
 
-    $this->runCron();
+    $this->sitemapGenerator->generateSitemap('backend');
     $this->drupalGet('sitemap.xml');
 
     $content = $this->getSession()->getPage()->getContent();
@@ -378,7 +378,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     ]);
     $page->find('xpath', '//input[@id="edit-submit"]')->click();
 
-    $this->runCron();
+    $this->sitemapGenerator->generateSitemap('backend');
 
     // Check loc, that it's pointing to sitemap.xml file.
     $this->drupalGet('sitemap.xml');
@@ -404,7 +404,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->clickSave();
 
-    $this->runCron();
+    $this->sitemapGenerator->generateSitemap('backend');
     $this->drupalGet('sitemaps/3/sitemap.xml');
 
     $content = $this->getSession()->getPage()->getContent();
