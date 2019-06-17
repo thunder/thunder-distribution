@@ -25,7 +25,6 @@ COMPOSER_MEMORY_LIMIT=-1 composer require "drupal/media_entity:^2.0" "drupal/vid
 
 cd ${TEST_DIR}/docroot
 drush cr
-drush pmu config_selector -y
 drush updb -y
 drush en vem_migrate_oembed -y
 drush vem:migrate_oembed
