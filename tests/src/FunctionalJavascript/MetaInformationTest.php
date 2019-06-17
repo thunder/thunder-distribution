@@ -389,7 +389,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     // Get 3rd sitemap.xml file and check that link exits there.
     $urlOptions = ['query' => ['page' => 3]];
-    $this->getSession()->visit($this->buildUrl('sitemaps/sitemap.xml', $urlOptions));
+    $this->getSession()->visit($this->buildUrl('sitemap.xml', $urlOptions));
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
     $this->assertEquals(1, $domElements->length);
@@ -400,13 +400,14 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $page = $this->getSession()->getPage();
 
     $this->expandAllTabs();
-    $this->scrollElementInView('[name="simple_sitemap_index_content"]');
-    $page->find('css', '[name="simple_sitemap_index_content"]')->click();
+    $this->setFieldValues($page, [
+      'index_default_node_settings' => '0',
+    ]);
 
     $this->clickSave();
 
     $this->sitemapGenerator->generateSitemap('backend');
-    $this->drupalGet('sitemaps/sitemap.xml', $urlOptions);
+    $this->drupalGet('sitemap.xml', $urlOptions);
 
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]');
