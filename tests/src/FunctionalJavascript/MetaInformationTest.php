@@ -344,9 +344,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->drupalGet('sitemap.xml');
 
     $content = $this->getSession()->getPage()->getContent();
-
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
-
     $this->assertEquals(1, $domElements->length);
     $this->assertEquals('0.5', $domElements->item(0)->nodeValue);
 
