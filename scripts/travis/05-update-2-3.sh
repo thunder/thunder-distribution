@@ -11,7 +11,8 @@ composer config repositories.thunder path ${THUNDER_DIST_DIR}
 
 composer remove burdamagazinorg/thunder --no-update
 composer require "thunder/thunder-distribution:*" --no-update
-composer remove drupal/dropzonejs --no-update
+# Remove all the packages we manually required in 03-build-thunder2.sh
+composer remove drupal/checklistapi drupal/simple_sitemap drupal/dropzonejs drupal/liveblog --no-update
 
 composer update
 
