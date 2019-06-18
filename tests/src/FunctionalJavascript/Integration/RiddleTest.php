@@ -34,12 +34,6 @@ class RiddleTest extends ThunderJavascriptTestBase {
       return;
     }
 
-    if (getenv('TRAVIS_JOB_NAME') == 'Run upgrade test') {
-      $this->markTestSkipped(
-        'Test can not run in upgrade test.'
-      );
-    }
-
     if (!\Drupal::service('module_installer')->install(['thunder_riddle'])) {
       $this->fail("Unable to install Thunder Riddle integration module.");
 
