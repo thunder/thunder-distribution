@@ -58,6 +58,11 @@ class ThunderMediaTest extends ThunderJavascriptTestBase {
    * Test for instagram media previews in backend.
    */
   public function test8103() {
+    if (getenv('TRAVIS_JOB_NAME') == 'Run upgrade test') {
+      $this->markTestSkipped(
+        'Test can not run in upgrade test.'
+      );
+    }
     // Check thumbnails in media list for instagram type.
     $this->drupalGet('admin/content/media');
     $page = $this->getSession()->getPage();
