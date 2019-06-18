@@ -32,6 +32,7 @@ env:
   global:
     - THUNDER_ADMIN_BRANCH=8.x-3.x
     - ADDITIONAL_COMPOSER_PARAMETERS=""
+    - COMPOSER_MEMORY_LIMIT=-1
 
 jobs:
   include:
