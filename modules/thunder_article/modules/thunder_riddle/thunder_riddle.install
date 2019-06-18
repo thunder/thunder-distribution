@@ -33,7 +33,7 @@ function thunder_riddle_install() {
   $field = \Drupal::entityTypeManager()->getStorage('field_config')->load('node.article.field_paragraphs');
   if ($field) {
     $settings = $field->getSetting('handler_settings');
-    if (!$settings['negate']) {
+    if (!isset($settings['negate']) || !$settings['negate']) {
       $settings['target_bundles']['riddle'] = 'riddle';
       $settings['target_bundles_drag_drop']['riddle'] = ['enabled' => TRUE, 'weight' => 10];
       $field->setSetting('handler_settings', $settings);
