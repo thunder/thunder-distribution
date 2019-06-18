@@ -36,7 +36,7 @@ env:
 jobs:
   include:
     - stage: test
-      name: Run tests with composer build
+      name: Run upgrade test
       install:
         - bash -x -e ./scripts/travis/03-build-thunder2.sh
       script:
