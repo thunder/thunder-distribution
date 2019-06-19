@@ -24,3 +24,4 @@ drush cr
 drush updb -y
 drush en vem_migrate_oembed -y
 drush vem:migrate_oembed
+drush cr
