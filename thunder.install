@@ -21,14 +21,6 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
  */
 function thunder_update_dependencies() {
 
-  if (\Drupal::moduleHandler()->moduleExists('media_entity')
-      && \Drupal::moduleHandler()->moduleExists('simple_sitemap')
-  ) {
-    // Ensure that media_entity_update_8201() runs after the
-    // simple_sitemap_entity_overrides schema has been updated.
-    $dependencies['media_entity'][8201]['simple_sitemap'] = 8216;
-  }
-
   $dependencies['thunder'] = [];
 
   // Ensure that all thunder hook_update_N functions are called after all other
