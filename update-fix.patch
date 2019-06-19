@@ -1,0 +1,14 @@
+diff --git a/simple_sitemap.install b/simple_sitemap.install
+index 8f701e1..d653340 100644
+--- a/simple_sitemap.install
++++ b/simple_sitemap.install
+@@ -703,4 +703,9 @@ function simple_sitemap_update_8301() {
+       'unsigned' => TRUE,
+     ]
+   );
++
++  $settings = \Drupal::service('config.factory')->getEditable('simple_sitemap.settings')->get();
++  if ($settings->get('batch_process_limit') !== NULL){
++    $settings->clear('batch_process_limit');
++  }
+ }
