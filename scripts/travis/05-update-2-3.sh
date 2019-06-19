@@ -20,7 +20,6 @@ mv composer1.json composer.json
 composer require "drupal/media_entity:2.x-dev" "drupal/video_embed_field:^2.0" "drupal/media_entity_image" "drupal/riddle_marketplace:^3.0-beta2"
 
 cd ${TEST_DIR}/docroot
-drush cr
 drush updb -y
 drush en vem_migrate_oembed -y
 drush vem:migrate_oembed
