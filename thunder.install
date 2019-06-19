@@ -29,7 +29,6 @@ function thunder_update_dependencies() {
     $dependencies['media_entity'][8201]['simple_sitemap'] = 8216;
   }
 
-
   $dependencies['thunder'] = [];
 
   // Ensure that all thunder hook_update_N functions are called after all other
