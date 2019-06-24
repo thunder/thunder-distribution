@@ -1,14 +1,22 @@
 diff --git a/simple_sitemap.install b/simple_sitemap.install
-index 8f701e1..d653340 100644
+index 8f701e1..9c6f8c4 100644
 --- a/simple_sitemap.install
 +++ b/simple_sitemap.install
-@@ -703,4 +703,9 @@ function simple_sitemap_update_8301() {
-       'unsigned' => TRUE,
+@@ -704,3 +704,17 @@ function simple_sitemap_update_8301() {
      ]
    );
-+
-+  $settings = \Drupal::service('config.factory')->getEditable('simple_sitemap.settings')->get();
-+  if ($settings->get('batch_process_limit') !== NULL){
-+    $settings->clear('batch_process_limit');
-+  }
  }
++
++/**
++ * Remove batch_process_limit setting if it exists after update from 2.x.
++ */
++function simple_sitemap_update_8302() {
++  $settings = \Drupal::service('config.factory')->getEditable('simple_sitemap.settings');
++
++  if($settings->get('batch_process_limit') === NULL){
++    return;
++  }
++
++  $settings->clear('batch_process_limit');
++  $settings->save();
++}
