@@ -81,7 +81,6 @@
                 "Drupal 8.7 no longer has a dedicated canonical route for media entities, breaks entity matcher deriver": "https://www.drupal.org/files/issues/2019-05-03/linkit-media-87-3040749-8.patch"
             },
             "drupal/simple_sitemap": {
-                "Update fix": "./update-fix.patch",
                 "Concurrent update of media module and simple_sitemap 2.x to 3.x fails": "https://www.drupal.org/files/issues/2019-06-19/3062747-4.patch"
             }
         }
