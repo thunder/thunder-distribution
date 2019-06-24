@@ -8,7 +8,7 @@ index 8f701e1..9c6f8c4 100644
  }
 +
 +/**
-+ * Remove batch_process_limit setting if it exists after update from 2.x.
++ * Remove batch_process_limit from settings setting if it still exists.
 + */
 +function simple_sitemap_update_8302() {
 +  $settings = \Drupal::service('config.factory')->getEditable('simple_sitemap.settings');
