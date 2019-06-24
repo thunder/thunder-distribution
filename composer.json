@@ -82,7 +82,7 @@
             },
             "drupal/simple_sitemap": {
                 "Remove setting": "../thunder-distribution/patches/update-fix.patch",
-                "Concurrent update of media module and simple_sitemap 2.x to 3.x fails": "https://www.drupal.org/files/issues/2019-06-19/3062747-4.patch"
+                "Concurrent update of media module and simple_sitemap 2.x to 3.x fails": "https://www.drupal.org/files/issues/2019-06-24/3062747-8.patch"
             }
         }
     },
