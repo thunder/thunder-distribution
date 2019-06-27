@@ -17,12 +17,11 @@ by
 in the require section of your composer.json.
 
 Second, we removed some modules from our codebase. If you are using one of
-following modules, please add them to the composer.json of your project.
-* valiton/harbourmaster
-* drupal/riddle_marketplace
-* drupal/nexx_integration
-* burdamagazinorg/infinite_module
-* burdamagazinorg/infinite_theme
+following modules, please require them manually for your project.
+
+```
+composer require valiton/harbourmaster drupal/riddle_marketplace:~3.0 drupal/nexx_integration:~3.0 burdamagazinorg/infinite_module burdamagazinorg/infinite_theme
+```
 
 We also switched from bower-asset to npm-asset for our frontend-libraries.
 In order to get the libraries downloaded to the correct location, please
@@ -38,9 +37,11 @@ in the composer.json of your project.
 
 ### Pre-requirements for the media update
 After that the following steps should be done for the update:
-* Add "drupal/media_entity": "^2.0" to your composer.json
-* Add "drupal/media_entity_image": "^1.3" to your composer.json
-* Add "drupal/video_embed_field": "^2.0" to your composer.json
+
+```
+composer require drupal/media_entity:^2.0 drupal/media_entity_image drupal/video_embed_field
+```
+
 * Make sure that you use the "Media in core" branch for all your
 media_* modules. (For the media modules in Thunder, we take care of that)
 * Make sure that all your media_entity related code is moved to media.
@@ -91,7 +92,7 @@ In our default configuration we moved from video_embed_field to media
 oEmbed and we recommend it to you, too.
 
 Steps to migrate:
-* Add https://www.drupal.org/files/issues/2018-12-11/2997799-22.patch
+* Add https://www.drupal.org/files/issues/2019-06-18/2997799-27.patch
 to your composer.json in the patch section for drupal/video_embed_field
 * ```
   drush en vem_migrate_oembed
