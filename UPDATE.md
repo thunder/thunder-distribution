@@ -44,7 +44,7 @@ composer require drupal/media_entity:^2.0 drupal/media_entity_image drupal/video
 
 * Make sure that you use the "Media in core" branch for all your
 media_* modules. (For the media modules in Thunder, we take care of that)
-* Make sure that all your media_entity related code is moved to media.
+* Make sure that all your code that uses media_entity API is modified to use the core media API.
 
 See here for more information:
 * [Moved a refined version of the contributed Media entity module to core as Media module](https://www.drupal.org/node/2863992)
@@ -54,7 +54,6 @@ See here for more information:
 All you need to do now is:
 
 ```
-drush cr
 drush updb
 ```
 
