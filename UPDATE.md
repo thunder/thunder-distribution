@@ -57,6 +57,12 @@ All you need to do now is:
 drush updb
 ```
 
+### Cleanup codebase
+Now the update is done and you can remove some modules from your project.
+```
+composer remove drupal/media_entity drupal/media_entity_image
+```
+
 ## Additional tasks
 
 ### Removing support for some entity browser configurations
