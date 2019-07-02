@@ -16,12 +16,6 @@ by
 ```
 in the require section of your composer.json.
 
-Second, we removed some modules from our codebase. If you are using one of
-following modules, please require them manually for your project.
-
-```
-composer require drupal/views_load_more drupal/breakpoint_js_settings valiton/harbourmaster drupal/riddle_marketplace:~3.0 drupal/nexx_integration:~3.0 burdamagazinorg/infinite_module burdamagazinorg/infinite_theme
-```
 
 We also switched from bower-asset to npm-asset for our frontend-libraries.
 In order to get the libraries downloaded to the correct location, please
@@ -33,7 +27,20 @@ by
 ```
 "installer-types": ["bower-asset", "npm-asset"],
 ```
-in the composer.json of your project and add "npm-asset" to the "docroot/libraries/{$name}" section in installer-paths.
+in the composer.json of your project and add "type:npm-asset" to the "docroot/libraries/{$name}" section in installer-paths.
+
+You have to update composer now
+
+```
+composer update
+```
+
+Additionally, we removed some modules from our codebase. If you are using one of
+following modules, please require them manually for your project.
+
+```
+composer require drupal/views_load_more drupal/breakpoint_js_settings valiton/harbourmaster drupal/riddle_marketplace:~3.0 drupal/nexx_integration:~3.0 burdamagazinorg/infinite_module burdamagazinorg/infinite_theme
+```
 
 ### Pre-requirements for the media update
 First we should make sure that the latest drush version is installed.
