@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 cd ${TEST_DIR}
-composer require burdamagazinorg/thunder:dev-fix/thunder-updater-notice --no-update
 composer update
 
 cd ${TEST_DIR}/docroot
