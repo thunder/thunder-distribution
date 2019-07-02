@@ -36,6 +36,11 @@ by
 in the composer.json of your project and add "npm-asset" to the "docroot/libraries/{$name}" section in installer-paths.
 
 ### Pre-requirements for the media update
+First we should make sure that the latest drush version is installed.
+```
+composer require drush/drush:~9.7.0
+```
+
 After that the following steps should be done for the update:
 
 ```
