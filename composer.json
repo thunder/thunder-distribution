@@ -81,8 +81,7 @@
                 "Drupal 8.7 no longer has a dedicated canonical route for media entities, breaks entity matcher deriver": "https://www.drupal.org/files/issues/2019-05-03/linkit-media-87-3040749-8.patch"
             },
             "drupal/core": {
-                "Allow updating modules with new service dependencies": "https://www.drupal.org/files/issues/2019-07-02/2863986-4-106.patch",
-                "Switch to a memory backend for running the database updates": "https://www.drupal.org/files/issues/2019-07-01/3055443-17.patch"
+                "Allow updating modules with new service dependencies and Switch to a memory backend for running the database updates": "https://www.drupal.org/files/issues/2019-07-02/3055443-2863986-combined.patch"
             },
             "drupal/simple_sitemap": {
                 "Remove setting": "https://www.drupal.org/files/issues/2019-06-25/3063870-3.patch",
