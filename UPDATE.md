@@ -115,7 +115,7 @@ to your composer.json in the patch section for drupal/video_embed_field
   drush en vem_migrate_oembed
   ```
 * ```
-  drush video-embed-media-migrate-oembed
+  drush vem:migrate_oembed
   ```
 * ```
   drush pmu video_embed_field
