@@ -112,12 +112,12 @@ Steps to migrate:
 * Add https://www.drupal.org/files/issues/2019-06-18/2997799-27.patch
 to your composer.json in the patch section for drupal/video_embed_field
 * ```
-  drush en vem_migrate_oembed
+  drush pm:enable vem_migrate_oembed
   ```
 * ```
   drush vem:migrate_oembed
   ```
 * ```
-  drush pmu video_embed_field
+  drush pm:uninstall video_embed_field
   ```
 * Remove the video_embed_field module and patch from your composer.json
