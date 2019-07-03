@@ -109,7 +109,7 @@ In our default configuration we moved from video_embed_field to media
 oEmbed and we recommend it to you, too.
 
 Steps to migrate:
-* Add https://www.drupal.org/files/issues/2019-06-18/2997799-27.patch
+* Add https://www.drupal.org/files/issues/2019-07-03/2997799-29.patch
 to your composer.json in the patch section for drupal/video_embed_field
 * ```
   drush pm:enable vem_migrate_oembed
