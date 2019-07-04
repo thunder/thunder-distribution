@@ -132,11 +132,10 @@ to your composer.json in the patch section for drupal/video_embed_field, it shou
             }
         },
 ```
-Composer update again
 
-```
-composer update
-```
+* ```
+  composer update
+  ```
 
 * ```
   drush pm:enable vem_migrate_oembed
