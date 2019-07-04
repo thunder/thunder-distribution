@@ -44,8 +44,8 @@ composer require drupal/breakpoint_js_settings --no-update
 composer require valiton/harbourmaster --no-update
 composer require drupal/riddle_marketplace:~3.0 --no-update
 composer require drupal/nexx_integration:~3.0 --no-update
-composer require burdamagazinorg/infinite_module --no-update
-composer require burdamagazinorg/infinite_theme --no-update
+composer require burdamagazinorg/infinite_module:~1.0 --no-update
+composer require burdamagazinorg/infinite_theme:~1.0 --no-update
 ```
 ### Updating fb_instant_articles
 If you are using the fb_instant_articles, please note that the RSS feed url will change
