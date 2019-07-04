@@ -77,9 +77,6 @@
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch",
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2019-05-20/password_policy-config_import_field_error-2771129-80.patch"
             },
-            "drupal/linkit": {
-                "Drupal 8.7 no longer has a dedicated canonical route for media entities, breaks entity matcher deriver": "https://www.drupal.org/files/issues/2019-05-03/linkit-media-87-3040749-8.patch"
-            },
             "drupal/core": {
                 "Allow updating modules with new service dependencies and Switch to a memory backend for running the database updates": "https://www.drupal.org/files/issues/2019-07-03/3055443-19-2863986-111-combined.patch"
             },
@@ -123,7 +120,7 @@
         "drupal/ivw_integration": "^1.0",
         "drupal/length_indicator": "^1.0-rc2",
         "drupal/libraries": "^3.0-alpha1",
-        "drupal/linkit": "5.0-beta8",
+        "drupal/linkit": "^5.0-beta9",
         "drupal/liveblog": "^1.2-alpha14",
         "drupal/media_entity_instagram": "^2.0-alpha1",
         "drupal/media_entity_pinterest": "^2.0",
