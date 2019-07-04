@@ -123,7 +123,21 @@ oEmbed and we recommend it to you, too.
 
 Steps to migrate:
 * Add https://www.drupal.org/files/issues/2019-07-03/2997799-29.patch
-to your composer.json in the patch section for drupal/video_embed_field
+to your composer.json in the patch section for drupal/video_embed_field, it should look similar to this:
+
+```
+        "patches": {
+            "drupal/video_embed_field": {
+                "Include upgrade path from video_embed_field to oEmbed": "https://www.drupal.org/files/issues/2019-07-03/2997799-29.patch"
+            }
+        },
+```
+Composer update again
+
+```
+composer update
+```
+
 * ```
   drush pm:enable vem_migrate_oembed
   ```
