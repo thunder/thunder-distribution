@@ -39,13 +39,19 @@ Additionally, we removed some modules from our codebase. If you are using one of
 following modules, please require them manually for your project.
 
 ```
-composer require drupal/views_load_more drupal/breakpoint_js_settings valiton/harbourmaster drupal/riddle_marketplace:~3.0 drupal/nexx_integration:~3.0 burdamagazinorg/infinite_module burdamagazinorg/infinite_theme
+composer require drupal/views_load_more --no-install
+composer require drupal/breakpoint_js_settings --no-install
+composer require valiton/harbourmaster --no-install
+composer require drupal/riddle_marketplace:~3.0 --no-install
+composer require drupal/nexx_integration:~3.0 --no-install
+composer require burdamagazinorg/infinite_module --no-install
+composer require burdamagazinorg/infinite_theme --no-install
 ```
 
 ### Pre-requirements for the media update
 First we should make sure that the latest drush version is installed.
 ```
-composer require drush/drush:~9.7.0
+composer require drush/drush:~9.7.0 --no-install
 ```
 
 After that the following steps should be done for the update:
