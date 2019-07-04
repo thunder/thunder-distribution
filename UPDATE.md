@@ -39,13 +39,13 @@ Additionally, we removed some modules from our codebase. If you are using one of
 following modules, please require them manually for your project.
 
 ```
-composer require drupal/views_load_more --no-install
-composer require drupal/breakpoint_js_settings --no-install
-composer require valiton/harbourmaster --no-install
-composer require drupal/riddle_marketplace:~3.0 --no-install
-composer require drupal/nexx_integration:~3.0 --no-install
-composer require burdamagazinorg/infinite_module --no-install
-composer require burdamagazinorg/infinite_theme --no-install
+composer require drupal/views_load_more --no-update
+composer require drupal/breakpoint_js_settings --no-update
+composer require valiton/harbourmaster --no-update
+composer require drupal/riddle_marketplace:~3.0 --no-update
+composer require drupal/nexx_integration:~3.0 --no-update
+composer require burdamagazinorg/infinite_module --no-update
+composer require burdamagazinorg/infinite_theme --no-update
 ```
 ### Updating fb_instant_articles
 If you are using the fb_instant_articles, please note that the RSS feed url will change
