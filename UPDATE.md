@@ -57,7 +57,7 @@ this is due to invalid configuration present in the system before the update and
 ### Pre-requirements for the media update
 First we should make sure that the latest drush version is installed.
 ```
-composer require drush/drush:~9.7.0 --no-install
+composer require drush/drush:~9.7.0 --no-update
 ```
 
 After that the following steps should be done for the update:
