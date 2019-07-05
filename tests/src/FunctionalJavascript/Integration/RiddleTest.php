@@ -72,11 +72,11 @@ class RiddleTest extends ThunderJavascriptTestBase {
 
     // Click button to load Riddles and compare thumbnails.
     $this->clickButtonDrupalSelector($page, 'edit-import-riddle');
-    $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', '.view-media-entity-browser .views-field-thumbnail__target-id img'));
+    $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', '.view-media-entity-browser .views-field-thumbnail__target-id img:last-child'));
     $this->assertTrue(
       $this->compareScreenToImage(
         $this->getScreenshotFile('test_riddle_eb_list'),
-        ['width' => 600, 'height' => 380, 'x' => 60, 'y' => 115]
+        ['width' => 600, 'height' => 380, 'x' => 60, 'y' => 92]
       )
     );
 
