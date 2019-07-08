@@ -8,6 +8,6 @@ Update from Thunder 2 is not fully automated, several manual steps have to be ex
 
 [How to update Thunder 2 to Thunder 3](https://thunder.github.io/thunder-documentation/update-2-to-3)
 
-From now on, new features will only be added to Thunder 3, Thunder 2 will be maintained as long as Drupal 8.7 is 
+From now on, new features will only be added to Thunder 3. Thunder 2 will be maintained as long as Drupal 8.7 is 
 maintained. 
 Thunder 2 will not work with Drupal 9, you should consider updating as soon as possible!
