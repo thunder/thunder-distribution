@@ -9,7 +9,8 @@ wget -q https://github.com/php/pecl-file_formats-yaml/archive/$PHP_YAML_VERSION.
 tar -C /tmp -zxf php-yaml-LATEST.tar.gz
 cd /tmp/pecl-file_formats-yaml-$PHP_YAML_VERSION
 phpize
-./configure
+# Silence configure
+./configure > /dev/null
 make -s
 make -s install
 echo "extension = yaml.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
