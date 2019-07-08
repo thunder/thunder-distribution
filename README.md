@@ -13,8 +13,10 @@ To start quickly, run this in your terminal to install Thunder from command line
 
 ```
 composer create-project thunder/thunder-project thunder --no-interaction --no-install
-cd thunder/docroot
+cd thunder
 composer install
+composer drupal:scaffold
+cd docroot
 php core/scripts/drupal quick-start thunder
 ```
 For further information follow the [install instructions](https://www.drupal.org/docs/8/install/drupal-8-quick-start-command).
