@@ -1,6 +1,6 @@
 # Changelog
 
-## [8.2.44](https://github.com/thunder/thunder-distribution/tree/3.3.0-beta1) 2019-07-08
+## [3.3.0-beta1](https://github.com/thunder/thunder-distribution/tree/3.3.0-beta1) 2019-07-08
 
 The first public release of Thunder 3. feature wise it is currently identical to Thunder 2, but uses Drupal media instead
 of the deprecated media_entity module. New installations should prefer this version to Thunder 3.
