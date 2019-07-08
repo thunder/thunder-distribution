@@ -2,7 +2,7 @@
 
 # install image magick
 wget -q https://github.com/mkoppanen/imagick/archive/$PHP_IMAGICK_VERSION.tar.gz -O php-imagick-LATEST.tar.gz
-yes '' | pecl install -q -f php-imagick-LATEST.tar.gz
+yes '' | pecl -q install -f php-imagick-LATEST.tar.gz
 
 # Build and install the YAML extension for strict parsing.
 wget -q https://github.com/php/pecl-file_formats-yaml/archive/$PHP_YAML_VERSION.tar.gz -O php-yaml-LATEST.tar.gz
