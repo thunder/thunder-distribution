@@ -1,4 +1,4 @@
-# Change Log
+# Changelog
 
 ## [8.2.44](https://github.com/thunder/thunder-distribution/tree/3.3.0-beta1) 2019-07-08
 
