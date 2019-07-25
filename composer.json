@@ -139,7 +139,7 @@
         "drupal/redirect": "^1.0",
         "drupal/scheduler": "1.0",
         "drupal/scheduler_content_moderation_integration": "^1.0-beta1",
-        "drupal/select2": "dev-8.x-1.x",
+        "drupal/select2": "1.x-dev",
         "drupal/simple_sitemap": "3.2",
         "drupal/simple_gmap": "^1.4",
         "drupal/shariff": "^1.5",
