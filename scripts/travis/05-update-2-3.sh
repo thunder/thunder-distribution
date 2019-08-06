@@ -12,6 +12,7 @@ composer config repositories.thunder path ${THUNDER_DIST_DIR}
 composer remove burdamagazinorg/thunder --no-update
 composer require "thunder/thunder-distribution:*" --no-update
 
+rm composer.lock
 composer update
 
 jq '.extra.patches += {"drupal/video_embed_field":{"Include upgrade path from video_embed_field":"https://www.drupal.org/files/issues/2019-06-04/2997799-25.patch"}}' composer.json > composer1.json
