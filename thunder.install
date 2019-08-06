@@ -89,3 +89,13 @@ function _thunder_mark_update_checklist($update_id, $successful, UpdateLogger $u
     // If service is not available, we will just ignore it.
   }
 }
+
+/**
+ * Installs the  autosave_form module.
+ */
+function thunder_update_8301() {
+
+  \Drupal::service('module_installer')->install([
+    'autosave_form',
+  ]);
+}
