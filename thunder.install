@@ -97,7 +97,7 @@ function thunder_requirements($phase) {
   $requirements = [];
   if ($phase == 'update') {
     $thunder_schema = drupal_get_installed_schema_version('thunder');
-    if ($thunder_schema > 8000 && $thunder_schema < 8137) {
+    if ($thunder_schema > 8000 && $thunder_schema < 8138) {
       $requirements['thunder'] = [
         'title' => t('Thunder'),
         'description' => t('You need to update to the latest version of Thunder 2 before switching to Thunder 3.'),
