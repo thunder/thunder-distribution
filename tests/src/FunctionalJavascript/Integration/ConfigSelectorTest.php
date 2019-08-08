@@ -11,8 +11,14 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
  */
 class ConfigSelectorTest extends ThunderJavascriptTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = ['thunder_demo'];
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $defaultUserRole = 'administrator';
 
   /**
