@@ -1,12 +1,19 @@
 # Changelog
 
+## [3.3.0-rc1](https://github.com/thunder/thunder-distribution/tree/3.3.0-rc1) 2019-08-08
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.0-beta3...3.3.0-rc1)
+
+Making sure, that projects updating from Thunder 2 are on the latest Thunder 2 release.
+
+- Task [Ensure you are coming from the latest Thunder 2 release](https://www.drupal.org/project/thunder/issues/3064515)
+
 ## [3.3.0-beta3](https://github.com/thunder/thunder-distribution/tree/3.3.0-beta3) 2019-07-29
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.0-beta2...3.3.0-beta3)
 
 This release updates the contrib Metatag module version to 1.9, which is a security update. 
 
-- Fix [#3055350 - Do not show revisionlog message form on inline forms](https://www.drupal.org/i/3055350) 
-- Task [#3069987 - Update documentation](https://www.drupal.org/i/3069987)
+- Fix [Do not show revisionlog message form on inline forms](https://www.drupal.org/project/thunder/issues/3055350) 
+- Task [Update documentation](https://www.drupal.org/project/thunder/issues/3069987)
 
 ## [3.3.0-beta2](https://github.com/thunder/thunder-distribution/tree/3.3.0-beta2) 2019-07-18
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.0-beta1...3.3.0-beta2)
