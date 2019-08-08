@@ -68,7 +68,8 @@
             },
             "drupal/entity_browser": {
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2019-07-04/2858438_17.patch",
-                "Entity Browser iFrame 100% height can cause vertical scrollbar #3055358": "https://www.drupal.org/files/issues/2019-05-21/entity-browser-iframe-scrollbar-3055358-4.patch"
+                "Entity Browser iFrame 100% height can cause vertical scrollbar #3055358": "https://www.drupal.org/files/issues/2019-05-21/entity-browser-iframe-scrollbar-3055358-4.patch",
+                "Reverted: Remove button conflict wrong triggering element": "https://www.drupal.org/files/issues/2019-08-08/reverted-entity-browser-random-triggering-element-3046416.patch"
             },
             "drupal/scheduler": {
                 "Deny edit access to scheduled content for unprivileged users": "https://www.drupal.org/files/issues/2018-12-18/3020250-8.patch"
