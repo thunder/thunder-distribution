@@ -21,7 +21,10 @@ if [[ "${TEST_UPDATE}" != "true" ]]; then
 fi
 
 # execute Drupal tests
-thunderDumpFile=thunder.php php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --suppress-deprecations --verbose --color --url http://localhost:8080 Thunder
+for i in {1..40}
+do
+  thunderDumpFile=thunder.php php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --suppress-deprecations --verbose --color --url http://localhost:8080 --class "Drupal\Tests\thunder\FunctionalJavascript\Integration\ParagraphSplitTest"
+done
 
 if [[ ${TEST_UPDATE} == "true" ]]; then
     php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --suppress-deprecations --verbose --color --url http://localhost:8080 --class "Drupal\Tests\thunder\Functional\Installer\ThunderInstallerTest"
