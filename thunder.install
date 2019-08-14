@@ -95,9 +95,14 @@ function _thunder_mark_update_checklist($update_id, $successful, UpdateLogger $u
  */
 function thunder_update_8301() {
 
-  \Drupal::service('module_installer')->install([
-    'autosave_form',
-  ]);
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8301');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
 }
 
 /**
