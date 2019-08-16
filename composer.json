@@ -71,7 +71,7 @@
                 "Deny edit access to scheduled content for unprivileged users": "https://www.drupal.org/files/issues/2018-12-18/3020250-8.patch"
             },
             "drupal/paragraphs": {
-                "Empty patch": "./docroot/profiles/contrib/thunder/empty.patch"
+                "Empty patch": "https://raw.githubusercontent.com/thunder/thunder-distribution/88f51bc8d26b6f381e27f358685a61c750593cfb/empty.patch"
             },
             "drupal/password_policy": {
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch",
