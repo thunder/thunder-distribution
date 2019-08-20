@@ -66,17 +66,6 @@ class ThunderMediaTest extends ThunderJavascriptTestBase {
     $this->drupalGet('admin/content/media');
     $page = $this->getSession()->getPage();
 
-    // Filter only instagram media type.
-    $this->setFieldValue($page, $sourceFieldName, 'instagram');
-    $page->find('xpath', '//div[@class="view-filters"]//input[@type="submit"]')->click();
-
-    // Adjust position for list, before making screenshot.
-    $this->scrollElementInView('#edit-submit');
-    $this->compareScreenToImage(
-      $this->getScreenshotFile('test8103_media_instagram'),
-      ['width' => 400, 'height' => 350, 'x' => 22, 'y' => 222]
-    );
-
     // Test single instagram preview, top part and bottom part.
     $this->drupalGet('media/23');
     $this->compareScreenToImage($this->getScreenshotFile('test8103_media23_1_top'));
