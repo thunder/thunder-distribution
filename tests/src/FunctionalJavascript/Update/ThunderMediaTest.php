@@ -55,32 +55,6 @@ class ThunderMediaTest extends ThunderJavascriptTestBase {
   }
 
   /**
-   * Test for instagram media previews in backend.
-   */
-  public function test8103() {
-    $sourceFieldName = 'source';
-    if (getenv('TRAVIS_JOB_NAME') == 'Run upgrade test') {
-      $sourceFieldName = 'provider';
-    }
-    // Check thumbnails in media list for instagram type.
-    $this->drupalGet('admin/content/media');
-    $page = $this->getSession()->getPage();
-
-    // Test single instagram preview, top part and bottom part.
-    $this->drupalGet('media/23');
-    $this->compareScreenToImage($this->getScreenshotFile('test8103_media23_1_top'));
-    $this->compareScreenToImage($this->getScreenshotFile('test8103_media23_2_top'), [], ['width' => 620, 'height' => 768]);
-    $this->compareScreenToImage($this->getScreenshotFile('test8103_media23_3_top'), [], ['width' => 830, 'height' => 768]);
-
-    $this->scrollElementInView('#block-thunder-base-powered');
-    $this->compareScreenToImage($this->getScreenshotFile('test8103_media23_1_bottom'));
-    $this->scrollElementInView('#block-thunder-base-powered');
-    $this->compareScreenToImage($this->getScreenshotFile('test8103_media23_2_bottom'), [], ['width' => 620, 'height' => 768]);
-    $this->scrollElementInView('#block-thunder-base-powered');
-    $this->compareScreenToImage($this->getScreenshotFile('test8103_media23_3_bottom'), [], ['width' => 830, 'height' => 768]);
-  }
-
-  /**
    * Test that Video and Image entity browser uses 24 images per page.
    */
   public function test8104() {
