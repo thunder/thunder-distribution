@@ -16,7 +16,6 @@ use Drupal\Tests\thunder\Traits\ThunderTestTrait;
 abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
 
   use ThunderTestTrait;
-  use ThunderImageCompareTestTrait;
   use StringTranslationTrait;
 
   /**
