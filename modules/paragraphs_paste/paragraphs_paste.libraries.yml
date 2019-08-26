@@ -1,0 +1,9 @@
+init:
+  js:
+    js/paragraphs-paste.js: {}
+  css:
+    theme:
+      css/paragraphs-paste.css: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once

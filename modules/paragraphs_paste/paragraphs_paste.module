@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Contains hooks for paragraphs_paste module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\paragraphs_paste\Form\ParagraphsPasteForm;
+
+/**
+ * Implements hook_field_widget_multivalue_form_alter().
+ */
+function paragraphs_paste_field_widget_multivalue_paragraphs_form_alter(array &$elements, FormStateInterface $form_state, array $context) {
+  \Drupal::service('class_resolver')
+    ->getInstanceFromDefinition(ParagraphsPasteForm::class)
+    ->formAlter($elements, $form_state, $context);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for field_multiple_value_form().
+ */
+function paragraphs_paste_preprocess_field_multiple_value_form(&$variables) {
+  if (!empty($variables['table']['#header']) && isset($variables['table']['#rows'])) {
+    // Find paragraphs_paste key and move to header.
+    // @see template_preprocess_field_multiple_value_form()
+    foreach ($variables['table']['#rows'] as $key => $row) {
+      if (!empty($row['data'][1]['data']['#paragraphs_paste'])) {
+        $variables['table']['#header'][] = [
+          'data' => [
+            'paragraphs_paste' => $row['data'][1]['data'],
+          ],
+        ];
+        unset($variables['table']['#rows'][$key]);
+      }
+    }
+  }
+}
