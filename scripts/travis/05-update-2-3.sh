@@ -2,14 +2,15 @@
 
 # Update paragraphs to version 1.3 first.
 cd ${TEST_DIR}
-composer require drupal/paragraphs:1.3
+composer require drupal/paragraphs:1.3 --no-update
+composer update
 
 cd ${TEST_DIR}/docroot
 drush updb -y
 
 # Update paragraphs to version required by thunder.
 cd ${TEST_DIR}
-composer remove drupal/paragraphs
+composer remove drupal/paragraphs --no-update
 composer update
 
 cd ${TEST_DIR}/docroot
