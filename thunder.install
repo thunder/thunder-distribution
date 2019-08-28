@@ -108,3 +108,17 @@ function thunder_requirements($phase) {
   }
   return $requirements;
 }
+
+/**
+ * Add missing region key to field groups in form display settings.
+ */
+function thunder_update_8301() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8301');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
+}
