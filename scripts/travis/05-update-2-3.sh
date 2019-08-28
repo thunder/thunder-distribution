@@ -11,7 +11,6 @@ drush updb -y
 # Update paragraphs to version required by thunder.
 cd ${TEST_DIR}
 composer remove drupal/paragraphs --no-update
-composer require "burdamagazinorg/thunder:dev-fix/field_group-update-order" --no-update
 composer update
 
 cd ${TEST_DIR}/docroot
