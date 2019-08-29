@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.3.0](https://github.com/thunder/thunder-distribution/tree/3.3.0) 2019-08-27
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.0-rc1...3.3.0)
+
+Thunder 3.0 is out! Since the rc1 we were able to update the paragraphs module to version 1.9 and the field groups 
+module to version 3.0-rc1.
+If you are updating from Thunder 2, please have look at our [update documentation](https://thunder.github.io/thunder-documentation/update-2-to-3).
+
+- Do [Consider upgrading field_group module](https://www.drupal.org/node/3059646)
+- Do [Update to Paragraphs 1.9](https://www.drupal.org/node/3042078)
+- Do [Remove deprecated code for checklist api integration](https://www.drupal.org/node/3040952)
+- Fix [Occasionally failing tests for paragraphs text split](https://www.drupal.org/node/3073791)
+
 ## [3.3.0-rc1](https://github.com/thunder/thunder-distribution/tree/3.3.0-rc1) 2019-08-08
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.0-beta3...3.3.0-rc1)
 
