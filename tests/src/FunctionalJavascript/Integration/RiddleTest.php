@@ -73,12 +73,6 @@ class RiddleTest extends ThunderJavascriptTestBase {
     // Click button to load Riddles and compare thumbnails.
     $this->clickButtonDrupalSelector($page, 'edit-import-riddle');
     $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', '.view-media-entity-browser .views-field-thumbnail__target-id img:last-child'));
-    $this->assertTrue(
-      $this->compareScreenToImage(
-        $this->getScreenshotFile('test_riddle_eb_list'),
-        ['width' => 600, 'height' => 380, 'x' => 60, 'y' => 92]
-      )
-    );
 
     // Close entity browser.
     $this->getSession()->switchToIFrame();
@@ -86,11 +80,11 @@ class RiddleTest extends ThunderJavascriptTestBase {
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     // Select first riddle.
-    $this->selectMedia("field_paragraphs_{$paragraphIndex}_subform_field_riddle", 'riddle_browser', ['media:24']);
+    $this->selectMedia("field_paragraphs_{$paragraphIndex}_subform_field_riddle", 'riddle_browser', ['media:23']);
 
     // Select second riddle.
     $paragraphIndex = $this->addParagraph('field_paragraphs', 'riddle');
-    $this->selectMedia("field_paragraphs_{$paragraphIndex}_subform_field_riddle", 'riddle_browser', ['media:25']);
+    $this->selectMedia("field_paragraphs_{$paragraphIndex}_subform_field_riddle", 'riddle_browser', ['media:24']);
 
     // Save article as unpublished.
     $this->clickSave();
