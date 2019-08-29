@@ -134,7 +134,7 @@
         "drupal/responsive_preview": "^1.0-alpha7",
         "drupal/redirect": "^1.0",
         "drupal/scheduler": "1.1",
-        "drupal/scheduler_content_moderation_integration": "dev-1.x",
+        "drupal/scheduler_content_moderation_integration": "^1.0",
         "drupal/select2": "^1.0",
         "drupal/simple_sitemap": "^3.3",
         "drupal/simple_gmap": "^1.4",
