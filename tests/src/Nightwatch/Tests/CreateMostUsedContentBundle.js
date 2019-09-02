@@ -21,6 +21,7 @@ module.exports = {
   before(browser, done) {
     browser.apm = apm;
 
+    // Get site information.
     thunderUtils.setSiteInfo(
       "test-admin",
       "test-admin",

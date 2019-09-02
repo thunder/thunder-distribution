@@ -9,7 +9,7 @@ module.exports = {
       {
         url: `${baseUrl}/user/login?_format=json`,
         method: "POST",
-        body: JSON.stringify({ name: "test-admin", pass: "test-admin" }),
+        body: JSON.stringify({ name: adminUser, pass: adminPass }),
         headers: {
           "Content-type": "application/json"
         },
@@ -23,7 +23,6 @@ module.exports = {
             jar: true
           },
           (error, response, body) => {
-            // Get Site information first!!!
             const { data } = JSON.parse(body);
 
             browser._site_info = data;
