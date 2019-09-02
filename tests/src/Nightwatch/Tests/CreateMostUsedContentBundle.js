@@ -14,25 +14,22 @@
 
 // eslint-disable-next-line import/no-dynamic-require
 const apm = require(`${process.cwd()}/node_modules/elastic-apm-node`);
-// eslint-disable-next-line import/no-dynamic-require
-const request = require(`${process.cwd()}/node_modules/request`);
+const thunderUtils = require("../utils");
 
 module.exports = {
   "@tags": ["Thunder"],
   before(browser, done) {
     browser.apm = apm;
 
-    const baseUrl = process.env.DRUPAL_TEST_BASE_URL;
-    request(
-      `${baseUrl}/thunder-performance-measurement/site-info/?rule=count&index=0`,
-      (error, response, body) => {
-        // Get Site information first!!!
-        const { data } = JSON.parse(body);
-
-        browser._site_info = data;
-
-        done();
-      }
+    thunderUtils.setSiteInfo(
+      "test-admin",
+      "test-admin",
+      {
+        rule: "count",
+        index: 0
+      },
+      browser,
+      done
     );
   },
   createMostUsedContentBundle(browser) {
