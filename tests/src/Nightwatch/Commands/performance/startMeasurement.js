@@ -36,6 +36,8 @@ exports.command = function startMeasurement(
     browser.apmSpans = [];
 
     browser
+      // We need to open some URL before set cookie.
+      .drupalRelativeURL("/")
       .setCookie({
         domain,
         httpOnly: false,
