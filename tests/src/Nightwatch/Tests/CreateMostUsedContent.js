@@ -33,7 +33,7 @@ module.exports = {
       done
     );
   },
-  createMostUsedContentBundle(browser) {
+  createMostUsedContent(browser) {
     const { bundle, required_fields: requiredFields } = browser._site_info;
 
     browser
