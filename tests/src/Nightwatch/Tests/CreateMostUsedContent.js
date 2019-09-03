@@ -1,6 +1,6 @@
 /**
  * @file
- * Testing of content creation for most used bundle.
+ * Testing of content creation for most used bundle type.
  */
 
 /**
@@ -41,7 +41,7 @@ module.exports = {
       .performance.startMeasurement(
         process.env.THUNDER_APM_URL,
         "NightwatchJS - Test",
-        "Create new most used content bundle (min)",
+        "Create new most used content (min)",
         `.${process.env.THUNDER_SITE_HOSTNAME}`
       )
       .performance.startMark("full task")
@@ -49,7 +49,7 @@ module.exports = {
       .drupalLogin({ name: "test-admin", password: "test-admin" })
       .performance.endMark()
 
-      .performance.startMark("create new most used content bundle")
+      .performance.startMark("create new most used content")
       .drupalRelativeURL(`/node/add/${bundle}`)
       // Start using XPATH!!!
       .useXpath()
@@ -63,7 +63,7 @@ module.exports = {
     });
     browser.performance.endMark();
 
-    // Close mark and save newly created content bundle entity.
+    // Close mark and save newly created content entity.
     browser.performance
       .endMark()
 
