@@ -1,15 +1,15 @@
 v3.0:
     '#title': 'Updates fo Thunder 3'
     '#description': '<h3>These are the new features for this release:</h3>'
-v3.1:
-    '#title': 'Update to version v3.1'
+v3.2:
+    '#title': 'Update to version v3.2'
     '#description': '<h3>These are the new features for this release:</h3>'
-    thunder_update_8301:
+    thunder_update_8302:
         '#title': 'Enable "Autosave Form" module'
         '#description': '<p>The "Autosave Form" module provides automatic perodical saving on content entity forms.</p>'
         '#description_successful': '<p>The "Autosave Form" module has been installed.</p>'
         '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.<p>'
-    thunder_update_8302:
+    thunder_update_8303:
         '#title': 'Disable the replace button on image paragraph form.'
         '#description': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong> You can disable the button on the configuration page.<p>'
