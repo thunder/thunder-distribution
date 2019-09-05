@@ -1,12 +1,3 @@
-core.entity_form_display.paragraph.image.default:
-  expected_config:
-    content:
-      field_image:
-        settings:
-          field_widget_replace: true
-  update_actions:
-    change:
-      content:
-        field_image:
-          settings:
-            field_widget_replace: false
+__global_actions:
+  install_modules:
+    - autosave_form

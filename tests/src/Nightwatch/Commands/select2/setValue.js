@@ -10,16 +10,18 @@
  *   The tag name.
  * @param {string} waitFor
  *   The element selector that should be waited for.
+ * @param {int} wait
+ *   The wait time in milliseconds. Default: 5000
  *
  * @return {object}
  *   The 'browser' object.
  */
-exports.command = function setValue(field, name, waitFor) {
+exports.command = function setValue(field, name, waitFor, wait = 5000) {
   const browser = this;
 
   browser
     .setValue(field, name)
-    .waitForElementVisible(waitFor, 5000)
+    .waitForElementVisible(waitFor, wait)
     .keys([browser.Keys.ENTER]);
 
   return browser;
