@@ -98,7 +98,7 @@
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0-rc3",
         "drupal/checklistapi": "^1.8",
-        "drupal/core": "8.7.6",
+        "drupal/core": "8.7.7",
         "drupal/config_selector": "^1.0-beta1",
         "drupal/config_update": "^1.5",
         "drupal/content_lock": "^1.0-alpha8",
@@ -169,6 +169,7 @@
     },
     "require-dev": {
         "burdamagazinorg/thunder-dev-tools": "dev-master",
+        "thunder/testsite_builder": "dev-master",
         "thunder/thunder_performance_measurement": "dev-master",
         "thunder/thunder_testing_demo": "3.x-dev",
         "drupal/config_profile": "^1.0",

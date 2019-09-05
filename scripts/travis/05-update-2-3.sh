@@ -3,6 +3,10 @@
 # Update paragraphs to version 1.3 first.
 cd ${TEST_DIR}
 composer require drupal/paragraphs:1.3 --no-update
+
+# Temporary fix for mink dependency. Has to be removed, if drupal core has sorted this out.
+# See: https://www.drupal.org/project/drupal/issues/3078671
+composer require "behat/mink-selenium2-driver:1.4.x-dev as 1.3.x-dev" --dev --no-update
 composer update
 
 cd ${TEST_DIR}/docroot
