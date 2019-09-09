@@ -18,10 +18,6 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
     sed -i 's/docroot\/profiles\/contrib/docroot\/profiles/g' composer.json
 fi
 
-# Temporary fix for mink dependency. Has to be removed, if drupal core has sorted this out.
-# See: https://www.drupal.org/project/drupal/issues/3078671
-composer require "behat/mink-selenium2-driver:1.4.x-dev as 1.3.x-dev" --dev --no-progress --no-update
-
 composer config repositories.thunder path ${THUNDER_DIST_DIR}
 composer require "thunder/thunder-distribution:*" "thunder/thunder_testing_demo:3.x-dev" "phpunit/phpunit:^6.5" "symfony/browser-kit:^4.0.0" "mglaman/phpstan-drupal" "phpstan/phpstan:0.11.6" "phpstan/phpstan-deprecation-rules:0.11.1" "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^1.0" "valiton/harbourmaster:~8.1" --no-progress ${ADDITIONAL_COMPOSER_PARAMETERS}
 
