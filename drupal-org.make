@@ -42,6 +42,7 @@ projects[entity_browser][type] = module
 projects[entity_browser][version] = 2.1
 projects[entity_browser][patch][] = https://www.drupal.org/files/issues/2858438_6.patch
 projects[entity_browser][patch][] = https://www.drupal.org/files/issues/2018-09-06/2997747-2.patch
+projects[entity_browser][patch][] = https://www.drupal.org/files/issues/modal-close-button-2913952-2.patch
 projects[entity_reference_revisions][type] = module
 projects[entity_reference_revisions][version] = 1
 projects[fb_instant_articles][type] = module
