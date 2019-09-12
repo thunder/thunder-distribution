@@ -12,6 +12,9 @@ use Drupal\Tests\thunder\Functional\ThunderTestBase;
  */
 class ContentTranslationTest extends ThunderTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = [
     'thunder_demo',
     'content_moderation',
