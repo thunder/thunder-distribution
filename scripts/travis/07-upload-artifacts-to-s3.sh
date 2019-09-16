@@ -7,13 +7,14 @@ gzip < "${DEPLOYMENT_DUMP_FILE}" > "${DB_ARTIFACT_FILE}"
 
 # Include performance measurement module in artifact
 cd "${TEST_DIR}"
-composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" --no-interaction --update-no-dev
+composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/media_entity_generic:^1.0" --no-interaction --update-no-dev
 
 # Cleanup project
 cd "${TEST_DIR}"
 composer install --no-dev
 rm -rf "${TEST_DIR}/bin"
 rm -rf "${TEST_DIR}/docroot/sites/default/files/*"
+rm -f "${DEPLOYMENT_DUMP_FILE}"
 find "${TEST_DIR}" -type d -name ".git" | xargs rm -rf
 find "${THUNDER_DIST_DIR}" -type d -name ".git" | xargs rm -rf
 
