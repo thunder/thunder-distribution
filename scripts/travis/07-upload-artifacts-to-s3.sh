@@ -14,6 +14,7 @@ cd "${TEST_DIR}"
 composer install --no-dev
 rm -rf "${TEST_DIR}/bin"
 rm -rf "${TEST_DIR}/docroot/sites/default/files/*"
+rm -f "${DEPLOYMENT_DUMP_FILE}"
 find "${TEST_DIR}" -type d -name ".git" | xargs rm -rf
 find "${THUNDER_DIST_DIR}" -type d -name ".git" | xargs rm -rf
 
