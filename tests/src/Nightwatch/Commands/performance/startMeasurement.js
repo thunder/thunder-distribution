@@ -31,9 +31,12 @@ exports.command = function startMeasurement(
       serviceName
     });
 
-    browser.apmDomain = domain;
-    browser.apmTrans = apmInstance.startTransaction(transactionName, "test");
-    browser.apmSpans = [];
+    browser.globals.apmDomain = domain;
+    browser.globals.apmTrans = apmInstance.startTransaction(
+      transactionName,
+      "test"
+    );
+    browser.globals.apmSpans = [];
 
     browser
       // We need to open some URL before set cookie.
@@ -43,7 +46,7 @@ exports.command = function startMeasurement(
         httpOnly: false,
         path: "/",
         name: "traceId",
-        value: browser.apmTrans.traceId
+        value: browser.globals.apmTrans.traceId
       })
       .setCookie({
         domain,
