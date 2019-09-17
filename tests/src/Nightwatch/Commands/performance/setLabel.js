@@ -17,7 +17,7 @@ exports.command = function setLabel(name, value) {
   const browser = this;
 
   browser.perform(() => {
-    browser.apmTrans.setLabel(name, value);
+    browser.globals.apmTrans.setLabel(name, value);
   });
 
   return browser;
