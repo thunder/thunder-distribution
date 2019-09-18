@@ -82,10 +82,6 @@
             },
             "drupal/inline_entity_form": {
                 "Remove revision log": "https://www.drupal.org/files/issues/2019-07-16/inline_entity_form-remove_log_message-2927884-6.patch"
-            },
-            "drupal/autosave_form": {
-                "Remove deprecated JavascriptTestBase in favor of WebDriverTestBase": "https://www.drupal.org/files/issues/2019-08-09/3067893-4.patch",
-                "Move test helper methods in a test trait": "https://www.drupal.org/files/issues/2019-09-16/3081546.patch"
             }
         }
     },
