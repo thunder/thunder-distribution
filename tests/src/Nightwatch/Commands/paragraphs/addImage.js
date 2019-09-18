@@ -44,13 +44,15 @@ exports.command = function addImage(fieldName, position, config) {
 
   // Make selection of provided image index.
   if (config.selectIndex) {
+    const { selectIndex } = config;
+
     browser
       .waitForElementVisible(
-        `//*[@id="entity-browser-image-browser-form"]/div[1]/div[2]/div[${config.selectIndex}]/div[1]/span/img`,
+        `//*[@id="entity-browser-image-browser-form"]/div[1]/div[2]/div[${selectIndex}]/div[1]/span/img`,
         10000
       )
       .click(
-        `//*[@id="entity-browser-image-browser-form"]/div[1]/div[2]/div[${config.selectIndex}]`
+        `//*[@id="entity-browser-image-browser-form"]/div[1]/div[2]/div[${selectIndex}]`
       );
   }
 
