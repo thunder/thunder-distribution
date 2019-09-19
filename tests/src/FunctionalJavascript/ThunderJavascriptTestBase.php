@@ -4,6 +4,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\DocumentElement;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\Tests\thunder\Traits\ThunderTestTrait;
 
@@ -15,7 +16,14 @@ use Drupal\Tests\thunder\Traits\ThunderTestTrait;
 abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
 
   use ThunderTestTrait;
-  use ThunderImageCompareTestTrait;
+  use StringTranslationTrait;
+
+  /**
+   * Keep CSS animations enabled for JavaScript tests.
+   *
+   * @var bool
+   */
+  protected $disableCssAnimations = FALSE;
 
   /**
    * Modules to enable.
@@ -28,7 +36,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    *
    * @see \Drupal\Tests\BrowserTestBase::installDrupal()
    */
-  protected static $modules = ['thunder_demo', 'content_moderation'];
+  protected static $modules = ['thunder_testing_demo', 'content_moderation'];
 
   /**
    * The profile to install as a basis for testing.
@@ -59,14 +67,21 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
 
     $this->logWithRole(static::$defaultUserRole);
 
-    // Set window width/height.
-    $windowSize = $this->getWindowSize();
-    $this->getSession()->getDriver()->resizeWindow($windowSize['width'], $windowSize['height']);
-
     // Set flag to generate screenshots instead of comparing them.
     if (!empty($_SERVER['generateMode'])) {
       $this->setGenerateMode(strtolower($_SERVER['generateMode']) === 'true');
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function initFrontPage() {
+    parent::initFrontPage();
+    // Set a standard window size so that all javascript tests start with the
+    // same viewport.
+    $windowSize = $this->getWindowSize();
+    $this->getSession()->resizeWindow($windowSize['width'], $windowSize['height']);
   }
 
   /**

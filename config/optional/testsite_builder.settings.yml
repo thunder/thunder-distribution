@@ -1,0 +1,48 @@
+widget_mapping:
+  entity_reference_revisions:
+    -
+      conditions:
+        target_type: paragraph
+      config:
+        entity_type: node
+        bundle: article
+        view_mode: default
+        field: field_paragraphs
+  entity_reference:
+    -
+      conditions:
+        target_type: media
+        cardinality: 1
+        entity_type: paragraph
+      config:
+        entity_type: paragraph
+        bundle: pinterest
+        view_mode: default
+        field: field_media
+    -
+      conditions:
+        target_type: media
+        cardinality: 1
+      config:
+        entity_type: node
+        bundle: article
+        view_mode: default
+        field: field_teaser_media
+    -
+      conditions:
+        target_type: media
+        cardinality: -1
+      config:
+        entity_type: media
+        bundle: gallery
+        view_mode: default
+        field: field_media_images
+    -
+      conditions:
+        target_type: taxonomy_term
+        cardinality: -1
+      config:
+        entity_type: node
+        bundle: article
+        view_mode: default
+        field: field_tags
