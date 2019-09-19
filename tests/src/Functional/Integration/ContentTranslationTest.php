@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\thunder\Functional\Integration;
 
+use Drupal\field\Entity\FieldConfig;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\Tests\thunder\Functional\ThunderTestBase;
 
@@ -12,8 +13,10 @@ use Drupal\Tests\thunder\Functional\ThunderTestBase;
  */
 class ContentTranslationTest extends ThunderTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = [
-    'thunder_demo',
     'content_moderation',
     'content_translation',
   ];
@@ -61,6 +64,35 @@ class ContentTranslationTest extends ThunderTestBase {
     $this->drupalGet($url);
     $page->fillField('Title', 'German draft');
     $page->pressButton('Save');
+  }
+
+  /**
+   * Test the field translatable property for all field configs.
+   */
+  public function testFieldTranslationKey() {
+    $whitelist = [
+      'field.field.media.twitter.field_author',
+      'field.field.media.twitter.field_content',
+    ];
+    foreach (FieldConfig::loadMultiple() as $field) {
+      if (in_array($field->getConfigDependencyName(), $whitelist)) {
+        continue;
+      }
+      else {
+        if (in_array($field->getType(), [
+          'entity_reference',
+          'entity_reference_revisions',
+          'datetime',
+          'image',
+          'link',
+        ])) {
+          $this->assertFalse($field->isTranslatable(), sprintf('%s is translatable.', $field->getConfigDependencyName()));
+        }
+        else {
+          $this->assertTrue($field->isTranslatable(), sprintf('%s is not translatable.', $field->getConfigDependencyName()));
+        }
+      }
+    }
   }
 
 }
