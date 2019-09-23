@@ -17,6 +17,7 @@ class ContentTranslationTest extends ThunderTestBase {
    * {@inheritdoc}
    */
   protected static $modules = [
+    'thunder_testing_demo',
     'content_moderation',
     'content_translation',
   ];
@@ -78,19 +79,17 @@ class ContentTranslationTest extends ThunderTestBase {
       if (in_array($field->getConfigDependencyName(), $whitelist)) {
         continue;
       }
+      if (in_array($field->getType(), [
+        'entity_reference',
+        'entity_reference_revisions',
+        'datetime',
+        'image',
+        'link',
+      ])) {
+        $this->assertFalse($field->isTranslatable(), sprintf('%s is translatable.', $field->getConfigDependencyName()));
+      }
       else {
-        if (in_array($field->getType(), [
-          'entity_reference',
-          'entity_reference_revisions',
-          'datetime',
-          'image',
-          'link',
-        ])) {
-          $this->assertFalse($field->isTranslatable(), sprintf('%s is translatable.', $field->getConfigDependencyName()));
-        }
-        else {
-          $this->assertTrue($field->isTranslatable(), sprintf('%s is not translatable.', $field->getConfigDependencyName()));
-        }
+        $this->assertTrue($field->isTranslatable(), sprintf('%s is not translatable.', $field->getConfigDependencyName()));
       }
     }
   }
