@@ -46,6 +46,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     $this->pressRejectButton();
     $this->assertEquals([5], $page->findField('field_tags[]')->getValue());
     $this->assertEquals('Come to DrupalCon New Orleans', $page->findField('title[0][value]')->getValue());
+    $this->assertEmpty($page->find('css', '.form-item-field-paragraphs-4-subform-field-text-0-value'));
 
     // Make changes again.
     $this->makeFormChanges();
@@ -56,6 +57,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     $this->pressRestoreButton();
     $this->assertEquals([5, '$ID:Tag2'], $page->findField('field_tags[]')->getValue());
     $this->assertEquals('New title', $page->findField('title[0][value]')->getValue());
+    $this->assertNotEmpty($page->find('css', '.form-item-field-paragraphs-4-subform-field-text-0-value'));
 
     // Save the article.
     $this->clickSave();
@@ -74,7 +76,6 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     // Press restore button.
     $this->assertSession()->waitForText('A version of this page you were editing at');
     $restore_button = $page->find('css', '.autosave-form-resume-button');
-    $this->assertNotEmpty($restore_button);
     $restore_button->press();
   }
 
@@ -86,9 +87,8 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
 
     // Press restore button.
     $this->assertSession()->waitForText('A version of this page you were editing at');
-    $restore_button = $page->find('css', '.autosave-form-reject-button');
-    $this->assertNotEmpty($restore_button);
-    $restore_button->press();
+    $reject_button = $page->find('css', '.autosave-form-reject-button');
+    $reject_button->press();
   }
 
   /**

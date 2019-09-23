@@ -15,5 +15,6 @@ v3.2:
         '#description': '<p>The "Autosave Form" module provides automatic perodical saving on content entity forms.</p>'
         '#description_successful': '<p>The "Autosave Form" module has been installed.</p>'
         '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.<p>'
+        extension_page: { '#text': 'Extension page', '#url': 'internal:/admin/modules' }
         configure_page: { '#text': 'Autosave Form configuration', '#url': 'internal:/admin/config/content/autosave_form' }
         module_page: { '#text': 'Autosave Form module page', '#url': 'https://www.drupal.org/project/autosave_form' }
