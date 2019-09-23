@@ -115,7 +115,7 @@
         "drupal/field_group": "3.0-rc1",
         "drupal/focal_point": "^1.0",
         "drupal/google_analytics": "^2.0",
-        "drupal/inline_entity_form": "1.0-rc1",
+        "drupal/inline_entity_form": "1.0-rc2",
         "drupal/ivw_integration": "^1.0",
         "drupal/length_indicator": "^1.0-rc2",
         "drupal/libraries": "^3.0-alpha1",
