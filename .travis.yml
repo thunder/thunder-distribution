@@ -42,8 +42,6 @@ jobs:
       name: Check config for composer build
       install:
         - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
-      before_script:
-        - bash -x -e ./scripts/travis/04-use-database-artifact.sh
       script:
         - bash -x -e ./scripts/travis/06-run-config-tests.sh
 
