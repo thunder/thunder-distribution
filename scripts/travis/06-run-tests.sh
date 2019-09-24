@@ -21,9 +21,8 @@ if [[ "${TEST_UPDATE}" != "true" ]]; then
 fi
 
 # execute Drupal tests
-thunderDumpFile=thunder.php php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --suppress-deprecations --verbose --color --url http://localhost:8080 Thunder
+thunderDumpFile=thunder.php phpunit --verbose --debug --configuration ${TEST_DIR}/docroot/core --group Thunder ${THUNDER_DIST_DIR} || exit 1
 
 if [[ ${TEST_UPDATE} == "true" ]]; then
-    php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --suppress-deprecations --verbose --color --url http://localhost:8080 --class "Drupal\Tests\thunder\Functional\Installer\ThunderInstallerTest"
-    php ${TEST_DIR}/docroot/core/scripts/run-tests.sh --php `which php` --suppress-deprecations --verbose --color --url http://localhost:8080 --class "Drupal\Tests\thunder\Functional\Installer\ThunderInstallerGermanTest"
+  thunderDumpFile=thunder.php phpunit --verbose --debug --configuration ${TEST_DIR}/docroot/core --group ThunderInstaller ${THUNDER_DIST_DIR} || exit 1
 fi
