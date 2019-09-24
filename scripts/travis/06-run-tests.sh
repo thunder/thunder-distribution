@@ -21,8 +21,8 @@ if [[ "${TEST_UPDATE}" != "true" ]]; then
 fi
 
 # execute Drupal tests
-thunderDumpFile=thunder.php phpunit --verbose --debug --configuration ${TEST_DIR}/docroot/core --group Thunder ${THUNDER_DIST_DIR} || exit 1
+thunderDumpFile=thunder.php phpunit --verbose --debug --configuration core --group Thunder $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests || exit 1
 
 if [[ ${TEST_UPDATE} == "true" ]]; then
-  thunderDumpFile=thunder.php phpunit --verbose --debug --configuration ${TEST_DIR}/docroot/core --group ThunderInstaller ${THUNDER_DIST_DIR} || exit 1
+  thunderDumpFile=thunder.php phpunit --verbose --debug --configuration core --group ThunderInstaller $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests || exit 1
 fi
