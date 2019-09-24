@@ -72,8 +72,11 @@ class ContentTranslationTest extends ThunderTestBase {
    */
   public function testFieldTranslationKey() {
     $whitelist = [
+      'field.field.media.instagram.field_url',
+      'field.field.media.pinterest.field_url',
       'field.field.media.twitter.field_author',
       'field.field.media.twitter.field_content',
+      'field.field.media.twitter.field_url',
     ];
     foreach (FieldConfig::loadMultiple() as $field) {
       if (in_array($field->getConfigDependencyName(), $whitelist)) {
@@ -84,7 +87,6 @@ class ContentTranslationTest extends ThunderTestBase {
         'entity_reference_revisions',
         'datetime',
         'image',
-        'link',
       ])) {
         $this->assertFalse($field->isTranslatable(), sprintf('%s is translatable.', $field->getConfigDependencyName()));
       }
