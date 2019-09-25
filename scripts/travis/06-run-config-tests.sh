@@ -7,4 +7,4 @@ cd ${TEST_DIR}/docroot
 
 PHPUNIT=${TEST_DIR}/vendor/bin/phpunit
 
-thunderDumpFile=thunder.php php phpunit --verbose --debug --configuration core --group ThunderConfig $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests || exit 1
+thunderDumpFile=thunder.php phpunit --verbose --debug --configuration core --group ThunderConfig $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests || exit 1
