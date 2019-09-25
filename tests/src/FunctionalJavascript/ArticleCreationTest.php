@@ -39,7 +39,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addImageParagraph(static::$paragraphsField, ['media:5']);
 
     // Add Text Paragraph.
-    $this->addTextParagraph(static::$paragraphsField, '<p>Awesome text1</p><p>With a new line</p>');
+    $this->addTextParagraph(static::$paragraphsField, '<p>Awesome text</p><p>With a new line</p>');
 
     // Add Gallery Paragraph between Image and Text.
     $this->addGalleryParagraph(static::$paragraphsField, 'Test gallery', [
@@ -105,7 +105,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->assertSession()->linkByHrefExists('http://www.thunder.org');
 
     // Check for sharing buttons.
-    $this->assertSession()->elementExists('css', '.shariff-button.twitter');
+    $this->assertSession()->elementExists('css', '.shariff-button.twitter1');
     $this->assertSession()->elementExists('css', '.shariff-button.facebook');
 
     // Check Video paragraph.
@@ -184,7 +184,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->drupalPostForm($revert_url, [], $this->t('Revert'));
 
     $this->drupalGet($node->toUrl());
-    $this->assertPageTitle('Massive gaining seo traffic text');
+    $this->assertPageTitle('Massive gaining seo 1traffic text');
 
     $this->drupalGet($node->toUrl('edit-form'));
     $this->assertSession()->fieldValueEquals('field_seo_title[0][value]', 'Massive gaining seo traffic text');

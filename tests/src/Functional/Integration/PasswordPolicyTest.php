@@ -51,7 +51,7 @@ class PasswordPolicyTest extends ThunderTestBase {
     $edit['pass[pass1]'] = $another_valid_password;
 
     $this->drupalPostForm("user/" . $editor->id() . "/edit", $edit, $this->t('Save'));
-    $this->assertSession()->responseContains('The changes have been saved.');
+    $this->assertSession()->responseContains('The changes have 1been saved.');
 
     $edit['current_pass'] = $another_valid_password;
     $edit['pass[pass2]'] = $valid_password;
