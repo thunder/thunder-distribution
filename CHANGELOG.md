@@ -3,14 +3,13 @@
 ## [3.3.2](https://github.com/thunder/thunder-distribution/tree/3.3.2) 2019-09-25
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.1...3.3.2)
 
-We added autosave to Thunder, and updated the Inline Entity Form Module. We introduced a UX change by removing the
+We added autosave to Thunder and updated the Inline Entity Form Module. We introduced a UX change by removing the
 Replace button for the Entity Browser.
 
 - Add [Automatic saving of content](https://www.drupal.org/node/2828088)
 - Do [Update Inline Entity Form Module](https://www.drupal.org/node/3083045)
 - Fix [Entity Browser replace functionality could lead to a bad UX](https://www.drupal.org/node/3080403)
 - Fix [Focal points in default content](https://www.drupal.org/node/3083350)
-
 
 ## [3.3.1](https://github.com/thunder/thunder-distribution/tree/3.3.1) 2019-09-05
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.0...3.3.1)
