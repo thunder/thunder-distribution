@@ -89,3 +89,64 @@ function _thunder_mark_update_checklist($update_id, $successful, UpdateLogger $u
     // If service is not available, we will just ignore it.
   }
 }
+
+/**
+ * Implements hook_requirements().
+ */
+function thunder_requirements($phase) {
+  if ($phase !== 'update') {
+    return [];
+  }
+  $requirements = [];
+  $thunder_schema = drupal_get_installed_schema_version('thunder');
+  if ($thunder_schema > 8000 && $thunder_schema < 8138) {
+    $requirements['thunder'] = [
+      'title' => t('Thunder'),
+      'description' => t('You need to update to the latest version of Thunder 2 before switching to Thunder 3.'),
+      'severity' => REQUIREMENT_ERROR,
+    ];
+  }
+  return $requirements;
+}
+
+/**
+ * Add missing region key to field groups in form display settings.
+ */
+function thunder_update_8301() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8301');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
+}
+
+/**
+ * Change replace button to remove button on image paragraph form.
+ */
+function thunder_update_8302() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8302');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
+}
+
+/**
+ * Installs the autosave_form module.
+ */
+function thunder_update_8303() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8303');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
+}

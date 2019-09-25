@@ -24,6 +24,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Basis
+      region: content
 id: media.gallery.default
 targetEntityType: media
 bundle: gallery
@@ -67,7 +68,7 @@ content:
     third_party_settings: {  }
   uid:
     type: select2_entity_reference
-    weight: 2
+    weight: 3
     region: content
     settings:
       width: 100%

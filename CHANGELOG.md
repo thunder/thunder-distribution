@@ -1,12 +1,36 @@
 # Changelog
 
+## [3.3.1](https://github.com/thunder/thunder-distribution/tree/3.3.1) 2019-09-05
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.0...3.3.1)
+
+Update to Drupal 8.7.7 and Scheduler 1.1.
+
+## [3.3.0](https://github.com/thunder/thunder-distribution/tree/3.3.0) 2019-08-27
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.0-rc1...3.3.0)
+
+Thunder 3.0 is out! Since the rc1 we were able to update the paragraphs module to version 1.9 and the field groups 
+module to version 3.0-rc1.
+If you are updating from Thunder 2, please have look at our [update documentation](https://thunder.github.io/thunder-documentation/update-2-to-3).
+
+- Do [Consider upgrading field_group module](https://www.drupal.org/node/3059646)
+- Do [Update to Paragraphs 1.9](https://www.drupal.org/node/3042078)
+- Do [Remove deprecated code for checklist api integration](https://www.drupal.org/node/3040952)
+- Fix [Occasionally failing tests for paragraphs text split](https://www.drupal.org/node/3073791)
+
+## [3.3.0-rc1](https://github.com/thunder/thunder-distribution/tree/3.3.0-rc1) 2019-08-08
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.0-beta3...3.3.0-rc1)
+
+Making sure, that projects updating from Thunder 2 are on the latest Thunder 2 release.
+
+- Task [Ensure you are coming from the latest Thunder 2 release](https://www.drupal.org/project/thunder/issues/3064515)
+
 ## [3.3.0-beta3](https://github.com/thunder/thunder-distribution/tree/3.3.0-beta3) 2019-07-29
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.0-beta2...3.3.0-beta3)
 
 This release updates the contrib Metatag module version to 1.9, which is a security update. 
 
-- Fix [#3055350 - Do not show revisionlog message form on inline forms](https://www.drupal.org/i/3055350) 
-- Task [#3069987 - Update documentation](https://www.drupal.org/i/3069987)
+- Fix [Do not show revisionlog message form on inline forms](https://www.drupal.org/project/thunder/issues/3055350) 
+- Task [Update documentation](https://www.drupal.org/project/thunder/issues/3069987)
 
 ## [3.3.0-beta2](https://github.com/thunder/thunder-distribution/tree/3.3.0-beta2) 2019-07-18
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.0-beta1...3.3.0-beta2)
