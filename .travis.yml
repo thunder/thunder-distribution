@@ -1,8 +1,8 @@
 language: php
 cache:
   directories:
-    - "$HOME/.composer/cache"
-    - "$HOME/.drush/cache"
+  - "$HOME/.composer/cache"
+  - "$HOME/.drush/cache"
 
 php:
   - 7.3
