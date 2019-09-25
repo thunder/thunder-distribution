@@ -32,6 +32,7 @@ env:
   global:
     - THUNDER_ADMIN_BRANCH=8.x-3.x
     - ADDITIONAL_COMPOSER_PARAMETERS=""
+    - ADDITIONAL_PHPUNIT_PARAMETERS=""
 
 jobs:
   allow_failures:
@@ -91,6 +92,7 @@ jobs:
 
     - stage: test
       name: Run upgrade test
+      env: ADDITIONAL_PHPUNIT_PARAMETERS="--exclude-group NoUpdate"
       install:
         - bash -x -e ./scripts/travis/03-build-thunder2.sh
       script:
