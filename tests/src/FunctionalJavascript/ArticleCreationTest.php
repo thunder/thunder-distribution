@@ -39,7 +39,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addImageParagraph(static::$paragraphsField, ['media:5']);
 
     // Add Text Paragraph.
-    $this->addTextParagraph(static::$paragraphsField, '<p>Awesome text</p><p>With a new line</p>');
+    $this->addTextParagraph(static::$paragraphsField, '<p>Awesome text1</p><p>With a new line</p>');
 
     // Add Gallery Paragraph between Image and Text.
     $this->addGalleryParagraph(static::$paragraphsField, 'Test gallery', [

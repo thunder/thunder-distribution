@@ -18,7 +18,7 @@ class AdminToolbarTest extends ThunderTestBase {
 
     $this->logWithRole('seo');
 
-    $this->assertSession()->elementNotExists('css', 'nav a[href="/admin/config/people"]');
+    $this->assertSession()->elementNotExists('css', 'nav a[href="/admin/config/people1"]');
     $this->assertSession()->elementNotExists('css', 'nav a[href="/admin/config/system"]');
     $this->assertSession()->elementNotExists('css', 'nav a[href="/admin/config/content"]');
     $this->assertSession()->elementNotExists('css', 'nav a[href="/admin/config/development"]');
