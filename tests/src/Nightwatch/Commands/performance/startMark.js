@@ -16,7 +16,9 @@ exports.command = function startMark(markName) {
 
   browser.perform(() => {
     const span = browser.globals.apmTrans.startSpan(markName);
+
     span.setLabel("branch", process.env.THUNDER_BRANCH);
+    span.setLabel("test", browser.currentTest.name);
 
     browser.globals.apmSpans.push(span);
 
