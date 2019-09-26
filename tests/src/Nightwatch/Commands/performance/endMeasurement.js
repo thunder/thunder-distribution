@@ -14,16 +14,16 @@ exports.command = function endMeasurement() {
 
   browser
     .perform(() => {
-      let span = browser.apmSpans.pop();
+      let span = browser.globals.apmSpans.pop();
 
       while (span) {
         span.end();
 
-        span = browser.apmSpans.pop();
+        span = browser.globals.apmSpans.pop();
       }
     })
     .perform(() => {
-      browser.apmTrans.end();
+      browser.globals.apmTrans.end();
     });
 
   return browser;
