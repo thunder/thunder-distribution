@@ -30,10 +30,10 @@ module.exports = {
     browser
       .resizeWindow(1024, 1024)
       .performance.startMeasurement(
-      process.env.THUNDER_APM_URL,
-      "Auto complete field",
-      `.${process.env.THUNDER_SITE_HOSTNAME}`
-    )
+        process.env.THUNDER_APM_URL,
+        "Auto complete field",
+        `.${process.env.THUNDER_SITE_HOSTNAME}`
+      )
       .drupalLogin({ name: "test-admin", password: "test-admin" })
       .useXpath();
 
@@ -55,13 +55,12 @@ module.exports = {
     browser.performance.endMark();
 
     // TODO - measure time for loading of auto-complete
-    // 1. Start performance mark - for finding of existing tag
+    // 1. Start performance mark - for finding of existing tag.
     browser.performance.startMark("finding of existing tag");
     // 2. Search for value in "field_22" and select it - tip: select2 commands
-    browser.select2.selectValue('field_22', "b", 2, 10000);
+    browser.select2.selectValue("field_22", "b", 2, 10000);
     // 3. End performance mark -  for finding of existing tag
     browser.performance.endMark();
-
 
     // Submit form.
     browser
