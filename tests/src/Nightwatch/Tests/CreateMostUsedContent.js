@@ -17,7 +17,7 @@ const apm = require(`${process.cwd()}/node_modules/elastic-apm-node`);
 const thunderUtils = require("../utils");
 
 module.exports = {
-  "@tags": ["Thunder"],
+  "@tags": ["Thunder", "Thunder_Base_Set"],
   before(browser, done) {
     browser.apm = apm;
 
@@ -40,7 +40,6 @@ module.exports = {
       .resizeWindow(1024, 1024)
       .performance.startMeasurement(
         process.env.THUNDER_APM_URL,
-        "NightwatchJS - Test",
         "Create new most used content (min)",
         `.${process.env.THUNDER_SITE_HOSTNAME}`
       )
