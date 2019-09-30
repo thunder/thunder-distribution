@@ -25,7 +25,10 @@ module.exports = {
       .useXpath()
       .performance.startMark("Open content overview page")
       .drupalRelativeURL("/admin/content")
-      .waitForElementVisible('//*[@id="block-thunder-admin-content"]/table/tbody/tr[1]', 1000)
+      .waitForElementVisible(
+        '//*[@id="block-thunder-admin-content"]/table/tbody/tr[1]',
+        1000
+      )
       .performance.endMark();
 
     // TODO - measure time for content overview loading
