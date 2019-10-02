@@ -54,13 +54,13 @@ module.exports = {
     });
     browser.performance.endMark();
 
-    // TODO - measure time for loading of auto-complete
-    // 1. Start performance mark - for finding of existing tag.
-    browser.performance.startMark("finding of existing tag");
-    // 2. Search for value in "field_22" and select it - tip: select2 commands
-    browser.select2.selectValue("field_22", "b", 2, 10000);
-    // 3. End performance mark -  for finding of existing tag
-    browser.performance.endMark();
+    browser.performance
+      .startMark("finding of existing tag")
+      // First selection is the slowest because caches are not warm.
+      .select2.selectValue("field_22", "bund", 2, 10000)
+      .select2.selectValue("field_22", "bund", 4, 10000)
+      .select2.selectValue("field_22", "bund", 6, 10000)
+      .performance.endMark();
 
     // Submit form.
     browser
