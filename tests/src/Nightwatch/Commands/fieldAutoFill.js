@@ -26,6 +26,7 @@ exports.command = function fieldAutoFill(fieldName, fieldInfo) {
     // Text field.
     case "string_textfield":
     case "string_textarea":
+      browser.clearValue(`//*[@id="edit-${fieldIdPart}-0-value"]`);
       browser.setValue(
         `//*[@id="edit-${fieldIdPart}-0-value"]`,
         `Some text ${Math.random().toString(36)}`

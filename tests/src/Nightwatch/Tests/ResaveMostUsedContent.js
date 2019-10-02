@@ -1,8 +1,8 @@
 /**
  * @file
- * Testing of editing for most used bundle type.
+ * Testing saving of edit form submit for most used bundle type.
+ * This test loads the edit form and directly submits it.
  */
-
 // eslint-disable-next-line import/no-dynamic-require
 const apm = require(`${process.cwd()}/node_modules/elastic-apm-node`);
 const thunderUtils = require("../utils");
@@ -24,14 +24,14 @@ module.exports = {
       done
     );
   },
-  editMostUsedContent(browser) {
+  resaveMostUsedContent(browser) {
     const { bundle, required_fields: requiredFields } = browser._site_info;
 
     browser
       .resizeWindow(1024, 1024)
       .performance.startMeasurement(
         process.env.THUNDER_APM_URL,
-        "Edit most used content (min)",
+        "Resave most used content (min)",
         `.${process.env.THUNDER_SITE_HOSTNAME}`
       )
       .drupalLogin({ name: "test-admin", password: "test-admin" })
@@ -43,7 +43,6 @@ module.exports = {
         '(//li[contains(@class,"dropbutton-action")])[1]//a[contains(@href, "edit")]'
       )
       .waitForElementVisible('//*[@id="edit-submit"]', 1000)
-      .autoFillFields(requiredFields)
 
       .performance.startMark("submit save form")
       .click('//*[@id="edit-submit"]')
