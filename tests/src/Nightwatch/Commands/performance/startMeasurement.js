@@ -19,20 +19,18 @@
 
 exports.command = function startMeasurement(
   serverUrl,
-  serviceName,
   transactionName,
   domain
 ) {
   const browser = this;
 
   browser.perform(() => {
-    const apmInstance = browser.apm.start({
-      serverUrl,
-      serviceName
-    });
+    if (!browser.apm.isStarted()) {
+      browser.apm.start({ serverUrl, serviceName: "NightwatchJS - Test" });
+    }
 
     browser.globals.apmDomain = domain;
-    browser.globals.apmTrans = apmInstance.startTransaction(
+    browser.globals.apmTrans = browser.apm.startTransaction(
       transactionName,
       "test"
     );
@@ -54,7 +52,11 @@ exports.command = function startMeasurement(
         path: "/",
         name: "serverUrl",
         value: serverUrl
-      })
+      });
+
+    // Label set on Node.JS APM agent should be also set for Browser APM agent.
+    browser.performance
+      .setLabel("branch", process.env.THUNDER_BRANCH)
       .setCookie({
         domain,
         httpOnly: false,
@@ -62,7 +64,14 @@ exports.command = function startMeasurement(
         name: "branchTag",
         value: process.env.THUNDER_BRANCH
       })
-      .performance.setLabel("branch", process.env.THUNDER_BRANCH);
+      .performance.setLabel("test", browser.currentTest.name)
+      .setCookie({
+        domain,
+        httpOnly: false,
+        path: "/",
+        name: "testTag",
+        value: browser.currentTest.name
+      });
   });
 
   return browser;

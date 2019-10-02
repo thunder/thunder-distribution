@@ -26,7 +26,6 @@ module.exports = {
       .resizeWindow(1024, 1024)
       .performance.startMeasurement(
         process.env.THUNDER_APM_URL,
-        "NightwatchJS - Test",
         "Create an article with paragraphs",
         `.${process.env.THUNDER_SITE_HOSTNAME}`
       )
