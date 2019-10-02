@@ -17,7 +17,7 @@ module.exports = {
       "test-admin",
       "test-admin",
       {
-        rule: "number_of_fields",
+        rule: "count",
         index: 0
       },
       browser,
