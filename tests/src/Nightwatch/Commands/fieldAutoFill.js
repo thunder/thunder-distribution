@@ -49,6 +49,7 @@ exports.command = function fieldAutoFill(fieldName, fieldInfo) {
     // Default Auto-Complete widget.
     case "entity_reference_autocomplete":
       browser
+        .clearValue(`//*[@id="edit-${fieldIdPart}-0-target-id"]`)
         .setValue(`//*[@id="edit-${fieldIdPart}-0-target-id"]`, "b")
         .waitForElementVisible('//*[@id="ui-id-1"]', 10000)
         .click('//*[@id="ui-id-1"]/*[1]/a');
