@@ -9,6 +9,7 @@ use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\block\Entity\Block;
+use Drupal\Core\Installer\InstallerKernel;
 use Drupal\user\Entity\User;
 use Drupal\user\Entity\Role;
 
@@ -218,7 +219,7 @@ function _thunder_check_triggering_modules(array $modules, array $triggering_mod
  *   Returns if enabling of a module is currently running.
  */
 function _thunder_is_enabling_module() {
-  return !drupal_installation_attempted() && !Drupal::isConfigSyncing();
+  return !InstallerKernel::installationAttempted() && !Drupal::isConfigSyncing();
 }
 
 /**
@@ -278,7 +279,8 @@ function thunder_modules_installed($modules) {
     // Attach field if channel vocabulary and article node type is
     // present in the distribution.
     try {
-      entity_get_form_display('node', 'article', 'default')
+      \Drupal::service('entity_display.repository')
+        ->getFormDisplay('node', 'article', 'default')
         ->setComponent(
           'field_ivw', [
             'type' => $fieldWidget,
@@ -289,7 +291,8 @@ function thunder_modules_installed($modules) {
     }
 
     try {
-      entity_get_form_display('taxonomy_term', 'channel', 'default')
+      \Drupal::service('entity_display.repository')
+        ->getFormDisplay('taxonomy_term', 'channel', 'default')
         ->setComponent('field_ivw', [
           'type' => $fieldWidget,
         ])->save();

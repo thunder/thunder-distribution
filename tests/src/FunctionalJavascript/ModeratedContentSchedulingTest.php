@@ -18,8 +18,8 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
    */
   public function testPublishStateSchedule() {
     $publish_timestamp = strtotime('yesterday');
-    /* @var $moderation_info \Drupal\content_moderation\ModerationInformationInterface */
-    $moderation_info = $this->container->get('content_moderation.moderation_information');
+    /** @var \Drupal\node\NodeStorageInterface $node_storage */
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
 
     $this->articleFillNew([
       'field_channel' => 1,
@@ -39,7 +39,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $this->assertEquals(FALSE, Node::load($node->id())->isPublished());
     $this->container->get('cron')->run();
 
-    $node = $moderation_info->getLatestRevision('node', $node->id());
+    $node = $node_storage->getLatestRevision($node->id());
     // Assert node is now published.
     $this->assertEquals(TRUE, $node->isPublished());
     $this->assertEquals('published', $node->moderation_state->value);
@@ -58,12 +58,12 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     ]);
     $this->clickSave();
 
-    $node = $moderation_info->getLatestRevision('node', $node->id());
+    $node = $node_storage->getLatestRevision($node->id());
     $this->assertEquals('Test workflow article 1 - Draft', $node->getTitle());
     $this->assertEquals('draft', $node->moderation_state->value);
     $this->container->get('cron')->run();
 
-    $node = $moderation_info->getLatestRevision('node', $node->id());
+    $node = $node_storage->getLatestRevision($node->id());
     $this->assertEquals(TRUE, $node->isPublished());
     $this->assertEquals('published', $node->moderation_state->value);
     $this->assertEquals('Test workflow article 1 - Draft', $node->getTitle());
