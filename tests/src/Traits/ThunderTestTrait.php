@@ -6,6 +6,8 @@ use Drupal\Component\Utility\Crypt;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Database\Database;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\Site\Settings;
 use Drupal\dblog\Controller\DbLogController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -25,6 +27,16 @@ trait ThunderTestTrait {
     $request = Request::createFromGlobals();
     $container = $this->initKernel($request);
     $this->initConfig($container);
+
+    // Add the config directories to settings.php.
+    $sync_directory = Settings::get('config_sync_directory');
+    \Drupal::service('file_system')->prepareDirectory($sync_directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+
+    // Ensure the default temp directory exist and is writable. The configured
+    // temp directory may be removed during update.
+    \Drupal::service('file_system')->prepareDirectory($this->tempFilesDirectory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+
+    $this->installDefaultThemeFromClassProperty($container);
     $this->installModulesFromClassProperty($container);
     $this->rebuildAll();
   }
@@ -49,6 +61,18 @@ trait ThunderTestTrait {
     // Since the installer isn't run, add the database settings here too.
     $settings['databases']['default'] = (object) [
       'value' => Database::getConnectionInfo(),
+      'required' => TRUE,
+    ];
+
+    // Force every update hook to only run one entity per batch.
+    $settings['entity_update_batch_size'] = (object) [
+      'value' => 1,
+      'required' => TRUE,
+    ];
+
+    // Set up sync directory.
+    $settings['settings']['config_sync_directory'] = (object) [
+      'value' => $this->publicFilesDirectory . '/config_sync',
       'required' => TRUE,
     ];
 

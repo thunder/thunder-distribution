@@ -174,12 +174,12 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->assertPageTitle('Massive gaining even more and more seo traffic text');
 
-    /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_info */
-    $moderation_info = \Drupal::service('content_moderation.moderation_information');
+    /** @var \Drupal\node\NodeStorageInterface $node_storage */
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
 
     $revert_url = Url::fromRoute('node.revision_revert_default_confirm', [
       'node' => $node->id(),
-      'node_revision' => $moderation_info->getLatestRevisionId('node', $node->id()),
+      'node_revision' => $node_storage->getLatestRevisionId($node->id()),
     ]);
     $this->drupalPostForm($revert_url, [], $this->t('Revert'));
 
