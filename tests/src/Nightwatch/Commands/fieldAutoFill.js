@@ -36,6 +36,7 @@ exports.command = function fieldAutoFill(fieldName, fieldInfo) {
 
     // Number field.
     case "number":
+      browser.clearValue(`//*[@id="edit-${fieldIdPart}-0-value"]`);
       browser.setValue(`//*[@id="edit-${fieldIdPart}-0-value"]`, "1");
 
       return browser;
