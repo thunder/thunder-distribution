@@ -25,7 +25,7 @@ module.exports = {
     );
   },
   editMostUsedContent(browser) {
-    const { bundle, required_fields: requiredFields } = browser._site_info;
+    const { bundle } = browser._site_info;
 
     browser
       .resizeWindow(1024, 1024)
@@ -43,7 +43,7 @@ module.exports = {
         '(//li[contains(@class,"dropbutton-action")])[1]//a[contains(@href, "edit")]'
       )
       .waitForElementVisible('//*[@id="edit-submit"]', 1000)
-//      .autoFillFields(requiredFields)
+
       .clearValue(`//*[@id="edit-title-0-value"]`)
       .setValue(
         `//*[@id="edit-title-0-value"]`,
