@@ -15,7 +15,12 @@ exports.command = function autoFillFields(fields) {
   const fieldNames = Object.keys(fields);
 
   fieldNames.forEach(fieldName => {
-    browser.autoFillField(fieldName, fields[fieldName]);
+    if (
+      fields[fieldName].type !== "entity_reference_autocomplete" &&
+      fields[fieldName].type !== "select2_entity_reference"
+    ) {
+      browser.autoFillField(fieldName, fields[fieldName]);
+    }
   });
 
   return browser;

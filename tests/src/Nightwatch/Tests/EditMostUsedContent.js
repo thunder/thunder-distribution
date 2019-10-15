@@ -45,7 +45,7 @@ module.exports = {
       .waitForElementVisible('//*[@id="edit-submit"]', 1000)
       .autoFillFields(requiredFields)
 
-      .performance.startMark("submit save form")
+      .performance.startMark("submit save form2")
       .click('//*[@id="edit-submit"]')
       .waitForElementVisible('//*[@id="block-thunder-admin-content"]', 10000)
       .performance.endMark() // "submit save form" task.
