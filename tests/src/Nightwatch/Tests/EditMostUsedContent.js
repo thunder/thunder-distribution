@@ -43,7 +43,12 @@ module.exports = {
         '(//li[contains(@class,"dropbutton-action")])[1]//a[contains(@href, "edit")]'
       )
       .waitForElementVisible('//*[@id="edit-submit"]', 1000)
-      .autoFillFields(requiredFields)
+//      .autoFillFields(requiredFields)
+      .clearValue(`//*[@id="edit-title-0-value"]`);
+      .setValue(
+        `//*[@id="edit-title-0-value"]`,
+        `Some text ${Math.random().toString(36)}`
+      );
 
       .performance.startMark("submit save form2")
       .click('//*[@id="edit-submit"]')
