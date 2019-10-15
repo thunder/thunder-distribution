@@ -15,7 +15,7 @@ exports.command = function autoFillFields(fields) {
   const fieldNames = Object.keys(fields);
 
   fieldNames.forEach(fieldName => {
-    browser.fieldAutoFill(fieldName, fields[fieldName]);
+    browser.autoFillField(fieldName, fields[fieldName]);
   });
 
   return browser;

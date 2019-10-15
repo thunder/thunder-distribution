@@ -4,7 +4,7 @@
  *
  * TODO: We should fill fields with some meaningful data!
  *
- * This provides a custom command, .fieldAutoFill()
+ * This provides a custom command, .autoFillField()
  *
  * @param {string} fieldName
  *   The filed name.
@@ -14,7 +14,7 @@
  * @return {object}
  *   The 'browser' object.
  */
-exports.command = function fieldAutoFill(fieldName, fieldInfo) {
+exports.command = function autoFillField(fieldName, fieldInfo) {
   const browser = this;
 
   // eslint-disable-next-line no-console
