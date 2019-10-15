@@ -1,5 +1,5 @@
 # Changelog
-## [3.3.2](https://github.com/thunder/thunder-distribution/tree/3.3.3) 2019-10-15
+## [3.3.3](https://github.com/thunder/thunder-distribution/tree/3.3.3) 2019-10-15
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.2...3.3.3)
 
 Bump drupal core and entity browser version. Unlock scheduler version and set new defaults for translatable fields.
