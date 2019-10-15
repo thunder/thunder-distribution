@@ -44,11 +44,11 @@ module.exports = {
       )
       .waitForElementVisible('//*[@id="edit-submit"]', 1000)
 //      .autoFillFields(requiredFields)
-      .clearValue(`//*[@id="edit-title-0-value"]`);
+      .clearValue(`//*[@id="edit-title-0-value"]`)
       .setValue(
         `//*[@id="edit-title-0-value"]`,
         `Some text ${Math.random().toString(36)}`
-      );
+      )
 
       .performance.startMark("submit save form2")
       .click('//*[@id="edit-submit"]')
