@@ -63,6 +63,7 @@ module.exports = {
     browser.performance
       .endMark()
 
+      .performance.startMark("submit save form")
       // Submit form.
       .click('//*[@id="edit-submit"]')
       .waitForElementVisible(
