@@ -1,4 +1,13 @@
 # Changelog
+## [3.3.2](https://github.com/thunder/thunder-distribution/tree/3.3.3) 2019-10-15
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.2...3.3.3)
+
+Bump drupal core version and entity browser. Unlock scheduler version and set new defaults for translatable fields.
+
+- Do [Update entity_browser to 8.x-2.2](https://www.drupal.org/node/3065999)
+- Do [Remove scheduler patch](Remove scheduler patch)
+- Do [Set sane defaults for 'translatable' property and add some tests](https://www.drupal.org/node/2918993) 
+- Do [Use phpunit instead of run-tests.sh in the CI](https://www.drupal.org/node/3083508)
 
 ## [3.3.2](https://github.com/thunder/thunder-distribution/tree/3.3.2) 2019-09-25
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.1...3.3.2)
