@@ -1,4 +1,24 @@
 # Changelog
+## [3.3.3](https://github.com/thunder/thunder-distribution/tree/3.3.3) 2019-10-15
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.2...3.3.3)
+
+Bump drupal core and entity browser version. Unlock scheduler version and set new defaults for translatable fields.
+
+- Do [Update entity_browser to 8.x-2.2](https://www.drupal.org/node/3065999)
+- Do [Remove scheduler patch](Remove scheduler patch)
+- Do [Set sane defaults for 'translatable' property and add some tests](https://www.drupal.org/node/2918993) 
+- Do [Use phpunit instead of run-tests.sh in the CI](https://www.drupal.org/node/3083508)
+
+## [3.3.2](https://github.com/thunder/thunder-distribution/tree/3.3.2) 2019-09-25
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.1...3.3.2)
+
+We added autosave to Thunder and updated the Inline Entity Form Module. We introduced a UX change by removing the
+Replace button for the Entity Browser.
+
+- Add [Automatic saving of content](https://www.drupal.org/node/2828088)
+- Do [Update Inline Entity Form Module](https://www.drupal.org/node/3083045)
+- Fix [Entity Browser replace functionality could lead to a bad UX](https://www.drupal.org/node/3080403)
+- Fix [Focal points in default content](https://www.drupal.org/node/3083350)
 
 ## [3.3.1](https://github.com/thunder/thunder-distribution/tree/3.3.1) 2019-09-05
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.0...3.3.1)

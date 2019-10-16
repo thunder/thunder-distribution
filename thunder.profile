@@ -301,6 +301,25 @@ function thunder_modules_installed($modules) {
     }
   }
 
+  // When enabling content_translation, grant permissions to Thunder user roles.
+  if (_thunder_check_triggering_modules($modules, ['content_translation'])) {
+    /** @var \Drupal\user\Entity\Role[] $roles */
+    $roles = Role::loadMultiple(['editor', 'seo', 'restricted_editor']);
+    foreach ($roles as $role) {
+      try {
+        $role->grantPermission('create content translations');
+        $role->grantPermission('update content translations');
+        $role->grantPermission('translate any entity');
+        if (in_array($role->id(), ['editor', 'seo'])) {
+          $role->grantPermission('delete content translations');
+        }
+        $role->save();
+      }
+      catch (EntityStorageException $storageException) {
+      }
+    }
+  }
+
   // When enabling search_api, enable facets and VBO.
   if (_thunder_check_triggering_modules($modules, ['search_api'])) {
     \Drupal::service('module_installer')->install(['search_api_db']);
