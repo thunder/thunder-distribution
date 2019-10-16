@@ -50,7 +50,7 @@ module.exports = {
         `Some text ${Math.random().toString(36)}`
       )
 
-      .performance.startMark("submit save form2")
+      .performance.startMark("submit save form3")
       .click('//*[@id="edit-submit"]')
       .waitForElementVisible('//*[@id="block-thunder-admin-content"]', 10000)
       .performance.endMark() // "submit save form" task.
