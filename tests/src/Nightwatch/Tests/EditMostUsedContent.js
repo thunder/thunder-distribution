@@ -25,7 +25,7 @@ module.exports = {
     );
   },
   editMostUsedContent(browser) {
-    const { bundle } = browser._site_info;
+    const { bundle, required_fields: requiredFields } = browser._site_info;
 
     browser
       .resizeWindow(1024, 1024)
@@ -43,14 +43,9 @@ module.exports = {
         '(//li[contains(@class,"dropbutton-action")])[1]//a[contains(@href, "edit")]'
       )
       .waitForElementVisible('//*[@id="edit-submit"]', 1000)
+      .autoFillFields(requiredFields)
 
-      .clearValue(`//*[@id="edit-title-0-value"]`)
-      .setValue(
-        `//*[@id="edit-title-0-value"]`,
-        `Some text ${Math.random().toString(36)}`
-      )
-
-      .performance.startMark("submit save form4")
+      .performance.startMark("submit save form")
       .click('//*[@id="edit-submit"]')
       .waitForElementVisible('//*[@id="block-thunder-admin-content"]', 10000)
       .performance.endMark() // "submit save form" task.
