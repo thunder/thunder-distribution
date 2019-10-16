@@ -43,8 +43,8 @@ module.exports = {
         '(//li[contains(@class,"dropbutton-action")])[1]//a[contains(@href, "edit")]'
       )
       .waitForElementVisible('//*[@id="edit-submit"]', 1000)
-
-      .performance.startMark("submit save form3")
+      .setValue(`//*[@id="edit-title-0-value"]`, "")
+      .performance.startMark("submit save form4")
       .click('//*[@id="edit-submit"]')
       .waitForElementVisible('//*[@id="block-thunder-admin-content"]', 10000)
       .performance.endMark() // "submit save form" task.
