@@ -90,6 +90,11 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_view_mode.paragraph.token',
     'core.entity_view_mode.taxonomy_term.token',
     'core.entity_view_mode.user.token',
+    'core.entity_view_mode.path_alias.token',
+
+    // @todo: Remove before merge
+    'views.view.locked_content',
+    'views.view.redirect',
   ];
 
   /**
