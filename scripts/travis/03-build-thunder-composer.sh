@@ -19,7 +19,6 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
 fi
 
 composer config repositories.thunder path ${THUNDER_DIST_DIR}
-composer require "webflo/drupal-core-require-dev:^8.8.0" --dev --no-update
 composer require "thunder/thunder-distribution:*" "thunder/thunder_testing_demo:3.x-dev" "phpunit/phpunit:^7"  "mglaman/phpstan-drupal" "phpstan/phpstan:0.11.6" "phpstan/phpstan-deprecation-rules:0.11.1" "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^1.0" "valiton/harbourmaster:~8.1" --no-progress ${ADDITIONAL_COMPOSER_PARAMETERS}
 
  # Get custom branch of Thunder Admin theme
