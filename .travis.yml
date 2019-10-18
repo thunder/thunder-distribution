@@ -30,7 +30,7 @@ stages:
 
 env:
   global:
-    - THUNDER_ADMIN_BRANCH=dev-relaxing-core-version
+    - THUNDER_ADMIN_BRANCH=8.x-3.x
     - ADDITIONAL_COMPOSER_PARAMETERS=""
     - ADDITIONAL_PHPUNIT_PARAMETERS=""
 
