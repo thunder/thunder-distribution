@@ -57,6 +57,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
       'publish_state[0]' => 'published',
     ]);
     $this->clickSave();
+    $node_storage->resetCache([$node->id()]);
 
     $node = $node_storage->loadRevision($node_storage->getLatestRevisionId($node->id()));
     $this->assertEquals('Test workflow article 1 - Draft', $node->getTitle());
