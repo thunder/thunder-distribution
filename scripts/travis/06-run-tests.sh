@@ -21,7 +21,6 @@ if [[ "${TEST_UPDATE}" != "true" ]]; then
 fi
 
 # execute Drupal tests
-phpunit --verbose --debug --configuration core --group Thunder ${ADDITIONAL_PHPUNIT_PARAMETERS} $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests/src/FunctionalJavascript/MetaInformationTest.php || exit 1
 thunderDumpFile=thunder.php phpunit --verbose --debug --configuration core --group Thunder ${ADDITIONAL_PHPUNIT_PARAMETERS} $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests || exit 1
 
 if [[ ${TEST_UPDATE} == "true" ]]; then
