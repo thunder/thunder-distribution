@@ -94,7 +94,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
 
     // @todo: Remove before merge
     'views.view.locked_content',
-    'views.view.redirect',
   ];
 
   /**

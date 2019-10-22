@@ -99,6 +99,7 @@ projects[riddle_marketplace][type] = module
 projects[riddle_marketplace][version] = 3
 projects[redirect][type] = module
 projects[redirect][version] = 1
+projects[redirect][patch][] = https://www.drupal.org/files/issues/2019-10-22/3089389.patch
 projects[scheduler][type] = module
 projects[scheduler][version] = 1
 projects[scheduler_content_moderation_integration][type] = module
