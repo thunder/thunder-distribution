@@ -9,6 +9,7 @@ use Drupal\Core\Database\Database;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\dblog\Controller\DbLogController;
+use Drupal\user\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -39,6 +40,21 @@ trait ThunderTestTrait {
     $this->installDefaultThemeFromClassProperty($container);
     $this->installModulesFromClassProperty($container);
     $this->rebuildAll();
+    $this->replaceUser1();
+  }
+
+  /**
+   * Replace User 1 with the user created here.
+   */
+  protected function replaceUser1() {
+    /** @var \Drupal\user\UserInterface $account */
+    // @todo: Saving the account before the update is problematic.
+    // https://www.drupal.org/node/2560237
+    $account = User::load(1);
+    $account->setPassword($this->rootUser->pass_raw);
+    $account->setEmail($this->rootUser->getEmail());
+    $account->setUsername($this->rootUser->getAccountName());
+    $account->save();
   }
 
   /**
