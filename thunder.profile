@@ -8,7 +8,6 @@
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\block\Entity\Block;
 use Drupal\Core\Installer\InstallerKernel;
 use Drupal\user\Entity\User;
 use Drupal\user\Entity\Role;
@@ -117,8 +116,6 @@ function _thunder_install_module_batch($module, $module_name, $form_values, &$co
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function thunder_finish_installation(array &$install_state) {
-  \Drupal::service('config.installer')->installOptionalConfig();
-
   // Assign user 1 the "administrator" role.
   $user = User::load(1);
   $user->roles[] = 'administrator';
@@ -147,23 +144,6 @@ function thunder_themes_installed($theme_list) {
       $ampThemeConfig->set('amptheme', 'thunder_amp')
         ->save(TRUE);
     }
-
-    // Disable unused blocks.
-    /** @var \Drupal\block\Entity\Block[] $blocks */
-    $blocks = Block::loadMultiple([
-      'thunder_amp_account_menu',
-      'thunder_amp_breadcrumbs',
-      'thunder_amp_footer',
-      'thunder_amp_local_actions',
-      'thunder_amp_local_tasks',
-      'thunder_amp_main_menu',
-      'thunder_amp_messages',
-      'thunder_amp_tools',
-    ]);
-    foreach ($blocks as $block) {
-      $block->disable()->save();
-    }
-
   }
 
   if (in_array('amptheme', $theme_list)) {
