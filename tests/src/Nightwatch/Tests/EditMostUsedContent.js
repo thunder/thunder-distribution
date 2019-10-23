@@ -39,10 +39,13 @@ module.exports = {
       .drupalRelativeURL(`/admin/content?type=${bundle}`)
 
       .performance.startMark("full task")
+      .performance.startMark("load form")
       .click(
         '(//li[contains(@class,"dropbutton-action")])[1]//a[contains(@href, "edit")]'
       )
       .waitForElementVisible('//*[@id="edit-submit"]', 1000)
+      .performance.endMark() // "load form" task.
+
       .autoFillFields(requiredFields)
 
       .performance.startMark("submit save form")
