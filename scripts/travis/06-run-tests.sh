@@ -10,19 +10,17 @@ docker run -d -p 4444:4444 -v $(pwd)/$(drush eval "echo drupal_get_path('profile
 docker ps -a
 
 # Make simple export import
-if [[ "${TEST_UPDATE}" != "true" ]]; then
-    drush -y cex sync
+drush -y cex sync
 
-    # We have to use "2>&1" because drush outputs everything to stderr
-    DRUSH_CIM_RESULT=$(drush -y cim sync 2>&1)
-    if [[ "${DRUSH_CIM_RESULT}" != *"There are no changes to import."* ]]; then
-        exit 1
-    fi
+# We have to use "2>&1" because drush outputs everything to stderr
+DRUSH_CIM_RESULT=$(drush -y cim sync 2>&1)
+if [[ "${DRUSH_CIM_RESULT}" != *"There are no changes to import."* ]]; then
+    exit 1
 fi
 
 # execute Drupal tests
 thunderDumpFile=thunder.php phpunit --verbose --debug --configuration core --group Thunder ${ADDITIONAL_PHPUNIT_PARAMETERS} $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests || exit 1
 
-if [[ ${TEST_UPDATE} == "true" ]]; then
-  thunderDumpFile=thunder.php phpunit --verbose --debug --configuration core --group ThunderInstaller ${ADDITIONAL_PHPUNIT_PARAMETERS} $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests || exit 1
+if [[ ${TEST_UPGRADE} == "true" ]]; then
+  phpunit --verbose --debug --configuration core --group ThunderInstaller ${ADDITIONAL_PHPUNIT_PARAMETERS} $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests || exit 1
 fi

@@ -31,8 +31,6 @@ class UpdateTest extends QuickStartTestBase {
 
     $this->executeCommand("composer config repositories.thunder path $repository");
     $this->executeCommand('composer require "thunder/thunder-distribution:*" --no-update');
-    // @todo: Remove when 8.8.0-alpha1 is released.
-    $this->executeCommand('composer require "webflo/drupal-core-require-dev:8.8.x-dev" --dev --no-update');
     $this->executeCommand('composer update');
 
     // Perform the update steps.
@@ -42,6 +40,12 @@ class UpdateTest extends QuickStartTestBase {
     $this->visitThunder($working_dir);
   }
 
+  /**
+   * Tests some URLs.
+   *
+   * @param string $working_dir
+   *   The path within the workspace directory.
+   */
   protected function visitThunder($working_dir) {
     // Visit paths with expectations.
     $this->visit('/', $working_dir);

@@ -7,7 +7,7 @@ use Drupal\BuildTests\QuickStart\QuickStartTestBase;
 /**
  * Test whether we can install a Thunder site using the quickstart CLI.
  *
- * @group Thunder
+ * @group ThunderInstaller
  */
 class InstallTest extends QuickStartTestBase {
 

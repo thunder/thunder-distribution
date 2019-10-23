@@ -109,13 +109,6 @@ jobs:
       script:
         - bash -x -e ./scripts/travis/08-build-docker-performance-image.sh
 
-# In the Thunder 8.x-3.x branch we have to wait for an actual releases to be able to test updates. That is why we
-# currently disable those tests. TODO: re-enable them after release of Thunder 3
-#    - stage: test
-#      name: Run update test
-#      env: TEST_UPDATE=true
-#      if: commit_message =~ \[TEST_UPDATE\] OR type = cron
-
 # The main functionality is divided into different scripts, each is prefixed by a number which
 # indicates the execution order
 before_install:
