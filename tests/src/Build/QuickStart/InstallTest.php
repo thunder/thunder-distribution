@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\thunder\BuildTests\QuickStart;
+namespace Drupal\Tests\thunder\Build\QuickStart;
 
 use Drupal\BuildTests\QuickStart\QuickStartTestBase;
 
