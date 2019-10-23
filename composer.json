@@ -83,6 +83,9 @@
             },
             "drupal/redirect": {
                 "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-10-22/3089389.patch"
+            },
+            "drupal/content_lock": {
+                "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-10-23/3089617.patch"
             }
         }
     },
@@ -103,7 +106,7 @@
         "drupal/core": "^8.8.0",
         "drupal/config_selector": "^1.0-beta1",
         "drupal/config_update": "^1.5",
-        "drupal/content_lock": "^1.0-alpha8",
+        "drupal/content_lock": "1.0-alpha8",
         "drupal/crop": "^2.0-rc1",
         "drupal/ctools": "^3.1",
         "drupal/default_content": "^1.0-alpha7",
