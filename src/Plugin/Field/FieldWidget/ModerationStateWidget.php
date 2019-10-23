@@ -30,7 +30,7 @@ class ModerationStateWidget extends CoreModerationStateWidget {
     /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
     $entity = $original_entity = $items->getEntity();
 
-    $default = $this->getOriginalState($entity);
+    $default = $this->moderationInformation->getOriginalState($entity);
 
     // If the entity already exists, grab the most recent revision and load it.
     // The moderation state of the saved revision will be used to display the
