@@ -20,7 +20,3 @@ fi
 
 # execute Drupal tests
 thunderDumpFile=thunder.php phpunit --verbose --debug --configuration core --group Thunder ${ADDITIONAL_PHPUNIT_PARAMETERS} $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests || exit 1
-
-if [[ ${TEST_UPGRADE} == "true" ]]; then
-  phpunit --verbose --debug --configuration core --group ThunderInstaller ${ADDITIONAL_PHPUNIT_PARAMETERS} $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests || exit 1
-fi
