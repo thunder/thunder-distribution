@@ -1,4 +1,11 @@
 # Changelog
+## [3.3.4](https://github.com/thunder/thunder-distribution/tree/3.3.4) 2019-10-23
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.3...3.3.4)
+
+Fixes removing of image paragraphs.
+
+- Fix [Cannot remove image media from image paragraph](https://www.drupal.org/node/3088809)
+
 ## [3.3.3](https://github.com/thunder/thunder-distribution/tree/3.3.3) 2019-10-15
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.2...3.3.3)
 

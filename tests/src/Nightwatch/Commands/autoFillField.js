@@ -4,7 +4,7 @@
  *
  * TODO: We should fill fields with some meaningful data!
  *
- * This provides a custom command, .fieldAutoFill()
+ * This provides a custom command, .autoFillField()
  *
  * @param {string} fieldName
  *   The filed name.
@@ -14,7 +14,7 @@
  * @return {object}
  *   The 'browser' object.
  */
-exports.command = function fieldAutoFill(fieldName, fieldInfo) {
+exports.command = function autoFillField(fieldName, fieldInfo) {
   const browser = this;
 
   // eslint-disable-next-line no-console
@@ -26,6 +26,7 @@ exports.command = function fieldAutoFill(fieldName, fieldInfo) {
     // Text field.
     case "string_textfield":
     case "string_textarea":
+      browser.clearValue(`//*[@id="edit-${fieldIdPart}-0-value"]`);
       browser.setValue(
         `//*[@id="edit-${fieldIdPart}-0-value"]`,
         `Some text ${Math.random().toString(36)}`
@@ -35,6 +36,7 @@ exports.command = function fieldAutoFill(fieldName, fieldInfo) {
 
     // Number field.
     case "number":
+      browser.clearValue(`//*[@id="edit-${fieldIdPart}-0-value"]`);
       browser.setValue(`//*[@id="edit-${fieldIdPart}-0-value"]`, "1");
 
       return browser;
@@ -48,6 +50,7 @@ exports.command = function fieldAutoFill(fieldName, fieldInfo) {
     // Default Auto-Complete widget.
     case "entity_reference_autocomplete":
       browser
+        .clearValue(`//*[@id="edit-${fieldIdPart}-0-target-id"]`)
         .setValue(`//*[@id="edit-${fieldIdPart}-0-target-id"]`, "b")
         .waitForElementVisible('//*[@id="ui-id-1"]', 10000)
         .click('//*[@id="ui-id-1"]/*[1]/a');
