@@ -32,5 +32,35 @@ module.exports = {
         );
       }
     );
+  },
+
+  filterObject(data, filterBy) {
+    return Object.keys(data).reduce((result, key) => {
+      if (Object.keys(filterBy).includes(key)) {
+        result[key] = data[key];
+      }
+
+      // Filter nested objects only if we have nested filter definition.
+      if (typeof filterBy[key] !== "object") {
+        return result;
+      }
+
+      if (typeof data[key].target_type_distribution === "object") {
+        result[key].target_type_distribution = this.filterObject(
+          data[key].target_type_distribution,
+          filterBy[key]
+        );
+
+        return result;
+      }
+
+      if (typeof data[key].fields === "object") {
+        result[key].fields = this.filterObject(data[key].fields, filterBy[key]);
+
+        return result;
+      }
+
+      return result;
+    }, {});
   }
 };

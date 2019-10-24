@@ -27,14 +27,50 @@ module.exports = {
       "test-admin",
       {
         rule: "count",
-        index: 0
+        index: 0,
+        percent_of_instances_threshold: 80
       },
       browser,
       done
     );
   },
   createMostUsedContent(browser) {
-    const { bundle, required_fields: requiredFields } = browser._site_info;
+    const { bundle, fields } = browser._site_info;
+
+    // We have to filter returned fields, because we always have 100% threshold.
+    const fieldsToFill = {
+      title: true, // required
+      field_2: true, // required
+      field_13: {
+        bundle_0: {
+          field_4: true,
+          field_6: true
+        },
+        bundle_2: {
+          field_4: true,
+          field_7: true,
+          field_12: true
+        },
+        // bundle_4: {
+        //   field_4: true,
+        //   field_12: {
+        //     bundle_2: {
+        //       name: true,
+        //       field_1: true,
+        //       field_2: true
+        //     }
+        //   }
+        // },
+        bundle_8: {
+          field_4: true,
+          field_7: true
+        }
+      }, // optional - paragraphs
+      field_18: true, // required
+      field_23: true // required
+    };
+
+    const filteredFields = thunderUtils.filterObject(fields, fieldsToFill);
 
     browser
       .resizeWindow(1024, 1024)
@@ -56,7 +92,7 @@ module.exports = {
 
       // Fill required fields for content bundle.
       .performance.startMark("fill required fields")
-      .autoFillFields(requiredFields)
+      .autoFillFields(filteredFields)
       .performance.endMark();
 
     // Close mark and save newly created content entity.

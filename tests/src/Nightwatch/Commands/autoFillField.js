@@ -20,30 +20,50 @@ exports.command = function autoFillField(fieldName, fieldInfo) {
   // eslint-disable-next-line no-console
   console.log("Auto fill field: ", fieldName);
 
-  const fieldIdPart = fieldName.replace(/_/g, "-");
+  const fieldIdPart = fieldName.replace(/[_[]/g, "-").replace(/]/g, "");
 
   switch (fieldInfo.type) {
     // Text field.
     case "string_textfield":
-    case "string_textarea":
-      browser.clearValue(`//*[@id="edit-${fieldIdPart}-0-value"]`);
+    case "string_textarea": {
+      const stringFieldXPath = `//*[starts-with(@id, "edit-${fieldIdPart}-0-value")]`;
+
+      browser.clearValue(stringFieldXPath);
       browser.setValue(
-        `//*[@id="edit-${fieldIdPart}-0-value"]`,
+        stringFieldXPath,
         `Some text ${Math.random().toString(36)}`
       );
 
       return browser;
+    }
 
-    // Number field.
-    case "number":
-      browser.clearValue(`//*[@id="edit-${fieldIdPart}-0-value"]`);
-      browser.setValue(`//*[@id="edit-${fieldIdPart}-0-value"]`, "1");
+    case "text_textarea": {
+      browser
+        .waitForElementVisible(
+          `//*[starts-with(@id, "cke_edit-${fieldIdPart}-0-value")]//iframe`,
+          10000
+        )
+        .fillCKEditor(
+          `//*[starts-with(@id, "edit-${fieldIdPart}-0-value")]`,
+          "Lorem ipsum dolor sit amet, cu choro iudico expetenda qui, sale assum instructior per an. His ne regione oporteat detraxit, integre intellegat definiebas mel id. Mutat persequeris definitiones nec at. Eu est legere facilis partiendo, ad sed sensibus posidonium. Insolens argumentum an pri. Mea at tritani nostrum recteque, et viris interpretaris vis."
+        );
 
       return browser;
+    }
+
+    // Number field.
+    case "number": {
+      const numberFieldXPath = `//*[starts-with(@id, "edit-${fieldIdPart}-0-value")]`;
+
+      browser.clearValue(numberFieldXPath);
+      browser.setValue(numberFieldXPath, "1");
+
+      return browser;
+    }
 
     // Select options.
     case "options_select":
-      browser.click(`//*[@id="edit-${fieldIdPart}"]/option[2]`);
+      browser.click(`//*[starts-with(@id, "edit-${fieldIdPart}")]/option[2]`);
 
       return browser;
 
@@ -60,6 +80,12 @@ exports.command = function autoFillField(fieldName, fieldInfo) {
     // Select2 Auto-Complete widget.
     case "select2_entity_reference":
       browser.select2.selectValue(fieldName, "b", 1, 10000);
+
+      return browser;
+
+    // Paragraphs widget.
+    case "paragraphs":
+      browser.paragraphs.autoCreate(fieldName, fieldInfo);
 
       return browser;
 

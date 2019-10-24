@@ -18,6 +18,9 @@ exports.command = function add(fieldName, type, position) {
   const browser = this;
 
   if (position < 1) {
+    // Returning of browser without any action breaks test.
+    browser.pause(1);
+
     return browser;
   }
 
