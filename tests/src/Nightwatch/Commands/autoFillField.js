@@ -83,9 +83,34 @@ exports.command = function autoFillField(fieldName, fieldInfo) {
 
       return browser;
 
+    // Entity browser widget.
+    case "entity_browser_entity_reference":
+      browser.fillEntityBrowser(
+        fieldName,
+        fieldInfo.settings.entity_browser,
+        fieldInfo.settings.selection_mode
+      );
+
+      return browser;
+
     // Paragraphs widget.
     case "paragraphs":
       browser.paragraphs.autoCreate(fieldName, fieldInfo);
+
+      return browser;
+
+    // Inline entity form.
+    case "inline_entity_form_simple":
+      if (typeof fieldInfo.inline_entity_form !== "object") {
+        browser.pause(1);
+
+        return browser;
+      }
+
+      browser.autoFillFields(
+        fieldInfo.inline_entity_form,
+        `${fieldName}[0][inline_entity_form]`
+      );
 
       return browser;
 

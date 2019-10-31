@@ -45,20 +45,17 @@ module.exports = {
         return result;
       }
 
-      if (typeof data[key].target_type_distribution === "object") {
-        result[key].target_type_distribution = this.filterObject(
-          data[key].target_type_distribution,
-          filterBy[key]
-        );
-
-        return result;
-      }
-
-      if (typeof data[key].fields === "object") {
-        result[key].fields = this.filterObject(data[key].fields, filterBy[key]);
-
-        return result;
-      }
+      // Filter custom sub-from fields.
+      ["target_type_distribution", "fields", "inline_entity_form"].forEach(
+        filterKey => {
+          if (typeof data[key][filterKey] === "object") {
+            result[key][filterKey] = this.filterObject(
+              data[key][filterKey],
+              filterBy[key]
+            );
+          }
+        }
+      );
 
       return result;
     }, {});

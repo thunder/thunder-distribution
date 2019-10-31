@@ -28,7 +28,7 @@ module.exports = {
       {
         rule: "count",
         index: 0,
-        percent_of_instances_threshold: 80
+        percent_of_instances_threshold: 50
       },
       browser,
       done
@@ -51,16 +51,14 @@ module.exports = {
           field_7: true,
           field_12: true
         },
-        // bundle_4: {
-        //   field_4: true,
-        //   field_12: {
-        //     bundle_2: {
-        //       name: true,
-        //       field_1: true,
-        //       field_2: true
-        //     }
-        //   }
-        // },
+        bundle_4: {
+          field_4: true,
+          field_12: {
+            name: true,
+            field_1: true,
+            field_2: true
+          }
+        },
         bundle_8: {
           field_4: true,
           field_7: true
