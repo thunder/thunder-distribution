@@ -5,25 +5,7 @@
  * Module for adding custom Infinity base functions.
  */
 
-use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
-
-/**
- * Implements hook_entity_base_field_info_alter().
- */
-function thunder_taxonomy_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
-  if ($entity_type->id() == 'taxonomy_term') {
-    $fields['status']
-      ->setDisplayOptions('form', [
-        'type' => 'boolean_checkbox',
-        'settings' => [
-          'display_label' => TRUE,
-        ],
-        'weight' => 120,
-      ])
-      ->setDisplayConfigurable('form', TRUE);
-  }
-}
 
 /**
  * Implements hook_entity_type_alter().
