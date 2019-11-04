@@ -48,8 +48,7 @@ module.exports = {
       if (fieldName === "field_22") {
         return;
       }
-
-      browser.fieldAutoFill(fieldName, requiredFields[fieldName]);
+      browser.autoFillField(fieldName, requiredFields[fieldName]);
     });
 
     browser.performance
