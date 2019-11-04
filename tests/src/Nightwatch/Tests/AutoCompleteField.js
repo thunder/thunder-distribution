@@ -42,7 +42,6 @@ module.exports = {
       .waitForElementVisible('//*[@id="edit-submit"]', 1000);
 
     // Fill required fields for content bundle.
-    browser.performance.startMark("fill required fields");
     const requiredFieldNames = Object.keys(requiredFields);
     requiredFieldNames.forEach(fieldName => {
       // Skip field_22 - because it's used in test.
@@ -52,25 +51,18 @@ module.exports = {
 
       browser.fieldAutoFill(fieldName, requiredFields[fieldName]);
     });
-    browser.performance.endMark();
 
     browser.performance
-      .startMark("finding of existing tag")
-      // First selection is the slowest because caches are not warm.
+      .startMark("Select a first value")
       .select2.selectValue("field_22", "bund", 2, 10000)
-      .select2.selectValue("field_22", "bund", 4, 10000)
-      .select2.selectValue("field_22", "bund", 6, 10000)
       .performance.endMark();
 
-    // Submit form.
-    browser
-      .click('//*[@id="edit-submit"]')
-      .waitForElementVisible(
-        '//*[@id="block-thunder-base-page-title"]/div[2]/h1/span',
-        60000
-      )
-      .performance.endMeasurement();
+    browser.performance
+      .startMark("Select a second value")
+      .select2.selectValue("field_22", "bund", 4, 10000)
+      .performance.endMark();
 
+    browser.performance.endMeasurement();
     browser.end();
   }
 };
