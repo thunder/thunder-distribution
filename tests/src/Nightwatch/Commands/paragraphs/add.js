@@ -18,8 +18,11 @@ exports.command = function add(fieldName, type, position) {
   const browser = this;
 
   if (position < 1) {
-    // Returning of browser without any action breaks test.
-    browser.pause(1);
+    browser.perform(() => {
+      console.error(
+        `Paragraph position has to be 1 or bigger. Following value is provided: ${position}.`
+      );
+    });
 
     return browser;
   }

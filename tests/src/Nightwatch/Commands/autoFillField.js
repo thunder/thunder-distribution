@@ -102,7 +102,11 @@ exports.command = function autoFillField(fieldName, fieldInfo) {
     // Inline entity form.
     case "inline_entity_form_simple":
       if (typeof fieldInfo.inline_entity_form !== "object") {
-        browser.pause(1);
+        browser.perform(() => {
+          console.error(
+            `Inline entity form information is not provided for field: ${fieldName}.`
+          );
+        });
 
         return browser;
       }
@@ -115,11 +119,10 @@ exports.command = function autoFillField(fieldName, fieldInfo) {
       return browser;
 
     default:
-      // eslint-disable-next-line no-console
-      console.log("Unsupported widget type: ", fieldInfo.type);
-
-      // If we do not make any action in command, for some reason test hangs!
-      browser.pause(1);
+      browser.perform(() => {
+        // eslint-disable-next-line no-console
+        console.log("Unsupported widget type: ", fieldInfo.type);
+      });
   }
 
   return browser;
