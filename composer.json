@@ -77,7 +77,7 @@
             },
             "drupal/core": {
                 "Switch to a memory backend for running the database updates": "https://www.drupal.org/files/issues/2019-07-22/3055443-2-37.patch",
-                "Entity queries querying the latest revision very slow with lots of revisions": "https://www.drupal.org/files/issues/2019-09-04/2950869-65-optimizing-revision-query.patch"
+                "Entity queries querying the latest revision very slow with lots of revisions": "https://www.drupal.org/files/issues/2019-11-05/2950869-67.patch"
             },
             "drupal/inline_entity_form": {
                 "Remove revision log": "https://www.drupal.org/files/issues/2019-07-16/inline_entity_form-remove_log_message-2927884-6.patch"
