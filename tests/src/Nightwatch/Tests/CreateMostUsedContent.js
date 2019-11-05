@@ -88,8 +88,8 @@ module.exports = {
       .useXpath()
       .waitForElementVisible('//*[@id="edit-submit"]', 1000)
 
-      // Fill required fields for content bundle.
-      .performance.startMark("fill required fields")
+      // Fill fields for content bundle.
+      .performance.startMark("fill fields")
       .autoFillFields(filteredFields)
       .performance.endMark();
 
