@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-dynamic-require
 const request = require(`${process.cwd()}/node_modules/request`);
+const thunderConfig = require("./config");
 
 module.exports = {
   setSiteInfo(adminUser, adminPass, queryParams, browser, browserDoneCallback) {
@@ -31,6 +32,31 @@ module.exports = {
           }
         );
       }
+    );
+  },
+
+  /**
+   * Find test set name based on defined footprint in config.
+   *
+   * @param {object} data
+   *   The site info object.
+   * @param {string} testName
+   *   The test name.
+   *
+   * @return {string|undefined}
+   *   Returns found test set name.
+   */
+  getTestSetName(data, testName) {
+    const { testSetFootprint } = thunderConfig[testName];
+
+    return Object.keys(testSetFootprint).find(testSetName =>
+      testSetFootprint[testSetName].find(
+        objectPath =>
+          objectPath.reduce(
+            (obj, key) => (obj && obj[key] ? obj[key] : null),
+            data
+          ) !== null
+      )
     );
   },
 

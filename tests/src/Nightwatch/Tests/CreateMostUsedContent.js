@@ -15,6 +15,7 @@
 // eslint-disable-next-line import/no-dynamic-require
 const apm = require(`${process.cwd()}/node_modules/elastic-apm-node`);
 const thunderUtils = require("../utils");
+const thunderConfig = require("../config");
 
 module.exports = {
   "@tags": ["Thunder", "Thunder_Base_Set"],
@@ -37,38 +38,17 @@ module.exports = {
   createMostUsedContent(browser) {
     const { bundle, fields } = browser._site_info;
 
-    // We have to filter returned fields, because we always have 100% threshold.
-    const fieldsToFill = {
-      title: true, // required
-      field_2: true, // required
-      field_13: {
-        bundle_0: {
-          field_4: true,
-          field_6: true
-        },
-        bundle_2: {
-          field_4: true,
-          field_7: true,
-          field_12: true
-        },
-        bundle_4: {
-          field_4: true,
-          field_12: {
-            name: true,
-            field_1: true,
-            field_2: true
-          }
-        },
-        bundle_8: {
-          field_4: true,
-          field_7: true
-        }
-      }, // optional - paragraphs
-      field_18: true, // required
-      field_23: true // required
-    };
+    // Discover test set name for current test.
+    const testSetName = thunderUtils.getTestSetName(
+      browser._site_info,
+      browser.currentTest.name
+    );
 
-    const filteredFields = thunderUtils.filterObject(fields, fieldsToFill);
+    // We have to filter returned fields, because we always have 100% threshold.
+    const filteredFields = thunderUtils.filterObject(
+      fields,
+      thunderConfig.createMostUsedContent[testSetName].fieldsToFill
+    );
 
     browser
       .resizeWindow(1024, 1024)

@@ -18,7 +18,7 @@ exports.command = function autoFillField(fieldName, fieldInfo) {
   const browser = this;
 
   // eslint-disable-next-line no-console
-  console.log("Auto fill field: ", fieldName);
+  console.log(`Auto fill field: ${fieldName}`);
 
   const fieldIdPart = fieldName.replace(/[_[]/g, "-").replace(/]/g, "");
 
@@ -103,7 +103,9 @@ exports.command = function autoFillField(fieldName, fieldInfo) {
     case "inline_entity_form_simple":
       if (typeof fieldInfo.inline_entity_form !== "object") {
         browser.perform(() => {
-          console.error(
+          // eslint-disable-next-line no-console
+          console.log(
+            "\x1b[31m\x1b[1m%s\x1b[0m",
             `Inline entity form information is not provided for field: ${fieldName}.`
           );
         });
@@ -121,7 +123,10 @@ exports.command = function autoFillField(fieldName, fieldInfo) {
     default:
       browser.perform(() => {
         // eslint-disable-next-line no-console
-        console.log("Unsupported widget type: ", fieldInfo.type);
+        console.log(
+          "\x1b[31m\x1b[1m%s\x1b[0m",
+          `Unsupported widget type: ${fieldInfo.type}`
+        );
       });
   }
 

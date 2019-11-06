@@ -19,7 +19,9 @@ exports.command = function add(fieldName, type, position) {
 
   if (position < 1) {
     browser.perform(() => {
-      console.error(
+      // eslint-disable-next-line no-console
+      console.log(
+        "\x1b[31m\x1b[1m%s\x1b[0m",
         `Paragraph position has to be 1 or bigger. Following value is provided: ${position}.`
       );
     });
