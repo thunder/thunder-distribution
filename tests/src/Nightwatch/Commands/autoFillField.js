@@ -18,32 +18,52 @@ exports.command = function autoFillField(fieldName, fieldInfo) {
   const browser = this;
 
   // eslint-disable-next-line no-console
-  console.log("Auto fill field: ", fieldName);
+  console.log(`Auto fill field: ${fieldName}`);
 
-  const fieldIdPart = fieldName.replace(/_/g, "-");
+  const fieldIdPart = fieldName.replace(/[_[]/g, "-").replace(/]/g, "");
 
   switch (fieldInfo.type) {
     // Text field.
     case "string_textfield":
-    case "string_textarea":
-      browser.clearValue(`//*[@id="edit-${fieldIdPart}-0-value"]`);
+    case "string_textarea": {
+      const stringFieldXPath = `//*[starts-with(@id, "edit-${fieldIdPart}-0-value")]`;
+
+      browser.clearValue(stringFieldXPath);
       browser.setValue(
-        `//*[@id="edit-${fieldIdPart}-0-value"]`,
+        stringFieldXPath,
         `Some text ${Math.random().toString(36)}`
       );
 
       return browser;
+    }
 
-    // Number field.
-    case "number":
-      browser.clearValue(`//*[@id="edit-${fieldIdPart}-0-value"]`);
-      browser.setValue(`//*[@id="edit-${fieldIdPart}-0-value"]`, "1");
+    case "text_textarea": {
+      browser
+        .waitForElementVisible(
+          `//*[starts-with(@id, "cke_edit-${fieldIdPart}-0-value")]//iframe`,
+          10000
+        )
+        .fillCKEditor(
+          `//*[starts-with(@id, "edit-${fieldIdPart}-0-value")]`,
+          "Lorem ipsum dolor sit amet, cu choro iudico expetenda qui, sale assum instructior per an. His ne regione oporteat detraxit, integre intellegat definiebas mel id. Mutat persequeris definitiones nec at. Eu est legere facilis partiendo, ad sed sensibus posidonium. Insolens argumentum an pri. Mea at tritani nostrum recteque, et viris interpretaris vis."
+        );
 
       return browser;
+    }
+
+    // Number field.
+    case "number": {
+      const numberFieldXPath = `//*[starts-with(@id, "edit-${fieldIdPart}-0-value")]`;
+
+      browser.clearValue(numberFieldXPath);
+      browser.setValue(numberFieldXPath, "1");
+
+      return browser;
+    }
 
     // Select options.
     case "options_select":
-      browser.click(`//*[@id="edit-${fieldIdPart}"]/option[2]`);
+      browser.click(`//*[starts-with(@id, "edit-${fieldIdPart}")]/option[2]`);
 
       return browser;
 
@@ -63,12 +83,51 @@ exports.command = function autoFillField(fieldName, fieldInfo) {
 
       return browser;
 
-    default:
-      // eslint-disable-next-line no-console
-      console.log("Unsupported widget type: ", fieldInfo.type);
+    // Entity browser widget.
+    case "entity_browser_entity_reference":
+      browser.fillEntityBrowser(
+        fieldName,
+        fieldInfo.settings.entity_browser,
+        fieldInfo.settings.selection_mode
+      );
 
-      // If we do not make any action in command, for some reason test hangs!
-      browser.pause(1);
+      return browser;
+
+    // Paragraphs widget.
+    case "paragraphs":
+      browser.paragraphs.autoCreate(fieldName, fieldInfo);
+
+      return browser;
+
+    // Inline entity form.
+    case "inline_entity_form_simple":
+      if (typeof fieldInfo.inline_entity_form !== "object") {
+        browser.perform(() => {
+          // eslint-disable-next-line no-console
+          console.log(
+            "\x1b[31m\x1b[1m%s\x1b[0m",
+            `Inline entity form information is not provided for field: ${fieldName}.`
+          );
+        });
+
+        return browser;
+      }
+
+      browser.autoFillFields(
+        fieldInfo.inline_entity_form,
+        `${fieldName}[0][inline_entity_form]`
+      );
+
+      return browser;
+
+    default:
+      browser.perform(() => {
+        // eslint-disable-next-line no-console
+        console.log(
+          "\x1b[31m\x1b[1m%s\x1b[0m",
+          `Unsupported widget type: ${fieldInfo.type}`
+        );
+      });
   }
 
   return browser;

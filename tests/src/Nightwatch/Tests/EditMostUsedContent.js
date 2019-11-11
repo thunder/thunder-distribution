@@ -25,7 +25,7 @@ module.exports = {
     );
   },
   editMostUsedContent(browser) {
-    const { bundle, required_fields: requiredFields } = browser._site_info;
+    const { bundle, fields } = browser._site_info;
 
     browser
       .resizeWindow(1024, 1024)
@@ -46,7 +46,7 @@ module.exports = {
       .waitForElementVisible('//*[@id="edit-submit"]', 1000)
       .performance.endMark() // "load form" task.
 
-      .autoFillFields(requiredFields)
+      .autoFillFields(fields)
 
       .performance.startMark("submit save form")
       .click('//*[@id="edit-submit"]')

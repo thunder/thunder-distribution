@@ -25,7 +25,7 @@ module.exports = {
     );
   },
   autoCompleteField(browser) {
-    const { bundle, required_fields: requiredFields } = browser._site_info;
+    const { bundle, fields } = browser._site_info;
 
     browser
       .resizeWindow(1024, 1024)
@@ -42,13 +42,14 @@ module.exports = {
       .waitForElementVisible('//*[@id="edit-submit"]', 1000);
 
     // Fill required fields for content bundle.
-    const requiredFieldNames = Object.keys(requiredFields);
+    // TODO: This part should be removed, because we are not submitting form.
+    const requiredFieldNames = Object.keys(fields);
     requiredFieldNames.forEach(fieldName => {
       // Skip field_22 - because it's used in test.
       if (fieldName === "field_22") {
         return;
       }
-      browser.autoFillField(fieldName, requiredFields[fieldName]);
+      browser.autoFillField(fieldName, fields[fieldName]);
     });
 
     browser.performance

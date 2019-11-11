@@ -1,4 +1,13 @@
 # Changelog
+## [3.3.5](https://github.com/thunder/thunder-distribution/tree/3.3.5) 2019-11-07
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.4...3.3.5)
+
+Maintenance release with improved performance test coverage and update to most recent Drupal release.
+
+- Do [Create a performance test for editing nodes](https://www.drupal.org/node/3089695)
+- Do [Create performance test for measuring select operations](https://www.drupal.org/node/3092267)
+- Do [Add creation of paragraphs to performance tests](https://www.drupal.org/node/3092996)
+
 ## [3.3.4](https://github.com/thunder/thunder-distribution/tree/3.3.4) 2019-10-23
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.3...3.3.4)
 
