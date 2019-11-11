@@ -83,6 +83,9 @@
             },
             "drupal/content_lock": {
                 "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-10-23/3089617.patch"
+            },
+            "drupal/pathauto": {
+                "Compatibility with Drupal 8.8.0-beta1": "https://www.drupal.org/files/issues/2019-11-11/3093401-6.patch"
             }
         }
     },
@@ -132,7 +135,7 @@
         "drupal/paragraphs": "^1.9",
         "drupal/paragraphs_features": "^1.0",
         "drupal/password_policy": "3.0-alpha5",
-        "drupal/pathauto": "^1.6",
+        "drupal/pathauto": "1.6-alpha1",
         "drupal/responsive_preview": "^1.0-alpha7",
         "drupal/redirect": "1.4",
         "drupal/scheduler": "^1.1",
@@ -143,7 +146,7 @@
         "drupal/shariff": "^1.5",
         "drupal/slick": "^2.0-rc3",
         "drupal/slick_media": "^2.0-alpha2",
-        "drupal/thunder_admin": "3.x-dev",
+        "drupal/thunder_admin": "^3.0",
         "drupal/token": "^1.0",
         "drupal/update_helper": "^1.0",
         "npm-asset/dropzone": "^5.5.1",
