@@ -75,17 +75,17 @@
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch",
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2019-05-20/password_policy-config_import_field_error-2771129-80.patch"
             },
-            "drupal/core": {
-                "temporary://update-cache-60b12ec6 is not a directory. in FileSystem->scanDirectory()": "https://www.drupal.org/files/issues/2019-10-21/3075645-6.patch"
-            },
             "drupal/inline_entity_form": {
                 "Remove revision log": "https://www.drupal.org/files/issues/2019-07-16/inline_entity_form-remove_log_message-2927884-6.patch"
             },
             "drupal/redirect": {
-                "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-10-22/3089389.patch"
+                "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-11-11/3089389-4.patch"
             },
             "drupal/content_lock": {
-                "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-10-23/3089617.patch"
+                "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-11-11/3089617-4.patch"
+            },
+            "drupal/pathauto": {
+                "Compatibility with Drupal 8.8.0-beta1": "https://www.drupal.org/files/issues/2019-11-11/3093401-6.patch"
             }
         }
     },
@@ -135,9 +135,9 @@
         "drupal/paragraphs": "^1.9",
         "drupal/paragraphs_features": "^1.0",
         "drupal/password_policy": "3.0-alpha5",
-        "drupal/pathauto": "^1.6",
+        "drupal/pathauto": "1.6-alpha1",
         "drupal/responsive_preview": "^1.0-alpha7",
-        "drupal/redirect": "1.4",
+        "drupal/redirect": "1.x-dev",
         "drupal/scheduler": "^1.1",
         "drupal/scheduler_content_moderation_integration": "^1.1",
         "drupal/select2": "^1.3",
@@ -146,7 +146,7 @@
         "drupal/shariff": "^1.5",
         "drupal/slick": "^2.0-rc3",
         "drupal/slick_media": "^2.0-alpha2",
-        "drupal/thunder_admin": "3.x-dev",
+        "drupal/thunder_admin": "^3.0",
         "drupal/token": "^1.0",
         "drupal/update_helper": "^1.0",
         "npm-asset/dropzone": "^5.5.1",
