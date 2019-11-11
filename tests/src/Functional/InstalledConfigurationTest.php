@@ -197,16 +197,31 @@ class InstalledConfigurationTest extends ThunderTestBase {
         'module' => TRUE,
       ],
     ],
+    'core.entity_view_display.taxonomy_term.channel.default' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
+    'core.entity_view_display.node.article.default' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
+    'core.entity_view_display.node.article.rss' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
+    'core.entity_view_display.node.article.teaser' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
     // Remove this when
     // https://github.com/BurdaMagazinOrg/module-nexx_integration/pull/37 lands.
     'core.entity_form_display.media.nexx_video.default' => [
       'content' => [
         'path' => TRUE,
-        'moderation_state' => TRUE,
-      ],
-    ],
-    'core.entity_form_display.paragraph.nexx_video.default' => [
-      'content' => [
         'moderation_state' => TRUE,
       ],
     ],
