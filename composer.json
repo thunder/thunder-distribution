@@ -76,7 +76,8 @@
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2019-05-20/password_policy-config_import_field_error-2771129-80.patch"
             },
             "drupal/core": {
-                "Switch to a memory backend for running the database updates": "https://www.drupal.org/files/issues/2019-07-22/3055443-2-37.patch"
+                "Switch to a memory backend for running the database updates": "https://www.drupal.org/files/issues/2019-07-22/3055443-2-37.patch",
+                "Add a revision_parent field to revisionable entities": "https://www.drupal.org/files/issues/2019-03-12/2725523-152.patch"
             },
             "drupal/inline_entity_form": {
                 "Remove revision log": "https://www.drupal.org/files/issues/2019-07-16/inline_entity_form-remove_log_message-2927884-6.patch"
