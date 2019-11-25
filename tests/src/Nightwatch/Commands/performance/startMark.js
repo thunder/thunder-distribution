@@ -15,13 +15,15 @@ exports.command = function startMark(markName) {
   const browser = this;
 
   browser.perform(() => {
-    const span = browser.apmTrans.startSpan(markName);
-    span.setLabel("branch", process.env.THUNDER_BRANCH);
+    const span = browser.globals.apmTrans.startSpan(markName);
 
-    browser.apmSpans.push(span);
+    span.setLabel("branch", process.env.THUNDER_BRANCH);
+    span.setLabel("test", browser.currentTest.name);
+
+    browser.globals.apmSpans.push(span);
 
     browser.setCookie({
-      domain: browser.apmDomain,
+      domain: browser.globals.apmDomain,
       httpOnly: false,
       name: "spanId",
       path: "/",
