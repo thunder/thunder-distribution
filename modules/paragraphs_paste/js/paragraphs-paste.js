@@ -9,11 +9,11 @@
 
   /**
    * Handle event when "Paste" button is clicked
-   * @param event
-   *   click event
+   * @param {event} event The event.
    */
-  var pasteHandler = function(event) {
-    var clipboardData, pastedData;
+  var pasteHandler = function (event) {
+    var clipboardData;
+    var pastedData;
 
     event.stopPropagation();
     event.preventDefault();
@@ -49,9 +49,9 @@
    * Process paragraph_AddAboveButton elements.
    */
   Drupal.behaviors.paragraphsPasteAction = {
-    attach: function (context, settings) {
+    attach: function (context) {
       var $buttons = $('[data-paragraphs-paste="enabled"]', context);
-      $buttons.each(function( ) {
+      $buttons.each(function () {
         var $this = $(this);
         var $wrapper = $this.closest('.paragraphs-container').once('paragraphsPaste');
 
