@@ -83,9 +83,6 @@
             },
             "drupal/content_lock": {
                 "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-11-11/3089617-4.patch"
-            },
-            "drupal/pathauto": {
-                "Compatibility with Drupal 8.8.0-beta1": "https://www.drupal.org/files/issues/2019-11-11/3093401-6.patch"
             }
         }
     },
@@ -135,7 +132,7 @@
         "drupal/paragraphs": "^1.9",
         "drupal/paragraphs_features": "^1.0",
         "drupal/password_policy": "3.0-alpha5",
-        "drupal/pathauto": "1.6-alpha1",
+        "drupal/pathauto": "^1.6",
         "drupal/responsive_preview": "^1.0-alpha7",
         "drupal/redirect": "1.x-dev",
         "drupal/scheduler": "^1.1",
