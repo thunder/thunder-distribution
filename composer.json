@@ -101,7 +101,7 @@
         "drupal/blazy": "^2.0-rc3",
         "drupal/checklistapi": "^1.8",
         "drupal/core": "^8.8.0",
-        "drupal/config_selector": "^1.0-beta1",
+        "drupal/config_selector": "^2.0",
         "drupal/config_update": "^1.5",
         "drupal/content_lock": "1.0-alpha8",
         "drupal/crop": "^2.0-rc1",
