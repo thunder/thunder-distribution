@@ -82,7 +82,6 @@
                 "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-11-11/3089389-4.patch"
             },
             "drupal/content_lock": {
-                "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-11-11/3089617-4.patch",
                 "Remove deprecated code": "https://www.drupal.org/files/issues/2019-11-25/3095055-4.patch"
 
             },
