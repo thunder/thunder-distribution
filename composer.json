@@ -82,7 +82,9 @@
                 "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-11-11/3089389-4.patch"
             },
             "drupal/content_lock": {
-                "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-11-11/3089617-4.patch"
+                "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-11-11/3089617-4.patch",
+                "Remove deprecated code": "https://www.drupal.org/files/issues/2019-11-25/3095055-4.patch"
+
             },
             "drupal/blazy": {
                 "[META] Drupal 9 Deprecation Notices for Blazy": "https://www.drupal.org/files/issues/2019-11-25/3088298.patch"
@@ -106,7 +108,7 @@
         "drupal/core": "^8.8.0",
         "drupal/config_selector": "^2",
         "drupal/config_update": "^1.5",
-        "drupal/content_lock": "1.0-alpha8",
+        "drupal/content_lock": "1.x-dev",
         "drupal/crop": "2.x-dev",
         "drupal/ctools": "^3.1",
         "drupal/default_content": "1.x-dev",
