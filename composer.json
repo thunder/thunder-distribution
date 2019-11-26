@@ -91,6 +91,15 @@
             },
             "drupal/media_entity_slideshow": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-25/3042829.patch"
+            },
+            "drupal/better_normalizers": {
+                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-25/3042791-12.patch"
+            },
+            "drupal/default_content": {
+                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-07/default_content-deprecation-3092985-2-8.x-1.x.patch"
+            },
+            "drupal/dropzonejs": {
+                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-19/3095062.patch"
             }
         }
     },
@@ -105,18 +114,18 @@
         "drupal/adsense": "1.x-dev",
         "drupal/admin_toolbar": "^1.22",
         "drupal/autosave_form": "1.x-dev",
-        "drupal/better_normalizers": "^1.0-beta3",
+        "drupal/better_normalizers": "1.x-dev",
         "drupal/blazy": "2.x-dev",
         "drupal/checklistapi": "1.x-dev",
         "drupal/core": "^8.8.0",
-        "drupal/config_selector": "^2",
+        "drupal/config_selector": "^2.0",
         "drupal/config_update": "^1.5",
         "drupal/content_lock": "1.x-dev",
         "drupal/crop": "2.x-dev",
         "drupal/ctools": "^3.1",
         "drupal/default_content": "1.x-dev",
         "drupal/diff": "1.0-rc2",
-        "drupal/dropzonejs": "^2.0-alpha2",
+        "drupal/dropzonejs": "2.x-dev",
         "drupal/empty_fields": "^1.0-alpha1",
         "drupal/entity": "^1.0",
         "drupal/entity_browser": "2.2",
