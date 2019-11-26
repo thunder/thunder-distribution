@@ -1,4 +1,13 @@
 # Changelog
+
+## [3.3.6](https://github.com/thunder/thunder-distribution/tree/3.3.6) 2019-11-26
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.5...3.3.6)
+
+Fixing bugs and bumping Drupal Core version.
+
+- Fix [Follow-up for "Fix field_group update": Check if field groups exists](https://www.drupal.org/node/3087938)
+- Fix [Do not install thunder_demo in tests](https://www.drupal.org/node/3094367)
+
 ## [3.3.5](https://github.com/thunder/thunder-distribution/tree/3.3.5) 2019-11-07
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.4...3.3.5)
 
