@@ -84,8 +84,8 @@
             "drupal/content_lock": {
                 "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-11-11/3089617-4.patch"
             },
-            "drupal/pathauto": {
-                "Compatibility with Drupal 8.8.0-beta1": "https://www.drupal.org/files/issues/2019-11-11/3093401-6.patch"
+            "drupal/blazy": {
+                "[META] Drupal 9 Deprecation Notices for Blazy": "https://www.drupal.org/files/issues/2019-11-25/3088298.patch"
             }
         }
     },
@@ -97,19 +97,19 @@
         "marc1706/fast-image-size": "^1.1.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0-alpha8",
-        "drupal/adsense": "^1.0",
+        "drupal/adsense": "1.x-dev",
         "drupal/admin_toolbar": "^1.22",
-        "drupal/autosave_form": "^1.0",
+        "drupal/autosave_form": "1.x-dev",
         "drupal/better_normalizers": "^1.0-beta3",
-        "drupal/blazy": "^2.0-rc3",
-        "drupal/checklistapi": "^1.8",
+        "drupal/blazy": "2.x-dev",
+        "drupal/checklistapi": "1.x-dev",
         "drupal/core": "^8.8.0",
-        "drupal/config_selector": "^1.0-beta1",
+        "drupal/config_selector": "^2",
         "drupal/config_update": "^1.5",
         "drupal/content_lock": "1.0-alpha8",
-        "drupal/crop": "^2.0-rc1",
+        "drupal/crop": "2.x-dev",
         "drupal/ctools": "^3.1",
-        "drupal/default_content": "^1.0-alpha7",
+        "drupal/default_content": "1.x-dev",
         "drupal/diff": "1.0-rc2",
         "drupal/dropzonejs": "^2.0-alpha2",
         "drupal/empty_fields": "^1.0-alpha1",
@@ -123,13 +123,12 @@
         "drupal/inline_entity_form": "1.0-rc2",
         "drupal/ivw_integration": "^1.0",
         "drupal/length_indicator": "^1.0-rc2",
-        "drupal/libraries": "^3.0-alpha1",
         "drupal/linkit": "^5.0-beta9",
         "drupal/liveblog": "^1.2-alpha14",
-        "drupal/media_entity_instagram": "^2.0-alpha1",
+        "drupal/media_entity_instagram": "2.x-dev",
         "drupal/media_entity_pinterest": "^2.0",
         "drupal/media_entity_slideshow": "^2.0-alpha1",
-        "drupal/media_entity_twitter": "^2.0-alpha1",
+        "drupal/media_entity_twitter": "2.x-dev",
         "drupal/media_expire": "^2.2",
         "drupal/metatag": "^1.9",
         "drupal/paragraphs": "^1.9",
