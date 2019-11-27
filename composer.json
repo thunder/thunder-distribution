@@ -89,7 +89,7 @@
         "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0-alpha8",
         "drupal/adsense": "^1.0",
-        "drupal/admin_toolbar": "^1.22",
+        "drupal/admin_toolbar": "^2.0",
         "drupal/autosave_form": "^1.0",
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0-rc3",
