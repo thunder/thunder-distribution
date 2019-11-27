@@ -5,6 +5,7 @@ namespace Drupal\paragraphs_paste;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Plugin\PluginBase;
+use Drupal\media\OEmbed\UrlResolverInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

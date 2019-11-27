@@ -34,10 +34,12 @@ interface ParagraphsPastePluginInterface extends PluginInspectionInterface {
    *
    * @param string $input
    *   Input string.
+   * @param array $definition
+   *   The plugin definition.
    *
    * @return bool
    *   TRUE if the plugin can be used, FALSE otherwise.
    */
-  public static function isApplicable($input);
+  public static function isApplicable($input, array $definition);
 
 }

@@ -52,7 +52,7 @@ class ParagraphsPastePluginManager extends DefaultPluginManager {
     $definitions = $this->getDefinitions();
     $candidates = [];
     foreach ($definitions as $definition) {
-      $is_applicable = $definition['class']::isApplicable($input);
+      $is_applicable = $definition['class']::isApplicable($input, $definition);
       if ($is_applicable) {
         $candidates[] = $definition;
       }

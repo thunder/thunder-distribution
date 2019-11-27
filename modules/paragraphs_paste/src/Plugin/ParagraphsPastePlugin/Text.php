@@ -38,9 +38,9 @@ class Text extends ParagraphsPastePluginBase {
   /**
    * {@inheritdoc}
    */
-  public static function isApplicable($input) {
+  public static function isApplicable($input, array $definition) {
     // Catch all content.
-    return TRUE;
+    return !empty(trim($input));
   }
 
 }
