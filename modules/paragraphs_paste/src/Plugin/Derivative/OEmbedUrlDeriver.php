@@ -16,8 +16,8 @@ class OEmbedUrlDeriver extends DeriverBase {
     $this->derivatives = [
       'video' => [
         'id' => 'oembed_url:video',
-        'label' => t('Remote video'),
-        'description' => t('Youtube or Vimeo URLs.'),
+        'label' => $this->t('Remote video'),
+        'description' => $this->t('Youtube or Vimeo URLs.'),
         'providers' => ['YouTube', 'Vimeo'],
         'media_bundle' => 'video',
         'media_bundle_field' => 'field_media_video_embed_field',
@@ -26,8 +26,8 @@ class OEmbedUrlDeriver extends DeriverBase {
       ],
       'twitter' => [
         'id' => 'oembed_url:twitter',
-        'label' => t('Twitter'),
-        'description' => t('Twitter URLs.'),
+        'label' => $this->t('Twitter'),
+        'description' => $this->t('Twitter URLs.'),
         'providers' => ['Twitter'],
         'media_bundle' => 'twitter',
         'media_bundle_field' => 'field_url',
@@ -36,8 +36,8 @@ class OEmbedUrlDeriver extends DeriverBase {
       ],
       'instagram' => [
         'id' => 'oembed_url:instagram',
-        'label' => t('Instagram'),
-        'description' => t('Instagram URLs.'),
+        'label' => $this->t('Instagram'),
+        'description' => $this->t('Instagram URLs.'),
         'providers' => ['Instagram'],
         'media_bundle' => 'instagram',
         'media_bundle_field' => 'field_url',
