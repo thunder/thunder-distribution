@@ -93,6 +93,12 @@
             },
             "drupal/dropzonejs": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-19/3095062.patch"
+            },
+            "drupal/google_analytics": {
+                "Drupal 9 compatibility related issues should be fixed": "https://www.drupal.org/files/issues/2019-11-29/3072207-21.patch"
+            },
+            "drupal/liveblog": {
+                "Remove deprecated code": "https://www.drupal.org/files/issues/2019-11-29/3095066-6.patch"
             }
         }
     },
@@ -126,12 +132,12 @@
         "drupal/fb_instant_articles": "^1.0",
         "drupal/field_group": "^3.0-rc2",
         "drupal/focal_point": "^1.2",
-        "drupal/google_analytics": "^2.0",
+        "drupal/google_analytics": "2.x-dev",
         "drupal/inline_entity_form": "1.0-rc2",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.0-rc2",
         "drupal/linkit": "^5.0-beta9",
-        "drupal/liveblog": "^1.2-alpha14",
+        "drupal/liveblog": "1.x-dev",
         "drupal/media_entity_instagram": "2.x-dev",
         "drupal/media_entity_pinterest": "^2.0",
         "drupal/media_entity_slideshow": "2.x-dev",
