@@ -43,15 +43,13 @@ function thunder_riddle_install() {
 }
 
 /**
- * Implements hook_uninstall().
+ * Add dependency on thunder_riddle where necessary.
  */
-function thunder_riddle_uninstall() {
+function thunder_riddle_update_8001() {
+  /** @var \Drupal\Core\Config\ConfigManager $config_manager */
+  $config_manager = \Drupal::service('config.manager');
 
-  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
-  $configFactory = \Drupal::configFactory();
-  $logger = \Drupal::logger('thunder_riddle');
-
-  $config = [
+  $config_entities = [
     'core.entity_form_display.media.riddle.default',
     'core.entity_form_display.paragraph.riddle.default',
     'core.entity_view_display.media.riddle.default',
@@ -59,7 +57,6 @@ function thunder_riddle_uninstall() {
     'core.entity_view_display.paragraph.riddle.default',
     'core.entity_view_display.paragraph.riddle.preview',
     'entity_browser.browser.riddle_browser',
-    'field.field.media.riddle.field_riddle_id',
     'field.field.paragraph.riddle.field_riddle',
     'field.storage.media.field_riddle_id',
     'field.storage.paragraph.field_riddle',
@@ -67,12 +64,15 @@ function thunder_riddle_uninstall() {
     'paragraphs.paragraphs_type.riddle',
   ];
 
-  foreach ($config as $tour) {
-    try {
-      $configFactory->getEditable($tour)->delete();
-    }
-    catch (\Exception $e) {
-      $logger->warning(sprintf('Unable to uninstall config: %s.', $tour));
-    }
+  $new_dependency = ['enforced' => ['module' => ['thunder_riddle']]];
+
+  foreach ($config_entities as $name) {
+    /** @var \Drupal\Core\Config\Entity\ConfigEntityBase $entity */
+    $entity = $config_manager->loadConfigEntityByName($name);
+    $dependencies = array_merge($entity->get('dependencies'), $new_dependency);
+    $entity
+      ->set('dependencies', $dependencies)
+      ->trustData()
+      ->save();
   }
 }
