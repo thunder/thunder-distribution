@@ -69,10 +69,13 @@ function thunder_riddle_update_8001() {
   foreach ($config_entities as $name) {
     /** @var \Drupal\Core\Config\Entity\ConfigEntityBase $entity */
     $entity = $config_manager->loadConfigEntityByName($name);
-    $dependencies = array_merge($entity->get('dependencies'), $new_dependency);
-    $entity
-      ->set('dependencies', $dependencies)
-      ->trustData()
-      ->save();
+    // It's possible a user might have deleted one of the provided entities.
+    if ($entity) {
+      $dependencies = array_merge($entity->get('dependencies'), $new_dependency);
+      $entity
+        ->set('dependencies', $dependencies)
+        ->trustData()
+        ->save();
+    }
   }
 }
