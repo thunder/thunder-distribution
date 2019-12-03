@@ -85,7 +85,7 @@ jobs:
     - stage: test
       name: Run tests with composer (min) build
       env: ADDITIONAL_COMPOSER_PARAMETERS="--prefer-lowest"
-      php: 7.1
+      php: 7.2
       if: commit_message =~ \[(TEST_MIN|TEST_EVERYTHING)\] OR type = cron
       install:
         - bash -x -e ./scripts/travis/03-build-thunder-composer.sh
