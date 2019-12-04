@@ -5,6 +5,9 @@ dependencies:
     - field.storage.paragraph.field_riddle
     - media.type.riddle
     - paragraphs.paragraphs_type.riddle
+  enforced:
+    module:
+      - thunder_riddle
 id: paragraph.riddle.field_riddle
 field_name: field_riddle
 entity_type: paragraph

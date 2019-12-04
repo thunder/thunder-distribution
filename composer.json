@@ -79,7 +79,7 @@
                 "Remove revision log": "https://www.drupal.org/files/issues/2019-07-16/inline_entity_form-remove_log_message-2927884-6.patch"
             },
             "drupal/redirect": {
-                "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-11-11/3089389-4.patch"
+                "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-12-04/3089389-5.patch"
             },
             "drupal/blazy": {
                 "[META] Drupal 9 Deprecation Notices for Blazy": "https://www.drupal.org/files/issues/2019-11-25/3088298.patch"
@@ -114,12 +114,12 @@
         "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0-alpha8",
         "drupal/adsense": "1.x-dev",
-        "drupal/admin_toolbar": "^1.22",
+        "drupal/admin_toolbar": "^2.0",
         "drupal/autosave_form": "1.x-dev",
         "drupal/better_normalizers": "1.x-dev",
         "drupal/blazy": "2.x-dev",
         "drupal/checklistapi": "1.x-dev",
-        "drupal/core": "^8.8.0",
+        "drupal/core": "~8.8.0",
         "drupal/config_selector": "^2.0",
         "drupal/config_update": "^1.5",
         "drupal/content_lock": "^2.0",
@@ -153,6 +153,7 @@
         "drupal/pathauto": "^1.6",
         "drupal/responsive_preview": "^1.0-alpha7",
         "drupal/redirect": "1.x-dev",
+        "drupal/redirect": "^1.4",
         "drupal/scheduler": "^1.1",
         "drupal/scheduler_content_moderation_integration": "^1.1",
         "drupal/select2": "^1.3",
@@ -192,8 +193,8 @@
         "thunder/thunder_performance_measurement": "dev-master",
         "thunder/thunder_testing_demo": "3.x-dev",
         "drupal/config_profile": "^1.0",
-        "mglaman/phpstan-drupal": "^0.11.1",
-        "phpstan/phpstan-deprecation-rules": "^0.11.0"
+        "mglaman/phpstan-drupal": "~0.11.1",
+        "phpstan/phpstan-deprecation-rules": "~0.11.0"
     },
     "conflict": {
         "masterminds/html5": "^2.4.0"
