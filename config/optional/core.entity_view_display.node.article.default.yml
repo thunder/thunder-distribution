@@ -18,6 +18,11 @@ targetEntityType: node
 bundle: article
 mode: default
 content:
+  content_moderation_control:
+    weight: -20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_paragraphs:
     type: entity_reference_revisions_entity_view
     weight: 0
@@ -37,14 +42,14 @@ content:
     region: content
   links:
     weight: 2
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   shariff_field:
     weight: 3
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   field_channel: true
   field_meta_tags: true
