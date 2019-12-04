@@ -5,6 +5,9 @@ dependencies:
     - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.riddle.field_riddle
     - paragraphs.paragraphs_type.riddle
+  enforced:
+    module:
+      - thunder_riddle
 id: paragraph.riddle.preview
 targetEntityType: paragraph
 bundle: riddle
