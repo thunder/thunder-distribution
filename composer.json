@@ -95,7 +95,7 @@
         "drupal/blazy": "^2.0-rc3",
         "drupal/checklistapi": "^1.8",
         "drupal/core": "8.7.10",
-        "webflo/drupal-core-strict": "8.7.10",
+        "guzzlehttp/guzzle": "^6.3.3",
         "drupal/config_selector": "^1.0-beta1",
         "drupal/config_update": "^1.5",
         "drupal/content_lock": "^1.0-alpha8",
