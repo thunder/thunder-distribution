@@ -4,6 +4,9 @@ dependencies:
   config:
     - field.field.paragraph.riddle.field_riddle
     - paragraphs.paragraphs_type.riddle
+  enforced:
+    module:
+      - thunder_riddle
 id: paragraph.riddle.default
 targetEntityType: paragraph
 bundle: riddle
