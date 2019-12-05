@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 
-# Update to Thunder 8.2.20. This includes paragraphs version 1.3 which is needed before the field group update.
-cd ${TEST_DIR}
-composer require burdamagazinorg/thunder:8.2.20 --no-update
-composer update
-
-cd ${TEST_DIR}/docroot
-drush updb -y
-
 # Update to the latest version of thunder.
 cd ${TEST_DIR}
 composer require burdamagazinorg/thunder:~8.2.51 --no-update
