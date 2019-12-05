@@ -4,7 +4,7 @@
 cd ${TEST_DIR}
 composer require drupal/paragraphs:1.3 --no-update
 
-composer update
+composer update drupal/paragraphs
 
 cd ${TEST_DIR}/docroot
 drush updb -y
@@ -12,6 +12,7 @@ drush updb -y
 # Update paragraphs to version required by thunder.
 cd ${TEST_DIR}
 composer remove drupal/paragraphs --no-update
+composer require burdamagazinorg/thunder:~8.2.51 --no-update
 composer update
 
 cd ${TEST_DIR}/docroot
