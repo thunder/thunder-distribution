@@ -4,7 +4,7 @@
 cd ${TEST_DIR}
 composer require drupal/paragraphs:1.3 --no-update
 
-composer update drupal/paragraphs
+composer update drupal/paragraphs --with-dependencies
 
 cd ${TEST_DIR}/docroot
 drush updb -y
