@@ -17,4 +17,5 @@ git clone --depth 1 --single-branch --branch ${THUNDER_ADMIN_BRANCH} https://git
 composer install --working-dir=${TEST_DIR}/docroot
 
 # require development packages needed for testing
-COMPOSER_ROOT_VERSION=8.8.x-dev composer require "thunder/thunder_testing_demo:3.x-dev" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir ${TEST_DIR}/docroot
+composer config minimum-stability dev --working-dir ${TEST_DIR}/docroot
+COMPOSER_ROOT_VERSION=8.8.x-dev composer require "drupal/core-dev" "thunder/thunder_testing_demo:3.x-dev" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir ${TEST_DIR}/docroot
