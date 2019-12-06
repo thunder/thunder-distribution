@@ -4,6 +4,9 @@ dependencies:
   config:
     - field.field.media.riddle.field_riddle_id
     - media.type.riddle
+  enforced:
+    module:
+      - thunder_riddle
   module:
     - select2
 id: media.riddle.default
