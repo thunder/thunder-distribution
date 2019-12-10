@@ -59,9 +59,8 @@ class ThunderInstallerTest extends InstallerTestBase {
     // Set up a minimal container (required by BrowserTestBase). Set cookie and
     // server information so that XDebug works.
     // @see install_begin_request()
-    // phpcs:disable
-    $request = Request::create($GLOBALS['base_url'] . '/core/install.php', 'GET', [], $_COOKIE, [], $_SERVER);
-    // phpcs:enable
+    $global_request = Request::createFromGlobals();
+    $request = Request::create($GLOBALS['base_url'] . '/core/install.php', 'GET', [], $global_request->cookies->all(), [], $global_request->server->all());
     $this->container = new ContainerBuilder();
     $request_stack = new RequestStack();
     $request_stack->push($request);
