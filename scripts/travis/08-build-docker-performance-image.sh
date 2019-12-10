@@ -30,12 +30,17 @@ echo "${DOCKER_PASSWORD_BASE64}" | base64 -d | docker login -u "${DOCKER_USERNAM
 # Push to Docker HUB
 docker push "${DOCKER_IMAGE_TAG}"
 
-# Trigger AWS create ECS task function
-API_CALL_HTTP_CODE=$(curl -X GET \
-  "https://qnxrqizu3k.execute-api.eu-central-1.amazonaws.com/default/createEcsTaskDefinition?docker_image=${DOCKER_IMAGE_TAG}&task_defintion_template=thunder_performance_runner&elastic_apm_context_tag_branch=${BRANCH_NAME}" \
-  -H "x-api-key: ${AWS_API_KEY_CREATE_ECS_TASK}" \
+# Start Thunde performance testing task for created image
+API_CALL_HTTP_CODE=$(curl \
+  --request POST \
+  --insecure \
+  "https://${THUNDER_PTM_HOST}:3000/warmers" \
+  --header "Authorization: Bearer ${THUNDER_PTM_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data "{\"branchTag\":\"${BRANCH_NAME}\",\"imageTag\":\"${BRANCH_NAME}-${TRAVIS_JOB_ID}\",\"composeType\":\"default\"}" \
   --output /dev/stderr \
-  --write-out "%{http_code}")
+  --write-out "%{http_code}" \
+)
 
 if [[ "${API_CALL_HTTP_CODE}" != "200" ]]; then
     exit 1
