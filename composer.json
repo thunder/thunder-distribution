@@ -70,9 +70,6 @@
                 "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2019-10-18/entity-browser-reorder-remove-2851580-67-stable.patch",
                 "Drupal 9 compatibility": "https://www.drupal.org/files/issues/2019-12-02/deprecated-3057212-10.patch"
             },
-            "drupal/password_policy": {
-                "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2019-05-20/password_policy-config_import_field_error-2771129-80.patch"
-            },
             "drupal/inline_entity_form": {
                 "Remove revision log": "https://www.drupal.org/files/issues/2019-07-16/inline_entity_form-remove_log_message-2927884-6.patch"
             },
