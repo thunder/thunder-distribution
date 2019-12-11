@@ -71,7 +71,6 @@
                 "Drupal 9 compatibility": "https://www.drupal.org/files/issues/2019-12-02/deprecated-3057212-10.patch"
             },
             "drupal/password_policy": {
-                "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch",
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2019-05-20/password_policy-config_import_field_error-2771129-80.patch"
             },
             "drupal/inline_entity_form": {
@@ -117,7 +116,7 @@
         "drupal/config_update": "^1.5",
         "drupal/content_lock": "^2.0",
         "drupal/crop": "2.x-dev",
-        "drupal/ctools": "^3.1",
+        "drupal/ctools": "3.x-dev",
         "drupal/default_content": "1.x-dev",
         "drupal/diff": "1.x-dev",
         "drupal/dropzonejs": "2.x-dev",
