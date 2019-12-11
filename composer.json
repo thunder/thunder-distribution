@@ -58,8 +58,7 @@
         },
         "patches": {
             "drupal/diff": {
-                "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch",
-                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-12-11/3042675-26.patch"
+                "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
             "drupal/amp": {
                 "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch",
@@ -87,9 +86,6 @@
             "drupal/media_entity_slideshow": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-25/3042829.patch"
             },
-            "drupal/better_normalizers": {
-                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-12-11/3042791-18.patch"
-            },
             "drupal/default_content": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-07/default_content-deprecation-3092985-2-8.x-1.x.patch",
                 "Drupal 9 Deprecated Code Report 2": "https://www.drupal.org/files/issues/2019-12-02/3098095.patch"
@@ -116,7 +112,7 @@
         "drupal/adsense": "1.x-dev",
         "drupal/admin_toolbar": "^2.0",
         "drupal/autosave_form": "1.x-dev",
-        "drupal/better_normalizers": "1.x-dev",
+        "drupal/better_normalizers": "^1.0-beta4",
         "drupal/blazy": "2.x-dev",
         "drupal/checklistapi": "1.x-dev",
         "drupal/core": "~8.8.0",
