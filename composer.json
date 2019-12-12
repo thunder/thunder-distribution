@@ -77,7 +77,7 @@
                 "[META] Drupal 9 Deprecation Notices for Blazy": "https://www.drupal.org/files/issues/2019-11-25/3088298.patch"
             },
             "drupal/media_entity_slideshow": {
-                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-25/3042829.patch"
+                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-12-12/3042829-6.patch"
             },
             "drupal/default_content": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-07/default_content-deprecation-3092985-2-8.x-1.x.patch",
