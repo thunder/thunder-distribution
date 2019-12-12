@@ -81,7 +81,7 @@
         }
     },
     "require": {
-        "burdamagazinorg/amazon-onsite": "dev-8.x-1.x",
+        "burdamagazinorg/amazon_onsite": "dev-8.x-1.x",
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.5",
         "drupal/amp": "1.2",
