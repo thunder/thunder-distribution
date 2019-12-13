@@ -88,6 +88,9 @@
             },
             "drupal/liveblog": {
                 "Remove deprecated code": "https://www.drupal.org/files/issues/2019-11-29/3095066-6.patch"
+            },
+            "drupal/media_entity_pinterest": {
+                "Remove deprecated code": "https://www.drupal.org/files/issues/2019-12-13/3074751-5.patch"
             }
         }
     },
@@ -128,7 +131,7 @@
         "drupal/linkit": "^5.0-beta9",
         "drupal/liveblog": "1.x-dev",
         "drupal/media_entity_instagram": "2.x-dev",
-        "drupal/media_entity_pinterest": "^2.0",
+        "drupal/media_entity_pinterest": "2.x-dev",
         "drupal/media_entity_slideshow": "2.x-dev",
         "drupal/media_entity_twitter": "2.x-dev",
         "drupal/media_expire": "^2.2",
