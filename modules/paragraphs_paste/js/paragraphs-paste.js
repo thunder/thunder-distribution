@@ -21,7 +21,7 @@
     // Get pasted data via clipboard API
     clipboardData = event.originalEvent.clipboardData || window.clipboardData;
     // TODO: Sanitize and quantify pasted data.
-    pastedData = JSON.stringify(clipboardData.getData('Text').split(/\n\s?\n/));
+    pastedData = JSON.stringify(clipboardData.getData('Text').split(/[\r\n]+\s?[\r\n]+/));
 
     var pasteTarget = $(event.currentTarget).data('paragraphs-paste-target');
     $('[data-drupal-selector="' + pasteTarget.replace(/action$/, 'content') + '"]').val(pastedData);
@@ -38,7 +38,7 @@
    *   Returns markup.
    */
   Drupal.theme.paragraphsPasteActionArea = function (options) {
-    return '<div class="paragraphs-paste-action" data-paragraphs-paste-target="' + options.target + '" contenteditable="true">' +
+    return '<div class="paragraphs-paste-action" data-paragraphs-paste-target="' + options.target + '">' +
       '<div class="paragraphs-paste-message">' +
         '<p>' + Drupal.t('Paste here.') + '</p>' +
         '</div>' +
@@ -56,7 +56,9 @@
         var $wrapper = $this.closest('.paragraphs-container').once('paragraphsPaste');
 
         $wrapper.find('> .fieldset-wrapper').prepend(Drupal.theme('paragraphsPasteActionArea', {target: $this.data('drupalSelector')}));
-        $wrapper.find('.paragraphs-paste-action').on('paste', pasteHandler);
+        $wrapper.find('.paragraphs-paste-action')
+          .on('paste', pasteHandler)
+          .on('mousedown', function() { $(this).attr('contenteditable', true); });
       });
 
     }

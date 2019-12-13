@@ -8,7 +8,7 @@ use Drupal\Core\Plugin\PluginBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Defines a base CKEditor plugin implementation.
+ * Defines a base Paragraphs paste plugin implementation.
  *
  * @see \Drupal\paragraphs_paste\Annotation\ParagraphsPastePlugin
  * @see \Drupal\paragraphs_paste\ParagraphsPastePluginBase
@@ -26,7 +26,7 @@ abstract class ParagraphsPastePluginBase extends PluginBase implements Container
   protected $entityTypeManager;
 
   /**
-   * Constructs display plugin.
+   * Constructs a ParagraphsPastePluginBase object.
    *
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.
