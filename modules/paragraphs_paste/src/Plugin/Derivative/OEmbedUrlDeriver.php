@@ -4,6 +4,7 @@ namespace Drupal\paragraphs_paste\Plugin\Derivative;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+
 /**
  * Derives paragraph paste plugins handling OEmbed urls.
  */
