@@ -369,7 +369,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     // After sitemap.xml -> we have to open page without setting cookie before.
     $this->getSession()
-      ->visit($this->buildUrl('admin/config/search/simplesitemap'));
+      ->visit($this->buildUrl('admin/config/search/simplesitemap/settings'));
     $page = $this->getSession()->getPage();
     $this->setFieldValues($page, [
       'max_links' => '2',
