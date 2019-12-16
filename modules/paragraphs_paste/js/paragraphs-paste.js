@@ -58,7 +58,7 @@
         $wrapper.find('> .fieldset-wrapper').prepend(Drupal.theme('paragraphsPasteActionArea', {target: $this.data('drupalSelector')}));
         $wrapper.find('.paragraphs-paste-action')
           .on('paste', pasteHandler)
-          .on('mousedown', function() { $(this).attr('contenteditable', true); });
+          .on('mousedown', function () { $(this).attr('contenteditable', true); });
       });
 
     }
