@@ -75,7 +75,7 @@
                 "Drupal 9 Deprecated Code Report 2": "https://www.drupal.org/files/issues/2019-12-02/3098095.patch"
             },
             "drupal/dropzonejs": {
-                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-19/3095062.patch"
+                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-25/3095062-4.patch"
             },
             "drupal/google_analytics": {
                 "Drupal 9 compatibility related issues should be fixed": "https://www.drupal.org/files/issues/2019-11-29/3072207-21.patch"
