@@ -368,14 +368,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->assertEquals('0.9', $domElements->item(0)->nodeValue);
 
     // After sitemap.xml -> we have to open page without setting cookie before.
-    $this->getSession()
-      ->visit($this->buildUrl('admin/config/search/simplesitemap'));
-    $page = $this->getSession()->getPage();
-    $this->setFieldValues($page, [
-      'max_links' => '2',
-    ]);
-    $page->find('xpath', '//input[@id="edit-submit"]')->click();
-
+    $this->container->get('config.factory')->getEditable('simple_sitemap.settings')->set('max_links', 2)->save();
     $this->sitemapGenerator->generateSitemap('backend');
 
     // Check loc, that it's pointing to sitemap.xml file.
