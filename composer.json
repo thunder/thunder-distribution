@@ -88,9 +88,6 @@
             },
             "drupal/paragraphs": {
                 "Remove deprecated code": "https://www.drupal.org/files/issues/2019-12-16/3042592-17.patch"
-            },
-            "drupal/metatag": {
-                "Fix namespace and imports": "https://www.drupal.org/files/issues/2019-12-16/3101288.patch"
             }
         }
     },
