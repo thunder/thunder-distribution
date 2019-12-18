@@ -117,12 +117,16 @@ class ParagraphsPasteForm implements ContainerInjectionInterface {
     $submit = ParagraphsWidget::getSubmitElementInfo($form, $form_state);
     $host = $form_state->getFormObject()->getEntity();
 
-    $values = json_decode(
+    $pasted_data = json_decode(
       NestedArray::getValue(
         $form_state->getUserInput(),
         array_merge(array_slice($submit['button']['#parents'], 0, -1), ['paste_content'])
       )
     );
+
+    // Split on urls and double newlines.
+    $values = preg_split('~(https?://[^\s/$.?#].[^\s]*)|[\r\n]+\s?[\r\n]+~', $pasted_data, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+
     /* @var ParagraphsPastePluginManager $plugin_manager */
     $plugin_manager = \Drupal::service('plugin.manager.paragraphs_paste.plugin');
 
