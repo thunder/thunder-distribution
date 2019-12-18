@@ -88,6 +88,9 @@
             },
             "drupal/paragraphs": {
                 "Remove deprecated code": "https://www.drupal.org/files/issues/2019-12-16/3042592-17.patch"
+            },
+            "drupal/redirect": {
+                "Remove deprecated code": "https://www.drupal.org/files/issues/2019-12-17/redirect-d9_deprecated_code-3051124-26-D8.patch"
             }
         }
     },
