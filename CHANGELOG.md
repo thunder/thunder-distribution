@@ -1,6 +1,6 @@
 # Changelog
 
-## [3.3.8](https://github.com/thunder/thunder-distribution/tree/3.3.1) 2019-09-05
+## [3.3.8](https://github.com/thunder/thunder-distribution/tree/3.3.8) 2019-09-05
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.7...3.3.8)
 
 This release updates the Drupal version to 8.7.11, which is a security update. Following issues were resolved as well:
