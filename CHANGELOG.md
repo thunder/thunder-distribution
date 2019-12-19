@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.3.8](https://github.com/thunder/thunder-distribution/tree/3.3.1) 2019-09-05
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.7...3.3.8)
+
+Update to Drupal 8.7.11.
+
 ## [3.3.7](https://github.com/thunder/thunder-distribution/tree/3.3.7) 2019-12-05
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.6...3.3.7)
 
