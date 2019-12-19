@@ -1,4 +1,6 @@
 parameters:
+  drupal:
+    drupal_root: %currentWorkingDirectory%/docroot
   customRulesetUsed: true
   reportUnmatchedIgnoredErrors: false
   # Ignore phpstan-drupal extension's rules.
