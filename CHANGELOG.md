@@ -3,7 +3,11 @@
 ## [3.3.8](https://github.com/thunder/thunder-distribution/tree/3.3.1) 2019-09-05
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.7...3.3.8)
 
-Update to Drupal 8.7.11.
+This release updates the Drupal version to 8.7.11, which is a security update. Following issues were resolved as well:
+
+ - [Thunder 3.3 tests are failing with simple_sitemap 3.5](https://www.drupal.org/node/3101277)
+ - [Thunder 3.3 tests are failing with paragraphs features 1.17](https://www.drupal.org/node/3100643)
+ - [Fix deprecations and coding style issues](https://www.drupal.org/node/3100288)
 
 ## [3.3.7](https://github.com/thunder/thunder-distribution/tree/3.3.7) 2019-12-05
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.6...3.3.7)
