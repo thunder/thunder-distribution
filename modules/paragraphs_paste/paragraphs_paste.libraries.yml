@@ -1,4 +1,4 @@
-paragraphs-paste:
+init:
   js:
     js/paragraphs-paste.js: {}
   css:
