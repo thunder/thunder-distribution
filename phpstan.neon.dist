@@ -9,7 +9,7 @@ parameters:
     - '#Plugin definitions cannot be altered.#'
     - '#Missing cache backend declaration for performance.#'
     - '#Plugin manager has cache backend specified but does not declare cache tags.#'
-   excludes_analyse:
+  excludes_analyse:
     - docroot/modules/contrib/rules/*
     - docroot/modules/contrib/graphql/*
     - docroot/modules/contrib/schema_metatag/*
