@@ -10,9 +10,9 @@ parameters:
     - '#Missing cache backend declaration for performance.#'
     - '#Plugin manager has cache backend specified but does not declare cache tags.#'
    excludes_analyse:
-     - docroot/modules/contrib/rules/*
-     - docroot/modules/contrib/graphql/*
-     - docroot/modules/contrib/schema_metatag/*
+    - docroot/modules/contrib/rules/*
+    - docroot/modules/contrib/graphql/*
+    - docroot/modules/contrib/schema_metatag/*
   autoload_files:
     - docroot/modules/contrib/token/token.module
 includes:
