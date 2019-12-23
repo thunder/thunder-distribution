@@ -85,6 +85,9 @@
             },
             "drupal/paragraphs": {
                 "Remove deprecated code": "https://www.drupal.org/files/issues/2019-12-16/3042592-17.patch"
+            },
+            "drupal/password_policy": {
+                "Remove deprecated code": "https://www.drupal.org/files/issues/2019-12-20/drupal_9_deprecated_code_report-3100148-5.patch"
             }
         }
     },
