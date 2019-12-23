@@ -83,9 +83,6 @@
             "drupal/liveblog": {
                 "Remove deprecated code": "https://www.drupal.org/files/issues/2019-11-29/3095066-6.patch"
             },
-            "drupal/media_entity_pinterest": {
-                "Remove deprecated code": "https://www.drupal.org/files/issues/2019-12-13/3074751-5.patch"
-            },
             "drupal/paragraphs": {
                 "Remove deprecated code": "https://www.drupal.org/files/issues/2019-12-16/3042592-17.patch"
             }
