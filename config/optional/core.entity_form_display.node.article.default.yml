@@ -34,7 +34,6 @@ third_party_settings:
       label: Teaser
       format_type: fieldset
       format_settings:
-        label: Teaser
         description: ''
         required_fields: true
         id: ''
@@ -48,7 +47,6 @@ third_party_settings:
       label: Paragraphs
       format_type: fieldset
       format_settings:
-        label: Paragraphs
         description: ''
         required_fields: true
         id: ''
@@ -64,7 +62,6 @@ third_party_settings:
       weight: 3
       format_type: fieldset
       format_settings:
-        label: Basis
         description: ''
         required_fields: true
         id: ''
@@ -123,6 +120,9 @@ content:
       size: 65
       placeholder: ''
     third_party_settings:
+      autofill:
+        enabled: true
+        source_field: title
       length_indicator:
         indicator: true
         indicator_opt:
