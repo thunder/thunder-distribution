@@ -75,7 +75,7 @@
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-25/3095062-4.patch"
             },
             "drupal/google_analytics": {
-                "Drupal 9 compatibility related issues should be fixed": "https://www.drupal.org/files/issues/2019-11-29/3072207-21.patch"
+                "Drupal 9 compatibility related issues should be fixed": "https://www.drupal.org/files/issues/2020-01-03/3072207-26.patch"
             },
             "drupal/liveblog": {
                 "Remove deprecated code": "https://www.drupal.org/files/issues/2019-11-29/3095066-6.patch"
@@ -87,7 +87,7 @@
                 "Remove deprecated code": "https://www.drupal.org/files/issues/2019-12-30/3100148-9.patch"
             },
             "drupal/crop": {
-                "Drupal 9 deprecated code report": "https://www.drupal.org/files/issues/2019-12-27/3096959-11.patch"
+                "Drupal 9 deprecated code report": "https://www.drupal.org/files/issues/2020-01-03/3096959-14.patch"
             }
         }
     },
