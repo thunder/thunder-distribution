@@ -64,9 +64,6 @@
                 "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch",
                 "Remove deprecated code": "https://www.drupal.org/files/issues/2019-11-19/3078897-8.patch"
             },
-            "drupal/inline_entity_form": {
-                "Remove revision log": "https://www.drupal.org/files/issues/2019-07-16/inline_entity_form-remove_log_message-2927884-6.patch"
-            },
             "drupal/default_content": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-07/default_content-deprecation-3092985-2-8.x-1.x.patch",
                 "Drupal 9 Deprecated Code Report 2": "https://www.drupal.org/files/issues/2019-12-02/3098095.patch"
@@ -122,7 +119,7 @@
         "drupal/field_group": "^3.0-rc2",
         "drupal/focal_point": "^1.2",
         "drupal/google_analytics": "2.x-dev",
-        "drupal/inline_entity_form": "1.0-rc2",
+        "drupal/inline_entity_form": "1.x-dev",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.0-rc2",
         "drupal/linkit": "^5.0-beta9",
