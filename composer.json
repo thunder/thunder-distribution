@@ -85,6 +85,9 @@
             },
             "drupal/crop": {
                 "Drupal 9 deprecated code report": "https://www.drupal.org/files/issues/2020-01-03/3096959-14.patch"
+            },
+            "drupal/config_update": {
+                "Refactor to not support Drush 8 any more": "https://www.drupal.org/files/issues/2019-11-25/3042621-8.patch"
             }
         }
     },
@@ -104,12 +107,12 @@
         "drupal/checklistapi": "1.x-dev",
         "drupal/core": "~8.8.1",
         "drupal/config_selector": "^2.0",
-        "drupal/config_update": "^1.5",
+        "drupal/config_update": "1.x-dev",
         "drupal/content_lock": "^2.0",
         "drupal/crop": "2.x-dev",
         "drupal/ctools": "3.x-dev",
         "drupal/default_content": "1.x-dev",
-        "drupal/diff": "1.x-dev",
+        "drupal/diff": "^1.0",
         "drupal/dropzonejs": "2.x-dev",
         "drupal/empty_fields": "^1.0-alpha1",
         "drupal/entity": "^1.0",

@@ -13,6 +13,7 @@ parameters:
     - docroot/modules/contrib/rules/*
     - docroot/modules/contrib/graphql/*
     - docroot/modules/contrib/schema_metatag/*
+    - docroot/modules/contrib/typed_data/*
   autoload_files:
     - docroot/modules/contrib/token/token.module
 includes:
