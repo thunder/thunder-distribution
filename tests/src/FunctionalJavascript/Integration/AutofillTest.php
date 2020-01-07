@@ -11,38 +11,10 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
  *
  * @group Thunder
  */
-
-
-//namespace Drupal\Tests\autofill\FunctionalJavascript;
-//
-//use Drupal\Core\Entity\Entity\EntityFormDisplay;
-//use Drupal\field\Entity\FieldConfig;
-//use Drupal\field\Entity\FieldStorageConfig;
-//use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
-
-/**
- * Tests the Autofill module.
- *
- * @group autofill
- */
 class AutofillTest extends ThunderJavascriptTestBase {
 
   use ThunderArticleTestTrait;
   use NodeCreationTrait;
-
-  /**
-   * The content type
-   *
-   * @var \Drupal\node\NodeTypeInterface
-   */
-  protected $contentType;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function setUp() {
-    parent::setUp();
-  }
 
   /**
    * Tests the autofill of a new field based on the node title.
