@@ -83,11 +83,11 @@
             "drupal/password_policy": {
                 "Remove deprecated code": "https://www.drupal.org/files/issues/2019-12-30/3100148-9.patch"
             },
-            "drupal/crop": {
-                "Drupal 9 deprecated code report": "https://www.drupal.org/files/issues/2020-01-03/3096959-14.patch"
-            },
             "drupal/config_update": {
                 "Refactor to not support Drush 8 any more": "https://www.drupal.org/files/issues/2019-11-25/3042621-8.patch"
+            },
+            "drupal/redirect": {
+                "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-12-23/3089389-6.patch"
             }
         }
     },
