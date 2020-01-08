@@ -19,7 +19,7 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
 fi
 
 composer config repositories.thunder path ${THUNDER_DIST_DIR}
-composer require "drupal/rules:3.x-dev" "drupal/schema_metatag" "drupal/graphql" --no-update --no-progress ${ADDITIONAL_COMPOSER_PARAMETERS}
+composer require "drush/drush:~9.0" "drupal/rules:3.x-dev" "drupal/schema_metatag" "drupal/graphql" --no-update --no-progress ${ADDITIONAL_COMPOSER_PARAMETERS}
 composer require "thunder/thunder-distribution:*" "thunder/thunder_testing_demo:3.x-dev" "phpunit/phpunit:^6.5" "composer/composer:^1.9.0" "mglaman/phpstan-drupal:~0.12.0" "phpstan/phpstan-deprecation-rules:~0.12.0" "valiton/harbourmaster:~8.1" --no-progress ${ADDITIONAL_COMPOSER_PARAMETERS}
 
  # Get custom branch of Thunder Admin theme
