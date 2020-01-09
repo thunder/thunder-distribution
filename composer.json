@@ -77,6 +77,11 @@
             },
             "drupal/redirect": {
                 "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-12-23/3089389-6.patch"
+            },
+            "drupal/liveblog": {
+                "Update info format": "https://patch-diff.githubusercontent.com/raw/galaniprojects/liveblog/pull/109.diff",
+                "Fix tests": "https://patch-diff.githubusercontent.com/raw/galaniprojects/liveblog/pull/110.diff",
+                "Remove deprecated code": "https://patch-diff.githubusercontent.com/raw/galaniprojects/liveblog/pull/111.diff"
             }
         }
     },
@@ -116,7 +121,7 @@
         "drupal/length_indicator": "^1.0-rc2",
         "drupal/libraries": "^3.0-alpha1",
         "drupal/linkit": "^5.0-beta9",
-        "drupal/liveblog": "^1.2-alpha14",
+        "drupal/liveblog": "1.x-dev",
         "drupal/media_entity_instagram": "^2.0-alpha1",
         "drupal/media_entity_pinterest": "^2.0",
         "drupal/media_entity_slideshow": "^2.0-alpha1",
