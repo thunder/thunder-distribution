@@ -74,9 +74,6 @@
             "drupal/google_analytics": {
                 "Drupal 9 compatibility related issues should be fixed": "https://www.drupal.org/files/issues/2020-01-03/3072207-26.patch"
             },
-            "drupal/liveblog": {
-                "Remove deprecated code": "https://www.drupal.org/files/issues/2019-11-29/3095066-6.patch"
-            },
             "drupal/password_policy": {
                 "Remove deprecated code": "https://www.drupal.org/files/issues/2019-12-30/3100148-9.patch"
             },
@@ -88,6 +85,12 @@
             },
             "drupal/simple_gmap": {
                 "Prepare Tests for upgrade": "https://www.drupal.org/files/issues/2019-12-14/2913307-30.patch"
+            },
+            "drupal/pathauto": {
+                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-12-26/3042582-32.patch"
+            },
+            "drupal/scheduler": {
+                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-09/3042677.patch"
             }
         }
     },
@@ -124,7 +127,7 @@
         "drupal/google_analytics": "2.x-dev",
         "drupal/inline_entity_form": "1.x-dev",
         "drupal/ivw_integration": "^2.0",
-        "drupal/length_indicator": "^1.0-rc2",
+        "drupal/length_indicator": "^1.1",
         "drupal/linkit": "^5.0-beta9",
         "drupal/liveblog": "1.x-dev",
         "drupal/media_entity_instagram": "2.x-dev",
@@ -136,7 +139,7 @@
         "drupal/paragraphs": "1.x-dev",
         "drupal/paragraphs_features": "^1.7",
         "drupal/password_policy": "3.x-dev",
-        "drupal/pathauto": "^1.6",
+        "drupal/pathauto": "1.x-dev",
         "drupal/responsive_preview": "^1.0-alpha7",
         "drupal/redirect": "1.5",
         "drupal/scheduler": "1.x-dev",
