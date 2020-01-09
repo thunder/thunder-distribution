@@ -91,6 +91,11 @@
             },
             "drupal/scheduler": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-09/3042677.patch"
+            },
+            "drupal/liveblog": {
+                "Update info format": "https://patch-diff.githubusercontent.com/raw/galaniprojects/liveblog/pull/109.diff",
+                "Fix tests": "https://patch-diff.githubusercontent.com/raw/galaniprojects/liveblog/pull/110.diff",
+                "Remove deprecated code": "https://patch-diff.githubusercontent.com/raw/galaniprojects/liveblog/pull/111.diff"
             }
         }
     },
@@ -128,7 +133,7 @@
         "drupal/inline_entity_form": "1.x-dev",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.1",
-        "drupal/linkit": "^5.0-beta9",
+        "drupal/linkit": "5.x-dev",
         "drupal/liveblog": "1.x-dev",
         "drupal/media_entity_instagram": "2.x-dev",
         "drupal/media_entity_pinterest": "2.x-dev",
