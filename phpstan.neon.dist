@@ -14,6 +14,8 @@ parameters:
     - docroot/modules/contrib/graphql/*
     - docroot/modules/contrib/schema_metatag/*
     - docroot/modules/contrib/typed_data/*
+    - docroot/modules/contrib/feeds/*
+    - docroot/modules/contrib/facets/*
   autoload_files:
     - docroot/modules/contrib/token/token.module
 includes:
