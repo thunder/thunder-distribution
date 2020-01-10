@@ -91,12 +91,15 @@
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-12-26/3042582-32.patch"
             },
             "drupal/scheduler": {
-                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-09/3042677.patch"
+                "Add new 'core_version_requirement' key to .info.yml": "https://www.drupal.org/files/issues/2020-01-10/3079913-5.patch"
             },
             "drupal/liveblog": {
                 "Update info format": "https://patch-diff.githubusercontent.com/raw/galaniprojects/liveblog/pull/109.diff",
                 "Fix tests": "https://patch-diff.githubusercontent.com/raw/galaniprojects/liveblog/pull/110.diff",
                 "Remove deprecated code": "https://patch-diff.githubusercontent.com/raw/galaniprojects/liveblog/pull/111.diff"
+            },
+            "drupal/media_entity_twitter": {
+                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-10/3097669-9.patch"
             }
         }
     },
