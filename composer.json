@@ -62,7 +62,7 @@
             },
             "drupal/amp": {
                 "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch",
-                "Remove deprecated code": "https://www.drupal.org/files/issues/2019-11-19/3078897-8.patch"
+                "Remove deprecated code": "https://www.drupal.org/files/issues/2020-01-10/3078897-9.patch"
             },
             "drupal/default_content": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-07/default_content-deprecation-3092985-2-8.x-1.x.patch",
@@ -75,13 +75,14 @@
                 "Drupal 9 compatibility related issues should be fixed": "https://www.drupal.org/files/issues/2020-01-03/3072207-26.patch"
             },
             "drupal/password_policy": {
-                "Remove deprecated code": "https://www.drupal.org/files/issues/2019-12-30/3100148-9.patch"
+                "Remove deprecated code": "https://www.drupal.org/files/issues/2020-01-10/3100148-10.patch"
             },
             "drupal/config_update": {
                 "Refactor to not support Drush 8 any more": "https://www.drupal.org/files/issues/2019-11-25/3042621-8.patch"
             },
             "drupal/redirect": {
-                "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-12-23/3089389-6.patch"
+                "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-12-23/3089389-6.patch",
+                "Remove Drupal 8.8 deprecations, compatibility with Drupal 9": "https://www.drupal.org/files/issues/2020-01-04/redirect-8.8-3102143-3.patch"
             },
             "drupal/simple_gmap": {
                 "Prepare Tests for upgrade": "https://www.drupal.org/files/issues/2019-12-14/2913307-30.patch"
