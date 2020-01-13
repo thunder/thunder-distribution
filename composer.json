@@ -111,7 +111,7 @@
         "drupal/amptheme": "^1.1",
         "marc1706/fast-image-size": "^1.1.0",
         "oomphinc/composer-installers-extender": "^1.1",
-        "drupal/access_unpublished": "^1.0-alpha8",
+        "drupal/access_unpublished": "^1.0-beta1",
         "drupal/adsense": "1.x-dev",
         "drupal/admin_toolbar": "^2.0",
         "drupal/autosave_form": "1.x-dev",
