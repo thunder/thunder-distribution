@@ -100,7 +100,7 @@
             },
             "drupal/media_entity_twitter": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-10/3097669-9.patch"
-            },,
+            },
             "drupal/media_entity_instagram": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-10/3097666-20.patch"
             },
