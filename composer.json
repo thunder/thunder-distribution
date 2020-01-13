@@ -100,6 +100,12 @@
             },
             "drupal/media_entity_twitter": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-10/3097669-9.patch"
+            },,
+            "drupal/media_entity_instagram": {
+                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-10/3097666-20.patch"
+            },
+            "drupal/metatag": {
+                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-11/metatag-3042590-42.patch"
             }
         }
     },
@@ -144,7 +150,7 @@
         "drupal/media_entity_slideshow": "2.x-dev",
         "drupal/media_entity_twitter": "2.x-dev",
         "drupal/media_expire": "^2.2",
-        "drupal/metatag": "^1.11",
+        "drupal/metatag": "1.x-dev",
         "drupal/paragraphs": "1.x-dev",
         "drupal/paragraphs_features": "^1.7",
         "drupal/password_policy": "3.x-dev",
