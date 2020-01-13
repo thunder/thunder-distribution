@@ -12,6 +12,8 @@ fi
 cd ${THUNDER_DIST_DIR}
 composer create-project thunder/thunder-project:3.0.3 ${TEST_DIR} --stability dev --no-interaction --no-install
 
+cd ${TEST_DIR}
+
 if [[ ${TEST_UPDATE} == "true" ]]; then
     sed -i 's/docroot\/profiles\/contrib/docroot\/profiles/g' composer.json
 fi
