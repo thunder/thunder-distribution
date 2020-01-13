@@ -10,7 +10,7 @@ if [[ ${TEST_UPDATE} == "true" ]]; then
 fi
 
 cd ${THUNDER_DIST_DIR}
-composer create-project thunder/thunder-project:3.x ${TEST_DIR} --stability dev --no-interaction --no-install
+composer create-project thunder/thunder-project#1c5a6a04363fd3f540600c89e1d3a5f1aa7bd54a ${TEST_DIR} --stability dev --no-interaction --no-install
 
 cd ${TEST_DIR}
 
