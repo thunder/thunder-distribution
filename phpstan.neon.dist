@@ -16,6 +16,7 @@ parameters:
     - docroot/modules/contrib/typed_data/*
     - docroot/modules/contrib/feeds/*
     - docroot/modules/contrib/facets/*
+    - docroot/modules/contrib/adsense/oldcode/revenue_sharing_basic/*
   autoload_files:
     - docroot/modules/contrib/token/token.module
 includes:
