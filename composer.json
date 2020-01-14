@@ -105,6 +105,9 @@
             },
             "drupal/metatag": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-14/metatag-3042590-43.patch"
+            },
+            "drupal/token": {
+                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-11/token_deprecated-3042568-14.patch"
             }
         }
     },
@@ -165,7 +168,7 @@
         "drupal/slick": "^2.0",
         "drupal/slick_media": "^2.0-alpha2",
         "drupal/thunder_admin": "^3.0",
-        "drupal/token": "^1.6",
+        "drupal/token": "1.x-dev",
         "drupal/update_helper": "^1.0",
         "npm-asset/dropzone": "^5.5.1",
         "npm-asset/exif-js": "^2.3.0",
