@@ -88,9 +88,6 @@
                 "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-12-23/3089389-6.patch",
                 "Remove Drupal 8.8 deprecations, compatibility with Drupal 9": "https://www.drupal.org/files/issues/2020-01-04/redirect-8.8-3102143-3.patch"
             },
-            "drupal/simple_gmap": {
-                "Prepare Tests for upgrade": "https://www.drupal.org/files/issues/2019-12-14/2913307-30.patch"
-            },
             "drupal/pathauto": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-12-26/3042582-32.patch"
             },
