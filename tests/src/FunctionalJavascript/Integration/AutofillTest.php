@@ -47,12 +47,10 @@ class AutofillTest extends ThunderJavascriptTestBase {
       ->fieldValueEquals('field_seo_title[0][value]', 'My adjusted autofill test title');
 
     // If the autofilled field was manipulated once it should not be autofilled
-    // anymore. Manipulation is done by pressing backspace in the text field.
-    $this->drupalGet('node/add/article');
-    $autofill_field = $page->findField('field_seo_title[0][value]');
-    $autofill_field->keyPress(8);
-    $page->fillField('title[0][value]', 'My adjusted autofill test title');
-    $this->assertSession()->fieldValueEquals('field_seo_title[0][value]', '');
+    // anymore.
+    $page->fillField('field_seo_title[0][value]', 'Override seo title');
+    $page->fillField('title[0][value]', 'Change title');
+    $this->assertSession()->fieldValueEquals('field_seo_title[0][value]', 'Override seo title');
   }
 
 }
