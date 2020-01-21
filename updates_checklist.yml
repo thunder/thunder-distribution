@@ -18,3 +18,14 @@ v3.2:
         extension_page: { '#text': 'Extension page', '#url': 'internal:/admin/modules' }
         configure_page: { '#text': 'Autosave Form configuration', '#url': 'internal:/admin/config/content/autosave_form' }
         module_page: { '#text': 'Autosave Form module page', '#url': 'https://www.drupal.org/project/autosave_form' }
+v4.2:
+    '#title': 'Update to version v4.2'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_update_8304:
+        '#title': 'Enable "Autofill" module'
+        '#description': '<p>The "Autofill" module automatically fills the values from one textfield to another while typing.</p>'
+        '#description_successful': '<p>The "Autofill" module has been installed.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.<p>'
+        extension_page: { '#text': 'Extension page', '#url': 'internal:/admin/modules' }
+        configure_page: { '#text': 'Article form configuration', '#url': 'internal:/admin/structure/types/manage/article/form-display' }
+        module_page: { '#text': 'Autofill module page', '#url': 'https://www.drupal.org/project/autofill' }
