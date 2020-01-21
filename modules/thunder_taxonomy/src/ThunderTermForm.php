@@ -16,9 +16,6 @@ class ThunderTermForm extends TermForm {
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
 
-    // Hide status checkbox. We have the button.
-    $form['status']['#group'] = 'footer';
-
     // Create sidebar group.
     $form['advanced'] = [
       '#type' => 'container',

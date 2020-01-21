@@ -156,6 +156,12 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $node = $this->getNodeByTitle('Test workflow article');
 
     $this->drupalGet($node->toUrl('edit-form'));
+
+    $this->setModerationState('unpublished');
+    $this->getSession()->getPage()->find('xpath', '//*[@id="edit-preview"]')->click();
+    $this->clickLink('Back to content editing');
+    $this->assertSession()->pageTextNotContains('An illegal choice has been detected. Please contact the site administrator.');
+
     $this->setFieldValues($this->getSession()->getPage(), [
       'title[0][value]' => 'Test workflow article in draft',
       'field_seo_title[0][value]' => 'Massive gaining even more seo traffic text',
@@ -174,12 +180,12 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->assertPageTitle('Massive gaining even more and more seo traffic text');
 
-    /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_info */
-    $moderation_info = \Drupal::service('content_moderation.moderation_information');
+    /** @var \Drupal\node\NodeStorageInterface $node_storage */
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
 
     $revert_url = Url::fromRoute('node.revision_revert_default_confirm', [
       'node' => $node->id(),
-      'node_revision' => $moderation_info->getLatestRevisionId('node', $node->id()),
+      'node_revision' => $node_storage->getLatestRevisionId($node->id()),
     ]);
     $this->drupalPostForm($revert_url, [], $this->t('Revert'));
 

@@ -1,0 +1,13 @@
+__global_actions:
+  install_modules:
+    - autofill
+core.entity_form_display.node.article.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        field_seo_title:
+          third_party_settings:
+            autofill:
+              enabled: true
+              source_field: title
