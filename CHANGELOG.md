@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.4.2](https://github.com/thunder/thunder-distribution/tree/3.4.2) 2019-01-22
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.4.1...3.4.2)
+
+Adding the autofill feature to Thunder. Autofill can be configured to copy the input of one field into another field
+while typing. We use it to autofill the SEO title with the title value.
+
+- Add [Autofill SEO field with title values, when initially being empty](https://www.drupal.org/node/3061243)
+- Fix [Add missing modules in update dependencies](https://www.drupal.org/node/3102123)
+- Fix [Metatag test fails with 1.11 release](https://www.drupal.org/node/3104801)
+- Do [Update redirect module](https://www.drupal.org/node/3104813)
+
 ## [3.4.1](https://github.com/thunder/thunder-distribution/tree/3.4.1) 2019-12-19
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.4.0...3.4.1)
 
