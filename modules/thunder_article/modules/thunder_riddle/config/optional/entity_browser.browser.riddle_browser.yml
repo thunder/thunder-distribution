@@ -3,6 +3,9 @@ status: true
 dependencies:
   config:
     - views.view.entity_browser
+  enforced:
+    module:
+      - thunder_riddle
   module:
     - views
 name: riddle_browser

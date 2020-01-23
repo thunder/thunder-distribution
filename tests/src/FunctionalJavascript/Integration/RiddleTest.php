@@ -39,6 +39,7 @@ class RiddleTest extends ThunderJavascriptTestBase {
 
       return;
     }
+    $this->rebuildAll();
 
     $this->logWithRole('administrator');
 

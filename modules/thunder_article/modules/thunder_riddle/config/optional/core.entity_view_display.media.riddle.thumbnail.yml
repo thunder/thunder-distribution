@@ -6,6 +6,9 @@ dependencies:
     - field.field.media.riddle.field_riddle_id
     - image.style.media_thumbnail
     - media.type.riddle
+  enforced:
+    module:
+      - thunder_riddle
   module:
     - image
 id: media.riddle.thumbnail

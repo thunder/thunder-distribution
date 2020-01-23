@@ -1,6 +1,9 @@
 langcode: en
 status: true
 dependencies:
+  enforced:
+    module:
+      - thunder_riddle
   module:
     - media_riddle_marketplace
 id: riddle

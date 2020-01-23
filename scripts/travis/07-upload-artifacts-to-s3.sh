@@ -5,6 +5,9 @@
 # Package database
 gzip < "${DEPLOYMENT_DUMP_FILE}" > "${DB_ARTIFACT_FILE}"
 
+# Workaround for https://www.drupal.org/project/drupal/issues/3091285
+chmod -R +w "${TEST_DIR}/docroot/sites/default"
+
 # Include performance measurement module in artifact
 cd "${TEST_DIR}"
 composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/media_entity_generic:^1.0" --no-interaction --update-no-dev
