@@ -57,6 +57,9 @@
             ]
         },
         "patches": {
+            "drupal/core": {
+                "ContentEntityStorageBase::loadRevision() should use the static and the persistent entity cache like ContentEntityStorageBase::load()": "https://www.drupal.org/files/issues/2019-12-09/2620980-151.patch"
+            },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
@@ -95,7 +98,7 @@
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0-rc3",
         "drupal/checklistapi": "^1.8",
-        "drupal/core": "~8.8.1",
+        "drupal/core": "8.8.1",
         "drupal/config_selector": "^2.0",
         "drupal/config_update": "^1.5",
         "drupal/content_lock": "^2.0",
