@@ -1,5 +1,0 @@
-name: 'Paragraphs Paste'
-type: module
-description: 'Creates paragraphs from pasted content.'
-package: Paragraphs
-core: 8.x

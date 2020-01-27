@@ -1,4 +1,0 @@
-services:
-  plugin.manager.paragraphs_paste.plugin:
-    class: Drupal\paragraphs_paste\ParagraphsPastePluginManager
-    parent: default_plugin_manager
