@@ -1,0 +1,86 @@
+name: Run distribution tests
+
+on:
+  pull_request:
+    branches:
+      - 8.x-[1-9]+.x
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        DRUPAL_TRAVIS_DRUPAL_VERSION: ['~8.8.0']
+        DRUPAL_TRAVIS_TEST_DEPRECATION: ['false']
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
+    - uses: shivammathur/setup-php@master
+      with:
+        coverage: none
+        php-version: '7.3'
+
+    - name: Cache composer dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.composer/cache
+        key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
+        restore-keys: ${{ runner.os }}-composer-cache-
+
+    - name: Cache NPM dependencies
+      id: npm-cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-npm-cache
+        restore-keys: ${{ runner.os }}-npm-cache
+
+    - name: Setup environment variables
+      run: |
+        echo "::add-path::$HOME/.composer/vendor/bin"
+
+    - name: Get build environment
+      run: composer global require thunder/travis:dev-improve/thunder-testing
+
+    - name: Check PHP coding styles
+      run: test-drupal-project coding_style
+      env:
+        DRUPAL_TRAVIS_TEST_CODING_STYLES: false
+
+    - name: Setup the environment
+      run: test-drupal-project setup
+      env:
+        DRUPAL_TRAVIS_USE_SELENIUM: true
+
+    - name: Prepare the build
+      run: test-drupal-project prepare_build
+      env:
+        DRUPAL_TRAVIS_DRUPAL_VERSION: ${{ matrix.DRUPAL_TRAVIS_DRUPAL_VERSION }}
+
+    - name: Build the docroot
+      run: test-drupal-project build
+
+    - name: Test for deprecations
+      run: test-drupal-project deprecation
+      env:
+        DRUPAL_TRAVIS_TEST_DEPRECATION: ${{ matrix.DRUPAL_TRAVIS_TEST_DEPRECATION }}
+
+    - name: Install drupal
+      run: test-drupal-project install
+      env:
+        DRUPAL_TRAVIS_TEST_PROFILE: thunder
+        DRUPAL_TRAVIS_TEST_DUMP_FILE: dump.sql
+
+    - name: Start webserver and run the tests
+      run: test-drupal-project
+      env:
+        DRUPAL_TRAVIS_TEST_DUMP_FILE: dump.sql
