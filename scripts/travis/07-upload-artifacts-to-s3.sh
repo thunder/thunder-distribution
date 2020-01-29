@@ -12,6 +12,10 @@ chmod -R +w "${TEST_DIR}/docroot/sites/default"
 cd "${TEST_DIR}"
 composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/media_entity_generic:^1.0" --no-interaction --update-no-dev
 
+# Apply patches important for testsite_builder
+cd "${TEST_DIR}/docroot" || exit
+curl --silent "https://www.drupal.org/files/issues/2020-01-29/3109767_2.patch" | patch -p1
+
 # Cleanup project
 cd "${TEST_DIR}"
 composer install --no-dev
