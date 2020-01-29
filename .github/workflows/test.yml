@@ -79,7 +79,9 @@ jobs:
       run: test-drupal-project install
       env:
         DRUPAL_TRAVIS_TEST_PROFILE: thunder
-        DRUPAL_TRAVIS_TEST_DUMP_FILE: dump.sql
+
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v1
 
     - name: Start webserver and run the tests
       run: test-drupal-project
