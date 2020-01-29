@@ -48,6 +48,10 @@ jobs:
       run: |
         echo "::add-path::$HOME/.composer/vendor/bin"
         echo '::set-env name=DRUPAL_TRAVIS_COMPOSER_PROJECT::thunder/thunder-project'
+        echo '::set-env name=TRAVIS::true'
+        echo '::set-env name=DRUPAL_TRAVIS_DATABASE_USER::root'
+        echo '::set-env name=DRUPAL_TRAVIS_DATABASE_PASSWORD::root'
+        echo '::set-env name=DRUPAL_TRAVIS_TEST_DUMP_FILE::dump.sql'
 
     - name: Get build environment
       run: composer global require thunder/travis:dev-improve/thunder-testing
@@ -59,8 +63,6 @@ jobs:
 
     - name: Setup the environment
       run: test-drupal-project setup
-      env:
-        DRUPAL_TRAVIS_USE_SELENIUM: true
 
     - name: Prepare the build
       run: test-drupal-project prepare_build
@@ -85,5 +87,3 @@ jobs:
 
     - name: Start webserver and run the tests
       run: test-drupal-project
-      env:
-        DRUPAL_TRAVIS_TEST_DUMP_FILE: dump.sql
