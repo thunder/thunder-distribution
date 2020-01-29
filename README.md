@@ -37,7 +37,7 @@ Using open source technology reduces development costs and resources and makes y
 For general help using Thunder, please refer to [the official Thunder documentation](https://thunder.github.io/thunder-documentation).
 
 ### Community support
-For additional help, you can use one of this channel to ask question:
+For additional help, you can use one of these channels to ask questions:
 
 * [Slack](https://thunder.org/contact-us) (highly recommended for faster support)
 * [Twitter](https://twitter.com/ThunderCoreTeam)
