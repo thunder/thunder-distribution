@@ -48,7 +48,6 @@ jobs:
       run: |
         echo "::add-path::$HOME/.composer/vendor/bin"
         echo '::set-env name=DRUPAL_TRAVIS_COMPOSER_PROJECT::thunder/thunder-project'
-        echo '::set-env name=TRAVIS::true'
         echo '::set-env name=DRUPAL_TRAVIS_DATABASE_USER::root'
         echo '::set-env name=DRUPAL_TRAVIS_DATABASE_PASSWORD::root'
         echo '::set-env name=DRUPAL_TRAVIS_TEST_DUMP_FILE::dump.sql'
@@ -78,9 +77,9 @@ jobs:
         DRUPAL_TRAVIS_TEST_DEPRECATION: ${{ matrix.DRUPAL_TRAVIS_TEST_DEPRECATION }}
 
     - name: Install drupal
-      run: test-drupal-project install
+      run: test-drupal-project -v install
       env:
         DRUPAL_TRAVIS_TEST_PROFILE: thunder
 
     - name: Start webserver and run the tests
-      run: test-drupal-project
+      run: test-drupal-project -v
