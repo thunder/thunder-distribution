@@ -47,6 +47,7 @@ jobs:
     - name: Setup environment variables
       run: |
         echo "::add-path::$HOME/.composer/vendor/bin"
+        echo '::set-env name=DRUPAL_TRAVIS_COMPOSER_PROJECT::thunder/thunder-project'
 
     - name: Get build environment
       run: composer global require thunder/travis:dev-improve/thunder-testing
