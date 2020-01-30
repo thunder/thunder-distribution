@@ -81,7 +81,7 @@ jobs:
         DRUPAL_TRAVIS_TEST_DEPRECATION: ${{ matrix.DRUPAL_TRAVIS_TEST_DEPRECATION }}
 
     - name: Install drupal
-      run: test-drupal-project -v install
+      run: test-drupal-project install
       env:
         DRUPAL_TRAVIS_TEST_PROFILE: thunder
         DRUPAL_TRAVIS_INSTALLATION_FORM_VALUES: "install_configure_form.enable_update_status_module=NULL thunder_module_configure_form.install_modules_thunder_demo=NULL"
@@ -94,7 +94,7 @@ jobs:
 #     uses: mxschmitt/action-tmate@v1
 
     - name: Run the tests
-      run: test-drupal-project -v run_tests
+      run: test-drupal-project run_tests
       env:
         DRUPAL_TRAVIS_TEST_GROUP: Thunder
         PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
