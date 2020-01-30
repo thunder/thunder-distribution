@@ -96,4 +96,4 @@ jobs:
         DRUPAL_TRAVIS_TEST_GROUP: Thunder
         PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
         RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
-        DRUPAL_TRAVIS_TEST_FILTER: ContentListTest
+        DRUPAL_TRAVIS_TEST_FILTER: RedirectTest
