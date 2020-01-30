@@ -85,8 +85,9 @@ jobs:
     - name: Start webserver
       run: test-drupal-project start_web_server
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v1
+#   Start a debug session.
+#   - name: Setup tmate session
+#     uses: mxschmitt/action-tmate@v1
 
     - name: Run the tests
       run: test-drupal-project -v run_tests
