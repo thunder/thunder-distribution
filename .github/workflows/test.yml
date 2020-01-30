@@ -81,6 +81,7 @@ jobs:
       run: test-drupal-project -v install
       env:
         DRUPAL_TRAVIS_TEST_PROFILE: thunder
+        DRUPAL_TRAVIS_INSTALLATION_FORM_VALUES: "install_configure_form.enable_update_status_module=NULL thunder_module_configure_form.install_modules_thunder_demo=NULL"
 
     - name: Start webserver
       run: test-drupal-project start_web_server
