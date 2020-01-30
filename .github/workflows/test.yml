@@ -83,3 +83,5 @@ jobs:
 
     - name: Start webserver and run the tests
       run: test-drupal-project -v
+      env:
+        DRUPAL_TRAVIS_TEST_GROUP: Thunder
