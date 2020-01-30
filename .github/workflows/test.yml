@@ -54,7 +54,7 @@ jobs:
         echo '::set-env name=DRUPAL_TRAVIS_TEST_DUMP_FILE::dump.sql'
 
     - name: Get build environment
-      run: composer global require thunder/travis:dev-improve/thunder-testing
+      run: composer global require thunder/travis
 
     - name: Check PHP coding styles
       run: test-drupal-project coding_style
@@ -68,6 +68,9 @@ jobs:
       run: test-drupal-project prepare_build
       env:
         DRUPAL_TRAVIS_DRUPAL_VERSION: ${{ matrix.DRUPAL_TRAVIS_DRUPAL_VERSION }}
+
+    - name: Install suggested dependencies
+      run: composer require "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
     - name: Build the docroot
       run: test-drupal-project build
