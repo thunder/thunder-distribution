@@ -20,6 +20,17 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
   use ThunderAwsTestFixtureTrait;
 
   /**
+   * {@inheritdoc}
+   */
+  protected function setUp() {
+    parent::setUp();
+
+    // Remove fb_instant_articles 1.x broken config..
+    $configFactory = \Drupal::configFactory();
+    $configFactory->getEditable('views.view.fb_instant_articles')->delete();
+  }
+
+  /**
    * An array of config to skip schema checking on.
    *
    * @var array
