@@ -47,14 +47,14 @@ jobs:
     - name: Setup environment variables
       run: |
         echo "::add-path::$HOME/.composer/vendor/bin"
-        echo '::set-env name=DRUPAL_TESTING_COMPOSER_PROJECT::thunder/thunder-project:dev-remove-core-recommended'
+        echo '::set-env name=DRUPAL_TESTING_COMPOSER_PROJECT::thunder/thunder-project'
         echo '::set-env name=DRUPAL_TESTING_DATABASE_USER::root'
         echo '::set-env name=DRUPAL_TESTING_DATABASE_PASSWORD::root'
         echo '::set-env name=DRUPAL_TESTING_TEST_DUMP_FILE::dump.sql'
         echo '::set-env name=DRUPAL_TESTING_DATABASE_ENGINE::mysql'
 
     - name: Get build environment
-      run: composer global require thunder/drupal-testing:dev-fix/repository-order
+      run: composer global require thunder/drupal-testing:dev-fix/3-make-project-dir-available-in-docker
 
     - name: Check PHP coding styles
       run: test-drupal-project coding_style
