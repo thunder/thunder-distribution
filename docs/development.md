@@ -46,7 +46,7 @@ Thunder distribution comes with a set of drupal tests. They can be used to valid
 #### How to run the tests
 In order to execute tests, following steps have to be executed.
 
-Enable the Simpletest module. Over administration UI or by drush.
+Enable the Simpletest module via the administration UI or by using a drush command.
 
 ```bash
 drush -y en simpletest
