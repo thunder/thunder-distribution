@@ -26,8 +26,7 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
     parent::setUp();
 
     // Remove fb_instant_articles 1.x broken config..
-    $configFactory = \Drupal::configFactory();
-    $configFactory->getEditable('views.view.fb_instant_articles')->delete();
+    $this->config('views.view.fb_instant_articles')->delete();
   }
 
   /**
