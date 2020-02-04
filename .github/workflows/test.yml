@@ -97,3 +97,4 @@ jobs:
         DRUPAL_TESTING_TEST_GROUP: Thunder
         PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
         RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
+        DRUPAL_TESTING_TEST_FILTER: MediaGalleryModifyTest
