@@ -55,7 +55,7 @@ jobs:
         echo '::set-env name=DRUPAL_TESTING_DATABASE_ENGINE::mysql'
 
     - name: Get build environment
-      run: composer global require thunder/drupal-testing:dev-fix/3-make-project-dir-available-in-docker
+      run: composer global require thunder/drupal-testing:dev-fix/repository-order
 
     - name: Check PHP coding styles
       run: test-drupal-project coding_style
