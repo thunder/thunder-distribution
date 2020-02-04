@@ -12,10 +12,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        DRUPAL_TESTING_TEST_DEPRECATION: ['false']
-
     steps:
     - uses: actions/checkout@v1
 
@@ -54,7 +50,7 @@ jobs:
         echo '::set-env name=DRUPAL_TESTING_DATABASE_ENGINE::mysql'
 
     - name: Get build environment
-      run: composer global require thunder/drupal-testing:dev-fix/3-make-project-dir-available-in-docker
+      run: composer global require thunder/drupal-testing:dev-master
 
     - name: Check PHP coding styles
       run: test-drupal-project coding_style
@@ -62,7 +58,7 @@ jobs:
         DRUPAL_TESTING_TEST_CODING_STYLES: false
 
     - name: Setup the environment
-      run: test-drupal-project -v setup
+      run: test-drupal-project setup
 
     - name: Prepare the build
       run: test-drupal-project prepare_build
@@ -75,8 +71,7 @@ jobs:
 
     - name: Test for deprecations
       run: test-drupal-project deprecation
-      env:
-        DRUPAL_TESTING_TEST_DEPRECATION: ${{ matrix.DRUPAL_TESTING_TEST_DEPRECATION }}
+      continue-on-error: true
 
     - name: Install drupal
       run: test-drupal-project install
@@ -97,4 +92,3 @@ jobs:
         DRUPAL_TESTING_TEST_GROUP: Thunder
         PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
         RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
-        DRUPAL_TESTING_TEST_FILTER: MediaGalleryModifyTest
