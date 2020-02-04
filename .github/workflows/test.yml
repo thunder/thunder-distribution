@@ -14,8 +14,8 @@ jobs:
 
     strategy:
       matrix:
-        DRUPAL_TRAVIS_DRUPAL_VERSION: ['~8.8.0']
-        DRUPAL_TRAVIS_TEST_DEPRECATION: ['false']
+        DRUPAL_TESTING_DRUPAL_VERSION: ['~8.8.0']
+        DRUPAL_TESTING_TEST_DEPRECATION: ['false']
 
     steps:
     - uses: actions/checkout@v1
@@ -48,18 +48,18 @@ jobs:
     - name: Setup environment variables
       run: |
         echo "::add-path::$HOME/.composer/vendor/bin"
-        echo '::set-env name=DRUPAL_TRAVIS_COMPOSER_PROJECT::thunder/thunder-project'
-        echo '::set-env name=DRUPAL_TRAVIS_DATABASE_USER::root'
-        echo '::set-env name=DRUPAL_TRAVIS_DATABASE_PASSWORD::root'
-        echo '::set-env name=DRUPAL_TRAVIS_TEST_DUMP_FILE::dump.sql'
+        echo '::set-env name=DRUPAL_TESTING_COMPOSER_PROJECT::thunder/thunder-project'
+        echo '::set-env name=DRUPAL_TESTING_DATABASE_USER::root'
+        echo '::set-env name=DRUPAL_TESTING_DATABASE_PASSWORD::root'
+        echo '::set-env name=DRUPAL_TESTING_TEST_DUMP_FILE::dump.sql'
 
     - name: Get build environment
-      run: composer global require thunder/travis
+      run: composer global require thunder/drupal-testing:fix/#3-make-project-dir-available-in-docker
 
     - name: Check PHP coding styles
       run: test-drupal-project coding_style
       env:
-        DRUPAL_TRAVIS_TEST_CODING_STYLES: false
+        DRUPAL_TESTING_TEST_CODING_STYLES: false
 
     - name: Setup the environment
       run: test-drupal-project setup
@@ -67,7 +67,7 @@ jobs:
     - name: Prepare the build
       run: test-drupal-project prepare_build
       env:
-        DRUPAL_TRAVIS_DRUPAL_VERSION: ${{ matrix.DRUPAL_TRAVIS_DRUPAL_VERSION }}
+        DRUPAL_TESTING_DRUPAL_VERSION: ${{ matrix.DRUPAL_TESTING_DRUPAL_VERSION }}
 
     - name: Install suggested dependencies
       run: composer require "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
@@ -78,13 +78,13 @@ jobs:
     - name: Test for deprecations
       run: test-drupal-project deprecation
       env:
-        DRUPAL_TRAVIS_TEST_DEPRECATION: ${{ matrix.DRUPAL_TRAVIS_TEST_DEPRECATION }}
+        DRUPAL_TESTING_TEST_DEPRECATION: ${{ matrix.DRUPAL_TESTING_TEST_DEPRECATION }}
 
     - name: Install drupal
       run: test-drupal-project install
       env:
-        DRUPAL_TRAVIS_TEST_PROFILE: thunder
-        DRUPAL_TRAVIS_INSTALLATION_FORM_VALUES: "install_configure_form.enable_update_status_module=NULL thunder_module_configure_form.install_modules_thunder_demo=NULL"
+        DRUPAL_TESTING_TEST_PROFILE: thunder
+        DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "install_configure_form.enable_update_status_module=NULL thunder_module_configure_form.install_modules_thunder_demo=NULL"
 
     - name: Start webserver
       run: test-drupal-project start_web_server
@@ -96,6 +96,6 @@ jobs:
     - name: Run the tests
       run: test-drupal-project run_tests
       env:
-        DRUPAL_TRAVIS_TEST_GROUP: Thunder
+        DRUPAL_TESTING_TEST_GROUP: Thunder
         PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
         RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
