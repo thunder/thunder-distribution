@@ -14,7 +14,6 @@ jobs:
 
     strategy:
       matrix:
-        DRUPAL_TESTING_DRUPAL_VERSION: ['~8.8.0']
         DRUPAL_TESTING_TEST_DEPRECATION: ['false']
 
     steps:
@@ -67,15 +66,9 @@ jobs:
 
     - name: Prepare the build
       run: test-drupal-project prepare_build
-      env:
-        DRUPAL_TESTING_DRUPAL_VERSION: ${{ matrix.DRUPAL_TESTING_DRUPAL_VERSION }}
 
     - name: Install suggested dependencies
       run: composer require "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
-
-      #   Start a debug session.
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v1
 
     - name: Build the docroot
       run: test-drupal-project build
