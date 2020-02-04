@@ -52,6 +52,7 @@ jobs:
         echo '::set-env name=DRUPAL_TESTING_DATABASE_USER::root'
         echo '::set-env name=DRUPAL_TESTING_DATABASE_PASSWORD::root'
         echo '::set-env name=DRUPAL_TESTING_TEST_DUMP_FILE::dump.sql'
+        echo '::set-env name=DRUPAL_TESTING_DATABASE_ENGINE::mysql'
 
     - name: Get build environment
       run: composer global require thunder/drupal-testing:dev-fix/3-make-project-dir-available-in-docker
