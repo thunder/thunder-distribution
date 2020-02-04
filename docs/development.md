@@ -44,7 +44,7 @@ folder
 Thunder distribution comes with a set of drupal tests. They can be used to validate Thunder installation or to use provided traits for your own project drupal tests.
 
 #### How to run the tests
-In order to execute tests, execute the following steps.
+In order to execute tests follow these steps.
 
 Enable the Simpletest module via the administration UI or by using a drush command.
 
