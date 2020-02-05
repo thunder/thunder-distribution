@@ -25,7 +25,7 @@ files that are shipped in the distribution should be:
   ```
   drush en config_profile
   ```
-* Make all your changes in the UI
+* Apply all your changes in the UI
 * Export your configuration
   ```
   drush cex
