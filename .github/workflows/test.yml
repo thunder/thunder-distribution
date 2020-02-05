@@ -12,6 +12,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        DRUPAL_TESTING_DRUPAL_VERSION: ['8.8.1', '8.8.2']
+
     steps:
     - uses: actions/checkout@v1
 
@@ -50,7 +54,7 @@ jobs:
         echo '::set-env name=DRUPAL_TESTING_DATABASE_ENGINE::mysql'
 
     - name: Get build environment
-      run: composer global require thunder/drupal-testing:dev-fix/phpstan
+      run: composer global require thunder/drupal-testing:dev-fix/core-requirement
 
     - name: Check PHP coding styles
       run: test-drupal-project coding_style
@@ -62,6 +66,8 @@ jobs:
 
     - name: Prepare the build
       run: test-drupal-project prepare_build
+      env:
+        DRUPAL_TESTING_DRUPAL_VERSION: ${{ matrix.DRUPAL_TESTING_DRUPAL_VERSION }}
 
     - name: Install suggested dependencies
       run: composer require "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
