@@ -101,7 +101,7 @@
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-10/3097666-20.patch"
             },
             "drupal/metatag": {
-                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-17/metatag-3042590-44.patch"
+                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-02-10/3042590-45.patch"
             },
             "drupal/token": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-11/token_deprecated-3042568-14.patch"
