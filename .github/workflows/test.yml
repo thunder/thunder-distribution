@@ -50,7 +50,7 @@ jobs:
         echo '::set-env name=DRUPAL_TESTING_DATABASE_ENGINE::mysql'
 
     - name: Get build environment
-      run: composer global require thunder/drupal-testing:dev-master
+      run: composer global require thunder/drupal-testing:dev-fix/stable-project
 
     - name: Check PHP coding styles
       run: test-drupal-project coding_style
