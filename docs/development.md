@@ -25,7 +25,7 @@ files that are shipped in the distribution should be:
   ```
   drush en config_profile
   ```
-* Make all your changes in the UI
+* Apply all your changes in the UI
 * Export your configuration
   ```
   drush cex
@@ -44,9 +44,9 @@ folder
 Thunder distribution comes with a set of drupal tests. They can be used to validate Thunder installation or to use provided traits for your own project drupal tests.
 
 #### How to run the tests
-In order to execute tests, following steps have to be executed.
+In order to execute tests follow these steps.
 
-Enable the Simpletest module. Over administration UI or by drush.
+Enable the Simpletest module via the administration UI or by using a drush command.
 
 ```bash
 drush -y en simpletest
@@ -96,7 +96,7 @@ thunderDumpFile=thunder.sql.gz php ./core/scripts/run-tests.sh --php '/usr/local
 --verbose --url http://thunder.dd:8083 --dburl mysql://drupaluser@127.0.0.1:33067/thunder --class "Drupal\Tests\thunder\Functional\InstalledConfigurationTest"
 ```
 
-This is just an example. For better explanation see [Running PHPUnit tests](https://www.drupal.org/docs/8/phpunit/running-phpunit-tests)
+This is just an example. For a better explanation see [Running PHPUnit tests](https://www.drupal.org/docs/8/phpunit/running-phpunit-tests)
 
 Sometimes tests are executed inside docker container where selenium is running inside other containers and it's not possible to access it over localhost.
 Or there are cases when two separated containers are running on the same machine but on different ports (for example Chrome and Firefox selenium containers).
