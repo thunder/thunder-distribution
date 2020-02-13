@@ -21,21 +21,39 @@ module.exports = {
         "Filtering of content overview",
         `.${process.env.THUNDER_SITE_HOSTNAME}`
       )
+      .performance.startMark("full task")
+      .performance.startMark("login")
       .drupalLogin({ name: "test-admin", password: "test-admin" })
-      .useXpath()
+      // end "login"
+      .performance.endMark()
       .performance.startMark("Open content overview page")
-      .drupalRelativeURL("/admin/content")
-      .waitForElementVisible(
-        '//*[@id="block-thunder-admin-content"]/table/tbody/tr[1]',
-        1000
+      .drupalRelativeURL("/admin/content_bundle_0")
+      .useXpath()
+      .moveToElement(
+        '//*[@id="block-thunder-admin-content"]/div/div/nav/ul/li[1]',
+        10,
+        10
       )
+      .waitForElementPresent(
+        '//*[@id="views-form-content-bundle-0-page-1"]/table[2]/tbody/tr[1]'
+      )
+      // end "Open content overview page"
+      .performance.endMark()
+      .performance.startMark("Filter by type")
+      .setValue('//*[@id="edit-type"]', "bundle_6")
+      .click('//*[@id="edit-submit-content-bundle-0"]')
+      .pause(10000)
+      .moveToElement(
+        '//*[@id="block-thunder-admin-content"]/div/div/nav/ul/li[1]',
+        10,
+        10
+      )
+      .waitForElementPresent(
+        '//*[@id="views-form-content-bundle-0-page-1"]/table[2]/tbody/tr[1]'
+      )
+      // end "Filter by type"
+      .performance.endMark()
       .performance.endMark();
-
-    // TODO - measure time for content overview loading
-    // 1. Start performance mark
-    // 2. Open content overview page
-    // 3. Wait for specific element to be visible, so that we know, loading has finished
-    // 4. End performance mark
 
     // End measurement transaction for whole test.
     browser.performance.endMeasurement();
