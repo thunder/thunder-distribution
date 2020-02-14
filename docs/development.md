@@ -25,7 +25,7 @@ files that are shipped in the distribution should be:
   ```
   drush en config_profile
   ```
-* Make all your changes in the UI
+* Apply all your changes in the UI
 * Export your configuration
   ```
   drush cex
@@ -44,9 +44,9 @@ folder
 Thunder distribution comes with a set of drupal tests. They can be used to validate Thunder installation or to use provided traits for your own project drupal tests.
 
 #### How to run the tests
-In order to execute tests, following steps have to be executed.
+In order to execute tests follow these steps.
 
-Enable the Simpletest module. Over administration UI or by drush.
+Enable the Simpletest module via the administration UI or by using a drush command.
 
 ```bash
 drush -y en simpletest
@@ -96,7 +96,7 @@ thunderDumpFile=thunder.sql.gz php ./core/scripts/run-tests.sh --php '/usr/local
 --verbose --url http://thunder.dd:8083 --dburl mysql://drupaluser@127.0.0.1:33067/thunder --class "Drupal\Tests\thunder\Functional\InstalledConfigurationTest"
 ```
 
-This is just an example. For better explanation see [Running PHPUnit tests](https://www.drupal.org/docs/8/phpunit/running-phpunit-tests)
+This is just an example. For a better explanation see [Running PHPUnit tests](https://www.drupal.org/docs/8/phpunit/running-phpunit-tests)
 
 Sometimes tests are executed inside docker container where selenium is running inside other containers and it's not possible to access it over localhost.
 Or there are cases when two separated containers are running on the same machine but on different ports (for example Chrome and Firefox selenium containers).
@@ -111,7 +111,7 @@ That information will be picked up by testing classes and used for selenium endp
 1. You need to install [Yarn](https://yarnpkg.com). Please check installation documentation for it.
 2. You have to install `thunder/thunder_performance_measurement` package. To do that, execute the following command in your project root directory: `composer require thunder/thunder_performance_measurement:dev-master --dev` and enable module by executing: `drush en thunder_performance_measurement` in your `docroot` directory.
 3. You need to install [Elastic APM Node.js Agent](https://www.npmjs.com/package/elastic-apm-node) in Drupal Core node packages. To do that go to your `docroot/core` directory and execute following command: `yarn add elastic-apm-node --dev`
-4. You have to adjust your `.env` file inside `docroot/core` directory. You can copy the `.env.example` to `.env` and edit it accordingly. Thunder tests require the following environment variables: `DRUPAL_TEST_BASE_URL`, `THUNDER_BRANCH`, `THUNDER_SITE_HOSTNAME` and `THUNDER_APM_URL`. The `THUNDER_BRANCH` is branch name where tests are executing, for example, `8.x-3.x`. The `THUNDER_SITE_HOSTNAME` is hostname where tests are executing, for example `thunder.dev`. The `THUNDER_APM_URL` is URL to Elastic APM Server, for example `http://localhost:8200`.
+4. You have to adjust your `.env` file inside `docroot/core` directory. You can copy the `.env.example` to `.env` and edit it accordingly. Thunder tests require the following environment variables: `DRUPAL_TEST_BASE_URL`, `THUNDER_BRANCH`, `THUNDER_SITE_HOSTNAME` and `THUNDER_APM_URL`. The `THUNDER_BRANCH` is branch name where tests are executing, for example, `8.x-4.x`. The `THUNDER_SITE_HOSTNAME` is hostname where tests are executing, for example `thunder.dev`. The `THUNDER_APM_URL` is URL to Elastic APM Server, for example `http://localhost:8200`.
 5. After that, you can run NightwatchJS tests by executing the following command inside `docroot/core` directory: `yarn test:nightwatch <path to JS Test file>`. Here is an example: `yarn test:nightwatch ../profiles/contrib/thunder/tests/src/Nightwatch/Tests/CreateMostUsedContent.js`
 
 **If you have problem with outdated chromedriver**
