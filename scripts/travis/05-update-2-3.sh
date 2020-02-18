@@ -1,14 +1,22 @@
 #!/usr/bin/env bash
 
+# Update paragraphs to version 1.7 first.
+cd ${TEST_DIR}
+composer require drupal/paragraphs:1.7 --no-update
+composer update
+cd ${TEST_DIR}/docroot
+drush updb -y
+# Remove paragraphs dependency.
+cd ${TEST_DIR}
+composer remove drupal/paragraphs --no-update
+composer update
+
 # Update to the latest version of thunder.
 cd ${TEST_DIR}
 composer require burdamagazinorg/thunder:~8.2.51 --no-update
 composer update
 
 cd ${TEST_DIR}/docroot
-
-echo "function paragraphs_update_dependencies() { \$dependencies['paragraphs'][8013]['system'] = 8501; return \$dependencies;}" >> modules/contrib/paragraphs/paragraphs.install
-
 drush updb -y
 
 cd ${TEST_DIR}
