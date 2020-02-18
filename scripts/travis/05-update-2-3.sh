@@ -2,6 +2,11 @@
 
 # Update paragraphs to version 1.9 first.
 cd ${TEST_DIR}
+composer require drupal/paragraphs:1.3 --no-update
+composer update
+cd ${TEST_DIR}/docroot
+drush updb -y
+cd ${TEST_DIR}
 composer require drupal/paragraphs:1.9 --no-update
 composer update
 cd ${TEST_DIR}/docroot
