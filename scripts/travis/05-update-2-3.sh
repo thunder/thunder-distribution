@@ -6,6 +6,9 @@ composer require burdamagazinorg/thunder:~8.2.51 --no-update
 composer update
 
 cd ${TEST_DIR}/docroot
+
+echo "function paragraphs_update_dependencies() { \$dependencies['paragraphs'][8013]['system'] = 8501; return \$dependencies;}" >> modules/contrib/paragraphs/paragraphs.install
+
 drush updb -y
 
 cd ${TEST_DIR}
