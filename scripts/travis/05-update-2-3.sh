@@ -2,7 +2,7 @@
 
 # Update paragraphs to version 1.9 first.
 cd ${TEST_DIR}
-composer require drupal/paragraphs:1.3 --no-update
+composer require drupal/paragraphs:1.3 drupal/core:~8.7.0 --no-update
 composer update
 cd ${TEST_DIR}/docroot
 drush updb -y
@@ -28,7 +28,7 @@ cd ${TEST_DIR}
 composer config repositories.thunder path ${THUNDER_DIST_DIR}
 
 composer remove burdamagazinorg/thunder
-composer require "thunder/thunder-distribution:*" --no-update
+composer require "thunder/thunder-distribution:*" drupal/core:~8.8.0 --no-update
 
 composer update
 
