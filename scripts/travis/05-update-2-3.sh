@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+# Update paragraphs to version 1.10 first.
+cd ${TEST_DIR}
+composer require drupal/paragraphs:1.10 --no-update
+composer update
+cd ${TEST_DIR}/docroot
+drush updb -y
+# Remove paragraphs dependency.
+cd ${TEST_DIR}
+composer remove drupal/paragraphs --no-update
+composer update
+
 # Update to the latest version of thunder.
 cd ${TEST_DIR}
 composer require burdamagazinorg/thunder:~8.2.51 --no-update
@@ -12,7 +23,7 @@ cd ${TEST_DIR}
 composer config repositories.thunder path ${THUNDER_DIST_DIR}
 
 composer remove burdamagazinorg/thunder
-composer require "thunder/thunder-distribution:*" --no-update
+composer require "thunder/thunder-distribution:*" drupal/core:~8.8.0 --no-update
 
 composer update
 
