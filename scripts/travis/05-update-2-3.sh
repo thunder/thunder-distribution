@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Update paragraphs to version 1.9 first.
+# Update paragraphs to version 1.10 first.
 cd ${TEST_DIR}
-composer require drupal/paragraphs:1.9 drupal/core:~8.7.0 --no-update
+composer require drupal/paragraphs:1.10 drupal/core:~8.7.0 --no-update
 composer update
 cd ${TEST_DIR}/docroot
 drush updb -y
