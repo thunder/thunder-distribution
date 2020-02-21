@@ -39,7 +39,9 @@ exports.command = function add(fieldName, type, position) {
     .click(
       `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${addButtonPosition}]//input`
     )
-    .click(`//*[@name="${fieldName}_${type}_add_more"]`)
+    .click(
+      `//div[contains(@class, "ui-dialog-content")]/*[contains(@class, "paragraphs-add-dialog-list")]//*[@name="${fieldName}_${type}_add_more"]`
+    )
     .waitForElementVisible(
       `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${addButtonPosition +
         1}]//div[contains(@class, "ajax-new-content")]`,
