@@ -115,6 +115,7 @@ content:
         add_in_between: true
         split_text: true
         delete_confirmation: true
+        show_drag_and_drop: false
     region: content
   field_seo_title:
     type: string_textfield
