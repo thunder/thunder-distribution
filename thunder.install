@@ -160,7 +160,7 @@ function thunder_update_8304() {
 }
 
 /**
- * Disable paragraphs drag & drop action button
+ * Disable paragraphs drag & drop action button.
  */
 function thunder_update_8305() {
   /** @var \Drupal\update_helper\Updater $updateHelper */
