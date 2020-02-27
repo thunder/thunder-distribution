@@ -27,8 +27,7 @@ content:
     settings:
       view_mode: default
       link: ''
-    third_party_settings:
-      show_drag_and_drop: false
+    third_party_settings: {  }
     region: content
 hidden:
   description: true
