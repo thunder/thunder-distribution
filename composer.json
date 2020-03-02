@@ -68,10 +68,6 @@
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2019-07-04/2858438_17.patch",
                 "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2019-10-18/entity-browser-reorder-remove-2851580-67.patch"
             },
-            "drupal/default_content": {
-                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-07/default_content-deprecation-3092985-2-8.x-1.x.patch",
-                "Drupal 9 Deprecated Code Report 2": "https://www.drupal.org/files/issues/2019-12-02/3098095.patch"
-            },
             "drupal/dropzonejs": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2019-11-25/3095062-4.patch"
             },
