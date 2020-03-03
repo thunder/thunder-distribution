@@ -37,3 +37,8 @@ v4.3:
         '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
         '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed. To  manually change your configuration visit your paragraphs widget configurations and select or deselect the show drag & drop button option.</strong><p>'
+    thunder_update_8306:
+        '#title': 'Add paragraph type icons'
+        '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
