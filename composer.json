@@ -115,7 +115,7 @@
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.5",
         "drupal/amp": "1.x-dev",
-        "drupal/amptheme": "^1.1",
+        "drupal/amptheme": "1.x-dev",
         "marc1706/fast-image-size": "^1.1.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0-alpha8",
