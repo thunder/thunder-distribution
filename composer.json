@@ -82,7 +82,7 @@
                 "Missing schema for optionset": "https://www.drupal.org/files/issues/2020-02-17/3114035.patch"
             },
             "drupal/core": {
-                "Try Drupal 8.8 performance drop": "docroot/profiles/contrib/thunder/patches/drupal_8_8_remove_deprecation_errors.patch"
+                "Try Drupal 8.8 performance drop": "patches/drupal_8_8_remove_deprecation_errors.patch"
             }
         }
     },
