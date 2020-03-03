@@ -2,8 +2,10 @@ langcode: en
 status: true
 dependencies:
   module:
+    - blazy
     - editor
     - linkit
+    - media
 name: 'Full HTML'
 format: full_html
 weight: 2
@@ -39,3 +41,32 @@ filters:
     weight: 0
     settings:
       title: true
+  blazy_filter:
+    id: blazy_filter
+    provider: blazy
+    status: false
+    weight: 3
+    settings:
+      filter_tags:
+        img: img
+        iframe: iframe
+      media_switch: ''
+      use_data_uri: '0'
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: false
+    weight: -10
+    settings:
+      allowed_html: '<a href hreflang> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <s> <sup> <sub> <table> <caption> <tbody> <thead> <tfoot> <th> <td> <tr> <hr> <p> <h1> <pre>'
+      filter_html_help: true
+      filter_html_nofollow: false
+  media_embed:
+    id: media_embed
+    provider: media
+    status: false
+    weight: 100
+    settings:
+      default_view_mode: default
+      allowed_media_types: {  }
+      allowed_view_modes: {  }
