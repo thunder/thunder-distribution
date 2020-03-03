@@ -1,0 +1,23 @@
+diff --git a/lib/Drupal/Core/Security/DoTrustedCallbackTrait.php b/lib/Drupal/Core/Security/DoTrustedCallbackTrait.php
+index d3d86b9..f61db82 100644
+--- a/lib/Drupal/Core/Security/DoTrustedCallbackTrait.php
++++ b/lib/Drupal/Core/Security/DoTrustedCallbackTrait.php
+@@ -85,15 +85,9 @@ trait DoTrustedCallbackTrait {
+       if (isset($method_name)) {
+         $description .= '::' . $method_name;
+       }
+-      $message = sprintf($message, $description);
+-      if ($error_type === TrustedCallbackInterface::TRIGGER_SILENCED_DEPRECATION) {
+-        @trigger_error($message, E_USER_DEPRECATED);
+-      }
+-      elseif ($error_type === TrustedCallbackInterface::TRIGGER_WARNING) {
+-        trigger_error($message, E_USER_WARNING);
+-      }
+-      else {
+-        throw new UntrustedCallbackException($message);
++
++      if ($error_type === TrustedCallbackInterface::THROW_EXCEPTION) {
++        throw new UntrustedCallbackException(sprintf($message, $description));
+       }
+     }
+ 

@@ -80,6 +80,9 @@
             },
             "drupal/blazy": {
                 "Missing schema for optionset": "https://www.drupal.org/files/issues/2020-02-17/3114035.patch"
+            },
+            "drupal/core": {
+                "Try Drupal 8.8 performance drop": "docroot/profiles/contrib/thunder/patches/drupal_8_8_remove_deprecation_errors.patch"
             }
         }
     },
@@ -98,7 +101,7 @@
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "2.0-rc7",
         "drupal/checklistapi": "^1.8",
-        "drupal/core": "~8.8.1",
+        "drupal/core": "8.8.2",
         "drupal/config_selector": "^2.0",
         "drupal/config_update": "^1.5",
         "drupal/content_lock": "^2.0",
