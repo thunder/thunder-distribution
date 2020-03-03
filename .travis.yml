@@ -46,7 +46,7 @@ jobs:
       before_script: skip
       script:
         #- bash -x -e ./scripts/travis/06-test-source-code.sh
-        #- bash -x -e ./scripts/travis/04-install-thunder.sh
+        - bash -x -e ./scripts/travis/04-install-thunder.sh
         #- bash -x -e ./scripts/travis/06-run-config-tests.sh
         #- bash -x -e ./scripts/travis/06-run-tests.sh
         - bash -x -e ./scripts/travis/07-upload-artifacts-to-s3.sh
