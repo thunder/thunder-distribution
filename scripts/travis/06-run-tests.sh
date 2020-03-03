@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-source ${THUNDER_DIST_DIR}/scripts/travis/05-setup-tests.sh
 
 cd ${TEST_DIR}/docroot
 
