@@ -22,31 +22,31 @@ settings:
     negate: 1
     target_bundles: null
     target_bundles_drag_drop:
-      gallery:
-        weight: 8
-        enabled: false
-      instagram:
-        weight: 9
-        enabled: false
-      link:
-        weight: 10
-        enabled: false
-      image:
-        weight: 11
+      text:
+        weight: -19
         enabled: false
       quote:
-        weight: 12
+        weight: -18
         enabled: false
-      text:
-        weight: 13
+      link:
+        weight: -17
         enabled: false
-      pinterest:
-        weight: 14
+      instagram:
+        weight: -16
         enabled: false
       twitter:
-        weight: 14
+        weight: -15
+        enabled: false
+      gallery:
+        weight: -14
+        enabled: false
+      image:
+        weight: -13
         enabled: false
       video:
-        weight: 18
+        weight: -12
+        enabled: false
+      pinterest:
+        weight: -11
         enabled: false
 field_type: entity_reference_revisions

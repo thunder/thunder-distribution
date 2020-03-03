@@ -1,0 +1,92 @@
+field.field.taxonomy_term.channel.field_paragraphs:
+  expected_config:
+    settings:
+      handler_settings:
+        target_bundles_drag_drop:
+          gallery:
+            weight: 8
+          image:
+            weight: 11
+          instagram:
+            weight: 9
+          link:
+            weight: 10
+          pinterest:
+            weight: 14
+          quote:
+            weight: 12
+          text:
+            weight: 13
+          twitter:
+            weight: 14
+          video:
+            weight: 18
+  update_actions:
+    change:
+      settings:
+        handler_settings:
+          target_bundles_drag_drop:
+            gallery:
+              weight: -14
+            image:
+              weight: -13
+            instagram:
+              weight: -16
+            link:
+              weight: -17
+            pinterest:
+              weight: -11
+            quote:
+              weight: -18
+            text:
+              weight: -19
+            twitter:
+              weight: -15
+            video:
+              weight: -12
+field.field.taxonomy_term.tags.field_paragraphs:
+  expected_config:
+    settings:
+      handler_settings:
+        target_bundles_drag_drop:
+          gallery:
+            weight: 8
+          image:
+            weight: 11
+          instagram:
+            weight: 9
+          link:
+            weight: 10
+          pinterest:
+            weight: 14
+          quote:
+            weight: 12
+          text:
+            weight: 13
+          twitter:
+            weight: 14
+          video:
+            weight: 18
+  update_actions:
+    change:
+      settings:
+        handler_settings:
+          target_bundles_drag_drop:
+            gallery:
+              weight: -14
+            image:
+              weight: -13
+            instagram:
+              weight: -16
+            link:
+              weight: -17
+            pinterest:
+              weight: -11
+            quote:
+              weight: -18
+            text:
+              weight: -19
+            twitter:
+              weight: -15
+            video:
+              weight: -12
