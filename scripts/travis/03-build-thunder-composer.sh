@@ -24,3 +24,7 @@ composer require "thunder/thunder-distribution:*" "thunder/thunder_testing_demo:
  # Get custom branch of Thunder Admin theme
 rm -rf ${TEST_DIR}/docroot/themes/contrib/thunder_admin
 git clone --depth 1 --single-branch --branch ${THUNDER_ADMIN_BRANCH} https://github.com/BurdaMagazinOrg/theme-thunder-admin.git ${TEST_DIR}/docroot/themes/contrib/thunder_admin
+
+# Apply patch for core
+cd "${TEST_DIR}/docroot/core"
+patch -p1 < "${THUNDER_DIST_DIR}/patches/drupal_8_8_remove_deprecation_errors.patch"
