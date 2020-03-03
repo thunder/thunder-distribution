@@ -62,7 +62,9 @@
             },
             "drupal/amp": {
                 "Missing schema": "https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch",
-                "Remove deprecated code": "https://www.drupal.org/files/issues/2020-01-10/3078897-9.patch",
+                "Remove deprecated code": "https://www.drupal.org/files/issues/2020-01-10/3078897-9.patch"
+            },
+            "drupal/amptheme": {
                 "Property 'base theme' needs to be set": "https://www.drupal.org/files/issues/2020-01-14/3106310.patch"
             },
             "drupal/admin_toolbar": {
