@@ -18,4 +18,4 @@ composer install --working-dir=${TEST_DIR}/docroot
 
 # require development packages needed for testing
 composer config minimum-stability dev --working-dir ${TEST_DIR}/docroot
-COMPOSER_ROOT_VERSION=8.8.x-dev composer require "drupal/core-dev" "thunder/thunder_testing_demo:3.x-dev" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" "facebook/facebook-instant-articles-sdk-php:^1.10.0" --no-progress --working-dir ${TEST_DIR}/docroot
+COMPOSER_ROOT_VERSION=8.8.x-dev composer require "drupal/core-dev" "thunder/thunder_testing_demo:3.x-dev" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir ${TEST_DIR}/docroot
