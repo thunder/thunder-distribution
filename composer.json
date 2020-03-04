@@ -74,9 +74,6 @@
             },
             "drupal/core": {
                 "Switch to a memory backend for running the database updates": "https://www.drupal.org/files/issues/2019-07-22/3055443-2-37.patch"
-            },
-            "drupal/inline_entity_form": {
-                "Remove revision log": "https://www.drupal.org/files/issues/2019-07-16/inline_entity_form-remove_log_message-2927884-6.patch"
             }
         }
     },
@@ -102,7 +99,7 @@
         "drupal/crop": "^2.0-rc1",
         "drupal/ctools": "^3.1",
         "drupal/default_content": "^1.0-alpha7",
-        "drupal/diff": "1.0-rc2",
+        "drupal/diff": "1.0",
         "drupal/dropzonejs": "^2.0-alpha2",
         "drupal/empty_fields": "^1.0-alpha1",
         "drupal/entity": "^1.0",
@@ -112,7 +109,7 @@
         "drupal/field_group": "^3.0-rc2",
         "drupal/focal_point": "^1.2",
         "drupal/google_analytics": "^2.0",
-        "drupal/inline_entity_form": "1.0-rc2",
+        "drupal/inline_entity_form": "^1.0",
         "drupal/ivw_integration": "^1.0",
         "drupal/length_indicator": "^1.0-rc2",
         "drupal/libraries": "^3.0-alpha1",
