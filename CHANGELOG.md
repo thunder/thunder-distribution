@@ -1,6 +1,6 @@
 # Changelog
 
-## [3.4.2](https://github.com/thunder/thunder-distribution/tree/3.4.3) 2019-03-02
+## [3.4.3](https://github.com/thunder/thunder-distribution/tree/3.4.3) 2019-03-04
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.4.2...3.4.3)
 
 Fixes and improvements related to the paragraphs module 1.11 release.
