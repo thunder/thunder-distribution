@@ -139,7 +139,7 @@
         "drupal/field_group": "^3.0-rc2",
         "drupal/focal_point": "1.x-dev",
         "drupal/google_analytics": "2.x-dev",
-        "drupal/inline_entity_form": "^1.0-rc2",
+        "drupal/inline_entity_form": "^1.0",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.0-rc2",
         "drupal/linkit": "5.x-dev",
