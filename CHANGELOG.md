@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.3.9](https://github.com/thunder/thunder-distribution/tree/3.3.9) 2020-03-05
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.8...3.3.9)
+
+Fixes and improvements related to the paragraphs module 1.11 release. Also fixing several testing issues.
+
+- Fix [Performance tests are failing with paragraphs 1.11](https://www.drupal.org/node/3115061)
+- Dix [Add missing modules in update dependencies](https://www.drupal.org/node/3102123)
+- Fix [Test failures](https://www.drupal.org/node/3114591)
+- Fix [Metatag test fails with 1.11 release](https://www.drupal.org/node/3104801)
+- Do [Update to Paragraphs features 8.x-1.8](https://www.drupal.org/node/3116379)
+
 ## [3.3.8](https://github.com/thunder/thunder-distribution/tree/3.3.8) 2019-09-05
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.7...3.3.8)
 
