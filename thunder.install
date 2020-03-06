@@ -174,7 +174,7 @@ function thunder_update_8305() {
 }
 
 /**
- * Add paragraph type icons
+ * Add paragraph type icons.
  */
 function thunder_update_8306() {
   /** @var \Drupal\update_helper\Updater $updateHelper */
