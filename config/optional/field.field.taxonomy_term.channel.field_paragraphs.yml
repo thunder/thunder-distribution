@@ -23,30 +23,30 @@ settings:
     target_bundles: null
     target_bundles_drag_drop:
       text:
-        weight: -19
+        weight: 1
         enabled: false
       quote:
-        weight: -18
+        weight: 9
         enabled: false
       link:
-        weight: -17
+        weight: 8
         enabled: false
       instagram:
-        weight: -16
+        weight: 4
         enabled: false
       twitter:
-        weight: -15
+        weight: 5
         enabled: false
       gallery:
-        weight: -14
+        weight: 3
         enabled: false
       image:
-        weight: -13
+        weight: 2
         enabled: false
       video:
-        weight: -12
+        weight: 7
         enabled: false
       pinterest:
-        weight: -11
+        weight: 6
         enabled: false
 field_type: entity_reference_revisions

@@ -1,3 +1,37 @@
+field.field.node.article.field_paragraphs:
+3  expected_config:
+    settings:
+      handler_settings:
+        target_bundles_drag_drop:
+          gallery:
+            weight: 6
+          image:
+            weight: 7
+          link:
+            weight: 3
+          pinterest:
+            weight: 9
+          quote:
+            weight: 2
+          video:
+            weight: 8
+  update_actions:
+    change:
+      settings:
+        handler_settings:
+          target_bundles_drag_drop:
+            gallery:
+              weight: 3
+            image:
+              weight: 2
+            link:
+              weight: 8
+            pinterest:
+              weight: 6
+            quote:
+              weight: 9
+            video:
+              weight: 7
 field.field.taxonomy_term.channel.field_paragraphs:
   expected_config:
     settings:
@@ -27,23 +61,23 @@ field.field.taxonomy_term.channel.field_paragraphs:
         handler_settings:
           target_bundles_drag_drop:
             gallery:
-              weight: -14
+              weight: 3
             image:
-              weight: -13
+              weight: 2
             instagram:
-              weight: -16
+              weight: 4
             link:
-              weight: -17
+              weight: 8
             pinterest:
-              weight: -11
+              weight: 6
             quote:
-              weight: -18
+              weight: 9
             text:
-              weight: -19
+              weight: 1
             twitter:
-              weight: -15
+              weight: 5
             video:
-              weight: -12
+              weight: 7
 field.field.taxonomy_term.tags.field_paragraphs:
   expected_config:
     settings:
@@ -73,20 +107,20 @@ field.field.taxonomy_term.tags.field_paragraphs:
         handler_settings:
           target_bundles_drag_drop:
             gallery:
-              weight: -14
+              weight: 3
             image:
-              weight: -13
+              weight: 2
             instagram:
-              weight: -16
+              weight: 4
             link:
-              weight: -17
+              weight: 8
             pinterest:
-              weight: -11
+              weight: 6
             quote:
-              weight: -18
+              weight: 9
             text:
-              weight: -19
+              weight: 1
             twitter:
-              weight: -15
+              weight: 5
             video:
-              weight: -12
+              weight: 7

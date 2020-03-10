@@ -25,10 +25,10 @@ settings:
       text:
         weight: 1
         enabled: false
-      quote:
+      image:
         weight: 2
         enabled: false
-      link:
+      gallery:
         weight: 3
         enabled: false
       instagram:
@@ -37,16 +37,16 @@ settings:
       twitter:
         weight: 5
         enabled: false
-      gallery:
+      pinterest:
         weight: 6
         enabled: false
-      image:
+      video:
         weight: 7
         enabled: false
-      video:
+      link:
         weight: 8
         enabled: false
-      pinterest:
+      quote:
         weight: 9
         enabled: false
 field_type: entity_reference_revisions
