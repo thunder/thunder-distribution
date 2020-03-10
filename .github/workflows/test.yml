@@ -123,6 +123,8 @@ jobs:
     - name: Start webserver
       run: test-drupal-project start_web_server
 
+    - run: mysql -e 'CREATE DATABASE IF NOT EXISTS testing;'
+
     - name: Run the tests
       run: test-drupal-project run_tests
       env:
