@@ -118,7 +118,7 @@ jobs:
         name: build
 
     - name: Unzip build artifact
-      run: tar xCfz /tmp/test build/build.tgz thunder; rm -rf build
+      run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build
 
     - name: Start webserver
       run: test-drupal-project start_web_server
