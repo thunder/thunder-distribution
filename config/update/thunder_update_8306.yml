@@ -1,5 +1,5 @@
 field.field.node.article.field_paragraphs:
-3  expected_config:
+  expected_config:
     settings:
       handler_settings:
         target_bundles_drag_drop:
