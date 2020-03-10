@@ -73,7 +73,14 @@ jobs:
           DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
           DRUPAL_TESTING_TEST_DEPRECATION: false
 
-      - uses: mxschmitt/action-tmate@v1
+      - name: Zip build
+        run: cd /tmp/test; tar cfz build.tgz thunder; mv build.tgz ${GITHUB_WORKSPACE}
+
+      - name: Upload build
+        uses: actions/upload-artifact@v1
+        with:
+          name: build
+          path: build.tgz
 
   test-max:
     needs: build
@@ -105,13 +112,13 @@ jobs:
     - name: Get build environment
       run: composer global require thunder/drupal-testing
 
+    - name: Download build
+      uses: actions/download-artifact@v1
+      with:
+        name: build
 
-
-
-
-
-
-
+    - name: Unzip build artifact
+      run: tar xCfz /tmp/test build/build.tgz thunder; rm -rf build
 
     - name: Start webserver
       run: test-drupal-project start_web_server
