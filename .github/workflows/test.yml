@@ -110,7 +110,7 @@ jobs:
         echo '::set-env name=DRUPAL_TESTING_DATABASE_ENGINE::mysql'
 
     - name: Get build environment
-      run: composer global require thunder/drupal-testing
+      run: composer global require thunder/drupal-testing:dev-feature/min-testing
 
     - name: Download build
       uses: actions/download-artifact@v1
