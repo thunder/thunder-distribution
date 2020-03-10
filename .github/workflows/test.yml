@@ -26,12 +26,12 @@ jobs:
           php-version: '7.3'
           extensions: Imagick
 
-    - name: Cache composer dependencies
-      uses: actions/cache@v1
-      with:
-        path: ~/.composer/cache
-        key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
-        restore-keys: ${{ runner.os }}-composer-cache-
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-cache-
 
       - name: Setup environment variables
         run: |
