@@ -62,6 +62,17 @@ jobs:
       - name: Build the docroot
         run: test-drupal-project build
 
+      - name: Test for deprecations
+        run: test-drupal-project deprecation
+        continue-on-error: true
+
+      - name: Install drupal
+        run: test-drupal-project install
+        env:
+          DRUPAL_TESTING_TEST_PROFILE: thunder
+          DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
+          DRUPAL_TESTING_TEST_DEPRECATION: false
+
       - uses: mxschmitt/action-tmate@v1
 
   test-max:
@@ -100,16 +111,7 @@ jobs:
 
 
 
-    - name: Test for deprecations
-      run: test-drupal-project deprecation
-      continue-on-error: true
 
-    - name: Install drupal
-      run: test-drupal-project install
-      env:
-        DRUPAL_TESTING_TEST_PROFILE: thunder
-        DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
-        DRUPAL_TESTING_TEST_DEPRECATION: false
 
     - name: Start webserver
       run: test-drupal-project start_web_server
