@@ -74,9 +74,6 @@
             },
             "drupal/redirect": {
                 "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-12-23/3089389-6.patch"
-            },
-            "drupal/blazy": {
-                "Missing schema for optionset": "https://www.drupal.org/files/issues/2020-02-17/3114035.patch"
             }
         }
     },
@@ -93,7 +90,7 @@
         "drupal/autofill": "^1.0",
         "drupal/autosave_form": "^1.0",
         "drupal/better_normalizers": "^1.0-beta3",
-        "drupal/blazy": "2.0-rc7",
+        "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.8",
         "drupal/core": "~8.8.1",
         "drupal/config_selector": "^2.0",
