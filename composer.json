@@ -135,7 +135,7 @@
         "drupal/inline_entity_form": "^1.0",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.0-rc2",
-        "drupal/linkit": "^5.0-beta9",
+        "drupal/linkit": "5.x-dev",
         "drupal/liveblog": "1.x-dev",
         "drupal/media_entity_instagram": "2.x-dev",
         "drupal/media_entity_pinterest": "2.x-dev",
