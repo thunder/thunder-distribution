@@ -29,3 +29,19 @@ v4.2:
         extension_page: { '#text': 'Extension page', '#url': 'internal:/admin/modules' }
         configure_page: { '#text': 'Article form configuration', '#url': 'internal:/admin/structure/types/manage/article/form-display' }
         module_page: { '#text': 'Autofill module page', '#url': 'https://www.drupal.org/project/autofill' }
+v4.3:
+    '#title': 'Update to version v4.3'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_update_8305:
+        '#title': 'Disable paragraphs drag & drop action button'
+        '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed. To  manually change your configuration visit your paragraphs widget configurations and select or deselect the show drag & drop button option.</strong><p>'
+v4.4:
+    '#title': 'Update to version v4.4'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_update_8306:
+        '#title': 'Adjust the order of paragraph types in add dialog for taxonomy terms of bundles news and tags to be consistent across the system.'
+        '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed. The order of paragraph types can be aligned manually in field_paragraphs field configuration for taxonomy terms of bundles news and tags.</strong><p>'
