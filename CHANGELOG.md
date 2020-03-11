@@ -1,6 +1,15 @@
 # Changelog
 
-## [3.4.2](https://github.com/thunder/thunder-distribution/tree/3.4.2) 2019-01-22
+## [3.4.3](https://github.com/thunder/thunder-distribution/tree/3.4.3) 2020-03-05
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.4.2...3.4.3)
+
+Fixes and improvements related to the paragraphs module 1.11 release.
+
+- Fix [Performance tests are failing with paragraphs 1.11](https://www.drupal.org/node/3115061)
+- Do [Fix test failures](https://www.drupal.org/node/3114591)
+- Do [Update to Paragraphs features 8.x-1.8](https://www.drupal.org/node/3116379)
+
+## [3.4.2](https://github.com/thunder/thunder-distribution/tree/3.4.2) 2020-01-22
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.4.1...3.4.2)
 
 Adding the autofill feature to Thunder. Autofill can be configured to copy the input of one field into another field
