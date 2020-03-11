@@ -89,6 +89,10 @@ jobs:
         php-version: '7.3'
         extensions: Imagick
 
+    - name: Setup environment variables
+      run: |
+        echo "::add-path::$HOME/.composer/vendor/bin"
+
     - name: Get build environment
       run: composer global require thunder/drupal-testing:dev-feature/min-testing
 
