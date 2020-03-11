@@ -50,9 +50,6 @@ jobs:
       - name: Get build environment
         run: composer global require thunder/drupal-testing
 
-      - name: Setup the environment
-        run: test-drupal-project setup
-
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
@@ -103,11 +100,8 @@ jobs:
     - name: Unzip build artifact
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build
 
-    - name: Start webserver
-      run: test-drupal-project start_web_server
-
     - name: Run the tests
-      run: test-drupal-project run_tests
+      run: test-drupal-project
 
   test-min:
 
