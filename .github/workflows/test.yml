@@ -113,6 +113,9 @@ jobs:
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') }}
 
+    env:
+      DRUPAL_TESTING_DRUPAL_VERSION: '~8.8.0'
+
     steps:
       - uses: actions/checkout@v1
 
