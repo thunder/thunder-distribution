@@ -204,35 +204,34 @@ jobs:
 
       - name: Build docker image
         run: |
-        # Build Docker image and tag it
-        DOCKER_SANITIZED_BRANCH_NAME=$(echo "${{ github.head_ref }}" | sed 's/\//_/g')
-        DOCKER_IMAGE_TAG="burda/thunder-performance:${DOCKER_SANITIZED_BRANCH_NAME}-${{ github.run_id }}"
-        cd docker-thunder-performance
-        ./build.sh --tag "${DOCKER_IMAGE_TAG}"
-        # list Docker images
-        docker images
-        # Login to Docker HUB
-        echo "${{ secrets.DOCKER_PASSWORD_BASE64 }}" | base64 -d | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          # Build Docker image and tag it
+          DOCKER_SANITIZED_BRANCH_NAME=$(echo "${{ github.head_ref }}" | sed 's/\//_/g')
+          DOCKER_IMAGE_TAG="burda/thunder-performance:${DOCKER_SANITIZED_BRANCH_NAME}-${{ github.run_id }}"
+          cd docker-thunder-performance
+          ./build.sh --tag "${DOCKER_IMAGE_TAG}"
+          # list Docker images
+          docker images
+          # Login to Docker HUB
+          echo "${{ secrets.DOCKER_PASSWORD_BASE64 }}" | base64 -d | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-        # Push to Docker HUB
-        docker push "${DOCKER_IMAGE_TAG}"
+          # Push to Docker HUB
+          docker push "${DOCKER_IMAGE_TAG}"
 
-        # Start Thunde performance testing task for created image
-        API_CALL_HTTP_CODE=$(curl \
-        --request POST \
-        --insecure \
-        "https://${{ secrets.THUNDER_PTM_HOST }}:3000/warmers" \
-        --header "Authorization: Bearer ${{ secrets.THUNDER_PTM_TOKEN }}" \
-        --header "Content-Type: application/json" \
-        --data "{\"branchTag\":\"${DOCKER_SANITIZED_BRANCH_NAME}\",\"imageTag\":\"${DOCKER_SANITIZED_BRANCH_NAME}-${{ github.run_id }}\",\"composeType\":\"default\"}" \
-        --output /dev/stderr \
-        --write-out "%{http_code}" \
-        )
+          # Start Thunde performance testing task for created image
+          API_CALL_HTTP_CODE=$(curl \
+          --request POST \
+          --insecure \
+          "https://${{ secrets.THUNDER_PTM_HOST }}:3000/warmers" \
+          --header "Authorization: Bearer ${{ secrets.THUNDER_PTM_TOKEN }}" \
+          --header "Content-Type: application/json" \
+          --data "{\"branchTag\":\"${DOCKER_SANITIZED_BRANCH_NAME}\",\"imageTag\":\"${DOCKER_SANITIZED_BRANCH_NAME}-${{ github.run_id }}\",\"composeType\":\"default\"}" \
+          --output /dev/stderr \
+          --write-out "%{http_code}" \
+          )
 
-        if [[ "${API_CALL_HTTP_CODE}" != "200" ]]; then
-          exit 1
-        fi
-
+          if [[ "${API_CALL_HTTP_CODE}" != "200" ]]; then
+            exit 1
+          fi
 
 #   Start a debug session.
 #   - name: Setup tmate session
