@@ -198,9 +198,12 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: build
+          path: ${GITHUB_WORKSPACE}
+
+      - uses: mxschmitt/action-tmate@v1
 
       - name: Unzip build artifact
-        run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build; mv /tmp/test/thunder/install docker-thunder-performance/www
+        run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build; mv /tmp/test/thunder/install ${GITHUB_WORKSPACE}/docker-thunder-performance/www
 
       - name: Build docker image
         run: |
@@ -209,7 +212,6 @@ jobs:
           cd docker-thunder-performance
           ./build.sh --tag "${DOCKER_IMAGE_TAG}"
 
-      - uses: mxschmitt/action-tmate@v1
 
 
 #   Start a debug session.
