@@ -200,7 +200,7 @@ jobs:
           name: build
 
       - name: Unzip build artifact
-        run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build; mkdir ${GITHUB_WORKSPACE}/docker-thunder-performance/www; mv /tmp/test/thunder/install ${GITHUB_WORKSPACE}/docker-thunder-performance/www
+        run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build; mv /tmp/test/thunder/install ${GITHUB_WORKSPACE}/docker-thunder-performance/www
 
       - name: Build docker image
         run: |
