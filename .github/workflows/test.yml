@@ -166,12 +166,12 @@ jobs:
       - name: Run the tests
         run: test-drupal-project run_tests
 
-  test-preformance:
+  test-performance:
     needs: build
 
     runs-on: ubuntu-latest
 
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'test-preformance') }}
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'test-performance') }}
 
     steps:
 
