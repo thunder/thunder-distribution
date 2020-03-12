@@ -178,7 +178,7 @@ jobs:
       - uses: actions/checkout@v1
         with:
           repository: thunder/docker-thunder-performance
-          path: ${GITHUB_WORKSPACE}/docker-thunder-performance
+          path: ${{ github.workspace }}/docker-thunder-performance
           ref: 'master'
 
       - uses: shivammathur/setup-php@master
