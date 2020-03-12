@@ -84,17 +84,11 @@
                 "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-12-23/3089389-6.patch",
                 "Remove Drupal 8.8 deprecations, compatibility with Drupal 9": "https://www.drupal.org/files/issues/2020-01-04/redirect-8.8-3102143-3.patch"
             },
-            "drupal/pathauto": {
-                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-02-08/3042582-48.patch"
-            },
             "drupal/scheduler": {
                 "Add new 'core_version_requirement' key to .info.yml": "https://www.drupal.org/files/issues/2020-01-10/3079913-5.patch"
             },
             "drupal/media_entity_twitter": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-10/3097669-9.patch"
-            },
-            "drupal/media_entity_instagram": {
-                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-01-10/3097666-20.patch"
             },
             "drupal/metatag": {
                 "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-03-02/3042590-47.patch"
@@ -143,7 +137,7 @@
         "drupal/media_entity_twitter": "2.x-dev",
         "drupal/media_expire": "^2.2",
         "drupal/metatag": "1.x-dev",
-        "drupal/paragraphs": "^1.11",
+        "drupal/paragraphs": "1.x-dev",
         "drupal/paragraphs_features": "^1.8",
         "drupal/password_policy": "3.x-dev",
         "drupal/pathauto": "1.x-dev",
