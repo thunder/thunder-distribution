@@ -177,7 +177,8 @@ jobs:
 
       - uses: actions/checkout@v1
         with:
-          repository: 'https://github.com/thunder/docker-thunder-performance.git'
+          repository: thunder/docker-thunder-performance
+          path: docker-thunder-performance
 
       - uses: shivammathur/setup-php@master
         with:
@@ -198,12 +199,14 @@ jobs:
           name: build
 
       - name: Unzip build artifact
-        run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build
+        run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build; mv /tmp/test/thunder/install docker-thunder-performance/www
 
       - name: Build docker image
         run: |
-          DOCKER_SANITIZED_BRANCH_NAME=$(echo "${{ github.head_ref	 }}" | sed 's/\//_/g')
+          DOCKER_SANITIZED_BRANCH_NAME=$(echo "${{ github.head_ref }}" | sed 's/\//_/g')
           DOCKER_IMAGE_TAG="burda/thunder-performance:${DOCKER_SANITIZED_BRANCH_NAME}-${{ github.run_id }}"
+          cd docker-thunder-performance
+          ./build.sh --tag "${DOCKER_IMAGE_TAG}"
 
       - uses: mxschmitt/action-tmate@v1
 
