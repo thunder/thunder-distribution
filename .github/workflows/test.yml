@@ -67,7 +67,7 @@ jobs:
         run: test-drupal-project install
 
       - name: Zip build
-        run: cd /tmp/test; tar cfz build.tgz thunder; mv build.tgz ${GITHUB_WORKSPACE}
+        run: cd /tmp/test; tar cfhz build.tgz thunder; mv build.tgz ${GITHUB_WORKSPACE}
 
       - name: Upload build
         uses: actions/upload-artifact@v1
