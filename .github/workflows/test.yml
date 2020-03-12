@@ -178,7 +178,7 @@ jobs:
       - uses: actions/checkout@v1
         with:
           repository: thunder/docker-thunder-performance
-          path: docker-thunder-performance
+          path: ${GITHUB_WORKSPACE}/docker-thunder-performance
           ref: 'master'
 
       - uses: shivammathur/setup-php@master
@@ -198,12 +198,13 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: build
-          path: ${GITHUB_WORKSPACE}
 
-      - uses: mxschmitt/action-tmate@v1
 
       - name: Unzip build artifact
         run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build; mv /tmp/test/thunder/install ${GITHUB_WORKSPACE}/docker-thunder-performance/www
+
+      - uses: mxschmitt/action-tmate@v1
+
 
       - name: Build docker image
         run: |
