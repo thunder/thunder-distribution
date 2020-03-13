@@ -177,10 +177,6 @@ jobs:
     if: true
     #if: ${{ contains(github.event.pull_request.labels.*.name, 'test-performance') }}
 
-    env:
-      DOCKER_SANITIZED_BRANCH_NAME: ${GITHUB_HEAD_REF/\//_}
-      DOCKER_IMAGE_TAG: ${{ format('burda/thunder-performance::{0}-{1}', ${DOCKER_SANITIZED_BRANCH_NAME}, ${{ github.run_id }}) }}
-
     steps:
       - uses: actions/checkout@v1
         with:
@@ -209,20 +205,23 @@ jobs:
       - name: Unzip build artifact
         run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build; mv /tmp/test/thunder/install ${GITHUB_WORKSPACE}/docker-thunder-performance/www
 
+      - name: Set variables
+        id: vars
+        run: |
+          echo ::set-output name=DOCKER_SANITIZED_BRANCH_NAME::${GITHUB_HEAD_REF/\//_}
+          echo ::set-output name=DOCKER_IMAGE_TAG::burda/thunder-performance:${GITHUB_HEAD_REF/\//_}-${{ github.run_id }}
+
       - name: Build docker image
         run: |
-          # Build Docker image and tag it
-          #DOCKER_SANITIZED_BRANCH_NAME=$(echo "${{ github.head_ref }}" | sed 's/\//_/g')
-          #DOCKER_IMAGE_TAG="burda/thunder-performance:${DOCKER_SANITIZED_BRANCH_NAME}-${{ github.run_id }}"
           cd docker-thunder-performance
-          ./build.sh --tag "${DOCKER_IMAGE_TAG}"
+          ./build.sh --tag "${{ steps.vars.outputs.DOCKER_IMAGE_TAG }}"
           # list Docker images
           docker images
           # Login to Docker HUB
           echo "${{ secrets.DOCKER_PASSWORD_BASE64 }}" | base64 -d | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
           # Push to Docker HUB
-          docker push "${DOCKER_IMAGE_TAG}"
+          docker push "${{ steps.vars.outputs.DOCKER_IMAGE_TAG }}"
 
           # Start Thunde performance testing task for created image
           API_CALL_HTTP_CODE=$(curl \
