@@ -182,6 +182,9 @@ jobs:
       DOCKER_SANITIZED_BRANCH_NAME1: ${GITHUB_HEAD_REF}
 
     steps:
+      - run: |
+          echo ${DOCKER_SANITIZED_BRANCH_NAME}
+          echo ${DOCKER_SANITIZED_BRANCH_NAME1}
 
       - uses: actions/checkout@v1
         with:
