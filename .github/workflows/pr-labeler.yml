@@ -1,8 +1,5 @@
 name: PR Labeler
 on:
-  push:
-    branches:
-      - gh-actions
   pull_request:
     types: [opened]
 
