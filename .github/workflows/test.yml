@@ -219,6 +219,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           tags: ${{ steps.vars.outputs.DOCKER_TAG }}
+          workdir: docker-thunder-performance
 
       - name: Start Thunde performance testing task for created image
         run: |
