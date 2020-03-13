@@ -179,6 +179,7 @@ jobs:
 
     env:
       DOCKER_SANITIZED_BRANCH_NAME: ${GITHUB_HEAD_REF/\//_}
+      DOCKER_SANITIZED_BRANCH_NAME1: ${GITHUB_HEAD_REF}
 
     steps:
 
