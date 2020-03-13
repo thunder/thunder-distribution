@@ -78,8 +78,7 @@
                 "Refactor to not support Drush 8 any more": "https://www.drupal.org/files/issues/2019-11-25/3042621-8.patch"
             },
             "drupal/redirect": {
-                "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-12-23/3089389-6.patch",
-                "Remove Drupal 8.8 deprecations, compatibility with Drupal 9": "https://www.drupal.org/files/issues/2020-01-04/redirect-8.8-3102143-3.patch"
+                "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-12-23/3089389-6.patch"
             },
             "drupal/scheduler": {
                 "Add new 'core_version_requirement' key to .info.yml": "https://www.drupal.org/files/issues/2020-01-10/3079913-5.patch"
