@@ -27,6 +27,8 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    if: false
+
     steps:
       - uses: actions/checkout@v1
 
@@ -111,7 +113,8 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') }}
+    if: false
+    #if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') }}
 
     env:
       DRUPAL_TESTING_DRUPAL_VERSION: '~8.8.1'
@@ -167,11 +170,15 @@ jobs:
         run: test-drupal-project run_tests
 
   test-performance:
-    needs: build
+    #needs: build
 
     runs-on: ubuntu-latest
 
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'test-performance') }}
+    if: true
+    #if: ${{ contains(github.event.pull_request.labels.*.name, 'test-performance') }}
+
+    env:
+      DOCKER_SANITIZED_BRANCH_NAME: ${GITHUB_HEAD_REF/\//_}
 
     steps:
 
