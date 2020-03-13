@@ -1,0 +1,18 @@
+- name: 3.x
+  description: 8.x-3.x
+  color: FFB000
+- name: 4.x
+  description: 8.x-4.x
+  color: 20B2AA
+- name: DO NOT MERGE
+  description: It's prohibited to merge this branch
+  color: ff425e
+- name: test-min
+  description: Triggers the minimum requirements testing
+  color: c9f9a9
+- name: test-performance
+  description: Triggers the performance testing
+  color: c2e0c6
+- name: test-update
+  description: Triggers the update path testing
+  color: b5326b

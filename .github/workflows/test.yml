@@ -27,8 +27,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    #if: false
-
     steps:
       - uses: actions/checkout@v1
 
@@ -113,8 +111,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: false
-    #if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') }}
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') }}
 
     env:
       DRUPAL_TESTING_DRUPAL_VERSION: '~8.8.1'
@@ -174,8 +171,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: true
-    #if: ${{ contains(github.event.pull_request.labels.*.name, 'test-performance') }}
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'test-performance') }}
 
     steps:
       - uses: actions/checkout@v1
@@ -210,7 +206,6 @@ jobs:
         run: |
           echo ::set-output name=DOCKER_SANITIZED_BRANCH_NAME::${GITHUB_HEAD_REF/\//_}
           echo ::set-output name=DOCKER_TAG::${GITHUB_HEAD_REF/\//_}-${{ github.run_id }}
-          echo ::set-output name=DOCKER_IMAGE_TAG::burda/thunder-performance:${GITHUB_HEAD_REF/\//_}-${{ github.run_id }}
 
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
@@ -229,7 +224,7 @@ jobs:
           "https://${{ secrets.THUNDER_PTM_HOST }}:3000/warmers" \
           --header "Authorization: Bearer ${{ secrets.THUNDER_PTM_TOKEN }}" \
           --header "Content-Type: application/json" \
-          --data "{\"branchTag\":\"${DOCKER_SANITIZED_BRANCH_NAME}\",\"imageTag\":\"${DOCKER_SANITIZED_BRANCH_NAME}-${{ github.run_id }}\",\"composeType\":\"default\"}" \
+          --data "{\"branchTag\":\"${DOCKER_SANITIZED_BRANCH_NAME}\",\"imageTag\":\"${DOCKER_TAG}\",\"composeType\":\"default\"}" \
           --output /dev/stderr \
           --write-out "%{http_code}" \
           )
