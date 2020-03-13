@@ -209,21 +209,19 @@ jobs:
         id: vars
         run: |
           echo ::set-output name=DOCKER_SANITIZED_BRANCH_NAME::${GITHUB_HEAD_REF/\//_}
+          echo ::set-output name=DOCKER_TAG::${GITHUB_HEAD_REF/\//_}-${{ github.run_id }}
           echo ::set-output name=DOCKER_IMAGE_TAG::burda/thunder-performance:${GITHUB_HEAD_REF/\//_}-${{ github.run_id }}
 
-      - name: Build docker image
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: burda/thunder-performance
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: ${{ steps.vars.outputs.DOCKER_TAG }}
+
+      - name: Start Thunde performance testing task for created image
         run: |
-          cd docker-thunder-performance
-          ./build.sh --tag "${{ steps.vars.outputs.DOCKER_IMAGE_TAG }}"
-          # list Docker images
-          docker images
-          # Login to Docker HUB
-          echo "${{ secrets.DOCKER_PASSWORD_BASE64 }}" | base64 -d | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-
-          # Push to Docker HUB
-          docker push "${{ steps.vars.outputs.DOCKER_IMAGE_TAG }}"
-
-          # Start Thunde performance testing task for created image
           API_CALL_HTTP_CODE=$(curl \
           --request POST \
           --insecure \
