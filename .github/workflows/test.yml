@@ -27,7 +27,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: false
+    #if: false
 
     steps:
       - uses: actions/checkout@v1
@@ -170,7 +170,7 @@ jobs:
         run: test-drupal-project run_tests
 
   test-performance:
-    #needs: build
+    needs: build
 
     runs-on: ubuntu-latest
 
@@ -179,13 +179,9 @@ jobs:
 
     env:
       DOCKER_SANITIZED_BRANCH_NAME: ${GITHUB_HEAD_REF/\//_}
-      DOCKER_SANITIZED_BRANCH_NAME1: ${GITHUB_HEAD_REF}
+      DOCKER_IMAGE_TAG: ${{ format('burda/thunder-performance::{0}-{1}', ${DOCKER_SANITIZED_BRANCH_NAME}, ${{ github.run_id }}) }}
 
     steps:
-      - run: |
-          echo ${DOCKER_SANITIZED_BRANCH_NAME}
-          echo ${DOCKER_SANITIZED_BRANCH_NAME1}
-
       - uses: actions/checkout@v1
         with:
           repository: thunder/docker-thunder-performance
@@ -216,8 +212,8 @@ jobs:
       - name: Build docker image
         run: |
           # Build Docker image and tag it
-          DOCKER_SANITIZED_BRANCH_NAME=$(echo "${{ github.head_ref }}" | sed 's/\//_/g')
-          DOCKER_IMAGE_TAG="burda/thunder-performance:${DOCKER_SANITIZED_BRANCH_NAME}-${{ github.run_id }}"
+          #DOCKER_SANITIZED_BRANCH_NAME=$(echo "${{ github.head_ref }}" | sed 's/\//_/g')
+          #DOCKER_IMAGE_TAG="burda/thunder-performance:${DOCKER_SANITIZED_BRANCH_NAME}-${{ github.run_id }}"
           cd docker-thunder-performance
           ./build.sh --tag "${DOCKER_IMAGE_TAG}"
           # list Docker images
