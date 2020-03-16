@@ -17,7 +17,7 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
   DRUPAL_TESTING_TEST_DEPRECATION: false
-  DRUPAL_TESTING_TEST_GROUP: Thunder
+  DRUPAL_TESTING_TEST_GROUP: ThunderConfig,Thunder
   PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
   RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
 
@@ -55,7 +55,7 @@ jobs:
         run: composer global require thunder/drupal-testing:dev-feature/min-testing
 
       - name: Prepare the build
-        run: test-drupal-project -v prepare_build
+        run: test-drupal-project prepare_build
 
       - name: Install suggested dependencies
         run: composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/media_entity_generic:^1.0" "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
@@ -87,7 +87,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - uses: shivammathur/setup-php@master
+    - uses: shivammathur/setup-php@2.1.1
       with:
         coverage: none
         php-version: '7.3'
