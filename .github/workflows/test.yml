@@ -51,7 +51,7 @@ jobs:
         run: composer global require thunder/drupal-testing:dev-feature/min-testing
 
       - name: Prepare the build
-        run: test-drupal-project prepare_build
+        run: test-drupal-project -v prepare_build
 
       - name: Install suggested dependencies
         run: composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/media_entity_generic:^1.0" "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
