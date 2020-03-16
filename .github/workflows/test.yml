@@ -224,7 +224,7 @@ jobs:
           "https://${{ secrets.THUNDER_PTM_HOST }}:3000/warmers" \
           --header "Authorization: Bearer ${{ secrets.THUNDER_PTM_TOKEN }}" \
           --header "Content-Type: application/json" \
-          --data "{\"branchTag\":\"${DOCKER_SANITIZED_BRANCH_NAME}\",\"imageTag\":\"${DOCKER_TAG}\",\"composeType\":\"default\"}" \
+          --data "{\"branchTag\":\"${{ steps.vars.outputs.DOCKER_SANITIZED_BRANCH_NAME }}\",\"imageTag\":\"${{ steps.vars.outputs.DOCKER_TAG }}\",\"composeType\":\"default\"}" \
           --output /dev/stderr \
           --write-out "%{http_code}" \
           )
