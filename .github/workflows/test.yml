@@ -93,9 +93,11 @@ jobs:
         php-version: '7.3'
         extensions: Imagick
 
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
+    - name: Setup problem matchers for PHP
+      run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+
+    - name: Setup problem matchers for PHPUnit
+      run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
     - name: Start MySql service
       run: |
