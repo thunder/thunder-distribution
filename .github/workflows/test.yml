@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - uses: shivammathur/setup-php@master
+      - uses: shivammathur/setup-php@v2
         with:
           coverage: none
           php-version: '7.3'
@@ -87,7 +87,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - uses: shivammathur/setup-php@2.1.0
+    - uses: shivammathur/setup-php@v2
       with:
         coverage: none
         php-version: '7.3'
@@ -128,7 +128,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - uses: shivammathur/setup-php@master
+      - uses: shivammathur/setup-php@v2
         with:
           coverage: none
           php-version: '7.3'
