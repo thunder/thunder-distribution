@@ -102,7 +102,7 @@ jobs:
         echo "::add-path::$HOME/.composer/vendor/bin"
 
     - name: Get build environment
-      run: composer global require thunder/drupal-testing:dev-feature/min-testing
+      run: composer global require thunder/drupal-testing:dev-fix/database-init
 
     - name: Download build
       uses: actions/download-artifact@v1
@@ -151,9 +151,6 @@ jobs:
       - name: Get build environment
         run: composer global require thunder/drupal-testing:dev-feature/min-testing
 
-      - name: Setup the environment
-        run: test-drupal-project setup
-
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
@@ -168,12 +165,6 @@ jobs:
       - name: Test for deprecations
         run: test-drupal-project deprecation
         continue-on-error: true
-
-      - name: Install drupal
-        run: test-drupal-project install
-
-      - name: Start webserver
-        run: test-drupal-project start_web_server
 
       - name: Run the tests
         run: test-drupal-project run_tests
