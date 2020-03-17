@@ -17,7 +17,7 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
   DRUPAL_TESTING_TEST_DEPRECATION: false
-  DRUPAL_TESTING_TEST_GROUP: ThunderConfig,Thunder
+  DRUPAL_TESTING_TEST_GROUP: Thunder
   PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
   RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
 
@@ -118,10 +118,13 @@ jobs:
     - name: Unzip build artifact
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build
 
-    - name: Run the tests
+    - name: Run config tests
       run: test-drupal-project
       env:
-        DRUPAL_TESTING_TEST_GROUP: Thunder
+        DRUPAL_TESTING_TEST_GROUP: ThunderConfig
+
+    - name: Run tests suite
+      run: test-drupal-project
 
   test-min:
 

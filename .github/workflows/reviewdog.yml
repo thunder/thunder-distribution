@@ -1,0 +1,39 @@
+name: Check coding styles
+
+on: [pull_request]
+
+jobs:
+  eslint:
+    name: runner / eslint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: eslint
+        uses: reviewdog/action-eslint@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+
+  phpcs:
+    name: runner / phpcs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: phpcs
+        uses: chrfritsch/action-drupal-coder@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          level: error
+
+  misspell:
+    name: runner / misspell
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: reviewdog/action-misspell@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-check
+          level: warning
+          locale: "US"
