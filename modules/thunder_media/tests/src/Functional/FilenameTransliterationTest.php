@@ -41,7 +41,14 @@ class FilenameTransliterationTest extends ThunderTestBase {
     $account = $this->drupalCreateUser(['access site reports']);
     $this->drupalLogin($account);
 
-    \Drupal::service('file_system')->copy('core/tests/fixtures/files/image-1.png', PublicStream::basePath() . '/foo°.png');
+    if (file_exists('core/tests/fixtures/files/image-1.png')) {
+      \Drupal::service('file_system')->copy('core/tests/fixtures/files/image-1.png', PublicStream::basePath() . '/foo°.png');
+    }
+    else {
+      // Needed for min testing.
+      $original = drupal_get_path('module', 'simpletest') . '/files';
+      \Drupal::service('file_system')->copy($original . '/image-1.png', PublicStream::basePath() . '/foo°.png');
+    }
 
     // Upload with replace to guarantee there's something there.
     $edit = [
