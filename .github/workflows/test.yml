@@ -134,6 +134,7 @@ jobs:
 
     env:
       DRUPAL_TESTING_DRUPAL_VERSION: '~8.8.1'
+      DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 'dev-remove-core-recommended'
 
     steps:
       - uses: actions/checkout@v1
