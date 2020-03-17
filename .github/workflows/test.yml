@@ -122,7 +122,7 @@ jobs:
 
     - run: test-drupal-project start_services
 
-    - uses: mxschmitt/action-tmate@v1
+ #   - uses: mxschmitt/action-tmate@v1
 
     - name: Run the tests
       run: test-drupal-project
@@ -181,7 +181,7 @@ jobs:
 
       - run: test-drupal-project start_services
 
-      - uses: mxschmitt/action-tmate@v1
+   #   - uses: mxschmitt/action-tmate@v1
 
       - name: Run the tests
         run: test-drupal-project run_tests
