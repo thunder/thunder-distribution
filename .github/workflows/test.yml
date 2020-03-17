@@ -20,8 +20,6 @@ env:
   DRUPAL_TESTING_TEST_GROUP: ThunderConfig,Thunder
   PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
   RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
-  #DRUPAL_TESTING_TEST_FILTER: "testSiteMap"
-  DRUPAL_TESTING_SELENIUM_CHROME_VERSION: 3.14.0-iron
 
 jobs:
 
@@ -120,18 +118,15 @@ jobs:
     - name: Unzip build artifact
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build
 
-    - run: test-drupal-project start_services
-
- #   - uses: mxschmitt/action-tmate@v1
-
     - name: Run the tests
       run: test-drupal-project
+      env:
+        DRUPAL_TESTING_TEST_GROUP: Thunder
 
   test-min:
 
     runs-on: ubuntu-latest
 
-    #if: false
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') }}
 
     env:
@@ -178,10 +173,6 @@ jobs:
       - name: Test for deprecations
         run: test-drupal-project deprecation
         continue-on-error: true
-
-      - run: test-drupal-project start_services
-
-   #   - uses: mxschmitt/action-tmate@v1
 
       - name: Run the tests
         run: test-drupal-project run_tests
