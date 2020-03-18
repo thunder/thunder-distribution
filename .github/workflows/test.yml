@@ -52,7 +52,7 @@ jobs:
           echo "::add-path::$HOME/.composer/vendor/bin"
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing:dev-feature/min-testing
+        run: composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -108,7 +108,7 @@ jobs:
         echo "::add-path::$HOME/.composer/vendor/bin"
 
     - name: Get build environment
-      run: composer global require thunder/drupal-testing:dev-feature/min-testing
+      run: composer global require thunder/drupal-testing
 
     - name: Download build
       uses: actions/download-artifact@v1
@@ -134,7 +134,6 @@ jobs:
 
     env:
       DRUPAL_TESTING_DRUPAL_VERSION: '~8.8.1'
-      DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 'dev-remove-core-recommended'
 
     steps:
       - uses: actions/checkout@v1
@@ -144,6 +143,12 @@ jobs:
           coverage: none
           php-version: '7.3'
           extensions: Imagick
+
+      - name: Setup problem matchers for PHP
+        run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+
+      - name: Setup problem matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Start MySql service
         run: |
@@ -161,7 +166,7 @@ jobs:
           echo "::add-path::$HOME/.composer/vendor/bin"
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing:dev-feature/min-testing
+        run: composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -206,7 +211,7 @@ jobs:
           echo "::add-path::$HOME/.composer/vendor/bin"
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing:dev-feature/min-testing
+        run: composer global require thunder/drupal-testing
 
       - name: Download build
         uses: actions/download-artifact@v1

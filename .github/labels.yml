@@ -13,6 +13,3 @@
 - name: test-performance
   description: Triggers the performance testing
   color: c2e0c6
-- name: test-update
-  description: Triggers the update path testing
-  color: b5326b
