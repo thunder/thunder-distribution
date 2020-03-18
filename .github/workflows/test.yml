@@ -16,7 +16,6 @@ env:
   DRUPAL_TESTING_TEST_CODING_STYLES: false
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
-  DRUPAL_TESTING_TEST_DEPRECATION: false
   DRUPAL_TESTING_TEST_GROUP: Thunder
   PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
   RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
@@ -59,13 +58,6 @@ jobs:
 
       - name: Install suggested dependencies
         run: composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/media_entity_generic:^1.0" "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
-
-      - name: Build the docroot
-        run: test-drupal-project build
-
-      - name: Test for deprecations
-        run: test-drupal-project deprecation
-        continue-on-error: true
 
       - name: Install drupal
         run: test-drupal-project install
@@ -134,6 +126,7 @@ jobs:
 
     env:
       DRUPAL_TESTING_DRUPAL_VERSION: '~8.8.1'
+      DRUPAL_TESTING_TEST_DEPRECATION: false
 
     steps:
       - uses: actions/checkout@v1
@@ -187,7 +180,7 @@ jobs:
         run: test-drupal-project run_tests
 
   test-performance:
-    needs: build
+    needs: [build, test-max]
 
     runs-on: ubuntu-latest
 
