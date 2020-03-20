@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.3.10](https://github.com/thunder/thunder-distribution/tree/3.3.10) 2020-03-20
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.9...3.3.10)
+
+No visible changes. Small test infrastructure fixes and version bumps.
+
 ## [3.3.9](https://github.com/thunder/thunder-distribution/tree/3.3.9) 2020-03-05
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.8...3.3.9)
 
