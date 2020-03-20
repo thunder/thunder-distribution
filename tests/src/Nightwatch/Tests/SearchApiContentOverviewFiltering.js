@@ -46,6 +46,7 @@ module.exports = {
       )
       // End "Filter by type".
       .performance.endMark()
+      // End full task.
       .performance.endMark();
 
     // End measurement transaction for whole test.
