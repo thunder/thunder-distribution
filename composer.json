@@ -74,6 +74,9 @@
             },
             "drupal/redirect": {
                 "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-12-23/3089389-6.patch"
+            },
+            "drupal/search_api": {
+                "Reset-tracker drush command functionality is misleading": "https://www.drupal.org/files/issues/2020-03-12/3119335.patch"
             }
         }
     },
