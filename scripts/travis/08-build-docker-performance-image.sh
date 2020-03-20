@@ -4,7 +4,7 @@
 
 # Get Thunder performance Docker project for packaging
 THUNDER_PERFORMANCE="${TEST_DIR}/../docker-thunder-performance"
-git clone https://github.com/thunder/docker-thunder-performance.git -b search-api "${THUNDER_PERFORMANCE}"
+git clone https://github.com/thunder/docker-thunder-performance.git "${THUNDER_PERFORMANCE}"
 
 # Download project artifact from S3
 aws s3 cp "s3://thunder-builds/${PROJECT_ARTIFACT_FILE_NAME}" "${PROJECT_ARTIFACT_FILE}"
