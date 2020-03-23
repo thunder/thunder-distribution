@@ -142,7 +142,7 @@
         "drupal/thunder_fia": "^1.0",
         "drupal/token": "^1.0",
         "drupal/update_helper": "^1.0",
-        "drupal/search_api": "dev-1.x",
+        "drupal/search_api": "1.15",
         "drupal/views_bulk_operations": "^2.4",
         "npm-asset/exif-js": "^2.3.0",
         "npm-asset/blazy": "^1.8",
