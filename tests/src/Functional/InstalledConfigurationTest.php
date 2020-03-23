@@ -92,6 +92,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_view_mode.taxonomy_term.token',
     'core.entity_view_mode.user.token',
     'core.entity_view_mode.path_alias.token',
+    'core.entity_view_mode.search_api_task.token',
 
     // SearchAPI tour.
     'tour.tour.search-api-index',
