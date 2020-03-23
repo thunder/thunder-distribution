@@ -1,8 +1,8 @@
 language: php
 cache:
   directories:
-  - "$HOME/.composer/cache"
-  - "$HOME/.drush/cache"
+    - "$HOME/.composer/cache"
+    - "$HOME/.drush/cache"
 
 php:
   - 7.3
@@ -21,12 +21,6 @@ addons:
     region: eu-west-1
     paths:
       - /tmp/thunder-travis-ci
-
-stages:
-  - build project
-  - sanity checks
-  - test
-  - performance test
 
 env:
   global:

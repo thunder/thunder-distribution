@@ -5,7 +5,7 @@ cd ${TEST_DIR}/docroot
 
 # Silently pull docker image
 docker pull selenium/standalone-chrome:3.14.0-iron > /dev/null
-docker run -d -p 4444:4444 -v $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests:/tests -v /dev/shm:/dev/shm --net=host selenium/standalone-chrome:3.14.0-iron
+docker run -d -p 4444:4444 -v $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');"):/project -v /dev/shm:/dev/shm --net=host selenium/standalone-chrome:3.14.0-iron
 docker ps -a
 
 # Make simple export import

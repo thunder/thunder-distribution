@@ -3,7 +3,7 @@
 This Thunder AMP theme includes config and templates to use AMP with the
 Thunder distribution.
 If you install this theme, two things will happen:
-1. During the installation, the directoy `config/optional` of this theme will be read
+1. During the installation, the directory `config/optional` of this theme will be read
 and included in the config. This configures the view modes for article, paragraphs, media and blocks.
 2. The thunder profile will automatically configure
 the AMP settings (to be found in "Configuration/Content authoring/AMP Configuration")
