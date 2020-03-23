@@ -2,12 +2,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.channel.field_ivw
     - field.field.taxonomy_term.channel.field_meta_tags
     - field.field.taxonomy_term.channel.field_paragraphs
     - taxonomy.vocabulary.channel
   module:
-    - ivw_integration
     - metatag
     - paragraphs
     - paragraphs_features
@@ -17,12 +15,6 @@ targetEntityType: taxonomy_term
 bundle: channel
 mode: default
 content:
-  field_ivw:
-    type: ivw_integration_widget
-    weight: 6
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   field_meta_tags:
     type: metatag_firehose
     weight: 4

@@ -4,7 +4,6 @@ dependencies:
   config:
     - core.entity_view_mode.node.search_index
     - field.field.node.article.field_channel
-    - field.field.node.article.field_ivw
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_paragraphs
     - field.field.node.article.field_seo_title
@@ -47,7 +46,6 @@ content:
 hidden:
   content_moderation_control: true
   field_channel: true
-  field_ivw: true
   field_meta_tags: true
   field_seo_title: true
   field_teaser_media: true

@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.channel.field_ivw
     - field.field.taxonomy_term.channel.field_meta_tags
     - field.field.taxonomy_term.channel.field_paragraphs
     - taxonomy.vocabulary.channel
@@ -32,6 +31,5 @@ content:
     region: content
 hidden:
   description: true
-  field_ivw: true
   langcode: true
   search_api_excerpt: true

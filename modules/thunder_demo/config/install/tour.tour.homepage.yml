@@ -2,10 +2,10 @@ langcode: en
 status: true
 dependencies:
   module:
-    - thunder_testing_demo
+    - thunder_demo
 id: homepage
 label: Homepage
-module: thunder_testing_demo
+module: thunder_demo
 routes:
   -
     route_name: view.frontpage.page_1
