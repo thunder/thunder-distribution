@@ -4,6 +4,7 @@ dependencies:
   config:
     - entity_browser.browser.image_browser
     - field.field.node.article.field_channel
+    - field.field.node.article.field_ivw
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_paragraphs
     - field.field.node.article.field_seo_title
@@ -11,10 +12,10 @@ dependencies:
     - field.field.node.article.field_teaser_media
     - field.field.node.article.field_teaser_text
     - node.type.article
-    - workflows.workflow.editorial
   module:
     - entity_browser
     - field_group
+    - ivw_integration
     - metatag
     - paragraphs
     - paragraphs_features
@@ -85,6 +86,12 @@ content:
   field_channel:
     type: options_select
     weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_ivw:
+    type: ivw_integration_widget
+    weight: 121
     settings: {  }
     third_party_settings: {  }
     region: content

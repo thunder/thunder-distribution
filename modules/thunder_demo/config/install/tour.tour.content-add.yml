@@ -2,10 +2,10 @@ langcode: en
 status: true
 dependencies:
   module:
-    - thunder_demo
+    - thunder_testing_demo
 id: content-add
 label: 'Add new content'
-module: thunder_demo
+module: thunder_testing_demo
 routes:
   -
     route_name: node.add

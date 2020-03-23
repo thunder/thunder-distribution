@@ -11,6 +11,7 @@ permissions:
   - 'access_unpublished node article'
   - 'cancel account'
   - 'change own username'
+  - 'opt-in or out of google analytics tracking'
   - 'use text format basic_html'
   - 'view media'
   - 'view published terms in channel'
