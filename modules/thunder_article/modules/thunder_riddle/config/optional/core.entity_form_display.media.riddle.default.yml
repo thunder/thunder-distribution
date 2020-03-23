@@ -45,6 +45,6 @@ content:
     third_party_settings: {  }
 hidden:
   moderation_state: true
+  name: true
   path: true
   status: true
-  name: true

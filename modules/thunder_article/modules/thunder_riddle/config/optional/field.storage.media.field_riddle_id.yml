@@ -1,11 +1,11 @@
 langcode: en
 status: true
 dependencies:
-  module:
-    - media
   enforced:
     module:
       - thunder_riddle
+  module:
+    - media
 id: media.field_riddle_id
 field_name: field_riddle_id
 entity_type: media

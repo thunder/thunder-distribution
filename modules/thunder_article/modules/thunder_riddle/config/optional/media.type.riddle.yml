@@ -16,4 +16,3 @@ source_configuration:
   source_field: field_riddle_id
 field_map:
   status: status
-third_party_settings: {  }
