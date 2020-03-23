@@ -35,7 +35,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'thunder_riddle',
     'harbourmaster',
     'simple_gmap',
-    'search_api',
+    'thunder_search_api',
 
     // Additional modules.
     // 'nexx_integration',
