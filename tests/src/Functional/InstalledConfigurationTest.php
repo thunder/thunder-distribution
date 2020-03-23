@@ -225,6 +225,11 @@ class InstalledConfigurationTest extends ThunderTestBase {
         'field_ivw' => TRUE,
       ],
     ],
+    'core.entity_view_display.node.article.search_index' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
     'core.entity_view_display.node.article.teaser' => [
       'hidden' => [
         'field_ivw' => TRUE,
