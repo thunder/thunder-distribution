@@ -21,4 +21,5 @@ content:
     type: entity_reference_entity_view
 hidden:
   created: true
+  search_api_excerpt: true
   uid: true

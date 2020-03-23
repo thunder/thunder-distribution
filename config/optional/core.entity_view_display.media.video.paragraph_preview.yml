@@ -53,4 +53,5 @@ hidden:
   field_media_video_embed_field: true
   field_source: true
   langcode: true
+  search_api_excerpt: true
   uid: true
