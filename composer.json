@@ -144,6 +144,7 @@
         "drupal/update_helper": "^1.0",
         "drupal/search_api": "1.15",
         "drupal/views_bulk_operations": "^2.4",
+        "npm-asset/dropzone": "^5.5.1",
         "npm-asset/exif-js": "^2.3.0",
         "npm-asset/blazy": "^1.8",
         "npm-asset/slick-carousel": "^1.8",
