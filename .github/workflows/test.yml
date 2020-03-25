@@ -220,8 +220,10 @@ jobs:
       - name: Set variables
         id: vars
         run: |
-          echo ::set-output name=DOCKER_SANITIZED_BRANCH_NAME::$(echo ${${GITHUB_REF#refs/heads/}:-$GITHUB_HEAD_REF} | sed 's/\//_/g')
-          echo ::set-output name=DOCKER_TAG::$(echo ${${GITHUB_REF#refs/heads/}:-$GITHUB_HEAD_REF} | sed 's/\//_/g')-${{ github.run_id }}
+# GITHUB_HEAD_REF is only defined in PRs. GITHUB_REF is on the default branch something like refs/heads/8.x-4.x.
+# So if GITHUB_HEAD_REF is not defined we use GITHUB_REF and remove leading refs/heads/. On the result / will replaced by _
+          echo ::set-output name=DOCKER_SANITIZED_BRANCH_NAME::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')
+          echo ::set-output name=DOCKER_TAG::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')-${{ github.run_id }}
 
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
