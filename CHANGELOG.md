@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.3.11](https://github.com/thunder/thunder-distribution/tree/3.3.11) 2020-03-25
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.10...3.3.11)
+
+Hotfix, to bump the drupal core version in the composer file, which we missed in the last release.
+
 ## [3.3.10](https://github.com/thunder/thunder-distribution/tree/3.3.10) 2020-03-20
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.9...3.3.10)
 
