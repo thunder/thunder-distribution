@@ -397,3 +397,14 @@ function thunder_field_widget_info_alter(array &$info) {
     unset($info['thunder_moderation_state_default']);
   }
 }
+
+/**
+ * Implements hook_field_widget_multivalue_WIDGET_TYPE_form_alter() for the
+ * entity_browser_entity_reference widget.
+ *
+ * Removes the cardinality information from the #prefix element of the current
+ * selection.
+ */
+function thunder_field_widget_multivalue_entity_browser_entity_reference_form_alter(array &$elements, FormStateInterface $form_state, array $context) {
+  unset ($elements['current']['#prefix']);
+}
