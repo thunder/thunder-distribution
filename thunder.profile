@@ -405,5 +405,5 @@ function thunder_field_widget_info_alter(array &$info) {
  * selection.
  */
 function thunder_field_widget_multivalue_entity_browser_entity_reference_form_alter(array &$elements, FormStateInterface $form_state, array $context) {
-  unset ($elements['current']['#prefix']);
+  unset($elements['current']['#prefix']);
 }
