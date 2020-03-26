@@ -399,8 +399,7 @@ function thunder_field_widget_info_alter(array &$info) {
 }
 
 /**
- * Implements hook_field_widget_multivalue_WIDGET_TYPE_form_alter() for the
- * entity_browser_entity_reference widget.
+ * Implements hook_field_widget_multivalue_WIDGET_TYPE_form_alter().
  *
  * Removes the cardinality information from the #prefix element of the current
  * selection.
