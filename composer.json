@@ -96,7 +96,7 @@
         "drupal/config_selector": "^1.0-beta1",
         "drupal/config_update": "^1.5",
         "drupal/content_lock": "^1.0-alpha8",
-        "drupal/crop": "<2.1",
+        "drupal/crop": "2.0",
         "drupal/ctools": "^3.1",
         "drupal/default_content": "^1.0-alpha7",
         "drupal/diff": "1.0",
