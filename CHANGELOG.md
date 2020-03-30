@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.4.4](https://github.com/thunder/thunder-distribution/tree/3.4.4) 2020-03-20
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.4.3...3.4.4)
+
+Small fixes and updates. In preparation of a future drop of facebook instant articles support,
+we moved the integration code out into a separate module, which can be used by people, who want to
+continue using it.
+
+- Fix [Inconsistent order of paragraph types in add dialog](https://www.drupal.org/node/3117401)
+- Do [Update blazy module](https://www.drupal.org/node/3118911)
+- Do [Move facebook integration to its own module](https://www.drupal.org/node/3059036)
+- Do [Disable image upload button in ckeditor](https://www.drupal.org/node/2875691)
+
 ## [3.4.3](https://github.com/thunder/thunder-distribution/tree/3.4.3) 2020-03-05
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.4.2...3.4.3)
 
