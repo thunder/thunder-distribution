@@ -84,7 +84,7 @@
                 "Add new 'core_version_requirement' key to .info.yml": "https://www.drupal.org/files/issues/2020-01-10/3079913-5.patch"
             },
             "drupal/metatag": {
-                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-03-02/3042590-47.patch"
+                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-03-27/3042590-54.patch"
             }
         }
     },
@@ -126,7 +126,7 @@
         "drupal/liveblog": "1.x-dev",
         "drupal/media_entity_instagram": "2.x-dev",
         "drupal/media_entity_pinterest": "2.x-dev",
-        "drupal/media_entity_slideshow": "2.x-dev",
+        "drupal/media_entity_slideshow": "^2.0-alpha1",
         "drupal/media_entity_twitter": "2.x-dev",
         "drupal/media_expire": "^2.2",
         "drupal/metatag": "1.x-dev",
