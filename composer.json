@@ -135,7 +135,7 @@
         "drupal/password_policy": "3.x-dev",
         "drupal/pathauto": "1.x-dev",
         "drupal/responsive_preview": "^1.0-alpha7",
-        "drupal/redirect": "1.5",
+        "drupal/redirect": "1.x-dev",
         "drupal/scheduler": "1.x-dev",
         "drupal/scheduler_content_moderation_integration": "^1.1",
         "drupal/select2": "^1.3",
