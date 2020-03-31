@@ -20,8 +20,6 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
   DRUPAL_TESTING_TEST_GROUP: Thunder
-  PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
-  RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
 
 jobs:
 
@@ -180,6 +178,9 @@ jobs:
         continue-on-error: true
 
       - name: Run the tests
+        env:
+          PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
+          RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
         run: test-drupal-project run_tests
 
   test-performance:
