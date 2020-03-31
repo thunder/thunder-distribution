@@ -186,3 +186,17 @@ function thunder_update_8306() {
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();
 }
+
+/**
+ * CHange entity browser integration.
+ */
+function thunder_update_8307() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8307');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
+}
