@@ -117,9 +117,10 @@ jobs:
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderConfig
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v1
     - name: Run tests suite
+      env:
+        PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
+        RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
       run: test-drupal-project run_tests
 
   test-min:
