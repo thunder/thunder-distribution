@@ -73,6 +73,7 @@ jobs:
         with:
           name: build
           path: build.tgz
+
   test-max:
     needs: build
 
@@ -118,9 +119,6 @@ jobs:
         DRUPAL_TESTING_TEST_GROUP: ThunderConfig
 
     - name: Run tests suite
-      env:
-        PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
-        RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
       run: test-drupal-project run_tests
 
   test-min:
