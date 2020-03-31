@@ -88,7 +88,7 @@
                 "Add new 'core_version_requirement' key to .info.yml": "https://www.drupal.org/files/issues/2020-01-10/3079913-5.patch"
             },
             "drupal/metatag": {
-                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-03-27/3042590-54.patch"
+                "Drupal 9 Deprecated Code Report": "https://www.drupal.org/files/issues/2020-03-30/3042590-64.patch"
             }
         }
     },
