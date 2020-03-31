@@ -73,7 +73,6 @@ jobs:
         with:
           name: build
           path: build.tgz
-
   test-max:
     needs: build
 
@@ -118,6 +117,8 @@ jobs:
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderConfig
 
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v1
     - name: Run tests suite
       run: test-drupal-project run_tests
 
