@@ -194,6 +194,9 @@ function thunder_update_8307() {
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updateHelper = \Drupal::service('update_helper.updater');
 
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8307');
+
   // Updating additional paragraph form displays using inline_entity_form.
   $paragraph_form_display_ids = Drupal::entityQuery('entity_form_display')
     ->condition('targetEntityType', 'paragraph')
