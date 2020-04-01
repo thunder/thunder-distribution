@@ -119,12 +119,17 @@ content:
         split_text: true
         show_drag_and_drop: false
       paragraphs_paste:
-        enabled: '1'
-        mapping:
+        enabled: true
+        property_path_mapping:
           'oembed_url:video': 'paragraph.video.field_video:video.field_media_video_embed_field'
           'oembed_url:twitter': 'paragraph.twitter.field_media:twitter.field_url'
           'oembed_url:instagram': 'paragraph.instagram.field_media:instagram.field_url'
           text: paragraph.text.field_text
+        split_method:
+          double_new_line: double_new_line
+          oEmbed: oEmbed
+          regex: '0'
+        split_method_regex: ''
     region: content
   field_seo_title:
     type: string_textfield
@@ -150,6 +155,7 @@ content:
       autocomplete: true
       match_operator: CONTAINS
       width: 100%
+      match_limit: 10
     third_party_settings: {  }
     region: content
   field_teaser_media:
@@ -247,6 +253,7 @@ content:
       width: 100%
       autocomplete: true
       match_operator: CONTAINS
+      match_limit: 10
     third_party_settings: {  }
     region: content
   unpublish_on:
