@@ -194,21 +194,18 @@ function thunder_update_8307() {
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updateHelper = \Drupal::service('update_helper.updater');
 
-  // Execute configuration update definitions with logging of success.
-  $updateHelper->executeUpdate('thunder', 'thunder_update_8307');
-
   // Updating additional paragraph form displays using inline_entity_form.
-  $paragraph_form_display_ids = Drupal::entityQuery('entity_form_display')
+  $entity_form_display_ids = Drupal::entityQuery('entity_form_display')
     ->condition('targetEntityType', 'paragraph')
     ->execute();
 
   try {
     $storage = \Drupal::entityTypeManager()->getStorage('entity_form_display');
-    foreach ($paragraph_form_display_ids as $paragraph_form_display_id) {
-      /** @var \Drupal\Core\Entity\EntityDisplayBase $paragraph_form_display */
-      $paragraph_form_display = $storage->load($paragraph_form_display_id);
+    foreach ($entity_form_display_ids as $entity_form_display_id) {
+      /** @var \Drupal\Core\Entity\EntityDisplayBase $entity_form_display */
+      $entity_form_display = $storage->load($entity_form_display_id);
 
-      foreach ($paragraph_form_display->getComponents() as $name => $options) {
+      foreach ($entity_form_display->getComponents() as $name => $options) {
         if ($options['type'] !== 'entity_browser_entity_reference' || $options['settings']['field_widget_display'] !== 'inline_entity_form') {
           continue;
         }
@@ -216,7 +213,14 @@ function thunder_update_8307() {
         unset($options['settings']['field_widget_display_settings']['form_mode']);
         $options['settings']['field_widget_display'] = 'rendered_entity';
         $options['settings']['field_widget_display_settings']['view_mode'] = 'thumbnail';
-        $paragraph_form_display->setComponent($name, $options)->save();
+        $entity_form_display->setComponent($name, $options)->save();
+
+        $field_id = 'field.field.' . $entity_form_display->getTargetEntityTypeId() . '.' . $entity_form_display->bundle() . '.' . $name;
+
+        $field = $storage->load($field_id);
+        print_r(get_class($field)); die();
+        $field->set('required', false)->save();
+
         $updateHelper->logger()->info('Converted field_widget_display from inline_entity form to rendered_entity for field ' . $name);
       }
     }
