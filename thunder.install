@@ -207,7 +207,8 @@ function thunder_update_8307() {
       $entity_form_display = $entity_form_display_storage->load($entity_form_display_id);
 
       foreach ($entity_form_display->getComponents() as $name => $options) {
-        // Modify only entity_browser_entity_reference fields with field widget display 'inline_entity_form'.
+        // Modify only entity_browser_entity_reference fields with field widget
+        // display 'inline_entity_form'.
         if ($options['type'] !== 'entity_browser_entity_reference' || $options['settings']['field_widget_display'] !== 'inline_entity_form') {
           continue;
         }
