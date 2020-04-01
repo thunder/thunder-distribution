@@ -218,7 +218,6 @@ function thunder_update_8307() {
         $field_id = 'field.field.' . $entity_form_display->getTargetEntityTypeId() . '.' . $entity_form_display->bundle() . '.' . $name;
 
         $field = $storage->load($field_id);
-        print_r(get_class($field)); die();
         $field->set('required', false)->save();
 
         $updateHelper->logger()->info('Converted field_widget_display from inline_entity form to rendered_entity for field ' . $name);
