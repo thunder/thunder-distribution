@@ -32,9 +32,9 @@ function thunder_paragraphs_field_widget_third_party_settings_form(WidgetInterfa
 function thunder_paragraphs_field_widget_entity_browser_entity_reference_form_alter(&$element, FormStateInterface $form_state, $context) {
   /* @var $context['widget'] EntityReferenceBrowserWidget */
   if (isset($context['widget']) && ($context['widget']->getSetting('field_widget_display') === 'inline_entity_form')) {
+    $element['#attach_ief_submit'] = TRUE;
     @trigger_error(__NAMESPACE__ . '\The inline_entity_form field widget display will be deprecated in Thunder 4. Please use a different display for you field.', E_USER_DEPRECATED);
   }
-}
 
 /**
  * Implements hook_field_widget_WIDGET_TYPE_form_alter().
