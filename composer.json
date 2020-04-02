@@ -119,7 +119,7 @@
         "drupal/config_update": "1.x-dev",
         "drupal/content_lock": "^2.0",
         "drupal/crop": "^2.0-rc1",
-        "drupal/ctools": "3.x-dev",
+        "drupal/ctools": "^3.1",
         "drupal/default_content": "1.x-dev",
         "drupal/diff": "1.0",
         "drupal/dropzonejs": "^2.0-alpha2",
