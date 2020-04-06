@@ -90,9 +90,6 @@
             },
             "drupal/responsive_preview": {
                 "Drupal 9 compatibility": "https://www.drupal.org/files/issues/2020-04-01/3105042-7.patch"
-            },
-            "drupal/media_entity_pinterest": {
-                "Deprecated Code Report": "https://www.drupal.org/files/issues/2020-04-01/3074751-11.patch"
             }
         }
     },
