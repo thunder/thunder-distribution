@@ -25,7 +25,7 @@ files that are shipped in the distribution should be:
   ```
   drush en config_profile
   ```
-* Make all your changes in the UI
+* Apply all your changes in the UI
 * Export your configuration
   ```
   drush cex
@@ -44,9 +44,9 @@ folder
 Thunder distribution comes with a set of drupal tests. They can be used to validate Thunder installation or to use provided traits for your own project drupal tests.
 
 #### How to run the tests
-In order to execute tests, following steps have to be executed.
+In order to execute tests follow these steps.
 
-Enable the Simpletest module. Over administration UI or by drush.
+Enable the Simpletest module via the administration UI or by using a drush command.
 
 ```bash
 drush -y en simpletest
@@ -96,7 +96,7 @@ thunderDumpFile=thunder.sql.gz php ./core/scripts/run-tests.sh --php '/usr/local
 --verbose --url http://thunder.dd:8083 --dburl mysql://drupaluser@127.0.0.1:33067/thunder --class "Drupal\Tests\thunder\Functional\InstalledConfigurationTest"
 ```
 
-This is just an example. For better explanation see [Running PHPUnit tests](https://www.drupal.org/docs/8/phpunit/running-phpunit-tests)
+This is just an example. For a better explanation see [Running PHPUnit tests](https://www.drupal.org/docs/8/phpunit/running-phpunit-tests)
 
 Sometimes tests are executed inside docker container where selenium is running inside other containers and it's not possible to access it over localhost.
 Or there are cases when two separated containers are running on the same machine but on different ports (for example Chrome and Firefox selenium containers).
@@ -260,9 +260,9 @@ Workflow to generate Thunder configuration update is following:
 1. Make clean install of the previous version of Thunder (version for which one you want to create configuration update). For example, if you are merging changes to `develop` branch, then you should install Thunder for that branch
 2. When Thunder is installed, make code update (with code update also configuration files will be updated, but not active configuration in database)
 3. Execute update hooks if it's necessary (e.g. in case when you have module and/or core updates in your branch)
-4. Now is a moment to generate Thunder configuration update code. For that we have provided following drupal console command: `drupal generate:thunder:update`. That command should be executed and there are several information that has to be filled, like module name where all generated data will be saved (CUD file, checklist `update.yml` and update hook function). Then also information for checklist entry, like title, success message and failure message. Command will generate CUD file and save it in `config/update` folder of the module, it will add entry in `update.yml` file for the checklist and it will create update hook function in `<module_name>.install` file.
+4. Now is a moment to generate Thunder configuration update code. For that we have provided following drupal console command: `drupal generate:configuration:update`. That command should be executed and there are several information that has to be filled, like module name where all generated data will be saved (CUD file, checklist `update.yml` and update hook function). Then also information for checklist entry, like title, success message and failure message. Command will generate CUD file and save it in `config/update` folder of the module, it will add entry in `update.yml` file for the checklist and it will create update hook function in `<module_name>.install` file.
 5. After the command has finished it will display what files are modified and generated. It's always good to make an additional check of generated code.
 
-Additional information about command options are provided with `drupal generate:thunder:update --help` and it's also possible to provide all information directly in command line without using the wizard.
+Additional information about command options are provided with `drupal generate:configuration:update --help` and it's also possible to provide all information directly in command line without using the wizard.
 
 When an update for Thunder is created don't forget to commit your update hook with `[TEST_UPDATE=true]` flag in your commit message, so that it's automatically tested.

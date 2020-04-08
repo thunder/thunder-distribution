@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\thunder_media\Functional;
 
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\StreamWrapper\PublicStream;
 use Drupal\file\Entity\File;
 use Drupal\Tests\thunder\Functional\ThunderTestBase;
@@ -40,13 +41,18 @@ class FilenameTransliterationTest extends ThunderTestBase {
     $account = $this->drupalCreateUser(['access site reports']);
     $this->drupalLogin($account);
 
-    $original = drupal_get_path('module', 'simpletest') . '/files';
-
-    \Drupal::service('file_system')->copy($original . '/image-1.png', PublicStream::basePath() . '/foo°.png');
+    if (file_exists('core/tests/fixtures/files/image-1.png')) {
+      \Drupal::service('file_system')->copy('core/tests/fixtures/files/image-1.png', PublicStream::basePath() . '/foo°.png');
+    }
+    else {
+      // Needed for min testing.
+      $original = drupal_get_path('module', 'simpletest') . '/files';
+      \Drupal::service('file_system')->copy($original . '/image-1.png', PublicStream::basePath() . '/foo°.png');
+    }
 
     // Upload with replace to guarantee there's something there.
     $edit = [
-      'file_test_replace' => FILE_EXISTS_RENAME,
+      'file_test_replace' => FileSystemInterface::EXISTS_RENAME,
       'files[file_test_upload]' => \Drupal::service('file_system')->realpath('public://foo°.png'),
     ];
     $this->drupalPostForm('file-test/upload', $edit, $this->t('Submit'));

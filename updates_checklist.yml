@@ -6,7 +6,7 @@ v3.2:
     '#description': '<h3>These are the new features for this release:</h3>'
     thunder_update_8302:
         '#title': 'Change replace button to remove button on image paragraph form.'
-        '#description': '<p>The replace button can interfere with ajax requests, to prevent such bad behaviour, we use the remove button instead.</p>'
+        '#description': '<p>The replace button can interfere with ajax requests, to prevent such bad behavior, we use the remove button instead.</p>'
         '#description_successful': '<p>The replace button has been successfully changed.</p>'
         '#description_failed': '<p><strong>The replace button could not be changed to the remove button. Please check the image paragraphs widget settings.</strong><p>'
         configure_page: { '#text': 'Paragraph configuration', '#url': 'internal:/admin/structure/paragraphs_type/image/form-display' }
@@ -18,3 +18,30 @@ v3.2:
         extension_page: { '#text': 'Extension page', '#url': 'internal:/admin/modules' }
         configure_page: { '#text': 'Autosave Form configuration', '#url': 'internal:/admin/config/content/autosave_form' }
         module_page: { '#text': 'Autosave Form module page', '#url': 'https://www.drupal.org/project/autosave_form' }
+v4.2:
+    '#title': 'Update to version v4.2'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_update_8304:
+        '#title': 'Enable "Autofill" module'
+        '#description': '<p>The "Autofill" module automatically fills the values from one textfield to another while typing.</p>'
+        '#description_successful': '<p>The "Autofill" module has been installed.</p>'
+        '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.<p>'
+        extension_page: { '#text': 'Extension page', '#url': 'internal:/admin/modules' }
+        configure_page: { '#text': 'Article form configuration', '#url': 'internal:/admin/structure/types/manage/article/form-display' }
+        module_page: { '#text': 'Autofill module page', '#url': 'https://www.drupal.org/project/autofill' }
+v4.3:
+    '#title': 'Update to version v4.3'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_update_8305:
+        '#title': 'Disable paragraphs drag & drop action button'
+        '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed. To  manually change your configuration visit your paragraphs widget configurations and select or deselect the show drag & drop button option.</strong><p>'
+v4.4:
+    '#title': 'Update to version v4.4'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_update_8306:
+        '#title': 'Adjust the order of paragraph types in add dialog for taxonomy terms of bundles news and tags to be consistent across the system.'
+        '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed. The order of paragraph types can be aligned manually in field_paragraphs field configuration for taxonomy terms of bundles news and tags.</strong><p>'
