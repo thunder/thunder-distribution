@@ -79,9 +79,6 @@
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2019-06-13/2918974-7.patch",
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2020-03-20/password-policy-2771129-110.patch"
             },
-            "drupal/config_update": {
-                "Make sure Config Update Manager is Drupal 9 compatible": "https://www.drupal.org/files/issues/2020-04-01/3089420-6.patch"
-            },
             "drupal/redirect": {
                 "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-12-23/3089389-6.patch"
             },
