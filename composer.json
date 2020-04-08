@@ -107,7 +107,7 @@
         "drupal/checklistapi": "1.x-dev",
         "drupal/core": "8.9.x-dev",
         "drupal/config_selector": "^2.0",
-        "drupal/config_update": "1.x-dev",
+        "drupal/config_update": "^1.5",
         "drupal/content_lock": "^2.0",
         "drupal/crop": "^2.0-rc1",
         "drupal/ctools": "^3.1",
