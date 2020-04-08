@@ -35,10 +35,6 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/thunder/scheduler_content_moderation_integration"
         }
     ],
     "extra": {
