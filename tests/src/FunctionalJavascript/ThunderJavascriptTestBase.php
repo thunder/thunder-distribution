@@ -36,7 +36,11 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    *
    * @see \Drupal\Tests\BrowserTestBase::installDrupal()
    */
-  protected static $modules = ['thunder_testing_demo', 'content_moderation'];
+  protected static $modules = [
+    'thunder_testing_demo',
+    'content_moderation',
+    'libraries',
+  ];
 
   /**
    * The profile to install as a basis for testing.

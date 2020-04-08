@@ -77,6 +77,13 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        DRUPAL_TESTING_DRUPAL_VERSION: ['~8.8.4', '~8.9.0']
+
+    env:
+      DRUPAL_TESTING_DRUPAL_VERSION: ${{ matrix.DRUPAL_TESTING_DRUPAL_VERSION }}
+
     steps:
     - uses: actions/checkout@v1
 
