@@ -127,6 +127,7 @@
         "drupal/responsive_preview": "^1.0-alpha7",
         "drupal/redirect": "1.5",
         "drupal/scheduler": "^1.1",
+        "drupal/search_api": "^1.15",
         "drupal/scheduler_content_moderation_integration": "^1.1",
         "drupal/select2": "dev-drupal9",
         "drupal/simple_sitemap": "^3.3",
