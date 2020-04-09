@@ -61,7 +61,7 @@ jobs:
         run: composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/media_entity_generic:^1.0" "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Add repo
-        run: composer config repositories.foo vcs https://github.com/thunder/scheduler_content_moderation_integration --working-dir=/tmp/test/thunder/install
+        run: composer config repositories.foo vcs https://github.com/thunder/select2 --working-dir=/tmp/test/thunder/install
 
       - name: Install drupal
         run: test-drupal-project install
