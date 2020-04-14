@@ -165,9 +165,6 @@ function _thunder_media_media_field_widget_form_alter_helper(array &$widget, $me
   // Process the media field widget.
   $widget['#attributes']['class'][] = 'media-form__items-widget';
   if (isset($widget['current']['items'])) {
-    if (count($widget['current']['items']) == 1) {
-      $widget['current']['#attributes']['class'][] = 'entities-list--single-item';
-    }
     foreach ($widget['current']['items'] as &$media_item) {
       $media_item['#attributes']['class'][] = 'media-form__item-widget';
       $media_item['#attributes']['class'][] = 'media-form__item-widget--' . $media_type;
