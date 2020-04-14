@@ -26,3 +26,9 @@ v3.9:
     '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
     '#description_successful': '<p>Configuration is successfully updated.</p>'
     '#description_failed': '<p><strong>Update of configuration has failed. To  manually change your configuration visit your paragraphs widget configurations and select or deselect the show drag & drop button option.</strong><p>'
+v3.12:
+  '#title': 'Update to version v3.12'
+  '#description': '<h3>These are the new features for this release:</h3>'
+  thunder_update_8307:
+    '#title': 'Update and reconfigure entity browser widget.'
+    '#description': '<p>The entity browser configuration in paragraphs has changed. We do not use the inline entity forms field widget anymore, and use the rendered entity instead.  We recommend to manually check all paragraphs, that use the inline entity form field widget for media entities. Make sure those widgets are changed to rendered entity.</p>'
