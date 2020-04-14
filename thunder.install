@@ -186,3 +186,52 @@ function thunder_update_8306() {
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();
 }
+
+/**
+ * Change entity browser widget in paragraphs integration.
+ */
+function thunder_update_8307() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+  $configFactory = \Drupal::configFactory();
+
+  // Modify paragraph form displays using inline_entity_form.
+  $entityFormDisplayIds = Drupal::entityQuery('entity_form_display')
+    ->condition('targetEntityType', 'paragraph')
+    ->execute();
+
+  try {
+    $entityFormDisplayStorage = \Drupal::entityTypeManager()->getStorage('entity_form_display');
+    foreach ($entityFormDisplayIds as $entityFormDisplayId) {
+      /** @var \Drupal\Core\Entity\EntityDisplayBase $entityFormDisplay */
+      $entityFormDisplay = $entityFormDisplayStorage->load($entityFormDisplayId);
+
+      foreach ($entityFormDisplay->getComponents() as $name => $options) {
+        // Modify only entity_browser_entity_reference fields with field widget
+        // display 'inline_entity_form'.
+        if ($options['type'] !== 'entity_browser_entity_reference' || $options['settings']['field_widget_display'] !== 'inline_entity_form') {
+          continue;
+        }
+
+        unset($options['settings']['field_widget_display_settings']['form_mode']);
+        $options['settings']['field_widget_display'] = 'rendered_entity';
+        $options['settings']['field_widget_edit'] = TRUE;
+        $options['settings']['field_widget_display_settings']['view_mode'] = 'thumbnail';
+        $entityFormDisplay->setComponent($name, $options)->save();
+
+        // These kind of fields cannot be required.
+        $field_id = 'field.field.' . $entityFormDisplay->getTargetEntityTypeId() . '.' . $entityFormDisplay->get('bundle') . '.' . $name;
+        $field = $configFactory->getEditable($field_id);
+        $field->set('required', FALSE)->save();
+
+        $updateHelper->logger()->info('Converted field_widget_display from inline_entity form to rendered_entity for field ' . $name . ' in the ' . $entityFormDisplay->get('bundle') . ' paragraph ');
+      }
+    }
+  }
+  catch (\Exception $e) {
+    $updateHelper->logger()->error($e->getMessage());
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
+}

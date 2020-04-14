@@ -69,7 +69,7 @@
             },
             "drupal/entity_browser": {
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2019-07-04/2858438_17.patch",
-                "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2019-10-18/entity-browser-reorder-remove-2851580-67.patch"
+                "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2020-03-30/2851580-83.patch"
             },
             "drupal/google_analytics": {
                 "Drupal 9 compatibility related issues should be fixed": "https://www.drupal.org/files/issues/2020-03-27/3072207-38.patch"
