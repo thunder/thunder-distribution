@@ -235,3 +235,12 @@ function thunder_update_8307() {
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();
 }
+
+/**
+ * Disable the slick_media module.
+ */
+function thunder_update_8308() {
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
+  $moduleInstaller = \Drupal::service('module_installer');
+  $moduleInstaller->uninstall(['slick_media']);
+}
