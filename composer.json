@@ -69,8 +69,8 @@
                 "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2019-10-18/entity-browser-reorder-remove-2851580-67-stable.patch"
             },
             "drupal/password_policy": {
-                "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2018-10-09/2918974-2.patch",
-                "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2019-05-20/password_policy-config_import_field_error-2771129-80.patch"
+                "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2020-04-14/2918974-7-11.patch",
+                "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2020-03-20/password-policy-2771129-110.patch"
             },
             "drupal/core": {
                 "Switch to a memory backend for running the database updates": "https://www.drupal.org/files/issues/2019-07-22/3055443-2-37.patch"
@@ -123,7 +123,7 @@
         "drupal/metatag": "^1.9",
         "drupal/paragraphs": "^1.11",
         "drupal/paragraphs_features": "^1.8",
-        "drupal/password_policy": "3.0-alpha5",
+        "drupal/password_policy": "3.0-beta1",
         "drupal/pathauto": "^1.0",
         "drupal/responsive_preview": "^1.0-alpha7",
         "drupal/redirect": "^1.4",
