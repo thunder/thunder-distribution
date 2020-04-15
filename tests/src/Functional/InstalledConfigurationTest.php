@@ -234,19 +234,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
       'icon_uuid' => TRUE,
       'description' => TRUE,
     ],
-    // Drupal 8.6.x adds the anchor key to the crop schema.
-    // As long as there is no release of Drupal 8.6.x we cannot provide a patch
-    // To the slick module. As soon as 8.6.0 is released we should provide that
-    // patch to get rid of this ignored key.
-    'image.style.slick_media' => [
-      'effects' => [
-        '4b434ce0-90cc-44c3-9423-35d7cccc7d93' => [
-          'data' => [
-            'anchor' => TRUE,
-          ],
-        ],
-      ],
-    ],
   ];
 
   /**
