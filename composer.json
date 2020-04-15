@@ -74,6 +74,9 @@
             },
             "drupal/core": {
                 "Switch to a memory backend for running the database updates": "https://www.drupal.org/files/issues/2019-07-22/3055443-2-37.patch"
+            },
+            "drupal/simple_sitemap": {
+                "Warning if excluded_languages is not set": "https://www.drupal.org/files/issues/2020-04-14/3127501.patch"
             }
         }
     },
