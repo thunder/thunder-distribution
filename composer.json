@@ -68,11 +68,14 @@
                 "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2020-03-30/2851580-83.patch"
             },
             "drupal/password_policy": {
-                "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2019-06-13/2918974-7.patch",
+                "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2020-04-14/2918974-7-11.patch",
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2020-03-20/password-policy-2771129-110.patch"
             },
             "drupal/redirect": {
                 "Update view to met the Drupal 8.8 views schema": "https://www.drupal.org/files/issues/2019-12-23/3089389-6.patch"
+            },
+            "drupal/simple_sitemap": {
+                "Warning if excluded_languages is not set": "https://www.drupal.org/files/issues/2020-04-14/3127501.patch"
             }
         }
     },
