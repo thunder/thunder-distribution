@@ -240,6 +240,27 @@ function thunder_update_8307() {
  * Disable the slick_media module.
  */
 function thunder_update_8308() {
+  $configFactory = \Drupal::configFactory();
+  $config = $configFactory->getEditable('core.entity_view_mode.media.slick');
+  $config->set('dependencies', ['enforced' => ['module' => ['slick']], 'module' => ['media']]);
+  $config->save();
+
+  $config = $configFactory->getEditable('image.style.slick_media');
+  $config->set('dependencies', ['enforced' => ['module' => ['slick']]]);
+  $config->save();
+
+  // Change slick_media to slick in module dependencies of view displays.
+  $entityViewIds = $configFactory->listAll('core.entity_view_display.');
+  foreach ($entityViewIds as $id) {
+    $config = $configFactory->getEditable($id);
+    $dependencies = $config->get('dependencies');
+    if (!empty($dependencies['module']) && ($key = array_search('slick_media', $dependencies['module'])) !== FALSE) {
+      $dependencies['module'] = array_replace($dependencies['module'], [$key => 'slick']);
+      $config->set('dependencies', $dependencies);
+      $config->save();
+    }
+  }
+
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
   $moduleInstaller = \Drupal::service('module_installer');
   $moduleInstaller->uninstall(['slick_media']);
