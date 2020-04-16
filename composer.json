@@ -130,7 +130,7 @@
         "drupal/simple_gmap": "^1.4",
         "drupal/shariff": "^1.5",
         "drupal/slick": "^2.0-rc3",
-        "drupal/slick_media": "^2.0-alpha2",
+        "drupal/slick_media": "3.x-dev",
         "drupal/thunder_admin": "^3.0",
         "drupal/thunder_amp": "^1.0-beta2",
         "drupal/thunder_fia": "^1.0",
