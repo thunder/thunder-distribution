@@ -20,7 +20,6 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
   DRUPAL_TESTING_TEST_GROUP: Thunder
-  DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: dev-drupal9
 
 jobs:
 
