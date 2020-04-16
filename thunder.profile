@@ -117,8 +117,6 @@ function _thunder_install_module_batch($module, $module_name, $form_values, &$co
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function thunder_finish_installation(array &$install_state) {
-  \Drupal::service('config.installer')->installOptionalConfig();
-
   // Assign user 1 the "administrator" role.
   $user = User::load(1);
   $user->roles[] = 'administrator';
