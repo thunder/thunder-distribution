@@ -60,6 +60,9 @@ jobs:
       - name: Install suggested dependencies
         run: composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/media_entity_generic:^1.0" "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
+      - name: Set composer bin path
+        run: composer config bin-dir bin/ --working-dir=/tmp/test/thunder/install
+
       - name: Install drupal
         run: test-drupal-project install
 
