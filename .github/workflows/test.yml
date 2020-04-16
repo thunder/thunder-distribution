@@ -112,7 +112,7 @@ jobs:
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build
 
     - name: Restore the composer symlinks
-      run: rm -rf vendor/bin; chmod u+w docroot/sites/default; composer install
+      run: rm -rf vendor/bin/phpunit; chmod u+w docroot/sites/default; composer install
       working-directory: /tmp/test/thunder/install
 
     - name: Run config tests
