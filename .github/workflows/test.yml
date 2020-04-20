@@ -52,7 +52,7 @@ jobs:
           echo "::add-path::$HOME/.composer/vendor/bin"
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing:dev-improve/local-checkout
+        run: composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
