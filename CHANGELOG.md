@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.4.5](https://github.com/thunder/thunder-distribution/tree/3.4.5) 2020-04-16
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.4.4...3.4.5)
+
+Some bug fixes and module updates. Most notably we updated the entity browser to version 2.4. This update does not work
+with the inline entity form field widget we used for the image and video paragraphs. For this reason, we changed the UX
+those paragraphs and use the rendered entity display instead. The entity form opens in a modal.
+
+- Fix [Upgrade testing](https://www.drupal.org/node/3127775)
+- Fix [Installation from the browser fails](https://www.drupal.org/node/3122269)
+- Do [Update to Entity Browser 2.4](https://www.drupal.org/node/3127484)
+- Do [Update password policy module](https://www.drupal.org/node/3127479)
+- Add [Content overview page test](https://www.drupal.org/node/3045492)
+
 ## [3.4.4](https://github.com/thunder/thunder-distribution/tree/3.4.4) 2020-03-20
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.4.3...3.4.4)
 

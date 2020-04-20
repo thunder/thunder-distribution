@@ -20,8 +20,6 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
   DRUPAL_TESTING_TEST_GROUP: Thunder
-  PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
-  RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
 
 jobs:
 
@@ -61,6 +59,9 @@ jobs:
 
       - name: Install suggested dependencies
         run: composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/media_entity_generic:^1.0" "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+
+      - name: Set composer bin path
+        run: composer config bin-dir bin/ --working-dir=/tmp/test/thunder/install
 
       - name: Install drupal
         run: test-drupal-project install
@@ -119,6 +120,9 @@ jobs:
         DRUPAL_TESTING_TEST_GROUP: ThunderConfig
 
     - name: Run tests suite
+      env:
+        PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
+        RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
       run: test-drupal-project run_tests
 
   test-min:
@@ -180,6 +184,9 @@ jobs:
         continue-on-error: true
 
       - name: Run the tests
+        env:
+          PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
+          RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
         run: test-drupal-project run_tests
 
   test-performance:
@@ -219,9 +226,11 @@ jobs:
 
       - name: Set variables
         id: vars
+        # GITHUB_HEAD_REF is only defined in PRs. GITHUB_REF is on the default branch something like refs/heads/8.x-4.x.
+        # So if GITHUB_HEAD_REF is not defined we use GITHUB_REF and remove leading refs/heads/. On the result / will replaced by _
         run: |
-          echo ::set-output name=DOCKER_SANITIZED_BRANCH_NAME::${GITHUB_HEAD_REF/\//_}
-          echo ::set-output name=DOCKER_TAG::${GITHUB_HEAD_REF/\//_}-${{ github.run_id }}
+          echo ::set-output name=DOCKER_SANITIZED_BRANCH_NAME::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')
+          echo ::set-output name=DOCKER_TAG::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')-${{ github.run_id }}
 
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master

@@ -439,5 +439,14 @@ function thunder_views_pre_render(ViewExecutable $view) {
   if (!$index_task_manager->isTrackingComplete($index) || $index->getTrackerInstance()->getRemainingItemsCount()) {
     \Drupal::messenger()->addError(t("It's needed to <a href='/admin/config/search/search-api/index/content'>index the search index</a> in order to have all content searchable."));
   }
+}
 
+/**
+ * Implements hook_field_widget_multivalue_WIDGET_TYPE_form_alter().
+ *
+ * Removes the cardinality information from the #prefix element of the current
+ * selection.
+ */
+function thunder_field_widget_multivalue_entity_browser_entity_reference_form_alter(array &$elements, FormStateInterface $form_state, array $context) {
+  unset($elements['current']['#prefix']);
 }

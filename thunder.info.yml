@@ -3,7 +3,7 @@ type: profile
 description: 'The Drupal8 based CMS for professional publishing.'
 project: thunder
 core: 8.x
-version: '8.x-4.4'
+version: '8.x-4.5'
 
 distribution:
   name: Thunder
@@ -80,7 +80,7 @@ install:
   - shariff:shariff
   - select2:select2
   - simple_sitemap:simple_sitemap
-  - slick_media:slick_media
+  - slick:slick
   - responsive_preview:responsive_preview
   - update_helper_checklist:update_helper_checklist
 # thunder
