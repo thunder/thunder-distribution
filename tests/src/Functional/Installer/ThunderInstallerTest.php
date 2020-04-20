@@ -22,6 +22,13 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class ThunderInstallerTest extends InstallerTestBase {
 
   /**
+   * Number of known warnings during the installation.
+   *
+   * @var int
+   */
+  protected $knownWarnings = 0;
+
+  /**
    * {@inheritdoc}
    */
   protected function setUp() {
@@ -200,7 +207,7 @@ class ThunderInstallerTest extends InstallerTestBase {
       ->condition('severity', 4, '<');
 
     // Check that there are no warnings in the log after installation.
-    $this->assertEquals($query->countQuery()->execute()->fetchField(), 0);
+    $this->assertEquals($query->countQuery()->execute()->fetchField(), $this->knownWarnings);
 
   }
 
