@@ -22,7 +22,4 @@ fi
 
 # execute Drupal tests
 thunderDumpFile=thunder.php phpunit --verbose --debug --configuration core --group Thunder ${ADDITIONAL_PHPUNIT_PARAMETERS} $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests || exit 1
-
-if [[ ${TEST_UPDATE} == "true" ]]; then
-  thunderDumpFile=thunder.php phpunit --verbose --debug --configuration core --group ThunderInstaller ${ADDITIONAL_PHPUNIT_PARAMETERS} $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests || exit 1
-fi
+thunderDumpFile=thunder.php phpunit --verbose --debug --configuration core --group ThunderInstaller ${ADDITIONAL_PHPUNIT_PARAMETERS} $(pwd)/$(drush eval "echo drupal_get_path('profile', 'thunder');")/tests || exit 1
