@@ -58,20 +58,23 @@ jobs:
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
-      - name: Install suggested dependencies
+      - name: Add needed dependencies
         run: composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/media_entity_generic:^1.0" "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Set composer bin path
         run: composer config bin-dir bin/ --working-dir=/tmp/test/thunder/install
 
-      - name: Install drupal
-        run: test-drupal-project install
+      - name: Build the docroot
+        run: test-drupal-project build
 
       - name: Get custom thunder_admin branch
         run: |
           rm -rf docroot/themes/contrib/thunder_admin
           git clone --depth 1 --single-branch --branch $THUNDER_ADMIN_BRANCH https://github.com/BurdaMagazinOrg/theme-thunder-admin.git docroot/themes/contrib/thunder_admin
         working-directory: /tmp/test/thunder/install
+
+      - name: Install drupal
+        run: test-drupal-project install
 
       - name: Zip build
         run: cd /tmp/test; tar cfhz build.tgz thunder; mv build.tgz ${GITHUB_WORKSPACE}
