@@ -53,7 +53,6 @@ jobs:
 
       - name: Remove .git directory
         run: |
-          ls -la
           rm -rf .git
 
       - name: Get build environment
@@ -67,6 +66,9 @@ jobs:
 
       - name: Set composer bin path
         run: composer config bin-dir bin/ --working-dir=/tmp/test/thunder/install
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v1
 
       - name: Install drupal
         run: test-drupal-project install
