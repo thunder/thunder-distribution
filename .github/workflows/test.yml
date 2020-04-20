@@ -69,9 +69,9 @@ jobs:
 
       - name: Get custom thunder_admin branch
         run: |
-          rm -rf docroot/themes/contrib/thunder_admin
-          git clone --depth 1 --single-branch --branch $THUNDER_ADMIN_BRANCH https://github.com/BurdaMagazinOrg/theme-thunder-admin.git docroot/themes/contrib/thunder_admin
-        working-directory: /tmp/test/thunder/install
+          rm -rf thunder_admin
+          git clone --depth 1 --single-branch --branch "${THUNDER_ADMIN_BRANCH}" https://github.com/BurdaMagazinOrg/theme-thunder-admin.git thunder_admin
+        working-directory: /tmp/test/thunder/install/docroot/themes/contrib
 
       - name: Install drupal
         run: test-drupal-project install
