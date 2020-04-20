@@ -51,12 +51,8 @@ jobs:
         run: |
           echo "::add-path::$HOME/.composer/vendor/bin"
 
-      - name: Remove .git directory
-        run: |
-          rm -rf .git
-
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: composer global require thunder/drupal-testing:dev-improve/local-checkout
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
