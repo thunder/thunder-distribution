@@ -4,8 +4,8 @@ on:
   pull_request:
     branches:
       - 8.x-[1-9]+.x
-    paths-ignore:
-      - '**.md'
+#    paths-ignore:
+#      - '**.md'
 
   schedule:
     - cron:  '0 7 * * *'
