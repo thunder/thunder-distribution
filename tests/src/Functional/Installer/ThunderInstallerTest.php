@@ -22,6 +22,13 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class ThunderInstallerTest extends InstallerTestBase {
 
   /**
+   * Number of known warnings during the installation.
+   *
+   * @var int
+   */
+  protected $knownWarnings = 0;
+
+  /**
    * {@inheritdoc}
    */
   protected function setUp() {
@@ -121,7 +128,6 @@ class ThunderInstallerTest extends InstallerTestBase {
       $request = Request::createFromGlobals();
       $class_loader = require $this->container->get('app.root') . '/autoload.php';
       Settings::initialize($this->container->get('app.root'), DrupalKernel::findSitePath($request), $class_loader);
-      $this->configDirectories['sync'] = Settings::get('config_sync_directory');
 
       // After writing settings.php, the installer removes write permissions
       // from the site directory. To allow drupal_generate_test_ua() to write
@@ -201,7 +207,7 @@ class ThunderInstallerTest extends InstallerTestBase {
       ->condition('severity', 4, '<');
 
     // Check that there are no warnings in the log after installation.
-    $this->assertEquals($query->countQuery()->execute()->fetchField(), 0);
+    $this->assertEquals($query->countQuery()->execute()->fetchField(), $this->knownWarnings);
 
   }
 

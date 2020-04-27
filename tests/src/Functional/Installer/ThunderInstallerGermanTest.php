@@ -12,6 +12,11 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
   /**
    * {@inheritdoc}
    */
+  protected $knownWarnings = 0;
+
+  /**
+   * {@inheritdoc}
+   */
   protected $langcode = 'de';
 
   /**

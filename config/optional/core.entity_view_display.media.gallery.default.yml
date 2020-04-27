@@ -7,7 +7,7 @@ dependencies:
     - media.type.gallery
   module:
     - empty_fields
-    - slick_media
+    - slick
 id: media.gallery.default
 targetEntityType: media
 bundle: gallery
