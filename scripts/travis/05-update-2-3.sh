@@ -13,7 +13,7 @@ composer update
 
 # Update to the latest version of thunder.
 cd ${TEST_DIR}
-composer require burdamagazinorg/thunder:~8.2.51 --no-update
+composer require burdamagazinorg/thunder:~8.2.51 drush/drush:^10.0 --no-update
 composer update
 
 cd ${TEST_DIR}/docroot
