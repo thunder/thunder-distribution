@@ -10,7 +10,7 @@ chmod -R +w "${TEST_DIR}/docroot/sites/default"
 
 # Include performance measurement module in artifact
 cd "${TEST_DIR}"
-composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/media_entity_generic:^1.0" --no-interaction --update-no-dev
+composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-feat/search-api-config-templates" "drupal/media_entity_generic:^1.0" --no-interaction --update-no-dev
 
 # Apply patches important for testsite_builder
 cd "${TEST_DIR}/docroot" || exit
