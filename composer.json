@@ -166,7 +166,7 @@
     },
     "require-dev": {
         "burdamagazinorg/thunder-dev-tools": "dev-master",
-        "thunder/testsite_builder": "dev-feat/search-api-config-templates",
+        "thunder/testsite_builder": "dev-feat/support-for-search-api-views",
         "thunder/thunder_performance_measurement": "dev-master",
         "thunder/thunder_testing_demo": "3.x-dev",
         "drupal/config_profile": "^1.0",
