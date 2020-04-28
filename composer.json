@@ -73,6 +73,9 @@
             },
             "drupal/simple_sitemap": {
                 "Warning if excluded_languages is not set": "https://www.drupal.org/files/issues/2020-04-14/3127501.patch"
+            },
+            "drupal/pathauto": {
+                "Updating core 8.7 -> 8.8 with pathauto not possible": "https://www.drupal.org/files/issues/2020-04-27/3131286-3.patch"
             }
         }
     },
@@ -120,7 +123,7 @@
         "drupal/paragraphs": "^1.11",
         "drupal/paragraphs_features": "^1.8",
         "drupal/password_policy": "3.0-beta1",
-        "drupal/pathauto": "^1.6",
+        "drupal/pathauto": "1.7",
         "drupal/responsive_preview": "^1.0-alpha7",
         "drupal/redirect": "1.5",
         "drupal/scheduler": "^1.1",
