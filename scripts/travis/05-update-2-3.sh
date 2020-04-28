@@ -30,8 +30,8 @@ composer update
 composer require "thunder/thunder_testing_demo:3.x-dev" "drupal/media_entity:^2.0-beta4" "drupal/video_embed_field:^2.2" "drupal/media_entity_image" "drupal/riddle_marketplace:^3.0-beta2"
 
 cd ${TEST_DIR}/docroot
-wget https://www.drupal.org/files/issues/2020-04-07/1894286-37-8.8.x_including_3098475-123.patch
-patch -p1 < 1894286-37-8.8.x_including_3098475-123.patch
+wget https://www.drupal.org/files/issues/2020-04-28/1894286-37-8.9.x.patch
+patch -p1 < 1894286-37-8.9.x.patch
 
 cd ${TEST_DIR}/docroot
 drush updb -y
