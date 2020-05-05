@@ -68,6 +68,7 @@ jobs:
           composer require "drupal/nexx_integration:^3.0" --no-update --no-progress
           composer require "valiton/harbourmaster:~8.1" --no-update --no-progress
           composer require "thunder/thunder_testing_demo"  --no-update --no-progress
+          composer require "drupal/console"  --no-update --no-progress
 
       - name: Set composer bin path
         working-directory: /tmp/test/thunder/install
@@ -264,7 +265,7 @@ jobs:
           tags: ${{ steps.vars.outputs.DOCKER_TAG }}
           workdir: docker-thunder-performance
 
-      - name: Start Thunde performance testing task for created image
+      - name: Start Thunder performance testing task for created image
         run: |
           API_CALL_HTTP_CODE=$(curl \
           --request POST \
