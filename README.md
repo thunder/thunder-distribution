@@ -29,7 +29,7 @@ Plan at which day and time articles should be published – and when they should
 ### <img src="./files/images/flexible_system_b_0.png" alt="Storytelling" width="2%"/> Flexible system
 Benefit from a wide range of additional functionality by industry partners or by one of more than 2,500 modules from the Drupal community.
 ### <img src="./files/images/drupal_community_b_1.png" alt="Storytelling" width="2%"/> Open Source
-Using open source technology reduces development costs and resources and makes you part of the Drupal community with more than 100,000 users actively contributing.
+To use open source technology reduces development costs and resources and makes you part of the Drupal community with more than 100,000 users actively contributing.
 
 *[More information about the modules used in Thunder](https://burdamagazinorg.github.io/thunder-documentation/modules)*
 
