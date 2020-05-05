@@ -59,19 +59,28 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Add needed dependencies
-        run: composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-feat/support-for-search-api-views" "drupal/media_entity_generic:^1.0" "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        working-directory: /tmp/test/thunder/install
+        run: |
+          composer require "thunder/thunder_performance_measurement:dev-master" --no-update --no-progress
+          composer require "thunder/testsite_builder:dev-feat/support-for-search-api-views" --no-update --no-progress
+          composer require "drupal/media_entity_generic:^1.0" --no-update --no-progress
+          composer require "drupal/riddle_marketplace:^3.0-beta2" --no-update --no-progress
+          composer require "drupal/nexx_integration:^3.0" --no-update --no-progress
+          composer require "valiton/harbourmaster:~8.1" --no-update --no-progress
+          composer require "thunder/thunder_testing_demo"  --no-update --no-progress
 
       - name: Set composer bin path
-        run: composer config bin-dir bin/ --working-dir=/tmp/test/thunder/install
+        working-directory: /tmp/test/thunder/install
+        run: composer config bin-dir bin/
 
       - name: Build the docroot
         run: test-drupal-project build
 
       - name: Get custom thunder_admin branch
+        working-directory: /tmp/test/thunder/install/docroot/themes/contrib
         run: |
           rm -rf thunder_admin
           git clone --depth 1 --single-branch --branch "${THUNDER_ADMIN_BRANCH}" https://github.com/BurdaMagazinOrg/theme-thunder-admin.git thunder_admin
-        working-directory: /tmp/test/thunder/install/docroot/themes/contrib
 
       - name: Install drupal
         run: test-drupal-project install
