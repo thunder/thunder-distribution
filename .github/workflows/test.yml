@@ -191,7 +191,11 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Install suggested dependencies
-        run: composer require "thunder/thunder_testing_demo" "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        working-directory: /tmp/test/thunder/install
+        run: |
+          composer require "drupal/riddle_marketplace:^3.0-beta2" --no-update --no-progress
+          composer require "drupal/nexx_integration:^3.0" --no-update --no-progress
+          composer require "valiton/harbourmaster:~8.1" --no-update --no-progress
 
       - name: Build the docroot
         run: test-drupal-project build
