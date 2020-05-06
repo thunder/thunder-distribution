@@ -225,7 +225,7 @@ jobs:
         with:
           repository: thunder/docker-thunder-performance
           path: thunder-distribution/docker-thunder-performance
-          ref: 'search-api'
+          ref: 'search-api-2'
 
       - uses: shivammathur/setup-php@master
         with:
