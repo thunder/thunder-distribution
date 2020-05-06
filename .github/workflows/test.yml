@@ -258,6 +258,9 @@ jobs:
 
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
+        env:
+          INSTALL: thunder
+          PROFILE: thunder
         with:
           name: burda/thunder-performance
           username: ${{ secrets.DOCKER_USERNAME }}
