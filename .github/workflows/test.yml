@@ -225,7 +225,7 @@ jobs:
         with:
           repository: thunder/docker-thunder-performance
           path: thunder-distribution/docker-thunder-performance
-          ref: 'search-api-2'
+          ref: 'search-api'
 
       - uses: shivammathur/setup-php@master
         with:
@@ -258,9 +258,6 @@ jobs:
 
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
-        env:
-          INSTALL: thunder
-          PROFILE: thunder
         with:
           name: burda/thunder-performance
           username: ${{ secrets.DOCKER_USERNAME }}
