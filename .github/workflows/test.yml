@@ -214,7 +214,7 @@ jobs:
         run: test-drupal-project run_tests
 
   test-performance:
-    needs: [build, test-max]
+    needs: [build]
 
     runs-on: ubuntu-latest
 
@@ -257,11 +257,16 @@ jobs:
           echo ::set-output name=DOCKER_TAG::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')-${{ github.run_id }}
 
       - name: Publish to Registry
-        run: |
-          cd ${GITHUB_WORKSPACE}/docker-thunder-performance
-          ./build.sh --tag "${DOCKER_TAG}"
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_PASSWORD }}" --password-stdin
-          docker push "${DOCKER_TAG}"
+        uses: elgohr/Publish-Docker-Github-Action@master
+        env:
+          INSTALL: thunder
+          PROFILE: thunder
+        with:
+          name: burda/thunder-performance
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: ${{ steps.vars.outputs.DOCKER_TAG }}
+          workdir: docker-thunder-performance
 
       - name: Start Thunder performance testing task for created image
         run: |
