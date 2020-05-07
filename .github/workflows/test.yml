@@ -260,6 +260,8 @@ jobs:
         run: |
           cd ${GITHUB_WORKSPACE}/docker-thunder-performance
           ./build.sh --tag "${DOCKER_TAG}"
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_PASSWORD }}" --password-stdin
+          docker push "${DOCKER_TAG}"
 
       - name: Start Thunder performance testing task for created image
         run: |
