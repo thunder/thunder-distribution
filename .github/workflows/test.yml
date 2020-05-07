@@ -257,16 +257,9 @@ jobs:
           echo ::set-output name=DOCKER_TAG::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')-${{ github.run_id }}
 
       - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
-        env:
-          INSTALL: thunder
-          PROFILE: thunder
-        with:
-          name: burda/thunder-performance
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: ${{ steps.vars.outputs.DOCKER_TAG }}
-          workdir: docker-thunder-performance
+        run: |
+          cd ${GITHUB_WORKSPACE}/docker-thunder-performance
+          ./build.sh --tag "${DOCKER_TAG}"
 
       - name: Start Thunder performance testing task for created image
         run: |
