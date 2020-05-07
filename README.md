@@ -47,4 +47,4 @@ For additional help, you can use one of this channel to ask question:
 If you want to help, to make Thunder even better, please take a look at the [contributing guidelines](CONTRIBUTING.md).
 
 ## Development
-For information on the installation and development of Thunder, please take a look at [docs/development.md](docs/development.md).
+For information on the developing for Thunder, please take a look at [docs/development.md](docs/development.md).
