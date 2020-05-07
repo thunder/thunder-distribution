@@ -268,8 +268,6 @@ jobs:
           tags: ${{ steps.vars.outputs.DOCKER_TAG }}
           workdir: docker-thunder-performance
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v1
       - name: Start Thunder performance testing task for created image
         run: |
           API_CALL_HTTP_CODE=$(curl \
