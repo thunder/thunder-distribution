@@ -27,7 +27,7 @@ With Thunder, editors and administrators can work from any device – on the go,
 ### <img src="./files/images/schedule_content_g_0.png" alt="Storytelling" width="2%"/> Schedule content
 Plan at which day and time articles should be published – and when they shouldn’t be visible to the public anymore.
 ### <img src="./files/images/flexible_system_b_0.png" alt="Storytelling" width="2%"/> Flexible system
-Benefit from a wide range of additional functionality by industry partners or by one of more than 2,500 modules from the Drupal community.
+Benefit from a wide range of additional functionality by industry partners or by one of more than 8000 modules from the Drupal community.
 ### <img src="./files/images/drupal_community_b_1.png" alt="Storytelling" width="2%"/> Open Source
 To use open source technology reduces development costs and resources and makes you part of the Drupal community with more than 100,000 users actively contributing.
 
