@@ -31,6 +31,7 @@ module.exports = {
       .useXpath()
       .waitForElementPresent(
         '//*[@id="block-thunder-admin-content"]/div/div/nav/ul/li[1]/a'
+        , 10000
       )
       // End "Open content overview page".
       .performance.endMark()
@@ -38,7 +39,8 @@ module.exports = {
       .setValue('//*[@id="edit-type"]', "bundle_6")
       .click('//*[@id="edit-submit-content-bundle-0"]')
       .waitForElementPresent(
-        '//*[@id="block-thunder-admin-content"]/div/div[contains(@class, "view-content-bundle-0")]/nav[@class="pager"]/ul/li[1]/a[contains(@href, "bundle_6")]'
+        '//*[@id="block-thunder-admin-content"]/div/div[contains(@class, "view-content-bundle-0")]/nav[@class="pager"]/ul/li[1]/a[contains(@href, "bundle_6")]',
+        10000
       )
       // End "Filter by type".
       .performance.endMark()
