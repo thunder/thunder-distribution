@@ -215,7 +215,7 @@ jobs:
         with:
           repository: thunder/docker-thunder-performance
           path: thunder-distribution/docker-thunder-performance
-          ref: 'use-apache'
+          ref: 'drupal-core-performance-testing'
 
       - uses: shivammathur/setup-php@master
         with:
