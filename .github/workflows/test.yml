@@ -215,7 +215,7 @@ jobs:
         with:
           repository: thunder/docker-thunder-performance
           path: thunder-distribution/docker-thunder-performance
-          ref: 'drupal-core-performance-testing'
+          ref: 'master'
 
       - uses: shivammathur/setup-php@master
         with:
@@ -251,6 +251,8 @@ jobs:
         run: |
           chmod u+w www/docroot/sites/default
           bash -x ./build.sh --tag "${{ steps.vars.outputs.DOCKER_TAG }}"
+          docker login --username "${{ secrets.DOCKER_USERNAME }}" --password ${{ secrets.DOCKER_PASSWORD }}
+          docker push "${{ steps.vars.outputs.DOCKER_TAG }}"
 
       - name: Start Thunder performance testing task for created image
         run: |
