@@ -4,7 +4,6 @@ composer global require drupal/coder
 composer global require dealerdirect/phpcodesniffer-composer-installer
 
 # run phpcs
-phpcs --config-set installed_paths ${TEST_DIR}/vendor/drupal/coder/coder_sniffer
 # Ignore check of .md files, because they should be able to contain more then 80 characters per line.
 phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme --ignore=*.md -p .
 phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme -p .
