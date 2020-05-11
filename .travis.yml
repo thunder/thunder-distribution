@@ -7,7 +7,7 @@ cache:
 php:
   - 7.3
 
-dist: xenial
+dist: bionic
 
 services:
   - mysql
