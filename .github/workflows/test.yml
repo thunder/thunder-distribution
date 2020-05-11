@@ -215,7 +215,7 @@ jobs:
         with:
           repository: thunder/docker-thunder-performance
           path: thunder-distribution/docker-thunder-performance
-          ref: 'master'
+          ref: 'use-apache'
 
       - uses: shivammathur/setup-php@master
         with:
