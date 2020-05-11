@@ -31,7 +31,7 @@ module.exports = {
       .useXpath()
       .waitForElementPresent(
         '//*[@id="block-thunder-admin-content"]/div/div/nav/ul/li[1]/a'
-        , 10000
+        , 20000
       )
       // End "Open content overview page".
       .performance.endMark()
