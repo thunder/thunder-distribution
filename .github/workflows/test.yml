@@ -249,6 +249,7 @@ jobs:
       - name: Publish to Registry
         working-directory: docker-thunder-performance
         run: |
+          chmod u+w www/docroot/sites/default
           bash -x ./build.sh --tag "${DOCKER_TAG}"
 
       - name: Start Thunder performance testing task for created image
