@@ -249,10 +249,10 @@ jobs:
       - name: Publish to Registry
         working-directory: docker-thunder-performance
         run: |
-          chmod u+w www/docroot/sites/default
-          export DOCKER_IMAGE_TAG="burda/thunder-performance:${{ steps.vars.outputs.DOCKER_TAG }}"
-          bash -x ./build.sh --tag "${DOCKER_IMAGE_TAG}"
           echo ${{ secrets.DOCKER_TOKEN }} | docker login -u thundertechnology --password-stdin
+          export DOCKER_IMAGE_TAG="burda/thunder-performance:${{ steps.vars.outputs.DOCKER_TAG }}"
+          chmod u+w www/docroot/sites/default
+          bash -x -e ./build.sh --tag "${DOCKER_IMAGE_TAG}"
           docker push "${DOCKER_IMAGE_TAG}"
 
       - name: Start Thunder performance testing task for created image
