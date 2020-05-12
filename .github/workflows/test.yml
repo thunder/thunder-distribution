@@ -245,14 +245,15 @@ jobs:
         run: |
           echo ::set-output name=DOCKER_SANITIZED_BRANCH_NAME::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')
           echo ::set-output name=DOCKER_TAG::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')-${{ github.run_id }}
+          echo ::set-output name=DOCKER_IMAGE_TAG::"burda/thunder-performance:"$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')-${{ github.run_id }}
 
       - name: Publish to Registry
         working-directory: docker-thunder-performance
         run: |
           chmod u+w www/docroot/sites/default
-          bash -x ./build.sh --tag "${{ steps.vars.outputs.DOCKER_TAG }}"
+          bash -x ./build.sh --tag "${{ steps.vars.outputs.DOCKER_IMAGE_TAG }}"
           echo ${{ secrets.DOCKER_TOKEN }} | docker login -u thundertechnology --password-stdin
-          docker push "burda/thunder-performance:""${{ steps.vars.outputs.DOCKER_TAG }}"
+          docker push "${{ steps.vars.outputs.DOCKER_IMAGE_TAG }}"
 
       - name: Start Thunder performance testing task for created image
         run: |
