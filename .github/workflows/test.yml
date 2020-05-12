@@ -252,7 +252,7 @@ jobs:
           chmod u+w www/docroot/sites/default
           bash -x ./build.sh --tag "${{ steps.vars.outputs.DOCKER_TAG }}"
           echo ${{ secrets.DOCKER_TOKEN }} | docker login -u thundertechnology --password-stdin
-          docker push "${{ steps.vars.outputs.DOCKER_TAG }}"
+          docker push burda/thunder-performance:"${{ steps.vars.outputs.DOCKER_TAG }}"
 
       - name: Start Thunder performance testing task for created image
         run: |
