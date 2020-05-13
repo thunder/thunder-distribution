@@ -251,8 +251,8 @@ jobs:
         run: |
           echo ${{ secrets.DOCKER_TOKEN }} | docker login -u thundertechnology --password-stdin
           export DOCKER_IMAGE_TAG="burda/thunder-performance:${{ steps.vars.outputs.DOCKER_TAG }}"
-          chmod u+w www/docroot/sites/default
           composer config bin-dir vendor/bin/ --working-dir=./www
+          chmod u+w www/docroot/sites/default
           bash -x ./build.sh --tag "${DOCKER_IMAGE_TAG}"
           docker push "${DOCKER_IMAGE_TAG}"
 
