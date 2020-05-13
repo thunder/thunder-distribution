@@ -7,7 +7,7 @@
 const apm = require(`${process.cwd()}/node_modules/elastic-apm-node`);
 
 module.exports = {
-  "@tags": ["Thunder", "Thunder_Base_Set"],
+  "@tags": ["Thunder_disabled", "Thunder_Base_Set_disabled"],
   before(browser, done) {
     browser.apm = apm;
 
