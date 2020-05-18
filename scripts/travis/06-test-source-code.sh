@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 composer global require drupal/coder
-composer global require dealerdirect/phpcodesniffer-composer-installer
+
+phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
 
 # run phpcs
 # Ignore check of .md files, because they should be able to contain more then 80 characters per line.
