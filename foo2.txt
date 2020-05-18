@@ -1,0 +1,941 @@
+travis_fold:start:worker_info
+[0K[33;1mWorker information[0m
+hostname: 3f82b676-5b12-4d03-801a-ba8d3c6e9fe3@1.worker-com-66449df859-49nwk.gce-production-3
+version: v6.2.8 https://github.com/travis-ci/worker/tree/6d3048d96b26562be21fa1a8b8144f4c4cecd083
+instance: travis-job-6518d9ac-ed29-4293-aa8c-7e3fd7ed65df travis-ci-ubuntu-1804-1582576938-a9b1ae58 (via amqp)
+startup: 6.209852177s
+travis_fold:end:worker_info
+[0Ktravis_time:start:1417e3f0
+[0Ktravis_time:end:1417e3f0:start=1589179695188708398,finish=1589179695385700509,duration=196992111,event=no_world_writable_dirs
+[0Ktravis_time:start:1555df4e
+[0Ktravis_time:end:1555df4e:start=1589179695388423024,finish=1589179695391520432,duration=3097408,event=setup_filter
+[0Ktravis_time:start:0a1b273c
+[0Ktravis_time:end:0a1b273c:start=1589179695399341579,finish=1589179695407195241,duration=7853662,event=agent
+[0Ktravis_time:start:138f1b60
+[0Ktravis_time:end:138f1b60:start=1589179695409683889,finish=1589179695411410985,duration=1727096,event=check_unsupported
+[0Ktravis_time:start:33aefbf6
+[0Ktravis_fold:start:system_info
+[0K[33;1mBuild system information[0m
+Build language: php
+Build dist: bionic
+Build id: 165107023
+Job id: 331429449
+Runtime kernel version: 5.0.0-1031-gcp
+travis-build version: c82aac3b
+[34m[1mBuild image provisioning date and time[0m
+Mon Feb 24 21:21:37 UTC 2020
+[34m[1mOperating System Details[0m
+Distributor ID:	Ubuntu
+Description:	Ubuntu 18.04.4 LTS
+Release:	18.04
+Codename:	bionic
+[34m[1mSystemd Version[0m
+systemd 237
+[34m[1mCookbooks Version[0m
+b5e4fc1 https://github.com/travis-ci/travis-cookbooks/tree/b5e4fc1
+[34m[1mgit version[0m
+git version 2.25.1
+[34m[1mbash version[0m
+GNU bash, version 4.4.20(1)-release (x86_64-pc-linux-gnu)
+[34m[1mgcc version[0m
+gcc (Ubuntu 7.4.0-1ubuntu1~18.04.1) 7.4.0
+[34m[1mdocker version[0m
+Client:
+ Version:           18.06.0-ce
+ API version:       1.38
+ Go version:        go1.10.3
+ Git commit:        0ffa825
+ Built:             Wed Jul 18 19:09:54 2018
+ OS/Arch:           linux/amd64
+ Experimental:      false
+
+Server:
+ Engine:
+  Version:          18.06.0-ce
+  API version:      1.38 (minimum version 1.12)
+  Go version:       go1.10.3
+  Git commit:       0ffa825
+  Built:            Wed Jul 18 19:07:56 2018
+  OS/Arch:          linux/amd64
+  Experimental:     false
+[34m[1mclang version[0m
+clang version 7.0.0 (tags/RELEASE_700/final)
+[34m[1mjq version[0m
+jq-1.5
+[34m[1mbats version[0m
+Bats 0.4.0
+[34m[1mshellcheck version[0m
+0.7.0
+[34m[1mshfmt version[0m
+v2.6.3
+[34m[1mccache version[0m
+3.4.1
+[34m[1mcmake version[0m
+cmake version 3.12.4
+[34m[1mheroku version[0m
+heroku/7.38.2 linux-x64 node-v12.13.0
+[34m[1mimagemagick version[0m
+Version: ImageMagick 6.9.7-4 Q16 x86_64 20170114 http://www.imagemagick.org
+[34m[1mmd5deep version[0m
+4.4
+[34m[1mmercurial version[0m
+version 4.8
+[34m[1mmysql version[0m
+mysql  Ver 14.14 Distrib 5.7.29, for Linux (x86_64) using  EditLine wrapper
+[34m[1mopenssl version[0m
+OpenSSL 1.1.1  11 Sep 2018
+[34m[1mpacker version[0m
+1.3.3
+[34m[1mpostgresql client version[0m
+psql (PostgreSQL) 11.7 (Ubuntu 11.7-2.pgdg18.04+1)
+[34m[1mragel version[0m
+Ragel State Machine Compiler version 6.10 March 2017
+[34m[1msudo version[0m
+1.8.21p2
+[34m[1mgzip version[0m
+gzip 1.6
+[34m[1mzip version[0m
+Zip 3.0
+[34m[1mvim version[0m
+VIM - Vi IMproved 8.0 (2016 Sep 12, compiled Jun 06 2019 17:31:41)
+[34m[1miptables version[0m
+iptables v1.6.1
+[34m[1mcurl version[0m
+curl 7.58.0 (x86_64-pc-linux-gnu) libcurl/7.58.0 OpenSSL/1.1.1 zlib/1.2.11 libidn2/2.0.4 libpsl/0.19.1 (+libidn2/2.0.4) nghttp2/1.30.0 librtmp/2.3
+[34m[1mwget version[0m
+GNU Wget 1.19.4 built on linux-gnu.
+[34m[1mrsync version[0m
+rsync  version 3.1.2  protocol version 31
+[34m[1mgimme version[0m
+v1.5.3
+[34m[1mnvm version[0m
+0.35.2
+[34m[1mperlbrew version[0m
+/home/travis/perl5/perlbrew/bin/perlbrew  - App::perlbrew/0.87
+[34m[1mphpenv version[0m
+rbenv 1.1.2-26-gc6324ff
+[34m[1mrvm version[0m
+rvm 1.29.9 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+[34m[1mdefault ruby version[0m
+ruby 2.6.5p114 (2019-10-01 revision 67812) [x86_64-linux]
+[34m[1mElasticSearch version[0m
+5.5.0
+[34m[1mInstalled Firefox version[0m
+firefox 63.0.1
+[34m[1mMongoDB version[0m
+MongoDB 4.0.16
+[34m[1mPhantomJS version[0m
+2.1.1
+[34m[1mPre-installed PostgreSQL versions[0m
+9.3.25
+9.4.26
+9.5.21
+9.6.17
+[34m[1mRedis version[0m
+redis-server 5.0.7
+[34m[1mPre-installed Go versions[0m
+1.11.1
+[34m[1mant version[0m
+Apache Ant(TM) version 1.10.5 compiled on March 28 2019
+[34m[1mmvn version[0m
+Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
+[34m[1mgradle version[0m
+Gradle 5.1.1!
+[34m[1mlein version[0m
+Leiningen 2.9.1 on Java 11.0.2 OpenJDK 64-Bit Server VM
+[34m[1mPre-installed Node.js versions[0m
+v10.16.0
+v10.19.0
+v11.15.0
+v12.13.1
+v12.16.1
+v13.3.0
+v4.9.1
+v6.17.1
+v8.16.2
+v8.17.0
+v8.9
+[34m[1mphpenv versions[0m
+  system
+  7.1
+  7.1.33
+  7.2
+* 7.2.27 (set by /home/travis/.phpenv/version)
+  7.3
+  7.3.14
+  7.4
+  7.4.2
+  hhvm
+  hhvm-stable
+[34m[1mcomposer --version[0m
+Composer version 1.9.2 2020-01-14 16:30:31
+[34m[1mPre-installed Ruby versions[0m
+ruby-2.4.9
+ruby-2.5.3
+ruby-2.5.7
+ruby-2.6.5
+ruby-2.7.0
+travis_fold:end:system_info
+[0K
+travis_time:end:33aefbf6:start=1589179695413969006,finish=1589179695424458663,duration=10489657,event=show_system_info
+[0Ktravis_time:start:10c612b4
+[0Ktravis_time:end:10c612b4:start=1589179695427293921,finish=1589179695443155249,duration=15861328,event=rm_riak_source
+[0Ktravis_time:start:018e1436
+[0Ktravis_time:end:018e1436:start=1589179695446533446,finish=1589179695452460326,duration=5926880,event=fix_rwky_redis
+[0Ktravis_time:start:00d40064
+[0Ktravis_time:end:00d40064:start=1589179695455708099,finish=1589179696086033273,duration=630325174,event=wait_for_network
+[0Ktravis_time:start:0fea0280
+[0Ktravis_time:end:0fea0280:start=1589179696093710459,finish=1589179696343199784,duration=249489325,event=update_apt_keys
+[0Ktravis_time:start:00c4fa85
+[0Ktravis_time:end:00c4fa85:start=1589179696349104388,finish=1589179696406349243,duration=57244855,event=fix_hhvm_source
+[0Ktravis_time:start:028d544c
+[0Ktravis_time:end:028d544c:start=1589179696413447300,finish=1589179696417613180,duration=4165880,event=update_mongo_arch
+[0Ktravis_time:start:116d749a
+[0Ktravis_time:end:116d749a:start=1589179696428400993,finish=1589179696472963457,duration=44562464,event=fix_sudo_enabled_trusty
+[0Ktravis_time:start:03b404dd
+[0Ktravis_time:end:03b404dd:start=1589179696479528940,finish=1589179696484867905,duration=5338965,event=update_glibc
+[0Ktravis_time:start:0e4847c8
+[0Ktravis_time:end:0e4847c8:start=1589179696491307326,finish=1589179696501251079,duration=9943753,event=clean_up_path
+[0Ktravis_time:start:10a848b0
+[0Ktravis_time:end:10a848b0:start=1589179696509692436,finish=1589179696519891644,duration=10199208,event=fix_resolv_conf
+[0Ktravis_time:start:04853222
+[0Ktravis_time:end:04853222:start=1589179696526611003,finish=1589179696543901720,duration=17290717,event=fix_etc_hosts
+[0Ktravis_time:start:00e7fe78
+[0Ktravis_time:end:00e7fe78:start=1589179696551641437,finish=1589179696560764007,duration=9122570,event=fix_mvn_settings_xml
+[0Ktravis_time:start:09449ef2
+[0Ktravis_time:end:09449ef2:start=1589179696569683217,finish=1589179696581466896,duration=11783679,event=no_ipv6_localhost
+[0Ktravis_time:start:1c2352ec
+[0Ktravis_time:end:1c2352ec:start=1589179696588783332,finish=1589179696592368634,duration=3585302,event=fix_etc_mavenrc
+[0Ktravis_time:start:0a053a72
+[0Ktravis_time:end:0a053a72:start=1589179696601953454,finish=1589179696606183471,duration=4230017,event=fix_wwdr_certificate
+[0Ktravis_time:start:000344f4
+[0Ktravis_time:end:000344f4:start=1589179696615330545,finish=1589179696656020703,duration=40690158,event=put_localhost_first
+[0Ktravis_time:start:02e7681a
+[0Ktravis_time:end:02e7681a:start=1589179696661633372,finish=1589179696664947161,duration=3313789,event=home_paths
+[0Ktravis_time:start:04f432b9
+[0Ktravis_time:end:04f432b9:start=1589179696672043717,finish=1589179696686147911,duration=14104194,event=disable_initramfs
+[0Ktravis_time:start:03479ad7
+[0Ktravis_time:end:03479ad7:start=1589179696693741060,finish=1589179696860331811,duration=166590751,event=disable_ssh_roaming
+[0Ktravis_time:start:192f2541
+[0Ktravis_time:end:192f2541:start=1589179696869474803,finish=1589179696873107884,duration=3633081,event=debug_tools
+[0Ktravis_time:start:2e689105
+[0Ktravis_time:end:2e689105:start=1589179696880471554,finish=1589179696884363041,duration=3891487,event=uninstall_oclint
+[0Ktravis_time:start:19f19f62
+[0Ktravis_time:end:19f19f62:start=1589179696891692167,finish=1589179696895559749,duration=3867582,event=rvm_use
+[0Ktravis_time:start:0dd3b3d0
+[0Ktravis_time:end:0dd3b3d0:start=1589179696901783987,finish=1589179696910718663,duration=8934676,event=rm_etc_boto_cfg
+[0Ktravis_time:start:0d0a7498
+[0Ktravis_time:end:0d0a7498:start=1589179696917850449,finish=1589179696921165926,duration=3315477,event=rm_oraclejdk8_symlink
+[0Ktravis_time:start:2a029370
+[0Ktravis_time:end:2a029370:start=1589179696928963758,finish=1589179697023172456,duration=94208698,event=enable_i386
+[0Ktravis_time:start:1da639cc
+[0Ktravis_time:end:1da639cc:start=1589179697032236117,finish=1589179697036344808,duration=4108691,event=update_rubygems
+[0Ktravis_time:start:04d8dc46
+[0Ktravis_time:end:04d8dc46:start=1589179697039862711,finish=1589179697839818290,duration=799955579,event=ensure_path_components
+[0Ktravis_time:start:0ad8af4c
+[0Ktravis_time:end:0ad8af4c:start=1589179697845551524,finish=1589179697847783462,duration=2231938,event=redefine_curl
+[0Ktravis_time:start:1d506b5a
+[0Ktravis_time:end:1d506b5a:start=1589179697855725497,finish=1589179697964165962,duration=108440465,event=nonblock_pipe
+[0Ktravis_time:start:100177f4
+[0Ktravis_time:end:100177f4:start=1589179697971778209,finish=1589179704009648130,duration=6037869921,event=apt_get_update
+[0Ktravis_time:start:14544948
+[0Ktravis_time:end:14544948:start=1589179704014286533,finish=1589179704019630454,duration=5343921,event=deprecate_xcode_64
+[0Ktravis_time:start:0ffe4a54
+[0Ktravis_time:end:0ffe4a54:start=1589179704026082318,finish=1589179706553946416,duration=2527864098,event=update_heroku
+[0Ktravis_time:start:0c4dfb77
+[0Ktravis_time:end:0c4dfb77:start=1589179706560720810,finish=1589179706564123069,duration=3402259,event=shell_session_update
+[0Ktravis_time:start:0223de60
+[0Ktravis_fold:start:docker_mtu
+[0Ktravis_fold:end:docker_mtu
+[0Ktravis_time:end:0223de60:start=1589179706572337634,finish=1589179708670285403,duration=2097947769,event=set_docker_mtu
+[0Ktravis_time:start:0484a748
+[0Ktravis_fold:start:resolvconf
+[0Ktravis_fold:end:resolvconf
+[0Ktravis_time:end:0484a748:start=1589179708674859341,finish=1589179708750594396,duration=75735055,event=resolvconf
+[0Ktravis_time:start:0ed62552
+[0Ktravis_time:end:0ed62552:start=1589179708763985952,finish=1589179708916369582,duration=152383630,event=maven_central_mirror
+[0Ktravis_time:start:11cd28a8
+[0Ktravis_time:end:11cd28a8:start=1589179708924047617,finish=1589179709025244857,duration=101197240,event=maven_https
+[0Ktravis_time:start:220edf70
+[0Ktravis_fold:start:services
+[0Ktravis_time:start:0e7633a2
+[0K$ sudo systemctl start mysql
+travis_time:end:0e7633a2:start=1589179709037359337,finish=1589179709655445988,duration=618086651,event=prepare
+[0Ktravis_fold:end:services
+[0Ktravis_time:end:0e7633a2:start=1589179709037359337,finish=1589179712689891416,duration=3652532079,event=services
+[0Ktravis_time:start:021f482d
+[0Ktravis_time:end:021f482d:start=1589179712695664293,finish=1589179712698752109,duration=3087816,event=fix_ps4
+[0Ktravis_time:start:0301234d
+[0K
+travis_fold:start:git.checkout
+[0Ktravis_time:start:063967c6
+[0K$ git clone --depth=50 https://github.com/thunder/thunder-distribution.git thunder/thunder-distribution
+Cloning into 'thunder/thunder-distribution'...
+travis_time:end:063967c6:start=1589179712709670070,finish=1589179714937934102,duration=2228264032,event=checkout
+[0K$ cd thunder/thunder-distribution
+travis_time:start:068a2bbc
+[0K$ git fetch origin +refs/pull/218/merge:
+From https://github.com/thunder/thunder-distribution
+ * branch            refs/pull/218/merge -> FETCH_HEAD
+travis_time:end:068a2bbc:start=1589179714947395699,finish=1589179715475976677,duration=528580978,event=checkout
+[0K$ git checkout -qf FETCH_HEAD
+travis_fold:end:git.checkout
+[0K
+travis_time:end:068a2bbc:start=1589179714947395699,finish=1589179715650616754,duration=703221055,event=checkout
+[0Ktravis_time:start:00fce31c
+[0K
+[33;1mSetting environment variables from repository settings[0m
+$ export RIDDLE_TOKEN=[secure]
+$ export SAUCE_ACCESS_KEY=[secure]
+$ export SAUCE_USERNAME=[secure]
+$ export ARTIFACTS_BUCKET=[secure]
+$ export ARTIFACTS_KEY=[secure]
+$ export ARTIFACTS_SECRET=[secure]
+$ export ACQUIA_HOST=[secure]
+$ export ACQUIA_REPOSITORY=[secure]
+$ export PUSHER_CREDENTIALS=[secure]
+$ export DOCKER_USERNAME=[secure]
+$ export DOCKER_PASSWORD_BASE64=[secure]
+$ export AWS_API_KEY_CREATE_ECS_TASK=[secure]
+$ export THUNDER_PTM_HOST=[secure]
+$ export THUNDER_PTM_TOKEN=[secure]
+
+[33;1mSetting environment variables from .travis.yml[0m
+$ export THUNDER_ADMIN_BRANCH=8.x-3.x
+$ export ADDITIONAL_COMPOSER_PARAMETERS=""
+$ export ADDITIONAL_PHPUNIT_PARAMETERS=""
+
+travis_time:end:00fce31c:start=1589179715656982858,finish=1589179715682464061,duration=25481203,event=env
+[0Ktravis_time:start:0753c622
+[0K$ phpenv global 7.3 2>/dev/null
+travis_time:end:0753c622:start=1589179715687643448,finish=1589179715706342355,duration=18698907,event=setup
+[0Ktravis_fold:start:pearrc
+[0K[33;1mWriting /home/travis/.pearrc[0m
+travis_time:start:14aa26e2
+[0Ktravis_time:end:14aa26e2:start=1589179715710408124,finish=1589179715948124123,duration=237715999,event=setup
+[0Ktravis_time:start:01b81c66
+[0K$ pear config-show
+CONFIGURATION (CHANNEL PEAR.PHP.NET):
+=====================================
+Auto-discover new Channels     auto_discover    1
+Default Channel                default_channel  pear.php.net
+HTTP Proxy Server Address      http_proxy       <not set>
+PEAR server [DEPRECATED]       master_server    pear.php.net
+Default Channel Mirror         preferred_mirror pear.php.net
+Remote Configuration File      remote_config    <not set>
+PEAR executables directory     bin_dir          /home/travis/.phpenv/versions/7.3/bin
+PEAR documentation directory   doc_dir          /home/travis/.phpenv/versions/7.3/docs
+PHP extension directory        ext_dir          /home/travis/.phpenv/versions/7.3.14/lib/php/extensions/no-debug-zts-20180731
+PEAR directory                 php_dir          /home/travis/.phpenv/versions/7.3/share/pear
+PEAR Installer cache directory cache_dir        /tmp/pear/cache
+PEAR configuration file        cfg_dir          /home/travis/.phpenv/versions/7.3/cfg
+directory
+PEAR data directory            data_dir         /home/travis/.phpenv/versions/7.3/data
+PEAR Installer download        download_dir     /tmp/pear/install
+directory
+Systems manpage files          man_dir          /home/travis/.phpenv/versions/7.3/man
+directory
+PEAR metadata directory        metadata_dir     <not set>
+PHP CLI/CGI binary             php_bin          /home/travis/.phpenv/versions/7.3.14/bin/php
+php.ini location               php_ini          /home/travis/.phpenv/versions/7.3.14/etc/php.ini
+--program-prefix passed to     php_prefix       <not set>
+PHP's ./configure
+--program-suffix passed to     php_suffix       <not set>
+PHP's ./configure
+PEAR Installer temp directory  temp_dir         /tmp/pear/install
+PEAR test directory            test_dir         /home/travis/.phpenv/versions/7.3/tests
+PEAR www files directory       www_dir          /home/travis/.phpenv/versions/7.3/www
+Cache TimeToLive               cache_ttl        3600
+Preferred Package State        preferred_state  stable
+Unix file mask                 umask            2
+Debug Log Level                verbose          1
+PEAR password (for             password         <not set>
+maintainers)
+Signature Handling Program     sig_bin          /usr/bin/gpg
+Signature Key Directory        sig_keydir       /home/travis/.phpenv/versions/7.3.14/etc/pearkeys
+Signature Key Id               sig_keyid        <not set>
+Package Signature Type         sig_type         gpg
+PEAR username (for             username         <not set>
+maintainers)
+User Configuration File        Filename         /home/travis/.pearrc
+System Configuration File      Filename         /home/travis/.phpenv/versions/7.3.14/etc/pear.conf
+travis_time:end:01b81c66:start=1589179715952408202,finish=1589179716102886941,duration=150478739,event=setup
+[0Ktravis_fold:end:pearrc
+[0Ktravis_time:start:17b22295
+[0K$ phpenv global 7.3
+travis_time:end:17b22295:start=1589179716108345870,finish=1589179716187461741,duration=79115871,event=setup
+[0Ktravis_time:start:0e2622a9
+[0K$ composer self-update
+Updating to version 1.10.6 (stable channel).
+   Downloading (connecting...)Downloading (100%)         
+Use composer self-update --rollback to return to version 1.9.2
+travis_time:end:0e2622a9:start=1589179716410480209,finish=1589179717351411207,duration=940930998,event=setup
+[0Ktravis_fold:start:cache.1
+[0KSetting up build cache
+$ export CASHER_DIR=${TRAVIS_HOME}/.casher
+travis_time:start:0dd415b4
+[0K$ Installing caching utilities
+travis_time:end:0dd415b4:start=1589179718150932071,finish=1589179718317000266,duration=166068195,event=setup_casher
+[0Ktravis_time:start:1e1e1335
+[0Ktravis_time:end:1e1e1335:start=1589179718327164580,finish=1589179718332044303,duration=4879723,event=setup_casher
+[0Ktravis_time:start:2a9a0f71
+[0Kattempting to download cache archive[0m
+[32;1mfetching PR.218/cache--linux-bionic-4561d36835d4a4f14bc2601599606519d5991b26f0fc8fc46cf5de3d2b37e773--php-7.3.tgz[0m
+[32;1mfound cache[0m
+travis_time:end:2a9a0f71:start=1589179718339110169,finish=1589179720106115712,duration=1767005543,event=setup_casher
+[0Ktravis_time:start:35abe110
+[0Ktravis_time:end:35abe110:start=1589179720113730100,finish=1589179720118794153,duration=5064053,event=setup_casher
+[0Ktravis_time:start:1fcf9b66
+[0Kadding /home/travis/.composer/cache to cache[0m
+creating directory /home/travis/.composer/cache[0m
+adding /home/travis/.drush/cache to cache[0m
+creating directory /home/travis/.drush/cache[0m
+travis_time:end:1fcf9b66:start=1589179720126551050,finish=1589179722760094873,duration=2633543823,event=setup_casher
+[0Ktravis_fold:end:cache.1
+[0K
+$ php --version
+PHP 7.3.14 (cli) (built: Jan 24 2020 11:46:10) ( ZTS )
+Copyright (c) 1997-2018 The PHP Group
+Zend Engine v3.3.14, Copyright (c) 1998-2018 Zend Technologies
+    with Zend OPcache v7.3.14, Copyright (c) 1999-2018, by Zend Technologies
+    with Xdebug v2.9.1, Copyright (c) 2002-2020, by Derick Rethans
+$ composer --version
+Composer version 1.10.6 2020-05-06 10:28:10
+[0m
+travis_fold:start:before_install.1
+[0Ktravis_time:start:0b9a41a8
+[0K$ bash -e ./scripts/travis/00-keep-travis-running.sh &
+Still testing....
+travis_time:end:0b9a41a8:start=1589179722999064834,finish=1589179723003916189,duration=4851355,event=before_install
+[0Ktravis_fold:end:before_install.1
+[0Ktravis_fold:start:before_install.2
+[0Ktravis_time:start:20f7beb3
+[0K$ source ./scripts/travis/01-setup-environment.sh
+travis_time:end:20f7beb3:start=1589179723013420907,finish=1589179723023069882,duration=9648975,event=before_install
+[0Ktravis_fold:end:before_install.2
+[0Ktravis_fold:start:before_install.3
+[0Ktravis_time:start:04be5e84
+[0K$ bash -x -e ./scripts/travis/02-before-install.sh
++echo ''
+++phpenv version-name
++echo 'sendmail_path = /bin/true'
+++phpenv version-name
++phpenv rehash
++pip install --user awscli
+DEPRECATION: Python 2.7 reached the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 is no longer maintained. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
+Collecting awscli
+  Downloading awscli-1.18.56-py2.py3-none-any.whl (3.0 MB)
+Collecting colorama<0.4.4,>=0.2.5; python_version != "3.4"
+  Downloading colorama-0.4.3-py2.py3-none-any.whl (15 kB)
+Collecting s3transfer<0.4.0,>=0.3.0
+  Downloading s3transfer-0.3.3-py2.py3-none-any.whl (69 kB)
+Collecting rsa<=3.5.0,>=3.1.2
+  Downloading rsa-3.4.2-py2.py3-none-any.whl (46 kB)
+Collecting docutils<0.16,>=0.10
+  Downloading docutils-0.15.2-py2-none-any.whl (548 kB)
+Collecting botocore==1.16.6
+  Downloading botocore-1.16.6-py2.py3-none-any.whl (6.2 MB)
+Requirement already satisfied: PyYAML<5.4,>=3.10; python_version != "3.4" in /usr/lib/python2.7/dist-packages (from awscli) (3.12)
+Collecting futures<4.0.0,>=2.2.0; python_version == "2.7"
+  Downloading futures-3.3.0-py2-none-any.whl (16 kB)
+Requirement already satisfied: pyasn1>=0.1.3 in /usr/lib/python2.7/dist-packages (from rsa<=3.5.0,>=3.1.2->awscli) (0.4.2)
+Collecting python-dateutil<3.0.0,>=2.1
+  Downloading python_dateutil-2.8.1-py2.py3-none-any.whl (227 kB)
+Requirement already satisfied: urllib3<1.26,>=1.20; python_version != "3.4" in /usr/lib/python2.7/dist-packages (from botocore==1.16.6->awscli) (1.22)
+Collecting jmespath<1.0.0,>=0.7.1
+  Downloading jmespath-0.9.5-py2.py3-none-any.whl (24 kB)
+Requirement already satisfied: six>=1.5 in /usr/lib/python2.7/dist-packages (from python-dateutil<3.0.0,>=2.1->botocore==1.16.6->awscli) (1.11.0)
+Installing collected packages: colorama, futures, python-dateutil, docutils, jmespath, botocore, s3transfer, rsa, awscli
+Successfully installed awscli-1.18.56 botocore-1.16.6 colorama-0.4.3 docutils-0.15.2 futures-3.3.0 jmespath-0.9.5 python-dateutil-2.8.1 rsa-3.4.2 s3transfer-0.3.3
+WARNING: You are using pip version 20.0.2; however, version 20.1 is available.
+You should consider upgrading via the '/usr/bin/python -m pip install --upgrade pip' command.
++cd /home/travis/build/thunder/thunder-distribution
++mkdir -p /home/travis/build/thunder/thunder-distribution/../test-dir
++composer global require 'drush/drush:^8.1'
+Changed current directory to /home/travis/.composer
+./composer.json has been created
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+Package operations: 20 installs, 0 updates, 0 removals
+  - Installing symfony/polyfill-ctype (v1.16.0): Loading from cache
+  - Installing webmozart/assert (1.8.0): Loading from cache
+  - Installing webmozart/path-util (2.3.0): Loading from cache
+  - Installing webflo/drupal-finder (1.2.0): Loading from cache
+  - Installing pear/console_table (v1.3.1): Loading from cache
+  - Installing symfony/finder (v3.4.40): Loading from cache
+  - Installing symfony/event-dispatcher (v3.4.40): Loading from cache
+  - Installing psr/log (1.1.3): Loading from cache
+  - Installing symfony/debug (v4.4.8): Loading from cache
+  - Installing symfony/polyfill-mbstring (v1.16.0): Loading from cache
+  - Installing symfony/console (v3.4.40): Loading from cache
+  - Installing symfony/var-dumper (v3.4.40): Loading from cache
+  - Installing symfony/yaml (v3.4.40): Loading from cache
+  - Installing dflydev/dot-access-data (v1.1.0): Loading from cache
+  - Installing consolidation/output-formatters (3.5.0): Loading from cache
+  - Installing consolidation/annotated-command (2.12.0): Loading from cache
+  - Installing nikic/php-parser (v4.4.0): Loading from cache
+  - Installing dnoegel/php-xdg-base-dir (v0.1.1): Loading from cache
+  - Installing psy/psysh (v0.10.4): Loading from cache
+  - Installing drush/drush (8.3.2): Loading from cache
+pear/console_table suggests installing pear/Console_Color2 (>=0.1.2)
+symfony/event-dispatcher suggests installing symfony/dependency-injection
+symfony/event-dispatcher suggests installing symfony/http-kernel
+symfony/console suggests installing symfony/lock
+symfony/console suggests installing symfony/process
+symfony/var-dumper suggests installing ext-symfony_debug
+psy/psysh suggests installing ext-pdo-sqlite (The doc command requires SQLite to work.)
+psy/psysh suggests installing hoa/console (A pure PHP readline implementation. You'll want this if your PHP install doesn't already support readline or libedit.)
+drush/drush suggests installing drush/config-extra (Provides configuration workflow commands, such as config-merge.)
+Writing lock file
+Generating autoload files
+7 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
++rm -f '/home/travis/.drush/cache/download/*---updates.drupal.org-release-history-*'
+travis_time:end:04be5e84:start=1589179723031309028,finish=1589179735184552301,duration=12153243273,event=before_install
+[0Ktravis_fold:end:before_install.3
+[0Ktravis_fold:start:install.1
+[0Ktravis_time:start:1356c1ec
+[0K$ drush dl drupalorg_drush-7.x && drush verify-makefile
+Project drupalorg_drush (7.x-1.x-dev) downloaded to                  [1;32;40m[1m[success][0m
+/home/travis/.drush/drupalorg_drush.
+Starting Drupal.org contrib makefile validation, please wait         [1;32;40m[1m[ok][0m
+Starting Drupal.org contrib makefile validation, please wait         [1;32;40m[1m[ok][0m
+Makefile drupal-org.make passed.                                     [1;32;40m[1m[ok][0m
+Starting Drupal.org core makefile validation, please wait            [1;32;40m[1m[ok][0m
+Starting Drupal.org core makefile validation, please wait            [1;32;40m[1m[ok][0m
+Makefile drupal-org-core.make passed.                                [1;32;40m[1m[ok][0m
+travis_time:end:1356c1ec:start=1589179735196545518,finish=1589179739125918739,duration=3929373221,event=install
+[0Ktravis_fold:end:install.1
+[0Ktravis_fold:start:install.2
+[0Ktravis_time:start:219f5e80
+[0K$ bash -x -e ./scripts/travis/03-use-thunder-artifact.sh
++aws s3 cp s3://thunder-builds/165107023-thunder.tar.gz /home/travis/build/thunder/thunder-distribution/../165107023-thunder.tar.gz
+Completed 256.0 KiB/71.6 MiB (188.8 KiB/s) with 1 file(s) remaining
+Completed 512.0 KiB/71.6 MiB (375.1 KiB/s) with 1 file(s) remaining
+Completed 768.0 KiB/71.6 MiB (561.5 KiB/s) with 1 file(s) remaining
+Completed 1.0 MiB/71.6 MiB (745.8 KiB/s) with 1 file(s) remaining  
+Completed 1.2 MiB/71.6 MiB (930.3 KiB/s) with 1 file(s) remaining  
+Completed 1.5 MiB/71.6 MiB (1.1 MiB/s) with 1 file(s) remaining    
+Completed 1.8 MiB/71.6 MiB (1.2 MiB/s) with 1 file(s) remaining    
+Completed 2.0 MiB/71.6 MiB (1.4 MiB/s) with 1 file(s) remaining    
+Completed 2.2 MiB/71.6 MiB (1.6 MiB/s) with 1 file(s) remaining    
+Completed 2.5 MiB/71.6 MiB (1.8 MiB/s) with 1 file(s) remaining    
+Completed 2.8 MiB/71.6 MiB (1.9 MiB/s) with 1 file(s) remaining    
+Completed 3.0 MiB/71.6 MiB (2.1 MiB/s) with 1 file(s) remaining    
+Completed 3.2 MiB/71.6 MiB (2.2 MiB/s) with 1 file(s) remaining    
+Completed 3.5 MiB/71.6 MiB (2.4 MiB/s) with 1 file(s) remaining    
+Completed 3.8 MiB/71.6 MiB (2.5 MiB/s) with 1 file(s) remaining    
+Completed 4.0 MiB/71.6 MiB (2.7 MiB/s) with 1 file(s) remaining    
+Completed 4.2 MiB/71.6 MiB (2.9 MiB/s) with 1 file(s) remaining    
+Completed 4.5 MiB/71.6 MiB (3.0 MiB/s) with 1 file(s) remaining    
+Completed 4.8 MiB/71.6 MiB (3.2 MiB/s) with 1 file(s) remaining    
+Completed 5.0 MiB/71.6 MiB (3.3 MiB/s) with 1 file(s) remaining    
+Completed 5.2 MiB/71.6 MiB (3.5 MiB/s) with 1 file(s) remaining    
+Completed 5.5 MiB/71.6 MiB (3.7 MiB/s) with 1 file(s) remaining    
+Completed 5.8 MiB/71.6 MiB (3.8 MiB/s) with 1 file(s) remaining    
+Completed 6.0 MiB/71.6 MiB (4.0 MiB/s) with 1 file(s) remaining    
+Completed 6.2 MiB/71.6 MiB (4.1 MiB/s) with 1 file(s) remaining    
+Completed 6.5 MiB/71.6 MiB (4.3 MiB/s) with 1 file(s) remaining    
+Completed 6.8 MiB/71.6 MiB (4.5 MiB/s) with 1 file(s) remaining    
+Completed 7.0 MiB/71.6 MiB (4.5 MiB/s) with 1 file(s) remaining    
+Completed 7.2 MiB/71.6 MiB (4.7 MiB/s) with 1 file(s) remaining    
+Completed 7.5 MiB/71.6 MiB (4.8 MiB/s) with 1 file(s) remaining    
+Completed 7.8 MiB/71.6 MiB (5.0 MiB/s) with 1 file(s) remaining    
+Completed 8.0 MiB/71.6 MiB (5.1 MiB/s) with 1 file(s) remaining    
+Completed 8.2 MiB/71.6 MiB (5.3 MiB/s) with 1 file(s) remaining    
+Completed 8.5 MiB/71.6 MiB (5.4 MiB/s) with 1 file(s) remaining    
+Completed 8.8 MiB/71.6 MiB (5.5 MiB/s) with 1 file(s) remaining    
+Completed 9.0 MiB/71.6 MiB (5.7 MiB/s) with 1 file(s) remaining    
+Completed 9.2 MiB/71.6 MiB (5.8 MiB/s) with 1 file(s) remaining    
+Completed 9.5 MiB/71.6 MiB (6.0 MiB/s) with 1 file(s) remaining    
+Completed 9.8 MiB/71.6 MiB (6.1 MiB/s) with 1 file(s) remaining    
+Completed 10.0 MiB/71.6 MiB (6.3 MiB/s) with 1 file(s) remaining   
+Completed 10.2 MiB/71.6 MiB (6.4 MiB/s) with 1 file(s) remaining   
+Completed 10.5 MiB/71.6 MiB (6.6 MiB/s) with 1 file(s) remaining   
+Completed 10.8 MiB/71.6 MiB (6.7 MiB/s) with 1 file(s) remaining   
+Completed 11.0 MiB/71.6 MiB (6.9 MiB/s) with 1 file(s) remaining   
+Completed 11.2 MiB/71.6 MiB (7.0 MiB/s) with 1 file(s) remaining   
+Completed 11.5 MiB/71.6 MiB (7.1 MiB/s) with 1 file(s) remaining   
+Completed 11.8 MiB/71.6 MiB (7.3 MiB/s) with 1 file(s) remaining   
+Completed 12.0 MiB/71.6 MiB (7.4 MiB/s) with 1 file(s) remaining   
+Completed 12.2 MiB/71.6 MiB (7.6 MiB/s) with 1 file(s) remaining   
+Completed 12.5 MiB/71.6 MiB (7.7 MiB/s) with 1 file(s) remaining   
+Completed 12.8 MiB/71.6 MiB (7.9 MiB/s) with 1 file(s) remaining   
+Completed 13.0 MiB/71.6 MiB (8.0 MiB/s) with 1 file(s) remaining   
+Completed 13.2 MiB/71.6 MiB (8.1 MiB/s) with 1 file(s) remaining   
+Completed 13.5 MiB/71.6 MiB (8.3 MiB/s) with 1 file(s) remaining   
+Completed 13.8 MiB/71.6 MiB (8.4 MiB/s) with 1 file(s) remaining   
+Completed 14.0 MiB/71.6 MiB (8.5 MiB/s) with 1 file(s) remaining   
+Completed 14.2 MiB/71.6 MiB (8.7 MiB/s) with 1 file(s) remaining   
+Completed 14.5 MiB/71.6 MiB (8.8 MiB/s) with 1 file(s) remaining   
+Completed 14.8 MiB/71.6 MiB (9.0 MiB/s) with 1 file(s) remaining   
+Completed 15.0 MiB/71.6 MiB (9.1 MiB/s) with 1 file(s) remaining   
+Completed 15.2 MiB/71.6 MiB (9.2 MiB/s) with 1 file(s) remaining   
+Completed 15.5 MiB/71.6 MiB (9.3 MiB/s) with 1 file(s) remaining   
+Completed 15.8 MiB/71.6 MiB (9.5 MiB/s) with 1 file(s) remaining   
+Completed 16.0 MiB/71.6 MiB (9.6 MiB/s) with 1 file(s) remaining   
+Completed 16.2 MiB/71.6 MiB (9.8 MiB/s) with 1 file(s) remaining   
+Completed 16.5 MiB/71.6 MiB (9.9 MiB/s) with 1 file(s) remaining   
+Completed 16.8 MiB/71.6 MiB (10.0 MiB/s) with 1 file(s) remaining  
+Completed 17.0 MiB/71.6 MiB (10.2 MiB/s) with 1 file(s) remaining  
+Completed 17.2 MiB/71.6 MiB (10.3 MiB/s) with 1 file(s) remaining  
+Completed 17.5 MiB/71.6 MiB (10.5 MiB/s) with 1 file(s) remaining  
+Completed 17.8 MiB/71.6 MiB (10.6 MiB/s) with 1 file(s) remaining  
+Completed 18.0 MiB/71.6 MiB (10.7 MiB/s) with 1 file(s) remaining  
+Completed 18.2 MiB/71.6 MiB (10.9 MiB/s) with 1 file(s) remaining  
+Completed 18.5 MiB/71.6 MiB (11.0 MiB/s) with 1 file(s) remaining  
+Completed 18.8 MiB/71.6 MiB (11.2 MiB/s) with 1 file(s) remaining  
+Completed 19.0 MiB/71.6 MiB (11.3 MiB/s) with 1 file(s) remaining  
+Completed 19.2 MiB/71.6 MiB (11.4 MiB/s) with 1 file(s) remaining  
+Completed 19.5 MiB/71.6 MiB (11.6 MiB/s) with 1 file(s) remaining  
+Completed 19.8 MiB/71.6 MiB (11.7 MiB/s) with 1 file(s) remaining  
+Completed 20.0 MiB/71.6 MiB (11.9 MiB/s) with 1 file(s) remaining  
+Completed 20.2 MiB/71.6 MiB (12.0 MiB/s) with 1 file(s) remaining  
+Completed 20.5 MiB/71.6 MiB (12.1 MiB/s) with 1 file(s) remaining  
+Completed 20.8 MiB/71.6 MiB (12.3 MiB/s) with 1 file(s) remaining  
+Completed 21.0 MiB/71.6 MiB (12.4 MiB/s) with 1 file(s) remaining  
+Completed 21.2 MiB/71.6 MiB (12.5 MiB/s) with 1 file(s) remaining  
+Completed 21.5 MiB/71.6 MiB (12.7 MiB/s) with 1 file(s) remaining  
+Completed 21.8 MiB/71.6 MiB (12.8 MiB/s) with 1 file(s) remaining  
+Completed 22.0 MiB/71.6 MiB (13.0 MiB/s) with 1 file(s) remaining  
+Completed 22.2 MiB/71.6 MiB (13.1 MiB/s) with 1 file(s) remaining  
+Completed 22.5 MiB/71.6 MiB (13.2 MiB/s) with 1 file(s) remaining  
+Completed 22.8 MiB/71.6 MiB (13.4 MiB/s) with 1 file(s) remaining  
+Completed 23.0 MiB/71.6 MiB (13.5 MiB/s) with 1 file(s) remaining  
+Completed 23.2 MiB/71.6 MiB (13.6 MiB/s) with 1 file(s) remaining  
+Completed 23.5 MiB/71.6 MiB (13.8 MiB/s) with 1 file(s) remaining  
+Completed 23.8 MiB/71.6 MiB (13.9 MiB/s) with 1 file(s) remaining  
+Completed 24.0 MiB/71.6 MiB (14.0 MiB/s) with 1 file(s) remaining  
+Completed 24.2 MiB/71.6 MiB (14.2 MiB/s) with 1 file(s) remaining  
+Completed 24.5 MiB/71.6 MiB (14.3 MiB/s) with 1 file(s) remaining  
+Completed 24.8 MiB/71.6 MiB (14.5 MiB/s) with 1 file(s) remaining  
+Completed 25.0 MiB/71.6 MiB (14.6 MiB/s) with 1 file(s) remaining  
+Completed 25.2 MiB/71.6 MiB (14.7 MiB/s) with 1 file(s) remaining  
+Completed 25.5 MiB/71.6 MiB (14.8 MiB/s) with 1 file(s) remaining  
+Completed 25.8 MiB/71.6 MiB (15.0 MiB/s) with 1 file(s) remaining  
+Completed 26.0 MiB/71.6 MiB (15.1 MiB/s) with 1 file(s) remaining  
+Completed 26.2 MiB/71.6 MiB (15.3 MiB/s) with 1 file(s) remaining  
+Completed 26.5 MiB/71.6 MiB (15.4 MiB/s) with 1 file(s) remaining  
+Completed 26.8 MiB/71.6 MiB (15.5 MiB/s) with 1 file(s) remaining  
+Completed 27.0 MiB/71.6 MiB (15.7 MiB/s) with 1 file(s) remaining  
+Completed 27.2 MiB/71.6 MiB (15.8 MiB/s) with 1 file(s) remaining  
+Completed 27.5 MiB/71.6 MiB (15.9 MiB/s) with 1 file(s) remaining  
+Completed 27.8 MiB/71.6 MiB (16.1 MiB/s) with 1 file(s) remaining  
+Completed 28.0 MiB/71.6 MiB (16.2 MiB/s) with 1 file(s) remaining  
+Completed 28.2 MiB/71.6 MiB (16.3 MiB/s) with 1 file(s) remaining  
+Completed 28.5 MiB/71.6 MiB (16.5 MiB/s) with 1 file(s) remaining  
+Completed 28.8 MiB/71.6 MiB (16.6 MiB/s) with 1 file(s) remaining  
+Completed 29.0 MiB/71.6 MiB (16.7 MiB/s) with 1 file(s) remaining  
+Completed 29.2 MiB/71.6 MiB (16.9 MiB/s) with 1 file(s) remaining  
+Completed 29.5 MiB/71.6 MiB (17.0 MiB/s) with 1 file(s) remaining  
+Completed 29.8 MiB/71.6 MiB (17.1 MiB/s) with 1 file(s) remaining  
+Completed 30.0 MiB/71.6 MiB (17.2 MiB/s) with 1 file(s) remaining  
+Completed 30.2 MiB/71.6 MiB (17.4 MiB/s) with 1 file(s) remaining  
+Completed 30.5 MiB/71.6 MiB (17.5 MiB/s) with 1 file(s) remaining  
+Completed 30.8 MiB/71.6 MiB (17.6 MiB/s) with 1 file(s) remaining  
+Completed 31.0 MiB/71.6 MiB (17.8 MiB/s) with 1 file(s) remaining  
+Completed 31.2 MiB/71.6 MiB (17.8 MiB/s) with 1 file(s) remaining  
+Completed 31.5 MiB/71.6 MiB (17.9 MiB/s) with 1 file(s) remaining  
+Completed 31.8 MiB/71.6 MiB (18.0 MiB/s) with 1 file(s) remaining  
+Completed 32.0 MiB/71.6 MiB (18.1 MiB/s) with 1 file(s) remaining  
+Completed 32.2 MiB/71.6 MiB (18.3 MiB/s) with 1 file(s) remaining  
+Completed 32.5 MiB/71.6 MiB (18.4 MiB/s) with 1 file(s) remaining  
+Completed 32.8 MiB/71.6 MiB (18.5 MiB/s) with 1 file(s) remaining  
+Completed 33.0 MiB/71.6 MiB (18.7 MiB/s) with 1 file(s) remaining  
+Completed 33.2 MiB/71.6 MiB (18.8 MiB/s) with 1 file(s) remaining  
+Completed 33.5 MiB/71.6 MiB (18.9 MiB/s) with 1 file(s) remaining  
+Completed 33.8 MiB/71.6 MiB (19.0 MiB/s) with 1 file(s) remaining  
+Completed 34.0 MiB/71.6 MiB (19.2 MiB/s) with 1 file(s) remaining  
+Completed 34.2 MiB/71.6 MiB (19.3 MiB/s) with 1 file(s) remaining  
+Completed 34.5 MiB/71.6 MiB (19.4 MiB/s) with 1 file(s) remaining  
+Completed 34.8 MiB/71.6 MiB (19.5 MiB/s) with 1 file(s) remaining  
+Completed 35.0 MiB/71.6 MiB (19.7 MiB/s) with 1 file(s) remaining  
+Completed 35.2 MiB/71.6 MiB (19.8 MiB/s) with 1 file(s) remaining  
+Completed 35.5 MiB/71.6 MiB (19.9 MiB/s) with 1 file(s) remaining  
+Completed 35.8 MiB/71.6 MiB (20.0 MiB/s) with 1 file(s) remaining  
+Completed 36.0 MiB/71.6 MiB (20.2 MiB/s) with 1 file(s) remaining  
+Completed 36.2 MiB/71.6 MiB (20.3 MiB/s) with 1 file(s) remaining  
+Completed 36.5 MiB/71.6 MiB (20.4 MiB/s) with 1 file(s) remaining  
+Completed 36.8 MiB/71.6 MiB (20.5 MiB/s) with 1 file(s) remaining  
+Completed 37.0 MiB/71.6 MiB (20.7 MiB/s) with 1 file(s) remaining  
+Completed 37.2 MiB/71.6 MiB (20.8 MiB/s) with 1 file(s) remaining  
+Completed 37.5 MiB/71.6 MiB (20.9 MiB/s) with 1 file(s) remaining  
+Completed 37.8 MiB/71.6 MiB (21.0 MiB/s) with 1 file(s) remaining  
+Completed 38.0 MiB/71.6 MiB (21.2 MiB/s) with 1 file(s) remaining  
+Completed 38.2 MiB/71.6 MiB (21.3 MiB/s) with 1 file(s) remaining  
+Completed 38.5 MiB/71.6 MiB (21.4 MiB/s) with 1 file(s) remaining  
+Completed 38.8 MiB/71.6 MiB (21.5 MiB/s) with 1 file(s) remaining  
+Completed 39.0 MiB/71.6 MiB (21.7 MiB/s) with 1 file(s) remaining  
+Completed 39.2 MiB/71.6 MiB (21.8 MiB/s) with 1 file(s) remaining  
+Completed 39.5 MiB/71.6 MiB (21.9 MiB/s) with 1 file(s) remaining  
+Completed 39.8 MiB/71.6 MiB (22.0 MiB/s) with 1 file(s) remaining  
+Completed 40.0 MiB/71.6 MiB (22.2 MiB/s) with 1 file(s) remaining  
+Completed 40.2 MiB/71.6 MiB (22.3 MiB/s) with 1 file(s) remaining  
+Completed 40.5 MiB/71.6 MiB (22.4 MiB/s) with 1 file(s) remaining  
+Completed 40.8 MiB/71.6 MiB (22.5 MiB/s) with 1 file(s) remaining  
+Completed 41.0 MiB/71.6 MiB (22.6 MiB/s) with 1 file(s) remaining  
+Completed 41.2 MiB/71.6 MiB (22.8 MiB/s) with 1 file(s) remaining  
+Completed 41.5 MiB/71.6 MiB (22.9 MiB/s) with 1 file(s) remaining  
+Completed 41.8 MiB/71.6 MiB (23.0 MiB/s) with 1 file(s) remaining  
+Completed 42.0 MiB/71.6 MiB (23.1 MiB/s) with 1 file(s) remaining  
+Completed 42.2 MiB/71.6 MiB (23.2 MiB/s) with 1 file(s) remaining  
+Completed 42.5 MiB/71.6 MiB (23.4 MiB/s) with 1 file(s) remaining  
+Completed 42.8 MiB/71.6 MiB (23.5 MiB/s) with 1 file(s) remaining  
+Completed 43.0 MiB/71.6 MiB (23.6 MiB/s) with 1 file(s) remaining  
+Completed 43.2 MiB/71.6 MiB (23.7 MiB/s) with 1 file(s) remaining  
+Completed 43.5 MiB/71.6 MiB (23.8 MiB/s) with 1 file(s) remaining  
+Completed 43.8 MiB/71.6 MiB (24.0 MiB/s) with 1 file(s) remaining  
+Completed 44.0 MiB/71.6 MiB (24.1 MiB/s) with 1 file(s) remaining  
+Completed 44.2 MiB/71.6 MiB (24.2 MiB/s) with 1 file(s) remaining  
+Completed 44.5 MiB/71.6 MiB (24.3 MiB/s) with 1 file(s) remaining  
+Completed 44.8 MiB/71.6 MiB (24.5 MiB/s) with 1 file(s) remaining  
+Completed 45.0 MiB/71.6 MiB (24.6 MiB/s) with 1 file(s) remaining  
+Completed 45.2 MiB/71.6 MiB (24.7 MiB/s) with 1 file(s) remaining  
+Completed 45.5 MiB/71.6 MiB (24.8 MiB/s) with 1 file(s) remaining  
+Completed 45.8 MiB/71.6 MiB (24.9 MiB/s) with 1 file(s) remaining  
+Completed 46.0 MiB/71.6 MiB (25.1 MiB/s) with 1 file(s) remaining  
+Completed 46.2 MiB/71.6 MiB (25.2 MiB/s) with 1 file(s) remaining  
+Completed 46.5 MiB/71.6 MiB (25.3 MiB/s) with 1 file(s) remaining  
+Completed 46.8 MiB/71.6 MiB (25.4 MiB/s) with 1 file(s) remaining  
+Completed 47.0 MiB/71.6 MiB (25.5 MiB/s) with 1 file(s) remaining  
+Completed 47.2 MiB/71.6 MiB (25.6 MiB/s) with 1 file(s) remaining  
+Completed 47.5 MiB/71.6 MiB (25.8 MiB/s) with 1 file(s) remaining  
+Completed 47.8 MiB/71.6 MiB (25.9 MiB/s) with 1 file(s) remaining  
+Completed 48.0 MiB/71.6 MiB (26.0 MiB/s) with 1 file(s) remaining  
+Completed 48.2 MiB/71.6 MiB (26.1 MiB/s) with 1 file(s) remaining  
+Completed 48.5 MiB/71.6 MiB (26.2 MiB/s) with 1 file(s) remaining  
+Completed 48.8 MiB/71.6 MiB (26.3 MiB/s) with 1 file(s) remaining  
+Completed 49.0 MiB/71.6 MiB (26.5 MiB/s) with 1 file(s) remaining  
+Completed 49.2 MiB/71.6 MiB (26.6 MiB/s) with 1 file(s) remaining  
+Completed 49.5 MiB/71.6 MiB (26.7 MiB/s) with 1 file(s) remaining  
+Completed 49.8 MiB/71.6 MiB (26.8 MiB/s) with 1 file(s) remaining  
+Completed 50.0 MiB/71.6 MiB (27.0 MiB/s) with 1 file(s) remaining  
+Completed 50.2 MiB/71.6 MiB (27.0 MiB/s) with 1 file(s) remaining  
+Completed 50.5 MiB/71.6 MiB (27.1 MiB/s) with 1 file(s) remaining  
+Completed 50.8 MiB/71.6 MiB (27.3 MiB/s) with 1 file(s) remaining  
+Completed 51.0 MiB/71.6 MiB (27.4 MiB/s) with 1 file(s) remaining  
+Completed 51.2 MiB/71.6 MiB (27.5 MiB/s) with 1 file(s) remaining  
+Completed 51.5 MiB/71.6 MiB (27.6 MiB/s) with 1 file(s) remaining  
+Completed 51.8 MiB/71.6 MiB (27.7 MiB/s) with 1 file(s) remaining  
+Completed 52.0 MiB/71.6 MiB (27.8 MiB/s) with 1 file(s) remaining  
+Completed 52.2 MiB/71.6 MiB (27.9 MiB/s) with 1 file(s) remaining  
+Completed 52.5 MiB/71.6 MiB (28.0 MiB/s) with 1 file(s) remaining  
+Completed 52.8 MiB/71.6 MiB (28.1 MiB/s) with 1 file(s) remaining  
+Completed 53.0 MiB/71.6 MiB (28.2 MiB/s) with 1 file(s) remaining  
+Completed 53.2 MiB/71.6 MiB (28.3 MiB/s) with 1 file(s) remaining  
+Completed 53.5 MiB/71.6 MiB (28.4 MiB/s) with 1 file(s) remaining  
+Completed 53.8 MiB/71.6 MiB (28.5 MiB/s) with 1 file(s) remaining  
+Completed 54.0 MiB/71.6 MiB (28.6 MiB/s) with 1 file(s) remaining  
+Completed 54.2 MiB/71.6 MiB (28.7 MiB/s) with 1 file(s) remaining  
+Completed 54.5 MiB/71.6 MiB (28.8 MiB/s) with 1 file(s) remaining  
+Completed 54.8 MiB/71.6 MiB (28.9 MiB/s) with 1 file(s) remaining  
+Completed 55.0 MiB/71.6 MiB (29.0 MiB/s) with 1 file(s) remaining  
+Completed 55.2 MiB/71.6 MiB (29.1 MiB/s) with 1 file(s) remaining  
+Completed 55.5 MiB/71.6 MiB (29.3 MiB/s) with 1 file(s) remaining  
+Completed 55.8 MiB/71.6 MiB (29.4 MiB/s) with 1 file(s) remaining  
+Completed 56.0 MiB/71.6 MiB (29.5 MiB/s) with 1 file(s) remaining  
+Completed 56.2 MiB/71.6 MiB (29.6 MiB/s) with 1 file(s) remaining  
+Completed 56.5 MiB/71.6 MiB (29.7 MiB/s) with 1 file(s) remaining  
+Completed 56.8 MiB/71.6 MiB (29.8 MiB/s) with 1 file(s) remaining  
+Completed 57.0 MiB/71.6 MiB (29.9 MiB/s) with 1 file(s) remaining  
+Completed 57.2 MiB/71.6 MiB (30.0 MiB/s) with 1 file(s) remaining  
+Completed 57.5 MiB/71.6 MiB (30.1 MiB/s) with 1 file(s) remaining  
+Completed 57.8 MiB/71.6 MiB (30.3 MiB/s) with 1 file(s) remaining  
+Completed 58.0 MiB/71.6 MiB (30.3 MiB/s) with 1 file(s) remaining  
+Completed 58.2 MiB/71.6 MiB (30.4 MiB/s) with 1 file(s) remaining  
+Completed 58.5 MiB/71.6 MiB (30.5 MiB/s) with 1 file(s) remaining  
+Completed 58.8 MiB/71.6 MiB (30.6 MiB/s) with 1 file(s) remaining  
+Completed 59.0 MiB/71.6 MiB (30.7 MiB/s) with 1 file(s) remaining  
+Completed 59.2 MiB/71.6 MiB (30.8 MiB/s) with 1 file(s) remaining  
+Completed 59.5 MiB/71.6 MiB (30.9 MiB/s) with 1 file(s) remaining  
+Completed 59.8 MiB/71.6 MiB (31.2 MiB/s) with 1 file(s) remaining  
+Completed 60.0 MiB/71.6 MiB (31.2 MiB/s) with 1 file(s) remaining  
+Completed 60.2 MiB/71.6 MiB (31.3 MiB/s) with 1 file(s) remaining  
+Completed 60.5 MiB/71.6 MiB (31.4 MiB/s) with 1 file(s) remaining  
+Completed 60.8 MiB/71.6 MiB (31.5 MiB/s) with 1 file(s) remaining  
+Completed 61.0 MiB/71.6 MiB (31.6 MiB/s) with 1 file(s) remaining  
+Completed 61.2 MiB/71.6 MiB (31.7 MiB/s) with 1 file(s) remaining  
+Completed 61.5 MiB/71.6 MiB (31.8 MiB/s) with 1 file(s) remaining  
+Completed 61.8 MiB/71.6 MiB (31.9 MiB/s) with 1 file(s) remaining  
+Completed 62.0 MiB/71.6 MiB (32.1 MiB/s) with 1 file(s) remaining  
+Completed 62.2 MiB/71.6 MiB (32.2 MiB/s) with 1 file(s) remaining  
+Completed 62.5 MiB/71.6 MiB (32.4 MiB/s) with 1 file(s) remaining  
+Completed 62.8 MiB/71.6 MiB (32.3 MiB/s) with 1 file(s) remaining  
+Completed 63.0 MiB/71.6 MiB (32.5 MiB/s) with 1 file(s) remaining  
+Completed 63.2 MiB/71.6 MiB (32.6 MiB/s) with 1 file(s) remaining  
+Completed 63.5 MiB/71.6 MiB (32.8 MiB/s) with 1 file(s) remaining  
+Completed 63.8 MiB/71.6 MiB (32.8 MiB/s) with 1 file(s) remaining  
+Completed 64.0 MiB/71.6 MiB (33.0 MiB/s) with 1 file(s) remaining  
+Completed 64.2 MiB/71.6 MiB (33.1 MiB/s) with 1 file(s) remaining  
+Completed 64.5 MiB/71.6 MiB (33.1 MiB/s) with 1 file(s) remaining  
+Completed 64.8 MiB/71.6 MiB (33.3 MiB/s) with 1 file(s) remaining  
+Completed 65.0 MiB/71.6 MiB (33.4 MiB/s) with 1 file(s) remaining  
+Completed 65.2 MiB/71.6 MiB (33.5 MiB/s) with 1 file(s) remaining  
+Completed 65.5 MiB/71.6 MiB (33.6 MiB/s) with 1 file(s) remaining  
+Completed 65.8 MiB/71.6 MiB (33.7 MiB/s) with 1 file(s) remaining  
+Completed 66.0 MiB/71.6 MiB (33.8 MiB/s) with 1 file(s) remaining  
+Completed 66.2 MiB/71.6 MiB (33.9 MiB/s) with 1 file(s) remaining  
+Completed 66.5 MiB/71.6 MiB (34.0 MiB/s) with 1 file(s) remaining  
+Completed 66.8 MiB/71.6 MiB (34.2 MiB/s) with 1 file(s) remaining  
+Completed 67.0 MiB/71.6 MiB (34.2 MiB/s) with 1 file(s) remaining  
+Completed 67.2 MiB/71.6 MiB (34.4 MiB/s) with 1 file(s) remaining  
+Completed 67.5 MiB/71.6 MiB (34.3 MiB/s) with 1 file(s) remaining  
+Completed 67.8 MiB/71.6 MiB (34.5 MiB/s) with 1 file(s) remaining  
+Completed 68.0 MiB/71.6 MiB (34.6 MiB/s) with 1 file(s) remaining  
+Completed 68.2 MiB/71.6 MiB (34.6 MiB/s) with 1 file(s) remaining  
+Completed 68.5 MiB/71.6 MiB (34.7 MiB/s) with 1 file(s) remaining  
+Completed 68.8 MiB/71.6 MiB (34.8 MiB/s) with 1 file(s) remaining  
+Completed 68.8 MiB/71.6 MiB (34.9 MiB/s) with 1 file(s) remaining  
+Completed 69.1 MiB/71.6 MiB (35.0 MiB/s) with 1 file(s) remaining  
+Completed 69.3 MiB/71.6 MiB (35.1 MiB/s) with 1 file(s) remaining  
+Completed 69.6 MiB/71.6 MiB (35.2 MiB/s) with 1 file(s) remaining  
+Completed 69.8 MiB/71.6 MiB (35.3 MiB/s) with 1 file(s) remaining  
+Completed 70.1 MiB/71.6 MiB (35.4 MiB/s) with 1 file(s) remaining  
+Completed 70.3 MiB/71.6 MiB (35.5 MiB/s) with 1 file(s) remaining  
+Completed 70.6 MiB/71.6 MiB (35.5 MiB/s) with 1 file(s) remaining  
+Completed 70.8 MiB/71.6 MiB (35.6 MiB/s) with 1 file(s) remaining  
+Completed 71.1 MiB/71.6 MiB (35.7 MiB/s) with 1 file(s) remaining  
+Completed 71.3 MiB/71.6 MiB (35.9 MiB/s) with 1 file(s) remaining  
+Completed 71.6 MiB/71.6 MiB (34.6 MiB/s) with 1 file(s) remaining  
+download: s3://thunder-builds/165107023-thunder.tar.gz to ../165107023-thunder.tar.gz
++tar -zxf /home/travis/build/thunder/thunder-distribution/../165107023-thunder.tar.gz -C /home/travis/build/thunder/thunder-distribution/../test-dir
++cd /home/travis/build/thunder/thunder-distribution/../test-dir
++composer install --dev
+You are using the deprecated option "dev". Dev packages are installed by default now.
+> DrupalProject\composer\ScriptHandler::checkComposerVersion
+Loading composer repositories with package information
+Installing dependencies (including require-dev) from lock file
+Package operations: 13 installs, 0 updates, 0 removals
+No patches supplied.
+Gathering patches for dependencies. This might take a minute.
+  - Installing behat/mink (1.7.x-dev b2e031b): Cloning b2e031b747 from cache
+  - Installing behat/mink-browserkit-driver (v1.3.4): Loading from cache
+  - Installing fabpot/goutte (v3.2.3): Loading from cache
+  - Installing instaclick/php-webdriver (1.4.7): Loading from cache
+  - Installing symfony/phpunit-bridge (v3.4.40): Loading from cache
+  - Installing mikey179/vfsstream (v1.6.8): Loading from cache
+  - Installing justinrainbow/json-schema (5.2.9): Loading from cache
+  - Installing jcalderonzumba/gastonjs (v1.2.0): Loading from cache
+  - Installing jcalderonzumba/mink-phantomjs-driver (v0.3.3): Loading from cache
+  - Installing drupal/coder (8.3.9): Loading from cache
+  - Installing behat/mink-selenium2-driver (1.3.x-dev 0a09c43): Cloning 0a09c43416 from cache
+  - Installing behat/mink-goutte-driver (v1.2.1): Loading from cache
+  - Installing webflo/drupal-core-require-dev (8.7.13)
+behat/mink suggests installing behat/mink-zombie-driver (fast and JS-enabled headless driver for any app (requires node.js))
+behat/mink suggests installing dmore/chrome-mink-driver (fast and JS-enabled driver for any app (requires chromium or google chrome))
+Package container-interop/container-interop is abandoned, you should avoid using it. Use psr/container instead.
+Package phpunit/phpunit-mock-objects is abandoned, you should avoid using it. No replacement was suggested.
+Package zendframework/zend-diactoros is abandoned, you should avoid using it. Use laminas/laminas-diactoros instead.
+Package zendframework/zend-escaper is abandoned, you should avoid using it. Use laminas/laminas-escaper instead.
+Package zendframework/zend-feed is abandoned, you should avoid using it. Use laminas/laminas-feed instead.
+Package zendframework/zend-stdlib is abandoned, you should avoid using it. Use laminas/laminas-stdlib instead.
+Package webflo/drupal-core-require-dev is abandoned, you should avoid using it. Use drupal/core-dev instead.
+Generating autoload files
+34 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+> DrupalProject\composer\ScriptHandler::createRequiredFiles
+travis_time:end:219f5e80:start=1589179739137600176,finish=1589179747588917052,duration=8451316876,event=install
+[0Ktravis_fold:end:install.2
+[0KSkipping the before_script step, as specified in the configuration.
+travis_time:start:2810239c
+[0K$ bash -x -e ./scripts/travis/06-test-source-code.sh
++composer global require drupal/coder
+Changed current directory to /home/travis/.composer
+Using version ^8.3 for drupal/coder
+./composer.json has been updated
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+Package operations: 2 installs, 0 updates, 0 removals
+  - Installing squizlabs/php_codesniffer (3.5.5): Downloading (connecting...)Downloading (0%)           Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+  - Installing drupal/coder (8.3.9): Cloning d51e0b8c65 from cache
+Writing lock file
+Generating autoload files
+7 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
++composer global require dealerdirect/phpcodesniffer-composer-installer
+Changed current directory to /home/travis/.composer
+Using version ^0.6.2 for dealerdirect/phpcodesniffer-composer-installer
+./composer.json has been updated
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+Package operations: 1 install, 0 updates, 0 removals
+  - Installing dealerdirect/phpcodesniffer-composer-installer (v0.6.2): Downloading (connecting...)Downloading (0%)           Downloading (85%)Downloading (95%)Downloading (100%)
+Writing lock file
+Generating autoload files
+7 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+PHP CodeSniffer Config installed_paths set to /home/travis/.composer/vendor/drupal/coder/coder_sniffer
++phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme '--ignore=*.md' -p .
+............................................................ 60 / 81 (74%)
+.....................                                        81 / 81 (100%)
+
+
+Time: 832ms; Memory: 10MB
+
++phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme -p .
+............................................................ 60 / 81 (74%)
+.....................                                        81 / 81 (100%)
+
+
+Time: 480ms; Memory: 8MB
+
+++command -v eslint
++'[' -x '' ']'
++npm install -g eslint
+/home/travis/.nvm/versions/node/v10.16.0/bin/eslint -> /home/travis/.nvm/versions/node/v10.16.0/lib/node_modules/eslint/bin/eslint.js
++ eslint@7.0.0
+added 136 packages from 82 contributors in 6.181s
++npm install -g eslint-config-drupal-bundle
+npm WARN deprecated circular-json@0.3.3: CircularJSON is in maintenance only, flatted is its successor.
+/home/travis/.nvm/versions/node/v10.16.0/bin/prettier -> /home/travis/.nvm/versions/node/v10.16.0/lib/node_modules/eslint-config-drupal-bundle/node_modules/prettier/bin-prettier.js
+/home/travis/.nvm/versions/node/v10.16.0/bin/eslint -> /home/travis/.nvm/versions/node/v10.16.0/lib/node_modules/eslint-config-drupal-bundle/node_modules/eslint/bin/eslint.js
+
+> core-js-pure@3.6.5 postinstall /home/travis/.nvm/versions/node/v10.16.0/lib/node_modules/eslint-config-drupal-bundle/node_modules/core-js-pure
+> node -e "try{require('./postinstall')}catch(e){}"
+
++ eslint-config-drupal-bundle@1.0.2
+added 239 packages from 230 contributors in 9.805s
++eslint .
++cd /home/travis/build/thunder/thunder-distribution/../test-dir
++cp /home/travis/build/thunder/thunder-distribution/phpstan.neon.dist phpstan.neon
++phpstan analyse --memory-limit 300M /home/travis/build/thunder/thunder-distribution/../test-dir/docroot/profiles/contrib/thunder
+Note: Using configuration file /home/travis/build/thunder/test-dir/phpstan.neon.
+  0/81 [â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘]   0%
+ 40/81 [â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘]  49%
+ 60/81 [â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘]  74%
+ 81/81 [â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“â–“] 100%
+
+
+ [OK] No errors                                                                 
+
+travis_time:end:2810239c:start=1589179747600014534,finish=1589179788907118458,duration=41307103924,event=script
+[0K[32;1mThe command "bash -x -e ./scripts/travis/06-test-source-code.sh" exited with 0.[0m
+travis_fold:start:cache.2
+[0Kstore build cache
+travis_time:start:074392c8
+[0Ktravis_time:end:074392c8:start=1589179788917556367,finish=1589179788921963808,duration=4407441,event=cache
+[0Ktravis_time:start:31475203
+[0K[32;1mchanges detected (content changed, file is created, or file is deleted):\n/home/travis/.composer/cache/files/dealerdirect/phpcodesniffer-composer-installer/252b16a2881fe1d5bd84629e8a606a2aa90a1aff.zip
+/home/travis/.composer/cache/files/squizlabs/php_codesniffer/afed57230df7c05e564f4845a8e0f41372304394.zip
+/home/travis/.composer/cache/repo/https---repo.packagist.org/packages.json
+/home/travis/.composer/cache/repo/https---repo.packagist.org/p-provider-latest.json
+/home/travis/.composer/cache/repo/https---repo.packagist.org/provider-dealerdirect$phpcodesniffer-composer-installer.json
+/home/travis/.composer/cache/vcs/https---git.drupalcode.org-project-coder.git/config
+/home/travis/.composer/cache/vcs/https---git.drupalcode.org-project-coder.git/description
+/home/travis/.composer/cache/vcs/https---git.drupalcode.org-project-coder.git/HEAD
+/home/travis/.composer/cache/vcs/https---git.drupalcode.org-project-coder.git/hooks/applypatch-msg.sample
+/home/travis/.composer/cache/vcs/https---git.drupalcode.org-project-coder.git/hooks/commit-msg.sample
+/home/travis/.compos\n...[0m
+[32;1mchanges detected, packing new archive[0m
+[32;1muploading PR.218/cache--linux-bionic-4561d36835d4a4f14bc2601599606519d5991b26f0fc8fc46cf5de3d2b37e773--php-7.3.tgz[0m
+[32;1mcache uploaded[0m
+travis_time:end:31475203:start=1589179788928020802,finish=1589179795125862330,duration=6197841528,event=cache
+[0Ktravis_fold:end:cache.2
+[0K
+
+[31;1mArtifacts support disabled for pull requests[0m
+
+
+Done. Your build exited with 0.
+/home/travis/.travis/functions: line 536:  6819 Terminated              bash -e ./scripts/travis/00-keep-travis-running.sh
+
