@@ -1,14 +1,16 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - focal_point
 name: paragraph_preview_thumbnail
 label: 'Paragraph Preview Thumbnail'
 effects:
-  701f3d12-4741-47a1-8a88-7a96487c9be1:
-    uuid: 701f3d12-4741-47a1-8a88-7a96487c9be1
-    id: image_scale_and_crop
-    weight: 1
+  be3418f6-9257-40ca-a6ed-20d73765b010:
+    uuid: be3418f6-9257-40ca-a6ed-20d73765b010
+    id: focal_point_scale_and_crop
+    weight: 2
     data:
       width: 150
       height: 90
-      anchor: center-center
+      crop_type: focal_point
