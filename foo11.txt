@@ -1,0 +1,1157 @@
+ ##[section]Starting: Request a runner to run this job
+ Can't find any online and idle self-hosted runner in current repository that matches the required labels: 'ubuntu-latest'
+ Can't find any online and idle self-hosted runner in current repository's account/organization that matches the required labels: 'ubuntu-latest'
+ Found online and idle hosted runner in current repository's account/organization that matches the required labels: 'ubuntu-latest'
+ ##[section]Finishing: Request a runner to run this job
+ Current runner version: '2.169.1'
+ ##[group]Operating System
+ Ubuntu
+ 18.04.4
+ LTS
+ ##[endgroup]
+ ##[group]Virtual Environment
+ Environment: ubuntu-18.04
+ Version: 20200430.1
+ Included Software: https://github.com/actions/virtual-environments/blob/ubuntu18/20200430.1/images/linux/Ubuntu1804-README.md
+ ##[endgroup]
+ Prepare workflow directory
+ Prepare all required actions
+ Download action repository 'actions/checkout@v1'
+ Download action repository 'actions/setup-node@v1'
+ Download action repository 'shivammathur/setup-php@master'
+ Download action repository 'actions/cache@v1'
+ ##[group]Run actions/checkout@v1
+ with:
+ clean: true
+ env:
+ DRUPAL_TESTING_TEST_CODING_STYLES: false
+ DRUPAL_TESTING_DATABASE_USER: root
+ DRUPAL_TESTING_DATABASE_PASSWORD: root
+ DRUPAL_TESTING_DATABASE_ENGINE: mysql
+ ##[endgroup]
+ Syncing repository: thunder/select2
+ ##[command]git version
+ git version 2.26.2
+ ##[command]git lfs version
+ git-lfs/2.10.0 (GitHub; linux amd64; go 1.13.4)
+ ##[command]git init "/home/runner/work/select2/select2"
+ Initialized empty Git repository in /home/runner/work/select2/select2/.git/
+ ##[command]git remote add origin https://github.com/thunder/select2
+ ##[command]git config gc.auto 0
+ ##[command]git config --get-all http.https://github.com/thunder/select2.extraheader
+ ##[command]git -c http.extraheader="AUTHORIZATION: basic ***" fetch --tags --prune --progress --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/*
+ remote: Enumerating objects: 231, done.
+ remote: Counting objects: 0% (1/231)
+ remote: Counting objects: 1% (3/231)
+ remote: Counting objects: 2% (5/231)
+ remote: Counting objects: 3% (7/231)
+ remote: Counting objects: 4% (10/231)
+ remote: Counting objects: 5% (12/231)
+ remote: Counting objects: 6% (14/231)
+ remote: Counting objects: 7% (17/231)
+ remote: Counting objects: 8% (19/231)
+ remote: Counting objects: 9% (21/231)
+ remote: Counting objects: 10% (24/231)
+ remote: Counting objects: 11% (26/231)
+ remote: Counting objects: 12% (28/231)
+ remote: Counting objects: 13% (31/231)
+ remote: Counting objects: 14% (33/231)
+ remote: Counting objects: 15% (35/231)
+ remote: Counting objects: 16% (37/231)
+ remote: Counting objects: 17% (40/231)
+ remote: Counting objects: 18% (42/231)
+ remote: Counting objects: 19% (44/231)
+ remote: Counting objects: 20% (47/231)
+ remote: Counting objects: 21% (49/231)
+ remote: Counting objects: 22% (51/231)
+ remote: Counting objects: 23% (54/231)
+ remote: Counting objects: 24% (56/231)
+ remote: Counting objects: 25% (58/231)
+ remote: Counting objects: 26% (61/231)
+ remote: Counting objects: 27% (63/231)
+ remote: Counting objects: 28% (65/231)
+ remote: Counting objects: 29% (67/231)
+ remote: Counting objects: 30% (70/231)
+ remote: Counting objects: 31% (72/231)
+ remote: Counting objects: 32% (74/231)
+ remote: Counting objects: 33% (77/231)
+ remote: Counting objects: 34% (79/231)
+ remote: Counting objects: 35% (81/231)
+ remote: Counting objects: 36% (84/231)
+ remote: Counting objects: 37% (86/231)
+ remote: Counting objects: 38% (88/231)
+ remote: Counting objects: 39% (91/231)
+ remote: Counting objects: 40% (93/231)
+ remote: Counting objects: 41% (95/231)
+ remote: Counting objects: 42% (98/231)
+ remote: Counting objects: 43% (100/231)
+ remote: Counting objects: 44% (102/231)
+ remote: Counting objects: 45% (104/231)
+ remote: Counting objects: 46% (107/231)
+ remote: Counting objects: 47% (109/231)
+ remote: Counting objects: 48% (111/231)
+ remote: Counting objects: 49% (114/231)
+ remote: Counting objects: 50% (116/231)
+ remote: Counting objects: 51% (118/231)
+ remote: Counting objects: 52% (121/231)
+ remote: Counting objects: 53% (123/231)
+ remote: Counting objects: 54% (125/231)
+ remote: Counting objects: 55% (128/231)
+ remote: Counting objects: 56% (130/231)
+ remote: Counting objects: 57% (132/231)
+ remote: Counting objects: 58% (134/231)
+ remote: Counting objects: 59% (137/231)
+ remote: Counting objects: 60% (139/231)
+ remote: Counting objects: 61% (141/231)
+ remote: Counting objects: 62% (144/231)
+ remote: Counting objects: 63% (146/231)
+ remote: Counting objects: 64% (148/231)
+ remote: Counting objects: 65% (151/231)
+ remote: Counting objects: 66% (153/231)
+ remote: Counting objects: 67% (155/231)
+ remote: Counting objects: 68% (158/231)
+ remote: Counting objects: 69% (160/231)
+ remote: Counting objects: 70% (162/231)
+ remote: Counting objects: 71% (165/231)
+ remote: Counting objects: 72% (167/231)
+ remote: Counting objects: 73% (169/231)
+ remote: Counting objects: 74% (171/231)
+ remote: Counting objects: 75% (174/231)
+ remote: Counting objects: 76% (176/231)
+ remote: Counting objects: 77% (178/231)
+ remote: Counting objects: 78% (181/231)
+ remote: Counting objects: 79% (183/231)
+ remote: Counting objects: 80% (185/231)
+ remote: Counting objects: 81% (188/231)
+ remote: Counting objects: 82% (190/231)
+ remote: Counting objects: 83% (192/231)
+ remote: Counting objects: 84% (195/231)
+ remote: Counting objects: 85% (197/231)
+ remote: Counting objects: 86% (199/231)
+ remote: Counting objects: 87% (201/231)
+ remote: Counting objects: 88% (204/231)
+ remote: Counting objects: 89% (206/231)
+ remote: Counting objects: 90% (208/231)
+ remote: Counting objects: 91% (211/231)
+ remote: Counting objects: 92% (213/231)
+ remote: Counting objects: 93% (215/231)
+ remote: Counting objects: 94% (218/231)
+ remote: Counting objects: 95% (220/231)
+ remote: Counting objects: 96% (222/231)
+ remote: Counting objects: 97% (225/231)
+ remote: Counting objects: 98% (227/231)
+ remote: Counting objects: 99% (229/231)
+ remote: Counting objects: 100% (231/231)
+ remote: Counting objects: 100% (231/231), done.
+ remote: Compressing objects: 0% (1/105)
+ remote: Compressing objects: 1% (2/105)
+ remote: Compressing objects: 2% (3/105)
+ remote: Compressing objects: 3% (4/105)
+ remote: Compressing objects: 4% (5/105)
+ remote: Compressing objects: 5% (6/105)
+ remote: Compressing objects: 6% (7/105)
+ remote: Compressing objects: 7% (8/105)
+ remote: Compressing objects: 8% (9/105)
+ remote: Compressing objects: 9% (10/105)
+ remote: Compressing objects: 10% (11/105)
+ remote: Compressing objects: 11% (12/105)
+ remote: Compressing objects: 12% (13/105)
+ remote: Compressing objects: 13% (14/105)
+ remote: Compressing objects: 14% (15/105)
+ remote: Compressing objects: 15% (16/105)
+ remote: Compressing objects: 16% (17/105)
+ remote: Compressing objects: 17% (18/105)
+ remote: Compressing objects: 18% (19/105)
+ remote: Compressing objects: 19% (20/105)
+ remote: Compressing objects: 20% (21/105)
+ remote: Compressing objects: 21% (23/105)
+ remote: Compressing objects: 22% (24/105)
+ remote: Compressing objects: 23% (25/105)
+ remote: Compressing objects: 24% (26/105)
+ remote: Compressing objects: 25% (27/105)
+ remote: Compressing objects: 26% (28/105)
+ remote: Compressing objects: 27% (29/105)
+ remote: Compressing objects: 28% (30/105)
+ remote: Compressing objects: 29% (31/105)
+ remote: Compressing objects: 30% (32/105)
+ remote: Compressing objects: 31% (33/105)
+ remote: Compressing objects: 32% (34/105)
+ remote: Compressing objects: 33% (35/105)
+ remote: Compressing objects: 34% (36/105)
+ remote: Compressing objects: 35% (37/105)
+ remote: Compressing objects: 36% (38/105)
+ remote: Compressing objects: 37% (39/105)
+ remote: Compressing objects: 38% (40/105)
+ remote: Compressing objects: 39% (41/105)
+ remote: Compressing objects: 40% (42/105)
+ remote: Compressing objects: 41% (44/105)
+ remote: Compressing objects: 42% (45/105)
+ remote: Compressing objects: 43% (46/105)
+ remote: Compressing objects: 44% (47/105)
+ remote: Compressing objects: 45% (48/105)
+ remote: Compressing objects: 46% (49/105)
+ remote: Compressing objects: 47% (50/105)
+ remote: Compressing objects: 48% (51/105)
+ remote: Compressing objects: 49% (52/105)
+ remote: Compressing objects: 50% (53/105)
+ remote: Compressing objects: 51% (54/105)
+ remote: Compressing objects: 52% (55/105)
+ remote: Compressing objects: 53% (56/105)
+ remote: Compressing objects: 54% (57/105)
+ remote: Compressing objects: 55% (58/105)
+ remote: Compressing objects: 56% (59/105)
+ remote: Compressing objects: 57% (60/105)
+ remote: Compressing objects: 58% (61/105)
+ remote: Compressing objects: 59% (62/105)
+ remote: Compressing objects: 60% (63/105)
+ remote: Compressing objects: 61% (65/105)
+ remote: Compressing objects: 62% (66/105)
+ remote: Compressing objects: 63% (67/105)
+ remote: Compressing objects: 64% (68/105)
+ remote: Compressing objects: 65% (69/105)
+ remote: Compressing objects: 66% (70/105)
+ remote: Compressing objects: 67% (71/105)
+ remote: Compressing objects: 68% (72/105)
+ remote: Compressing objects: 69% (73/105)
+ remote: Compressing objects: 70% (74/105)
+ remote: Compressing objects: 71% (75/105)
+ remote: Compressing objects: 72% (76/105)
+ remote: Compressing objects: 73% (77/105)
+ remote: Compressing objects: 74% (78/105)
+ remote: Compressing objects: 75% (79/105)
+ remote: Compressing objects: 76% (80/105)
+ remote: Compressing objects: 77% (81/105)
+ remote: Compressing objects: 78% (82/105)
+ remote: Compressing objects: 79% (83/105)
+ remote: Compressing objects: 80% (84/105)
+ remote: Compressing objects: 81% (86/105)
+ remote: Compressing objects: 82% (87/105)
+ remote: Compressing objects: 83% (88/105)
+ remote: Compressing objects: 84% (89/105)
+ remote: Compressing objects: 85% (90/105)
+ remote: Compressing objects: 86% (91/105)
+ remote: Compressing objects: 87% (92/105)
+ remote: Compressing objects: 88% (93/105)
+ remote: Compressing objects: 89% (94/105)
+ remote: Compressing objects: 90% (95/105)
+ remote: Compressing objects: 91% (96/105)
+ remote: Compressing objects: 92% (97/105)
+ remote: Compressing objects: 93% (98/105)
+ remote: Compressing objects: 94% (99/105)
+ remote: Compressing objects: 95% (100/105)
+ remote: Compressing objects: 96% (101/105)
+ remote: Compressing objects: 97% (102/105)
+ remote: Compressing objects: 98% (103/105)
+ remote: Compressing objects: 99% (104/105)
+ remote: Compressing objects: 100% (105/105)
+ remote: Compressing objects: 100% (105/105), done.
+ Receiving objects: 0% (1/1050)
+ Receiving objects: 1% (11/1050)
+ Receiving objects: 2% (21/1050)
+ Receiving objects: 3% (32/1050)
+ Receiving objects: 4% (42/1050)
+ Receiving objects: 5% (53/1050)
+ Receiving objects: 6% (63/1050)
+ Receiving objects: 7% (74/1050)
+ Receiving objects: 8% (84/1050)
+ Receiving objects: 9% (95/1050)
+ Receiving objects: 10% (105/1050)
+ Receiving objects: 11% (116/1050)
+ Receiving objects: 12% (126/1050)
+ Receiving objects: 13% (137/1050)
+ Receiving objects: 14% (147/1050)
+ Receiving objects: 15% (158/1050)
+ Receiving objects: 16% (168/1050)
+ Receiving objects: 17% (179/1050)
+ Receiving objects: 18% (189/1050)
+ Receiving objects: 19% (200/1050)
+ Receiving objects: 20% (210/1050)
+ Receiving objects: 21% (221/1050)
+ Receiving objects: 22% (231/1050)
+ Receiving objects: 23% (242/1050)
+ Receiving objects: 24% (252/1050)
+ Receiving objects: 25% (263/1050)
+ Receiving objects: 26% (273/1050)
+ Receiving objects: 27% (284/1050)
+ Receiving objects: 28% (294/1050)
+ Receiving objects: 29% (305/1050)
+ Receiving objects: 30% (315/1050)
+ Receiving objects: 31% (326/1050)
+ Receiving objects: 32% (336/1050)
+ Receiving objects: 33% (347/1050)
+ Receiving objects: 34% (357/1050)
+ Receiving objects: 35% (368/1050)
+ Receiving objects: 36% (378/1050)
+ Receiving objects: 37% (389/1050)
+ Receiving objects: 38% (399/1050)
+ Receiving objects: 39% (410/1050)
+ Receiving objects: 40% (420/1050)
+ Receiving objects: 41% (431/1050)
+ Receiving objects: 42% (441/1050)
+ Receiving objects: 43% (452/1050)
+ Receiving objects: 44% (462/1050)
+ Receiving objects: 45% (473/1050)
+ Receiving objects: 46% (483/1050)
+ Receiving objects: 47% (494/1050)
+ Receiving objects: 48% (504/1050)
+ Receiving objects: 49% (515/1050)
+ Receiving objects: 50% (525/1050)
+ Receiving objects: 51% (536/1050)
+ Receiving objects: 52% (546/1050)
+ Receiving objects: 53% (557/1050)
+ Receiving objects: 54% (567/1050)
+ Receiving objects: 55% (578/1050)
+ Receiving objects: 56% (588/1050)
+ Receiving objects: 57% (599/1050)
+ Receiving objects: 58% (609/1050)
+ Receiving objects: 59% (620/1050)
+ Receiving objects: 60% (630/1050)
+ Receiving objects: 61% (641/1050)
+ Receiving objects: 62% (651/1050)
+ remote: Total 1050 (delta 142), reused 145 (delta 104), pack-reused 819
+ Receiving objects: 63% (662/1050)
+ Receiving objects: 64% (672/1050)
+ Receiving objects: 65% (683/1050)
+ Receiving objects: 66% (693/1050)
+ Receiving objects: 67% (704/1050)
+ Receiving objects: 68% (714/1050)
+ Receiving objects: 69% (725/1050)
+ Receiving objects: 70% (735/1050)
+ Receiving objects: 71% (746/1050)
+ Receiving objects: 72% (756/1050)
+ Receiving objects: 73% (767/1050)
+ Receiving objects: 74% (777/1050)
+ Receiving objects: 75% (788/1050)
+ Receiving objects: 76% (798/1050)
+ Receiving objects: 77% (809/1050)
+ Receiving objects: 78% (819/1050)
+ Receiving objects: 79% (830/1050)
+ Receiving objects: 80% (840/1050)
+ Receiving objects: 81% (851/1050)
+ Receiving objects: 82% (861/1050)
+ Receiving objects: 83% (872/1050)
+ Receiving objects: 84% (882/1050)
+ Receiving objects: 85% (893/1050)
+ Receiving objects: 86% (903/1050)
+ Receiving objects: 87% (914/1050)
+ Receiving objects: 88% (924/1050)
+ Receiving objects: 89% (935/1050)
+ Receiving objects: 90% (945/1050)
+ Receiving objects: 91% (956/1050)
+ Receiving objects: 92% (966/1050)
+ Receiving objects: 93% (977/1050)
+ Receiving objects: 94% (987/1050)
+ Receiving objects: 95% (998/1050)
+ Receiving objects: 96% (1008/1050)
+ Receiving objects: 97% (1019/1050)
+ Receiving objects: 98% (1029/1050)
+ Receiving objects: 99% (1040/1050)
+ Receiving objects: 100% (1050/1050)
+ Receiving objects: 100% (1050/1050), 187.35 KiB | 26.76 MiB/s, done.
+ Resolving deltas: 0% (0/412)
+ Resolving deltas: 1% (5/412)
+ Resolving deltas: 3% (13/412)
+ Resolving deltas: 4% (20/412)
+ Resolving deltas: 5% (21/412)
+ Resolving deltas: 6% (25/412)
+ Resolving deltas: 7% (30/412)
+ Resolving deltas: 8% (33/412)
+ Resolving deltas: 9% (38/412)
+ Resolving deltas: 10% (42/412)
+ Resolving deltas: 12% (50/412)
+ Resolving deltas: 13% (56/412)
+ Resolving deltas: 14% (58/412)
+ Resolving deltas: 16% (67/412)
+ Resolving deltas: 20% (84/412)
+ Resolving deltas: 22% (92/412)
+ Resolving deltas: 23% (97/412)
+ Resolving deltas: 25% (105/412)
+ Resolving deltas: 26% (109/412)
+ Resolving deltas: 30% (127/412)
+ Resolving deltas: 34% (143/412)
+ Resolving deltas: 35% (147/412)
+ Resolving deltas: 36% (149/412)
+ Resolving deltas: 37% (156/412)
+ Resolving deltas: 38% (158/412)
+ Resolving deltas: 39% (164/412)
+ Resolving deltas: 40% (165/412)
+ Resolving deltas: 48% (198/412)
+ Resolving deltas: 50% (209/412)
+ Resolving deltas: 53% (222/412)
+ Resolving deltas: 54% (226/412)
+ Resolving deltas: 55% (228/412)
+ Resolving deltas: 56% (234/412)
+ Resolving deltas: 57% (236/412)
+ Resolving deltas: 58% (242/412)
+ Resolving deltas: 59% (244/412)
+ Resolving deltas: 60% (248/412)
+ Resolving deltas: 62% (258/412)
+ Resolving deltas: 64% (264/412)
+ Resolving deltas: 67% (280/412)
+ Resolving deltas: 68% (283/412)
+ Resolving deltas: 72% (297/412)
+ Resolving deltas: 77% (320/412)
+ Resolving deltas: 79% (327/412)
+ Resolving deltas: 82% (340/412)
+ Resolving deltas: 90% (374/412)
+ Resolving deltas: 91% (376/412)
+ Resolving deltas: 92% (383/412)
+ Resolving deltas: 93% (385/412)
+ Resolving deltas: 94% (389/412)
+ Resolving deltas: 95% (394/412)
+ Resolving deltas: 96% (398/412)
+ Resolving deltas: 97% (400/412)
+ Resolving deltas: 98% (406/412)
+ Resolving deltas: 99% (410/412)
+ Resolving deltas: 100% (412/412)
+ Resolving deltas: 100% (412/412), done.
+ From https://github.com/thunder/select2
+ * [new branch] 8.x-1.x -> origin/8.x-1.x
+ * [new branch] featu/select-all -> origin/featu/select-all
+ * [new branch] feature/2998871-bef -> origin/feature/2998871-bef
+ * [new branch] feature/3000623 -> origin/feature/3000623
+ * [new branch] feature/3007333-style-arrow -> origin/feature/3007333-style-arrow
+ * [new tag] 8.x-1.0 -> 8.x-1.0
+ * [new tag] 8.x-1.0-beta1 -> 8.x-1.0-beta1
+ * [new tag] 8.x-1.0-beta2 -> 8.x-1.0-beta2
+ * [new tag] 8.x-1.0-beta3 -> 8.x-1.0-beta3
+ * [new tag] 8.x-1.0-beta4 -> 8.x-1.0-beta4
+ * [new tag] 8.x-1.0-beta5 -> 8.x-1.0-beta5
+ * [new tag] 8.x-1.0-beta6 -> 8.x-1.0-beta6
+ * [new tag] 8.x-1.0-beta7 -> 8.x-1.0-beta7
+ * [new tag] 8.x-1.1 -> 8.x-1.1
+ * [new tag] 8.x-1.2 -> 8.x-1.2
+ * [new tag] 8.x-1.3 -> 8.x-1.3
+ * [new tag] 8.x-1.4 -> 8.x-1.4
+ * [new tag] 8.x-1.5 -> 8.x-1.5
+ * [new tag] 8.x-1.6 -> 8.x-1.6
+ ##[command]git checkout --progress --force 5ab645e052b93eb026b50edb497c5e18eaf0bc43
+ Note: switching to '5ab645e052b93eb026b50edb497c5e18eaf0bc43'.
+
+ You are in 'detached HEAD' state. You can look around, make experimental
+ changes and commit them, and you can discard any commits you make in this
+ state without impacting any branches by switching back to a branch.
+
+ If you want to create a new branch to retain commits you create, you may
+ do so (now or later) by using -c with the switch command. Example:
+
+ git switch -c <new-branch-name>
+
+ Or undo this operation with:
+
+ git switch -
+
+ Turn off this advice by setting config variable advice.detachedHead to false
+
+ HEAD is now at 5ab645e Issue #3087379 by angela_G, chr.fritsch, mbovan, Berdir, volkerk: Drupal 9 Deprecated Code Report
+ ##[group]Run actions/setup-node@v1
+ with:
+ node-version: 12.x
+ always-auth: false
+ env:
+ DRUPAL_TESTING_TEST_CODING_STYLES: false
+ DRUPAL_TESTING_DATABASE_USER: root
+ DRUPAL_TESTING_DATABASE_PASSWORD: root
+ DRUPAL_TESTING_DATABASE_ENGINE: mysql
+ ##[endgroup]
+ [command]/bin/tar xz --warning=no-unknown-keyword -C /home/runner/work/_temp/8e7c44bf-32ed-4c41-ad83-3e887b3b79f5 -f /home/runner/work/_temp/4a50b3c6-5563-4635-a60f-6ad46b33c92e
+ [command]/opt/hostedtoolcache/node/12.16.3/x64/bin/node --version
+ v12.16.3
+ [command]/opt/hostedtoolcache/node/12.16.3/x64/bin/npm --version
+ 6.14.4
+ ##[group]Run shivammathur/setup-php@master
+ with:
+ coverage: none
+ php-version: 7.3
+ env:
+ DRUPAL_TESTING_TEST_CODING_STYLES: false
+ DRUPAL_TESTING_DATABASE_USER: root
+ DRUPAL_TESTING_DATABASE_PASSWORD: root
+ DRUPAL_TESTING_DATABASE_ENGINE: mysql
+ ##[endgroup]
+ [command]/bin/bash /opt/hostedtoolcache/linux.sh 7.3 /home/runner/work/_actions/shivammathur/setup-php/master/dist
+
+ [90;1m==> [0m[37;1mSetup PHP[0m
+ [32;1m✓ [0m[34;1mPHP [0m[90;1mSwitched to PHP 7.3.17[0m
+
+ [90;1m==> [0m[37;1mSetup Tools[0m
+ [32;1m✓ [0m[34;1mcomposer [0m[90;1mAdded[0m
+
+ [90;1m==> [0m[37;1mSetup Coverage[0m
+ [32;1m✓ [0m[34;1mnone [0m[90;1mDisabled Xdebug and PCOV[0m
+ ##[group]Run sudo /etc/init.d/mysql start
+ [36;1msudo /etc/init.d/mysql start[0m
+ shell: /bin/bash -e {0}
+ env:
+ DRUPAL_TESTING_TEST_CODING_STYLES: false
+ DRUPAL_TESTING_DATABASE_USER: root
+ DRUPAL_TESTING_DATABASE_PASSWORD: root
+ DRUPAL_TESTING_DATABASE_ENGINE: mysql
+ ##[endgroup]
+ Starting mysql (via systemctl): mysql.service.
+ ##[group]Run actions/cache@v1
+ with:
+ path: ~/.composer/cache
+ key: Linux-composer-cache-dc3b128f45a0fb1aae635f9251cc540da9b67db9610f8f3b45be7d37754dc345
+ restore-keys: Linux-composer-cache-
+ env:
+ DRUPAL_TESTING_TEST_CODING_STYLES: false
+ DRUPAL_TESTING_DATABASE_USER: root
+ DRUPAL_TESTING_DATABASE_PASSWORD: root
+ DRUPAL_TESTING_DATABASE_ENGINE: mysql
+ ##[endgroup]
+ [warning]Event Validation Error: The event type schedule is not supported. Only push, pull_request events are supported at this time.
+ ##[group]Run actions/cache@v1
+ with:
+ path: ~/.npm
+ key: Linux-npm-cache
+ restore-keys: Linux-npm-cache
+ env:
+ DRUPAL_TESTING_TEST_CODING_STYLES: false
+ DRUPAL_TESTING_DATABASE_USER: root
+ DRUPAL_TESTING_DATABASE_PASSWORD: root
+ DRUPAL_TESTING_DATABASE_ENGINE: mysql
+ ##[endgroup]
+ [warning]Event Validation Error: The event type schedule is not supported. Only push, pull_request events are supported at this time.
+ ##[group]Run echo "::add-path::$HOME/.composer/vendor/bin"
+ [36;1mecho "::add-path::$HOME/.composer/vendor/bin"[0m
+ shell: /bin/bash -e {0}
+ env:
+ DRUPAL_TESTING_TEST_CODING_STYLES: false
+ DRUPAL_TESTING_DATABASE_USER: root
+ DRUPAL_TESTING_DATABASE_PASSWORD: root
+ DRUPAL_TESTING_DATABASE_ENGINE: mysql
+ ##[endgroup]
+ ##[group]Run composer global require thunder/drupal-testing
+ [36;1mcomposer global require thunder/drupal-testing[0m
+ shell: /bin/bash -e {0}
+ env:
+ DRUPAL_TESTING_TEST_CODING_STYLES: false
+ DRUPAL_TESTING_DATABASE_USER: root
+ DRUPAL_TESTING_DATABASE_PASSWORD: root
+ DRUPAL_TESTING_DATABASE_ENGINE: mysql
+ ##[endgroup]
+ Changed current directory to /home/runner/.composer
+ Using version ^1.0 for thunder/drupal-testing
+ ./composer.json has been updated
+ Loading composer repositories with package information
+ Updating dependencies (including require-dev)
+ Package operations: 6 installs, 0 updates, 0 removals
+ - Installing squizlabs/php_codesniffer (3.5.5): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing dealerdirect/phpcodesniffer-composer-installer (v0.4.4): Downloading (connecting...)Downloading (0%) Downloading (55%)Downloading (100%)
+ - Installing symfony/polyfill-ctype (v1.17.0): Downloading (connecting...)Downloading (0%) Downloading (100%)
+ - Installing symfony/yaml (v3.4.40): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (100%)
+ - Installing drupal/coder (8.3.9): Cloning d51e0b8c65 from cache
+ - Installing thunder/drupal-testing (1.0.6): Downloading (connecting...)Downloading (100%)
+ dealerdirect/phpcodesniffer-composer-installer suggests installing dealerdirect/qa-tools (All the PHP QA tools you'll need)
+ symfony/yaml suggests installing symfony/console (For validating YAML files using the lint command)
+ Writing lock file
+ Generating autoload files
+ 2 packages you are using are looking for funding.
+ Use the `composer fund` command to find out more!
+ PHP CodeSniffer Config installed_paths set to /home/runner/.composer/vendor/drupal/coder/coder_sniffer
+ ##[group]Run test-drupal-project coding_style
+ [36;1mtest-drupal-project coding_style[0m
+ shell: /bin/bash -e {0}
+ env:
+ DRUPAL_TESTING_TEST_CODING_STYLES: false
+ DRUPAL_TESTING_DATABASE_USER: root
+ DRUPAL_TESTING_DATABASE_PASSWORD: root
+ DRUPAL_TESTING_DATABASE_ENGINE: mysql
+ ##[endgroup]
+ ##[group]Run test-drupal-project prepare_build
+ [36;1mtest-drupal-project prepare_build[0m
+ shell: /bin/bash -e {0}
+ env:
+ DRUPAL_TESTING_TEST_CODING_STYLES: false
+ DRUPAL_TESTING_DATABASE_USER: root
+ DRUPAL_TESTING_DATABASE_PASSWORD: root
+ DRUPAL_TESTING_DATABASE_ENGINE: mysql
+ DRUPAL_TESTING_DRUPAL_VERSION: ~8.8.0
+ ##[endgroup]
+ Check requirements
+
+ Prepare composer.json
+
+ Creating a "drupal/recommended-project:*" project at "/tmp/test/select2/install"
+ Installing drupal/recommended-project (8.8.5)
+ - Installing drupal/recommended-project (8.8.5): Downloading (connecting...)Downloading (100%)
+ Created project in /tmp/test/select2/install
+ ./composer.json has been updated
+ ./composer.json has been updated
+ ./composer.json has been updated
+ Using version ^1.1 for oomphinc/composer-installers-extender
+ ./composer.json has been updated
+ ./composer.json has been updated
+ ./composer.json has been updated
+ ./composer.json has been updated
+ Using version ^1.6 for cweagans/composer-patches
+ ./composer.json has been updated
+ drupal/select2 is not required in your composer.json and has not been removed
+ ./composer.json has been updated
+ ./composer.json has been updated
+ ./composer.json has been updated
+ ./composer.json has been updated
+ ##[group]Run composer require npm-asset/select2:^4.0.7 --working-dir=/tmp/test/select2/install --no-update
+ [36;1mcomposer require npm-asset/select2:^4.0.7 --working-dir=/tmp/test/select2/install --no-update[0m
+ shell: /bin/bash -e {0}
+ env:
+ DRUPAL_TESTING_TEST_CODING_STYLES: false
+ DRUPAL_TESTING_DATABASE_USER: root
+ DRUPAL_TESTING_DATABASE_PASSWORD: root
+ DRUPAL_TESTING_DATABASE_ENGINE: mysql
+ ##[endgroup]
+ ./composer.json has been updated
+ ##[group]Run test-drupal-project build
+ [36;1mtest-drupal-project build[0m
+ shell: /bin/bash -e {0}
+ env:
+ DRUPAL_TESTING_TEST_CODING_STYLES: false
+ DRUPAL_TESTING_DATABASE_USER: root
+ DRUPAL_TESTING_DATABASE_PASSWORD: root
+ DRUPAL_TESTING_DATABASE_ENGINE: mysql
+ ##[endgroup]
+ Building the project.
+
+ Loading composer repositories with package information
+ Updating dependencies (including require-dev)
+ Package operations: 143 installs, 0 updates, 0 removals
+ - Installing cweagans/composer-patches (1.6.7): Downloading (connecting...)Downloading (0%) Downloading (50%)Downloading (65%)Downloading (100%)
+ No patches supplied.
+ Gathering patches for dependencies. This might take a minute.
+ - Installing composer/installers (v1.7.0): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (100%)
+ - Installing drupal/core-composer-scaffold (8.8.5): Downloading (connecting...)Downloading (0%) Downloading (15%)Downloading (25%)Downloading (40%)Downloading (55%)Downloading (65%)Downloading (80%)Downloading (95%)Downloading (100%)
+ - Installing drupal/core-project-message (8.8.5): Downloading (connecting...)Downloading (100%)
+ - Installing oomphinc/composer-installers-extender (v1.1.2): Downloading (connecting...)Downloading (0%) Downloading (75%)Downloading (85%)Downloading (100%)
+ - Installing drupal-testing-drupal/select2 (dev-5ab645e052b93eb026b50edb497c5e18eaf0bc43): Symlinking from /home/runner/work/select2/select2
+ - Installing symfony/polyfill-mbstring (v1.12.0): Downloading (connecting...)Downloading (0%) Downloading (30%)Downloading (60%)Downloading (70%)Downloading (100%)
+ - Installing symfony/polyfill-php72 (v1.17.0): Downloading (connecting...)Downloading (0%) Downloading (100%)
+ - Installing psr/log (1.1.0): Downloading (connecting...)Downloading (0%) Downloading (65%)Downloading (90%)Downloading (100%)
+ - Installing pear/pear_exception (v1.0.0): Downloading (connecting...)Downloading (100%)
+ - Installing pear/console_getopt (v1.4.2): Downloading (connecting...)Downloading (100%)
+ - Installing pear/pear-core-minimal (v1.10.9): Downloading (connecting...)Downloading (100%)
+ - Installing pear/archive_tar (1.4.9): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (65%)Downloading (70%)Downloading (100%)
+ - Installing symfony/polyfill-ctype (v1.12.0): Downloading (connecting...)Downloading (0%) Downloading (85%)Downloading (100%)
+ - Installing symfony/var-dumper (v4.4.8): Downloading (connecting...)Downloading (0%) Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (65%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing psr/container (1.0.0): Downloading (connecting...)Downloading (0%) Downloading (75%)Downloading (100%)
+ - Installing symfony/debug (v3.4.35): Downloading (connecting...)Downloading (100%)
+ - Installing symfony/polyfill-util (v1.12.0): Downloading (connecting...)Downloading (0%) Downloading (100%)
+ - Installing symfony/polyfill-php56 (v1.12.0): Downloading (connecting...)Downloading (0%) Downloading (100%)
+ - Installing paragonie/random_compat (v9.99.99): Downloading (connecting...)Downloading (0%) Downloading (45%)Downloading (90%)Downloading (100%)
+ - Installing symfony/polyfill-php70 (v1.12.0): Downloading (connecting...)Downloading (0%) Downloading (85%)Downloading (100%)
+ - Installing symfony/http-foundation (v3.4.35): Downloading (connecting...)Downloading (100%)
+ - Installing symfony/event-dispatcher (v3.4.35): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (25%)Downloading (30%)Downloading (75%)Downloading (80%)Downloading (95%)Downloading (100%)
+ - Installing symfony/http-kernel (v3.4.35): Downloading (connecting...)Downloading (100%)
+ - Installing asm89/stack-cors (1.2.0): Downloading (connecting...)Downloading (0%) Downloading (70%)Downloading (90%)Downloading (100%)
+ - Installing composer/semver (1.5.0): Downloading (connecting...)Downloading (0%) Downloading (35%)Downloading (70%)Downloading (100%)
+ - Installing psr/http-message (1.0.1): Downloading (connecting...)Downloading (0%) Downloading (65%)Downloading (100%)
+ - Installing masterminds/html5 (2.3.0): Downloading (connecting...)Downloading (100%)
+ - Installing doctrine/lexer (1.0.2): Downloading (connecting...)Downloading (0%) Downloading (65%)Downloading (100%)
+ - Installing egulias/email-validator (2.1.11): Downloading (connecting...)Downloading (0%) Downloading (25%)Downloading (35%)Downloading (60%)Downloading (85%)Downloading (100%)
+ - Installing stack/builder (v1.0.5): Downloading (connecting...)Downloading (0%) Downloading (55%)Downloading (95%)Downloading (100%)
+ - Installing symfony/routing (v3.4.35): Downloading (connecting...)Downloading (100%)
+ - Installing ralouphie/getallheaders (3.0.3): Downloading (connecting...)Downloading (0%) Downloading (80%)Downloading (100%)
+ - Installing guzzlehttp/psr7 (1.6.1): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing guzzlehttp/promises (v1.3.1): Downloading (connecting...)Downloading (0%) Downloading (30%)Downloading (60%)Downloading (75%)Downloading (100%)
+ - Installing doctrine/annotations (v1.4.0): Downloading (connecting...)Downloading (0%) Downloading (15%)Downloading (20%)Downloading (35%)Downloading (45%)Downloading (55%)Downloading (65%)Downloading (80%)Downloading (95%)Downloading (100%)
+ - Installing typo3/phar-stream-wrapper (v3.1.3): Downloading (connecting...)Downloading (0%) Downloading (25%)Downloading (65%)Downloading (70%)Downloading (100%)
+ - Installing symfony/polyfill-iconv (v1.12.0): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing symfony/psr-http-message-bridge (v1.1.2): Downloading (connecting...)Downloading (100%)
+ - Installing easyrdf/easyrdf (0.9.1): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing symfony-cmf/routing (1.4.1): Downloading (connecting...)Downloading (0%) Downloading (10%)Downloading (30%)Downloading (40%)Downloading (50%)Downloading (55%)Downloading (65%)Downloading (75%)Downloading (85%)Downloading (90%)Downloading (100%)
+ - Installing guzzlehttp/guzzle (6.3.3): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (20%)Downloading (30%)Downloading (35%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (65%)Downloading (70%)Downloading (80%)Downloading (85%)Downloading (95%)Downloading (100%)
+ - Installing doctrine/collections (v1.4.0): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (55%)Downloading (60%)Downloading (80%)Downloading (85%)Downloading (100%)
+ - Installing doctrine/cache (v1.6.2): Downloading (connecting...)Downloading (0%) Downloading (10%)Downloading (20%)Downloading (30%)Downloading (35%)Downloading (45%)Downloading (50%)Downloading (65%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (95%)Downloading (100%)
+ - Installing doctrine/inflector (v1.2.0): Downloading (connecting...)Downloading (0%) Downloading (90%)Downloading (100%)
+ - Installing doctrine/common (v2.7.3): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (40%)Downloading (45%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing twig/twig (v1.42.3): Downloading (connecting...)Downloading (100%)
+ - Installing symfony/yaml (v3.4.35): Downloading (connecting...)Downloading (100%)
+ - Installing symfony/process (v3.4.35): Downloading (connecting...)Downloading (100%)
+ - Installing symfony/translation (v3.4.35): Downloading (connecting...)Downloading (100%)
+ - Installing symfony/validator (v3.4.35): Downloading (connecting...)Downloading (100%)
+ - Installing symfony/serializer (v3.4.35): Downloading (connecting...)Downloading (100%)
+ - Installing symfony/dependency-injection (v3.4.35): Downloading (connecting...)Downloading (100%)
+ - Installing symfony/console (v3.4.35): Downloading (connecting...)Downloading (100%)
+ - Installing symfony/class-loader (v3.4.35): Downloading (connecting...)Downloading (100%)
+ - Installing zendframework/zend-diactoros (1.8.7): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (20%)Downloading (25%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (100%)
+ - Installing zendframework/zend-stdlib (3.2.1): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing zendframework/zend-escaper (2.6.1): Downloading (connecting...)Downloading (0%) Downloading (15%)Downloading (100%)
+ - Installing zendframework/zend-feed (2.12.0): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing drupal/core (8.8.5): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing drupal/facets (dev-1.x 64ed456): Cloning 64ed456e5d from cache
+ - Installing drupal/search_api (dev-1.x b1b5df4): Cloning b1b5df4598 from cache
+ - Installing drupal/core-recommended (8.8.5)
+ - Installing webmozart/assert (1.8.0): Downloading (connecting...)Downloading (0%) Downloading (55%)Downloading (65%)Downloading (100%)
+ - Installing webmozart/path-util (2.3.0): Downloading (connecting...)Downloading (0%) Downloading (35%)Downloading (40%)Downloading (75%)Downloading (100%)
+ - Installing webflo/drupal-finder (1.2.0): Downloading (connecting...)Downloading (0%) Downloading (100%)
+ - Installing symfony/finder (v3.4.40): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (100%)
+ - Installing nikic/php-parser (v4.4.0): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing dnoegel/php-xdg-base-dir (v0.1.1): Downloading (connecting...)Downloading (0%) Downloading (40%)Downloading (80%)Downloading (100%)
+ - Installing psy/psysh (v0.10.4): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing container-interop/container-interop (1.2.0): Downloading (connecting...)Downloading (0%) Downloading (10%)Downloading (20%)Downloading (25%)Downloading (35%)Downloading (45%)Downloading (55%)Downloading (60%)Downloading (70%)Downloading (75%)Downloading (90%)Downloading (100%)
+ - Installing league/container (2.4.1): Downloading (connecting...)Downloading (0%) Downloading (40%)Downloading (45%)Downloading (65%)Downloading (100%)
+ - Installing dflydev/dot-access-data (v1.1.0): Downloading (connecting...)Downloading (0%) Downloading (65%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing grasmash/yaml-expander (1.4.0): Downloading (connecting...)Downloading (0%) Downloading (35%)Downloading (70%)Downloading (100%)
+ - Installing grasmash/expander (1.0.0): Downloading (connecting...)Downloading (0%) Downloading (40%)Downloading (45%)Downloading (85%)Downloading (100%)
+ - Installing consolidation/config (1.2.1): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing consolidation/site-alias (3.0.0): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (15%)Downloading (25%)Downloading (30%)Downloading (45%)Downloading (50%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (80%)Downloading (85%)Downloading (95%)Downloading (100%)
+ - Installing consolidation/site-process (2.1.0): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing symfony/filesystem (v3.4.40): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (60%)Downloading (100%)
+ - Installing consolidation/self-update (1.2.0): Downloading (connecting...)Downloading (0%) Downloading (100%)
+ - Installing consolidation/log (1.1.1): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (100%)
+ - Installing consolidation/output-formatters (3.5.0): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (100%)
+ - Installing consolidation/annotated-command (2.12.0): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (40%)Downloading (45%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing consolidation/robo (1.4.12): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing phpdocumentor/reflection-common (2.1.0): Downloading (connecting...)Downloading (0%) Downloading (10%)Downloading (20%)Downloading (30%)Downloading (100%)
+ - Installing phpdocumentor/type-resolver (1.1.0): Downloading (connecting...)Downloading (0%) Downloading (15%)Downloading (30%)Downloading (45%)Downloading (60%)Downloading (75%)Downloading (90%)Downloading (100%)
+ - Installing consolidation/filter-via-dot-access-data (1.0.0): Downloading (connecting...)Downloading (0%) Downloading (15%)Downloading (20%)Downloading (25%)Downloading (40%)Downloading (45%)Downloading (60%)Downloading (75%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing chi-teck/drupal-code-generator (1.32.0): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing drush/drush (10.2.2): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing phpstan/phpstan (0.12.25): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing nette/utils (v3.1.1): Downloading (connecting...)Downloading (0%) Downloading (15%)Downloading (25%)Downloading (40%)Downloading (55%)Downloading (70%)Downloading (85%)Downloading (100%)
+ - Installing nette/finder (v2.5.2): Downloading (connecting...)Downloading (0%) Downloading (100%)
+ - Installing mglaman/phpstan-drupal (0.12.3): Downloading (connecting...)Downloading (0%) Downloading (15%)Downloading (30%)Downloading (55%)Downloading (90%)Downloading (100%)
+ - Installing npm-asset/select2 (4.0.13): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (40%)Downloading (50%)Downloading (55%)Downloading (70%)Downloading (95%)Downloading (100%)
+ - Installing phpstan/phpstan-deprecation-rules (0.12.2): Downloading (connecting...)Downloading (0%) Downloading (25%)Downloading (40%)Downloading (65%)Downloading (90%)Downloading (100%)
+ - Installing symfony/phpunit-bridge (v3.4.39): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (100%)
+ - Installing symfony/lock (v3.4.40): Downloading (connecting...)Downloading (0%) Downloading (10%)Downloading (25%)Downloading (35%)Downloading (45%)Downloading (55%)Downloading (65%)Downloading (75%)Downloading (85%)Downloading (95%)Downloading (100%)
+ - Installing symfony/css-selector (v3.4.40): Downloading (connecting...)Downloading (100%)
+ - Installing symfony/dom-crawler (v4.2.12): Downloading (connecting...)Downloading (100%)
+ - Installing symfony/browser-kit (v3.4.40): Downloading (connecting...)Downloading (100%)
+ - Installing sebastian/version (2.0.1): Downloading (connecting...)Downloading (0%) Downloading (100%)
+ - Installing sebastian/resource-operations (2.0.1): Downloading (connecting...)Downloading (0%) Downloading (25%)Downloading (45%)Downloading (70%)Downloading (80%)Downloading (100%)
+ - Installing sebastian/recursion-context (3.0.0): Downloading (connecting...)Downloading (0%) Downloading (35%)Downloading (70%)Downloading (100%)
+ - Installing sebastian/object-reflector (1.1.1): Downloading (connecting...)Downloading (0%) Downloading (65%)Downloading (95%)Downloading (100%)
+ - Installing sebastian/object-enumerator (3.0.3): Downloading (connecting...)Downloading (0%) Downloading (100%)
+ - Installing sebastian/global-state (2.0.0): Downloading (connecting...)Downloading (0%) Downloading (20%)Downloading (75%)Downloading (85%)Downloading (100%)
+ - Installing sebastian/exporter (3.1.2): Downloading (connecting...)Downloading (0%) Downloading (10%)Downloading (20%)Downloading (30%)Downloading (40%)Downloading (50%)Downloading (100%)
+ - Installing sebastian/environment (4.2.3): Downloading (connecting...)Downloading (0%) Downloading (45%)Downloading (80%)Downloading (100%)
+ - Installing sebastian/diff (3.0.2): Downloading (connecting...)Downloading (0%) Downloading (20%)Downloading (40%)Downloading (45%)Downloading (60%)Downloading (65%)Downloading (80%)Downloading (85%)Downloading (100%)
+ - Installing sebastian/comparator (3.0.2): Downloading (connecting...)Downloading (0%) Downloading (25%)Downloading (55%)Downloading (80%)Downloading (100%)
+ - Installing phpunit/php-timer (2.1.2): Downloading (connecting...)Downloading (0%) Downloading (35%)Downloading (70%)Downloading (95%)Downloading (100%)
+ - Installing phpunit/php-text-template (1.2.1): Downloading (connecting...)Downloading (0%) Downloading (35%)Downloading (100%)
+ - Installing phpunit/php-file-iterator (2.0.2): Downloading (connecting...)Downloading (0%) Downloading (35%)Downloading (70%)Downloading (95%)Downloading (100%)
+ - Installing theseer/tokenizer (1.1.3): Downloading (connecting...)Downloading (0%) Downloading (15%)Downloading (30%)Downloading (85%)Downloading (100%)
+ - Installing sebastian/code-unit-reverse-lookup (1.0.1): Downloading (connecting...)Downloading (0%) Downloading (55%)Downloading (100%)
+ - Installing phpunit/php-token-stream (3.1.1): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (100%)
+ - Installing phpunit/php-code-coverage (6.1.4): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing doctrine/instantiator (1.3.0): Downloading (connecting...)Downloading (0%) Downloading (45%)Downloading (95%)Downloading (100%)
+ - Installing phpdocumentor/reflection-docblock (5.1.0): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (15%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (70%)Downloading (75%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing phpspec/prophecy (v1.10.3): Downloading (connecting...)Downloading (0%) Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (40%)Downloading (50%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing phar-io/version (2.0.1): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (100%)
+ - Installing phar-io/manifest (1.0.3): Downloading (connecting...)Downloading (0%) Downloading (10%)Downloading (15%)Downloading (20%)Downloading (30%)Downloading (40%)Downloading (55%)Downloading (65%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (95%)Downloading (100%)
+ - Installing myclabs/deep-copy (1.9.5): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (100%)
+ - Installing phpunit/phpunit (7.5.20): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing mikey179/vfsstream (v1.6.8): Downloading (connecting...)Downloading (0%) Downloading (10%)Downloading (15%)Downloading (20%)Downloading (30%)Downloading (40%)Downloading (45%)Downloading (55%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (90%)Downloading (100%)
+ - Installing justinrainbow/json-schema (5.2.9): Downloading (connecting...)Downloading (0%) Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (55%)Downloading (60%)Downloading (75%)Downloading (80%)Downloading (100%)
+ - Installing jcalderonzumba/gastonjs (v1.2.0): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing behat/mink (v1.8.0): Downloading (connecting...)Downloading (0%) Downloading (10%)Downloading (35%)Downloading (45%)Downloading (55%)Downloading (65%)Downloading (90%)Downloading (100%)
+ - Installing jcalderonzumba/mink-phantomjs-driver (v0.3.3): Downloading (connecting...)Downloading (0%) Downloading (45%)Downloading (50%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing drupal/coder (8.3.9): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (25%)Downloading (40%)Downloading (55%)Downloading (70%)Downloading (85%)Downloading (100%)
+ - Installing seld/phar-utils (1.1.0): Downloading (connecting...)Downloading (0%) Downloading (25%)Downloading (50%)Downloading (100%)
+ - Installing seld/jsonlint (1.8.0): Downloading (connecting...)Downloading (0%) Downloading (35%)Downloading (75%)Downloading (100%)
+ - Installing composer/xdebug-handler (1.4.1): Downloading (connecting...)Downloading (0%) Downloading (40%)Downloading (80%)Downloading (100%)
+ - Installing composer/spdx-licenses (1.5.3): Downloading (connecting...)Downloading (0%) Downloading (10%)Downloading (20%)Downloading (55%)Downloading (65%)Downloading (100%)
+ - Installing composer/ca-bundle (1.2.7): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing composer/composer (1.10.6): Downloading (connecting...)Downloading (0%) Downloading (5%)Downloading (10%)Downloading (15%)Downloading (20%)Downloading (25%)Downloading (30%)Downloading (35%)Downloading (40%)Downloading (45%)Downloading (50%)Downloading (55%)Downloading (60%)Downloading (65%)Downloading (70%)Downloading (75%)Downloading (80%)Downloading (85%)Downloading (90%)Downloading (95%)Downloading (100%)
+ - Installing instaclick/php-webdriver (1.4.7): Downloading (connecting...)Downloading (100%)
+ - Installing behat/mink-selenium2-driver (v1.4.0): Downloading (connecting...)Downloading (100%)
+ - Installing fabpot/goutte (v3.2.3): Downloading (connecting...)Downloading (0%) Downloading (40%)Downloading (100%)
+ - Installing behat/mink-browserkit-driver (v1.3.4): Downloading (connecting...)Downloading (0%) Downloading (10%)Downloading (100%)
+ - Installing behat/mink-goutte-driver (v1.2.1): Downloading (connecting...)Downloading (0%) Downloading (35%)Downloading (70%)Downloading (100%)
+ - Installing drupal/core-dev (8.8.5)
+ - Installing drupal/form_options_attributes (1.1.0): Downloading (connecting...)Downloading (0%) Downloading (35%)Downloading (85%)Downloading (100%)
+ - Applying patches for drupal/form_options_attributes
+ https://www.drupal.org/files/issues/2020-04-09/3126225-2.patch (Add missing core_version_requirement in tests)
+
+ pear/archive_tar suggests installing ext-xz (Lzma2 compression support.)
+ paragonie/random_compat suggests installing ext-libsodium (Provides a modern crypto API that can be used to generate random bytes.)
+ symfony/http-kernel suggests installing symfony/config
+ symfony/routing suggests installing symfony/config (For using the all-in-one router or any loader)
+ symfony/routing suggests installing symfony/expression-language (For using expression matching)
+ guzzlehttp/psr7 suggests installing zendframework/zend-httphandlerrunner (Emit PSR-7 responses)
+ symfony/psr-http-message-bridge suggests installing nyholm/psr7 (For a super lightweight PSR-7/17 implementation)
+ easyrdf/easyrdf suggests installing ml/json-ld (~1.0)
+ symfony/translation suggests installing symfony/config
+ symfony/validator suggests installing psr/cache-implementation (For using the metadata cache.)
+ symfony/validator suggests installing symfony/intl
+ symfony/validator suggests installing symfony/config
+ symfony/validator suggests installing symfony/property-access (For accessing properties within comparison constraints)
+ symfony/validator suggests installing symfony/expression-language (For using the Expression validator)
+ symfony/serializer suggests installing psr/cache-implementation (For using the metadata cache.)
+ symfony/serializer suggests installing symfony/property-info (To deserialize relations.)
+ symfony/serializer suggests installing symfony/config (For using the XML mapping loader.)
+ symfony/serializer suggests installing symfony/property-access (For using the ObjectNormalizer.)
+ symfony/dependency-injection suggests installing symfony/config
+ symfony/dependency-injection suggests installing symfony/expression-language (For using expressions in service container configuration)
+ symfony/dependency-injection suggests installing symfony/proxy-manager-bridge (Generate service proxies to lazy load them)
+ symfony/class-loader suggests installing symfony/polyfill-apcu (For using ApcClassLoader on HHVM)
+ zendframework/zend-feed suggests installing zendframework/zend-cache (Zend\Cache component, for optionally caching feeds between requests)
+ zendframework/zend-feed suggests installing zendframework/zend-db (Zend\Db component, for use with PubSubHubbub)
+ zendframework/zend-feed suggests installing zendframework/zend-http (Zend\Http for PubSubHubbub, and optionally for use with Zend\Feed\Reader)
+ zendframework/zend-feed suggests installing zendframework/zend-servicemanager (Zend\ServiceManager component, for easily extending ExtensionManager implementations)
+ zendframework/zend-feed suggests installing zendframework/zend-validator (Zend\Validator component, for validating email addresses used in Atom feeds and entries when using the Writer subcomponent)
+ drupal/search_api suggests installing drupal/search_api_autocomplete (Allows adding autocomplete suggestions to search fields.)
+ drupal/search_api suggests installing drupal/search_api_solr (Adds support for using Apache Solr as a backend.)
+ psy/psysh suggests installing ext-pdo-sqlite (The doc command requires SQLite to work.)
+ psy/psysh suggests installing hoa/console (A pure PHP readline implementation. You'll want this if your PHP install doesn't already support readline or libedit.)
+ consolidation/robo suggests installing henrikbjorn/lurker (For monitoring filesystem changes in taskWatch)
+ consolidation/robo suggests installing patchwork/jsqueeze (For minifying JS files in taskMinify)
+ consolidation/robo suggests installing natxet/CssMin (For minifying CSS files in taskMinify)
+ sebastian/global-state suggests installing ext-uopz (*)
+ phpunit/php-code-coverage suggests installing ext-xdebug (^2.6.0)
+ phpunit/phpunit suggests installing phpunit/php-invoker (^2.0)
+ phpunit/phpunit suggests installing ext-xdebug (*)
+ behat/mink suggests installing dmore/chrome-mink-driver (fast and JS-enabled driver for any app (requires chromium or google chrome))
+ behat/mink suggests installing behat/mink-zombie-driver (fast and JS-enabled headless driver for any app (requires node.js))
+ Package zendframework/zend-diactoros is abandoned, you should avoid using it. Use laminas/laminas-diactoros instead.
+ Package zendframework/zend-stdlib is abandoned, you should avoid using it. Use laminas/laminas-stdlib instead.
+ Package zendframework/zend-escaper is abandoned, you should avoid using it. Use laminas/laminas-escaper instead.
+ Package zendframework/zend-feed is abandoned, you should avoid using it. Use laminas/laminas-feed instead.
+ Package container-interop/container-interop is abandoned, you should avoid using it. Use psr/container instead.
+ Writing lock file
+ Generating autoload files
+ 13 packages you are using are looking for funding.
+ Use the `composer fund` command to find out more!
+ Scaffolding files for drupal/core:
+ - Copy [project-root]/.editorconfig from assets/scaffold/files/editorconfig
+ - Copy [project-root]/.gitattributes from assets/scaffold/files/gitattributes
+ - Copy [web-root]/.csslintrc from assets/scaffold/files/csslintrc
+ - Copy [web-root]/.eslintignore from assets/scaffold/files/eslintignore
+ - Copy [web-root]/.eslintrc.json from assets/scaffold/files/eslintrc.json
+ - Copy [web-root]/.ht.router.php from assets/scaffold/files/ht.router.php
+ - Copy [web-root]/.htaccess from assets/scaffold/files/htaccess
+ - Copy [web-root]/example.gitignore from assets/scaffold/files/example.gitignore
+ - Copy [web-root]/index.php from assets/scaffold/files/index.php
+ - Copy [web-root]/INSTALL.txt from assets/scaffold/files/drupal.INSTALL.txt
+ - Copy [web-root]/README.txt from assets/scaffold/files/drupal.README.txt
+ - Copy [web-root]/robots.txt from assets/scaffold/files/robots.txt
+ - Copy [web-root]/update.php from assets/scaffold/files/update.php
+ - Copy [web-root]/web.config from assets/scaffold/files/web.config
+ - Copy [web-root]/sites/README.txt from assets/scaffold/files/sites.README.txt
+ - Copy [web-root]/sites/development.services.yml from assets/scaffold/files/development.services.yml
+ - Copy [web-root]/sites/example.settings.local.php from assets/scaffold/files/example.settings.local.php
+ - Copy [web-root]/sites/example.sites.php from assets/scaffold/files/example.sites.php
+ - Copy [web-root]/sites/default/default.services.yml from assets/scaffold/files/default.services.yml
+ - Copy [web-root]/sites/default/default.settings.php from assets/scaffold/files/default.settings.php
+ - Copy [web-root]/modules/README.txt from assets/scaffold/files/modules.README.txt
+ - Copy [web-root]/profiles/README.txt from assets/scaffold/files/profiles.README.txt
+ - Copy [web-root]/themes/README.txt from assets/scaffold/files/themes.README.txt
+ /home/runner/work/select2/select2
+ ##[group]Run test-drupal-project deprecation
+ [36;1mtest-drupal-project deprecation[0m
+ shell: /bin/bash -e {0}
+ env:
+ DRUPAL_TESTING_TEST_CODING_STYLES: false
+ DRUPAL_TESTING_DATABASE_USER: root
+ DRUPAL_TESTING_DATABASE_PASSWORD: root
+ DRUPAL_TESTING_DATABASE_ENGINE: mysql
+ ##[endgroup]
+ Checking for deprecations.
+
+ Note: Using configuration file /tmp/test/select2/install/phpstan.neon.
+ 0/28 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 0%
+ 3/28 [▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░] 10%
+ 6/28 [▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░] 21%
+ 9/28 [▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░] 32%
+ 12/28 [▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░] 42%
+ 20/28 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░] 71%
+ 23/28 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░] 82%
+ 26/28 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░] 92%
+ 28/28 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+
+
+ [OK] No errors
+
+ /home/runner/work/select2/select2
+ ##[group]Run test-drupal-project install
+ [36;1mtest-drupal-project install[0m
+ shell: /bin/bash -e {0}
+ env:
+ DRUPAL_TESTING_TEST_CODING_STYLES: false
+ DRUPAL_TESTING_DATABASE_USER: root
+ DRUPAL_TESTING_DATABASE_PASSWORD: root
+ DRUPAL_TESTING_DATABASE_ENGINE: mysql
+ DRUPAL_TESTING_TEST_DEPRECATION: false
+ ##[endgroup]
+ Installing project
+
+ [info] Executing: command -v mysql
+ [info] Executing: mysql --defaults-file=/tmp/drush_msMd22 --database=testing --host=127.0.0.1 --port=3306 --silent -A < /tmp/drush_30DhrG
+
+ // You are about to CREATE the 'testing' database. Do you want to continue?:
+ // yes.
+
+ [info] Sites directory sites/default already exists - proceeding.
+ [info] Executing: mysql --defaults-file=/tmp/drush_U2nibN --database=testing --host=127.0.0.1 --port=3306 --silent -A < /tmp/drush_FOXJ6p
+ [info] Executing: mysql --defaults-file=/tmp/drush_Qx7gox --database=information_schema --host=127.0.0.1 --port=3306 --silent -A < /tmp/drush_zChMha
+ [notice] Starting Drupal installation. This takes a while.
+ [success] Installation complete. User name: admin User password: yW9PoDLw8a
+ ##[group]Run test-drupal-project
+ [36;1mtest-drupal-project[0m
+ shell: /bin/bash -e {0}
+ env:
+ DRUPAL_TESTING_TEST_CODING_STYLES: false
+ DRUPAL_TESTING_DATABASE_USER: root
+ DRUPAL_TESTING_DATABASE_PASSWORD: root
+ DRUPAL_TESTING_DATABASE_ENGINE: mysql
+ ##[endgroup]
+ Starting services
+
+ Starting web driver
+ Unable to find image 'selenium/standalone-chrome:3.141.59-oxygen' locally
+ 3.141.59-oxygen: Pulling from selenium/standalone-chrome
+ 84ed7d2f608f: Pulling fs layer
+ be2bf1c4a48d: Pulling fs layer
+ a5bdc6303093: Pulling fs layer
+ e9055237d68d: Pulling fs layer
+ 386a40964aed: Pulling fs layer
+ 06e803f31b1c: Pulling fs layer
+ f655bb4c3cd6: Pulling fs layer
+ 4fb0061656c5: Pulling fs layer
+ 596ec6766c4b: Pulling fs layer
+ 2d4ca7909f45: Pulling fs layer
+ 87d4bc6422ff: Pulling fs layer
+ fe54095e92d3: Pulling fs layer
+ dbf74cf56a2b: Pulling fs layer
+ 582cd7ee33f3: Pulling fs layer
+ e77d0169ca02: Pulling fs layer
+ d879005b523d: Pulling fs layer
+ d3e6461e4c9b: Pulling fs layer
+ b9b518115a57: Pulling fs layer
+ 1e1b7d612c5b: Pulling fs layer
+ 9bd122501491: Pulling fs layer
+ a44642ff01aa: Pulling fs layer
+ c53cd312b992: Pulling fs layer
+ 35f7128b2f2c: Pulling fs layer
+ f7439f467b5c: Pulling fs layer
+ 44adc2ece393: Pulling fs layer
+ 0ffccc6de60c: Pulling fs layer
+ 4e27e5e27fb3: Pulling fs layer
+ e77d0169ca02: Waiting
+ e9055237d68d: Waiting
+ 386a40964aed: Waiting
+ 06e803f31b1c: Waiting
+ d879005b523d: Waiting
+ d3e6461e4c9b: Waiting
+ b9b518115a57: Waiting
+ 1e1b7d612c5b: Waiting
+ 9bd122501491: Waiting
+ f655bb4c3cd6: Waiting
+ a44642ff01aa: Waiting
+ 4fb0061656c5: Waiting
+ c53cd312b992: Waiting
+ 596ec6766c4b: Waiting
+ 2d4ca7909f45: Waiting
+ 35f7128b2f2c: Waiting
+ 87d4bc6422ff: Waiting
+ f7439f467b5c: Waiting
+ 44adc2ece393: Waiting
+ 0ffccc6de60c: Waiting
+ fe54095e92d3: Waiting
+ dbf74cf56a2b: Waiting
+ 582cd7ee33f3: Waiting
+ 4e27e5e27fb3: Waiting
+ be2bf1c4a48d: Verifying Checksum
+ be2bf1c4a48d: Download complete
+ a5bdc6303093: Verifying Checksum
+ a5bdc6303093: Download complete
+ 386a40964aed: Verifying Checksum
+ 386a40964aed: Download complete
+ e9055237d68d: Verifying Checksum
+ e9055237d68d: Download complete
+ f655bb4c3cd6: Verifying Checksum
+ f655bb4c3cd6: Download complete
+ 84ed7d2f608f: Verifying Checksum
+ 84ed7d2f608f: Download complete
+ 596ec6766c4b: Verifying Checksum
+ 596ec6766c4b: Download complete
+ 4fb0061656c5: Verifying Checksum
+ 4fb0061656c5: Download complete
+ 2d4ca7909f45: Verifying Checksum
+ 2d4ca7909f45: Download complete
+ 87d4bc6422ff: Verifying Checksum
+ 87d4bc6422ff: Download complete
+ fe54095e92d3: Verifying Checksum
+ fe54095e92d3: Download complete
+ 06e803f31b1c: Verifying Checksum
+ 06e803f31b1c: Download complete
+ dbf74cf56a2b: Verifying Checksum
+ dbf74cf56a2b: Download complete
+ e77d0169ca02: Verifying Checksum
+ e77d0169ca02: Download complete
+ d3e6461e4c9b: Verifying Checksum
+ d3e6461e4c9b: Download complete
+ 582cd7ee33f3: Verifying Checksum
+ 582cd7ee33f3: Download complete
+ d879005b523d: Verifying Checksum
+ d879005b523d: Download complete
+ 1e1b7d612c5b: Download complete
+ b9b518115a57: Verifying Checksum
+ b9b518115a57: Download complete
+ c53cd312b992: Verifying Checksum
+ c53cd312b992: Download complete
+ a44642ff01aa: Verifying Checksum
+ a44642ff01aa: Download complete
+ f7439f467b5c: Verifying Checksum
+ f7439f467b5c: Download complete
+ 35f7128b2f2c: Verifying Checksum
+ 35f7128b2f2c: Download complete
+ 44adc2ece393: Verifying Checksum
+ 44adc2ece393: Download complete
+ 0ffccc6de60c: Verifying Checksum
+ 0ffccc6de60c: Download complete
+ 4e27e5e27fb3: Verifying Checksum
+ 4e27e5e27fb3: Download complete
+ 9bd122501491: Verifying Checksum
+ 9bd122501491: Download complete
+ 84ed7d2f608f: Pull complete
+ be2bf1c4a48d: Pull complete
+ a5bdc6303093: Pull complete
+ e9055237d68d: Pull complete
+ 386a40964aed: Pull complete
+ 06e803f31b1c: Pull complete
+ f655bb4c3cd6: Pull complete
+ 4fb0061656c5: Pull complete
+ 596ec6766c4b: Pull complete
+ 2d4ca7909f45: Pull complete
+ 87d4bc6422ff: Pull complete
+ fe54095e92d3: Pull complete
+ dbf74cf56a2b: Pull complete
+ 582cd7ee33f3: Pull complete
+ e77d0169ca02: Pull complete
+ d879005b523d: Pull complete
+ d3e6461e4c9b: Pull complete
+ b9b518115a57: Pull complete
+ 1e1b7d612c5b: Pull complete
+ 9bd122501491: Pull complete
+ a44642ff01aa: Pull complete
+ c53cd312b992: Pull complete
+ 35f7128b2f2c: Pull complete
+ f7439f467b5c: Pull complete
+ 44adc2ece393: Pull complete
+ 0ffccc6de60c: Pull complete
+ 4e27e5e27fb3: Pull complete
+ Digest: sha256:c86fbabaa94303eb81983e1ebed88c9993f55e19daba359b196eb7457012036a
+ Status: Downloaded newer image for selenium/standalone-chrome:3.141.59-oxygen
+ 9a880a2fcd12e3fcbbdfe19f849e2ad7a66a382901f03f394713036b01d5903d
+ /home/runner/work/select2/select2
+ Running tests
+
+ PHPUnit 7.5.20 by Sebastian Bergmann and contributors.
+
+ Runtime: PHP 7.3.17-1+ubuntu18.04.1+deb.sury.org+1
+ Configuration: /tmp/test/select2/install/web/core/phpunit.xml.dist
+
+ Testing /tmp/test/select2/install/web/modules/contrib/select2
+ Test 'Drupal\Tests\select2_facets\FunctionalJavascript\FacetsTest::testBasicFunctionality with data set #0 (array(), array(false))' started
+ Test 'Drupal\Tests\select2_facets\FunctionalJavascript\FacetsTest::testBasicFunctionality with data set #0 (array(), array(false))' ended
+ Test 'Drupal\Tests\select2_facets\FunctionalJavascript\FacetsTest::testBasicFunctionality with data set #1 (array(true), array(array(), false))' started
+ Test 'Drupal\Tests\select2_facets\FunctionalJavascript\FacetsTest::testBasicFunctionality with data set #1 (array(true), array(array(), false))' ended
+ Test 'Drupal\Tests\select2_publish\FunctionalJavascript\PublishTest::testMultipleSelection' started
+ Test 'Drupal\Tests\select2_publish\FunctionalJavascript\PublishTest::testMultipleSelection' ended
+ Test 'Drupal\Tests\select2_publish\FunctionalJavascript\PublishTest::testAutocomplete' started
+ Test 'Drupal\Tests\select2_publish\FunctionalJavascript\PublishTest::testAutocomplete' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testSingleValueWidget with data set #0 (true, 'STARTS_WITH', 2, true)' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testSingleValueWidget with data set #0 (true, 'STARTS_WITH', 2, true)' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testSingleValueWidget with data set #1 (false, null, 3, true)' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testSingleValueWidget with data set #1 (false, null, 3, true)' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testSingleValueWidget with data set #2 (false, null, 2, false)' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testSingleValueWidget with data set #2 (false, null, 2, false)' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testSingleValueWidget with data set #3 (true, 'STARTS_WITH', 1, false)' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testSingleValueWidget with data set #3 (true, 'STARTS_WITH', 1, false)' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testSingleValueWidget with data set #4 (true, 'CONTAINS', 2, false)' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testSingleValueWidget with data set #4 (true, 'CONTAINS', 2, false)' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testMultipleValueWidget with data set #0 (true, true)' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testMultipleValueWidget with data set #0 (true, true)' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testMultipleValueWidget with data set #1 (true, false)' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testMultipleValueWidget with data set #1 (true, false)' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testMultipleValueWidget with data set #2 (false, true)' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testMultipleValueWidget with data set #2 (false, true)' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testMultipleValueWidget with data set #3 (false, false)' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testMultipleValueWidget with data set #3 (false, false)' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testMultipleAutocreation' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testMultipleAutocreation' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testMultipleBundleSelection' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testMultipleBundleSelection' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testAjaxCallbacksInBetween' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testAjaxCallbacksInBetween' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testAutocompleteOrdering' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testAutocompleteOrdering' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testAutocompleteMatchLimit' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testAutocompleteMatchLimit' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testAutocompleteDragnDrop' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testAutocompleteDragnDrop' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2WidgetTest::testEmptyField' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2WidgetTest::testEmptyField' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2WidgetTest::testSingleSelect' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2WidgetTest::testSingleSelect' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2WidgetTest::testSingleSelectRequired' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2WidgetTest::testSingleSelectRequired' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2WidgetTest::testMultipleSelect' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2WidgetTest::testMultipleSelect' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2WidgetTest::testLimitedCount' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2WidgetTest::testLimitedCount' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\Form\ElementTest::testOptgroups' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\Form\ElementTest::testOptgroups' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\Form\ElementTest::testAjaxCallbacksInBetween' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\Form\ElementTest::testAjaxCallbacksInBetween' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\Form\ElementTest::testSevenTheme' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\Form\ElementTest::testSevenTheme' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\Form\ElementTest::testAutocomplete' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\Form\ElementTest::testAutocomplete' ended
+ Test 'Drupal\Tests\select2\FunctionalJavascript\Form\ViewsExposedFilterTest::testContentListWithSelect2Filter' started
+ Test 'Drupal\Tests\select2\FunctionalJavascript\Form\ViewsExposedFilterTest::testContentListWithSelect2Filter' ended
+ Test 'Drupal\Tests\select2\Kernel\Element\Select2Test::testSelect2Theming' started
+ Test 'Drupal\Tests\select2\Kernel\Element\Select2Test::testSelect2Theming' ended
+ Test 'Drupal\Tests\select2\Kernel\Element\Select2Test::testEmptyOption' started
+ Test 'Drupal\Tests\select2\Kernel\Element\Select2Test::testEmptyOption' ended
+ Test 'Drupal\Tests\select2\Kernel\Element\Select2Test::testAutocompleteOptions' started
+ Test 'Drupal\Tests\select2\Kernel\Element\Select2Test::testAutocompleteOptions' ended
+ Test 'Drupal\Tests\select2\Kernel\Select2ValidOptionsTest::testAvailableOptions' started
+ Test 'Drupal\Tests\select2\Kernel\Select2ValidOptionsTest::testAvailableOptions' ended
+ Test 'Drupal\Tests\select2\Unit\Element\Select2Test::testPreRenderSelect with data set #0 (true, true, array(), array('multiple', 'field_foo[]', '{"multiple":true,"placeholder...100%"}'))' started
+ Test 'Drupal\Tests\select2\Unit\Element\Select2Test::testPreRenderSelect with data set #0 (true, true, array(), array('multiple', 'field_foo[]', '{"multiple":true,"placeholder...100%"}'))' ended
+ Test 'Drupal\Tests\select2\Unit\Element\Select2Test::testPreRenderSelect with data set #1 (false, true, array(), array('field_foo', '{"multiple":false,"placeholde...100%"}'))' started
+ Test 'Drupal\Tests\select2\Unit\Element\Select2Test::testPreRenderSelect with data set #1 (false, true, array(), array('field_foo', '{"multiple":false,"placeholde...100%"}'))' ended
+ Test 'Drupal\Tests\select2\Unit\Element\Select2Test::testPreRenderSelect with data set #2 (true, false, array(), array('multiple', 'field_foo[]', '{"multiple":true,"placeholder...100%"}'))' started
+ Test 'Drupal\Tests\select2\Unit\Element\Select2Test::testPreRenderSelect with data set #2 (true, false, array(), array('multiple', 'field_foo[]', '{"multiple":true,"placeholder...100%"}'))' ended
+ Test 'Drupal\Tests\select2\Unit\Element\Select2Test::testPreRenderSelect with data set #3 (false, false, array(), array('field_foo', '{"multiple":false,"placeholde...100%"}'))' started
+ Test 'Drupal\Tests\select2\Unit\Element\Select2Test::testPreRenderSelect with data set #3 (false, false, array(), array('field_foo', '{"multiple":false,"placeholde...100%"}'))' ended
+ Test 'Drupal\Tests\select2\Unit\Element\Select2Test::testPreRenderSelect with data set #4 (false, false, array(false, true), array('field_foo', '{"multiple":true,"placeholder...100%"}'))' started
+ Test 'Drupal\Tests\select2\Unit\Element\Select2Test::testPreRenderSelect with data set #4 (false, false, array(false, true), array('field_foo', '{"multiple":true,"placeholder...100%"}'))' ended
+
+
+ Time: 6.25 minutes, Memory: 10.00 MB
+
+ There was 1 error:
+
+ 1) Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testAjaxCallbacksInBetween
+ Exception: invalid argument: File not found : /tmp/test/select2/install/web/sites/simpletest/17444670/files/text-0.txt
+ (Session info: chrome=74.0.3729.169)
+ (Driver info: chromedriver=74.0.3729.6 (255758eccf3d244491b8a1317aa76e1ce10d57e9-refs/branch-heads/3729@{#29}),platform=Linux 5.3.0-1020-azure x86_64)
+
+ /tmp/test/select2/install/vendor/instaclick/php-webdriver/lib/WebDriver/Exception.php:144
+ /tmp/test/select2/install/vendor/instaclick/php-webdriver/lib/WebDriver/AbstractWebDriver.php:157
+ /tmp/test/select2/install/vendor/instaclick/php-webdriver/lib/WebDriver/AbstractWebDriver.php:218
+ /tmp/test/select2/install/vendor/instaclick/php-webdriver/lib/WebDriver/Container.php:234
+ /tmp/test/select2/install/vendor/behat/mink-selenium2-driver/src/Selenium2Driver.php:838
+ /tmp/test/select2/install/vendor/behat/mink/src/Element/NodeElement.php:261
+ /tmp/test/select2/install/vendor/behat/mink/src/Element/TraversableElement.php:295
+ /home/runner/work/select2/select2/tests/src/FunctionalJavascript/FieldWidget/Select2EntityReferenceWidgetTest.php:357
+
+ --
+
+ There was 1 skipped test:
+
+ 1) Drupal\Tests\select2\FunctionalJavascript\FieldWidget\Select2EntityReferenceWidgetTest::testAutocompleteDragnDrop
+ Testing drag and drop is currently not possible due to a bug in chromedriver. See https://www.drupal.org/node/3084730.
+
+ /home/runner/work/select2/select2/tests/src/FunctionalJavascript/FieldWidget/Select2EntityReferenceWidgetTest.php:439
+
+ ERRORS!
+ Tests: 38, Assertions: 270, Errors: 1, Skipped: 1.
+ ##[error]Process completed with exit code 1.
+ Cleaning up orphan processes
+ Terminate orphan process: pid (5778) (php)
+
