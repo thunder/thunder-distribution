@@ -55,7 +55,7 @@ jobs:
       - name: Get build environment
         run: |
           composer self-update
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:dev-task/replace-phpcodesniffer-composer-installer
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
