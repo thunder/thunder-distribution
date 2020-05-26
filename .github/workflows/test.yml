@@ -56,7 +56,7 @@ jobs:
         run: |
           composer self-update
           composer global require thunder/drupal-testing
-  
+
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
