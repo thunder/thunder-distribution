@@ -106,7 +106,7 @@ jobs:
       script:
         - bash -x -e ./scripts/travis/05-update-2-3.sh
         - bash -x -e ./scripts/travis/06-run-tests.sh
-      php: 7.1
+      php: 7.2
       if: commit_message =~ \[(TEST_UPGRADE|TEST_EVERYTHING)\] OR type = cron
 
     - stage: performance test
