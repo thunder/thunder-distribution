@@ -204,7 +204,7 @@ jobs:
         run: test-drupal-project run_tests
 
   test-performance:
-    needs: [build, test-max]
+    needs: [build]
 
     runs-on: ubuntu-latest
 
@@ -245,6 +245,9 @@ jobs:
         run: |
           echo ::set-output name=DOCKER_SANITIZED_BRANCH_NAME::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')
           echo ::set-output name=DOCKER_TAG::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')-${{ github.run_id }}
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v1
 
       - name: Create image and push to registry
         working-directory: docker-thunder-performance
