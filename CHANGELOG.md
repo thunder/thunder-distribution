@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.3.13](https://github.com/thunder/thunder-distribution/tree/3.3.13) 2020-05-26
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.12...3.3.13)
+
+Bumping Drupal version to the latest security update. Also put version restrictions on modules, that are not compatible with Drupal core 8.7
+
+- Fix [https://www.drupal.org/node/3142834](Unable to install security release 8.7.14)
+- Do [Prevent usage of incompatible redirect release for drush builds](https://www.drupal.org/node/3123859)
+
 ## [3.3.12](https://github.com/thunder/thunder-distribution/tree/3.3.12) 2020-04-16
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.3.11...3.3.12)
 
