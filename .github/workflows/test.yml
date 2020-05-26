@@ -224,9 +224,6 @@ jobs:
         run: |
           echo "::add-path::$HOME/.composer/vendor/bin"
 
-      - name: Get build environment
-        run: composer global require thunder/drupal-testing
-
       - name: Download build
         uses: actions/download-artifact@v1
         with:
