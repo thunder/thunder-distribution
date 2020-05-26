@@ -60,7 +60,6 @@ install:
   - field_group:field_group
   - focal_point:focal_point
   - length_indicator:length_indicator
-  - libraries:libraries
   - linkit:linkit
   - media_entity_instagram:media_entity_instagram
   - media_entity_pinterest:media_entity_pinterest
