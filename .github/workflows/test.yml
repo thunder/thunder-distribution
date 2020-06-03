@@ -75,6 +75,14 @@ jobs:
           git clone --depth 1 --single-branch --branch "${THUNDER_ADMIN_BRANCH}" https://github.com/BurdaMagazinOrg/theme-thunder-admin.git thunder_admin
         working-directory: /tmp/test/thunder/install/docroot/themes/contrib
 
+      - name: Get custom paragraphs_features branch
+        run: |
+          rm -rf paragraphs_features
+          git clone --depth 1 --single-branch --branch drupal9 https://github.com/thunder/paragraphs_features.git paragraphs_features
+        working-directory: /tmp/test/thunder/install/docroot/modules/contrib
+
+
+
       - name: Install drupal
         run: test-drupal-project install
 
