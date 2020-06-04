@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.4.6](https://github.com/thunder/thunder-distribution/tree/3.4.6) 2020-06-04
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.4.5...3.4.6)
+
+- Do [Move thunder_amp theme to d.o.](https://www.drupal.org/node/3128263)
+- Do [Disable slick_media for new installations](https://www.drupal.org/node/3105337)
+- Do [Update redirect module](https://www.drupal.org/node/3137492)
+- Fix [Paragraph preview does not respect focal point settings](https://www.drupal.org/node/3083372)
+
 ## [3.4.5](https://github.com/thunder/thunder-distribution/tree/3.4.5) 2020-04-16
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.4.4...3.4.5)
 
