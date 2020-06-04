@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.4.7](https://github.com/thunder/thunder-distribution/tree/3.4.7) 2020-06-04
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.4.6...3.4.7)
+
+Fixing the download URL for the slick_media module in order to get the tarball built.
+
 ## [3.4.6](https://github.com/thunder/thunder-distribution/tree/3.4.6) 2020-06-04
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.4.5...3.4.6)
 
