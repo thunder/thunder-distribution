@@ -89,7 +89,7 @@
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.9",
-        "drupal/core": "~8.8.4",
+        "drupal/core": "~8.8.6",
         "drupal/config_selector": "^2.0",
         "drupal/config_update": "^1.5",
         "drupal/content_lock": "^2.0",
