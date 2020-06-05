@@ -18,4 +18,4 @@ composer install --working-dir=${TEST_DIR}/docroot
 
 # require development packages needed for testing
 composer config minimum-stability dev --working-dir ${TEST_DIR}/docroot
-COMPOSER_ROOT_VERSION=8.8.x-dev composer require "drupal/core-dev" "thunder/thunder_testing_demo:3.x-dev" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir ${TEST_DIR}/docroot
+COMPOSER_ROOT_VERSION=8.9.x-dev composer require "drupal/core-dev:^8.9.0" "thunder/thunder_testing_demo:3.x-dev" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir ${TEST_DIR}/docroot

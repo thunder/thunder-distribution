@@ -207,7 +207,7 @@ class ThunderInstallerTest extends InstallerTestBase {
       ->condition('severity', 4, '<');
 
     // Check that there are no warnings in the log after installation.
-    $this->assertEquals($query->countQuery()->execute()->fetchField(), $this->knownWarnings);
+    $this->assertEquals($this->knownWarnings, $query->countQuery()->execute()->fetchField());
 
   }
 

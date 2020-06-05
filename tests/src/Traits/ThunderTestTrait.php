@@ -109,7 +109,7 @@ trait ThunderTestTrait {
    */
   protected function doInstall() {
 
-    if (!empty($_SERVER['thunderDumpFile'])) {
+    if (!empty($_SERVER['thunderDumpFile']) && file_exists($_SERVER['thunderDumpFile'])) {
       $file = $_SERVER['thunderDumpFile'];
       // Load the database.
       if (substr($file, -3) == '.gz') {

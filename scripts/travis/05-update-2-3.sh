@@ -23,7 +23,7 @@ cd ${TEST_DIR}
 composer config repositories.thunder path ${THUNDER_DIST_DIR}
 
 composer remove burdamagazinorg/thunder
-composer require "thunder/thunder-distribution:*" drupal/core:~8.8.0 --no-update
+composer require "thunder/thunder-distribution:*" drupal/core:~8.9.0 --no-update
 
 composer update
 

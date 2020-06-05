@@ -53,7 +53,9 @@ jobs:
           echo "::add-path::$HOME/.composer/vendor/bin"
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: |
+          composer self-update
+          composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -142,7 +144,7 @@ jobs:
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
 
     env:
-      DRUPAL_TESTING_DRUPAL_VERSION: '~8.8.1'
+      DRUPAL_TESTING_DRUPAL_VERSION: '~8.9.0'
       DRUPAL_TESTING_TEST_DEPRECATION: false
 
     steps:
@@ -176,7 +178,9 @@ jobs:
           echo "::add-path::$HOME/.composer/vendor/bin"
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: |
+          composer self-update
+          composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
