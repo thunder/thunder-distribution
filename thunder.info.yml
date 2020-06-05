@@ -28,7 +28,6 @@ install:
   - drupal:menu_link_content
   - drupal:datetime
   - drupal:editor
-  - drupal:entity_reference
   - drupal:image
   - drupal:inline_form_errors
   - drupal:menu_ui
