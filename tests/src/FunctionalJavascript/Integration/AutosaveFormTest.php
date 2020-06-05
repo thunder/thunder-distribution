@@ -63,7 +63,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     $this->clickSave();
 
     // Check some things.
-    $this->assertSession()->pageTextContains('This post is unpublished and will be published');
+    $this->assertSession()->pageTextContains('New title is scheduled to be published');
     $this->assertSession()->pageTextContains('Awesome quote');
   }
 
