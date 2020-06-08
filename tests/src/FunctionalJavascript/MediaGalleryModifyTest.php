@@ -20,7 +20,6 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
    */
   protected function sortableUpdate($item, $from, $to = NULL) {
     list ($container) = explode(' ', $item, 2);
-
     $js = <<<END
 if (typeof Drupal.entityBrowserEntityReference === 'object') {
   Drupal.entityBrowserEntityReference.entitiesReordered(document.querySelector("$container"));
@@ -29,7 +28,6 @@ if (typeof Drupal.entityBrowserMultiStepDisplay === 'object') {
   Drupal.entityBrowserMultiStepDisplay.entitiesReordered(document.querySelector("$container"));
 }
 END;
-
     $this->getSession()->executeScript($js);
   }
 
@@ -118,7 +116,7 @@ END;
     // Click Select entities -> to open Entity Browser.
     $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
 
-    $this->uploadFile($page, '/tests/fixtures/reference.jpg');
+    $this->uploadFile($page, '/project/tests/fixtures/reference.jpg');
 
     // Move new image -> that's 5th image in list, to 3rd position.
     $list_selector = '#edit-selected';
