@@ -91,7 +91,7 @@
         "drupal/adsense": "^1.2-rc1",
         "drupal/admin_toolbar": "^2.0",
         "drupal/autofill": "^1.0",
-        "drupal/autosave_form": "1.x-dev",
+        "drupal/autosave_form": "^1.2",
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.9",
