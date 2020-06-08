@@ -76,6 +76,9 @@
             },
             "drupal/scheduler": {
                 "User messages are gone after update": "https://www.drupal.org/files/issues/2020-06-03/3145169.patch"
+            },
+            "drupal/inline_entity_form": {
+                "Replace theme_inline_entity_form_entity_table() with twig template": "https://www.drupal.org/files/issues/2020-05-24/3121071-21.patch"
             }
         }
     },
@@ -108,7 +111,7 @@
         "drupal/field_group": "3.x-dev",
         "drupal/focal_point": "^1.2",
         "drupal/google_analytics": "^2.0",
-        "drupal/inline_entity_form": "^1.0",
+        "drupal/inline_entity_form": "1.x-dev",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.0-rc2",
         "drupal/linkit": "5.x-dev",
