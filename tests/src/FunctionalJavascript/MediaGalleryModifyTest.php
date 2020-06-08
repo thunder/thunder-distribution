@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Drupal\FunctionalJavascriptTests\SortableTestTrait;
+
 /**
  * Tests the Gallery media modification.
  *
@@ -11,6 +13,25 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
   use ThunderEntityBrowserTestTrait;
   use ThunderParagraphsTestTrait;
+  use SortableTestTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function sortableUpdate($item, $from, $to = NULL) {
+    list ($container) = explode(' ', $item, 2);
+
+    $js = <<<END
+if (typeof Drupal.entityBrowserEntityReference === 'object') {
+  Drupal.entityBrowserEntityReference.entitiesReordered(document.querySelector("$container"));
+}
+if (typeof Drupal.entityBrowserMultiStepDisplay === 'object') {
+  Drupal.entityBrowserMultiStepDisplay.entitiesReordered(document.querySelector("$container"));
+}
+END;
+
+    $this->getSession()->executeScript($js);
+  }
 
   /**
    * Test order change for Gallery.
@@ -28,10 +49,11 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     $this->getSession()
       ->wait(10000, "jQuery('[data-drupal-selector=\"edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current\"] .media-form__item-widget--image').filter(function() {return jQuery(this).width() === 182;}).length === 5");
 
-    $cssSelector = 'div[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current"]';
-    $this->scrollElementInView($cssSelector . ' > *:nth-child(2)');
-    $dragElement = $this->xpath("//div[@data-entity-id='media:8']")[0];
-    $this->dragDropElement($dragElement, 300, 0);
+    $list_selector = 'div[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current"]';
+    $this->scrollElementInView($list_selector . ' > *:nth-child(2)');
+
+    $item_selector = "$list_selector .item-container";
+    $this->sortableAfter("$item_selector:first-child", "$item_selector:nth-child(2)", $list_selector);
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaGalleryModifyTest_AfterOrderChange_' . date('Ymd_His') . '.png');
 
@@ -96,11 +118,12 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
     // Click Select entities -> to open Entity Browser.
     $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
 
-    $this->uploadFile($page, '/project/tests/fixtures/reference.jpg');
+    $this->uploadFile($page, '/tests/fixtures/reference.jpg');
 
     // Move new image -> that's 5th image in list, to 3rd position.
-    $dragElement = $this->xpath("//*[@id='edit-selected']/div[5]")[0];
-    $this->dragDropElement($dragElement, -440, 0);
+    $list_selector = '#edit-selected';
+    $item_selector = "$list_selector .item-container";
+    $this->sortableAfter("$item_selector:nth-child(5)", "$item_selector:nth-child(2)", $list_selector);
 
     $this->submitEntityBrowser($page);
 
