@@ -117,7 +117,7 @@
         "drupal/linkit": "5.x-dev",
         "drupal/liveblog": "1.x-dev",
         "drupal/media_entity_instagram": "^2.0-alpha1",
-        "drupal/media_entity_pinterest": "2.x-dev",
+        "drupal/media_entity_pinterest": "^2.0",
         "drupal/media_entity_slideshow": "^2.0-alpha1",
         "drupal/media_entity_twitter": "^2.0-alpha1",
         "drupal/media_expire": "^2.2",
