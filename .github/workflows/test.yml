@@ -12,6 +12,7 @@ on:
 
 env:
   DRUPAL_TESTING_COMPOSER_PROJECT: thunder/thunder-project
+  DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: drupal9-project
   DRUPAL_TESTING_DATABASE_USER: root
   DRUPAL_TESTING_DATABASE_PASSWORD: root
   DRUPAL_TESTING_TEST_DUMP_FILE: dump.sql
@@ -20,7 +21,7 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
   DRUPAL_TESTING_TEST_GROUP: Thunder
-  THUNDER_ADMIN_BRANCH: 8.x-3.x
+  THUNDER_ADMIN_BRANCH: drupal9
 
 jobs:
 
