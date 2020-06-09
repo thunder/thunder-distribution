@@ -63,8 +63,8 @@ jobs:
       - name: Add needed dependencies
         run: |
           composer config -g github-oauth.github.com ${{ secrets.GH_ACCESS_TOKEN }}
-          composer config repositories.3 vcs https://github.com/BurdaMagazinOrg/module-update_helper --working-dir="${DRUPAL_TESTING_DRUPAL_INSTALLATION_DIRECTORY}"
-          composer config repositories.4 vcs https://github.com/BurdaMagazinOrg/theme-thunder-admin --working-dir="${DRUPAL_TESTING_DRUPAL_INSTALLATION_DIRECTORY}"
+          composer config repositories.3 vcs https://github.com/BurdaMagazinOrg/module-update_helper --working-dir=/tmp/test/thunder/install
+          composer config repositories.4 vcs https://github.com/BurdaMagazinOrg/theme-thunder-admin --working-dir=/tmp/test/thunder/install
           composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Set composer bin path
