@@ -12,7 +12,6 @@ on:
 
 env:
   DRUPAL_TESTING_COMPOSER_PROJECT: thunder/thunder-project
-  DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: dev-drupal9-project
   DRUPAL_TESTING_DATABASE_USER: root
   DRUPAL_TESTING_DATABASE_PASSWORD: root
   DRUPAL_TESTING_TEST_DUMP_FILE: dump.sql
@@ -56,14 +55,17 @@ jobs:
       - name: Get build environment
         run: |
           composer self-update
-          composer config -g github-oauth.github.com ${{ secrets.GH_ACCESS_TOKEN }}
           composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
       - name: Add needed dependencies
-        run: composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: |
+          composer config -g github-oauth.github.com ${{ secrets.GH_ACCESS_TOKEN }}
+          composer config repositories.3 vcs https://github.com/BurdaMagazinOrg/module-update_helper --working-dir="${DRUPAL_TESTING_DRUPAL_INSTALLATION_DIRECTORY}"
+          composer config repositories.4 vcs https://github.com/BurdaMagazinOrg/theme-thunder-admin --working-dir="${DRUPAL_TESTING_DRUPAL_INSTALLATION_DIRECTORY}"
+          composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Set composer bin path
         run: composer config bin-dir bin/ --working-dir=/tmp/test/thunder/install
