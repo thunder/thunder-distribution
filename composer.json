@@ -135,7 +135,7 @@
         "drupal/simple_gmap": "^2.0",
         "drupal/shariff": "^1.5",
         "drupal/slick": "^2.1",
-        "drupal/thunder_admin": "dev-drupal9",
+        "drupal/thunder_admin": "dev-task/drupal9",
         "drupal/thunder_fia": "^1.0",
         "drupal/token": "^1.0",
         "drupal/update_helper": "dev-drush-support",
