@@ -66,7 +66,7 @@ jobs:
           composer config repositories.3 vcs https://github.com/BurdaMagazinOrg/module-update_helper --working-dir=/tmp/test/thunder/install
           composer config repositories.4 vcs https://github.com/BurdaMagazinOrg/theme-thunder-admin --working-dir=/tmp/test/thunder/install
           composer config repositories.5 vcs https://github.com/BurdaMagazinOrg/module-riddle_marketplace --working-dir=/tmp/test/thunder/install
-          composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-drupal9" "drupal/riddle_marketplace:dev-drupal9" "drupal/nexx_integration:dev-8.x-3.x" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+          composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-drupal9" "drupal/riddle_marketplace:dev-drupal9" "drupal/nexx_integration:dev-3.x" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Set composer bin path
         run: composer config bin-dir bin/ --working-dir=/tmp/test/thunder/install
