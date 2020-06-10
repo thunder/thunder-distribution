@@ -1,4 +1,4 @@
-core = 8.x
+core = 9.x
 api = 2
 projects[access_unpublished][type] = module
 projects[access_unpublished][version] = 1
