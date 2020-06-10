@@ -157,7 +157,7 @@
     },
     "require-dev": {
         "burdamagazinorg/thunder-dev-tools": "dev-master",
-        "thunder/testsite_builder": "dev-master",
+        "thunder/testsite_builder": "dev-drupal9",
         "thunder/thunder_performance_measurement": "dev-master",
         "thunder/thunder_testing_demo": "3.x-dev",
         "mglaman/phpstan-drupal": "~0.12.0",
