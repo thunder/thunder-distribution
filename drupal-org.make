@@ -1,4 +1,4 @@
-core = 9.x
+core = 8.x
 api = 2
 projects[access_unpublished][type] = module
 projects[access_unpublished][version] = 1
@@ -6,9 +6,6 @@ projects[admin_toolbar][type] = module
 projects[admin_toolbar][version] = 2
 projects[adsense][type] = module
 projects[adsense][version] = 1
-projects[amp][type] = module
-projects[amp][version] = 1.2
-projects[amp][patch][] = https://www.drupal.org/files/issues/missing_schema_for-2878769-3.patch
 projects[amptheme][type] = theme
 projects[amptheme][version] = 1
 projects[autosave_form][type] = module
