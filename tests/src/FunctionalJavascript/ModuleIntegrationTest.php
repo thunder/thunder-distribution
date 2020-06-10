@@ -201,6 +201,9 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
    * Testing integration of "AMP" module and theme.
    */
   public function testAmpIntegration() {
+    $this->markTestSkipped(
+      "AMP is not supported in Thunder for Drupal 9"
+    );
     if (!\Drupal::service('theme_installer')->install(['thunder_amp'])) {
       $this->fail("thunder_amp theme couldn't be installed.");
       return;
