@@ -191,7 +191,12 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Install suggested dependencies
-        run: composer require "drupal/riddle_marketplace:^3.0-beta2" "drupal/nexx_integration:^3.0" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: |
+          composer config -g github-oauth.github.com ${{ secrets.GH_ACCESS_TOKEN }}
+          composer config repositories.3 vcs https://github.com/BurdaMagazinOrg/theme-thunder-admin --working-dir=/tmp/test/thunder/install
+          composer config repositories.4 vcs https://github.com/BurdaMagazinOrg/module-riddle_marketplace --working-dir=/tmp/test/thunder/install
+          composer config repositories.5 vcs https://github.com/BurdaMagazinOrg/liveblog --working-dir=/tmp/test/thunder/install
+          composer require "drupal/riddle_marketplace:dev-drupal9" "drupal/nexx_integration:dev-3.x" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build
