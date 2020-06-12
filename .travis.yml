@@ -41,9 +41,9 @@ jobs:
       name: Run upgrade test
       env: ADDITIONAL_PHPUNIT_PARAMETERS="--exclude-group NoUpdate"
       install:
-        - bash -x -e ./scripts/travis/03-build-thunder2.sh
+        - bash -x -e ./scripts/travis/03-build-thunder3-4.sh
       script:
-        - bash -x -e ./scripts/travis/05-update-2-3.sh
+        - bash -x -e ./scripts/travis/05-update-3-4.sh
         - bash -x -e ./scripts/travis/06-run-tests.sh
       php: 7.2
       if: commit_message =~ \[(TEST_UPGRADE|TEST_EVERYTHING)\] OR type = cron
