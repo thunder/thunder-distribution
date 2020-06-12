@@ -1,0 +1,1 @@
+C:37:"PHPUnit\Runner\DefaultTestResultCache":215:{a:2:{s:7:"defects";a:1:{s:71:"Drupal\Tests\thunder\Functional\ContentListTest::testSchedulerLocalTask";i:4;}s:5:"times";a:1:{s:71:"Drupal\Tests\thunder\Functional\ContentListTest::testSchedulerLocalTask";d:58.662;}}}
