@@ -131,7 +131,7 @@
         "drupal/slick": "^2.2",
         "drupal/thunder_admin": "dev-task/drupal9",
         "drupal/thunder_fia": "^1.0",
-        "drupal/token": "^1.0",
+        "drupal/token": "^1.7",
         "drupal/update_helper": "^2.0",
         "npm-asset/dropzone": "^5.5.1",
         "npm-asset/exif-js": "^2.3.0",
