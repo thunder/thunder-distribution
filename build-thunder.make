@@ -1,6 +1,0 @@
-api = 2
-core = 9.x
-includes[] = drupal-org-core.make
-projects[thunder][type] = profile
-projects[thunder][download][type] = git
-projects[thunder][download][branch] = 8.x-5.x
