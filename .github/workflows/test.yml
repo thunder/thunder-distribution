@@ -174,11 +174,11 @@ jobs:
 
       - name: Update the docroot
         run: |
-          composer require thunder/thunder-distribution:^3.4.0 --no-update
+          composer require thunder/thunder-distribution:^3.5.0 --no-update
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
-          vendor/bin/drush pmu libraries slick_media -y
+          vendor/bin/drush pmu libraries -y
 
           composer require thunder/thunder-distribution:* --no-update
           chmod -R +w docroot/sites/default

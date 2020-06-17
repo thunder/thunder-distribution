@@ -249,23 +249,3 @@ function thunder_update_8308() {
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();
 }
-
-
-/**
- * Let paragraph preview image style use the focal point.
- */
-function thunder_update_8309() {
-  /** @var \Drupal\update_helper\Updater $updateHelper */
-  $updateHelper = \Drupal::service('update_helper.updater');
-
-  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
-  $moduleInstaller = \Drupal::service('module_installer');
-
-  $moduleInstaller->uninstall(['libraries']);
-
-  $updateHelper->logger()->info('Libraries module uninstalled.');
-
-  // Output logged messages to related channel of update execution.
-  return $updateHelper->logger()->output();
-}
-
