@@ -183,6 +183,7 @@ jobs:
 
           composer require thunder/thunder-distribution:* --no-update
           rm -rf docroot/profiles/thunder
+          rm vendor/composer/installed.json
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
