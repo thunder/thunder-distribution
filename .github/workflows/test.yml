@@ -164,6 +164,7 @@ jobs:
           touch /tmp/test/thunder/finished-stages/build
           cp ${GITHUB_WORKSPACE}/tests/fixtures/thunder3-4.composer.lock composer.lock
           composer install
+        working-directory: /tmp/test/thunder/install
 
       - name: Install drupal
         run: test-drupal-project install
@@ -172,6 +173,7 @@ jobs:
         run: |
           composer update
           drush updb -y
+        working-directory: /tmp/test/thunder/install
 
       - name: Run tests suite
         env:
