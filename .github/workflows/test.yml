@@ -175,6 +175,7 @@ jobs:
 
       - name: Update the docroot
         run: |
+          chmod -R +w docroot/sites/default
           composer update
           drush updb -y
         working-directory: /tmp/test/thunder/install
