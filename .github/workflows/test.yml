@@ -135,6 +135,9 @@ jobs:
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-upgrade') || github.event_name == 'schedule' }}
 
+    env:
+      DRUPAL_TESTING_TEST_DEPRECATION: false
+
     steps:
       - uses: actions/checkout@v1
 
