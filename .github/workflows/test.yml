@@ -154,13 +154,14 @@ jobs:
         run: sudo /etc/init.d/mysql start
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: composer global require thunder/drupal-testing:dev-use-composer-install
 
       - name: Prepare the build
-        run: test-drupal-project build
+        run: test-drupal-project prepare_build
 
       - name: Use Thunder 3.4 lockfile
         run: |
+          touch /tmp/test/thunder/finished-stages/build
           cp ${GITHUB_WORKSPACE}/tests/fixtures/thunder3-4.composer.lock composer.lock
           composer install
 
