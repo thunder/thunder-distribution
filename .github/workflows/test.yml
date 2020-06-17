@@ -178,9 +178,11 @@ jobs:
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
+
           vendor/bin/drush pmu libraries -y
 
           composer require thunder/thunder-distribution:* --no-update
+          rm -rf docroot/profiles/thunder
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
