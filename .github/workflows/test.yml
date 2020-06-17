@@ -177,7 +177,7 @@ jobs:
         run: |
           chmod -R +w docroot/sites/default
           composer update
-          drush updb -y
+          vendor/bin/drush updb -y
         working-directory: /tmp/test/thunder/install
 
       - name: Run tests suite
