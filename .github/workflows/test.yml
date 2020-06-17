@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
 
       - uses: shivammathur/setup-php@v2
         with:
@@ -47,10 +47,6 @@ jobs:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-cache-
-
-      - name: Setup environment variables
-        run: |
-          echo "::add-path::$HOME/.composer/vendor/bin"
 
       - name: Get build environment
         run: |
@@ -111,10 +107,6 @@ jobs:
       run: |
         sudo /etc/init.d/mysql start
 
-    - name: Setup environment variables
-      run: |
-        echo "::add-path::$HOME/.composer/vendor/bin"
-
     - name: Get build environment
       run: composer global require thunder/drupal-testing
 
@@ -136,6 +128,55 @@ jobs:
         PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
         RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
       run: test-drupal-project run_tests
+
+  test-upgrade:
+
+    runs-on: ubuntu-latest
+
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'test-upgrade') || github.event_name == 'schedule' }}
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          coverage: none
+          php-version: '7.3'
+          extensions: Imagick
+
+      - name: Setup problem matchers for PHP
+        run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+
+      - name: Setup problem matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Start MySql service
+        run: sudo /etc/init.d/mysql start
+
+      - name: Get build environment
+        run: composer global require thunder/drupal-testing
+
+      - name: Prepare the build
+        run: test-drupal-project build
+
+      - name: Use Thunder 3.4 lockfile
+        run: |
+          cp ${GITHUB_WORKSPACE}/tests/fixtures/thunder3-4.composer.lock composer.lock
+          composer install
+
+      - name: Install drupal
+        run: test-drupal-project install
+
+      - name: Update the docroot
+        run: |
+          composer update
+          drush updb -y
+
+      - name: Run tests suite
+        env:
+          PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
+          RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
+        run: test-drupal-project run_tests
 
   test-min:
 
@@ -172,10 +213,6 @@ jobs:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-cache-
-
-      - name: Setup environment variables
-        run: |
-          echo "::add-path::$HOME/.composer/vendor/bin"
 
       - name: Get build environment
         run: |
