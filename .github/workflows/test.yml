@@ -181,7 +181,7 @@ jobs:
 
           vendor/bin/drush pmu libraries -y
 
-          composer require thunder/thunder-distribution:* --no-update
+          composer require thunder/thunder-distribution:* drupal/riddle_marketplace:^3.0 --no-update
           rm -rf docroot/profiles/thunder
           rm -rf docroot/modules/contrib
           rm -rf docroot/themes/contrib
