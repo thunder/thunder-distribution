@@ -166,7 +166,6 @@ jobs:
         run: |
           touch /tmp/test/thunder/finished-stages/build
           cp ${GITHUB_WORKSPACE}/tests/fixtures/thunder3-4.composer.lock composer.lock
-          composer require thunder/thunder-distribution:* --no-update
           composer install
         working-directory: /tmp/test/thunder/install
 
@@ -175,6 +174,13 @@ jobs:
 
       - name: Update the docroot
         run: |
+          composer require thunder/thunder-distribution:^3.4.0 --no-update
+          chmod -R +w docroot/sites/default
+          composer update
+          vendor/bin/drush updb -y
+          vendor/bin/drush pmu libraries slick_media -y
+
+          composer require thunder/thunder-distribution:* --no-update
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
