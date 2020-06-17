@@ -174,7 +174,7 @@ jobs:
 
       - name: Update the docroot
         run: |
-          composer require thunder/thunder-distribution:^3.5.0 --no-update
+          composer require thunder/thunder-distribution:dev-8.x-5.x --no-update
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
