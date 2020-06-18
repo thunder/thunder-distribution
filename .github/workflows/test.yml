@@ -172,6 +172,7 @@ jobs:
           touch /tmp/test/thunder/finished-stages/build
           cp ${GITHUB_WORKSPACE}/tests/fixtures/thunder2.composer.lock composer.lock
           composer install
+          composer drupal-scaffold
         working-directory: /tmp/test/thunder/install
 
       - name: Install drupal
