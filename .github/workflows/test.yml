@@ -141,7 +141,8 @@ jobs:
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: false
-      DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 3.0.3
+      DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 2.x
+      DRUPAL_TESTING_COMPOSER_PROJECT: BurdaMagazinOrg/thunder-project
 
     steps:
       - uses: actions/checkout@v1
