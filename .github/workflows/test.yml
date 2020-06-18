@@ -180,6 +180,7 @@ jobs:
 
       - name: Update the docroot
         run: |
+          composer remove thunder/testsite_builder --no-update
           composer require drupal/paragraphs:1.10 drupal/core:~8.7.0 --no-update
           composer update
           vendor/bin/drush updb -y
