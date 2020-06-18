@@ -3,7 +3,7 @@
 ## [3.4.8](https://github.com/thunder/thunder-distribution/tree/3.4.8) 2020-06-18
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.4.7...3.4.8)
 
-Update tarball to include latest security update and updating entity browser and update helper
+Update tarball to include latest security update and updating entity browser and update helper.
 
 - Do [Update entity browser to 2.5](https://www.drupal.org/node/3146606)
 
