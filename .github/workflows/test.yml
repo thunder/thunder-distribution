@@ -189,6 +189,9 @@ jobs:
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
+
+          cd docroot
+          php core/scripts/db-tools.php dump-database-d8-mysql > dump.sql
         working-directory: /tmp/test/thunder/install
 
       - name: Run tests suite
