@@ -163,7 +163,7 @@ jobs:
         run: sudo /etc/init.d/mysql start
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing:dev-fix/dump
+        run: composer global require thunder/drupal-testing:dev-prepare-upgrade-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
