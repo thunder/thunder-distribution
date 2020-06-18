@@ -51,7 +51,7 @@ jobs:
       - name: Get build environment
         run: |
           composer self-update
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:dev-fix/dump
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -108,7 +108,7 @@ jobs:
         sudo /etc/init.d/mysql start
 
     - name: Get build environment
-      run: composer global require thunder/drupal-testing
+      run: composer global require thunder/drupal-testing:dev-fix/dump
 
     - name: Download build
       uses: actions/download-artifact@v1
@@ -157,7 +157,7 @@ jobs:
         run: sudo /etc/init.d/mysql start
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: composer global require thunder/drupal-testing:dev-fix/dump
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -236,7 +236,7 @@ jobs:
       - name: Get build environment
         run: |
           composer self-update
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:dev-fix/dump
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -282,9 +282,6 @@ jobs:
       - name: Setup environment variables
         run: |
           echo "::add-path::$HOME/.composer/vendor/bin"
-
-      - name: Get build environment
-        run: composer global require thunder/drupal-testing
 
       - name: Download build
         uses: actions/download-artifact@v1
