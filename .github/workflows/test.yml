@@ -179,7 +179,7 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer self-update
+          composer self-update --snapshot
           composer global require thunder/drupal-testing
 
       - name: Prepare the build
