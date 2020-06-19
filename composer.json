@@ -133,7 +133,6 @@
         "drupal/shariff": "^1.5",
         "drupal/slick": "^2.2",
         "drupal/thunder_admin": "^4.0",
-        "drupal/thunder_fia": "^1.0",
         "drupal/token": "^1.7",
         "drupal/update_helper": "^1.3 || ^2.0",
         "npm-asset/dropzone": "^5.5.1",
