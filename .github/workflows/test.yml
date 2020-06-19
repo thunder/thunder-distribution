@@ -14,7 +14,7 @@ env:
   DRUPAL_TESTING_COMPOSER_PROJECT: thunder/thunder-project
   DRUPAL_TESTING_DATABASE_USER: root
   DRUPAL_TESTING_DATABASE_PASSWORD: root
-  DRUPAL_TESTING_TEST_DUMP_FILE: dump.sql
+  DRUPAL_TESTING_TEST_DUMP_FILE: db-dump.php
   DRUPAL_TESTING_DATABASE_ENGINE: mysql
   DRUPAL_TESTING_TEST_CODING_STYLES: false
   DRUPAL_TESTING_TEST_PROFILE: thunder
@@ -156,8 +156,15 @@ jobs:
       - name: Start MySql service
         run: sudo /etc/init.d/mysql start
 
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-cache-
+
       - name: Get build environment
-        run: composer global require thunder/drupal-testing:dev-fix/dump
+        run: composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -174,7 +181,7 @@ jobs:
 
       - name: Update the docroot
         run: |
-          composer require thunder/thunder-distribution:dev-8.x-5.x --no-update
+          composer require thunder/thunder-distribution:^3.5.0 --no-update
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
@@ -182,16 +189,12 @@ jobs:
           vendor/bin/drush pmu libraries -y
 
           composer require thunder/thunder-distribution:* drupal/riddle_marketplace:^3.0 --no-update
-          rm -rf docroot/profiles/thunder
-          rm -rf docroot/modules/contrib
-          rm -rf docroot/themes/contrib
-          rm vendor/composer/installed.json
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
 
           cd docroot
-          php core/scripts/db-tools.php dump-database-d8-mysql > dump.sql
+          php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
         working-directory: /tmp/test/thunder/install
 
       - name: Run tests suite
@@ -281,10 +284,6 @@ jobs:
           coverage: none
           php-version: '7.3'
           extensions: Imagick
-
-      - name: Setup environment variables
-        run: |
-          echo "::add-path::$HOME/.composer/vendor/bin"
 
       - name: Download build
         uses: actions/download-artifact@v1
