@@ -143,6 +143,7 @@ jobs:
       DRUPAL_TESTING_TEST_DEPRECATION: false
       DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 2.x-dev
       DRUPAL_TESTING_COMPOSER_PROJECT: BurdaMagazinOrg/thunder-project
+      DRUPAL_TESTING_TEST_GROUP: "Thunder --exclude-group NoUpdate"
 
     steps:
       - uses: actions/checkout@v1
