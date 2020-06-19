@@ -14,7 +14,7 @@ env:
   DRUPAL_TESTING_COMPOSER_PROJECT: thunder/thunder-project
   DRUPAL_TESTING_DATABASE_USER: root
   DRUPAL_TESTING_DATABASE_PASSWORD: root
-  DRUPAL_TESTING_TEST_DUMP_FILE: dump.sql
+  DRUPAL_TESTING_TEST_DUMP_FILE: db-dump.php
   DRUPAL_TESTING_DATABASE_ENGINE: mysql
   DRUPAL_TESTING_TEST_CODING_STYLES: false
   DRUPAL_TESTING_TEST_PROFILE: thunder
@@ -47,10 +47,6 @@ jobs:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-cache-
-
-      - name: Setup environment variables
-        run: |
-          echo "::add-path::$HOME/.composer/vendor/bin"
 
       - name: Get build environment
         run: |
@@ -111,10 +107,6 @@ jobs:
       run: |
         sudo /etc/init.d/mysql start
 
-    - name: Setup environment variables
-      run: |
-        echo "::add-path::$HOME/.composer/vendor/bin"
-
     - name: Get build environment
       run: composer global require thunder/drupal-testing
 
@@ -136,6 +128,89 @@ jobs:
         PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
         RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
       run: test-drupal-project run_tests
+
+  test-upgrade:
+
+    runs-on: ubuntu-latest
+
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'test-upgrade') || github.event_name == 'schedule' }}
+
+    env:
+      DRUPAL_TESTING_TEST_DEPRECATION: false
+      DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 2.x-dev
+      DRUPAL_TESTING_COMPOSER_PROJECT: BurdaMagazinOrg/thunder-project
+      DRUPAL_TESTING_TEST_GROUP: "Thunder --exclude-group NoUpdate"
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          coverage: none
+          php-version: '7.3'
+          extensions: Imagick
+
+      - name: Setup problem matchers for PHP
+        run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+
+      - name: Setup problem matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Start MySql service
+        run: sudo /etc/init.d/mysql start
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-cache-
+
+      - name: Get build environment
+        run: composer global require thunder/drupal-testing
+
+      - name: Prepare the build
+        run: test-drupal-project prepare_build
+
+      - name: Use Thunder 2 lockfile
+        run: |
+          touch /tmp/test/thunder/finished-stages/build
+          cp ${GITHUB_WORKSPACE}/tests/fixtures/thunder2.composer.lock composer.lock
+          composer install
+          composer drupal-scaffold
+        working-directory: /tmp/test/thunder/install
+
+      - name: Install drupal
+        run: test-drupal-project install
+
+      - name: Update the docroot
+        run: |
+          composer remove thunder/testsite_builder --dev --no-update
+          composer require drupal/paragraphs:1.10 drupal/core:~8.7.0 --no-update
+          composer update
+          vendor/bin/drush updb -y
+          composer remove drupal/paragraphs --no-update
+          composer update
+          composer require burdamagazinorg/thunder:~8.2.51 --no-update
+          composer update
+          vendor/bin/drush updb -y
+          composer remove burdamagazinorg/thunder
+          composer require "thunder/thunder-distribution:*" drupal/core:~8.9.0 --no-update
+          composer update
+          composer require "thunder/thunder_testing_demo:3.x-dev" "drupal/media_entity:^2.0-beta4" "drupal/video_embed_field:^2.2" "drupal/media_entity_image" "drupal/riddle_marketplace:^3.0-beta2"
+          vendor/bin/drush updb -y
+          vendor/bin/drush en vem_migrate_oembed -y
+          vendor/bin/drush vem:migrate_oembed
+          vendor/bin/drush cr
+          cd docroot
+          php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
+        working-directory: /tmp/test/thunder/install
+
+      - name: Run tests suite
+        env:
+          PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
+          RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
+        run: test-drupal-project run_tests
 
   test-min:
 
@@ -172,10 +247,6 @@ jobs:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-cache-
-
-      - name: Setup environment variables
-        run: |
-          echo "::add-path::$HOME/.composer/vendor/bin"
 
       - name: Get build environment
         run: |
@@ -222,13 +293,6 @@ jobs:
           coverage: none
           php-version: '7.3'
           extensions: Imagick
-
-      - name: Setup environment variables
-        run: |
-          echo "::add-path::$HOME/.composer/vendor/bin"
-
-      - name: Get build environment
-        run: composer global require thunder/drupal-testing
 
       - name: Download build
         uses: actions/download-artifact@v1
