@@ -167,7 +167,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-cache-
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing:dev-prepare-upgrade-testing
+        run: composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -211,68 +211,6 @@ jobs:
           PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
           RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
         run: test-drupal-project run_tests
-
-  test-drush-make:
-
-    runs-on: ubuntu-latest
-
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'test-drush-make') || github.event_name == 'schedule' }}
-
-    env:
-      DRUPAL_TESTING_TEST_DEPRECATION: false
-
-    steps:
-      - uses: actions/checkout@v1
-
-      - uses: shivammathur/setup-php@v2
-        with:
-          coverage: none
-          php-version: '7.3'
-          extensions: Imagick
-
-      - name: Setup problem matchers for PHP
-        run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-
-      - name: Setup problem matchers for PHPUnit
-        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-
-      - name: Start MySql service
-        run: sudo /etc/init.d/mysql start
-
-      - name: Get build environment
-        run: composer global require thunder/drupal-testing:dev-prepare-upgrade-testing drush/drush:^8.0
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v1
-
-      - name: Build the docroot
-        run: test-drupal-project build
-
-      - name: Build docroot by drush make
-        run: |
-          rm -rf docroot
-          drush make --concurrency=5 $GITHUB_WORKSPACE/drupal-org-core.make docroot -y
-          mkdir docroot/profiles/thunder
-          rsync -a $GITHUB_WORKSPACE/* docroot/profiles/thunder --exclude docroot
-
-          drush make -y --no-core docroot/profiles/thunder/drupal-org.make docroot/profiles/thunder
-
-          rm -rf docroot/profiles/thunder/themes/thunder_admin
-          git clone --depth 1 --single-branch --branch 8.x-3.x https://github.com/BurdaMagazinOrg/theme-thunder-admin.git docroot/profiles/thunder/themes/thunder_admin
-        working-directory: /tmp/test/thunder/install
-
-      - name: Install drupal
-        run: |
-          drush si --db-url="mysql://root:root@127.0.0.1/testing" thunder -y
-          touch /tmp/test/thunder/finished-stages/install
-        working-directory: /tmp/test/thunder/install
-
-      - name: Run tests suite
-        env:
-          PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
-          RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
-        run: test-drupal-project run_tests
-
 
   test-min:
 
