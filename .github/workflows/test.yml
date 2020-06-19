@@ -242,6 +242,9 @@ jobs:
       - name: Get build environment
         run: composer global require thunder/drupal-testing:dev-prepare-upgrade-testing
 
+      - name: Setup requirements
+        run: test-drupal-project requirements
+
       - name: Build docroot by drush make
         run: |
           touch /tmp/test/thunder/finished-stages/prepare_build
