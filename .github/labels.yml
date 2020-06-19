@@ -7,6 +7,9 @@
 - name: DO NOT MERGE
   description: It's prohibited to merge this branch
   color: ff425e
+- name: test-drush-make
+  description: Triggers testing with a docroot build by drush make (D8.9 only)
+  color: d4e827
 - name: test-min
   description: Triggers the minimum requirements testing
   color: c9f9a9

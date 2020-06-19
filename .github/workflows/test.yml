@@ -48,10 +48,6 @@ jobs:
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-cache-
 
-      - name: Setup environment variables
-        run: |
-          echo "::add-path::$HOME/.composer/vendor/bin"
-
       - name: Get build environment
         run: |
           composer self-update
@@ -163,6 +159,13 @@ jobs:
       - name: Start MySql service
         run: sudo /etc/init.d/mysql start
 
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-cache-
+
       - name: Get build environment
         run: composer global require thunder/drupal-testing:dev-prepare-upgrade-testing
 
@@ -208,6 +211,65 @@ jobs:
           PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
           RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
         run: test-drupal-project run_tests
+
+  test-drush-make:
+
+    runs-on: ubuntu-latest
+
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'test-drush-make') || github.event_name == 'schedule' }}
+
+    env:
+      DRUPAL_TESTING_TEST_DEPRECATION: false
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          coverage: none
+          php-version: '7.3'
+          extensions: Imagick
+
+      - name: Setup problem matchers for PHP
+        run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+
+      - name: Setup problem matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Start MySql service
+        run: sudo /etc/init.d/mysql start
+
+      - name: Get build environment
+        run: composer global require thunder/drupal-testing:dev-prepare-upgrade-testing
+
+      - name: Build docroot by drush make
+        run: |
+          touch /tmp/test/thunder/finished-stages/prepare_build
+          touch /tmp/test/thunder/finished-stages/build
+          vendor/bin/drush make --concurrency=5 drupal-org-core.make docroot -y
+          mkdir docroot/profiles/thunder
+          rsync -a . docroot/profiles/thunder --exclude docroot
+
+          vendor/bin/drush make -y --no-core ${TEST_DIR}/docroot/profiles/thunder/drupal-org.make ${TEST_DIR}/docroot/profiles/thunder
+
+          rm -rf docroot/profiles/thunder/themes/thunder_admin
+          git clone --depth 1 --single-branch --branch 8.x-3.x https://github.com/BurdaMagazinOrg/theme-thunder-admin.git docroot/profiles/thunder/themes/thunder_admin
+
+          composer install --working-dir=docroot
+
+          composer config minimum-stability dev --working-dir docroot
+          COMPOSER_ROOT_VERSION=8.9.x-dev composer require "drupal/core-dev:^8.9.0" "thunder/thunder_testing_demo:3.x-dev" "lullabot/amp" "pusher/pusher-php-server:^3.0.0" --no-progress --working-dir docroot
+        working-directory: /tmp/test/thunder/install
+
+      - name: Install drupal
+        run: test-drupal-project install
+
+      - name: Run tests suite
+        env:
+          PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
+          RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
+        run: test-drupal-project run_tests
+
 
   test-min:
 
