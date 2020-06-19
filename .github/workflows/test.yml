@@ -240,7 +240,7 @@ jobs:
         run: sudo /etc/init.d/mysql start
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing:dev-prepare-upgrade-testing drush:drush:^8.0
+        run: composer global require thunder/drupal-testing:dev-prepare-upgrade-testing drush/drush:^8.0
 
       - name: Setup requirements
         run: |
