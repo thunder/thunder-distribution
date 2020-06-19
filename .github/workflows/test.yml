@@ -242,6 +242,9 @@ jobs:
       - name: Get build environment
         run: composer global require thunder/drupal-testing:dev-prepare-upgrade-testing drush/drush:^8.0
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v1
+
       - name: Setup requirements
         run: |
           test-drupal-project requirements
