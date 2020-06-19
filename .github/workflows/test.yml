@@ -245,19 +245,20 @@ jobs:
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v1
 
-      - name: Setup requirements
+      - name: Prepare the build
         run: |
-          test-drupal-project requirements
-          touch /tmp/test/thunder/finished-stages/prepare_build
+          test-drupal-project prepare_build
           touch /tmp/test/thunder/finished-stages/build
+          mdir /tmp/test/thunder/install
+          rsync -a . /tmp/test/thunder/install
 
       - name: Build docroot by drush make
         run: |
-          drush make --concurrency=5 drupal-org-core.make docroot -y
+          drush make --concurrency=5 $GITHUB_WORKSPACE/drupal-org-core.make docroot -y
           mkdir docroot/profiles/thunder
-          rsync -a . docroot/profiles/thunder --exclude docroot
+          rsync -a $GITHUB_WORKSPACE/* docroot/profiles/thunder --exclude docroot
 
-          drush make -y --no-core ${TEST_DIR}/docroot/profiles/thunder/drupal-org.make ${TEST_DIR}/docroot/profiles/thunder
+          drush make -y --no-core docroot/profiles/thunder/drupal-org.make docroot/profiles/thunder
 
           rm -rf docroot/profiles/thunder/themes/thunder_admin
           git clone --depth 1 --single-branch --branch 8.x-3.x https://github.com/BurdaMagazinOrg/theme-thunder-admin.git docroot/profiles/thunder/themes/thunder_admin
