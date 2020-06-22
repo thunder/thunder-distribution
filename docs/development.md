@@ -129,7 +129,7 @@ After you have running chrome in docker, you have also to change environment var
 DRUPAL_TEST_WEBDRIVER_PORT=4444
 DRUPAL_TEST_WEBDRIVER_PATH_PREFIX=/wd/hub
 DRUPAL_TEST_CHROMEDRIVER_AUTOSTART=false
-``` 
+```
 You can copy/paste this section to the bottom of your `.env` file.
 
 ----------
@@ -140,17 +140,14 @@ Documentation how to check your code for coding style issues can be found [here]
 
 ----------
 
-## Thunder Travis CI
+## Thunder GitHub actions
 
-All Thunder pull requests are execute on [Travis CI](https://travis-ci.com/thunder/thunder-distribution). On every pull request tests will be executed (or when new commits are pushed into pull request branch). Tests are executed against PHP version 7.3 (with drush make install and with composer install). All code will be checked against coding style.
+All Thunder pull requests are execute on [GitHub actiona](https://github.com/thunder/thunder-distribution/actions). On every pull request tests will be executed (or when new commits are pushed into pull request branch). Tests are executed against PHP version 7.3 (with drush make install and with composer install). All code will be checked against coding style.
 
-We support some test execution options. They can be provided in commit message in square brackets []. Here is list of options supported:
-- TEST_UPDATE - this option will execute custom test path, where update (including execution of update hooks) from latest released version will be tested. This option should be used in case of pull request with update hooks or module update.
-
-Example to execute update test path:
-```
-git commit -m "[TEST_UPDATE] Trigger update test path"
-```
+We support some test execution options. They can be provided by pull request labels. Here is list of supported labels:
+- test-upgrade - this option will execute a custom test path, where an update (including execution of update hooks) from Thunder 2 will be tested. This option should be used in case of a pull request with update hooks or module updates.
+- test-min - this options installs the pull request version of Thunder with the oldest possible dependencies and executes the test suite.
+- test-performance - this option pushed the code base to our performance testing infrastructure. A successful test-max build is the required for this.
 
 ----------
 
