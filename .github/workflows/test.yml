@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - 8.x-[1-9]+.x
+      - 6.[1-9]+.[1-9]+
     paths-ignore:
       - '**.md'
 
