@@ -142,7 +142,7 @@ Documentation how to check your code for coding style issues can be found [here]
 
 ## Thunder GitHub actions
 
-All Thunder pull requests are execute on [GitHub actiona](https://github.com/thunder/thunder-distribution/actions). On every pull request tests will be executed (or when new commits are pushed into pull request branch). Tests are executed against PHP version 7.3 (with drush make install and with composer install). All code will be checked against coding style.
+All Thunder pull requests are execute on [GitHub actions](https://github.com/thunder/thunder-distribution/actions). On every pull request tests will be executed (or when new commits are pushed into pull request branch). Tests are executed against PHP version 7.3. All code will be checked against coding style.
 
 We support some test execution options. They can be provided by pull request labels. Here is list of supported labels:
 - test-upgrade - this option will execute a custom test path, where an update (including execution of update hooks) from Thunder 2 will be tested. This option should be used in case of a pull request with update hooks or module updates.
