@@ -62,7 +62,7 @@
             },
             "drupal/entity_browser": {
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2019-07-04/2858438_17.patch",
-                "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2020-03-30/2851580-83.patch"
+                "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2020-06-05/2851580-88.patch"
             },
             "drupal/password_policy": {
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2020-04-14/2918974-7-11.patch",
@@ -86,7 +86,7 @@
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.9",
-        "drupal/core": "~8.8.4",
+        "drupal/core": "~8.8.6",
         "drupal/config_selector": "^2.0",
         "drupal/config_update": "^1.5",
         "drupal/content_lock": "^2.0",
@@ -97,7 +97,7 @@
         "drupal/dropzonejs": "^2.0-alpha2",
         "drupal/empty_fields": "^1.0-alpha1",
         "drupal/entity": "^1.0",
-        "drupal/entity_browser": "2.4",
+        "drupal/entity_browser": "2.5",
         "drupal/entity_reference_revisions": "^1.3",
         "drupal/field_group": "^3.0-rc2",
         "drupal/focal_point": "^1.2",
@@ -120,11 +120,10 @@
         "drupal/pathauto": "^1.6",
         "drupal/responsive_preview": "^1.0-alpha7",
         "drupal/redirect": "^1.6",
-        "drupal/scheduler": "^1.1",
+        "drupal/scheduler": "^1.3",
         "drupal/scheduler_content_moderation_integration": "^1.1",
         "drupal/select2": "^1.3",
         "drupal/simple_sitemap": "3.6",
-        "drupal/simple_gmap": "^1.4",
         "drupal/shariff": "^1.5",
         "drupal/slick": "^2.0-rc3",
         "drupal/slick_media": "3.x-dev",
@@ -132,7 +131,7 @@
         "drupal/thunder_amp": "^1.0-beta2",
         "drupal/thunder_fia": "^1.0",
         "drupal/token": "^1.0",
-        "drupal/update_helper": "^1.3",
+        "drupal/update_helper": "^1.3 || ^2.0",
         "npm-asset/dropzone": "^5.5.1",
         "npm-asset/exif-js": "^2.3.0",
         "npm-asset/blazy": "^1.8",
