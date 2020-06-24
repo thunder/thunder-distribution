@@ -188,8 +188,13 @@ jobs:
 
           vendor/bin/drush pmu libraries -y
 
+          composer require thunder/thunder-distribution:* --no-update
+          rm -rf docroot/profiles/thunder
+          rm -rf docroot/modules/contrib
+          rm -rf docroot/themes/contrib
+          rm vendor/composer/installed.json
           chmod -R +w docroot/sites/default
-          composer require thunder/thunder-distribution:* --update-with-all-dependencies
+          composer update
           vendor/bin/drush updb -y
 
           cd docroot
