@@ -5,7 +5,7 @@ namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * AMP.
+ * Liveblog.
  *
  * @ThunderOptionalModule(
  *   id = "thunder_liveblog",

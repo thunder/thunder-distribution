@@ -2,8 +2,8 @@ name: Thunder
 type: profile
 description: 'The Drupal8 based CMS for professional publishing.'
 project: thunder
-core: 8.x
-version: '8.x-4.5'
+core_version_requirement: ^9
+version: '8.x-5.1'
 
 distribution:
   name: Thunder
@@ -28,7 +28,6 @@ install:
   - drupal:menu_link_content
   - drupal:datetime
   - drupal:editor
-  - drupal:entity_reference
   - drupal:image
   - drupal:inline_form_errors
   - drupal:menu_ui
@@ -60,7 +59,6 @@ install:
   - field_group:field_group
   - focal_point:focal_point
   - length_indicator:length_indicator
-  - libraries:libraries
   - linkit:linkit
   - media_entity_instagram:media_entity_instagram
   - media_entity_pinterest:media_entity_pinterest

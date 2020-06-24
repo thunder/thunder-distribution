@@ -5,6 +5,7 @@ dependencies:
     - field.field.node.page.body
     - node.type.page
   module:
+    - content_moderation
     - path
     - scheduler
     - select2
