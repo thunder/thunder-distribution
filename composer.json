@@ -138,7 +138,6 @@
         "pusher/pusher-php-server": "^3.0.3 || ^4.1.1"
     },
     "suggest": {
-        "drupal/riddle_marketplace": "Riddle marketplace integration",
         "drupal/nexx_integration": "NEXX Video CMS integration",
         "valiton/harbourmaster": "Harbourmaster Single Sign On"
     },
