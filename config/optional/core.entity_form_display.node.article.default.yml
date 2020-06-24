@@ -127,7 +127,6 @@ content:
           text: paragraph.text.field_text
         split_method:
           double_new_line: double_new_line
-          oEmbed: oEmbed
           regex: '0'
         split_method_regex: ''
     region: content

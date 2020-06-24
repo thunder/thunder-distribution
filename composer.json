@@ -116,7 +116,7 @@
         "drupal/metatag": "^1.13",
         "drupal/paragraphs": "^1.11",
         "drupal/paragraphs_features": "^1.8",
-        "drupal/paragraphs_paste": "dev-1.x",
+        "drupal/paragraphs_paste": "^1.0",
         "drupal/password_policy": "3.0-beta1",
         "drupal/pathauto": "^1.8",
         "drupal/responsive_preview": "^1.0-alpha7",
