@@ -68,9 +68,6 @@
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2020-04-14/2918974-7-11.patch",
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2020-03-20/password-policy-2771129-110.patch"
             },
-            "drupal/search_api": {
-                "Add rebuild-tracker drush command": "https://www.drupal.org/files/issues/2020-04-20/3119335-7.patch"
-            },
             "drupal/inline_entity_form": {
                 "Replace theme_inline_entity_form_entity_table() with twig template": "https://www.drupal.org/files/issues/2020-05-24/3121071-21.patch"
             },
@@ -133,7 +130,7 @@
         "drupal/thunder_admin": "^4.0",
         "drupal/token": "^1.7",
         "drupal/update_helper": "^2.0",
-        "drupal/search_api": "1.16",
+        "drupal/search_api": "^1.17",
         "drupal/views_bulk_operations": "^3.6",
         "npm-asset/dropzone": "^5.5.1",
         "npm-asset/exif-js": "^2.3.0",
