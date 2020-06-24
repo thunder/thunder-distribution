@@ -42,8 +42,6 @@ class ModuleUninstallTest extends ThunderTestBase {
       'select2_facets',
     ],
 
-    // ['amp'],
-    // Patch provided: https://www.drupal.org/files/issues/2901581_3.patch.
     // ['harbourmaster'],
     // Requires update of project on drupal.org.
     // ['thunder_fia'],

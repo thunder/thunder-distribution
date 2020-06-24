@@ -65,7 +65,7 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     );
 
     // Check for sort targets outside active table.
-    $this->assertFalse(
+    $this->assertEmpty(
       $page->find('xpath', '//*[@class="tabledrag-sort-target" and not(ancestor::*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"])]'),
       'Found tabledrag sort targets outside of active table.'
     );
