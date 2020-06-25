@@ -2,12 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - entity_browser.browser.multiple_image_browser
     - field.field.media.gallery.field_media_images
     - media.type.gallery
   module:
-    - entity_browser
     - field_group
+    - media_library
     - select2
 third_party_settings:
   field_group:
@@ -37,18 +36,10 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_media_images:
-    type: entity_browser_entity_reference
+    type: media_library_widget
     weight: 2
     settings:
-      entity_browser: multiple_image_browser
-      field_widget_display: rendered_entity
-      field_widget_edit: true
-      field_widget_remove: true
-      open: true
-      selection_mode: selection_edit
-      field_widget_display_settings:
-        view_mode: thumbnail
-      field_widget_replace: false
+      media_types: {  }
     third_party_settings: {  }
     region: content
   name:

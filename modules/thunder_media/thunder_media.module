@@ -31,55 +31,10 @@ function thunder_media_file_create(File $entity) {
 }
 
 /**
- * Implements hook_preprocess_views_view().
- */
-function thunder_media_preprocess_views_view(&$variables) {
-
-  $thunder_media_browser = [
-    'entity_browser',
-
-    // TODO: Legacy support, remove it with new major version.
-    'image_browser',
-    'video_browser',
-  ];
-
-  if (in_array($variables['view']->id(), $thunder_media_browser)) {
-    $variables['view_array']['#attached']['library'][] = 'thunder_media/entity_browser_view';
-  }
-}
-
-/**
  * Implements hook_page_attachments().
  */
 function thunder_media_page_attachments(array &$page) {
   $page['#attached']['library'][] = 'thunder_media/gallery';
-}
-
-/**
- * Implements hook_field_widget_WIDGET_ID_form_alter().
- *
- * Alter the widget to apply classes and identify widget buttons and their types
- * for the theme.
- */
-function thunder_media_field_widget_entity_browser_entity_reference_form_alter(&$element, FormStateInterface $form_state, $context) {
-  /* @var \Drupal\Core\Field\EntityReferenceFieldItemList $items */
-  $items = $context['items'];
-  $field_name = $items->getName();
-  switch ($field_name) {
-    case 'field_teaser_media':
-    case 'field_image':
-    case 'field_video':
-    case 'field_media_images':
-      _thunder_media_media_field_widget_form_alter_helper($element, 'image');
-      break;
-  }
-}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- */
-function thunder_media_form_entity_browser_multiple_image_browser_form_alter(&$form, FormStateInterface $form_state) {
-  $form['#attached']['library'][] = 'thunder_media/entity_browser_view';
 }
 
 /**

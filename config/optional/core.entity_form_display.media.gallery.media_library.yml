@@ -2,35 +2,26 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_form_mode.media.inline
+    - core.entity_form_mode.media.media_library
     - field.field.media.gallery.field_media_images
     - media.type.gallery
-  module:
-    - media_library
-id: media.gallery.inline
+id: media.gallery.media_library
 targetEntityType: media
 bundle: gallery
-mode: inline
+mode: media_library
 content:
-  field_media_images:
-    type: media_library_widget
-    weight: 1
-    settings:
-      media_types: {  }
-    third_party_settings: {  }
-    region: content
   name:
     type: string_textfield
-    weight: 0
     settings:
       size: 60
       placeholder: ''
+    weight: 0
     third_party_settings: {  }
     region: content
 hidden:
   created: true
+  field_media_images: true
   langcode: true
-  moderation_state: true
   path: true
   status: true
   uid: true

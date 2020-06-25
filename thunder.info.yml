@@ -30,6 +30,7 @@ install:
   - drupal:editor
   - drupal:image
   - drupal:inline_form_errors
+  - drupal:media_library
   - drupal:menu_ui
   - drupal:language
   - drupal:options
@@ -53,11 +54,11 @@ install:
   - content_lock:content_lock
   - ctools:ctools
   - diff:diff
-  - dropzonejs:dropzonejs_eb_widget
+  - dropzonejs:dropzonejs
   - empty_fields:empty_fields
-  - entity_browser:entity_browser_entity_form
   - field_group:field_group
   - focal_point:focal_point
+  - inline_entity_form:inline_entity_form
   - length_indicator:length_indicator
   - linkit:linkit
   - media_entity_instagram:media_entity_instagram
