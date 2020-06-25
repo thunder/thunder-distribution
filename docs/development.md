@@ -7,7 +7,7 @@
 - [composer](https://getcomposer.org/)
 
 ### Install Thunder for development
-[Follow this instruction to get the code](https://github.com/thunder/thunder-develop/blob/master/README.md)
+[Follow this instruction to get the code](https://github.com/thunder/thunder-develop/blob/3.x/README.md)
 
 Now we have to register the created docroot into Acquia's DevDesktop and then we can install the site.
 
