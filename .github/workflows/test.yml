@@ -188,11 +188,11 @@ jobs:
 
           vendor/bin/drush pmu libraries -y
 
-          composer require thunder/thunder-distribution:* --no-update
-          rm -rf docroot/profiles/thunder
-          rm -rf docroot/modules/contrib
-          rm -rf docroot/themes/contrib
-          rm vendor/composer/installed.json
+          composer remove thunder/thunder-distribution
+
+          composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
+          composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
+
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
