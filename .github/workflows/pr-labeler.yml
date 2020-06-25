@@ -1,0 +1,13 @@
+name: PR Labeler
+
+on: [pull_request]
+#  pull_request:
+#    types: [opened]
+
+jobs:
+  pr-labeler:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ffittschen/pr-branch-labeler@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}

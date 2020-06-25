@@ -1,3 +1,6 @@
+- name: 6.x
+  description: 6.x
+  color: efeb64
 - name: 5.x
   description: 8.x-5.x
   color: FFB000
