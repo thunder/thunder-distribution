@@ -38,7 +38,6 @@ function thunder_update_dependencies() {
     'thunder_paragraphs',
     'thunder_taxonomy',
     'thunder_fia',
-    'thunder_riddle',
   ];
 
   foreach ($updates as $module => $info) {

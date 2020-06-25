@@ -5,7 +5,7 @@ namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Riddle integration.
+ * Nexx integration.
  *
  * @ThunderOptionalModule(
  *   id = "nexx_integration",
