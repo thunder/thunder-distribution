@@ -30,6 +30,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: mxschmitt/action-tmate@v1
       - uses: actions/checkout@v1
 
       - uses: shivammathur/setup-php@v2

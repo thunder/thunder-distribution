@@ -1,5 +1,5 @@
-- name: 3.x
-  description: 8.x-3.x
+- name: 5.x
+  description: 8.x-5.x
   color: FFB000
 - name: 4.x
   description: 8.x-4.x
