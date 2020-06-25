@@ -1,5 +1,0 @@
-6.x:
-  base: "6.[0-9]+.x"
-
-test-upgrade:
-  base: "6.[0-9]+.x"
