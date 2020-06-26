@@ -20,7 +20,7 @@ tips:
     id: main_content
     plugin: text
     label: 'Main content region'
-    body: 'Meat and bones of a Thunder site. Depending on the page you are on you''ll find article content, list of articles in a channel, media asstes and many more here.'
+    body: 'Meat and bones of a Thunder site. Depending on the page you are on you''ll find article content, list of articles in a channel, media assets and many more here.'
     weight: 2
     attributes:
       data-id: content

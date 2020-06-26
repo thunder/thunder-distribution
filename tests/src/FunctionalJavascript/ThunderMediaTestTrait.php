@@ -51,9 +51,6 @@ trait ThunderMediaTestTrait {
     elseif ($entityBrowser == 'image_browser') {
       $page->pressButton('Select image');
     }
-    elseif ($entityBrowser == 'riddle_browser') {
-      $page->pressButton('Select riddle');
-    }
     elseif ($entityBrowser == 'video_browser') {
       $page->pressButton('Select video');
       $element = 'iframe';
