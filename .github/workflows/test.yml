@@ -58,7 +58,7 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Add needed dependencies
-        run: composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/riddle_marketplace:^3.0" "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Set composer bin path
         working-directory: /tmp/test/thunder/install
@@ -128,7 +128,6 @@ jobs:
     - name: Run tests suite
       env:
         PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
-        RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
       run: test-drupal-project run_tests
 
   test-upgrade:
@@ -190,7 +189,11 @@ jobs:
 
           vendor/bin/drush pmu libraries -y
 
-          composer require thunder/thunder-distribution:* drupal/riddle_marketplace:^3.0 --no-update
+          composer remove thunder/thunder-distribution
+
+          composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
+          composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
+
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
@@ -202,7 +205,6 @@ jobs:
       - name: Run tests suite
         env:
           PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
-          RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
         run: test-drupal-project run_tests
 
   test-min:
@@ -250,7 +252,7 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Install suggested dependencies
-        run: composer require "consolidation/robo:^2.0" "drupal/riddle_marketplace:^3.0" "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: composer require "consolidation/robo:^2.0" "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build
@@ -264,7 +266,6 @@ jobs:
       - name: Run the tests
         env:
           PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
-          RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
         run: test-drupal-project run_tests
 
   test-performance:

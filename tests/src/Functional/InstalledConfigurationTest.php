@@ -32,7 +32,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'google_analytics',
     'ivw_integration',
     'adsense',
-    'thunder_riddle',
     'harbourmaster',
     'simple_gmap',
     'thunder_search_api',
@@ -275,17 +274,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
    * @var array
    */
   protected static $ignoreConfigListValues = [
-    // Riddle permissions are added dynamically by thunder_riddle installation.
-    'user.role.editor' => [
-      'permissions' => [
-        'access riddle_browser entity browser pages',
-      ],
-    ],
-    'user.role.seo' => [
-      'permissions' => [
-        'access riddle_browser entity browser pages',
-      ],
-    ],
     // Google analytics adds one permission dynamically in the install hook.
     'user.role.authenticated' => [
       'permissions' => [

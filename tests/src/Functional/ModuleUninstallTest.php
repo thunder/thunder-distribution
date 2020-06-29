@@ -17,10 +17,6 @@ class ModuleUninstallTest extends ThunderTestBase {
    * @var string[]
    */
   protected static $moduleLists = [
-    ['thunder_riddle'],
-    ['media_riddle_marketplace'],
-    ['riddle_marketplace'],
-    ['thunder_riddle', 'media_riddle_marketplace', 'riddle_marketplace'],
     ['thunder_liveblog'],
     ['liveblog_pusher', 'liveblog', 'simple_gmap'],
     ['thunder_liveblog', 'liveblog_pusher', 'liveblog', 'simple_gmap'],

@@ -41,7 +41,6 @@ function thunder_media_preprocess_views_view(&$variables) {
     // TODO: Legacy support, remove it with new major version.
     'image_browser',
     'video_browser',
-    'riddle_browser',
   ];
 
   if (in_array($variables['view']->id(), $thunder_media_browser)) {
