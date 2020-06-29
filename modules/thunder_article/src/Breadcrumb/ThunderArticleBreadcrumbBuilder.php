@@ -165,8 +165,6 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     if (!empty($exclude[$path])) {
       return NULL;
     }
-    // @todo Use the RequestHelper once https://www.drupal.org/node/2090293 is
-    //   fixed.
     $request = Request::create($path);
     // Performance optimization: set a short accept header to reduce overhead in
     // AcceptHeaderMatcher when matching the request.

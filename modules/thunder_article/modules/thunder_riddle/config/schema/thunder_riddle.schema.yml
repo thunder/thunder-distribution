@@ -1,3 +1,0 @@
-entity_browser.browser.widget.riddle_view:
-  type: entity_browser.browser.widget.view
-  label: 'Riddle view widget configuration'
