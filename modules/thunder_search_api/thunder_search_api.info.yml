@@ -4,4 +4,5 @@ type: module
 core_version_requirement: ^9
 dependencies:
   - search_api:search_api
+  - search_api_mark_outdated:search_api_mark_outdated
 package: Thunder
