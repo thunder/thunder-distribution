@@ -70,6 +70,9 @@
             },
             "drupal/simple_sitemap": {
                 "Warning if excluded_languages is not set": "https://www.drupal.org/files/issues/2020-04-14/3127501.patch"
+            },
+            "drupal/scheduler_content_moderation_integration": {
+               "Widget error when field is overridden": "https://www.drupal.org/files/issues/2020-02-19/undefined_offset_node_creation-3077147-12.patch"
             }
         }
     },
