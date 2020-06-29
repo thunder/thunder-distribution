@@ -1,7 +1,7 @@
 name: 'Thunder Search Api'
 description: 'Provide search_api integration for thunder.'
 type: module
-core: 8.x
+core_version_requirement: ^9
 dependencies:
   - search_api:search_api
   - search_api_mark_outdated:search_api_mark_outdated
