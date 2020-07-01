@@ -10,6 +10,7 @@ dependencies:
     - config_selector
     - media
     - search_api
+    - search_api_mark_outdated
     - user
     - views_bulk_operations
 third_party_settings:
@@ -809,6 +810,58 @@ display:
           hide_alter_empty: true
           destination: true
           plugin_id: search_api_entity_operations
+        search_api_mark_outdated_state_field:
+          id: search_api_mark_outdated_state_field
+          table: search_api_index_content
+          field: search_api_mark_outdated_state_field
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          add_row_class: 1
+          link_to_item: 0
+          use_highlighting: 0
+          plugin_id: search_api_mark_outdated_state_field
       filters:
         search_api_fulltext:
           id: search_api_fulltext
@@ -1003,10 +1056,12 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'user.node_grants:view'
         - user.permissions
       tags:
         - 'config:field.storage.node.field_channel'
         - 'config:field.storage.node.field_teaser_media'
+        - 'config:search_api.index.content'
   page_1:
     display_options:
       path: admin/content
@@ -1039,7 +1094,9 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'user.node_grants:view'
         - user.permissions
       tags:
         - 'config:field.storage.node.field_channel'
         - 'config:field.storage.node.field_teaser_media'
+        - 'config:search_api.index.content'
