@@ -75,6 +75,16 @@ jobs:
       - name: Install drupal
         run: test-drupal-project install
 
+      - name: Set twitter credentials
+        run: |
+          chmod -R +w docroot/sites/default
+          echo "\$config['media.type.twitter']['source_configuration']['use_twitter_api'] = TRUE;" >> docroot/sites/default/settings.php
+          echo "\$config['media.type.twitter']['source_configuration']['consumer_key'] = ${{ secrets.TWITTER_CONSUMER_KEY }};" >> docroot/sites/default/settings.php
+          echo "\$config['media.type.twitter']['source_configuration']['consumer_secret'] = ${{ secrets.TWITTER_CONSUMER_SECRET }};" >> docroot/sites/default/settings.php
+          echo "\$config['media.type.twitter']['source_configuration']['oauth_access_token'] = ${{ secrets.TWITTER_OAUTH_ACCESS_TOKEN }};" >> docroot/sites/default/settings.php
+          echo "\$config['media.type.twitter']['source_configuration']['oauth_access_token_secret'] = ${{ secrets.TWITTER_OAUTH_ACCESS_TOKEN_SECRET }};" >> docroot/sites/default/settings.php
+        working-directory: /tmp/test/thunder/install
+
       - name: Zip build
         run: cd /tmp/test; tar cfhz build.tgz thunder; mv build.tgz ${GITHUB_WORKSPACE}
 
