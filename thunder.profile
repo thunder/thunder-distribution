@@ -278,6 +278,7 @@ function thunder_modules_installed($modules) {
   // When enabling search_api, enable facets and VBO.
   if (_thunder_check_triggering_modules($modules, ['search_api'])) {
     \Drupal::service('module_installer')->install(['search_api_db']);
+    \Drupal::service('module_installer')->install(['search_api_mark_outdated']);
     \Drupal::service('module_installer')->install(['facets']);
     \Drupal::service('module_installer')->install(['select2_facets']);
     \Drupal::service('module_installer')->install(['views_bulk_operations']);
