@@ -32,6 +32,7 @@ class ModuleUninstallTest extends ThunderTestBase {
     ['simple_sitemap'],
     [
       'search_api_db',
+      'search_api_mark_outdated',
       'search_api',
       'facets',
       'views_bulk_operations',

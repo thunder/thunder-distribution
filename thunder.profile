@@ -364,20 +364,6 @@ function thunder_field_widget_info_alter(array &$info) {
 }
 
 /**
- * Implements hook_views_data().
- */
-function thunder_views_data() {
-  $data['views']['facet_block'] = [
-    'title' => t('Facet block'),
-    'help' => t('.'),
-    'area' => [
-      'id' => 'facet_block',
-    ],
-  ];
-  return $data;
-}
-
-/**
  * Implements hook_views_pre_render().
  */
 function thunder_views_pre_render(ViewExecutable $view) {

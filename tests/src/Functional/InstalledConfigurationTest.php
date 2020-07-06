@@ -34,7 +34,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'adsense',
     'harbourmaster',
     'simple_gmap',
-    'thunder_search_api',
 
     // Additional modules.
     // 'nexx_integration',
