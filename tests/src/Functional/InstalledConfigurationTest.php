@@ -91,6 +91,15 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_view_mode.taxonomy_term.token',
     'core.entity_view_mode.user.token',
     'core.entity_view_mode.path_alias.token',
+    'core.entity_view_mode.search_api_task.token',
+
+    // SearchAPI tour.
+    'tour.tour.search-api-index',
+    'tour.tour.search-api-index-fields',
+    'tour.tour.search-api-index-form',
+    'tour.tour.search-api-index-processors',
+    'tour.tour.search-api-server',
+    'tour.tour.search-api-server-form',
   ];
 
   /**
@@ -136,6 +145,9 @@ class InstalledConfigurationTest extends ThunderTestBase {
     ],
 
     // Changed on installation.
+    'views.view.content' => [
+      'status' => TRUE,
+    ],
     'views.view.glossary' => [
       'dependencies' => [
         'config' => TRUE,
@@ -208,6 +220,11 @@ class InstalledConfigurationTest extends ThunderTestBase {
       ],
     ],
     'core.entity_view_display.node.article.rss' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
+    'core.entity_view_display.node.article.search_index' => [
       'hidden' => [
         'field_ivw' => TRUE,
       ],

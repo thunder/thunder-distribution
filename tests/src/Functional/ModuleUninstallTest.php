@@ -34,6 +34,14 @@ class ModuleUninstallTest extends ThunderTestBase {
     ['length_indicator'],
     ['redirect'],
     ['simple_sitemap'],
+    [
+      'search_api_db',
+      'search_api_mark_outdated',
+      'search_api',
+      'facets',
+      'views_bulk_operations',
+      'select2_facets',
+    ],
 
     // ['amp'],
     // Patch provided: https://www.drupal.org/files/issues/2901581_3.patch.

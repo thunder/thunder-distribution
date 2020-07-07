@@ -57,3 +57,4 @@ hidden:
   field_teaser_media: true
   field_teaser_text: true
   langcode: true
+  search_api_excerpt: true

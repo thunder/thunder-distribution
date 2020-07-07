@@ -25,3 +25,4 @@ content:
 hidden:
   langcode: true
   member_for: true
+  search_api_excerpt: true

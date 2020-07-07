@@ -27,7 +27,7 @@ module.exports = {
       // End "login".
       .performance.endMark()
       .performance.startMark("Open content overview page")
-      .drupalRelativeURL("/admin/content_bundle_0")
+      .drupalRelativeURL("/admin/t1_node_bundle_0/node")
       .useXpath()
       .waitForElementPresent(
         '//*[@id="block-thunder-admin-content"]/div/div/nav/ul/li[1]/a'
@@ -35,10 +35,14 @@ module.exports = {
       // End "Open content overview page".
       .performance.endMark()
       .performance.startMark("Filter by type")
-      .setValue('//*[@id="edit-type"]', "bundle_6")
-      .click('//*[@id="edit-submit-content-bundle-0"]')
+      .moveToElement('//*[@id="block-t1-node-bundle-0-type"]',
+        10,
+        10
+      )
+      .click('//*[@id="block-t1-node-bundle-0-type"]/div/span/span[1]/span/span[2]/b')
+      .click('//*[@class="select2-results__options"]/li[contains(@data-select2-id, "bundle_6")]')
       .waitForElementPresent(
-        '//*[@id="block-thunder-admin-content"]/div/div[contains(@class, "view-content-bundle-0")]/nav[@class="pager"]/ul/li[1]/a[contains(@href, "bundle_6")]'
+        '//*[@id="block-thunder-admin-content"]/div/div[contains(@class, "view-t1-node-bundle-0")]/nav[@class="pager"]/ul/li[1]/a[contains(@href, "bundle_6")]'
       )
       // End "Filter by type".
       .performance.endMark()

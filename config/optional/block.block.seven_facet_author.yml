@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.author
+  module:
+    - facets
+  theme:
+    - seven
+id: seven_facet_author
+theme: seven
+region: content
+weight: -5
+provider: null
+plugin: 'facet_block:author'
+settings:
+  id: 'facet_block:author'
+  label: Author
+  provider: facets
+  label_display: '0'
+  block_id: seven_facet_author
+visibility: {  }

@@ -44,4 +44,5 @@ hidden:
   field_url: true
   langcode: true
   name: true
+  search_api_excerpt: true
   uid: true
