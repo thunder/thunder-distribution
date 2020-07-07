@@ -73,6 +73,9 @@
             },
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
+            },
+            "drupal/media_entity_twitter": {
+                "Use twitter API in TweetVisibleConstraintValidator": "https://www.drupal.org/files/issues/2020-06-29/3155001-2.patch"
             }
         }
     },
