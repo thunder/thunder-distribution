@@ -26,21 +26,30 @@ class ThunderOptionalModule extends Plugin {
    * @var \Drupal\Core\Annotation\Translation
    * @ingroup plugin_translatable
    */
-  public $label;
+  public $label = '';
 
-  /**
-   * The human-readable name of the widget.
-   *
-   * @var \Drupal\Core\Annotation\Translation
-   * @ingroup plugin_translatable
-   */
-  public $type;
+  public $description = '';
 
   /**
    * The weight of the plugin in relation to other plugins.
    *
    * @var int
    */
-  public $weight;
+  public $weight = 0;
+
+  /**
+   * @var bool
+   */
+  public $standardlyEnabled = FALSE;
+
+  /**
+   * @var string[]
+   */
+  public $modules = [];
+
+  /**
+   * @var string[]
+   */
+  public $themes = [];
 
 }

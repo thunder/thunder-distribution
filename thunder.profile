@@ -55,57 +55,7 @@ function thunder_install_tasks(&$install_state) {
  *   A batch array to execute.
  */
 function thunder_module_install(array &$install_state) {
-
-  $modules = $install_state['thunder_additional_modules'];
-
-  $batch = [];
-  if ($modules) {
-    $operations = [];
-    foreach ($modules as $module) {
-      $operations[] = [
-        '_thunder_install_module_batch',
-        [[$module], $module, $install_state['form_state_values']],
-      ];
-    }
-
-    $batch = [
-      'operations' => $operations,
-      'title' => t('Installing additional modules'),
-      'error_message' => t('The installation has encountered an error.'),
-    ];
-  }
-
-  return $batch;
-}
-
-/**
- * Implements callback_batch_operation().
- *
- * Performs batch installation of modules.
- */
-function _thunder_install_module_batch($module, $module_name, $form_values, &$context) {
-  set_time_limit(0);
-
-  $optionalModulesManager = \Drupal::service('plugin.manager.thunder.optional_modules');
-
-  try {
-    $definition = $optionalModulesManager->getDefinition($module_name);
-    if ($definition['type'] == 'module') {
-      \Drupal::service('module_installer')->install($module, TRUE);
-    }
-    elseif ($definition['type'] == 'theme') {
-      \Drupal::service('theme_installer')->install($module, TRUE);
-    }
-
-    $instance = $optionalModulesManager->createInstance($module_name);
-    $instance->submitForm($form_values);
-  }
-  catch (\Exception $e) {
-
-  }
-
-  $context['results'][] = $module;
-  $context['message'] = t('Installed %module_name modules.', ['%module_name' => $module_name]);
+  return $install_state['thunder_install_batch'];
 }
 
 /**

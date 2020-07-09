@@ -2,9 +2,10 @@
 
 namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Extension\ModuleInstallerInterface;
+use Drupal\Core\Extension\ThemeHandlerInterface;
+use Drupal\Core\Extension\ThemeInstallerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Plugin\PluginBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -15,18 +16,32 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 abstract class AbstractOptionalModule extends PluginBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The entity manager.
+   * The module installer service.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var \Drupal\Core\Extension\ModuleInstallerInterface
    */
-  protected $entityTypeManager;
+  protected $moduleInstaller;
 
   /**
-   * The config factory.
+   * The theme installer service.
    *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   * @var \Drupal\Core\Extension\ThemeInstallerInterface
    */
-  protected $configFactory;
+  protected $themeInstaller;
+
+  /**
+   * The module handler service.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
+   * The theme handler service.
+   *
+   * @var \Drupal\Core\Extension\ThemeHandlerInterface
+   */
+  protected $themeHandler;
 
   /**
    * Constructs display plugin.
@@ -37,16 +52,23 @@ abstract class AbstractOptionalModule extends PluginBase implements ContainerFac
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
-   *   The entity manager.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
-   *   The config factory.
+   * @param \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller
+   *   The module installer service.
+   * @param \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller
+   *   The theme installer service.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   *   The module handler service.
+   * @param \Drupal\Core\Extension\ThemeHandlerInterface $themeHandler
+   *   The theme handler service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entityTypeManager, ConfigFactoryInterface $configFactory) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ModuleInstallerInterface $moduleInstaller, ThemeInstallerInterface $themeInstaller, ModuleHandlerInterface $moduleHandler, ThemeHandlerInterface $themeHandler) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
-    $this->entityTypeManager = $entityTypeManager;
-    $this->configFactory = $configFactory;
+    $this->moduleInstaller = $moduleInstaller;
+    $this->themeInstaller = $themeInstaller;
+
+    $this->moduleHandler = $moduleHandler;
+    $this->themeHandler = $themeHandler;
   }
 
   /**
@@ -57,44 +79,51 @@ abstract class AbstractOptionalModule extends PluginBase implements ContainerFac
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('entity_type.manager'),
-      $container->get('config.factory')
+      $container->get('module_installer'),
+      $container->get('theme_installer'),
+      $container->get('module_handler'),
+      $container->get('theme_handler'),
     );
   }
 
   /**
-   * {@inheritdoc}
+   * Module install instructions.
+   *
+   * @param array $formValues
+   *   Array of submitted form values.
+   * @param array $context
+   *   The context for the batch operation.
+   *
+   * @throws \Drupal\Core\Extension\ExtensionNameLengthException
+   * @throws \Drupal\Core\Extension\MissingDependencyException
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function install(array $formValues, array &$context) {
+    $context['results'][] = $this->pluginDefinition['id'];
 
-    // Check if this method is overridden.
-    $reflection = new \ReflectionClass($this);
-    foreach ($reflection->getMethods() as $method) {
-      if ($method->name == 'buildForm') {
-        if ($method->class != get_class($this)) {
-          return $form;
-        }
-      }
-    }
+    $this->moduleInstaller->install($this->pluginDefinition['modules'], TRUE);
+    $this->themeInstaller->install($this->pluginDefinition['themes'], TRUE);
 
-    $form[$this->getBaseId()] = [
-      '#type' => 'details',
-      '#title' => $this->pluginDefinition['label'],
-      '#open' => TRUE,
-      '#states' => [
-        'visible' => [
-          ':input[name="install_modules_' . $this->getBaseId() . '"]' => ['checked' => TRUE],
-        ],
-      ],
-    ];
-
-    return $form;
+    $context['message'] = t('Installed %module_name feature.', ['%module_name' => $this->pluginDefinition['label']]);
   }
 
   /**
-   * {@inheritdoc}
+   * Indicates if a feature is enabeld.
+   *
+   * When all modules and themes of a feature are enabled we assume that is was
+   * installed from the optional thunder modules form.
+   *
+   * @return bool
+   *   TRUE if all modules and themes are enabled, otherwise FALSE.
    */
-  public function submitForm(array $formValues) {
+  public function enabled() {
+    $enabled = TRUE;
+    foreach ($this->pluginDefinition['modules'] as $module) {
+      $enabled = $enabled && $this->moduleHandler->moduleExists($module);
+    }
+    foreach ($this->pluginDefinition['themes'] as $theme) {
+      $enabled = $enabled && $this->themeHandler->themeExists($theme);
+    }
+    return $enabled;
   }
 
 }
