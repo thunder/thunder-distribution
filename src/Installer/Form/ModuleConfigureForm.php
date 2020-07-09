@@ -3,7 +3,6 @@
 namespace Drupal\thunder\Installer\Form;
 
 use Drupal\Component\Utility\SortArray;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Installer\InstallerKernel;
@@ -23,20 +22,12 @@ class ModuleConfigureForm extends FormBase {
   protected $optionalModulesManager;
 
   /**
-   * The module handler service.
-   *
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface
-   */
-  protected $moduleHandler;
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     $form = parent::create($container);
     $form->setOptionalModulesManager($container->get('plugin.manager.thunder.optional_modules'));
     $form->setConfigFactory($container->get('config.factory'));
-    $form->setModuleHander($container->get('module_handler'));
     return $form;
   }
 
@@ -48,16 +39,6 @@ class ModuleConfigureForm extends FormBase {
    */
   protected function setOptionalModulesManager(OptionalModulesManager $manager) {
     $this->optionalModulesManager = $manager;
-  }
-
-  /**
-   * Set the module handler service.
-   *
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
-   *   The module handler service.
-   */
-  protected function setModuleHander(ModuleHandlerInterface $moduleHandler) {
-    $this->moduleHandler = $moduleHandler;
   }
 
   /**
@@ -121,7 +102,11 @@ class ModuleConfigureForm extends FormBase {
     foreach ($form_state->getValues() as $key => $value) {
       if (strpos($key, 'install_modules') !== FALSE && $value) {
         preg_match('/install_modules_(?P<name>\w+)/', $key, $values);
-        if (!$this->moduleHandler->moduleExists($values['name'])) {
+
+        /** @var \Drupal\thunder\Plugin\Thunder\OptionalModule\AbstractOptionalModule $instance */
+        $instance = $this->optionalModulesManager->createInstance($values['name']);
+
+        if (!$instance->enabled()) {
           $installModules[] = $values['name'];
         }
       }
@@ -138,8 +123,8 @@ class ModuleConfigureForm extends FormBase {
 
       $batch = [
         'operations' => $operations,
-        'title' => t('Installing additional modules'),
-        'error_message' => t('The installation has encountered an error.'),
+        'title' => $this->t('Installing additional modules'),
+        'error_message' => $this->t('The installation has encountered an error.'),
       ];
 
       if (InstallerKernel::installationAttempted()) {

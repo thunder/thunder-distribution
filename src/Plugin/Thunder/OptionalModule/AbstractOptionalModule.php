@@ -103,7 +103,7 @@ abstract class AbstractOptionalModule extends PluginBase implements ContainerFac
     $this->moduleInstaller->install($this->pluginDefinition['modules'], TRUE);
     $this->themeInstaller->install($this->pluginDefinition['themes'], TRUE);
 
-    $context['message'] = t('Installed %module_name feature.', ['%module_name' => $this->pluginDefinition['label']]);
+    $context['message'] = $this->t('Installed %module_name feature.', ['%module_name' => $this->pluginDefinition['label']]);
   }
 
   /**
