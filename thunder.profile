@@ -163,47 +163,6 @@ function thunder_modules_installed($modules) {
     \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
   }
 
-  // When enabling password policy, enabled required sub modules.
-  if (
-    _thunder_is_enabling_module()
-    && _thunder_check_triggering_modules($modules, ['password_policy'])
-  ) {
-    \Drupal::service('module_installer')->install(['password_policy_length']);
-    \Drupal::service('module_installer')->install(['password_policy_history']);
-    \Drupal::service('module_installer')->install(['password_policy_character_types']);
-    \Drupal::service('messenger')->addStatus(t('The Password Character Length, Password Policy History and Password Character Types modules have been additionally enabled, they are required by the default policy configuration.'));
-  }
-
-  // Move fields into form display.
-  if (_thunder_check_triggering_modules($modules, ['ivw_integration'])) {
-    $fieldWidget = 'ivw_integration_widget';
-
-    // Attach field if channel vocabulary and article node type is
-    // present in the distribution.
-    try {
-      \Drupal::service('entity_display.repository')
-        ->getFormDisplay('node', 'article', 'default')
-        ->setComponent(
-          'field_ivw', [
-            'type' => $fieldWidget,
-          ])->save();
-    }
-    catch (Exception $e) {
-      \Drupal::logger('thunder')->info(t('Could not add ivw field to article node: "@message"', ['@message' => $e->getMessage()]));
-    }
-
-    try {
-      \Drupal::service('entity_display.repository')
-        ->getFormDisplay('taxonomy_term', 'channel', 'default')
-        ->setComponent('field_ivw', [
-          'type' => $fieldWidget,
-        ])->save();
-    }
-    catch (Exception $e) {
-      \Drupal::logger('thunder')->info(t('Could not add ivw field to channel taxonomy: "@message"', ['@message' => $e->getMessage()]));
-    }
-  }
-
   // When enabling content_translation, grant permissions to Thunder user roles.
   if (_thunder_check_triggering_modules($modules, ['content_translation'])) {
     /** @var \Drupal\user\Entity\Role[] $roles */
