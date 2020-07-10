@@ -12,43 +12,4 @@ namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
  *   modules = {"ivw_integration"},
  * )
  */
-class IvwIntegration extends AbstractOptionalModule {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function install(array $formValues, array &$context) {
-    parent::install($formValues, $context);
-
-    $fieldWidget = 'ivw_integration_widget';
-
-    // Attach field if channel vocabulary and article node type is
-    // present in the distribution.
-    try {
-      \Drupal::service('entity_display.repository')
-        ->getFormDisplay('node', 'article', 'default')
-        ->setComponent(
-          'field_ivw', [
-            'type' => $fieldWidget,
-          ])->save();
-    }
-    catch (\Exception $e) {
-      \Drupal::logger('thunder')
-        ->info(t('Could not add ivw field to article node: "@message"', ['@message' => $e->getMessage()]));
-    }
-
-    try {
-      \Drupal::service('entity_display.repository')
-        ->getFormDisplay('taxonomy_term', 'channel', 'default')
-        ->setComponent('field_ivw', [
-          'type' => $fieldWidget,
-        ])->save();
-    }
-    catch (\Exception $e) {
-      \Drupal::logger('thunder')
-        ->info(t('Could not add ivw field to channel taxonomy: "@message"', ['@message' => $e->getMessage()]));
-    }
-
-  }
-
-}
+class IvwIntegration extends AbstractOptionalModule {}

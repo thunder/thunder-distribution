@@ -9,7 +9,7 @@ namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
  *   id = "thunder_password_policy",
  *   label = @Translation("Password integration"),
  *   description = @Translation("Add the possibility to define more sophisticated password policies."),
- *   modules = {"password_policy", "password_policy_length", "password_policy_history", "password_policy_character_types"},
+ *   modules = {"thunder_password_policy"},
  * )
  */
-class Password extends AbstractOptionalModule {}
+class PasswordPolicy extends AbstractOptionalModule {}
