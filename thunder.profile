@@ -164,7 +164,7 @@ function thunder_modules_installed($modules) {
   }
 
   // Move fields into form display.
-  if (in_array($modules, ['ivw_integration'])) {
+  if (in_array('ivw_integration', $modules)) {
     $fieldWidget = 'ivw_integration_widget';
 
     // Attach field if channel vocabulary and article node type is
@@ -194,7 +194,7 @@ function thunder_modules_installed($modules) {
   }
 
   // When enabling content_translation, grant permissions to Thunder user roles.
-  if (in_array($modules, ['content_translation'])) {
+  if (in_array('content_translation', $modules)) {
     /** @var \Drupal\user\Entity\Role[] $roles */
     $roles = Role::loadMultiple(['editor', 'seo', 'restricted_editor']);
     foreach ($roles as $role) {
