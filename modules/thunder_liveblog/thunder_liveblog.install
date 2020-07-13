@@ -37,27 +37,3 @@ function thunder_liveblog_install() {
     }
   }
 }
-
-/**
- * Delete liveblog provided config, we have our own.
- */
-function thunder_liveblog_module_preinstall($module) {
-  if ('thunder_liveblog' == $module) {
-    $entity_query = \Drupal::entityQuery('node');
-    $results = $entity_query->condition('type', 'liveblog')->exists('body')->count()->execute();
-    if (($field = FieldConfig::load('node.liveblog.body')) && !$results) {
-      $field->delete();
-      field_purge_batch(10);
-    }
-    $configs = [
-      'core.entity_form_display.node.liveblog.default',
-      'core.entity_form_display.liveblog_post.liveblog_post.default',
-      'core.entity_view_display.liveblog_post.liveblog_post.default',
-      'core.entity_view_display.node.liveblog.default',
-    ];
-    $configFactory = \Drupal::configFactory();
-    foreach ($configs as $config) {
-      $configFactory->getEditable($config)->delete();
-    }
-  }
-}
