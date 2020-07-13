@@ -4,6 +4,9 @@ dependencies:
   config:
     - field.storage.node.field_paragraphs
     - node.type.liveblog
+  enforced:
+    module:
+      - thunder_liveblog
   module:
     - entity_reference_revisions
 id: node.liveblog.field_paragraphs
