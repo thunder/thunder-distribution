@@ -128,6 +128,18 @@ function _thunder_is_enabling_module() {
  * Implements hook_modules_installed().
  */
 function thunder_modules_installed($modules) {
+
+  if (_thunder_is_enabling_module()) {
+    $suggestions = [['liveblog', ['thunder_liveblog'], t('To get the full Thunder experience, we recommend to install the Thunder Liveblog module.')]];
+    foreach ($suggestions as $suggestion) {
+      if (in_array($suggestion[0], $modules)) {
+        if (!empty(array_diff($suggestion[1], $modules))) {
+          \Drupal::messenger()->addWarning($suggestion[2]);
+        }
+      }
+    }
+  }
+
   if (
     _thunder_is_enabling_module()
     && _thunder_check_triggering_modules($modules, ['content_moderation', 'config_update'])
