@@ -131,16 +131,13 @@ function thunder_modules_installed($modules) {
 
   if (_thunder_is_enabling_module()) {
     $suggestions = [
-      [
-        'liveblog',
-        ['thunder_liveblog'],
-        t('To get the full Thunder experience, we recommend to install the Thunder Liveblog module.'),
-      ],
+      ['liveblog', ['thunder_liveblog'], 'Thunder Liveblog'],
+      ['password_policy', ['thunder_password_policy'], 'Thunder Password Policy'],
     ];
     foreach ($suggestions as $suggestion) {
       if (in_array($suggestion[0], $modules)) {
         if (!empty(array_diff($suggestion[1], $modules))) {
-          \Drupal::messenger()->addWarning($suggestion[2]);
+          \Drupal::messenger()->addWarning(t('To get the full Thunder experience, we recommend to install the @module module. See all supported optional modules at !page', ['@module' => $suggestion[2], '!page' => '<a href="/admin/modules/extend-thunder">'. t('Optional Thunder modules') .'</a>']));
         }
       }
     }
