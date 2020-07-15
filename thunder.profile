@@ -137,7 +137,7 @@ function thunder_modules_installed($modules) {
     foreach ($suggestions as $suggestion) {
       if (in_array($suggestion[0], $modules)) {
         if (!empty(array_diff($suggestion[1], $modules))) {
-          \Drupal::messenger()->addWarning(t('To get the full Thunder experience, we recommend to install the @module module. See all supported optional modules at !page', ['@module' => $suggestion[2], '!page' => '<a href="/admin/modules/extend-thunder">'. t('Optional Thunder modules') .'</a>']));
+          \Drupal::messenger()->addWarning(t('To get the full Thunder experience, we recommend to install the @module module. See all supported optional modules at <a href="/admin/modules/extend-thunder">Thunder Optional modules</a>.', ['@module' => $suggestion[2]]));
         }
       }
     }
