@@ -134,7 +134,8 @@ function thunder_modules_installed($modules) {
       [
         'liveblog',
         ['thunder_liveblog'],
-        t('To get the full Thunder experience, we recommend to install the Thunder Liveblog module.')],
+        t('To get the full Thunder experience, we recommend to install the Thunder Liveblog module.'),
+      ],
     ];
     foreach ($suggestions as $suggestion) {
       if (in_array($suggestion[0], $modules)) {
