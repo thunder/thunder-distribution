@@ -9,8 +9,8 @@ namespace Drupal\thunder\Plugin\Thunder\OptionalModule;
  *   id = "thunder_demo",
  *   label = @Translation("Thunder Demo Content"),
  *   description = @Translation("Installs demo content to show how Thunder works."),
- *   type = "module",
- *   standardlyEnabled = 1,
+ *   modules = {"thunder_demo"},
+ *   standardlyEnabled = TRUE,
  *   weight = -1
  * )
  */

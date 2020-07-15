@@ -2,16 +2,17 @@
 
 namespace Drupal\thunder\Installer\Form;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Form\ConfigFormBase;
+use Drupal\Component\Utility\SortArray;
+use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Installer\InstallerKernel;
 use Drupal\thunder\OptionalModulesManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides the site configuration form.
  */
-class ModuleConfigureForm extends ConfigFormBase {
+class ModuleConfigureForm extends FormBase {
 
   /**
    * The plugin manager.
@@ -21,28 +22,23 @@ class ModuleConfigureForm extends ConfigFormBase {
   protected $optionalModulesManager;
 
   /**
-   * Constructs a \Drupal\system\ConfigFormBase object.
-   *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The factory for configuration objects.
-   * @param \Drupal\thunder\OptionalModulesManager $optionalModulesManager
-   *   The factory for configuration objects.
-   */
-  public function __construct(ConfigFactoryInterface $config_factory, OptionalModulesManager $optionalModulesManager) {
-
-    parent::__construct($config_factory);
-
-    $this->optionalModulesManager = $optionalModulesManager;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('config.factory'),
-      $container->get('plugin.manager.thunder.optional_modules')
-    );
+    $form = parent::create($container);
+    $form->setOptionalModulesManager($container->get('plugin.manager.thunder.optional_modules'));
+    $form->setConfigFactory($container->get('config.factory'));
+    return $form;
+  }
+
+  /**
+   * Set the modules manager.
+   *
+   * @param \Drupal\thunder\OptionalModulesManager $manager
+   *   The manager service.
+   */
+  protected function setOptionalModulesManager(OptionalModulesManager $manager) {
+    $this->optionalModulesManager = $manager;
   }
 
   /**
@@ -55,21 +51,7 @@ class ModuleConfigureForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  protected function getEditableConfigNames() {
-
-    return [];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function buildForm(array $form, FormStateInterface $form_state) {
-
-    // We have to delete all messages, because simple_sitemap adds a bunch of
-    // messages during the install process.
-    // @see https://www.drupal.org/project/simple_sitemap/issues/3001388.
-    $this->messenger()->deleteAll();
-
     $form['description'] = [
       '#type' => 'item',
       '#markup' => $this->t('Keep calm. You can install all the modules later, too.'),
@@ -79,23 +61,24 @@ class ModuleConfigureForm extends ConfigFormBase {
       '#type' => 'container',
     ];
 
-    $providers = $this->optionalModulesManager->getDefinitions();
+    $providers = $this->optionalModulesManager->getModules();
 
-    static::sortByWeights($providers);
+    uasort($providers, ['self', 'sortByLabelElement']);
+    uasort($providers, [SortArray::class, 'sortByWeightElement']);
 
     foreach ($providers as $provider) {
+      $should_enable = InstallerKernel::installationAttempted() && $provider['standardlyEnabled'];
 
+      /** @var \Drupal\thunder\Plugin\Thunder\OptionalModule\AbstractOptionalModule $instance */
       $instance = $this->optionalModulesManager->createInstance($provider['id']);
 
       $form['install_modules_' . $provider['id']] = [
         '#type' => 'checkbox',
         '#title' => $provider['label'],
-        '#description' => isset($provider['description']) ? $provider['description'] : '',
-        '#default_value' => isset($provider['standardlyEnabled']) ? $provider['standardlyEnabled'] : 0,
+        '#description' => $provider['description'],
+        '#default_value' => $instance->enabled() || $should_enable,
+        '#disabled' => $instance->enabled(),
       ];
-
-      $form = $instance->buildForm($form, $form_state);
-
     }
     $form['#title'] = $this->t('Install & configure modules');
 
@@ -117,45 +100,80 @@ class ModuleConfigureForm extends ConfigFormBase {
     $installModules = [];
 
     foreach ($form_state->getValues() as $key => $value) {
-
       if (strpos($key, 'install_modules') !== FALSE && $value) {
         preg_match('/install_modules_(?P<name>\w+)/', $key, $values);
-        $installModules[] = $values['name'];
+
+        /** @var \Drupal\thunder\Plugin\Thunder\OptionalModule\AbstractOptionalModule $instance */
+        $instance = $this->optionalModulesManager->createInstance($values['name']);
+
+        if (!$instance->enabled()) {
+          $installModules[] = $values['name'];
+        }
       }
     }
 
-    $buildInfo = $form_state->getBuildInfo();
+    if ($installModules) {
+      $operations = [];
+      foreach ($installModules as $module) {
+        $operations[] = [
+          [$this, 'batchOperation'],
+          [$module, $form_state->getValues()],
+        ];
+      }
 
-    $install_state = $buildInfo['args'];
+      $batch = [
+        'operations' => $operations,
+        'title' => $this->t('Installing additional modules'),
+        'error_message' => $this->t('The installation has encountered an error.'),
+      ];
 
-    $install_state[0]['thunder_additional_modules'] = $installModules;
-    $install_state[0]['form_state_values'] = $form_state->getValues();
-
-    $buildInfo['args'] = $install_state;
-
-    $form_state->setBuildInfo($buildInfo);
-
+      if (InstallerKernel::installationAttempted()) {
+        $buildInfo = $form_state->getBuildInfo();
+        $buildInfo['args'][0]['thunder_install_batch'] = $batch;
+        $form_state->setBuildInfo($buildInfo);
+      }
+      else {
+        batch_set($batch);
+      }
+    }
   }
 
   /**
-   * Returns a sorting function to sort an array by weights.
+   * Batch operation callback.
    *
-   * If an array element doesn't provide a weight, it will be set to 0.
-   * If two elements have the same weight, they are sorted by label.
+   * @param string $module
+   *   Name of the module.
+   * @param array $form_values
+   *   Submitted form values.
+   * @param array $context
+   *   The batch context.
    *
-   * @param array $array
-   *   The array to be sorted.
+   * @throws \Drupal\Component\Plugin\Exception\PluginException
    */
-  private static function sortByWeights(array &$array) {
-    uasort($array, function ($a, $b) {
-      $a_weight = isset($a['weight']) ? $a['weight'] : 0;
-      $b_weight = isset($b['weight']) ? $b['weight'] : 0;
+  public function batchOperation($module, array $form_values, array &$context) {
+    set_time_limit(0);
 
-      if ($a_weight == $b_weight) {
-        return ($a['label'] > $b['label']) ? 1 : -1;
-      }
-      return ($a_weight > $b_weight) ? 1 : -1;
-    });
+    /** @var \Drupal\thunder\Plugin\Thunder\OptionalModule\AbstractOptionalModule $instance */
+    $instance = $this->optionalModulesManager->createInstance($module);
+    $instance->install($form_values, $context);
+  }
+
+  /**
+   * Sorts a structured array by 'label' key (no # prefix).
+   *
+   * Callback for uasort().
+   *
+   * @param array $a
+   *   First item for comparison. The compared items should be associative
+   *   arrays that optionally include a 'label' key.
+   * @param array $b
+   *   Second item for comparison.
+   *
+   * @return int
+   *   The comparison result for uasort().
+   */
+  protected static function sortByLabelElement(array $a, array $b) {
+    return SortArray::sortByKeyString($a, $b, 'label');
   }
 
 }

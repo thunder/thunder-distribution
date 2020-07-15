@@ -55,57 +55,7 @@ function thunder_install_tasks(&$install_state) {
  *   A batch array to execute.
  */
 function thunder_module_install(array &$install_state) {
-
-  $modules = $install_state['thunder_additional_modules'];
-
-  $batch = [];
-  if ($modules) {
-    $operations = [];
-    foreach ($modules as $module) {
-      $operations[] = [
-        '_thunder_install_module_batch',
-        [[$module], $module, $install_state['form_state_values']],
-      ];
-    }
-
-    $batch = [
-      'operations' => $operations,
-      'title' => t('Installing additional modules'),
-      'error_message' => t('The installation has encountered an error.'),
-    ];
-  }
-
-  return $batch;
-}
-
-/**
- * Implements callback_batch_operation().
- *
- * Performs batch installation of modules.
- */
-function _thunder_install_module_batch($module, $module_name, $form_values, &$context) {
-  set_time_limit(0);
-
-  $optionalModulesManager = \Drupal::service('plugin.manager.thunder.optional_modules');
-
-  try {
-    $definition = $optionalModulesManager->getDefinition($module_name);
-    if ($definition['type'] == 'module') {
-      \Drupal::service('module_installer')->install($module, TRUE);
-    }
-    elseif ($definition['type'] == 'theme') {
-      \Drupal::service('theme_installer')->install($module, TRUE);
-    }
-
-    $instance = $optionalModulesManager->createInstance($module_name);
-    $instance->submitForm($form_values);
-  }
-  catch (\Exception $e) {
-
-  }
-
-  $context['results'][] = $module;
-  $context['message'] = t('Installed %module_name modules.', ['%module_name' => $module_name]);
+  return $install_state['thunder_install_batch'];
 }
 
 /**
@@ -226,6 +176,25 @@ function _thunder_is_enabling_module() {
  * Implements hook_modules_installed().
  */
 function thunder_modules_installed($modules) {
+
+  if (_thunder_is_enabling_module()) {
+    $suggestions = [
+      ['liveblog', ['thunder_liveblog'], 'Thunder Liveblog'],
+      [
+        'password_policy',
+        ['thunder_password_policy'],
+        'Thunder Password Policy',
+      ],
+    ];
+    foreach ($suggestions as $suggestion) {
+      if (in_array($suggestion[0], $modules)) {
+        if (!empty(array_diff($suggestion[1], $modules))) {
+          \Drupal::messenger()->addWarning(t('To get the full Thunder experience, we recommend to install the @module module. See all supported optional modules at <a href="/admin/modules/extend-thunder">Thunder Optional modules</a>.', ['@module' => $suggestion[2]]));
+        }
+      }
+    }
+  }
+
   if (
     _thunder_is_enabling_module()
     && _thunder_check_triggering_modules($modules, ['content_moderation', 'config_update'])
@@ -261,19 +230,8 @@ function thunder_modules_installed($modules) {
     \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
   }
 
-  // When enabling password policy, enabled required sub modules.
-  if (
-    _thunder_is_enabling_module()
-    && _thunder_check_triggering_modules($modules, ['password_policy'])
-  ) {
-    \Drupal::service('module_installer')->install(['password_policy_length']);
-    \Drupal::service('module_installer')->install(['password_policy_history']);
-    \Drupal::service('module_installer')->install(['password_policy_character_types']);
-    \Drupal::service('messenger')->addStatus(t('The Password Character Length, Password Policy History and Password Character Types modules have been additionally enabled, they are required by the default policy configuration.'));
-  }
-
   // Move fields into form display.
-  if (_thunder_check_triggering_modules($modules, ['ivw_integration'])) {
+  if (in_array('ivw_integration', $modules)) {
     $fieldWidget = 'ivw_integration_widget';
 
     // Attach field if channel vocabulary and article node type is
@@ -303,7 +261,7 @@ function thunder_modules_installed($modules) {
   }
 
   // When enabling content_translation, grant permissions to Thunder user roles.
-  if (_thunder_check_triggering_modules($modules, ['content_translation'])) {
+  if (in_array('content_translation', $modules)) {
     /** @var \Drupal\user\Entity\Role[] $roles */
     $roles = Role::loadMultiple(['editor', 'seo', 'restricted_editor']);
     foreach ($roles as $role) {

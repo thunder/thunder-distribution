@@ -5,7 +5,7 @@ namespace Drupal\thunder\Annotation;
 use Drupal\Component\Annotation\Plugin;
 
 /**
- * Defines an entity browser widget annotation object.
+ * Defines an thunder optional module annotation object.
  *
  * @see hook_entity_browser_widget_info_alter()
  *
@@ -21,26 +21,46 @@ class ThunderOptionalModule extends Plugin {
   public $id;
 
   /**
-   * The human-readable name of the widget.
+   * The human-readable name of the module.
    *
    * @var \Drupal\Core\Annotation\Translation
    * @ingroup plugin_translatable
    */
-  public $label;
+  public $label = '';
 
   /**
-   * The human-readable name of the widget.
+   * A brief description.
    *
-   * @var \Drupal\Core\Annotation\Translation
-   * @ingroup plugin_translatable
+   * @var string
    */
-  public $type;
+  public $description = '';
 
   /**
    * The weight of the plugin in relation to other plugins.
    *
    * @var int
    */
-  public $weight;
+  public $weight = 0;
+
+  /**
+   * Should the module be enabled by default.
+   *
+   * @var bool
+   */
+  public $standardlyEnabled = FALSE;
+
+  /**
+   * List of module names to enable.
+   *
+   * @var string[]
+   */
+  public $modules = [];
+
+  /**
+   * List of theme names to enable.
+   *
+   * @var string[]
+   */
+  public $themes = [];
 
 }
