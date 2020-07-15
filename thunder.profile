@@ -267,7 +267,7 @@ function thunder_page_attachments(array &$attachments) {
 
     if ($name == 'system_meta_generator') {
       $tag = &$html_head[0];
-      $tag['#attributes']['content'] = 'Drupal 8 (Thunder | http://www.thunder.org)';
+      $tag['#attributes']['content'] = 'Drupal 9 (Thunder | https://www.thunder.org)';
     }
   }
 }
