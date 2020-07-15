@@ -132,7 +132,11 @@ function thunder_modules_installed($modules) {
   if (_thunder_is_enabling_module()) {
     $suggestions = [
       ['liveblog', ['thunder_liveblog'], 'Thunder Liveblog'],
-      ['password_policy', ['thunder_password_policy'], 'Thunder Password Policy'],
+      [
+        'password_policy',
+        ['thunder_password_policy'],
+        'Thunder Password Policy',
+      ],
     ];
     foreach ($suggestions as $suggestion) {
       if (in_array($suggestion[0], $modules)) {
