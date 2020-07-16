@@ -51,5 +51,4 @@ hidden:
   field_seo_title: true
   field_tags: true
   langcode: true
-  search_api_excerpt: true
   shariff_field: true

@@ -23,5 +23,4 @@ content:
         handler: ''
     type: entity_reference_entity_view
     region: content
-hidden:
-  search_api_excerpt: true
+hidden: {  }
