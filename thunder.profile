@@ -7,6 +7,8 @@
 
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Extension\Dependency;
+use Drupal\Core\Extension\Extension;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\block\Entity\Block;
 use Drupal\Core\Installer\InstallerKernel;
@@ -178,56 +180,22 @@ function _thunder_is_enabling_module() {
 function thunder_modules_installed($modules) {
 
   if (_thunder_is_enabling_module()) {
-    $suggestions = [
-      ['liveblog', ['thunder_liveblog'], 'Thunder Liveblog'],
-      [
-        'password_policy',
-        ['thunder_password_policy'],
-        'Thunder Password Policy',
-      ],
-    ];
-    foreach ($suggestions as $suggestion) {
-      if (in_array($suggestion[0], $modules)) {
-        if (!empty(array_diff($suggestion[1], $modules))) {
-          \Drupal::messenger()->addWarning(t('To get the full Thunder experience, we recommend to install the @module module. See all supported optional modules at <a href="/admin/modules/extend-thunder">Thunder Optional modules</a>.', ['@module' => $suggestion[2]]));
-        }
+    /** @var \Drupal\Core\Extension\ModuleExtensionList $moduleExtensionList */
+    $moduleExtensionList = \Drupal::service('extension.list.module');
+    $thunder_features = array_filter($moduleExtensionList->getList(), function (Extension $module) {
+      return $module->info['package'] === 'Thunder Optional';
+    });
+
+    foreach ($thunder_features as $id => $extension) {
+
+      $dependencies = array_map(function ($dependency) {
+        return Dependency::createFromString($dependency)->getName();
+      }, $extension->info['dependencies']);
+
+      if (!in_array($id, $modules) && !empty(array_intersect($modules, $dependencies))) {
+        \Drupal::messenger()->addWarning(t('To get the full Thunder experience, we recommend to install the @module module. See all supported optional modules at <a href="/admin/modules/extend-thunder">Thunder Optional modules</a>.', ['@module' => $extension->info['name']]));
       }
     }
-  }
-
-  if (
-    _thunder_is_enabling_module()
-    && _thunder_check_triggering_modules($modules, ['content_moderation', 'config_update'])
-  ) {
-    if (!Role::load('restricted_editor')) {
-      /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
-      $configReverter = \Drupal::service('config_update.config_update');
-      $configReverter->import('user_role', 'restricted_editor');
-    }
-
-    // Granting permissions only for "editor" and "seo" user roles.
-    $roles = Role::loadMultiple(['editor', 'seo']);
-    foreach ($roles as $role) {
-      try {
-        $role->grantPermission('use editorial transition create_new_draft');
-        $role->grantPermission('use editorial transition publish');
-        $role->grantPermission('use editorial transition unpublish');
-        $role->grantPermission('use editorial transition unpublished_draft');
-        $role->grantPermission('use editorial transition unpublished_published');
-        $role->grantPermission('view any unpublished content');
-        $role->grantPermission('view latest version');
-        $role->save();
-      }
-      catch (EntityStorageException $storageException) {
-      }
-    }
-  }
-
-  if (
-    _thunder_is_enabling_module()
-    && _thunder_check_triggering_modules($modules, ['content_moderation', 'scheduler'])
-  ) {
-    \Drupal::service('module_installer')->install(['scheduler_content_moderation_integration']);
   }
 
   // Move fields into form display.
@@ -327,23 +295,6 @@ function thunder_page_attachments(array &$attachments) {
 function thunder_toolbar_alter(&$items) {
   if (!empty($items['admin_toolbar_tools'])) {
     $items['admin_toolbar_tools']['#attached']['library'][] = 'thunder/toolbar.icon';
-  }
-}
-
-/**
- * Implements hook_entity_base_field_info_alter().
- */
-function thunder_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
-  if (\Drupal::config('system.theme')->get('admin') == 'thunder_admin' && \Drupal::hasService('content_moderation.moderation_information')) {
-    /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_info */
-    $moderation_info = \Drupal::service('content_moderation.moderation_information');
-    if ($moderation_info->canModerateEntitiesOfEntityType($entity_type) && isset($fields['moderation_state'])) {
-      $fields['moderation_state']->setDisplayOptions('form', [
-        'type' => 'thunder_moderation_state_default',
-        'weight' => 100,
-        'settings' => [],
-      ]);
-    }
   }
 }
 

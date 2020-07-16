@@ -1,4 +1,0 @@
-services:
-  plugin.manager.thunder.optional_modules:
-    class: Drupal\thunder\OptionalModulesManager
-    arguments: ['@container.namespaces', '@cache.discovery', '@module_handler', '@extension.list.module', '@extension.list.theme' ]

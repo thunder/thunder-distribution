@@ -2,11 +2,12 @@
 
 namespace Drupal\thunder\Installer\Form;
 
-use Drupal\Component\Utility\SortArray;
+use Drupal\Core\Extension\Extension;
+use Drupal\Core\Extension\ModuleExtensionList;
+use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Installer\InstallerKernel;
-use Drupal\thunder\OptionalModulesManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -15,30 +16,48 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ModuleConfigureForm extends FormBase {
 
   /**
-   * The plugin manager.
+   * The module extension list.
    *
-   * @var \Drupal\thunder\OptionalModulesManager
+   * @var \Drupal\Core\Extension\ModuleExtensionList
    */
-  protected $optionalModulesManager;
+  protected $moduleExtensionList;
+
+  /**
+   * The module installer.
+   *
+   * @var \Drupal\Core\Extension\ModuleInstallerInterface
+   */
+  protected $moduleInstaller;
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     $form = parent::create($container);
-    $form->setOptionalModulesManager($container->get('plugin.manager.thunder.optional_modules'));
+    $form->setModuleExtensionList($container->get('extension.list.module'));
+    $form->setModuleInstaller($container->get('module_installer'));
     $form->setConfigFactory($container->get('config.factory'));
     return $form;
   }
 
   /**
-   * Set the modules manager.
+   * Set the module extension list.
    *
-   * @param \Drupal\thunder\OptionalModulesManager $manager
-   *   The manager service.
+   * @param \Drupal\Core\Extension\ModuleExtensionList $moduleExtensionList
+   *   The module extension list.
    */
-  protected function setOptionalModulesManager(OptionalModulesManager $manager) {
-    $this->optionalModulesManager = $manager;
+  protected function setModuleExtensionList(ModuleExtensionList $moduleExtensionList) {
+    $this->moduleExtensionList = $moduleExtensionList;
+  }
+
+  /**
+   * Set the modules installer.
+   *
+   * @param \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller
+   *   The module installer.
+   */
+  protected function setModuleInstaller(ModuleInstallerInterface $moduleInstaller) {
+    $this->moduleInstaller = $moduleInstaller;
   }
 
   /**
@@ -61,23 +80,17 @@ class ModuleConfigureForm extends FormBase {
       '#type' => 'container',
     ];
 
-    $providers = $this->optionalModulesManager->getModules();
+    $thunder_features = array_filter($this->moduleExtensionList->getList(), function (Extension $module) {
+      return $module->info['package'] === 'Thunder Optional';
+    });
 
-    uasort($providers, ['self', 'sortByLabelElement']);
-    uasort($providers, [SortArray::class, 'sortByWeightElement']);
-
-    foreach ($providers as $provider) {
-      $should_enable = InstallerKernel::installationAttempted() && $provider['standardlyEnabled'];
-
-      /** @var \Drupal\thunder\Plugin\Thunder\OptionalModule\AbstractOptionalModule $instance */
-      $instance = $this->optionalModulesManager->createInstance($provider['id']);
-
-      $form['install_modules_' . $provider['id']] = [
+    foreach ($thunder_features as $id => $extension) {
+      $form['install_modules_' . $id] = [
         '#type' => 'checkbox',
-        '#title' => $provider['label'],
-        '#description' => $provider['description'],
-        '#default_value' => $instance->enabled() || $should_enable,
-        '#disabled' => $instance->enabled(),
+        '#title' => $extension->info['name'],
+        '#description' => $extension->info['description'],
+        '#default_value' => $extension->status,
+        '#disabled' => $extension->status,
       ];
     }
     $form['#title'] = $this->t('Install & configure modules');
@@ -103,10 +116,8 @@ class ModuleConfigureForm extends FormBase {
       if (strpos($key, 'install_modules') !== FALSE && $value) {
         preg_match('/install_modules_(?P<name>\w+)/', $key, $values);
 
-        /** @var \Drupal\thunder\Plugin\Thunder\OptionalModule\AbstractOptionalModule $instance */
-        $instance = $this->optionalModulesManager->createInstance($values['name']);
-
-        if (!$instance->enabled()) {
+        $extension = $this->moduleExtensionList->get($values['name']);
+        if (!$extension->status) {
           $installModules[] = $values['name'];
         }
       }
@@ -152,28 +163,7 @@ class ModuleConfigureForm extends FormBase {
    */
   public function batchOperation($module, array $form_values, array &$context) {
     set_time_limit(0);
-
-    /** @var \Drupal\thunder\Plugin\Thunder\OptionalModule\AbstractOptionalModule $instance */
-    $instance = $this->optionalModulesManager->createInstance($module);
-    $instance->install($form_values, $context);
-  }
-
-  /**
-   * Sorts a structured array by 'label' key (no # prefix).
-   *
-   * Callback for uasort().
-   *
-   * @param array $a
-   *   First item for comparison. The compared items should be associative
-   *   arrays that optionally include a 'label' key.
-   * @param array $b
-   *   Second item for comparison.
-   *
-   * @return int
-   *   The comparison result for uasort().
-   */
-  protected static function sortByLabelElement(array $a, array $b) {
-    return SortArray::sortByKeyString($a, $b, 'label');
+    $this->moduleInstaller->install([$module]);
   }
 
 }
