@@ -35,7 +35,7 @@ class ConfigSelectorTest extends ThunderJavascriptTestBase {
 
     // Install search_api.
     $module_installer = \Drupal::service('module_installer');
-    $module_installer->install(['search_api']);
+    $module_installer->install(['thunder_search']);
 
     // Now we have a search_api based view.
     $this->drupalGet('admin/config/search/search-api/index/content');
