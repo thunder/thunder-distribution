@@ -5,7 +5,7 @@
  * The install file.
  */
 
-use Drupal\field\Entity\FieldConfig;
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\user\Entity\Role;
 
 /**
@@ -32,7 +32,7 @@ function thunder_workflow_install() {
       $role->grantPermission('view latest version');
       $role->save();
     }
-    catch (\Drupal\Core\Entity\EntityStorageException $storageException) {
+    catch (EntityStorageException $storageException) {
     }
   }
 
