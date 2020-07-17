@@ -18,9 +18,9 @@ function thunder_ivw_install() {
     \Drupal::service('entity_display.repository')
       ->getFormDisplay('node', 'article', 'default')
       ->setComponent(
-        'field_ivw', [
-        'type' => $fieldWidget,
-      ])->save();
+        'field_ivw',
+        ['type' => $fieldWidget]
+      )->save();
   }
   catch (Exception $e) {
     \Drupal::logger('thunder')->info(t('Could not add ivw field to article node: "@message"', ['@message' => $e->getMessage()]));
@@ -29,9 +29,9 @@ function thunder_ivw_install() {
   try {
     \Drupal::service('entity_display.repository')
       ->getFormDisplay('taxonomy_term', 'channel', 'default')
-      ->setComponent('field_ivw', [
-        'type' => $fieldWidget,
-      ])->save();
+      ->setComponent('field_ivw',
+        ['type' => $fieldWidget]
+      )->save();
   }
   catch (Exception $e) {
     \Drupal::logger('thunder')->info(t('Could not add ivw field to channel taxonomy: "@message"', ['@message' => $e->getMessage()]));

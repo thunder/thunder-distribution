@@ -5,15 +5,12 @@
  * Enables modules and site configuration for a thunder site installation.
  */
 
-use Drupal\Core\Entity\EntityStorageException;
-use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Extension\Dependency;
 use Drupal\Core\Extension\Extension;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\block\Entity\Block;
 use Drupal\Core\Installer\InstallerKernel;
 use Drupal\user\Entity\User;
-use Drupal\user\Entity\Role;
 
 /**
  * Implements hook_form_FORM_ID_alter() for install_configure_form().

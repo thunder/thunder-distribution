@@ -93,7 +93,10 @@ function _thunder_mark_update_checklist($update_id, $successful, UpdateLogger $u
 }
 
 /**
- * @param $module
+ * Installs a module without calling any hooks nor config imports.
+ *
+ * @param string $module
+ *   The module to install.
  */
 function _thunder_bare_install($module) {
   // Load a new config object for each iteration, otherwise changes made
@@ -278,7 +281,7 @@ function thunder_update_8308() {
 }
 
 /**
- * Install thunder_workflows for content_moderation users
+ * Install optional modules for users that already use them.
  */
 function thunder_update_8309() {
   /** @var \Drupal\update_helper\Updater $updateHelper */
