@@ -5,3 +5,4 @@ core: 8.x
 package: Thunder Optional
 dependencies:
   - google_analytics:google_analytics
+configure: google_analytics.admin_settings_form
