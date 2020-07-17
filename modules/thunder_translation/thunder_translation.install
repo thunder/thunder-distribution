@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Thunder Riddle integration install hooks.
+ */
+
+use Drupal\Core\Entity\EntityStorageException;
+use Drupal\user\Entity\Role;
+
+/**
+ * Implements hook_install().
+ */
+function thunder_translation_install() {
+  /** @var \Drupal\user\Entity\Role[] $roles */
+  $roles = Role::loadMultiple(['editor', 'seo', 'restricted_editor']);
+  foreach ($roles as $role) {
+    try {
+      $role->grantPermission('create content translations');
+      $role->grantPermission('update content translations');
+      $role->grantPermission('translate any entity');
+      if (in_array($role->id(), ['editor', 'seo'])) {
+        $role->grantPermission('delete content translations');
+      }
+      $role->save();
+    }
+    catch (EntityStorageException $storageException) {
+    }
+  }
+}

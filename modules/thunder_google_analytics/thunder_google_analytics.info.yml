@@ -1,0 +1,7 @@
+name: 'Thunder Google Analytics'
+description: 'Install the Google Analytics module for extensive tracking.'
+type: module
+core: 8.x
+package: Thunder Optional
+dependencies:
+  - google_analytics:google_analytics

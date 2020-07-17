@@ -124,62 +124,10 @@ function thunder_themes_installed($theme_list) {
 }
 
 /**
- * Check if provided triggering modules are one of the newly installed modules.
- *
- * This function is helper for thunder_modules_installed(). Using it in another
- * context is not recommended. @see hook_modules_installed()
- *
- * @param array $modules
- *   The list of the modules that were newly installed.
- * @param array $triggering_modules
- *   The list of triggering modules required for executing some action.
- *
- * @return bool
- *   Returns if triggering module is newly installed.
- */
-function _thunder_check_triggering_modules(array $modules, array $triggering_modules) {
-  // Check that at least one triggering module is in list of the modules that
-  // were newly installed.
-  $triggering_not_installed_modules = array_diff($triggering_modules, $modules);
-  if (count($triggering_not_installed_modules) === count($triggering_modules)) {
-    return FALSE;
-  }
-
-  // All required triggering modules are in the list of the modules that were
-  // newly installed.
-  if (empty($triggering_not_installed_modules)) {
-    return TRUE;
-  }
-
-  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
-  $module_handler = Drupal::moduleHandler();
-  $active_modules = array_keys($module_handler->getModuleList());
-
-  // Ensure that all triggering modules modules are installed on system.
-  $required_not_active_modules = array_diff($triggering_not_installed_modules, $active_modules);
-
-  return empty($required_not_active_modules);
-}
-
-/**
- * Check if enabling of a module is executed.
- *
- * This function is helper for thunder_modules_installed(). Using it in another
- * context is not recommended. @see hook_modules_installed()
- *
- * @return bool
- *   Returns if enabling of a module is currently running.
- */
-function _thunder_is_enabling_module() {
-  return !InstallerKernel::installationAttempted() && !Drupal::isConfigSyncing();
-}
-
-/**
  * Implements hook_modules_installed().
  */
 function thunder_modules_installed($modules) {
-
-  if (_thunder_is_enabling_module()) {
+  if (!InstallerKernel::installationAttempted() && !Drupal::isConfigSyncing()) {
     /** @var \Drupal\Core\Extension\ModuleExtensionList $moduleExtensionList */
     $moduleExtensionList = \Drupal::service('extension.list.module');
     $thunder_features = array_filter($moduleExtensionList->getList(), function (Extension $module) {
@@ -194,55 +142,6 @@ function thunder_modules_installed($modules) {
 
       if (!in_array($id, $modules) && !empty(array_intersect($modules, $dependencies))) {
         \Drupal::messenger()->addWarning(t('To get the full Thunder experience, we recommend to install the @module module. See all supported optional modules at <a href="/admin/modules/extend-thunder">Thunder Optional modules</a>.', ['@module' => $extension->info['name']]));
-      }
-    }
-  }
-
-  // Move fields into form display.
-  if (in_array('ivw_integration', $modules)) {
-    $fieldWidget = 'ivw_integration_widget';
-
-    // Attach field if channel vocabulary and article node type is
-    // present in the distribution.
-    try {
-      \Drupal::service('entity_display.repository')
-        ->getFormDisplay('node', 'article', 'default')
-        ->setComponent(
-          'field_ivw', [
-            'type' => $fieldWidget,
-          ])->save();
-    }
-    catch (Exception $e) {
-      \Drupal::logger('thunder')->info(t('Could not add ivw field to article node: "@message"', ['@message' => $e->getMessage()]));
-    }
-
-    try {
-      \Drupal::service('entity_display.repository')
-        ->getFormDisplay('taxonomy_term', 'channel', 'default')
-        ->setComponent('field_ivw', [
-          'type' => $fieldWidget,
-        ])->save();
-    }
-    catch (Exception $e) {
-      \Drupal::logger('thunder')->info(t('Could not add ivw field to channel taxonomy: "@message"', ['@message' => $e->getMessage()]));
-    }
-  }
-
-  // When enabling content_translation, grant permissions to Thunder user roles.
-  if (in_array('content_translation', $modules)) {
-    /** @var \Drupal\user\Entity\Role[] $roles */
-    $roles = Role::loadMultiple(['editor', 'seo', 'restricted_editor']);
-    foreach ($roles as $role) {
-      try {
-        $role->grantPermission('create content translations');
-        $role->grantPermission('update content translations');
-        $role->grantPermission('translate any entity');
-        if (in_array($role->id(), ['editor', 'seo'])) {
-          $role->grantPermission('delete content translations');
-        }
-        $role->save();
-      }
-      catch (EntityStorageException $storageException) {
       }
     }
   }
