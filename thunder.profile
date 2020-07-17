@@ -54,7 +54,7 @@ function thunder_install_tasks(&$install_state) {
  *   A batch array to execute.
  */
 function thunder_module_install(array &$install_state) {
-  return $install_state['thunder_install_batch'];
+  return $install_state['thunder_install_batch'] ?? [];
 }
 
 /**
