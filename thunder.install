@@ -93,36 +93,6 @@ function _thunder_mark_update_checklist($update_id, $successful, UpdateLogger $u
 }
 
 /**
- * Installs a module without calling any hooks nor config imports.
- *
- * @param string $module
- *   The module to install.
- */
-function _thunder_bare_install($module) {
-  // Load a new config object for each iteration, otherwise changes made
-  // in hook_install() are not reflected in $extension_config.
-  $extension_config = \Drupal::configFactory()->getEditable('core.extension');
-
-  $extension_config
-    ->set("module.$module", 0)
-    ->set('module', module_config_sort($extension_config->get('module')))
-    ->save(TRUE);
-
-  // Set the schema version to the number of the last update provided by
-  // the module, or the minimum core schema version.
-  $version = \Drupal::CORE_MINIMUM_SCHEMA_VERSION;
-  $versions = drupal_get_schema_versions($module);
-  if ($versions) {
-    $version = max(max($versions), $version);
-  }
-
-  drupal_set_installed_schema_version($module, $version);
-
-  $kernel = \Drupal::service('kernel');
-  $kernel->rebuildContainer();
-}
-
-/**
  * Implements hook_requirements().
  */
 function thunder_requirements($phase) {
@@ -287,21 +257,45 @@ function thunder_update_8309() {
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updateHelper = \Drupal::service('update_helper.updater');
 
+  $bare_install = function ($module) {
+    // Load a new config object for each iteration, otherwise changes made
+    // in hook_install() are not reflected in $extension_config.
+    $extension_config = \Drupal::configFactory()->getEditable('core.extension');
+
+    $extension_config
+      ->set("module.$module", 0)
+      ->set('module', module_config_sort($extension_config->get('module')))
+      ->save(TRUE);
+
+    // Set the schema version to the number of the last update provided by
+    // the module, or the minimum core schema version.
+    $version = \Drupal::CORE_MINIMUM_SCHEMA_VERSION;
+    $versions = drupal_get_schema_versions($module);
+    if ($versions) {
+      $version = max(max($versions), $version);
+    }
+
+    drupal_set_installed_schema_version($module, $version);
+  };
+
   if (\Drupal::moduleHandler()->moduleExists('content_moderation')) {
     /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
     $moduleInstaller = \Drupal::service('module_installer');
     $moduleInstaller->install(['scheduler_content_moderation_integration', 'config_update']);
 
-    _thunder_bare_install('thunder_workflow');
+    $bare_install('thunder_workflow');
   }
 
   if (\Drupal::moduleHandler()->moduleExists('ivw_integration')) {
-    _thunder_bare_install('thunder_ivw');
+    $bare_install('thunder_ivw');
   }
 
   if (\Drupal::moduleHandler()->moduleExists('google_analytics')) {
-    _thunder_bare_install('thunder_google_analytics');
+    $bare_install('thunder_google_analytics');
   }
+
+  $kernel = \Drupal::service('kernel');
+  $kernel->rebuildContainer();
 
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();
