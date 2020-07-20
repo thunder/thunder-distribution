@@ -261,34 +261,36 @@ function thunder_update_8309() {
   // in hook_install() are not reflected in $extension_config.
   $extension_config = \Drupal::configFactory()->getEditable('core.extension');
 
-  $bare_install = function ($module) use ($extension_config) {
+  $modules_to_install = [];
+  if (\Drupal::moduleHandler()->moduleExists('content_moderation')) {
+    /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
+    $moduleInstaller = \Drupal::service('module_installer');
+    $moduleInstaller->install(['scheduler_content_moderation_integration', 'config_update']);
+
+    $modules_to_install[] = 'thunder_workflow';
+  }
+
+  if (\Drupal::moduleHandler()->moduleExists('ivw_integration')) {
+    $modules_to_install[] = 'thunder_ivw';
+
+  }
+
+  if (\Drupal::moduleHandler()->moduleExists('google_analytics')) {
+    $modules_to_install[] = 'thunder_google_analytics';
+  }
+
+  $version = \Drupal::CORE_MINIMUM_SCHEMA_VERSION;
+  foreach ($modules_to_install as $module) {
     $extension_config->set("module.$module", 0);
 
     // Set the schema version to the number of the last update provided by
     // the module, or the minimum core schema version.
-    $version = \Drupal::CORE_MINIMUM_SCHEMA_VERSION;
     $versions = drupal_get_schema_versions($module);
     if ($versions) {
       $version = max(max($versions), $version);
     }
 
     drupal_set_installed_schema_version($module, $version);
-  };
-
-  if (\Drupal::moduleHandler()->moduleExists('content_moderation')) {
-    /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
-    $moduleInstaller = \Drupal::service('module_installer');
-    $moduleInstaller->install(['scheduler_content_moderation_integration', 'config_update']);
-
-    $bare_install('thunder_workflow');
-  }
-
-  if (\Drupal::moduleHandler()->moduleExists('ivw_integration')) {
-    $bare_install('thunder_ivw');
-  }
-
-  if (\Drupal::moduleHandler()->moduleExists('google_analytics')) {
-    $bare_install('thunder_google_analytics');
   }
 
   $extension_config
