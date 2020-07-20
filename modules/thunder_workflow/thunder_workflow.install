@@ -37,3 +37,6 @@ function thunder_workflow_install() {
   }
 
 }
+
+/* If you have to implement an hook_update_n, think if you have to add it to
+thunder_update_8309. */

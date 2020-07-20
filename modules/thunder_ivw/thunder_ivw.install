@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Thunder Riddle integration install hooks.
+ * Thunder IVW install hooks.
  */
 
 /**
@@ -38,3 +38,6 @@ function thunder_ivw_install() {
   }
 
 }
+
+/* If you have to implement an hook_update_n, think if you have to add it to
+thunder_update_8309. */

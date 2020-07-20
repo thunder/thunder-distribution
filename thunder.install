@@ -37,7 +37,12 @@ function thunder_update_dependencies() {
     'thunder_media',
     'thunder_paragraphs',
     'thunder_taxonomy',
-    'thunder_fia',
+    'thunder_translation',
+    'thunder_password_policy',
+    'thunder_google_analytics',
+    'thunder_translation',
+    'thunder_workflow',
+    'thunder_ivw',
     'thunder_riddle',
   ];
 
@@ -272,7 +277,6 @@ function thunder_update_8309() {
 
   if (\Drupal::moduleHandler()->moduleExists('ivw_integration')) {
     $modules_to_install[] = 'thunder_ivw';
-
   }
 
   if (\Drupal::moduleHandler()->moduleExists('google_analytics')) {
@@ -291,6 +295,10 @@ function thunder_update_8309() {
     }
 
     drupal_set_installed_schema_version($module, $version);
+
+    /** @var \Drupal\Core\Update\UpdateRegistry $post_update_registry */
+    $post_update_registry = \Drupal::service('update.post_update_registry');
+    $post_update_registry->filterOutInvokedUpdatesByModule($module);
   }
 
   $extension_config
