@@ -257,15 +257,13 @@ function thunder_update_8309() {
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updateHelper = \Drupal::service('update_helper.updater');
 
-  $bare_install = function ($module) {
-    // Load a new config object for each iteration, otherwise changes made
-    // in hook_install() are not reflected in $extension_config.
-    $extension_config = \Drupal::configFactory()->getEditable('core.extension');
+  // Load a new config object for each iteration, otherwise changes made
+  // in hook_install() are not reflected in $extension_config.
+  $extension_config = \Drupal::configFactory()->getEditable('core.extension');
 
-    $extension_config
-      ->set("module.$module", 0)
-      ->set('module', module_config_sort($extension_config->get('module')))
-      ->save(TRUE);
+  $bare_install = function ($module) use ($extension_config) {
+
+    $extension_config->set("module.$module", 0);
 
     // Set the schema version to the number of the last update provided by
     // the module, or the minimum core schema version.
@@ -293,6 +291,10 @@ function thunder_update_8309() {
   if (\Drupal::moduleHandler()->moduleExists('google_analytics')) {
     $bare_install('thunder_google_analytics');
   }
+
+  $extension_config
+    ->set('module', module_config_sort($extension_config->get('module')))
+    ->save(TRUE);
 
   $kernel = \Drupal::service('kernel');
   $kernel->rebuildContainer();
