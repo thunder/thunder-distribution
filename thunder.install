@@ -262,7 +262,6 @@ function thunder_update_8309() {
   $extension_config = \Drupal::configFactory()->getEditable('core.extension');
 
   $bare_install = function ($module) use ($extension_config) {
-
     $extension_config->set("module.$module", 0);
 
     // Set the schema version to the number of the last update provided by
@@ -295,9 +294,6 @@ function thunder_update_8309() {
   $extension_config
     ->set('module', module_config_sort($extension_config->get('module')))
     ->save(TRUE);
-
-  $kernel = \Drupal::service('kernel');
-  $kernel->rebuildContainer();
 
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();
