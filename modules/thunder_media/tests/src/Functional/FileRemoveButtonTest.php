@@ -16,7 +16,7 @@ class FileRemoveButtonTest extends ThunderTestBase {
    *
    * @var array
    */
-  public static $modules = ['thunder_testing_demo', 'content_moderation'];
+  public static $modules = ['thunder_testing_demo', 'thunder_workflow'];
 
   /**
    * Test for transliteration of file name.
