@@ -28,3 +28,6 @@ function thunder_translation_install() {
     }
   }
 }
+
+/* hook_update_n implementations should be in the profile instead of this
+submodule. */

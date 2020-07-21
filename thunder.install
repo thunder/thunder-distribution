@@ -283,6 +283,10 @@ function thunder_update_8309() {
     $modules_to_install[] = 'thunder_google_analytics';
   }
 
+  if (\Drupal::moduleHandler()->moduleExists('content_translation')) {
+    $modules_to_install[] = 'thunder_translation';
+  }
+
   $version = \Drupal::CORE_MINIMUM_SCHEMA_VERSION;
   foreach ($modules_to_install as $module) {
     $extension_config->set("module.$module", 0);

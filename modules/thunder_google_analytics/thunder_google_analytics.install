@@ -5,5 +5,5 @@
  * Thunder Google analytics install hooks.
  */
 
-/* If you have to implement an hook_update_n, think if you have to add it to
-thunder_update_8309. */
+/* hook_update_n implementations should be in the profile instead of this
+submodule. */
