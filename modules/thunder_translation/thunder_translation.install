@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Thunder Riddle integration install hooks.
+ * Thunder Translation install hooks.
  */
 
 use Drupal\Core\Entity\EntityStorageException;

@@ -262,10 +262,6 @@ function thunder_update_8309() {
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updateHelper = \Drupal::service('update_helper.updater');
 
-  // Load a new config object for each iteration, otherwise changes made
-  // in hook_install() are not reflected in $extension_config.
-  $extension_config = \Drupal::configFactory()->getEditable('core.extension');
-
   $modules_to_install = [];
   if (\Drupal::moduleHandler()->moduleExists('content_moderation')) {
     /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
@@ -288,6 +284,8 @@ function thunder_update_8309() {
   }
 
   $version = \Drupal::CORE_MINIMUM_SCHEMA_VERSION;
+
+  $extension_config = \Drupal::configFactory()->getEditable('core.extension');
   foreach ($modules_to_install as $module) {
     $extension_config->set("module.$module", 0);
 

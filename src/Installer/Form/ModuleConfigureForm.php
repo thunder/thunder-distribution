@@ -13,6 +13,7 @@ use Drupal\Core\Installer\InstallerKernel;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Url;
 use Drupal\user\PermissionHandlerInterface;
+use Drupal\Component\Utility\Environment;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -284,7 +285,7 @@ class ModuleConfigureForm extends FormBase {
    * @throws \Drupal\Core\Extension\MissingDependencyException
    */
   public function batchOperation($module, array &$context) {
-    set_time_limit(0);
+    Environment::setTimeLimit(0);
     $this->moduleInstaller->install([$module]);
   }
 

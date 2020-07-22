@@ -10,7 +10,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 /**
  * Implements hook_entity_base_field_info_alter().
  */
-function thunder_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
+function thunder_workflow_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
   if (\Drupal::config('system.theme')->get('admin') == 'thunder_admin') {
     /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_info */
     $moderation_info = \Drupal::service('content_moderation.moderation_information');

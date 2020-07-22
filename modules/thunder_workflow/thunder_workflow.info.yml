@@ -1,5 +1,5 @@
 name: 'Thunder Workflow'
-description: 'Full integration for more sophisticated password policies.'
+description: 'Get an advanced content creation workflow with scheduling functionality.'
 type: module
 core: 8.x
 package: Thunder Optional
