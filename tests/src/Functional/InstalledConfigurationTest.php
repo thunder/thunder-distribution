@@ -29,8 +29,8 @@ class InstalledConfigurationTest extends ThunderTestBase {
    */
   protected static $modules = [
     'thunder_testing_demo',
-    'google_analytics',
-    'ivw_integration',
+    'thunder_google_analytics',
+    'thunder_ivw',
     'adsense',
     'thunder_riddle',
     'harbourmaster',
