@@ -203,7 +203,6 @@ function thunder_field_widget_info_alter(array &$info) {
   }
 }
 
-
 /**
  * Implements hook_field_widget_multivalue_WIDGET_TYPE_form_alter().
  *

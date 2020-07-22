@@ -20,9 +20,7 @@ function thunder_search_views_pre_render(ViewExecutable $view) {
   $index_task_manager = \Drupal::service('search_api.index_task_manager');
 
   $index = $view->query->getIndex();
-  if (!$index_task_manager->isTrackingComplete($index) || $index->getTrackerInstance()
-      ->getRemainingItemsCount()) {
-    \Drupal::messenger()
-      ->addError(t("It's needed to <a href='/admin/config/search/search-api/index/content'>index the search index</a> in order to have all content searchable."));
+  if (!$index_task_manager->isTrackingComplete($index) || $index->getTrackerInstance()->getRemainingItemsCount()) {
+    \Drupal::messenger()->addError(t("It's needed to <a href='/admin/config/search/search-api/index/content'>index the search index</a> in order to have all content searchable."));
   }
 }
