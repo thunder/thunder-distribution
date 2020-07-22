@@ -2,47 +2,140 @@
 
 namespace Drupal\thunder\Installer\Form;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Form\ConfigFormBase;
+use Drupal\Core\Access\AccessManagerInterface;
+use Drupal\Core\Extension\Extension;
+use Drupal\Core\Extension\ModuleExtensionList;
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Extension\ModuleInstallerInterface;
+use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\thunder\OptionalModulesManager;
+use Drupal\Core\Installer\InstallerKernel;
+use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\Core\Url;
+use Drupal\user\PermissionHandlerInterface;
+use Drupal\Component\Utility\Environment;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides the site configuration form.
  */
-class ModuleConfigureForm extends ConfigFormBase {
+class ModuleConfigureForm extends FormBase {
 
   /**
-   * The plugin manager.
+   * The module extension list.
    *
-   * @var \Drupal\thunder\OptionalModulesManager
+   * @var \Drupal\Core\Extension\ModuleExtensionList
    */
-  protected $optionalModulesManager;
+  protected $moduleExtensionList;
 
   /**
-   * Constructs a \Drupal\system\ConfigFormBase object.
+   * The module installer.
    *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The factory for configuration objects.
-   * @param \Drupal\thunder\OptionalModulesManager $optionalModulesManager
-   *   The factory for configuration objects.
+   * @var \Drupal\Core\Extension\ModuleInstallerInterface
    */
-  public function __construct(ConfigFactoryInterface $config_factory, OptionalModulesManager $optionalModulesManager) {
+  protected $moduleInstaller;
 
-    parent::__construct($config_factory);
+  /**
+   * The access manager service.
+   *
+   * @var \Drupal\Core\Access\AccessManagerInterface
+   */
+  protected $accessManager;
 
-    $this->optionalModulesManager = $optionalModulesManager;
-  }
+  /**
+   * The module handler service.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
+   * The current user.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  protected $currentUser;
+
+  /**
+   * The permission handler service.
+   *
+   * @var \Drupal\user\PermissionHandlerInterface
+   */
+  protected $permissionHandler;
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('config.factory'),
-      $container->get('plugin.manager.thunder.optional_modules')
-    );
+    $form = parent::create($container);
+    $form->setModuleExtensionList($container->get('extension.list.module'));
+    $form->setModuleInstaller($container->get('module_installer'));
+    $form->setAccessManager($container->get('access_manager'));
+    $form->setCurrentUser($container->get('current_user'));
+    $form->setModuleHandler($container->get('module_handler'));
+    $form->setPermissionHandler($container->get('user.permissions'));
+    $form->setConfigFactory($container->get('config.factory'));
+    return $form;
+  }
+
+  /**
+   * Set the module extension list.
+   *
+   * @param \Drupal\Core\Extension\ModuleExtensionList $moduleExtensionList
+   *   The module extension list.
+   */
+  protected function setModuleExtensionList(ModuleExtensionList $moduleExtensionList) {
+    $this->moduleExtensionList = $moduleExtensionList;
+  }
+
+  /**
+   * Set the modules installer.
+   *
+   * @param \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller
+   *   The module installer.
+   */
+  protected function setModuleInstaller(ModuleInstallerInterface $moduleInstaller) {
+    $this->moduleInstaller = $moduleInstaller;
+  }
+
+  /**
+   * Set the access manager.
+   *
+   * @param \Drupal\Core\Access\AccessManagerInterface $accessManager
+   *   The access manager service.
+   */
+  protected function setAccessManager(AccessManagerInterface $accessManager) {
+    $this->accessManager = $accessManager;
+  }
+
+  /**
+   * Set the current user.
+   *
+   * @param \Drupal\Core\Session\AccountProxyInterface $accountProxy
+   *   The current user.
+   */
+  protected function setCurrentUser(AccountProxyInterface $accountProxy) {
+    $this->currentUser = $accountProxy;
+  }
+
+  /**
+   * Set the module handler service.
+   *
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   *   The module handler service.
+   */
+  protected function setModuleHandler(ModuleHandlerInterface $moduleHandler) {
+    $this->moduleHandler = $moduleHandler;
+  }
+
+  /**
+   * Set the permissions handler service.
+   *
+   * @param \Drupal\user\PermissionHandlerInterface $handler
+   *   The permissions handler service.
+   */
+  protected function setPermissionHandler(PermissionHandlerInterface $handler) {
+    $this->permissionHandler = $handler;
   }
 
   /**
@@ -55,21 +148,7 @@ class ModuleConfigureForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  protected function getEditableConfigNames() {
-
-    return [];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function buildForm(array $form, FormStateInterface $form_state) {
-
-    // We have to delete all messages, because simple_sitemap adds a bunch of
-    // messages during the install process.
-    // @see https://www.drupal.org/project/simple_sitemap/issues/3001388.
-    $this->messenger()->deleteAll();
-
     $form['description'] = [
       '#type' => 'item',
       '#markup' => $this->t('Keep calm. You can install all the modules later, too.'),
@@ -77,25 +156,78 @@ class ModuleConfigureForm extends ConfigFormBase {
 
     $form['install_modules'] = [
       '#type' => 'container',
+      '#tree' => TRUE,
     ];
 
-    $providers = $this->optionalModulesManager->getDefinitions();
+    $thunder_features = array_filter($this->moduleExtensionList->getList(), function (Extension $module) {
+      return $module->info['package'] === 'Thunder Optional';
+    });
 
-    static::sortByWeights($providers);
+    foreach ($thunder_features as $id => $module) {
 
-    foreach ($providers as $provider) {
-
-      $instance = $this->optionalModulesManager->createInstance($provider['id']);
-
-      $form['install_modules_' . $provider['id']] = [
-        '#type' => 'checkbox',
-        '#title' => $provider['label'],
-        '#description' => isset($provider['description']) ? $provider['description'] : '',
-        '#default_value' => isset($provider['standardlyEnabled']) ? $provider['standardlyEnabled'] : 0,
+      $form['install_modules'][$id] = [
+        '#type' => 'container',
       ];
 
-      $form = $instance->buildForm($form, $form_state);
+      $form['install_modules'][$id]['enable'] = [
+        '#type' => 'checkbox',
+        '#title' => $module->info['name'],
+        '#description' => $module->info['description'],
+        '#default_value' => $module->status,
+        '#disabled' => $module->status,
+      ];
 
+      if ($module->status) {
+        // Generate link for module's help page. Assume that if a hook_help()
+        // implementation exists then the module provides an overview page,
+        // rather than checking to see if the page exists, which is costly.
+        if ($this->moduleHandler->moduleExists('help') && in_array($module->getName(), $this->moduleHandler->getImplementations('help'))) {
+          $form['install_modules'][$id]['links']['help'] = [
+            '#type' => 'link',
+            '#title' => $this->t('Help'),
+            '#url' => Url::fromRoute('help.page', ['name' => $module->getName()]),
+            '#options' => [
+              'attributes' => [
+                'class' => ['module-link', 'module-link-help'],
+                'title' => $this->t('Help'),
+              ],
+            ],
+          ];
+        }
+
+        // Generate link for module's permission, if the user has access to it.
+        if ($this->currentUser->hasPermission('administer permissions') && $this->permissionHandler->moduleProvidesPermissions($module->getName())) {
+          $form['install_modules'][$id]['links']['permissions'] = [
+            '#type' => 'link',
+            '#title' => $this->t('Permissions'),
+            '#url' => Url::fromRoute('user.admin_permissions'),
+            '#options' => [
+              'fragment' => 'module-' . $module->getName(),
+              'attributes' => [
+                'class' => ['module-link', 'module-link-permissions'],
+                'title' => $this->t('Configure permissions'),
+              ],
+            ],
+          ];
+        }
+
+        // Generate link for module's configuration page, if it has one.
+        if (isset($module->info['configure'])) {
+          $route_parameters = isset($module->info['configure_parameters']) ? $module->info['configure_parameters'] : [];
+          if ($this->accessManager->checkNamedRoute($module->info['configure'], $route_parameters, $this->currentUser)) {
+            $form['install_modules'][$id]['links']['configure'] = [
+              '#type' => 'link',
+              '#title' => $this->t('Configure <span class="visually-hidden">the @module module</span>', ['@module' => $module->info['name']]),
+              '#url' => Url::fromRoute($module->info['configure'], $route_parameters),
+              '#options' => [
+                'attributes' => [
+                  'class' => ['module-link', 'module-link-configure'],
+                ],
+              ],
+            ];
+          }
+        }
+      }
     }
     $form['#title'] = $this->t('Install & configure modules');
 
@@ -104,7 +236,6 @@ class ModuleConfigureForm extends ConfigFormBase {
       '#type' => 'submit',
       '#value' => $this->t('Save and continue'),
       '#button_type' => 'primary',
-      '#submit' => ['::submitForm'],
     ];
 
     return $form;
@@ -114,48 +245,48 @@ class ModuleConfigureForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $installModules = [];
-
-    foreach ($form_state->getValues() as $key => $value) {
-
-      if (strpos($key, 'install_modules') !== FALSE && $value) {
-        preg_match('/install_modules_(?P<name>\w+)/', $key, $values);
-        $installModules[] = $values['name'];
+    $operations = [];
+    foreach ($form_state->getValue('install_modules') as $module => $values) {
+      $extension = $this->moduleExtensionList->get($module);
+      if (!$extension->status && $values['enable']) {
+        $operations[] = [
+          [$this, 'batchOperation'],
+          [$module],
+        ];
       }
     }
 
-    $buildInfo = $form_state->getBuildInfo();
+    if ($operations) {
+      $batch = [
+        'operations' => $operations,
+        'title' => $this->t('Installing additional modules'),
+        'error_message' => $this->t('The installation has encountered an error.'),
+      ];
 
-    $install_state = $buildInfo['args'];
-
-    $install_state[0]['thunder_additional_modules'] = $installModules;
-    $install_state[0]['form_state_values'] = $form_state->getValues();
-
-    $buildInfo['args'] = $install_state;
-
-    $form_state->setBuildInfo($buildInfo);
-
+      if (InstallerKernel::installationAttempted()) {
+        $buildInfo = $form_state->getBuildInfo();
+        $buildInfo['args'][0]['thunder_install_batch'] = $batch;
+        $form_state->setBuildInfo($buildInfo);
+      }
+      else {
+        batch_set($batch);
+      }
+    }
   }
 
   /**
-   * Returns a sorting function to sort an array by weights.
+   * Batch operation callback.
    *
-   * If an array element doesn't provide a weight, it will be set to 0.
-   * If two elements have the same weight, they are sorted by label.
+   * @param string $module
+   *   Name of the module.
+   * @param array $context
+   *   The batch context.
    *
-   * @param array $array
-   *   The array to be sorted.
+   * @throws \Drupal\Core\Extension\MissingDependencyException
    */
-  private static function sortByWeights(array &$array) {
-    uasort($array, function ($a, $b) {
-      $a_weight = isset($a['weight']) ? $a['weight'] : 0;
-      $b_weight = isset($b['weight']) ? $b['weight'] : 0;
-
-      if ($a_weight == $b_weight) {
-        return ($a['label'] > $b['label']) ? 1 : -1;
-      }
-      return ($a_weight > $b_weight) ? 1 : -1;
-    });
+  public function batchOperation($module, array &$context) {
+    Environment::setTimeLimit(0);
+    $this->moduleInstaller->install([$module]);
   }
 
 }

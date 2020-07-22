@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder\Plugin\Field\FieldWidget;
+namespace Drupal\thunder_workflow\Plugin\Field\FieldWidget;
 
 use Drupal\content_moderation\Plugin\Field\FieldWidget\ModerationStateWidget as CoreModerationStateWidget;
 use Drupal\Core\Field\FieldItemListInterface;
