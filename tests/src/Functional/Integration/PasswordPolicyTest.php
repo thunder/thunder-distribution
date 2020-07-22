@@ -15,10 +15,7 @@ class PasswordPolicyTest extends ThunderTestBase {
    * {@inheritdoc}
    */
   protected static $modules = [
-    'password_policy_character_types',
-    'password_policy_history',
-    'password_policy_length',
-    'password_policy',
+    'thunder_password_policy',
   ];
 
   /**

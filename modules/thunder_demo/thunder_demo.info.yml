@@ -1,7 +1,7 @@
 name: Thunder Demo
 type: module
 description: Provide demo content.
-package: Thunder
+package: Thunder Optional
 core_version_requirement: ^9
 dependencies:
   - better_normalizers:better_normalizers

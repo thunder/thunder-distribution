@@ -18,8 +18,8 @@ class ContentTranslationTest extends ThunderTestBase {
    */
   protected static $modules = [
     'thunder_testing_demo',
-    'content_moderation',
-    'content_translation',
+    'thunder_workflow',
+    'thunder_translation',
   ];
 
   /**

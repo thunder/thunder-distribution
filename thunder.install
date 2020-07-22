@@ -37,7 +37,12 @@ function thunder_update_dependencies() {
     'thunder_media',
     'thunder_paragraphs',
     'thunder_taxonomy',
-    'thunder_fia',
+    'thunder_translation',
+    'thunder_password_policy',
+    'thunder_google_analytics',
+    'thunder_translation',
+    'thunder_workflow',
+    'thunder_ivw',
   ];
 
   foreach ($updates as $module => $info) {
@@ -96,4 +101,60 @@ function _thunder_mark_update_checklist($update_id, $successful, UpdateLogger $u
  */
 function thunder_update_last_removed() {
   return 8308;
+}
+
+/**
+ * Install optional modules for users that already use them.
+ */
+function thunder_update_8309() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  $modules_to_install = [];
+  if (\Drupal::moduleHandler()->moduleExists('content_moderation')) {
+    /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
+    $moduleInstaller = \Drupal::service('module_installer');
+    $moduleInstaller->install(['scheduler_content_moderation_integration', 'config_update']);
+
+    $modules_to_install[] = 'thunder_workflow';
+  }
+
+  if (\Drupal::moduleHandler()->moduleExists('ivw_integration')) {
+    $modules_to_install[] = 'thunder_ivw';
+  }
+
+  if (\Drupal::moduleHandler()->moduleExists('google_analytics')) {
+    $modules_to_install[] = 'thunder_google_analytics';
+  }
+
+  if (\Drupal::moduleHandler()->moduleExists('content_translation')) {
+    $modules_to_install[] = 'thunder_translation';
+  }
+
+  $version = \Drupal::CORE_MINIMUM_SCHEMA_VERSION;
+
+  $extension_config = \Drupal::configFactory()->getEditable('core.extension');
+  foreach ($modules_to_install as $module) {
+    $extension_config->set("module.$module", 0);
+
+    // Set the schema version to the number of the last update provided by
+    // the module, or the minimum core schema version.
+    $versions = drupal_get_schema_versions($module);
+    if ($versions) {
+      $version = max(max($versions), $version);
+    }
+
+    drupal_set_installed_schema_version($module, $version);
+
+    /** @var \Drupal\Core\Update\UpdateRegistry $post_update_registry */
+    $post_update_registry = \Drupal::service('update.post_update_registry');
+    $post_update_registry->filterOutInvokedUpdatesByModule($module);
+  }
+
+  $extension_config
+    ->set('module', module_config_sort($extension_config->get('module')))
+    ->save(TRUE);
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
 }
