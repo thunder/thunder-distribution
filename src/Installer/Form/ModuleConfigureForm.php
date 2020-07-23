@@ -176,17 +176,50 @@ class ModuleConfigureForm extends FormBase {
       $form['install_modules'][$id]['enable'] = [
         '#type' => 'checkbox',
         '#title' => $module->info['name'],
-        '#description' => $module->info['description'],
         '#default_value' => $module->status,
         '#disabled' => $module->status,
       ];
 
+      $form['install_modules'][$id]['info'] = [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['module-info']],
+      ];
+
+      $form['install_modules'][$id]['info']['description'] = [
+        '#markup' => '<span class="text module-description">' . $module->info['description'] . '</span>',
+      ];
+
+      $requires = [];
+      // If this module requires other modules, add them to the array.
+      /** @var \Drupal\Core\Extension\Dependency $dependency_object */
+      foreach ($module->requires as $dependency => $dependency_object) {
+        // @todo Add logic for not displaying hidden modules in
+        //   https://drupal.org/node/3117829.
+        if ($incompatible = $this->checkDependencyMessage($modules, $dependency, $dependency_object)) {
+          $requires[$dependency] = $incompatible;
+          $form['install_modules'][$id]['enable']['#disabled'] = TRUE;
+          continue;
+        }
+
+        $name = $modules[$dependency]->info['name'];
+        $requires[$dependency] = $modules[$dependency]->status ? $this->t('@module', ['@module' => $name]) : $this->t('@module (<span class="admin-disabled">disabled</span>)', ['@module' => $name]);
+      }
+
+      $form['install_modules'][$id]['info']['requires'] = [
+        '#prefix' => '<div class="admin-requirements">Requires: ',
+        '#suffix' => '</div>',
+        '#theme' => 'item_list',
+        '#items' => $requires,
+        '#context' => ['list_style' => 'comma-list'],
+      ];
+
       if ($module->status) {
+
         // Generate link for module's help page. Assume that if a hook_help()
         // implementation exists then the module provides an overview page,
         // rather than checking to see if the page exists, which is costly.
         if ($this->moduleHandler->moduleExists('help') && in_array($module->getName(), $this->moduleHandler->getImplementations('help'))) {
-          $form['install_modules'][$id]['links']['help'] = [
+          $form['install_modules'][$id]['info']['links']['help'] = [
             '#type' => 'link',
             '#title' => $this->t('Help'),
             '#url' => Url::fromRoute('help.page', ['name' => $module->getName()]),
@@ -201,7 +234,7 @@ class ModuleConfigureForm extends FormBase {
 
         // Generate link for module's permission, if the user has access to it.
         if ($this->currentUser->hasPermission('administer permissions') && $this->permissionHandler->moduleProvidesPermissions($module->getName())) {
-          $form['install_modules'][$id]['links']['permissions'] = [
+          $form['install_modules'][$id]['info']['links']['permissions'] = [
             '#type' => 'link',
             '#title' => $this->t('Permissions'),
             '#url' => Url::fromRoute('user.admin_permissions'),
@@ -219,7 +252,7 @@ class ModuleConfigureForm extends FormBase {
         if (isset($module->info['configure'])) {
           $route_parameters = isset($module->info['configure_parameters']) ? $module->info['configure_parameters'] : [];
           if ($this->accessManager->checkNamedRoute($module->info['configure'], $route_parameters, $this->currentUser)) {
-            $form['install_modules'][$id]['links']['configure'] = [
+            $form['install_modules'][$id]['info']['links']['configure'] = [
               '#type' => 'link',
               '#title' => $this->t('Configure <span class="visually-hidden">the @module module</span>', ['@module' => $module->info['name']]),
               '#url' => Url::fromRoute($module->info['configure'], $route_parameters),
@@ -232,28 +265,8 @@ class ModuleConfigureForm extends FormBase {
           }
         }
       }
-
-      $requires = [];
-      // If this module requires other modules, add them to the array.
-      /** @var \Drupal\Core\Extension\Dependency $dependency_object */
-      foreach ($module->requires as $dependency => $dependency_object) {
-        // @todo Add logic for not displaying hidden modules in
-        //   https://drupal.org/node/3117829.
-        if ($incompatible = $this->checkDependencyMessage($modules, $dependency, $dependency_object)) {
-          $requires[$dependency] = $incompatible;
-          $form['install_modules'][$id]['enable']['#disabled'] = TRUE;
-          continue;
-        }
-
-        $name = $modules[$dependency]->info['name'];
-        $requires[$dependency] = $modules[$dependency]->status ? $this->t('@module', ['@module' => $name]) : $this->t('@module (<span class="admin-disabled">disabled</span>)', ['@module' => $name]);
-      }
-      $form['install_modules'][$id]['requires'] = [
-        '#theme' => 'item_list',
-        '#items' => $requires,
-        '#context' => ['list_style' => 'comma-list'],
-      ];
     }
+
     $form['#title'] = $this->t('Install & configure modules');
 
     $form['actions'] = ['#type' => 'actions'];
@@ -262,6 +275,8 @@ class ModuleConfigureForm extends FormBase {
       '#value' => $this->t('Save and continue'),
       '#button_type' => 'primary',
     ];
+
+    $form['#attached']['library'][] = 'thunder/module.configure.form';
 
     return $form;
   }
