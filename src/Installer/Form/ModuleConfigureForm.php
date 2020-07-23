@@ -12,6 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Installer\InstallerKernel;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Url;
+use Drupal\system\ModuleDependencyMessageTrait;
 use Drupal\user\PermissionHandlerInterface;
 use Drupal\Component\Utility\Environment;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -20,6 +21,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Provides the site configuration form.
  */
 class ModuleConfigureForm extends FormBase {
+
+  use ModuleDependencyMessageTrait;
 
   /**
    * The module extension list.
@@ -151,7 +154,7 @@ class ModuleConfigureForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['description'] = [
       '#type' => 'item',
-      '#markup' => $this->t('Keep calm. You can install all the modules later, too.'),
+      '#markup' => $this->t('This is a list of modules that are supported by Thunder, but not enabled by default.'),
     ];
 
     $form['install_modules'] = [
@@ -159,7 +162,8 @@ class ModuleConfigureForm extends FormBase {
       '#tree' => TRUE,
     ];
 
-    $thunder_features = array_filter($this->moduleExtensionList->getList(), function (Extension $module) {
+    $modules = $this->moduleExtensionList->getList();
+    $thunder_features = array_filter($modules, function (Extension $module) {
       return $module->info['package'] === 'Thunder Optional';
     });
 
@@ -228,6 +232,27 @@ class ModuleConfigureForm extends FormBase {
           }
         }
       }
+
+      $requires = [];
+      // If this module requires other modules, add them to the array.
+      /** @var \Drupal\Core\Extension\Dependency $dependency_object */
+      foreach ($module->requires as $dependency => $dependency_object) {
+        // @todo Add logic for not displaying hidden modules in
+        //   https://drupal.org/node/3117829.
+        if ($incompatible = $this->checkDependencyMessage($modules, $dependency, $dependency_object)) {
+          $requires[$dependency] = $incompatible;
+          $form['install_modules'][$id]['enable']['#disabled'] = TRUE;
+          continue;
+        }
+
+        $name = $modules[$dependency]->info['name'];
+        $requires[$dependency] = $modules[$dependency]->status ? $this->t('@module', ['@module' => $name]) : $this->t('@module (<span class="admin-disabled">disabled</span>)', ['@module' => $name]);
+      }
+      $form['install_modules'][$id]['requires'] = [
+        '#theme' => 'item_list',
+        '#items' => $requires,
+        '#context' => ['list_style' => 'comma-list'],
+      ];
     }
     $form['#title'] = $this->t('Install & configure modules');
 
