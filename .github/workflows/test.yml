@@ -184,6 +184,11 @@ jobs:
           composer require thunder/thunder-distribution:^3.5.0 --no-update
           chmod -R +w docroot/sites/default
           composer update
+
+          pushd docroot/modules/contrib/slick_media
+          wget -q -O - https://www.drupal.org/files/issues/2020-07-24/3161185-4.patch | git apply -v
+          popd
+
           vendor/bin/drush updb -y
 
           vendor/bin/drush pmu libraries -y
