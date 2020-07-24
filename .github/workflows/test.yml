@@ -195,6 +195,7 @@ jobs:
 
           composer remove thunder/thunder-distribution
 
+          composer config discard-changes true --working-dir="${GITHUB_WORKSPACE}"
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
 
