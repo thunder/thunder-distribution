@@ -181,6 +181,7 @@ jobs:
 
       - name: Update the docroot
         run: |
+          composer config discard-changes true
           composer require thunder/thunder-distribution:^3.5.0 --no-update
           chmod -R +w docroot/sites/default
           composer update
@@ -195,7 +196,6 @@ jobs:
 
           composer remove thunder/thunder-distribution
 
-          composer config discard-changes true --working-dir="${GITHUB_WORKSPACE}"
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
 
