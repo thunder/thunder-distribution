@@ -1,0 +1,5 @@
+thunder.optional_modules_form:
+  title: 'Optional Thunder modules'
+  route_name: thunder.optional_modules_form
+  menu_name: admin
+  parent: system.modules_list
