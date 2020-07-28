@@ -22,7 +22,7 @@ dependencies:
     - scheduler
     - scheduler_content_moderation_integration
     - select2
-    - thunder
+    - thunder_workflow
 third_party_settings:
   field_group:
     group_teaser:

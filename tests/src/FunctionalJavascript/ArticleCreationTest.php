@@ -96,8 +96,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check that one Twitter widget is on page.
     $this->getSession()
-      ->wait(5000, "jQuery('twitter-widget').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length === 1");
-    $numOfElements = $this->getSession()->evaluateScript("jQuery('twitter-widget').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length");
+      ->wait(5000, "jQuery('iframe').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length === 1");
+    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length");
     $this->assertEquals(1, $numOfElements, "Number of twitter on page should be one.");
 
     // Check Link Paragraph.
@@ -127,7 +127,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     foreach (\Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'article']) as $node) {
       $node->delete();
     }
-    \Drupal::service('module_installer')->uninstall(['content_moderation']);
+    \Drupal::service('module_installer')->uninstall(['thunder_workflow']);
 
     // Try to create an article.
     $this->articleFillNew([
