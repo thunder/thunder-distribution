@@ -21,6 +21,7 @@ env:
   DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
   DRUPAL_TESTING_TEST_GROUP: Thunder
   THUNDER_ADMIN_BRANCH: 8.x-3.x
+  DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 3.0.8
 
 jobs:
 
@@ -310,16 +311,17 @@ jobs:
           echo ::set-output name=DOCKER_SANITIZED_BRANCH_NAME::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')
           echo ::set-output name=DOCKER_TAG::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')-${{ github.run_id }}
 
-      - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
-        with:
-          name: burda/thunder-performance
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: ${{ steps.vars.outputs.DOCKER_TAG }}
-          workdir: docker-thunder-performance
+      - name: Create image and push to registry
+        working-directory: docker-thunder-performance
+        run: |
+          echo ${{ secrets.DOCKER_TOKEN }} | docker login -u thundertechnology --password-stdin
+          export DOCKER_IMAGE_TAG="burda/thunder-performance:${{ steps.vars.outputs.DOCKER_TAG }}"
+          composer config bin-dir vendor/bin/ --working-dir=./www
+          chmod u+w www/docroot/sites/default
+          bash -x ./build.sh --tag "${DOCKER_IMAGE_TAG}"
+          docker push "${DOCKER_IMAGE_TAG}"
 
-      - name: Start Thunde performance testing task for created image
+      - name: Start Thunder performance testing task for created image
         run: |
           API_CALL_HTTP_CODE=$(curl \
           --request POST \
