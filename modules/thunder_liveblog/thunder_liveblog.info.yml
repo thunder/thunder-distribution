@@ -2,8 +2,9 @@ name: 'Thunder Liveblog'
 description: 'Integrates with the Paragraphs module and Thunder for media embedding'
 type: module
 core: 8.x
-package: Thunder
+package: Thunder Optional
 dependencies:
+  - liveblog:liveblog
   - liveblog:liveblog_pusher
   - paragraphs:paragraphs
   - select2:select2

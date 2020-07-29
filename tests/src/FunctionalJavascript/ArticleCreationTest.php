@@ -127,7 +127,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     foreach (\Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'article']) as $node) {
       $node->delete();
     }
-    \Drupal::service('module_installer')->uninstall(['content_moderation']);
+    \Drupal::service('module_installer')->uninstall(['thunder_workflow']);
 
     // Try to create an article.
     $this->articleFillNew([
