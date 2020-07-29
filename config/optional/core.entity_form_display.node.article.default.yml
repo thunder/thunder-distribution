@@ -1,3 +1,4 @@
+uuid: 17d84f67-dda9-4d31-b918-1173f5ea1b4e
 langcode: en
 status: true
 dependencies:
@@ -35,7 +36,6 @@ third_party_settings:
       label: Teaser
       format_type: fieldset
       format_settings:
-        label: Teaser
         description: ''
         required_fields: true
         id: ''
@@ -49,7 +49,6 @@ third_party_settings:
       label: Paragraphs
       format_type: fieldset
       format_settings:
-        label: Paragraphs
         description: ''
         required_fields: true
         id: ''
@@ -65,13 +64,14 @@ third_party_settings:
       weight: 3
       format_type: fieldset
       format_settings:
-        label: Basis
         description: ''
         required_fields: true
         id: ''
         classes: content-form__form-section
       label: Basis
       region: content
+_core:
+  default_config_hash: gQE3DNzS9JPWwDYihtTNA7ugxicMlIaV6wMR9uKIw1s
 id: node.article.default
 targetEntityType: node
 bundle: article
@@ -91,7 +91,8 @@ content:
     region: content
   field_meta_tags:
     weight: 10
-    settings: {  }
+    settings:
+      sidebar: true
     third_party_settings: {  }
     type: metatag_firehose
     region: content
@@ -109,9 +110,9 @@ content:
       form_display_mode: default
       default_paragraph_type: _none
       features:
-        duplicate: '0'
-        collapse_edit_all: '0'
         add_above: '0'
+        collapse_edit_all: '0'
+        duplicate: '0'
     third_party_settings:
       paragraphs_features:
         delete_confirmation: true
@@ -127,8 +128,10 @@ content:
           text: paragraph.text.field_text
         split_method:
           double_new_line: double_new_line
+          url: url
           regex: '0'
         split_method_regex: ''
+        experimental: false
     region: content
   field_seo_title:
     type: string_textfield
