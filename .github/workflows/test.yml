@@ -287,7 +287,7 @@ jobs:
         with:
           repository: thunder/docker-thunder-performance
           path: thunder-distribution/docker-thunder-performance
-          ref: 'master'
+          ref: 'fix/permissions-for-image-styles'
 
       - uses: shivammathur/setup-php@master
         with:
