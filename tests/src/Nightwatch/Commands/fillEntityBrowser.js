@@ -43,7 +43,7 @@ exports.command = function fillEntityBrowser(
     );
 
   // Select first entity in view.
-  browser.executeAsync(
+  browser.execute(
     // eslint-disable-next-line prefer-arrow-callback
     function inBrowser(xpathSelectorInBrowser, done) {
       jQuery(
