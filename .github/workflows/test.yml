@@ -276,7 +276,7 @@ jobs:
         run: test-drupal-project run_tests
 
   test-performance:
-    needs: [build]
+    needs: [build, test-max]
 
     runs-on: ubuntu-latest
 
