@@ -54,6 +54,7 @@ exports.command = function fillEntityBrowser(
     .click(
       `//*[@id="entity-browser-${entityBrowserNameIdPart}-form"]/div[1]/div[2]/div[1]`
     )
+    .waitForElementVisible(submitSelector, 10000)
     .click(submitSelector)
     .frame()
     .waitForElementVisible(
