@@ -320,6 +320,7 @@ jobs:
           chmod u+w www/docroot/sites/default
           bash -x ./build.sh --tag "${DOCKER_IMAGE_TAG}"
           docker push "${DOCKER_IMAGE_TAG}"
+
       - name: Start Thunder performance testing task for created image
         run: |
           API_CALL_HTTP_CODE=$(curl \
