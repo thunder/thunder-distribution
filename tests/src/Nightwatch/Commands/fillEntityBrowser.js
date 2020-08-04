@@ -28,6 +28,12 @@ exports.command = function fillEntityBrowser(
     .replace(/[_[]/g, "-")
     .replace(/]/g, "");
 
+  // Handle multi and single select entity browser.
+  const submitSelector =
+    selectionMode === "selection_edit"
+      ? '//*[starts-with(@id, "edit-use-selected")]'
+      : '//*[@id = "edit-submit"]';
+
   browser
     .scrollInViewAndClick(
       `//*[starts-with(@id, "edit-${fieldIdPart}-entity-browser-entity-browser-open-modal")]`
@@ -40,40 +46,14 @@ exports.command = function fillEntityBrowser(
     .waitForElementVisible(
       `//*[@id="entity-browser-${entityBrowserNameIdPart}-form"]/div[1]/div[2]`,
       10000
-    );
-
-  // Select first entity in view.
-  browser.execute(
-    // eslint-disable-next-line prefer-arrow-callback
-    function inBrowser(xpathSelectorInBrowser, done) {
-      jQuery(
-        document.evaluate(xpathSelectorInBrowser, document).iterateNext()
-      ).click();
-
-      done();
-    },
-    [
+    )
+    .waitForElementVisible(
+      `//*[@id="entity-browser-${entityBrowserNameIdPart}-form"]/div[1]/div[2]/div[1]`,
+      10000
+    )
+    .click(
       `//*[@id="entity-browser-${entityBrowserNameIdPart}-form"]/div[1]/div[2]/div[1]`
-    ],
-    () => {}
-  );
-
-  // TODO: Fix after we have properly displayed images in entity browser.
-  // .waitForElementVisible(
-  //   `//*[@id="entity-browser-${entityBrowserNameIdPart}-form"]/div[1]/div[2]/div[1]`,
-  //   10000
-  // )
-  // .click(
-  //   `//*[@id="entity-browser-${entityBrowserNameIdPart}-form"]/div[1]/div[2]/div[1]`
-  // )
-
-  // Handle multi and single select entity browser.
-  const submitSelector =
-    selectionMode === "selection_edit"
-      ? '//*[starts-with(@id, "edit-use-selected")]'
-      : '//*[@id = "edit-submit"]';
-
-  browser
+    )
     .click(submitSelector)
     .frame()
     .waitForElementVisible(
