@@ -17,7 +17,7 @@ image.effect.thunder_media_auto_aspect:
       label: 'Landscape image style'
     portrait:
       type: string
-      label: 'Portrait'
+      label: 'Portrait image style'
     ratio_adjustment:
       type: integer
       label: 'Ratio adjustment'
