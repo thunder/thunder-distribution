@@ -76,7 +76,7 @@ jobs:
         run: test-drupal-project install
 
       - name: Zip build
-        run: cd /tmp/test; tar cfhz build.tgz thunder; mv build.tgz ${GITHUB_WORKSPACE}
+        run: cd /tmp/test; tar cfz build.tgz thunder; mv build.tgz ${GITHUB_WORKSPACE}
 
       - name: Upload build
         uses: actions/upload-artifact@v1
@@ -137,6 +137,7 @@ jobs:
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: false
+      DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 3.0.8
 
     steps:
       - uses: actions/checkout@v1
