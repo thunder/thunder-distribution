@@ -1,6 +1,6 @@
 /**
  * @file
- * Testing of content overview filtering.
+ * Testing of content overview filtering with a search api based view.
  */
 
 // eslint-disable-next-line import/no-dynamic-require
@@ -13,7 +13,7 @@ module.exports = {
 
     done();
   },
-  contentOverviewFiltering(browser) {
+  searchApiContentOverviewFiltering(browser) {
     browser
       .resizeWindow(1024, 1024)
       .performance.startMeasurement(
