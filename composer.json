@@ -57,6 +57,9 @@
             ]
         },
         "patches": {
+            "drupal/core": {
+                "#3164210 Refactor array_merge() usage in loops as possible for performance": "https://www.drupal.org/files/issues/2020-08-09/3164210-3.patch"
+            },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
