@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Thunder Search integration install hooks.
+ * Thunder Search integration hooks.
  */
 
 use Drupal\views\ViewExecutable;
@@ -21,6 +21,6 @@ function thunder_search_views_pre_render(ViewExecutable $view) {
 
   $index = $view->query->getIndex();
   if (!$index_task_manager->isTrackingComplete($index) || $index->getTrackerInstance()->getRemainingItemsCount()) {
-    \Drupal::messenger()->addError(t("It's needed to <a href='/admin/config/search/search-api/index/content'>index the search index</a> in order to have all content searchable."));
+    \Drupal::messenger()->addError(t("The content is not fully indexed. Check your <a href='/admin/config/search/search-api/index/content'>search index</a> settings."));
   }
 }
