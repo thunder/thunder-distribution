@@ -74,9 +74,6 @@
         }
     },
     "require": {
-        "composer/installers": "^1.2",
-        "cweagans/composer-patches": "^1.6.5",
-        "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0-alpha8",
         "drupal/adsense": "^1.2-rc1",
         "drupal/admin_toolbar": "^2.1",
