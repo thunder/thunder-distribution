@@ -1,5 +1,14 @@
 # Changelog
 
+## [6.0.1](https://github.com/thunder/thunder-distribution/tree/6.0.1) 2020-08-27
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.0.0...6.0.1)
+
+After a lot of work, we have finally integrated the search api to have a better editorial search.
+To start using the new article search, the optional Thunder Search API module has to be enabled, it is not enabled by default. The content list will get a fulltext search index instead of the previous search by title.
+We recommend to use Solr-Search for improved performance.
+
+- Do [Integrate editorial search with Search API module](https://www.drupal.org/node/2899254)
+
 ## [6.0.0](https://github.com/thunder/thunder-distribution/tree/6.0.0) 2020-07-27
 
 Add Drupal 9 compatibility. To achieve this, we had to remove the AMP anf Facebook instant articles modules. If you need
