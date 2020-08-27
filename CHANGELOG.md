@@ -8,7 +8,6 @@ To start using the new article search, the optional Thunder Search API module ha
 
 Starting with this release, we will not provide a tar-ball on drupal.org anymore. Only composer installs are supported.
 
-
 - Do [Integrate editorial search with Search API module](https://www.drupal.org/node/2899254)
 
 ## [3.5.2](https://github.com/thunder/thunder-distribution/tree/3.5.2) 2020-07-23
