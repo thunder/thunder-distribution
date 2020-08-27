@@ -6,6 +6,9 @@
 After a lot of work, we have finally integrated the search api to have a better editorial search.
 To start using the new article search, the optional Thunder Search API module has to be enabled, it is not enabled by default. The content list will get a fulltext search index instead of the previous search by title. We recommend to use Solr-Search for improved performance.
 
+Starting with this release, we will not provide a tar-ball on drupal.org anymore. Only composer installs are supported.
+
+
 - Do [Integrate editorial search with Search API module](https://www.drupal.org/node/2899254)
 
 ## [3.5.2](https://github.com/thunder/thunder-distribution/tree/3.5.2) 2020-07-23
