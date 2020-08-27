@@ -4,8 +4,7 @@
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.2...3.5.3)
 
 After a lot of work, we have finally integrated the search api to have a better editorial search.
-To start using the new article search, the optional Thunder Search API module has to be enabled, it is not enabled by default. The content list will get a fulltext search index instead of the previous search by title.
-We recommend to use Solr-Search for improved performance.
+To start using the new article search, the optional Thunder Search API module has to be enabled, it is not enabled by default. The content list will get a fulltext search index instead of the previous search by title. We recommend to use Solr-Search for improved performance.
 
 - Do [Integrate editorial search with Search API module](https://www.drupal.org/node/2899254)
 
