@@ -129,7 +129,7 @@
         "drupal/token": "^1.7",
         "drupal/update_helper": "^2.0",
         "drupal/search_api": "^1.17",
-        "drupal/views_bulk_operations": "^3.7",
+        "drupal/views_bulk_operations": "^3.8",
         "npm-asset/dropzone": "^5.5.1",
         "npm-asset/exif-js": "^2.3.0",
         "npm-asset/blazy": "^1.8",
