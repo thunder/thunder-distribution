@@ -43,6 +43,7 @@ function thunder_update_dependencies() {
     'thunder_translation',
     'thunder_workflow',
     'thunder_ivw',
+    'thunder_search',
   ];
 
   foreach ($updates as $module => $info) {
@@ -101,4 +102,18 @@ function _thunder_mark_update_checklist($update_id, $successful, UpdateLogger $u
  */
 function thunder_update_last_removed() {
   return 8309;
+}
+
+/**
+ * Prepare the content view for the config selector.
+ */
+function thunder_update_8310() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8310');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
 }

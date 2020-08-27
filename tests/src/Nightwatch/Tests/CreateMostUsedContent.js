@@ -66,7 +66,7 @@ module.exports = {
       .drupalRelativeURL(`/node/add/${bundle}`)
       // Start using XPATH!!!
       .useXpath()
-      .waitForElementVisible('//*[@id="edit-submit"]', 1000)
+      .waitForElementVisible('//*[@id="edit-submit"]', 10000)
 
       // Fill fields for content bundle.
       .performance.startMark("fill fields")
