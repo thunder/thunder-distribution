@@ -128,9 +128,9 @@ class LiveblogTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ModuleIntegrationTest_Liveblog_TwitterPost_Add_' . date('Ymd_His') . '.png');
     $this->clickDropButton('field_embed_media_twitter_add_more');
-    $this->waitUntilVisible('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]"]', 10000);
+    $this->waitUntilVisible('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][value]"]', 10000);
     $this->setFieldValue($page,
-      'field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]',
+      'field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][value]',
       'https://twitter.com/tweetsauce/status/778001033142284288'
     );
 
