@@ -102,18 +102,54 @@ function _thunder_mark_update_checklist($update_id, $successful, UpdateLogger $u
  * Implements hook_requirements().
  */
 function thunder_requirements($phase) {
-  if ($phase !== 'update') {
-    return [];
-  }
   $requirements = [];
-  $thunder_schema = drupal_get_installed_schema_version('thunder');
-  if ($thunder_schema > 8000 && $thunder_schema < 8138) {
-    $requirements['thunder'] = [
-      'title' => t('Thunder'),
-      'description' => t('You need to update to the latest version of Thunder 2 before switching to Thunder 3.'),
-      'severity' => REQUIREMENT_ERROR,
-    ];
+
+  if ($phase == 'update') {
+    $thunder_schema = drupal_get_installed_schema_version('thunder');
+    if ($thunder_schema > 8000 && $thunder_schema < 8138) {
+      $requirements['thunder'] = [
+        'title' => t('Thunder'),
+        'description' => t('You need to update to the latest version of Thunder 2 before switching to Thunder 3.'),
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
   }
+
+  // Add runtime error for missing modules.
+  if ($phase == 'runtime') {
+    $missing_modules = [];
+    $extension_list = \Drupal::service("extension.list.module");
+    foreach (drupal_get_installed_schema_version(NULL, FALSE, TRUE) as $module => $schema_version) {
+      try {
+        $extension_list->getPathname($module);
+      }
+      catch (\InvalidArgumentException $e) {
+        $missing_modules[] = $module;
+      }
+    }
+
+    if (!empty($missing_modules)) {
+      $requirements['missing_modules'] = [
+        'title' => t('Missing modules'),
+      ];
+
+      $description = [
+        '#type' => 'inline_template',
+        '#template' => '{{ configuration_error_list }} '. t('Put the code back in its original place and uninstall.'),
+        '#context' => [
+          'configuration_error_list' => [
+            '#theme' => 'item_list',
+            '#items' => $missing_modules,
+          ]
+        ],
+      ];
+
+      $requirements['missing_modules']['value'] = t('Following modules are missing from the file system:');
+      $requirements['missing_modules']['severity'] = REQUIREMENT_ERROR;
+      $requirements['missing_modules']['description'] = $description;
+    }
+  }
+
   return $requirements;
 }
 
