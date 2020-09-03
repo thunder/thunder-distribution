@@ -35,7 +35,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           coverage: none
-          php-version: '7.3'
+          php-version: '7.4'
           extensions: Imagick
 
       - name: Start MySql service
@@ -95,7 +95,7 @@ jobs:
     - uses: shivammathur/setup-php@v2
       with:
         coverage: none
-        php-version: '7.3'
+        php-version: '7.4'
         extensions: Imagick
 
     - name: Setup problem matchers for PHP
@@ -285,7 +285,7 @@ jobs:
       - uses: shivammathur/setup-php@master
         with:
           coverage: none
-          php-version: '7.3'
+          php-version: '7.4'
           extensions: Imagick
 
       - name: Download build
