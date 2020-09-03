@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Thunder Search integration hooks.
+ */
+
+use Drupal\views\ViewExecutable;
+use Drupal\search_api\Plugin\views\query\SearchApiQuery;
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function thunder_search_views_pre_render(ViewExecutable $view) {
+  if ($view->result || !$view->query instanceof SearchApiQuery) {
+    return;
+  }
+
+  /** @var \Drupal\search_api\Task\IndexTaskManagerInterface $index_task_manager */
+  $index_task_manager = \Drupal::service('search_api.index_task_manager');
+
+  $index = $view->query->getIndex();
+  if (!$index_task_manager->isTrackingComplete($index) || $index->getTrackerInstance()->getRemainingItemsCount()) {
+    \Drupal::messenger()->addError(t("The content is not fully indexed. Check your <a href='/admin/config/search/search-api/index/content'>search index</a> settings."));
+  }
+}

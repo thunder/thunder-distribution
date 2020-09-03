@@ -35,7 +35,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           coverage: none
-          php-version: '7.3'
+          php-version: '7.4'
           extensions: Imagick
 
       - name: Start MySql service
@@ -58,7 +58,7 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Add needed dependencies
-        run: composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: composer require "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Set composer bin path
         run: composer config bin-dir bin/ --working-dir=/tmp/test/thunder/install
@@ -95,7 +95,7 @@ jobs:
     - uses: shivammathur/setup-php@v2
       with:
         coverage: none
-        php-version: '7.3'
+        php-version: '7.4'
         extensions: Imagick
 
     - name: Setup problem matchers for PHP
@@ -285,7 +285,7 @@ jobs:
       - uses: shivammathur/setup-php@master
         with:
           coverage: none
-          php-version: '7.3'
+          php-version: '7.4'
           extensions: Imagick
 
       - name: Download build
