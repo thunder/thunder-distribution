@@ -1,5 +1,8 @@
 # Changelog
 
+## [3.5.4](https://github.com/thunder/thunder-distribution/tree/3.5.4) 2020-09-03
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.3...3.5.4)
+
 ## [3.5.3](https://github.com/thunder/thunder-distribution/tree/3.5.3) 2020-08-27
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.2...3.5.3)
 
