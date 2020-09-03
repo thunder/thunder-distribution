@@ -3,6 +3,11 @@
 ## [3.5.4](https://github.com/thunder/thunder-distribution/tree/3.5.4) 2020-09-03
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.3...3.5.4)
 
+Modal dialogs do not work with Drupal 8.9.4. Until a new release of Drupal has been done, we need to prevent installation of Drupal 8.9.4.
+
+- Do [Make Thunder PHP 7.4 compatible](https://www.drupal.org/node/3168860)
+- Fix [Prevent installing of Drupal 8.9.4/9.0.4](https://www.drupal.org/node/3168846)
+
 ## [3.5.3](https://github.com/thunder/thunder-distribution/tree/3.5.3) 2020-08-27
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.2...3.5.3)
 
