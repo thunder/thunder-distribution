@@ -142,6 +142,9 @@
         "npm-asset/select2": "^4.0.7",
         "pusher/pusher-php-server": "^3.0.3 || ^4.1.1"
     },
+    "conflict": {
+        "drupal/core": "9.0.4"
+    },
     "suggest": {
         "drupal/nexx_integration": "NEXX Video CMS integration",
         "valiton/harbourmaster": "Harbourmaster Single Sign On"
