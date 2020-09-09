@@ -9,5 +9,8 @@
     "review": {
       "addons": ["heroku-postgresql:hobby-dev"]
     }
+  },
+  "scripts": {
+    "postdeploy": "vendor/bin/drush si --db-url=\"${DATABASE_URL}\" --site-name=\"Thunder PR ${HEROKU_PR_NUMBER}\""
   }
 }
