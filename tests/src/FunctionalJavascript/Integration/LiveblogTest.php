@@ -132,11 +132,12 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     $socialUrl = 'https://twitter.com/tweetsauce/status/778001033142284288';
-    if ($page->hasField('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][value]"]')) {
-      $page->fillField('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][value]"]', $socialUrl);
+
+    if ($page->hasField('field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][value]')) {
+      $page->fillField('field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][value]', $socialUrl);
     }
-    elseif ($page->hasField('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]"]')) {
-      $page->fillField('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]"]', $socialUrl);
+    elseif ($page->hasField('field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]')) {
+      $page->fillField('field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]', $socialUrl);
     }
 
     $this->liveblogSetBody('Very nice twitter post you have here!');
