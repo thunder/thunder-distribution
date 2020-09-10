@@ -135,8 +135,8 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     if ($page->hasField('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][value]"]')) {
       $page->fillField('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][value]"]', $socialUrl);
     }
-    elseif ($page->hasField('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][url]"]')) {
-      $page->fillField('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][url]"]', $socialUrl);
+    elseif ($page->hasField('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]"]')) {
+      $page->fillField('[name="field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][uri]"]', $socialUrl);
     }
 
     $this->liveblogSetBody('Very nice twitter post you have here!');
