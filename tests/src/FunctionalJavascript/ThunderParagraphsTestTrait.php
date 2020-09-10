@@ -215,8 +215,8 @@ trait ThunderParagraphsTestTrait {
     if ($page->hasField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][value]")) {
       $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][value]", $socialUrl);
     }
-    elseif ($page->hasField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][url]")) {
-      $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][url]", $socialUrl);
+    elseif ($page->hasField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][uri]")) {
+      $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][uri]", $socialUrl);
     }
   }
 
