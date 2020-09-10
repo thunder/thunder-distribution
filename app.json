@@ -11,6 +11,6 @@
     }
   },
   "scripts": {
-    "postdeploy": "export DB_URL=`echo $DATABASE_URL |sed -e's,^\(.*://\),pgsql://,g'`; vendor/bin/drush si --db-url=$DB_URL --site-name='Thunder PR $HEROKU_PR_NUMBER' -y"
+    "postdeploy": "export DB_URL=\`echo $DATABASE_URL |sed -e's,^\(.*://\),pgsql://,g'\`; vendor/bin/drush si --db-url=$DB_URL --site-name='Thunder PR $HEROKU_PR_NUMBER' -y"
   }
 }
