@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.0.2](https://github.com/thunder/thunder-distribution/tree/6.0.2) 2020-09-03
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.0.1...6.0.2)
+
+Modal dialogs do not work with Drupal 9.0.4. Until a new release of Drupal has been done, we need to prevent installation of Drupal 9.0.4.
+
+- Do [Make Thunder PHP 7.4 compatible](https://www.drupal.org/node/3168860)
+- Fix [Prevent installing of Drupal 8.9.4/9.0.4](https://www.drupal.org/node/3168846)
+
 ## [6.0.1](https://github.com/thunder/thunder-distribution/tree/6.0.1) 2020-08-27
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.0.0...6.0.1)
 
