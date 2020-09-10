@@ -60,7 +60,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
       return TRUE;
     }
 
-    /* @var \Drupal\image\ImageStyleInterface $style */
+    /** @var \Drupal\image\ImageStyleInterface $style */
     $style = $this->entityTypeManager->getStorage('image_style')->load($style_name);
     if (empty($style)) {
       // Required preset has gone missing?
@@ -69,7 +69,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
 
     // Run the preset actions ourself.
     foreach ($style->getEffects() as $sub_effect) {
-      /* @var \Drupal\image\ImageEffectInterface $sub_effect */
+      /** @var \Drupal\image\ImageEffectInterface $sub_effect */
       $sub_effect->applyEffect($image);
     }
     return TRUE;
@@ -84,11 +84,11 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
       // resulting dimensions, unless both styles return the same dimensions:
       $landscape_dimensions = $portrait_dimensions = $dimensions;
 
-      /* @var \Drupal\image\ImageStyleInterface $landscape_style */
+      /** @var \Drupal\image\ImageStyleInterface $landscape_style */
       $landscape_style = $this->entityTypeManager->getStorage('image_style')->load($this->configuration['landscape']);
       $landscape_style->transformDimensions($landscape_dimensions, $uri);
 
-      /* @var \Drupal\image\ImageStyleInterface $portrait_style */
+      /** @var \Drupal\image\ImageStyleInterface $portrait_style */
       $portrait_style = $this->entityTypeManager->getStorage('image_style')->load($this->configuration['portrait']);
       $portrait_style->transformDimensions($portrait_dimensions, $uri);
 
@@ -104,7 +104,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
       $aspect = $dimensions['width'] / $dimensions['height'];
       $style_name = (($aspect * $ratio_adjustment) > 1) ? $this->configuration['landscape'] : $this->configuration['portrait'];
 
-      /* @var \Drupal\image\ImageStyleInterface $style */
+      /** @var \Drupal\image\ImageStyleInterface $style */
       $style = $this->entityTypeManager->getStorage('image_style')->load($style_name);
       $style->transformDimensions($dimensions, $uri);
     }
@@ -142,12 +142,12 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
 
     $image_style_storage = $this->entityTypeManager->getStorage('image_style');
 
-    /* @var \Drupal\image\ImageStyleInterface $landscape_style */
+    /** @var \Drupal\image\ImageStyleInterface $landscape_style */
     if ($landscape_style = $image_style_storage->load($this->configuration['landscape'])) {
       $dependencies[$landscape_style->getConfigDependencyKey()][] = $landscape_style->getConfigDependencyName();
     }
 
-    /* @var \Drupal\image\ImageStyleInterface $portrait_style */
+    /** @var \Drupal\image\ImageStyleInterface $portrait_style */
     if ($portrait_style = $image_style_storage->load($this->configuration['portrait'])) {
       $dependencies[$portrait_style->getConfigDependencyKey()][] = $portrait_style->getConfigDependencyName();
     }
