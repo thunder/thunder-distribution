@@ -11,6 +11,6 @@
     }
   },
   "scripts": {
-    "postdeploy": "vendor/bin/drush si --db-url=\"${DATABASE_URL}\" --site-name=\"Thunder PR ${HEROKU_PR_NUMBER}\""
+    "postdeploy": "vendor/bin/drush si --db-url=\"${DATABASE_URL}\" --site-name=\"Thunder PR ${HEROKU_PR_NUMBER}\" -y"
   }
 }
