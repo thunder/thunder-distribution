@@ -35,7 +35,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           coverage: none
-          php-version: '7.3'
+          php-version: '7.4'
           extensions: Imagick
 
       - name: Start MySql service
@@ -58,7 +58,7 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Add needed dependencies
-        run: composer require "thunder/thunder_performance_measurement:dev-master" "thunder/testsite_builder:dev-master" "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: composer require "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Set composer bin path
         run: composer config bin-dir bin/ --working-dir=/tmp/test/thunder/install
@@ -76,7 +76,7 @@ jobs:
         run: test-drupal-project install
 
       - name: Zip build
-        run: cd /tmp/test; tar cfhz build.tgz thunder; mv build.tgz ${GITHUB_WORKSPACE}
+        run: cd /tmp/test; tar cfz build.tgz thunder; mv build.tgz ${GITHUB_WORKSPACE}
 
       - name: Upload build
         uses: actions/upload-artifact@v1
@@ -95,7 +95,7 @@ jobs:
     - uses: shivammathur/setup-php@v2
       with:
         coverage: none
-        php-version: '7.3'
+        php-version: '7.4'
         extensions: Imagick
 
     - name: Setup problem matchers for PHP
@@ -137,6 +137,7 @@ jobs:
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: false
+      DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 3.0.8
 
     steps:
       - uses: actions/checkout@v1
@@ -284,7 +285,7 @@ jobs:
       - uses: shivammathur/setup-php@master
         with:
           coverage: none
-          php-version: '7.3'
+          php-version: '7.4'
           extensions: Imagick
 
       - name: Download build
@@ -303,16 +304,17 @@ jobs:
           echo ::set-output name=DOCKER_SANITIZED_BRANCH_NAME::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')
           echo ::set-output name=DOCKER_TAG::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')-${{ github.run_id }}
 
-      - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
-        with:
-          name: burda/thunder-performance
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: ${{ steps.vars.outputs.DOCKER_TAG }}
-          workdir: docker-thunder-performance
+      - name: Create image and push to registry
+        working-directory: docker-thunder-performance
+        run: |
+          echo ${{ secrets.DOCKER_TOKEN }} | docker login -u thundertechnology --password-stdin
+          export DOCKER_IMAGE_TAG="burda/thunder-performance:${{ steps.vars.outputs.DOCKER_TAG }}"
+          composer config bin-dir vendor/bin/ --working-dir=./www
+          chmod u+w www/docroot/sites/default
+          bash -x ./build.sh --tag "${DOCKER_IMAGE_TAG}"
+          docker push "${DOCKER_IMAGE_TAG}"
 
-      - name: Start Thunde performance testing task for created image
+      - name: Start Thunder performance testing task for created image
         run: |
           API_CALL_HTTP_CODE=$(curl \
           --request POST \

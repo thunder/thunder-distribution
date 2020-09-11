@@ -64,9 +64,6 @@
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2020-04-14/2918974-7-11.patch",
                 "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2020-03-20/password-policy-2771129-110.patch"
             },
-            "drupal/inline_entity_form": {
-                "Replace theme_inline_entity_form_entity_table() with twig template": "https://www.drupal.org/files/issues/2020-05-24/3121071-21.patch"
-            },
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
             }
@@ -97,8 +94,9 @@
         "drupal/entity_reference_revisions": "^1.3",
         "drupal/field_group": "3.1",
         "drupal/focal_point": "^1.3",
+        "drupal/facets": "^1.4",
         "drupal/google_analytics": "^2.0",
-        "drupal/inline_entity_form": "1.0-rc6",
+        "drupal/inline_entity_form": "^1.0-rc7",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.1",
         "drupal/linkit": "^6.0.0-beta1",
@@ -118,12 +116,15 @@
         "drupal/scheduler": "^1.3",
         "drupal/scheduler_content_moderation_integration": "^1.3",
         "drupal/select2": "^1.7",
+        "drupal/search_api_mark_outdated": "^1.0",
         "drupal/simple_sitemap": "^3.7",
         "drupal/shariff": "^1.5",
         "drupal/slick": "^2.2",
         "drupal/thunder_admin": "^4.0",
         "drupal/token": "^1.7",
         "drupal/update_helper": "^2.0",
+        "drupal/search_api": "^1.17",
+        "drupal/views_bulk_operations": "^3.8",
         "npm-asset/dropzone": "^5.5.1",
         "npm-asset/exif-js": "^2.3.0",
         "npm-asset/blazy": "^1.8",
@@ -131,6 +132,9 @@
         "npm-asset/shariff": "^3.1.1",
         "npm-asset/select2": "^4.0.7",
         "pusher/pusher-php-server": "^3.0.3 || ^4.1.1"
+    },
+    "conflict": {
+        "drupal/core": "9.0.4"
     },
     "suggest": {
         "drupal/nexx_integration": "NEXX Video CMS integration",

@@ -2,7 +2,7 @@
 
 [![Build Status](https://github.com/thunder/thunder-distribution/workflows/.github/workflows/test.yml/badge.svg)](https://github.com/thunder/thunder-distribution/actions)
 
-Thunder is a Drupal 8 distribution for professional publishers. It consists of the current Drupal 8 functionality, lots of useful modules from publishers and industry partners, and an environment which makes it easy to install, deploy and add new functionality.
+Thunder is a Drupal distribution for professional publishers. It consists of the current Drupal functionality, lots of useful modules from publishers and industry partners, and an environment which makes it easy to install, deploy and add new functionality.
 
 
 ## Installing Thunder
@@ -31,7 +31,7 @@ Benefit from a wide range of additional functionality by industry partners or by
 ### <img src="./files/images/drupal_community_b_1.png" alt="Storytelling" width="2%"/> Open Source
 Using open source technology reduces development costs and resources and makes you part of the Drupal community with more than 100,000 users actively contributing.
 
-*[More information about the modules used in Thunder](https://burdamagazinorg.github.io/thunder-documentation/modules)*
+*[More information about the modules used in Thunder](https://thunder.github.io/thunder-documentation/modules)*
 
 ## Support
 For general help using Thunder, please refer to [the official Thunder documentation](https://thunder.github.io/thunder-documentation).

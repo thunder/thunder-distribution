@@ -1,9 +1,9 @@
 name: Thunder
 type: profile
-description: 'The Drupal8 based CMS for professional publishing.'
+description: 'The Drupal based CMS for professional publishing.'
 project: thunder
 core_version_requirement: ^9
-version: '8.x-5.1'
+version: '6.0.2'
 
 distribution:
   name: Thunder
@@ -87,6 +87,7 @@ install:
   - thunder:thunder_media
   - thunder:thunder_paragraphs
   - thunder:thunder_taxonomy
+  - thunder:thunder_workflow
 themes:
   - seven
   - thunder_base
