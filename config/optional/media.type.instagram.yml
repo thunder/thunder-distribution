@@ -24,4 +24,3 @@ source_configuration:
   source_field: field_url
 field_map:
   author_name: field_author
-  html: field_content
