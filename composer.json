@@ -73,7 +73,8 @@
             },
             "drupal/media_entity_instagram": {
                 "Settings file doesn't match schema": "https://www.drupal.org/files/issues/2020-09-10/3168689-3.patch",
-                "Add field formatter schema": "https://www.drupal.org/files/issues/2020-09-02/3168694.patch"
+                "Add field formatter schema": "https://www.drupal.org/files/issues/2020-09-02/3168694.patch",
+                "Allow link fields for the source": "https://www.drupal.org/files/issues/2020-09-11/3170405.patch"
             }
         }
     },
