@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 63c664f3-d403-4509-b90c-b945a69431b5
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: thunder_dg_2237.jpg
+  uri:
+    -
+      value: 'public://2020-09/thunder_dg_2237.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 469966
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1600163434

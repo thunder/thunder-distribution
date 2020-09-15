@@ -1,0 +1,327 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 17317a9b-c007-4933-99af-57d53e416f5d
+  bundle: article
+  default_langcode: en
+  depends:
+    a67c24e2-5974-42b4-9210-f918a0f230fd: taxonomy_term
+    dd45a3e7-ce93-41e8-bffe-2020211c2b5b: media
+    5d0b5981-3c35-4160-9ada-f4f7eaf4f607: media
+    2584ef49-8f36-424e-9338-c95d5cf933dc: media
+    6296b850-fea3-458d-8782-3177f48e2cbe: media
+    4fe40f59-8f90-4fc6-8630-fadea609a619: taxonomy_term
+    6fcc43bd-c374-4528-b180-ebe94c8fa6a5: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Thunder Day 2017: What you missed (if you weren''t there)'
+  created:
+    -
+      value: 1511258648
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /thunder-day-2017-community-shared-experiences-hamburg
+      langcode: en
+      pathauto: 1
+  publish_state:
+    -
+      value: _none
+  unpublish_state:
+    -
+      value: _none
+  field_channel:
+    -
+      entity: a67c24e2-5974-42b4-9210-f918a0f230fd
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 7e9a1da5-9369-4243-ba59-b53c12678b72
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600160761
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p>Our very first Thunder Day was a huge success: More than 100 publishers and IT experts working with or interested in Thunder came together in Hamburg to exchange experiences, success stories, and business cards. Conclusion: For professional publishing, there is no way to do without Thunder.</p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 8cfb5c3e-6a7a-405e-98a8-7bf1e68c9e36
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600160770
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p>Around 120 participants from eleven countries joined us for the first Thunder Day in Hamburg. Most came from Germany but we also welcomed guests from Austria, the Czech Republic, the Netherlands, Norway, Portugal, Serbia, Switzerland, Ukraine, United Kingdom, and the United States. We had an outstanding lineup of speakers from different areas of the publishing world who shared their experiences and ideas.</p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 14cd9f78-37fd-4346-9a43-f2b8bdcbe8c6
+          bundle: gallery
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600160779
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_media:
+            -
+              entity: dd45a3e7-ce93-41e8-bffe-2020211c2b5b
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 06adcfcc-dabc-4c0a-ae15-31b19af50bc9
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600160911
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p>Photos by Kerstin Seipt, <a href=\"http://kerstinseipt-photography.de/\" rel=\"nofollow\">www.kerstinseipt-photography.de</a></p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: e50b8b0f-b498-44e5-b7d7-9da228a7655d
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600160923
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p>At the get-together in the evening, the participants were able to dive into relevant discussions, ask questions, and meet new people as well as consolidate acquaintances made earlier that day or beforehand.</p>\r\n\r\n<p>For those who couldn't attend, we have good news: We recorded the sessions in the main room. The videos can be found here:</p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: e8c0bc6f-2da1-41b6-aba9-bec8c07e2f64
+          bundle: link
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600160936
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_link:
+            -
+              uri: 'https://thunder.org/stratos-filalithis-tim-gray-innovation-collaboration-development-university-edinburgh-cms'
+              title: 'Stratos Filalithis and Tim Gray, University of Edinburgh: Innovation via collaboration in the development of the University of Edinburgh CMS'
+              options: {  }
+            -
+              uri: 'https://thunder.org/nathan-maehren-open-y-bringing-digital-transformation-170-year-old-global-ymca-brand'
+              title: 'Nathan Maehren, YMCA of the Greater Twin Cities: Open Y – Bringing Digital Transformation to a 170-year-old global YMCA Brand'
+              options: {  }
+            -
+              uri: 'https://thunder.org/andreas-landle-thunderstruck-agile-values-design-thinking-and-mvps-book-publishing'
+              title: 'Andreas Ländle, Droemer Knaur: Thunderstruck – Agile Values, Design Thinking and MVPs in Book Publishing'
+              options: {  }
+            -
+              uri: 'https://thunder.org/richard-jones-7-dimensions-personalisation'
+              title: 'Richard Jones, Inviqa: Personalisation in 7 Dimensions'
+              options: {  }
+            -
+              uri: 'https://thunder.org/oliver-berndt-contentpool-publishers-our-way-drupal-6-thunder'
+              title: 'Oliver Berndt, Österreichischer Wirtschaftsverlag: Contentpool for Publishers. Our way from Drupal 6 to Thunder'
+              options: {  }
+            -
+              uri: 'https://thunder.org/martin-gaiger-adam-zielinski-digital-transformation-daily-news-publisher'
+              title: 'Adam Zielinski and Martin Gaiger, Telekurier Online Medien: Digital Transformation of a Daily News Publisher'
+              options: {  }
+            -
+              uri: 'https://thunder.org/peter-bilz-wohlgemuth-johannes-haseitl-saskia-rettenbacher-case-study-ispocom-how-thunder-drives'
+              title: 'Johannes Haseitl, undpaul, Peter Bilz-Wohlgemuth, THE DIGITALE, and Saskia Rettenbacher, Messe München: Case Study ISPO.COM - How Thunder drives Content Marketing'
+              options: {  }
+            -
+              uri: 'https://thunder.org/stephan-heck-thunder-and-purple-ds-serve-all-digital-channels'
+              title: 'Stephan Heck, sprylab technologies: Thunder and Purple DS to serve all digital channels'
+              options: {  }
+            -
+              uri: 'https://thunder.org/patrick-lithander-alexander-dobbert-cms-requirements-content-marketing-industry'
+              title: 'Patrick Lithander, fischerAppelt, and Alexander Dobbert, Fork Unstable Media: CMS requirements for the content marketing industry'
+              options: {  }
+            -
+              uri: 'https://thunder.org/thor-andre-gretland-roberto-ornelas-university-drupal-8-distribution-universities-and-colleges'
+              title: 'Thor Andre Gretland and Roberto Ornelas, frontkom: University – a Drupal 8 distribution for universities and colleges'
+              options: {  }
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 150d0236-869d-4711-8098-3dc838826713
+          bundle: twitter
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600161133
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_media:
+            -
+              entity: 5d0b5981-3c35-4160-9ada-f4f7eaf4f607
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 0b623b95-2b98-4000-bb53-9f02e7297879
+          bundle: twitter
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600161142
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_media:
+            -
+              entity: 2584ef49-8f36-424e-9338-c95d5cf933dc
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 62d11693-bdc8-48ef-888f-509bdb78fae9
+          bundle: twitter
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600161155
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_media:
+            -
+              entity: 6296b850-fea3-458d-8782-3177f48e2cbe
+  field_seo_title:
+    -
+      value: 'Thunder Day 2017: Community shared experiences in Hamburg'
+  field_tags:
+    -
+      entity: 4fe40f59-8f90-4fc6-8630-fadea609a619
+  field_teaser_media:
+    -
+      entity: 6fcc43bd-c374-4528-b180-ebe94c8fa6a5
+  field_teaser_text:
+    -
+      value: 'Our very first Thunder Day was a huge success: More than 100 publishers and IT experts working with or interested in Thunder came together in Hamburg to exchange experiences, success stories, and business cards. Conclusion: For professional publishing, there is no way to do without Thunder.'

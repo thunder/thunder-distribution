@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 50b7f62a-6c43-4ae8-b1fc-2675520fdea7
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: map_ctis.png
+  uri:
+    -
+      value: 'public://2020-09/map_ctis.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 1433826
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1600160222

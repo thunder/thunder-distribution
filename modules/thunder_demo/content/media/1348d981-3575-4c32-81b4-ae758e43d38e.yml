@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 1348d981-3575-4c32-81b4-ae758e43d38e
+  bundle: twitter
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  created:
+    -
+      value: 1600162474
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_author:
+    -
+      value: markusvl
+  field_url:
+    -
+      uri: 'https://twitter.com/markusvl/status/1067030913299693568'
+      title: ''
+      options: {  }

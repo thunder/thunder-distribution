@@ -11,10 +11,10 @@
 function thunder_demo_install() {
 
   // Set default pages.
-  \Drupal::configFactory()->getEditable('system.site')
-    ->set('page.403', '/node/3')
-    ->set('page.404', '/node/4')
-    ->save(TRUE);
+  #\Drupal::configFactory()->getEditable('system.site')
+  #  ->set('page.403', '/node/3')
+  #  ->set('page.404', '/node/4')
+  #  ->save(TRUE);
 
 }
 

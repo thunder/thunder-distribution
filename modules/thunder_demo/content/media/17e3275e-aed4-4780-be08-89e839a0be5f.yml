@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 17e3275e-aed4-4780-be08-89e839a0be5f
+  bundle: twitter
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  created:
+    -
+      value: 1600162499
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_author:
+    -
+      value: lukasfischer
+  field_url:
+    -
+      uri: 'https://twitter.com/lukasfischer/status/1067396358775218176'
+      title: ''
+      options: {  }

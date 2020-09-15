@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: f8ad6684-b110-4751-98b8-dbf9310f91b0
+  bundle: image
+  default_langcode: en
+  depends:
+    94a2a059-a253-45a1-83e0-79fcb32133c0: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Philipp Welte'
+  created:
+    -
+      value: 1600157248
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_image:
+    -
+      entity: 94a2a059-a253-45a1-83e0-79fcb32133c0
+      alt: ''
+      title: ''
+      width: 2409
+      height: 2973

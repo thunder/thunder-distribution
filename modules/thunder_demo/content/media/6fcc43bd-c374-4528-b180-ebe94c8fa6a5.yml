@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 6fcc43bd-c374-4528-b180-ebe94c8fa6a5
+  bundle: image
+  default_langcode: en
+  depends:
+    0044429b-3571-4ccf-b6a1-4e7d2c5c035a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: ThunderDay
+  created:
+    -
+      value: 1600160742
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_image:
+    -
+      entity: 0044429b-3571-4ccf-b6a1-4e7d2c5c035a
+      alt: ''
+      title: ''
+      width: 3543
+      height: 2362

@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 3c47da20-33f3-4bf2-bee0-bd7669d8e7aa
+  bundle: image
+  default_langcode: en
+  depends:
+    5abbb82e-76f3-405d-b8e3-e2d890197aba: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: impressionen_kaminzimmer_4.jpg
+  created:
+    -
+      value: 1600162381
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_image:
+    -
+      entity: 5abbb82e-76f3-405d-b8e3-e2d890197aba
+      alt: ''
+      title: ''
+      width: 5472
+      height: 3648

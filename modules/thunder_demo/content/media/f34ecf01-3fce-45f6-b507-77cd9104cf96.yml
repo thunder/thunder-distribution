@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: f34ecf01-3fce-45f6-b507-77cd9104cf96
+  bundle: image
+  default_langcode: en
+  depends:
+    de73fbb6-9126-4eee-844f-cd4622653f83: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: thunderday_burda_2017011407.jpg
+  created:
+    -
+      value: 1600160861
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_image:
+    -
+      entity: de73fbb6-9126-4eee-844f-cd4622653f83
+      alt: ''
+      title: ''
+      width: 3543
+      height: 2362

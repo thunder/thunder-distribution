@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 9c2cafe0-3345-4cd3-ad3c-2d8ff85b9db5
+  bundle: image
+  default_langcode: en
+  depends:
+    87530ce0-8006-4773-9ec2-98bb85c21d30: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'CTI Badge'
+  created:
+    -
+      value: 1600160312
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_image:
+    -
+      entity: 87530ce0-8006-4773-9ec2-98bb85c21d30
+      alt: ''
+      title: ''
+      width: 3543
+      height: 1248

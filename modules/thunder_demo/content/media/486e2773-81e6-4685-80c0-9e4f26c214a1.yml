@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 486e2773-81e6-4685-80c0-9e4f26c214a1
+  bundle: image
+  default_langcode: en
+  depends:
+    9a9a6603-6dba-4f33-b467-fd81bcc6a3a4: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: impressionen_kaminzimmer_2.jpg
+  created:
+    -
+      value: 1600162381
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_image:
+    -
+      entity: 9a9a6603-6dba-4f33-b467-fd81bcc6a3a4
+      alt: ''
+      title: ''
+      width: 5472
+      height: 3648

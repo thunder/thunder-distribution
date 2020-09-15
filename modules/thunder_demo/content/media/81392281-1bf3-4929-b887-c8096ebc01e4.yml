@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 81392281-1bf3-4929-b887-c8096ebc01e4
+  bundle: image
+  default_langcode: en
+  depends:
+    d2fd4235-9c0d-46bf-a649-e812be18cfbb: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: Impressionen
+  created:
+    -
+      value: 1600162084
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_image:
+    -
+      entity: d2fd4235-9c0d-46bf-a649-e812be18cfbb
+      alt: ''
+      title: ''
+      width: 5880
+      height: 3770

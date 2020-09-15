@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 94a2a059-a253-45a1-83e0-79fcb32133c0
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: welte_philipp_final_2.jpg
+  uri:
+    -
+      value: 'public://2020-09/welte_philipp_final_2.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 1337168
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1600157248

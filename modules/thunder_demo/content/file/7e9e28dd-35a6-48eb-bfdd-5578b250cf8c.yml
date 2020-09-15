@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 7e9e28dd-35a6-48eb-bfdd-5578b250cf8c
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: thunderteam_on_stage.jpg
+  uri:
+    -
+      value: 'public://2020-09/thunderteam_on_stage.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 4869115
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1600162381

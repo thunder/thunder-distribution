@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 2584ef49-8f36-424e-9338-c95d5cf933dc
+  bundle: twitter
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  created:
+    -
+      value: 1600161155
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_author:
+    -
+      value: bofrost007
+  field_url:
+    -
+      uri: 'https://twitter.com/bofrost007/status/932699092278444032'
+      title: ''
+      options: {  }

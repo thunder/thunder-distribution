@@ -1,0 +1,245 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 2f23186e-dcc3-4feb-997b-db72410afe16
+  bundle: article
+  default_langcode: en
+  depends:
+    120b4c9c-82e5-4fe9-97b0-da6fefb9b5f3: taxonomy_term
+    8656ff5b-a9a5-49e4-a8e8-0d7c5bc2678b: media
+    d6de25c8-c089-4b62-b69a-d43dfee83492: taxonomy_term
+    bdaf83bd-2f64-4b35-a458-2e1ac0fbf4f9: taxonomy_term
+    df43ad97-ab4f-4f15-84c0-f10009b8fdb0: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: false
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Thunder, the Drupal distribution for professional publishing'
+  created:
+    -
+      value: 1600163163
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: unpublished
+  path:
+    -
+      alias: /thunder-drupal-distribution-professional-publishing
+      langcode: en
+      pathauto: 1
+  publish_state:
+    -
+      value: _none
+  unpublish_state:
+    -
+      value: _none
+  field_channel:
+    -
+      entity: 120b4c9c-82e5-4fe9-97b0-da6fefb9b5f3
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: bc281376-68d4-4311-90c8-2872a810ae53
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600163458
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p>Thunder is the Drupal 8 distribution for professional publishing. Thunder was designed by Hubert Burda Media and released as open-source software under the GNU General Public License in 2016. As members of the Thunder community, publishers, partners, and developers build custom extensions and share them with the community to further enhance Thunder.</p>\r\n\r\n<p>Thunder consists of the current Drupal functionality, lots of handpicked publisher-centric modules with custom enhancements (our own Thunder Admin Theme, the Paragraphs module, the Media Entity module, the Entity Browser module, and lots more), and an environment which makes it easy to install, deploy and add new functionality (e.g. the Thunder Updater).</p>\r\n\r\n<p>To learn more about Thunder projects, read these case studies: German magazine Mein Schöner Garten (<a href=\"https://www.drupal.org/case-study/gardening-magazine-for-hubert-burda-media\" rel=\"nofollow\">Gardening Magazine for Hubert Burda Media</a>), US magazine American Heritage (<a href=\"https://www.drupal.org/case-study/american-heritage-magazine-migration-drupal-8\" rel=\"nofollow\">American Heritage Magazine Migration – Drupal 8</a>), and Serbian television and radio station PannonRTV (<a href=\"https://www.drupal.org/case-study/news-portal-for-media-house-pannonrtv\" rel=\"nofollow\">News portal for media house – PannonRTV</a>).</p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 20043ff5-c610-47d2-9305-178a0c88d2ec
+          bundle: pinterest
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600163473
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_media:
+            -
+              entity: 8656ff5b-a9a5-49e4-a8e8-0d7c5bc2678b
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 1d7d8be7-2cd9-451f-8bdf-8b84c64dd221
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600163484
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<h4 id=\"\"><strong>About the idea:</strong></h4>\r\n\r\n<p>We at the Thunder Core Team believe that publishers do not compete with each other through technology, but rather through content and brands. That is why the German publisher Hubert Burda Media established the Thunder community which aims to join forces among media companies by sharing code and innovation power. The goal is to innovate faster and spend less money overall by working together.</p>\r\n\r\n<p>The Thunder community’s core product is the open-source content management system Thunder. Community members develop useful modules, use them for their own purposes and share them with the community by publishing them under the GNU General Public License. Neither Hubert Burda Media nor the other publishers in the community charge anyone for their contributions.</p>\r\n\r\n<p>Any company publishing content professionally is welcome as a member of the Thunder community - both as user and as contributor. Anyone can join by contributing to the distribution. The usefulness and richness of Thunder’s functionality directly benefit from the number of contributors.</p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: fdfbc78e-f5be-4e40-a9cf-ba3201a3c3fa
+          bundle: link
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600163505
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_link:
+            -
+              uri: 'https://thunder.org/'
+              title: 'Visit thunder.org'
+              options: {  }
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 3596a508-42ab-4030-92aa-28f7ae3c1877
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600163529
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p><strong>Why Drupal was chosen:&nbsp;</strong></p>\r\n\r\n<p>For Burda, Drupal is the content management platform of choice. It is a free and open-source content-management framework written in PHP and distributed under the GNU General Public License.</p>\r\n\r\n<p>The standard Drupal core already provides the essential features, e.g. user management, menu management, RSS feeds, taxonomy, page layout customization, and system administration. It is easily adaptable and extensible with thousands of modules provided by a global community of users and developers. In addition, developers at Hubert Burda Media have had previous good experiences with Drupal. Drupal is therefore a tried and tested basis.</p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: d3bcd37c-c7ac-4d00-a7d2-d85bed1112f2
+          bundle: quote
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600163636
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p>\"Since we get a lot from the Drupal community, we give our best to contribute back, e.g. by fixing the bugs we find through automated tests and by supporting Drupal events and code sprints with developer time, talks, and sponsoring.\"</p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 0b132944-aa92-4649-9602-96354787a8c1
+          bundle: link
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600163651
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_link:
+            -
+              uri: 'https://www.drupal.org/case-study/thunder-the-drupal-8-distribution-for-professional-publishing'
+              title: 'Read the case study at drupal.org'
+              options: {  }
+  field_seo_title:
+    -
+      value: 'Thunder, the Drupal distribution for professional publishing'
+  field_tags:
+    -
+      entity: d6de25c8-c089-4b62-b69a-d43dfee83492
+    -
+      entity: bdaf83bd-2f64-4b35-a458-2e1ac0fbf4f9
+  field_teaser_media:
+    -
+      entity: df43ad97-ab4f-4f15-84c0-f10009b8fdb0
+  field_teaser_text:
+    -
+      value: 'Thunder is the Drupal distribution for professional publishing. Thunder was designed by Hubert Burda Media and released as open-source software under the GNU General Public License in 2016. As members of the Thunder community, publishers, partners, and developers build custom extensions and share them with the community to further enhance Thunder.'
