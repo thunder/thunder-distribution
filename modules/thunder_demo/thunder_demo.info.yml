@@ -77,3 +77,7 @@ default_content:
   crop:
     - 73fa0ae6-47b2-4719-b2fd-09dabca808d0
     - 35877b5f-300a-4456-9e8c-760a4c1c37b5
+  menu_link_content:
+    - 41f139d4-f1e7-4cc1-8dd6-37f86c682f49
+    - f3cace00-efd5-421d-8366-d7975754e737
+
