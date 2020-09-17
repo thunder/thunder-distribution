@@ -18,7 +18,7 @@ default:
       value: image/jpeg
   filesize:
     -
-      value: 2082754
+      value: 440839
   status:
     -
       value: true
