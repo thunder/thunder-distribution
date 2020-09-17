@@ -2,7 +2,7 @@
   "name": "Thunder CMS heroku app",
   "buildpacks": [
     {
-      "url": "https://github.com/thunder/heroku-buildpack-thunder#use-postgres"
+      "url": "https://github.com/thunder/heroku-buildpack-thunder"
     }
   ],
   "environments": {
