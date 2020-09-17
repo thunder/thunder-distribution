@@ -212,7 +212,12 @@ trait ThunderParagraphsTestTrait {
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
-    $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][uri]", $socialUrl);
+    if ($page->hasField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][value]")) {
+      $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][value]", $socialUrl);
+    }
+    elseif ($page->hasField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][uri]")) {
+      $page->fillField("{$fieldName}[{$paragraphIndex}][subform][field_media][0][inline_entity_form][field_url][0][uri]", $socialUrl);
+    }
   }
 
   /**

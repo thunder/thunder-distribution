@@ -7,6 +7,7 @@ dependencies:
     - field.field.media.instagram.field_url
     - media.type.instagram
   module:
+    - empty_fields
     - media_entity_instagram
 id: media.instagram.default
 targetEntityType: media
@@ -18,9 +19,10 @@ content:
     weight: 0
     label: hidden
     settings:
-      width: null
-      hidecaption: false
-    third_party_settings: {  }
+      max_width: 0
+    third_party_settings:
+      empty_fields:
+        handler: ''
     region: content
 hidden:
   created: true
