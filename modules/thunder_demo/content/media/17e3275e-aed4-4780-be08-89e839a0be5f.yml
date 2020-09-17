@@ -27,6 +27,4 @@ default:
       value: lukasfischer
   field_url:
     -
-      uri: 'https://twitter.com/lukasfischer/status/1067396358775218176'
-      title: ''
-      options: {  }
+      value: 'https://twitter.com/lukasfischer/status/1067396358775218176'

@@ -27,6 +27,4 @@ default:
       value: markusvl
   field_url:
     -
-      uri: 'https://twitter.com/markusvl/status/1067030913299693568'
-      title: ''
-      options: {  }
+      value: 'https://twitter.com/markusvl/status/1067030913299693568'

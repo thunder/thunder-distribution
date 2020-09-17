@@ -27,6 +27,4 @@ default:
       value: thorandreg
   field_url:
     -
-      uri: 'https://twitter.com/thorandreg/status/932727077526212608'
-      title: ''
-      options: {  }
+      value: 'https://twitter.com/thorandreg/status/932727077526212608'

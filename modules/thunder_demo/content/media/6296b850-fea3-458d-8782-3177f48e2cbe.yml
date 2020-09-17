@@ -27,6 +27,4 @@ default:
       value: breidert
   field_url:
     -
-      uri: 'https://twitter.com/breidert/status/932627844030779392'
-      title: ''
-      options: {  }
+      value: 'https://twitter.com/breidert/status/932627844030779392'

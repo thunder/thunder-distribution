@@ -27,6 +27,4 @@ default:
       pathauto: 0
   field_url:
     -
-      uri: 'https://www.pinterest.de/pin/478085316687452268/'
-      title: ''
-      options: {  }
+      value: 'https://www.pinterest.de/pin/478085316687452268/'

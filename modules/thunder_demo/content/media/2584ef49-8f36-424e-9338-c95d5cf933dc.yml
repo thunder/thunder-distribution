@@ -27,6 +27,4 @@ default:
       value: bofrost007
   field_url:
     -
-      uri: 'https://twitter.com/bofrost007/status/932699092278444032'
-      title: ''
-      options: {  }
+      value: 'https://twitter.com/bofrost007/status/932699092278444032'

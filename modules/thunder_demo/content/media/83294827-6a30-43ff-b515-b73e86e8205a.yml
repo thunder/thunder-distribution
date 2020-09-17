@@ -27,6 +27,4 @@ default:
       value: ramsalt
   field_url:
     -
-      uri: 'https://twitter.com/ramsalt/status/1066995176093216769'
-      title: ''
-      options: {  }
+      value: 'https://twitter.com/ramsalt/status/1066995176093216769'
