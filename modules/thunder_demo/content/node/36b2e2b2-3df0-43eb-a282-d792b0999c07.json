@@ -170,22 +170,6 @@
                         "href": ""
                     },
                     "type": {
-                        "href": "http:\/\/drupal.org\/rest\/type\/paragraph\/instagram"
-                    }
-                },
-                "uuid": [
-                    {
-                        "value": "f64a0fcf-c95f-4355-b4e1-8c0af997db27"
-                    }
-                ],
-                "target_revision_id": "18"
-            },
-            {
-                "_links": {
-                    "self": {
-                        "href": ""
-                    },
-                    "type": {
                         "href": "http:\/\/drupal.org\/rest\/type\/paragraph\/media"
                     }
                 },

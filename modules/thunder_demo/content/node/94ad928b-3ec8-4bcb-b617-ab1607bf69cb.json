@@ -157,22 +157,6 @@
                     }
                 ],
                 "target_revision_id": "15"
-            },
-            {
-                "_links": {
-                    "self": {
-                        "href": ""
-                    },
-                    "type": {
-                        "href": "http:\/\/drupal.org\/rest\/type\/paragraph\/instagram"
-                    }
-                },
-                "uuid": [
-                    {
-                        "value": "43468869-c4e1-4bf5-b87e-86210c6ae796"
-                    }
-                ],
-                "target_revision_id": "16"
             }
         ],
         "http:\/\/drupal.org\/rest\/relation\/node\/article\/field_tags": [
