@@ -10,7 +10,7 @@ default:
       value: true
   title:
     -
-      value: About
+      value: 'About Thunder'
   menu_name:
     -
       value: footer

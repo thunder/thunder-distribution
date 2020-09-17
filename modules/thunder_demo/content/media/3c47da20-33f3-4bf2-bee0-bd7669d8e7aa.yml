@@ -27,6 +27,9 @@ default:
       alias: ''
       langcode: en
       pathauto: 1
+  field_copyright:
+    -
+      value: 'Sophia Vogel'
   field_image:
     -
       entity: 5abbb82e-76f3-405d-b8e3-e2d890197aba

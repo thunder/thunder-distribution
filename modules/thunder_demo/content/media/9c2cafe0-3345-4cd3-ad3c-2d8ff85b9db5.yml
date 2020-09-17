@@ -27,10 +27,17 @@ default:
       alias: ''
       langcode: en
       pathauto: 0
+  field_copyright:
+    -
+      value: Thunder
+  field_description:
+    -
+      value: "<p><span>CTIs are allowed to use the label ‘Certified Thunder Integrator’ and the associated badge to promote their services. </span></p>\r\n"
+      format: basic_html
   field_image:
     -
       entity: 87530ce0-8006-4773-9ec2-98bb85c21d30
-      alt: ''
-      title: ''
+      alt: 'Certified Thunder Integrator Badge'
+      title: 'Certified Thunder Integrator Badge'
       width: 3543
       height: 1248

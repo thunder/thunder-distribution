@@ -10,7 +10,7 @@ default:
       value: true
   title:
     -
-      value: CTIs
+      value: 'Certified Thunder Integrators'
   menu_name:
     -
       value: footer

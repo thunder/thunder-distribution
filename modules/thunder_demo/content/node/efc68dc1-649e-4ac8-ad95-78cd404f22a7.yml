@@ -6,11 +6,11 @@ _meta:
   default_langcode: en
   depends:
     a67c24e2-5974-42b4-9210-f918a0f230fd: taxonomy_term
-    c8b73bd1-1e4b-477e-96d9-580be6dab017: media
     765b7c3f-e70c-4cdb-85c6-d0d329919eec: media
     83294827-6a30-43ff-b515-b73e86e8205a: media
     1348d981-3575-4c32-81b4-ae758e43d38e: media
     17e3275e-aed4-4780-be08-89e839a0be5f: media
+    c8b73bd1-1e4b-477e-96d9-580be6dab017: media
     4fe40f59-8f90-4fc6-8630-fadea609a619: taxonomy_term
     038587f9-39d8-4441-a848-a62b54b08a84: taxonomy_term
     81392281-1bf3-4929-b887-c8096ebc01e4: media
@@ -87,8 +87,8 @@ default:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: 61167910-2695-45ec-b942-0292d7a3d272
-          bundle: gallery
+          uuid: f3edfd03-ae49-433f-b8d2-827f34b70921
+          bundle: video
           default_langcode: en
         default:
           status:
@@ -96,16 +96,16 @@ default:
               value: true
           created:
             -
-              value: 1600162291
+              value: 1600162421
           behavior_settings:
             -
               value: {  }
           revision_translation_affected:
             -
               value: true
-          field_media:
+          field_video:
             -
-              entity: c8b73bd1-1e4b-477e-96d9-580be6dab017
+              entity: 765b7c3f-e70c-4cdb-85c6-d0d329919eec
     -
       entity:
         _meta:
@@ -129,32 +129,8 @@ default:
               value: true
           field_text:
             -
-              value: "<p>With over 150 participants from 10 countries, 23 well selected speakers and a creative presenter, we pulled off a fantastic event for networking, discussions and further learing. There was a bit of everything at the event: content-rich presentations, spontaneous discussions, exciting interactive activitities, entertainment, artistic elements and a very cool location. A really lively atmosphere could be sensed, especially during the breaks and get-togeher in the evening.</p>\r\n\r\n<p>All participants grouped themselves into intense conversations and discussed presentation topics. Business cards were swapped, plans discussed and there was much head-nodding and laughing as old friends met again. Each of the participants contributed to the success of the event, like individual pieces of a jigsaw puzzle. And that is exactly what Thunder Day is all about, a global platform bringing together experts from IT, Media and Open Source, enabling them to talk about topics as equals, network and discuss new ideas and perspectives.</p>\r\n\r\n<p>Thunder Day 2018 ran from 26th to 27th November in Berlin and was a great success for us. We are very pleased with the positive feedback from participants which will enable us to strengthen our plans with Thunder and Thunder Day. We are already looking forward to seeing even more old friends and new faces!</p>\r\n"
+              value: "<p>With over 150 participants from 10 countries, 23 well selected speakers and a creative presenter, we pulled off a fantastic event for networking, discussions and further learing. There was a bit of everything at the event: content-rich presentations, spontaneous discussions, exciting interactive activitities, entertainment, artistic elements and a very cool location. A really lively atmosphere could be sensed, especially during the breaks and get-togeher in the evening.</p>\r\n"
               format: basic_html
-    -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: f3edfd03-ae49-433f-b8d2-827f34b70921
-          bundle: video
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1600162421
-          behavior_settings:
-            -
-              value: {  }
-          revision_translation_affected:
-            -
-              value: true
-          field_video:
-            -
-              entity: 765b7c3f-e70c-4cdb-85c6-d0d329919eec
     -
       entity:
         _meta:
@@ -184,6 +160,31 @@ default:
         _meta:
           version: '1.0'
           entity_type: paragraph
+          uuid: daa345c4-0d3d-41c3-9727-0bf785dd79e3
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600333523
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p>All participants grouped themselves into intense conversations and discussed presentation topics. Business cards were swapped, plans discussed and there was much head-nodding and laughing as old friends met again. Each of the participants contributed to the success of the event, like individual pieces of a jigsaw puzzle. And that is exactly what Thunder Day is all about, a global platform bringing together experts from IT, Media and Open Source, enabling them to talk about topics as equals, network and discuss new ideas and perspectives.</p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
           uuid: d2b920ca-a456-471e-945f-4fd62ef63a9c
           bundle: twitter
           default_langcode: en
@@ -208,6 +209,31 @@ default:
         _meta:
           version: '1.0'
           entity_type: paragraph
+          uuid: 38808a60-4437-41bb-ad69-63d93e3daa17
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600333527
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p>Thunder Day 2018 ran from 26th to 27th November in Berlin and was a great success for us. We are very pleased with the positive feedback from participants which will enable us to strengthen our plans with Thunder and Thunder Day. We are already looking forward to seeing even more old friends and new faces!</p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
           uuid: d60bec6f-7f08-4645-a5f5-6d558f4c4094
           bundle: twitter
           default_langcode: en
@@ -227,6 +253,30 @@ default:
           field_media:
             -
               entity: 17e3275e-aed4-4780-be08-89e839a0be5f
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 61167910-2695-45ec-b942-0292d7a3d272
+          bundle: gallery
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600162291
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_media:
+            -
+              entity: c8b73bd1-1e4b-477e-96d9-580be6dab017
   field_seo_title:
     -
       value: 'Thunder Day 2018 Community meets in Berlin'

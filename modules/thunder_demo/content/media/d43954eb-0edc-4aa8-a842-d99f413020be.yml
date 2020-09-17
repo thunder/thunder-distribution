@@ -27,6 +27,9 @@ default:
       alias: ''
       langcode: en
       pathauto: 1
+  field_copyright:
+    -
+      value: 'Kerstin Seipt, www.kerstinseipt-photography.de'
   field_image:
     -
       entity: 4533f02b-f720-46cb-acbb-84255b302ef1

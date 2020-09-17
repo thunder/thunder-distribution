@@ -9,16 +9,16 @@ default:
       target_id: 1
   filename:
     -
-      value: thunder-badge_web_300mm.png
+      value: cti-badge.jpg
   uri:
     -
-      value: 'public://2020-09/thunder-badge_web_300mm.png'
+      value: 'public://2020-09/cti-badge.jpg'
   filemime:
     -
-      value: image/png
+      value: image/jpeg
   filesize:
     -
-      value: 15331
+      value: 38551
   status:
     -
       value: true

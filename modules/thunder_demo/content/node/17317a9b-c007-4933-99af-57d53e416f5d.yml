@@ -11,6 +11,7 @@ _meta:
     2584ef49-8f36-424e-9338-c95d5cf933dc: media
     6296b850-fea3-458d-8782-3177f48e2cbe: media
     4fe40f59-8f90-4fc6-8630-fadea609a619: taxonomy_term
+    038587f9-39d8-4441-a848-a62b54b08a84: taxonomy_term
     6fcc43bd-c374-4528-b180-ebe94c8fa6a5: media
 default:
   revision_uid:
@@ -85,6 +86,30 @@ default:
         _meta:
           version: '1.0'
           entity_type: paragraph
+          uuid: 14cd9f78-37fd-4346-9a43-f2b8bdcbe8c6
+          bundle: gallery
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600160779
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_media:
+            -
+              entity: dd45a3e7-ce93-41e8-bffe-2020211c2b5b
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
           uuid: 8cfb5c3e-6a7a-405e-98a8-7bf1e68c9e36
           bundle: text
           default_langcode: en
@@ -110,8 +135,8 @@ default:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: 14cd9f78-37fd-4346-9a43-f2b8bdcbe8c6
-          bundle: gallery
+          uuid: 150d0236-869d-4711-8098-3dc838826713
+          bundle: twitter
           default_langcode: en
         default:
           status:
@@ -119,7 +144,7 @@ default:
               value: true
           created:
             -
-              value: 1600160779
+              value: 1600161133
           behavior_settings:
             -
               value: {  }
@@ -128,32 +153,7 @@ default:
               value: true
           field_media:
             -
-              entity: dd45a3e7-ce93-41e8-bffe-2020211c2b5b
-    -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: 06adcfcc-dabc-4c0a-ae15-31b19af50bc9
-          bundle: text
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1600160911
-          behavior_settings:
-            -
-              value: {  }
-          revision_translation_affected:
-            -
-              value: true
-          field_text:
-            -
-              value: "<p>Photos by Kerstin Seipt, <a href=\"http://kerstinseipt-photography.de/\" rel=\"nofollow\">www.kerstinseipt-photography.de</a></p>\r\n"
-              format: basic_html
+              entity: 5d0b5981-3c35-4160-9ada-f4f7eaf4f607
     -
       entity:
         _meta:
@@ -177,7 +177,80 @@ default:
               value: true
           field_text:
             -
-              value: "<p>At the get-together in the evening, the participants were able to dive into relevant discussions, ask questions, and meet new people as well as consolidate acquaintances made earlier that day or beforehand.</p>\r\n\r\n<p>For those who couldn't attend, we have good news: We recorded the sessions in the main room. The videos can be found here:</p>\r\n"
+              value: "<p>At the get-together in the evening, the participants were able to dive into relevant discussions, ask questions, and meet new people as well as consolidate acquaintances made earlier that day or beforehand.</p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 0b623b95-2b98-4000-bb53-9f02e7297879
+          bundle: twitter
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600161142
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_media:
+            -
+              entity: 2584ef49-8f36-424e-9338-c95d5cf933dc
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 62d11693-bdc8-48ef-888f-509bdb78fae9
+          bundle: twitter
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600161155
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_media:
+            -
+              entity: 6296b850-fea3-458d-8782-3177f48e2cbe
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 99874574-80bb-41e7-ad7f-092ed1856ca0
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600333308
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p>For those who couldn't attend, we have good news: We recorded the sessions in the main room. The videos can be found here:</p>\r\n"
               format: basic_html
     -
       entity:
@@ -241,84 +314,14 @@ default:
               uri: 'https://thunder.org/thor-andre-gretland-roberto-ornelas-university-drupal-8-distribution-universities-and-colleges'
               title: 'Thor Andre Gretland and Roberto Ornelas, frontkom: University – a Drupal 8 distribution for universities and colleges'
               options: {  }
-    -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: 150d0236-869d-4711-8098-3dc838826713
-          bundle: twitter
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1600161133
-          behavior_settings:
-            -
-              value: {  }
-          revision_translation_affected:
-            -
-              value: true
-          field_media:
-            -
-              entity: 5d0b5981-3c35-4160-9ada-f4f7eaf4f607
-    -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: 0b623b95-2b98-4000-bb53-9f02e7297879
-          bundle: twitter
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1600161142
-          behavior_settings:
-            -
-              value: {  }
-          revision_translation_affected:
-            -
-              value: true
-          field_media:
-            -
-              entity: 2584ef49-8f36-424e-9338-c95d5cf933dc
-    -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: 62d11693-bdc8-48ef-888f-509bdb78fae9
-          bundle: twitter
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1600161155
-          behavior_settings:
-            -
-              value: {  }
-          revision_translation_affected:
-            -
-              value: true
-          field_media:
-            -
-              entity: 6296b850-fea3-458d-8782-3177f48e2cbe
   field_seo_title:
     -
       value: 'Thunder Day 2017: Community shared experiences in Hamburg'
   field_tags:
     -
       entity: 4fe40f59-8f90-4fc6-8630-fadea609a619
+    -
+      entity: 038587f9-39d8-4441-a848-a62b54b08a84
   field_teaser_media:
     -
       entity: 6fcc43bd-c374-4528-b180-ebe94c8fa6a5

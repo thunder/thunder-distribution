@@ -27,10 +27,13 @@ default:
       alias: ''
       langcode: en
       pathauto: 0
+  field_copyright:
+    -
+      value: 'Thunder, Hubert Burda Media'
   field_image:
     -
       entity: 94a2a059-a253-45a1-83e0-79fcb32133c0
-      alt: ''
-      title: ''
+      alt: 'Philipp Welte'
+      title: 'Philipp Welte'
       width: 2409
       height: 2973
