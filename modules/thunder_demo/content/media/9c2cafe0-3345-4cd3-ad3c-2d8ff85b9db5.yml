@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 9c2cafe0-3345-4cd3-ad3c-2d8ff85b9db5
+  bundle: image
+  default_langcode: en
+  depends:
+    87530ce0-8006-4773-9ec2-98bb85c21d30: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'CTI Badge'
+  created:
+    -
+      value: 1600160312
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_copyright:
+    -
+      value: Thunder
+  field_description:
+    -
+      value: "<p><span>CTIs are allowed to use the label ‘Certified Thunder Integrator’ and the associated badge to promote their services. </span></p>\r\n"
+      format: basic_html
+  field_image:
+    -
+      entity: 87530ce0-8006-4773-9ec2-98bb85c21d30
+      alt: 'Certified Thunder Integrator Badge'
+      title: 'Certified Thunder Integrator Badge'
+      width: 3543
+      height: 1248
