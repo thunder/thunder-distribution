@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 34478597-153e-4b96-b275-4de573e1116c
+  bundle: image
+  default_langcode: en
+  depends:
+    50b7f62a-6c43-4ae8-b1fc-2675520fdea7: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Map of CTIs'
+  created:
+    -
+      value: 1600160222
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_image:
+    -
+      entity: 50b7f62a-6c43-4ae8-b1fc-2675520fdea7
+      alt: ''
+      title: ''
+      width: 1581
+      height: 781

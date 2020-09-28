@@ -4,5 +4,10 @@
     {
       "url": "https://github.com/thunder/heroku-buildpack-thunder"
     }
-  ]
+  ],
+  "environments": {
+    "review": {
+      "addons": ["heroku-postgresql:hobby-dev"]
+    }
+  }
 }

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 120b4c9c-82e5-4fe9-97b0-da6fefb9b5f3
+  bundle: channel
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: News
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /news
+      langcode: en
+      pathauto: 1

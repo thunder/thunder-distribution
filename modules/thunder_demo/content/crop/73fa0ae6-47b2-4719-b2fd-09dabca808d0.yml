@@ -1,0 +1,31 @@
+_meta:
+  version: '1.0'
+  entity_type: crop
+  uuid: 73fa0ae6-47b2-4719-b2fd-09dabca808d0
+  bundle: focal_point
+  default_langcode: en
+default:
+  entity_id:
+    -
+      value: 1
+  entity_type:
+    -
+      value: file
+  uri:
+    -
+      value: 'public://2020-09/welte_ingo_v1.jpg'
+  x:
+    -
+      value: 728
+  'y':
+    -
+      value: 294
+  revision_timestamp:
+    -
+      value: 1600152511
+  revision_uid:
+    -
+      target_id: 1
+  revision_translation_affected:
+    -
+      value: true
