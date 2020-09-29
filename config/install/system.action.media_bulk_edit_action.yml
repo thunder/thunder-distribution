@@ -7,5 +7,5 @@ dependencies:
 id: media_bulk_edit_action
 label: 'Edit media items'
 type: media
-plugin: 'views_bulk_edit:media'
+plugin: 'entity:edit_action:media'
 configuration: {  }
