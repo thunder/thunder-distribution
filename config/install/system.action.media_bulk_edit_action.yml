@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - views_bulk_edit
+id: media_bulk_edit_action
+label: 'Edit media items'
+type: media
+plugin: 'views_bulk_edit:media'
+configuration: {  }

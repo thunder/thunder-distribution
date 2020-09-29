@@ -7,6 +7,7 @@ dependencies:
     - media.type.gallery
   module:
     - entity_browser
+    - entity_reference_actions
     - field_group
     - select2
 third_party_settings:
@@ -42,14 +43,25 @@ content:
     settings:
       entity_browser: multiple_image_browser
       field_widget_display: rendered_entity
+      field_widget_display_settings:
+        view_mode: thumbnail
       field_widget_edit: true
       field_widget_remove: true
       open: true
       selection_mode: selection_edit
-      field_widget_display_settings:
-        view_mode: thumbnail
       field_widget_replace: false
-    third_party_settings: {  }
+    third_party_settings:
+      entity_reference_actions:
+        enabled: true
+        options:
+          action_title: Action
+          include_exclude: include
+          selected_actions:
+            media_bulk_edit_action: media_bulk_edit_action
+            media_delete_action: '0'
+            media_publish_action: '0'
+            media_save_action: '0'
+            media_unpublish_action: '0'
     region: content
   name:
     type: string_textfield
@@ -74,6 +86,7 @@ content:
       width: 100%
       autocomplete: true
       match_operator: CONTAINS
+      match_limit: 10
     third_party_settings: {  }
 hidden:
   langcode: true
