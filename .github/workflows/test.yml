@@ -56,7 +56,7 @@ jobs:
       - name: Get build environment
         run: |
           composer self-update --preview
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:dev-composer-patches-dev
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
