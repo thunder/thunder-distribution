@@ -1,0 +1,5 @@
+*.php     diff=php
+*.inc     diff=php
+*.module  diff=php
+*.install diff=php
+*.test    diff=php
