@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: c5a9a50a-20bc-48ee-89ff-6465c194f2be
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: welte_ingo_v1.jpg
+  uri:
+    -
+      value: 'public://2020-09/welte_ingo_v1_0.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 126045
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1600152444

@@ -1,3 +1,11 @@
-v6.0:
+v6.0.0:
     '#title': 'Updates fo Thunder 6'
     '#description': '<h3>These are the new features for this release:</h3>'
+v6.0.1:
+    '#title': 'Update to version v6.0.1'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_update_8310:
+        '#title': 'Preparation for Thunder Search.'
+        '#description': '<p>This update will make the content view ready for the config selector.</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'

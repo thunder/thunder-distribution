@@ -4,7 +4,85 @@ description: Provide demo content.
 package: Thunder Optional
 core_version_requirement: ^9
 dependencies:
-  - better_normalizers:better_normalizers
   - default_content:default_content
   - drupal:tour
   - drupal:help
+default_content:
+  taxonomy_term:
+    - 120b4c9c-82e5-4fe9-97b0-da6fefb9b5f3
+    - a67c24e2-5974-42b4-9210-f918a0f230fd
+    - d6de25c8-c089-4b62-b69a-d43dfee83492
+    - 4fe40f59-8f90-4fc6-8630-fadea609a619
+    - f9eb68a8-9bc1-4209-a7a0-fa72cbffecf6
+    - 593c8619-b941-4bcb-93ef-0574cbbb49ad
+    - 038587f9-39d8-4441-a848-a62b54b08a84
+    - bdaf83bd-2f64-4b35-a458-2e1ac0fbf4f9
+  node:
+    - bd5c625d-9074-40f8-99e4-91923ffdeb84
+    - 383b2b08-01be-464d-8cfb-a265d2fd46b9
+    - 17317a9b-c007-4933-99af-57d53e416f5d
+    - efc68dc1-649e-4ac8-ad95-78cd404f22a7
+    - 2f23186e-dcc3-4feb-997b-db72410afe16
+  media:
+    - 31457b1e-0122-46a6-b3ab-edfa0c4b801a
+    - f8ad6684-b110-4751-98b8-dbf9310f91b0
+    - 9c2cafe0-3345-4cd3-ad3c-2d8ff85b9db5
+    - 34478597-153e-4b96-b275-4de573e1116c
+    - dd45a3e7-ce93-41e8-bffe-2020211c2b5b
+    - 5d0b5981-3c35-4160-9ada-f4f7eaf4f607
+    - 2584ef49-8f36-424e-9338-c95d5cf933dc
+    - 6296b850-fea3-458d-8782-3177f48e2cbe
+    - 6fcc43bd-c374-4528-b180-ebe94c8fa6a5
+    - d5170777-5d26-423a-8710-e009d47ee979
+    - 4f4039ab-65a3-4ade-8d2c-6553b21cad58
+    - 5734cc42-787a-464e-9836-38ffa34aad7f
+    - d43954eb-0edc-4aa8-a842-d99f413020be
+    - 40bbeede-898b-4574-a239-95aae6112a3d
+    - 40bbeede-898b-4574-a239-95aae6112a3d
+    - 1c1b3c83-3f91-4110-871c-d612d7df1bb6
+    - f34ecf01-3fce-45f6-b507-77cd9104cf96
+    - c8b73bd1-1e4b-477e-96d9-580be6dab017
+    - 765b7c3f-e70c-4cdb-85c6-d0d329919eec
+    - 83294827-6a30-43ff-b515-b73e86e8205a
+    - 1348d981-3575-4c32-81b4-ae758e43d38e
+    - 17e3275e-aed4-4780-be08-89e839a0be5f
+    - 81392281-1bf3-4929-b887-c8096ebc01e4
+    - d3782161-f7b3-4e8c-a24f-f2545bb2d474
+    - 13b6536a-f317-4e74-a71f-66e5c61ede65
+    - 486e2773-81e6-4685-80c0-9e4f26c214a1
+    - 916d281a-6097-4e26-8805-e5392ac53a0b
+    - 3c47da20-33f3-4bf2-bee0-bd7669d8e7aa
+    - 8656ff5b-a9a5-49e4-a8e8-0d7c5bc2678b
+    - df43ad97-ab4f-4f15-84c0-f10009b8fdb0
+  file:
+    - c5a9a50a-20bc-48ee-89ff-6465c194f2be
+    - 94a2a059-a253-45a1-83e0-79fcb32133c0
+    - 87530ce0-8006-4773-9ec2-98bb85c21d30
+    - 50b7f62a-6c43-4ae8-b1fc-2675520fdea7
+    - 0044429b-3571-4ccf-b6a1-4e7d2c5c035a
+    - b08692d3-765c-4422-b001-0aee9b7ea103
+    - 82aa86b9-645c-4310-a7b6-9770240663b3
+    - 911771d1-f8d5-4d62-ba77-e7040682c07e
+    - 587ac846-1c3a-4345-8995-122683d5d2a9
+    - 4533f02b-f720-46cb-acbb-84255b302ef1
+    - 2387f16f-68c8-4297-a998-954c7ef66dc0
+    - de73fbb6-9126-4eee-844f-cd4622653f83
+    - d2fd4235-9c0d-46bf-a649-e812be18cfbb
+    - 5abbb82e-76f3-405d-b8e3-e2d890197aba
+    - 4fc96a05-40d7-4651-9c87-b06f2fcaf95a
+    - 9a9a6603-6dba-4f33-b467-fd81bcc6a3a4
+    - 038a612e-d318-4959-b23b-ee2978cd1f6c
+    - 7e9e28dd-35a6-48eb-bfdd-5578b250cf8c
+    - 63c664f3-d403-4509-b90c-b945a69431b5
+  crop:
+    - 73fa0ae6-47b2-4719-b2fd-09dabca808d0
+    - 35877b5f-300a-4456-9e8c-760a4c1c37b5
+  menu_link_content:
+    - 41f139d4-f1e7-4cc1-8dd6-37f86c682f49
+    - f3cace00-efd5-421d-8366-d7975754e737
+    - 5e0b1d08-af33-4a38-b3ba-f4cf85b7315a
+    - 132c827a-1b30-4f67-a8df-8f41b38797fe
+    - 9c2a1fbf-a72f-4ca3-b27d-e216788aa6cc
+    - 61c592ad-015b-43e3-8cd0-03f2fdb1893d
+    - ddba293d-6e01-4f47-aa16-6a84fbe592da
+

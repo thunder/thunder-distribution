@@ -2,10 +2,11 @@
 
 namespace Drupal\thunder_media\Plugin\ImageEffect;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Image\ImageInterface;
 use Drupal\image\ConfigurableImageEffectBase;
-use Drupal\image\Entity\ImageStyle;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Resizes an image resource.
@@ -17,6 +18,32 @@ use Drupal\image\Entity\ImageStyle;
  * )
  */
 class AutoAspectEffect extends ConfigurableImageEffectBase {
+
+  /**
+   * The entity type manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    $style = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $style->setEntityTypeManager($container->get('entity_type.manager'));
+    return $style;
+  }
+
+  /**
+   * Set the entity type manager service.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager service.
+   */
+  protected function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager) {
+    $this->entityTypeManager = $entityTypeManager;
+  }
 
   /**
    * {@inheritdoc}
@@ -33,8 +60,8 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
       return TRUE;
     }
 
-    /* @var ImageStyle $style */
-    $style = ImageStyle::load($style_name);
+    /** @var \Drupal\image\ImageStyleInterface $style */
+    $style = $this->entityTypeManager->getStorage('image_style')->load($style_name);
     if (empty($style)) {
       // Required preset has gone missing?
       return FALSE;
@@ -42,7 +69,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
 
     // Run the preset actions ourself.
     foreach ($style->getEffects() as $sub_effect) {
-      /* @var ImageEffectInterface $sub_effect */
+      /** @var \Drupal\image\ImageEffectInterface $sub_effect */
       $sub_effect->applyEffect($image);
     }
     return TRUE;
@@ -57,12 +84,12 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
       // resulting dimensions, unless both styles return the same dimensions:
       $landscape_dimensions = $portrait_dimensions = $dimensions;
 
-      /* @var ImageStyle $landscape_style */
-      $landscape_style = ImageStyle::load($this->configuration['landscape']);
+      /** @var \Drupal\image\ImageStyleInterface $landscape_style */
+      $landscape_style = $this->entityTypeManager->getStorage('image_style')->load($this->configuration['landscape']);
       $landscape_style->transformDimensions($landscape_dimensions, $uri);
 
-      /* @var ImageStyle $portrait_style */
-      $portrait_style = ImageStyle::load($this->configuration['portrait']);
+      /** @var \Drupal\image\ImageStyleInterface $portrait_style */
+      $portrait_style = $this->entityTypeManager->getStorage('image_style')->load($this->configuration['portrait']);
       $portrait_style->transformDimensions($portrait_dimensions, $uri);
 
       if ($landscape_dimensions == $portrait_dimensions) {
@@ -77,8 +104,8 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
       $aspect = $dimensions['width'] / $dimensions['height'];
       $style_name = (($aspect * $ratio_adjustment) > 1) ? $this->configuration['landscape'] : $this->configuration['portrait'];
 
-      /* @var ImageStyle $style */
-      $style = ImageStyle::load($style_name);
+      /** @var \Drupal\image\ImageStyleInterface $style */
+      $style = $this->entityTypeManager->getStorage('image_style')->load($style_name);
       $style->transformDimensions($dimensions, $uri);
     }
   }
@@ -105,6 +132,27 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
       'portrait' => NULL,
       'ratio_adjustment' => 1,
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function calculateDependencies() {
+    $dependencies = parent::calculateDependencies();
+
+    $image_style_storage = $this->entityTypeManager->getStorage('image_style');
+
+    /** @var \Drupal\image\ImageStyleInterface $landscape_style */
+    if ($landscape_style = $image_style_storage->load($this->configuration['landscape'])) {
+      $dependencies[$landscape_style->getConfigDependencyKey()][] = $landscape_style->getConfigDependencyName();
+    }
+
+    /** @var \Drupal\image\ImageStyleInterface $portrait_style */
+    if ($portrait_style = $image_style_storage->load($this->configuration['portrait'])) {
+      $dependencies[$portrait_style->getConfigDependencyKey()][] = $portrait_style->getConfigDependencyName();
+    }
+
+    return $dependencies;
   }
 
   /**

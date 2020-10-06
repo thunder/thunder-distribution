@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 038a612e-d318-4959-b23b-ee2978cd1f6c
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: impressionen_kaminzimmer_3.jpg
+  uri:
+    -
+      value: 'public://2020-09/impressionen_kaminzimmer_3.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 10076427
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1600162381
