@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.5.5](https://github.com/thunder/thunder-distribution/tree/3.5.5) 2020-10-12
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.4...3.5.5)
+
+Instagram will shut down its current oEmbed API on October 24, 2020. We integrate the new version of Media Entity Instagram to support the future integration.
+After that date, you will need a Facebook Developer Account and App credentials to be able to show Instagram embeds.
+More information on what is necessary to be able to integrate Instagram embeds in the future can be found here:
+https://developers.facebook.com/docs/instagram/oembed
+
+- Fix [Add config dependencies to thunder_media AutoAspectEffect](https://www.drupal.org/node/3164391)
+- Do [Update to media_entity_instagram v3](https://www.drupal.org/node/3171500)
+
 ## [3.5.4](https://github.com/thunder/thunder-distribution/tree/3.5.4) 2020-09-03
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.3...3.5.4)
 
