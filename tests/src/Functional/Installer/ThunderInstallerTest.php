@@ -32,6 +32,8 @@ class ThunderInstallerTest extends InstallerTestBase {
    * {@inheritdoc}
    */
   protected function setUp() {
+    parent::setUpAppRoot();
+
     $this->isInstalled = FALSE;
 
     $this->setupBaseUrl();
@@ -176,7 +178,7 @@ class ThunderInstallerTest extends InstallerTestBase {
    */
   protected function setUpSite() {
     $edit = $this->translatePostValues($this->parameters['forms']['install_configure_form']);
-    $this->drupalPostForm(NULL, $edit, $this->translations['Save and continue']);
+    $this->submitForm($edit, $this->translations['Save and continue']);
     // If we've got to this point the site is installed using the regular
     // installation workflow.
   }
@@ -185,7 +187,7 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Setup modules -> subroutine of test setUp process.
    */
   protected function setUpModules() {
-    $this->drupalPostForm(NULL, [], $this->translations['Save and continue']);
+    $this->submitForm([], $this->translations['Save and continue']);
     $this->isInstalled = TRUE;
   }
 

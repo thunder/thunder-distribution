@@ -187,7 +187,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
       'node' => $node->id(),
       'node_revision' => $node_storage->getLatestRevisionId($node->id()),
     ]);
-    $this->drupalPostForm($revert_url, [], $this->t('Revert'));
+    $this->drupalGet($revert_url);
+    $this->submitForm([], $this->t('Revert'));
 
     $this->drupalGet($node->toUrl());
     $this->assertPageTitle('Massive gaining seo traffic text');
