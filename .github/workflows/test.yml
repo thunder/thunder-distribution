@@ -69,6 +69,9 @@ jobs:
       - name: Build the docroot
         run: test-drupal-project build
 
+      - name: Install all needed phpunit dependencies
+        run: composer drupal-phpunit-upgrade
+
       - name: Get custom thunder_admin branch
         run: |
           rm -rf thunder_admin
