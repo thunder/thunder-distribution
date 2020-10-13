@@ -24,8 +24,6 @@
             "email": "alex.a.pott@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "license": "GPL-2.0-or-later",
     "repositories": [
         {
@@ -39,23 +37,6 @@
     ],
     "extra": {
         "installer-name": "thunder",
-        "installer-paths": {
-            "docroot/core": [
-                "type:drupal-core"
-            ],
-            "docroot/modules/contrib/{$name}": [
-                "type:drupal-module"
-            ],
-            "docroot/profiles/contrib/{$name}": [
-                "type:drupal-profile"
-            ],
-            "docroot/themes/contrib/{$name}": [
-                "type:drupal-theme"
-            ],
-            "drush/contrib/{$name}": [
-                "type:drupal-drush"
-            ]
-        },
         "patches": {
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
@@ -77,9 +58,7 @@
         }
     },
     "require": {
-        "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.5",
-        "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0-alpha8",
         "drupal/adsense": "^1.2-rc1",
         "drupal/admin_toolbar": "^2.1",
