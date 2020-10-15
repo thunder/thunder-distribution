@@ -40,6 +40,7 @@ jobs:
           coverage: none
           php-version: '7.4'
           extensions: Imagick
+          tools: composer:v2
 
       - name: Start MySql service
         run: |
@@ -54,7 +55,6 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer self-update
           composer global require thunder/drupal-testing
 
       - name: Prepare the build
@@ -100,6 +100,7 @@ jobs:
         coverage: none
         php-version: '7.4'
         extensions: Imagick
+        tools: composer:v2
 
     - name: Setup problem matchers for PHP
       run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
@@ -224,6 +225,7 @@ jobs:
           coverage: none
           php-version: '7.3'
           extensions: Imagick
+          tools: composer:v2
 
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
@@ -251,7 +253,7 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Install suggested dependencies
-        run: composer require "consolidation/robo:^2.0" "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: composer require "drupal/media_entity_instagram:^3.0" "consolidation/robo:^2.0" "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build
