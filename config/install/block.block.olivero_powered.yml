@@ -4,16 +4,16 @@ dependencies:
   module:
     - system
   theme:
-    - thunder_base
-id: thunder_base_content
-theme: thunder_base
-region: content
+    - olivero
+id: olivero_powered
+theme: olivero
+region: footer_bottom
 weight: 0
 provider: null
-plugin: system_main_block
+plugin: thunder_powered_by_block
 settings:
-  id: system_main_block
-  label: 'Main page content'
+  id: system_powered_by_block
+  label: 'Powered by Thunder'
   provider: system
   label_display: '0'
 visibility: {  }

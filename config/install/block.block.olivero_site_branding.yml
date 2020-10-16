@@ -4,9 +4,9 @@ dependencies:
   module:
     - system
   theme:
-    - thunder_base
-id: thunder_base_branding
-theme: thunder_base
+    - olivero
+id: olivero_site_branding
+theme: olivero
 region: header
 weight: 0
 provider: null
@@ -18,5 +18,5 @@ settings:
   label_display: '0'
   use_site_logo: true
   use_site_name: false
-  use_site_slogan: true
+  use_site_slogan: false
 visibility: {  }
