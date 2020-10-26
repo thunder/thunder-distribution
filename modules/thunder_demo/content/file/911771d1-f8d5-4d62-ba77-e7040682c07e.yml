@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 911771d1-f8d5-4d62-ba77-e7040682c07e
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: thunderday_burda_2017011419.jpg
+  uri:
+    -
+      value: 'public://2020-09/thunderday_burda_2017011419.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 217503
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1600160861
