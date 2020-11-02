@@ -43,7 +43,6 @@ For additional help, you can use one of this channel to ask question:
 * [Twitter](https://twitter.com/ThunderCoreTeam)
 * [Facebook](https://www.facebook.com/Thunder-CMS-168018513979183/).
 
-
 ## Contributing
 If you want to help, to make Thunder even better, please take a look at the [contributing guidelines](CONTRIBUTING.md).
 
