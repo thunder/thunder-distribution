@@ -40,7 +40,6 @@ jobs:
           coverage: none
           php-version: '7.4'
           extensions: Imagick
-          tools: composer:v2
 
       - name: Start MySql service
         run: |
@@ -100,7 +99,6 @@ jobs:
         coverage: none
         php-version: '7.4'
         extensions: Imagick
-        tools: composer:v2
 
     - name: Setup problem matchers for PHP
       run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
@@ -149,6 +147,7 @@ jobs:
           coverage: none
           php-version: '7.3'
           extensions: Imagick
+          tools: composer:v1
 
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
@@ -225,7 +224,6 @@ jobs:
           coverage: none
           php-version: '7.3'
           extensions: Imagick
-          tools: composer:v2
 
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
