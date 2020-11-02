@@ -8,7 +8,7 @@ Thunder is a Drupal distribution for professional publishers. It consists of the
 ## Installing Thunder
 Instructions on how to install Thunder can be found at the [installation guide](https://thunder.github.io/thunder-documentation/quick-install).
 
-### Updating Thunder 2 to Thunder 3
+### Updating Thunder
 If you want to update from Thunder 2 to Thunder 3 some manual steps are necessary, they are described here:
 
 [How to update Thunder 2 to Thunder 3](https://thunder.github.io/thunder-documentation/update-2-to-3)
@@ -42,6 +42,7 @@ For additional help, you can use one of this channel to ask question:
 * [Slack](https://thunder.org/contact-us) (highly recommended for faster support)
 * [Twitter](https://twitter.com/ThunderCoreTeam)
 * [Facebook](https://www.facebook.com/Thunder-CMS-168018513979183/).
+
 
 ## Contributing
 If you want to help, to make Thunder even better, please take a look at the [contributing guidelines](CONTRIBUTING.md).
