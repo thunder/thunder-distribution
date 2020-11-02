@@ -14,5 +14,8 @@
   "homepage": "https://github.com/thunder/thunder-distribution#readme",
   "devDependencies": {
     "eslint": "^6.8.0"
+  },
+  "dependencies": {
+    "eslint-config-airbnb": "^18.2.0"
   }
 }
