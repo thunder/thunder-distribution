@@ -43,7 +43,9 @@ function thunder_media_preprocess_views_view(&$variables) {
     'video_browser',
   ];
 
-  if (in_array($variables['view']->id(), $thunder_media_browser)) {
+  // @todo Remove after seven / thunder_admin support is dropped.
+  $activeTheme = Drupal::theme()->getActiveTheme()->getName();
+  if (in_array($activeTheme, ['seven', 'thunder_admin']) && in_array($variables['view']->id(), $thunder_media_browser)) {
     $variables['view_array']['#attached']['library'][] = 'thunder_media/entity_browser_view';
   }
 }
@@ -79,7 +81,12 @@ function thunder_media_field_widget_entity_browser_entity_reference_form_alter(&
  * Implements hook_form_FORM_ID_alter().
  */
 function thunder_media_form_entity_browser_multiple_image_browser_form_alter(&$form, FormStateInterface $form_state) {
-  $form['#attached']['library'][] = 'thunder_media/entity_browser_view';
+
+  // @todo Remove after seven / thunder_admin support is dropped.
+  $activeTheme = Drupal::theme()->getActiveTheme()->getName();
+  if (in_array($activeTheme, ['seven', 'thunder_admin'])) {
+    $form['#attached']['library'][] = 'thunder_media/entity_browser_view';
+  }
 }
 
 /**
