@@ -1,0 +1,16 @@
+{
+  "name": "tonic",
+  "version": "",
+  "description": "Adapt thunder distribution to gin (claro) theme.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:styles": "node-sass sass -o css",
+    "watch:styles": "node-sass --watch sass -o css"
+  },
+  "author": "thunder",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "node-sass": "^5.0.0"
+  }
+}

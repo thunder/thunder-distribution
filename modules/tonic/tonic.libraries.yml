@@ -1,0 +1,5 @@
+entity_browser_view:
+  css:
+    theme:
+      css/entity_browser_view.css: {}
+      ../../../../../core/themes/claro/css/base/variables.pcss.css: {}
