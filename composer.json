@@ -26,7 +26,7 @@
     ],
     "license": "GPL-2.0-or-later",
     "repositories": [
-e       {
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
@@ -68,7 +68,7 @@ e       {
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.9",
-        "drupal/core": "dev-9.0.x#3ab4109dd6c3d5c5a85d06fa46c782e12cf356bc",
+        "drupal/core": "~9.0.0",
         "drupal/config_selector": "^2.0",
         "drupal/config_update": "^1.7",
         "drupal/content_lock": "^2.1",
