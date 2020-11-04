@@ -261,7 +261,8 @@ jobs:
       - name: Test for deprecations
         run: test-drupal-project deprecation
         continue-on-error: true
-
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
       - name: Run the tests
         run: test-drupal-project run_tests
 

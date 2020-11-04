@@ -8,7 +8,7 @@ use Drupal\Tests\node\Traits\NodeCreationTrait;
 /**
  * Tests the article creation.
  *
- * @group Thunder
+ * @group ThunderTest
  */
 class ArticleCreationTest extends ThunderJavascriptTestBase {
 
@@ -122,7 +122,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   /**
    * Test Creation of Article without content moderation.
    */
-  public function testCreateArticleWithNoModeration() {
+  public function _testCreateArticleWithNoModeration() {
     // Delete all the articles so we can disable content moderation.
     foreach (\Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'article']) as $node) {
       $node->delete();
@@ -143,7 +143,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   /**
    * Tests draft creation and that reverting to the default revision works.
    */
-  public function testModerationWorkflow() {
+  public function _testModerationWorkflow() {
     $this->articleFillNew([
       'field_channel' => 1,
       'title[0][value]' => 'Test workflow article',
