@@ -85,7 +85,7 @@
         "drupal/length_indicator": "^1.1",
         "drupal/linkit": "^6.0.0-beta1",
         "drupal/liveblog": "^1.3-alpha15",
-        "drupal/media_entity_instagram": "^3.0.2",
+        "drupal/media_entity_instagram": "^3.0",
         "drupal/media_entity_pinterest": "^2.0",
         "drupal/media_entity_slideshow": "^2.0-alpha1",
         "drupal/media_entity_twitter": "^2.0-alpha1",
