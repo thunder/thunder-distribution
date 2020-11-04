@@ -40,7 +40,6 @@ jobs:
           coverage: none
           php-version: '7.4'
           extensions: Imagick
-          tools: composer:v2
 
       - name: Start MySql service
         run: |
@@ -100,7 +99,6 @@ jobs:
         coverage: none
         php-version: '7.4'
         extensions: Imagick
-        tools: composer:v2
 
     - name: Setup problem matchers for PHP
       run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
@@ -149,6 +147,7 @@ jobs:
           coverage: none
           php-version: '7.3'
           extensions: Imagick
+          tools: composer:v1
 
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
@@ -225,7 +224,6 @@ jobs:
           coverage: none
           php-version: '7.3'
           extensions: Imagick
-          tools: composer:v2
 
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
@@ -253,7 +251,7 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Install suggested dependencies
-        run: composer require "drupal/media_entity_instagram:^3.0" "consolidation/robo:^2.0" "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: composer require "consolidation/robo:^2.0" "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build
@@ -332,4 +330,4 @@ jobs:
 
 #   Start a debug session.
 #   - name: Setup tmate session
-#     uses: mxschmitt/action-tmate@v1
+#     uses: mxschmitt/action-tmate@v3
