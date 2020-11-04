@@ -26,7 +26,7 @@
     ],
     "license": "GPL-2.0-or-later",
     "repositories": [
-        {
+e       {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
@@ -38,6 +38,10 @@
     "extra": {
         "installer-name": "thunder",
         "patches": {
+            "drupal/core": {
+                "Autocomplete input in views exposed filters does not align with select and text inputs": "https://www.drupal.org/files/issues/2020-06-18/3116377-31.patch",
+                "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2020-07-30/3133639-8.patch"
+            },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
@@ -64,7 +68,7 @@
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.9",
-        "drupal/core": "~9.0.0",
+        "drupal/core": "dev-9.0.x#3ab4109dd6c3d5c5a85d06fa46c782e12cf356bc",
         "drupal/config_selector": "^2.0",
         "drupal/config_update": "^1.7",
         "drupal/content_lock": "^2.1",
