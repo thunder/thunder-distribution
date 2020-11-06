@@ -50,9 +50,6 @@
             },
             "drupal/dropzonejs": {
                 "Make dropzonejs widget available to the new Media Library in core": "https://www.drupal.org/files/issues/2020-09-18/3051658-7.patch"
-            },
-            "drupal/core": {
-                "Not possible to overwrite the upload forms for media library": "https://www.drupal.org/files/issues/2020-09-18/3171743-4.patch"
             }
         }
     },
