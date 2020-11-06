@@ -41,17 +41,6 @@ module.exports = {
       .drupalRelativeURL(`/node/add/${bundle}`)
       .waitForElementVisible('//*[@id="edit-submit"]', 1000);
 
-    // Fill required fields for content bundle.
-    // TODO: This part should be removed, because we are not submitting form.
-    const requiredFieldNames = Object.keys(fields);
-    requiredFieldNames.forEach(fieldName => {
-      // Skip field_22 - because it's used in test.
-      if (fieldName === "field_22") {
-        return;
-      }
-      browser.autoFillField(fieldName, fields[fieldName]);
-    });
-
     browser.performance
       .startMark("Select a first value")
       .select2.selectValue("field_22", "bund", 2, 10000)

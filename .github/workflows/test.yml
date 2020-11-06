@@ -54,7 +54,6 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer self-update
           composer global require thunder/drupal-testing
 
       - name: Prepare the build
@@ -148,6 +147,7 @@ jobs:
           coverage: none
           php-version: '7.3'
           extensions: Imagick
+          tools: composer:v1
 
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
@@ -330,4 +330,4 @@ jobs:
 
 #   Start a debug session.
 #   - name: Setup tmate session
-#     uses: mxschmitt/action-tmate@v1
+#     uses: mxschmitt/action-tmate@v3
