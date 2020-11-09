@@ -33,7 +33,7 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
    */
   protected function setUpLanguage() {
     // Place custom local translations in the translations directory to avoid
-    // using the Internet and relying on locale.drupal.org.
+    // using the Internet and relying on https://localize.drupal.org/.
     mkdir(DRUPAL_ROOT . '/' . $this->siteDirectory . '/files/translations', 0777, TRUE);
     file_put_contents(DRUPAL_ROOT . '/' . $this->siteDirectory . '/files/translations/drupal-8.0.0.de.po', $this->getPo('de'));
 
