@@ -32,10 +32,13 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
    * {@inheritdoc}
    */
   protected function visitInstaller() {
+    include_once DRUPAL_ROOT . '/core/includes/install.core.inc';
+    $version = _install_get_version_info(\Drupal::VERSION)['major'] . '.0.0';
+
     // Place custom local translations in the translations directory to avoid
     // using the Internet and relying on https://localize.drupal.org/.
     mkdir(DRUPAL_ROOT . '/' . $this->siteDirectory . '/files/translations', 0777, TRUE);
-    file_put_contents(DRUPAL_ROOT . '/' . $this->siteDirectory . '/files/translations/drupal-8.0.0.de.po', $this->getPo('de'));
+    file_put_contents(DRUPAL_ROOT . '/' . $this->siteDirectory . "/files/translations/drupal-{$version}.{$this->langcode}.po", $this->getPo($this->langcode));
 
     parent::visitInstaller();
   }

@@ -201,7 +201,7 @@ class ThunderInstallerTest extends InstallerTestBase {
     // Confirm that we are logged-in after installation.
     $this->assertSession()->pageTextContains($this->rootUser->getAccountName());
 
-    $message = strip_tags(new TranslatableMarkup('Congratulations, you installed @drupal!', ['@drupal' => 'Thunder',], ['langcode' => $this->langcode]));
+    $message = strip_tags(new TranslatableMarkup('Congratulations, you installed @drupal!', ['@drupal' => 'Thunder'], ['langcode' => $this->langcode]));
     $this->assertSession()->pageTextContains($message);
 
     /** @var \Drupal\Core\Database\Query\SelectInterface $query */
