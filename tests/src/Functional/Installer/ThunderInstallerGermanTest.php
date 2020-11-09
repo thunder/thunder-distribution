@@ -29,14 +29,21 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
   ];
 
   /**
-   * Installer step: Select language.
+   * {@inheritdoc}
    */
-  protected function setUpLanguage() {
+  protected function visitInstaller() {
     // Place custom local translations in the translations directory to avoid
     // using the Internet and relying on https://localize.drupal.org/.
     mkdir(DRUPAL_ROOT . '/' . $this->siteDirectory . '/files/translations', 0777, TRUE);
     file_put_contents(DRUPAL_ROOT . '/' . $this->siteDirectory . '/files/translations/drupal-8.0.0.de.po', $this->getPo('de'));
 
+    parent::visitInstaller();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUpLanguage() {
     $edit = [
       'langcode' => $this->langcode,
     ];

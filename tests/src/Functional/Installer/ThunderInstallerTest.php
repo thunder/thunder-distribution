@@ -6,6 +6,7 @@ use Drupal\Core\DrupalKernel;
 use Drupal\Core\Language\Language;
 use Drupal\Core\Session\UserSession;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Test\HttpClientMiddleware\TestHttpClientMiddleware;
 use Drupal\FunctionalTests\Installer\InstallerTestBase;
 use GuzzleHttp\HandlerStack;
@@ -200,7 +201,7 @@ class ThunderInstallerTest extends InstallerTestBase {
     // Confirm that we are logged-in after installation.
     $this->assertSession()->pageTextContains($this->rootUser->getAccountName());
 
-    $message = strip_tags(t('Congratulations, you installed @drupal!', ['@drupal' => 'Thunder',], ['langcode' => $this->langcode]));
+    $message = strip_tags(new TranslatableMarkup('Congratulations, you installed @drupal!', ['@drupal' => 'Thunder',], ['langcode' => $this->langcode]));
     $this->assertSession()->pageTextContains($message);
 
     /** @var \Drupal\Core\Database\Query\SelectInterface $query */
