@@ -185,6 +185,8 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Setup modules -> subroutine of test setUp process.
    */
   protected function setUpModules() {
+    // @todo Add another test that tests interactive install of all optional
+    //   Thunder modules.
     $this->drupalPostForm(NULL, [], $this->translations['Save and continue']);
     $this->isInstalled = TRUE;
   }
@@ -193,14 +195,12 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Confirms that the installation succeeded.
    */
   public function testInstalled() {
-    $this->assertSession()->addressEquals('?tour=1');
+    $this->assertSession()->addressEquals('user/1');
     $this->assertSession()->statusCodeEquals(200);
     // Confirm that we are logged-in after installation.
     $this->assertSession()->pageTextContains($this->rootUser->getAccountName());
 
-    // Ensure demo content is installed.
-    $this->assertSession()->pageTextContains('Burda Launches Open-Source CMS Thunder');
-    $this->assertSession()->pageTextContains('Come to DrupalCon New Orleans');
+    $this->assertSession()->pageTextContains('Congratulations, you installed Thunder!');
 
     /** @var \Drupal\Core\Database\Query\SelectInterface $query */
     $query = \Drupal::database()->select('watchdog', 'w')
