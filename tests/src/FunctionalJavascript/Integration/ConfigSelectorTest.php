@@ -34,8 +34,12 @@ class ConfigSelectorTest extends ThunderJavascriptTestBase {
     $assert_session->elementExists('css', '#block-thunder-admin-content > div > div.view-content');
 
     // Install search_api.
-    $module_installer = \Drupal::service('module_installer');
-    $module_installer->install(['thunder_search']);
+    $this->drupalGet('admin/modules');
+    $edit = [
+      'modules[thunder_search][enable]' => TRUE,
+    ];
+    $this->submitForm($edit, t('Install'));
+    $this->submitForm([], 'Continue');
 
     // Now we have a search_api based view.
     $this->drupalGet('admin/config/search/search-api/index/content');
@@ -46,9 +50,20 @@ class ConfigSelectorTest extends ThunderJavascriptTestBase {
     $assert_session->elementExists('xpath', '//*[@id="view-title-table-column"]/a');
     $assert_session->elementExists('css', '#block-thunder-admin-content > div > div.view-content-search-api');
 
-    // Uninstall search_api.
-    $module_installer->uninstall(['search_api']);
-    drupal_flush_all_caches();
+    // Uninstall thunder_search and search_api_mark_outdated.
+    $this->drupalGet('admin/modules/uninstall');
+    $edit = [
+      'uninstall[thunder_search]' => TRUE,
+    ];
+    $this->submitForm($edit, t('Uninstall'));
+    $this->submitForm([], t('Uninstall'));
+
+    $this->drupalGet('admin/modules/uninstall');
+    $edit = [
+      'uninstall[search_api_mark_outdated]' => TRUE,
+    ];
+    $this->submitForm($edit, t('Uninstall'));
+    $this->submitForm([], t('Uninstall'));
 
     // The normal view is back.
     $this->drupalGet('admin/content');
