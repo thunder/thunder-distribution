@@ -38,7 +38,7 @@ class ConfigSelectorTest extends ThunderJavascriptTestBase {
     $edit = [
       'modules[thunder_search][enable]' => TRUE,
     ];
-    $this->submitForm($edit, t('Install'));
+    $this->submitForm($edit, 'Install');
     $this->submitForm([], 'Continue');
 
     // Now we have a search_api based view.
@@ -55,15 +55,15 @@ class ConfigSelectorTest extends ThunderJavascriptTestBase {
     $edit = [
       'uninstall[thunder_search]' => TRUE,
     ];
-    $this->submitForm($edit, t('Uninstall'));
-    $this->submitForm([], t('Uninstall'));
+    $this->submitForm($edit, 'Uninstall');
+    $this->submitForm([], 'Uninstall');
 
     $this->drupalGet('admin/modules/uninstall');
     $edit = [
       'uninstall[search_api_mark_outdated]' => TRUE,
     ];
-    $this->submitForm($edit, t('Uninstall'));
-    $this->submitForm([], t('Uninstall'));
+    $this->submitForm($edit, 'Uninstall');
+    $this->submitForm([], 'Uninstall');
 
     // The normal view is back.
     $this->drupalGet('admin/content');
