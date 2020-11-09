@@ -200,7 +200,8 @@ class ThunderInstallerTest extends InstallerTestBase {
     // Confirm that we are logged-in after installation.
     $this->assertSession()->pageTextContains($this->rootUser->getAccountName());
 
-    $this->assertSession()->pageTextContains('Congratulations, you installed Thunder!');
+    $message = strip_tags(t('Congratulations, you installed @drupal!', ['@drupal' => 'Thunder',], ['langcode' => $this->langcode]));
+    $this->assertSession()->pageTextContains($message);
 
     /** @var \Drupal\Core\Database\Query\SelectInterface $query */
     $query = \Drupal::database()->select('watchdog', 'w')
