@@ -32,10 +32,44 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
    * Installer step: Select language.
    */
   protected function setUpLanguage() {
+    // Place custom local translations in the translations directory to avoid
+    // using the Internet and relying on locale.drupal.org.
+    mkdir(DRUPAL_ROOT . '/' . $this->siteDirectory . '/files/translations', 0777, TRUE);
+    file_put_contents(DRUPAL_ROOT . '/' . $this->siteDirectory . '/files/translations/drupal-8.0.0.de.po', $this->getPo('de'));
+
     $edit = [
       'langcode' => $this->langcode,
     ];
     $this->drupalPostForm(NULL, $edit, 'Save and continue');
+  }
+
+  /**
+   * Returns the string for the test .po file.
+   *
+   * @param string $langcode
+   *   The language code.
+   *
+   * @return string
+   *   Contents for the test .po file.
+   */
+  protected function getPo($langcode) {
+    return <<<ENDPO
+msgid ""
+msgstr ""
+
+msgid "Congratulations, you installed @drupal!"
+msgstr "Glückwunsch, @drupal wurde erfolgreich installiert."
+
+msgid "Save and continue"
+msgstr "Speichern und fortfahren"
+
+msgid "continue anyway"
+msgstr "fortfahren"
+
+msgid "Errors found"
+msgstr "Fehler gefunden"
+
+ENDPO;
   }
 
   /**
