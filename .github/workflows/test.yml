@@ -54,7 +54,7 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer global require thunder/drupal-testing:revert/phpstan-downgrade-dev
+          composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
