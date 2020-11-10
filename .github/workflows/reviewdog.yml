@@ -13,6 +13,7 @@ jobs:
         uses: reviewdog/action-eslint@v1
         with:
           github_token: ${{ secrets.github_token }}
+          reporter: github-pr-check
 
   phpcs:
     name: runner / phpcs
