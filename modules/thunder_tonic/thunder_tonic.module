@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * The module file.
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function thunder_tonic_preprocess_views_view(&$variables) {$x=1;
+  if ($variables['view']->id() === 'entity_browser') {
+    $variables['view_array']['#attached']['library'][] = 'thunder_tonic/entity_browser_view';
+  }
+}
