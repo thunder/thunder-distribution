@@ -12,7 +12,7 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
   /**
    * {@inheritdoc}
    */
-  protected $knownWarnings = 1;
+  protected $knownWarnings = 0;
 
   /**
    * {@inheritdoc}
@@ -29,13 +29,57 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
   ];
 
   /**
-   * Installer step: Select language.
+   * {@inheritdoc}
+   */
+  protected function visitInstaller() {
+    include_once DRUPAL_ROOT . '/core/includes/install.core.inc';
+    $version = _install_get_version_info(\Drupal::VERSION)['major'] . '.0.0';
+
+    // Place custom local translations in the translations directory to avoid
+    // using the Internet and relying on https://localize.drupal.org/.
+    mkdir(DRUPAL_ROOT . '/' . $this->siteDirectory . '/files/translations', 0777, TRUE);
+    file_put_contents(DRUPAL_ROOT . '/' . $this->siteDirectory . "/files/translations/drupal-{$version}.{$this->langcode}.po", $this->getPo($this->langcode));
+
+    parent::visitInstaller();
+  }
+
+  /**
+   * {@inheritdoc}
    */
   protected function setUpLanguage() {
     $edit = [
       'langcode' => $this->langcode,
     ];
     $this->drupalPostForm(NULL, $edit, 'Save and continue');
+  }
+
+  /**
+   * Returns the string for the test .po file.
+   *
+   * @param string $langcode
+   *   The language code.
+   *
+   * @return string
+   *   Contents for the test .po file.
+   */
+  protected function getPo($langcode) {
+    return <<<ENDPO
+msgid ""
+msgstr ""
+
+msgid "Congratulations, you installed @drupal!"
+msgstr "Glückwunsch, @drupal wurde erfolgreich installiert."
+
+msgid "Save and continue"
+msgstr "Speichern und fortfahren"
+
+msgid "continue anyway"
+msgstr "fortfahren"
+
+msgid "Errors found"
+msgstr "Fehler gefunden"
+
+ENDPO;
   }
 
   /**
