@@ -54,7 +54,7 @@
             },
             "drupal/core": {
                 "When a profile installs a block for a theme, it is created for all enabled themes": "https://www.drupal.org/files/issues/2020-11-12/2404105-17.patch",
-                "Resolve config differences": "https://www.drupal.org/files/issues/2020-11-12/3182134-3.patch"
+                "Resolve config differences": "https://www.drupal.org/files/issues/2020-11-12/3182134-4.patch"
             }
         }
     },
