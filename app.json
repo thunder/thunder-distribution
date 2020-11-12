@@ -5,9 +5,5 @@
       "url": "https://github.com/thunder/heroku-buildpack-thunder#fix/demo-content"
     }
   ],
-  "environments": {
-    "review": {
-      "addons": ["heroku-postgresql:hobby-dev"]
-    }
-  }
+  "stack": "heroku-20"
 }
