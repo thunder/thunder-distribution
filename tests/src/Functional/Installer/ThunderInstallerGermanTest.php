@@ -44,13 +44,32 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
   }
 
   /**
-   * {@inheritdoc}
+   * Returns the string for the test .po file.
+   *
+   * @param string $langcode
+   *   The language code.
+   *
+   * @return string
+   *   Contents for the test .po file.
    */
-  protected function setUpLanguage() {
-    $edit = [
-      'langcode' => $this->langcode,
-    ];
-    $this->drupalPostForm(NULL, $edit, 'Save and continue');
+  protected function getPo($langcode) {
+    return <<<ENDPO
+msgid ""
+msgstr ""
+
+msgid "Congratulations, you installed @drupal!"
+msgstr "Glückwunsch, @drupal wurde erfolgreich installiert."
+
+msgid "Save and continue"
+msgstr "Speichern und fortfahren"
+
+msgid "continue anyway"
+msgstr "fortfahren"
+
+msgid "Errors found"
+msgstr "Fehler gefunden"
+
+ENDPO;
   }
 
   /**
