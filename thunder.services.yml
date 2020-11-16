@@ -1,0 +1,5 @@
+services:
+  thunder.breadcrumb.default:
+    class: Drupal\thunder\Breadcrumb\ThunderNodeEditBreadcrumbBuilder
+    tags:
+      - { name: breadcrumb_builder, priority: 100 }
