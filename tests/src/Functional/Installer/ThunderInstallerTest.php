@@ -6,6 +6,7 @@ use Drupal\Core\DrupalKernel;
 use Drupal\Core\Language\Language;
 use Drupal\Core\Session\UserSession;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Test\HttpClientMiddleware\TestHttpClientMiddleware;
 use Drupal\FunctionalTests\Installer\InstallerTestBase;
 use GuzzleHttp\HandlerStack;
@@ -187,6 +188,8 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Setup modules -> subroutine of test setUp process.
    */
   protected function setUpModules() {
+    // @todo Add another test that tests interactive install of all optional
+    //   Thunder modules.
     $this->submitForm([], $this->translations['Save and continue']);
     $this->isInstalled = TRUE;
   }
@@ -195,14 +198,13 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Confirms that the installation succeeded.
    */
   public function testInstalled() {
-    $this->assertSession()->addressEquals('?tour=1');
+    $this->assertSession()->addressEquals('user/1');
     $this->assertSession()->statusCodeEquals(200);
     // Confirm that we are logged-in after installation.
     $this->assertSession()->pageTextContains($this->rootUser->getAccountName());
 
-    // Ensure demo content is installed.
-    $this->assertSession()->pageTextContains('Burda Launches Open-Source CMS Thunder');
-    $this->assertSession()->pageTextContains('Come to DrupalCon New Orleans');
+    $message = strip_tags(new TranslatableMarkup('Congratulations, you installed @drupal!', ['@drupal' => 'Thunder'], ['langcode' => $this->langcode]));
+    $this->assertSession()->pageTextContains($message);
 
     /** @var \Drupal\Core\Database\Query\SelectInterface $query */
     $query = \Drupal::database()->select('watchdog', 'w')
