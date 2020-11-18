@@ -163,8 +163,8 @@ jobs:
 
       - name: Start MySql service
         run: |
-          sudo echo "[mysqld]" > /etc/mysql/conf.d/native-password
-          sudo echo "default-authentication-plugin=mysql_native_password" >> /etc/mysql/conf.d/native-password
+          sudo echo "[mysqld]" > /etc/mysql/mysql.conf.d/native-password
+          sudo echo "default-authentication-plugin=mysql_native_password" >> /etc/mysql/mysql.conf.d/native-password
           sudo /etc/init.d/mysql start
 
       - name: Cache composer dependencies
@@ -242,8 +242,9 @@ jobs:
 
       - name: Start MySql service
         run: |
-          sudo echo "[mysqld]" > /etc/mysql/conf.d/native-password
-          sudo echo "default-authentication-plugin=mysql_native_password" >> /etc/mysql/conf.d/native-password
+          ls -al /etc/mysql/mysql.conf.d
+          sudo echo "[mysqld]" > /etc/mysql/mysql.conf.d/native-password
+          sudo echo "default-authentication-plugin=mysql_native_password" >> /etc/mysql/mysql.conf.d/native-password
           sudo /etc/init.d/mysql start
 
       - name: Cache composer dependencies
