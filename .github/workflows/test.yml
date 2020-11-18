@@ -159,6 +159,8 @@ jobs:
       - uses: mirromutth/mysql-action@v1.1
         with:
           mysql version: '5.7'
+          mysql user: ${{ env.DRUPAL_TESTING_DATABASE_USER }}
+          mysql password: ${{ env.DRUPAL_TESTING_DATABASE_PASSWORD }}
 
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
@@ -239,6 +241,8 @@ jobs:
       - uses: mirromutth/mysql-action@v1.1
         with:
           mysql version: '5.7'
+          mysql user: ${{ env.DRUPAL_TESTING_DATABASE_USER }}
+          mysql password: ${{ env.DRUPAL_TESTING_DATABASE_PASSWORD }}
 
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
