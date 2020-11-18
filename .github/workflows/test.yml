@@ -243,7 +243,7 @@ jobs:
       - name: Start MySql service
         run: |
           sudo bash -c 'echo "[mysqld]" > /etc/mysql/mysql.conf.d/native-password'
-          sudo bash -c 'echo "default-authentication-plugin=mysql_native_password" > /etc/mysql/mysql.conf.d/native-password'
+          sudo bash -c 'echo "default-authentication-plugin=mysql_native_password" >> /etc/mysql/mysql.conf.d/native-password'
           sudo /etc/init.d/mysql start
 
       - name: Cache composer dependencies
@@ -274,8 +274,8 @@ jobs:
         continue-on-error: true
 
         # Start a debug session.
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      #- name: Setup tmate session
+      #  uses: mxschmitt/action-tmate@v3
 
       - name: Run the tests
         run: test-drupal-project run_tests
