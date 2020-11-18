@@ -161,15 +161,13 @@ jobs:
           mysql version: '5.7'
           mysql user: ${{ env.DRUPAL_TESTING_DATABASE_USER }}
           mysql password: ${{ env.DRUPAL_TESTING_DATABASE_PASSWORD }}
+          mysql database: testing
 
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
 
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-
-      - name: Start MySql service
-        run: sudo /etc/init.d/mysql start
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -243,16 +241,13 @@ jobs:
           mysql version: '5.7'
           mysql user: ${{ env.DRUPAL_TESTING_DATABASE_USER }}
           mysql password: ${{ env.DRUPAL_TESTING_DATABASE_PASSWORD }}
+          mysql database: testing
 
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
 
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-
-      - name: Start MySql service
-        run: |
-          sudo /etc/init.d/mysql start
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
