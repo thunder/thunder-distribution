@@ -30,7 +30,7 @@ jobs:
 
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v1
@@ -89,7 +89,7 @@ jobs:
   test-max:
     needs: build
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v1
@@ -138,7 +138,7 @@ jobs:
 
   test-upgrade:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-upgrade') || github.event_name == 'schedule' }}
 
@@ -215,7 +215,7 @@ jobs:
 
   test-min:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
 
@@ -275,7 +275,7 @@ jobs:
   test-performance:
     needs: [build, test-max]
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-performance') || github.event_name == 'schedule' }}
 
