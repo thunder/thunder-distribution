@@ -156,6 +156,10 @@ jobs:
           extensions: Imagick, gd
           tools: composer:v1
 
+      - uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql version: '5.7'
+
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
 
