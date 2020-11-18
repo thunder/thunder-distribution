@@ -159,8 +159,7 @@ jobs:
       - uses: mirromutth/mysql-action@v1.1
         with:
           mysql version: '5.7'
-          mysql user: ${{ env.DRUPAL_TESTING_DATABASE_USER }}
-          mysql password: ${{ env.DRUPAL_TESTING_DATABASE_PASSWORD }}
+          mysql root password: root
           mysql database: testing
 
       - name: Setup problem matchers for PHP
@@ -239,8 +238,7 @@ jobs:
       - uses: mirromutth/mysql-action@v1.1
         with:
           mysql version: '5.7'
-          mysql user: ${{ env.DRUPAL_TESTING_DATABASE_USER }}
-          mysql password: ${{ env.DRUPAL_TESTING_DATABASE_PASSWORD }}
+          mysql root password: root
           mysql database: testing
 
       - name: Setup problem matchers for PHP
