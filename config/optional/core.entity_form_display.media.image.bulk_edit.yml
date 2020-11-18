@@ -14,15 +14,13 @@ dependencies:
     - datetime
     - select2
     - text
-_core:
-  default_config_hash: eQoqvQoRnZTMAOjSCwZ9VZYyXN7yHJWgGItVpVi3NmM
 id: media.image.bulk_edit
 targetEntityType: media
 bundle: image
 mode: bulk_edit
 content:
   field_copyright:
-    weight: 0
+    weight: 1
     settings:
       size: 60
       placeholder: ''
@@ -31,14 +29,14 @@ content:
     region: content
   field_description:
     type: text_textarea
-    weight: 5
+    weight: 0
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
     region: content
   field_expires:
-    weight: 1
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -52,23 +50,6 @@ content:
     third_party_settings: {  }
     region: content
   field_tags:
-    type: select2_entity_reference
-    weight: 3
-    region: content
-    settings:
-      width: 100%
-      autocomplete: true
-      match_operator: CONTAINS
-      match_limit: 10
-    third_party_settings: {  }
-  status:
-    type: boolean_checkbox
-    weight: 6
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  uid:
     type: select2_entity_reference
     weight: 4
     region: content
@@ -85,3 +66,5 @@ hidden:
   moderation_state: true
   name: true
   path: true
+  status: true
+  uid: true
