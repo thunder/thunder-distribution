@@ -97,7 +97,7 @@ jobs:
       with:
         coverage: none
         php-version: '7.4'
-        extensions: Imagick
+        extensions: Imagick, gd, pdo_mysql
         # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
         ini-values: pcre.jit=0
 
