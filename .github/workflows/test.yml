@@ -163,8 +163,8 @@ jobs:
 
       - name: Start MySql service
         run: |
-          sudo echo "[mysqld]" > /etc/mysql/mysql.conf.d/native-password
-          sudo echo "default-authentication-plugin=mysql_native_password" >> /etc/mysql/mysql.conf.d/native-password
+          sudo bash -c 'echo "[mysqld]" > /etc/mysql/mysql.conf.d/native-password'
+          sudo bash -c 'echo "default-authentication-plugin=mysql_native_password" > /etc/mysql/mysql.conf.d/native-password'
           sudo /etc/init.d/mysql start
 
       - name: Cache composer dependencies
@@ -242,8 +242,6 @@ jobs:
 
       - name: Start MySql service
         run: |
-          ls -al /etc/mysql/mysql.conf.d
-          cat /etc/mysql/mysql.conf.d/mysql.cnf
           sudo bash -c 'echo "[mysqld]" > /etc/mysql/mysql.conf.d/native-password'
           sudo bash -c 'echo "default-authentication-plugin=mysql_native_password" > /etc/mysql/mysql.conf.d/native-password'
           sudo /etc/init.d/mysql start
@@ -274,6 +272,10 @@ jobs:
       - name: Test for deprecations
         run: test-drupal-project deprecation
         continue-on-error: true
+
+        # Start a debug session.
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - name: Run the tests
         run: test-drupal-project run_tests
