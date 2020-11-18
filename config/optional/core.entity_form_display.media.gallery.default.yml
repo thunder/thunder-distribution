@@ -57,8 +57,8 @@ content:
           action_title: Action
           include_exclude: include
           selected_actions:
-            media_bulk_edit_action: media_bulk_edit_action
             media_delete_action: '0'
+            media_edit_action: media_edit_action
             media_publish_action: '0'
             media_save_action: '0'
             media_unpublish_action: '0'
