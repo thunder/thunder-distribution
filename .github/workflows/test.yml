@@ -19,7 +19,6 @@ env:
   DRUPAL_TESTING_DATABASE_ENGINE: mysql
   DRUPAL_TESTING_TEST_CODING_STYLES: false
   DRUPAL_TESTING_TEST_PROFILE: thunder
-  DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
   DRUPAL_TESTING_TEST_GROUP: Thunder
   THUNDER_ADMIN_BRANCH: 4.x
   PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
@@ -156,17 +155,14 @@ jobs:
           extensions: Imagick, gd, pdo_mysql
           tools: composer:v1
 
-      - uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql version: '5.7'
-          mysql root password: root
-          mysql database: testing
-
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
 
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Start MySql service
+        run: sudo /etc/init.d/mysql start
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -235,17 +231,14 @@ jobs:
           php-version: '7.3'
           extensions: Imagick, gd, pdo_mysql
 
-      - uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql version: '5.7'
-          mysql root password: root
-          mysql database: testing
-
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
 
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Start MySql service
+        run: sudo /etc/init.d/mysql start
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
