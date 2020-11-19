@@ -5,9 +5,10 @@
 
 Adding composer 2 compatibility.
 
-Please make sure, that your project is composer 2 ready by calling
+Please make sure, that your project is requiring oomphinc/composer-installers-extender by calling
 
     composer require oomphinc/composer-installers-extender:^2.0
+
 
 ## [3.5.5](https://github.com/thunder/thunder-distribution/tree/3.5.5) 2020-10-12
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.4...3.5.5)
