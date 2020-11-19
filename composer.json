@@ -24,8 +24,6 @@
             "email": "alex.a.pott@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "license": "GPL-2.0-or-later",
     "repositories": [
         {
@@ -39,23 +37,6 @@
     ],
     "extra": {
         "installer-name": "thunder",
-        "installer-paths": {
-            "docroot/core": [
-                "type:drupal-core"
-            ],
-            "docroot/modules/contrib/{$name}": [
-                "type:drupal-module"
-            ],
-            "docroot/profiles/contrib/{$name}": [
-                "type:drupal-profile"
-            ],
-            "docroot/themes/contrib/{$name}": [
-                "type:drupal-theme"
-            ],
-            "drush/contrib/{$name}": [
-                "type:drupal-drush"
-            ]
-        },
         "patches": {
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
@@ -74,10 +55,8 @@
         }
     },
     "require": {
-        "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.5",
         "marc1706/fast-image-size": "^1.1.0",
-        "oomphinc/composer-installers-extender": "^1.1",
         "drupal/access_unpublished": "^1.0-alpha8",
         "drupal/adsense": "^1.2",
         "drupal/admin_toolbar": "^2.1",
@@ -86,7 +65,7 @@
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.9",
-        "drupal/core": "~8.9.0",
+        "drupal/core": "~8.9.7",
         "drupal/config_selector": "^2.0",
         "drupal/config_update": "^1.7",
         "drupal/content_lock": "^2.1",
