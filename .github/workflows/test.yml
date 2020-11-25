@@ -19,7 +19,6 @@ env:
   DRUPAL_TESTING_DATABASE_ENGINE: mysql
   DRUPAL_TESTING_TEST_CODING_STYLES: false
   DRUPAL_TESTING_TEST_PROFILE: thunder
-  DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
   DRUPAL_TESTING_TEST_GROUP: Thunder
   THUNDER_ADMIN_BRANCH: 4.x
   PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
@@ -30,7 +29,7 @@ jobs:
 
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v1
@@ -89,7 +88,7 @@ jobs:
   test-max:
     needs: build
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v1
@@ -98,7 +97,7 @@ jobs:
       with:
         coverage: none
         php-version: '7.4'
-        extensions: Imagick
+        extensions: Imagick, gd, pdo_mysql
         # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
         ini-values: pcre.jit=0
 
@@ -138,13 +137,14 @@ jobs:
 
   test-upgrade:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-upgrade') || github.event_name == 'schedule' }}
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: false
       DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 3.0.8
+      DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
 
     steps:
       - uses: actions/checkout@v1
@@ -153,7 +153,7 @@ jobs:
         with:
           coverage: none
           php-version: '7.3'
-          extensions: Imagick
+          extensions: Imagick, gd, pdo_mysql
           tools: composer:v1
 
       - name: Setup problem matchers for PHP
@@ -163,7 +163,9 @@ jobs:
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Start MySql service
-        run: sudo /etc/init.d/mysql start
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -uroot -proot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -215,7 +217,7 @@ jobs:
 
   test-min:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
 
@@ -230,7 +232,7 @@ jobs:
         with:
           coverage: none
           php-version: '7.3'
-          extensions: Imagick
+          extensions: Imagick, gd, pdo_mysql
 
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
@@ -241,6 +243,7 @@ jobs:
       - name: Start MySql service
         run: |
           sudo /etc/init.d/mysql start
+          mysql -uroot -proot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -275,7 +278,7 @@ jobs:
   test-performance:
     needs: [build, test-max]
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-performance') || github.event_name == 'schedule' }}
 
