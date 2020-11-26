@@ -20,7 +20,7 @@ After that, Thunder is successfully installed. Start coding now.
 The Thunder distributions ships the config_profile module as a dev
 dependency for easier config updates. The workflow for updating config
 files that are shipped in the distribution should be:
-* Install the latest dev version of Thunder
+* Install the latest development version of Thunder
 * Enable the Config Profile module
   ```
   drush en config_profile
