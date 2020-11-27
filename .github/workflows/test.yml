@@ -37,7 +37,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           coverage: none
-          php-version: '7.4'
+          php-version: '8.0'
           extensions: Imagick
 
       - name: Start MySql service
@@ -96,7 +96,7 @@ jobs:
     - uses: shivammathur/setup-php@v2
       with:
         coverage: none
-        php-version: '7.4'
+        php-version: '8.0'
         extensions: Imagick, gd, pdo_mysql
         # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
         ini-values: pcre.jit=0
