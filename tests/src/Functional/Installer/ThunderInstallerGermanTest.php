@@ -44,16 +44,6 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  protected function setUpLanguage() {
-    $edit = [
-      'langcode' => $this->langcode,
-    ];
-    $this->drupalPostForm(NULL, $edit, 'Save and continue');
-  }
-
-  /**
    * Returns the string for the test .po file.
    *
    * @param string $langcode

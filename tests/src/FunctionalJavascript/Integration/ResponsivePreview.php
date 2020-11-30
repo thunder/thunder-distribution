@@ -34,8 +34,8 @@ class ResponsivePreview extends ThunderJavascriptTestBase {
     $current_height = $session->evaluateScript("jQuery('#responsive-preview-frame').height()");
     $this->changeDeviceRotation();
     $assert_session->elementExists('xpath', '//*[@id="responsive-preview-orientation" and contains(@class, "rotated")]');
-    $this->assertEqual($current_height, $session->evaluateScript("jQuery('#responsive-preview-frame').width()"));
-    $this->assertEqual($current_width, $session->evaluateScript("jQuery('#responsive-preview-frame').height()"));
+    $this->assertEquals($current_height, $session->evaluateScript("jQuery('#responsive-preview-frame').width()"));
+    $this->assertEquals($current_width, $session->evaluateScript("jQuery('#responsive-preview-frame').height()"));
 
     // Switching of device should keep rotation.
     $this->selectDevice('(//*[@id="responsive-preview-toolbar-tab"]//button[@data-responsive-preview-name])[last()]');
@@ -56,7 +56,7 @@ class ResponsivePreview extends ThunderJavascriptTestBase {
 
     // Using preview on entity edit should use preview page.
     $this->selectDevice('(//*[@id="responsive-preview-toolbar-tab"]//button[@data-responsive-preview-name])[1]');
-    $this->assertNotEqual(-1, $session->evaluateScript("jQuery('#responsive-preview-frame')[0].contentWindow.location.href.indexOf('/node/preview/')"));
+    $this->assertNotEquals(-1, $session->evaluateScript("jQuery('#responsive-preview-frame')[0].contentWindow.location.href.indexOf('/node/preview/')"));
     $this->changeDeviceRotation();
 
     // Un-checking device from dropdown should turn off preview.

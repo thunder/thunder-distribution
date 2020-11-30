@@ -33,7 +33,8 @@ class ContentListTest extends ThunderTestBase {
     $assert_session->elementTextContains('css', $secondaryMenuBlockSelector, 'Scheduled content');
     $assert_session->elementTextContains('css', $secondaryMenuBlockSelector, 'Locked content');
 
-    $this->drupalPostForm('admin/config/thunder_article/configuration', ['move_scheduler_local_task' => 0], 'Save configuration');
+    $this->drupalGet('admin/config/thunder_article/configuration');
+    $this->submitForm(['move_scheduler_local_task' => 0], 'Save configuration');
 
     $this->drupalGet('admin/content');
 
@@ -41,14 +42,16 @@ class ContentListTest extends ThunderTestBase {
     $assert_session->elementTextContains('css', $primaryMenuBlockSelector, 'Scheduled');
     $assert_session->elementTextContains('css', $secondaryMenuBlockSelector, 'Locked content');
 
-    $this->drupalPostForm('admin/config/thunder_article/configuration', ['move_scheduler_local_task' => 1], 'Save configuration');
+    $this->drupalGet('admin/config/thunder_article/configuration');
+    $this->submitForm(['move_scheduler_local_task' => 1], 'Save configuration');
 
     $this->drupalGet('admin/content');
 
     $assert_session->elementTextNotContains('css', $primaryMenuBlockSelector, 'Scheduled');
     $assert_session->elementTextContains('css', $secondaryMenuBlockSelector, 'Scheduled content');
 
-    $this->drupalPostForm('admin/config/thunder_article/configuration', ['move_scheduler_local_task' => 0], 'Save configuration');
+    $this->drupalGet('admin/config/thunder_article/configuration');
+    $this->submitForm(['move_scheduler_local_task' => 0], 'Save configuration');
 
     $this->drupalGet('admin/content');
 
