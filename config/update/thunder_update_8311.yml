@@ -1,0 +1,61 @@
+__global_actions:
+  import_configs:
+    - core.entity_form_mode.media.bulk_edit.yml
+    - core.entity_form_display.media.image.bulk_edit
+  install_modules:
+    - views_bulk_edit
+    - entity_reference_actions
+user.role.editor:
+  expected_config: {  }
+  update_actions:
+    add:
+      permissions:
+        - 'use views bulk edit'
+user.role.seo:
+  expected_config: {  }
+  update_actions:
+    add:
+      permissions:
+        - 'use views bulk edit'
+core.entity_form_display.media.gallery.default:
+  expected_config:
+    content:
+      field_media_images:
+        third_party_settings: {  }
+  update_actions:
+    change:
+      content:
+        field_media_images:
+          third_party_settings:
+            entity_reference_actions:
+              enabled: true
+              options:
+                action_title: Action
+                include_exclude: include
+                selected_actions:
+                  media_delete_action: '0'
+                  media_edit_action: media_edit_action
+                  media_publish_action: '0'
+                  media_save_action: '0'
+                  media_unpublish_action: '0'
+core.entity_form_display.media.gallery.inline:
+  expected_config:
+    content:
+      field_media_images:
+        third_party_settings: {  }
+  update_actions:
+    change:
+      content:
+        field_media_images:
+          third_party_settings:
+            entity_reference_actions:
+              enabled: true
+              options:
+                action_title: Action
+                include_exclude: include
+                selected_actions:
+                  media_delete_action: '0'
+                  media_edit_action: media_edit_action
+                  media_publish_action: '0'
+                  media_save_action: '0'
+                  media_unpublish_action: '0'
