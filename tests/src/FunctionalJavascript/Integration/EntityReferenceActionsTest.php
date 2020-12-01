@@ -14,7 +14,6 @@ class EntityReferenceActionsTest extends ThunderJavascriptTestBase {
 
   use ThunderParagraphsTestTrait;
 
-
   /**
    * {@inheritdoc}
    */
