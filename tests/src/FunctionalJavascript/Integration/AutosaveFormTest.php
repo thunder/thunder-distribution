@@ -23,8 +23,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     parent::setUp();
 
     // Adjust the autosave form submission interval.
-    \Drupal::configFactory()
-      ->getEditable('autosave_form.settings')
+    $this->config('autosave_form.settings')
       ->set('interval', 2000)
       ->save();
   }
