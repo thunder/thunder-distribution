@@ -3,6 +3,8 @@
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Drupal\Core\Url;
+use Drupal\media_test_oembed\Controller\ResourceController;
+use Drupal\Tests\media\Traits\OEmbedTestTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 
 /**
@@ -15,6 +17,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   use ThunderParagraphsTestTrait;
   use ThunderArticleTestTrait;
   use NodeCreationTrait;
+  use OEmbedTestTrait;
 
   /**
    * Field name for paragraphs in article content.
@@ -22,6 +25,36 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
    * @var string
    */
   protected static $paragraphsField = 'field_paragraphs';
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static $modules = ['media_test_oembed'];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getFixturesDirectory() {
+    return drupal_get_path('profile', 'thunder') . '/tests/fixtures/oembed';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
+    parent::setUp();
+    $this->lockHttpClientToFixtures();
+
+    // Add mocked YouTube video.
+    $this->hijackProviderEndpoints();
+    $video_url = 'https://www.youtube.com/watch?v=PWjcqE3QKBg';
+    ResourceController::setResourceUrl($video_url, $this->getFixturesDirectory() . '/video_youtube.json');
+    // Create a media item.
+    $this->drupalGet("media/add/video");
+    $this->assertSession()->fieldExists('Video URL')->setValue($video_url);
+    $this->assertSession()->fieldExists('Name')->setValue('Youtube');
+    $this->assertSession()->buttonExists('Save')->press();
+  }
 
   /**
    * Test Creation of Article.
@@ -54,13 +87,15 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addSocialParagraph(static::$paragraphsField, 'https://twitter.com/ThunderCoreTeam/status/776417570756976640', 'twitter', 3);
 
     // Add Instagram Paragraph.
-    $this->addSocialParagraph(static::$paragraphsField, 'https://www.instagram.com/p/BbywAZBBqlI/', 'instagram');
+    $instagram_url = 'https://www.instagram.com/p/B2huuS8AQVq/';
+    ResourceController::setResourceUrl($instagram_url, $this->getFixturesDirectory() . '/instagram.json');
+    $this->addSocialParagraph(static::$paragraphsField, $instagram_url, 'instagram');
 
     // Add Link Paragraph.
     $this->addLinkParagraph(static::$paragraphsField, 'Link to Thunder', 'http://www.thunder.org');
 
     // Add Video paragraph at the beginning.
-    $this->addVideoParagraph(static::$paragraphsField, ['media:7'], 0);
+    $this->addVideoParagraph(static::$paragraphsField, ['media:23'], 0);
 
     // Add Pinterest Paragraph.
     $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/478085316687452268/', 'pinterest');
@@ -90,8 +125,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check that one Instagram widget is on page.
     $this->getSession()
-      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/BbywAZBBqlI') !== -1);}).length === 1");
-    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/BbywAZBBqlI') !== -1);}).length");
+      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/B2huuS8AQVq') !== -1);}).length === 1");
+    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/B2huuS8AQVq') !== -1);}).length");
     $this->assertEquals(1, $numOfElements, "Number of instagrams on page should be one.");
 
     // Check that one Twitter widget is on page.
@@ -110,8 +145,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check Video paragraph.
     $this->getSession()
-      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DKsp5JVFryEg') !== -1);}).length === 1");
-    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('/media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DKsp5JVFryEg') !== -1);}).length");
+      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DPWjcqE3QKBg') !== -1);}).length === 1");
+    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('/media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DPWjcqE3QKBg') !== -1);}).length");
     $this->assertEquals(1, $numOfElements, "Number of youtube on page should be one.");
 
     // Check that one Pinterest widget is on page.
