@@ -135,7 +135,7 @@
         "burdamagazinorg/thunder-dev-tools": "dev-master",
         "thunder/testsite_builder": "dev-master",
         "thunder/thunder_performance_measurement": "dev-master",
-        "thunder/thunder_testing_demo": "3.x-dev",
+        "thunder/thunder_testing_demo": "dev-remove-youtube",
         "mglaman/phpstan-drupal": "~0.12.0",
         "phpstan/phpstan-deprecation-rules": "~0.12.0"
     }
