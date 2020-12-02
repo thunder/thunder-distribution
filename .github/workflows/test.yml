@@ -122,18 +122,9 @@ jobs:
     - name: Unzip build artifact
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build
 
-    - name: Run config tests
-      run: test-drupal-project run_tests -nc
-      env:
-        DRUPAL_TESTING_TEST_GROUP: ThunderConfig
-
-    - name: Run installer tests
-      run: test-drupal-project run_tests -nc
-      env:
-        DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
-
-    - name: Run tests suite
-      run: test-drupal-project run_tests
+  #   Start a debug session.
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
 
   test-upgrade:
 
