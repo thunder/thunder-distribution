@@ -24,6 +24,7 @@ env:
   PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
   FACEBOOK_APP_ID: ${{ secrets.FACEBOOK_APP_ID }}
   FACEBOOK_APP_SECRET: ${{ secrets.FACEBOOK_APP_SECRET }}
+  DRUPAL_TESTING_TEST_FILTER: "ArticleCreationTest::testCreateArticle"
 
 jobs:
 
