@@ -30,8 +30,6 @@ jobs:
   build:
 
     runs-on: ubuntu-20.04
-    env:
-      DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "install_configure_form.enable_update_status_module=NULL"
 
     steps:
       - uses: actions/checkout@v1
@@ -126,12 +124,8 @@ jobs:
 
     - name: Run config tests
       run: test-drupal-project run_tests -nc
-
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderConfig
-
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
 
     - name: Run installer tests
       run: test-drupal-project run_tests -nc
