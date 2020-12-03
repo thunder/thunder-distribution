@@ -67,7 +67,7 @@ jobs:
         run: composer config bin-dir bin/ --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
-        run: test-drupal-project build
+        run: test-drupal-project build -v
 
       - name: Get custom thunder_admin branch
         run: |
