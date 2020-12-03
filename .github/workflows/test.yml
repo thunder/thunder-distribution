@@ -30,6 +30,8 @@ jobs:
   build:
 
     runs-on: ubuntu-20.04
+    env:
+      DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "install_configure_form.enable_update_status_module=NULL"
 
     steps:
       - uses: actions/checkout@v1
@@ -90,6 +92,7 @@ jobs:
 
     runs-on: ubuntu-20.04
 
+    env
     steps:
     - uses: actions/checkout@v1
 
@@ -124,6 +127,7 @@ jobs:
 
     - name: Run config tests
       run: test-drupal-project run_tests -nc
+      env:
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderConfig
 
