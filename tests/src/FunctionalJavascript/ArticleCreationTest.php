@@ -2,9 +2,8 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Drupal\thunder_test_mock_request\MockHttpClientMiddleware;
 use Drupal\Core\Url;
-use Drupal\media_test_oembed\Controller\ResourceController;
-use Drupal\Tests\media\Traits\OEmbedTestTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 
 /**
@@ -17,7 +16,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   use ThunderParagraphsTestTrait;
   use ThunderArticleTestTrait;
   use NodeCreationTrait;
-  use OEmbedTestTrait;
 
   /**
    * Field name for paragraphs in article content.
@@ -29,7 +27,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['media_test_oembed'];
+  protected static $modules = ['thunder_test_mock_request'];
 
   /**
    * {@inheritdoc}
@@ -39,27 +37,26 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  protected function setUp(): void {
-    parent::setUp();
-    $this->lockHttpClientToFixtures();
-
-    // Add mocked YouTube video.
-    $this->hijackProviderEndpoints();
-    $video_url = 'https://www.youtube.com/watch?v=PWjcqE3QKBg';
-    ResourceController::setResourceUrl($video_url, $this->getFixturesDirectory() . '/video_youtube.json');
-    // Create a media item.
-    $this->drupalGet("media/add/video");
-    $this->assertSession()->fieldExists('Video URL')->setValue($video_url);
-    $this->assertSession()->fieldExists('Name')->setValue('Youtube');
-    $this->assertSession()->buttonExists('Save')->press();
-  }
-
-  /**
    * Test Creation of Article.
    */
   public function testCreateArticle() {
+
+    MockHttpClientMiddleware::add(file_get_contents($this->getFixturesDirectory() . '/providers.json'), ['Content-Type' => 'application/json']);
+    MockHttpClientMiddleware::add(file_get_contents($this->getFixturesDirectory() . '/video_youtube.json'), ['Content-Type' => 'application/json']);
+    MockHttpClientMiddleware::add(file_get_contents(DRUPAL_ROOT . '/core/misc/druplicon.png'));
+    MockHttpClientMiddleware::add(file_get_contents($this->getFixturesDirectory() . '/video_youtube.json'), ['Content-Type' => 'application/json']);
+    MockHttpClientMiddleware::add('');
+    MockHttpClientMiddleware::add(file_get_contents($this->getFixturesDirectory() . '/instagram.json'), ['Content-Type' => 'application/json']);
+    MockHttpClientMiddleware::add(file_get_contents(DRUPAL_ROOT . '/core/misc/druplicon.png'));
+    MockHttpClientMiddleware::add(file_get_contents($this->getFixturesDirectory() . '/video_youtube.json'), ['Content-Type' => 'application/json']);
+    MockHttpClientMiddleware::add(file_get_contents($this->getFixturesDirectory() . '/video_youtube.json'), ['Content-Type' => 'application/json']);
+
+    // Create a video media item.
+    $this->drupalGet("media/add/video");
+    $this->assertSession()->fieldExists('Video URL')->setValue('https://www.youtube.com/watch?v=PWjcqE3QKBg');
+    $this->assertSession()->fieldExists('Name')->setValue('Youtube');
+    $this->assertSession()->buttonExists('Save')->press();
+
     $this->articleFillNew([
       'field_channel' => 1,
       'title[0][value]' => 'Test article',
@@ -87,9 +84,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addSocialParagraph(static::$paragraphsField, 'https://twitter.com/ThunderCoreTeam/status/776417570756976640', 'twitter', 3);
 
     // Add Instagram Paragraph.
-    $instagram_url = 'https://www.instagram.com/p/B2huuS8AQVq/';
-    ResourceController::setResourceUrl($instagram_url, $this->getFixturesDirectory() . '/instagram.json');
-    $this->addSocialParagraph(static::$paragraphsField, $instagram_url, 'instagram');
+    $this->addSocialParagraph(static::$paragraphsField, 'https://www.instagram.com/p/B2huuS8AQVq/', 'instagram');
 
     // Add Link Paragraph.
     $this->addLinkParagraph(static::$paragraphsField, 'Link to Thunder', 'http://www.thunder.org');

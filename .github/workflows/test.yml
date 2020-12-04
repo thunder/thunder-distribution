@@ -24,7 +24,6 @@ env:
   PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
   FACEBOOK_APP_ID: ${{ secrets.FACEBOOK_APP_ID }}
   FACEBOOK_APP_SECRET: ${{ secrets.FACEBOOK_APP_SECRET }}
-  DRUPAL_TESTING_TEST_FILTER: "ArticleCreationTest::testCreateArticle"
 
 jobs:
 
@@ -128,9 +127,13 @@ jobs:
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderConfig
 
-      #   Start a debug session.
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    - name: Run installer tests
+      run: test-drupal-project run_tests -nc
+      env:
+        DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
+
+    - name: Run tests suite
+      run: test-drupal-project run_tests
 
   test-upgrade:
 
