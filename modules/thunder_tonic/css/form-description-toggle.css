@@ -1,0 +1,28 @@
+/* Wraps element and toggle. */
+.help-icon__element-has-description {
+  display: flex;
+  align-items: center;
+}
+/* Size of svg + border added by claro*/
+.help-icon__description-toggle {
+  flex: 0 0 auto;
+  align-self: flex-end;
+  margin-left: 8px;
+  width: 26px;
+  height: 26px;
+}
+/* Full width checkbox label. */
+.form-item:not(.form-type--checkbox) .help-icon__element-has-description label {
+  flex-basis: 100%;
+}
+/*
+ * 1. Subtract description toggle width from input fields.
+ */
+.help-icon__element-has-description input:not(.form-checkbox):not(.form-autocomplete),
+.help-icon__element-has-description select {
+  max-width: calc(100% - 34px); /* 1 */
+}
+/* Float toggle in detail summary. */
+details.help-icon__description-container .help-icon__description-toggle {
+  float: right;
+}

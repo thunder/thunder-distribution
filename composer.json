@@ -39,8 +39,11 @@
         "installer-name": "thunder",
         "patches": {
             "drupal/core": {
+                "Nested Paragraphs create multiple drag handles": "https://www.drupal.org/files/issues/2020-10-13/claro-nested_paragraphs_multiple_drag_handles-3092181-132_3.patch",
                 "Autocomplete input in views exposed filters does not align with select and text inputs": "https://www.drupal.org/files/issues/2020-06-18/3116377-31.patch",
-                "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2020-07-30/3133639-8.patch"
+                "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2020-07-30/3133639-8.patch",
+                "No hook alter to override Field Widget wrappers created by WidgetBase::form": "https://www.drupal.org/files/issues/2018-06-04/2872162-field-widget-hook-10.patch"
+
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"

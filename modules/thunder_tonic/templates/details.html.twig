@@ -20,46 +20,47 @@
  */
 #}
 {#
-  Prefix 'details' class to avoid collision with Modernizr.
+Prefix 'details' class to avoid collision with Modernizr.
 
-  @todo Remove prefix after https://www.drupal.org/node/2981732 has been solved.
+@todo Remove prefix after https://www.drupal.org/node/2981732 has been solved.
 #}
+
 {%
   set classes = [
-    'claro-details',
-    accordion ? 'claro-details--accordion',
-    accordion_item ? 'claro-details--accordion-item',
-    element['#module_package_listing'] ? 'claro-details--package-listing',
-  ]
+  'claro-details',
+  accordion ? 'claro-details--accordion',
+  accordion_item ? 'claro-details--accordion-item',
+  description ? 'help-icon__description-container',
+  element['#module_package_listing'] ? 'claro-details--package-listing',
+]
 %}
 {%
   set content_wrapper_classes = [
-    'claro-details__wrapper',
-    'details-wrapper',
-    accordion ? 'claro-details__wrapper--accordion',
-    accordion_item ? 'claro-details__wrapper--accordion-item',
-    element['#module_package_listing'] ? 'claro-details__wrapper--package-listing',
-  ]
+  'claro-details__wrapper',
+  'details-wrapper',
+  accordion ? 'claro-details__wrapper--accordion',
+  accordion_item ? 'claro-details__wrapper--accordion-item',
+  element['#module_package_listing'] ? 'claro-details__wrapper--package-listing',
+]
 %}
 {%
   set inner_wrapper_classes = [
-    'claro-details__content',
-    accordion ? 'claro-details__content--accordion',
-    accordion_item ? 'claro-details__content--accordion-item',
-    element['#module_package_listing']  ? 'claro-details__content--package-listing',
-  ]
+  'claro-details__content',
+  accordion ? 'claro-details__content--accordion',
+  accordion_item ? 'claro-details__content--accordion-item',
+  element['#module_package_listing']  ? 'claro-details__content--package-listing',
+]
 %}
 <details{{ attributes.addClass(classes) }}>
   {%- if title -%}
     {%
       set summary_classes = [
-        'claro-details__summary',
-        required ? 'js-form-required',
-        required ? 'form-required',
-        accordion ? 'claro-details__summary--accordion',
-        accordion_item ? 'claro-details__summary--accordion-item',
-        element['#module_package_listing']  ? 'claro-details__summary--package-listing',
-
+      'claro-details__summary',
+      required ? 'js-form-required',
+      required ? 'form-required',
+      accordion ? 'claro-details__summary--accordion',
+      accordion_item ? 'claro-details__summary--accordion-item',
+      element['#module_package_listing']  ? 'claro-details__summary--package-listing',
     ]
     %}
     <summary{{ summary_attributes.addClass(summary_classes) }}>
@@ -67,12 +68,15 @@
       {%- if required -%}
         <span class="required-mark"></span>
       {%- endif -%}
+      {% if description %}
+        {% include '@thunder_tonic/button-description-toggle.html.twig' with {'class': 'help-icon__description-toggle'} %}
+      {% endif %}
     </summary>
   {%- endif -%}
   <div{{ content_attributes.addClass(content_wrapper_classes) }}>
     {% if accordion or accordion_item %}
     <div{{ create_attribute({class: inner_wrapper_classes}) }}>
-    {% endif %}
+      {% endif %}
 
       {% if errors %}
         <div class="form-item form-item--error-message">
@@ -80,7 +84,7 @@
         </div>
       {% endif %}
       {%- if description -%}
-        <div class="claro-details__description{{ disabled ? ' is-disabled' }}">{{ description }}</div>
+        <div class="claro-details__description visually-hidden{{ disabled ? ' is-disabled' }}">{{ description }}</div>
       {%- endif -%}
       {%- if children -%}
         {{ children }}
@@ -89,7 +93,7 @@
         {{ value }}
       {%- endif -%}
 
-    {% if accordion or accordion_item %}
+      {% if accordion or accordion_item %}
     </div>
     {% endif %}
   </div>

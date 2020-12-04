@@ -9,32 +9,36 @@
  */
 #}
 {#
-  Most of core-provided js assumes that the CSS class pattern js-form-item-[something] or
-  js-form-type-[something] exists on form items. We have to keep them.
+Most of core-provided js assumes that the CSS class pattern js-form-item-[something] or
+js-form-type-[something] exists on form items. We have to keep them.
 #}
 {%
   set classes = [
-    'js-form-item',
-    'form-item',
-    'js-form-type-' ~ type|clean_class,
-    'form-type--' ~ type|clean_class,
-    type in ['checkbox', 'radio'] ? 'form-type--boolean',
-    'js-form-item-' ~ name|clean_class,
-    'form-item--' ~ name|clean_class,
-    title_display not in ['after', 'before'] ? 'form-item--no-label',
-    disabled == 'disabled' ? 'form-item--disabled',
-    errors ? 'form-item--error',
-  ]
+  'js-form-item',
+  'form-item',
+  'js-form-type-' ~ type|clean_class,
+  'form-type--' ~ type|clean_class,
+  type in ['checkbox', 'radio'] ? 'form-type--boolean',
+  'js-form-item-' ~ name|clean_class,
+  'form-item--' ~ name|clean_class,
+  title_display not in ['after', 'before'] ? 'form-item--no-label',
+  disabled == 'disabled' ? 'form-item--disabled',
+  errors ? 'form-item--error',
+  description.content ? 'help-icon__description-container'
+]
 %}
 {%
   set description_classes = [
-    'form-item__description',
-    description_display == 'invisible' ? 'visually-hidden',
-  ]
+  'form-item__description',
+  description_display == 'invisible' ? 'visually-hidden',
+]
 %}
 <div{{ attributes.addClass(classes) }}>
   {% if label_display in ['before', 'invisible'] %}
     {{ label }}
+  {% endif %}
+  {% if description.content %}
+  <div class="help-icon__element-has-description">
   {% endif %}
   {% if prefix is not empty %}
     <span class="form-item__prefix{{disabled == 'disabled' ? ' is-disabled'}}">{{ prefix }}</span>
@@ -50,6 +54,10 @@
   {% endif %}
   {% if label_display == 'after' %}
     {{ label }}
+  {% endif %}
+  {% if description.content %}
+    {% include '@thunder_tonic/button-description-toggle.html.twig' with {'class': 'help-icon__description-toggle'} %}
+  </div>
   {% endif %}
   {% if errors %}
     <div class="form-item__error-message">
