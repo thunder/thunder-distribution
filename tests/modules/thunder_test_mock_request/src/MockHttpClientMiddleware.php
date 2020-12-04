@@ -39,9 +39,8 @@ class MockHttpClientMiddleware {
           $items = \Drupal::state()->get(static::class, []);
           if ($items) {
             $item = array_shift($items);
-            $response = new Response(200, $item[1], $item[0]);
             $items = \Drupal::state()->set(static::class, $items);
-            $handler->append($response);
+            $handler->append(new Response(200, $item[1], $item[0]));
           }
         }
         return $handler($request, $options);
