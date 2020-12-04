@@ -192,14 +192,14 @@ jobs:
 
       - name: Update the docroot
         run: |
-          composer require thunder/thunder-distribution:^3.5.0 --no-update
+          composer require thunder/thunder-distribution:^3.5.0 drupal/core-dev:~8.9.0 --no-update
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
 
           vendor/bin/drush pmu libraries -y
 
-          composer remove thunder/thunder-distribution
+          composer remove thunder/thunder-distribution drupal/core-dev
 
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
