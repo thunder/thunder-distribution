@@ -49,7 +49,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     MockHttpClientMiddleware::add(file_get_contents($this->getFixturesDirectory() . '/instagram.json'), ['Content-Type' => 'application/json']);
     MockHttpClientMiddleware::add(file_get_contents(DRUPAL_ROOT . '/core/misc/druplicon.png'));
     MockHttpClientMiddleware::add(file_get_contents($this->getFixturesDirectory() . '/video_youtube.json'), ['Content-Type' => 'application/json']);
-    MockHttpClientMiddleware::add(file_get_contents($this->getFixturesDirectory() . '/video_youtube.json'), ['Content-Type' => 'application/json']);
 
     // Create a video media item.
     $this->drupalGet("media/add/video");
