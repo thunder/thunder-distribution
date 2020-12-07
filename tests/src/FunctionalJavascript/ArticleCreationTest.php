@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-use Drupal\thunder_test_mock_request\MockHttpClientMiddleware;
 use Drupal\Core\Url;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 

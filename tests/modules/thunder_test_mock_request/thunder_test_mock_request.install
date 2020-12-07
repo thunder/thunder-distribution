@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Install functions for thunder_test_mock_request.
+ */
+
 use Drupal\thunder_test_mock_request\MockHttpClientMiddleware;
 
 /**

@@ -45,7 +45,7 @@ class MockHttpClientMiddleware {
           $response = new Response($items[$url]['status'], $items[$url]['headers'], $items[$url]['body']);
           return Create::promiseFor($response);
         }
-        elseif (\Drupal::request()->getHttpHost() !== $request->getUri()->getHost()) {
+        elseif (strstr(\Drupal::request()->getHttpHost(), $request->getUri()->getHost()) === FALSE) {
           throw new \Exception(sprintf("No response for %s defined. See MockHttpClientMiddleware::addUrlResponse().", $url));
         }
 

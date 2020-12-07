@@ -188,7 +188,9 @@ jobs:
         working-directory: /tmp/test/thunder/install
 
       - name: Install drupal
-        run: test-drupal-project install
+        run: |
+          test-drupal-project install
+          vendor/bin/drush pmu update -y
 
       - name: Update the docroot
         run: |
