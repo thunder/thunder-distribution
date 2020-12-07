@@ -199,7 +199,7 @@ jobs:
 
           vendor/bin/drush pmu libraries -y
 
-          composer remove thunder/thunder-distribution drupal/core-dev
+          composer remove thunder/thunder-distribution phpunit/phpunit
 
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
