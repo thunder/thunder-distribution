@@ -2,15 +2,9 @@
 
 namespace Drupal\Tests\thunder\Functional;
 
-use Drupal\block\Entity\Block;
-use Drupal\Core\Link;
 use Drupal\Core\Url;
-use Drupal\node\Entity\NodeType;
-use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\thunder\Functional\ThunderTestBase;
-use Drupal\user\RoleInterface;
-use PHPUnit\Framework\ExpectationFailedException;
 use Drupal\Tests\system\Functional\Menu\AssertBreadcrumbTrait;
+
 /**
  * Tests breadcrumbs functionality.
  *
@@ -21,6 +15,9 @@ class BreadcrumbTest extends ThunderTestBase {
 
   use AssertBreadcrumbTrait;
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = [
     'thunder_testing_demo',
   ];
@@ -50,4 +47,5 @@ class BreadcrumbTest extends ThunderTestBase {
     // Article content.
     $this->assertBreadcrumb('node/8/edit', $home + $overview);
   }
+
 }
