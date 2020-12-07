@@ -1,4 +1,3 @@
 services:
   thunder_test_mock_request.mock_handler:
     class: GuzzleHttp\Handler\MockHandler
-

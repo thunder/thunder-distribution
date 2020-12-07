@@ -20,11 +20,13 @@ class MockHttpClientMiddleware {
    *   The content body of the response.
    * @param array $headers
    *   The response headers.
+   * @param int $status
+   *   The response status code.
    */
-  public static function addUrlResponse($url, $body, array $headers = []) {
+  public static function addUrlResponse($url, $body, array $headers = [], $status = 200) {
 
     $items = \Drupal::state()->get(static::class, []);
-    $items[$url] = ['body' => $body, 'headers' => $headers];
+    $items[$url] = ['body' => $body, 'headers' => $headers, 'status' => $status];
 
     \Drupal::state()->set(static::class, $items);
   }
@@ -41,7 +43,7 @@ class MockHttpClientMiddleware {
           $items = \Drupal::state()->get(static::class, []);
           $url = (string) $request->getUri();
           if ($items[$url]) {
-            $handler->append(new Response(200, $items[$url]['headers'], $items[$url]['body']));
+            $handler->append(new Response($items[$url]['status'], $items[$url]['headers'], $items[$url]['body']));
           }
         }
         return $handler($request, $options);
