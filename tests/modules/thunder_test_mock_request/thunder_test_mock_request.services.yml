@@ -1,3 +1,5 @@
 services:
-  thunder_test_mock_request.mock_handler:
-    class: GuzzleHttp\Handler\MockHandler
+  thunder_test_mock_request.http_client.middleware:
+    class: Drupal\thunder_test_mock_request\MockHttpClientMiddleware
+    tags:
+      - { name: http_client_middleware }

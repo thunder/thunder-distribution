@@ -2,7 +2,7 @@
 
 namespace Drupal\thunder_test_mock_request;
 
-use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\Promise\Create;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
 
@@ -39,13 +39,16 @@ class MockHttpClientMiddleware {
   public function __invoke() {
     return function ($handler) {
       return function (RequestInterface $request, array $options) use ($handler) {
-        if ($handler instanceof MockHandler) {
-          $items = \Drupal::state()->get(static::class, []);
-          $url = (string) $request->getUri();
-          if ($items[$url]) {
-            $handler->append(new Response($items[$url]['status'], $items[$url]['headers'], $items[$url]['body']));
-          }
+        $items = \Drupal::state()->get(static::class, []);
+        $url = (string) $request->getUri();
+        if (!empty($items[$url])) {
+          $response = new Response($items[$url]['status'], $items[$url]['headers'], $items[$url]['body']);
+          return Create::promiseFor($response);
         }
+        elseif (\Drupal::request()->getHttpHost() !== $request->getUri()->getHost()) {
+          throw new \Exception(sprintf("No response for %s defined. See MockHttpClientMiddleware::addUrlResponse().", $url));
+        }
+
         return $handler($request, $options);
       };
     };

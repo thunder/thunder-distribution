@@ -28,16 +28,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
    * Test Creation of Article.
    */
   public function testCreateArticle() {
-
-    $fixturesDirectory = drupal_get_path('profile', 'thunder') . '/tests/fixtures/oembed';
-    MockHttpClientMiddleware::addUrlResponse('https://oembed.com/providers.json', file_get_contents($fixturesDirectory . '/providers.json'), ['Content-Type' => 'application/json']);
-    MockHttpClientMiddleware::addUrlResponse('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=PWjcqE3QKBg', file_get_contents($fixturesDirectory . '/youtube.json'), ['Content-Type' => 'application/json']);
-    MockHttpClientMiddleware::addUrlResponse('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=PWjcqE3QKBg&maxwidth=241&maxheight=138', file_get_contents($fixturesDirectory . '/youtube.json'), ['Content-Type' => 'application/json']);
-    MockHttpClientMiddleware::addUrlResponse('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=PWjcqE3QKBg&maxwidth=854&maxheight=480', file_get_contents($fixturesDirectory . '/youtube.json'), ['Content-Type' => 'application/json']);
-    MockHttpClientMiddleware::addUrlResponse($this->baseUrl . '/core/misc/druplicon.png', file_get_contents(DRUPAL_ROOT . '/core/misc/druplicon.png'));
-    MockHttpClientMiddleware::addUrlResponse('https://twitter.com/ThunderCoreTeam/status/776417570756976640', '');
-    MockHttpClientMiddleware::addUrlResponse('https://graph.facebook.com/v8.0/instagram_oembed?url=https://www.instagram.com/p/B2huuS8AQVq/&access_token=123%7C123&omitscript=1', file_get_contents($fixturesDirectory . '/instagram.json'), ['Content-Type' => 'application/json']);
-
     // Create a video media item.
     $this->drupalGet("media/add/video");
     $this->assertSession()->fieldExists('Video URL')->setValue('https://www.youtube.com/watch?v=PWjcqE3QKBg');
