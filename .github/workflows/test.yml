@@ -188,9 +188,7 @@ jobs:
         working-directory: /tmp/test/thunder/install
 
       - name: Install drupal
-        run: |
-          test-drupal-project install
-          vendor/bin/drush pmu update -y
+        run: test-drupal-project install
 
       - name: Update the docroot
         run: |
@@ -199,7 +197,7 @@ jobs:
           composer update
           vendor/bin/drush updb -y
 
-          vendor/bin/drush pmu libraries -y
+          vendor/bin/drush pmu libraries update -y
 
           composer remove thunder/thunder-distribution phpunit/phpunit
 
