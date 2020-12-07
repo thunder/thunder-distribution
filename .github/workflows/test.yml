@@ -222,7 +222,7 @@ jobs:
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
 
     env:
-      DRUPAL_TESTING_DRUPAL_VERSION: '~9.0.0'
+      DRUPAL_TESTING_DRUPAL_VERSION: '~9.1.0'
       DRUPAL_TESTING_TEST_DEPRECATION: false
 
     steps:
