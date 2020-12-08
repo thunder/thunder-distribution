@@ -27,6 +27,12 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
    * Test Creation of Article.
    */
   public function testCreateArticle() {
+    // Create a video media item.
+    $this->drupalGet("media/add/video");
+    $this->assertSession()->fieldExists('Video URL')->setValue('https://www.youtube.com/watch?v=PWjcqE3QKBg');
+    $this->assertSession()->fieldExists('Name')->setValue('Youtube');
+    $this->assertSession()->buttonExists('Save')->press();
+
     $this->articleFillNew([
       'field_channel' => 1,
       'title[0][value]' => 'Test article',
@@ -54,13 +60,13 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addSocialParagraph(static::$paragraphsField, 'https://twitter.com/ThunderCoreTeam/status/776417570756976640', 'twitter', 3);
 
     // Add Instagram Paragraph.
-    $this->addSocialParagraph(static::$paragraphsField, 'https://www.instagram.com/p/BbywAZBBqlI/', 'instagram');
+    $this->addSocialParagraph(static::$paragraphsField, 'https://www.instagram.com/p/B2huuS8AQVq/', 'instagram');
 
     // Add Link Paragraph.
     $this->addLinkParagraph(static::$paragraphsField, 'Link to Thunder', 'http://www.thunder.org');
 
     // Add Video paragraph at the beginning.
-    $this->addVideoParagraph(static::$paragraphsField, ['media:7'], 0);
+    $this->addVideoParagraph(static::$paragraphsField, ['media:23'], 0);
 
     // Add Pinterest Paragraph.
     $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/478085316687452268/', 'pinterest');
@@ -90,8 +96,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check that one Instagram widget is on page.
     $this->getSession()
-      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/BbywAZBBqlI') !== -1);}).length === 1");
-    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/BbywAZBBqlI') !== -1);}).length");
+      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/B2huuS8AQVq') !== -1);}).length === 1");
+    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/B2huuS8AQVq') !== -1);}).length");
     $this->assertEquals(1, $numOfElements, "Number of instagrams on page should be one.");
 
     // Check that one Twitter widget is on page.
@@ -110,8 +116,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check Video paragraph.
     $this->getSession()
-      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DKsp5JVFryEg') !== -1);}).length === 1");
-    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('/media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DKsp5JVFryEg') !== -1);}).length");
+      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DPWjcqE3QKBg') !== -1);}).length === 1");
+    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('/media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DPWjcqE3QKBg') !== -1);}).length");
     $this->assertEquals(1, $numOfElements, "Number of youtube on page should be one.");
 
     // Check that one Pinterest widget is on page.
