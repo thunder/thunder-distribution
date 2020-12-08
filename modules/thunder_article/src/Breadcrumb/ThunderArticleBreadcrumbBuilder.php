@@ -105,7 +105,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   public function applies(RouteMatchInterface $route_match) {
     // This breadcrumb apply only for all articles.
     $parameters = $route_match->getParameters()->all();
-    if (isset($parameters['node']) && is_object($parameters['node'])) {
+    if (($route_match->getRouteName() === 'entity.node.canonical') && is_object($parameters['node'])) {
       return $parameters['node']->getType() == 'article';
     }
     return FALSE;
