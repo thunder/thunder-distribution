@@ -9,4 +9,3 @@ Changes since 6.0.3:
 - [Fix the interactive installer](https://www.drupal.org/node/3181696)
 - [Fix admin toolbar logo](https://www.drupal.org/node/3176562)
 - [Remove system.site.yml from shipped config](https://www.drupal.org/node/3176823)
-a
