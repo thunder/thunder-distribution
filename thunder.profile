@@ -88,6 +88,7 @@ function thunder_modules_installed($modules) {
         return Dependency::createFromString($dependency)->getName();
       }, $extension->info['dependencies']);
 
+
       if (!in_array($id, $modules) && !empty(array_intersect($modules, $dependencies))) {
         \Drupal::messenger()->addWarning(t('To get the full Thunder experience, we recommend to install the @module module. See all supported optional modules at <a href="/admin/modules/extend-thunder">Thunder Optional modules</a>.', ['@module' => $extension->info['name']]));
       }
