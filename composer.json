@@ -38,9 +38,6 @@
     "extra": {
         "installer-name": "thunder",
         "patches": {
-            "drupal/core" : {
-                "PHPUnit 9.5 Call to undefined method ::getAnnotations()": "https://www.drupal.org/files/issues/2020-12-04/3186443-1.patch"
-            },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
