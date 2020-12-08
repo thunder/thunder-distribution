@@ -94,7 +94,8 @@ function thunder_media_field_widget_image_focal_point_form_alter(&$element, Form
   if (!$config->get('enable_filefield_remove_button')) {
     $type = NULL;
     /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
-    if (!empty($form_state->getStorage()['form_display']) && ($form_display = $form_state->getStorage()['form_display']) && $form_display->getTargetEntityTypeId() == 'media') {
+    $form_display = !empty($form_state->getStorage()['form_display']) ? $form_state->getStorage()['form_display'] : NULL;
+    if ($form_display && $form_display->getTargetEntityTypeId() == 'media') {
       $type = $form_display->getTargetBundle();
     }
     elseif (isset($context['form']['#type']) && $context['form']['#type'] == 'inline_entity_form' && $context['form']['#entity_type'] == 'media') {

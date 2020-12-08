@@ -112,6 +112,7 @@ class ThunderNodeForm implements ContainerInjectionInterface {
     /** @var \Drupal\node\NodeInterface $entity */
     $entity = $form_object->getEntity();
 
+    /** @var \Drupal\Core\Entity\ContentEntityStorageInterface $storage */
     $storage = $this->entityTypeManager->getStorage($entity->getEntityTypeId());
     $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()->getId());
     if ($latest_revision_id !== NULL && $this->moderationInfo && $this->moderationInfo->hasPendingRevision($entity)) {
@@ -127,6 +128,7 @@ class ThunderNodeForm implements ContainerInjectionInterface {
    * {@inheritdoc}
    */
   protected function actions($entity) {
+    /** @var \Drupal\Core\Entity\ContentEntityStorageInterface $storage */
     $storage = $this->entityTypeManager->getStorage($entity->getEntityTypeId());
     $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()->getId());
 
@@ -134,6 +136,7 @@ class ThunderNodeForm implements ContainerInjectionInterface {
       return [];
     }
 
+    /** @var \Drupal\content_moderation\ContentModerationState $state */
     $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
     $element['status'] = [
       '#type' => 'item',
