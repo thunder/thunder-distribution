@@ -71,12 +71,10 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
 
     $this->logWithRole(static::$defaultUserRole);
 
-    if (($facebook_id = getenv('FACEBOOK_APP_ID')) && ($facebook_secret = getenv('FACEBOOK_APP_SECRET'))) {
-      $instagram = $this->config('media_entity_instagram.settings');
-      $instagram->set('facebook_app_id', $facebook_id)
-        ->set('facebook_app_secret', $facebook_secret)
-        ->save();
-    }
+    $instagram = $this->config('media_entity_instagram.settings');
+    $instagram->set('facebook_app_id', 123)
+      ->set('facebook_app_secret', 123)
+      ->save();
   }
 
   /**
