@@ -179,8 +179,6 @@ class ThunderInstallerTest extends InstallerTestBase {
    */
   protected function setUpSite() {
     $edit = $this->translatePostValues($this->parameters['forms']['install_configure_form']);
-    $edit['enable_update_status_module'] = NULL;
-    $edit['enable_update_status_emails'] = NULL;
     $this->submitForm($edit, $this->translations['Save and continue']);
     // If we've got to this point the site is installed using the regular
     // installation workflow.
