@@ -125,9 +125,6 @@ jobs:
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderConfig
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-
     - name: Run installer tests
       run: test-drupal-project run_tests -nc
       env:
