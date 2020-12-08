@@ -36,7 +36,11 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    *
    * @see \Drupal\Tests\BrowserTestBase::installDrupal()
    */
-  protected static $modules = ['thunder_testing_demo', 'thunder_workflow'];
+  protected static $modules = [
+    'thunder_testing_demo',
+    'thunder_workflow',
+    'thunder_test_mock_request',
+  ];
 
   /**
    * The profile to install as a basis for testing.
@@ -73,7 +77,6 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
         ->set('facebook_app_secret', $facebook_secret)
         ->save();
     }
-
   }
 
   /**
