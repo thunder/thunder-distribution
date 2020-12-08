@@ -22,8 +22,6 @@ env:
   DRUPAL_TESTING_TEST_GROUP: Thunder
   THUNDER_ADMIN_BRANCH: 4.x
   PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
-  FACEBOOK_APP_ID: ${{ secrets.FACEBOOK_APP_ID }}
-  FACEBOOK_APP_SECRET: ${{ secrets.FACEBOOK_APP_SECRET }}
 
 jobs:
 
@@ -224,6 +222,7 @@ jobs:
     env:
       DRUPAL_TESTING_DRUPAL_VERSION: '~9.1.0'
       DRUPAL_TESTING_TEST_DEPRECATION: false
+      DRUPAL_TESTING_TEST_FILTER: 'testCreateArticle$'
 
     steps:
       - uses: actions/checkout@v1
@@ -271,6 +270,9 @@ jobs:
       - name: Test for deprecations
         run: test-drupal-project deprecation
         continue-on-error: true
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - name: Run the tests
         run: test-drupal-project run_tests
