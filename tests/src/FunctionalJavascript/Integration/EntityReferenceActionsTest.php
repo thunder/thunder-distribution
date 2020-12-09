@@ -46,10 +46,12 @@ class EntityReferenceActionsTest extends ThunderJavascriptTestBase {
 
     $this->assertSession()->pageTextContains('Action was successfully applied');
 
-    $this->clickAjaxButtonCssSelector('[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current-items-0-edit-button"]');
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    $this->assertSession()->fieldValueEquals('field_copyright[0][value]', 'Test copyright');
+    for ($i = 0; $i < 4; $i++) {
+      $this->clickAjaxButtonCssSelector('[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current-items-' . $i . '-edit-button"]');
+      $this->assertSession()->assertWaitOnAjaxRequest();
+      $this->assertSession()->fieldValueEquals('field_copyright[0][value]', 'Test copyright');
+      $this->assertSession()->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Save');
+    }
   }
 
 }
