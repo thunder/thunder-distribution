@@ -24,6 +24,8 @@ class BreadcrumbTest extends ThunderTestBase {
 
   /**
    * Tests breadcrumbs on node and administrative paths.
+   *
+   * @group NoUpdate
    */
   public function testBreadCrumbs() {
 
