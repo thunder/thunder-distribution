@@ -69,8 +69,6 @@ class ContentTranslationTest extends ThunderTestBase {
 
   /**
    * Test the field translatable property for all field configs.
-   *
-   * @group NoUpdate
    */
   public function testFieldTranslationKey() {
     $whitelist = [

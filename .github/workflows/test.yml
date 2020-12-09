@@ -143,6 +143,7 @@ jobs:
       DRUPAL_TESTING_TEST_DEPRECATION: false
       DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 3.0.8
       DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
+      DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
 
     steps:
       - uses: actions/checkout@v1
@@ -173,7 +174,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-cache-
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: composer global require thunder/drupal-testing:dev-master
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
