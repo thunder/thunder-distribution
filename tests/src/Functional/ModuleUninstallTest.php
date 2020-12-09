@@ -14,7 +14,7 @@ class ModuleUninstallTest extends ThunderTestBase {
   /**
    * Modules to test uninstall/install capability.
    *
-   * @var string[]
+   * @var string[][]
    */
   protected static $moduleLists = [
     ['thunder_liveblog'],

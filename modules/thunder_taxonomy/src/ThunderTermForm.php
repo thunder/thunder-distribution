@@ -30,8 +30,12 @@ class ThunderTermForm extends TermForm {
     // Move relations into sidebar.
     $form['relations']['#group'] = 'advanced';
 
+    /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
+    $form_object = $form_state->getFormObject();
+    /** @var \Drupal\taxonomy\TermInterface $term */
+    $term = $form_object->getEntity();
+
     // Move pathauto into sidebar.
-    $term = $form_state->getFormObject()->getEntity();
     $form['path_settings'] = [
       '#type' => 'details',
       '#title' => $this->t('URL path settings'),
