@@ -174,7 +174,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-cache-
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing:dev-master
+        run: composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
