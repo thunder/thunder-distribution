@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.node.bulk_edit
+    - field.field.node.page.body
+    - node.type.page
+  module:
+    - select2
+id: node.page.bulk_edit
+targetEntityType: node
+bundle: page
+mode: bulk_edit
+content:
+  uid:
+    type: select2_entity_reference
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      autocomplete: false
+      width: 100%
+    third_party_settings: {  }
+hidden:
+  body: true
+  created: true
+  langcode: true
+  moderation_state: true
+  path: true
+  promote: true
+  publish_on: true
+  publish_state: true
+  status: true
+  sticky: true
+  title: true
+  unpublish_on: true
+  unpublish_state: true
+  url_redirects: true

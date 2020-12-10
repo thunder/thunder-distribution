@@ -1,6 +1,9 @@
 __global_actions:
   import_configs:
+    - core.entity_form_mode.node.bulk_edit
     - core.entity_form_mode.media.bulk_edit
+    - core.entity_form_display.node.article.bulk_edit
+    - core.entity_form_display.node.page.bulk_edit
     - core.entity_form_display.media.image.bulk_edit
   install_modules:
     - views_bulk_edit
