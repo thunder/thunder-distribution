@@ -142,13 +142,13 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
 
     $image_style_storage = $this->entityTypeManager->getStorage('image_style');
 
-    /** @var \Drupal\image\ImageStyleInterface $landscape_style */
     if ($landscape_style = $image_style_storage->load($this->configuration['landscape'])) {
+      /** @var \Drupal\image\ImageStyleInterface $landscape_style */
       $dependencies[$landscape_style->getConfigDependencyKey()][] = $landscape_style->getConfigDependencyName();
     }
 
-    /** @var \Drupal\image\ImageStyleInterface $portrait_style */
     if ($portrait_style = $image_style_storage->load($this->configuration['portrait'])) {
+      /** @var \Drupal\image\ImageStyleInterface $portrait_style */
       $dependencies[$portrait_style->getConfigDependencyKey()][] = $portrait_style->getConfigDependencyName();
     }
 

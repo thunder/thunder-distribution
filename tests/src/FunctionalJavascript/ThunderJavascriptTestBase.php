@@ -36,7 +36,11 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    *
    * @see \Drupal\Tests\BrowserTestBase::installDrupal()
    */
-  protected static $modules = ['thunder_testing_demo', 'thunder_workflow'];
+  protected static $modules = [
+    'thunder_testing_demo',
+    'thunder_workflow',
+    'thunder_test_mock_request',
+  ];
 
   /**
    * The profile to install as a basis for testing.
@@ -67,18 +71,10 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
 
     $this->logWithRole(static::$defaultUserRole);
 
-    // Set flag to generate screenshots instead of comparing them.
-    if (!empty($_SERVER['generateMode'])) {
-      $this->setGenerateMode(strtolower($_SERVER['generateMode']) === 'true');
-    }
-
-    if (($facebook_id = getenv('FACEBOOK_APP_ID')) && ($facebook_secret = getenv('FACEBOOK_APP_SECRET'))) {
-      $instagram = \Drupal::configFactory()->getEditable('media_entity_instagram.settings');
-      $instagram->set('facebook_app_id', $facebook_id)
-        ->set('facebook_app_secret', $facebook_secret)
-        ->save();
-    }
-
+    $instagram = $this->config('media_entity_instagram.settings');
+    $instagram->set('facebook_app_id', 123)
+      ->set('facebook_app_secret', 123)
+      ->save();
   }
 
   /**

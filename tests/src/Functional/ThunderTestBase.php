@@ -19,4 +19,11 @@ abstract class ThunderTestBase extends BrowserTestBase {
    */
   protected $profile = 'thunder';
 
+  /**
+   * {@inheritdoc}
+   */
+  protected static $modules = [
+    'thunder_test_mock_request',
+  ];
+
 }

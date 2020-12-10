@@ -22,8 +22,6 @@ env:
   DRUPAL_TESTING_TEST_GROUP: Thunder
   THUNDER_ADMIN_BRANCH: 4.x
   PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
-  FACEBOOK_APP_ID: ${{ secrets.FACEBOOK_APP_ID }}
-  FACEBOOK_APP_SECRET: ${{ secrets.FACEBOOK_APP_SECRET }}
 
 jobs:
 
@@ -145,6 +143,7 @@ jobs:
       DRUPAL_TESTING_TEST_DEPRECATION: false
       DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 3.0.8
       DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
+      DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
 
     steps:
       - uses: actions/checkout@v1
@@ -192,17 +191,17 @@ jobs:
 
       - name: Update the docroot
         run: |
-          composer require thunder/thunder-distribution:^3.5.0 --no-update
+          composer require thunder/thunder-distribution:^3.5.0 phpunit/phpunit:^7 --no-update
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
 
-          vendor/bin/drush pmu libraries -y
+          vendor/bin/drush pmu libraries update -y
 
-          composer remove thunder/thunder-distribution
+          composer remove thunder/thunder-distribution phpunit/phpunit
 
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
-          composer require "drupal/core-dev:~9.1.0" "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
+          composer require phpunit/phpunit:~9.4.3 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
 
           chmod -R +w docroot/sites/default
           composer update
@@ -222,7 +221,7 @@ jobs:
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
 
     env:
-      DRUPAL_TESTING_DRUPAL_VERSION: '~9.0.0'
+      DRUPAL_TESTING_DRUPAL_VERSION: '~9.1.0'
       DRUPAL_TESTING_TEST_DEPRECATION: false
 
     steps:

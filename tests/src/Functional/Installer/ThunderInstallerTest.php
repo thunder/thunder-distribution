@@ -129,6 +129,7 @@ class ThunderInstallerTest extends InstallerTestBase {
     if ($this->isInstalled) {
       // Import new settings.php written by the installer.
       $request = Request::createFromGlobals();
+      // @phpstan-ignore-next-line
       $class_loader = require $this->container->get('app.root') . '/autoload.php';
       Settings::initialize($this->container->get('app.root'), DrupalKernel::findSitePath($request), $class_loader);
 
@@ -138,6 +139,7 @@ class ThunderInstallerTest extends InstallerTestBase {
       // directory has to be writable.
       // BrowserTestBase::tearDown() will delete the entire test site directory.
       // Not using File API; a potential error must trigger a PHP warning.
+      // @phpstan-ignore-next-line
       chmod($this->container->get('app.root') . '/' . $this->siteDirectory, 0777);
       $this->kernel = DrupalKernel::createFromRequest($request, $class_loader, 'prod', FALSE);
       $this->kernel->boot();
@@ -179,6 +181,8 @@ class ThunderInstallerTest extends InstallerTestBase {
    */
   protected function setUpSite() {
     $edit = $this->translatePostValues($this->parameters['forms']['install_configure_form']);
+    $edit['enable_update_status_module'] = NULL;
+    $edit['enable_update_status_emails'] = NULL;
     $this->submitForm($edit, $this->translations['Save and continue']);
     // If we've got to this point the site is installed using the regular
     // installation workflow.
