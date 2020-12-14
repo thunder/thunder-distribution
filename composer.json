@@ -119,6 +119,7 @@
     },
     "suggest": {
         "drupal/nexx_integration": "NEXX Video CMS integration",
+        "drupal/search_api_solr": "Provides a Apache Solr backend for the Search API module",
         "valiton/harbourmaster": "Harbourmaster Single Sign On"
     },
     "replace": {
