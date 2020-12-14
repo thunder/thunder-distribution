@@ -9,3 +9,11 @@ v6.0.1:
         '#description': '<p>This update will make the content view ready for the config selector.</p>'
         '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+v6.1.0:
+    '#title': 'Update to version v6.1.0'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_update_8311:
+        '#title': 'Enable bulk editing for media images.'
+        '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
