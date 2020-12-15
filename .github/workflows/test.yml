@@ -126,12 +126,9 @@ jobs:
     - name: Install drupal
       run: test-drupal-project install
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v1
-
     - name: Disable update module
       run: |
-        vendor/bin/drush pmu update -y
+        bin/drush pmu update -y
         cd docroot
         php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
       working-directory: /tmp/test/thunder/install
