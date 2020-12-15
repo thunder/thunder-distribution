@@ -126,9 +126,11 @@ jobs:
     - name: Install drupal
       run: test-drupal-project install
 
-    - name: Update the docroot
+    - name: Disable update module
       run: |
         vendor/bin/drush pmu update -y
+        cd docroot
+        php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
       working-directory: /tmp/test/thunder/install
 
     - name: Run config tests
@@ -199,9 +201,11 @@ jobs:
       - name: Install drupal
         run: test-drupal-project install
 
-      - name: Update the docroot
+      - name: Disable update module
         run: |
           vendor/bin/drush pmu update -y
+          cd docroot
+          php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
         working-directory: /tmp/test/thunder/install
 
       - name: Run the tests
