@@ -123,6 +123,14 @@ jobs:
     - name: Unzip build artifact
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build
 
+    - name: Install drupal
+      run: test-drupal-project install
+
+    - name: Update the docroot
+      run: |
+        vendor/bin/drush pmu update -y
+      working-directory: /tmp/test/thunder/install
+
     - name: Run config tests
       run: test-drupal-project run_tests -nc
       env:
@@ -187,6 +195,14 @@ jobs:
       - name: Test for deprecations
         run: test-drupal-project deprecation
         continue-on-error: true
+
+      - name: Install drupal
+        run: test-drupal-project install
+
+      - name: Update the docroot
+        run: |
+          vendor/bin/drush pmu update -y
+        working-directory: /tmp/test/thunder/install
 
       - name: Run the tests
         run: test-drupal-project run_tests
