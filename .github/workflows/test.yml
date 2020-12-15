@@ -23,8 +23,6 @@ env:
   THUNDER_ADMIN_BRANCH: 8.x-3.x
   DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 3.0.8
   PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
-  FACEBOOK_APP_ID: ${{ secrets.FACEBOOK_APP_ID }}
-  FACEBOOK_APP_SECRET: ${{ secrets.FACEBOOK_APP_SECRET }}
   RIDDLE_TOKEN: ${{ secrets.RIDDLE_TOKEN }}
 
 jobs:
@@ -79,6 +77,13 @@ jobs:
 
       - name: Install drupal
         run: test-drupal-project install
+
+      - name: Disable update module
+        run: |
+          bin/drush pmu update -y
+          cd docroot
+          php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
+        working-directory: /tmp/test/thunder/install
 
       - name: Zip build
         run: cd /tmp/test; tar cfz build.tgz thunder; mv build.tgz ${GITHUB_WORKSPACE}
@@ -189,6 +194,16 @@ jobs:
       - name: Test for deprecations
         run: test-drupal-project deprecation
         continue-on-error: true
+
+      - name: Install drupal
+        run: test-drupal-project install
+
+      - name: Disable update module
+        run: |
+          vendor/bin/drush pmu update -y
+          cd docroot
+          php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
+        working-directory: /tmp/test/thunder/install
 
       - name: Run the tests
         run: test-drupal-project run_tests
