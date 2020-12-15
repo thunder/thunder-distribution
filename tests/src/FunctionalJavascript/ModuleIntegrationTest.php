@@ -223,10 +223,6 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->assertSession()->waitForElementVisible('css', '.paragraph--type--gallery amp-carousel amp-img');
     $this->assertSession()->elementsCount('css', '.paragraph--type--gallery amp-carousel amp-img', 5);
 
-    // Video Paragraph.
-    $this->assertSession()->elementExists('css', '.paragraph--type--video amp-youtube[data-videoid="Ksp5JVFryEg"]');
-    $this->assertSession()->waitForElementVisible('css', '.paragraph--type--video amp-youtube[data-videoid="Ksp5JVFryEg"] iframe');
-
     // Twitter Paragraph.
     $this->assertSession()->elementExists('css', '.paragraph--type--twitter amp-twitter[data-tweetid="731057647877787648"]');
     $this->assertSession()->waitForElementVisible('css', '.paragraph--type--twitter amp-twitter[data-tweetid="731057647877787648"] iframe');

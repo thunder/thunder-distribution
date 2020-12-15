@@ -6,6 +6,7 @@ use Behat\Mink\Element\DocumentElement;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderFormFieldTestTrait;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderMediaTestTrait;
+use Drupal\thunder_test_mock_request\MockHttpClientMiddleware;
 
 /**
  * Testing integration of "liveblog" module.
@@ -132,6 +133,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     $socialUrl = 'https://twitter.com/tweetsauce/status/778001033142284288';
+    MockHttpClientMiddleware::addUrlResponse($socialUrl, '');
 
     if ($page->hasField('field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][value]')) {
       $page->fillField('field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][value]', $socialUrl);
