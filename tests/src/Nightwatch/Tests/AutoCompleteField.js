@@ -18,14 +18,14 @@ module.exports = {
       "test-admin",
       {
         rule: "number_of_fields",
-        index: 3
+        index: 3,
       },
       browser,
       done
     );
   },
   autoCompleteField(browser) {
-    const { bundle, fields } = browser._site_info;
+    const { bundle } = browser._site_info;
 
     browser
       .resizeWindow(1024, 1024)
@@ -53,5 +53,5 @@ module.exports = {
 
     browser.performance.endMeasurement();
     browser.end();
-  }
+  },
 };

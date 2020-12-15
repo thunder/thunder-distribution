@@ -29,7 +29,7 @@ module.exports = {
       {
         rule: "count",
         index: 0,
-        percent_of_instances_threshold: 50
+        percent_of_instances_threshold: 50,
       },
       browser,
       done
@@ -86,5 +86,5 @@ module.exports = {
       .performance.endMeasurement();
 
     browser.end();
-  }
+  },
 };

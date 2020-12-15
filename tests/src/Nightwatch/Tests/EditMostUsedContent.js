@@ -18,7 +18,7 @@ module.exports = {
       "test-admin",
       {
         rule: "count",
-        index: 0
+        index: 0,
       },
       browser,
       done
@@ -58,5 +58,5 @@ module.exports = {
       .performance.endMeasurement();
 
     browser.end();
-  }
+  },
 };

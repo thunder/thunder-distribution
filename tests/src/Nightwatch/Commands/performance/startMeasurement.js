@@ -44,14 +44,14 @@ exports.command = function startMeasurement(
         httpOnly: false,
         path: "/",
         name: "traceId",
-        value: browser.globals.apmTrans.traceId
+        value: browser.globals.apmTrans.traceId,
       })
       .setCookie({
         domain,
         httpOnly: false,
         path: "/",
         name: "serverUrl",
-        value: serverUrl
+        value: serverUrl,
       });
 
     // Label set on Node.JS APM agent should be also set for Browser APM agent.
@@ -62,7 +62,7 @@ exports.command = function startMeasurement(
         httpOnly: false,
         path: "/",
         name: "branchTag",
-        value: process.env.THUNDER_BRANCH
+        value: process.env.THUNDER_BRANCH,
       })
       .performance.setLabel("test", browser.currentTest.name)
       .setCookie({
@@ -70,7 +70,7 @@ exports.command = function startMeasurement(
         httpOnly: false,
         path: "/",
         name: "testTag",
-        value: browser.currentTest.name
+        value: browser.currentTest.name,
       });
   });
 

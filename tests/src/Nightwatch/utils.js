@@ -12,16 +12,16 @@ module.exports = {
         method: "POST",
         body: JSON.stringify({ name: adminUser, pass: adminPass }),
         headers: {
-          "Content-type": "application/json"
+          "Content-type": "application/json",
         },
-        jar: true
+        jar: true,
       },
       () => {
         request(
           {
             url: `${baseUrl}/thunder-performance-measurement/site-info`,
             qs: queryParams,
-            jar: true
+            jar: true,
           },
           (error, response, body) => {
             const { data } = JSON.parse(body);
@@ -49,9 +49,9 @@ module.exports = {
   getTestSetName(data, testName) {
     const { testSetFootprint } = thunderConfig[testName];
 
-    return Object.keys(testSetFootprint).find(testSetName =>
+    return Object.keys(testSetFootprint).find((testSetName) =>
       testSetFootprint[testSetName].find(
-        objectPath =>
+        (objectPath) =>
           objectPath.reduce(
             (obj, key) => (obj && obj[key] ? obj[key] : null),
             data
@@ -73,7 +73,7 @@ module.exports = {
 
       // Filter custom sub-from fields.
       ["target_type_distribution", "fields", "inline_entity_form"].forEach(
-        filterKey => {
+        (filterKey) => {
           if (typeof data[key][filterKey] === "object") {
             result[key][filterKey] = this.filterObject(
               data[key][filterKey],
@@ -85,5 +85,5 @@ module.exports = {
 
       return result;
     }, {});
-  }
+  },
 };

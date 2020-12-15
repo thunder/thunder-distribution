@@ -49,5 +49,5 @@ module.exports = {
     browser.performance.endMeasurement();
 
     browser.end();
-  }
+  },
 };

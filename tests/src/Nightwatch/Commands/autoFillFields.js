@@ -16,7 +16,7 @@ exports.command = function autoFillFields(fields, parent = "") {
   const browser = this;
   const fieldNames = Object.keys(fields);
 
-  fieldNames.forEach(fieldName => {
+  fieldNames.forEach((fieldName) => {
     browser.autoFillField(
       parent.length === 0 ? fieldName : `${parent}[${fieldName}]`,
       fields[fieldName]

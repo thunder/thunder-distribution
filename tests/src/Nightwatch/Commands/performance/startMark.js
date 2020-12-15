@@ -27,7 +27,7 @@ exports.command = function startMark(markName) {
       httpOnly: false,
       name: "spanId",
       path: "/",
-      value: span.id
+      value: span.id,
     });
   });
 

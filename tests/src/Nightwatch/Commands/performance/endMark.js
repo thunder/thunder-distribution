@@ -31,7 +31,7 @@ exports.command = function endMark() {
       httpOnly: false,
       name: "spanId",
       path: "/",
-      value: span.id
+      value: span.id,
     });
     browser.globals.apmSpans.push(span);
   });
