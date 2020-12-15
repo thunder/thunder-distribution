@@ -5,6 +5,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderArticleTestTrait;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
+use Drupal\thunder_test_mock_request\MockHttpClientMiddleware;
 
 /**
  * Tests the riddle integration.
@@ -21,6 +22,8 @@ class RiddleTest extends ThunderJavascriptTestBase {
    */
   public function testRiddle() {
     $riddleToken = getenv('RIDDLE_TOKEN');
+    MockHttpClientMiddleware::addUrlResponse('https://www.riddle.com/imageservice/q_80,f_auto,c_fill,w_256,h_144/rpnykwxetggrh99lkten', file_get_contents(DRUPAL_ROOT . '/core/misc/druplicon.png'));
+    MockHttpClientMiddleware::addUrlResponse('https://cdn.riddle.com/website/riddle/2019/placeholders/placeholder-poll.png', file_get_contents(DRUPAL_ROOT . '/core/misc/druplicon.png'));
 
     if (empty($riddleToken)) {
       if ($this->isForkPullRequest()) {

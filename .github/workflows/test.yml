@@ -78,6 +78,13 @@ jobs:
       - name: Install drupal
         run: test-drupal-project install
 
+      - name: Disable update module
+        run: |
+          bin/drush pmu update -y
+          cd docroot
+          php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
+        working-directory: /tmp/test/thunder/install
+
       - name: Zip build
         run: cd /tmp/test; tar cfz build.tgz thunder; mv build.tgz ${GITHUB_WORKSPACE}
 
@@ -122,16 +129,6 @@ jobs:
 
     - name: Unzip build artifact
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build
-
-    - name: Install drupal
-      run: test-drupal-project install
-
-    - name: Disable update module
-      run: |
-        bin/drush pmu update -y
-        cd docroot
-        php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
-      working-directory: /tmp/test/thunder/install
 
     - name: Run config tests
       run: test-drupal-project run_tests -nc
