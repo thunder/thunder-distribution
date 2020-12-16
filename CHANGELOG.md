@@ -1,6 +1,7 @@
 # Changelog
 
-## [6.1.1](https://github.com/thunder/thunder-distribution/tree/6.1.0) 2020-12-16
+## [6.1.1](https://github.com/thunder/thunder-distribution/tree/6.1.1) 2020-12-16
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.1.0...6.1.1)
 
 We added the ability to edit all images in a gallery. With this feature you can for example change the copyright for all images at once.
 
