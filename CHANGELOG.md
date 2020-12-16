@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.5.6](https://github.com/thunder/thunder-distribution/tree/3.5.6) 2020-12-16
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.6...3.5.7)
+
+We added the ability to edit all images in a gallery. With this feature you can for example change the copyright for all images at once.
+
+Changes since 3.5.6
+
+- Add [Bulk edit of gallery images](https://www.drupal.org/node/3187607)
+
 ## [3.5.6](https://github.com/thunder/thunder-distribution/tree/3.5.6) 2020-11-19
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.5...3.5.6)
 
