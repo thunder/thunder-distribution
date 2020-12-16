@@ -9,8 +9,8 @@
    */
   Drupal.behaviors.mediaEntityBrowserView = {
     attach(context) {
-      $(".views-row", context).each(() => {
-        const $row = $(this);
+      $(".views-row", context).each((index, element) => {
+        const $row = $(element);
         const $input = $row.find(".views-field-entity-browser-select input");
 
         // When Auto Select functionality is enabled, then select entity
