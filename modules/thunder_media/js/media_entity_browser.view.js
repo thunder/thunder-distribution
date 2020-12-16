@@ -3,7 +3,7 @@
  * Defines the behavior of the media entity browser view.
  */
 
-(($) => {
+(($, Drupal) => {
   /**
    * Attaches the behavior of the media entity browser view.
    */
