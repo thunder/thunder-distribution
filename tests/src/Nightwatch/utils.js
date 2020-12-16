@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-dynamic-require
 const request = require(`${process.cwd()}/node_modules/request`);
-const thunderConfig = require("./config");
+const thunderConfig = require('./config');
 
 module.exports = {
   setSiteInfo(adminUser, adminPass, queryParams, browser, browserDoneCallback) {
@@ -9,10 +9,10 @@ module.exports = {
     request(
       {
         url: `${baseUrl}/user/login?_format=json`,
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify({ name: adminUser, pass: adminPass }),
         headers: {
-          "Content-type": "application/json",
+          'Content-type': 'application/json',
         },
         jar: true,
       },
@@ -29,9 +29,9 @@ module.exports = {
             browser._site_info = data;
 
             browserDoneCallback();
-          }
+          },
         );
-      }
+      },
     );
   },
 
@@ -54,9 +54,9 @@ module.exports = {
         (objectPath) =>
           objectPath.reduce(
             (obj, key) => (obj && obj[key] ? obj[key] : null),
-            data
-          ) !== null
-      )
+            data,
+          ) !== null,
+      ),
     );
   },
 
@@ -67,20 +67,20 @@ module.exports = {
       }
 
       // Filter nested objects only if we have nested filter definition.
-      if (typeof filterBy[key] !== "object") {
+      if (typeof filterBy[key] !== 'object') {
         return result;
       }
 
       // Filter custom sub-from fields.
-      ["target_type_distribution", "fields", "inline_entity_form"].forEach(
+      ['target_type_distribution', 'fields', 'inline_entity_form'].forEach(
         (filterKey) => {
-          if (typeof data[key][filterKey] === "object") {
+          if (typeof data[key][filterKey] === 'object') {
             result[key][filterKey] = this.filterObject(
               data[key][filterKey],
-              filterBy[key]
+              filterBy[key],
             );
           }
-        }
+        },
       );
 
       return result;

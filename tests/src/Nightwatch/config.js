@@ -7,9 +7,9 @@ module.exports = {
     testSetFootprint: {
       // Order of test sets is important, because first matched will be used.
       Thunder_Base_Set: [
-        ["fields", "field_13", "third_party_settings", "paragraphs_features"],
+        ['fields', 'field_13', 'third_party_settings', 'paragraphs_features'],
       ],
-      Thunder: [["bundle"]],
+      Thunder: [['bundle']],
     },
     Thunder_Base_Set: {
       fieldsToFill: {

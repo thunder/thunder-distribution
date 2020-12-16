@@ -29,8 +29,8 @@ exports.command = function endMark() {
     browser.setCookie({
       domain: browser.globals.apmDomain,
       httpOnly: false,
-      name: "spanId",
-      path: "/",
+      name: 'spanId',
+      path: '/',
       value: span.id,
     });
     browser.globals.apmSpans.push(span);
