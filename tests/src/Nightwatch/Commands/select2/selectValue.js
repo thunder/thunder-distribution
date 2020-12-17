@@ -20,16 +20,16 @@ exports.command = function selectValue(
   field,
   search,
   index,
-  searchWait = 5000
+  searchWait = 5000,
 ) {
   const browser = this;
-  const fieldIdPart = field.replace(/_/g, "-");
+  const fieldIdPart = field.replace(/_/g, '-');
 
   browser
     .setValue(`//*[@id="edit-${fieldIdPart}-wrapper"]//input`, search)
     .waitForElementVisible(
       `//*[@id="select2-edit-${fieldIdPart}-results"]/li[${index}]`,
-      searchWait
+      searchWait,
     )
     .click(`//*[@id="select2-edit-${fieldIdPart}-results"]/li[${index}]`);
 
