@@ -30,4 +30,3 @@ function thunder_tonic_preprocess(&$variables) {
     $variables['description_display'] = 'invisible';
   }
 }
-
