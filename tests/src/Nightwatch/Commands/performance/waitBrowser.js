@@ -20,7 +20,7 @@ exports.command = function waitBrowser(maxWait) {
     // eslint-disable-next-line prefer-arrow-callback
     function inBrowser(done) {
       const checkBrowserTransaction = () => {
-        if (typeof elasticApm === "undefined") {
+        if (typeof elasticApm === 'undefined') {
           setTimeout(checkBrowserTransaction, 100);
 
           return;
@@ -33,7 +33,7 @@ exports.command = function waitBrowser(maxWait) {
           return;
         }
 
-        if (transaction.type === "page-load" && !transaction.ended) {
+        if (transaction.type === 'page-load' && !transaction.ended) {
           setTimeout(checkBrowserTransaction, 100);
 
           return;
@@ -46,7 +46,7 @@ exports.command = function waitBrowser(maxWait) {
       setTimeout(checkBrowserTransaction, 200);
     },
     [],
-    () => {}
+    () => {},
   );
 
   return browser;

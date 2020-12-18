@@ -197,6 +197,11 @@ class InstalledConfigurationTest extends ThunderTestBase {
         'module' => TRUE,
       ],
     ],
+    'core.entity_form_display.node.article.bulk_edit' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
     'core.entity_form_display.taxonomy_term.channel.default' => [
       'content' => [
         'field_ivw' => TRUE,

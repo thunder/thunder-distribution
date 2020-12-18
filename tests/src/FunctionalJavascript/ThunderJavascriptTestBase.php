@@ -71,12 +71,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
 
     $this->logWithRole(static::$defaultUserRole);
 
-    // Set flag to generate screenshots instead of comparing them.
-    if (!empty($_SERVER['generateMode'])) {
-      $this->setGenerateMode(strtolower($_SERVER['generateMode']) === 'true');
-    }
-
-    $instagram = \Drupal::configFactory()->getEditable('media_entity_instagram.settings');
+    $instagram = $this->config('media_entity_instagram.settings');
     $instagram->set('facebook_app_id', 123)
       ->set('facebook_app_secret', 123)
       ->save();

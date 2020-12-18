@@ -12,6 +12,8 @@ use Drupal\Component\Utility\Html;
  */
 trait ThunderParagraphsTestTrait {
 
+  use ThunderMediaTestTrait;
+
   /**
    * Get number of paragraphs for defined field on current page.
    *
@@ -33,7 +35,7 @@ trait ThunderParagraphsTestTrait {
    * @param string $fieldName
    *   Paragraph field name.
    *
-   * @return Behat\Mink\Element\NodeElement
+   * @return \Behat\Mink\Element\NodeElement[]
    *   The paragraph node element.
    */
   protected function getParagraphItems($fieldName) {

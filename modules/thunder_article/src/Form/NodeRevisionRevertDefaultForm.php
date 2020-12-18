@@ -41,7 +41,9 @@ class NodeRevisionRevertDefaultForm extends NodeRevisionRevertForm {
    */
   public function buildForm(array $form, FormStateInterface $form_state, $node = NULL) {
 
-    $this->revision = $this->nodeStorage->load($node);
+    /** @var \Drupal\node\NodeInterface $revision */
+    $revision = $this->nodeStorage->load($node);
+    $this->revision = $revision;
     $form = ConfirmFormBase::buildForm($form, $form_state);
 
     return $form;

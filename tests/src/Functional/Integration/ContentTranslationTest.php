@@ -25,7 +25,7 @@ class ContentTranslationTest extends ThunderTestBase {
   /**
    * List of used languages.
    *
-   * @var \Drupal\Core\Language\LanguageInterface[]
+   * @var \Drupal\language\ConfigurableLanguageInterface[]
    */
   protected $languages = [];
 
@@ -69,8 +69,6 @@ class ContentTranslationTest extends ThunderTestBase {
 
   /**
    * Test the field translatable property for all field configs.
-   *
-   * @group NoUpdate
    */
   public function testFieldTranslationKey() {
     $whitelist = [

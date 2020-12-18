@@ -60,6 +60,7 @@ permissions:
   - 'use editorial transition unpublished_draft'
   - 'use editorial transition unpublished_published'
   - 'use text format full_html'
+  - 'use views bulk edit'
   - 'view all revisions'
   - 'view any unpublished content'
   - 'view article revisions'
