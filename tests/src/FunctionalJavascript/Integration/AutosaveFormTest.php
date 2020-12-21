@@ -23,8 +23,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     parent::setUp();
 
     // Adjust the autosave form submission interval.
-    \Drupal::configFactory()
-      ->getEditable('autosave_form.settings')
+    $this->config('autosave_form.settings')
       ->set('interval', 2000)
       ->save();
   }
@@ -46,7 +45,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     $this->pressRejectButton();
     $this->assertEquals([5], $page->findField('field_tags[]')->getValue());
     $this->assertEquals('Come to DrupalCon New Orleans', $page->findField('title[0][value]')->getValue());
-    $this->assertEmpty($page->find('css', '.form-item-field-paragraphs-4-subform-field-text-0-value'));
+    $this->assertEmpty($page->find('css', '.form-item-field-paragraphs-3-subform-field-text-0-value'));
 
     // Make changes again.
     $this->makeFormChanges();
@@ -57,7 +56,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     $this->pressRestoreButton();
     $this->assertEquals([5, '$ID:Tag2'], $page->findField('field_tags[]')->getValue());
     $this->assertEquals('New title', $page->findField('title[0][value]')->getValue());
-    $this->assertNotEmpty($page->find('css', '.form-item-field-paragraphs-4-subform-field-text-0-value'));
+    $this->assertNotEmpty($page->find('css', '.form-item-field-paragraphs-3-subform-field-text-0-value'));
 
     // Save the article.
     $this->clickSave();

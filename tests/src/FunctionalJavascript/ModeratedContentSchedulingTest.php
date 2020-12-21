@@ -32,13 +32,14 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     ]);
     $this->clickSave();
 
-    /* @var $node \Drupal\node\Entity\Node */
+    /** @var \Drupal\node\Entity\Node $node */
     $node = $this->getNodeByTitle('Test workflow article 1 - Published');
     $revision_id = $node->getRevisionId();
     // Make sure node is unpublished.
     $this->assertEquals(FALSE, Node::load($node->id())->isPublished());
     $this->container->get('cron')->run();
 
+    /** @var \Drupal\node\Entity\Node $node */
     $node = $node_storage->loadRevision($node_storage->getLatestRevisionId($node->id()));
     // Assert node is now published.
     $this->assertEquals(TRUE, $node->isPublished());
@@ -59,11 +60,13 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $this->clickSave();
     $node_storage->resetCache([$node->id()]);
 
+    /** @var \Drupal\node\Entity\Node $node */
     $node = $node_storage->loadRevision($node_storage->getLatestRevisionId($node->id()));
     $this->assertEquals('Test workflow article 1 - Draft', $node->getTitle());
     $this->assertEquals('draft', $node->moderation_state->value);
     $this->container->get('cron')->run();
 
+    /** @var \Drupal\node\Entity\Node $node */
     $node = $node_storage->loadRevision($node_storage->getLatestRevisionId($node->id()));
     $this->assertEquals(TRUE, $node->isPublished());
     $this->assertEquals('published', $node->moderation_state->value);

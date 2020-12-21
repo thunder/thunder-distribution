@@ -1,0 +1,79 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.node.bulk_edit
+    - field.field.node.article.field_channel
+    - field.field.node.article.field_meta_tags
+    - field.field.node.article.field_paragraphs
+    - field.field.node.article.field_seo_title
+    - field.field.node.article.field_tags
+    - field.field.node.article.field_teaser_media
+    - field.field.node.article.field_teaser_text
+    - node.type.article
+  module:
+    - select2
+id: node.article.bulk_edit
+targetEntityType: node
+bundle: article
+mode: bulk_edit
+content:
+  field_channel:
+    type: select2_entity_reference
+    weight: 0
+    settings:
+      autocomplete: false
+      match_operator: CONTAINS
+      match_limit: 10
+      width: 100%
+    third_party_settings: {  }
+    region: content
+  field_tags:
+    type: select2_entity_reference
+    weight: 1
+    region: content
+    settings:
+      width: 100%
+      autocomplete: true
+      match_operator: CONTAINS
+      match_limit: 10
+    third_party_settings:
+      entity_reference_actions:
+        options:
+          action_title: Action
+          include_exclude: exclude
+          selected_actions:
+            taxonomy_term_edit_action: '0'
+            taxonomy_term_publish_action: '0'
+            taxonomy_term_unpublish_action: '0'
+        enabled: false
+  uid:
+    type: select2_entity_reference
+    weight: 2
+    region: content
+    settings:
+      width: 100%
+      autocomplete: true
+      match_operator: CONTAINS
+      match_limit: 10
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_meta_tags: true
+  field_paragraphs: true
+  field_seo_title: true
+  field_teaser_media: true
+  field_teaser_text: true
+  langcode: true
+  moderation_state: true
+  path: true
+  promote: true
+  publish_on: true
+  publish_state: true
+  scheduler_settings: true
+  status: true
+  sticky: true
+  title: true
+  unpublish_on: true
+  unpublish_state: true
+  url_redirects: true

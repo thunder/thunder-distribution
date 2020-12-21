@@ -1,0 +1,127 @@
+views.view.locked_content:
+  expected_config:
+    display:
+      default:
+        cache_metadata:
+          max-age: -1
+      page_1:
+        cache_metadata:
+          max-age: -1
+  update_actions:
+    add:
+      display:
+        default:
+          display_options:
+            fields:
+              node_bulk_form:
+                action_title: Action
+                admin_label: ''
+                alter:
+                  absolute: false
+                  alt: ''
+                  alter_text: false
+                  ellipsis: true
+                  external: false
+                  html: false
+                  link_class: ''
+                  make_link: false
+                  max_length: 0
+                  more_link: false
+                  more_link_path: ''
+                  more_link_text: ''
+                  nl2br: false
+                  path: ''
+                  path_case: none
+                  prefix: ''
+                  preserve_tags: ''
+                  rel: ''
+                  replace_spaces: false
+                  strip_tags: false
+                  suffix: ''
+                  target: ''
+                  text: ''
+                  trim: false
+                  trim_whitespace: false
+                  word_boundary: true
+                element_class: ''
+                element_default_classes: true
+                element_label_class: ''
+                element_label_colon: false
+                element_label_type: ''
+                element_type: ''
+                element_wrapper_class: ''
+                element_wrapper_type: ''
+                empty: ''
+                empty_zero: false
+                entity_type: node
+                exclude: false
+                field: node_bulk_form
+                group_type: group
+                hide_alter_empty: true
+                hide_empty: false
+                id: node_bulk_form
+                include_exclude: include
+                label: 'Node operations bulk form'
+                plugin_id: node_bulk_form
+                relationship: none
+                selected_actions:
+                  - node_break_lock_action
+                table: node
+    change:
+      display:
+        default:
+          cache_metadata:
+            max-age: 0
+        page_1:
+          cache_metadata:
+            max-age: 0
+views.view.content:
+  expected_config: {  }
+  update_actions:
+    add:
+      display:
+        default:
+          display_options:
+            fields:
+              node_bulk_form:
+                action_title: Action
+                admin_label: ''
+                alter:
+                  absolute: false
+                  alt: ''
+                  ellipsis: true
+                  external: false
+                  html: false
+                  link_class: ''
+                  make_link: false
+                  max_length: 0
+                  more_link: false
+                  more_link_path: ''
+                  more_link_text: ''
+                  nl2br: false
+                  path: ''
+                  path_case: none
+                  prefix: ''
+                  preserve_tags: ''
+                  rel: ''
+                  replace_spaces: false
+                  strip_tags: false
+                  suffix: ''
+                  target: ''
+                  text: ''
+                  trim: false
+                  trim_whitespace: false
+                  word_boundary: true
+                element_label_class: ''
+                element_label_colon: false
+                element_label_type: ''
+                element_type: ''
+                element_wrapper_class: ''
+                element_wrapper_type: ''
+                group_type: group
+                include_exclude: exclude
+                relationship: none
+                selected_actions:
+                  - node_break_lock_action
+                  - node_publish_action
+                  - node_unpublish_action

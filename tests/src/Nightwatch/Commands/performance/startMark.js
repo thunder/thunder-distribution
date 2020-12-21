@@ -17,17 +17,17 @@ exports.command = function startMark(markName) {
   browser.perform(() => {
     const span = browser.globals.apmTrans.startSpan(markName);
 
-    span.setLabel("branch", process.env.THUNDER_BRANCH);
-    span.setLabel("test", browser.currentTest.name);
+    span.setLabel('branch', process.env.THUNDER_BRANCH);
+    span.setLabel('test', browser.currentTest.name);
 
     browser.globals.apmSpans.push(span);
 
     browser.setCookie({
       domain: browser.globals.apmDomain,
       httpOnly: false,
-      name: "spanId",
-      path: "/",
-      value: span.id
+      name: 'spanId',
+      path: '/',
+      value: span.id,
     });
   });
 
