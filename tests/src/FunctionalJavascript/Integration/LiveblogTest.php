@@ -132,8 +132,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
 
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $socialUrl = 'https://twitter.com/tweetsauce/status/778001033142284288';
-    MockHttpClientMiddleware::addUrlResponse($socialUrl, '');
+    $socialUrl = 'https://twitter.com/ThunderCoreTeam/status/776417570756976640';
 
     if ($page->hasField('field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][value]')) {
       $page->fillField('field_embed_media[0][subform][field_media][0][inline_entity_form][field_url][0][value]', $socialUrl);
@@ -148,7 +147,7 @@ class LiveblogTest extends ThunderJavascriptTestBase {
     $this->createScreenshot($this->getScreenshotFolder() . '/ModuleIntegrationTest_Liveblog_TwitterPost_' . date('Ymd_His') . '.png');
 
     $this->waitUntilVisible('article[data-postid="3"]', 10000);
-    $this->waitUntilVisible('.twitter-tweet-rendered [data-tweet-id="778001033142284288"]', 10000);
+    $this->waitUntilVisible('.twitter-tweet-rendered [data-tweet-id="776417570756976640"]', 10000);
 
     // We can't check inside Twitter widget is it loaded or not, that's why
     // plain wait is used.
