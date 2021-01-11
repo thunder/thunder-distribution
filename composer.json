@@ -54,6 +54,9 @@
             },
             "drupal/dropzonejs": {
                 "Execute field mapping before displaying in IEF form": "https://www.drupal.org/files/issues/2020-12-16/3188665.patch"
+            },
+            "drupal/core": {
+                "Use the source field main property to determine if the source field has changed": "https://www.drupal.org/files/issues/2021-01-11/3192059.patch"
             }
         }
     },
