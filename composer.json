@@ -51,6 +51,9 @@
             },
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
+            },
+            "drupal/media_entity_twitter": {
+                "Error: Call to a member function mainPropertyName() on null in Drupal\\media_entity_twitter\\Plugin\\media\\Source\\Twitter->matchRegexp()": "https://www.drupal.org/files/issues/2020-10-08/call-mainPropertyName-on-null-3175788-2.patch"
             }
         }
     },
