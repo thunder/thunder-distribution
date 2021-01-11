@@ -21,7 +21,7 @@ exports.command = function scrollIntoMiddleOfView(selector) {
       const elem = document.evaluate(selectorInBrowser, document).iterateNext();
       const viewPortHeight = Math.max(
         document.documentElement.clientHeight,
-        window.innerHeight || 0
+        window.innerHeight || 0,
       );
       const element = jQuery(elem);
       const scrollTop = element.offset().top - viewPortHeight / 2;
@@ -41,7 +41,7 @@ exports.command = function scrollIntoMiddleOfView(selector) {
       done();
     },
     [selector],
-    () => {}
+    () => {},
   );
 
   return browser;
