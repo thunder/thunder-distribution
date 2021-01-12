@@ -16,7 +16,15 @@ function thunder_tonic_theme_registry_alter(&$theme_registry) {
 /**
  * Implements hook_preprocess_form_element().
  */
-function thunder_tonic_preprocess(&$variables) {
+function thunder_tonic_preprocess_form_element(&$variables) {
+  if (!empty($variables['description'])) {
+    $variables['description_display'] = 'invisible';
+  }
+}
+/**
+ * Implements hook_preprocess_details().
+ */
+function thunder_tonic_preprocess_details(&$variables) {
   if (!empty($variables['description'])) {
     $variables['description_display'] = 'invisible';
   }
