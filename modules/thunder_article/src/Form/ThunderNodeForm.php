@@ -138,7 +138,13 @@ class ThunderNodeForm implements ContainerInjectionInterface {
         /** @var \Drupal\content_moderation\ContentModerationState $state */
         $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
         if (!$state->isDefaultRevisionState()) {
-          $form['meta']['published']['#markup'] = $entity->isNew() || !$this->moderationInfo->isDefaultRevisionPublished($entity) ? $this->t('@state of unpublished @entity_type', ['@state' => $state->label(), '@entity_type' => strtolower($entity->type->entity->label())]) : $this->t('@state of published @entity_type', ['@state' => $state->label(), '@entity_type' => strtolower($entity->type->entity->label())]);
+          $args = [
+            '@state' => $state->label(),
+            '@entity_type' => strtolower($entity->type->entity->label()),
+          ];
+          $form['meta']['published']['#markup'] = $entity->isNew() || !$this->moderationInfo->isDefaultRevisionPublished($entity) ?
+            $this->t('@state of unpublished @entity_type', $args) :
+            $this->t('@state of published @entity_type', $args);
         }
       }
     }
@@ -161,7 +167,10 @@ class ThunderNodeForm implements ContainerInjectionInterface {
     $element = [];
 
     // @todo Remove after seven / thunder_admin support is dropped.
-    if (in_array($this->themeManager->getActiveTheme()->getName(), ['seven', 'thunder_admin'])) {
+    if (in_array($this->themeManager->getActiveTheme()->getName(), [
+      'seven',
+      'thunder_admin',
+    ])) {
       /** @var \Drupal\content_moderation\ContentModerationState $state */
       $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
       $element['status'] = [
