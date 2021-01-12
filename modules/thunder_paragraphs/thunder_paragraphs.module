@@ -108,7 +108,9 @@ function _thunder_paragraph_attach_ief_submit(array &$element, array $button_par
 
         $button = NestedArray::getValue($element, $button_parents);
         if ($button) {
-          $button['#submit'] = array_merge([['Drupal\inline_entity_form\ElementSubmit', 'trigger']], $button['#submit']);
+          $button['#submit'] = array_merge([
+            ['Drupal\inline_entity_form\ElementSubmit', 'trigger'],
+          ], $button['#submit']);
           $button['#value'] = t('Collapse and save');
           $button['#ief_submit_trigger'] = TRUE;
           $button['#ief_submit_trigger_all'] = TRUE;
