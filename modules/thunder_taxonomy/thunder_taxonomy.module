@@ -42,6 +42,7 @@ function thunder_taxonomy_form_taxonomy_term_form_alter(&$form, FormStateInterfa
     // Move pathauto into sidebar.
     /** @var \Drupal\Core\Entity\EntityFormInterface $form_object */
     $form_object = $form_state->getFormObject();
+    /** @var \Drupal\taxonomy\TermInterface $term */
     $term = $form_object->getEntity();
     $form['path_settings'] = [
       '#type' => 'details',
