@@ -273,7 +273,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *   ]
    * ]
    *
-   * TODO: use this functionality for more strict "dependencies" checking.
+   * @todo use this functionality for more strict "dependencies" checking.
    *
    * @var array
    */
