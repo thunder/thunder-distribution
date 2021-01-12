@@ -40,7 +40,9 @@ function thunder_taxonomy_form_taxonomy_term_form_alter(&$form, FormStateInterfa
     $form['relations']['#group'] = 'advanced';
 
     // Move pathauto into sidebar.
-    $term = $form_state->getFormObject()->getEntity();
+    /** @var \Drupal\Core\Entity\EntityFormInterface $form_object */
+    $form_object = $form_state->getFormObject();
+    $term = $form_object->getEntity();
     $form['path_settings'] = [
       '#type' => 'details',
       '#title' => t('URL path settings'),
