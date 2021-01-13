@@ -6,7 +6,6 @@ use Behat\Mink\Element\DocumentElement;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderFormFieldTestTrait;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderMediaTestTrait;
-use Drupal\thunder_test_mock_request\MockHttpClientMiddleware;
 
 /**
  * Testing integration of "liveblog" module.
