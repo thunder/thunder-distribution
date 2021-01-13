@@ -11,6 +11,7 @@
 function thunder_tonic_theme_registry_alter(&$theme_registry) {
   $theme_registry['form_element']['path'] = drupal_get_path('module', 'thunder_tonic') . '/templates';
   $theme_registry['details']['path'] = drupal_get_path('module', 'thunder_tonic') . '/templates';
+  $theme_registry['status_report_general_info']['path'] = drupal_get_path('module', 'thunder_tonic') . '/templates';
 }
 
 /**

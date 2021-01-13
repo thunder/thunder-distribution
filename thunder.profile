@@ -172,3 +172,15 @@ function thunder_field_widget_info_alter(array &$info) {
 function thunder_field_widget_multivalue_entity_browser_entity_reference_form_alter(array &$elements, FormStateInterface $form_state, array $context) {
   unset($elements['current']['#prefix']);
 }
+
+
+/**
+ * Implements template_preprocess_status_report().
+ */
+function thunder_preprocess_status_report_general_info(&$variables) {
+  if (!empty($thunder_version = \Drupal::service('extension.list.module')->get('thunder')->info['version'])) {
+    $variables['thunder']['title'] = new \Drupal\Core\StringTranslation\TranslatableMarkup('Thunder Version');
+    $variables['thunder']['value'] = $thunder_version;
+    $variables['thunder']['icon_class'] = 'thunder';
+  }
+}
