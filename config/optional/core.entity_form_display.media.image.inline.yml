@@ -9,7 +9,7 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
-    - image.style.medium
+    - image.style.entity_browser_thumbnail
     - media.type.image
   module:
     - datetime
@@ -64,7 +64,6 @@ third_party_settings:
       weight: 3
       format_type: html_element
       format_settings:
-        label: Bottom
         element: div
         show_label: false
         label_element: h3
@@ -125,10 +124,10 @@ content:
   field_image:
     weight: 2
     settings:
+      preview_image_style: entity_browser_thumbnail
+      preview_link: true
       offsets: '50,50'
       progress_indicator: throbber
-      preview_image_style: medium
-      preview_link: true
     third_party_settings: {  }
     type: image_focal_point
     region: content
