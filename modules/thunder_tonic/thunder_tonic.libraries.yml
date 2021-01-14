@@ -7,3 +7,8 @@ form-description-toggle:
     js/form-description-toggle.js: { }
   dependencies:
     - claro/icon-link
+
+media-gallery-thumbnail:
+  css:
+    theme:
+      css/media-gallery-thumbnail.css: {}
