@@ -5,6 +5,8 @@
  * The module file.
  */
 
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+
 /**
  * Implements hook_theme_registry_alter().
  */
@@ -29,5 +31,16 @@ function thunder_tonic_preprocess_form_element(&$variables) {
 function thunder_tonic_preprocess_details(&$variables) {
   if (!empty($variables['description'])) {
     $variables['description_display'] = 'invisible';
+  }
+}
+
+/**
+ * Implements template_preprocess_status_report().
+ */
+function thunder_tonic_preprocess_status_report_general_info(&$variables) {
+  if (!empty($thunder_version = \Drupal::service('extension.list.module')->get('thunder')->info['version'])) {
+    $variables['thunder']['title'] = new TranslatableMarkup('Thunder Version');
+    $variables['thunder']['value'] = $thunder_version;
+    $variables['thunder']['icon_class'] = 'thunder';
   }
 }
