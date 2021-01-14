@@ -57,7 +57,7 @@ trait ThunderTestTrait {
    */
   protected function replaceUser1() {
     /** @var \Drupal\user\UserInterface $account */
-    // @todo: Saving the account before the update is problematic.
+    // @todo Saving the account before the update is problematic.
     // https://www.drupal.org/node/2560237
     $account = User::load(1);
     $account->setPassword($this->rootUser->pass_raw);

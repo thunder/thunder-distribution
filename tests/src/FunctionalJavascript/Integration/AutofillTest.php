@@ -31,7 +31,7 @@ class AutofillTest extends ThunderJavascriptTestBase {
     // The autofill field should have the same value as the title.
     $this->assertSession()
       ->fieldValueEquals('field_seo_title[0][value]', 'Autofill test title');
-    $page->findButton('Save')->click();
+    $this->clickSave();
 
     // After reload meta title should be same as seo_title.
     $this->assertSession()->elementContains('xpath', '//head/title', 'Autofill test title');

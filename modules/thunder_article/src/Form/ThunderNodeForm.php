@@ -128,7 +128,10 @@ class ThunderNodeForm implements ContainerInjectionInterface {
     $storage = $this->entityTypeManager->getStorage($entity->getEntityTypeId());
     $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()->getId());
     if ($latest_revision_id !== NULL && $this->moderationInfo && $this->moderationInfo->hasPendingRevision($entity)) {
-      $this->messenger->addWarning($this->t('This %entity_type has unpublished changes from user %user.', ['%entity_type' => $entity->get('type')->entity->label(), '%user' => $entity->getRevisionUser()->label()]));
+      $this->messenger->addWarning($this->t('This %entity_type has unpublished changes from user %user.', [
+        '%entity_type' => $entity->get('type')->entity->label(),
+        '%user' => $entity->getRevisionUser()->label(),
+      ]));
     }
 
     $form['actions'] = array_merge($form['actions'], $this->actions($entity));

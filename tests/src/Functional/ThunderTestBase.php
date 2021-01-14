@@ -7,7 +7,7 @@ use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\thunder\Traits\ThunderTestTrait;
 
 /**
- * Class ThunderTestBase.
+ * The base class for all functional Thunder tests.
  */
 abstract class ThunderTestBase extends BrowserTestBase {
 

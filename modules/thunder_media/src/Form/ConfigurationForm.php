@@ -6,9 +6,7 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class ConfigurationForm.
- *
- * @package Drupal\thunder_media\Form
+ * Configuration form for Thunder media settings.
  */
 class ConfigurationForm extends ConfigFormBase {
 

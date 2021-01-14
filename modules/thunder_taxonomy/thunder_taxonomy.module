@@ -12,7 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function thunder_taxonomy_entity_type_alter(array &$entity_types) {
 
-  /* @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
+  /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
   if (!empty($entity_types['taxonomy_term'])) {
     $entity_types['taxonomy_term']->setAccessClass('Drupal\thunder_taxonomy\ThunderTermAccessControlHandler');
   }
