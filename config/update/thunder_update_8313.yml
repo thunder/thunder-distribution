@@ -1,0 +1,86 @@
+core.entity_view_display.media.gallery.paragraph_preview:
+  expected_config:
+    content:
+      field_media_images:
+        label: hidden
+        region: content
+        settings:
+          image_link: ''
+          image_style: paragraph_preview_thumbnail
+        third_party_settings: {  }
+        type: media_thumbnail
+        weight: 0
+    hidden:
+      thumbnail: true
+  update_actions:
+    delete:
+      content:
+        field_media_images:
+          label: hidden
+          region: content
+          settings:
+            image_link: ''
+            image_style: paragraph_preview_thumbnail
+          third_party_settings: {  }
+          type: media_thumbnail
+          weight: 0
+      hidden:
+        thumbnail: true
+    add:
+      content:
+        thumbnail:
+          label: hidden
+          region: content
+          settings:
+            image_link: ''
+            image_style: paragraph_preview_thumbnail
+          third_party_settings:
+            empty_fields:
+              handler: ''
+          type: image
+          weight: 0
+      hidden:
+        field_media_images: true
+core.entity_view_display.media.image.paragraph_preview:
+  expected_config:
+    content:
+      field_image:
+        label: hidden
+        region: content
+        settings:
+          image_link: ''
+          image_style: paragraph_preview_thumbnail
+        third_party_settings: {  }
+        type: image
+        weight: 0
+    hidden:
+      thumbnail: true
+  update_actions:
+    delete:
+      content:
+        field_image:
+          label: hidden
+          region: content
+          settings:
+            image_link: ''
+            image_style: paragraph_preview_thumbnail
+          third_party_settings: {  }
+          type: image
+          weight: 0
+      hidden:
+        thumbnail: true
+    add:
+      content:
+        thumbnail:
+          label: hidden
+          region: content
+          settings:
+            image_link: ''
+            image_style: paragraph_preview_thumbnail
+          third_party_settings:
+            empty_fields:
+              handler: ''
+          type: image
+          weight: 0
+      hidden:
+        field_image: true
