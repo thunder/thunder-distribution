@@ -51,10 +51,14 @@
             },
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
+            },
+            "intervention/image": {
+                "fix: gd memory issue when retrieving mime type": "https://patch-diff.githubusercontent.com/raw/Intervention/image/pull/1070.diff"
             }
         }
     },
     "require": {
+        "intervention/image": "2.5.1",
         "cweagans/composer-patches": "^1.6.5",
         "drupal/access_unpublished": "^1.0-alpha8",
         "drupal/adsense": "^1.2-rc1",
