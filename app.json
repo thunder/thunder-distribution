@@ -2,7 +2,7 @@
   "name": "Thunder CMS heroku app",
   "buildpacks": [
     {
-      "url": "https://github.com/thunder/heroku-buildpack-thunder"
+      "url": "https://github.com/thunder/heroku-buildpack-thunder#memory-usage"
     }
   ],
   "stack": "heroku-20"
