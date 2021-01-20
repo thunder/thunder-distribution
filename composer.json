@@ -52,8 +52,8 @@
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
             },
-            "intervention/image": {
-                "fix: gd memory issue when retrieving mime type": "https://patch-diff.githubusercontent.com/raw/Intervention/image/pull/1070.diff"
+            "drupal/media_entity_slideshow": {
+                "Replace collage generation by own implementation": "https://www.drupal.org/files/issues/2021-01-20/3193701.patch"
             }
         }
     },
