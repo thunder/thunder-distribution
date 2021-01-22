@@ -61,7 +61,7 @@
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
             },
             "drupal/gin": {
-                "#3190832 - #3176607": "https://www.drupal.org/files/issues/2021-01-12/3190832-3176607.patch"
+                "#3176607": "https://www.drupal.org/files/issues/2021-01-21/3176607-35.patch"
             }
         }
     },
