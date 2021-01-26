@@ -53,12 +53,11 @@
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
             },
             "drupal/media_entity_slideshow": {
-                "Replace collage generation by own implementation": "https://www.drupal.org/files/issues/2021-01-20/3193701.patch"
+                "Replace collage generation by own implementation": "https://www.drupal.org/files/issues/2021-01-26/3193701-13.patch"
             }
         }
     },
     "require": {
-        "intervention/image": "2.5.1",
         "cweagans/composer-patches": "^1.6.5",
         "drupal/access_unpublished": "^1.0-alpha8",
         "drupal/adsense": "^1.2-rc1",
