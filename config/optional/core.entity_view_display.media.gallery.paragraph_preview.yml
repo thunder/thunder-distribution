@@ -7,21 +7,13 @@ dependencies:
     - image.style.paragraph_preview_thumbnail
     - media.type.gallery
   module:
-    - media
+    - empty_fields
+    - image
 id: media.gallery.paragraph_preview
 targetEntityType: media
 bundle: gallery
 mode: paragraph_preview
 content:
-  field_media_images:
-    weight: 0
-    label: hidden
-    settings:
-      image_style: paragraph_preview_thumbnail
-      image_link: ''
-    third_party_settings: {  }
-    type: media_thumbnail
-    region: content
   name:
     type: string
     weight: 1
@@ -30,8 +22,19 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     region: content
+  thumbnail:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: paragraph_preview_thumbnail
+      image_link: ''
+    third_party_settings:
+      empty_fields:
+        handler: ''
 hidden:
   created: true
+  field_media_images: true
   langcode: true
-  thumbnail: true
   uid: true

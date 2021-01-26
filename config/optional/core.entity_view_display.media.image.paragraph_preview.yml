@@ -1,3 +1,4 @@
+uuid: 2acd3c73-56dc-489f-8d29-c85b13dbee83
 langcode: en
 status: true
 dependencies:
@@ -12,6 +13,7 @@ dependencies:
     - image.style.paragraph_preview_thumbnail
     - media.type.image
   module:
+    - empty_fields
     - image
 id: media.image.paragraph_preview
 targetEntityType: media
@@ -28,15 +30,6 @@ content:
     third_party_settings:
       empty_fields:
         handler: nbsp
-  field_image:
-    type: image
-    weight: 0
-    region: content
-    label: hidden
-    settings:
-      image_style: paragraph_preview_thumbnail
-      image_link: ''
-    third_party_settings: {  }
   name:
     type: string
     weight: 1
@@ -45,6 +38,17 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     region: content
+  thumbnail:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: paragraph_preview_thumbnail
+      image_link: ''
+    third_party_settings:
+      empty_fields:
+        handler: ''
 hidden:
   created: true
   field_brands: true
@@ -52,9 +56,9 @@ hidden:
   field_description: true
   field_events: true
   field_expires: true
+  field_image: true
   field_people: true
   field_source: true
   field_tags: true
   langcode: true
-  thumbnail: true
   uid: true
