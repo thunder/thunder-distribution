@@ -42,7 +42,8 @@
                 "Nested Paragraphs create multiple drag handles": "https://www.drupal.org/files/issues/2020-12-08/3092181-142-9X_0.patch",
                 "#3116377 - Autocomplete input in views exposed filters does not align with select and text inputs": "https://git.drupalcode.org/project/drupal/-/merge_requests/131.diff",
                 "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2020-07-30/3133639-8.patch",
-                "No hook alter to override Field Widget wrappers created by WidgetBase::form": "https://www.drupal.org/files/issues/2018-06-04/2872162-field-widget-hook-10.patch"
+                "No hook alter to override Field Widget wrappers created by WidgetBase::form": "https://www.drupal.org/files/issues/2018-06-04/2872162-field-widget-hook-10.patch",
+                "REMOVE BEFORE COMMIT: Claro's preprocessing of field multiple value form's table header cell removes potential changes by others": "https://www.drupal.org/files/issues/2020-08-13/3099026-17.patch"
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
@@ -61,7 +62,10 @@
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
             },
             "drupal/gin": {
-                "#3176607": "https://www.drupal.org/files/issues/2021-01-21/3176607-35.patch"
+                "#3176607": "https://www.drupal.org/files/issues/2021-01-21/3176607-35.patch",
+                "#3187407 Collapsible sidebar": "https://git.drupalcode.org/project/gin/-/merge_requests/13.patch",
+                "#3192768 Add possibility to dismiss status messages": "https://git.drupalcode.org/project/gin/-/merge_requests/11.patch",
+                "#3194226 Add a form description toggle": "https://git.drupalcode.org/project/gin/-/merge_requests/12.patch"
             }
         }
     },
