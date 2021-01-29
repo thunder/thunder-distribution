@@ -11,28 +11,28 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
  * Implements hook_theme_registry_alter().
  */
 function thunder_tonic_theme_registry_alter(&$theme_registry) {
-  $theme_registry['form_element']['path'] = drupal_get_path('module', 'thunder_tonic') . '/templates';
-  $theme_registry['details']['path'] = drupal_get_path('module', 'thunder_tonic') . '/templates';
+//  $theme_registry['form_element']['path'] = drupal_get_path('module', 'thunder_tonic') . '/templates';
+//  $theme_registry['details']['path'] = drupal_get_path('module', 'thunder_tonic') . '/templates';
   $theme_registry['status_report_general_info']['path'] = drupal_get_path('module', 'thunder_tonic') . '/templates';
 }
 
-/**
- * Implements hook_preprocess_form_element().
- */
-function thunder_tonic_preprocess_form_element(&$variables) {
-  if (!empty($variables['description'])) {
-    $variables['description_display'] = 'invisible';
-  }
-}
-
-/**
- * Implements hook_preprocess_details().
- */
-function thunder_tonic_preprocess_details(&$variables) {
-  if (!empty($variables['description'])) {
-    $variables['description_display'] = 'invisible';
-  }
-}
+///**
+// * Implements hook_preprocess_form_element().
+// */
+//function thunder_tonic_preprocess_form_element(&$variables) {
+//  if (!empty($variables['description'])) {
+//    $variables['description_display'] = 'invisible';
+//  }
+//}
+//
+///**
+// * Implements hook_preprocess_details().
+// */
+//function thunder_tonic_preprocess_details(&$variables) {
+//  if (!empty($variables['description'])) {
+//    $variables['description_display'] = 'invisible';
+//  }
+//}
 
 /**
  * Implements template_preprocess_status_report().

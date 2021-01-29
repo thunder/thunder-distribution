@@ -1,9 +1,9 @@
 # Adds visibility toggling of form descriptions.
-form-description-toggle:
-  css:
-    theme:
-      css/form-description-toggle.css: {}
-  js:
-    js/form-description-toggle.js: { }
-  dependencies:
-    - claro/icon-link
+#form-description-toggle:
+#  css:
+#    theme:
+#      css/form-description-toggle.css: {}
+#  js:
+#    js/form-description-toggle.js: { }
+#  dependencies:
+#    - claro/icon-link
