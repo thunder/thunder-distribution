@@ -6,7 +6,7 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class ConfigurationForm.
+ * Configuration form for Thunder article settings.
  */
 class ConfigurationForm extends ConfigFormBase {
 

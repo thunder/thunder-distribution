@@ -49,7 +49,7 @@ function thunder_media_preprocess_views_view(&$variables) {
   $thunder_media_browser = [
     'entity_browser',
 
-    // TODO: Legacy support, remove it with new major version.
+    // @todo Legacy support, remove it with new major version.
     'image_browser',
     'video_browser',
   ];
@@ -73,7 +73,7 @@ function thunder_media_page_attachments(array &$page) {
  * for the theme.
  */
 function thunder_media_field_widget_entity_browser_entity_reference_form_alter(&$element, FormStateInterface $form_state, $context) {
-  /* @var \Drupal\Core\Field\EntityReferenceFieldItemList $items */
+  /** @var \Drupal\Core\Field\EntityReferenceFieldItemList $items */
   $items = $context['items'];
   $field_name = $items->getName();
   switch ($field_name) {
