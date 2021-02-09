@@ -29,6 +29,7 @@ function thunder_media_file_create(File $entity) {
     }
   }
 }
+
 /**
  * Implements hook_preprocess_media().
  */
