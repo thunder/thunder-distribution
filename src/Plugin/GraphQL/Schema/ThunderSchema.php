@@ -57,6 +57,18 @@ class ThunderSchema extends SdlSchemaPluginBase {
     $this->addParagraphImageListFields();
     $this->addParagraphEmbedFields();
 
+    // Todo: Maybe make a list and add Connectionfields in a loop.
+    $this->addConnectionFields('ArticleList');
+    $this->addConnectionFields('TopicList');
+    $this->addConnectionFields('ChannelList');
+
+    $this->registry->addFieldResolver('Query', 'route', $this->builder->compose(
+      $this->builder->produce('route_load')
+        ->map('path', $this->builder->fromArgument('path')),
+      $this->builder->produce('route_entity')
+        ->map('url', $this->builder->fromParent())
+    ));
+
     return $this->registry;
   }
 
@@ -355,15 +367,25 @@ class ThunderSchema extends SdlSchemaPluginBase {
     );
   }
 
-  /**
-   * Function addQueryFields.
+  /*
+   * Function addQueryFields().
+   * Todo: maybe list types in an array and make a foreach to add producers.
    */
   protected function addQueryFields() {
+
     $this->registry->addFieldResolver('Query', 'article',
       $this->builder->produce('entity_load')
         ->map('type', $this->builder->fromValue('node'))
         ->map('bundles', $this->builder->fromValue(['article']))
         ->map('id', $this->builder->fromArgument('id'))
+    );
+
+    $this->registry->addFieldResolver('Query', 'article_list',
+      $this->builder->produce('query_entities')
+        ->map('type', $this->builder->fromArgument('type'))
+        ->map('bundle', $this->builder->fromArgument('bundle'))
+        ->map('offset', $this->builder->fromArgument('offset'))
+        ->map('limit', $this->builder->fromArgument('limit'))
     );
 
     $this->registry->addFieldResolver('Query', 'channel',
@@ -373,11 +395,46 @@ class ThunderSchema extends SdlSchemaPluginBase {
         ->map('id', $this->builder->fromArgument('id'))
     );
 
+    $this->registry->addFieldResolver('Query', 'channel_list',
+      $this->builder->produce('query_entities')
+        ->map('type', $this->builder->fromArgument('type'))
+        ->map('bundle', $this->builder->fromArgument('bundle'))
+        ->map('offset', $this->builder->fromArgument('offset'))
+        ->map('limit', $this->builder->fromArgument('limit'))
+    );
+
     $this->registry->addFieldResolver('Query', 'tag',
       $this->builder->produce('entity_load')
         ->map('type', $this->builder->fromValue('taxonomy_term'))
         ->map('bundles', $this->builder->fromValue(['tag']))
         ->map('id', $this->builder->fromArgument('id'))
+    );
+
+    $this->registry->addFieldResolver('Query', 'tag_list',
+      $this->builder->produce('query_entities')
+        ->map('type', $this->builder->fromArgument('type'))
+        ->map('bundle', $this->builder->fromArgument('bundle'))
+        ->map('offset', $this->builder->fromArgument('offset'))
+        ->map('limit', $this->builder->fromArgument('limit'))
+    );
+  }
+
+  /**
+   * Function addConnectionFields - adds the connection fields.
+   * @param string $type
+   *   The connection type.
+   */
+  protected function addConnectionFields($type) {
+    $this->registry->addFieldResolver($type, 'total',
+      $this->builder->callback(function (QueryConnection $connection) {
+        return $connection->total();
+      })
+    );
+
+    $this->registry->addFieldResolver($type, 'items',
+      $this->builder->callback(function (QueryConnection $connection) {
+        return $connection->items();
+      })
     );
   }
 
