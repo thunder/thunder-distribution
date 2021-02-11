@@ -61,41 +61,51 @@ class ThunderSchema extends SdlSchemaPluginBase {
   }
 
   /**
-   * TODO: this should be much less hard coded and better pluggable.
+   * Function addInterfaces.
    *
    */
   protected function addInterfaces () {
     $this->registry->addTypeResolver('ContentType', function ($value) {
+      $bundle = $value->bundle();
+
       if ($value instanceof ContentEntityInterface) {
-        return ucfirst($value->bundle());
+        return $this->mapBundleToSchemaName($bundle);
       }
-      throw new Error('Could not resolve content type.');
+      throw new Error('Could not resolve content type. ' . $bundle);
     });
 
     $this->registry->addTypeResolver('ContentElement', function ($value) {
+      $bundle = $value->bundle();
+
       if ($value instanceof ParagraphInterface) {
-        $bundle = $value->bundle();
-        switch ($bundle) {
-          case 'text':
-          case 'image':
-            return 'Paragraph' . ucfirst($bundle);
-          case 'twitter':
-          case 'pinterest':
-          case 'instagram':
-            // TODO: make this more general, instead of using the cases above
-            return 'ParagraphEmbed';
-          case 'gallery':
-            return 'ParagraphImageList';
+        if (in_array($bundle,['twitter','pinterest','instagram'])) {
+          return 'ParagraphEmbed';
         }
+        if (in_array($bundle,['gallery'])) {
+          return 'ParagraphImageList';
+        }
+        return 'Paragraph' . $this->mapBundleToSchemaName($bundle);
       }
 
       if($value instanceof MediaInterface) {
-        return ucfirst($value->bundle());
+        return $this->mapBundleToSchemaName($bundle);
       }
 
-      throw new Error('Could not resolve element type.');
+      throw new Error('Could not resolve element type. ' . $bundle);
     });
 
+  }
+
+  /**
+   * Takes the bundle name and returns the schema name.
+   * @param $bundle_name
+   *   The bundle name.
+   *
+   * @return string
+   *   Returns the mapped bundle name.
+   */
+  protected function mapBundleToSchemaName($bundle_name) {
+    return str_replace('_', '', ucwords($bundle_name, '_'));
   }
 
   /**
