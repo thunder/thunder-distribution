@@ -62,10 +62,7 @@
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
             },
             "drupal/gin": {
-                "#3176607": "https://www.drupal.org/files/issues/2021-01-21/3176607-35.patch",
-                "#3187407 Collapsible sidebar": "https://git.drupalcode.org/project/gin/-/merge_requests/13.patch",
-                "#3192768 Add possibility to dismiss status messages": "https://git.drupalcode.org/project/gin/-/merge_requests/11.patch",
-                "#3194226 Add a form description toggle": "https://git.drupalcode.org/project/gin/-/merge_requests/12.patch"
+                "Combined patch": "https://www.drupal.org/files/issues/2021-02-11/3191606-gin-combined.patch"
             }
         }
     },

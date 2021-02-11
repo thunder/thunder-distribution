@@ -21,3 +21,4 @@ favicon:
 accent_color: ''
 focus_color: ''
 icon_upload: ''
+show_description_toggle: true
