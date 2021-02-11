@@ -1,0 +1,113 @@
+schema {
+  query: Query
+}
+
+type Query {
+  article(id: Int!): Article
+  channel(id: Int!): Channel
+  tag(id: Int!): Tag
+}
+
+interface ContentType {
+  id: Int!
+  uuid: String!
+  title: String!
+  bundle: String!
+  url: String!
+  created: String!
+  changed: String!
+  language: String!
+}
+
+interface ContentElement {
+  id: Int!
+  uuid: String!
+  type: String!
+  label: String
+}
+
+type Channel implements ContentType {
+  id: Int!
+  uuid: String!
+  bundle: String!
+  title: String!
+  url: String!
+  created: String!
+  changed: String!
+  language: String!
+  content: [ContentElement]
+}
+
+type Tag implements ContentType {
+  id: Int!
+  uuid: String!
+  title: String!
+  bundle: String!
+  url: String!
+  created: String!
+  changed: String!
+  language: String!
+}
+
+type Article implements ContentType {
+  id: Int!
+  uuid: String!
+  bundle: String!
+  title: String!
+  url: String!
+  created: String!
+  changed: String!
+  language: String!
+  channel: Channel!
+  tags: [Tag]
+  seoTitle: String!
+  content: [ContentElement]
+}
+
+type Image implements ContentElement {
+  id: Int!
+  uuid: String!
+  type: String!
+  label: String
+  copyright: String
+  description: String
+  src: String
+  width: Int
+  height: Int
+}
+
+type ParagraphText implements ContentElement {
+  id: Int!
+  uuid: String!
+  type: String!
+  label: String
+  text: String
+}
+
+type ParagraphImage implements ContentElement {
+  id: Int!
+  uuid: String!
+  type: String!
+  label: String
+  copyright: String
+  description: String
+  src: String
+  width: Int
+  height: Int
+}
+
+type ParagraphEmbed implements ContentElement {
+  id: Int!
+  uuid: String!
+  type: String!
+  label: String
+  url: String
+}
+
+type ParagraphImageList implements ContentElement {
+  id: Int!
+  uuid: String!
+  type: String!
+  label: String
+  images: [Image]
+}
