@@ -51,6 +51,9 @@
             },
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
+            },
+            "drupal/scheduler": {
+                "Rules and Scheduler events should be dispatched after the node is saved, not before": "https://www.drupal.org/files/issues/2021-02-12/3196989-4.dispatch-after-save.patch"
             }
         }
     },
