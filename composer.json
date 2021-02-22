@@ -39,10 +39,7 @@
         "installer-name": "thunder",
         "patches": {
             "drupal/core": {
-                "Nested Paragraphs create multiple drag handles": "https://www.drupal.org/files/issues/2020-12-08/3092181-142-9X_0.patch",
-                "#3116377 - Autocomplete input in views exposed filters does not align with select and text inputs": "https://www.drupal.org/files/issues/2020-06-18/3116377-31.patch",
                 "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2020-07-30/3133639-8.patch",
-                "No hook alter to override Field Widget wrappers created by WidgetBase::form": "https://www.drupal.org/files/issues/2018-06-04/2872162-field-widget-hook-10.patch",
                 "REMOVE BEFORE COMMIT: Claro's preprocessing of field multiple value form's table header cell removes potential changes by others": "https://www.drupal.org/files/issues/2020-08-13/3099026-17.patch"
             },
             "drupal/diff": {
@@ -62,7 +59,7 @@
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
             },
             "drupal/gin": {
-                "Combined patch": "https://www.drupal.org/files/issues/2021-02-11/3191606-gin-combined.patch"
+                "Collapsible sidebar": "https://git.drupalcode.org/project/gin/-/merge_requests/13.diff"
             }
         }
     },
@@ -76,7 +73,7 @@
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.9",
-        "drupal/core": "~9.1.0@STABLE",
+        "drupal/core": "9.2.x",
         "drupal/config_selector": "^2.0",
         "drupal/config_update": "^1.7",
         "drupal/content_lock": "^2.1",
