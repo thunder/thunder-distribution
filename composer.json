@@ -58,6 +58,9 @@
             },
             "drupal/media_entity_twitter": {
                 "Trying to access array offset on value of type bool": "https://www.drupal.org/files/issues/2021-03-01/3200945.patch"
+            },
+            "drupal/media_entity_instagram": {
+                "Trying to access array offset on value of type bool": "https://www.drupal.org/files/issues/2021-03-01/3200960.patch"
             }
         }
     },
