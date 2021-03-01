@@ -51,9 +51,6 @@
             },
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
-            },
-            "drupal/dropzonejs": {
-                "Execute field mapping before displaying in IEF form": "https://www.drupal.org/files/issues/2020-12-16/3188665.patch"
             }
         }
     },
@@ -67,7 +64,7 @@
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.9",
-        "drupal/core": "~9.1.0@STABLE",
+        "drupal/core": "~9.1.4@STABLE",
         "drupal/config_selector": "^2.0",
         "drupal/config_update": "^1.7",
         "drupal/content_lock": "^2.1",
