@@ -51,6 +51,9 @@
             },
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
+            },
+            "drupal/simple_sitemap": {
+                "PHP 8 TypeError: method_exists()": "https://www.drupal.org/files/issues/2020-12-07/simple_sitemap-php8-error-1.patch"
             }
         }
     },
