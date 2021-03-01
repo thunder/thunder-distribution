@@ -30,13 +30,17 @@ jobs:
 
     runs-on: ubuntu-20.04
 
+    strategy:
+      matrix:
+        PHP_VERSION: [ '7.4', '8.0']
+
     steps:
       - uses: actions/checkout@v1
 
       - uses: shivammathur/setup-php@v2
         with:
           coverage: none
-          php-version: '8.0'
+          php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick
 
       - name: Start MySql service
@@ -79,9 +83,9 @@ jobs:
         run: cd /tmp/test; tar cfz build.tgz thunder; mv build.tgz ${GITHUB_WORKSPACE}
 
       - name: Upload build
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
-          name: build
+          name: build ${{ matrix.PHP_VERSION }}
           path: build.tgz
 
   test-max:
@@ -89,13 +93,17 @@ jobs:
 
     runs-on: ubuntu-20.04
 
+    strategy:
+      matrix:
+        PHP_VERSION: [ '7.4', '8.0']
+
     steps:
     - uses: actions/checkout@v1
 
     - uses: shivammathur/setup-php@v2
       with:
         coverage: none
-        php-version: '8.0'
+        php-version: ${{ matrix.PHP_VERSION }}
         extensions: Imagick, gd, pdo_mysql
 
     - name: Setup problem matchers for PHP
@@ -114,7 +122,8 @@ jobs:
     - name: Download build
       uses: actions/download-artifact@v1
       with:
-        name: build
+        name: build ${{ matrix.PHP_VERSION }}
+        path: build.tgz
 
     - name: Unzip build artifact
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build
