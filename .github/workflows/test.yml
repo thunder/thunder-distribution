@@ -80,13 +80,12 @@ jobs:
         run: test-drupal-project install
 
       - name: Zip build
-        run: cd /tmp/test; tar cfz build.tgz thunder; mv build.tgz ${GITHUB_WORKSPACE}
+        run: cd /tmp/test; tar cfz build-${{ matrix.PHP_VERSION }}.tgz thunder; mv build.tgz ${GITHUB_WORKSPACE}
 
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
-          name: build ${{ matrix.PHP_VERSION }}
-          path: build.tgz
+          path: build-${{ matrix.PHP_VERSION }}.tgz
 
   test-max:
     needs: build
@@ -122,11 +121,11 @@ jobs:
     - name: Download build
       uses: actions/download-artifact@v1
       with:
-        name: build ${{ matrix.PHP_VERSION }}
-        path: build.tgz
+        name: build
+        path: build-${{ matrix.PHP_VERSION }}.tgz
 
     - name: Unzip build artifact
-      run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build
+      run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build
 
     - name: Run config tests
       run: test-drupal-project run_tests -nc
