@@ -77,7 +77,7 @@ trait ThunderEntityBrowserTestTrait {
     $fileFieldSelector = "input[type='file'].dz-hidden-input";
     $fileField = NULL;
     foreach ($tabLinks as $tabLink) {
-      /* @var \Behat\Mink\Element\NodeElement $tabLink */
+      /** @var \Behat\Mink\Element\NodeElement $tabLink */
       $tabLink->click();
       $this->assertSession()->assertWaitOnAjaxRequest();
 
