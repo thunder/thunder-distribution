@@ -1,0 +1,71 @@
+interface ContentType {
+  id: Int!
+  uuid: String!
+  name: String!
+  entity: String!
+  url: String!
+  created: String!
+  changed: String!
+  language: String
+}
+
+type Article implements ContentType {
+  id: Int!
+  uuid: String!
+  name: String!
+  entity: String!
+  url: String!
+  created: String!
+  changed: String!
+  language: String
+  author: User
+
+  published: Boolean!
+  channel: Channel
+  tags: [Tag]
+  seoTitle: String!
+  content: [Paragraph]
+}
+
+type Tag implements ContentType {
+  id: Int!
+  uuid: String!
+  name: String!
+  entity: String!
+  url: String!
+  created: String!
+  changed: String!
+  language: String
+  author: User
+
+  published: Boolean!
+  content: [Paragraph]
+}
+
+type Channel implements ContentType {
+  id: Int!
+  uuid: String!
+  name: String!
+  entity: String!
+  url: String!
+  created: String!
+  changed: String!
+  language: String
+  author: User
+
+  published: Boolean!
+  content: [Paragraph]
+}
+
+type User implements ContentType {
+  id: Int!
+  uuid: String!
+  name: String!
+  entity: String!
+  url: String!
+  created: String!
+  changed: String!
+  language: String
+
+  mail: String
+}

@@ -1,0 +1,60 @@
+interface Paragraph {
+  id: Int!
+  uuid: String!
+  entity: String!
+  name: String
+}
+
+type ParagraphImage implements Paragraph {
+  id: Int!
+  uuid: String!
+  entity: String!
+  name: String
+
+  image: Image
+}
+
+type ParagraphTwitter implements Paragraph {
+  id: Int!
+  uuid: String!
+  entity: String!
+  name: String
+
+  url: String
+}
+
+type ParagraphInstagram implements Paragraph {
+  id: Int!
+  uuid: String!
+  entity: String!
+  name: String
+
+  url: String
+}
+
+type ParagraphPinterest implements Paragraph {
+  id: Int!
+  uuid: String!
+  entity: String!
+  name: String
+
+  url: String
+}
+
+type ParagraphText implements Paragraph {
+  id: Int!
+  uuid: String!
+  entity: String!
+  name: String
+
+  text: String
+}
+
+type ParagraphGallery implements Paragraph {
+  id: Int!
+  uuid: String!
+  entity: String!
+  name: String
+
+  images: [Image]
+}
