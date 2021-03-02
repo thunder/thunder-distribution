@@ -125,7 +125,7 @@ jobs:
         name: build-${{ matrix.PHP_VERSION }}
 
     - name: Unzip build artifact
-      run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build
+      run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
 
     - name: Run config tests
       run: test-drupal-project run_tests -nc
@@ -302,10 +302,10 @@ jobs:
       - name: Download build
         uses: actions/download-artifact@v1
         with:
-          name: build
+          name: build-7.4
 
       - name: Unzip build artifact
-        run: mkdir -p /tmp/test; tar xCfz /tmp/test build/build.tgz thunder; rm -rf build; mv /tmp/test/thunder/install ${GITHUB_WORKSPACE}/docker-thunder-performance/www
+        run: mkdir -p /tmp/test; tar xCfz /tmp/test build-7.4/build-7.4.tgz thunder; rm -rf build-7.4; mv /tmp/test/thunder/install ${GITHUB_WORKSPACE}/docker-thunder-performance/www
 
       - name: Set variables
         id: vars
