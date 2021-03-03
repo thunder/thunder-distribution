@@ -59,6 +59,7 @@
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
             },
             "drupal/gin": {
+                "Draggable tables are not working in Drupal 9.2.x": "https://www.drupal.org/files/issues/2021-03-03/3200202.patch",
                 "Collapsible sidebar": "https://git.drupalcode.org/project/gin/-/merge_requests/13.diff"
             }
         }
