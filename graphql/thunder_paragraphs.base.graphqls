@@ -11,7 +11,7 @@ type ParagraphImage implements Paragraph {
   entity: String!
   name: String
 
-  image: Image
+  image: MediaImage
 }
 
 type ParagraphTwitter implements Paragraph {
@@ -56,5 +56,5 @@ type ParagraphGallery implements Paragraph {
   entity: String!
   name: String
 
-  images: [Image]
+  images: [MediaImage]
 }

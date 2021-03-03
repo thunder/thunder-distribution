@@ -37,22 +37,22 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
   protected function resolveFields() {
 
     // Image
-    $this->resolveBaseFields('Image');
-    $this->registry->addFieldResolver('Image', 'copyright',
+    $this->resolveBaseFields('MediaImage');
+    $this->registry->addFieldResolver('MediaImage', 'copyright',
       $this->builder->produce('property_path')
         ->map('type', $this->builder->fromValue('entity:media'))
         ->map('value', $this->builder->fromParent())
         ->map('path', $this->builder->fromValue('field_copyright.value'))
     );
 
-    $this->registry->addFieldResolver('Image', 'description',
+    $this->registry->addFieldResolver('MediaImage', 'description',
       $this->builder->produce('property_path')
         ->map('type', $this->builder->fromValue('entity:media'))
         ->map('value', $this->builder->fromParent())
         ->map('path', $this->builder->fromValue('field_description.processed'))
     );
 
-    $this->registry->addFieldResolver('Image', 'src',
+    $this->registry->addFieldResolver('MediaImage', 'src',
       $this->builder->compose(
         $this->builder->produce('property_path')
           ->map('type', $this->builder->fromValue('entity:media'))
@@ -63,47 +63,38 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
       )
     );
 
-    $this->registry->addFieldResolver('Image', 'width',
+    $this->registry->addFieldResolver('MediaImage', 'width',
       $this->builder->produce('property_path')
         ->map('type', $this->builder->fromValue('entity:media'))
         ->map('value', $this->builder->fromParent())
         ->map('path', $this->builder->fromValue('field_image.width'))
     );
 
-    $this->registry->addFieldResolver('Image', 'height',
+    $this->registry->addFieldResolver('MediaImage', 'height',
       $this->builder->produce('property_path')
         ->map('type', $this->builder->fromValue('entity:media'))
         ->map('value', $this->builder->fromParent())
         ->map('path', $this->builder->fromValue('field_image.height'))
     );
 
-    $this->registry->addFieldResolver('Image', 'title',
+    $this->registry->addFieldResolver('MediaImage', 'title',
       $this->builder->produce('property_path')
         ->map('type', $this->builder->fromValue('entity:media'))
         ->map('value', $this->builder->fromParent())
         ->map('path', $this->builder->fromValue('field_image.title'))
     );
 
-    $this->registry->addFieldResolver('Image', 'alt',
+    $this->registry->addFieldResolver('MediaImage', 'alt',
       $this->builder->produce('property_path')
         ->map('type', $this->builder->fromValue('entity:media'))
         ->map('value', $this->builder->fromParent())
         ->map('path', $this->builder->fromValue('field_image.alt'))
     );
 
-    $this->registry->addFieldResolver('Image', 'tags',
+    $this->registry->addFieldResolver('MediaImage', 'tags',
       $this->builder->produce('entity_reference')
         ->map('entity', $this->builder->fromParent())
         ->map('field', $this->builder->fromValue('field_tags'))
-    );
-
-    // Embed
-    $this->resolveBaseFields('Embed');
-    $this->registry->addFieldResolver('Embed', 'url',
-      $this->builder->produce('property_path')
-        ->map('type', $this->builder->fromValue('entity:media'))
-        ->map('value', $this->builder->fromParent())
-        ->map('path', $this->builder->fromValue('field_url.value'))
     );
   }
 
@@ -120,7 +111,7 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
    */
   protected function resolveMediaTypes($value, ResolveContext $context, ResolveInfo $info): string {
     if ($value instanceof MediaInterface) {
-      return $this->mapBundleToSchemaName($value->bundle());
+      return 'Media' . $this->mapBundleToSchemaName($value->bundle());
     }
   }
 
