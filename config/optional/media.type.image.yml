@@ -19,4 +19,5 @@ queue_thumbnail_downloads: false
 new_revision: false
 source_configuration:
   source_field: field_image
-field_map: {  }
+field_map:
+  name: name

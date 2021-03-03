@@ -25,3 +25,9 @@ v6.1.2:
         '#description': '<p>"Publish content", "Unpublish content" and "Break lock" actions were removed from the content overview, because they make no sense there. </p>'
         '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+
+    thunder_update_8313:
+        '#title': 'Add image name to media type field map.'
+        '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
