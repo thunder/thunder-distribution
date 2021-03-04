@@ -98,12 +98,12 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
 
 
   /**
-   * Add fields common to all content types.
+   * Add fields common to all page types.
    *
    * @param string $type
    *   The type name.
    */
-  protected function resolveContentTypeInterfaceFields(string $type) {
+  protected function resolvePageInterfaceFields(string $type) {
     $this->resolveBaseFields($type);
 
     $this->registry->addFieldResolver($type, 'url',

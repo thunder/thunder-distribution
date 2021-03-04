@@ -11,21 +11,21 @@ use GraphQL\Type\Definition\ResolveInfo;
 
 /**
  * @SchemaExtension(
- *   id = "thunder_content_types",
- *   name = "Content types",
- *   description = "Adds content types and their fields.",
+ *   id = "thunder_pages",
+ *   name = "Content pages",
+ *   description = "Adds page types and their fields.",
  *   schema = "thunder"
  * )
  */
-class ThunderContentTypesSchemaExtension extends ThunderSchemaExtensionPluginBase {
+class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
 
   public function registerResolvers(ResolverRegistryInterface $registry) {
     parent::registerResolvers($registry);
 
-    $this->registry->addTypeResolver('ContentType',
+    $this->registry->addTypeResolver('Page',
       \Closure::fromCallable([
         __CLASS__,
-        'resolveContentTypes',
+        'resolvePageTypes',
       ])
     );
 
@@ -41,7 +41,7 @@ class ThunderContentTypesSchemaExtension extends ThunderSchemaExtensionPluginBas
     /**
      * Article
      */
-    $this->resolveContentTypeInterfaceFields('Article');
+    $this->resolvePagesInterfaceFields('Article');
 
     $this->registry->addFieldResolver('Article', 'published',
       $this->builder->produce('entity_published')
@@ -84,7 +84,7 @@ class ThunderContentTypesSchemaExtension extends ThunderSchemaExtensionPluginBas
     /**
      * Tags
      */
-    $this->resolveContentTypeInterfaceFields('Tag');
+    $this->resolvePagesInterfaceFields('Tag');
 
     $this->registry->addFieldResolver('Tag', 'author',
       $this->builder->produce('entity_owner')
@@ -105,7 +105,7 @@ class ThunderContentTypesSchemaExtension extends ThunderSchemaExtensionPluginBas
     /**
      * Channel
      */
-    $this->resolveContentTypeInterfaceFields('Channel');
+    $this->resolvePagesInterfaceFields('Channel');
 
     $this->registry->addFieldResolver('Channel', 'author',
       $this->builder->produce('entity_owner')
@@ -126,7 +126,7 @@ class ThunderContentTypesSchemaExtension extends ThunderSchemaExtensionPluginBas
     /**
      * User
      */
-    $this->resolveContentTypeInterfaceFields('User');
+    $this->resolvePagesInterfaceFields('User');
 
     $this->registry->addFieldResolver('User', 'mail',
       $this->builder->produce('property_path')
@@ -170,7 +170,7 @@ class ThunderContentTypesSchemaExtension extends ThunderSchemaExtensionPluginBas
   }
 
   /**
-   * Resolves content types.
+   * Resolves page types.
    *
    * @param mixed $value
    * @param \Drupal\graphql\GraphQL\Execution\ResolveContext $context
@@ -179,7 +179,7 @@ class ThunderContentTypesSchemaExtension extends ThunderSchemaExtensionPluginBas
    * @return string
    *   Response type.
    */
-  protected function resolveContentTypes($value, ResolveContext $context, ResolveInfo $info): string {
+  protected function resolvePageTypes($value, ResolveContext $context, ResolveInfo $info): string {
     if ($value instanceof NodeInterface || $value instanceof TermInterface || $value instanceof UserInterface) {
       return $this->mapBundleToSchemaName($value->bundle());
     }

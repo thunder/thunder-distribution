@@ -1,4 +1,4 @@
-interface ContentType {
+interface Page {
   id: Int!
   uuid: String!
   name: String!
@@ -9,7 +9,7 @@ interface ContentType {
   language: String
 }
 
-type Article implements ContentType {
+type Article implements Page {
   id: Int!
   uuid: String!
   name: String!
@@ -27,7 +27,7 @@ type Article implements ContentType {
   content: [Paragraph]
 }
 
-type Tag implements ContentType {
+type Tag implements Page {
   id: Int!
   uuid: String!
   name: String!
@@ -42,7 +42,7 @@ type Tag implements ContentType {
   content: [Paragraph]
 }
 
-type Channel implements ContentType {
+type Channel implements Page {
   id: Int!
   uuid: String!
   name: String!
@@ -57,7 +57,7 @@ type Channel implements ContentType {
   content: [Paragraph]
 }
 
-type User implements ContentType {
+type User implements Page {
   id: Int!
   uuid: String!
   name: String!

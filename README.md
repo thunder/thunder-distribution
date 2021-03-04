@@ -19,51 +19,62 @@ If all works, you should be able to test some queries in the Explorer.
 # Example
 
     {
-      article(id: 4) {
-        id
+      route(path: "/your-path") {
+        uuid
         url
         name
-        seoTitle
-        language
-        author {
-          id
-          name
+        ... on User {
           mail
-          __typename
         }
-        entity
-        channel {
-          url
-          name
+        ... on Channel {
+          content {
+            __typename
+          }
         }
-
-        content {
+        ... on Article {
           id
-          __typename
-          ... on ParagraphPinterest {
+          url
+          seoTitle
+          language
+          author {
+            id
+            name
+            mail
+            __typename
+          }
+          channel {
             url
+            name
           }
-          ... on ParagraphText {
-            text
-          }
-          ... on ParagraphGallery {
-            images {
-              src
+          content {
+            id
+            __typename
+            ... on ParagraphPinterest {
+              url
             }
-          }
-          ... on ParagraphImage {
-            image {
-              src
-              width
-              title
-              alt
-              name
-              tags {
+            ... on ParagraphText {
+              text
+            }
+            ... on ParagraphGallery {
+              images {
+                src
+              }
+            }
+            ... on ParagraphImage {
+              image {
+                src
+                width
+                title
+                alt
                 name
+                tags {
+                  name
+                }
               }
             }
           }
         }
       }
     }
+
 
