@@ -1,12 +1,12 @@
 <?php
 
-namespace Drupal\thunder_schema\Plugin\GraphQL\DataProducer;
+namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
-use Drupal\thunder_schema\Wrappers\QueryConnection;
+use Drupal\thunder_gqls\Wrappers\QueryConnection;
 use GraphQL\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -91,7 +91,7 @@ class QueryEntities extends DataProducerPluginBase implements ContainerFactoryPl
    * @param int $limit
    * @param \Drupal\Core\Cache\RefinableCacheableDependencyInterface $metadata
    *
-   * @return \Drupal\thunder_schema\Wrappers\QueryConnection
+   * @return \Drupal\thunder_gqls\Wrappers\QueryConnection
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */

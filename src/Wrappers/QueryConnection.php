@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder_schema\Wrappers;
+namespace Drupal\thunder_gqls\Wrappers;
 
 use Drupal\Core\Entity\Query\QueryInterface;
 use GraphQL\Deferred;

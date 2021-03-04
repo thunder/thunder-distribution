@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder_schema\Plugin\GraphQL\SchemaExtension;
+namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
 use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
@@ -41,7 +41,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
     /**
      * Article
      */
-    $this->resolvePagesInterfaceFields('Article');
+    $this->resolvePageInterfaceFields('Article');
 
     $this->registry->addFieldResolver('Article', 'published',
       $this->builder->produce('entity_published')
@@ -84,7 +84,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
     /**
      * Tags
      */
-    $this->resolvePagesInterfaceFields('Tag');
+    $this->resolvePageInterfaceFields('Tag');
 
     $this->registry->addFieldResolver('Tag', 'author',
       $this->builder->produce('entity_owner')
@@ -105,7 +105,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
     /**
      * Channel
      */
-    $this->resolvePagesInterfaceFields('Channel');
+    $this->resolvePageInterfaceFields('Channel');
 
     $this->registry->addFieldResolver('Channel', 'author',
       $this->builder->produce('entity_owner')
@@ -126,7 +126,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
     /**
      * User
      */
-    $this->resolvePagesInterfaceFields('User');
+    $this->resolvePageInterfaceFields('User');
 
     $this->registry->addFieldResolver('User', 'mail',
       $this->builder->produce('property_path')

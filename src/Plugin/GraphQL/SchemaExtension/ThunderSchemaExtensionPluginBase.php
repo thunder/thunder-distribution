@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder_schema\Plugin\GraphQL\SchemaExtension;
+namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
 use Drupal\graphql\GraphQL\ResolverBuilder;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;

@@ -2,8 +2,8 @@
 
 In modules folder of a Thunder installation:
 
-    git clone git@github.com:thunder/thunder_schema.git
-    drush en thunder_schema
+    git clone git@github.com:thunder/thunder_gqls.git
+    drush en thunder_gqls
 
 Might also want to enable the thunder_demo module to have some articles to work with, if you do not have any.
 

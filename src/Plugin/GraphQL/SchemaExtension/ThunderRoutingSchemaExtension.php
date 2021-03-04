@@ -1,12 +1,8 @@
 <?php
 
-namespace Drupal\thunder_schema\Plugin\GraphQL\SchemaExtension;
+namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
-use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
-use Drupal\media\MediaInterface;
-use Drupal\paragraphs\ParagraphInterface;
-use GraphQL\Type\Definition\ResolveInfo;
 
 /**
  * @SchemaExtension(
