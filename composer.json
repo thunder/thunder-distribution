@@ -1,0 +1,23 @@
+{
+    "name": "thunder/thunder_gqls",
+    "description": "GraphQL Schema for Thunder.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Daniel Bosen",
+            "email": "daniel.bosen@burda.com"
+        }
+    ],
+    "require": {
+        "drupal/graphql": "^4.0"
+    },
+    "require-dev": {
+        "drupal/coder": "^8.3",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1"
+    },
+    "scripts": {
+        "cs": "phpcs",
+        "cbf": "phpcbf"
+    }
+}

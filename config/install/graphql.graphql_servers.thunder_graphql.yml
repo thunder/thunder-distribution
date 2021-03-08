@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies: {  }
+name: thunder_graphql
+label: 'Thunder - GraphQL Server'
+schema: composable
+schema_configuration:
+  composable:
+    extensions:
+      thunder_paragraphs: thunder_paragraphs
+      thunder_media: thunder_media
+      thunder_routing: thunder_routing
+      thunder_pages: thunder_pages
+persisted_queries_settings: {  }
+endpoint: /graphql
+debug_flag: 0
+caching: true
+batching: true

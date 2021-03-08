@@ -5,6 +5,8 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 
 /**
+ * The routing schema extension.
+ *
  * @SchemaExtension(
  *   id = "thunder_routing",
  *   name = "Routing extension",
@@ -14,6 +16,9 @@ use Drupal\graphql\GraphQL\ResolverRegistryInterface;
  */
 class ThunderRoutingSchemaExtension extends ThunderSchemaExtensionPluginBase {
 
+  /**
+   * {@inheritdoc}
+   */
   public function registerResolvers(ResolverRegistryInterface $registry) {
     parent::registerResolvers($registry);
 

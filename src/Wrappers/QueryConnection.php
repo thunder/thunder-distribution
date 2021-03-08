@@ -5,9 +5,14 @@ namespace Drupal\thunder_gqls\Wrappers;
 use Drupal\Core\Entity\Query\QueryInterface;
 use GraphQL\Deferred;
 
+/**
+ * The query connection class.
+ */
 class QueryConnection {
 
   /**
+   * The query interface.
+   *
    * @var \Drupal\Core\Entity\Query\QueryInterface
    */
   protected $query;
@@ -16,13 +21,17 @@ class QueryConnection {
    * QueryConnection constructor.
    *
    * @param \Drupal\Core\Entity\Query\QueryInterface $query
+   *   The query interface.
    */
   public function __construct(QueryInterface $query) {
     $this->query = $query;
   }
 
   /**
+   * Calculate the total amount of results.
+   *
    * @return int
+   *   The total amount of results.
    */
   public function total() {
     $query = clone $this->query;
@@ -31,7 +40,10 @@ class QueryConnection {
   }
 
   /**
+   * Retrieve The item list.
+   *
    * @return array|\GraphQL\Deferred
+   *   The item list.
    */
   public function items() {
     $result = $this->query->execute();

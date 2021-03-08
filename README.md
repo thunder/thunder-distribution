@@ -5,11 +5,11 @@ In modules folder of a Thunder installation:
     git clone git@github.com:thunder/thunder_gqls.git
     drush en thunder_gqls
 
-Might also want to enable the thunder_demo module to have some articles to work with, if you do not have any.
+You can enable the thunder_demo module to have some articles to work with.
 
 + open admin/config/graphql in browser click "Create Server"
 + choose a label and custom endpoint to your liking.
-+ Select "Composable schema" as schema and enable all extensions in "Schema configuration"
++ Select "Composable schema" as schema and enable extensions
 + Hit "Save" button
 
 Back on admin/config/graphql choose "Explorer" from the drop down button
@@ -76,5 +76,3 @@ If all works, you should be able to test some queries in the Explorer.
         }
       }
     }
-
-

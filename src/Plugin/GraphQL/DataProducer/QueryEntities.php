@@ -11,6 +11,8 @@ use GraphQL\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
+ * The list producer.
+ *
  * @DataProducer(
  *   id = "query_entities",
  *   name = @Translation("Load entities"),
@@ -43,14 +45,14 @@ class QueryEntities extends DataProducerPluginBase implements ContainerFactoryPl
   const MAX_LIMIT = 100;
 
   /**
+   * The entity type manager.
+   *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
   /**
    * {@inheritdoc}
-   *
-   * @codeCoverageIgnore
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
@@ -71,6 +73,7 @@ class QueryEntities extends DataProducerPluginBase implements ContainerFactoryPl
    * @param mixed $pluginDefinition
    *   The plugin definition.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager.
    *
    * @codeCoverageIgnore
    */
@@ -85,13 +88,22 @@ class QueryEntities extends DataProducerPluginBase implements ContainerFactoryPl
   }
 
   /**
+   * The resolver.
+   *
    * @param string $type
+   *   The entity type.
    * @param string $bundle
+   *   The entity bundle.
    * @param int $offset
+   *   The list offset.
    * @param int $limit
+   *   The list limit.
    * @param \Drupal\Core\Cache\RefinableCacheableDependencyInterface $metadata
+   *   The cacheability metadata.
    *
    * @return \Drupal\thunder_gqls\Wrappers\QueryConnection
+   *   The query connection.
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
