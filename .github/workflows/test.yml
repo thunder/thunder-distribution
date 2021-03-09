@@ -105,6 +105,8 @@ jobs:
         coverage: none
         php-version: ${{ matrix.PHP_VERSION }}
         extensions: Imagick, gd, pdo_mysql
+        # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
+        ini-values: pcre.jit=0
 
     - name: Setup problem matchers for PHP
       run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
