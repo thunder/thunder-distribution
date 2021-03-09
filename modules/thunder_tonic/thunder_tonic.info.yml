@@ -1,5 +1,5 @@
 name: 'Thunder Tonic'
-description: 'Adapt thunder distribution to the gin (claro) theme.'
+description: 'Adapting the thunder distribution to the gin (claro) theme.'
 type: module
 core_version_requirement: ^9
 package: Thunder
