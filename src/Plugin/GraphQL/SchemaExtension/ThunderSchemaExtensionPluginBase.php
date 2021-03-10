@@ -2,6 +2,7 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
+use Drupal\graphql\GraphQL\Resolver\ResolverInterface;
 use Drupal\graphql\GraphQL\ResolverBuilder;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerProxy;
@@ -70,28 +71,28 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
    *   The type name.
    */
   protected function resolveBaseFields(string $type) {
-    $this->registry->addFieldResolver(
+    $this->addFieldResolverIfNotExists(
       $type,
       'uuid',
       $this->builder->produce('entity_uuid')
         ->map('entity', $this->builder->fromParent())
     );
 
-    $this->registry->addFieldResolver(
+    $this->addFieldResolverIfNotExists(
       $type,
       'id',
       $this->builder->produce('entity_id')
         ->map('entity', $this->builder->fromParent())
     );
 
-    $this->registry->addFieldResolver(
+    $this->addFieldResolverIfNotExists(
       $type,
       'entity',
       $this->builder->produce('entity_type_id')
         ->map('entity', $this->builder->fromParent())
     );
 
-    $this->registry->addFieldResolver(
+    $this->addFieldResolverIfNotExists(
       $type,
       'name',
       $this->builder->produce('entity_label')
@@ -108,7 +109,7 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
   protected function resolvePageInterfaceFields(string $type) {
     $this->resolveBaseFields($type);
 
-    $this->registry->addFieldResolver($type, 'url',
+    $this->addFieldResolverIfNotExists($type, 'url',
       $this->builder->compose(
         $this->builder->produce('entity_url')
           ->map('entity', $this->builder->fromParent()),
@@ -117,17 +118,17 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
       )
     );
 
-    $this->registry->addFieldResolver($type, 'created',
+    $this->addFieldResolverIfNotExists($type, 'created',
       $this->builder->produce('entity_created')
         ->map('entity', $this->builder->fromParent())
     );
 
-    $this->registry->addFieldResolver($type, 'changed',
+    $this->addFieldResolverIfNotExists($type, 'changed',
       $this->builder->produce('entity_changed')
         ->map('entity', $this->builder->fromParent())
     );
 
-    $this->registry->addFieldResolver($type, 'language',
+    $this->addFieldResolverIfNotExists($type, 'language',
       $this->builder->produce('property_path')
         ->map('type', $this->builder->fromValue('entity'))
         ->map('value', $this->builder->fromParent())
@@ -153,4 +154,17 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
       ->map('path', $this->builder->fromValue($referenceFieldName . '.entity'));
   }
 
+  /**
+   * @param string $type
+   *   The type name.
+   * @param string $field
+   *   The field name
+   * @param \Drupal\graphql\GraphQL\Resolver\ResolverInterface $resolver
+   *   The field resolver.
+   */
+  protected function addFieldResolverIfNotExists(string $type, string $field, ResolverInterface $resolver){
+    if (!$this->registry->getFieldResolver($type, $field)) {
+      $this->registry->addFieldResolver($type, $field, $resolver);
+    }
+  }
 }
