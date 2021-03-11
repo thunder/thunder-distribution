@@ -17,9 +17,9 @@ function thunder_demo_tour_tips_alter(array &$tour_tips, EntityInterface $entity
   // Whitelist of tours for frontend and backend theme.
   $tourThemeMapping = [
     'homepage' => ['thunder_base'],
-    'content-add' => ['thunder_admin'],
-    'content-list' => ['thunder_admin'],
-    'content-paragraphs' => ['thunder_admin'],
+    'content-add' => ['thunder_admin', 'gin'],
+    'content-list' => ['thunder_admin', 'gin'],
+    'content-paragraphs' => ['thunder_admin', 'gin'],
   ];
 
   // Remove tours that are not whitelisted for provided themes.
