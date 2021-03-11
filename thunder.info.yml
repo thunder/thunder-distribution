@@ -71,6 +71,7 @@ install:
   - metatag:metatag_facebook
   - metatag:metatag_twitter_cards
   - paragraphs:paragraphs
+  - paragraphs_ee:paragraphs_ee
   - paragraphs_features:paragraphs_features
   - pathauto:pathauto
   - redirect:redirect

@@ -17,6 +17,7 @@ dependencies:
     - field_group
     - metatag
     - paragraphs
+    - paragraphs_ee
     - paragraphs_features
     - path
     - scheduler
@@ -34,7 +35,6 @@ third_party_settings:
       label: Teaser
       format_type: fieldset
       format_settings:
-        label: Teaser
         description: ''
         required_fields: true
         id: ''
@@ -48,7 +48,6 @@ third_party_settings:
       label: Paragraphs
       format_type: fieldset
       format_settings:
-        label: Paragraphs
         description: ''
         required_fields: true
         id: ''
@@ -64,7 +63,6 @@ third_party_settings:
       weight: 3
       format_type: fieldset
       format_settings:
-        label: Basis
         description: ''
         required_fields: true
         id: ''
@@ -90,7 +88,8 @@ content:
     region: content
   field_meta_tags:
     weight: 10
-    settings: {  }
+    settings:
+      sidebar: true
     third_party_settings: {  }
     type: metatag_firehose
     region: content
@@ -108,15 +107,20 @@ content:
       form_display_mode: default
       default_paragraph_type: _none
       features:
-        duplicate: '0'
-        collapse_edit_all: '0'
         add_above: '0'
+        collapse_edit_all: '0'
+        duplicate: '0'
     third_party_settings:
       paragraphs_features:
         delete_confirmation: true
         add_in_between: true
         split_text: true
         show_drag_and_drop: false
+      paragraphs_ee:
+        paragraphs_ee:
+          dialog_style: list
+          easy_access_count: '5'
+          dialog_off_canvas: false
     region: content
   field_seo_title:
     type: string_textfield
@@ -142,6 +146,7 @@ content:
       autocomplete: true
       match_operator: CONTAINS
       width: 100%
+      match_limit: 10
     third_party_settings: {  }
     region: content
   field_teaser_media:
@@ -239,6 +244,7 @@ content:
       width: 100%
       autocomplete: true
       match_operator: CONTAINS
+      match_limit: 10
     third_party_settings: {  }
     region: content
   unpublish_on:
