@@ -1,0 +1,10 @@
+query ($id: Int!) {
+  channel(id: $id) {
+    articles {
+      total
+      items {
+        name
+      }
+    }
+  }
+}

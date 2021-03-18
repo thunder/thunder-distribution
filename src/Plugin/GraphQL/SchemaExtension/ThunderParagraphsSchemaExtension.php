@@ -69,7 +69,7 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
         $this->builder->produce('property_path')
           ->map('type', $this->builder->fromValue('entity:media'))
           ->map('value', $this->builder->fromParent())
-          ->map('path', $this->builder->fromValue('field_url.uri'))
+          ->map('path', $this->builder->fromValue('field_url.value'))
       )
     );
 
@@ -83,7 +83,7 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
         $this->builder->produce('property_path')
           ->map('type', $this->builder->fromValue('entity:media'))
           ->map('value', $this->builder->fromParent())
-          ->map('path', $this->builder->fromValue('field_url.uri'))
+          ->map('path', $this->builder->fromValue('field_url.value'))
       )
     );
 
@@ -97,7 +97,7 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
         $this->builder->produce('property_path')
           ->map('type', $this->builder->fromValue('entity:media'))
           ->map('value', $this->builder->fromParent())
-          ->map('path', $this->builder->fromValue('field_url.uri'))
+          ->map('path', $this->builder->fromValue('field_url.value'))
       )
     );
 

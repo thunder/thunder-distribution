@@ -1,0 +1,53 @@
+{
+  "data": {
+    "article": {
+      "id": 7,
+      "uuid": "36b2e2b2-3df0-43eb-a282-d792b0999c07",
+      "url": "/come-drupalcon-new-orleans",
+      "name": "Come to DrupalCon New Orleans",
+      "entity": "node",
+      "language": "en",
+      "published": true,
+      "author": {
+        "id": 3,
+        "name": "test-seo",
+        "mail": null,
+        "entity": "user",
+        "url": "/user/3",
+        "language": "en"
+      },
+      "channel": {
+        "id": 2,
+        "published": true,
+        "name": "Events",
+        "url": "/events",
+        "parent": null
+      },
+      "tags": [
+        {
+          "id": 5,
+          "name": "Drupal",
+          "url": "/drupal"
+        }
+      ],
+      "seoTitle": "Come to DrupalCon New Orleans",
+      "content": [
+        {
+          "id": 9,
+          "entity": "paragraph",
+          "__typename": "ParagraphGallery"
+        },
+        {
+          "id": 7,
+          "entity": "paragraph",
+          "__typename": "ParagraphText"
+        },
+        {
+          "id": 17,
+          "entity": "paragraph",
+          "__typename": "ParagraphTwitter"
+        }
+      ]
+    }
+  }
+}

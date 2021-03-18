@@ -1,6 +1,6 @@
 extend type Query {
   article(id: Int!): Article
-  tag(id: Int!): Tag
+  tags(id: Int!): Tags
   channel(id: Int!): Channel
   user(id: Int!): User
 }

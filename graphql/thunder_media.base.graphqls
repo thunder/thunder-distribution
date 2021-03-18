@@ -18,5 +18,5 @@ type MediaImage implements Media {
   src: String
   width: Int
   height: Int
-  tags: [Tag]
+  tags: [Tags]
 }

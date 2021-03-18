@@ -6,9 +6,9 @@ use Drupal\Core\Entity\Query\QueryInterface;
 use GraphQL\Deferred;
 
 /**
- * The query connection class.
+ * The thunder entity list response class.
  */
-class QueryConnection {
+class EntityListResponse {
 
   /**
    * The query interface.
@@ -18,7 +18,7 @@ class QueryConnection {
   protected $query;
 
   /**
-   * QueryConnection constructor.
+   * EntityListResponse constructor.
    *
    * @param \Drupal\Core\Entity\Query\QueryInterface $query
    *   The query interface.
@@ -40,10 +40,10 @@ class QueryConnection {
   }
 
   /**
-   * Retrieve The item list.
+   * Retrieve the entity list.
    *
    * @return array|\GraphQL\Deferred
-   *   The item list.
+   *   The entity list.
    */
   public function items() {
     $result = $this->query->execute();

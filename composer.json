@@ -14,7 +14,8 @@
     },
     "require-dev": {
         "drupal/coder": "^8.3",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1"
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+        "thunder/thunder_testing_demo": "3.x-dev"
     },
     "scripts": {
         "cs": "phpcs",

@@ -9,6 +9,11 @@ interface Page {
   language: String
 }
 
+type EntityList {
+  total: Int!
+  items: [Page!]
+}
+
 type Article implements Page {
   id: Int!
   uuid: String!
@@ -22,12 +27,12 @@ type Article implements Page {
 
   published: Boolean!
   channel: Channel
-  tags: [Tag]
+  tags: [Tags]
   seoTitle: String!
   content: [Paragraph]
 }
 
-type Tag implements Page {
+type Tags implements Page {
   id: Int!
   uuid: String!
   name: String!
@@ -36,10 +41,11 @@ type Tag implements Page {
   created: String!
   changed: String!
   language: String
-  author: User
 
+  author: User
   published: Boolean!
   content: [Paragraph]
+  articles(offset: Int = 0, limit: Int, languages: [String]): EntityList
 }
 
 type Channel implements Page {
@@ -51,10 +57,12 @@ type Channel implements Page {
   created: String!
   changed: String!
   language: String
-  author: User
 
+  parent: Channel
+  author: User
   published: Boolean!
   content: [Paragraph]
+  articles(offset: Int = 0, limit: Int, languages: [String]): EntityList
 }
 
 type User implements Page {

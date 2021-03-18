@@ -6,6 +6,7 @@ use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\TermInterface;
+use Drupal\thunder_gqls\Wrappers\EntityListResponse;
 use Drupal\user\UserInterface;
 use GraphQL\Type\Definition\ResolveInfo;
 
@@ -34,7 +35,6 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
       ])
     );
 
-    $this->resolveQueryFields();
     $this->resolveFields();
   }
 
@@ -44,6 +44,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
   protected function resolveFields() {
     // Article.
     $this->resolvePageInterfaceFields('Article');
+    $this->resolvePageInterfaceQueryFields('article', 'node');
 
     $this->addFieldResolverIfNotExists('Article', 'published',
       $this->builder->produce('entity_published')
@@ -63,12 +64,10 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
     );
 
     $this->addFieldResolverIfNotExists('Article', 'channel',
-      $this->builder->compose(
-        $this->builder->produce('property_path')
-          ->map('type', $this->builder->fromValue('entity:taxonomy_term'))
-          ->map('value', $this->builder->fromParent())
-          ->map('path', $this->builder->fromValue('field_channel.entity'))
-      )
+      $this->builder->produce('property_path')
+        ->map('type', $this->builder->fromValue('entity:taxonomy_term'))
+        ->map('value', $this->builder->fromParent())
+        ->map('path', $this->builder->fromValue('field_channel.entity'))
     );
 
     $this->addFieldResolverIfNotExists('Article', 'tags',
@@ -84,26 +83,45 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
     );
 
     // Tags.
-    $this->resolvePageInterfaceFields('Tag');
+    $this->resolvePageInterfaceFields('Tags');
+    $this->resolvePageInterfaceQueryFields('tags', 'taxonomy_term');
 
-    $this->addFieldResolverIfNotExists('Tag', 'author',
+    $this->addFieldResolverIfNotExists('Tags', 'author',
       $this->builder->produce('entity_owner')
         ->map('entity', $this->builder->fromParent())
     );
 
-    $this->addFieldResolverIfNotExists('Tag', 'published',
+    $this->addFieldResolverIfNotExists('Tags', 'published',
       $this->builder->produce('entity_published')
         ->map('entity', $this->builder->fromParent())
     );
 
-    $this->addFieldResolverIfNotExists('Tag', 'content',
+    $this->addFieldResolverIfNotExists('Tags', 'content',
       $this->builder->produce('entity_reference_revisions')
         ->map('entity', $this->builder->fromParent())
         ->map('field', $this->builder->fromValue('field_paragraphs'))
     );
 
+    $this->addFieldResolverIfNotExists('Tags', 'articles',
+      $this->builder->produce('entities_with_term')
+        ->map('term', $this->builder->fromParent())
+        ->map('type', $this->builder->fromValue('node'))
+        ->map('bundles', $this->builder->fromValue(['article']))
+        ->map('field', $this->builder->fromValue('field_tags'))
+        ->map('offset', $this->builder->fromArgument('offset'))
+        ->map('limit', $this->builder->fromArgument('limit'))
+        ->map('languages', $this->builder->fromArgument('languages'))
+        ->map('sortBy', $this->builder->fromValue([
+          [
+            'field' => 'created',
+            'direction' => 'DESC',
+          ],
+        ]))
+    );
+
     // Channel.
     $this->resolvePageInterfaceFields('Channel');
+    $this->resolvePageInterfaceQueryFields('channel', 'taxonomy_term');
 
     $this->addFieldResolverIfNotExists('Channel', 'author',
       $this->builder->produce('entity_owner')
@@ -121,8 +139,34 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
         ->map('field', $this->builder->fromValue('field_paragraphs'))
     );
 
+    $this->addFieldResolverIfNotExists('Channel', 'parent',
+      $this->builder->produce('property_path')
+        ->map('type', $this->builder->fromValue('entity:taxonomy_term'))
+        ->map('value', $this->builder->fromParent())
+        ->map('path', $this->builder->fromValue('parent.entity'))
+    );
+
+    $this->addFieldResolverIfNotExists('Channel', 'articles',
+      $this->builder->produce('entities_with_term')
+        ->map('term', $this->builder->fromParent())
+        ->map('type', $this->builder->fromValue('node'))
+        ->map('bundles', $this->builder->fromValue(['article']))
+        ->map('field', $this->builder->fromValue('field_channel'))
+        ->map('offset', $this->builder->fromArgument('offset'))
+        ->map('limit', $this->builder->fromArgument('limit'))
+        ->map('languages', $this->builder->fromArgument('languages'))
+        ->map('sortBy', $this->builder->fromValue([
+          [
+            'field' => 'created',
+            'direction' => 'DESC',
+          ],
+        ]))
+        ->map('depth', $this->builder->fromValue(1))
+    );
+
     // User.
     $this->resolvePageInterfaceFields('User');
+    $this->resolvePageInterfaceQueryFields('user', 'node');
 
     $this->addFieldResolverIfNotExists('User', 'mail',
       $this->builder->produce('property_path')
@@ -130,39 +174,19 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
         ->map('value', $this->builder->fromParent())
         ->map('path', $this->builder->fromValue('mail.value'))
     );
-  }
 
-  /**
-   * Add content query field resolvers.
-   */
-  protected function resolveQueryFields() {
-    $this->addFieldResolverIfNotExists('Query', 'article',
-      $this->builder->produce('entity_load')
-        ->map('type', $this->builder->fromValue('node'))
-        ->map('bundles', $this->builder->fromValue(['article']))
-        ->map('id', $this->builder->fromArgument('id'))
+    // Entity List.
+    $this->addFieldResolverIfNotExists('EntityList', 'total',
+      $this->builder->callback(function (EntityListResponse $entityList) {
+        return $entityList->total();
+      })
     );
 
-    $this->addFieldResolverIfNotExists('Query', 'channel',
-      $this->builder->produce('entity_load')
-        ->map('type', $this->builder->fromValue('taxonomy_term'))
-        ->map('bundles', $this->builder->fromValue(['channel']))
-        ->map('id', $this->builder->fromArgument('id'))
+    $this->addFieldResolverIfNotExists('EntityList', 'items',
+      $this->builder->callback(function (EntityListResponse $entityList) {
+        return $entityList->items();
+      })
     );
-
-    $this->addFieldResolverIfNotExists('Query', 'tag',
-      $this->builder->produce('entity_load')
-        ->map('type', $this->builder->fromValue('taxonomy_term'))
-        ->map('bundles', $this->builder->fromValue(['tags']))
-        ->map('id', $this->builder->fromArgument('id'))
-    );
-
-    $this->addFieldResolverIfNotExists('Query', 'user',
-      $this->builder->produce('entity_load')
-        ->map('type', $this->builder->fromValue('user'))
-        ->map('id', $this->builder->fromArgument('id'))
-    );
-
   }
 
   /**

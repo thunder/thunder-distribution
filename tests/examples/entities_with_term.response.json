@@ -1,0 +1,17 @@
+{
+  "data": {
+    "channel": {
+      "articles": {
+        "total": 2,
+        "items": [
+          {
+            "name": "Come to DrupalCon New Orleans"
+          },
+          {
+            "name": "Lorem ipsum dolor sit amet"
+          }
+        ]
+      }
+    }
+  }
+}
