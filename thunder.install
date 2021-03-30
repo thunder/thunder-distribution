@@ -160,7 +160,6 @@ function thunder_update_8313() {
   return $updateHelper->logger()->output();
 }
 
-
 /**
  * Disable xsl on sitemap.
  */
