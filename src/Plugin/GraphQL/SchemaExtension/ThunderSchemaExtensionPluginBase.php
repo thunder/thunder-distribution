@@ -134,6 +134,13 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
         ->map('value', $this->builder->fromParent())
         ->map('path', $this->builder->fromValue('langcode.value'))
     );
+
+    $this->addFieldResolverIfNotExists($type, 'metatags',
+      $this->builder->produce('thunder_metatags')
+        ->map('type', $this->builder->fromValue('entity'))
+        ->map('value', $this->builder->fromParent())
+    );
+
   }
 
   /**
