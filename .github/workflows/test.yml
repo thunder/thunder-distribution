@@ -117,7 +117,7 @@ jobs:
 
     - name: Start MySql service
       run: |
-        sudo /etc/init.d/mysql start
+        mysql -uroot -proot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
 
     - name: Get build environment
       run: composer global require thunder/drupal-testing
@@ -274,4 +274,4 @@ jobs:
 
 #   Start a debug session.
 #   - name: Setup tmate session
-#     uses: mxschmitt/action-tmate@v1
+#     uses: mxschmitt/action-tmate@v3
