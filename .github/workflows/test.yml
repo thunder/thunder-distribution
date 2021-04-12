@@ -97,7 +97,7 @@ jobs:
   test-max:
     needs: build
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v1
@@ -117,6 +117,7 @@ jobs:
 
     - name: Start MySql service
       run: |
+        sudo /etc/init.d/mysql start
         mysql -uroot -proot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
 
     - name: Get build environment
@@ -166,6 +167,7 @@ jobs:
 
       - name: Start MySql service
         run: |
+          sudo /etc/init.d/mysql start
           mysql -uroot -proot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
 
       - name: Cache composer dependencies
@@ -211,7 +213,7 @@ jobs:
   test-performance:
     needs: [build, test-max]
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-performance') || github.event_name == 'schedule' }}
 
