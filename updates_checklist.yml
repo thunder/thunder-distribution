@@ -31,3 +31,9 @@ v6.1.2:
         '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
         '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+
+    thunder_update_8314:
+        '#title': 'Disable xsl on sitemap.'
+        '#description': '<p>To improve the display speed of the sitemaop in the browser, we disabled xsl.</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed. You might try and disable xsl for your sitemap manually.</strong><p>'
