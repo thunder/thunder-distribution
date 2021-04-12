@@ -19,7 +19,7 @@ If all works, you should be able to test some queries in the Explorer.
 # Example
 
     {
-      route(path: "/your-path") {
+      page(path: "/your-path") {
         uuid
         url
         name

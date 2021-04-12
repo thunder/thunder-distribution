@@ -22,7 +22,7 @@ class ThunderRoutingSchemaExtension extends ThunderSchemaExtensionPluginBase {
   public function registerResolvers(ResolverRegistryInterface $registry) {
     parent::registerResolvers($registry);
 
-    $this->addFieldResolverIfNotExists('Query', 'route', $this->builder->compose(
+    $this->addFieldResolverIfNotExists('Query', 'page', $this->builder->compose(
       $this->builder->produce('route_load')
         ->map('path', $this->builder->fromArgument('path')),
       $this->builder->produce('route_entity')

@@ -1,41 +1,43 @@
-query ($id: Int!) {
-  article(id: $id) {
+query ($path: String!) {
+  page(path: $path) {
     id
     uuid
     url
     name
     entity
     language
-    published
-    author {
-      id
-      name
-      mail
-      entity
-      url
-      language
-    }
-    channel {
-      id
+    ... on Article {
       published
-      name
-      url
-      parent {
-        name
+      author {
         id
+        name
+        mail
+        entity
+        url
+        language
+      }
+      channel {
+        id
+        published
+        name
+        url
+        parent {
+          name
+          id
+          url
+        }
+      }
+      tags {
+        id
+        name
         url
       }
-    }
-    tags {
-      id
-      name
-      url
-    }
-    seoTitle
-    content {
-      id
-      entity
-      __typename
+      seoTitle
+      content {
+        id
+        entity
+        __typename
+      }
     }
   }
 }
