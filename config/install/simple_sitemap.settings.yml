@@ -13,3 +13,4 @@ enabled_entity_types:
   - node
   - taxonomy_term
 disable_language_hreflang: false
+entities_per_queue_item: 50
