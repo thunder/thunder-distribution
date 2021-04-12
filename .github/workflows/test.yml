@@ -140,7 +140,7 @@ jobs:
 
   test-min:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
 
@@ -155,7 +155,7 @@ jobs:
         with:
           coverage: none
           php-version: '7.3'
-          extensions: Imagick
+          extensions: Imagick, gd, pdo_mysql
           tools: composer:v1
 
       - name: Setup problem matchers for PHP
@@ -166,7 +166,7 @@ jobs:
 
       - name: Start MySql service
         run: |
-          sudo /etc/init.d/mysql start
+          mysql -uroot -proot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
