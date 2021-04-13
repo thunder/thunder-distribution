@@ -77,8 +77,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_AfterSave_' . date('Ymd_His') . '.png');
 
-    $this->assertPageTitle('Massive gaining seo traffic text');
     $this->assertSession()->pageTextContains('Test article');
+    $this->assertPageTitle('Massive gaining seo traffic text');
 
     // Check Image paragraph.
     $this->assertSession()
