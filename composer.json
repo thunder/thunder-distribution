@@ -58,9 +58,6 @@
             },
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
-            },
-            "drupal/gin": {
-                "Combined patch": "https://patch-diff.githubusercontent.com/raw/ol0lll/gin/pull/1.diff"
             }
         }
     },
