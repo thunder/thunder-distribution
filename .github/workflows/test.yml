@@ -129,10 +129,10 @@ jobs:
     - name: Unzip build artifact
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
 
-    - name: Run config tests
-      run: test-drupal-project -v run_tests -nc
-      env:
-        DRUPAL_TESTING_TEST_GROUP: ThunderConfig
+#    - name: Run config tests
+#      run: test-drupal-project -v run_tests -nc
+#      env:
+#        DRUPAL_TESTING_TEST_GROUP: ThunderConfig
 
     - name: Run installer tests
       run: test-drupal-project -v run_tests -nc
