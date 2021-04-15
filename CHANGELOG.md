@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.5.8](https://github.com/thunder/thunder-distribution/tree/3.5.8) 2021-04-15
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.7...3.5.8)
+
+We spend a lot of effort into improving the sitemap generation speed. We saw on larger sites, that generating the sitemap
+took about 30 minutes and consumed a lot of memory.
+
+We reduced that generation time to 3 minutes and heavily reduced memory usage as well. Additionally, the sitemap
+generation does not clear the entity cache anymore.
+
+More information about those fixes can be found in the release notes of simple_sitemap 3.10:
+[simple_sitemap 8.x-3.10](https://www.drupal.org/project/simple_sitemap/releases/8.x-3.10)
+
+If you experience similar Problems with the sitemap generation, we urge you to update and set the config value entities_per_dataset
+in simple_sitemap.settings configuration to a value that fits to your circumstances. It will be set to 50 by default,
+and that will already give you huge performance boosts, but depending on your server configuration you might try and
+increase this value to gain even better performance.
+
+- [Disable xsl on sitemap and bumb simple_sitemap version](https://www.drupal.org/node/3208377)
+
 ## [3.5.7](https://github.com/thunder/thunder-distribution/tree/3.5.7) 2020-12-16
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.6...3.5.7)
 
