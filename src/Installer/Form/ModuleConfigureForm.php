@@ -12,7 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Installer\InstallerKernel;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Url;
-use Drupal\system\ModuleDependencyMessageTrait;
+use Drupal\Core\Extension\ModuleDependencyMessageTrait;
 use Drupal\user\PermissionHandlerInterface;
 use Drupal\Component\Utility\Environment;
 use Symfony\Component\DependencyInjection\ContainerInterface;
