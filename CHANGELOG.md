@@ -17,7 +17,7 @@ in simple_sitemap.settings configuration to a value that fits to your circumstan
 and that will already give you huge performance boosts, but depending on your server configuration you might try and
 increase this value to gain even better performance.
 
-- [Disable xsl on sitemap and bumb simple_sitemap version](https://www.drupal.org/node/3208377)
+- [Disable xsl on sitemap and bump simple_sitemap version](https://www.drupal.org/node/3208377)
 
 ## [3.5.7](https://github.com/thunder/thunder-distribution/tree/3.5.7) 2020-12-16
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.6...3.5.7)
