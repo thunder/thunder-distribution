@@ -3,13 +3,13 @@ type: profile
 description: 'The Drupal based CMS for professional publishing.'
 project: thunder
 core_version_requirement: ^9
-version: '6.1.1'
+version: '6.1.2'
 
 distribution:
   name: Thunder
   install:
     theme: thunder_admin
-    finish_url: /?tour=1
+    finish_url: ?tour=1
 
 # Required modules
 dependencies:
