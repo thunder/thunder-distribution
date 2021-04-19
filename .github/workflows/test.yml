@@ -137,9 +137,8 @@ jobs:
     - name: Run installer tests
       run: |
         ulimit -c unlimited
-        test-drupal-project -v run_tests -nc
+        test-drupal-project -v run_tests -nc || true
         sudo chmod -R +rwx /cores/*
-      continue-on-error: true
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
 
