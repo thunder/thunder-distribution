@@ -135,9 +135,18 @@ jobs:
 #        DRUPAL_TESTING_TEST_GROUP: ThunderConfig
 
     - name: Run installer tests
-      run: test-drupal-project -v run_tests -nc
+      run: |
+        ulimit -c unlimited
+        test-drupal-project -v run_tests -nc
+        sudo chmod -R +rwx /cores/*
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
+
+    - name: Upload crashes
+      uses: actions/upload-artifact@master # capture all crashes as build artifacts
+      with:
+        name: crashes
+        path: /cores
 
   test-upgrade:
 
