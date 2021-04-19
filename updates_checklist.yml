@@ -37,7 +37,9 @@ v6.1.2:
         '#description': '<p>To improve the display speed of the sitemaop in the browser, we disabled xsl.</p>'
         '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed. You might try and disable xsl for your sitemap manually.</strong><p>'
-
+v6.1.3:
+    '#title': 'Update to version v6.1.3'
+    '#description': '<h3>These are the new features for this release:</h3>'
     thunder_update_8315:
         '#title': 'Change to the async metatag widget.'
         '#description': '<p>The async widget provides a smoother node editing experience for site editors.</p>'
