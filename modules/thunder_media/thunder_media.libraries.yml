@@ -8,8 +8,12 @@ entity_browser_view:
   css:
     theme:
       css/media_entity_browser.view.css: {}
-  js:
-    js/media_entity_browser.view.js: {}
   dependencies:
-    - core/jquery
+    - thunder_media/entity_browser_view.selection
+
+entity_browser_view.selection:
+  js:
+    js/media_entity_browser.selection.js: {}
+  dependencies:
     - core/drupal
+    - core/once
