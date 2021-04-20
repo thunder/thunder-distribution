@@ -138,7 +138,7 @@ jobs:
       run: |
         ulimit -c unlimited
         test-drupal-project -v run_tests -nc || true
-        sudo chmod -R +rwx /cores/*
+      # sudo chmod -R +rwx /cores/*
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
 
