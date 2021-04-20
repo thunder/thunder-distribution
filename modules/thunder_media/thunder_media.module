@@ -5,6 +5,9 @@
  * Contains media related functions.
  */
 
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Render\Element;
 use Drupal\file\Entity\File;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -206,6 +209,21 @@ function _thunder_media_media_field_widget_form_alter_helper(array &$widget, $me
         // Add our own "button action type" key to be able to use a distinct
         // template via suggestions in the theme.
         $media_item['edit_button']['#button_action_type'] = 'media_edit';
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view_alter() for media entities.
+ */
+function thunder_media_media_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
+
+  if ($entity->bundle() === 'gallery' && $display->getMode() === 'paragraph_preview') {
+    $build['#attached']['library'][] = 'thunder_media/gallery.paragraph_preview';
+    foreach (Element::children($build['field_media_images']) as $key) {
+      if ($key > 3) {
+        $build['field_media_images'][$key]['#item_attributes']['class'][] = 'visually-hidden';
       }
     }
   }

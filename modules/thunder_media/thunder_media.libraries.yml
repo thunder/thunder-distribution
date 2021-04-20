@@ -4,6 +4,11 @@ gallery:
     theme:
       css/bartik_slick_fix.css: {}
 
+gallery.paragraph_preview:
+  css:
+    theme:
+      css/gallery.paragraph_preview.css: {}
+
 entity_browser_view:
   css:
     theme:
