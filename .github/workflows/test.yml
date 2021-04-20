@@ -101,7 +101,7 @@ jobs:
 
     - name: Set up stuff
       run: |
-        sudo ulimit -c unlimited
+        ulimit -c unlimited
 
     - uses: actions/checkout@v1
 
