@@ -98,6 +98,11 @@ jobs:
         PHP_VERSION: [ '8.0']
 
     steps:
+
+    - name: Set up stuff
+      run: |
+        sudo ulimit -c unlimited
+
     - uses: actions/checkout@v1
 
     - uses: shivammathur/setup-php@v2
@@ -137,6 +142,7 @@ jobs:
     - name: Run installer tests
       run: |
         ulimit -c unlimited
+        sudo sysctl -w kernel.core_pattern=/tmp/core-%e.%p.%h.%t
         test-drupal-project -v run_tests -nc || true
       # sudo chmod -R +rwx /cores/*
       env:
