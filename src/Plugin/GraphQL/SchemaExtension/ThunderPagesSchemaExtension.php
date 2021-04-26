@@ -82,6 +82,26 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
         ->map('field', $this->builder->fromValue('field_paragraphs'))
     );
 
+    // Basic page.
+    $this->resolvePageInterfaceFields('BasicPage');
+
+    $this->addFieldResolverIfNotExists('BasicPage', 'published',
+      $this->builder->produce('entity_published')
+        ->map('entity', $this->builder->fromParent())
+    );
+
+    $this->addFieldResolverIfNotExists('BasicPage', 'author',
+      $this->builder->produce('entity_owner')
+        ->map('entity', $this->builder->fromParent())
+    );
+
+    $this->addFieldResolverIfNotExists('BasicPage', 'content',
+      $this->builder->produce('property_path')
+        ->map('type', $this->builder->fromValue('entity:node'))
+        ->map('value', $this->builder->fromParent())
+        ->map('path', $this->builder->fromValue('body.processed'))
+    );
+
     // Tags.
     $this->resolvePageInterfaceFields('Tags');
     $this->resolvePageInterfaceQueryFields('tags', 'taxonomy_term');
@@ -204,6 +224,9 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
    */
   protected function resolvePageTypes($value, ResolveContext $context, ResolveInfo $info): string {
     if ($value instanceof NodeInterface || $value instanceof TermInterface || $value instanceof UserInterface) {
+      if ($value->bundle() === 'page') {
+        return 'BasicPage';
+      }
       return $this->mapBundleToSchemaName($value->bundle());
     }
   }

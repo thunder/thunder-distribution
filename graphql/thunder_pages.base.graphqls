@@ -39,6 +39,22 @@ type Article implements Page {
   content: [Paragraph]
 }
 
+type BasicPage implements Page {
+  id: Int!
+  uuid: String!
+  name: String!
+  entity: String!
+  url: String!
+  created: String!
+  changed: String!
+  language: String
+  metatags: [MetaTag]
+
+  author: User
+  published: Boolean!
+  content: String
+}
+
 type Tags implements Page {
   id: Int!
   uuid: String!
