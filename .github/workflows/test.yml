@@ -164,10 +164,20 @@ jobs:
       run: |
         ulimit -c unlimited
         sudo sysctl -w kernel.core_pattern=/tmp/core-%e.%p.%h.%t
-        test-drupal-project -v run_tests -nc || true
+        test-drupal-project -v run_tests -nc
+        test-drupal-project -v run_tests -nc
+        test-drupal-project -v run_tests -nc
+        test-drupal-project -v run_tests -nc
+        test-drupal-project -v run_tests -nc
+        test-drupal-project -v run_tests -nc
+        test-drupal-project -v run_tests -nc
+        test-drupal-project -v run_tests -nc
+        test-drupal-project -v run_tests -nc
+        test-drupal-project -v run_tests -nc
       # sudo chmod -R +rwx /cores/*
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
+      continue-on-error: true
 #
 #    - name: Install debug symbols
 #      run: |
