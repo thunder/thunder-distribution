@@ -112,6 +112,7 @@ jobs:
 #        extensions: Imagick, gd, pdo_mysql
 #        # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
 #        ini-values: pcre.jit=0
+
     - name: PHP Debug build
       run: |
         sudo apt install  autoconf  re2c  bison  libsqlite3-dev  libpq-dev  libonig-dev  libfcgi-dev  libfcgi0ldbl  libjpeg-dev  libpng-dev  libssl-dev  libxml2-dev  libcurl4-openssl-dev  libxpm-dev  libgd-dev  libmysqlclient-dev  libfreetype6-dev  libxslt1-dev  libpspell-dev  libzip-dev  libgccjit-10-dev
@@ -141,7 +142,10 @@ jobs:
         sudo /etc/init.d/mysql start
 
     - name: Get build environment
-      run: composer global require thunder/drupal-testing:dev-verbose-php-server
+      run: |
+        composer global require thunder/drupal-testing:dev-verbose-php-server
+        export composer_bin="$HOME/.composer/vendor/bin"
+        echo "$composer_bin" >> "$GITHUB_PATH"
 
     - name: Download build
       uses: actions/download-artifact@v1
