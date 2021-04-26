@@ -113,11 +113,6 @@ jobs:
         # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
         ini-values: pcre.jit=0
 
-    - name: Install PHP with debug symbols
-      run: |
-        LC_ALL=C.UTF-8 sudo apt-add-repository "deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main main/debug"
-        sudo apt install php8.0-cli-dbgsym php8.0-common-dbgsym
-
     - name: Setup problem matchers for PHP
       run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
 
@@ -152,6 +147,11 @@ jobs:
       # sudo chmod -R +rwx /cores/*
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
+
+    - name: Install debug symbols
+      run: |
+        LC_ALL=C.UTF-8 sudo apt-add-repository "deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main main/debug"
+        sudo apt install gdb php8.0-cli-dbgsym php8.0-common-dbgsym
 
       #   Start a debug session.
     - name: Setup tmate session
