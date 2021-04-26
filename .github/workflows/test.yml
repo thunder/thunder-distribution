@@ -129,11 +129,11 @@ jobs:
         echo -e "zend_extension=/opt/php/php8/lib/php/extensions/debug-non-zts-20200930/opcache.so" | tee -a /opt/php/php8/lib/php.ini
         php -v
 
-    - name: Setup problem matchers for PHP
-      run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-
-    - name: Setup problem matchers for PHPUnit
-      run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+#    - name: Setup problem matchers for PHP
+#      run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+#
+#    - name: Setup problem matchers for PHPUnit
+#      run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
     - name: Start MySql service
       run: |
