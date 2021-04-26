@@ -43,6 +43,13 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick
 
+      - name: Install PHP with debug symbols
+        run: |
+          ls -lah /usr/bin/php8.0
+          LC_ALL=C.UTF-8 sudo apt-add-repository "deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main main/debug"
+          sudo apt install php8.0-cli-dbgsym php8.0-common-dbgsym
+          ls -lah /usr/bin/php8.0
+
       - name: Start MySql service
         run: |
           sudo /etc/init.d/mysql start
