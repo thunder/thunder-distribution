@@ -33,7 +33,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4' ]
+        PHP_VERSION: [ '8.0' ]
 
     steps:
       - uses: actions/checkout@v1
@@ -96,7 +96,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: ['7.4']
+        PHP_VERSION: ['8.0']
 
     steps:
     - uses: actions/checkout@v1
@@ -165,12 +165,25 @@ jobs:
         DRUPAL_TESTING_TEST_GROUP: ThunderConfig
 
     - name: Run installer tests
-      run: test-drupal-project run_tests -nc
+      run: |
+        test-drupal-project run_tests -nc
+        test-drupal-project run_tests -nc
+        test-drupal-project run_tests -nc
+        test-drupal-project run_tests -nc
+        test-drupal-project run_tests -nc
+        test-drupal-project run_tests -nc
+        test-drupal-project run_tests -nc
+        test-drupal-project run_tests -nc
+        test-drupal-project run_tests -nc
+        test-drupal-project run_tests -nc
+        test-drupal-project run_tests -nc
+        test-drupal-project run_tests -nc
+        test-drupal-project run_tests -nc
+        test-drupal-project run_tests -nc
+        test-drupal-project run_tests -nc
+        test-drupal-project run_tests -nc
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
-
-    - name: Run tests suite
-      run: test-drupal-project run_tests
 
   test-upgrade:
 
