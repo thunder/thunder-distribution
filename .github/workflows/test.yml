@@ -163,6 +163,7 @@ jobs:
     - name: Run installer tests
       run: |
         export SIMPLETEST_BASE_URL=http://127.0.0.1:8888
+        export SYMFONY_DEPRECATIONS_HELPER=weak
         test-drupal-project run_tests -nc
         php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
         php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
