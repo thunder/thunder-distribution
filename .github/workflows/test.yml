@@ -135,16 +135,17 @@ jobs:
         sudo sed -ri -e "s!Listen 80!Listen ${DRUPAL_TESTING_HTTP_PORT}!g" /etc/apache2/conf-available/*.conf
         sudo sed -ri -e "s!Listen 80!Listen ${DRUPAL_TESTING_HTTP_PORT}!g" /etc/apache2/ports.conf
         cd ..
+        source /etc/apache2/envvars
         export APACHE_LOG_DIR="${PWD}"
         export APACHE_LOCK_DIR="${PWD}"
         export APACHE_PID_FILE="${PWD}/apache2.pid"
-        nohup apache2-foreground > /dev/null 2>&1 &
-#        cat error.log
+        nohup apache2 -DFOREGROUND > /dev/null 2>&1 &
+        cat error.log
       working-directory: /tmp/test/thunder/install/docroot
 
-    #   Start a debug session.
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+#    #   Start a debug session.
+#    - name: Setup tmate session
+#      uses: mxschmitt/action-tmate@v3
 
     - name: Run config tests
       run: test-drupal-project run_tests -nc
