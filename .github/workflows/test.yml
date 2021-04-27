@@ -129,14 +129,26 @@ jobs:
       run: |
         sudo apt install libapache2-mod-php${{ matrix.PHP_VERSION }}
         sudo a2enmod php${{ matrix.PHP_VERSION }} rewrite
-        sudo sed -ri -e "s!/var/www/html!${PWD}!g" /etc/apache2/sites-available/*.conf
-        sudo sed -ri -e "s!VirtualHost \*:80!VirtualHost *:${DRUPAL_TESTING_HTTP_PORT}!g" /etc/apache2/sites-available/*.conf
-        sudo sed -ri -e "s!Listen 80!Listen ${DRUPAL_TESTING_HTTP_PORT}!g" /etc/apache2/ports.conf
+        echo "<Directory ${PWD}>" | sudo tee /etc/apache2/sites-available/thunder.conf
+        echo '  Options Indexes FollowSymLinks' | sudo tee -a /etc/apache2/sites-available/thunder.conf
+        echo '  AllowOverride all' | sudo tee -a /etc/apache2/sites-available/thunder.conf
+        echo '  Require all granted' | sudo tee -a /etc/apache2/sites-available/thunder.conf
+        echo '</Directory>' | sudo tee -a /etc/apache2/sites-available/thunder.conf
+        echo '' | sudo tee -a /etc/apache2/sites-available/thunder.conf
+        echo "<VirtualHost *:${DRUPAL_TESTING_HTTP_PORT}>" | sudo tee -a /etc/apache2/sites-available/thunder.conf
+        echo '  ServerAdmin webmaster@localhost' | sudo tee -a /etc/apache2/sites-available/thunder.conf
+        echo "  DocumentRoot ${PWD}" | sudo tee -a /etc/apache2/sites-available/thunder.conf
+        echo '  ErrorLog ${APACHE_LOG_DIR}/error.log' | sudo tee -a /etc/apache2/sites-available/thunder.conf
+        echo '  CustomLog ${APACHE_LOG_DIR}/access.log combined' | sudo tee -a /etc/apache2/sites-available/thunder.conf
+        echo '</VirtualHost>' | sudo tee -a /etc/apache2/sites-available/thunder.conf
         cd ..
+        sudo sed -ri -e "s!Listen 80!Listen ${DRUPAL_TESTING_HTTP_PORT}!g" /etc/apache2/ports.conf
         source /etc/apache2/envvars
         export APACHE_LOG_DIR="${PWD}"
         export APACHE_LOCK_DIR="${PWD}"
         export APACHE_PID_FILE="${PWD}/apache2.pid"
+        sudo a2ensite thunder
+        sudo a2dissite 000-default
         nohup apache2 -DFOREGROUND > /dev/null 2>&1 &
       working-directory: /tmp/test/thunder/install/docroot
 
