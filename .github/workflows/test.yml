@@ -115,15 +115,19 @@ jobs:
 
 #    - name: PHP Debug build
 #      run: |
-#        sudo apt install  autoconf  re2c  bison  libsqlite3-dev  libpq-dev  libonig-dev  libfcgi-dev  libfcgi0ldbl  libjpeg-dev  libpng-dev  libssl-dev  libxml2-dev  libcurl4-openssl-dev  libxpm-dev  libgd-dev  libmysqlclient-dev  libfreetype6-dev  libxslt1-dev  libpspell-dev  libzip-dev  libgccjit-10-dev
+#        sudo apt install  autoconf  re2c  bison  libsqlite3-dev  libpq-dev  libonig-dev  libfcgi-dev  libfcgi0ldbl  libjpeg-dev  libpng-dev  libssl-dev  libxml2-dev  libcurl4-openssl-dev  libxpm-dev  libgd-dev  libmysqlclient-dev  libfreetype6-dev  libxslt1-dev  libpspell-dev  libzip-dev  libgccjit-10-dev  librabbitmq-dev libenchant-2-dev
 #        git clone https://github.com/php/php-src.git
 #        cd php-src/
 #        git checkout php-8.0.3
 #        ./buildconf --force
-#        sudo ./configure  --prefix=/opt/php/php8  --enable-cli  --enable-fpm  --enable-intl  --enable-mbstring  --enable-opcache  --enable-sockets  --enable-soap  --with-curl  --with-freetype  --with-fpm-user=www-data  --with-fpm-group=www-data  --with-jpeg  --with-mysql-sock  --with-mysqli  --with-openssl  --with-pdo-mysql --with-xsl  --with-zlib  --enable-debug --enable-gd
+#        sudo ./configure  --prefix=/opt/php/php8  --enable-cli  --enable-fpm  --enable-intl  --enable-mbstring  --enable-opcache  --enable-sockets  --enable-soap  --with-curl  --with-freetype  --with-fpm-user=www-data  --with-fpm-group=www-data  --with-jpeg  --with-mysql-sock  --with-mysqli  --with-openssl  --with-pdo-mysql --with-xsl  --with-zlib  --enable-debug --enable-gd --with-enchant --with-ffi --enable-exif --enable-ftp --with-gettext --with-gmp --with-pear
 #        sudo make
 #        sudo make install
 #        sudo ln -sfn /opt/php/php8/bin/php /usr/bin/php
+#        sudo ln -sfn /opt/php/php8/bin/pecl /usr/bin/pecl
+#        sudo ln -sfn /opt/php/php8/bin/pear /usr/bin/pear
+#        sudo ln -sfn /opt/php/php8/bin/phpize /usr/bin/phpize
+#        echo '' | sudo pecl install amqp-1.11.0beta
 #        touch /opt/php/php8/lib/php.ini
 #        echo -e "pcre.jit=0" | tee -a /opt/php/php8/lib/php.ini
 #        echo -e "memory_limit=-1" | tee -a /opt/php/php8/lib/php.ini
@@ -143,7 +147,8 @@ jobs:
 
     - name: Get build environment
       run: |
-        composer global require thunder/drupal-testing:dev-verbose-php-server
+#        composer global require thunder/drupal-testing:dev-verbose-php-server
+        composer global require thunder/drupal-testing
         export composer_bin="$HOME/.composer/vendor/bin"
         echo "$composer_bin" >> "$GITHUB_PATH"
 
