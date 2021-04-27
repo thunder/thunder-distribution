@@ -142,9 +142,9 @@ jobs:
         nohup apache2 -DFOREGROUND > /dev/null 2>&1 &
       working-directory: /tmp/test/thunder/install/docroot
 
-    #   Start a debug session.
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+#    #   Start a debug session.
+#    - name: Setup tmate session
+#      uses: mxschmitt/action-tmate@v3
 
     - name: Run config tests
       run: test-drupal-project run_tests -nc
