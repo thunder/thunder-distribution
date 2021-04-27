@@ -124,6 +124,7 @@ jobs:
     - name: Unzip build artifact
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
 
+    # @todo document
     - name: Start Apache
       run: |
         sudo apt install libapache2-mod-php${{ matrix.PHP_VERSION }}
@@ -133,12 +134,17 @@ jobs:
         sudo sed -ri -e "s!/var/www/!${PWD}!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
         sudo sed -ri -e "s!Listen 80!Listen ${DRUPAL_TESTING_HTTP_PORT}!g" /etc/apache2/conf-available/*.conf
         sudo sed -ri -e "s!Listen 80!Listen ${DRUPAL_TESTING_HTTP_PORT}!g" /etc/apache2/ports.conf
+        cd ..
+        export APACHE_LOG_DIR="${PWD}"
+        export APACHE_LOCK_DIR="${PWD}"
+        export APACHE_PID_FILE="${PWD}/apache2.pid"
         nohup apache2-foreground > /dev/null 2>&1 &
+        cat /home/runner/work/thunder-distribution/thunder-distribution/error.log
       working-directory: /tmp/test/thunder/install/docroot
 
-    #   Start a debug session.
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+#    #   Start a debug session.
+#    - name: Setup tmate session
+#      uses: mxschmitt/action-tmate@v3
 
     - name: Run config tests
       run: test-drupal-project run_tests -nc
