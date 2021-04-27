@@ -147,7 +147,6 @@ jobs:
 
     - name: Get build environment
       run: |
-#        composer global require thunder/drupal-testing:dev-verbose-php-server
         composer global require thunder/drupal-testing
         export composer_bin="$HOME/.composer/vendor/bin"
         echo "$composer_bin" >> "$GITHUB_PATH"
