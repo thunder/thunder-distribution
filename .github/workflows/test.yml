@@ -150,6 +150,8 @@ jobs:
         sudo a2ensite thunder
         sudo a2dissite 000-default
         nohup apache2 -DFOREGROUND > /dev/null 2>&1 &
+        sleep 2
+        nc -z "127.0.0.1" "${DRUPAL_TESTING_HTTP_PORT}"
       working-directory: /tmp/test/thunder/install/docroot
 
     - name: Run config tests
