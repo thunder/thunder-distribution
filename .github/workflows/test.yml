@@ -21,6 +21,7 @@ env:
   DRUPAL_TESTING_TEST_CODING_STYLES: false
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_TEST_GROUP: Thunder
+  DRUPAL_TESTING_HTTP_PORT: 8888
   THUNDER_ADMIN_BRANCH: 4.x
   PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
 
@@ -113,7 +114,7 @@ jobs:
         sudo /etc/init.d/mysql start
 
     - name: Get build environment
-      run: composer global require thunder/drupal-testing
+      run: composer global require thunder/drupal-testing:verbose-php-server
 
     - name: Download build
       uses: actions/download-artifact@v1
@@ -122,6 +123,18 @@ jobs:
 
     - name: Unzip build artifact
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
+
+    - name: Start Apache
+      run: |
+        sudo apt install libapache2-mod-php${{ matrix.PHP_VERSION }}
+        sudo a2enmod php${{ matrix.PHP_VERSION }} rewrite
+        sudo sed -ri -e "s!/var/www/html!${PWD}!g" /etc/apache2/sites-available/*.conf
+        sudo sed -ri -e "s!Listen 80!Listen ${DRUPAL_TESTING_HTTP_PORT}!g" /etc/apache2/sites-available/*.conf
+        sudo sed -ri -e "s!/var/www/!${PWD}!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+        sudo sed -ri -e "s!Listen 80!Listen ${DRUPAL_TESTING_HTTP_PORT}!g" /etc/apache2/conf-available/*.conf
+        sudo sed -ri -e "s!Listen 80!Listen ${DRUPAL_TESTING_HTTP_PORT}!g" /etc/apache2/ports.conf
+        nohup apache2-foreground > /dev/null 2>&1 &
+      working-directory: /tmp/test/thunder/install/docroot
 
     - name: Run config tests
       run: test-drupal-project run_tests -nc
