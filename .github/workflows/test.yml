@@ -160,6 +160,10 @@ jobs:
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderConfig
 
+    # Start a debug session.
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+
     - name: Run installer tests
       run: |
         export SIMPLETEST_BASE_URL=http://127.0.0.1:8888
