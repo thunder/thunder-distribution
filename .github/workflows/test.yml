@@ -142,10 +142,6 @@ jobs:
         nohup apache2 -DFOREGROUND > /dev/null 2>&1 &
       working-directory: /tmp/test/thunder/install/docroot
 
-#    #   Start a debug session.
-#    - name: Setup tmate session
-#      uses: mxschmitt/action-tmate@v3
-
     - name: Run config tests
       run: test-drupal-project run_tests -nc
       env:
@@ -155,6 +151,10 @@ jobs:
       run: test-drupal-project run_tests -nc
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
+
+    #   Start a debug session.
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
 
     - name: Run tests suite
       run: test-drupal-project run_tests
