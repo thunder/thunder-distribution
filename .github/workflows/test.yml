@@ -139,7 +139,7 @@ jobs:
         export APACHE_LOCK_DIR="${PWD}"
         export APACHE_PID_FILE="${PWD}/apache2.pid"
         nohup apache2-foreground > /dev/null 2>&1 &
-        cat /home/runner/work/thunder-distribution/thunder-distribution/error.log
+        cat error.log
       working-directory: /tmp/test/thunder/install/docroot
 
 #    #   Start a debug session.
