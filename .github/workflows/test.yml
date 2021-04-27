@@ -33,7 +33,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4', '8.0']
+        PHP_VERSION: [ '7.4' ]
 
     steps:
       - uses: actions/checkout@v1
@@ -96,7 +96,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: ['8.0']
+        PHP_VERSION: ['7.4']
 
     steps:
     - uses: actions/checkout@v1
@@ -114,7 +114,7 @@ jobs:
         sudo /etc/init.d/mysql start
 
     - name: Get build environment
-      run: composer global require thunder/drupal-testing:dev-verbose-php-server
+      run: composer global require thunder/drupal-testing
 
     - name: Download build
       uses: actions/download-artifact@v1
@@ -123,6 +123,10 @@ jobs:
 
     - name: Unzip build artifact
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
+
+    # Start a debug session.
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
 
     # @todo document
     - name: Start Apache
@@ -160,13 +164,9 @@ jobs:
         DRUPAL_TESTING_TEST_GROUP: ThunderConfig
 
     - name: Run installer tests
-      run: test-drupal-project run_tests -nc || true
+      run: test-drupal-project run_tests -nc
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
-
-    #   Start a debug session.
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
 
     - name: Run tests suite
       run: test-drupal-project run_tests
