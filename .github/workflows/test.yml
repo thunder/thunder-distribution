@@ -131,6 +131,7 @@ jobs:
     # @todo document
     - name: Start Apache
       run: |
+        LC_ALL=C.UTF-8 sudo apt-add-repository http://ppa.launchpad.net/ondrej/php/ubuntu
         sudo apt install libapache2-mod-php${{ matrix.PHP_VERSION }}
         sudo a2enmod php${{ matrix.PHP_VERSION }} rewrite
         echo "<Directory ${PWD}>" | sudo tee /etc/apache2/sites-available/thunder.conf
