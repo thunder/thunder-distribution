@@ -124,10 +124,6 @@ jobs:
     - name: Unzip build artifact
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
 
-    # Start a debug session.
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-
     # @todo document
     - name: Start Apache
       run: |
@@ -167,21 +163,21 @@ jobs:
     - name: Run installer tests
       run: |
         test-drupal-project run_tests -nc
-        test-drupal-project run_tests -nc
-        test-drupal-project run_tests -nc
-        test-drupal-project run_tests -nc
-        test-drupal-project run_tests -nc
-        test-drupal-project run_tests -nc
-        test-drupal-project run_tests -nc
-        test-drupal-project run_tests -nc
-        test-drupal-project run_tests -nc
-        test-drupal-project run_tests -nc
-        test-drupal-project run_tests -nc
-        test-drupal-project run_tests -nc
-        test-drupal-project run_tests -nc
-        test-drupal-project run_tests -nc
-        test-drupal-project run_tests -nc
-        test-drupal-project run_tests -nc
+        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
+        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
+        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
+        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
+        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
+        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
+        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
+        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
+        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
+        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
+        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
+        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
+        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
+        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
+        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
 
