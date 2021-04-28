@@ -9,6 +9,7 @@ schema_configuration:
     extensions:
       thunder_paragraphs: thunder_paragraphs
       thunder_media: thunder_media
+      thunder_menu: thunder_menu
       thunder_routing: thunder_routing
       thunder_pages: thunder_pages
 persisted_queries_settings: {  }

@@ -1,5 +1,29 @@
 {
   "data": {
+    "menu": {
+      "name": "Main navigation",
+      "id": "main",
+      "items": [
+        {
+          "title": "Home",
+          "url": "/",
+          "inActiveTrail": false,
+          "children": []
+        },
+        {
+          "title": "News",
+          "url": "/news",
+          "inActiveTrail": false,
+          "children": []
+        },
+        {
+          "title": "Events",
+          "url": "/events",
+          "inActiveTrail": false,
+          "children": []
+        }
+      ]
+    },
     "page": {
       "id": 7,
       "uuid": "36b2e2b2-3df0-43eb-a282-d792b0999c07",
