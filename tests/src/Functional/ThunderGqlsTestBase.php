@@ -2,22 +2,14 @@
 
 namespace Drupal\Tests\thunder_gqls\Functional;
 
-use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Tests\BrowserTestBase;
+use Drupal\Tests\thunder\Functional\ThunderTestBase;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * The base class for all functional Thunder GraphQl schema tests.
  */
-abstract class ThunderGqlsTestBase extends BrowserTestBase {
-
-  use StringTranslationTrait;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected $profile = 'thunder';
+abstract class ThunderGqlsTestBase extends ThunderTestBase {
 
   /**
    * {@inheritdoc}
@@ -59,22 +51,8 @@ abstract class ThunderGqlsTestBase extends BrowserTestBase {
       'view published terms in channel',
       'view published terms in tags',
     ]);
+    $this->drupalLogin($this->graphqlUser);
 
-  }
-
-  /**
-   * Login with defined role assigned to user.
-   *
-   * @param string $role
-   *   Role name that will be assigned to user.
-   *
-   * @throws \Drupal\Core\Entity\EntityStorageException
-   */
-  protected function logWithRole(string $role) {
-    $user = $this->drupalCreateUser();
-    $user->addRole($role);
-    $user->save();
-    $this->drupalLogin($user);
   }
 
   /**
