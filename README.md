@@ -20,6 +20,10 @@ example query you have to add the query variable `{"path": "/your-path"}`
 # Example
 
     query ($path: String!) {
+      metatags(path: $path) {
+        tag
+        attributes
+      }
       mainMenu: menu(id: "main" path: $path) {
         name
         id

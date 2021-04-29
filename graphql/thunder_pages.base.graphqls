@@ -7,12 +7,6 @@ interface Page {
   created: String!
   changed: String!
   language: String
-  metatags: [MetaTag]
-}
-
-type MetaTag {
-  tag: String
-  attributes: String
 }
 
 type EntityList {
@@ -29,7 +23,6 @@ type Article implements Page {
   created: String!
   changed: String!
   language: String
-  metatags: [MetaTag]
 
   author: User
   published: Boolean!
@@ -48,7 +41,6 @@ type BasicPage implements Page {
   created: String!
   changed: String!
   language: String
-  metatags: [MetaTag]
 
   author: User
   published: Boolean!
@@ -64,7 +56,6 @@ type Tags implements Page {
   created: String!
   changed: String!
   language: String
-  metatags: [MetaTag]
 
   author: User
   published: Boolean!
@@ -81,7 +72,6 @@ type Channel implements Page {
   created: String!
   changed: String!
   language: String
-  metatags: [MetaTag]
 
   parent: Channel
   author: User
@@ -99,7 +89,6 @@ type User implements Page {
   created: String!
   changed: String!
   language: String
-  metatags: [MetaTag]
 
   mail: String
 }

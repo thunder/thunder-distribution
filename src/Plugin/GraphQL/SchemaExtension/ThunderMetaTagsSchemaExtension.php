@@ -5,16 +5,16 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 
 /**
- * Extension to add the JSON-LD script tag query.
+ * Extension to add the meta tags query.
  *
  * @SchemaExtension(
- *   id = "thunder_jsonld",
- *   name = "JSON-LD extension",
- *   description = "Adds the JSON-LD script tag query.",
+ *   id = "thunder_metatags",
+ *   name = "Meta tags extension",
+ *   description = "Adds the meta tags query.",
  *   schema = "thunder"
  * )
  */
-class ThunderJsonLdSchemaExtension extends ThunderSchemaExtensionPluginBase {
+class ThunderMetaTagsSchemaExtension extends ThunderSchemaExtensionPluginBase {
 
   /**
    * {@inheritdoc}
@@ -22,14 +22,16 @@ class ThunderJsonLdSchemaExtension extends ThunderSchemaExtensionPluginBase {
   public function registerResolvers(ResolverRegistryInterface $registry) {
     parent::registerResolvers($registry);
 
-    $this->addFieldResolverIfNotExists('Query', 'jsonld', $this->builder->compose(
+    $this->addFieldResolverIfNotExists('Query', 'metatags', $this->builder->compose(
       $this->builder->produce('route_load')
         ->map('path', $this->builder->fromArgument('path')),
       $this->builder->produce('route_entity')
         ->map('url', $this->builder->fromParent()),
-      $this->builder->produce('thunder_jsonld')
-        ->map('entity', $this->builder->fromParent())
+      $this->builder->produce('thunder_metatags')
+        ->map('type', $this->builder->fromValue('entity'))
+        ->map('value', $this->builder->fromParent())
     ));
+
   }
 
 }

@@ -8,6 +8,7 @@ schema_configuration:
   composable:
     extensions:
       thunder_paragraphs: thunder_paragraphs
+      thunder_metatags: thunder_metatags
       thunder_media: thunder_media
       thunder_menu: thunder_menu
       thunder_routing: thunder_routing
