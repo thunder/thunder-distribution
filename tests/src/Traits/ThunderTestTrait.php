@@ -9,7 +9,6 @@ use Drupal\Core\Database\Database;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\dblog\Controller\DbLogController;
-use Drupal\image\Entity\ImageStyle;
 use Drupal\user\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -51,49 +50,6 @@ trait ThunderTestTrait {
     $this->installModulesFromClassProperty($container);
     $this->rebuildAll();
     $this->replaceUser1();
-    $this->deriveAllImageStyles();
-  }
-
-  /**
-   * Pre-creates all image styles to avoid race conditions.
-   *
-   * @todo Remove once https://www.drupal.org/project/drupal/issues/3211936 is
-   *   in core.
-   */
-  private function deriveAllImageStyles() {
-    $extensions = ['jpeg', 'jpg', 'gif', 'png'];
-    $mimetypes = ['image/jpeg', 'image/jpg', 'image/gif', 'image/png'];
-    $regex = "^public:\/\/.*\.(" . implode('|', $extensions) . ")$";
-
-    // Query the database for files that match this pattern.
-    $query = Database::getConnection()
-      ->select('file_managed', 'f');
-    $andGroup = $query->andConditionGroup()
-      ->condition('filemime', $mimetypes, 'IN')
-      ->condition('uri', $regex, 'REGEXP');
-    $query->condition($andGroup);
-
-    // Select the files to have derivatives created.
-    $files = $query->fields('f', ['fid', 'filename', 'uri'])
-      ->execute()
-      ->fetchAll();
-
-    $count = 0;
-    $image_styles = ImageStyle::loadMultiple();
-    /** @var \Drupal\image\Entity\ImageStyle $style ImageStyle Object */
-    foreach ($image_styles as $style) {
-      foreach ($files as $file) {
-        $destination = $style->buildUri($file->uri);
-        if (!file_exists($destination)) {
-          if ($style->createDerivative($file->uri, $destination)) {
-            $count++;
-          }
-        }
-      }
-    }
-    if ($count === 0) {
-      $this->fail('Failed to pre-generated image styles');
-    }
   }
 
   /**

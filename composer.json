@@ -38,6 +38,9 @@
     "extra": {
         "installer-name": "thunder",
         "patches": {
+            "drupal/core": {
+                "Race condition when generating sub directories for image styles": "https://www.drupal.org/files/issues/2021-05-03/3211936-2.patch"
+            },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
