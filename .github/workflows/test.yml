@@ -33,7 +33,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.0' ]
+        PHP_VERSION: [ '7.4', '8.0']
 
     steps:
       - uses: actions/checkout@v1
@@ -96,7 +96,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: ['8.0']
+        PHP_VERSION: [ '7.4', '8.0']
 
     steps:
     - uses: actions/checkout@v1
@@ -169,21 +169,6 @@ jobs:
         export SIMPLETEST_BASE_URL=http://127.0.0.1:8888
         export SYMFONY_DEPRECATIONS_HELPER=weak
         test-drupal-project run_tests -nc
-        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
-        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
-        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
-        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
-        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
-        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
-        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
-        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
-        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
-        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
-        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
-        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
-        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
-        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
-        php /tmp/test/thunder/install/bin//phpunit --verbose --debug --configuration /tmp/test/thunder/install/docroot/core --group ThunderInstaller /tmp/test/thunder/install/docroot/profiles/contrib/thunder
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
 
