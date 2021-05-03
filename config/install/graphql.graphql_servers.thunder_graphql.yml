@@ -1,0 +1,24 @@
+uuid: e8af2b0a-e784-4a96-9a85-a3a5a051fb36
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: PxOTh4-6rIPZsNgMQaPxvMmt_STHA0Mx8HFNYQ_Dpw0
+name: thunder_graphql
+label: 'Thunder - GraphQL Server'
+schema: composable
+schema_configuration:
+  composable:
+    extensions:
+      thunder_paragraphs: thunder_paragraphs
+      thunder_metatags: thunder_metatags
+      thunder_menu: thunder_menu
+      thunder_media: thunder_media
+      thunder_routing: thunder_routing
+      thunder_pages: thunder_pages
+      thunder_jsonld: 0
+persisted_queries_settings: {  }
+endpoint: /graphql
+debug_flag: 0
+caching: true
+batching: true

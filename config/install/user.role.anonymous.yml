@@ -1,6 +1,9 @@
+uuid: 19da747e-3a2e-478d-98b8-9f6ba76d9b84
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: YNwZhabAcFeIPfZsXVuj6z69TPmgR4FXmT9Ue9x2gXg
 id: anonymous
 label: 'Anonymous user'
 weight: -10
@@ -9,6 +12,8 @@ permissions:
   - 'access content'
   - 'access user profiles'
   - 'access_unpublished node article'
+  - 'execute thunder_graphql arbitrary graphql requests'
+  - 'execute thunder_graphql persisted graphql requests'
   - 'opt-in or out of tracking'
   - 'use text format restricted_html'
   - 'view media'

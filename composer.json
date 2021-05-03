@@ -33,6 +33,10 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/thunder/thunder_gqls.git"
         }
     ],
     "extra": {
@@ -118,7 +122,8 @@
         "npm-asset/slick-carousel": "^1.8",
         "npm-asset/shariff": "^3.1.1",
         "npm-asset/select2": "^4.0.7",
-        "pusher/pusher-php-server": "^3.0.3 || ^4.1.1"
+        "pusher/pusher-php-server": "^3.0.3 || ^4.1.1",
+        "thunder/thunder_gqls": "dev-develop"
     },
     "suggest": {
         "drupal/nexx_integration": "NEXX Video CMS integration",
