@@ -14,6 +14,11 @@ type EntityList {
   items: [Page!]
 }
 
+type Teaser {
+  image: MediaImage
+  text: String
+}
+
 type Article implements Page {
   id: Int!
   uuid: String!
@@ -30,6 +35,7 @@ type Article implements Page {
   tags: [Tags]
   seoTitle: String!
   content: [Paragraph]
+  teaser: Teaser
 }
 
 type BasicPage implements Page {

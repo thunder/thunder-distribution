@@ -2,6 +2,7 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\node\NodeInterface;
@@ -80,6 +81,15 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
       $this->builder->produce('entity_reference_revisions')
         ->map('entity', $this->builder->fromParent())
         ->map('field', $this->builder->fromValue('field_paragraphs'))
+    );
+
+    $this->addFieldResolverIfNotExists('Article', 'teaser',
+     $this->builder->callback(function (ContentEntityInterface $entity) {
+       return [
+         'image' => $entity->field_teaser_media->entity,
+         'text' => $entity->field_teaser_text->value,
+       ];
+     })
     );
 
     // Basic page.

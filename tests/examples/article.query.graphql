@@ -52,6 +52,12 @@ query ($path: String!) {
         entity
         __typename
       }
+      teaser {
+        text
+        image {
+          id
+        }
+      }
     }
   }
 }
