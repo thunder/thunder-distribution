@@ -7,13 +7,13 @@ schema: composable
 schema_configuration:
   composable:
     extensions:
-      thunder_paragraphs: true
-      thunder_metatags: true
-      thunder_menu: true
-      thunder_media: true
-      thunder_routing: true
-      thunder_pages: true
-      thunder_jsonld: false
+      thunder_paragraphs: thunder_paragraphs
+      thunder_metatags: thunder_metatags
+      thunder_menu: thunder_menu
+      thunder_media: thunder_media
+      thunder_routing: thunder_routing
+      thunder_pages: thunder_pages
+      thunder_jsonld: 0
 persisted_queries_settings: {  }
 endpoint: /graphql
 debug_flag: 0
