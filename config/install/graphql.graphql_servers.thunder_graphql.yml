@@ -1,9 +1,6 @@
-uuid: e8af2b0a-e784-4a96-9a85-a3a5a051fb36
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: PxOTh4-6rIPZsNgMQaPxvMmt_STHA0Mx8HFNYQ_Dpw0
 name: thunder_graphql
 label: 'Thunder - GraphQL Server'
 schema: composable
