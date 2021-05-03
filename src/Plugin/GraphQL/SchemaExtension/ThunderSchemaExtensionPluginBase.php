@@ -129,10 +129,7 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
     );
 
     $this->addFieldResolverIfNotExists($type, 'language',
-      $this->builder->produce('property_path')
-        ->map('type', $this->builder->fromValue('entity'))
-        ->map('value', $this->builder->fromParent())
-        ->map('path', $this->builder->fromValue('langcode.value'))
+      $this->builder->fromPath('entity', 'langcode.value')
     );
 
     $this->addFieldResolverIfNotExists($type, 'metatags',
@@ -146,19 +143,14 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
   /**
    * Get the data producer for a referenced entity.
    *
-   * @param string $parentEntityType
-   *   The entity type id of the parent entity.
    * @param string $referenceFieldName
    *   The reference field name.
    *
    * @return \Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerProxy
    *   The data producer proxy.
    */
-  protected function referencedEntityProducer(string $parentEntityType, string $referenceFieldName) : DataProducerProxy {
-    return $this->builder->produce('property_path')
-      ->map('type', $this->builder->fromValue('entity:' . $parentEntityType))
-      ->map('value', $this->builder->fromParent())
-      ->map('path', $this->builder->fromValue($referenceFieldName . '.entity'));
+  protected function referencedEntityProducer(string $referenceFieldName) : DataProducerProxy {
+    return $this->builder->fromPath('entity', $referenceFieldName . '.entity');
   }
 
   /**

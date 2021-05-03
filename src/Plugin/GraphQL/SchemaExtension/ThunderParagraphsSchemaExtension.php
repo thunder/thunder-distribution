@@ -43,67 +43,52 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
     $this->resolveBaseFields('ParagraphText');
 
     $this->addFieldResolverIfNotExists('ParagraphText', 'text',
-      $this->builder->produce('property_path')
-        ->map('type', $this->builder->fromValue('entity:paragraph'))
-        ->map('value', $this->builder->fromParent())
-        ->map('path', $this->builder->fromValue('field_text.processed'))
+      $this->builder->fromPath('entity', 'field_text.processed')
     );
 
     // Image.
     $this->resolveBaseFields('ParagraphImage');
 
     $this->addFieldResolverIfNotExists('ParagraphImage', 'image',
-      $this->builder->produce('property_path')
-        ->map('type', $this->builder->fromValue('entity:paragraph'))
-        ->map('value', $this->builder->fromParent())
-        ->map('path', $this->builder->fromValue('field_image.entity'))
+      $this->builder->fromPath('entity', 'field_image.entity')
     );
 
     // Twitter.
     $this->resolveBaseFields('ParagraphTwitter');
-    $embedEntityProducer = $this->referencedEntityProducer('paragraph', 'field_media');
+    $embedEntityProducer = $this->referencedEntityProducer('field_media');
 
     $this->addFieldResolverIfNotExists('ParagraphTwitter', 'url',
       $this->builder->compose(
         $embedEntityProducer,
-        $this->builder->produce('property_path')
-          ->map('type', $this->builder->fromValue('entity:media'))
-          ->map('value', $this->builder->fromParent())
-          ->map('path', $this->builder->fromValue('field_url.value'))
+        $this->builder->fromPath('entity', 'field_url.value')
       )
     );
 
     // Instagram.
     $this->resolveBaseFields('ParagraphInstagram');
-    $embedEntityProducer = $this->referencedEntityProducer('paragraph', 'field_media');
+    $embedEntityProducer = $this->referencedEntityProducer('field_media');
 
     $this->addFieldResolverIfNotExists('ParagraphInstagram', 'url',
       $this->builder->compose(
         $embedEntityProducer,
-        $this->builder->produce('property_path')
-          ->map('type', $this->builder->fromValue('entity:media'))
-          ->map('value', $this->builder->fromParent())
-          ->map('path', $this->builder->fromValue('field_url.value'))
+        $this->builder->fromPath('entity', 'field_url.value')
       )
     );
 
     // Pinterest.
     $this->resolveBaseFields('ParagraphPinterest');
-    $embedEntityProducer = $this->referencedEntityProducer('paragraph', 'field_media');
+    $embedEntityProducer = $this->referencedEntityProducer('field_media');
 
     $this->addFieldResolverIfNotExists('ParagraphPinterest', 'url',
       $this->builder->compose(
         $embedEntityProducer,
-        $this->builder->produce('property_path')
-          ->map('type', $this->builder->fromValue('entity:media'))
-          ->map('value', $this->builder->fromParent())
-          ->map('path', $this->builder->fromValue('field_url.value'))
+        $this->builder->fromPath('entity', 'field_url.value')
       )
     );
 
     // Gallery.
     $this->resolveBaseFields('ParagraphGallery');
-    $mediaEntityProducer = $this->referencedEntityProducer('paragraph', 'field_media');
+    $mediaEntityProducer = $this->referencedEntityProducer('field_media');
 
     $this->addFieldResolverIfNotExists('ParagraphGallery', 'name',
       $this->builder->compose(

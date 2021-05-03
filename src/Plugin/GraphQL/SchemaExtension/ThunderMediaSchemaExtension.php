@@ -43,56 +43,35 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
     // Image.
     $this->resolveBaseFields('MediaImage');
     $this->addFieldResolverIfNotExists('MediaImage', 'copyright',
-      $this->builder->produce('property_path')
-        ->map('type', $this->builder->fromValue('entity:media'))
-        ->map('value', $this->builder->fromParent())
-        ->map('path', $this->builder->fromValue('field_copyright.value'))
+      $this->builder->fromPath('entity', 'field_copyright.value')
     );
 
     $this->addFieldResolverIfNotExists('MediaImage', 'description',
-      $this->builder->produce('property_path')
-        ->map('type', $this->builder->fromValue('entity:media'))
-        ->map('value', $this->builder->fromParent())
-        ->map('path', $this->builder->fromValue('field_description.processed'))
+      $this->builder->fromPath('entity', 'field_description.processed')
     );
 
     $this->addFieldResolverIfNotExists('MediaImage', 'src',
       $this->builder->compose(
-        $this->builder->produce('property_path')
-          ->map('type', $this->builder->fromValue('entity:media'))
-          ->map('value', $this->builder->fromParent())
-          ->map('path', $this->builder->fromValue('field_image.entity')),
+        $this->builder->fromPath('entity', 'field_image.entity'),
         $this->builder->produce('image_url')
           ->map('entity', $this->builder->fromParent())
       )
     );
 
     $this->addFieldResolverIfNotExists('MediaImage', 'width',
-      $this->builder->produce('property_path')
-        ->map('type', $this->builder->fromValue('entity:media'))
-        ->map('value', $this->builder->fromParent())
-        ->map('path', $this->builder->fromValue('field_image.width'))
+      $this->builder->fromPath('entity', 'field_image.width')
     );
 
     $this->addFieldResolverIfNotExists('MediaImage', 'height',
-      $this->builder->produce('property_path')
-        ->map('type', $this->builder->fromValue('entity:media'))
-        ->map('value', $this->builder->fromParent())
-        ->map('path', $this->builder->fromValue('field_image.height'))
+      $this->builder->fromPath('entity', 'field_image.height')
     );
 
     $this->addFieldResolverIfNotExists('MediaImage', 'title',
-      $this->builder->produce('property_path')
-        ->map('type', $this->builder->fromValue('entity:media'))
-        ->map('value', $this->builder->fromParent())
-        ->map('path', $this->builder->fromValue('field_image.title'))
+      $this->builder->fromPath('entity', 'field_image.title')
     );
 
     $this->addFieldResolverIfNotExists('MediaImage', 'alt',
-      $this->builder->produce('property_path')
-        ->map('type', $this->builder->fromValue('entity:media'))
-        ->map('value', $this->builder->fromParent())
-        ->map('path', $this->builder->fromValue('field_image.alt'))
+      $this->builder->fromPath('entity', 'field_image.alt')
     );
 
     $this->addFieldResolverIfNotExists('MediaImage', 'tags',
