@@ -33,10 +33,6 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/thunder/thunder_gqls.git"
         }
     ],
     "extra": {
