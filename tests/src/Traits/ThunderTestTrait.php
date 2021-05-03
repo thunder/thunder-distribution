@@ -74,14 +74,14 @@ trait ThunderTestTrait {
     $query->condition($andGroup);
 
     // Select the files to have derivatives created.
-    $files = $query->fields('f', array('fid', 'filename', 'uri'))
+    $files = $query->fields('f', ['fid', 'filename', 'uri'])
       ->execute()
       ->fetchAll();
 
     $count = 0;
-    $imageStyles = ImageStyle::loadMultiple();
-    /* @var ImageStyle $style ImageStyle Object */
-    foreach ($imageStyles as $name => $style) {
+    $image_styles = ImageStyle::loadMultiple();
+    /** @var \Drupal\image\Entity\ImageStyle $style ImageStyle Object */
+    foreach ($image_styles as $style) {
       foreach ($files as $file) {
         $destination = $style->buildUri($file->uri);
         if (!file_exists($destination)) {
