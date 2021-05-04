@@ -7,6 +7,7 @@ interface Page {
   created: String!
   changed: String!
   language: String
+  entityLinks: EntityLinks
 }
 
 type EntityList {
@@ -19,6 +20,17 @@ type Teaser {
   text: String
 }
 
+type EntityLinks {
+  canonical: String
+  deleteForm: String
+  deleteMultipleForm: String
+  editForm: String
+  versionHistory: String
+  revision: String
+  create: String
+  latestVersion: String
+}
+
 type Article implements Page {
   id: Int!
   uuid: String!
@@ -28,6 +40,7 @@ type Article implements Page {
   created: String!
   changed: String!
   language: String
+  entityLinks: EntityLinks
 
   author: User
   published: Boolean!
@@ -47,6 +60,7 @@ type BasicPage implements Page {
   created: String!
   changed: String!
   language: String
+  entityLinks: EntityLinks
 
   author: User
   published: Boolean!
@@ -62,6 +76,7 @@ type Tags implements Page {
   created: String!
   changed: String!
   language: String
+  entityLinks: EntityLinks
 
   author: User
   published: Boolean!
@@ -78,6 +93,7 @@ type Channel implements Page {
   created: String!
   changed: String!
   language: String
+  entityLinks: EntityLinks
 
   parent: Channel
   author: User
@@ -95,6 +111,7 @@ type User implements Page {
   created: String!
   changed: String!
   language: String
+  entityLinks: EntityLinks
 
   mail: String
 }

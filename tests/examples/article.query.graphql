@@ -20,6 +20,10 @@ query ($path: String!) {
     name
     entity
     language
+    entityLinks {
+      canonical
+      editForm
+    }
     ... on Article {
       published
       author {
