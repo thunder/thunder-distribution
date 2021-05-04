@@ -1,0 +1,6 @@
+services:
+  main_content_renderer.thunder_gqls:
+    class: Drupal\thunder_gqls\Render\MainContent\ThunderGqlsRenderer
+    arguments: ['@breadcrumb', '@current_route_match']
+    tags:
+      - { name: render.main_content_renderer, format: thunder_gqls }

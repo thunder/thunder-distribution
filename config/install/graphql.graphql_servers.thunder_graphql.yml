@@ -7,6 +7,7 @@ schema: composable
 schema_configuration:
   composable:
     extensions:
+      thunder_breadcrumb: thunder_breadcrumb
       thunder_paragraphs: thunder_paragraphs
       thunder_metatags: thunder_metatags
       thunder_media: thunder_media

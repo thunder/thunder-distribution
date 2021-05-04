@@ -40,6 +40,9 @@ class SchemaTest extends ThunderGqlsTestBase {
       [
         'menu',
       ],
+      [
+        'breadcrumb',
+      ],
     ];
   }
 
