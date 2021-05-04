@@ -125,7 +125,7 @@ jobs:
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
 
     - name: Setup Apache
-      uses: thunder/apache-shiva-php-action
+      uses: thunder/apache-shiva-php-action@v1
       with:
         php-version: ${{ matrix.PHP_VERSION }}
         site-directory: /tmp/test/thunder/install/docroot
@@ -220,7 +220,7 @@ jobs:
         working-directory: /tmp/test/thunder/install
 
       - name: Setup Apache
-        uses: thunder/apache-shiva-php-action
+        uses: thunder/apache-shiva-php-action@v1
         with:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
@@ -280,7 +280,7 @@ jobs:
           DRUPAL_TESTING_MIN_BUILD: true
 
       - name: Setup Apache
-        uses: thunder/apache-shiva-php-action
+        uses: thunder/apache-shiva-php-action@v1
         with:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
