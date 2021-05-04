@@ -124,38 +124,12 @@ jobs:
     - name: Unzip build artifact
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
 
-    # Install Apache and configure to serve the Thunder test site. Apache is run
-    # in the foreground using the same user as the test runner to avoid common
-    # pitfalls with file ownership.
-    - name: Start Apache
-      run: |
-        LC_ALL=C.UTF-8 sudo apt-add-repository http://ppa.launchpad.net/ondrej/php/ubuntu
-        sudo apt install libapache2-mod-php${{ matrix.PHP_VERSION }}
-        sudo a2enmod php${{ matrix.PHP_VERSION }} rewrite
-        echo "<Directory ${PWD}>" | sudo tee /etc/apache2/sites-available/thunder.conf
-        echo '  Options Indexes FollowSymLinks' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-        echo '  AllowOverride all' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-        echo '  Require all granted' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-        echo '</Directory>' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-        echo '' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-        echo "<VirtualHost *:${DRUPAL_TESTING_HTTP_PORT}>" | sudo tee -a /etc/apache2/sites-available/thunder.conf
-        echo '  ServerAdmin webmaster@localhost' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-        echo "  DocumentRoot ${PWD}" | sudo tee -a /etc/apache2/sites-available/thunder.conf
-        echo '  ErrorLog ${APACHE_LOG_DIR}/error.log' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-        echo '  CustomLog ${APACHE_LOG_DIR}/access.log combined' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-        echo '</VirtualHost>' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-        cd ..
-        sudo sed -ri -e "s!Listen 80!Listen ${DRUPAL_TESTING_HTTP_PORT}!g" /etc/apache2/ports.conf
-        source /etc/apache2/envvars
-        export APACHE_LOG_DIR="${PWD}"
-        export APACHE_LOCK_DIR="${PWD}"
-        export APACHE_PID_FILE="${PWD}/apache2.pid"
-        sudo a2ensite thunder
-        sudo a2dissite 000-default
-        nohup apache2 -DFOREGROUND > /dev/null 2>&1 &
-        sleep 2
-        nc -z "127.0.0.1" "${DRUPAL_TESTING_HTTP_PORT}"
-      working-directory: /tmp/test/thunder/install/docroot
+    - name: Setup Apache
+      uses: thunder/apache-shiva-php-action
+      with:
+        php-version: ${{ matrix.PHP_VERSION }}
+        site-directory: /tmp/test/thunder/install/docroot
+        http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
     - name: Run config tests
       run: test-drupal-project run_tests -nc
@@ -245,38 +219,12 @@ jobs:
           php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
         working-directory: /tmp/test/thunder/install
 
-      # Install Apache and configure to serve the Thunder test site. Apache is run
-      # in the foreground using the same user as the test runner to avoid common
-      # pitfalls with file ownership.
-      - name: Start Apache
-        run: |
-          LC_ALL=C.UTF-8 sudo apt-add-repository http://ppa.launchpad.net/ondrej/php/ubuntu
-          sudo apt install libapache2-mod-php${{ matrix.PHP_VERSION }}
-          sudo a2enmod php${{ matrix.PHP_VERSION }} rewrite
-          echo "<Directory ${PWD}>" | sudo tee /etc/apache2/sites-available/thunder.conf
-          echo '  Options Indexes FollowSymLinks' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '  AllowOverride all' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '  Require all granted' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '</Directory>' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo "<VirtualHost *:${DRUPAL_TESTING_HTTP_PORT}>" | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '  ServerAdmin webmaster@localhost' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo "  DocumentRoot ${PWD}" | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '  ErrorLog ${APACHE_LOG_DIR}/error.log' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '  CustomLog ${APACHE_LOG_DIR}/access.log combined' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '</VirtualHost>' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          cd ..
-          sudo sed -ri -e "s!Listen 80!Listen ${DRUPAL_TESTING_HTTP_PORT}!g" /etc/apache2/ports.conf
-          source /etc/apache2/envvars
-          export APACHE_LOG_DIR="${PWD}"
-          export APACHE_LOCK_DIR="${PWD}"
-          export APACHE_PID_FILE="${PWD}/apache2.pid"
-          sudo a2ensite thunder
-          sudo a2dissite 000-default
-          nohup apache2 -DFOREGROUND > /dev/null 2>&1 &
-          sleep 2
-          nc -z "127.0.0.1" "${DRUPAL_TESTING_HTTP_PORT}"
-        working-directory: /tmp/test/thunder/install/docroot
+      - name: Setup Apache
+        uses: thunder/apache-shiva-php-action
+        with:
+          php-version: ${{ matrix.PHP_VERSION }}
+          site-directory: /tmp/test/thunder/install/docroot
+          http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Run tests suite
         run: test-drupal-project run_tests
@@ -331,38 +279,12 @@ jobs:
         env:
           DRUPAL_TESTING_MIN_BUILD: true
 
-      # Install Apache and configure to serve the Thunder test site. Apache is run
-      # in the foreground using the same user as the test runner to avoid common
-      # pitfalls with file ownership.
-      - name: Start Apache
-        run: |
-          LC_ALL=C.UTF-8 sudo apt-add-repository http://ppa.launchpad.net/ondrej/php/ubuntu
-          sudo apt install libapache2-mod-php${{ matrix.PHP_VERSION }}
-          sudo a2enmod php${{ matrix.PHP_VERSION }} rewrite
-          echo "<Directory ${PWD}>" | sudo tee /etc/apache2/sites-available/thunder.conf
-          echo '  Options Indexes FollowSymLinks' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '  AllowOverride all' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '  Require all granted' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '</Directory>' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo "<VirtualHost *:${DRUPAL_TESTING_HTTP_PORT}>" | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '  ServerAdmin webmaster@localhost' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo "  DocumentRoot ${PWD}" | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '  ErrorLog ${APACHE_LOG_DIR}/error.log' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '  CustomLog ${APACHE_LOG_DIR}/access.log combined' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          echo '</VirtualHost>' | sudo tee -a /etc/apache2/sites-available/thunder.conf
-          cd ..
-          sudo sed -ri -e "s!Listen 80!Listen ${DRUPAL_TESTING_HTTP_PORT}!g" /etc/apache2/ports.conf
-          source /etc/apache2/envvars
-          export APACHE_LOG_DIR="${PWD}"
-          export APACHE_LOCK_DIR="${PWD}"
-          export APACHE_PID_FILE="${PWD}/apache2.pid"
-          sudo a2ensite thunder
-          sudo a2dissite 000-default
-          nohup apache2 -DFOREGROUND > /dev/null 2>&1 &
-          sleep 2
-          nc -z "127.0.0.1" "${DRUPAL_TESTING_HTTP_PORT}"
-        working-directory: /tmp/test/thunder/install/docroot
+      - name: Setup Apache
+        uses: thunder/apache-shiva-php-action
+        with:
+          php-version: ${{ matrix.PHP_VERSION }}
+          site-directory: /tmp/test/thunder/install/docroot
+          http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Test for deprecations
         run: test-drupal-project deprecation
