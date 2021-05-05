@@ -216,6 +216,8 @@ jobs:
           vendor/bin/drush updb -y
 
           cd docroot
+          wget https://www.drupal.org/files/issues/2021-05-03/3211936-2.patch
+          patch -p1 < 3211936-2.patch
           php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
         working-directory: /tmp/test/thunder/install
 
