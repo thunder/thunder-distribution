@@ -62,7 +62,6 @@
         "drupal/admin_toolbar": "^2.1",
         "drupal/autofill": "^1.0",
         "drupal/autosave_form": "^1.2",
-        "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.9",
         "drupal/core": "~9.1.4@STABLE",
@@ -139,7 +138,7 @@
         "burdamagazinorg/thunder-dev-tools": "dev-master",
         "thunder/testsite_builder": "dev-master",
         "thunder/thunder_performance_measurement": "dev-master",
-        "thunder/thunder_testing_demo": "3.x-dev",
+        "thunder/thunder_testing_demo": "default_content_2-dev",
         "phpunit/phpunit": "~9.4.3"
     }
 }
