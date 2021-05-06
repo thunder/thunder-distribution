@@ -66,7 +66,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addLinkParagraph(static::$paragraphsField, 'Link to Thunder', 'http://www.thunder.org');
 
     // Add Video paragraph at the beginning.
-    $this->addVideoParagraph(static::$paragraphsField, ['media:23'], 0);
+    $this->addVideoParagraph(static::$paragraphsField, ['media:20'], 0);
 
     // Add Pinterest Paragraph.
     $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/478085316687452268/', 'pinterest');
