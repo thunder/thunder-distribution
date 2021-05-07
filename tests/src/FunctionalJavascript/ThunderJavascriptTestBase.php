@@ -61,7 +61,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    *
    * @var string
    */
-  protected static $defaultUserRole = 'editor';
+  protected static $defaultUserRole = 'administrator';
 
   /**
    * {@inheritdoc}

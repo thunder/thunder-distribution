@@ -39,6 +39,10 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
     ]);
 
+    $this->drupalGet("admin/reports/dblog");
+    $this->createScreenshot($this->getScreenshotFolder() . '/Dblog' . date('Ymd_His') . '.png');
+
+
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
 
     // Add Image Paragraph.
