@@ -169,26 +169,4 @@ trait ThunderTestTrait {
     parent::tearDown();
   }
 
-  protected function printLog() {
-    $query = \Drupal::database()->select('watchdog', 'w')
-      ->fields('w', ['message', 'variables']);
-    $query->groupBy('w.message');
-    $query->groupBy('w.variables');
-
-    $controller = DbLogController::create(\Drupal::getContainer());
-
-    // Check that there are no warnings in the log after installation.
-    // $this->assertEqual($query->countQuery()->execute()->fetchField(), 0);.
-    if ($query->countQuery()->execute()->fetchField()) {
-      // Output all errors for modules tested.
-      $errors = [];
-      foreach ($query->execute()->fetchAll() as $row) {
-        $errors[] = Unicode::truncate(Html::decodeEntities(strip_tags($controller->formatMessage($row))), 256, TRUE, TRUE);
-      }
-      #throw new \Exception(print_r($errors, TRUE));
-    }
-    var_dump($errors);
-
-  }
-
 }
