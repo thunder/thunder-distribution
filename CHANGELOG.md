@@ -7,7 +7,7 @@ Having the metatag form on the node edit page is a huge performance hit on save,
 improve those operations, we integrate the metatag_async_widget, which loads the metatag form on demand.
 
 We cannot ship update hooks with Thunder 3.5 anymore. In order to get the new metatag widget, you will have to enable the
-metatag_async_widget module and change the widget of the metatag module field.
+metatag_async_widget module and change the widget of the metatag module field manually.
 
 - [Use asynchronous widget for metatag handling](https://www.drupal.org/node/3208355)
 
