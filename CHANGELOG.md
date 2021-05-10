@@ -1,7 +1,7 @@
 # Changelog
 
-## [3.5.9](https://github.com/thunder/thunder-distribution/tree/3.5.8) 2021-05-10
-[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.7...3.5.8)
+## [3.5.9](https://github.com/thunder/thunder-distribution/tree/3.5.9) 2021-05-10
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.8...3.5.9)
 
 Having the metatag form on the node edit page is a huge performance hit on save, autosave and adding new paragraphs. To
 improve those operations, we integrate the metatag_async_widget, which loads the metatag form on demand.
