@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Drupal\Component\Serialization\Json;
+
 /**
  * Trait for manipulation of meta tag configuration and meta tags on page.
  *
