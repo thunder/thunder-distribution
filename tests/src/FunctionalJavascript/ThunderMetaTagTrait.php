@@ -62,17 +62,22 @@ trait ThunderMetaTagTrait {
    *   Meta tag value.
    */
   protected function checkMetaTag($name, $value) {
-    $htmlValue = htmlentities($value);
-
-    $checkXPath = "@content='{$htmlValue}'";
-    if (strpos($value, 'LIKE:') === 0) {
-      $valueToCheck = substr($htmlValue, strlen('LIKE:'));
-
-      $checkXPath = "contains(@content, '{$valueToCheck}')";
+    if (strpos($name, 'schema_article') === 0) {
+      $jsonLd = Json::decode($this->getSession()->getPage()->find('xpath', '//head/script[(@type="application/ld+json")]')->getHtml());
+      $key = substr($name, strlen('schema_article_'));
+      $this->assertSame($jsonLd['@graph'][0][$key], $value);
     }
+    else {
+      $htmlValue = htmlentities($value);
+      $checkXPath = "@content='{$htmlValue}'";
+      if (strpos($value, 'LIKE:') === 0) {
+        $valueToCheck = substr($htmlValue, strlen('LIKE:'));
 
-    $this->assertSession()
-      ->elementExists('xpath', "//head/meta[(@name='{$name}' or @property='{$name}') and {$checkXPath}]");
+        $checkXPath = "contains(@content, '{$valueToCheck}')";
+      }
+      $this->assertSession()
+        ->elementExists('xpath', "//head/meta[(@name='{$name}' or @property='{$name}') and {$checkXPath}]");
+    }
   }
 
   /**
