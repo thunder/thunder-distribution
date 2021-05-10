@@ -169,4 +169,12 @@ trait ThunderTestTrait {
     parent::tearDown();
   }
 
+  protected function loadMediaByUuid($uuid) {
+    return \Drupal::getContainer()->get('entity.repository')->loadEntityByUuid('media', $uuid);
+  }
+
+  protected function loadNodeByUuid($uuid) {
+    return \Drupal::getContainer()->get('entity.repository')->loadEntityByUuid('node', $uuid);
+  }
+
 }
