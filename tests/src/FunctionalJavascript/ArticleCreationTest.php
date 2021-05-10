@@ -131,7 +131,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   /**
    * Test Creation of Article without content moderation.
    */
-  public function test1CreateArticleWithNoModeration() {
+  public function testCreateArticleWithNoModeration() {
     // Delete all the articles so we can disable content moderation.
     foreach (\Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'article']) as $node) {
       $node->delete();

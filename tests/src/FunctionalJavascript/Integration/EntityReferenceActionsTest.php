@@ -24,7 +24,8 @@ class EntityReferenceActionsTest extends ThunderJavascriptTestBase {
    */
   public function testMediaEditInArticle() {
 
-    $this->drupalGet('node/7/edit');
+    $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
+    $this->drupalGet($node->toUrl('edit-form'));
     $page = $this->getSession()->getPage();
 
     $this->editParagraph($page, 'field_paragraphs', 0);

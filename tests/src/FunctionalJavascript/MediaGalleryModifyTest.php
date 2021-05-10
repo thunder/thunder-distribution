@@ -37,7 +37,8 @@ END;
    * @throws \Exception
    */
   public function testOrderChange() {
-    $this->drupalGet("node/7/edit");
+    $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
+    $this->drupalGet($node->toUrl('edit-form'));
 
     $page = $this->getSession()->getPage();
 
@@ -60,15 +61,17 @@ END;
       throw new \Exception('Second element in Gallery is not found');
     }
 
-    $this->assertSame('media:8', $secondElement->getAttribute('data-entity-id'));
+    $media = $this->loadMediaByUuid('159797c5-d9f9-4e27-b425-0f703a8a416d');
+    $this->assertSame('media:' . $media->id(), $secondElement->getAttribute('data-entity-id'));
 
     $this->clickSave();
 
-    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-13-1 button.slick-next');
+    $gallery = $this->loadMediaByUuid('df67621b-518f-4159-a59e-1bad0700800c');
+    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
 
     // Check that, 2nd image is file: 26357237683_0891e46ba5_k.jpg.
     $fileNamePosition = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-13-1 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("26357237683_0891e46ba5_k.jpg")');
+      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("26357237683_0891e46ba5_k.jpg")');
     $this->assertNotEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should be "26357237683_0891e46ba5_k.jpg".');
   }
 
