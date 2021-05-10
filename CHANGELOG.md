@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.1.3](https://github.com/thunder/thunder-distribution/tree/6.1.2) 2021-05-10
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.1.2...6.1.3)
+
+Having the metatag form on the node edit page is a huge performance hit on save / autosave and adding new paragraphs.
+To improve those operations, we integrate the metatag_async_widget, which loads the metatag form on demand.
+
+- [Use asynchronous widget for metatag handling](https://www.drupal.org/node/3208355)
+
 ## [6.1.2](https://github.com/thunder/thunder-distribution/tree/6.1.2) 2021-04-15
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.1.1...6.1.2)
 
