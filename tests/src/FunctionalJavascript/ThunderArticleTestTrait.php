@@ -28,6 +28,11 @@ trait ThunderArticleTestTrait {
 
     if (!empty($fieldValues)) {
       $this->expandAllTabs();
+      if ($this->getSession()->getPage()->hasButton('Customize meta tags')) {
+        $this->getSession()->getPage()->pressButton('Customize meta tags');
+        $this->assertSession()->assertWaitOnAjaxRequest();
+        $this->expandAllTabs();
+      }
       $this->setFieldValues($this->getSession()->getPage(), $fieldValues);
     }
 
