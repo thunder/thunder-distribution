@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.5.9](https://github.com/thunder/thunder-distribution/tree/3.5.8) 2021-05-10
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.7...3.5.8)
+
+Having the metatag form on the node edit page is a huge performance hit on save, autosave and adding new paragraphs. To
+improve those operations, we integrate the metatag_async_widget, which loads the metatag form on demand.
+
+We cannot ship update hooks with Thunder 3.5 anymore. In order to get the new metatag widget, you will have to enable the
+metatag_async_widget module and change the widget of the metatag module field.
+
+- [Use asynchronous widget for metatag handling](https://www.drupal.org/node/3208355)
+
 ## [3.5.8](https://github.com/thunder/thunder-distribution/tree/3.5.8) 2021-04-15
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.7...3.5.8)
 
