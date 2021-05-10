@@ -106,7 +106,7 @@ jobs:
       with:
         coverage: none
         php-version: ${{ matrix.PHP_VERSION }}
-        extensions: Imagick, gd, pdo_mysql, yaml
+        extensions: Imagick, gd, pdo_mysql
         # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
         ini-values: pcre.jit=0
 
@@ -136,9 +136,6 @@ jobs:
       run: test-drupal-project run_tests -nc
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderConfig
-
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
 
     - name: Run installer tests
       run: test-drupal-project run_tests -nc
