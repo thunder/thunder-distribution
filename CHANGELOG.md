@@ -1,6 +1,6 @@
 # Changelog
 
-## [6.1.3](https://github.com/thunder/thunder-distribution/tree/6.1.2) 2021-05-10
+## [6.1.3](https://github.com/thunder/thunder-distribution/tree/6.1.3) 2021-05-10
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.1.2...6.1.3)
 
 Having the metatag form on the node edit page is a huge performance hit on save, autosave and adding new paragraphs. To 
