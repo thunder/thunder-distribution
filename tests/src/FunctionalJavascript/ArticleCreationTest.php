@@ -51,8 +51,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Add Gallery Paragraph between Image and Text.
     $image2 = $this->loadMediaByUuid('05048c57-942d-4251-ad12-ce562f8c79a0');
     $this->addGalleryParagraph(static::$paragraphsField, 'Test gallery', [
-      ['media:' . $image1->id()],
-      ['media:' . $image2->id()],
+      'media:' . $image1->id(),
+      'media:' . $image2->id(),
     ], 1);
 
     // Add Quote Paragraph.
