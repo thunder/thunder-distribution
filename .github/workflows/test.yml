@@ -199,7 +199,7 @@ jobs:
 
       - name: Update the docroot
         run: |
-          composer require thunder/thunder-distribution:dev-fix/allow_default_content2 phpunit/phpunit:^7 --no-update
+          composer require thunder/thunder-distribution:^3.5.0 phpunit/phpunit:^7 --no-update
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y

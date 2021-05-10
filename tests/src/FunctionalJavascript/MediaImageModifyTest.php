@@ -4,7 +4,6 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
-use Drupal\media\Entity\Media;
 
 /**
  * Tests the Image media modification.
