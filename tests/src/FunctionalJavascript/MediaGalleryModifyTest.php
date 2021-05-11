@@ -153,7 +153,8 @@ END;
     // Click Select entities -> to open Entity Browser.
     $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
 
-    $this->clickButtonDrupalSelector($page, 'edit-selected-items-23-2-remove-button');
+    $file = $this->getFileByName('reference.jpg');
+    $this->clickButtonDrupalSelector($page, 'edit-selected-items-' . $file->id() . '-2-remove-button');
 
     $this->submitEntityBrowser($page);
 
@@ -164,8 +165,8 @@ END;
       ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(4, $numberOfImages, 'There should be 4 images in Gallery.');
 
-    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-13-1 button.slick-next');
-    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-13-1 button.slick-next');
+    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
+    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
 
     // Check that, 3rd image is not file: reference.jpg.
     $fileNamePosition = $this->getSession()

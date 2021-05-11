@@ -102,9 +102,11 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
 
     $startTimestamp = strtotime('-2 days');
     $endTimestamp = strtotime('+1 day');
+
+    $term = $this->loadTermByUuid('35bdba6e-9b45-472a-8fda-11e7e69de71b');
     $fieldValues = [
       'title[0][value]' => 'New title',
-      'field_tags[]' => [[5, 'Drupal'], 'Tag2'],
+      'field_tags[]' => [[$term->id(), $term->getName()], 'Tag2'],
       'publish_on[0][value][date]' => date('Y-m-d', $startTimestamp),
       'publish_on[0][value][time]' => date('H:i:s', $startTimestamp),
       'unpublish_on[0][value][date]' => date('Y-m-d', $endTimestamp),
