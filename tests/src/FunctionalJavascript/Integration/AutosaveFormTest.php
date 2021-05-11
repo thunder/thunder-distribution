@@ -44,7 +44,8 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
 
     // Reject the changes.
     $this->pressRejectButton();
-    $this->assertEquals([5], $page->findField('field_tags[]')->getValue());
+    $term = $this->loadTermByUuid('35bdba6e-9b45-472a-8fda-11e7e69de71b');
+    $this->assertEquals([$term->id()], $page->findField('field_tags[]')->getValue());
     $this->assertEquals('Come to DrupalCon New Orleans', $page->findField('title[0][value]')->getValue());
     $this->assertEmpty($page->find('css', '.form-item-field-paragraphs-3-subform-field-text-0-value'));
 
@@ -55,7 +56,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     $this->drupalGet($node->toUrl('edit-form'));
 
     $this->pressRestoreButton();
-    $this->assertEquals([5, '$ID:Tag2'], $page->findField('field_tags[]')->getValue());
+    $this->assertEquals([$term->id(), '$ID:Tag2'], $page->findField('field_tags[]')->getValue());
     $this->assertEquals('New title', $page->findField('title[0][value]')->getValue());
     $this->assertNotEmpty($page->find('css', '.form-item-field-paragraphs-3-subform-field-text-0-value'));
 

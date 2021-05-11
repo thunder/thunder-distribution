@@ -48,7 +48,7 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
     $this->drupalLogout();
     $this->drupalGet($tokenUrl);
     $this->assertSession()->pageTextContains('Article Text 1');
-    $this->drupalGet('/article-1');
+    $this->drupalGet($node->toUrl());
     $noAccess = $this->xpath('//h1[contains(@class, "page-title")]//span[text() = "403"]');
     $this->assertEquals(1, count($noAccess));
 
@@ -76,7 +76,7 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
 
     // Log-Out and check that URL to article works.
     $this->drupalLogout();
-    $this->drupalGet('article-1');
+    $this->drupalGet($node->toUrl());
     $this->assertSession()->pageTextContains('Article Text 1');
   }
 
