@@ -32,14 +32,15 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
    * Tests the autosave functionality in an existing article.
    */
   public function testAutosaveInExistingEntity() {
-    $this->drupalGet('node/7/edit');
+    $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
+    $this->drupalGet($node->toUrl('edit-form'));
     $page = $this->getSession()->getPage();
 
     // Make some changes.
     $this->makeFormChanges();
 
     // Reload the page.
-    $this->drupalGet('node/7/edit');
+    $this->drupalGet($node->toUrl('edit-form'));
 
     // Reject the changes.
     $this->pressRejectButton();
@@ -51,7 +52,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     $this->makeFormChanges();
 
     // Reload the page.
-    $this->drupalGet('node/7/edit');
+    $this->drupalGet($node->toUrl('edit-form'));
 
     $this->pressRestoreButton();
     $this->assertEquals([5, '$ID:Tag2'], $page->findField('field_tags[]')->getValue());

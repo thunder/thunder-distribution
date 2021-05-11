@@ -88,7 +88,8 @@ END;
   public function testAddRemove() {
 
     // Test remove inside inline entity form.
-    $this->drupalGet("node/7/edit");
+    $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
+    $this->drupalGet($node->toUrl('edit-form'));
 
     $page = $this->getSession()->getPage();
 
@@ -112,7 +113,7 @@ END;
     $this->assertNotEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should be "26315068204_24ffa6cfc4_o.jpg".');
 
     // Test add + reorder inside entity browser.
-    $this->drupalGet("node/7/edit");
+    $this->drupalGet($node->toUrl('edit-form'));
 
     $this->editParagraph($page, 'field_paragraphs', 0);
 
@@ -144,7 +145,7 @@ END;
     $this->assertNotEquals(-1, $fileNamePosition, 'For 3rd image in gallery, used file should be "reference.jpg".');
 
     // Test remove inside entity browser.
-    $this->drupalGet("node/7/edit");
+    $this->drupalGet($node->toUrl('edit-form'));
 
     $this->editParagraph($page, 'field_paragraphs', 0);
 
