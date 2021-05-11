@@ -1,19 +1,21 @@
-query ($id: Int!) {
-  article(id: $id) {
-    content {
-      id
-      entity
-      __typename
-      ... on ParagraphText {
-        text
-      }
-      ... on ParagraphTwitter {
-        url
-      }
-      ... on ParagraphGallery {
-        name
-        images {
+query ($path: String!) {
+  page(path: $path) {
+    ... on Article {
+      content {
+        uuid
+        entity
+        __typename
+        ... on ParagraphText {
+          text
+        }
+        ... on ParagraphTwitter {
+          url
+        }
+        ... on ParagraphGallery {
           name
+          images {
+            name
+          }
         }
       }
     }

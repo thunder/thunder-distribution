@@ -13,13 +13,13 @@
         {
           "title": "News",
           "url": "/news",
-          "inActiveTrail": false,
+          "inActiveTrail": true,
           "children": []
         },
         {
           "title": "Events",
           "url": "/events",
-          "inActiveTrail": true,
+          "inActiveTrail": false,
           "children": []
         }
       ]

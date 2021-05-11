@@ -1,9 +1,11 @@
-query ($id: Int!) {
-  channel(id: $id) {
-    articles {
-      total
-      items {
-        name
+query ($path: String!) {
+  page(path: $path) {
+    ... on Channel {
+      articles {
+        total
+        items {
+          name
+        }
       }
     }
   }

@@ -1,14 +1,14 @@
 {
   "data": {
-    "channel": {
+    "page": {
       "articles": {
         "total": 2,
         "items": [
           {
-            "name": "Come to DrupalCon New Orleans"
+            "name": "Burda Launches Open-Source CMS Thunder"
           },
           {
-            "name": "Lorem ipsum dolor sit amet"
+            "name": "Duis autem vel eum iriure"
           }
         ]
       }
