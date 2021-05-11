@@ -100,16 +100,17 @@ END;
 
     $this->clickSave();
 
-    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-13-1 button.slick-next');
+    $gallery = $this->loadMediaByUuid('df67621b-518f-4159-a59e-1bad0700800c');
+    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
 
     // Check that, there are 4 images in gallery.
     $numberOfImages = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-13-1 div.slick-slide:not(.slick-cloned)\').length;');
+      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(4, $numberOfImages, 'There should be 4 images in Gallery.');
 
     // Check that, 2nd image is file: 26315068204_24ffa6cfc4_o.jpg.
     $fileNamePosition = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-13-1 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("26315068204_24ffa6cfc4_o.jpg")');
+      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("26315068204_24ffa6cfc4_o.jpg")');
     $this->assertNotEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should be "26315068204_24ffa6cfc4_o.jpg".');
 
     // Test add + reorder inside entity browser.
@@ -133,15 +134,15 @@ END;
 
     // Check that, there are 5 images in gallery.
     $numberOfImages = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-13-1 div.slick-slide:not(.slick-cloned)\').length;');
+      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(5, $numberOfImages, 'There should be 5 images in Gallery.');
 
-    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-13-1 button.slick-next');
-    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-13-1 button.slick-next');
+    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
+    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
 
     // Check that, 3rd image is file: reference.jpg.
     $fileNamePosition = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-13-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'src\').indexOf("reference.jpg")');
+      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'src\').indexOf("reference.jpg")');
     $this->assertNotEquals(-1, $fileNamePosition, 'For 3rd image in gallery, used file should be "reference.jpg".');
 
     // Test remove inside entity browser.
@@ -160,7 +161,7 @@ END;
 
     // Check that, there are 4 images in gallery.
     $numberOfImages = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-13-1 div.slick-slide:not(.slick-cloned)\').length;');
+      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(4, $numberOfImages, 'There should be 4 images in Gallery.');
 
     $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-13-1 button.slick-next');
@@ -168,7 +169,7 @@ END;
 
     // Check that, 3rd image is not file: reference.jpg.
     $fileNamePosition = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-13-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'src\').indexOf("reference.jpg")');
+      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'src\').indexOf("reference.jpg")');
     $this->assertEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should not be "reference.jpg".');
   }
 
