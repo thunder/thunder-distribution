@@ -27,8 +27,9 @@ class ThunderBreadcrumbSchemaExtension extends ThunderSchemaExtensionPluginBase 
         ->map('path', $this->builder->fromArgument('path')),
       $this->builder->produce('route_entity')
         ->map('url', $this->builder->fromParent()),
-      $this->builder->produce('thunder_breadcrumb')
+      $this->builder->produce('thunder_entity_sub_request')
         ->map('entity', $this->builder->fromParent())
+        ->map('key', $this->builder->fromValue('breadcrumb'))
     ));
 
   }

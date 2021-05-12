@@ -14,23 +14,26 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
- * Resolves breadcrumbs for an entity.
+ * Get data from a sub request to the URL of an entity.
  *
  * @DataProducer(
- *   id = "thunder_breadcrumb",
- *   name = @Translation("Breadcrumb"),
- *   description = @Translation("Resolves the breadcrumb for an entity."),
- *   produces = @ContextDefinition("string",
- *     label = @Translation("The url")
+ *   id = "thunder_entity_sub_request",
+ *   name = @Translation("Entity sub request"),
+ *   description = @Translation("Get data from a sub request to the URL of an entity."),
+ *   produces = @ContextDefinition("any",
+ *     label = @Translation("The data")
  *   ),
  *   consumes = {
  *     "entity" = @ContextDefinition("entity",
  *       label = @Translation("Root value")
+ *     ),
+ *     "key" = @ContextDefinition("string",
+ *       label = @Translation("The data key")
  *     )
  *   }
  * )
  */
-class ThunderBreadcrumb extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
+class ThunderEntitySubRequest extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
   /**
    * The HTTP kernel service.
@@ -88,19 +91,21 @@ class ThunderBreadcrumb extends DataProducerPluginBase implements ContainerFacto
   }
 
   /**
-   * Resolve the breadcrumb.
+   * Resolve data from a sub request.
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The entity.
+   * @param string $key
+   *   The key, where the data is stored in the sub request.
    * @param \Drupal\Core\Cache\RefinableCacheableDependencyInterface $metadata
    *   The cacheable dependency interface.
    *
-   * @throws \Drupal\Core\Entity\EntityMalformedException
-   *
    * @return mixed
-   *   The breadcrumb.
+   *   The data.
+   *
+   * @throws \Drupal\Core\Entity\EntityMalformedException
    */
-  public function resolve(EntityInterface $entity, RefinableCacheableDependencyInterface $metadata) {
+  public function resolve(EntityInterface $entity, string $key, RefinableCacheableDependencyInterface $metadata) {
     $currentRequest = $this->requestStack->getCurrentRequest();
     $request = Request::create(
       $entity->toUrl()->getInternalPath(),
@@ -120,7 +125,7 @@ class ThunderBreadcrumb extends DataProducerPluginBase implements ContainerFacto
 
     $content = (string) $response->getContent();
 
-    return Json::decode($content)['breadcrumb'];
+    return Json::decode($content)[$key];
   }
 
 }
