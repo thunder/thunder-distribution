@@ -17,6 +17,15 @@ query ($path: String!) {
             name
           }
         }
+        ... on ParagraphQuote {
+          text
+        }
+        ... on ParagraphLink {
+          links {
+            url
+            title
+          }
+        }
       }
     }
   }

@@ -58,3 +58,30 @@ type ParagraphGallery implements Paragraph {
 
   images: [MediaImage]
 }
+
+type ParagraphLink implements Paragraph {
+  id: Int!
+  uuid: String!
+  entity: String!
+  name: String
+
+  links: [Link]
+}
+
+type ParagraphVideo implements Paragraph {
+  id: Int!
+  uuid: String!
+  entity: String!
+  name: String
+
+  video: MediaVideo
+}
+
+type ParagraphQuote implements Paragraph {
+  id: Int!
+  uuid: String!
+  entity: String!
+  name: String
+
+  text: String
+}

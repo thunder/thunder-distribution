@@ -3,20 +3,50 @@ interface Media {
   uuid: String!
   entity: String!
   name: String
+  thumbnail: Thumbnail
 }
 
-type MediaImage implements Media {
+interface Image {
+  src: String
+  width: Int
+  height: Int
+}
+
+type Thumbnail implements Image {
+  src: String
+  width: Int
+  height: Int
+}
+
+type MediaImage implements Media & Image {
   id: Int!
   uuid: String!
   entity: String!
   name: String
+  thumbnail: Thumbnail
+
+  src: String
+  width: Int
+  height: Int
 
   title: String
   alt: String
   copyright: String
   description: String
-  src: String
-  width: Int
-  height: Int
   tags: [Tags]
+}
+
+type MediaVideo implements Media {
+  id: Int!
+  uuid: String!
+  entity: String!
+  name: String
+  thumbnail: Thumbnail
+
+  src: String
+  author: String
+  caption: String
+  copyright: String
+  description: String
+  source: String
 }

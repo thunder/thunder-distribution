@@ -1,40 +1,4 @@
 {
-  "errors": [
-    {
-      "message": "Internal server error",
-      "extensions": {
-        "category": "internal"
-      },
-      "locations": [
-        {
-          "line": 51,
-          "column": 7
-        }
-      ],
-      "path": [
-        "page",
-        "content",
-        3
-      ]
-    },
-    {
-      "message": "Internal server error",
-      "extensions": {
-        "category": "internal"
-      },
-      "locations": [
-        {
-          "line": 51,
-          "column": 7
-        }
-      ],
-      "path": [
-        "page",
-        "content",
-        4
-      ]
-    }
-  ],
   "data": {
     "menu": {
       "name": "Main navigation",
@@ -108,8 +72,16 @@
           "entity": "paragraph",
           "__typename": "ParagraphTwitter"
         },
-        null,
-        null
+        {
+          "uuid": "99c4a942-3a64-4cb1-922f-9d33b04c3bfc",
+          "entity": "paragraph",
+          "__typename": "ParagraphLink"
+        },
+        {
+          "uuid": "cc93e914-9a0d-4083-ade6-077072a3c2a6",
+          "entity": "paragraph",
+          "__typename": "ParagraphQuote"
+        }
       ],
       "teaser": {
         "text": "The Drupal community is one of the largest open source communities in the world. We're developers, designers, strategists, coordinators, editors, translators, and more. Each year, we meet at DrupalCamps, meetups, and other events in more than 200 countries. But once a year, our community comes together at the biggest Drupal event in the world: DrupalCon North America. This year, from May 9-13, we'll be in New Orleans.",

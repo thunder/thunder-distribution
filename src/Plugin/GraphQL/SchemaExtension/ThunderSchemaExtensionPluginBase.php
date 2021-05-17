@@ -101,6 +101,21 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
   }
 
   /**
+   * Add fields common to all media types.
+   *
+   * @param string $type
+   *   The type name.
+   */
+  protected function resolveMediaInterfaceFields(string $type) {
+    $this->resolveBaseFields($type);
+
+    $this->addFieldResolverIfNotExists($type, 'thumbnail',
+      $this->builder->produce('thunder_image')
+        ->map('entity', $this->builder->fromPath('entity', 'thumbnail.entity'))
+    );
+  }
+
+  /**
    * Add fields common to all page types.
    *
    * @param string $type

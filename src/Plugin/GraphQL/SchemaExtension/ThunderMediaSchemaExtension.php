@@ -39,9 +39,8 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
    * Add image media field resolvers.
    */
   protected function resolveFields() {
-
     // Image.
-    $this->resolveBaseFields('MediaImage');
+    $this->resolveMediaInterfaceFields('MediaImage');
     $this->addFieldResolverIfNotExists('MediaImage', 'copyright',
       $this->builder->fromPath('entity', 'field_copyright.value')
     );
@@ -79,6 +78,34 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
         ->map('entity', $this->builder->fromParent())
         ->map('field', $this->builder->fromValue('field_tags'))
     );
+
+    // Video.
+    $this->resolveMediaInterfaceFields('MediaVideo');
+
+    $this->addFieldResolverIfNotExists('MediaVideo', 'src',
+      $this->builder->fromPath('entity', 'field_media_video_embed_field.value')
+    );
+
+    $this->addFieldResolverIfNotExists('MediaVideo', 'author',
+      $this->builder->fromPath('entity', 'field_author.value')
+    );
+
+    $this->addFieldResolverIfNotExists('MediaVideo', 'caption',
+      $this->builder->fromPath('entity', 'field_caption.processed')
+    );
+
+    $this->addFieldResolverIfNotExists('MediaVideo', 'copyright',
+      $this->builder->fromPath('entity', 'field_copyright.value')
+    );
+
+    $this->addFieldResolverIfNotExists('MediaVideo', 'description',
+      $this->builder->fromPath('entity', 'field_description.processed')
+    );
+
+    $this->addFieldResolverIfNotExists('MediaVideo', 'source',
+      $this->builder->fromPath('entity', 'field_source.value')
+    );
+
   }
 
   /**
