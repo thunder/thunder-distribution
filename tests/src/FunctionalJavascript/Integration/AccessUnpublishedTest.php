@@ -33,7 +33,8 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
     $this->setModerationState('draft');
     $this->clickSave();
     // Edit article and generate access unpublished token.
-    $this->drupalGet('node/10/edit');
+    $node = $this->drupalGetNodeByTitle('Article 1');
+    $this->drupalGet($node->toUrl('edit-form'));
     $this->expandAllTabs();
     $page = $this->getSession()->getPage();
     $this->scrollElementInView('[data-drupal-selector="edit-generate-token"]');
@@ -47,13 +48,13 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
     $this->drupalLogout();
     $this->drupalGet($tokenUrl);
     $this->assertSession()->pageTextContains('Article Text 1');
-    $this->drupalGet('/article-1');
+    $this->drupalGet($node->toUrl());
     $noAccess = $this->xpath('//h1[contains(@class, "page-title")]//span[text() = "403"]');
     $this->assertEquals(1, count($noAccess));
 
     // Log-In and delete token -> check page can't be accessed.
     $this->drupalLogin($loggedInUser);
-    $this->drupalGet('node/10/edit');
+    $this->drupalGet($node->toUrl('edit-form'));
     $this->expandAllTabs();
     $this->scrollElementInView('[data-drupal-selector="edit-generate-token"]');
     $page->find('css', '[data-drupal-selector="access-token-list"] li.dropbutton-toggle > button')->click();
@@ -69,13 +70,13 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
 
     // Log-In and publish article.
     $this->drupalLogin($loggedInUser);
-    $this->drupalGet('node/10/edit');
+    $this->drupalGet($node->toUrl('edit-form'));
     $this->setModerationState('published');
     $this->clickSave();
 
     // Log-Out and check that URL to article works.
     $this->drupalLogout();
-    $this->drupalGet('article-1');
+    $this->drupalGet($node->toUrl());
     $this->assertSession()->pageTextContains('Article Text 1');
   }
 

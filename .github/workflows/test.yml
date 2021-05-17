@@ -209,7 +209,7 @@ jobs:
           composer remove thunder/thunder-distribution phpunit/phpunit
 
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
-          composer require phpunit/phpunit:~9.4.3 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
+          composer require thunder/thunder_testing_demo:4.x-upgrade-testing-dev phpunit/phpunit:~9.4.3 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
 
           chmod -R +w docroot/sites/default
           composer update

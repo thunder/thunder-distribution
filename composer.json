@@ -140,7 +140,7 @@
         "burdamagazinorg/thunder-dev-tools": "dev-master",
         "thunder/testsite_builder": "dev-master",
         "thunder/thunder_performance_measurement": "dev-master",
-        "thunder/thunder_testing_demo": "3.x-dev",
+        "thunder/thunder_testing_demo": "4.x-dev",
         "phpunit/phpunit": "~9.4.3"
     }
 }
