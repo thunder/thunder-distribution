@@ -158,6 +158,7 @@ jobs:
       DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 3.0.8
       DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
+      DRUPAL_TESTING_TEST_FILTER: testOrderChange
 
     steps:
       - uses: actions/checkout@v1
@@ -227,6 +228,9 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - name: Run tests suite
         run: test-drupal-project run_tests
