@@ -106,7 +106,7 @@ class ThunderGqlsRenderer implements MainContentRendererInterface {
       $this->currentRouteMatch->getCurrentRouteMatch()
     )->getLinks() as $link) {
       $breadCrumb[] = [
-        'url' => $link->getUrl()->toString(),
+        'uri' => $link->getUrl()->toUriString(),
         'title' => $link->getText(),
       ];
     }

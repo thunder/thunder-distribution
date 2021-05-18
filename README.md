@@ -112,6 +112,12 @@ example query you have to add the query variable `{"path": "/your-path"}`
                 }
               }
             }
+            ... on ParagraphLink {
+              links {
+                url
+                title
+              }
+            }
           }
         }
       }
