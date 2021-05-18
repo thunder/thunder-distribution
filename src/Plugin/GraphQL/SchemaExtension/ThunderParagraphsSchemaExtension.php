@@ -20,7 +20,7 @@ use GraphQL\Type\Definition\ResolveInfo;
 class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase {
 
   /**
-   * Add image media field resolvers.
+   * {@inheritdoc}
    */
   public function registerResolvers(ResolverRegistryInterface $registry) {
     parent::registerResolvers($registry);
