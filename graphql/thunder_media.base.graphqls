@@ -12,10 +12,21 @@ interface Image {
   height: Int
 }
 
+type ImageDerivative implements Image {
+  src: String
+  width: Int
+  height: Int
+}
+
 type Thumbnail implements Image {
   src: String
   width: Int
   height: Int
+}
+
+type FocalPoint {
+  x: Int
+  y: Int
 }
 
 type MediaImage implements Media & Image {
@@ -28,6 +39,8 @@ type MediaImage implements Media & Image {
   src: String
   width: Int
   height: Int
+  derivative(style: String!): ImageDerivative
+  focalPoint: FocalPoint
 
   title: String
   alt: String

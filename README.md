@@ -110,6 +110,14 @@ example query you have to add the query variable `{"path": "/your-path"}`
                 tags {
                   name
                 }
+                derivative(style: "medium") {
+                  src
+                  width
+                }
+                focalPoint {
+                  x
+                  y
+                }
               }
             }
             ... on ParagraphLink {

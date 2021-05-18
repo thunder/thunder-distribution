@@ -57,6 +57,26 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
       )
     );
 
+    $this->addFieldResolverIfNotExists('MediaImage', 'derivative',
+      $this->builder->compose(
+        $this->builder->fromPath('entity', 'field_image.entity'),
+        $this->builder->produce('image_derivative')
+          ->map('entity', $this->builder->fromParent())
+          ->map('style', $this->builder->fromArgument('style')),
+        $this->builder->callback(function (array $values) {
+          return $values + ['src' => $values['url']];
+        })
+      )
+    );
+
+    $this->addFieldResolverIfNotExists('MediaImage', 'focalPoint',
+      $this->builder->compose(
+        $this->builder->fromPath('entity', 'field_image.entity'),
+        $this->builder->produce('focal_point')
+          ->map('file', $this->builder->fromParent())
+      )
+    );
+
     $this->addFieldResolverIfNotExists('MediaImage', 'width',
       $this->builder->fromPath('entity', 'field_image.width')
     );

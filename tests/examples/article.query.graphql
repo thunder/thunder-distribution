@@ -57,6 +57,9 @@ query ($path: String!) {
         text
         image {
           uuid
+          derivative(style: "medium") {
+            width
+          }
         }
       }
     }
