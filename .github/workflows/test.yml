@@ -57,7 +57,7 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer global require thunder/drupal-testing:1.0.20
+          composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -268,7 +268,7 @@ jobs:
       - name: Get build environment
         run: |
           composer self-update
-          composer global require thunder/drupal-testing:1.0.20
+          composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
