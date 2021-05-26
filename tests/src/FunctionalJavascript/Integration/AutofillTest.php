@@ -25,7 +25,8 @@ class AutofillTest extends ThunderJavascriptTestBase {
 
     $this->drupalGet('node/add/article');
 
-    $page->fillField('field_channel', 1);
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
+    $page->fillField('field_channel', $term->id());
     $page->fillField('title[0][value]', 'Autofill test title');
 
     // The autofill field should have the same value as the title.

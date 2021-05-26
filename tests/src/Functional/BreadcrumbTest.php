@@ -34,9 +34,11 @@ class BreadcrumbTest extends ThunderTestBase {
     $node_add = [Url::fromRoute('node.add_page')->toString() => 'Add content'];
 
     // Page content.
-    $this->assertBreadcrumb('node/3', $home + ['/node' => 'Node']);
+    $node1 = $this->loadNodeByUuid('f3f1e924-d404-425e-8130-eeb554e36f7a');
+    $this->assertBreadcrumb($node1->toUrl(), $home + ['/node' => 'Node']);
     // Article content.
-    $this->assertBreadcrumb('node/8', $home + ['/events' => 'Events']);
+    $node2 = $this->loadNodeByUuid('bbb1ee17-15f8-46bd-9df5-21c58040d741');
+    $this->assertBreadcrumb($node2->toUrl(), $home + ['/events' => 'Events']);
 
     $this->logWithRole('administrator');
 
@@ -45,9 +47,9 @@ class BreadcrumbTest extends ThunderTestBase {
     $this->assertBreadcrumb('node/add/page', $home + $overview + $node_add);
 
     // Page content.
-    $this->assertBreadcrumb('node/3/edit', $home + $overview);
+    $this->assertBreadcrumb($node1->toUrl('edit-form'), $home + $overview);
     // Article content.
-    $this->assertBreadcrumb('node/8/edit', $home + $overview);
+    $this->assertBreadcrumb($node2->toUrl('edit-form'), $home + $overview);
   }
 
 }

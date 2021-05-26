@@ -33,8 +33,9 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->assertSession()->fieldExists('Name')->setValue('Youtube');
     $this->assertSession()->buttonExists('Save')->press();
 
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Test article',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
     ]);
@@ -138,9 +139,10 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     }
     \Drupal::service('module_installer')->uninstall(['thunder_workflow']);
 
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     // Try to create an article.
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Test article',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
     ]);
@@ -153,8 +155,9 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
    * Tests draft creation and that reverting to the default revision works.
    */
   public function testModerationWorkflow() {
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Test workflow article',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
     ]);
