@@ -205,7 +205,8 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
    */
   public function testContentLock() {
 
-    $this->drupalGet('node/6/edit');
+    $node = $this->loadNodeByUuid('0bd5c257-2231-450f-b4c2-ab156af7b78d');
+    $this->drupalGet($node->toUrl('edit-form'));
     $this->assertSession()->pageTextContains('This content is now locked against simultaneous editing. This content will remain locked if you navigate away from this page without saving or unlocking it.');
 
     $page = $this->getSession()->getPage();
@@ -214,7 +215,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $page->find('xpath', '//*[@id="edit-submit"]')->click();
     $this->assertSession()->pageTextContains('Lock broken. Anyone can now edit this content.');
 
-    $this->drupalGet('node/6/edit');
+    $this->drupalGet($node->toUrl('edit-form'));
     $loggedInUser = $this->loggedInUser->label();
 
     $this->drupalLogout();
@@ -222,7 +223,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     // Login with other user.
     $this->logWithRole(static::$defaultUserRole);
 
-    $this->drupalGet('node/6/edit');
+    $this->drupalGet($node->toUrl('edit-form'));
     $this->assertSession()->pageTextContains('This content is being edited by the user ' . $loggedInUser . ' and is therefore locked to prevent other users changes.');
   }
 
