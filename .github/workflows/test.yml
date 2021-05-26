@@ -21,6 +21,7 @@ env:
   DRUPAL_TESTING_TEST_CODING_STYLES: false
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_TEST_GROUP: Thunder
+  DRUPAL_TESTING_HTTP_PORT: 8888
   THUNDER_ADMIN_BRANCH: 4.x
   PUSHER_CREDENTIALS: ${{ secrets.PUSHER_CREDENTIALS }}
 
@@ -108,12 +109,6 @@ jobs:
         # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
         ini-values: pcre.jit=0
 
-    - name: Setup problem matchers for PHP
-      run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-
-    - name: Setup problem matchers for PHPUnit
-      run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-
     - name: Start MySql service
       run: |
         sudo /etc/init.d/mysql start
@@ -128,6 +123,13 @@ jobs:
 
     - name: Unzip build artifact
       run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
+
+    - name: Setup Apache
+      uses: thunder/apache-shiva-php-action@v1
+      with:
+        php-version: ${{ matrix.PHP_VERSION }}
+        site-directory: /tmp/test/thunder/install/docroot
+        http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
     - name: Run config tests
       run: test-drupal-project run_tests -nc
@@ -146,6 +148,10 @@ jobs:
 
     runs-on: ubuntu-20.04
 
+    strategy:
+      matrix:
+        PHP_VERSION: [ '7.3' ]
+
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-upgrade') || github.event_name == 'schedule' }}
 
     env:
@@ -159,15 +165,9 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           coverage: none
-          php-version: '7.3'
+          php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick, gd, pdo_mysql
           tools: composer:v1
-
-      - name: Setup problem matchers for PHP
-        run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-
-      - name: Setup problem matchers for PHPUnit
-        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Start MySql service
         run: |
@@ -209,15 +209,24 @@ jobs:
           composer remove thunder/thunder-distribution phpunit/phpunit
 
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
-          composer require phpunit/phpunit:~9.4.3 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
+          composer require thunder/thunder_testing_demo:4.x-upgrade-testing-dev phpunit/phpunit:~9.4.3 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
 
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
 
           cd docroot
+          wget https://www.drupal.org/files/issues/2021-05-03/3211936-2.patch
+          patch -p1 < 3211936-2.patch
           php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
         working-directory: /tmp/test/thunder/install
+
+      - name: Setup Apache
+        uses: thunder/apache-shiva-php-action@v1
+        with:
+          php-version: ${{ matrix.PHP_VERSION }}
+          site-directory: /tmp/test/thunder/install/docroot
+          http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Run tests suite
         run: test-drupal-project run_tests
@@ -225,6 +234,10 @@ jobs:
   test-min:
 
     runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        PHP_VERSION: [ '7.3' ]
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
 
@@ -237,14 +250,8 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           coverage: none
-          php-version: '7.3'
+          php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick, gd, pdo_mysql
-
-      - name: Setup problem matchers for PHP
-        run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-
-      - name: Setup problem matchers for PHPUnit
-        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Start MySql service
         run: |
@@ -273,6 +280,13 @@ jobs:
         run: test-drupal-project build
         env:
           DRUPAL_TESTING_MIN_BUILD: true
+
+      - name: Setup Apache
+        uses: thunder/apache-shiva-php-action@v1
+        with:
+          php-version: ${{ matrix.PHP_VERSION }}
+          site-directory: /tmp/test/thunder/install/docroot
+          http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Test for deprecations
         run: test-drupal-project deprecation

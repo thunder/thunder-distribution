@@ -4,7 +4,6 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
-use Drupal\media\Entity\Media;
 
 /**
  * Tests the Image media modification.
@@ -21,10 +20,8 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
    */
   public function testFocalPointChange() {
 
-    // Media ID used for testing.
-    $mediaId = 9;
-
-    $this->drupalGet("media/$mediaId/edit");
+    $media = $this->loadMediaByUuid('f5f7fc5d-b2b8-426a-adf3-ee6aff6379da');
+    $this->drupalGet($media->toUrl('edit-form'));
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_BeforeFocalPointChange_' . date('Ymd_His') . '.png');
 
@@ -36,7 +33,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     $this->clickSave();
 
-    $media = Media::load($mediaId);
+    $media = $this->loadMediaByUuid('f5f7fc5d-b2b8-426a-adf3-ee6aff6379da');
     $img = $media->get('field_image')->target_id;
 
     $file = File::load($img);
@@ -61,50 +58,48 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
    * Test Image modifications (edit fields).
    */
   public function testImageEdit() {
-    // Media ID used for testing.
-    $mediaId = 9;
-
     $page = $this->getSession()->getPage();
 
-    $this->drupalGet("media/$mediaId/edit");
+    $media = $this->loadMediaByUuid('f5f7fc5d-b2b8-426a-adf3-ee6aff6379da');
+    $this->drupalGet($media->toUrl('edit-form'));
 
     $this->assertSession()->assertWaitOnAjaxRequest();
 
-    $page->fillField('name[0][value]', "Media {$mediaId}");
-    $page->fillField('field_image[0][alt]', "Media {$mediaId} Alt Text");
-    $page->fillField('field_image[0][title]', "Media {$mediaId} Title");
+    $page->fillField('name[0][value]', "Media {$media->id()}");
+    $page->fillField('field_image[0][alt]', "Media {$media->id()} Alt Text");
+    $page->fillField('field_image[0][title]', "Media {$media->id()} Title");
     $this->setRawFieldValue('field_expires[0][value][date]', '2022-12-18');
     $this->setRawFieldValue('field_expires[0][value][time]', '01:02:03');
-    $page->fillField('field_copyright[0][value]', "Media {$mediaId} Copyright");
-    $page->fillField('field_source[0][value]', "Media {$mediaId} Source");
+    $page->fillField('field_copyright[0][value]', "Media {$media->id()} Copyright");
+    $page->fillField('field_source[0][value]', "Media {$media->id()} Source");
 
-    $this->fillCkEditor('#edit-field-description-0-value', "Media {$mediaId} Description");
+    $this->fillCkEditor('#edit-field-description-0-value', "Media {$media->id()} Description");
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_BeforeImageEditSave_' . date('Ymd_His') . '.png');
 
     $this->clickSave();
 
     // Edit media and check are fields correct.
-    $this->drupalGet("media/$mediaId/edit");
+    $this->drupalGet($media->toUrl('edit-form'));
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_AfterImageEdit_' . date('Ymd_His') . '.png');
 
     $this->assertSession()
-      ->fieldValueEquals('name[0][value]', "Media {$mediaId}");
+      ->fieldValueEquals('name[0][value]', "Media {$media->id()}");
     $this->assertSession()
-      ->fieldValueEquals('field_image[0][alt]', "Media {$mediaId} Alt Text");
+      ->fieldValueEquals('field_image[0][alt]', "Media {$media->id()} Alt Text");
     $this->assertSession()
-      ->fieldValueEquals('field_image[0][title]', "Media {$mediaId} Title");
+      ->fieldValueEquals('field_image[0][title]', "Media {$media->id()} Title");
     $this->assertSession()
       ->fieldValueEquals('field_expires[0][value][date]', '2022-12-18');
     $this->assertSession()
       ->fieldValueEquals('field_expires[0][value][time]', '01:02:03');
     $this->assertSession()
-      ->fieldValueEquals('field_copyright[0][value]', "Media {$mediaId} Copyright");
+      ->fieldValueEquals('field_copyright[0][value]', "Media {$media->id()} Copyright");
     $this->assertSession()
-      ->fieldValueEquals('field_source[0][value]', "Media {$mediaId} Source");
+      ->fieldValueEquals('field_source[0][value]', "Media {$media->id()} Source");
     $this->assertSession()
-      ->fieldValueEquals('field_description[0][value]', "<p>Media {$mediaId} Description</p>");
+      ->fieldValueEquals('field_description[0][value]', "<p>Media {$media->id()} Description</p>");
   }
 
   /**
