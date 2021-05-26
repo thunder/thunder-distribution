@@ -65,7 +65,7 @@
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.9",
-        "drupal/core": "9.2.x-dev",
+        "drupal/core": "^9.2.0@BETA",
         "drupal/config_selector": "^2.1",
         "drupal/config_update": "^1.7",
         "drupal/content_lock": "^2.1",
