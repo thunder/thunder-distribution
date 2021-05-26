@@ -188,8 +188,9 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     // Create Article with facebook meta tags and check it.
     $fieldValues = $this->generateMetaTagFieldValues($facebookMetaTags, 'field_meta_tags[0]');
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $fieldValues += [
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Test FB MetaTags Article',
       'field_seo_title[0][value]' => 'Facebook MetaTags',
       'field_teaser_text[0][value]' => 'Facebook MetaTags Testing',
