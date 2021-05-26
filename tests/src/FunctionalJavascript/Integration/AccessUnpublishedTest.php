@@ -22,10 +22,10 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
    * Testing integration of "access_unpublished" module.
    */
   public function testAccessUnpublished() {
-
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     // Create article and save it as unpublished.
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Article 1',
       'field_seo_title[0][value]' => 'Article 1',
     ]);

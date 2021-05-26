@@ -136,9 +136,9 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    *   Custom meta tag configuration for article.
    */
   protected function createArticleWithFields(array $fieldValues = []) {
-
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $fieldValues += [
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => static::$tokens['[node:title]'],
       'field_seo_title[0][value]' => static::$tokens['[node:field_seo_title]'],
       'field_teaser_text[0][value]' => static::$tokens['[node:field_teaser_text]'],
