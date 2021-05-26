@@ -9,19 +9,24 @@
           "name": "Come to DrupalCon New Orleans > Paragraphs",
           "images": [
             {
-              "name": "Image 5"
+              "name": "Image 5",
+              "source": null
             },
             {
-              "name": "Image 4"
+              "name": "Image 4",
+              "source": null
             },
             {
-              "name": "Image 1"
+              "name": "Image 1",
+              "source": "Thunder"
             },
             {
-              "name": "Image 2"
+              "name": "Image 2",
+              "source": null
             },
             {
-              "name": "Image 3"
+              "name": "Image 3",
+              "source": null
             }
           ]
         },

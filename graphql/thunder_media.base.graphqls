@@ -47,6 +47,7 @@ type MediaImage implements Media & Image {
   copyright: String
   description: String
   tags: [Tags]
+  source: String
 }
 
 type MediaVideo implements Media {
