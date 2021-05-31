@@ -113,7 +113,8 @@ class LiveblogTest extends ThunderJavascriptTestBase {
 
     $this->clickDropButton('field_embed_media_image_add_more', FALSE);
 
-    $this->selectMedia("field_embed_media_0_subform_field_image", 'image_browser', ['media:1']);
+    $media = $this->loadMediaByUuid('17965877-27b2-428f-8b8c-7dccba9786e5');
+    $this->selectMedia("field_embed_media_0_subform_field_image", 'image_browser', ['media:' . $media->id()]);
 
     $this->liveblogSetBody('Very nice image post you have here!');
 

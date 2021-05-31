@@ -106,7 +106,8 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
    */
   public function testDiffModule() {
 
-    $this->drupalGet('node/7/edit');
+    $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
+    $this->drupalGet($node->toUrl('edit-form'));
 
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
@@ -117,16 +118,18 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $teaserField->setValue($teaserText);
 
     $this->clickButtonDrupalSelector($page, 'edit-field-teaser-media-current-items-0-remove-button');
-    $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
+    $media1 = $this->loadMediaByUuid('17965877-27b2-428f-8b8c-7dccba9786e5');
+    $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $media1->id()]);
 
     $newParagraphText = 'One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them!';
     $this->addTextParagraph('field_paragraphs', $newParagraphText);
 
-    $this->addImageParagraph('field_paragraphs', ['media:5']);
+    $media2 = $this->loadMediaByUuid('5d719c64-7f32-4062-9967-9874f5ca3eba');
+    $this->addImageParagraph('field_paragraphs', ['media:' . $media2->id()]);
 
     $this->clickSave();
 
-    $this->drupalGet('node/7/revisions');
+    $this->drupalGet($node->toUrl('version-history'));
 
     $firstRightRadio = $page->find('xpath', '//table[contains(@class, "diff-revisions")]/tbody//tr[1]//input[@name="radios_right"]');
     $firstRightRadio->click();
@@ -185,8 +188,9 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     // Create Article with facebook meta tags and check it.
     $fieldValues = $this->generateMetaTagFieldValues($facebookMetaTags, 'field_meta_tags[0]');
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $fieldValues += [
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Test FB MetaTags Article',
       'field_seo_title[0][value]' => 'Facebook MetaTags',
       'field_teaser_text[0][value]' => 'Facebook MetaTags Testing',
@@ -202,7 +206,8 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
    */
   public function testContentLock() {
 
-    $this->drupalGet('node/6/edit');
+    $node = $this->loadNodeByUuid('0bd5c257-2231-450f-b4c2-ab156af7b78d');
+    $this->drupalGet($node->toUrl('edit-form'));
     $this->assertSession()->pageTextContains('This content is now locked against simultaneous editing. This content will remain locked if you navigate away from this page without saving or unlocking it.');
 
     $page = $this->getSession()->getPage();
@@ -211,7 +216,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $page->find('xpath', '//*[@id="edit-submit"]')->click();
     $this->assertSession()->pageTextContains('Lock broken. Anyone can now edit this content.');
 
-    $this->drupalGet('node/6/edit');
+    $this->drupalGet($node->toUrl('edit-form'));
     $loggedInUser = $this->loggedInUser->label();
 
     $this->drupalLogout();
@@ -219,7 +224,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     // Login with other user.
     $this->logWithRole(static::$defaultUserRole);
 
-    $this->drupalGet('node/6/edit');
+    $this->drupalGet($node->toUrl('edit-form'));
     $this->assertSession()->pageTextContains('This content is being edited by the user ' . $loggedInUser . ' and is therefore locked to prevent other users changes.');
   }
 
