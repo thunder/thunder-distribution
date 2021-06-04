@@ -72,6 +72,7 @@ install:
   - metatag:metatag_twitter_cards
   - metatag_async_widget:metatag_async_widget
   - paragraphs:paragraphs
+  - paragraphs_ee:paragraphs_ee
   - paragraphs_features:paragraphs_features
   - pathauto:pathauto
   - redirect:redirect
