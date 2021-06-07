@@ -3,8 +3,6 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
-use Drupal\graphql\Plugin\DataProducerPluginManager;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * The routing schema extension.
@@ -17,32 +15,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class ThunderRoutingSchemaExtension extends ThunderSchemaExtensionPluginBase {
-
-  /**
-   * The data producer plugin manager.
-   *
-   * @var \Drupal\graphql\Plugin\DataProducerPluginManager
-   */
-  protected $dataProducerManager;
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    $extension = parent::create($container, $configuration, $plugin_id, $plugin_definition);
-    $extension->setDataProducerManager($container->get('plugin.manager.graphql.data_producer'));
-    return $extension;
-  }
-
-  /**
-   * Set the plugin manager.
-   *
-   * @param \Drupal\graphql\Plugin\DataProducerPluginManager $pluginManager
-   *   The data producer plugin manager.
-   */
-  protected function setDataProducerManager(DataProducerPluginManager $pluginManager) {
-    $this->dataProducerManager = $pluginManager;
-  }
 
   /**
    * {@inheritdoc}

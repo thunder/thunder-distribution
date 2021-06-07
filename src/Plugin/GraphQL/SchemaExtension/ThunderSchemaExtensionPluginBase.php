@@ -6,6 +6,7 @@ use Drupal\Core\Url;
 use Drupal\graphql\GraphQL\Resolver\ResolverInterface;
 use Drupal\graphql\GraphQL\ResolverBuilder;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
+use Drupal\graphql\Plugin\DataProducerPluginManager;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerProxy;
 use Drupal\graphql\Plugin\GraphQL\SchemaExtension\SdlSchemaExtensionPluginBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -30,11 +31,19 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
   protected $builder;
 
   /**
+   * The data producer plugin manager.
+   *
+   * @var \Drupal\graphql\Plugin\DataProducerPluginManager
+   */
+  protected $dataProducerManager;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     $plugin = parent::create($container, $configuration, $plugin_id, $plugin_definition);
     $plugin->createResolverBuilder();
+    $plugin->setDataProducerManager($container->get('plugin.manager.graphql.data_producer'));
     return $plugin;
   }
 
@@ -43,6 +52,16 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
    */
   public function registerResolvers(ResolverRegistryInterface $registry) {
     $this->registry = $registry;
+  }
+
+  /**
+   * Set the plugin manager.
+   *
+   * @param \Drupal\graphql\Plugin\DataProducerPluginManager $pluginManager
+   *   The data producer plugin manager.
+   */
+  protected function setDataProducerManager(DataProducerPluginManager $pluginManager) {
+    $this->dataProducerManager = $pluginManager;
   }
 
   /**
@@ -115,6 +134,17 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
         ->map('entity', $this->builder->fromPath('entity', 'thumbnail.entity'))
     );
 
+    $this->addFieldResolverIfNotExists($type, 'published',
+      $this->builder->produce('entity_published')
+        ->map('entity', $this->builder->fromParent())
+    );
+
+    if ($this->dataProducerManager->hasDefinition('media_expire_fallback_entity')) {
+      $this->addFieldResolverIfNotExists($type, 'fallbackMedia',
+        $this->builder->produce('media_expire_fallback_entity')
+          ->map('entity', $this->builder->fromParent())
+      );
+    }
     $this->resolveBaseTypes();
   }
 

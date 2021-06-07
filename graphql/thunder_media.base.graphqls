@@ -4,6 +4,8 @@ interface Media {
   entity: String!
   name: String
   thumbnail: Thumbnail
+  published: Boolean
+  fallbackMedia: Media
 }
 
 interface Image {
@@ -35,6 +37,8 @@ type MediaImage implements Media & Image {
   entity: String!
   name: String
   thumbnail: Thumbnail
+  published: Boolean
+  fallbackMedia: MediaImage
 
   src: String
   width: Int
@@ -56,6 +60,8 @@ type MediaVideo implements Media {
   entity: String!
   name: String
   thumbnail: Thumbnail
+  published: Boolean
+  fallbackMedia: MediaVideo
 
   src: String
   author: String

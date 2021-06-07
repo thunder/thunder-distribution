@@ -4,6 +4,7 @@ namespace Drupal\Tests\thunder_gqls\Functional;
 
 use Drupal\access_unpublished\Entity\AccessToken;
 use Drupal\Component\Serialization\Json;
+use Drupal\media\Entity\MediaType;
 use Drupal\node\Entity\Node;
 
 /**
@@ -98,6 +99,58 @@ GQL;
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
 
     $this->assertEqualsCanonicalizing(['name' => 'Test node'], json_decode($response->getBody(), TRUE)['data']['page']);
+  }
+
+  /**
+   * Tests the article with an expired teaser image.
+   *
+   * @throws \GuzzleHttp\Exception\GuzzleException
+   */
+  public function testExpiredImage() {
+
+    \Drupal::service('entity.repository')->loadEntityByUuid('media', '17965877-27b2-428f-8b8c-7dccba9786e5')
+      ->setUnpublished()
+      ->save();
+
+    MediaType::load('image')
+      ->setThirdPartySetting('media_expire', 'fallback_media', '05048c57-942d-4251-ad12-ce562f8c79a0')
+      ->save();
+
+    $query = <<<GQL
+      query (\$path: String!) {
+        page(path: \$path) {
+          name
+          ... on Article {
+            teaser {
+              image {
+                name
+                published
+                fallbackMedia {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+GQL;
+
+    $node = \Drupal::service('entity.repository')->loadEntityByUuid('node', '0bd5c257-2231-450f-b4c2-ab156af7b78d');
+    $variables = ['path' => $node->toUrl()->toString()];
+    $response = $this->query($query, Json::encode($variables));
+    $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
+    $this->assertEqualsCanonicalizing([
+      'name' => 'Burda Launches Open-Source CMS Thunder',
+      'teaser' => [
+        'image' => [
+          'name' => 'Thunder',
+          'published' => FALSE,
+          'fallbackMedia' => [
+            'name' => 'Image 1',
+          ],
+        ],
+      ],
+    ], json_decode($response->getBody(), TRUE)['data']['page']);
   }
 
 }
