@@ -47,4 +47,38 @@ trait ResolverHelperTrait {
     $this->builder = new ResolverBuilder();
   }
 
+  /**
+   * Produces an entity_reference field.
+   *
+   * @param string $field
+   *   Name of the filed.
+   * @param \Drupal\graphql\GraphQL\Resolver\ResolverInterface|null $entity
+   *   Entity to get the field property.
+   *
+   * @return \Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerProxy
+   *   The field data producer.
+   */
+  public function fromEntityReference(string $field, ResolverInterface $entity = NULL) {
+    return $this->builder->produce('entity_reference')
+      ->map('field', $this->builder->fromValue($field))
+      ->map('entity', $entity ?: $this->builder->fromParent());
+  }
+
+  /**
+   * Produces an entity_reference_revisions field.
+   *
+   * @param string $field
+   *   Name of the filed.
+   * @param \Drupal\graphql\GraphQL\Resolver\ResolverInterface|null $entity
+   *   Entity to get the field property.
+   *
+   * @return \Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerProxy
+   *   The field data producer.
+   */
+  public function fromEntityReferenceRevisions(string $field, $entity = NULL) {
+    return $this->builder->produce('entity_reference_revisions')
+      ->map('field', $this->builder->fromValue($field))
+      ->map('entity', $entity ?: $this->builder->fromParent());
+  }
+
 }
