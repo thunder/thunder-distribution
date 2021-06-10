@@ -1,0 +1,33 @@
+type Schema {
+  query: Query
+}
+
+type Query
+
+type Link {
+  url: String!
+  title: String!
+}
+
+interface Image {
+  src: String
+  width: Int
+  height: Int
+}
+
+type ImageDerivative implements Image {
+  src: String
+  width: Int
+  height: Int
+}
+
+type Thumbnail implements Image {
+  src: String
+  width: Int
+  height: Int
+}
+
+type FocalPoint {
+  x: Int
+  y: Int
+}

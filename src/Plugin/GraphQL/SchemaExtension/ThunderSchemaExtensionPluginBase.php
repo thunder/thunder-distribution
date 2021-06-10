@@ -2,13 +2,11 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
-use Drupal\Core\Url;
-use Drupal\graphql\GraphQL\Resolver\ResolverInterface;
-use Drupal\graphql\GraphQL\ResolverBuilder;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\graphql\Plugin\DataProducerPluginManager;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerProxy;
 use Drupal\graphql\Plugin\GraphQL\SchemaExtension\SdlSchemaExtensionPluginBase;
+use Drupal\thunder_gqls\Traits\ResolverHelperTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -16,19 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPluginBase {
 
-  /**
-   * ResolverRegistryInterface.
-   *
-   * @var \Drupal\graphql\GraphQL\ResolverRegistryInterface
-   */
-  protected $registry;
-
-  /**
-   * ResolverBuilder.
-   *
-   * @var \Drupal\graphql\GraphQL\ResolverBuilder
-   */
-  protected $builder;
+  use ResolverHelperTrait;
 
   /**
    * The data producer plugin manager.
@@ -62,13 +48,6 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
    */
   protected function setDataProducerManager(DataProducerPluginManager $pluginManager) {
     $this->dataProducerManager = $pluginManager;
-  }
-
-  /**
-   * Create the ResolverBuilder.
-   */
-  protected function createResolverBuilder() {
-    $this->builder = new ResolverBuilder();
   }
 
   /**
@@ -145,7 +124,6 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
           ->map('entity', $this->builder->fromParent())
       );
     }
-    $this->resolveBaseTypes();
   }
 
   /**
@@ -206,22 +184,6 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
   }
 
   /**
-   * Add field resolver to registry, if it does not already exist.
-   *
-   * @param string $type
-   *   The type name.
-   * @param string $field
-   *   The field name.
-   * @param \Drupal\graphql\GraphQL\Resolver\ResolverInterface $resolver
-   *   The field resolver.
-   */
-  protected function addFieldResolverIfNotExists(string $type, string $field, ResolverInterface $resolver) {
-    if (!$this->registry->getFieldResolver($type, $field)) {
-      $this->registry->addFieldResolver($type, $field, $resolver);
-    }
-  }
-
-  /**
    * Add content query field resolvers.
    *
    * @param string $page_type
@@ -235,27 +197,6 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
         ->map('type', $this->builder->fromValue($entity_type))
         ->map('bundles', $this->builder->fromValue([$page_type]))
         ->map('id', $this->builder->fromArgument('id'))
-    );
-  }
-
-  /**
-   * Resolve custom types, that are used in multiple places.
-   */
-  private function resolveBaseTypes() {
-    $this->addFieldResolverIfNotExists('Link', 'url',
-      $this->builder->callback(function ($parent) {
-        if (!empty($parent) && isset($parent['uri'])) {
-          $urlObject = Url::fromUri($parent['uri']);
-          $url = $urlObject->toString(TRUE)->getGeneratedUrl();
-        }
-        return $url ?? '';
-      })
-    );
-
-    $this->addFieldResolverIfNotExists('Link', 'title',
-      $this->builder->callback(function ($parent) {
-        return $parent['title'];
-      })
     );
   }
 

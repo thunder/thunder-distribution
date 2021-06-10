@@ -3,7 +3,7 @@
   <description>PHP CodeSniffer configuration for Thunder GraphQL schema development.</description>
   <file>.</file>
   <exclude-pattern>/vendor/*</exclude-pattern>
-  <arg name="extensions" value="php,module,inc,install,test,profile,theme,css,info,txt,md,yml"/>
+  <arg name="extensions" value="php,module,inc,install,test,profile,theme,css,info,txt,yml"/>
   <config name="drupal_core_version" value="9"/>
   <rule ref="Drupal"/>
   <rule ref="DrupalPractice"/>

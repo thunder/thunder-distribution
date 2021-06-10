@@ -20,11 +20,6 @@ type Teaser {
   text: String
 }
 
-type Link {
-  url: String!
-  title: String!
-}
-
 type EntityLinks {
   canonical: String
   deleteForm: String

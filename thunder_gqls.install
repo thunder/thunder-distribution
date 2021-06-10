@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the thunder_gqls module.
+ */
+
+/**
+ * Use thunder schema instead of composable.
+ *
+ * This is a helper function for haus.de and should be removed after haus.de
+ * was updated. This is way to invasive for general purpose.
+ */
+function thunder_gqls_update_8001() {
+  $configFactory = \Drupal::configFactory();
+
+  foreach ($configFactory->listAll('graphql.graphql_servers.') as $graphqlServerConfigName) {
+    $config = $configFactory->getEditable($graphqlServerConfigName);
+    $extensions = $config->get('schema_configuration.composable.extensions');
+
+    if (is_array($extensions) && in_array('thunder_pages', $extensions)) {
+      $config->clear('schema_configuration.composable')
+        ->set('schema', 'thunder')
+        ->set('schema_configuration.thunder.extensions', $extensions)
+        ->save(TRUE);
+    }
+  }
+}

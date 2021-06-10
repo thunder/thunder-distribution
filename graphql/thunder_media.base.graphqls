@@ -8,29 +8,6 @@ interface Media {
   fallbackMedia: Media
 }
 
-interface Image {
-  src: String
-  width: Int
-  height: Int
-}
-
-type ImageDerivative implements Image {
-  src: String
-  width: Int
-  height: Int
-}
-
-type Thumbnail implements Image {
-  src: String
-  width: Int
-  height: Int
-}
-
-type FocalPoint {
-  x: Int
-  y: Int
-}
-
 type MediaImage implements Media & Image {
   id: Int!
   uuid: String!

@@ -27,9 +27,9 @@ class JsonLdSchemaTest extends ThunderGqlsTestBase {
     $this->config('metatag.metatag_defaults.node__article')->set('tags', $tags)
       ->save();
 
-    $extensions = $this->config('graphql.graphql_servers.thunder_graphql')->get('schema_configuration.composable.extensions');
+    $extensions = $this->config('graphql.graphql_servers.thunder_graphql')->get('schema_configuration.thunder.extensions');
     $extensions['thunder_jsonld'] = 'thunder_jsonld';
-    $this->config('graphql.graphql_servers.thunder_graphql')->set('schema_configuration.composable.extensions', $extensions)
+    $this->config('graphql.graphql_servers.thunder_graphql')->set('schema_configuration.thunder.extensions', $extensions)
       ->save();
 
     $this->drupalLogin($this->graphqlUser);
