@@ -1,3 +1,0 @@
-extend type Query {
-  page(path: String!, auHash: String): Page
-}

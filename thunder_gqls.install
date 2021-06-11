@@ -26,3 +26,18 @@ function thunder_gqls_update_8001() {
     }
   }
 }
+
+/**
+ * Remove thunder_routing extension.
+ */
+function thunder_gqls_update_8002() {
+  $configFactory = \Drupal::configFactory();
+
+  foreach ($configFactory->listAll('graphql.graphql_servers.') as $graphqlServerConfigName) {
+    $config = $configFactory->getEditable($graphqlServerConfigName);
+
+    if ($config->get('schema') === 'thunder') {
+      $config->clear('schema_configuration.thunder.extensions.thunder_routing')->save(TRUE);
+    }
+  }
+}

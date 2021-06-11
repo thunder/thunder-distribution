@@ -3,4 +3,5 @@ extend type Query {
   tags(id: Int!): Tags
   channel(id: Int!): Channel
   user(id: Int!): User
+  page(path: String!, auHash: String): Page
 }
