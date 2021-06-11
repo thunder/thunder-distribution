@@ -4,7 +4,6 @@ namespace Drupal\thunder\Installer\Form;
 
 use Drupal\Core\Access\AccessManagerInterface;
 use Drupal\Core\Extension\Extension;
-use Drupal\Core\Extension\ModuleDependencyMessageTrait;
 use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ModuleInstallerInterface;
@@ -13,6 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Installer\InstallerKernel;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Extension\ModuleDependencyMessageTrait;
 use Drupal\user\PermissionHandlerInterface;
 use Drupal\Component\Utility\Environment;
 use Symfony\Component\DependencyInjection\ContainerInterface;

@@ -71,7 +71,7 @@
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.9",
-        "drupal/core": "9.2.x",
+        "drupal/core": "^9.2.0@BETA",
         "drupal/config_selector": "^2.1",
         "drupal/config_update": "^1.7",
         "drupal/content_lock": "^2.1",
@@ -148,6 +148,8 @@
         "thunder/testsite_builder": "dev-master",
         "thunder/thunder_performance_measurement": "dev-master",
         "thunder/thunder_testing_demo": "4.x-dev",
+        "mglaman/phpstan-drupal": "~0.12.0",
+        "phpstan/phpstan-deprecation-rules": "~0.12.0",
         "phpunit/phpunit": "~9.4.3"
     }
 }
