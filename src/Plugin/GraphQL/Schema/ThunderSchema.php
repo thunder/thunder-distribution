@@ -29,6 +29,11 @@ class ThunderSchema extends ComposableSchema {
 
     $this->resolveBaseTypes();
 
+    $this->addFieldResolverIfNotExists('Query', 'redirect',
+      $this->builder->produce('thunder_redirect')
+        ->map('path', $this->builder->fromArgument('path'))
+    );
+
     return $this->registry;
   }
 

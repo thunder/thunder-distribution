@@ -2,7 +2,9 @@ type Schema {
   query: Query
 }
 
-type Query
+type Query {
+  redirect(path: String!): Redirect
+}
 
 type Link {
   url: String!
@@ -31,3 +33,9 @@ type FocalPoint {
   x: Int
   y: Int
 }
+
+type Redirect {
+  url: String
+  status: Int
+}
+
