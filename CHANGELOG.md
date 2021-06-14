@@ -3,7 +3,7 @@
 ## [6.1.4](https://github.com/thunder/thunder-distribution/tree/6.1.4) 2021-06-14
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.1.3...6.1.4)
 
-With this release we require the exact version of th entity_reference_actions module, that is still working with
+With this release we require the version of th entity_reference_actions module, that is still working with
 Drupal Version 9.1. Newer Versions of the module will require Drupal 9.2.
 
 ## [6.1.3](https://github.com/thunder/thunder-distribution/tree/6.1.3) 2021-05-10
