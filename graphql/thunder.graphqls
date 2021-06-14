@@ -4,6 +4,7 @@ type Schema {
 
 type Query {
   redirect(path: String!): Redirect
+  accessUnpublishedToken(auHash: String): String
 }
 
 type Link {

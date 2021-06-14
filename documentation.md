@@ -435,3 +435,22 @@ As you can see, you can give either set hard coded values for the producers para
 have to use either more query arguments (which could be bad), or implement your own data producer based on
 ThunderEntityListProducerBase. You can find an example in EntitiesWithTerm.php where we dynamically add term IDs
 to the query conditions.
+
+# Integrated contrib modules
+
+## Access unpublished
+
+With the access unpublished module, you can hand out links to unpublished nodes to a person, that would usually not
+have the permission to view unpublished articles.
+
+The module creates a temporary link with an arbitrary hash token. This hash has to be added to the query in the
+following way:
+
+    {
+      accessUnpublishedToken(auHash: "irCtdmllOqyoocxQ9JSUZNm5waEFmX0v4-ueUnUjPZI")
+      page(path: "/example-page") {
+        name
+      }
+    }
+
+The accessUnpublishedToken request has to be in the first line of the request.
