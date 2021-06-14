@@ -4,7 +4,6 @@ interface Page {
   name: String!
   entity: String!
   url: String!
-  created: String!
   changed: String!
   language: String
   entityLinks: EntityLinks
@@ -73,7 +72,6 @@ type Tags implements Page {
   name: String!
   entity: String!
   url: String!
-  created: String!
   changed: String!
   language: String
   entityLinks: EntityLinks
@@ -90,7 +88,6 @@ type Channel implements Page {
   name: String!
   entity: String!
   url: String!
-  created: String!
   changed: String!
   language: String
   entityLinks: EntityLinks
