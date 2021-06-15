@@ -1,9 +1,15 @@
 # Changelog
 
+## [6.1.4](https://github.com/thunder/thunder-distribution/tree/6.1.4) 2021-06-14
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.1.3...6.1.4)
+
+With this release we require the version of th entity_reference_actions module, that is still working with
+Drupal Version 9.1. Newer Versions of the module will require Drupal 9.2.
+
 ## [6.1.3](https://github.com/thunder/thunder-distribution/tree/6.1.3) 2021-05-10
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.1.2...6.1.3)
 
-Having the metatag form on the node edit page is a huge performance hit on save, autosave and adding new paragraphs. To 
+Having the metatag form on the node edit page is a huge performance hit on save, autosave and adding new paragraphs. To
 improve those operations, we integrate the metatag_async_widget, which loads the metatag form on demand.
 
 - [Use asynchronous widget for metatag handling](https://www.drupal.org/node/3208355)
