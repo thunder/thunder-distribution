@@ -177,6 +177,7 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
     $this->addFieldResolverIfNotExists($type, 'thumbnail',
       $this->builder->produce('thunder_image')
         ->map('entity', $this->builder->fromPath('entity', 'thumbnail.entity'))
+        ->map('field', $this->builder->fromPath('entity', 'thumbnail'))
     );
 
     if ($this->dataProducerManager->hasDefinition('media_expire_fallback_entity')) {
@@ -233,10 +234,9 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
    */
   protected function resolvePageInterfaceQueryFields(string $page_type, string $entity_type_id) {
     $this->addFieldResolverIfNotExists('Query', $page_type,
-      $this->builder->produce('entity_load')
+      $this->builder->produce('entity_load_by_uuid')
         ->map('type', $this->builder->fromValue($entity_type_id))
-        ->map('bundles', $this->builder->fromValue([$page_type]))
-        ->map('id', $this->builder->fromArgument('id'))
+        ->map('uuid', $this->builder->fromArgument('uuid'))
     );
   }
 

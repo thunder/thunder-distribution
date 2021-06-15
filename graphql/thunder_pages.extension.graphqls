@@ -1,7 +1,7 @@
 extend type Query {
-  article(id: Int!): Article
-  tags(id: Int!): Tags
-  channel(id: Int!): Channel
-  user(id: Int!): User
+  article(uuid: String!): Article
+  tags(uuid: String!): Tags
+  channel(uuid: String!): Channel
+  user(uuid: String!): User
   page(path: String!): Page
 }

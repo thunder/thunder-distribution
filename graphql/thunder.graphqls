@@ -16,9 +16,11 @@ interface Image {
   src: String
   width: Int
   height: Int
+  alt: String
+  title: String
 }
 
-type ImageDerivative implements Image {
+type ImageDerivative {
   src: String
   width: Int
   height: Int
@@ -28,6 +30,8 @@ type Thumbnail implements Image {
   src: String
   width: Int
   height: Int
+  alt: String
+  title: String
 }
 
 type FocalPoint {

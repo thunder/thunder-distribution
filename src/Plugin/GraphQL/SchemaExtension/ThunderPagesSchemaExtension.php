@@ -145,10 +145,24 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
 
     // User.
     $this->resolvePageInterfaceFields('User', 'user');
-    $this->resolvePageInterfaceQueryFields('user', 'node');
+    $this->resolvePageInterfaceQueryFields('user', 'user');
 
     $this->addFieldResolverIfNotExists('User', 'mail',
       $this->builder->fromPath('entity', 'mail.value')
+    );
+
+    $this->addFieldResolverIfNotExists('User', 'access',
+      $this->builder->fromPath('entity', 'access.value')
+    );
+
+    $this->addFieldResolverIfNotExists('User', 'published',
+      $this->builder->fromPath('entity', 'status.value')
+    );
+
+    $this->addFieldResolverIfNotExists('User', 'picture',
+      $this->builder->produce('thunder_image')
+        ->map('entity', $this->builder->fromPath('entity', 'user_picture.entity'))
+        ->map('field', $this->builder->fromPath('entity', 'user_picture'))
     );
 
     // Entity List.
