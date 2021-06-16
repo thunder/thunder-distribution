@@ -111,7 +111,7 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
       $this->builder->fromPath('entity', 'field_media_video_embed_field.value')
     );
 
-    $this->addFieldResolverIfNotExists('MediaVideo', 'author',
+    $this->addFieldResolverIfNotExists('MediaVideo', 'username',
       $this->builder->fromPath('entity', 'field_author.value')
     );
 

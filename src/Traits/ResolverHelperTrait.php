@@ -81,4 +81,22 @@ trait ResolverHelperTrait {
       ->map('entity', $entity ?: $this->builder->fromParent());
   }
 
+  /**
+   * Define callback field resolver for a type.
+   *
+   * @param string $type
+   *   Type to add fields.
+   * @param array $fields
+   *   The fields.
+   */
+  public function addSimpleCallbackFields(string $type, array $fields) {
+    foreach ($fields as $field) {
+      $this->addFieldResolverIfNotExists($type, $field,
+        $this->builder->callback(function ($arr) use ($field) {
+          return $arr[$field];
+        })
+      );
+    }
+  }
+
 }

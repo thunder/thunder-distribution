@@ -3,10 +3,8 @@
     "page": {
       "content": [
         {
-          "uuid": "698fa476-f9ba-4404-a3f1-cfaef81178c5",
-          "entity": "paragraph",
           "__typename": "ParagraphGallery",
-          "name": "Come to DrupalCon New Orleans > Paragraphs",
+          "name": "DrupalCon Gallery",
           "images": [
             {
               "name": "Image 5",
@@ -31,20 +29,14 @@
           ]
         },
         {
-          "uuid": "1e0bf060-a2af-422a-ad51-a739f7bc158a",
-          "entity": "paragraph",
           "__typename": "ParagraphText",
           "text": "<h2>About</h2>\n\n<p>The Drupal community is one of the largest open source communities in the world. We're developers, designers, strategists, coordinators, editors, translators, and more. Each year, we meet at DrupalCamps, meetups, and other events in more than 200 countries. But once a year, our community comes together at the biggest Drupal event in the world: DrupalCon North America. This year, from May 9-13, we'll be in New Orleans.</p>\n\n<h2>Make something amazing, for anyone</h2>\n\n<p>Bring your questions and challenges. At DrupalCon, you'll learn to make, think about, and do things differently with Drupal. There are <a href=\"https://events.drupal.org/neworleans2016/tracks\">13 session tracks</a>, featuring topics like UX, DevOps, project management, and PHP. And each track includes sessions for beginners, experts, and everyone between. You can also join full-day <a href=\"https://events.drupal.org/neworleans2016/summits\">summits</a> or choose from 15 <a href=\"https://events.drupal.org/neworleans2016/training\">training courses</a>. You'll leave New Orleans inspired and empowered to create amazing web experiences.</p>\n\n<h2>Introduce yourself</h2>\n\n<p>The best part of DrupalCon is the people you'll meet. Finally give a high-five to people you've only known by their Drupal.org username. Get great insight from industry leaders like Sara Wachter-Boettcher, and Drupal's founder, Dries Buytaert. Ask any of the 175 speakers the questions you've had about site building, case studies, and more. And as each conference day ends, the<a href=\"https://events.drupal.org/neworleans2016/social-events\">events continue</a>. Join us at the opening reception, meet the Women in Drupal team, or test your knowledge on trivia night. Our community is excited to meet you.</p>\n\n<h2>Give back to the community</h2>\n\n<p>DrupalCon is an event where anyone can learn to use Drupal to make the internet a better place. And you won't have to wait until DrupalCon is over to use what you learn. Put your ideas to work right away at <a href=\"https://events.drupal.org/neworleans2016/sprints\">sprints</a>. (Tip: you don't have to be a developer, or have ever joined a sprint before.) You can also help people feel welcome by having fun at <a href=\"https://events.drupal.org/neworleans2016/birds-feather\">Birds of a Feather sessions</a> (BoF's). Some BoF's—like last year's Knitting BoF—are all about the chance to create relationships.</p>\n\n<h2>Enjoy New Orleans</h2>\n\n<p>New Orleans has more than a few nicknames. But no matter what you call it, its history, culture, and people make it one of the most celebrated U.S. cities. <a href=\"https://events.drupal.org/neworleans2016/travel\">The convention center</a> is steps away from the famous French Quarter. It's also just a short ride away from the Garden District. There's more to explore than we can list.</p>"
         },
         {
-          "uuid": "17bf4b1a-08b7-461e-9990-667d465d5509",
-          "entity": "paragraph",
           "__typename": "ParagraphTwitter",
           "url": "https://twitter.com/drupal/status/731057647877787648"
         },
         {
-          "uuid": "99c4a942-3a64-4cb1-922f-9d33b04c3bfc",
-          "entity": "paragraph",
           "__typename": "ParagraphLink",
           "links": [
             {
@@ -62,8 +54,6 @@
           ]
         },
         {
-          "uuid": "cc93e914-9a0d-4083-ade6-077072a3c2a6",
-          "entity": "paragraph",
           "__typename": "ParagraphQuote",
           "text": "<p><em>\"Flying is learning how to throw yourself at the ground and miss\" (Douglas Adams)</em>.</p>"
         }

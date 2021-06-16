@@ -1,6 +1,7 @@
 type Menu {
   id: String!
   name: String!
+
   items: [MenuItem]
 }
 

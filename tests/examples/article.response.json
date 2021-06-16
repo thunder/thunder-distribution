@@ -58,28 +58,18 @@
       "seoTitle": "Come to DrupalCon New Orleans",
       "content": [
         {
-          "uuid": "698fa476-f9ba-4404-a3f1-cfaef81178c5",
-          "entity": "paragraph",
           "__typename": "ParagraphGallery"
         },
         {
-          "uuid": "1e0bf060-a2af-422a-ad51-a739f7bc158a",
-          "entity": "paragraph",
           "__typename": "ParagraphText"
         },
         {
-          "uuid": "17bf4b1a-08b7-461e-9990-667d465d5509",
-          "entity": "paragraph",
           "__typename": "ParagraphTwitter"
         },
         {
-          "uuid": "99c4a942-3a64-4cb1-922f-9d33b04c3bfc",
-          "entity": "paragraph",
           "__typename": "ParagraphLink"
         },
         {
-          "uuid": "cc93e914-9a0d-4083-ade6-077072a3c2a6",
-          "entity": "paragraph",
           "__typename": "ParagraphQuote"
         }
       ],

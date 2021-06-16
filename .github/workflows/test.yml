@@ -16,15 +16,12 @@ env:
   DRUPAL_TESTING_DATABASE_USER: root
   DRUPAL_TESTING_DATABASE_PASSWORD: root
   DRUPAL_TESTING_DATABASE_ENGINE: mysql
+  DRUPAL_TESTING_DRUPAL_VERSION: '~9.1.0'
 
 jobs:
   build:
 
     runs-on: ubuntu-20.04
-
-    strategy:
-      matrix:
-        DRUPAL_TESTING_DRUPAL_VERSION: ['~9.1.0']
 
     steps:
       - uses: actions/checkout@v1
@@ -60,10 +57,6 @@ jobs:
 
       - name: Build the docroot
         run: test-drupal-project build
-
-      - name: Test for deprecations
-        run: test-drupal-project deprecation
-        if: ${{ matrix.DRUPAL_TESTING_DRUPAL_VERSION != '~9.1.0' }}
 
       - name: Install drupal
         run: test-drupal-project install

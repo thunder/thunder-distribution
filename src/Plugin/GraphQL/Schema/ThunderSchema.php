@@ -124,11 +124,18 @@ class ThunderSchema extends ComposableSchema {
       })
     );
 
-    $this->addFieldResolverIfNotExists('Link', 'title',
-      $this->builder->callback(function ($parent) {
-        return $parent['title'];
-      })
-    );
+    $this->addSimpleCallbackFields('Link', ['title']);
+    $this->addSimpleCallbackFields('FocalPoint', ['x', 'y']);
+    $this->addSimpleCallbackFields('Redirect', ['url', 'status']);
+    $this->addSimpleCallbackFields('EntityLinks', [
+      'canonical', 'deleteForm', 'deleteMultipleForm', 'editForm',
+      'versionHistory', 'revision', 'create', 'latestVersion',
+    ]);
+    $this->addSimpleCallbackFields('Thumbnail', [
+      'src', 'width', 'height', 'alt', 'title',
+    ]);
+    $this->addSimpleCallbackFields('ImageDerivative', ['src', 'width', 'height']);
+    $this->addSimpleCallbackFields('Schema', ['query']);
   }
 
 }

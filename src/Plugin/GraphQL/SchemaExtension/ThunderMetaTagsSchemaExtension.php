@@ -32,6 +32,7 @@ class ThunderMetaTagsSchemaExtension extends ThunderSchemaExtensionPluginBase {
         ->map('value', $this->builder->fromParent())
     ));
 
+    $this->addSimpleCallbackFields('MetaTag', ['tag', 'attributes']);
   }
 
 }

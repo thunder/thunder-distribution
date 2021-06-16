@@ -49,8 +49,6 @@ query ($path: String!) {
       }
       seoTitle
       content {
-        uuid
-        entity
         __typename
       }
       teaser {

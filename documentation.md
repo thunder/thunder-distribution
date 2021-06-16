@@ -234,16 +234,16 @@ You will now be able to find and enable it on the admin page admin/config/graphq
 A common task will be to add a new data type. To do so, you will have to add a new type definition in myschema.base.graphqls.
 Say, you have added a new content type. Your myschema.base.graphqls should look like this now:
 
-    type MyContentType implements Page {
+    type MyContentType implements Page & Entity {
       id: Int!
       uuid: String!
-      name: String!
       entity: String!
-      url: String!
-      created: String!
-      changed: String!
       language: String
-      metatags: [MetaTag]
+      name: String!
+      url: String!
+      entityLinks: EntityLinks
+      published: Boolean!
+      changed: String!
       myCustomField: String
     }
 

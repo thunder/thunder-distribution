@@ -96,7 +96,6 @@ example query you have to add the query variable `{"path": "/your-path"}`
             }
           }
           content {
-            id
             __typename
             ... on ParagraphPinterest {
               url

@@ -1,11 +1,14 @@
-interface Page {
+interface Page implements Entity {
   id: Int!
   uuid: String!
-  name: String!
   entity: String!
-  url: String!
   language: String
+  name: String!
+  url: String!
   entityLinks: EntityLinks
+
+  published: Boolean!
+  changed: String!
 }
 
 type EntityList {
@@ -18,18 +21,7 @@ type Teaser {
   text: String
 }
 
-type EntityLinks {
-  canonical: String
-  deleteForm: String
-  deleteMultipleForm: String
-  editForm: String
-  versionHistory: String
-  revision: String
-  create: String
-  latestVersion: String
-}
-
-type Article implements Page {
+type Article implements Page & Entity {
   id: Int!
   uuid: String!
   name: String!
@@ -38,10 +30,11 @@ type Article implements Page {
   language: String
   entityLinks: EntityLinks
 
-  created: String!
-  changed: String!
-  author: User
   published: Boolean!
+  changed: String!
+
+  created: String!
+  author: User
   channel: Channel
   tags: [Tags]
   seoTitle: String!
@@ -49,7 +42,7 @@ type Article implements Page {
   teaser: Teaser
 }
 
-type BasicPage implements Page {
+type BasicPage implements Page & Entity {
   id: Int!
   uuid: String!
   name: String!
@@ -58,14 +51,15 @@ type BasicPage implements Page {
   language: String
   entityLinks: EntityLinks
 
-  created: String!
-  changed: String!
-  author: User
   published: Boolean!
+  changed: String!
+
+  created: String!
+  author: User
   content: String
 }
 
-type Tags implements Page {
+type Tags implements Page & Entity {
   id: Int!
   uuid: String!
   name: String!
@@ -74,14 +68,14 @@ type Tags implements Page {
   language: String
   entityLinks: EntityLinks
 
-  changed: String!
-  author: User
   published: Boolean!
+  changed: String!
+
   content: [Paragraph]
   articles(offset: Int = 0, limit: Int, languages: [String]): EntityList
 }
 
-type Channel implements Page {
+type Channel implements Page & Entity {
   id: Int!
   uuid: String!
   name: String!
@@ -90,15 +84,15 @@ type Channel implements Page {
   language: String
   entityLinks: EntityLinks
 
+  published: Boolean!
   changed: String!
+
   parent: Channel
-  author: User
-  published: Boolean!
   content: [Paragraph]
   articles(offset: Int = 0, limit: Int, languages: [String]): EntityList
 }
 
-type User implements Page {
+type User implements Page & Entity {
   id: Int!
   uuid: String!
   name: String!
@@ -106,12 +100,12 @@ type User implements Page {
   url: String!
   language: String
   entityLinks: EntityLinks
+
+  published: Boolean!
+  changed: String!
 
   created: String!
-  changed: String!
   mail: String
-  published: Boolean!
-  language: String!
   access: String!
   picture: Thumbnail
 }

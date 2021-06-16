@@ -7,7 +7,6 @@ use Drupal\Core\Entity\EntityPublishedInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\graphql\Plugin\DataProducerPluginManager;
-use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerProxy;
 use Drupal\graphql\Plugin\GraphQL\SchemaExtension\SdlSchemaExtensionPluginBase;
 use Drupal\user\EntityOwnerInterface;
 use Drupal\thunder_gqls\Traits\ResolverHelperTrait;
@@ -122,11 +121,6 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
         ->map('entity', $this->builder->fromParent())
     );
 
-    $this->addFieldResolverIfNotExists($type, 'created',
-      $this->builder->produce('entity_created')
-        ->map('entity', $this->builder->fromParent())
-    );
-
     $this->addFieldResolverIfNotExists($type, 'language',
       $this->builder->fromPath('entity', 'langcode.value')
     );
@@ -140,6 +134,18 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
           $this->builder->produce('url_path')
             ->map('url', $this->builder->fromParent())
         )
+      );
+    }
+    else {
+      $this->addFieldResolverIfNotExists($type, 'url',
+        $this->builder->fromValue(NULL)
+      );
+    }
+
+    if (method_exists($entity_type->getClass(), 'getCreatedTime')) {
+      $this->addFieldResolverIfNotExists($type, 'created',
+        $this->builder->produce('entity_created')
+          ->map('entity', $this->builder->fromParent())
       );
     }
 
@@ -163,6 +169,11 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
           ->map('entity', $this->builder->fromParent())
       );
     }
+
+    $this->addFieldResolverIfNotExists($type, 'entityLinks',
+      $this->builder->produce('entity_links')
+        ->map('entity', $this->builder->fromParent())
+    );
   }
 
   /**
@@ -189,6 +200,19 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
   }
 
   /**
+   * Add fields common to all media types.
+   *
+   * @param string $type
+   *   The type name.
+   */
+  protected function resolveParagraphInterfaceFields(string $type) {
+    $this->addFieldResolverIfNotExists($type, 'summary',
+      $this->builder->produce('paragraph_summary')
+        ->map('paragraph', $this->builder->fromParent())
+    );
+  }
+
+  /**
    * Add fields common to all page types.
    *
    * @param string $type
@@ -198,30 +222,6 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
    */
   protected function resolvePageInterfaceFields(string $type, string $entity_type_id) {
     $this->resolveBaseFields($type, $entity_type_id);
-
-    $this->addFieldResolverIfNotExists($type, 'metatags',
-      $this->builder->produce('thunder_metatags')
-        ->map('type', $this->builder->fromValue('entity'))
-        ->map('value', $this->builder->fromParent())
-    );
-
-    $this->addFieldResolverIfNotExists($type, 'entityLinks',
-      $this->builder->produce('entity_links')
-        ->map('entity', $this->builder->fromParent())
-    );
-  }
-
-  /**
-   * Get the data producer for a referenced entity.
-   *
-   * @param string $referenceFieldName
-   *   The reference field name.
-   *
-   * @return \Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerProxy
-   *   The data producer proxy.
-   */
-  protected function referencedEntityProducer(string $referenceFieldName) : DataProducerProxy {
-    return $this->builder->fromPath('entity', $referenceFieldName . '.entity');
   }
 
   /**

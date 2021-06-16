@@ -2,8 +2,6 @@ query ($path: String!) {
   page(path: $path) {
     ... on Article {
       content {
-        uuid
-        entity
         __typename
         ... on ParagraphText {
           text

@@ -1,87 +1,58 @@
 interface Paragraph {
-  id: Int!
-  uuid: String!
-  entity: String!
-  name: String
+  summary: [String]
 }
 
 type ParagraphImage implements Paragraph {
-  id: Int!
-  uuid: String!
-  entity: String!
-  name: String
+  summary: [String]
 
   image: MediaImage
 }
 
 type ParagraphTwitter implements Paragraph {
-  id: Int!
-  uuid: String!
-  entity: String!
-  name: String
+  summary: [String]
 
   url: String
 }
 
 type ParagraphInstagram implements Paragraph {
-  id: Int!
-  uuid: String!
-  entity: String!
-  name: String
+  summary: [String]
 
   url: String
 }
 
 type ParagraphPinterest implements Paragraph {
-  id: Int!
-  uuid: String!
-  entity: String!
-  name: String
+  summary: [String]
 
   url: String
 }
 
 type ParagraphText implements Paragraph {
-  id: Int!
-  uuid: String!
-  entity: String!
-  name: String
+  summary: [String]
 
   text: String
 }
 
 type ParagraphGallery implements Paragraph {
-  id: Int!
-  uuid: String!
-  entity: String!
-  name: String
+  summary: [String]
 
+  name: String!
   images: [MediaImage]
 }
 
 type ParagraphLink implements Paragraph {
-  id: Int!
-  uuid: String!
-  entity: String!
-  name: String
+  summary: [String]
 
   links: [Link]
 }
 
 type ParagraphVideo implements Paragraph {
-  id: Int!
-  uuid: String!
-  entity: String!
-  name: String
+  summary: [String]
 
   video: MediaVideo
 }
 
 type ParagraphQuote implements Paragraph {
-  id: Int!
-  uuid: String!
-  entity: String!
-  name: String
+  summary: [String]
 
   text: String
 }

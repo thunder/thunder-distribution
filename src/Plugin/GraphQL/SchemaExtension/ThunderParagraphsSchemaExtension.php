@@ -39,60 +39,51 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
    * Add paragraph field resolvers.
    */
   protected function resolveFields() {
-    // Text.
-    $this->resolveBaseFields('ParagraphText', 'paragraph');
 
+    // Text.
+    $this->resolveParagraphInterfaceFields('ParagraphText');
     $this->addFieldResolverIfNotExists('ParagraphText', 'text',
       $this->builder->fromPath('entity', 'field_text.processed')
     );
 
     // Image.
-    $this->resolveBaseFields('ParagraphImage', 'paragraph');
-
+    $this->resolveParagraphInterfaceFields('ParagraphImage');
     $this->addFieldResolverIfNotExists('ParagraphImage', 'image',
       $this->builder->fromPath('entity', 'field_image.entity')
     );
 
     // Twitter.
-    $this->resolveBaseFields('ParagraphTwitter', 'paragraph');
-    $embedEntityProducer = $this->referencedEntityProducer('field_media');
-
+    $this->resolveParagraphInterfaceFields('ParagraphTwitter');
     $this->addFieldResolverIfNotExists('ParagraphTwitter', 'url',
       $this->builder->compose(
-        $embedEntityProducer,
+        $this->builder->fromPath('entity', 'field_media.entity'),
         $this->builder->fromPath('entity', 'field_url.value')
       )
     );
 
     // Instagram.
-    $this->resolveBaseFields('ParagraphInstagram', 'paragraph');
-    $embedEntityProducer = $this->referencedEntityProducer('field_media');
-
+    $this->resolveParagraphInterfaceFields('ParagraphInstagram');
     $this->addFieldResolverIfNotExists('ParagraphInstagram', 'url',
       $this->builder->compose(
-        $embedEntityProducer,
+        $this->builder->fromPath('entity', 'field_media.entity'),
         $this->builder->fromPath('entity', 'field_url.value')
       )
     );
 
     // Pinterest.
-    $this->resolveBaseFields('ParagraphPinterest', 'paragraph');
-    $embedEntityProducer = $this->referencedEntityProducer('field_media');
-
+    $this->resolveParagraphInterfaceFields('ParagraphPinterest');
     $this->addFieldResolverIfNotExists('ParagraphPinterest', 'url',
       $this->builder->compose(
-        $embedEntityProducer,
+        $this->builder->fromPath('entity', 'field_media.entity'),
         $this->builder->fromPath('entity', 'field_url.value')
       )
     );
 
     // Gallery.
-    $this->resolveBaseFields('ParagraphGallery', 'paragraph');
-    $mediaEntityProducer = $this->referencedEntityProducer('field_media');
-
+    $this->resolveParagraphInterfaceFields('ParagraphGallery');
     $this->addFieldResolverIfNotExists('ParagraphGallery', 'name',
       $this->builder->compose(
-        $mediaEntityProducer,
+        $this->builder->fromPath('entity', 'field_media.entity'),
         $this->builder->produce('entity_label')
           ->map('entity', $this->builder->fromParent())
       )
@@ -100,26 +91,25 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
 
     $this->addFieldResolverIfNotExists('ParagraphGallery', 'images',
       $this->builder->compose(
-        $mediaEntityProducer,
+        $this->builder->fromPath('entity', 'field_media.entity'),
         $this->fromEntityReference('field_media_images')
       )
     );
 
     // Link.
-    $this->resolveBaseFields('ParagraphLink', 'paragraph');
+    $this->resolveParagraphInterfaceFields('ParagraphLink');
     $this->addFieldResolverIfNotExists('ParagraphLink', 'links',
       $this->builder->fromPath('entity', 'field_link')
     );
 
     // Video.
-    $this->resolveBaseFields('ParagraphVideo', 'paragraph');
+    $this->resolveParagraphInterfaceFields('ParagraphVideo');
     $this->addFieldResolverIfNotExists('ParagraphVideo', 'video',
       $this->builder->fromPath('entity', 'field_video.entity')
     );
 
     // Quote.
-    $this->resolveBaseFields('ParagraphQuote', 'paragraph');
-
+    $this->resolveParagraphInterfaceFields('ParagraphQuote');
     $this->addFieldResolverIfNotExists('ParagraphQuote', 'text',
       $this->builder->fromPath('entity', 'field_text.processed')
     );

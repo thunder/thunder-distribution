@@ -1,18 +1,32 @@
-interface Media {
+interface Media implements Entity{
   id: Int!
   uuid: String!
   entity: String!
-  name: String
+  language: String
+  name: String!
+  url: String!
+  entityLinks: EntityLinks
+
+  created: String!
+  changed: String!
+  author: User
   thumbnail: Thumbnail
   published: Boolean
   fallbackMedia: Media
 }
 
-type MediaImage implements Media & Image {
+type MediaImage implements Media & Image & Entity {
   id: Int!
   uuid: String!
   entity: String!
-  name: String
+  language: String
+  name: String!
+  url: String!
+  entityLinks: EntityLinks
+
+  created: String!
+  changed: String!
+  author: User
   thumbnail: Thumbnail
   published: Boolean
   fallbackMedia: MediaImage
@@ -31,17 +45,24 @@ type MediaImage implements Media & Image {
   source: String
 }
 
-type MediaVideo implements Media {
+type MediaVideo implements Media & Entity {
   id: Int!
   uuid: String!
   entity: String!
-  name: String
+  language: String
+  name: String!
+  url: String!
+  entityLinks: EntityLinks
+
+  created: String!
+  changed: String!
+  author: User
   thumbnail: Thumbnail
   published: Boolean
   fallbackMedia: MediaVideo
 
   src: String
-  author: String
+  username: String
   caption: String
   copyright: String
   description: String
