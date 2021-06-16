@@ -172,3 +172,14 @@ function thunder_field_widget_info_alter(array &$info) {
 function thunder_field_widget_multivalue_entity_browser_entity_reference_form_alter(array &$elements, FormStateInterface $form_state, array $context) {
   unset($elements['current']['#prefix']);
 }
+
+/**
+ * Implements hook_action_info_alter().
+ */
+function thunder_action_info_alter(&$definitions) {
+  foreach ($definitions as &$definition) {
+    if ($definition['id'] === 'entity:edit_action') {
+      $definition['action_label'] = t('Edit');
+    }
+  }
+}
