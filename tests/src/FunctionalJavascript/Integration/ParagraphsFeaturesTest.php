@@ -28,9 +28,9 @@ class ParagraphsFeaturesTest extends ThunderJavascriptTestBase {
    */
   public function testDeleteConfirmation() {
     $page = $this->getSession()->getPage();
-
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Article 1',
       'field_seo_title[0][value]' => 'Article 1',
     ]);
