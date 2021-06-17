@@ -97,6 +97,12 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'tour.tour.search-api-index-processors',
     'tour.tour.search-api-server',
     'tour.tour.search-api-server-form',
+
+    // Because of https://www.drupal.org/node/3204093
+    'tour.tour.content-add',
+    'tour.tour.content-list',
+    'tour.tour.content-paragraphs',
+    'tour.tour.homepage',
   ];
 
   /**
