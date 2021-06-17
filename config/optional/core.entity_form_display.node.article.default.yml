@@ -113,8 +113,9 @@ content:
       paragraphs_features:
         delete_confirmation: true
         add_in_between: true
+        sorting: true
         split_text: true
-        show_drag_and_drop: true
+        show_drag_and_drop: false
     region: content
   field_seo_title:
     type: string_textfield
