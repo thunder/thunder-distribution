@@ -62,7 +62,7 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Add needed dependencies
-        run: composer require "drupal/core-dev:~9.1.0" "phpspec/prophecy-phpunit:^2" "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: composer require "drupal/core-dev:~9.2.0" "phpspec/prophecy-phpunit:^2" "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Set composer bin path
         run: composer config bin-dir bin/ --working-dir=/tmp/test/thunder/install
@@ -240,7 +240,7 @@ jobs:
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
 
     env:
-      DRUPAL_TESTING_DRUPAL_VERSION: '~9.1.0'
+      DRUPAL_TESTING_DRUPAL_VERSION: '~9.2.0'
       DRUPAL_TESTING_TEST_DEPRECATION: false
 
     steps:
@@ -273,7 +273,7 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Install suggested dependencies
-        run: composer require "drupal/core-dev:~9.1.0" "phpspec/prophecy-phpunit:^2" "consolidation/robo:^2.0" "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: composer require "drupal/core-dev:~9.2.0" "phpspec/prophecy-phpunit:^2" "consolidation/robo:^2.0" "drupal/nexx_integration:^3.4" "valiton/harbourmaster:~8.1" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build
