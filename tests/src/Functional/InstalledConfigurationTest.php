@@ -97,6 +97,12 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'tour.tour.search-api-index-processors',
     'tour.tour.search-api-server',
     'tour.tour.search-api-server-form',
+
+    // Because of https://www.drupal.org/node/3204093
+    'tour.tour.content-add',
+    'tour.tour.content-list',
+    'tour.tour.content-paragraphs',
+    'tour.tour.homepage',
   ];
 
   /**
@@ -170,7 +176,12 @@ class InstalledConfigurationTest extends ThunderTestBase {
     ],
     'views.view.moderated_content' => [
       'display' => [
-        'moderated_content' => ['cache_metadata' => ['max-age' => TRUE, 'tags' => TRUE]],
+        'moderated_content' => [
+          'cache_metadata' => [
+            'max-age' => TRUE,
+            'tags' => TRUE,
+          ],
+        ],
         'default' => ['cache_metadata' => ['max-age' => TRUE, 'tags' => TRUE]],
       ],
     ],
@@ -265,6 +276,8 @@ class InstalledConfigurationTest extends ThunderTestBase {
   /**
    * Ignore configuration list values. Path to key is separated by '::'.
    *
+   * @var array
+   *
    * Example:
    * 'field.field.node.article.field_example' => [
    *   'settings::settings_part1::list_part' => [
@@ -273,9 +286,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *   ]
    * ]
    *
-   * TODO: use this functionality for more strict "dependencies" checking.
-   *
-   * @var array
+   * @todo use this functionality for more strict "dependencies" checking.
    */
   protected static $ignoreConfigListValues = [
     // Google analytics adds one permission dynamically in the install hook.

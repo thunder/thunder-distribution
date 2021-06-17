@@ -52,7 +52,8 @@ class ResponsivePreview extends ThunderJavascriptTestBase {
       ->wait(5000, "jQuery('#responsive-preview').length === 0");
     $assert_session->elementNotExists('xpath', '//*[@id="responsive-preview"]');
 
-    $this->drupalGet('node/8/edit');
+    $node = $this->loadNodeByUuid('bbb1ee17-15f8-46bd-9df5-21c58040d741');
+    $this->drupalGet($node->toUrl('edit-form'));
 
     // Using preview on entity edit should use preview page.
     $this->selectDevice('(//*[@id="responsive-preview-toolbar-tab"]//button[@data-responsive-preview-name])[1]');

@@ -5,28 +5,17 @@
  * Contains media related functions.
  */
 
-use Drupal\file\Entity\File;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Implements hook_ENTITY_TYPE_create().
+ * Implements hook_preprocess_media().
  */
-function thunder_media_file_create(File $entity) {
-
-  $config = \Drupal::config('thunder_media.settings');
-
-  if ($config->get('enable_filename_transliteration')) {
-
-    $pathinfo = pathinfo($entity->getFilename());
-
-    /** @var \Drupal\pathauto\AliasCleaner $aliasCleaner */
-    $aliasCleaner = \Drupal::service('pathauto.alias_cleaner');
-
-    // Check for needed pathinfo array keys.
-    if (!empty($pathinfo['filename']) && !empty($pathinfo['extension'])) {
-      $cleanFilename = $aliasCleaner->cleanString($pathinfo['filename']) . '.' . $pathinfo['extension'];
-      $entity->setFilename($cleanFilename);
-    }
+function thunder_media_preprocess_media(&$variables) {
+  // Remove contextual links from preview in node form.
+  if ($variables['elements']['#view_mode'] === 'paragraph_preview' && isset($variables['title_suffix']['contextual_links'])) {
+    unset($variables['title_suffix']['contextual_links']);
+    unset($variables['elements']['#contextual_links']);
+    $variables['attributes']['class'] = array_diff($variables['attributes']['class'], ['contextual-region']);
   }
 }
 
@@ -38,7 +27,7 @@ function thunder_media_preprocess_views_view(&$variables) {
   $thunder_media_browser = [
     'entity_browser',
 
-    // TODO: Legacy support, remove it with new major version.
+    // @todo Legacy support, remove it with new major version.
     'image_browser',
     'video_browser',
   ];
@@ -62,7 +51,7 @@ function thunder_media_page_attachments(array &$page) {
  * for the theme.
  */
 function thunder_media_field_widget_entity_browser_entity_reference_form_alter(&$element, FormStateInterface $form_state, $context) {
-  /* @var \Drupal\Core\Field\EntityReferenceFieldItemList $items */
+  /** @var \Drupal\Core\Field\EntityReferenceFieldItemList $items */
   $items = $context['items'];
   $field_name = $items->getName();
   switch ($field_name) {

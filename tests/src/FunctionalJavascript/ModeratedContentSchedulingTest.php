@@ -21,8 +21,9 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     /** @var \Drupal\node\NodeStorageInterface $node_storage */
     $node_storage = \Drupal::entityTypeManager()->getStorage('node');
 
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Test workflow article 1 - Published',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text 1',
       'moderation_state[0]' => 'draft',
@@ -78,9 +79,9 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
    * Tests moderated nodes unpublish scheduling.
    */
   public function testUnpublishStateSchedule() {
-
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Test workflow article 2 - Published',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text 2',
       'moderation_state[0]' => 'published',
@@ -110,8 +111,9 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
    * Tests publish scheduling for a draft of a published node.
    */
   public function testPublishOfDraft() {
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Test workflow article 3 - Published',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text 3',
       'moderation_state[0]' => 'published',

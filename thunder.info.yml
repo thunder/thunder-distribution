@@ -3,13 +3,13 @@ type: profile
 description: 'The Drupal based CMS for professional publishing.'
 project: thunder
 core_version_requirement: ^9
-version: '6.1.1'
+version: '6.1.4'
 
 distribution:
   name: Thunder
   install:
     theme: thunder_admin
-    finish_url: /?tour=1
+    finish_url: ?tour=1
 
 # Required modules
 dependencies:
@@ -70,6 +70,7 @@ install:
   - metatag:metatag_open_graph
   - metatag:metatag_facebook
   - metatag:metatag_twitter_cards
+  - metatag_async_widget:metatag_async_widget
   - paragraphs:paragraphs
   - paragraphs_features:paragraphs_features
   - pathauto:pathauto
