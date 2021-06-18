@@ -5,6 +5,7 @@ dependencies:
     - field.field.media.gallery.field_media_images
     - media.type.gallery
   module:
+    - entity_reference_actions
     - field_group
     - media_library
     - select2
@@ -41,6 +42,17 @@ content:
     settings:
       media_types: {  }
     third_party_settings: {  }
+      entity_reference_actions:
+        enabled: true
+        options:
+          action_title: Action
+          include_exclude: include
+          selected_actions:
+            media_delete_action: '0'
+            media_edit_action: media_edit_action
+            media_publish_action: '0'
+            media_save_action: '0'
+            media_unpublish_action: '0'
     region: content
   name:
     type: string_textfield
@@ -65,6 +77,7 @@ content:
       width: 100%
       autocomplete: true
       match_operator: CONTAINS
+      match_limit: 10
     third_party_settings: {  }
 hidden:
   langcode: true

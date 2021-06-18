@@ -27,8 +27,15 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
    * Test Creation of Article.
    */
   public function testCreateArticle() {
+    // Create a video media item.
+    $this->drupalGet("media/add/video");
+    $this->assertSession()->fieldExists('Video URL')->setValue('https://www.youtube.com/watch?v=PWjcqE3QKBg');
+    $this->assertSession()->fieldExists('Name')->setValue('Youtube');
+    $this->assertSession()->buttonExists('Save')->press();
+
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Test article',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
     ]);
@@ -36,15 +43,17 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
 
     // Add Image Paragraph.
-    $this->addImageParagraph(static::$paragraphsField, ['media:5']);
+    $image1 = $this->loadMediaByUuid('23f6d444-ece1-465d-a667-b1fb80e641d3');
+    $this->addImageParagraph(static::$paragraphsField, ['media:' . $image1->id()]);
 
     // Add Text Paragraph.
     $this->addTextParagraph(static::$paragraphsField, '<p>Awesome text</p><p>With a new line</p>');
 
     // Add Gallery Paragraph between Image and Text.
+    $image2 = $this->loadMediaByUuid('05048c57-942d-4251-ad12-ce562f8c79a0');
     $this->addGalleryParagraph(static::$paragraphsField, 'Test gallery', [
-      'media:1',
-      'media:5',
+      'media:' . $image1->id(),
+      'media:' . $image2->id(),
     ], 1);
 
     // Add Quote Paragraph.
@@ -54,13 +63,14 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->addSocialParagraph(static::$paragraphsField, 'https://twitter.com/ThunderCoreTeam/status/776417570756976640', 'twitter', 3);
 
     // Add Instagram Paragraph.
-    $this->addSocialParagraph(static::$paragraphsField, 'https://www.instagram.com/p/BbywAZBBqlI/', 'instagram');
+    $this->addSocialParagraph(static::$paragraphsField, 'https://www.instagram.com/p/B2huuS8AQVq/', 'instagram');
 
     // Add Link Paragraph.
     $this->addLinkParagraph(static::$paragraphsField, 'Link to Thunder', 'http://www.thunder.org');
 
     // Add Video paragraph at the beginning.
-    $this->addVideoParagraph(static::$paragraphsField, ['media:7'], 0);
+    $video = $this->getMediaByName('Youtube');
+    $this->addVideoParagraph(static::$paragraphsField, ['media:' . $video->id()], 0);
 
     // Add Pinterest Paragraph.
     $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/478085316687452268/', 'pinterest');
@@ -90,8 +100,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check that one Instagram widget is on page.
     $this->getSession()
-      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/BbywAZBBqlI') !== -1);}).length === 1");
-    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/BbywAZBBqlI') !== -1);}).length");
+      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/B2huuS8AQVq') !== -1);}).length === 1");
+    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('instagram.com/p/B2huuS8AQVq') !== -1);}).length");
     $this->assertEquals(1, $numOfElements, "Number of instagrams on page should be one.");
 
     // Check that one Twitter widget is on page.
@@ -110,8 +120,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check Video paragraph.
     $this->getSession()
-      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DKsp5JVFryEg') !== -1);}).length === 1");
-    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('/media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DKsp5JVFryEg') !== -1);}).length");
+      ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DPWjcqE3QKBg') !== -1);}).length === 1");
+    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('/media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DPWjcqE3QKBg') !== -1);}).length");
     $this->assertEquals(1, $numOfElements, "Number of youtube on page should be one.");
 
     // Check that one Pinterest widget is on page.
@@ -129,9 +139,10 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     }
     \Drupal::service('module_installer')->uninstall(['thunder_workflow']);
 
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     // Try to create an article.
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Test article',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
     ]);
@@ -144,8 +155,9 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
    * Tests draft creation and that reverting to the default revision works.
    */
   public function testModerationWorkflow() {
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Test workflow article',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
     ]);

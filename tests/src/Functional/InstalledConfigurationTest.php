@@ -170,7 +170,12 @@ class InstalledConfigurationTest extends ThunderTestBase {
     ],
     'views.view.moderated_content' => [
       'display' => [
-        'moderated_content' => ['cache_metadata' => ['max-age' => TRUE, 'tags' => TRUE]],
+        'moderated_content' => [
+          'cache_metadata' => [
+            'max-age' => TRUE,
+            'tags' => TRUE,
+          ],
+        ],
         'default' => ['cache_metadata' => ['max-age' => TRUE, 'tags' => TRUE]],
       ],
     ],
@@ -195,6 +200,11 @@ class InstalledConfigurationTest extends ThunderTestBase {
       'dependencies' => [
         'config' => TRUE,
         'module' => TRUE,
+      ],
+    ],
+    'core.entity_form_display.node.article.bulk_edit' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
       ],
     ],
     'core.entity_form_display.taxonomy_term.channel.default' => [
@@ -260,6 +270,8 @@ class InstalledConfigurationTest extends ThunderTestBase {
   /**
    * Ignore configuration list values. Path to key is separated by '::'.
    *
+   * @var array
+   *
    * Example:
    * 'field.field.node.article.field_example' => [
    *   'settings::settings_part1::list_part' => [
@@ -268,9 +280,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *   ]
    * ]
    *
-   * TODO: use this functionality for more strict "dependencies" checking.
-   *
-   * @var array
+   * @todo use this functionality for more strict "dependencies" checking.
    */
   protected static $ignoreConfigListValues = [
     // Google analytics adds one permission dynamically in the install hook.

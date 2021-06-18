@@ -44,7 +44,7 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     $this->addLinkParagraph(static::$paragraphsField, 'Example 21', 'https://example.com/21');
     $this->addLinkField(static::$paragraphsField, 2, static::$linkField, 1, 'Example 22', 'https://example.com/22');
 
-    /* @var \Behat\Mink\Element\DocumentElement $page */
+    /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
     // Enable sorting on second link paragraph.

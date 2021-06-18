@@ -14,7 +14,7 @@ dependencies:
   module:
     - field_group
     - media_library
-    - metatag
+    - metatag_async_widget
     - paragraphs
     - paragraphs_features
     - path
@@ -89,9 +89,10 @@ content:
     region: content
   field_meta_tags:
     weight: 10
-    settings: {  }
+    settings:
+      sidebar: true
     third_party_settings: {  }
-    type: metatag_firehose
+    type: metatag_async_widget_firehose
     region: content
   field_paragraphs:
     type: paragraphs

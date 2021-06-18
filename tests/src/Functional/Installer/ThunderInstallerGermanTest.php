@@ -73,14 +73,7 @@ ENDPO;
   }
 
   /**
-   * Continues installation when an expected warning is found.
-   *
-   * @param string $expected_warnings
-   *   A list of warning summaries to expect on the requirements screen (e.g.
-   *   'PHP', 'PHP OPcode caching', etc.). If only the expected warnings
-   *   are found, the test will click the "continue anyway" link to go to the
-   *   next screen of the installer. If an expected warning is not found, or if
-   *   a warning not in the list is present, a fail is raised.
+   * {@inheritdoc}
    */
   protected function continueOnExpectedWarnings($expected_warnings = []) {
     // Don't try to continue if there are errors.

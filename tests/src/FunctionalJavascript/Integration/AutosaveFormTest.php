@@ -23,8 +23,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     parent::setUp();
 
     // Adjust the autosave form submission interval.
-    \Drupal::configFactory()
-      ->getEditable('autosave_form.settings')
+    $this->config('autosave_form.settings')
       ->set('interval', 2000)
       ->save();
   }
@@ -33,31 +32,33 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
    * Tests the autosave functionality in an existing article.
    */
   public function testAutosaveInExistingEntity() {
-    $this->drupalGet('node/7/edit');
+    $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
+    $this->drupalGet($node->toUrl('edit-form'));
     $page = $this->getSession()->getPage();
 
     // Make some changes.
     $this->makeFormChanges();
 
     // Reload the page.
-    $this->drupalGet('node/7/edit');
+    $this->drupalGet($node->toUrl('edit-form'));
 
     // Reject the changes.
     $this->pressRejectButton();
-    $this->assertEquals([5], $page->findField('field_tags[]')->getValue());
+    $term = $this->loadTermByUuid('35bdba6e-9b45-472a-8fda-11e7e69de71b');
+    $this->assertEquals([$term->id()], $page->findField('field_tags[]')->getValue());
     $this->assertEquals('Come to DrupalCon New Orleans', $page->findField('title[0][value]')->getValue());
-    $this->assertEmpty($page->find('css', '.form-item-field-paragraphs-4-subform-field-text-0-value'));
+    $this->assertEmpty($page->find('css', '.form-item-field-paragraphs-3-subform-field-text-0-value'));
 
     // Make changes again.
     $this->makeFormChanges();
 
     // Reload the page.
-    $this->drupalGet('node/7/edit');
+    $this->drupalGet($node->toUrl('edit-form'));
 
     $this->pressRestoreButton();
-    $this->assertEquals([5, '$ID:Tag2'], $page->findField('field_tags[]')->getValue());
+    $this->assertEquals([$term->id(), '$ID:Tag2'], $page->findField('field_tags[]')->getValue());
     $this->assertEquals('New title', $page->findField('title[0][value]')->getValue());
-    $this->assertNotEmpty($page->find('css', '.form-item-field-paragraphs-4-subform-field-text-0-value'));
+    $this->assertNotEmpty($page->find('css', '.form-item-field-paragraphs-5-subform-field-text-0-value'));
 
     // Save the article.
     $this->clickSave();
@@ -102,9 +103,11 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
 
     $startTimestamp = strtotime('-2 days');
     $endTimestamp = strtotime('+1 day');
+
+    $term = $this->loadTermByUuid('35bdba6e-9b45-472a-8fda-11e7e69de71b');
     $fieldValues = [
       'title[0][value]' => 'New title',
-      'field_tags[]' => [[5, 'Drupal'], 'Tag2'],
+      'field_tags[]' => [[$term->id(), $term->getName()], 'Tag2'],
       'publish_on[0][value][date]' => date('Y-m-d', $startTimestamp),
       'publish_on[0][value][time]' => date('H:i:s', $startTimestamp),
       'unpublish_on[0][value][date]' => date('Y-m-d', $endTimestamp),

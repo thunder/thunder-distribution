@@ -1,41 +1,59 @@
 # Changelog
 
-## [6.0.3](https://github.com/thunder/thunder-distribution/tree/6.0.3) 2020-10-12
-[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.0.2...6.0.3)
+## [6.1.4](https://github.com/thunder/thunder-distribution/tree/6.1.4) 2021-06-14
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.1.3...6.1.4)
 
-Instagram will shut down its current oEmbed API on October 24, 2020. We integrate the new version of Media Entity Instagram to support the future integration.
-After that date, you will need a Facebook Developer Account and App credentials to be able to show Instagram embeds.
-More information on what is necessary to be able to integrate Instagram embeds in the future can be found here:
-https://developers.facebook.com/docs/instagram/oembed
+With this release we require the version of th entity_reference_actions module, that is still working with
+Drupal Version 9.1. Newer Versions of the module will require Drupal 9.2.
 
-- Fix [Add config dependencies to thunder_media AutoAspectEffect](https://www.drupal.org/node/3164391)
-- Do [Modernize demo content](https://www.drupal.org/node/3171543)
-- Do [Update to media_entity_instagram v3](https://www.drupal.org/node/3171500)
+## [6.1.3](https://github.com/thunder/thunder-distribution/tree/6.1.3) 2021-05-10
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.1.2...6.1.3)
 
-## [6.0.2](https://github.com/thunder/thunder-distribution/tree/6.0.2) 2020-09-03
-[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.0.1...6.0.2)
+Having the metatag form on the node edit page is a huge performance hit on save, autosave and adding new paragraphs. To
+improve those operations, we integrate the metatag_async_widget, which loads the metatag form on demand.
 
-Modal dialogs do not work with Drupal 9.0.4. Until a new release of Drupal has been done, we need to prevent installation of Drupal 9.0.4.
+- [Use asynchronous widget for metatag handling](https://www.drupal.org/node/3208355)
 
-- Do [Make Thunder PHP 7.4 compatible](https://www.drupal.org/node/3168860)
-- Fix [Prevent installing of Drupal 8.9.4/9.0.4](https://www.drupal.org/node/3168846)
+## [6.1.2](https://github.com/thunder/thunder-distribution/tree/6.1.2) 2021-04-15
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.1.1...6.1.2)
 
-## [6.0.1](https://github.com/thunder/thunder-distribution/tree/6.0.1) 2020-08-27
-[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.0.0...6.0.1)
+We spend a lot of effort into improving the sitemap generation speed. We saw on larger sites, that generating the sitemap
+took about 30 minutes and consumed a lot of memory.
 
-After a lot of work, we have finally integrated the search api to have a better editorial search.
-To start using the new article search, the optional Thunder Search API module has to be enabled, it is not enabled by default. The content list will get a fulltext search index instead of the previous search by title.
-We recommend to use Solr-Search for improved performance.
+We reduced that generation time to 3 minutes and heavily reduced memory usage as well. Additionally, the sitemap
+generation does not clear the entity cache anymore.
 
-- Do [Integrate editorial search with Search API module](https://www.drupal.org/node/2899254)
+More information about those fixes can be found in the release notes of simple_sitemap 3.10:
+[simple_sitemap 8.x-3.10](https://www.drupal.org/project/simple_sitemap/releases/8.x-3.10)
 
-## [6.0.0](https://github.com/thunder/thunder-distribution/tree/6.0.0) 2020-07-27
+If you experience similar Problems with the sitemap generation, we urge you to update and set the config value entities_per_dataset
+in simple_sitemap.settings configuration to a value that fits to your circumstances. It will be set to 50 by default,
+and that will already give you huge performance boosts, but depending on your server configuration you might try and
+increase this value to gain even better performance.
 
-Add Drupal 9 compatibility. To achieve this, we had to remove the AMP anf Facebook instant articles modules. If you need
-these modules, you have to stay on Thunder 3.5 (Drupal 8.9) for now. Thunder 3.5 will be supported as long as Drupal 8.9
-is supported. Drupal 8.9 Support will end in November 2021.
+Thunder is now PHP 8 ready!
 
-For update instructions from Thunder 3 to Thunder 6 see the [Thunder 6 update documentation](https://thunder.github.io/thunder-documentation/update-3-to-6)
+- [Disable xsl on sitemap and bump simple_sitemap version](https://www.drupal.org/node/3208377)
+- [PHP 8 support](https://www.drupal.org/node/3202526)
+- [Set the media name by default to the image filename in dropzone upload widget](https://www.drupal.org/node/3200971)
+- [Clean up content admin views](https://www.drupal.org/node/3185134)
 
-What happened to Thunder 4 and 5? Drupal.org introduced semantic versioning, and what we considered to be Thunder 3.4 and Thunder 3.5
-is Thunder 4 and Thunder 5 in drupal.org terms. So we had to do the big version jump to Thunder 6.
+## [6.1.1](https://github.com/thunder/thunder-distribution/tree/6.1.1) 2020-12-16
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.1.0...6.1.1)
+
+We added the ability to edit all images in a gallery. With this feature you can for example change the copyright for all images at once.
+
+Changes since 6.1.0
+
+- Fix [Additional breadcrumb link on node/add pages](https://www.drupal.org/node/3180882)
+- Add [Bulk edit of gallery images](https://www.drupal.org/node/3187607)
+
+## [6.1.0](https://github.com/thunder/thunder-distribution/tree/6.1.0) 2020-12-08
+
+Minor release, that corresponds to the Drupal 9.1.x minor releases.
+
+Changes since 6.0.3:
+
+- [Fix the interactive installer](https://www.drupal.org/node/3181696)
+- [Fix admin toolbar logo](https://www.drupal.org/node/3176562)
+- [Remove system.site.yml from shipped config](https://www.drupal.org/node/3176823)

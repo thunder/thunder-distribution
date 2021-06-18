@@ -1,0 +1,6 @@
+services:
+  thunder_test_mock_request.http_client.middleware:
+    class: Drupal\thunder_test_mock_request\MockHttpClientMiddleware
+    arguments: ['@request_stack', '@state']
+    tags:
+      - { name: http_client_middleware }

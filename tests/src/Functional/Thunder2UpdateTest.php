@@ -12,7 +12,7 @@ use Drupal\Tests\thunder\Traits\ThunderAwsTestFixtureTrait;
  * This will be disabled for the Thunder 3.0 branch as long as there are no
  * releases with update path.
  *
- * TODO: rewrite for Thunder 3.0
+ * @todo rewrite for Thunder 3.0
  *
  * @group Disabled_Thunder
  */
