@@ -6,6 +6,20 @@
  */
 
 /**
+ * Implements hook_install().
+ */
+function thunder_demo_install() {
+  /** @var \Drupal\Core\Entity\EntityRepositoryInterface $entityRepository */
+  $entityRepository = \Drupal::service('entity.repository');
+
+  $node = $entityRepository->loadEntityByUuid('node', 'efc68dc1-649e-4ac8-ad95-78cd404f22a7');
+
+  \Drupal::configFactory()->getEditable('tour.tour.content-paragraphs')
+    ->set('routes.0.route_params.node', $node->id())
+    ->save();
+}
+
+/**
  * Implements hook_uninstall().
  *
  * Handling following steps:
