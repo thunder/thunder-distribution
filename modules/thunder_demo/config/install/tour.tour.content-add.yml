@@ -16,7 +16,7 @@ tips:
     id: article
     plugin: text
     label: 'Article creation page'
-    body: '<p>On this step we''ll explain you the different parts of an article.</p><p>Lets start!</p>'
+    body: '<p>On this step we''ll explain you the different parts of an article.</p><p>Let''s start!</p>'
     weight: 1
   article-channel:
     id: article-channel
@@ -74,7 +74,7 @@ tips:
     label: 'Main actions'
     body: '<p>You can preview, save, publish and unpublish the article here.</p><p>Try clicking the down arrow in the "Save and continue" button to reveal the hidden options.</p>'
     weight: 9
-    position: top
+    position: top-start
     selector: '#edit-actions'
   article-last:
     id: article-last
