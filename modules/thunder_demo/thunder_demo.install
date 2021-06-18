@@ -18,6 +18,11 @@ function thunder_demo_modules_installed($modules) {
     \Drupal::configFactory()->getEditable('tour.tour.content-paragraphs')
       ->set('routes.0.route_params.node', $node->id())
       ->save();
+
+    $tour = \Drupal::configFactory()->getEditable('tour.tour.content-add');
+    $article_last = $tour->get('tips.article-last.body');
+    $article_last = str_replace('/node/7/edit', $node->toUrl('edit-form')->toString(), $article_last);
+    $tour->set('tips.article-last.body', $article_last)->save();
   }
 }
 
