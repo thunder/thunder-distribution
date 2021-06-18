@@ -25,6 +25,7 @@ tips:
     label: 'Paragraph actions'
     body: '<p>Each paragraph comes with it''s actions, which let you edit or remove it.</p>'
     weight: 2
+    position: left
     selector: '#field-paragraphs-0-edit--2'
   article-paragraphs-text:
     id: article-paragraphs-text
@@ -32,6 +33,7 @@ tips:
     label: Text
     body: '<p>This is a simple text paragraph with a WYSIWYG editor.</p>'
     weight: 3
+    position: left
     selector: '#edit-field-paragraphs-0-top'
   article-paragraphs-video:
     id: article-paragraphs-video
@@ -39,6 +41,7 @@ tips:
     label: Video
     body: '<p>This is a video. You can select one from the library or upload a new one.</p>'
     weight: 4
+    position: left
     selector: '#edit-field-paragraphs-1-top'
   article-paragraphs-twitter:
     id: article-paragraphs-twitter
@@ -46,6 +49,7 @@ tips:
     label: Twitter
     body: '<p>In order to display an Twitter card just paste in the url of the post and Thunder will do the rest for you. How smart!</p>'
     weight: 5
+    position: left
     selector: '#edit-field-paragraphs-3-top'
   article-paragraphs-gallery:
     id: article-paragraphs-gallery
@@ -53,6 +57,7 @@ tips:
     label: Gallery
     body: '<p>This is a gallery. By using the "Edit" button you''re able to add or delete images and change their order.</p>'
     weight: 6
+    position: left
     selector: '#edit-field-paragraphs-8-top'
   article-paragraphs-more:
     id: article-paragraphs-more
