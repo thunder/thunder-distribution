@@ -66,8 +66,7 @@ tips:
     label: Advanced
     body: '<p>They let you configure advanced settings related to the article. You will use this part when dealing with SEO, article promotion, scheduling, etc.</p><p>Click on the section titles to expand them and see what they offer.</p>'
     weight: 8
-    attributes:
-      data-options: 'tipLocation: left'
+    position: left
     selector: '#edit-advanced'
   article-actions:
     id: article-actions
@@ -75,8 +74,7 @@ tips:
     label: 'Main actions'
     body: '<p>You can preview, save, publish and unpublish the article here.</p><p>Try clicking the down arrow in the "Save and continue" button to reveal the hidden options.</p>'
     weight: 9
-    attributes:
-      data-options: 'tipLocation: top'
+    position: top
     selector: '#edit-actions'
   article-last:
     id: article-last

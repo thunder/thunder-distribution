@@ -24,8 +24,7 @@ tips:
     label: 'Main content region'
     body: 'Meat and bones of a Thunder site. Depending on the page you are on you''ll find article content, list of articles in a channel, media assets and many more here.'
     weight: 2
-    attributes:
-      data-options: 'tipLocation: left'
+    position: left
     selector: '#content'
   main_menu:
     id: main_menu
@@ -47,9 +46,6 @@ tips:
     label: 'Need some more time to explore on your own?'
     body: 'You can stop the tour at any time and re-start it by pressing this button.'
     weight: 5
-    attributes:
-      data-options: 'nubPosition: top-right'
-    selector: '#toolbar-tab-tour'
   next_step:
     id: next_step
     plugin: text

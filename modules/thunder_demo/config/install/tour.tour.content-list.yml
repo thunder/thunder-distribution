@@ -38,8 +38,7 @@ tips:
     label: Actions
     body: '<p>In order to define which items to execute an action on use the checkboxes. The one in the header row will select all items on a page and the ones in the rows below will select corresponding individual items.</p>'
     weight: 4
-    attributes:
-      data-options: 'tipLocation: right'
+    position: right
     selector: '.views-table .select-all'
   sort:
     id: sort
@@ -47,8 +46,7 @@ tips:
     label: Sorting
     body: '<p>Click on the links in the header row to sort the list. Arrow next to the active sort link indicates the sort direction (ascending or descending).</p>'
     weight: 5
-    attributes:
-      data-options: 'nubPosition: top-right'
+    position: top
     selector: '.views-table #view-changed-table-column'
   operations:
     id: operations
@@ -56,8 +54,7 @@ tips:
     label: 'Content operations'
     body: '<p>Use content operations dropbutton to edit or delete a given content item.</p>'
     weight: 6
-    attributes:
-      data-options: 'tipLocation: left'
+    position: left
     selector: '.views-table tr:nth-child(2) .views-field-operations'
   last:
     id: last

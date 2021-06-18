@@ -60,8 +60,7 @@ tips:
     label: 'Add paragraphs in between'
     body: '<p>Use this kind of button to add another paragraph at the place you like!</p>'
     weight: 7
-    attributes:
-      data-options: 'tipLocation: top'
+    position: top
     selector: '#field-paragraphs-values .paragraphs-features__add-in-between__button'
   article-paragraphs-drag:
     id: article-paragraphs-drag
@@ -69,8 +68,7 @@ tips:
     label: 'Reorder paragprahs'
     body: '<p>Activate the sort mode to easily reorder your paragraphs.</p>'
     weight: 8
-    attributes:
-      data-options: 'tipLocation: right'
+    position: right
     selector: '#field-paragraphs-values .tabledrag-toggle-checkbox'
   article-paragraphs-last:
     id: article-paragraphs-last
