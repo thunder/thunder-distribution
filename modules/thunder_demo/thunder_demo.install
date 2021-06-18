@@ -6,17 +6,19 @@
  */
 
 /**
- * Implements hook_install().
+ * Implements hook_modules_installed().
  */
-function thunder_demo_install() {
-  /** @var \Drupal\Core\Entity\EntityRepositoryInterface $entityRepository */
-  $entityRepository = \Drupal::service('entity.repository');
+function thunder_demo_modules_installed($modules) {
+  if (in_array('thunder_demo', $modules)) {
+    /** @var \Drupal\Core\Entity\EntityRepositoryInterface $entityRepository */
+    $entityRepository = \Drupal::service('entity.repository');
 
-  $node = $entityRepository->loadEntityByUuid('node', 'efc68dc1-649e-4ac8-ad95-78cd404f22a7');
+    $node = $entityRepository->loadEntityByUuid('node', 'efc68dc1-649e-4ac8-ad95-78cd404f22a7');
 
-  \Drupal::configFactory()->getEditable('tour.tour.content-paragraphs')
-    ->set('routes.0.route_params.node', $node->id())
-    ->save();
+    \Drupal::configFactory()->getEditable('tour.tour.content-paragraphs')
+      ->set('routes.0.route_params.node', $node->id())
+      ->save();
+  }
 }
 
 /**
