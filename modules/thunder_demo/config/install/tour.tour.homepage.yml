@@ -44,7 +44,7 @@ tips:
     id: restart_tour
     plugin: text
     label: 'Need some more time to explore on your own?'
-    body: 'You can stop the tour at any time and re-start it by pressing this button.'
+    body: 'You can stop the tour at any time and re-start it by pressing the tour button in the top-right corner.'
     weight: 5
   next_step:
     id: next_step
