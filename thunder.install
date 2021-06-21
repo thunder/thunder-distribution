@@ -187,3 +187,12 @@ function thunder_update_8315() {
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();
 }
+
+/**
+ * Uninstall thunder_liveblog.
+ */
+function thunder_update_8316() {
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
+  $moduleInstaller = \Drupal::service('module_installer');
+  $moduleInstaller->uninstall(['thunder_liveblog']);
+}

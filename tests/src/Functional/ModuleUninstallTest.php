@@ -17,9 +17,6 @@ class ModuleUninstallTest extends ThunderTestBase {
    * @var string[][]
    */
   protected static $moduleLists = [
-    ['thunder_liveblog'],
-    ['liveblog_pusher', 'liveblog', 'simple_gmap'],
-    ['thunder_liveblog', 'liveblog_pusher', 'liveblog', 'simple_gmap'],
     ['diff'],
     ['content_lock'],
     ['adsense'],

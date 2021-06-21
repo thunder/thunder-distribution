@@ -38,10 +38,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
     // Additional modules.
     // 'nexx_integration',
     // 'thunder_fia',
-    // We are messing around with configuration in
-    // thunder_liveblog_module_preinstall, so it's not possible to check the
-    // thunder_liveblog config in a proper way.
-    // 'thunder_liveblog',
     // end of list.
   ];
 
