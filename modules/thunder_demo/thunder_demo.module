@@ -5,6 +5,7 @@
  * Provides hooks for demo module.
  */
 
+use Drupal\Core\Asset\AttachedAssetsInterface;
 use Drupal\Core\Entity\EntityInterface;
 
 /**
@@ -27,5 +28,14 @@ function thunder_demo_tour_tips_alter(array &$tour_tips, EntityInterface $entity
   $tourId = $entity->id();
   if (isset($tourThemeMapping[$tourId]) && !in_array($activeTheme, $tourThemeMapping[$tourId])) {
     $tour_tips = [];
+  }
+}
+
+/**
+ * Implements hook_js_alter().
+ */
+function thunder_demo_js_alter(&$javascript, AttachedAssetsInterface $assets) {
+  if (isset($javascript['core/modules/tour/js/tour.js'])) {
+    $javascript['core/modules/tour/js/tour.js']['weight'] = 1;
   }
 }
