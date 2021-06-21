@@ -50,7 +50,7 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:dev-fix/stan-memory-limit
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
