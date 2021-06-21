@@ -36,13 +36,6 @@ class ModuleUninstallTest extends ThunderTestBase {
       'views_bulk_operations',
       'select2_facets',
     ],
-
-    // ['harbourmaster'],
-    // Requires update of project on drupal.org.
-    // ['thunder_fia'],
-    // ['fb_instant_articles'],
-    // ['thunder_fia', 'fb_instant_articles'],
-    // Patch provided: https://www.drupal.org/files/issues/2901583_2.patch.
   ];
 
   /**
