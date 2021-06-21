@@ -145,11 +145,14 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
    *
    * @return string
    *   Response type.
+   *
+   * @throws \Exception
    */
   protected function resolveMediaTypes($value, ResolveContext $context, ResolveInfo $info): string {
     if ($value instanceof MediaInterface) {
       return 'Media' . $this->mapBundleToSchemaName($value->bundle());
     }
+    throw new \Exception('Invalid media type.');
   }
 
 }

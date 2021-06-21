@@ -46,7 +46,7 @@ class FocalPoint extends DataProducerPluginBase implements ContainerFactoryPlugi
   /**
    * The module handler.
    *
-   * @var \Drupal\focal_point\FocalPointManagerInterface
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
    */
   protected $moduleHandler;
 

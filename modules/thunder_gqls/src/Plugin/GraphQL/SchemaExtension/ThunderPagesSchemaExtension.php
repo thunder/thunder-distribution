@@ -194,6 +194,8 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
    *
    * @return string
    *   Response type.
+   *
+   * @throws \Exception
    */
   protected function resolvePageTypes($value, ResolveContext $context, ResolveInfo $info): string {
     if ($value instanceof NodeInterface || $value instanceof TermInterface || $value instanceof UserInterface) {
@@ -202,6 +204,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
       }
       return $this->mapBundleToSchemaName($value->bundle());
     }
+    throw new \Exception('Invalid page type.');
   }
 
 }

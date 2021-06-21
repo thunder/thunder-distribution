@@ -118,6 +118,7 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
         'status' => $redirect->getStatusCode(),
       ];
     }
+    return [];
   }
 
 }
