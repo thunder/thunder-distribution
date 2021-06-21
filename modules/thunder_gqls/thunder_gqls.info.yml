@@ -1,0 +1,8 @@
+name: Thunder GraphQL schema
+type: module
+description: 'Composable GraphQL schema for the Thunder distribution.'
+package: GraphQL
+dependencies:
+  - graphql:graphql
+  - drupal:node
+core_version_requirement: ^8 || ^9

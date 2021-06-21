@@ -1,0 +1,7 @@
+extend type Query {
+  article(uuid: String!): Article
+  tags(uuid: String!): Tags
+  channel(uuid: String!): Channel
+  user(uuid: String!): User
+  page(path: String!): Page
+}

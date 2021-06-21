@@ -1,0 +1,87 @@
+{
+  "data": {
+    "menu": {
+      "name": "Main navigation",
+      "id": "main",
+      "items": [
+        {
+          "title": "Home",
+          "url": "/",
+          "inActiveTrail": false,
+          "children": []
+        },
+        {
+          "title": "News",
+          "url": "/news",
+          "inActiveTrail": false,
+          "children": []
+        },
+        {
+          "title": "Events",
+          "url": "/events",
+          "inActiveTrail": false,
+          "children": []
+        }
+      ]
+    },
+    "page": {
+      "uuid": "36b2e2b2-3df0-43eb-a282-d792b0999c07",
+      "url": "/come-drupalcon-new-orleans",
+      "name": "Come to DrupalCon New Orleans",
+      "entity": "node",
+      "language": "en",
+      "entityLinks": {
+        "canonical": "/come-drupalcon-new-orleans"
+      },
+      "published": true,
+      "author": {
+        "uuid": "be8e7a25-8a41-4bda-a854-b4b9bb1b0a02",
+        "name": "test-seo",
+        "mail": null,
+        "entity": "user",
+        "language": "en"
+      },
+      "channel": {
+        "uuid": "0bb70443-8172-4d8e-9335-2876bc32e356",
+        "published": true,
+        "name": "Events",
+        "url": "/events",
+        "parent": null
+      },
+      "tags": [
+        {
+          "uuid": "35bdba6e-9b45-472a-8fda-11e7e69de71b",
+          "name": "Drupal",
+          "url": "/drupal"
+        }
+      ],
+      "seoTitle": "Come to DrupalCon New Orleans",
+      "content": [
+        {
+          "__typename": "ParagraphGallery"
+        },
+        {
+          "__typename": "ParagraphText"
+        },
+        {
+          "__typename": "ParagraphTwitter"
+        },
+        {
+          "__typename": "ParagraphLink"
+        },
+        {
+          "__typename": "ParagraphQuote"
+        }
+      ],
+      "teaser": {
+        "text": "The Drupal community is one of the largest open source communities in the world. We're developers, designers, strategists, coordinators, editors, translators, and more. Each year, we meet at DrupalCamps, meetups, and other events in more than 200 countries. But once a year, our community comes together at the biggest Drupal event in the world: DrupalCon North America. This year, from May 9-13, we'll be in New Orleans.",
+        "image": {
+          "uuid": "a4c1035a-5b27-4713-8ba3-40ba5942486d",
+          "derivative": {
+            "width": 220
+          }
+        }
+      }
+    }
+  }
+}
