@@ -10,7 +10,7 @@ use Drupal\node\Entity\Node;
 /**
  * Test the schema.
  *
- * @group thunder_gqls
+ * @group Thunder
  */
 class SchemaTest extends ThunderGqlsTestBase {
 
