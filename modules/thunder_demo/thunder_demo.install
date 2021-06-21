@@ -6,6 +6,27 @@
  */
 
 /**
+ * Implements hook_modules_installed().
+ */
+function thunder_demo_modules_installed($modules) {
+  if (in_array('thunder_demo', $modules)) {
+    /** @var \Drupal\Core\Entity\EntityRepositoryInterface $entityRepository */
+    $entityRepository = \Drupal::service('entity.repository');
+
+    $node = $entityRepository->loadEntityByUuid('node', 'efc68dc1-649e-4ac8-ad95-78cd404f22a7');
+
+    \Drupal::configFactory()->getEditable('tour.tour.content-paragraphs')
+      ->set('routes.0.route_params.node', $node->id())
+      ->save();
+
+    $tour = \Drupal::configFactory()->getEditable('tour.tour.content-add');
+    $article_last = $tour->get('tips.article-last.body');
+    $article_last = str_replace('/node/7/edit', $node->toUrl('edit-form')->toString(), $article_last);
+    $tour->set('tips.article-last.body', $article_last)->save();
+  }
+}
+
+/**
  * Implements hook_uninstall().
  *
  * Handling following steps:
