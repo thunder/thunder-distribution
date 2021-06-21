@@ -20,7 +20,7 @@
     <!-- Example SIMPLETEST_BASE_URL value: http://localhost -->
     <env name="SIMPLETEST_BASE_URL" value=""/>
     <!-- Example SIMPLETEST_DB value: mysql://username:password@localhost/databasename#table_prefix -->
-    <env name="SIMPLETEST_DB" value=""/>
+    <env name="SIMPLETEST_DB" value="sqlite://localhost/sites/default/files/.ht.sqlite"/>
     <!-- Example BROWSERTEST_OUTPUT_DIRECTORY value: /path/to/webroot/sites/simpletest/browser_output -->
     <env name="BROWSERTEST_OUTPUT_DIRECTORY" value=""/>
     <!-- To have browsertest output use an alternative base URL. For example if
@@ -35,7 +35,7 @@
     <!-- Example for changing the driver args to mink tests MINK_DRIVER_ARGS value: '["http://127.0.0.1:8510"]' -->
     <env name="MINK_DRIVER_ARGS" value=''/>
     <!-- Example for changing the driver args to webdriver tests MINK_DRIVER_ARGS_WEBDRIVER value: '["chrome", { "chromeOptions": { "w3c": false } }, "http://localhost:4444/wd/hub"]' For using the Firefox browser, replace "chrome" with "firefox" -->
-    <env name="MINK_DRIVER_ARGS_WEBDRIVER" value=''/>
+    <env name="MINK_DRIVER_ARGS_WEBDRIVER" value='["chrome", { "chromeOptions": { "w3c": false } }, "http://localhost:4444/wd/hub"]'/>
   </php>
   <testsuites>
     <testsuite name="unit">
