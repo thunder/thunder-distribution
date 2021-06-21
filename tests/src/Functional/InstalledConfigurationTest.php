@@ -31,6 +31,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'thunder_testing_demo',
     'thunder_google_analytics',
     'thunder_ivw',
+    'thunder_gqls',
     'adsense',
     'harbourmaster',
     'simple_gmap',
@@ -103,6 +104,9 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'tour.tour.content-list',
     'tour.tour.content-paragraphs',
     'tour.tour.homepage',
+
+    // Because of https://github.com/drupal-graphql/graphql/issues/1177.
+    'graphql.graphql_servers.thunder_graphql',
   ];
 
   /**
