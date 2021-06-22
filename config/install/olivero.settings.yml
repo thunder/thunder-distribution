@@ -1,0 +1,17 @@
+third_party_settings:
+  shortcut:
+    module_link: true
+features:
+  node_user_picture: false
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+logo:
+  use_default: false
+  path: profiles/contrib/thunder/files/images/logo.svg
+favicon:
+  use_default: false
+  path: profiles/contrib/thunder/files/favicon.ico
+  mimetype: image/vnd.microsoft.icon
+mobile_menu_all_widths: 0
+site_branding_bg_color: default
