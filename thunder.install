@@ -187,3 +187,21 @@ function thunder_update_8315() {
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();
 }
+
+/**
+ * Uninstall thunder_liveblog.
+ */
+function thunder_update_8316() {
+  $configFactory = \Drupal::configFactory();
+  $configFactory->getEditable('field.field.node.liveblog.field_paragraphs')
+    ->clear('dependencies.enforced')
+    ->save();
+
+  $configFactory->getEditable('field.storage.liveblog_post.field_embed_media')
+    ->clear('dependencies.enforced')
+    ->save();
+
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
+  $moduleInstaller = \Drupal::service('module_installer');
+  $moduleInstaller->uninstall(['thunder_liveblog']);
+}

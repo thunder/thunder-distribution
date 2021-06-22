@@ -27,7 +27,6 @@ class Thunder2UpdateTest extends UpdatePathTestBase {
   protected $configSchemaCheckSkip = [
     'core.entity_form_display.paragraph.image.default',
     'core.entity_form_display.paragraph.video.default',
-    'core.entity_view_display.liveblog_post.liveblog_post.default',
     'core.entity_view_display.paragraph.gallery.preview',
     'nexx_integration.settings',
     'views.view.fb_instant_articles',
