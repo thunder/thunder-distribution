@@ -32,17 +32,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'thunder_google_analytics',
     'thunder_ivw',
     'adsense',
-    'harbourmaster',
-    'simple_gmap',
-
-    // Additional modules.
-    // 'nexx_integration',
-    // 'thunder_fia',
-    // We are messing around with configuration in
-    // thunder_liveblog_module_preinstall, so it's not possible to check the
-    // thunder_liveblog config in a proper way.
-    // 'thunder_liveblog',
-    // end of list.
   ];
 
   /**
@@ -246,23 +235,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
       'hidden' => [
         'field_ivw' => TRUE,
       ],
-    ],
-    // Remove this when
-    // https://github.com/BurdaMagazinOrg/module-nexx_integration/pull/37 lands.
-    'core.entity_form_display.media.nexx_video.default' => [
-      'content' => [
-        'path' => TRUE,
-        'moderation_state' => TRUE,
-      ],
-    ],
-    'core.entity_form_display.paragraph.nexx_video.default' => [
-      'content' => [
-        'moderation_state' => TRUE,
-      ],
-    ],
-    'paragraphs.paragraphs_type.nexx_video' => [
-      'icon_uuid' => TRUE,
-      'description' => TRUE,
     ],
   ];
 
