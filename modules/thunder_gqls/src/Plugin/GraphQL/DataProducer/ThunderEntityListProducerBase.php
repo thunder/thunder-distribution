@@ -141,7 +141,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
       $query->condition($condition['field'], $condition['value'], $operation);
     }
 
-    if (isset($sortBy)) {
+    if (!empty($sortBy)) {
       foreach ($sortBy as $sort) {
         if (!empty($sort['field'])) {
           if (!empty($sort['direction']) && strtolower(

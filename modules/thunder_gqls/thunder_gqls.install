@@ -2,42 +2,25 @@
 
 /**
  * @file
- * Install, update and uninstall functions for the thunder_gqls module.
+ * The install file.
  */
+
+use Drupal\user\Entity\Role;
 
 /**
- * Use thunder schema instead of composable.
- *
- * This is a helper function for haus.de and should be removed after haus.de
- * was updated. This is way to invasive for general purpose.
+ * Implements hook_install().
  */
-function thunder_gqls_update_8001() {
-  $configFactory = \Drupal::configFactory();
-
-  foreach ($configFactory->listAll('graphql.graphql_servers.') as $graphqlServerConfigName) {
-    $config = $configFactory->getEditable($graphqlServerConfigName);
-    $extensions = $config->get('schema_configuration.composable.extensions');
-
-    if (is_array($extensions) && in_array('thunder_pages', $extensions)) {
-      $config->clear('schema_configuration.composable')
-        ->set('schema', 'thunder')
-        ->set('schema_configuration.thunder.extensions', $extensions)
-        ->save(TRUE);
-    }
-  }
-}
-
-/**
- * Remove thunder_routing extension.
- */
-function thunder_gqls_update_8002() {
-  $configFactory = \Drupal::configFactory();
-
-  foreach ($configFactory->listAll('graphql.graphql_servers.') as $graphqlServerConfigName) {
-    $config = $configFactory->getEditable($graphqlServerConfigName);
-
-    if ($config->get('schema') === 'thunder') {
-      $config->clear('schema_configuration.thunder.extensions.thunder_routing')->save(TRUE);
+function thunder_gqls_install() {
+  $graphql_permissions = [
+    'execute thunder_graphql arbitrary graphql requests',
+    'execute thunder_graphql persisted graphql requests',
+  ];
+  foreach (['anonymous', 'authenticated'] as $role) {
+    if ($role = Role::load($role)) {
+      foreach ($graphql_permissions as $permission) {
+        $role->grantPermission($permission);
+      }
+      $role->save();
     }
   }
 }

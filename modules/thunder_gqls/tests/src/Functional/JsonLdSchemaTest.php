@@ -5,7 +5,7 @@ namespace Drupal\Tests\thunder_gqls\Functional;
 /**
  * Test the schema.
  *
- * @group thunder_gqls
+ * @group Thunder
  */
 class JsonLdSchemaTest extends ThunderGqlsTestBase {
 

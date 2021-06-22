@@ -128,11 +128,14 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
    *
    * @return string
    *   Response type.
+   *
+   * @throws \Exception
    */
   protected function resolveParagraphTypes($value, ResolveContext $context, ResolveInfo $info): string {
     if ($value instanceof ParagraphInterface) {
       return 'Paragraph' . $this->mapBundleToSchemaName($value->bundle());
     }
+    throw new \Exception('Invalid paragraph type.');
   }
 
 }

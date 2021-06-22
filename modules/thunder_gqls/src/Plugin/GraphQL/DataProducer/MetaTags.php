@@ -12,7 +12,7 @@ use Drupal\Core\Render\RenderContext;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\TypedData\TypedDataTrait;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
-use Drupal\metatag\MetatagManagerInterface;
+use Drupal\metatag\MetatagManager;
 use Drupal\typed_data\DataFetcherTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -51,7 +51,7 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
   /**
    * The metatag manager service.
    *
-   * @var \Drupal\metatag\MetatagManagerInterface
+   * @var \Drupal\metatag\MetatagManager
    */
   protected $metatagManager;
 
@@ -89,7 +89,7 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
    *   The plugin definition.
    * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer service.
-   * @param \Drupal\metatag\MetatagManagerInterface $metatagManager
+   * @param \Drupal\metatag\MetatagManager $metatagManager
    *   The metatag manager service.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
    *   The module handler.
@@ -99,7 +99,7 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
     string $pluginId,
     $pluginDefinition,
     RendererInterface $renderer,
-    MetatagManagerInterface $metatagManager,
+    MetatagManager $metatagManager,
     ModuleHandlerInterface $moduleHandler
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
