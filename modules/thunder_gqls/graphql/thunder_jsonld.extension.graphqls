@@ -1,0 +1,3 @@
+extend type Query {
+  jsonld(path: String!): String
+}

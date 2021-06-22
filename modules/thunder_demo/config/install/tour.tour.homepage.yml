@@ -8,7 +8,9 @@ label: Homepage
 module: thunder_demo
 routes:
   -
-    route_name: view.frontpage.page_1
+    route_name: entity.user.canonical
+    route_params:
+      user: '1'
 tips:
   homepage:
     id: homepage
@@ -22,34 +24,28 @@ tips:
     label: 'Main content region'
     body: 'Meat and bones of a Thunder site. Depending on the page you are on you''ll find article content, list of articles in a channel, media assets and many more here.'
     weight: 2
-    attributes:
-      data-id: content
-      data-options: 'tipLocation: left'
+    position: left
+    selector: '#content'
   main_menu:
     id: main_menu
     plugin: text
     label: 'Main menu'
     body: '<p>Main site navigation. You can currently see the links to the two channels that we pre-created for you. All menus in Thunder are easy to modify so they can suit your needs.</p><p><em>Hint: try hovering the menu and look for the pencil icon.</em>'
     weight: 3
-    attributes:
-      data-class: menu--main
+    selector: .menu--main
   admin_menu:
     id: admin_menu
     plugin: text
     label: 'Admin menu'
     body: '<p>It lets you do the editorial and administrative tasks. Hover over the "Content" link  and see what happens. Don''t worry I''ll wait so you can take your time.</p><p>Neat, ha?</p>'
     weight: 4
-    attributes:
-      data-class: toolbar-icon-system-admin-content
+    selector: .toolbar-icon-system-admin-content
   restart_tour:
     id: restart_tour
     plugin: text
     label: 'Need some more time to explore on your own?'
-    body: 'You can stop the tour at any time and re-start it by pressing this button.'
+    body: 'You can stop the tour at any time and re-start it by pressing the tour button in the top-right corner.'
     weight: 5
-    attributes:
-      data-id: toolbar-tab-tour
-      data-options: 'nubPosition: top-right'
   next_step:
     id: next_step
     plugin: text

@@ -1,0 +1,86 @@
+{
+  "data": {
+    "metatags": [
+      {
+        "tag": "meta",
+        "attributes": "{\"http-equiv\":\"content-language\",\"content\":\"en\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes": "{\"name\":\"robots\",\"content\":\"index, follow\"}"
+      },
+      {
+        "tag": "link",
+        "attributes": "{\"rel\":\"image_src\",\"href\":\"https:\\/\\/thunder-develop.ddev.site\\/sites\\/default\\/files\\/2016-05\\/logo-front_8.png\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes": "{\"name\":\"referrer\",\"content\":\"no-referrer\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes": "{\"name\":\"title\",\"content\":\"Come to DrupalCon New Orleans\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes":"{\"name\":\"description\",\"content\":\"The Drupal community is one of the largest open source communities in the world. We\'re developers, designers, strategists, coordinators, editors, translators, and more. Each year, we meet at DrupalCamps, meetups, and other events in more than 200 countries. But once a year, our community comes together at the biggest Drupal event in the world: DrupalCon North America. This year, from May 9-13, we\'ll be in New Orleans.\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes": "{\"property\":\"og:site_name\",\"content\":\"Drush Site-Install\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes": "{\"property\":\"og:type\",\"content\":\"article\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes": "{\"property\":\"og:title\",\"content\":\"Come to DrupalCon New Orleans\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes":"{\"property\":\"og:description\",\"content\":\"The Drupal community is one of the largest open source communities in the world. We\'re developers, designers, strategists, coordinators, editors, translators, and more. Each year, we meet at DrupalCamps, meetups, and other events in more than 200 countries. But once a year, our community comes together at the biggest Drupal event in the world: DrupalCon North America. This year, from May 9-13, we\'ll be in New Orleans.\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes":"{\"property\":\"og:image\",\"content\":\"https:\\/\\/thunder-develop.ddev.site\\/sites\\/default\\/files\\/styles\\/facebook\\/public\\/2016-05\\/logo-front_8.png?h=4bce8042\&itok=xboDbU24\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes": "{\"property\":\"og:image:type\",\"content\":\"image\\/png\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes": "{\"property\":\"og:image:width\",\"content\":\"1200\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes": "{\"property\":\"og:image:height\",\"content\":\"630\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes": "{\"property\":\"og:updated_time\",\"content\":\"2021-04-28T11:56:54+0000\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes": "{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes":"{\"name\":\"twitter:description\",\"content\":\"The Drupal community is one of the largest open source communities in the world. We\'re developers, designers, strategists, coordinators, editors, translators, and more. Each year, we meet at DrupalCamps, meetups, and other events in more than 200 countries. But once a year, our community comes together at the biggest Drupal event in the world: DrupalCon North America. This year, from May 9-13, we\'ll be in New Orleans.\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes": "{\"name\":\"twitter:image:height\",\"content\":\"512\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes": "{\"name\":\"twitter:image:width\",\"content\":\"1024\"}"
+      },
+      {
+        "tag": "meta",
+        "attributes":"{\"name\":\"twitter:image\",\"content\":\"https:\\/\\/thunder-develop.ddev.site\\/sites\\/default\\/files\\/styles\\/twitter\\/public\\/2016-05\\/logo-front_8.png?h=301820f2\&itok=jWD7257A\"}"
+      }
+    ]
+  }
+}
