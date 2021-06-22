@@ -1,0 +1,40 @@
+{
+  "data": {
+    "main": {
+      "name": "Main navigation",
+      "id": "main",
+      "items": [
+        {
+          "title": "Home",
+          "url": "/",
+          "inActiveTrail": false,
+          "children": []
+        },
+        {
+          "title": "News",
+          "url": "/news",
+          "inActiveTrail": true,
+          "children": []
+        },
+        {
+          "title": "Events",
+          "url": "/events",
+          "inActiveTrail": false,
+          "children": []
+        }
+      ]
+    },
+    "admin": {
+      "name": "Administration",
+      "id": "admin",
+      "items": [
+        {
+          "title": "Inaccessible",
+          "url": "/",
+          "inActiveTrail": false,
+          "children": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,67 @@
+type Schema {
+  query: Query
+}
+
+type Query {
+  redirect(path: String!): Redirect
+  accessUnpublishedToken(auHash: String): String
+}
+
+interface Entity {
+  id: Int!
+  uuid: String!
+  entity: String!
+  language: String
+  name: String!
+  url: String!
+  entityLinks: EntityLinks
+}
+
+type EntityLinks {
+  canonical: String
+  deleteForm: String
+  deleteMultipleForm: String
+  editForm: String
+  versionHistory: String
+  revision: String
+  create: String
+  latestVersion: String
+}
+
+type Link {
+  url: String!
+  title: String!
+}
+
+interface Image {
+  src: String
+  width: Int
+  height: Int
+  alt: String
+  title: String
+}
+
+type ImageDerivative {
+  src: String
+  width: Int
+  height: Int
+}
+
+type Thumbnail implements Image {
+  src: String
+  width: Int
+  height: Int
+  alt: String
+  title: String
+}
+
+type FocalPoint {
+  x: Int
+  y: Int
+}
+
+type Redirect {
+  url: String
+  status: Int
+}
+
