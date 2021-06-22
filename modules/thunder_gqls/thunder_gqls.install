@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * The install file.
+ */
+
+use Drupal\user\Entity\Role;
+
+/**
+ * Implements hook_install().
+ */
+function thunder_gqls_install() {
+  $graphql_permissions = [
+    'execute thunder_graphql arbitrary graphql requests',
+    'execute thunder_graphql persisted graphql requests',
+  ];
+  foreach (['anonymous', 'authenticated'] as $role) {
+    if ($role = Role::load($role)) {
+      foreach ($graphql_permissions as $permission) {
+        $role->grantPermission($permission);
+      }
+      $role->save();
+    }
+  }
+}
