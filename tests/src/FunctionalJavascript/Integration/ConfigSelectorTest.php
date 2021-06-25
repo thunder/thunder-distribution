@@ -31,7 +31,7 @@ class ConfigSelectorTest extends ThunderJavascriptTestBase {
     // Content lock fields are there by default.
     $this->drupalGet('admin/content');
     $assert_session->elementExists('xpath', '//*[@id="view-title-table-column"]/a');
-    $assert_session->elementExists('css', '#block-thunder-admin-content > div > div.view-content');
+    $assert_session->elementExists('css', '#block-gin-content > div > div.view-content');
 
     // Install search_api.
     $this->drupalGet('admin/modules');
@@ -48,7 +48,7 @@ class ConfigSelectorTest extends ThunderJavascriptTestBase {
 
     $this->drupalGet('admin/content');
     $assert_session->elementExists('xpath', '//*[@id="view-title-table-column"]/a');
-    $assert_session->elementExists('css', '#block-thunder-admin-content > div > div.view-content-search-api');
+    $assert_session->elementExists('css', '#block-gin-content > div > div.view-content-search-api');
 
     // Uninstall thunder_search and search_api_mark_outdated.
     $this->drupalGet('admin/modules/uninstall');
@@ -68,7 +68,7 @@ class ConfigSelectorTest extends ThunderJavascriptTestBase {
     // The normal view is back.
     $this->drupalGet('admin/content');
     $assert_session->elementExists('xpath', '//*[@id="view-title-table-column"]/a');
-    $assert_session->elementExists('css', '#block-thunder-admin-content > div > div.view-content');
+    $assert_session->elementExists('css', '#block-gin-content > div > div.view-content');
   }
 
 }

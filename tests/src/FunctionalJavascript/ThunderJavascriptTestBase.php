@@ -381,7 +381,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
   protected function clickSave() {
     $page = $this->getSession()->getPage();
 
-    $page->find('xpath', '//div[@data-drupal-selector="edit-actions"]/input[@id="edit-submit"]')
+    $page->find('xpath', '//div[@data-drupal-selector="edit-actions"]/input[@data-drupal-selector="edit-submit"]')
       ->click();
   }
 

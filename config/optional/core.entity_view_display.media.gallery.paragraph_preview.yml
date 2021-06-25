@@ -4,9 +4,10 @@ dependencies:
   config:
     - core.entity_view_mode.media.paragraph_preview
     - field.field.media.gallery.field_media_images
-    - image.style.paragraph_preview_thumbnail
+    - image.style.entity_browser_thumbnail
     - media.type.gallery
   module:
+    - empty_fields
     - media
 id: media.gallery.paragraph_preview
 targetEntityType: media
@@ -17,9 +18,11 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: paragraph_preview_thumbnail
+      image_style: entity_browser_thumbnail
       image_link: ''
-    third_party_settings: {  }
+    third_party_settings:
+      empty_fields:
+        handler: ''
     type: media_thumbnail
     region: content
   name:

@@ -1,0 +1,8 @@
+.media--type-gallery.media--view-mode-paragraph-preview .field__items {
+  display: grid;
+  grid-template-columns: 90px 90px;
+  grid-gap: 5px;
+}
+.media--type-gallery.media--view-mode-paragraph-preview .field__items img {
+  display: block;
+}

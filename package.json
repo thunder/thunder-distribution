@@ -15,8 +15,9 @@
   "devDependencies": {
     "eslint": "^7.10.0",
     "eslint-config-drupal": "^5.0.2",
-    "prettier": ">=1.13.0",
-    "eslint-plugin-react-hooks": "^4 || ^3 || ^2.3.0 || ^1.7.0"
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react-hooks": "^4 || ^3 || ^2.3.0 || ^1.7.0",
+    "prettier": "^2.3.0"
   },
   "dependencies": {}
 }
