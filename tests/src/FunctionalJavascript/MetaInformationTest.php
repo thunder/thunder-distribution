@@ -377,7 +377,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '(//sm:loc)[last()]');
     $lastSiteMapUrl = $domElements->item(0)->nodeValue;
-    $this->assertStringEndsWith('/sitemap.xml?page=7', $lastSiteMapUrl);
+    $this->assertStringEndsWith('/sitemap.xml?page=3', $lastSiteMapUrl);
 
     // Get 3rd sitemap.xml file and check that link exits there.
     $urlOptions = ['query' => ['page' => 3]];
