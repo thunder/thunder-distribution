@@ -1,8 +1,13 @@
 module.exports = {
+  title: 'Thunder',
   description: 'Thunder is a Drupal distribution for professional publishers.',
   head: [['link', { rel: 'icon', href: '/thunder.svg' }]],
   themeConfig: {
     logo: '/thunder.svg',
+    repo: 'https://github.com/thunder/thunder-distribution',
+    docsDir: 'docs',
+    docsBranch: '6.2.x',
+    contributors: false,
     navbar: [
       {
         text: 'User Guide',
@@ -15,6 +20,10 @@ module.exports = {
       {
         text: 'Contribute',
         link: '../../contributing.md',
+      },
+      {
+        text: 'Thunder.org',
+        link: 'https://thunder.org',
       },
     ],
     sidebar: {

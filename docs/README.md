@@ -2,6 +2,9 @@
 home: true
 heroImage: /thunder.svg
 heroText: null
+title: Homepage
+footer: © 2021 <a href="https://thunder.org">Thunder</a>
+footerHtml: true
 actions:
   - text: Start as an editor
     link: /user-guide/feature-overview.html
@@ -31,7 +34,6 @@ As members of the Thunder Coalition, publishers, industry partners, and develope
 * **Create articles dynamically with paragraphs**: Using paragraphs, you can add text with a WYSIWYG-editor, pictures, videos, Instagram or Twitter cards to your article – and change the order by dragging and dropping the content wherever you like it. Thanks to a preview mode, you get a good idea of how your article will look like in the end.
 * **Schedule your content**: You can plan when texts should be published, and you can also set a date to remove the article from your website. Also, you can set an expire date for images. After this, the picture will be replaced with a placeholder.
 * **Improved media handling**: With the help of the media browser, it’s very easy to add pictures, galleries, or videos to your article. You can upload new pictures to the media browser by just dragging and dropping. The pictures are cropped automatically and with the focal point, you can define the important part of the picture, which should be visible in every layout.
-* **Liveblog**: Cover events in realtime with the liveblog, our first community project developed by [Kurier](https://kurier.at/), [Bunte](http://www.bunte.de/), [Drunomics](https://drunomics.com/), and [galaniprojects](http://galaniprojects.de/).
 * **Mobile Friendly**: With the Thunder installation, you get a responsive theme for frontend and backend. When writing an article, you can check how your text will look on different smartphones and tablets with the help of the device preview.
 * **Demo Content and Guided Tour**: We added demo content and a guided tour to make it easier for newcomers to understand how Thunder works. Step by step, we explain how to add an article, how to edit an article, or how to add and sort channels.
 * **Flexible System**: With Thunder, you get a system with a very high scalability. It's extendable with more than 2500 modules to fit every need. Plus, it's themeable.

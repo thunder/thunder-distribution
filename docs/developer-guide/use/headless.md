@@ -56,7 +56,7 @@ One example would be the Image type, which is implementing the Media interface.
 In Drupal, media entity fields are distributed between several entities, because the file entity does provide
 the basic file information, and the media entity adds more data fields to that, while referencing a file. Directly
 translated to a GraphQL API it would look similar to:
-
+  ```graphql
     type MediaImage {
       entityLabel
       fieldDescription
@@ -67,9 +67,10 @@ translated to a GraphQL API it would look similar to:
         height
       }
     }
+  ```
 
 When you think about images as a frontend developer, you might expect datastructures similar to the following:
-
+  ```graphql
     type MediaImage {
       name
       description
@@ -78,6 +79,7 @@ When you think about images as a frontend developer, you might expect datastruct
       width
       height
     }
+  ```
 
 This is much cleaner and does not expose internal Drupal structures and naming.
 
@@ -99,7 +101,7 @@ The explorer will also give you a nice autocomplete, and show you all currently 
 ### Basic example
 First a basic example for a page query. All we know so far is that the path is "/example-page". So, how do we get the
 content?
-
+  ```graphql
     {
       page(path: "/example-page") {
         name
@@ -115,6 +117,7 @@ content?
           seoTitle
         }
     }
+  ```
 
 This will return whatever it finds behind /example-page, and depending on whether it is a user page, a term (channel)
 or article node is, it will contain the requested fields.
@@ -123,7 +126,7 @@ or article node is, it will contain the requested fields.
 
 Articles and taxonomy terms contain paragraph fields in Thunder, the following example shows how to request paragraphs'
 content.
-
+  ```graphql
     {
       page(path: "/example-page") {
         name
@@ -139,6 +142,7 @@ content.
           }
         }
     }
+  ```
 
 As you can see, the paragraphs are located in the content field. Different paragraphs have different fields,
 so we again use the "... on" syntax to request the correct ones. In the ParagraphPinterest example, the URL
@@ -150,7 +154,7 @@ Drupal schema. This is an example on how we try to simplify and hide Drupal spec
 Some fields contain lists of entities, an example are the article lists for taxonomy terms. Those fields have parameters
 for offset and limit. The result will contain a list of entities, and the number of total items for that list.
 For example the channel page has a list of articles within that channel:
-
+  ```graphql
     {
       page(path: "/example-term") {
         name
@@ -164,6 +168,7 @@ For example the channel page has a list of articles within that channel:
           }
         }
     }
+  ```
 
 # Extending
 
@@ -184,15 +189,16 @@ You will find examples for that in the thunder_gqls module, for all the schema e
 
 Let's do some examples: We will extend the Thunder schema with our own types. To do so, we first create a new
 custom module called myschema:
-
+  ```bash
     drush generate module --answers='{"name": "My Schema", "machine_name": "myschema", "install_file": false, "libraries.yml": false, "permissions.yml": false, "event_subscriber": false, "block_plugin": false, "controller": false, "settings_form": false}'
+  ```
 
 This will create a barebone module called myschema in the modules folder. To continue working on your extension go ahead
 and create a new folder called graphql and put two empty files in it called myschema.base.graphqls and myschema.extension.graphqls in it.
 Now create another empty file called MySchemaSchemaExtension.php in the src/Plugin/GraphQL/SchemaExtension folder.
 
 Your modules' file structure should be similar to this now:
-
+  ```
     +-- myschema.info.yml
     +-- myschema.module
     +-- graphql
@@ -203,11 +209,10 @@ Your modules' file structure should be similar to this now:
             +-- GraphQL
                 +-- SchemaExtension
                     +-- MySchemaSchemaExtension.php
+  ```
 
 The content of MySchemaSchemaExtension.php should be:
-
-    <?php
-
+  ```php
     namespace Drupal\myschema\Plugin\GraphQL\SchemaExtension;
 
     use Drupal\graphql\GraphQL\ResolverRegistryInterface;
@@ -226,6 +231,7 @@ The content of MySchemaSchemaExtension.php should be:
     class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
 
     }
+  ```
 
 When you enable the module, your (currently empty) schema extension will be added to the list of available schema extensions.
 You will now be able to find and enable it on the admin page admin/config/graphql/servers/manage/thunder_graphql
@@ -233,7 +239,7 @@ You will now be able to find and enable it on the admin page admin/config/graphq
 ## Add new type
 A common task will be to add a new data type. To do so, you will have to add a new type definition in myschema.base.graphqls.
 Say, you have added a new content type. Your myschema.base.graphqls should look like this now:
-
+  ```graphql
     type MyContentType implements Page & Entity {
       id: Int!
       uuid: String!
@@ -246,6 +252,7 @@ Say, you have added a new content type. Your myschema.base.graphqls should look 
       changed: String!
       myCustomField: String
     }
+  ```
 
 This declares the fields, that will be available through the API. Since it is a node content type, it will have a URL
 and should implement the Page interface. This makes it possible to be requested with the page() query.
@@ -258,9 +265,7 @@ The first 9 fields, from id to metatags, are mandatory fields from the Page inte
 calling `resolvePageInterfaceFields()` (see example below). The "mycustomfield" field is a custom
 field, which we do not know about, so you would have to implement producers for it by yourself. This is done in
 the MySchemaSchemaExtension.php file.
-
-    <?php
-
+  ```php
     namespace Drupal\myschema\Plugin\GraphQL\SchemaExtension;
 
     use Drupal\graphql\GraphQL\ResolverRegistryInterface;
@@ -296,6 +301,7 @@ the MySchemaSchemaExtension.php file.
         );
       }
     }
+  ```
 
 That's it, most of it is boilerplate code, just the `$this->registry->addFieldResolver('MyContentType', 'mycustomfield',` part
 is necessary for your custom field. To learn more about producers and which are available out of the box, please
@@ -312,16 +318,15 @@ type, you will have to add the producers for those fields.
 
 This is very similar to creating a new type, but instead of using the myschema.base.graphqls file to declare your schema,
 you have to use the myschema.extension.graphqls file to extend the existing schema.
-
+  ```graphql
     extend type Article {
       hero: MediaImage
     }
+  ```
 
 This will add a new image field to the Article type. Similar to adding a new content type, we need to add the data producer for
 that field in our MySchemaSchemaExtension.php:
-
-    <?php
-
+  ```php
     namespace Drupal\myschema\Plugin\GraphQL\SchemaExtension;
 
     use Drupal\graphql\GraphQL\ResolverRegistryInterface;
@@ -362,6 +367,7 @@ that field in our MySchemaSchemaExtension.php:
         );
       }
     }
+  ```
 
 ### Entity lists
 
@@ -378,12 +384,13 @@ Existing fields, where you would like to change the producer, e.g. to use a diff
 make your own definition in the MySchemaSchemaExtension.php. If you would like to change the Drupal field for
 the content field from field_paragraph to field_my_paragraph, you change the producer in your registerResolvers()
 method to something like this:
-
+  ```php
     $this->registry->addFieldResolver('Article', 'content',
       $this->builder->produce('entity_reference_revisions')
         ->map('entity', $this->builder->fromParent())
         ->map('field', $this->builder->fromValue('field_my_paragraphs'))
     );
+  ```
 
 #### Thunder entity list producer and entities with term producer
 
@@ -395,11 +402,12 @@ query conditions, which simplifies the usage.
 
 To use the producer for a field, you first have to define that field in your graphqls file. In this example we add a
 related articles field to the existing article type, so we have to add it to myschema.extension.graphqls.
-
+  ```graphql
     extend type Article {
       hero: MediaImage
       promotedArticles(offset: Int = 0, limit: Int = 50): EntityList
     }
+  ```
 
 As you can see in the example, it is possible to expose parameters to the GraphQL client. We recommend limiting the
 exposed parameters as much as possible, and not give too much control to the consumer, because generating lists can
@@ -408,7 +416,7 @@ Any limit that will be set greater than 100 will not be accepted.
 
 Back in the MySchemaSchemaExtension.php we can now use the thunder_entity_list producer to
 resolve that field.
-
+  ```php
     // Example for the thunder_entity_list list producer.
     $this->registry->addFieldResolver('Article', 'promotedArticles',
       $this->builder->produce('thunder_entity_list')
@@ -429,6 +437,7 @@ resolve that field.
           ],
         ]))
     );
+  ```
 
 As you can see, you can give either set hard coded values for the producers parameters, or values from query arguments
 (offset and limit in this example). When you want to use context dependent parameters to the conditions, you would
@@ -445,12 +454,13 @@ have the permission to view unpublished articles.
 
 The module creates a temporary link with an arbitrary hash token. This hash has to be added to the query in the
 following way:
-
+  ```graphql
     {
       accessUnpublishedToken(auHash: "irCtdmllOqyoocxQ9JSUZNm5waEFmX0v4-ueUnUjPZI")
       page(path: "/example-page") {
         name
       }
     }
+  ```
 
 The accessUnpublishedToken request has to be in the first line of the request.
