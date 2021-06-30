@@ -247,7 +247,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->createArticleWithFields($fieldValues);
 
-    $node = $this->drupalGetNodeByTitle(static::$tokens['[node:title]']);
+    $node = $this->drupalGetNodeByTitle('Test Note Title');
     $this->drupalGet($node->toUrl('edit-form'));
 
     // Check that Article is unpublished.
