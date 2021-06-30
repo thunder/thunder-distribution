@@ -104,7 +104,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->sitemapGenerator = $this->container->get('simple_sitemap.generator');
@@ -232,9 +232,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * Test Scheduling of Article.
    */
   public function testArticleScheduling() {
-    $articleId = 10;
-
-    // Create article with published 2 days ago, unpublish tomorrow.
+    // Create article with published 2 days ago, unpublished tomorrow.
     $startTimestamp = strtotime('-2 days');
     $endTimestamp = strtotime('+1 day');
 
@@ -249,20 +247,23 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->createArticleWithFields($fieldValues);
 
+    $node = $this->drupalGetNodeByTitle(static::$tokens['[node:title]']);
+    $this->drupalGet($node->toUrl('edit-form'));
+
     // Check that Article is unpublished.
-    $this->drupalGet('node/' . $articleId);
+    $this->drupalGet($node->toUrl());
     $this->assertSession()
       ->elementExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
 
     $this->runCron();
 
     // Check that Article is published.
-    $this->drupalGet('node/' . $articleId);
+    $this->drupalGet($node->toUrl());
     $this->assertSession()
       ->elementNotExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
 
     // Check that Article is published.
-    $this->drupalGet('node/' . $articleId . '/edit');
+    $this->drupalGet($node->toUrl('edit-form'));
     $page = $this->getSession()->getPage();
 
     // Edit article and set un-publish date same as publish date.
@@ -280,7 +281,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->clickSave();
 
     // Check that Article is published.
-    $this->drupalGet('node/' . $articleId);
+    $this->drupalGet($node->toUrl());
     $this->assertSession()
       ->elementNotExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
 
@@ -290,7 +291,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->runCron();
 
     // Check that Article is unpublished.
-    $this->drupalGet('node/' . $articleId);
+    $this->drupalGet($node->toUrl());
     $this->assertSession()
       ->elementExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
   }
@@ -322,7 +323,6 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * Test Site Map for Article.
    */
   public function testSiteMap() {
-    $articleId = 10;
     $articleUrl = 'test-sitemap-seo-title';
 
     $customFields = [
@@ -331,7 +331,8 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->createArticleWithFields($customFields);
 
-    $this->drupalGet('node/' . $articleId . '/edit');
+    $node = $this->drupalGetNodeByTitle(static::$tokens['[node:title]']);
+    $this->drupalGet($node->toUrl('edit-form'));
 
     // Publish article.
     $this->setModerationState('published');
@@ -350,7 +351,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->assertEquals('0.5', $domElements->item(0)->nodeValue);
 
     // After sitemap.xml -> we have to open page without setting cookie before.
-    $this->getSession()->visit($this->buildUrl('node/' . $articleId . '/edit'));
+    $this->getSession()->visit($this->buildUrl($node->toUrl('edit-form')));
     $page = $this->getSession()->getPage();
 
     $this->expandAllTabs();
@@ -388,7 +389,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->assertEquals('0.9', $domElements->item(0)->nodeValue);
 
     // After sitemap.xml -> we have to open page without setting cookie before.
-    $this->getSession()->visit($this->buildUrl('node/' . $articleId . '/edit'));
+    $this->getSession()->visit($this->buildUrl($node->toUrl('edit-form')));
     $page = $this->getSession()->getPage();
 
     $this->expandAllTabs();
@@ -406,7 +407,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->assertEquals(0, $domElements->length);
 
-    $this->getSession()->visit($this->buildUrl('node/' . $articleId . '/edit'));
+    $this->getSession()->visit($this->buildUrl($node->toUrl('edit-form')));
   }
 
 }
