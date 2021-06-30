@@ -233,7 +233,6 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    */
   public function testArticleScheduling() {
     $node = $this->drupalGetNodeByTitle('Article 1');
-    $articleId = $node->id();
 
     // Create article with published 2 days ago, unpublish tomorrow.
     $startTimestamp = strtotime('-2 days');
