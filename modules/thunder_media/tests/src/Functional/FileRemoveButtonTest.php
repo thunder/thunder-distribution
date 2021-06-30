@@ -22,19 +22,17 @@ class FileRemoveButtonTest extends ThunderTestBase {
    * Test for transliteration of file name.
    */
   public function testRemoveButtonGone() {
-
     $this->logWithRole('editor');
     $media = $this->getMediaByName('Image 1');
-    $mediaEditUrl = $media->toUrl('edit-form')->toString();
 
-    $this->drupalGet($mediaEditUrl);
+    $this->drupalGet($media->toUrl('edit-form'));
     $this->assertSession()->elementNotExists('css', '#edit-field-image-0-remove-button');
 
     $this->config('thunder_media.settings')
       ->set('enable_filefield_remove_button', TRUE)
       ->save();
 
-    $this->drupalGet($mediaEditUrl);
+    $this->drupalGet($media->toUrl('edit-form'));
     $this->assertSession()->elementExists('css', '#edit-field-image-0-remove-button');
 
   }
