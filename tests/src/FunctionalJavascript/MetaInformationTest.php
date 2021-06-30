@@ -232,7 +232,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * Test Scheduling of Article.
    */
   public function testArticleScheduling() {
-    $node = $this->drupalGetNodeByTitle('Article 1');
+    $node = $this->drupalGetNodeByTitle('Come to DrupalCon New Orleans');
 
     // Create article with published 2 days ago, unpublish tomorrow.
     $startTimestamp = strtotime('-2 days');
@@ -322,7 +322,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * Test Site Map for Article.
    */
   public function testSiteMap() {
-    $node = $this->drupalGetNodeByTitle('Article 1');
+    $node = $this->drupalGetNodeByTitle('Come to DrupalCon New Orleans');
     $articleUrl = 'test-sitemap-seo-title';
 
     $customFields = [
