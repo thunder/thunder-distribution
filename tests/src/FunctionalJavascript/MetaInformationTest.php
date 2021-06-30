@@ -232,7 +232,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * Test Scheduling of Article.
    */
   public function testArticleScheduling() {
-    $node = $this->drupalGetNodeByTitle('Come to DrupalCon New Orleans');
+    $articleId = 10;
 
     // Create article with published 2 days ago, unpublish tomorrow.
     $startTimestamp = strtotime('-2 days');
@@ -250,19 +250,19 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->createArticleWithFields($fieldValues);
 
     // Check that Article is unpublished.
-    $this->drupalGet($node->toUrl());
+    $this->drupalGet('node/' . $articleId);
     $this->assertSession()
       ->elementExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
 
     $this->runCron();
 
     // Check that Article is published.
-    $this->drupalGet($node->toUrl());
+    $this->drupalGet('node/' . $articleId);
     $this->assertSession()
       ->elementNotExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
 
     // Check that Article is published.
-    $this->drupalGet($node->toUrl('edit-form'));
+    $this->drupalGet('node/' . $articleId . '/edit');
     $page = $this->getSession()->getPage();
 
     // Edit article and set un-publish date same as publish date.
@@ -280,7 +280,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->clickSave();
 
     // Check that Article is published.
-    $this->drupalGet($node->toUrl());
+    $this->drupalGet('node/' . $articleId);
     $this->assertSession()
       ->elementNotExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
 
@@ -290,7 +290,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->runCron();
 
     // Check that Article is unpublished.
-    $this->drupalGet($node->toUrl());
+    $this->drupalGet('node/' . $articleId);
     $this->assertSession()
       ->elementExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
   }
@@ -322,7 +322,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * Test Site Map for Article.
    */
   public function testSiteMap() {
-    $node = $this->drupalGetNodeByTitle('Come to DrupalCon New Orleans');
+    $articleId = 10;
     $articleUrl = 'test-sitemap-seo-title';
 
     $customFields = [
@@ -331,7 +331,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->createArticleWithFields($customFields);
 
-    $this->drupalGet($node->toUrl('edit-form'));
+    $this->drupalGet('node/' . $articleId . '/edit');
 
     // Publish article.
     $this->setModerationState('published');
@@ -350,7 +350,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->assertEquals('0.5', $domElements->item(0)->nodeValue);
 
     // After sitemap.xml -> we have to open page without setting cookie before.
-    $this->getSession()->visit($this->buildUrl($node->toUrl('edit-form')));
+    $this->getSession()->visit($this->buildUrl('node/' . $articleId . '/edit'));
     $page = $this->getSession()->getPage();
 
     $this->expandAllTabs();
@@ -388,7 +388,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->assertEquals('0.9', $domElements->item(0)->nodeValue);
 
     // After sitemap.xml -> we have to open page without setting cookie before.
-    $this->getSession()->visit($this->buildUrl($node->toUrl('edit-form')));
+    $this->getSession()->visit($this->buildUrl('node/' . $articleId . '/edit'));
     $page = $this->getSession()->getPage();
 
     $this->expandAllTabs();
@@ -406,7 +406,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->assertEquals(0, $domElements->length);
 
-    $this->getSession()->visit($this->buildUrl($node->toUrl('edit-form')));
+    $this->getSession()->visit($this->buildUrl('node/' . $articleId . '/edit'));
   }
 
 }
