@@ -320,6 +320,8 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
   /**
    * Test Site Map for Article.
+   *
+   * @group NoUpdate
    */
   public function testSiteMap() {
     $articleId = 10;
