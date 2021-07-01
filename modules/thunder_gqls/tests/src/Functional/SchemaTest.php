@@ -22,6 +22,7 @@ class SchemaTest extends ThunderGqlsTestBase {
    *
    * @group NoUpdate
    * @throws \GuzzleHttp\Exception\GuzzleException
+   *
    * @dataProvider schemas
    */
   public function testSchema(string $schema) {
@@ -132,7 +133,7 @@ GQL;
               image {
                 name
                 published
-                  fallbackMedia {
+                fallbackMedia {
                   name
                 }
               }
