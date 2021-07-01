@@ -229,7 +229,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4' ]
+        PHP_VERSION: [ '7.3' ]
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
 
