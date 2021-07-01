@@ -111,6 +111,7 @@ GQL;
   /**
    * Tests the article with an expired teaser image.
    *
+   * @group TestMin
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
   public function testExpiredImage() {
