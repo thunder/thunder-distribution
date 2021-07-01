@@ -21,6 +21,7 @@ class SchemaTest extends ThunderGqlsTestBase {
    *   Schema name to test.
    *
    * @group NoUpdate
+   *
    * @throws \GuzzleHttp\Exception\GuzzleException
    *
    * @dataProvider schemas
