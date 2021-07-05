@@ -48,7 +48,7 @@
             },
             "drupal/password_policy": {
                 "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2020-04-14/2918974-7-11.patch",
-                "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2020-03-20/password-policy-2771129-110.patch"
+                "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2021-07-05/password_policy_field_last_password_reset_unknown_error_2771129-130.patch"
             },
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
@@ -97,7 +97,7 @@
         "drupal/metatag_async_widget": "^1.0-alpha2",
         "drupal/paragraphs": "^1.11",
         "drupal/paragraphs_features": "^1.8",
-        "drupal/password_policy": "3.0-beta1",
+        "drupal/password_policy": "3.0",
         "drupal/pathauto": "^1.8",
         "drupal/responsive_preview": "^1.0-alpha7",
         "drupal/redirect": "^1.6",
