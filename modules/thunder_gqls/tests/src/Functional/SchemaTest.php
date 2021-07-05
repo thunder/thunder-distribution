@@ -22,6 +22,8 @@ class SchemaTest extends ThunderGqlsTestBase {
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
    *
+   * @group NoUpdate
+   *
    * @dataProvider schemas
    */
   public function testSchema(string $schema) {
@@ -59,6 +61,8 @@ class SchemaTest extends ThunderGqlsTestBase {
 
   /**
    * Tests the article schema.
+   *
+   * @group NoUpdate
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
