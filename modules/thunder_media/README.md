@@ -1,7 +1,7 @@
 # Thunder media
 
 ### Introduction
-Media administration is one of Thunder's main focus. We try to compose all the useful media modules to have a 
+Media administration is one of Thunder's main focus. We try to compose all the useful media modules to have a
 out-of-the-box solution for media handling. The goal is to make it as easy as possible to create and reuse media elements.
 
 Currently we cover the following use-cases:
@@ -16,7 +16,7 @@ Currently we cover the following use-cases:
 
 #### Instagram
 
-If you would like to have instagram thumbnails in you admin backend, follow this [documentation](https://github.com/drupal-media/media_entity_instagram#with-instagram-api).
+If you would like to have instagram thumbnails in your admin backend, follow this [documentation](https://github.com/drupal-media/media_entity_instagram#with-instagram-api).
 You received a developer key, which must be placed here: /admin/structure/media/manage/instagram.
 
 #### Twitter
