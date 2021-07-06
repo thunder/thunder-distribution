@@ -1,7 +1,13 @@
-:root, html.dark {
+:root {
   // brand colors
   --c-brand: #009FE3;
   --c-brand-light: #A2DAF8;
+}
+
+html.dark {
+  // brand colors
+  --c-brand: white;
+  --c-brand-light: #96A0A5;
 }
 
 .site-name {

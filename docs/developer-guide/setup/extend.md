@@ -11,15 +11,15 @@ If you know the name of the extension you are looking for, the fastest way is to
 Using 'composer', you can also manage the dependencies of your Thunder site and extensions.
 
 To add an extension to your project, go to the root of your site (there should be a `composer.json` file) and add modules by typing
-```
-$ composer require drupal/[short name of the extension]
+```bash
+composer require drupal/[short name of the extension]
 ```
 into the command line.
 
 For example:
 
-```
-$ composer require drupal/webform
+```bash
+composer require drupal/webform
 ```
 
 ## Install extension
@@ -37,13 +37,13 @@ You can install themes by going to your site page `admin/appearance`, or by clic
 To install a theme or module at the command line, you need to have [drush](http://docs.drush.org/en/master/install) installed.
 
 You can run `drush` command in the `docroot` folder of your site to install a module like this:
-```
-$ drush en [module]
+```bash
+drush en [module]
 ```
 
 And to install a theme, you can run `drush` command like this:
-```
-$ drush then [theme]
+```bash
+drush en [theme]
 ```
 
 To use a theme, you still have to navigate to `Appearance` (admin/appearance) and set it as default.
@@ -65,15 +65,15 @@ To uninstall a theme or module at the command line, you need to have [drush](htt
 
 After that, you can run `drush` command in the `docroot` folder of your site to uninstall a module like this:
 
-```
-$ drush pm:uninstall [module]
+```bash
+drush pm:uninstall [module]
 ```
 
 To uninstall a theme, you still have to select another theme as default. It's explained in `Uninstall in UI` part.
 
 And then you to uninstall a theme, you can run `drush` command like this:
-```
-$ drush theme:uninstall [theme]
+```bash
+drush theme:uninstall [theme]
 ```
 
 
@@ -84,7 +84,7 @@ After you have uninstalled an extension from your site, you can also remove the 
 If you want to remove a module, that was provided by Thunder, you will have to add it to your composer.json file in the
 replace block. Modules, that you added yourself by the above commands, do not have to be placed there.
 
-```
+```json
  "replace": {
      "drupal/google_analytics": "*"
  }
@@ -94,6 +94,6 @@ For more information on using the composer replace check the official [composer 
 
 To remove code you can execute a command like this:
 
-```
-$ composer remove drupal/[short name of the extension]
+```bash
+composer remove drupal/[short name of the extension]
 ```

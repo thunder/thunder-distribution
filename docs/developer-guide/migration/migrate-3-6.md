@@ -9,19 +9,19 @@ These are the instructions to manually update your existing Thunder 3 installati
 You have to make sure that your Thunder 3 project and all its dependencies
 are fully updated to the most current versions. Run the following command in your docroot:
 
-```
+```bash
 drush ev "print drupal_get_installed_schema_version('thunder') . PHP_EOL;"
 ```
 This should print the number 8309 or greater. If that is not the case, update your project.
 
-```
+```bash
 cd ..
 composer update
 ```
 This should update to Thunder 8.3.5 or greater.
 
 Now run database updates:
-```
+```bash
 cd docroot
 drush updb
 ```
@@ -45,7 +45,7 @@ when calling deprecated code.
 
 Add the following line to your phpunit.xml file and run your tests.
 
-```
+```xml
     <env name="SYMFONY_DEPRECATIONS_HELPER" value="strict"/>
 ```
 
@@ -56,7 +56,7 @@ If your test suite is based on Behat, [https://github.com/caciobanu/behat-deprec
 We removed some modules from our codebase. If you are using one of
 below mentioned modules, please require them manually for your project.
 
-```
+```bash
 composer require drupal/entity --no-update
 
 ```
@@ -65,7 +65,7 @@ composer require drupal/entity --no-update
 
 All you need to do now is:
 
-```
+```bash
 composer require thunder/thunder-distribution:~6.0@STABLE --no-update
 composer update
 

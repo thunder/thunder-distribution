@@ -9,19 +9,19 @@ some changes to our composer.json.
 You have to make sure, that your Thunder 2 project and all it's dependecies,
 are fully updated to the most current versions. Run the following command in your docroot:
 
-```
+```bash
 drush ev "print drupal_get_installed_schema_version('thunder') . PHP_EOL;"
 ```
 This should print the number 8138 or greater. If that is not the case, update your project.
 
-```
+```bash
 cd ..
 composer update
 ```
 This should update to Thunder 8.2.47 or greater.
 
 Now run database updates:
-```
+```bash
 cd docroot
 drush updb
 ```
@@ -32,11 +32,11 @@ You should at least see the thunder 8138 schema update. If not, double check tha
 We switched from bower-asset to npm-asset for our frontend-libraries.
 In order to get the libraries downloaded to the correct location, please
 replace
-```
+```json
 "installer-types": ["bower-asset"],
 ```
 by
-```
+```json
 "installer-types": ["bower-asset", "npm-asset"],
 ```
 in the composer.json of your project and add "type:npm-asset" to the "docroot/libraries/{$name}" section in installer-paths.
@@ -44,24 +44,21 @@ in the composer.json of your project and add "type:npm-asset" to the "docroot/li
 
 We moved the composer package under the thunder namespace, so remove the old package and a the new one.
 
-```
+```bash
 composer remove burdamagazinorg/thunder
-```
-
-```
 composer require "thunder/thunder-distribution:~3.3" --no-update
 ```
 
 You have to update composer now.
 
-```
+```bash
 composer update
 ```
 
 We removed some modules from our codebase. In case you are using one of
 below mentioned modules please require them manually for your project.
 
-```
+```bash
 composer require drupal/views_load_more --no-update
 composer require drupal/breakpoint_js_settings --no-update
 composer require valiton/harbourmaster --no-update
@@ -82,13 +79,13 @@ this is due to invalid configuration present in the system before the update and
 ## Pre-requirements for media update
 
 First we should make sure that the latest drush version is installed.
-```
+```bash
 composer require drush/drush:~10.0 --no-update
 ```
 
 After that the following steps should be done for the update:
 
-```
+```bash
 composer require drupal/media_entity:^2.0 drupal/media_entity_image drupal/video_embed_field:^2.2
 ```
 
@@ -104,7 +101,7 @@ See here for more information:
 
 All you need to do now is:
 
-```
+```bash
 drush updb
 drush cr
 ```
@@ -112,6 +109,6 @@ drush cr
 ## Cleanup codebase
 
 Now the update is done and you can remove some modules from your project.
-```
+```bash
 composer remove drupal/media_entity drupal/media_entity_image
 ```

@@ -42,7 +42,7 @@ module.exports = {
         {
           text: 'Operating',
           children: [
-            '/developer-guide/setup/varnish.md',
+            '/developer-guide/operating/varnish.md',
           ],
         },
         {
