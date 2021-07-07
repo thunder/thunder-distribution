@@ -21,15 +21,11 @@ jobs:
       - name: Build VuePress site
         run: npm run docs:build
 
-      # please check out the docs of the workflow for more details
-      # @see https://github.com/crazy-max/ghaction-github-pages
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2
         with:
           repo: thunder/thunder.github.io
           target_branch: main
-          # deploy the default output dir of VuePress
           build_dir: docs/.vuepress/dist
         env:
-          # @see https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
           GH_PAT: ${{ secrets.PUSH_DOCS_ACCESS_TOKEN }}

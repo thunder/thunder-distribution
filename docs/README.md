@@ -6,10 +6,10 @@ title: Homepage
 footer: © 2021 <a href="https://thunder.org">Thunder</a>
 footerHtml: true
 actions:
-  - text: Start as an editor
+  - text: User Guide
     link: /user-guide/feature-overview.html
     type: primary
-  - text: Start as a developer
+  - text: Developer Guide
     link: /developer-guide/setup/install.html
     type: secondary
 features:

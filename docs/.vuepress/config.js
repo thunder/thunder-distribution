@@ -28,6 +28,7 @@ module.exports = {
         link: 'https://thunder.org',
       },
     ],
+    sidebarDepth: 3,
     sidebar: {
       '/user-guide/': [
         '/user-guide/feature-overview.md'
@@ -48,9 +49,14 @@ module.exports = {
           ],
         },
         {
-          text: 'Use Thunder',
+          text: 'Headless API',
           children: [
-            '/developer-guide/use/headless.md',
+            '/developer-guide/headless/introduction.md',
+            '/developer-guide/headless/motivation.md',
+            '/developer-guide/headless/basic-ideas.md',
+            '/developer-guide/headless/usage.md',
+            '/developer-guide/headless/extending.md',
+            '/developer-guide/headless/integrated-contrib-modules.md',
           ],
         },
         {
@@ -59,7 +65,8 @@ module.exports = {
             '/developer-guide/migration/migrate-3-6.md',
             '/developer-guide/migration/migrate-2-3.md',
           ],
-        }
+        },
+
       ],
     }
   },
