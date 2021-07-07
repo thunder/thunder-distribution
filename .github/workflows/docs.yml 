@@ -1,9 +1,6 @@
 name: docs
 
-on:
-  # trigger deployment on every push to main branch
-  pull_request:
-
+on: [pull_request]
 
 jobs:
   docs:
