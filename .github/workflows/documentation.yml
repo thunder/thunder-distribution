@@ -26,7 +26,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2
         with:
-          repo: https://github.com/thunder/thunder.github.io
+          repo: thunder/thunder.github.io
           target_branch: main
           # deploy the default output dir of VuePress
           build_dir: docs/.vuepress/dist
