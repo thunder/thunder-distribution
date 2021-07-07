@@ -56,7 +56,7 @@ module.exports = {
             '/developer-guide/headless/basic-ideas.md',
             '/developer-guide/headless/usage.md',
             '/developer-guide/headless/extending.md',
-            '/developer-guide/headless/integrated-contrib-modules.md',
+            '/developer-guide/headless/supported-contrib-modules.md',
           ],
         },
         {
@@ -66,7 +66,6 @@ module.exports = {
             '/developer-guide/migration/migrate-2-3.md',
           ],
         },
-
       ],
     }
   },

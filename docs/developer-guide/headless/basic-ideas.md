@@ -18,29 +18,31 @@ One example would be the Image type, which is implementing the Media interface.
 In Drupal, media entity fields are distributed between several entities, because the file entity does provide
 the basic file information, and the media entity adds more data fields to that, while referencing a file. Directly
 translated to a GraphQL API it would look similar to:
-  ```graphql
-    type MediaImage {
-      entityLabel
-      fieldDescription
-      fieldImage {
-        src
-        alt
-        width
-        height
-      }
-    }
-  ```
+
+```graphql
+type MediaImage {
+  entityLabel: String
+  fieldDescription: String
+  fieldImage: Image
+}
+type Image {
+  src: String
+  alt: String
+  width: Int
+  height: Int
+}
+```
 
 When you think about images as a frontend developer, you might expect datastructures similar to the following:
-  ```graphql
-    type MediaImage {
-      name
-      description
-      src
-      alt
-      width
-      height
-    }
-  ```
+```graphql
+type MediaImage {
+  name: String
+  description: String
+  src: String
+  alt: String
+  width: Int
+  height: Int
+}
+```
 
-This is much cleaner and does not expose internal Drupal structures and naming.
+This is cleaner and does not expose internal Drupal structures and naming.

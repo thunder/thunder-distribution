@@ -17,49 +17,51 @@ You will find examples for that in the thunder_gqls module, for all the schema e
 
 Let's do some examples: We will extend the Thunder schema with our own types. To do so, we first create a new
 custom module called myschema:
-  ```bash
-    drush generate module --answers='{"name": "My Schema", "machine_name": "myschema", "install_file": false, "libraries.yml": false, "permissions.yml": false, "event_subscriber": false, "block_plugin": false, "controller": false, "settings_form": false}'
-  ```
+
+```bash
+drush generate module --answers='{"name": "My Schema", "machine_name": "myschema", "install_file": false, "libraries.yml": false, "permissions.yml": false, "event_subscriber": false, "block_plugin": false, "controller": false, "settings_form": false}'
+```
 
 This will create a barebone module called myschema in the modules folder. To continue working on your extension go ahead
 and create a new folder called graphql and put two empty files in it called myschema.base.graphqls and myschema.extension.graphqls in it.
 Now create another empty file called MySchemaSchemaExtension.php in the src/Plugin/GraphQL/SchemaExtension folder.
 
 Your modules' file structure should be similar to this now:
-  ```
-    +-- myschema.info.yml
-    +-- myschema.module
-    +-- graphql
-    |   +-- myschema.base.graphqls
-    |   +-- myschema.extension.graphqls
-    +-- src
-        +-- Plugin
-            +-- GraphQL
-                +-- SchemaExtension
-                    +-- MySchemaSchemaExtension.php
-  ```
+
+```text
++-- myschema.info.yml
++-- myschema.module
++-- graphql
+|   +-- myschema.base.graphqls
+|   +-- myschema.extension.graphqls
++-- src
+    +-- Plugin
+        +-- GraphQL
+            +-- SchemaExtension
+                +-- MySchemaSchemaExtension.php
+```
 
 The content of MySchemaSchemaExtension.php should be:
-  ```php
-    namespace Drupal\myschema\Plugin\GraphQL\SchemaExtension;
+```php
+namespace Drupal\myschema\Plugin\GraphQL\SchemaExtension;
 
-    use Drupal\graphql\GraphQL\ResolverRegistryInterface;
-    use Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension\ThunderSchemaExtensionPluginBase;
+use Drupal\graphql\GraphQL\ResolverRegistryInterface;
+use Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension\ThunderSchemaExtensionPluginBase;
 
-    /**
-     * My schema extension.
-     *
-     * @SchemaExtension(
-     *   id = "myschema",
-     *   name = "My schema extension",
-     *   description = "Adds my schema.",
-     *   schema = "thunder"
-     * )
-     */
-    class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
+/**
+ * My schema extension.
+ *
+ * @SchemaExtension(
+ *   id = "myschema",
+ *   name = "My schema extension",
+ *   description = "Adds my schema.",
+ *   schema = "thunder"
+ * )
+ */
+class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
 
-    }
-  ```
+}
+```
 
 When you enable the module, your (currently empty) schema extension will be added to the list of available schema extensions.
 You will now be able to find and enable it on the admin page admin/config/graphql/servers/manage/thunder_graphql
@@ -67,20 +69,21 @@ You will now be able to find and enable it on the admin page admin/config/graphq
 ## Add new type
 A common task will be to add a new data type. To do so, you will have to add a new type definition in myschema.base.graphqls.
 Say, you have added a new content type. Your myschema.base.graphqls should look like this now:
-  ```graphql
-    type MyContentType implements Page & Entity {
-      id: Int!
-      uuid: String!
-      entity: String!
-      language: String
-      name: String!
-      url: String!
-      entityLinks: EntityLinks
-      published: Boolean!
-      changed: String!
-      myCustomField: String
-    }
-  ```
+
+```graphql
+type MyContentType implements Page & Entity {
+  id: Int!
+  uuid: String!
+  entity: String!
+  language: String
+  name: String!
+  url: String!
+  entityLinks: EntityLinks
+  published: Boolean!
+  changed: String!
+  myCustomField: String
+}
+```
 
 This declares the fields, that will be available through the API. Since it is a node content type, it will have a URL
 and should implement the Page interface. This makes it possible to be requested with the page() query.
@@ -93,43 +96,45 @@ The first 9 fields, from id to metatags, are mandatory fields from the Page inte
 calling `resolvePageInterfaceFields()` (see example below). The "mycustomfield" field is a custom
 field, which we do not know about, so you would have to implement producers for it by yourself. This is done in
 the MySchemaSchemaExtension.php file.
-  ```php
-    namespace Drupal\myschema\Plugin\GraphQL\SchemaExtension;
 
-    use Drupal\graphql\GraphQL\ResolverRegistryInterface;
-    use Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension\ThunderSchemaExtensionPluginBase;
+```php
+<?php
+namespace Drupal\myschema\Plugin\GraphQL\SchemaExtension;
 
-    /**
-     * My schema extension.
-     *
-     * @SchemaExtension(
-     *   id = "myschema",
-     *   name = "My schema extension",
-     *   description = "Adds my schema.",
-     *   schema = "thunder"
-     * )
-     */
-    class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
-      /**
-       * {@inheritdoc}
-       */
-      public function registerResolvers(ResolverRegistryInterface $registry) {
-        // Call the parent resolver first.
-        parent::registerResolvers($registry);
+use Drupal\graphql\GraphQL\ResolverRegistryInterface;
+use Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension\ThunderSchemaExtensionPluginBase;
 
-        // This adds all the Page interface fields to the resolver,
-        $this->resolvePageInterfaceFields('MyContentType');
+/**
+ * My schema extension.
+ *
+ * @SchemaExtension(
+ *   id = "myschema",
+ *   name = "My schema extension",
+ *   description = "Adds my schema.",
+ *   schema = "thunder"
+ * )
+ */
+class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
+  /**
+   * {@inheritdoc}
+   */
+  public function registerResolvers(ResolverRegistryInterface $registry) {
+    // Call the parent resolver first.
+    parent::registerResolvers($registry);
 
-        // Now we add field resolvers for our new fields. In this case we simply get
-        // the value from the field_mycustomfield. parent::registerResolvers($registry)
-        // stores $registry into the registry property, which we should use instead
-        // of $registry.
-        $this->registry->addFieldResolver('MyContentType', 'mycustomfield',
-          $this->builder->fromPath('entity', 'field_mycustomfield.value')
-        );
-      }
-    }
-  ```
+    // This adds all the Page interface fields to the resolver,
+    $this->resolvePageInterfaceFields('MyContentType');
+
+    // Now we add field resolvers for our new fields. In this case we simply get
+    // the value from the field_mycustomfield. parent::registerResolvers($registry)
+    // stores $registry into the registry property, which we should use instead
+    // of $registry.
+    $this->registry->addFieldResolver('MyContentType', 'mycustomfield',
+      $this->builder->fromPath('entity', 'field_mycustomfield.value')
+    );
+  }
+}
+```
 
 That's it, most of it is boilerplate code, just the `$this->registry->addFieldResolver('MyContentType', 'mycustomfield',` part
 is necessary for your custom field. To learn more about producers and which are available out of the box, please
@@ -146,56 +151,59 @@ type, you will have to add the producers for those fields.
 
 This is very similar to creating a new type, but instead of using the myschema.base.graphqls file to declare your schema,
 you have to use the myschema.extension.graphqls file to extend the existing schema.
-  ```graphql
-    extend type Article {
-      hero: MediaImage
-    }
-  ```
+
+```graphql
+extend type Article {
+  hero: MediaImage
+}
+```
 
 This will add a new image field to the Article type. Similar to adding a new content type, we need to add the data producer for
 that field in our MySchemaSchemaExtension.php:
-  ```php
-    namespace Drupal\myschema\Plugin\GraphQL\SchemaExtension;
 
-    use Drupal\graphql\GraphQL\ResolverRegistryInterface;
-    use Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension\ThunderSchemaExtensionPluginBase;
+```php
+<?php
+namespace Drupal\myschema\Plugin\GraphQL\SchemaExtension;
 
-    /**
-     * My schema extension.
-     *
-     * @SchemaExtension(
-     *   id = "myschema",
-     *   name = "My schema extension",
-     *   description = "Adds my schema.",
-     *   schema = "thunder"
-     * )
-     */
-    class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
-      /**
-       * {@inheritdoc}
-       */
-      public function registerResolvers(ResolverRegistryInterface $registry) {
-        // Call the parent resolver first.
-        parent::registerResolvers($registry);
+use Drupal\graphql\GraphQL\ResolverRegistryInterface;
+use Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension\ThunderSchemaExtensionPluginBase;
 
-        // This adds all the Page interface fields to the resolver,
-        $this->resolvePageInterfaceFields('MyContentType');
+/**
+ * My schema extension.
+ *
+ * @SchemaExtension(
+ *   id = "myschema",
+ *   name = "My schema extension",
+ *   description = "Adds my schema.",
+ *   schema = "thunder"
+ * )
+ */
+class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
+  /**
+   * {@inheritdoc}
+   */
+  public function registerResolvers(ResolverRegistryInterface $registry) {
+    // Call the parent resolver first.
+    parent::registerResolvers($registry);
 
-        // Now we add field resolvers for our new fields. In this case we simply get
-        // the value from the field_mycustomfield. parent::registerResolvers($registry)
-        // stores $registry into the registry property, which we should use instead
-        // of $registry.
-        $this->registry->addFieldResolver('MyContentType', 'myCustomField',
-          $this->builder->fromPath('entity', 'field_mycustomfield.value')
-        );
+    // This adds all the Page interface fields to the resolver,
+    $this->resolvePageInterfaceFields('MyContentType');
 
-        // Extending the article
-        $this->registry->addFieldResolver('Article', 'hero',
-          $this->builder->fromPath('entity', 'field_hero.entity')
-        );
-      }
-    }
-  ```
+    // Now we add field resolvers for our new fields. In this case we simply get
+    // the value from the field_mycustomfield. parent::registerResolvers($registry)
+    // stores $registry into the registry property, which we should use instead
+    // of $registry.
+    $this->registry->addFieldResolver('MyContentType', 'myCustomField',
+      $this->builder->fromPath('entity', 'field_mycustomfield.value')
+    );
+
+    // Extending the article
+    $this->registry->addFieldResolver('Article', 'hero',
+      $this->builder->fromPath('entity', 'field_hero.entity')
+    );
+  }
+}
+```
 
 ### Entity lists
 
@@ -212,13 +220,14 @@ Existing fields, where you would like to change the producer, e.g. to use a diff
 make your own definition in the MySchemaSchemaExtension.php. If you would like to change the Drupal field for
 the content field from field_paragraph to field_my_paragraph, you change the producer in your registerResolvers()
 method to something like this:
-  ```php
-    $this->registry->addFieldResolver('Article', 'content',
-      $this->builder->produce('entity_reference_revisions')
-        ->map('entity', $this->builder->fromParent())
-        ->map('field', $this->builder->fromValue('field_my_paragraphs'))
-    );
-  ```
+
+```php
+  $this->registry->addFieldResolver('Article', 'content',
+    $this->builder->produce('entity_reference_revisions')
+      ->map('entity', $this->builder->fromParent())
+      ->map('field', $this->builder->fromValue('field_my_paragraphs'))
+  );
+```
 
 #### Thunder entity list producer and entities with term producer
 
@@ -230,12 +239,13 @@ query conditions, which simplifies the usage.
 
 To use the producer for a field, you first have to define that field in your graphqls file. In this example we add a
 related articles field to the existing article type, so we have to add it to myschema.extension.graphqls.
-  ```graphql
-    extend type Article {
-      hero: MediaImage
-      promotedArticles(offset: Int = 0, limit: Int = 50): EntityList
-    }
-  ```
+
+```graphql
+extend type Article {
+  hero: MediaImage
+  promotedArticles(offset: Int = 0, limit: Int = 50): EntityList
+}
+```
 
 As you can see in the example, it is possible to expose parameters to the GraphQL client. We recommend limiting the
 exposed parameters as much as possible, and not give too much control to the consumer, because generating lists can
@@ -244,28 +254,29 @@ Any limit that will be set greater than 100 will not be accepted.
 
 Back in the MySchemaSchemaExtension.php we can now use the thunder_entity_list producer to
 resolve that field.
-  ```php
-    // Example for the thunder_entity_list list producer.
-    $this->registry->addFieldResolver('Article', 'promotedArticles',
-      $this->builder->produce('thunder_entity_list')
-        ->map('type', $this->builder->fromValue('node'))
-        ->map('bundles', $this->builder->fromValue(['article']))
-        ->map('offset', $this->builder->fromArgument('offset'))
-        ->map('limit', $this->builder->fromArgument('limit'))
-        ->map('conditions', $this->builder->fromValue([
-          [
-            'field' => 'promote',
-            'value' => 1,
-          ],
-        ]))
-        ->map('sortBy', $this->builder->fromValue([
-          [
-            'field' => 'created',
-            'direction' => 'DESC',
-          ],
-        ]))
-    );
-  ```
+
+```php
+  // Example for the thunder_entity_list list producer.
+  $this->registry->addFieldResolver('Article', 'promotedArticles',
+    $this->builder->produce('thunder_entity_list')
+      ->map('type', $this->builder->fromValue('node'))
+      ->map('bundles', $this->builder->fromValue(['article']))
+      ->map('offset', $this->builder->fromArgument('offset'))
+      ->map('limit', $this->builder->fromArgument('limit'))
+      ->map('conditions', $this->builder->fromValue([
+        [
+          'field' => 'promote',
+          'value' => 1,
+        ],
+      ]))
+      ->map('sortBy', $this->builder->fromValue([
+        [
+          'field' => 'created',
+          'direction' => 'DESC',
+        ],
+      ]))
+  );
+```
 
 As you can see, you can give either set hard coded values for the producers parameters, or values from query arguments
 (offset and limit in this example). When you want to use context dependent parameters to the conditions, you would
