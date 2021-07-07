@@ -51,6 +51,9 @@
             },
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
+            },
+            "drupal/simple_sitemap": {
+                "Sitemap variant index functionality": "https://www.drupal.org/files/issues/2021-03-03/simple_sitemap-sitemap_variant_index-3109090-16.patch"
             }
         }
     },
