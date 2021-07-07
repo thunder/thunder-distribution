@@ -1,7 +1,9 @@
+const { path } = require('@vuepress/utils')
 module.exports = {
   title: 'Thunder',
   description: 'Thunder is a Drupal distribution for professional publishers.',
   head: [['link', { rel: 'icon', href: '/thunder.svg' }]],
+  theme: path.resolve(__dirname, './theme'),
   themeConfig: {
     logo: '/thunder.svg',
     repo: 'https://github.com/thunder/thunder-distribution',
