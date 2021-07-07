@@ -2,8 +2,8 @@ name: docs
 
 on:
   # trigger deployment on every push to main branch
+  pull_request:
   push:
-    pull_request:
     branches:
       - 6.[1-9]+.x
     paths:
