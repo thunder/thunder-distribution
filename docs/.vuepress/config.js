@@ -78,6 +78,15 @@ module.exports = {
       ],
     }
   },
+  plugins: [
+    [
+      '@vuepress/plugin-search',
+      {
+        // exclude the homepage
+        isSearchable: (page) => page.path !== '/',
+      },
+    ],
+  ],
   async onInitialized(app) {
     const rp = require('request-promise');
     const {createPage} = require("@vuepress/core");
