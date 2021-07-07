@@ -17,7 +17,9 @@
     "eslint-config-drupal": "^5.0.2",
     "eslint-plugin-react-hooks": "^4 || ^3 || ^2.3.0 || ^1.7.0",
     "prettier": ">=1.13.0",
-    "vuepress": "^2.0.0-beta.21"
+    "vuepress": "^2.0.0-beta.21",
+    "request-promise": "^4.2.6",
+    "request": "^2.88.2"
   },
   "dependencies": {},
   "scripts": {

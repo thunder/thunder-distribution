@@ -1,8 +1,8 @@
-const { path } = require('@vuepress/utils')
+const {path} = require('@vuepress/utils')
 module.exports = {
   title: 'Thunder',
   description: 'Thunder is a Drupal distribution for professional publishers.',
-  head: [['link', { rel: 'icon', href: '/thunder.svg' }]],
+  head: [['link', {rel: 'icon', href: '/thunder.svg'}]],
   theme: path.resolve(__dirname, './theme'),
   themeConfig: {
     logo: '/thunder.svg',
@@ -66,8 +66,38 @@ module.exports = {
             '/developer-guide/migration/migrate-2-3.md',
           ],
         },
+        {
+          text: 'Changelogs',
+          children: [
+            '/changelog/6.2.x',
+            '/changelog/6.1.x',
+            '/changelog/6.0.x',
+          ],
+        },
 
       ],
     }
   },
+  async onInitialized(app) {
+    const rp = require('request-promise');
+    const {createPage} = require("@vuepress/core");
+    const logs = [
+      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.0.x/CHANGELOG.md', title: 'Changelog 6.0.x', path: '/changelog/6.0.x'},
+      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.1.x/CHANGELOG.md', title: 'Changelog 6.1.x', path: '/changelog/6.1.x'},
+      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.2.x/CHANGELOG.md', title: 'Changelog 6.2.x', path: '/changelog/6.2.x'},
+    ]
+    await Promise.all(logs.map(async (log) => {
+      const content = await rp(log.url);
+      const page = await createPage(app, {
+        path: log.path,
+        frontmatter: {
+          layout: 'Layout',
+          sidebar: 'auto',
+          title: log.title
+        },
+        content
+      })
+      app.pages.push(page)
+    }));
+  }
 }
