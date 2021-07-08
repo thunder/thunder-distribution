@@ -1,4 +1,289 @@
-# Extending
+# Headless API
+## Introduction
+The thunder_gqls module provides a GraphQL API schema and implementation for Thunder based on the Drupal GraphQL module
+version 4.
+Version 4 of the GraphQL module does not provide an out-of-the-box API for Drupal, as previous versions did. Instead, it
+provides the ability to define a schema independent of the underlying Drupal installation, and utilities to map fields
+defined in that schema to data from Drupal.
+
+To get most of this documentation, you should have a basic understanding of what GraphQL is, and how to do requests
+against GraphQL endpoints. A good starting point for this is the official
+[GraphQl documentation](https://graphql.org/learn/).
+
+## Motivation to go with GraphQL 4
+
+Drupal core provides already a turn-key implementation for JSON-API, which basically just needs to be enabled and
+configured, and it is good to go. Similarly, version 3 of the GraphQL module is as quickly usable. Both modules expose
+all data structures from Drupal as they are.
+
+So why did we manually implement an API? While it is very convenient to have schemas automatically created, it also
+leads to an API that is very close to the structure of Drupal. A consumer would have to know the relationships of
+entities within Drupal. Especially when working with paragraphs and media entities, you would have to be aware of the
+entity references to get to the actual data.
+For example, we use media entities for images in paragraphs. The referencing goes unconventionally deep in this case:
+If you wanted to get the src attribute of an image in such a paragraph, you would have to dereference
+Article => Paragraph => Media Entity => File Entity (src).
+
+Another pain point is, that field names are automatically created. This leads to two separate problems: First, field
+names are awkward and again very Drupal specific. In GraphQL 3 we have entityUuid instead of uuid and fieldMyField
+instead of just myField.
+Second, since field names are automatically generated out of the machine name, the API would change, as soon as you change
+the machine name. This sounds not very likely, and for actual fields it should not happen, but sometimes even plugin
+names are used to create the schema, and plugins could be exchanged (we had an example of a views-plugin, that was exchanged).
+
+Finally, routing with those automated APIs is very often a process that requires two requests, instead of one.
+Usually you just have some URL string, that could be a route to a node, a user, a term or any other entity. To get
+the actual data, you will have to do a route query first, to get the information on what kind of entity you are looking at
+(plus its ID), and then you would have to do a specific node, term or user query to get the actual page.
+
+## Basic Ideas
+
+We introduce three main interfaces for which interfaces covering all main data types used in Thunder.
+
+1) Page
+2) Media
+3) Paragraph
+
+The Page interface is for all Drupal entities that have a URL, in Thunder that could be nodes, terms, users and similar.
+This gives us the possibility to request a page from a route without knowing if it is an article or a channel for example.
+
+The Media interface is for all media entities, and the Paragraph interface for all paragraph entities.
+
+As described above, we try to minimize references and keep fields as flat as possible - especially if the references are
+very Drupal specific. Also, Drupal specific field prefixes should be avoided, they make no sense for the frontend.
+
+One example would be the Image type, which is implementing the Media interface.
+In Drupal, media entity fields are distributed between several entities, because the file entity does provide
+the basic file information, and the media entity adds more data fields to that, while referencing a file. Directly
+translated to a GraphQL API it would look similar to:
+
+```graphql
+type MediaImage {
+  entityLabel: String
+  fieldDescription: String
+  fieldImage: Image
+}
+type Image {
+  src: String
+  alt: String
+  width: Int
+  height: Int
+}
+```
+
+When you think about images as a frontend developer, you might expect datastructures similar to the following:
+```graphql
+type MediaImage {
+  name: String
+  description: String
+  src: String
+  alt: String
+  width: Int
+  height: Int
+}
+```
+
+This is cleaner and does not expose internal Drupal structures and naming.
+
+## Usage
+
+### Routing
+The starting point for most requests will be a URL. Usually, you cannot know what kind of content you will find behind
+that URL, meaning, which fields you would be able to request. We have simplified this in the Thunder GraphQL schema by
+introducing the page() request, which internally routes the URL to the correct entity and returns the entity or entity
+bundle as a Page interface. Multiple page types can then be queried with the "... on Type" construct.
+
+Let's take a look at some examples.
+
+### Pages query
+
+All examples can be tested in the GraphQL explorer (admin/config/graphql/servers/manage/thunder_graphql/explorer).
+The explorer will also give you a nice autocomplete, and show you all currently available fields.
+
+#### Basic example
+First a basic example for a page query. All we know so far is that the path is "/example-page". So, how do we get the
+content?
+  ```graphql
+    {
+      page(path: "/example-page") {
+        name
+        ... on User {
+          mail
+        }
+        ... on Channel {
+          parent {
+            name
+          }
+        }
+        ... on Article {
+          seoTitle
+        }
+    }
+  ```
+
+This will return whatever it finds behind /example-page, and depending on whether it is a user page, a term page or
+article node, it will contain the requested fields.
+
+#### Query parameter
+
+To simplify request, hard coded strings as the "path" in the previous example can be moved to [query variables](https://graphql.org/learn/queries/#variables).
+
+For this we slightly change the  query to:
+
+```graphql
+query($path: String!) {
+  page(path: $path) {
+    name
+    # Add your fields
+  }
+}
+```
+
+Then we add the $path variable with a json string like this:
+
+```json
+{
+  "path": "/example-page"
+}
+```
+
+This variable can be added in the GraphQL explorer in the corresponding input field.
+All following examples will assume a variable definition like this.
+
+#### Paragraphs example
+
+Articles and taxonomy terms contain paragraph fields in Thunder, the following example shows how to request paragraphs'
+content.
+
+```graphql
+query($path: String!) {
+  page(path: $path) {
+    name
+    ... on Article {
+      seoTitle
+      content {
+        ... on ParagraphPinterest {
+          url
+        }
+        ... on ParagraphText {
+          text
+        }
+      }
+    }
+  }
+}
+```
+
+As you can see, the paragraphs are located in the content field. Different paragraphs have different fields,
+so we again use the "... on" syntax to request the correct ones. In the ParagraphPinterest example, the URL
+is directly located on the paragraphs' level, and not inside the entity_reference field, where it can be found in the
+Drupal schema. This is an example on how we try to simplify and hide Drupal specific implementations.
+
+### Breadcrumb
+
+The Drupal breadcrumb for a given path can be retrieved with this query:
+
+```graphql
+query($path: String!) {
+  breadcrumb(path: $path) {
+    url
+    title
+  }
+}
+```
+
+### Combined queries
+
+You can submit multiple queries with one request. EAn example query for both breadcrumb and page for the same path
+would be:
+
+```graphql
+query($path: String!) {
+  breadcrumb(path: $path) {
+    url
+    title
+  }
+
+  page(path: $path) {
+    name
+    # Add your fields
+  }
+}
+```
+
+### Entity lists
+
+Some fields contain lists of entities, an example are the article lists for taxonomy terms. Those fields have parameters
+for offset and limit. The result will contain a list of entities, and the number of total items for that list.
+For example the channel page has a list of articles within that channel:
+
+```graphql
+query($path: String!) {
+  page(path: $path) {
+    name
+    ... on Channel {
+      articles(offset: 0 limit: 10) {
+      total
+      items {
+        name
+        url
+      }
+    }
+    }
+  }
+}
+```
+
+### Menu
+
+Drupal's menus are queried as well. To get the main menu for a given path, you can send this query:
+
+```graphql
+query($path: String!) {
+  menu(id: "main" path: $path) {
+    name
+    id
+    items {
+      title
+      url
+      inActiveTrail
+      children {
+        title
+        url
+        inActiveTrail
+      }
+    }
+  }
+}
+```
+
+The inActiveTrail field tells you, which menu entry represents the current path.
+
+To retrieve multiple menus with one request, you can use [GraphQL aliases](https://graphql.org/learn/queries/#aliases):
+
+```graphql
+query($path: String!) {
+  mainMenu: menu(id: "main" path: $path) {
+    name
+    id
+    items {
+      title
+      url
+    }
+  }
+
+  footerMenu: menu(id: "footer" path: $path) {
+    name
+    id
+    items {
+      title
+      url
+    }
+  }
+}
+```
+
+## Extending
 
 The graphql module has an extension mechanism, called composable schema, that can be used in your projects to extend the Thunder schema with your
 custom types. We added some base classes and helper methods to simplify that work.
@@ -66,7 +351,7 @@ class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
 When you enable the module, your (currently empty) schema extension will be added to the list of available schema extensions.
 You will now be able to find and enable it on the admin page admin/config/graphql/servers/manage/thunder_graphql
 
-## Add new type
+### Add new type
 A common task will be to add a new data type. To do so, you will have to add a new type definition in myschema.base.graphqls.
 Say, you have added a new content type. Your myschema.base.graphqls should look like this now:
 
@@ -144,7 +429,7 @@ Similar extensions can be made for new media types and new paragraph types. The 
 type names are prefixed with Media and Paragraph. If you have a custom paragraph called my_paragraph, the GraphQL
 type name would be ParagraphMyParagraph, and the media my_media would be called MediaMyMedia.
 
-## Extend existing types
+### Extend existing types
 
 Another common task is extending existing content types with new fields. When adding more fields to the article content
 type, you will have to add the producers for those fields.
@@ -205,16 +490,16 @@ class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
 }
 ```
 
-### Entity lists
+#### Entity lists
 
 We have a base class for entity lists, which can be used to create your own list definitions.
 
-## Change existing definitions
+### Change existing definitions
 
 It is also possible to change existing resolvers. Field resolver and type resolver are simply overridable in your
 schema extension class.
 
-### Fields
+#### Fields
 
 Existing fields, where you would like to change the producer, e.g. to use a different Drupal field, are very easy: Just
 make your own definition in the MySchemaSchemaExtension.php. If you would like to change the Drupal field for
@@ -229,7 +514,7 @@ method to something like this:
   );
 ```
 
-#### Thunder entity list producer and entities with term producer
+##### Thunder entity list producer and entities with term producer
 
 The thunder_entity_list producer is a highly configurable producer to create lists of entities based on entity field queries.
 You can use it as a field producer for you custom fields. It can also be used as a base producer class for more specific
@@ -283,3 +568,46 @@ As you can see, you can give either set hard coded values for the producers para
 have to use either more query arguments (which could be bad), or implement your own data producer based on
 ThunderEntityListProducerBase. You can find an example in EntitiesWithTerm.php where we dynamically add term IDs
 to the query conditions.
+
+## Supported contrib modules
+
+### Access unpublished
+
+With the access unpublished module, you can hand out links to unpublished nodes to a person, that would usually not
+have the permission to view unpublished articles.
+
+The module creates a temporary link with an arbitrary hash token. This hash has to be added to the query in the
+following way:
+
+```graphql
+query($path: String! $auHash: String) {
+  accessUnpublishedToken(auHash: $auHash)
+  page(path: $path) {
+    name
+    # Add your fields
+  }
+}
+```
+
+The accessUnpublishedToken request has to be in the first line of the request.
+
+### Metatag and Schema Metatag
+
+Data provided by the metatag and schema metatag (jsonld) modules is exposed by two similar calls and can be added to the page
+call in the following way:
+
+```graphql
+query($path: String!) {
+  metatags(path: $path) {
+    tag
+    attributes
+  }
+  jsonld(path: $path)
+  page(path: $path) {
+    name
+    # Add your fields
+  }
+}
+```
+
+The metatag query will return tag name, and the attributes as a json string. The jsonld query will return the jsonld string.

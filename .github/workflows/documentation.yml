@@ -1,7 +1,12 @@
 name: docs
 
-on: [pull_request]
-
+on:
+  pull_request:
+    path:
+      - 'docs/**'
+      - 'package-lock.json'
+    branches:
+      - 6.[1-9]+.x
 jobs:
   docs:
     runs-on: ubuntu-latest

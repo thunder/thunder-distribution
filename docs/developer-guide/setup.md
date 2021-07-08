@@ -1,12 +1,84 @@
-# Extend
+# Setup Thunder
+## Install Thunder
 
-## Find extensions
+### System requirements
+
+You have to install `PHP`, `composer`, and `git` on your computer before you can install Thunder. The `composer` requires `git` command for proper functioning.
+
+To install `PHP` please take a look at the official [Installation and Configuration](https://www.php.net/manual/install.php) for `PHP`.
+On top of `PHP`, you need to install the required libraries. The Thunder installation requires at least all the libraries Drupal requires.
+Extensions used by Drupal core are defined in Core's composer.json file - see for example the [file for Drupal 9.1.x](https://git.drupalcode.org/project/drupal/blob/9.1.x/core/composer.json). Look at the "require" section and the keys starting with "ext-".
+
+The installation of `PHP` extensions can differ between operating systems, that's why you should check for detailed instructions on `PHP` [Installation and Configuration](https://www.php.net/manual/install.php).
+
+To install `composer`, you can check the `composer` [installation instructions](https://getcomposer.org/download) and for `git` you can find installation instructions [here](https://git-scm.com/downloads).
+
+### Project setup
+
+To set up a new project, run this in your console to install Thunder from the command line:
+
+```bash
+composer create-project thunder/thunder-project thunder --no-interaction --no-install
+cd thunder
+composer install
+```
+
+### Run locally
+
+To quickly run this installation locally call the following command from within the docroot:
+
+```bash
+cd docroot
+php core/scripts/drupal quick-start thunder
+```
+
+**NOTE:** This command is useful to try Thunder locally, but it's not the way to run it in production.
+
+### Beyond quick install
+
+For any further information on how to run and maintain your installation in production environments please refer to [the Drupal User Guide](https://www.drupal.org/docs/user_guide/en/index.html).
+
+## Update
+
+Updating Thunder consists of three parts. First needs the code to be updated, and after that, it's required to update the database and then export the changes.
+
+### Code update
+
+To update Thunder or any module to the newest version, constrained by the specified version in `composer.json`, use composer. The following command will check every dependency for a new version, downloads it, and updates it accordingly.
+```bash
+composer update
+```
+### Database update
+
+#### UI
+
+After you have updated your code with `composer` command, you can go to your site page `/update.php` and follow instructions to update your site database.
+
+#### CLI
+
+To update the database in the command line, you need to have [drush](http://docs.drush.org/en/master/install) installed.
+
+You can run `drush` command in the `docroot` folder of your site to update the database of your site like this:
+```bash
+drush updb
+```
+
+### Configuration export
+
+After the database was updated, it's necessary to export the changes to your configuration files.
+```bash
+drush cex
+```
+
+## Extend
+
+### Find extensions
 
 You can find extensions on [Drupal.org](https://www.drupal.org). On [the following page](https://www.drupal.org/project/project_module?f%5B3%5D=drupal_core%3A7234), you can search for `Modules` and on [this page](https://www.drupal.org/project/project_theme?f%5B2%5D=drupal_core%3A7234) for `Themes`. You can find further information on extensions in [the Drupal User Guide - Extending and Customizing Your Site](https://www.drupal.org/docs/user_guide/en/extend-chapter.html).
 
 If you know the name of the extension you are looking for, the fastest way is to search it using Google or any other search engine, adding `drupal` to the search. For example: `drupal webform`
 
-## Add extension
+### Add extension
 
 Using 'composer', you can also manage the dependencies of your Thunder site and extensions.
 
@@ -22,7 +94,7 @@ For example:
 composer require drupal/webform
 ```
 
-## Install extension
+### Install extension
 
 You can install extensions via the UI or the command line.
 
@@ -49,7 +121,7 @@ drush en [theme]
 To use a theme, you still have to navigate to `Appearance` (admin/appearance) and set it as default.
 
 
-## Uninstall extension
+### Uninstall extension
 
 To uninstall an extension, you have to uninstall it first and then remove the code. You can uninstall extensions via the UI or the command line, but to remove the code from your project, you have to use `composer`.
 
@@ -77,7 +149,7 @@ drush theme:uninstall [theme]
 ```
 
 
-## Remove extension
+### Remove extension
 
 After you have uninstalled an extension from your site, you can also remove the code from your project.
 

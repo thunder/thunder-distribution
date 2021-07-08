@@ -10,7 +10,7 @@ actions:
     link: /user-guide/feature-overview.html
     type: primary
   - text: Developer Guide
-    link: /developer-guide/setup/install.html
+    link: /developer-guide/setup.html
     type: secondary
 features:
   - title: Easy to use

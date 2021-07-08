@@ -17,7 +17,7 @@ module.exports = {
       },
       {
         text: 'Developer Guide',
-        link: '/developer-guide/setup/install.md',
+        link: '/developer-guide/setup.md',
       },
       {
         text: 'Contribute',
@@ -33,31 +33,14 @@ module.exports = {
         '/user-guide/feature-overview.md'
       ],
       '/developer-guide/': [
-        {
-          text: 'Setup Thunder',
-          children: [
-            '/developer-guide/setup/install.md',
-            '/developer-guide/setup/update.md',
-            '/developer-guide/setup/extend.md',
-          ],
-        },
+        '/developer-guide/setup.md',
         {
           text: 'Operating',
           children: [
             '/developer-guide/operating/varnish.md',
           ],
         },
-        {
-          text: 'Headless API',
-          children: [
-            '/developer-guide/headless/introduction.md',
-            '/developer-guide/headless/motivation.md',
-            '/developer-guide/headless/basic-ideas.md',
-            '/developer-guide/headless/usage.md',
-            '/developer-guide/headless/extending.md',
-            '/developer-guide/headless/supported-contrib-modules.md',
-          ],
-        },
+        '/developer-guide/headless.md',
         {
           text: 'Migration',
           children: [
