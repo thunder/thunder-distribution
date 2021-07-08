@@ -115,8 +115,8 @@ explorer will also give you a nice autocomplete, and show you all currently avai
 First a basic example for a page query. All we know so far is that the path is "/example-page". So, how do we get the
 content?
 
-  ```graphql
-    {
+```graphql
+query {
   page(path: "/example-page") {
     name
     ... on User {
@@ -131,7 +131,8 @@ content?
       seoTitle
     }
   }
-  ```
+}
+```
 
 This will return whatever it finds behind /example-page, and depending on whether it is a user page, a term page or
 article node, it will contain the requested fields.
@@ -318,9 +319,11 @@ Let's do some examples: We will extend the Thunder schema with our own types. To
 module called myschema:
 
 <!-- markdownlint-disable MD013 -->
+
 ```bash
 drush generate module --answers='{"name": "My Schema", "machine_name": "myschema", "install_file": false, "libraries.yml": false, "permissions.yml": false, "event_subscriber": false, "block_plugin": false, "controller": false, "settings_form": false}'
 ```
+
 <!-- markdownlint-enable MD013 -->
 
 This will create a barebone module called myschema in the modules folder. To continue working on your extension go ahead

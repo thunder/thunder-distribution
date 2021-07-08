@@ -11,8 +11,8 @@ To install `PHP` please take a look at the
 official [Installation and Configuration](https://www.php.net/manual/install.php) for `PHP`. On top of `PHP`, you need
 to install the required libraries. The Thunder installation requires at least all the libraries Drupal requires.
 Extensions used by Drupal core are defined in Core's composer.json file - see for example
-the [file for Drupal 9.1.x](https://git.drupalcode.org/project/drupal/blob/9.1.x/core/composer.json). Look at the "
-require" section and the keys starting with "ext-".
+the [file for Drupal 9.1.x](https://git.drupalcode.org/project/drupal/blob/9.1.x/core/composer.json). Look at the
+"require" section and the keys starting with "ext-".
 
 The installation of `PHP` extensions can differ between operating systems, that's why you should check for detailed
 instructions on `PHP` [Installation and Configuration](https://www.php.net/manual/install.php).
