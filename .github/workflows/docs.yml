@@ -6,7 +6,7 @@ on:
       - 'docs/**'
       - 'package-lock.json'
     branches:
-      - 6.[1-9]+.x
+      - 6.2.x
 jobs:
   docs:
     runs-on: ubuntu-latest
