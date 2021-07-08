@@ -1,3 +1,7 @@
+---
+tags:
+- headless
+---
 # Introduction
 The thunder_gqls module provides a GraphQL API schema and implementation for Thunder based on the Drupal GraphQL module
 version 4.

@@ -28,7 +28,6 @@ module.exports = {
         link: 'https://thunder.org',
       },
     ],
-    sidebarDepth: 3,
     sidebar: {
       '/user-guide/': [
         '/user-guide/feature-overview.md'
@@ -84,6 +83,7 @@ module.exports = {
       {
         // exclude the homepage
         isSearchable: (page) => page.path !== '/',
+        getExtraFields: (page) => page.frontmatter.tags ?? [],
       },
     ],
   ],

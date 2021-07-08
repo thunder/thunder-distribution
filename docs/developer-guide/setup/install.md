@@ -1,3 +1,7 @@
+---
+tags:
+- setup
+---
 # Install Thunder
 
 ## System requirements
