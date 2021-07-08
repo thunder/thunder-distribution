@@ -22,7 +22,7 @@ features:
         Drupal Big Pipe.
 ---
 
-## What is Thunder?
+## What is Thunder
 
 Thunder is a Drupal distribution for professional publishers. It consists of the current Drupal functionality, lots of
 handpicked publisher-centric modules with custom enhancements, and an environment which makes it easy to install, deploy
@@ -35,7 +35,7 @@ As members of the Thunder Coalition, publishers, industry partners, and develope
 extensions, use them for their own purposes and share them with the Coalition by publishing them under the GNU General
 Public License to further enhance Thunder.
 
-## What do I get with Thunder?
+## What do I get with Thunder
 
 * **Create articles dynamically with paragraphs**: Using paragraphs, you can add text with a WYSIWYG-editor, pictures,
   videos, Instagram or Twitter cards to your article – and change the order by dragging and dropping the content
@@ -58,7 +58,7 @@ Public License to further enhance Thunder.
 * **Big Drupal community**: Benefit from an active community with more than 100.000 user actively contributing and more
   than 2000 commits per week. In the Drupal and the Thunder community you'll find support if needed.
 
-## Who is doing this?
+## Who is doing this
 
 The distribution is maintained by the Thunder Core Team. The Thunder Core Team are a small number of publishing experts
 and computer scientists. They maintain the distribution, handle industry relations, publishers’ requests and offers as
@@ -68,7 +68,7 @@ also ensures that all basic functionality is available free of charge.
 
 And if you like to chat, join our Slack team at [thunder.org/slack](http://www.thunder.org/slack).
 
-## How to reach the Thunder Core Team?
+## How to reach the Thunder Core Team
 
 We would love to hear about your plans for using Thunder, your feature requests, your potential needs, and your
 contributions to Thunder and the Community. Follow the @ThunderCoreTeam
