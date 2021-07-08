@@ -5,6 +5,7 @@ on:
     path:
       - 'docs/**'
       - 'package-lock.json'
+      - 'CHANGELOG.md'
     branches:
       - 6.2.x
 jobs:
