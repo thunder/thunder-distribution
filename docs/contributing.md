@@ -16,6 +16,28 @@ If you want to open a PR for the Thunder distribution, please make sure you crea
 
 Please also note the pull request template to create better quality pull requests.
 
+## Setup Thunder for development
+
+To install the Thunder Distribution for development create the thunder-develop project:
+```bash
+composer create-project thunder/thunder-develop -s dev
+cd thunder-develop
+```
+
+This will install thunder into the docroot folder. The actual
+distribution repository will be cloned into docroot/profiles/contrib/thunder.
+
+Now you can install thunder. Point the web server to the docroot directory and do a normal site install.
+
+To work on the distribution, work inside the docroot/profiles/contrib/thunder
+folder.
+```bash
+cd docroot/profiles/contrib/thunder
+git checkout -b feature/new-thunder-feature # <-- this will be a branch in the distribution not the project
+<make changes>
+git commit .
+```
+
 ## Automated code checks
 
 All Thunder pull requests are executed on [GitHub actions](https://github.com/thunder/thunder-distribution/actions). On every pull request tests will be executed (or when new commits are pushed into the pull request branch). All code will be checked against coding style.
@@ -34,12 +56,12 @@ dependency for easier config updates. The workflow for updating config
 files that are shipped in the distribution should be:
 * Install the latest dev version of Thunder
 * Enable the Config Profile module
-  ```
+  ```bash
   drush en config_profile
   ```
 * Apply all your changes in the UI
 * Export your configuration
-  ```
+  ```bash
   drush cex
   ```
   The configuration is exported to the chosen config_directory and simultaneously to your profile folder.
@@ -47,7 +69,7 @@ files that are shipped in the distribution should be:
   folder
 * Put all new config files to the desired folder and add track it in git
 * Remove all untracked files
-  ```
+  ```bash
   git clean -fd
   ```
 
