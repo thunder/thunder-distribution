@@ -6,12 +6,12 @@ Thunder is a Drupal distribution for professional publishers. It consists of the
 
 
 ## Installing Thunder
-Instructions on how to install Thunder can be found at the [installation guide](https://thunder.github.io/thunder-documentation/quick-install).
+Instructions on how to install Thunder can be found at the [installation guide](https://thunder.github.io/developer-guide/setup.html#install-thunder).
 
-### Updating Thunder 2 to Thunder 3
-If you want to update from Thunder 2 to Thunder 3 some manual steps are necessary, they are described here:
+### Updating Thunder 3 to Thunder 6
+If you want to update from Thunder 3 to Thunder 6 some manual steps are necessary, they are described here:
 
-[How to update Thunder 2 to Thunder 3](https://thunder.github.io/thunder-documentation/update-2-to-3)
+[How to update Thunder 3 to Thunder 6](https://thunder.github.io/developer-guide/migration/migrate-3-6.html)
 
 ## Feature Highlights
 ### <img src="./files/images/story_fireplace_b.png" alt="Storytelling" width="2%"/> Storytelling
@@ -31,10 +31,10 @@ Benefit from a wide range of additional functionality by industry partners or by
 ### <img src="./files/images/drupal_community_b_1.png" alt="Storytelling" width="2%"/> Open Source
 Using open source technology reduces development costs and resources and makes you part of the Drupal community with more than 100,000 users actively contributing.
 
-*[More information about the modules used in Thunder](https://thunder.github.io/thunder-documentation/modules)*
+*[More information about the modules used in Thunder](https://thunder.github.io/user-guide/feature-overview.html)*
 
 ## Support
-For general help using Thunder, please refer to [the official Thunder documentation](https://thunder.github.io/thunder-documentation).
+For general help using Thunder, please refer to [the official Thunder documentation](https://thunder.github.io).
 
 ### Community support
 For additional help, you can use one of this channel to ask question:

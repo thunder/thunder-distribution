@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-These are the instructions to manually update your existing Thunder 2 installation to Thunder 3. If you want to do a fresh installation of thunder please visit [install Thunder](https://thunder.github.io/thunder-documentation/quick-install). The most
+These are the instructions to manually update your existing Thunder 2 installation to Thunder 3. If you want to do a fresh installation of thunder please visit [install Thunder](../setup.md#install-thunder). The most
 significant change is the migration to media in core. But we also made
 some changes to our composer.json.
 

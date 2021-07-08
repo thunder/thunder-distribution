@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-These are the instructions to manually update your existing Thunder 3 installation to Thunder 6 including Drupal 9. If you want to do a fresh installation of thunder please visit [install Thunder](https://thunder.github.io/thunder-documentation/quick-install).
+These are the instructions to manually update your existing Thunder 3 installation to Thunder 6 including Drupal 9. If you want to do a fresh installation of thunder please visit [install Thunder](../setup.md#install-thunder).
 
 **The most important change is that we removed the support for AMP and Facebook Instant Articles, because none of them support Drupal 9 currently. If you rely on one of these modules, we recommend that you stay on Thunder 3.5 for now.**
 
