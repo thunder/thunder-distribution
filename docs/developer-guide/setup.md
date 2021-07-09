@@ -39,7 +39,8 @@ cd docroot
 php core/scripts/drupal quick-start thunder
 ```
 
-**NOTE:** This command is only useful to try Thunder locally, but not to run it in production nor to start a new project based on Thunder.
+**NOTE:** This command is only useful to try Thunder locally, but not to run it in production nor to start a new project
+based on Thunder.
 
 ### Beyond quick install
 
