@@ -40,6 +40,7 @@ module.exports = {
             '/developer-guide/operating/varnish.md',
           ],
         },
+        '/developer-guide/testing.md',
         '/developer-guide/headless.md',
         {
           text: 'Migration',

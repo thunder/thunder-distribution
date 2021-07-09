@@ -30,21 +30,53 @@ cd thunder
 composer install
 ```
 
-### Run locally
+### Quick start
 
-To quickly run this installation locally call the following command from within the docroot:
+To have a quick start run the following commands:
 
 ```bash
 cd docroot
 php core/scripts/drupal quick-start thunder
 ```
 
-**NOTE:** This command is useful to try Thunder locally, but it's not the way to run it in production.
+**NOTE:** This command is only useful to try Thunder locally, but not to run it in production nor to start a new project
+based on Thunder.
 
 ### Beyond quick install
 
-For any further information on how to run and maintain your installation in production environments please refer
-to [the Drupal User Guide](https://www.drupal.org/docs/user_guide/en/index.html).
+To develop your own website based on Thunder, you should have `mysql` installed on your computer.
+
+Then you can install Thunder with:
+
+```bash
+drush si thunder
+```
+
+As a next step, it's recommended to export your config files to a location outside the docroot. To do this change the
+location of `config_sync_directory` in `docroot/sites/default/settings.php`.
+
+```php
+$settings['config_sync_directory'] = '../config/sync';
+```
+
+and export the config files:
+
+```bash
+drush cex
+```
+
+Now you should initialize a git repository for your project and commit all the files:
+
+```bash
+git init . -b development
+git add .
+git commit -m"Initial commit"
+```
+
+From that point, you are ready to develop your new website based on Thunder.
+
+For any further information on how to run and maintain your installation please refer to
+[the Drupal User Guide](https://www.drupal.org/docs/user_guide/en/index.html).
 
 ## Update
 
@@ -126,7 +158,7 @@ You can install extensions via the UI or the command line.
 
 You can install modules by going to your site page `admin/modules`, or by clicking on `Extend` in the menu at the top.
 Here you can search for the module already added to your project by entering the name in the filter box at the top. To
-actually install a module, select the checkbox next to it, scroll to the bottom and click `Install`. You might be warned
+install a module, select the checkbox next to it, scroll to the bottom, and click `Install`. You might be warned
 that another module needs to be enabled because it is required for the module of your interest. By clicking
 on `continue`, Thunder will take care of that.
 
@@ -162,7 +194,7 @@ UI or the command line, but to remove the code from your project, you have to us
 
 You can uninstall modules by going to your site page `admin/modules`, or by clicking on `Extend` in the menu at the top
 and then by clicking on `Uninstall` tab. Here you can search for the module by entering the name in the filter box at
-the top. To uninstall a module, select the checkbox next to it, scroll to the bottom and click `Uninstall`. You might be
+the top. To uninstall a module, select the checkbox next to it, scroll to the bottom, and click `Uninstall`. You might be
 warned that another module needs to be uninstalled because it depends on the module that you want to remove. By clicking
 on `continue`, Thunder will take care of that.
 

@@ -3,7 +3,7 @@ name: Run distribution tests
 on:
   pull_request:
     paths-ignore:
-      - 'docs/**'
+      - '**.md'
       - 'package-lock.json'
   schedule:
     - cron:  '0 7 * * *'

@@ -3,7 +3,7 @@ name: Check docs
 on:
   pull_request:
     paths:
-      - 'docs/**'
+      - '**.md'
 
 jobs:
   markdownlint:
