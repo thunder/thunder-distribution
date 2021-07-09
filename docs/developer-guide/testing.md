@@ -20,8 +20,8 @@ There are also some traits, that provides useful functionalities:
 
 ### Use thunder_test_mock_request for external requests
 
-With the help of the `thunder_test_mock_request` test module, it's easy to mock external requests and make your tests more
-stable and reliable.
+With the help of the `thunder_test_mock_request` test module, it's easy to mock external requests and make your tests
+more stable and reliable.
 
 You just have to define the response for a request URL.
 
@@ -37,9 +37,9 @@ Drupal\thunder_test_mock_request\MockHttpClientMiddleware::addUrlResponse('https
 
 ## Run tests
 
-Running tests for a project isn't that easy. Drupal installs a site, where the test runs onto before every test run.
-Because all your tests are having the `$profile` variable set the 'thunder', Drupal would install a fresh Thunder before
-every test run. So these test sites, wouldn't contain any of your configuration changes.
+Running tests for a project isn't that easy. Since all your tests have the `$profile` variable set to 'thunder', the
+test runs against a plain Thunder installation. So these test sites, wouldn't contain any configuration changes from
+your project.
 
 To prevent that, `ThunderTestTrait.php` can receive a database dump that is installed before the test
 runs.
@@ -53,7 +53,7 @@ content.
 drush si --existing-config
 ```
 
-Then you can create the database dump:
+After that create the database dump:
 
 ```bash
 cd docroot

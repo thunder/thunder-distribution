@@ -32,15 +32,14 @@ composer install
 
 ### Quick start
 
-To have a quick start call the following commands:
+To have a quick start run the following commands:
 
 ```bash
 cd docroot
 php core/scripts/drupal quick-start thunder
 ```
 
-**NOTE:** This command is only useful to try Thunder out locally, but it's not the way to run it in production nor to
-create a new project based on Thunder.
+**NOTE:** This command is only useful to try Thunder locally, but not to run it in production nor to start a new project based on Thunder.
 
 ### Beyond quick install
 
@@ -52,7 +51,7 @@ Then you can install Thunder with:
 drush si thunder
 ```
 
-As a next step, it's recommended to export your config files to a location outside the docroot. To do that change the
+As a next step, it's recommended to export your config files to a location outside the docroot. To do this change the
 location of `config_sync_directory` in `docroot/sites/default/settings.php`.
 
 ```php
@@ -65,7 +64,7 @@ and export the config files:
 drush cex
 ```
 
-Now you should make your project to a git repository and commit all the files:
+Now you should initialize a git repository for your project and commit all the files:
 
 ```bash
 git init . -b development
