@@ -18,6 +18,23 @@ There are also some traits, that provides useful functionalities:
 - `ThunderMetaTagTrait.php`
 - `ThunderParagraphsTestTrait.php`
 
+### Use thunder_test_mock_request for external requests
+
+With the help of the `thunder_test_mock_request` test module, it's easy to mock external requests and make your tests more
+stable and reliable.
+
+You just have to define the response for a request URL.
+
+<!-- markdownlint-disable MD013 -->
+
+```php
+Drupal\thunder_test_mock_request\MockHttpClientMiddleware::addUrlResponse('https://oembed.com/providers.json', '/path/to/myresponse.json', ['Content-Type' => 'application/json']);
+```
+
+<!-- markdownlint-enable MD013 -->
+
+**Note:** If `thunder_test_mock_request` is enabled, all external requests have to be mocked.
+
 ## Run tests
 
 Running tests for a project isn't that easy. Drupal installs a site, where the test runs onto before every test run.
