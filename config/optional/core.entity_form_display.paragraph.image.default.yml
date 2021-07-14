@@ -2,11 +2,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - entity_browser.browser.image_browser
     - field.field.paragraph.image.field_image
     - paragraphs.paragraphs_type.image
   module:
-    - entity_browser
+    - media_library
 id: paragraph.image.default
 targetEntityType: paragraph
 bundle: image
@@ -15,17 +14,9 @@ content:
   field_image:
     weight: 0
     settings:
-      entity_browser: image_browser
-      field_widget_display: rendered_entity
-      field_widget_display_settings:
-        view_mode: thumbnail
-      field_widget_edit: true
-      field_widget_remove: true
-      open: true
-      selection_mode: selection_append
-      field_widget_replace: false
+      media_types: {  }
     third_party_settings: {  }
-    type: entity_browser_entity_reference
+    type: media_library_widget
     region: content
 hidden:
   created: true

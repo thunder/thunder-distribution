@@ -3,13 +3,3 @@ gallery:
   css:
     theme:
       css/bartik_slick_fix.css: {}
-
-entity_browser_view:
-  css:
-    theme:
-      css/media_entity_browser.view.css: {}
-  js:
-    js/media_entity_browser.view.js: {}
-  dependencies:
-    - core/jquery
-    - core/drupal

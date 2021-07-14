@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.twitter.field_author
+    - field.field.media.twitter.field_content
+    - field.field.media.twitter.field_url
+    - media.type.twitter
+id: media.twitter.media_library
+targetEntityType: media
+bundle: twitter
+mode: media_library
+content:
+  name:
+    type: string_textfield
+    settings:
+      size: 60
+      placeholder: ''
+    weight: 0
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  field_author: true
+  field_content: true
+  field_url: true
+  langcode: true
+  path: true
+  status: true
+  uid: true

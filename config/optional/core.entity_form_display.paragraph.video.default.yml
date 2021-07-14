@@ -2,11 +2,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - entity_browser.browser.video_browser
     - field.field.paragraph.video.field_video
     - paragraphs.paragraphs_type.video
   module:
-    - entity_browser
+    - media_library
 id: paragraph.video.default
 targetEntityType: paragraph
 bundle: video
@@ -15,18 +14,10 @@ content:
   field_video:
     weight: 0
     settings:
-      entity_browser: video_browser
-      field_widget_display: rendered_entity
-      field_widget_display_settings:
-        view_mode: thumbnail
-      field_widget_edit: true
-      field_widget_remove: true
-      open: true
-      selection_mode: selection_append
-      field_widget_replace: false
+      media_types: {  }
     third_party_settings: {  }
     region: content
-    type: entity_browser_entity_reference
+    type: media_library_widget
 hidden:
   created: true
   moderation_state: true
