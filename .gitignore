@@ -5,6 +5,7 @@
 /libraries
 .DS_Store
 composer.lock
-package-lock.json
 phpunit.xml
 .phpunit.result.cache
+.temp
+.cache

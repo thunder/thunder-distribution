@@ -13,10 +13,18 @@
   },
   "homepage": "https://github.com/thunder/thunder-distribution#readme",
   "devDependencies": {
-    "eslint": "^7.10.0",
+    "@vuepress/plugin-search": "^2.0.0-beta.21",
+    "eslint": "^7.30.0",
     "eslint-config-drupal": "^5.0.2",
+    "eslint-plugin-react-hooks": "^4 || ^3 || ^2.3.0 || ^1.7.0",
     "prettier": ">=1.13.0",
-    "eslint-plugin-react-hooks": "^4 || ^3 || ^2.3.0 || ^1.7.0"
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
+    "vuepress": "^2.0.0-beta.21"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  }
 }
