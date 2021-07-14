@@ -40,7 +40,8 @@ class ParagraphsFeaturesTest extends ThunderJavascriptTestBase {
     $this->addTextParagraph(static::$paragraphsField, 'Test Delete Confirmation to stay text');
     $this->clickSave();
 
-    $this->drupalGet('node/10/edit');
+    $node = $this->drupalGetNodeByTitle('Article 1');
+    $this->drupalGet($node->toUrl('edit-form'));
 
     $customDeleteButton = $page->find('xpath', '//div[contains(@id, "field-paragraphs-0-item-wrapper")]//button[contains(@class, "paragraph-form-item__action--remove")]');
     $hiddenDeleteButton = $page->find('xpath', '//div[contains(@id, "field-paragraphs-0-item-wrapper")]//button[contains(@class, "paragraph-form-item__action--remove")]');
