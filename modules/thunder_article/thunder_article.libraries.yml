@@ -1,0 +1,6 @@
+teaser_preview:
+  version: VERSION
+  js:
+    js/teaser_preview.js: {}
+  dependencies:
+    - core/drupal
