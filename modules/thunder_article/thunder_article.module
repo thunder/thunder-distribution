@@ -43,7 +43,7 @@ function thunder_article_form_node_form_alter(&$form, FormStateInterface $form_s
  * Implements hook_entity_extra_field_info().
  */
 function thunder_article_entity_extra_field_info() {
-  $extra['node']['article']['form']['article_teaser_preview_wrapper'] = [
+  $extra['node']['article']['form']['article_teaser_preview'] = [
     'label' => t('Teaser Preview'),
     'weight' => 100,
     'visible' => TRUE,
