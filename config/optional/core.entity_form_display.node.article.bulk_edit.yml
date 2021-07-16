@@ -58,6 +58,7 @@ content:
       match_limit: 10
     third_party_settings: {  }
 hidden:
+  article_teaser_preview: true
   created: true
   field_meta_tags: true
   field_paragraphs: true
