@@ -79,11 +79,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  article_teaser_preview_wrapper:
-    weight: 6
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   created:
     type: datetime_timestamp
     weight: 1
