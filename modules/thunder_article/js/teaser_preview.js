@@ -27,12 +27,15 @@
 
       title.addEventListener('input', (e) => {
         const titleField = document.querySelector('article.teaser-preview h1');
-        titleField.textContent = e.target.value;
+        titleField.textContent = this.trimText(e.target.value, 100);
       });
 
       text.addEventListener('input', (e) => {
         const textField = document.querySelector('article.teaser-preview p');
-        textField.innerHTML = e.target.value.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        textField.innerHTML = this.trimText(e.target.value, 155).replace(
+          /(?:\r\n|\r|\n)/g,
+          '<br>',
+        );
       });
 
       let imageSrc = '';
@@ -46,9 +49,15 @@
       const container = document.querySelector('article.teaser-preview');
       container.innerHTML = Drupal.theme('thunderArticleTeaserPreview', {
         image: imageSrc,
-        title: title.value,
-        text: text.value.replace(/(?:\r\n|\r|\n)/g, '<br>'),
+        title: this.trimText(title.value, 100),
+        text: this.trimText(text.value, 155).replace(/(?:\r\n|\r|\n)/g, '<br>'),
       });
+    },
+
+    trimText: (string, length) => {
+      return string.length > length
+        ? `${string.substring(0, length - 3)}...`
+        : string;
     },
   };
 })(Drupal);
