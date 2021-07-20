@@ -110,7 +110,7 @@
         "drupal/simple_sitemap": "^3.10",
         "drupal/shariff": "^1.5",
         "drupal/slick": "^2.2",
-        "drupal/thunder_admin": "^4.0",
+        "drupal/thunder_admin": "dev-feat/teaser_preview",
         "drupal/token": "^1.7",
         "drupal/update_helper": "^2.0",
         "drupal/search_api": "^1.17",
