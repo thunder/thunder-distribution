@@ -205,3 +205,12 @@ function thunder_update_8316() {
   $moduleInstaller = \Drupal::service('module_installer');
   $moduleInstaller->uninstall(['thunder_liveblog']);
 }
+
+/**
+ * Remove thunder_article.settings.
+ */
+function thunder_update_8317() {
+  \Drupal::configFactory()
+    ->getEditable('thunder_article.settings')
+    ->delete();
+}
