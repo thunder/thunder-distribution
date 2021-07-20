@@ -1,0 +1,14 @@
+views.view.scheduler_scheduled_content:
+  expected_config:
+    display:
+      overview:
+        display_options:
+          menu:
+            type: normal
+  update_actions:
+    change:
+      display:
+        overview:
+          display_options:
+            menu:
+              type: none

@@ -1,8 +1,6 @@
 langcode: en
 status: true
 dependencies:
-  config:
-    - system.menu.admin
   module:
     - node
     - scheduler
@@ -992,7 +990,7 @@ display:
     display_options:
       path: admin/content/scheduled
       menu:
-        type: normal
+        type: none
         title: Scheduled
         description: 'Content scheduled for publishing and unpublishing'
         expanded: false
