@@ -54,8 +54,3 @@ v6.1.4:
         '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>We did not automatically update your sitemap config. Add the variants you want to have and the add another variant of type variant_index as the default sitemap.</strong><p>'
         configuration_page: { '#text': 'Add variants', '#url': 'internal:/admin/config/search/simplesitemap/variants' }
-    thunder_update_8317:
-        '#title': 'Remove scheduler link from menu.'
-        '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
-        '#description_successful': '<p>Configuration is successfully updated.</p>'
-        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'

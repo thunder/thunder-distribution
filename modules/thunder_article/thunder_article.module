@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Thunder Article module hooks.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\thunder_article\Form\ThunderNodeForm;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function thunder_article_form_node_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service('class_resolver')
+    ->getInstanceFromDefinition(ThunderNodeForm::class)
+    ->formAlter($form, $form_state);
+}
