@@ -1,6 +1,8 @@
 langcode: en
 status: true
 dependencies:
+  config:
+    - system.menu.admin
   module:
     - node
     - scheduler
