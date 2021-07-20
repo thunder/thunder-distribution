@@ -24,7 +24,6 @@ class ContentListTest extends ThunderTestBase {
     $this->logWithRole('administrator');
     $this->drupalGet('admin/content');
 
-    $primaryMenuBlockSelector = '#block-thunder-admin-primary-local-tasks > nav > nav > ul';
     $secondaryMenuBlockSelector = '#block-thunder-admin-secondary-local-tasks > nav > nav > ul';
 
     $assert_session = $this->assertSession();
@@ -36,7 +35,6 @@ class ContentListTest extends ThunderTestBase {
     $this->container->get('module_installer')->uninstall(['scheduler']);
     $this->drupalGet('admin/content');
 
-    $assert_session->elementTextNotContains('css', $primaryMenuBlockSelector, 'Scheduled');
     $assert_session->elementTextNotContains('css', $secondaryMenuBlockSelector, 'Scheduled content');
 
   }
