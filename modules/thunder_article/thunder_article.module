@@ -21,6 +21,17 @@ function thunder_article_form_node_form_alter(&$form, FormStateInterface $form_s
  * Implements hook_entity_extra_field_info().
  */
 function thunder_article_entity_extra_field_info() {
+  /** @var \Drupal\Core\Entity\EntityFieldManagerInterface $field_manager */
+  $field_manager = \Drupal::service('entity_field.manager');
+  $fields = $field_manager->getFieldDefinitions('node', 'article');
+  $required_fields = [
+    'field_seo_title',
+    'field_teaser_text',
+    'field_teaser_media',
+  ];
+  if (!empty(array_diff($required_fields, array_keys($fields)))) {
+    return [];
+  }
   $extra['node']['article']['form']['article_teaser_preview'] = [
     'label' => t('Teaser Preview'),
     'weight' => 100,
