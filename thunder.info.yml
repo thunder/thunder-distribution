@@ -67,6 +67,7 @@ install:
   - media_entity_slideshow:media_entity_slideshow
   - media_entity_twitter:media_entity_twitter
   - media_expire:media_expire
+  - media_library_edit:media_library_edit
   - metatag:metatag
   - metatag:metatag_open_graph
   - metatag:metatag_facebook
