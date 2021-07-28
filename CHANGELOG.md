@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.5.11](https://github.com/thunder/thunder-distribution/tree/3.5.11) 2021-07-28
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.10...3.5.11)
+
+- Fix ['Scheduled content' is shown twice on admin/content](https://www.drupal.org/project/thunder/issues/3224286)
+
 ## [3.5.10](https://github.com/thunder/thunder-distribution/tree/3.5.10) 2021-06-17
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.9...3.5.10)
 
