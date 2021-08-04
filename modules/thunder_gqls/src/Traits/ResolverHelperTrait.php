@@ -78,7 +78,8 @@ trait ResolverHelperTrait {
   public function fromEntityReferenceRevisions(string $field, $entity = NULL) {
     return $this->builder->produce('entity_reference_revisions')
       ->map('field', $this->builder->fromValue($field))
-      ->map('entity', $entity ?: $this->builder->fromParent());
+      ->map('entity', $entity ?: $this->builder->fromParent())
+      ->map('language', $this->builder->fromPath('entity', 'langcode.value', $this->builder->fromParent()));
   }
 
   /**
