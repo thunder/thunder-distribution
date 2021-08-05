@@ -46,16 +46,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
 
     // Page.
     $this->addFieldResolverIfNotExists('Query', 'page',
-      $this->builder->compose(
-        $this->builder->produce('route_load')
-          ->map('path', $this->builder->fromArgument('path')),
-        $this->builder->produce('route_entity')
-          ->map('url', $this->builder->fromParent())
-          ->map('language', $this->builder->produce('thunder_entity_sub_request')
-            ->map('path', $this->builder->fromArgument('path'))
-            ->map('key', $this->builder->fromValue('language'))
-        ),
-      )
+      $this->fromRoute($this->builder->fromArgument('path'))
     );
 
     // Teaser.

@@ -100,6 +100,9 @@ class ThunderEntitySubRequest extends DataProducerPluginBase implements Containe
 
     /** @var \Symfony\Component\HttpFoundation\JsonResponse $response */
     $response = $this->httpKernel->handle($request);
+    if ($response->getStatusCode() !== 200) {
+      return '';
+    }
 
     $content = (string) $response->getContent();
 
