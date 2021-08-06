@@ -143,7 +143,7 @@
         "thunder/testsite_builder": "dev-master",
         "thunder/thunder_performance_measurement": "dev-master",
         "thunder/thunder_testing_demo": "4.x-dev",
-        "mglaman/phpstan-drupal": "~0.12.0",
+        "mglaman/phpstan-drupal": "0.12.11",
         "phpstan/phpstan-deprecation-rules": "~0.12.0",
         "phpunit/phpunit": "~9.4.3",
         "drupal/schema_metatag": "^2.1"
