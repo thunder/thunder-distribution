@@ -8,6 +8,7 @@
 use Drupal\Component\Utility\NestedArray;
 use Drupal\update_helper\UpdateLogger;
 use Drupal\Core\Entity\EntityStorageException;
+use Drupal\views\Entity\View;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
@@ -186,4 +187,39 @@ function thunder_update_8315() {
 
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();
+}
+
+/**
+ * Uninstall thunder_liveblog.
+ */
+function thunder_update_8316() {
+  $configFactory = \Drupal::configFactory();
+  $configFactory->getEditable('field.field.node.liveblog.field_paragraphs')
+    ->clear('dependencies.enforced')
+    ->save();
+
+  $configFactory->getEditable('field.storage.liveblog_post.field_embed_media')
+    ->clear('dependencies.enforced')
+    ->save();
+
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
+  $moduleInstaller = \Drupal::service('module_installer');
+  $moduleInstaller->uninstall(['thunder_liveblog']);
+}
+
+/**
+ * Remove thunder_article.settings.
+ */
+function thunder_update_8317() {
+  \Drupal::configFactory()
+    ->getEditable('thunder_article.settings')
+    ->delete();
+
+  $view = View::load('scheduler_scheduled_content');
+  if ($view) {
+    $display =& $view->getDisplay('overview');
+    $display['display_options']['menu']['type'] = 'none';
+    $view->save();
+    return t('The "Scheduled" menu entry was removed.');
+  }
 }
