@@ -1,0 +1,13 @@
+variants:
+  article:
+    label: Article
+    weight: 0
+  basic:
+    label: Basic
+    weight: 1
+  channel:
+    label: Channel
+    weight: 2
+  tags:
+    label: Tags
+    weight: 3

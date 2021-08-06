@@ -1,0 +1,31 @@
+:root {
+  // brand colors
+  --c-brand: #009FE3;
+  --c-brand-light: #A2DAF8;
+}
+
+html.dark {
+  // brand colors
+  --c-brand: white;
+  --c-brand-light: #96A0A5;
+
+  svg.logo {
+    .light {
+      fill: white;
+    }
+    .dark {
+      fill: #96A0A5;
+    }
+  }
+}
+
+.site-name {
+  display: none;
+}
+
+.home .hero svg {
+  max-width: 100%;
+  max-height: 280px;
+  display: block;
+  margin: 3rem auto 1.5rem;
+}

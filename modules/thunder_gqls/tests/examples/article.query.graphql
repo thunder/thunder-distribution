@@ -1,0 +1,65 @@
+query ($path: String!) {
+  menu(id: "main", path: $path) {
+    name
+    id
+    items {
+      title
+      url
+      inActiveTrail
+      children {
+        title
+        url
+        inActiveTrail
+      }
+    }
+  }
+  page(path: $path) {
+    uuid
+    url
+    name
+    entity
+    language
+    entityLinks {
+      canonical
+    }
+    ... on Article {
+      published
+      author {
+        uuid
+        name
+        mail
+        entity
+        language
+      }
+      channel {
+        uuid
+        published
+        name
+        url
+        parent {
+          name
+          id
+          url
+        }
+      }
+      tags {
+        uuid
+        name
+        url
+      }
+      seoTitle
+      content {
+        __typename
+      }
+      teaser {
+        text
+        image {
+          uuid
+          derivative(style: "medium") {
+            width
+          }
+        }
+      }
+    }
+  }
+}

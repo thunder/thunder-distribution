@@ -1,0 +1,6 @@
+query ($path: String!) {
+  metatags(path: $path) {
+    tag
+    attributes
+  }
+}

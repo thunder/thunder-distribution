@@ -1,0 +1,70 @@
+interface Media implements Entity{
+  id: Int!
+  uuid: String!
+  entity: String!
+  language: String
+  name: String!
+  url: String!
+  entityLinks: EntityLinks
+
+  created: String!
+  changed: String!
+  author: User
+  thumbnail: Thumbnail
+  published: Boolean
+  fallbackMedia: Media
+}
+
+type MediaImage implements Media & Image & Entity {
+  id: Int!
+  uuid: String!
+  entity: String!
+  language: String
+  name: String!
+  url: String!
+  entityLinks: EntityLinks
+
+  created: String!
+  changed: String!
+  author: User
+  thumbnail: Thumbnail
+  published: Boolean
+  fallbackMedia: MediaImage
+
+  src: String
+  width: Int
+  height: Int
+  derivative(style: String!): ImageDerivative
+  focalPoint: FocalPoint
+
+  title: String
+  alt: String
+  copyright: String
+  description: String
+  tags: [Tags]
+  source: String
+}
+
+type MediaVideo implements Media & Entity {
+  id: Int!
+  uuid: String!
+  entity: String!
+  language: String
+  name: String!
+  url: String!
+  entityLinks: EntityLinks
+
+  created: String!
+  changed: String!
+  author: User
+  thumbnail: Thumbnail
+  published: Boolean
+  fallbackMedia: MediaVideo
+
+  src: String
+  username: String
+  caption: String
+  copyright: String
+  description: String
+  source: String
+}
