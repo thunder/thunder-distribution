@@ -1,0 +1,16 @@
+.paragraph-form-item--has-subform .field--name-field-video > details[open] > summary,
+.paragraph-form-item--has-subform .field--name-field-image > details[open] > summary,
+.paragraph-form-item--has-subform .field--name-field-media-images > details[open] > summary,
+.paragraph-form-item--has-subform .paragraph-top .paragraph-type {
+  display: none;
+}
+
+.paragraph-form-item--has-subform .field--name-field-video > details,
+.paragraph-form-item--has-subform .field--name-field-image > details {
+  margin: 0;
+  border: 0;
+}
+.paragraph-form-item--has-subform .field--name-field-video > details .details-wrapper,
+.paragraph-form-item--has-subform .field--name-field-image > details .details-wrapper {
+  padding: 0;
+}

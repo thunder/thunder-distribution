@@ -87,6 +87,16 @@ function thunder_paragraphs_field_widget_paragraphs_form_alter(&$element, FormSt
     ],
     !$processing_new_paragraphs
   );
+
+  if (isset($element['preview'])) {
+    $element['#attributes']['class'][] = 'paragraph-form-item--has-preview';
+  }
+  elseif (isset($element['subform'])) {
+    $element['#attributes']['class'][] = 'paragraph-form-item--has-subform';
+  }
+
+  // Add custom styling.
+  $element['#attached']['library'][] = 'thunder_paragraphs/paragraphs.widget';
 }
 
 /**
@@ -142,6 +152,6 @@ function thunder_paragraphs_theme() {
 function thunder_paragraphs_preprocess_paragraphs_add_dialog(&$variables) {
   foreach (array_keys($variables['buttons']) as $key) {
     $variables['buttons'][$key]['#theme_wrappers'] = ['input__submit__paragraphs_add_dialog'];
-    $variables['buttons'][$key]['#attached']['library'][] = 'thunder_paragraphs/paragraphs_type_icon';
+    $variables['buttons'][$key]['#attached']['library'][] = 'thunder_paragraphs/paragraphs.type_icon';
   }
 }

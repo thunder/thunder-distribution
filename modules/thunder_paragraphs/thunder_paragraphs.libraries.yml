@@ -5,7 +5,12 @@ fieldwidget_settings:
     - core/jquery
     - core/drupal
 
-paragraphs_type_icon:
+paragraphs.type_icon:
   css:
     theme:
-      css/paragraphs_type_icon.css: {}
+      css/paragraphs.type_icon.css: {}
+
+paragraphs.widget:
+  css:
+    theme:
+      css/paragraphs.widget.css: {}
