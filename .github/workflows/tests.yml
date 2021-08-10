@@ -128,6 +128,11 @@ jobs:
         site-directory: /tmp/test/thunder/install/docroot
         http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
+    - name: Test for deprecations
+        run: test-drupal-project deprecation
+        continue-on-error: true
+
+
     - name: Run config tests
       run: test-drupal-project run_tests -nc
       env:
@@ -284,10 +289,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-
-      - name: Test for deprecations
-        run: test-drupal-project deprecation
-        continue-on-error: true
 
       - name: Run the tests
         run: test-drupal-project run_tests
