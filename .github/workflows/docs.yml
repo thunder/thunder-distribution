@@ -4,6 +4,7 @@ on:
   push:
     path:
       - 'docs/**'
+      - 'package.json'
       - 'package-lock.json'
       - 'CHANGELOG.md'
     branches:
