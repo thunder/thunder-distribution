@@ -6,18 +6,19 @@ dependencies:
     - field.field.media.gallery.field_media_images
     - media.type.gallery
   module:
-    - media_library
     - entity_reference_actions
+    - entity_reference_override
 id: media.gallery.inline
 targetEntityType: media
 bundle: gallery
 mode: inline
 content:
   field_media_images:
-    type: media_library_widget
+    type: media_library_with_override_widget
     weight: 1
     settings:
       media_types: {  }
+      form_mode: override
     third_party_settings:
       entity_reference_actions:
         enabled: true

@@ -5,6 +5,8 @@ dependencies:
     - field.storage.node.field_teaser_media
     - media.type.image
     - node.type.article
+  module:
+    - entity_reference_override
 id: node.article.field_teaser_media
 field_name: field_teaser_media
 entity_type: node
@@ -22,4 +24,4 @@ settings:
       image: image
     sort:
       field: _none
-field_type: entity_reference
+field_type: entity_reference_override

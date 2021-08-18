@@ -6,8 +6,8 @@ dependencies:
     - media.type.gallery
   module:
     - entity_reference_actions
+    - entity_reference_override
     - field_group
-    - media_library
     - select2
 third_party_settings:
   field_group:
@@ -37,10 +37,11 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_media_images:
-    type: media_library_widget
+    type: media_library_with_override_widget
     weight: 2
     settings:
       media_types: {  }
+      form_mode: override
     third_party_settings:
       entity_reference_actions:
         enabled: true

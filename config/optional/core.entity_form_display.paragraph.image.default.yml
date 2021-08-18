@@ -5,7 +5,7 @@ dependencies:
     - field.field.paragraph.image.field_image
     - paragraphs.paragraphs_type.image
   module:
-    - media_library
+    - entity_reference_override
 id: paragraph.image.default
 targetEntityType: paragraph
 bundle: image
@@ -15,8 +15,9 @@ content:
     weight: 0
     settings:
       media_types: {  }
+      form_mode: override
     third_party_settings: {  }
-    type: media_library_widget
+    type: media_library_with_override_widget
     region: content
 hidden:
   created: true

@@ -5,6 +5,8 @@ dependencies:
     - field.storage.paragraph.field_image
     - media.type.image
     - paragraphs.paragraphs_type.image
+  module:
+    - entity_reference_override
 id: paragraph.image.field_image
 field_name: field_image
 entity_type: paragraph
@@ -24,4 +26,4 @@ settings:
       field: _none
     auto_create: false
     auto_create_bundle: ''
-field_type: entity_reference
+field_type: entity_reference_override

@@ -12,8 +12,8 @@ dependencies:
     - node.type.article
     - workflows.workflow.editorial
   module:
+    - entity_reference_override
     - field_group
-    - media_library
     - metatag_async_widget
     - paragraphs
     - paragraphs_features
@@ -148,8 +148,9 @@ content:
     weight: 4
     settings:
       media_types: {  }
+      form_mode: override
     third_party_settings: {  }
-    type: media_library_widget
+    type: media_library_with_override_widget
     region: content
   field_teaser_text:
     weight: 6
