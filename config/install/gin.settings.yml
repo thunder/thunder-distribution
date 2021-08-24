@@ -1,4 +1,4 @@
-preset_accent_color: light_blue
+preset_accent_color: custom
 preset_focus_color: gin
 enable_darkmode: false
 classic_toolbar: vertical
@@ -18,7 +18,7 @@ favicon:
   use_default: false
   path: profiles/contrib/thunder/files/favicon.ico
   mimetype: image/vnd.microsoft.icon
-accent_color: ''
+accent_color: '#00a0e6'
 focus_color: ''
 icon_upload: ''
 show_description_toggle: true
