@@ -200,7 +200,7 @@ function thunder_media_media_view_alter(array &$build, EntityInterface $entity, 
     $build['#attached']['library'][] = 'thunder_media/gallery.paragraph_preview';
     foreach (Element::children($build['field_media_images']) as $key) {
       if ($key > 3) {
-        $build['field_media_images'][$key]['#item_attributes']['class'][] = 'visually-hidden';
+        $build['field_media_images'][$key]['#access'] = FALSE;
       }
     }
   }
