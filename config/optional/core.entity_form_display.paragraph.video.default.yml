@@ -5,7 +5,7 @@ dependencies:
     - field.field.paragraph.video.field_video
     - paragraphs.paragraphs_type.video
   module:
-    - entity_reference_override
+    - entity_reference_override_media_library
 id: paragraph.video.default
 targetEntityType: paragraph
 bundle: video

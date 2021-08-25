@@ -6,7 +6,7 @@ dependencies:
     - media.type.gallery
   module:
     - entity_reference_actions
-    - entity_reference_override
+    - entity_reference_override_media_library
     - field_group
     - select2
 third_party_settings:

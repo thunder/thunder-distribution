@@ -5,7 +5,7 @@ dependencies:
     - field.field.paragraph.image.field_image
     - paragraphs.paragraphs_type.image
   module:
-    - entity_reference_override
+    - entity_reference_override_media_library
 id: paragraph.image.default
 targetEntityType: paragraph
 bundle: image

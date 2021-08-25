@@ -57,7 +57,7 @@ install:
   - dropzonejs:dropzonejs
   - empty_fields:empty_fields
   - entity_reference_actions:entity_reference_actions
-  - entity_reference_override:entity_reference_override
+  - entity_reference_override:entity_reference_override_media_library
   - field_group:field_group
   - focal_point:focal_point
   - inline_entity_form:inline_entity_form

@@ -14,14 +14,12 @@ dependencies:
   module:
     - field_group
     - focal_point
-    - select2
     - text
 third_party_settings:
   field_group:
     group_basis:
       children:
         - name
-        - field_tags
         - field_image
         - field_description
       parent_name: ''
@@ -39,11 +37,11 @@ third_party_settings:
         - status
         - uid
         - created
-        - field_expires
         - field_copyright
+        - field_expires
         - field_source
       parent_name: ''
-      weight: 5
+      weight: 4
       format_type: fieldset
       format_settings:
         id: ''
@@ -75,16 +73,6 @@ content:
     third_party_settings: {  }
     type: image_focal_point
     region: content
-  field_tags:
-    type: select2_entity_reference
-    weight: 2
-    region: content
-    settings:
-      width: 100%
-      autocomplete: true
-      match_operator: CONTAINS
-      match_limit: 10
-    third_party_settings: {  }
   name:
     type: string_textfield
     weight: 1
@@ -98,6 +86,7 @@ hidden:
   field_copyright: true
   field_expires: true
   field_source: true
+  field_tags: true
   langcode: true
   moderation_state: true
   path: true

@@ -7,7 +7,7 @@ dependencies:
     - media.type.gallery
   module:
     - entity_reference_actions
-    - entity_reference_override
+    - entity_reference_override_media_library
 id: media.gallery.inline
 targetEntityType: media
 bundle: gallery

@@ -12,7 +12,7 @@ dependencies:
     - node.type.article
     - workflows.workflow.editorial
   module:
-    - entity_reference_override
+    - entity_reference_override_media_library
     - field_group
     - metatag_async_widget
     - paragraphs
