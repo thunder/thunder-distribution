@@ -58,6 +58,9 @@
             },
             "drupal/simple_sitemap": {
                 "Sitemap variant index functionality": "https://www.drupal.org/files/issues/2021-03-03/simple_sitemap-sitemap_variant_index-3109090-16.patch"
+            },
+            "drupal/gin": {
+                "Add a form description toggle": "https://git.drupalcode.org/project/gin/-/merge_requests/12.diff"
             }
         }
     },
