@@ -151,6 +151,7 @@ class ThunderNodeForm implements ContainerInjectionInterface {
       return [];
     }
 
+    $element = [];
     // @todo Remove after seven / thunder_admin support is dropped.
     if (in_array($this->themeManager->getActiveTheme()->getName(), [
       'seven',
