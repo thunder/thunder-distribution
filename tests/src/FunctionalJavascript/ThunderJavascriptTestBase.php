@@ -352,6 +352,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    *   Max depth of nested collapsed tabs.
    */
   public function expandAllTabs($maxLevel = 3) {
+    $this->click('.meta-sidebar__trigger');
     $jsScript = 'jQuery(\'details.js-form-wrapper.form-wrapper:not([open]) > summary\').click().length';
 
     $numOfOpen = $this->getSession()->evaluateScript($jsScript);

@@ -211,6 +211,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->assertSession()->pageTextContains('This content is now locked against simultaneous editing. This content will remain locked if you navigate away from this page without saving or unlocking it.');
 
     $page = $this->getSession()->getPage();
+    $this->expandAllTabs();
     $page->find('xpath', '//*[@data-drupal-selector="edit-unlock"]')->click();
 
     $page->find('xpath', '//*[@id="edit-submit"]')->click();
