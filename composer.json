@@ -39,8 +39,7 @@
         "installer-name": "thunder",
         "patches": {
             "drupal/core": {
-                "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2020-07-30/3133639-8.patch",
-                "REMOVE BEFORE COMMIT: Claro's preprocessing of field multiple value form's table header cell removes potential changes by others": "https://www.drupal.org/files/issues/2020-08-13/3099026-17.patch"
+                "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2020-07-30/3133639-8.patch"
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
