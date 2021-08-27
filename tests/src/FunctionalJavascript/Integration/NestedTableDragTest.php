@@ -48,19 +48,20 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     $page = $this->getSession()->getPage();
 
     // Enable sorting on second link paragraph.
-    $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/thead/tr[2]/th/button')->click();
+    $this->scrollElementInView('[data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]');
+    $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/thead/tr/th/div/button')->click();
 
     // Check that related sort buttons are disabled, but not this one.
     $this->assertTrue(
-      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-wrapper"]/div/div/table/thead/tr[2]/th/button')->hasAttribute('disabled'),
+      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-wrapper"]/div/div/div/table/thead/tr/th/div/button')->hasAttribute('disabled'),
       'Related sort buttons should be disabled.'
     );
     $this->assertTrue(
-      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-1-subform-field-link-wrapper"]/div/div/table/thead/tr[2]/th/button')->hasAttribute('disabled'),
+      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-1-subform-field-link-wrapper"]/div/div/div/table/thead/tr/th/div/button')->hasAttribute('disabled'),
       'Related sort buttons should be disabled.'
     );
     $this->assertFalse(
-      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/thead/tr[2]/th/button')->hasAttribute('disabled'),
+      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/thead/tr/th/div/button')->hasAttribute('disabled'),
       'Active sort button should be enabled.'
     );
 
@@ -71,37 +72,37 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     );
 
     // Select and move link field.
-    $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/tbody/tr[4]/td[1]/input')->click();
-    $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/tbody/tr[1]/td/a')->click();
+    $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/tbody/tr[4]/td[1]/div/span/input')->click();
+    $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/tbody/tr[1]/td/a')->click();
 
     // Check content of field url on certain position.
     $this->assertTrue(
-      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/tbody/tr[2]/td[2]/div/div[1]/div[1]/input')->getValue() === 'https://example.com/22',
+      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/tbody/tr[2]/td[2]/div/div[1]/div[2]/div/input')->getValue() === 'https://example.com/22',
       'Content of field url on certain position is incorrect.'
     );
 
     // Disable sorting on second link paragraph.
-    $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/thead/tr[2]/th/button')->click();
+    $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/thead/tr/th/div/button')->click();
 
     // Check that all sort buttons are enabled again.
     $message = 'All sort buttons should be enabled again.';
     $this->assertFalse(
-      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-wrapper"]/div/div/table/thead/tr[2]/th/button')->hasAttribute('disabled'),
+      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-wrapper"]/div/div/div/table/thead/tr/th/div/button')->hasAttribute('disabled'),
       $message
     );
     $this->assertFalse(
-      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-1-subform-field-link-wrapper"]/div/div/table/thead/tr[2]/th/button')->hasAttribute('disabled'),
+      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-1-subform-field-link-wrapper"]/div/div/div/table/thead/tr/th/div/button')->hasAttribute('disabled'),
       $message
     );
     $this->assertFalse(
-      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/thead/tr[2]/th/button')->hasAttribute('disabled'),
+      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/thead/tr/th/div/button')->hasAttribute('disabled'),
       $message
     );
 
     // Enable sorting on second link paragraph.
-    $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/thead/tr[2]/th/button')->click();
+    $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/thead/tr/th/div/button')->click();
     $this->assertFalse(
-      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/table/tbody/tr[2]/td[1]/input')->isChecked(),
+      $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/tbody/tr[2]/td[1]/div/span/input')->isChecked(),
       'Checkbox is still checked after sort completed.'
     );
   }

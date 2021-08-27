@@ -39,8 +39,7 @@
         "installer-name": "thunder",
         "patches": {
             "drupal/core": {
-                "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2020-07-30/3133639-8.patch",
-                "REMOVE BEFORE COMMIT: Claro's preprocessing of field multiple value form's table header cell removes potential changes by others": "https://www.drupal.org/files/issues/2020-08-13/3099026-17.patch"
+                "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2020-07-30/3133639-8.patch"
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
@@ -60,6 +59,10 @@
             },
             "drupal/simple_sitemap": {
                 "Sitemap variant index functionality": "https://www.drupal.org/files/issues/2021-03-03/simple_sitemap-sitemap_variant_index-3109090-16.patch"
+            },
+            "drupal/gin": {
+                "Add a form description toggle": "https://git.drupalcode.org/project/gin/-/merge_requests/12.diff",
+                "Collapsible sidebar": "https://git.drupalcode.org/project/gin/-/merge_requests/13.diff"
             }
         }
     },
@@ -67,7 +70,7 @@
         "cweagans/composer-patches": "^1.6.5",
         "drupal/access_unpublished": "^1.3",
         "drupal/adsense": "^1.2-rc1",
-        "drupal/admin_toolbar": "^2.1",
+        "drupal/admin_toolbar": "^2.5||^3.0.2",
         "drupal/autofill": "^1.0",
         "drupal/autosave_form": "^1.2",
         "drupal/better_normalizers": "^1.0-beta3",
