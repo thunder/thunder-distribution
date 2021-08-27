@@ -75,6 +75,10 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
     $instagram->set('facebook_app_id', 123)
       ->set('facebook_app_secret', 123)
       ->save();
+
+    $autosave_form = $this->config('autosave_form.settings');
+    $autosave_form->set('notification.active', FALSE)
+      ->save();
   }
 
   /**
