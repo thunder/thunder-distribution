@@ -24,7 +24,7 @@ class ContentListTest extends ThunderTestBase {
     $this->logWithRole('administrator');
     $this->drupalGet('admin/content');
 
-    $secondaryMenuBlockSelector = '#block-thunder-admin-secondary-local-tasks > nav > nav > ul';
+    $secondaryMenuBlockSelector = '#block-gin-secondary-local-tasks > nav > ul';
 
     $assert_session = $this->assertSession();
     $assert_session->elementTextContains('css', $secondaryMenuBlockSelector, 'Overview');

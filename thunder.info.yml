@@ -93,6 +93,7 @@ install:
   - thunder:thunder_taxonomy
   - thunder:thunder_workflow
 themes:
+  - gin
   - seven
   - thunder_base
   - thunder_admin

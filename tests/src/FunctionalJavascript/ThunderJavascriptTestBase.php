@@ -75,6 +75,10 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
     $instagram->set('facebook_app_id', 123)
       ->set('facebook_app_secret', 123)
       ->save();
+
+    $autosave_form = $this->config('autosave_form.settings');
+    $autosave_form->set('notification.active', FALSE)
+      ->save();
   }
 
   /**
@@ -352,6 +356,9 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    *   Max depth of nested collapsed tabs.
    */
   public function expandAllTabs($maxLevel = 3) {
+    if ($this->getSession()->getPage()->find('css', '.meta-sidebar__trigger:not(.is-active)')) {
+      $this->click('.meta-sidebar__trigger:not(.is-active)');
+    }
     $jsScript = 'jQuery(\'details.js-form-wrapper.form-wrapper:not([open]) > summary\').click().length';
 
     $numOfOpen = $this->getSession()->evaluateScript($jsScript);
@@ -381,7 +388,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
   protected function clickSave() {
     $page = $this->getSession()->getPage();
 
-    $page->find('xpath', '//div[@data-drupal-selector="edit-actions"]/input[@id="edit-submit"]')
+    $page->find('xpath', '//div[@data-drupal-selector="edit-actions"]/input[@data-drupal-selector="edit-submit"]')
       ->click();
   }
 
