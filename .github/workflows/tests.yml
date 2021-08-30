@@ -4,6 +4,7 @@ on:
   pull_request:
     paths-ignore:
       - '**.md'
+      - 'package.json'
       - 'package-lock.json'
   schedule:
     - cron:  '0 7 * * *'
