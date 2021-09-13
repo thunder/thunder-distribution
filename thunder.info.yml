@@ -89,7 +89,6 @@ install:
   - thunder:thunder_media
   - thunder:thunder_paragraphs
   - thunder:thunder_taxonomy
-  - thunder:thunder_tonic
   - thunder:thunder_workflow
 themes:
   - gin
