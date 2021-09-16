@@ -54,9 +54,6 @@
             },
             "drupal/simple_sitemap": {
                 "Sitemap variant index functionality": "https://www.drupal.org/files/issues/2021-03-03/simple_sitemap-sitemap_variant_index-3109090-16.patch"
-            },
-            "drupal/graphql": {
-                "Fix loaded translations on ER fields": "https://patch-diff.githubusercontent.com/raw/drupal-graphql/graphql/pull/1228.diff"
             }
         }
     },
