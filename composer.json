@@ -62,7 +62,8 @@
             },
             "drupal/gin": {
                 "Add a form description toggle": "https://git.drupalcode.org/project/gin/-/merge_requests/12.diff",
-                "Collapsible sidebar": "https://git.drupalcode.org/project/gin/-/merge_requests/13.diff"
+                "Collapsible sidebar": "https://git.drupalcode.org/project/gin/-/merge_requests/13.diff",
+                "Views exposed form alignment": "https://git.drupalcode.org/project/gin/-/merge_requests/52.diff"
             }
         }
     },
