@@ -34,7 +34,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=1
+
     strategy:
       matrix:
         PHP_VERSION: [ '7.4', '8.0']
