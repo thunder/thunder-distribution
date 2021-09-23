@@ -11,10 +11,10 @@ on:
 
 env:
   DRUPAL_TESTING_COMPOSER_PROJECT: thunder/thunder-project
-  DRUPAL_TESTING_DATABASE_USER: root
-  DRUPAL_TESTING_DATABASE_PASSWORD: root
+  DRUPAL_TESTING_DATABASE_USER: postgres
+  DRUPAL_TESTING_DATABASE_PASSWORD: postgres
   DRUPAL_TESTING_TEST_DUMP_FILE: db-dump.php
-  DRUPAL_TESTING_DATABASE_ENGINE: mysql
+  DRUPAL_TESTING_DATABASE_ENGINE: postgres
   DRUPAL_TESTING_TEST_CODING_STYLES: false
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_TEST_GROUP: Thunder
@@ -29,12 +29,14 @@ jobs:
     runs-on: ubuntu-20.04
 
     services:
-      mysql:
-        image: mariadb:latest
+      postgres:
+        image: postgres:13
         env:
-          MYSQL_ROOT_PASSWORD: root
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: testing
         ports:
-          - 3306:3306
+          - 5432:5432
     strategy:
       matrix:
         PHP_VERSION: [ '7.4', '8.0']
@@ -95,12 +97,14 @@ jobs:
     runs-on: ubuntu-20.04
 
     services:
-      mysql:
-        image: mariadb:latest
+      postgres:
+        image: postgres:13
         env:
-          MYSQL_ROOT_PASSWORD: root
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: testing
         ports:
-          - 3306:3306
+          - 5432:5432
 
     strategy:
       matrix:
@@ -151,12 +155,14 @@ jobs:
     runs-on: ubuntu-20.04
 
     services:
-      mysql:
-        image: mariadb:latest
+      postgres:
+        image: postgres:13
         env:
-          MYSQL_ROOT_PASSWORD: root
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: testing
         ports:
-          - 3306:3306
+          - 5432:5432
 
     strategy:
       matrix:
@@ -240,12 +246,14 @@ jobs:
     runs-on: ubuntu-20.04
 
     services:
-      mysql:
-        image: mariadb:latest
+      postgres:
+        image: postgres:13
         env:
-          MYSQL_ROOT_PASSWORD: root
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: testing
         ports:
-          - 3306:3306
+          - 5432:5432
 
     strategy:
       matrix:
