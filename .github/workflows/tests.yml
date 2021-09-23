@@ -206,6 +206,9 @@ jobs:
           composer install
         working-directory: /tmp/test/thunder/install
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - name: Install drupal
         run: test-drupal-project install
 
