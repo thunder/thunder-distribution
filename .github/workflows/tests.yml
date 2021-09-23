@@ -30,7 +30,7 @@ jobs:
 
     services:
       mysql:
-        image: mysql:8.0
+        image: mysql:8
         command: "--default-authentication-plugin=mysql_native_password"
         env:
           MYSQL_ROOT_PASSWORD: root
@@ -97,7 +97,7 @@ jobs:
 
     services:
       mysql:
-        image: mysql:8.0
+        image: mysql:8
         command: "--default-authentication-plugin=mysql_native_password"
         env:
           MYSQL_ROOT_PASSWORD: root
@@ -154,7 +154,7 @@ jobs:
 
     services:
       mysql:
-        image: mysql:8.0
+        image: mysql:8
         command: "--default-authentication-plugin=mysql_native_password"
         env:
           MYSQL_ROOT_PASSWORD: root
@@ -244,7 +244,7 @@ jobs:
 
     services:
       mysql:
-        image: mysql:8.0
+        image: mysql:8
         command: "--default-authentication-plugin=mysql_native_password"
         env:
           MYSQL_ROOT_PASSWORD: root
