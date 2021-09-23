@@ -31,7 +31,17 @@ jobs:
     strategy:
       matrix:
         PHP_VERSION: [ '7.4', '8.0']
-
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - uses: actions/checkout@v1
 
@@ -40,10 +50,6 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick
-
-      - name: Start MySql service
-        run: |
-          sudo /etc/init.d/mysql start
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -90,7 +96,17 @@ jobs:
     needs: build
 
     runs-on: ubuntu-20.04
-
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     strategy:
       matrix:
         PHP_VERSION: [ '7.4', '8.0']
@@ -105,10 +121,6 @@ jobs:
         extensions: Imagick, gd, pdo_mysql
         # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
         ini-values: pcre.jit=0
-
-    - name: Start MySql service
-      run: |
-        sudo /etc/init.d/mysql start
 
     - name: Get build environment
       run: composer global require thunder/drupal-testing
@@ -159,18 +171,23 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
       - uses: shivammathur/setup-php@v2
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick, gd, pdo_mysql
           tools: composer:v1
-
-      - name: Start MySql service
-        run: |
-          sudo /etc/init.d/mysql start
-          mysql -uroot -proot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -230,7 +247,17 @@ jobs:
   test-min:
 
     runs-on: ubuntu-20.04
-
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     strategy:
       matrix:
         PHP_VERSION: [ '7.3' ]
@@ -243,17 +270,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-
       - uses: shivammathur/setup-php@v2
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick, gd, pdo_mysql
-
-      - name: Start MySql service
-        run: |
-          sudo /etc/init.d/mysql start
-          mysql -uroot -proot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -288,9 +309,7 @@ jobs:
       - name: Test for deprecations
         run: test-drupal-project deprecation
         continue-on-error: true
-      #   Start a debug session.
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+
       - name: Run the tests
         run: test-drupal-project run_tests
 
