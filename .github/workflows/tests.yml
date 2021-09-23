@@ -79,9 +79,6 @@ jobs:
           git clone --depth 1 --single-branch --branch "${THUNDER_ADMIN_BRANCH}" https://github.com/BurdaMagazinOrg/theme-thunder-admin.git thunder_admin
         working-directory: /tmp/test/thunder/install/docroot/themes/contrib
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Install drupal
         run: test-drupal-project install
 
