@@ -27,7 +27,14 @@ jobs:
   build:
 
     runs-on: ubuntu-20.04
-
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=1
     strategy:
       matrix:
         PHP_VERSION: [ '7.4', '8.0']
@@ -40,10 +47,6 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick
-
-      - name: Start MySql service
-        run: |
-          sudo /etc/init.d/mysql start
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
