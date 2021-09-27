@@ -105,6 +105,15 @@ function thunder_preprocess_html(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_status_report().
+ */
+function thunder_preprocess_status_report_general_info(&$variables) {
+  if (!empty($thunder_version = \Drupal::service('extension.list.module')->get('thunder')->info['version'])) {
+    $variables['drupal']['value'] = $variables['drupal']['value'] . ' (Thunder ' . $thunder_version . ')';
+  }
+}
+
+/**
  * Implements hook_modules_uninstalled().
  */
 function thunder_modules_uninstalled($modules) {
