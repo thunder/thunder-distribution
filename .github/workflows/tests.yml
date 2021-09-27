@@ -42,7 +42,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - uses: shivammathur/setup-php@v2
+      - uses: shivammathur/setup-php@2.13.0
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
@@ -109,7 +109,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - uses: shivammathur/setup-php@v2
+    - uses: shivammathur/setup-php@2.13.0
       with:
         coverage: none
         php-version: ${{ matrix.PHP_VERSION }}
@@ -173,7 +173,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - uses: shivammathur/setup-php@v2
+      - uses: shivammathur/setup-php@2.13.0
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
@@ -260,7 +260,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - uses: shivammathur/setup-php@v2
+      - uses: shivammathur/setup-php@2.13.0
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
@@ -317,7 +317,7 @@ jobs:
           path: thunder-distribution/docker-thunder-performance
           ref: 'master'
 
-      - uses: shivammathur/setup-php@master
+      - uses: shivammathur/setup-php@2.13.0
         with:
           coverage: none
           php-version: '7.4'
