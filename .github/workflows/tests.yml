@@ -19,7 +19,7 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_TEST_GROUP: Thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
-  DRUPAL_TESTING_USE_SELENIUM: false
+  DRUPAL_TESTING_SELENIUM_CHROME_VERSION: '4.0.0-rc-2-prerelease-20210923'
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
 
@@ -280,13 +280,13 @@ jobs:
           composer global require thunder/drupal-testing
 
       - name: Prepare the build
-        run: test-drupal-project prepare_build
+        run: test-drupal-project -v prepare_build
 
       - name: Install suggested dependencies
         run: composer require "drupal/core-dev:~9.2.0" "phpspec/prophecy-phpunit:^2" "consolidation/robo:^2.0" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
-        run: test-drupal-project build
+        run: test-drupal-project -v build
         env:
           DRUPAL_TESTING_MIN_BUILD: true
 
@@ -298,11 +298,11 @@ jobs:
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Test for deprecations
-        run: test-drupal-project deprecation
+        run: test-drupal-project -v deprecation
         continue-on-error: true
 
       - name: Run the tests
-        run: test-drupal-project run_tests
+        run: test-drupal-project -v run_tests
 
   test-performance:
     needs: [build, test-max]
@@ -318,7 +318,7 @@ jobs:
           path: thunder-distribution/docker-thunder-performance
           ref: 'master'
 
-      - uses: shivammathur/setup-php@master
+      - uses: shivammathur/setup-php@2.13.0
         with:
           coverage: none
           php-version: '7.4'
