@@ -19,6 +19,7 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_TEST_GROUP: Thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
+  DRUPAL_TESTING_SELENIUM_CHROME_VERSION: 87.0
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
 
@@ -299,10 +300,6 @@ jobs:
       - name: Test for deprecations
         run: test-drupal-project -v deprecation
         continue-on-error: true
-
-      #   Start a debug session.
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
 
       - name: Run the tests
         run: test-drupal-project -v run_tests
