@@ -57,10 +57,10 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:verbose-chromedriver-dev
 
       - name: Prepare the build
-        run: test-drupal-project prepare_build
+        run: test-drupal-project -v prepare_build
 
       - name: Add needed dependencies
         run: composer require "drupal/core-dev:~9.2.0" "phpspec/prophecy-phpunit:^2" --no-update --no-progress --working-dir=/tmp/test/thunder/install
@@ -69,7 +69,7 @@ jobs:
         run: composer config bin-dir bin/ --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
-        run: test-drupal-project build
+        run: test-drupal-project -v build
 
       - name: Get custom thunder_admin branch
         run: |
@@ -78,7 +78,7 @@ jobs:
         working-directory: /tmp/test/thunder/install/docroot/themes/contrib
 
       - name: Install drupal
-        run: test-drupal-project install
+        run: test-drupal-project -v install
 
       - name: Zip build
         run: cd /tmp/test; tar cfz build-${{ matrix.PHP_VERSION }}.tgz thunder; mv build-${{ matrix.PHP_VERSION }}.tgz ${GITHUB_WORKSPACE}
@@ -116,7 +116,7 @@ jobs:
         extensions: Imagick, gd, pdo_mysql
 
     - name: Get build environment
-      run: composer global require thunder/drupal-testing
+      run: composer global require thunder/drupal-testing:verbose-chromedriver-dev
 
     - name: Download build
       uses: actions/download-artifact@v1
@@ -134,17 +134,17 @@ jobs:
         http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
     - name: Run config tests
-      run: test-drupal-project run_tests -nc
+      run: test-drupal-project -v run_tests -nc
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderConfig
 
     - name: Run installer tests
-      run: test-drupal-project run_tests -nc
+      run: test-drupal-project -v run_tests -nc
       env:
         DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
 
     - name: Run tests suite
-      run: test-drupal-project run_tests
+      run: test-drupal-project -v run_tests
 
   test-upgrade:
 
@@ -188,10 +188,10 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-cache-
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: composer global require thunder/drupal-testing:verbose-chromedriver-dev
 
       - name: Prepare the build
-        run: test-drupal-project prepare_build
+        run: test-drupal-project -v prepare_build
 
       - name: Use Thunder 3.4 lockfile
         run: |
@@ -201,7 +201,7 @@ jobs:
         working-directory: /tmp/test/thunder/install
 
       - name: Install drupal
-        run: test-drupal-project install
+        run: test-drupal-project -v install
 
       - name: Update the docroot
         run: |
@@ -233,7 +233,7 @@ jobs:
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Run tests suite
-        run: test-drupal-project run_tests
+        run: test-drupal-project -v run_tests
 
   test-min:
 
@@ -276,16 +276,16 @@ jobs:
       - name: Get build environment
         run: |
           composer self-update
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:verbose-chromedriver-dev
 
       - name: Prepare the build
-        run: test-drupal-project prepare_build
+        run: test-drupal-project -v prepare_build
 
       - name: Install suggested dependencies
         run: composer require "drupal/core-dev:~9.2.0" "phpspec/prophecy-phpunit:^2" "consolidation/robo:^2.0" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
-        run: test-drupal-project build
+        run: test-drupal-project -v build
         env:
           DRUPAL_TESTING_MIN_BUILD: true
 
@@ -297,11 +297,11 @@ jobs:
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Test for deprecations
-        run: test-drupal-project deprecation
+        run: test-drupal-project -v deprecation
         continue-on-error: true
 
       - name: Run the tests
-        run: test-drupal-project run_tests
+        run: test-drupal-project -v run_tests
 
   test-performance:
     needs: [build, test-max]
