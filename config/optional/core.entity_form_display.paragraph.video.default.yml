@@ -5,7 +5,7 @@ dependencies:
     - field.field.paragraph.video.field_video
     - paragraphs.paragraphs_type.video
   module:
-    - entity_reference_override_media_library
+    - media_library_media_modify
 id: paragraph.video.default
 targetEntityType: paragraph
 bundle: video
@@ -18,7 +18,7 @@ content:
       form_mode: override
     third_party_settings: {  }
     region: content
-    type: media_library_with_override_widget
+    type: media_library_media_modify_widget
 hidden:
   created: true
   moderation_state: true

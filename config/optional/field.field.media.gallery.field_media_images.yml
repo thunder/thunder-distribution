@@ -6,7 +6,7 @@ dependencies:
     - media.type.gallery
     - media.type.image
   module:
-    - entity_reference_override
+    - media_library_media_modify
 id: media.gallery.field_media_images
 field_name: field_media_images
 entity_type: media
@@ -24,4 +24,4 @@ settings:
       image: image
     sort:
       field: _none
-field_type: entity_reference_override
+field_type: entity_reference_entity_modify

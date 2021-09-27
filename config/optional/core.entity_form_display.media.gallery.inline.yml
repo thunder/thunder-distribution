@@ -7,14 +7,14 @@ dependencies:
     - media.type.gallery
   module:
     - entity_reference_actions
-    - entity_reference_override_media_library
+    - media_library_media_modify
 id: media.gallery.inline
 targetEntityType: media
 bundle: gallery
 mode: inline
 content:
   field_media_images:
-    type: media_library_with_override_widget
+    type: media_library_media_modify_widget
     weight: 1
     settings:
       media_types: {  }

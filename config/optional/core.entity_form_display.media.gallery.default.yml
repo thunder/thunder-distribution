@@ -6,7 +6,7 @@ dependencies:
     - media.type.gallery
   module:
     - entity_reference_actions
-    - entity_reference_override_media_library
+    - media_library_media_modify
     - field_group
     - select2
 third_party_settings:
@@ -37,7 +37,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_media_images:
-    type: media_library_with_override_widget
+    type: media_library_media_modify_widget
     weight: 2
     settings:
       media_types: {  }
