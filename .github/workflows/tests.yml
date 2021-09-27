@@ -302,7 +302,7 @@ jobs:
 
       #   Start a debug session.
       - name: Setup tmate session
-         uses: mxschmitt/action-tmate@v3
+        uses: mxschmitt/action-tmate@v3
 
       - name: Run the tests
         run: test-drupal-project -v run_tests
