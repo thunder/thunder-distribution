@@ -101,6 +101,8 @@ jobs:
         image: selenium/standalone-chrome:3.141.59-oxygen
         volumes:
           - ${{ github.workspace }}:/project
+        extra_hosts:
+          - "host.docker.internal:host-gateway"
         ports:
           - 4444:4444
         options: >-
