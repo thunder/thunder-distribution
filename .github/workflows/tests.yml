@@ -58,7 +58,7 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:dev-verbose-chromedriver
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -117,7 +117,7 @@ jobs:
         extensions: Imagick, gd, pdo_mysql
 
     - name: Get build environment
-      run: composer global require thunder/drupal-testing
+      run: composer global require thunder/drupal-testing:dev-verbose-chromedriver
 
     - name: Download build
       uses: actions/download-artifact@v1
@@ -189,7 +189,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-cache-
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: composer global require thunder/drupal-testing:dev-verbose-chromedriver
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -277,7 +277,7 @@ jobs:
       - name: Get build environment
         run: |
           composer self-update
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:dev-verbose-chromedriver
 
       - name: Prepare the build
         run: test-drupal-project -v prepare_build
