@@ -102,7 +102,7 @@ jobs:
         volumes:
           - ${{ github.workspace }}:/project
         extra_hosts:
-          - "host.docker.internal:host-gateway"
+          - 'host.docker.internal:host-gateway'
         ports:
           - 4444:4444
         options: >-
