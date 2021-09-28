@@ -18,8 +18,8 @@ env:
   DRUPAL_TESTING_TEST_CODING_STYLES: false
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_TEST_GROUP: Thunder
+  DRUPAL_TESTING_TEST_FILTER: 'ModuleIntegrationTest::testContentLock'
   DRUPAL_TESTING_HTTP_PORT: 8888
-  DRUPAL_TESTING_SELENIUM_HOST: selenium
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
 
@@ -30,7 +30,6 @@ jobs:
     runs-on: ubuntu-20.04
 
     services:
-
       mysql:
         image: mariadb:latest
         env:
@@ -39,7 +38,7 @@ jobs:
           - 3306:3306
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4', '8.0']
+        PHP_VERSION: [ '8.0']
 
     steps:
       - uses: actions/checkout@v1
@@ -59,7 +58,7 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer global require thunder/drupal-testing:dev-verbose-chromedriver
+          composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project -v prepare_build
@@ -105,6 +104,7 @@ jobs:
           - 4444:4444
         options: >-
           --shm-size 2G
+          --net host
       mysql:
         image: mariadb:latest
         env:
@@ -114,7 +114,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4', '8.0']
+        PHP_VERSION: ['8.0']
 
     steps:
     - uses: actions/checkout@v1
