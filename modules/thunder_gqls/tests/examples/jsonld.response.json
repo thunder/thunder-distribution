@@ -1,0 +1,5 @@
+{
+  "data": {
+    "jsonld": "<script type=\"application/ld+json\">{\n    \"@context\": \"https://schema.org\",\n    \"@graph\": [\n        {\n            \"@type\": \"Article\"\n        }\n    ]\n}</script>\n"
+  }
+}

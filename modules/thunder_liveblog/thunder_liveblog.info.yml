@@ -3,6 +3,7 @@ description: 'Integrates with the Paragraphs module and Thunder for media embedd
 type: module
 core_version_requirement: ^9
 package: Thunder Optional
+hidden: true
 dependencies:
   - liveblog:liveblog
   - liveblog:liveblog_pusher

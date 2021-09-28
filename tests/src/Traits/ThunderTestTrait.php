@@ -9,6 +9,9 @@ use Drupal\Core\Database\Database;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\dblog\Controller\DbLogController;
+use Drupal\media\MediaInterface;
+use Drupal\node\NodeInterface;
+use Drupal\taxonomy\TermInterface;
 use Drupal\user\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -181,7 +184,9 @@ trait ThunderTestTrait {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   protected function loadMediaByUuid($uuid) {
-    return \Drupal::getContainer()->get('entity.repository')->loadEntityByUuid('media', $uuid);
+    $media = \Drupal::getContainer()->get('entity.repository')->loadEntityByUuid('media', $uuid);
+    assert($media instanceof MediaInterface);
+    return $media;
   }
 
   /**
@@ -196,7 +201,9 @@ trait ThunderTestTrait {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   protected function loadNodeByUuid($uuid) {
-    return \Drupal::getContainer()->get('entity.repository')->loadEntityByUuid('node', $uuid);
+    $node = \Drupal::getContainer()->get('entity.repository')->loadEntityByUuid('node', $uuid);
+    assert($node instanceof NodeInterface);
+    return $node;
   }
 
   /**
@@ -211,7 +218,9 @@ trait ThunderTestTrait {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   protected function loadTermByUuid($uuid) {
-    return \Drupal::getContainer()->get('entity.repository')->loadEntityByUuid('taxonomy_term', $uuid);
+    $term = \Drupal::getContainer()->get('entity.repository')->loadEntityByUuid('taxonomy_term', $uuid);
+    assert($term instanceof TermInterface);
+    return $term;
   }
 
   /**

@@ -47,25 +47,27 @@
                 "Trying to access array offset on value of type null in EntityBrowserElement valueCallback": "https://www.drupal.org/files/issues/2021-02-19/3199269-array-value-null.patch"
             },
             "drupal/password_policy": {
-                "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2020-04-14/2918974-7-11.patch",
-                "Importing configuration on site without password_policy activated": "https://www.drupal.org/files/issues/2020-03-20/password-policy-2771129-110.patch"
+                "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2020-04-14/2918974-7-11.patch"
             },
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
+            },
+            "drupal/simple_sitemap": {
+                "Sitemap variant index functionality": "https://www.drupal.org/files/issues/2021-03-03/simple_sitemap-sitemap_variant_index-3109090-16.patch"
             }
         }
     },
     "require": {
         "cweagans/composer-patches": "^1.6.5",
-        "drupal/access_unpublished": "^1.0-alpha8",
+        "drupal/access_unpublished": "^1.3",
         "drupal/adsense": "^1.2-rc1",
-        "drupal/admin_toolbar": "^2.1",
+        "drupal/admin_toolbar": "^2.5||^3.0.2",
         "drupal/autofill": "^1.0",
         "drupal/autosave_form": "^1.2",
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.9",
-        "drupal/core": "~9.1.10@STABLE",
+        "drupal/core": "^9.2.0@STABLE",
         "drupal/config_selector": "^2.1",
         "drupal/config_update": "^1.7",
         "drupal/content_lock": "^2.1",
@@ -75,13 +77,14 @@
         "drupal/diff": "1.0",
         "drupal/dropzonejs": "^2.1",
         "drupal/empty_fields": "^1.0-alpha1",
-        "drupal/entity_browser": "2.5",
-        "drupal/entity_reference_actions": "1.0-beta4",
+        "drupal/entity_browser": "2.6",
+        "drupal/entity_reference_actions": "^1.0-beta5",
         "drupal/entity_reference_revisions": "^1.3",
         "drupal/field_group": "3.1",
         "drupal/focal_point": "^1.3",
         "drupal/facets": "^1.4",
         "drupal/google_analytics": "^2.0",
+        "drupal/graphql": "^4.1",
         "drupal/inline_entity_form": "^1.0-rc7",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.1",
@@ -91,16 +94,16 @@
         "drupal/media_entity_pinterest": "^2.0",
         "drupal/media_entity_slideshow": "^2.0-alpha1",
         "drupal/media_entity_twitter": "^2.5",
-        "drupal/media_expire": "^2.2",
+        "drupal/media_expire": "^2.4",
         "drupal/metatag": "^1.13",
         "drupal/metatag_async_widget": "^1.0-alpha2",
         "drupal/paragraphs": "^1.11",
         "drupal/paragraphs_features": "^1.8",
-        "drupal/password_policy": "3.0-beta1",
+        "drupal/password_policy": "3.0",
         "drupal/pathauto": "^1.8",
         "drupal/responsive_preview": "^1.0-alpha7",
         "drupal/redirect": "^1.6",
-        "drupal/scheduler": "^1.3",
+        "drupal/scheduler": "^1.4",
         "drupal/scheduler_content_moderation_integration": "^1.3",
         "drupal/select2": "^1.7",
         "drupal/search_api_mark_outdated": "^1.0",
@@ -122,9 +125,7 @@
         "pusher/pusher-php-server": "^3.0.3 || ^4.1.1"
     },
     "suggest": {
-        "drupal/nexx_integration": "NEXX Video CMS integration",
-        "drupal/search_api_solr": "Provides a Apache Solr backend for the Search API module",
-        "valiton/harbourmaster": "Harbourmaster Single Sign On"
+        "drupal/search_api_solr": "Provides a Apache Solr backend for the Search API module"
     },
     "replace": {
         "bower-asset/jquery": "*",
@@ -134,13 +135,17 @@
         "npm-asset/jquery": "*",
         "npm-asset/jqueryui": "*",
         "npm-asset/backbone": "*",
-        "npm-asset/underscore": "*"
+        "npm-asset/underscore": "*",
+        "thunder/thunder_gqls": "*"
     },
     "require-dev": {
         "burdamagazinorg/thunder-dev-tools": "dev-master",
         "thunder/testsite_builder": "dev-master",
         "thunder/thunder_performance_measurement": "dev-master",
         "thunder/thunder_testing_demo": "4.x-dev",
-        "phpunit/phpunit": "~9.4.3"
+        "mglaman/phpstan-drupal": "0.12.11",
+        "phpstan/phpstan-deprecation-rules": "~0.12.0",
+        "phpunit/phpunit": "~9.4.3",
+        "drupal/schema_metatag": "^2.1"
     }
 }

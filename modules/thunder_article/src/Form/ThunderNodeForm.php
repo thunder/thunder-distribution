@@ -13,6 +13,7 @@ use Drupal\Core\Url;
 use Drupal\node\Access\NodeRevisionAccessCheck;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Drupal\Core\Theme\ThemeManagerInterface;
 
 /**
  * Base for handler for node add/edit forms.
@@ -64,6 +65,13 @@ class ThunderNodeForm implements ContainerInjectionInterface {
   protected $entityTypeManager;
 
   /**
+   * The theme manager.
+   *
+   * @var \Drupal\Core\Theme\ThemeManagerInterface
+   */
+  protected $themeManager;
+
+  /**
    * Constructs a NodeForm object.
    *
    * @param \Drupal\Core\Session\AccountInterface $current_user
@@ -76,16 +84,19 @@ class ThunderNodeForm implements ContainerInjectionInterface {
    *   The node revision access check service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
+   * @param \Drupal\Core\Theme\ThemeManagerInterface $theme_manager
+   *   The theme manager.
    * @param \Drupal\content_moderation\ModerationInformationInterface $moderationInfo
    *   (optional) The moderation info service. The optionality is important
    *   otherwise this form becomes dependent on the content_moderation module.
    */
-  public function __construct(AccountInterface $current_user, MessengerInterface $messenger, RequestStack $requestStack, NodeRevisionAccessCheck $node_revision_access, EntityTypeManagerInterface $entity_type_manager, ModerationInformationInterface $moderationInfo = NULL) {
+  public function __construct(AccountInterface $current_user, MessengerInterface $messenger, RequestStack $requestStack, NodeRevisionAccessCheck $node_revision_access, EntityTypeManagerInterface $entity_type_manager, ThemeManagerInterface $theme_manager, ModerationInformationInterface $moderationInfo = NULL) {
     $this->currentUser = $current_user;
     $this->messenger = $messenger;
     $this->request = $requestStack->getCurrentRequest();
     $this->nodeRevisionAccess = $node_revision_access;
     $this->entityTypeManager = $entity_type_manager;
+    $this->themeManager = $theme_manager;
     $this->moderationInfo = $moderationInfo;
   }
 
@@ -99,6 +110,7 @@ class ThunderNodeForm implements ContainerInjectionInterface {
       $container->get('request_stack'),
       $container->get('access_check.node.revision'),
       $container->get('entity_type.manager'),
+      $container->get('theme.manager'),
       $container->has('content_moderation.moderation_information') ? $container->get('content_moderation.moderation_information') : NULL
     );
   }
@@ -139,26 +151,33 @@ class ThunderNodeForm implements ContainerInjectionInterface {
       return [];
     }
 
-    /** @var \Drupal\content_moderation\ContentModerationState $state */
-    $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
-    $element['status'] = [
-      '#type' => 'item',
-      '#markup' => $entity->isNew() || !$this->moderationInfo->isDefaultRevisionPublished($entity) ? $this->t('of unpublished @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]) : $this->t('of published @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]),
-      '#weight' => 200,
-      '#wrapper_attributes' => [
-        'class' => ['status'],
-      ],
-      '#access' => !$state->isDefaultRevisionState(),
-    ];
+    $element = [];
+    // @todo Remove after seven / thunder_admin support is dropped.
+    if (in_array($this->themeManager->getActiveTheme()->getName(), [
+      'seven',
+      'thunder_admin',
+    ])) {
+      /** @var \Drupal\content_moderation\ContentModerationState $state */
+      $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
+      $element['status'] = [
+        '#type' => 'item',
+        '#markup' => $entity->isNew() || !$this->moderationInfo->isDefaultRevisionPublished($entity) ? $this->t('of unpublished @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]) : $this->t('of published @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]),
+        '#weight' => 200,
+        '#wrapper_attributes' => [
+          'class' => ['status'],
+        ],
+        '#access' => !$state->isDefaultRevisionState(),
+      ];
 
-    $element['moderation_state_current'] = [
-      '#type' => 'item',
-      '#markup' => $state->label(),
-      '#weight' => 210,
-      '#wrapper_attributes' => [
-        'class' => ['status', $state->id()],
-      ],
-    ];
+      $element['moderation_state_current'] = [
+        '#type' => 'item',
+        '#markup' => $state->label(),
+        '#weight' => 210,
+        '#wrapper_attributes' => [
+          'class' => ['status', $state->id()],
+        ],
+      ];
+    }
 
     if ($this->moderationInfo->hasPendingRevision($entity)) {
       $route_info = Url::fromRoute('node.revision_revert_default_confirm', [
