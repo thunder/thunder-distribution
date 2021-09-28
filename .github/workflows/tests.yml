@@ -101,8 +101,6 @@ jobs:
         image: selenium/standalone-chrome:3.141.59-oxygen
         volumes:
           - ${{ github.workspace }}:/project
-        extra_hosts:
-          - 'host.docker.internal:host-gateway'
         ports:
           - 4444:4444
         options: >-
@@ -144,9 +142,6 @@ jobs:
         php-version: ${{ matrix.PHP_VERSION }}
         site-directory: /tmp/test/thunder/install/docroot
         http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
 
     - name: Run config tests
       run: test-drupal-project -v run_tests -nc
