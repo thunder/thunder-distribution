@@ -259,7 +259,7 @@ trait ThunderParagraphsTestTrait {
 
     $this->scrollElementInView("[name=\"{$editButtonName}\"]");
     $page->pressButton($editButtonName);
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
   }
 
 }
