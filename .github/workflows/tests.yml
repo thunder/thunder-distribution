@@ -144,7 +144,7 @@ jobs:
         http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
     - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      uses: mxschmitt/action-tmate@v3
 
     - name: Run config tests
       run: test-drupal-project -v run_tests -nc
