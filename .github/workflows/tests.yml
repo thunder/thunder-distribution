@@ -20,6 +20,7 @@ env:
   DRUPAL_TESTING_TEST_GROUP: Thunder
   DRUPAL_TESTING_TEST_FILTER: 'ModuleIntegrationTest::testContentLock'
   DRUPAL_TESTING_HTTP_PORT: 8888
+  SIMPLETEST_BASE_URL: 'http://host.docker.internal'
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
 
