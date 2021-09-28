@@ -104,7 +104,6 @@ jobs:
           - 4444:4444
         options: >-
           --shm-size 2G
-          --network host
       mysql:
         image: mariadb:latest
         env:
