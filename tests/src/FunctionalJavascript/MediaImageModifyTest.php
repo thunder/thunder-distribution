@@ -124,7 +124,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     // Remove image.
     $this->clickAjaxButtonCssSelector('[data-drupal-selector="edit-field-paragraphs-0-subform-field-image-current-items-0-remove-button"]');
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     // Check that there are no errors.
     $this->assertSession()
@@ -138,7 +138,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $fileName = $this->getSession()->evaluateScript('jQuery(\'#entity-browser-image-browser-form div.view-content > div.views-row:nth-child(1) img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1);');
     $this->clickButtonDrupalSelector($page, 'edit-submit');
     $this->getSession()->switchToIFrame();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     // Save paragraph.
     $this->clickAjaxButtonCssSelector('[name="field_paragraphs_0_collapse"]');
