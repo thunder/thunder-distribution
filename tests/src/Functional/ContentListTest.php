@@ -7,6 +7,7 @@ namespace Drupal\Tests\thunder\Functional;
  *
  * @group Thunder
  */
+
 class ContentListTest extends ThunderTestBase {
 
   /**
@@ -27,6 +28,7 @@ class ContentListTest extends ThunderTestBase {
     $secondaryMenuBlockSelector = '#block-thunder-admin-secondary-local-tasks > nav > nav > ul';
 
     $assert_session = $this->assertSession();
+
     $assert_session->elementTextContains('css', $secondaryMenuBlockSelector, 'Overview');
     $assert_session->elementTextContains('css', $secondaryMenuBlockSelector, 'Scheduled content');
     $assert_session->elementTextContains('css', $secondaryMenuBlockSelector, 'Locked content');
