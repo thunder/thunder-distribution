@@ -99,7 +99,7 @@ jobs:
       selenium:
         image: selenium/standalone-chrome
         volumes:
-          - ${GITHUB_WORKSPACE}:/project
+          - ${{ env.GITHUB_WORKSPACE }}:/project
         ports:
           - 4444:4444
         options: >-
