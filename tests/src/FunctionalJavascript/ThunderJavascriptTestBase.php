@@ -462,7 +462,6 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
     return $ckEditor->getAttribute('id');
   }
 
-
   /**
    * Overrides this for testing purposes.
    */
