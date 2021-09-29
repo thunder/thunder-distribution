@@ -7,7 +7,6 @@ namespace Drupal\Tests\thunder\Functional;
  *
  * @group Thunder
  */
-
 class ContentListTest extends ThunderTestBase {
 
   /**
