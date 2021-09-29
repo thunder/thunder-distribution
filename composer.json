@@ -38,6 +38,9 @@
     "extra": {
         "installer-name": "thunder",
         "patches": {
+            "drupal/core": {
+              "Fix table not exist": "docroot/profiles/contrib/thunder/fix-return-true.patch"
+            },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },

@@ -1,0 +1,14 @@
+diff --git a/core/lib/Drupal/Core/KeyValueStore/DatabaseStorage.php b/core/lib/Drupal/Core/KeyValueStore/DatabaseStorage.php
+index 365e52b5ec..e5eee49149 100644
+--- a/core/lib/Drupal/Core/KeyValueStore/DatabaseStorage.php
++++ b/core/lib/Drupal/Core/KeyValueStore/DatabaseStorage.php
+@@ -257,8 +257,8 @@ protected function ensureTableExists() {
+       $database_schema = $this->connection->schema();
+       if (!$database_schema->tableExists($this->table)) {
+         $database_schema->createTable($this->table, $this->schemaDefinition());
+-        return TRUE;
+       }
++      return TRUE;
+     }
+     // If the table already exists, then attempting to recreate it will throw an
+     // exception. In this case just catch the exception and do nothing.
