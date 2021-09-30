@@ -6,8 +6,8 @@ dependencies:
     - media.type.gallery
   module:
     - entity_reference_actions
-    - media_library_media_modify
     - field_group
+    - media_library_media_modify
     - select2
 third_party_settings:
   field_group:

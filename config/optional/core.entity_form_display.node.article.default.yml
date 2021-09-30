@@ -12,8 +12,8 @@ dependencies:
     - node.type.article
     - workflows.workflow.editorial
   module:
-    - media_library_media_modify
     - field_group
+    - media_library_media_modify
     - metatag_async_widget
     - paragraphs
     - paragraphs_features

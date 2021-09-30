@@ -13,7 +13,7 @@ dependencies:
     - media.type.image
   module:
     - field_group
-    - focal_point
+    - image
     - text
 third_party_settings:
   field_group:
@@ -66,12 +66,10 @@ content:
   field_image:
     weight: 3
     settings:
-      offsets: '50,50'
       progress_indicator: throbber
       preview_image_style: medium
-      preview_link: true
     third_party_settings: {  }
-    type: image_focal_point
+    type: image_image
     region: content
   name:
     type: string_textfield
