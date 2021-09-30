@@ -76,7 +76,7 @@ jobs:
 
       - name: Add base table or view not found patch
         working-directory: /tmp/test/thunder/install/docroot
-        run: patch -p1 < themes/contrib/thunder/patches/fix-return-true.patch
+        run: patch -p1 < profiles/contrib/thunder/patches/fix-return-true.patch
 
       - name: Install drupal
         run: test-drupal-project install
