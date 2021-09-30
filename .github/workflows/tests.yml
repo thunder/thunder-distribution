@@ -277,14 +277,14 @@ jobs:
       - name: Install suggested dependencies
         run: composer require "drupal/core-dev:~9.2.0" "phpspec/prophecy-phpunit:^2" "consolidation/robo:^2.0" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
-      - name: Add base table or view not found patch
-        working-directory: /tmp/test/thunder/install/docroot
-        run: patch -p1 < profiles/contrib/thunder/patches/fix-return-true.patch
-
       - name: Build the docroot
         run: test-drupal-project build
         env:
           DRUPAL_TESTING_MIN_BUILD: true
+
+      - name: Add base table or view not found patch
+        working-directory: /tmp/test/thunder/install/docroot
+        run: patch -p1 < profiles/contrib/thunder/patches/fix-return-true.patch
 
       - name: Setup Apache
         uses: thunder/apache-shiva-php-action@v1
