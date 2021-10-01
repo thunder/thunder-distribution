@@ -40,8 +40,9 @@ content:
     type: media_library_media_modify_widget
     weight: 2
     settings:
-      media_types: {  }
+      add_button_text: 'Select images'
       form_mode: override
+      media_types: {  }
     third_party_settings:
       entity_reference_actions:
         enabled: true
@@ -49,8 +50,8 @@ content:
           action_title: Action
           include_exclude: include
           selected_actions:
-            media_delete_action: '0'
             media_edit_action: media_edit_action
+            media_delete_action: '0'
             media_publish_action: '0'
             media_save_action: '0'
             media_unpublish_action: '0'

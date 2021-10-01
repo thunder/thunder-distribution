@@ -40,7 +40,8 @@
         "patches": {
             "drupal/core": {
                 "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2020-07-30/3133639-8.patch",
-                "It is possible to overflow the number of items allowed in Media Library": "https://git.drupalcode.org/project/drupal/-/merge_requests/760.diff"
+                "It is possible to overflow the number of items allowed in Media Library": "https://git.drupalcode.org/project/drupal/-/merge_requests/760.diff",
+                "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch"
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
