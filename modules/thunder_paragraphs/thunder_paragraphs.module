@@ -123,3 +123,25 @@ function _thunder_paragraph_attach_ief_submit(array &$element, array $button_par
     }
   }
 }
+
+/**
+ * Implements hook_theme().
+ */
+function thunder_paragraphs_theme() {
+  return [
+    'input__submit__paragraphs_add_dialog' => [
+      'render element' => 'element',
+      'template' => 'input--submit--paragraphs-add-dialog',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function thunder_paragraphs_preprocess_paragraphs_add_dialog(&$variables) {
+  foreach (array_keys($variables['buttons']) as $key) {
+    $variables['buttons'][$key]['#theme_wrappers'] = ['input__submit__paragraphs_add_dialog'];
+    $variables['buttons'][$key]['#attached']['library'][] = 'thunder_paragraphs/paragraphs.type_icon';
+  }
+}
