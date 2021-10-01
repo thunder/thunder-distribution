@@ -13,3 +13,8 @@ entity_browser_view:
   dependencies:
     - core/jquery
     - core/drupal
+
+gallery.paragraph_preview:
+  css:
+    theme:
+      css/gallery.paragraph_preview.css: {}
