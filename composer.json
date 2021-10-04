@@ -39,7 +39,7 @@
         "installer-name": "thunder",
         "patches": {
             "drupal/core": {
-                "The standard logic we use in ::ensureTableExists() is wrong": "https://www.drupal.org/files/issues/2021-10-04/3240601-5.patch"
+                "Fix table not exist": "docroot/profiles/contrib/thunder/3240601-9.2.x.patch"
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"

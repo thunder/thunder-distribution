@@ -1,0 +1,315 @@
+diff --git a/core/lib/Drupal/Core/Batch/BatchStorage.php b/core/lib/Drupal/Core/Batch/BatchStorage.php
+index 1386821ed8..3c44628ef9 100644
+--- a/core/lib/Drupal/Core/Batch/BatchStorage.php
++++ b/core/lib/Drupal/Core/Batch/BatchStorage.php
+@@ -165,19 +165,18 @@ protected function doCreate(array $batch) {
+   protected function ensureTableExists() {
+     try {
+       $database_schema = $this->connection->schema();
+-      if (!$database_schema->tableExists(static::TABLE_NAME)) {
+-        $schema_definition = $this->schemaDefinition();
+-        $database_schema->createTable(static::TABLE_NAME, $schema_definition);
+-        return TRUE;
+-      }
++      $schema_definition = $this->schemaDefinition();
++      $database_schema->createTable(static::TABLE_NAME, $schema_definition);
+     }
+     // If another process has already created the batch table, attempting to
+     // recreate it will throw an exception. In this case just catch the
+     // exception and do nothing.
+     catch (DatabaseException $e) {
+-      return TRUE;
+     }
+-    return FALSE;
++    catch (\Exception $e) {
++      return FALSE;
++    }
++    return TRUE;
+   }
+ 
+   /**
+diff --git a/core/lib/Drupal/Core/Cache/DatabaseCacheTagsChecksum.php b/core/lib/Drupal/Core/Cache/DatabaseCacheTagsChecksum.php
+index 7b797b9ae8..d1b4501b8a 100644
+--- a/core/lib/Drupal/Core/Cache/DatabaseCacheTagsChecksum.php
++++ b/core/lib/Drupal/Core/Cache/DatabaseCacheTagsChecksum.php
+@@ -47,7 +47,7 @@ protected function doInvalidateTags(array $tags) {
+       // core install where cache tags are invalidated before the table is
+       // created.
+       if (!$this->ensureTableExists()) {
+-        $this->catchException($e);
++        throw $e;
+       }
+     }
+   }
+@@ -63,7 +63,7 @@ protected function getTagInvalidationCounts(array $tags) {
+     catch (\Exception $e) {
+       // If the table does not exist yet, create.
+       if (!$this->ensureTableExists()) {
+-        $this->catchException($e);
++        throw $e;
+       }
+     }
+     return [];
+@@ -75,21 +75,18 @@ protected function getTagInvalidationCounts(array $tags) {
+   protected function ensureTableExists() {
+     try {
+       $database_schema = $this->connection->schema();
+-      // Create the cache tags table if it does not exist.
+-      if (!$database_schema->tableExists('cachetags')) {
+-        $schema_definition = $this->schemaDefinition();
+-        $database_schema->createTable('cachetags', $schema_definition);
+-
+-        return TRUE;
+-      }
++      $schema_definition = $this->schemaDefinition();
++      $database_schema->createTable('cachetags', $schema_definition);
+     }
+     // If another process has already created the cachetags table, attempting to
+     // recreate it will throw an exception. In this case just catch the
+     // exception and do nothing.
+     catch (DatabaseException $e) {
+-      return TRUE;
+     }
+-    return FALSE;
++    catch (\Exception $e) {
++      return FALSE;
++    }
++    return TRUE;
+   }
+ 
+   /**
+@@ -133,6 +130,7 @@ public function schemaDefinition() {
+    * @throws \Exception
+    */
+   protected function catchException(\Exception $e) {
++    @trigger_error('@todo', E_USER_DEPRECATED);
+     if ($this->connection->schema()->tableExists('cachetags')) {
+       throw $e;
+     }
+diff --git a/core/lib/Drupal/Core/Config/DatabaseStorage.php b/core/lib/Drupal/Core/Config/DatabaseStorage.php
+index bca57388b9..10657c52ca 100644
+--- a/core/lib/Drupal/Core/Config/DatabaseStorage.php
++++ b/core/lib/Drupal/Core/Config/DatabaseStorage.php
+@@ -128,6 +128,7 @@ public function write($name, array $data) {
+         return $this->doWrite($name, $data);
+       }
+       // Some other failure that we can not recover from.
++      // @todo this is actually unreachable code - should we fix this?
+       throw $e;
+     }
+   }
+@@ -161,10 +162,7 @@ protected function doWrite($name, $data) {
+    */
+   protected function ensureTableExists() {
+     try {
+-      if (!$this->connection->schema()->tableExists($this->table)) {
+-        $this->connection->schema()->createTable($this->table, static::schemaDefinition());
+-        return TRUE;
+-      }
++      $this->connection->schema()->createTable($this->table, static::schemaDefinition());
+     }
+     // If another process has already created the config table, attempting to
+     // recreate it will throw an exception. In this case just catch the
+@@ -175,7 +173,7 @@ protected function ensureTableExists() {
+     catch (\Exception $e) {
+       throw new StorageException($e->getMessage(), NULL, $e);
+     }
+-    return FALSE;
++    return TRUE;
+   }
+ 
+   /**
+diff --git a/core/lib/Drupal/Core/Flood/DatabaseBackend.php b/core/lib/Drupal/Core/Flood/DatabaseBackend.php
+index c944cb01fe..33120c0898 100644
+--- a/core/lib/Drupal/Core/Flood/DatabaseBackend.php
++++ b/core/lib/Drupal/Core/Flood/DatabaseBackend.php
+@@ -150,19 +150,19 @@ public function garbageCollection() {
+   protected function ensureTableExists() {
+     try {
+       $database_schema = $this->connection->schema();
+-      if (!$database_schema->tableExists(static::TABLE_NAME)) {
+-        $schema_definition = $this->schemaDefinition();
+-        $database_schema->createTable(static::TABLE_NAME, $schema_definition);
+-        return TRUE;
+-      }
++      $schema_definition = $this->schemaDefinition();
++      $database_schema->createTable(static::TABLE_NAME, $schema_definition);
++      return TRUE;
+     }
+     // If another process has already created the table, attempting to create
+     // it will throw an exception. In this case just catch the exception and do
+     // nothing.
+     catch (DatabaseException $e) {
+-      return TRUE;
+     }
+-    return FALSE;
++    catch (\Exception $e) {
++      return FALSE;
++    }
++    return TRUE;
+   }
+ 
+   /**
+diff --git a/core/lib/Drupal/Core/KeyValueStore/DatabaseStorage.php b/core/lib/Drupal/Core/KeyValueStore/DatabaseStorage.php
+index 365e52b5ec..a0bbe4ee10 100644
+--- a/core/lib/Drupal/Core/KeyValueStore/DatabaseStorage.php
++++ b/core/lib/Drupal/Core/KeyValueStore/DatabaseStorage.php
+@@ -255,17 +255,17 @@ public function deleteAll() {
+   protected function ensureTableExists() {
+     try {
+       $database_schema = $this->connection->schema();
+-      if (!$database_schema->tableExists($this->table)) {
+-        $database_schema->createTable($this->table, $this->schemaDefinition());
+-        return TRUE;
+-      }
++      $database_schema->createTable($this->table, $this->schemaDefinition());
+     }
+     // If the table already exists, then attempting to recreate it will throw an
+     // exception. In this case just catch the exception and do nothing.
++    // @todo Should this be DatabaseException like the others?
+     catch (SchemaObjectExistsException $e) {
+-      return TRUE;
+     }
+-    return FALSE;
++    catch (\Exception $e) {
++      return FALSE;
++    }
++    return TRUE;
+   }
+ 
+   /**
+diff --git a/core/lib/Drupal/Core/Lock/DatabaseLockBackend.php b/core/lib/Drupal/Core/Lock/DatabaseLockBackend.php
+index 9dc214e5e5..870f311fd9 100644
+--- a/core/lib/Drupal/Core/Lock/DatabaseLockBackend.php
++++ b/core/lib/Drupal/Core/Lock/DatabaseLockBackend.php
+@@ -177,19 +177,18 @@ public function releaseAll($lock_id = NULL) {
+   protected function ensureTableExists() {
+     try {
+       $database_schema = $this->database->schema();
+-      if (!$database_schema->tableExists(static::TABLE_NAME)) {
+-        $schema_definition = $this->schemaDefinition();
+-        $database_schema->createTable(static::TABLE_NAME, $schema_definition);
+-        return TRUE;
+-      }
++      $schema_definition = $this->schemaDefinition();
++      $database_schema->createTable(static::TABLE_NAME, $schema_definition);
+     }
+     // If another process has already created the semaphore table, attempting to
+     // recreate it will throw an exception. In this case just catch the
+     // exception and do nothing.
+     catch (DatabaseException $e) {
+-      return TRUE;
+     }
+-    return FALSE;
++    catch (\Exception $e) {
++      return FALSE;
++    }
++    return TRUE;
+   }
+ 
+   /**
+diff --git a/core/lib/Drupal/Core/Menu/MenuTreeStorage.php b/core/lib/Drupal/Core/Menu/MenuTreeStorage.php
+index 34059a3350..e7a7906c3b 100644
+--- a/core/lib/Drupal/Core/Menu/MenuTreeStorage.php
++++ b/core/lib/Drupal/Core/Menu/MenuTreeStorage.php
+@@ -247,6 +247,7 @@ protected function safeExecuteSelect(SelectInterface $query) {
+         return $query->execute();
+       }
+       // Some other failure that we can not recover from.
++      // @todo this is actually unreachable code - should we fix this.
+       throw $e;
+     }
+   }
+@@ -1163,21 +1164,17 @@ protected function treeDataRecursive(array &$links, array $parents, $depth) {
+    */
+   protected function ensureTableExists() {
+     try {
+-      if (!$this->connection->schema()->tableExists($this->table)) {
+-        $this->connection->schema()->createTable($this->table, static::schemaDefinition());
+-        return TRUE;
+-      }
++      $this->connection->schema()->createTable($this->table, static::schemaDefinition());
+     }
+     catch (DatabaseException $e) {
+       // If another process has already created the config table, attempting to
+       // recreate it will throw an exception. In this case just catch the
+       // exception and do nothing.
+-      return TRUE;
+     }
+     catch (\Exception $e) {
+       throw new PluginException($e->getMessage(), NULL, $e);
+     }
+-    return FALSE;
++    return TRUE;
+   }
+ 
+   /**
+diff --git a/core/lib/Drupal/Core/Queue/DatabaseQueue.php b/core/lib/Drupal/Core/Queue/DatabaseQueue.php
+index 99512d9f13..32a87feb32 100644
+--- a/core/lib/Drupal/Core/Queue/DatabaseQueue.php
++++ b/core/lib/Drupal/Core/Queue/DatabaseQueue.php
+@@ -266,19 +266,18 @@ public function garbageCollection() {
+   protected function ensureTableExists() {
+     try {
+       $database_schema = $this->connection->schema();
+-      if (!$database_schema->tableExists(static::TABLE_NAME)) {
+-        $schema_definition = $this->schemaDefinition();
+-        $database_schema->createTable(static::TABLE_NAME, $schema_definition);
+-        return TRUE;
+-      }
++      $schema_definition = $this->schemaDefinition();
++      $database_schema->createTable(static::TABLE_NAME, $schema_definition);
+     }
+     // If another process has already created the queue table, attempting to
+     // recreate it will throw an exception. In this case just catch the
+     // exception and do nothing.
+     catch (DatabaseException $e) {
+-      return TRUE;
+     }
+-    return FALSE;
++    catch (\Exception $e) {
++      return FALSE;
++    }
++    return TRUE;
+   }
+ 
+   /**
+diff --git a/core/lib/Drupal/Core/Routing/MatcherDumper.php b/core/lib/Drupal/Core/Routing/MatcherDumper.php
+index 4f07f6cc8c..3e8d326ab9 100644
+--- a/core/lib/Drupal/Core/Routing/MatcherDumper.php
++++ b/core/lib/Drupal/Core/Routing/MatcherDumper.php
+@@ -100,7 +100,9 @@ public function dump(array $options = []) {
+           ->execute();
+       }
+       catch (\Exception $e) {
+-        $this->ensureTableExists();
++        if (!$this->ensureTableExists()) {
++          throw $e;
++        }
+       }
+ 
+       // Split the routes into chunks to avoid big INSERT queries.
+@@ -174,18 +176,17 @@ public function getRoutes() {
+    */
+   protected function ensureTableExists() {
+     try {
+-      if (!$this->connection->schema()->tableExists($this->tableName)) {
+-        $this->connection->schema()->createTable($this->tableName, $this->schemaDefinition());
+-        return TRUE;
+-      }
++      $this->connection->schema()->createTable($this->tableName, $this->schemaDefinition());
+     }
+     catch (DatabaseException $e) {
+       // If another process has already created the config table, attempting to
+       // recreate it will throw an exception. In this case just catch the
+       // exception and do nothing.
+-      return TRUE;
+     }
+-    return FALSE;
++    catch (\Exception $e) {
++      return FALSE;
++    }
++    return TRUE;
+   }
+ 
+   /**
