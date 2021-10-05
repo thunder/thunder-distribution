@@ -134,7 +134,7 @@ trait ThunderParagraphsTestTrait {
   public function addImageParagraph($fieldName, array $media, $position = NULL) {
     $paragraphIndex = $this->addParagraph($fieldName, 'image', $position);
 
-    $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_image", 'image_browser', $media);
+    $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_image", $media);
 
   }
 
@@ -151,7 +151,7 @@ trait ThunderParagraphsTestTrait {
   public function addVideoParagraph($fieldName, array $media, $position = NULL) {
     $paragraphIndex = $this->addParagraph($fieldName, 'video', $position);
 
-    $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_video", 'video_browser', $media);
+    $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_video", $media);
 
   }
 

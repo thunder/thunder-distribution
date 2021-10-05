@@ -119,13 +119,13 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     $this->clickButtonDrupalSelector($page, 'edit-field-teaser-media-current-items-0-remove-button');
     $media1 = $this->loadMediaByUuid('17965877-27b2-428f-8b8c-7dccba9786e5');
-    $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $media1->id()]);
+    $this->selectMedia('field_teaser_media', [$media1->id()]);
 
     $newParagraphText = 'One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them!';
     $this->addTextParagraph('field_paragraphs', $newParagraphText);
 
     $media2 = $this->loadMediaByUuid('5d719c64-7f32-4062-9967-9874f5ca3eba');
-    $this->addImageParagraph('field_paragraphs', ['media:' . $media2->id()]);
+    $this->addImageParagraph('field_paragraphs', [$media2->id()]);
 
     $this->clickSave();
 

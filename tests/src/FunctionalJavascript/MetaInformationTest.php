@@ -147,7 +147,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->articleFillNew($fieldValues);
 
     $media = $this->loadMediaByUuid('17965877-27b2-428f-8b8c-7dccba9786e5');
-    $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $media->id()]);
+    $this->selectMedia('field_teaser_media', [$media->id()]);
 
     $this->clickSave();
   }
