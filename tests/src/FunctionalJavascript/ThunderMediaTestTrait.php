@@ -24,7 +24,7 @@ trait ThunderMediaTestTrait {
 
     $button_selector = '[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '"] .media-library-open-button';
     $this->scrollElementInView($button_selector);
-    $page->find('css' ,$button_selector)->press();
+    $page->find('css', $button_selector)->press();
 
     $this->assertSession()->assertWaitOnAjaxRequest();
 
