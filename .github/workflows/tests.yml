@@ -54,7 +54,7 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:dev-drupal-patch-for-ajax-tests
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -73,11 +73,6 @@ jobs:
           rm -rf thunder_admin
           git clone --depth 1 --single-branch --branch "${THUNDER_ADMIN_BRANCH}" https://github.com/BurdaMagazinOrg/theme-thunder-admin.git thunder_admin
         working-directory: /tmp/test/thunder/install/docroot/themes/contrib
-
-      - name: Add base table or view not found patch
-        working-directory: /tmp/test/thunder/install/docroot
-        run: |
-          wget https://www.drupal.org/files/issues/2021-10-05/3240601%2B3240813-9.2.x.patch; patch -p1 < 3240601+3240813-9.2.x.patch
 
       - name: Install drupal
         run: test-drupal-project install
@@ -270,7 +265,7 @@ jobs:
       - name: Get build environment
         run: |
           composer self-update
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:dev-drupal-patch-for-ajax-tests
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -282,11 +277,6 @@ jobs:
         run: test-drupal-project build
         env:
           DRUPAL_TESTING_MIN_BUILD: true
-
-      - name: Add base table or view not found patch
-        working-directory: /tmp/test/thunder/install/docroot
-        run: |
-          wget https://www.drupal.org/files/issues/2021-10-05/3240601%2B3240813-9.2.x.patch; patch -p1 < 3240601+3240813-9.2.x.patch
 
       - name: Setup Apache
         uses: thunder/apache-shiva-php-action@v1
