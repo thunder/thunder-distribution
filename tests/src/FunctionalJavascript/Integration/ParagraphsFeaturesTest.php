@@ -51,7 +51,7 @@ class ParagraphsFeaturesTest extends ThunderJavascriptTestBase {
 
     $confirmButton = $page->find('xpath', '//*[contains(@class, "paragraphs-features__delete-confirmation")]//button[contains(@class, "paragraphs-features__delete-confirmation__remove-button")]');
     $confirmButton->click();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
     $this->assertEquals(1, $this->getNumberOfParagraphs(static::$paragraphsField));
 
     $this->editParagraph($page, 'field_paragraphs', 1);
