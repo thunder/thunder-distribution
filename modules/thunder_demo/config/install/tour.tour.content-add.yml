@@ -80,5 +80,5 @@ tips:
     id: article-last
     plugin: text
     label: 'What is next?'
-    body: '<p>You have just learned how to create an article. What do you want to do next?</p><p><em>Ah, right!</em> I promised you that <a href="/node/7/edit?tour=1">I''ll teach you more about paragraphs</a>.'
+    body: '<p>You have just learned how to create an article. What do you want to do next?</p><p><em>Ah, right!</em> I promised you that <a href="/node/3/edit?tour=1">I''ll teach you more about paragraphs</a>.'
     weight: 10
