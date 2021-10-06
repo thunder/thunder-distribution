@@ -50,7 +50,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
 
     // Split text paragraph before the current selection.
     $this->clickParagraphSplitButton();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     // Test if all texts are in the correct paragraph.
     $this->assertCkEditorContent($this->getCkEditorCssSelector(0), $firstParagraphContent . PHP_EOL);
@@ -72,7 +72,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     // Remove the paragraph.
     $driver = $this->getSession()->getDriver();
     $driver->executeScript("jQuery('[name=\"field_paragraphs_0_remove\"]').trigger('mousedown')");
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     // Create second paragraph.
     $this->addTextParagraph(static::$paragraphsField, $firstParagraphContent . $secondParagraphContent);
@@ -82,7 +82,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
 
     // Split text paragraph.
     $this->clickParagraphSplitButton();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     // Test if all texts are in the correct paragraph.
     $this->assertCkEditorContent($this->getCkEditorCssSelector(1), $firstParagraphContent . PHP_EOL);
@@ -107,7 +107,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
 
     // Split text paragraph.
     $this->clickParagraphSplitButton();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     $paragraphDelta = $this->getParagraphDelta(static::$paragraphsField, 0);
     $ckEditorCssSelector = "textarea[name='" . static::$paragraphsField . "[{$paragraphDelta}][subform][field_text][0][value]']";

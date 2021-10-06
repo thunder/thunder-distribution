@@ -31,7 +31,7 @@ trait ThunderEntityBrowserTestTrait {
     // Wait that iframe is loaded and jQuery is available.
     $this->getSession()->wait(10000, '(typeof jQuery !== "undefined")');
 
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
   }
 
   /**
@@ -44,7 +44,7 @@ trait ThunderEntityBrowserTestTrait {
     $this->clickButtonDrupalSelector($page, 'edit-use-selected', FALSE);
 
     $this->getSession()->switchToIFrame();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
   }
 
   /**
@@ -79,7 +79,7 @@ trait ThunderEntityBrowserTestTrait {
     foreach ($tabLinks as $tabLink) {
       /** @var \Behat\Mink\Element\NodeElement $tabLink */
       $tabLink->click();
-      $this->assertSession()->assertWaitOnAjaxRequest();
+      $this->assertWaitOnAjaxRequest();
 
       $fileField = $page->find('css', $fileFieldSelector);
 
@@ -103,7 +103,7 @@ trait ThunderEntityBrowserTestTrait {
 
     $fileField->attachFile($filePath);
 
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     // Wait up to 10 sec that "Use selected" button is active.
     $this->getSession()->wait(
@@ -111,12 +111,12 @@ trait ThunderEntityBrowserTestTrait {
       '(typeof jQuery === "undefined" || !jQuery(\'input[name="op"]\').is(":disabled"))'
     );
 
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     // In case of gallery image upload we should wait additionally so that all
     // command for auto selection are executed.
     $this->getSession()->wait(200);
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
   }
 
   /**
@@ -130,7 +130,7 @@ trait ThunderEntityBrowserTestTrait {
    *   Horizontal offset for element drag in pixels.
    */
   protected function dragDropElement(NodeElement $element, $offsetX, $offsetY) {
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     $elemXpath = $element->getXpath();
 
