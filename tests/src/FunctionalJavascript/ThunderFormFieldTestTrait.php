@@ -97,7 +97,7 @@ trait ThunderFormFieldTestTrait {
     $this->scrollElementInView('[name="' . $fieldName . '"]');
     $page->fillField($fieldName, $value);
 
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
   }
 
   /**

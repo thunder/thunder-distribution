@@ -59,7 +59,7 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
     $this->scrollElementInView('[data-drupal-selector="edit-generate-token"]');
     $page->find('css', '[data-drupal-selector="access-token-list"] li.dropbutton-toggle > button')->click();
     $page->find('css', '[data-drupal-selector="access-token-list"] li.delete > a')->click();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
     $this->clickSave();
 
     // Log-Out and check that URL with token doesn't work anymore.

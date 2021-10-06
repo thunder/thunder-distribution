@@ -132,7 +132,7 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     $addButtonName = $paragraphName . "_" . $paragraphIndex . "_subform_" . $fieldName . "_add_more";
     $this->scrollElementInView("[name=\"{$addButtonName}\"]");
     $page->pressButton($addButtonName);
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     $page->fillField("{$paragraphName}[{$paragraphIndex}][subform][{$fieldName}][{$fieldIndex}][title]", $urlText);
     $page->fillField("{$paragraphName}[{$paragraphIndex}][subform][{$fieldName}][{$fieldIndex}][uri]", $url);

@@ -75,7 +75,7 @@ class ResponsivePreview extends ThunderJavascriptTestBase {
       ->getPage()
       ->find('xpath', '//*[@id="responsive-preview-orientation"]')
       ->click();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
   }
 
   /**
@@ -91,10 +91,10 @@ class ResponsivePreview extends ThunderJavascriptTestBase {
 
     $page->find('xpath', '//*[@id="responsive-preview-toolbar-tab"]/button')
       ->click();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     $page->find('xpath', $xpath_device_button)->click();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
   }
 
 }
