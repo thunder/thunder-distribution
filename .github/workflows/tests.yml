@@ -19,6 +19,9 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_TEST_GROUP: Thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
+  DRUPAL_TESTING_PARALLEL_TESTING: true
+  DRUPAL_TESTING_PARALLEL_TESTING_PROCESSES: 3
+  DRUPAL_TESTING_PARALLEL_TESTING_PER_FUNCTION: true
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
 
@@ -54,7 +57,7 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:dev-paratest
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -111,7 +114,7 @@ jobs:
         sudo /etc/init.d/mysql start
 
     - name: Get build environment
-      run: composer global require thunder/drupal-testing
+      run: composer global require thunder/drupal-testing:dev-paratest
 
     - name: Download build
       uses: actions/download-artifact@v1
@@ -156,6 +159,7 @@ jobs:
       DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
       DRUPAL_TESTING_TEST_DEPRECATION: false
+      DRUPAL_TESTING_PARALLEL_TESTING: false
 
     steps:
       - uses: actions/checkout@v1
@@ -180,7 +184,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-cache-
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: composer global require thunder/drupal-testing:dev-paratest
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -265,7 +269,7 @@ jobs:
       - name: Get build environment
         run: |
           composer self-update
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:dev-paratest
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
