@@ -2,7 +2,7 @@
 
 /**
  * @file
- * The install file.
+ * The module file.
  */
 
 use Drupal\Core\Entity\EntityTypeInterface;

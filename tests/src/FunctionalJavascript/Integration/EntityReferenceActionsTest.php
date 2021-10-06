@@ -36,20 +36,20 @@ class EntityReferenceActionsTest extends ThunderJavascriptTestBase {
 
     $this->scrollElementInView('#field_media_images_media_edit_action_button');
     $this->getSession()->getPage()->pressButton('Edit all media items');
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     $this->getSession()->getPage()->checkField('media[image][_field_selector][field_copyright]');
     $this->getSession()->getPage()->fillField('media[image][field_copyright][0][value]', 'Test copyright');
 
     $this->assertSession()->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Confirm');
 
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     $this->assertSession()->pageTextContains('Action was successfully applied');
 
     for ($i = 0; $i < 4; $i++) {
       $this->clickAjaxButtonCssSelector('[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current-items-' . $i . '-edit-button"]');
-      $this->assertSession()->assertWaitOnAjaxRequest();
+      $this->assertWaitOnAjaxRequest();
       $this->assertSession()->fieldValueEquals('field_copyright[0][value]', 'Test copyright');
       $this->assertSession()->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Save');
     }

@@ -26,7 +26,7 @@ trait ThunderMediaTestTrait {
     $this->scrollElementInView($button_selector);
     $page->find('css', $button_selector)->press();
 
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     foreach ($medias as $media) {
       $page->find('css', "div.media-library-views-form__rows input[value='$media']")->click();
@@ -34,7 +34,7 @@ trait ThunderMediaTestTrait {
 
     $page->find('css', '.media-library-widget-modal .form-actions button')->click();
 
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
     $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-wrapper"] img');
   }
 

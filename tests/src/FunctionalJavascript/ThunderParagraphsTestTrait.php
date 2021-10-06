@@ -80,12 +80,12 @@ trait ThunderParagraphsTestTrait {
     $this->scrollElementInView($addButtonCssSelector);
 
     $addButton->click();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     $page->find('xpath', "//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]")
       ->click();
 
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     // Test if we have one more paragraph now.
     static::assertEquals($this->getNumberOfParagraphs($fieldName), ($numberOfParagraphs + 1));
@@ -259,7 +259,7 @@ trait ThunderParagraphsTestTrait {
 
     $this->scrollElementInView("[name=\"{$editButtonName}\"]");
     $page->pressButton($editButtonName);
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
   }
 
 }
