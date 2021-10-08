@@ -31,7 +31,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4', '8.0' ]
+        PHP_VERSION: [ '8.0' ]
 
     steps:
       - uses: actions/checkout@v1
@@ -138,9 +138,9 @@ jobs:
 #      run: test-drupal-project run_tests -nc
 #      env:
 #        DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
-
-    - name: Run tests suite
-      run: test-drupal-project run_tests -nc
+#
+#    - name: Run tests suite
+#      run: test-drupal-project run_tests
 
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
