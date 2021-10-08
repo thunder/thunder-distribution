@@ -36,6 +36,7 @@ trait ThunderMediaTestTrait {
       ->switchToIFrame('entity_browser_iframe_' . $entityBrowser);
     $this->assertWaitOnAjaxRequest();
 
+    file_put_contents('foo.html', $this->getSession()->getPage()->getContent());
     foreach ($medias as $media) {
       $page->find('xpath', "//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]")->click();
     }
