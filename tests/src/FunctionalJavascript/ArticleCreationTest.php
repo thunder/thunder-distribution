@@ -40,10 +40,10 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
     ]);
 
-    $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
+    $image1 = $this->loadMediaByUuid('23f6d444-ece1-465d-a667-b1fb80e641d3');
+    $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $image1->id()]);
 
     // Add Image Paragraph.
-    $image1 = $this->loadMediaByUuid('23f6d444-ece1-465d-a667-b1fb80e641d3');
     $this->addImageParagraph(static::$paragraphsField, ['media:' . $image1->id()]);
 
     // Add Text Paragraph.
