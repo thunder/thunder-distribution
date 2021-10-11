@@ -24,6 +24,67 @@ env:
 
 jobs:
 
+  build:
+
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        PHP_VERSION: [ '8.0' ]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          coverage: none
+          php-version: ${{ matrix.PHP_VERSION }}
+          extensions: Imagick
+
+      - name: Start MySql service
+        run: |
+          sudo /etc/init.d/mysql start
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-cache-
+
+      - name: Get build environment
+        run: |
+          composer global require thunder/drupal-testing
+
+      - name: Prepare the build
+        run: test-drupal-project prepare_build
+
+      - name: Add needed dependencies
+        run: composer require "drupal/core-dev:~9.2.0" "phpspec/prophecy-phpunit:^2" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+
+      - name: Set composer bin path
+        run: composer config bin-dir bin/ --working-dir=/tmp/test/thunder/install
+
+      - name: Build the docroot
+        run: test-drupal-project build
+
+      - name: Get custom thunder_admin branch
+        run: |
+          rm -rf thunder_admin
+          git clone --depth 1 --single-branch --branch "${THUNDER_ADMIN_BRANCH}" https://github.com/BurdaMagazinOrg/theme-thunder-admin.git thunder_admin
+        working-directory: /tmp/test/thunder/install/docroot/themes/contrib
+
+      - name: Install drupal
+        run: test-drupal-project install
+
+      - name: Zip build
+        run: cd /tmp/test; tar cfz build-${{ matrix.PHP_VERSION }}.tgz thunder; mv build-${{ matrix.PHP_VERSION }}.tgz ${GITHUB_WORKSPACE}
+
+      - name: Upload build
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-${{ matrix.PHP_VERSION }}
+          path: build-${{ matrix.PHP_VERSION }}.tgz
 
   test-upgrade:
 
