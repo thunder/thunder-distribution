@@ -48,6 +48,7 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick, gd, pdo_mysql
+          tools: composer:v1
 
       - name: Start MySql service
         run: |
@@ -79,6 +80,11 @@ jobs:
 
       - name: Update the docroot
         run: |
+
+          composer require composer/installers:^2.0
+
+          composer self-update --2
+
           composer require thunder/thunder-distribution:^3.5.0 phpunit/phpunit:^7 --no-update
           chmod -R +w docroot/sites/default
           composer update
