@@ -151,6 +151,14 @@ jobs:
 
     runs-on: ubuntu-20.04
 
+    services:
+      mysql:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+
     strategy:
       matrix:
         PHP_VERSION: [ '7.3' ]
@@ -173,11 +181,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick, gd, pdo_mysql
           tools: composer:v1
-
-      - name: Start MySql service
-        run: |
-          sudo /etc/init.d/mysql start
-          mysql -uroot -proot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
