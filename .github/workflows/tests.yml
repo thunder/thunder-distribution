@@ -158,6 +158,7 @@ jobs:
       DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
       DRUPAL_TESTING_TEST_DEPRECATION: false
+      DRUPAL_TESTING_PARALLEL_TESTING: false
 
     steps:
       - uses: actions/checkout@v1
@@ -226,6 +227,8 @@ jobs:
 
       - name: Run tests suite
         run: test-drupal-project run_tests
+        env:
+          DRUPAL_TESTING_PARALLEL_TESTING: true
 
   test-min:
 
