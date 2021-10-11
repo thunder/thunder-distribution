@@ -206,7 +206,7 @@ jobs:
 
           vendor/bin/drush pmu libraries update -y
 
-          composer remove thunder/thunder-distribution phpunit/phpunit
+          composer remove thunder/thunder-distribution phpunit/phpunit --update-with-all-dependencies
 
           chmod -R +w docroot/sites/default
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
