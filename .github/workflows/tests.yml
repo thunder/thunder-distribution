@@ -81,7 +81,7 @@ jobs:
       - name: Update the docroot
         run: |
 
-          composer require composer/installers:^2.0 oomphinc/composer-installers-extender:^2.0
+          composer require composer/installers:^2.0 oomphinc/composer-installers-extender:^2.0 cweagans/composer-patches:^1.7
 
           composer self-update --2
 
