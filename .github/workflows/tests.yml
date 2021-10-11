@@ -93,6 +93,14 @@ jobs:
 
     runs-on: ubuntu-20.04
 
+    services:
+      mysql:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+
     strategy:
       matrix:
         PHP_VERSION: [ '8.0' ]
@@ -107,10 +115,6 @@ jobs:
         extensions: Imagick, gd, pdo_mysql
         # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
         ini-values: pcre.jit=0
-
-    - name: Start MySql service
-      run: |
-        sudo /etc/init.d/mysql start
 
     - name: Get build environment
       run: composer global require thunder/drupal-testing:dev-paratest
@@ -141,8 +145,8 @@ jobs:
 #        DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
 
     #   Start a debug session.
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+#    - name: Setup tmate session
+#      uses: mxschmitt/action-tmate@v3
 
     - name: Run tests suite
       run: test-drupal-project run_tests
