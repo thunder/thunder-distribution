@@ -2,3 +2,4 @@ profile: thunder
 blacklist:
   - scheduler.settings
   - diff.settings
+  - tour.tour.content-add
