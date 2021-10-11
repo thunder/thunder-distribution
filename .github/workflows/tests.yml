@@ -200,17 +200,19 @@ jobs:
 
       - name: Update the docroot
         run: |
+          composer require thunder/thunder-distribution:^3.5.0 phpunit/phpunit:^7 --no-update
           chmod -R +w docroot/sites/default
-          composer require thunder/thunder-distribution:^3.5.0 phpunit/phpunit:^7 --update-with-all-dependencies
+          composer update
           vendor/bin/drush updb -y
 
           vendor/bin/drush pmu libraries update -y
 
           composer remove thunder/thunder-distribution phpunit/phpunit --update-with-all-dependencies
 
-          chmod -R +w docroot/sites/default
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
-          composer require brianium/paratest thunder/thunder_testing_demo:4.x-upgrade-testing-dev phpunit/phpunit:~9.5.8 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --update-with-all-dependencies
+          composer require brianium/paratest thunder/thunder_testing_demo:4.x-upgrade-testing-dev phpunit/phpunit:~9.5.8 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
+          chmod -R +w docroot/sites/default
+          composer update
 
           vendor/bin/drush updb -y
 
