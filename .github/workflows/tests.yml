@@ -80,10 +80,10 @@ jobs:
 
       - name: Update the docroot
         run: |
-          composer self-update --2
           composer require thunder/thunder-distribution:^3.5.0 phpunit/phpunit:^7 oomphinc/composer-installers-extender:^2.0 cweagans/composer-patches:^1.7 --no-update
           chmod -R +w docroot/sites/default
           composer update
+          composer self-update --2
           vendor/bin/drush updb -y
 
           vendor/bin/drush pmu libraries update -y
