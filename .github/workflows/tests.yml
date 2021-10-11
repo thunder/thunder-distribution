@@ -30,6 +30,14 @@ jobs:
 
     runs-on: ubuntu-20.04
 
+    services:
+      mysql:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+
     strategy:
       matrix:
         PHP_VERSION: [ '8.0' ]
@@ -42,10 +50,6 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick
-
-      - name: Start MySql service
-        run: |
-          sudo /etc/init.d/mysql start
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -247,6 +251,14 @@ jobs:
 
     runs-on: ubuntu-20.04
 
+    services:
+      mysql:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+
     strategy:
       matrix:
         PHP_VERSION: [ '7.3' ]
@@ -265,11 +277,6 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick, gd, pdo_mysql
-
-      - name: Start MySql service
-        run: |
-          sudo /etc/init.d/mysql start
-          mysql -uroot -proot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
