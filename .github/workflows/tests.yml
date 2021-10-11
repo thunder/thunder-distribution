@@ -32,7 +32,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4', '8.0' ]
+        PHP_VERSION: [ '8.0' ]
 
     steps:
       - uses: actions/checkout@v1
@@ -95,7 +95,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4', '8.0' ]
+        PHP_VERSION: [ '8.0' ]
 
     steps:
     - uses: actions/checkout@v1
@@ -129,16 +129,20 @@ jobs:
         php-version: ${{ matrix.PHP_VERSION }}
         site-directory: /tmp/test/thunder/install/docroot
         http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
+#
+#    - name: Run config tests
+#      run: test-drupal-project run_tests -nc
+#      env:
+#        DRUPAL_TESTING_TEST_GROUP: ThunderConfig
+#
+#    - name: Run installer tests
+#      run: test-drupal-project run_tests -nc
+#      env:
+#        DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
 
-    - name: Run config tests
-      run: test-drupal-project run_tests -nc
-      env:
-        DRUPAL_TESTING_TEST_GROUP: ThunderConfig
-
-    - name: Run installer tests
-      run: test-drupal-project run_tests -nc
-      env:
-        DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
+    #   Start a debug session.
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
 
     - name: Run tests suite
       run: test-drupal-project run_tests
@@ -207,13 +211,13 @@ jobs:
 
           vendor/bin/drush pmu libraries update -y
 
-          composer remove thunder/thunder-distribution phpunit/phpunit --update-with-all-dependencies
+          composer remove thunder/thunder-distribution phpunit/phpunit
 
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require brianium/paratest thunder/thunder_testing_demo:4.x-upgrade-testing-dev phpunit/phpunit:~9.5.8 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
+
           chmod -R +w docroot/sites/default
           composer update
-
           vendor/bin/drush updb -y
 
           cd docroot
