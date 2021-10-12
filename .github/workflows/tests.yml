@@ -137,20 +137,16 @@ jobs:
         php-version: ${{ matrix.PHP_VERSION }}
         site-directory: /tmp/test/thunder/install/docroot
         http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-#
-#    - name: Run config tests
-#      run: test-drupal-project run_tests -nc
-#      env:
-#        DRUPAL_TESTING_TEST_GROUP: ThunderConfig
-#
-#    - name: Run installer tests
-#      run: test-drupal-project run_tests -nc
-#      env:
-#        DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
 
-    #   Start a debug session.
-#    - name: Setup tmate session
-#      uses: mxschmitt/action-tmate@v3
+    - name: Run config tests
+      run: test-drupal-project run_tests -nc
+      env:
+        DRUPAL_TESTING_TEST_GROUP: ThunderConfig
+
+    - name: Run installer tests
+      run: test-drupal-project run_tests -nc
+      env:
+        DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
 
     - name: Run tests suite
       run: test-drupal-project run_tests
@@ -233,6 +229,12 @@ jobs:
 
           cd docroot
           php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
+
+          wget https://www.drupal.org/files/issues/2021-10-05/3240601%2B3240813-9.2.x.patch
+          patch -p1 < 3240601+3240813-9.2.x.patch
+
+          wget https://www.drupal.org/files/issues/2021-10-05/3192365-17-mkdir-race-condition-in-tests.patch
+          patch -p1 < 3192365-17-mkdir-race-condition-in-tests.patch
         working-directory: /tmp/test/thunder/install
 
       - name: Setup Apache
