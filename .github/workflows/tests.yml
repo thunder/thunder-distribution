@@ -21,12 +21,21 @@ env:
   DRUPAL_TESTING_HTTP_PORT: 8888
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
+  DRUPAL_TESTING_PARALLEL_TESTING: true
 
 jobs:
 
   build:
 
     runs-on: ubuntu-20.04
+
+    services:
+      mysql:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
 
     strategy:
       matrix:
@@ -40,10 +49,6 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick
-
-      - name: Start MySql service
-        run: |
-          sudo /etc/init.d/mysql start
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -91,6 +96,14 @@ jobs:
 
     runs-on: ubuntu-20.04
 
+    services:
+      mysql:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+
     strategy:
       matrix:
         PHP_VERSION: [ '7.4', '8.0' ]
@@ -106,9 +119,6 @@ jobs:
           # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
           ini-values: pcre.jit=0
 
-      - name: Start MySql service
-        run: |
-          sudo /etc/init.d/mysql start
       - name: Get build environment
         run: composer global require thunder/drupal-testing
 
@@ -144,6 +154,14 @@ jobs:
 
     runs-on: ubuntu-20.04
 
+    services:
+      mysql:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+
     strategy:
       matrix:
         PHP_VERSION: [ '7.3' ]
@@ -155,6 +173,7 @@ jobs:
       DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
       DRUPAL_TESTING_TEST_DEPRECATION: false
+      DRUPAL_TESTING_PARALLEL_TESTING: false
 
     steps:
       - uses: actions/checkout@v1
@@ -165,11 +184,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick, gd, pdo_mysql
           tools: composer:v1
-
-      - name: Start MySql service
-        run: |
-          sudo /etc/init.d/mysql start
-          mysql -uroot -proot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -208,7 +222,7 @@ jobs:
           composer remove thunder/thunder-distribution
 
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
-          composer require thunder/thunder_testing_demo:4.x-upgrade-testing-dev phpunit/phpunit:~9.4.3 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
+          composer require brianium/paratest thunder/thunder_testing_demo:4.x-upgrade-testing-dev phpunit/phpunit:~9.5.8 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
 
           chmod -R +w docroot/sites/default
           composer update
@@ -216,6 +230,12 @@ jobs:
 
           cd docroot
           php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
+
+          wget https://www.drupal.org/files/issues/2021-10-05/3240601%2B3240813-9.2.x.patch
+          patch -p1 < 3240601+3240813-9.2.x.patch
+
+          wget https://www.drupal.org/files/issues/2021-10-05/3192365-17-mkdir-race-condition-in-tests.patch
+          patch -p1 < 3192365-17-mkdir-race-condition-in-tests.patch
         working-directory: /tmp/test/thunder/install
 
       - name: Setup Apache
@@ -227,10 +247,20 @@ jobs:
 
       - name: Run tests suite
         run: test-drupal-project run_tests
+        env:
+          DRUPAL_TESTING_PARALLEL_TESTING: true
 
   test-min:
 
     runs-on: ubuntu-20.04
+
+    services:
+      mysql:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
 
     strategy:
       matrix:
@@ -250,11 +280,6 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick, gd, pdo_mysql
-
-      - name: Start MySql service
-        run: |
-          sudo /etc/init.d/mysql start
-          mysql -uroot -proot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
