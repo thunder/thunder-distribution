@@ -22,7 +22,6 @@ env:
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
-  DRUPAL_TESTING_TEST_DEPRECATION: true
 
 jobs:
 
@@ -41,6 +40,9 @@ jobs:
     strategy:
       matrix:
         PHP_VERSION: [ '7.4', '8.0' ]
+
+    env:
+      DRUPAL_TESTING_TEST_DEPRECATION: true
 
     steps:
       - uses: actions/checkout@v1
