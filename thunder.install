@@ -199,7 +199,6 @@ function thunder_update_8316() {
   if(!$liveblogNodeConfig->isNew()) {
     $liveblogNodeConfig->clear('dependencies.enforced')->save();
   }
-
   $liveblogStorageConfig = $configFactory->getEditable('field.storage.liveblog_post.field_embed_media');
   if(!$liveblogStorageConfig->isNew()) {
     $liveblogStorageConfig->clear('dependencies.enforced')->save();
