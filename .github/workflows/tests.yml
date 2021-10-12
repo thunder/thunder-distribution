@@ -44,6 +44,7 @@ jobs:
       - name: Start MySql service
         run: |
           sudo /etc/init.d/mysql start
+
       - name: Cache composer dependencies
         uses: actions/cache@v1
         with:
@@ -54,6 +55,7 @@ jobs:
       - name: Get build environment
         run: |
           composer global require thunder/drupal-testing
+
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
@@ -326,6 +328,7 @@ jobs:
         run: |
           echo ::set-output name=DOCKER_SANITIZED_BRANCH_NAME::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')
           echo ::set-output name=DOCKER_TAG::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')-${{ github.run_id }}
+
       - name: Create image and push to registry
         working-directory: docker-thunder-performance
         run: |
@@ -335,6 +338,7 @@ jobs:
           chmod u+w www/docroot/sites/default
           bash -x ./build.sh --tag "${DOCKER_IMAGE_TAG}"
           docker push "${DOCKER_IMAGE_TAG}"
+
       - name: Start Thunder performance testing task for created image
         run: |
           API_CALL_HTTP_CODE=$(curl \
@@ -347,6 +351,7 @@ jobs:
           --output /dev/stderr \
           --write-out "%{http_code}" \
           )
+
           if [[ "${API_CALL_HTTP_CODE}" != "200" ]]; then
             exit 1
           fi
