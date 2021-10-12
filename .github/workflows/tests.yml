@@ -96,50 +96,49 @@ jobs:
         PHP_VERSION: [ '7.4', '8.0' ]
 
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v1
 
-    - uses: shivammathur/setup-php@v2
-      with:
-        coverage: none
-        php-version: ${{ matrix.PHP_VERSION }}
-        extensions: Imagick, gd, pdo_mysql
-        # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
-        ini-values: pcre.jit=0
+      - uses: shivammathur/setup-php@v2
+        with:
+          coverage: none
+          php-version: ${{ matrix.PHP_VERSION }}
+          extensions: Imagick, gd, pdo_mysql
+          # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
+          ini-values: pcre.jit=0
 
-    - name: Start MySql service
-      run: |
-        sudo /etc/init.d/mysql start
+      - name: Start MySql service
+        run: |
+          sudo /etc/init.d/mysql start
+      - name: Get build environment
+        run: composer global require thunder/drupal-testing
 
-    - name: Get build environment
-      run: composer global require thunder/drupal-testing
+      - name: Download build
+        uses: actions/download-artifact@v1
+        with:
+          name: build-${{ matrix.PHP_VERSION }}
 
-    - name: Download build
-      uses: actions/download-artifact@v1
-      with:
-        name: build-${{ matrix.PHP_VERSION }}
+      - name: Unzip build artifact
+        run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
 
-    - name: Unzip build artifact
-      run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
+      - name: Setup Apache
+        uses: thunder/apache-shiva-php-action@v1
+        with:
+          php-version: ${{ matrix.PHP_VERSION }}
+          site-directory: /tmp/test/thunder/install/docroot
+          http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
-    - name: Setup Apache
-      uses: thunder/apache-shiva-php-action@v1
-      with:
-        php-version: ${{ matrix.PHP_VERSION }}
-        site-directory: /tmp/test/thunder/install/docroot
-        http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
+      - name: Run config tests
+        run: test-drupal-project run_tests -nc
+        env:
+          DRUPAL_TESTING_TEST_GROUP: ThunderConfig
 
-    - name: Run config tests
-      run: test-drupal-project run_tests -nc
-      env:
-        DRUPAL_TESTING_TEST_GROUP: ThunderConfig
+      - name: Run installer tests
+        run: test-drupal-project run_tests -nc
+        env:
+          DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
 
-    - name: Run installer tests
-      run: test-drupal-project run_tests -nc
-      env:
-        DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
-
-    - name: Run tests suite
-      run: test-drupal-project run_tests
+      - name: Run tests suite
+        run: test-drupal-project run_tests
 
   test-upgrade:
 
@@ -197,14 +196,16 @@ jobs:
 
       - name: Update the docroot
         run: |
-          composer require thunder/thunder-distribution:^3.5.0 phpunit/phpunit:^7 --no-update
+          composer require thunder/thunder-distribution:^3.5.0 phpunit/phpunit:^7 oomphinc/composer-installers-extender:^2.0 cweagans/composer-patches:^1.7 --no-update
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
 
           vendor/bin/drush pmu libraries update -y
 
-          composer remove thunder/thunder-distribution phpunit/phpunit
+          composer self-update --2
+          composer remove phpunit/phpunit --no-update
+          composer remove thunder/thunder-distribution
 
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require thunder/thunder_testing_demo:4.x-upgrade-testing-dev phpunit/phpunit:~9.4.3 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
