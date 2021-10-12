@@ -4,7 +4,7 @@ noscript: false
 responsive_image: true
 one_pixel: true
 placeholder: ''
-extras: {}
+extras: {  }
 blazy:
   loadInvisible: false
   offset: 100
