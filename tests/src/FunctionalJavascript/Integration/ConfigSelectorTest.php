@@ -46,8 +46,6 @@ class ConfigSelectorTest extends ThunderJavascriptTestBase {
     $this->getSession()->getPage()->pressButton('Index now');
     $assert_session->waitForId('edit-index-now');
 
-    file_put_contents('foo.html', $this->getRawContent());
-
     $this->drupalGet('admin/content');
     $assert_session->elementExists('xpath', '//*[@id="view-title-table-column"]/a');
     $assert_session->elementExists('css', '#block-thunder-admin-content > div > div.view-content-search-api');
