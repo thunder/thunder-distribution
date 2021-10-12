@@ -79,6 +79,10 @@ jobs:
           git clone --depth 1 --single-branch --branch "${THUNDER_ADMIN_BRANCH}" https://github.com/BurdaMagazinOrg/theme-thunder-admin.git thunder_admin
         working-directory: /tmp/test/thunder/install/docroot/themes/contrib
 
+      - name: Test for deprecations
+        run: test-drupal-project deprecation
+        continue-on-error: true
+
       - name: Install drupal
         run: test-drupal-project install
 
@@ -310,10 +314,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-
-      - name: Test for deprecations
-        run: test-drupal-project deprecation
-        continue-on-error: true
 
       - name: Run the tests
         run: test-drupal-project run_tests
