@@ -41,6 +41,9 @@ jobs:
       matrix:
         PHP_VERSION: [ '7.4', '8.0' ]
 
+    env:
+      DRUPAL_TESTING_TEST_DEPRECATION: true
+
     steps:
       - uses: actions/checkout@v1
 
@@ -78,6 +81,10 @@ jobs:
           rm -rf thunder_admin
           git clone --depth 1 --single-branch --branch "${THUNDER_ADMIN_BRANCH}" https://github.com/BurdaMagazinOrg/theme-thunder-admin.git thunder_admin
         working-directory: /tmp/test/thunder/install/docroot/themes/contrib
+
+      - name: Test for deprecations
+        run: test-drupal-project deprecation
+        continue-on-error: true
 
       - name: Install drupal
         run: test-drupal-project install
@@ -172,7 +179,6 @@ jobs:
       DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 3.0.8
       DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
-      DRUPAL_TESTING_TEST_DEPRECATION: false
       DRUPAL_TESTING_PARALLEL_TESTING: false
 
     steps:
@@ -270,7 +276,6 @@ jobs:
 
     env:
       DRUPAL_TESTING_DRUPAL_VERSION: '~9.2.0'
-      DRUPAL_TESTING_TEST_DEPRECATION: false
 
     steps:
       - uses: actions/checkout@v1
@@ -310,10 +315,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-
-      - name: Test for deprecations
-        run: test-drupal-project deprecation
-        continue-on-error: true
 
       - name: Run the tests
         run: test-drupal-project run_tests
