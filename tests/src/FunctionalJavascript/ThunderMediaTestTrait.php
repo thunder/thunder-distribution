@@ -24,17 +24,17 @@ trait ThunderMediaTestTrait {
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     $buttonName = $fieldName . '_entity_browser_entity_browser';
     $this->scrollElementInView("[name=\"{$buttonName}\"]");
     $page->pressButton($buttonName);
 
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     $this->getSession()
       ->switchToIFrame('entity_browser_iframe_' . $entityBrowser);
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     foreach ($medias as $media) {
       $input = $page->find('xpath', "//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]");
@@ -46,12 +46,12 @@ trait ThunderMediaTestTrait {
         $page->checkField("entity_browser_select[$media]");
       }
     }
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     $element = 'img';
     if ($entityBrowser == 'multiple_image_browser') {
       $this->getSession()->wait(200);
-      $this->assertSession()->assertWaitOnAjaxRequest();
+      $this->assertWaitOnAjaxRequest();
 
       $page->pressButton('Use selected');
     }
@@ -64,7 +64,7 @@ trait ThunderMediaTestTrait {
     }
 
     $this->getSession()->switchToIFrame();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-wrapper"] ' . $element);
   }

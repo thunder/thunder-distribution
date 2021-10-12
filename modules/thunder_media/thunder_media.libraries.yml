@@ -22,3 +22,8 @@ entity_browser_view.selection:
   dependencies:
     - core/drupal
     - core/once
+
+gallery.paragraph_preview:
+  css:
+    theme:
+      css/gallery.paragraph_preview.css: {}
