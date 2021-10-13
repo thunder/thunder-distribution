@@ -1,5 +1,18 @@
 # Changelog
 
+## [6.2.2](https://github.com/thunder/thunder-distribution/tree/6.2.2) 2021-10-13
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.2.1...6.2.2)
+
+We are fixing a few bugs with this release. Most notably we are fixing an update hook of the 6.2.1 release, which might
+have created empty configs. The configs, that were created are "field.field.node.liveblog.field_paragraphs" and
+"field.storage.liveblog_post.field_embed_media". You can check your installation by exporting your config. When you get
+the mentioned configuration files as empty files (only containing an empty set of brackets), you can safely delete those files.
+
+- Fix update hook thunder_update_8316
+- [Fix 'Scheduled content' is shown twice on admin/content](https://www.drupal.org/node/3224286)
+- [Allow install admin_toolbar v3, require security update](https://www.drupal.org/node/3229926)
+
 ## [6.2.1](https://github.com/thunder/thunder-distribution/tree/6.2.1) 2021-07-08
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.2.0...6.2.1)
