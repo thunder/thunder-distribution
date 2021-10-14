@@ -78,7 +78,8 @@ trait ResolverHelperTrait {
   public function fromEntityReferenceRevisions(string $field, $entity = NULL) {
     return $this->builder->produce('entity_reference_revisions')
       ->map('field', $this->builder->fromValue($field))
-      ->map('entity', $entity ?: $this->builder->fromParent());
+      ->map('entity', $entity ?: $this->builder->fromParent())
+      ->map('language', $this->builder->fromPath('entity', 'langcode.value', $this->builder->fromParent()));
   }
 
   /**
@@ -97,6 +98,28 @@ trait ResolverHelperTrait {
         })
       );
     }
+  }
+
+  /**
+   * Produces an entity from a given path.
+   *
+   * @param \Drupal\graphql\GraphQL\Resolver\ResolverInterface $path
+   *   The path resolver.
+   *
+   * @return \Drupal\graphql\GraphQL\Resolver\ResolverInterface
+   *   The resolved entity.
+   */
+  public function fromRoute(ResolverInterface $path) {
+    return $this->builder->compose(
+      $this->builder->produce('route_load')
+        ->map('path', $path),
+      $this->builder->produce('route_entity')
+        ->map('url', $this->builder->fromParent())
+        ->map('language', $this->builder->produce('thunder_entity_sub_request')
+          ->map('path', $path)
+          ->map('key', $this->builder->fromValue('language'))
+        )
+    );
   }
 
 }
