@@ -19,6 +19,7 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_TEST_GROUP: Thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
+  SIMPLETEST_BASE_URL: docker.host.internal
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
@@ -36,10 +37,16 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
-
+      selenium:
+        image: selenium/standalone-chrome:3.141.59-oxygen
+        options: --shm-size 2g --add-host=host.docker.internal:host-gateway
+        volumes:
+          - volume ${{github.workspace}}:/project
+        ports:
+          - 4444:4444
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4', '8.0' ]
+        PHP_VERSION: [ '7.4', '8.1' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
