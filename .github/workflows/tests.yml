@@ -62,7 +62,7 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:dev-remove-patches
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -113,7 +113,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4', '8.0' ]
+        PHP_VERSION: [ '7.4', '8.1' ]
 
     steps:
       - uses: actions/checkout@v1
@@ -127,7 +127,7 @@ jobs:
           ini-values: pcre.jit=0
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: composer global require thunder/drupal-testing:dev-remove-patches
 
       - name: Download build
         uses: actions/download-artifact@v1
@@ -199,7 +199,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-cache-
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: composer global require thunder/drupal-testing:dev-remove-patches
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -296,7 +296,7 @@ jobs:
       - name: Get build environment
         run: |
           composer self-update
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:dev-remove-patches
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
