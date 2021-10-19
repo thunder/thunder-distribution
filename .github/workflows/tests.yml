@@ -46,7 +46,7 @@ jobs:
           - 4444:4444
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4', '8.1' ]
+        PHP_VERSION: [ '7.4', '8.0' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
