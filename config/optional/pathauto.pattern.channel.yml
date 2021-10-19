@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - ctools
     - taxonomy
 id: channel
 label: Channel
