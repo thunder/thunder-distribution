@@ -41,7 +41,7 @@ jobs:
         image: selenium/standalone-chrome:3.141.59-oxygen
         options: --shm-size 2g --add-host=host.docker.internal:host-gateway
         volumes:
-          - volume ${{github.workspace}}:/project
+          - ${{github.workspace}}:/project
         ports:
           - 4444:4444
     strategy:
