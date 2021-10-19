@@ -124,7 +124,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: Imagick, gd, pdo_mysql
+          extensions: Imagick, gd, pdo_mysql, sodium
           # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
           ini-values: pcre.jit=0
 
