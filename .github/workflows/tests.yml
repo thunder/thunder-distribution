@@ -88,6 +88,8 @@ jobs:
 
       - name: Install drupal
         run: test-drupal-project install
+        env:
+          DRUPAL_TESTING_TEST_DEPRECATION: false
 
       - name: Zip build
         run: cd /tmp/test; tar cfz build-${{ matrix.PHP_VERSION }}.tgz thunder; mv build-${{ matrix.PHP_VERSION }}.tgz ${GITHUB_WORKSPACE}
