@@ -3,7 +3,7 @@
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 /**
- * Tests content moderation and scheduling..
+ * Tests content moderation and scheduling.
  *
  * @group Thunder
  */
