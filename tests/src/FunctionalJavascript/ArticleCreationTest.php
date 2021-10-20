@@ -96,7 +96,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
       ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][3]//div[contains(@class, "slick-track")]/div[not(contains(@class, "slick-cloned"))]//img', 2);
 
     // Check Quote paragraph.
-    $this->assertSession()->pageTextContains('Awesome quote');
+    $this->assertSession()->pageTextContains('Not an Awesome quote');
 
     // Check that one Instagram widget is on page.
     $this->getSession()
