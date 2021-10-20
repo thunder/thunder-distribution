@@ -45,7 +45,7 @@ class ArticleSchedulerIntegrationTest extends ThunderJavascriptTestBase {
     // Test restricted editor access.
     $this->logWithRole('restricted_editor');
     $this->drupalGet($edit_url);
-    $this->assertEquals(1000, count($this->xpath('//h1[contains(@class, "page-title")]//span[text() = "403"]')));
+    $this->assertEquals(1, count($this->xpath('//h1[contains(@class, "page-title")]//span[text() = "403"]')));
 
     $this->container->get('cron')->run();
 
