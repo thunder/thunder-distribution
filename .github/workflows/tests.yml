@@ -22,6 +22,7 @@ env:
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
+  SIMPLETEST_BASE_URL: http://host.docker.internal:8888
 
 jobs:
 
