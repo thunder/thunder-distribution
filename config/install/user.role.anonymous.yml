@@ -1,8 +1,11 @@
 langcode: en
 status: true
 dependencies:
+  config:
+    - filter.format.restricted_html
   module:
     - access_unpublished
+    - filter
     - media
     - system
     - thunder_taxonomy

@@ -238,6 +238,11 @@ class InstalledConfigurationTest extends ThunderTestBase {
         'field_ivw' => TRUE,
       ],
     ],
+    'views.view.locked_content' => [
+      'display' => [
+        'default' => ['display_options' => ['sorts' => ['created' => ['expose' => ['field_identifier' => TRUE]]]]],
+      ],
+    ],
   ];
 
   /**
@@ -267,6 +272,9 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'user.role.authenticated' => [
       'permissions' => [
         'opt-in or out of google analytics tracking',
+      ],
+      'dependencies::module' => [
+        'google_analytics'
       ],
     ],
   ];
@@ -468,6 +476,8 @@ class InstalledConfigurationTest extends ThunderTestBase {
 
       // Check is active configuration same as in Yaml file.
       if (!$configDiffer->same($fileConfig, $activeConfig)) {
+        file_put_contents('foo.txt', print_r($configDiffer->normalize1($fileConfig),1 ));
+        file_put_contents('foo1.txt', print_r($configDiffer->normalize1($activeConfig), 1));
         $differentConfigNames[] = $activeConfigName;
       }
     }
