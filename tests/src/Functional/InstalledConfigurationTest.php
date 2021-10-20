@@ -274,7 +274,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
         'opt-in or out of google analytics tracking',
       ],
       'dependencies::module' => [
-        'google_analytics'
+        'google_analytics',
       ],
     ],
   ];
