@@ -23,7 +23,6 @@ env:
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
   SIMPLETEST_BASE_URL: http://host.docker.internal:8888
-  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"chromeOptions": {"w3c": false } }, "http://127.0.0.1:4444/wd/hub"]'
 
 jobs:
 
@@ -64,7 +63,7 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:dev-feature/newer-chromedriver
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -138,7 +137,7 @@ jobs:
         run: docker cp ./ selenium:/project
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: composer global require thunder/drupal-testing:dev-feature/newer-chromedriver
 
       - name: Download build
         uses: actions/download-artifact@v1
@@ -154,9 +153,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
 
       - name: Run config tests
         run: test-drupal-project run_tests -nc
@@ -224,7 +220,7 @@ jobs:
         run: echo "127.0.0.1 host.docker.internal" | sudo tee -a /etc/hosts
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: composer global require thunder/drupal-testing:dev-feature/newer-chromedriver
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -332,7 +328,7 @@ jobs:
       - name: Get build environment
         run: |
           composer self-update
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:dev-feature/newer-chromedriver
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
