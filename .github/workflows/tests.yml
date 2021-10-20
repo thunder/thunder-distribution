@@ -36,13 +36,6 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
-      selenium:
-        image: selenium/standalone-chrome:latest
-        options: --shm-size 2g --add-host=host.docker.internal:host-gateway
-        volumes:
-          - ${{github.workspace}}:/project
-        ports:
-          - 4444:4444
 
     strategy:
       matrix:
@@ -117,6 +110,13 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
+      selenium:
+        image: selenium/standalone-chrome:latest
+        options: --shm-size 2g --add-host=host.docker.internal:host-gateway
+        volumes:
+          - ${{github.workspace}}:/project
+        ports:
+          - 4444:4444
 
     strategy:
       matrix:
@@ -175,6 +175,13 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
+      selenium:
+        image: selenium/standalone-chrome:latest
+        options: --shm-size 2g --add-host=host.docker.internal:host-gateway
+        volumes:
+          - ${{github.workspace}}:/project
+        ports:
+          - 4444:4444
 
     strategy:
       matrix:
@@ -274,6 +281,13 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
+      selenium:
+        image: selenium/standalone-chrome:latest
+        options: --shm-size 2g --add-host=host.docker.internal:host-gateway
+        volumes:
+          - ${{github.workspace}}:/project
+        ports:
+          - 4444:4444
 
     strategy:
       matrix:
