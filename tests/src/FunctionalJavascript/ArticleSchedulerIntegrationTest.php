@@ -7,7 +7,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
  *
  * @group Thunder
  */
-class ArticleSchedulerIntegration extends ThunderJavascriptTestBase {
+class ArticleSchedulerIntegrationTest extends ThunderJavascriptTestBase {
 
   use ThunderArticleTestTrait;
 
