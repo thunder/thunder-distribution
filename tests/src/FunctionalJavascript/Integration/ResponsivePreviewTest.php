@@ -9,7 +9,7 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
  *
  * @group Thunder
  */
-class ResponsivePreview extends ThunderJavascriptTestBase {
+class ResponsivePreviewTest extends ThunderJavascriptTestBase {
 
   /**
    * Testing integration of "responsive_preview" module.
