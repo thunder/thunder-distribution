@@ -23,7 +23,7 @@ env:
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
   SIMPLETEST_BASE_URL: http://host.docker.internal:8888
-  MINK_DRIVER_ARGS_WEBDRIVER: ["chrome", {"chromeOptions": {"w3c": false } }, "http://127.0.0.1:4444/wd/hub"]
+  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"chromeOptions": {"w3c": false } }, "http://127.0.0.1:4444/wd/hub"]'
   SELENIUM_VERSION: 94.0
 
 jobs:
