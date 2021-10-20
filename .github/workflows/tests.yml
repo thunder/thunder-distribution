@@ -112,7 +112,7 @@ jobs:
         ports:
           - 3306:3306
       selenium:
-        image: selenium/standalone-chrome:3.141.59-oxygen
+        image: selenium/standalone-chrome:latest
         options: --shm-size 2g --add-host=host.docker.internal:host-gateway
         volumes:
           - ${{github.workspace}}:/project
@@ -183,7 +183,7 @@ jobs:
         ports:
           - 3306:3306
       selenium:
-        image: selenium/standalone-chrome:3.141.59-oxygen
+        image: selenium/standalone-chrome:latest
         options: --shm-size 2g --add-host=host.docker.internal:host-gateway
         volumes:
           - ${{github.workspace}}:/project
@@ -292,7 +292,7 @@ jobs:
         ports:
           - 3306:3306
       selenium:
-        image: selenium/standalone-chrome:3.141.59-oxygen
+        image: selenium/standalone-chrome:latest
         options: --shm-size 2g --add-host=host.docker.internal:host-gateway
         volumes:
           - ${{github.workspace}}:/project
