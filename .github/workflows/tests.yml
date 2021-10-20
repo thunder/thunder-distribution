@@ -116,7 +116,7 @@ jobs:
         image: selenium/standalone-chrome
         options: --shm-size 2g --add-host=host.docker.internal:host-gateway
         volumes:
-          - ${{github.workspace}}:/project
+          - ${{github.workspace}}/tests/fixtures/reference.jpg:/project/tests/fixtures/reference.jpg
         ports:
           - 4444:4444
 
@@ -154,9 +154,6 @@ jobs:
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Run config tests
         run: test-drupal-project run_tests -nc
         env:
@@ -185,7 +182,7 @@ jobs:
         image: selenium/standalone-chrome
         options: --shm-size 2g --add-host=host.docker.internal:host-gateway
         volumes:
-          - ${{github.workspace}}:/project
+          - ${{github.workspace}}/tests/fixtures/reference.jpg:/project/tests/fixtures/reference.jpg
         ports:
           - 4444:4444
 
@@ -294,7 +291,7 @@ jobs:
         image: selenium/standalone-chrome
         options: --shm-size 2g --add-host=host.docker.internal:host-gateway
         volumes:
-          - ${{github.workspace}}:/project
+          - ${{github.workspace}}/tests/fixtures/reference.jpg:/project/tests/fixtures/reference.jpg
         ports:
           - 4444:4444
 
