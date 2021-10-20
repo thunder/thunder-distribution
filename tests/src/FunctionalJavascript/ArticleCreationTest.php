@@ -89,7 +89,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
       ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][2]//img', 1);
 
     // Check Text paragraph.
-    $this->assertSession()->pageTextContains('Awesome text');
+    $this->assertSession()->pageTextContains('Not an awesome text');
 
     // Check Gallery paragraph. Ensure that there are 2 images in gallery.
     $this->assertSession()
