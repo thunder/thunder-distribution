@@ -134,6 +134,9 @@ jobs:
           # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
           ini-values: pcre.jit=0
 
+      - name: Add host
+        run: echo "127.0.0.1 host.docker.internal" | sudo tee -a /etc/hosts
+
       - name: Get build environment
         run: composer global require thunder/drupal-testing
 
@@ -215,6 +218,9 @@ jobs:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-cache-
+
+      - name: Add host
+        run: echo "127.0.0.1 host.docker.internal" | sudo tee -a /etc/hosts
 
       - name: Get build environment
         run: composer global require thunder/drupal-testing
@@ -317,6 +323,9 @@ jobs:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-cache-
+
+      - name: Add host
+        run: echo "127.0.0.1 host.docker.internal" | sudo tee -a /etc/hosts
 
       - name: Get build environment
         run: |
