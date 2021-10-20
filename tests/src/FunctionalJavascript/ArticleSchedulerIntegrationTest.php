@@ -3,11 +3,11 @@
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 /**
- * Tests content moderation and scheduling..
+ * Tests content moderation and scheduling.
  *
  * @group Thunder
  */
-class ArticleSchedulerIntegration extends ThunderJavascriptTestBase {
+class ArticleSchedulerIntegrationTest extends ThunderJavascriptTestBase {
 
   use ThunderArticleTestTrait;
 
@@ -18,7 +18,7 @@ class ArticleSchedulerIntegration extends ThunderJavascriptTestBase {
     $this->logWithRole('restricted_editor');
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
-      'field_channel' => $term,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Scheduler integration testing',
       'field_seo_title[0][value]' => 'Scheduler integration testing seo title',
     ]);
