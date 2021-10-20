@@ -27,6 +27,7 @@ class ResponsivePreviewTest extends ThunderJavascriptTestBase {
     // The selection of device should create overlay with iframe to news page.
     $this->selectDevice('(//*[@id="responsive-preview-toolbar-tab"]//button[@data-responsive-preview-name])[1]');
     $assert_session->elementNotExists('xpath', '//*[@id="responsive-preview-orientation" and contains(@class, "rotated")]');
+    $assert_session->elementExists('xpath', '//*[@id="responsive-preview-frame")]');
     $this->assertTrue($session->evaluateScript("jQuery('#responsive-preview-frame')[0].contentWindow.location.href.endsWith('/news')"));
 
     // Clicking of rotate should rotate iframe sizes.
