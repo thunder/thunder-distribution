@@ -83,7 +83,7 @@ trait ThunderParagraphsTestTrait {
     $this->assertWaitOnAjaxRequest();
 
     // Wait for a very short time to allow for processing of ajax response.
-    usleep(5000);
+//    usleep(5000);
     $page->find('xpath', "//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]")
       ->click();
 
