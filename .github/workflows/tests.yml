@@ -113,7 +113,7 @@ jobs:
         ports:
           - 3306:3306
       selenium:
-        image: selenium/standalone-chrome
+        image: selenium/standalone-chrome:3.141.59-oxygen
         options: --shm-size 2g --add-host=host.docker.internal:host-gateway --name selenium
         ports:
           - 4444:4444
@@ -183,7 +183,7 @@ jobs:
         ports:
           - 3306:3306
       selenium:
-        image: selenium/standalone-chrome
+        image: selenium/standalone-chrome:3.141.59-oxygen
         options: --shm-size 2g --add-host=host.docker.internal:host-gateway --name selenium
         ports:
           - 4444:4444
@@ -293,7 +293,7 @@ jobs:
         ports:
           - 3306:3306
       selenium:
-        image: selenium/standalone-chrome
+        image: selenium/standalone-chrome:3.141.59-oxygen
         options: --shm-size 2g --add-host=host.docker.internal:host-gateway --name selenium
         ports:
           - 4444:4444
