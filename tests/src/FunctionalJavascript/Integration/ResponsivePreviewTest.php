@@ -28,15 +28,19 @@ class ResponsivePreviewTest extends ThunderJavascriptTestBase {
     $this->selectDevice('(//*[@id="responsive-preview-toolbar-tab"]//button[@data-responsive-preview-name])[1]');
     $assert_session->elementNotExists('xpath', '//*[@id="responsive-preview-orientation" and contains(@class, "rotated")]');
     $assert_session->elementExists('xpath', '//*[@id="responsive-preview-frame"]');
-    $this->assertTrue($session->evaluateScript("jQuery('#responsive-preview-frame')[0].contentWindow.location.href.endsWith('/news')"));
+    $session->evaluateScript("document.querySelector('#responsive-preview-frame').setAttribute('name', 'responsive-preview-frame-testing')");
+    $session->switchToIFrame('responsive-preview-frame-testing');
+    $assert_session->waitForElement('css', 'h1.title.page-title');
+    $this->assertTrue($session->evaluateScript("window.location.href.endsWith('news')"));
+    $session->switchToIFrame();
 
     // Clicking of rotate should rotate iframe sizes.
-    $current_width = $session->evaluateScript("jQuery('#responsive-preview-frame').width()");
-    $current_height = $session->evaluateScript("jQuery('#responsive-preview-frame').height()");
+    $current_width = $session->evaluateScript("document.getElementById('responsive-preview-frame').clientWidth");
+    $current_height = $session->evaluateScript("document.getElementById('responsive-preview-frame').clientHeight");
     $this->changeDeviceRotation();
     $assert_session->elementExists('xpath', '//*[@id="responsive-preview-orientation" and contains(@class, "rotated")]');
-    $this->assertEquals($current_height, $session->evaluateScript("jQuery('#responsive-preview-frame').width()"));
-    $this->assertEquals($current_width, $session->evaluateScript("jQuery('#responsive-preview-frame').height()"));
+    $this->assertEquals($current_height, $session->evaluateScript("document.getElementById('responsive-preview-frame').clientWidth"));
+    $this->assertEquals($current_width, $session->evaluateScript("document.getElementById('responsive-preview-frame').clientHeight"));
 
     // Switching of device should keep rotation.
     $this->selectDevice('(//*[@id="responsive-preview-toolbar-tab"]//button[@data-responsive-preview-name])[last()]');
