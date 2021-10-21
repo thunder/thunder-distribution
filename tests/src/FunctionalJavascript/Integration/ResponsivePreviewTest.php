@@ -28,9 +28,9 @@ class ResponsivePreviewTest extends ThunderJavascriptTestBase {
     $this->selectDevice('(//*[@id="responsive-preview-toolbar-tab"]//button[@data-responsive-preview-name])[1]');
     $assert_session->elementNotExists('xpath', '//*[@id="responsive-preview-orientation" and contains(@class, "rotated")]');
     $assert_session->elementExists('xpath', '//*[@id="responsive-preview-frame"]');
-    $session->evaluateScript("document.querySelector('#responsive-preview-frame').setAttribute('name', 'responsive-preview-frame-testing')");
+    $session->evaluateScript("document.getElementById('responsive-preview-frame').setAttribute('name', 'responsive-preview-frame-testing')");
     $session->switchToIFrame('responsive-preview-frame-testing');
-    $assert_session->waitForElement('css', 'h1.title.page-title');
+    $assert_session->waitForElement('css', 'h1.page-title');
     $this->assertTrue($session->evaluateScript("window.location.href.endsWith('news')"));
     $session->switchToIFrame();
 
@@ -54,7 +54,7 @@ class ResponsivePreviewTest extends ThunderJavascriptTestBase {
       ->find('xpath', '//*[@id="responsive-preview-close"]')
       ->click();
     $this->getSession()
-      ->wait(5000, "jQuery('#responsive-preview').length === 0");
+      ->wait(5000, "document.getElementById('responsive-preview-frame') === null");
     $assert_session->elementNotExists('xpath', '//*[@id="responsive-preview"]');
 
     $node = $this->loadNodeByUuid('bbb1ee17-15f8-46bd-9df5-21c58040d741');
@@ -62,13 +62,17 @@ class ResponsivePreviewTest extends ThunderJavascriptTestBase {
 
     // Using preview on entity edit should use preview page.
     $this->selectDevice('(//*[@id="responsive-preview-toolbar-tab"]//button[@data-responsive-preview-name])[1]');
-    $this->assertNotEquals(-1, $session->evaluateScript("jQuery('#responsive-preview-frame')[0].contentWindow.location.href.indexOf('/node/preview/')"));
+    $session->evaluateScript("document.getElementById('responsive-preview-frame').setAttribute('name', 'responsive-preview-frame-testing')");
+    $session->switchToIFrame('responsive-preview-frame-testing');
+    $assert_session->waitForElement('css', 'h1.page-title');
+    $this->assertNotEquals(-1, $session->evaluateScript("window.location.href.indexOf('/node/preview/')"));
+    $session->switchToIFrame();
     $this->changeDeviceRotation();
 
     // Un-checking device from dropdown should turn off preview.
     $this->selectDevice('(//*[@id="responsive-preview-toolbar-tab"]//button[@data-responsive-preview-name])[1]');
     $this->getSession()
-      ->wait(5000, "jQuery('#responsive-preview').length === 0");
+      ->wait(5000, "document.getElementById('responsive-preview-frame') === null");
     $assert_session->elementNotExists('xpath', '//*[@id="responsive-preview"]');
   }
 
