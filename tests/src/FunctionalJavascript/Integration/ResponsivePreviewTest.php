@@ -28,16 +28,14 @@ class ResponsivePreviewTest extends ThunderJavascriptTestBase {
     $this->selectDevice('(//*[@id="responsive-preview-toolbar-tab"]//button[@data-responsive-preview-name])[1]');
     $assert_session->elementNotExists('xpath', '//*[@id="responsive-preview-orientation" and contains(@class, "rotated")]');
     $assert_session->elementExists('xpath', '//*[@id="responsive-preview-frame"]');
-    $session->evaluateScript("document.getElementById('responsive-preview-frame').setAttribute('name', 'responsive-preview-frame-testing')");
-    $session->switchToIFrame('responsive-preview-frame-testing');
-    $assert_session->waitForElement('css', 'h1.page-title');
-    $this->assertTrue($session->evaluateScript("window.location.href.endsWith('news')"));
-    $session->switchToIFrame();
+    $this->waitForIframeContent();
+    $this->assertTrue($session->evaluateScript("document.getElementById('responsive-preview-frame').contentWindow.location.href.endsWith('news')"));
 
     // Clicking of rotate should rotate iframe sizes.
     $current_width = $session->evaluateScript("document.getElementById('responsive-preview-frame').clientWidth");
     $current_height = $session->evaluateScript("document.getElementById('responsive-preview-frame').clientHeight");
     $this->changeDeviceRotation();
+    $this->waitForIframeContent();
     $assert_session->elementExists('xpath', '//*[@id="responsive-preview-orientation" and contains(@class, "rotated")]');
     $this->assertEquals($current_height, $session->evaluateScript("document.getElementById('responsive-preview-frame').clientWidth"));
     $this->assertEquals($current_width, $session->evaluateScript("document.getElementById('responsive-preview-frame').clientHeight"));
@@ -62,11 +60,8 @@ class ResponsivePreviewTest extends ThunderJavascriptTestBase {
 
     // Using preview on entity edit should use preview page.
     $this->selectDevice('(//*[@id="responsive-preview-toolbar-tab"]//button[@data-responsive-preview-name])[1]');
-    $session->evaluateScript("document.getElementById('responsive-preview-frame').setAttribute('name', 'responsive-preview-frame-testing')");
-    $session->switchToIFrame('responsive-preview-frame-testing');
-    $assert_session->waitForElement('css', 'h1.page-title');
-    $this->assertNotEquals(-1, $session->evaluateScript("window.location.href.indexOf('/node/preview/')"));
-    $session->switchToIFrame();
+    $this->waitForIframeContent();
+    $this->assertNotEquals(-1, $session->evaluateScript("document.getElementById('responsive-preview-frame').contentWindow.location.href.indexOf('/node/preview/')"));
     $this->changeDeviceRotation();
 
     // Un-checking device from dropdown should turn off preview.
@@ -85,6 +80,16 @@ class ResponsivePreviewTest extends ThunderJavascriptTestBase {
       ->find('xpath', '//*[@id="responsive-preview-orientation"]')
       ->click();
     $this->assertWaitOnAjaxRequest();
+  }
+
+  /**
+   * Wait for iframe content loaded.
+   */
+  protected function waitForIframeContent() {
+    $this->getSession()->evaluateScript("document.getElementById('responsive-preview-frame').setAttribute('name', 'responsive-preview-frame-testing')");
+    $this->getSession()->switchToIFrame('responsive-preview-frame-testing');
+    $this->assertSession()->waitForElement('css', 'h1.page-title');
+    $this->getSession()->switchToIFrame();
   }
 
   /**
