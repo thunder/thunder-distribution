@@ -26,11 +26,10 @@ env:
 
 jobs:
 
+  call-workflow:
+    uses: thunder/thunder-distribution/.github/workflows/build-env.yml@v1
+
   build:
-
-    call-workflow:
-      uses: thunder/thunder-distribution/.github/workflows/build-env.yml@v1
-
     runs-on: ubuntu-20.04
 
     services:
