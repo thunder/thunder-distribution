@@ -27,7 +27,7 @@ env:
 jobs:
 
   call-workflow:
-    uses: thunder/thunder-distribution/.github/workflows/build-env.yml@v1
+    uses: thunder/thunder-distribution/.github/workflows/build-env.yml@reusable-workflow-dev
 
   build:
     runs-on: ubuntu-20.04
