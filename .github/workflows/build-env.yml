@@ -1,0 +1,26 @@
+name: Reusable workflow example
+
+on:
+  workflow_call:
+
+jobs:
+  example_job:
+    name: Pass input and secrets to my-action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          coverage: none
+          php-version: ${{ matrix.PHP_VERSION }}
+          extensions: Imagick, gd, pdo_mysql
+
+      - name: Add host
+        run: echo "127.0.0.1 host.docker.internal" | sudo tee -a /etc/hosts
+
+      - name: Prepare fixtures
+        run: docker cp ./ selenium:/project
+
+      - name: Get build environment
+        run: composer global require thunder/drupal-testing:dev-feature/newer-chromedriver
