@@ -26,7 +26,8 @@ env:
 
 jobs:
 
-  build:
+  test-max:
+    needs: build
 
     runs-on: ubuntu-20.04
 
@@ -37,13 +38,15 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
+      selenium:
+        image: selenium/standalone-chrome
+        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
+        ports:
+          - 4444:4444
 
     strategy:
       matrix:
         PHP_VERSION: [ '7.4', '8.0' ]
-
-    env:
-      DRUPAL_TESTING_TEST_DEPRECATION: true
 
     steps:
       - uses: actions/checkout@v1
@@ -52,7 +55,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: Imagick
+          extensions: Imagick, gd, pdo_mysql
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -90,62 +93,11 @@ jobs:
       - name: Install drupal
         run: test-drupal-project install
 
-      - name: Zip build
-        run: cd /tmp/test; tar cfz build-${{ matrix.PHP_VERSION }}.tgz thunder; mv build-${{ matrix.PHP_VERSION }}.tgz ${GITHUB_WORKSPACE}
-
-      - name: Upload build
-        uses: actions/upload-artifact@v2
-        with:
-          name: build-${{ matrix.PHP_VERSION }}
-          path: build-${{ matrix.PHP_VERSION }}.tgz
-
-  test-max:
-    needs: build
-
-    runs-on: ubuntu-20.04
-
-    services:
-      mysql:
-        image: mariadb:latest
-        env:
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - 3306:3306
-      selenium:
-        image: selenium/standalone-chrome
-        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
-        ports:
-          - 4444:4444
-
-    strategy:
-      matrix:
-        PHP_VERSION: [ '7.4', '8.0' ]
-
-    steps:
-      - uses: actions/checkout@v1
-
-      - uses: shivammathur/setup-php@v2
-        with:
-          coverage: none
-          php-version: ${{ matrix.PHP_VERSION }}
-          extensions: Imagick, gd, pdo_mysql
-
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
 
       - name: Prepare fixtures
         run: docker cp ./tests/fixtures selenium:/fixtures
-
-      - name: Get build environment
-        run: composer global require thunder/drupal-testing
-
-      - name: Download build
-        uses: actions/download-artifact@v1
-        with:
-          name: build-${{ matrix.PHP_VERSION }}
-
-      - name: Unzip build artifact
-        run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
 
       - name: Setup Apache
         uses: thunder/apache-shiva-php-action@v1
@@ -350,69 +302,6 @@ jobs:
 
       - name: Run the tests
         run: test-drupal-project run_tests
-
-  test-performance:
-    needs: [build, test-max]
-
-    runs-on: ubuntu-20.04
-
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'test-performance') || github.event_name == 'schedule' }}
-
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          repository: thunder/docker-thunder-performance
-          path: thunder-distribution/docker-thunder-performance
-          ref: 'master'
-
-      - uses: shivammathur/setup-php@master
-        with:
-          coverage: none
-          php-version: '7.4'
-          extensions: Imagick
-
-      - name: Download build
-        uses: actions/download-artifact@v1
-        with:
-          name: build-7.4
-
-      - name: Unzip build artifact
-        run: mkdir -p /tmp/test; tar xCfz /tmp/test build-7.4/build-7.4.tgz thunder; rm -rf build-7.4; mv /tmp/test/thunder/install ${GITHUB_WORKSPACE}/docker-thunder-performance/www
-
-      - name: Set variables
-        id: vars
-        # GITHUB_HEAD_REF is only defined in PRs. GITHUB_REF is on the default branch something like refs/heads/8.x-4.x.
-        # So if GITHUB_HEAD_REF is not defined we use GITHUB_REF and remove leading refs/heads/. On the result / will replaced by _
-        run: |
-          echo ::set-output name=DOCKER_SANITIZED_BRANCH_NAME::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')
-          echo ::set-output name=DOCKER_TAG::$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//_/g')-${{ github.run_id }}
-
-      - name: Create image and push to registry
-        working-directory: docker-thunder-performance
-        run: |
-          echo ${{ secrets.DOCKER_TOKEN }} | docker login -u thundertechnology --password-stdin
-          export DOCKER_IMAGE_TAG="burda/thunder-performance:${{ steps.vars.outputs.DOCKER_TAG }}"
-          composer config bin-dir vendor/bin/ --working-dir=./www
-          chmod u+w www/docroot/sites/default
-          bash -x ./build.sh --tag "${DOCKER_IMAGE_TAG}"
-          docker push "${DOCKER_IMAGE_TAG}"
-
-      - name: Start Thunder performance testing task for created image
-        run: |
-          API_CALL_HTTP_CODE=$(curl \
-          --request POST \
-          --insecure \
-          "https://${{ secrets.THUNDER_PTM_HOST }}:3000/warmers" \
-          --header "Authorization: Bearer ${{ secrets.THUNDER_PTM_TOKEN }}" \
-          --header "Content-Type: application/json" \
-          --data "{\"branchTag\":\"${{ steps.vars.outputs.DOCKER_SANITIZED_BRANCH_NAME }}\",\"imageTag\":\"${{ steps.vars.outputs.DOCKER_TAG }}\",\"composeType\":\"default\"}" \
-          --output /dev/stderr \
-          --write-out "%{http_code}" \
-          )
-
-          if [[ "${API_CALL_HTTP_CODE}" != "200" ]]; then
-            exit 1
-          fi
 
 #   Start a debug session.
 #   - name: Setup tmate session

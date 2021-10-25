@@ -4,9 +4,6 @@
 - name: test-min
   description: Triggers the minimum requirements testing
   color: c9f9a9
-- name: test-performance
-  description: Triggers the performance testing
-  color: c2e0c6
 - name: test-upgrade
   description: Triggers the upgrade path testing
   color: 8e36db
