@@ -121,7 +121,7 @@ END;
     // Click Select entities -> to open Entity Browser.
     $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
 
-    $this->uploadFile($page, '/project/tests/fixtures/reference.jpg');
+    $this->uploadFile($page, '/fixtures/reference.jpg');
 
     // Move new image -> that's 5th image in list, to 3rd position.
     $list_selector = '#edit-selected';

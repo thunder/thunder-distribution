@@ -22,6 +22,7 @@ env:
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
+  SIMPLETEST_BASE_URL: http://thunder-testing:8888
 
 jobs:
 
@@ -36,13 +37,6 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
-      selenium:
-        image: selenium/standalone-chrome:3.141.59-oxygen
-        options: --shm-size 2g --add-host=host.docker.internal:host-gateway
-        volumes:
-          - ${{github.workspace}}:/project
-        ports:
-          - 4444:4444
 
     strategy:
       matrix:
@@ -119,6 +113,11 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
+      selenium:
+        image: selenium/standalone-chrome
+        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
+        ports:
+          - 4444:4444
 
     strategy:
       matrix:
@@ -132,8 +131,12 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick, gd, pdo_mysql
-          # Turn off pcre.jit until https://www.drupal.org/project/drupal/issues/3181644 is solved.
-          ini-values: pcre.jit=0
+
+      - name: Add host
+        run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
+
+      - name: Prepare fixtures
+        run: docker cp ./tests/fixtures selenium:/fixtures
 
       - name: Get build environment
         run: composer global require thunder/drupal-testing:dev-remove-patches
@@ -177,6 +180,11 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
+      selenium:
+        image: selenium/standalone-chrome
+        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
+        ports:
+          - 4444:4444
 
     strategy:
       matrix:
@@ -206,6 +214,12 @@ jobs:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-cache-
+
+      - name: Prepare fixtures
+        run: docker cp ./tests/fixtures selenium:/fixtures
+
+      - name: Add host
+        run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
 
       - name: Get build environment
         run: composer global require thunder/drupal-testing:dev-remove-patches
@@ -276,6 +290,11 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
+      selenium:
+        image: selenium/standalone-chrome
+        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
+        ports:
+          - 4444:4444
 
     strategy:
       matrix:
@@ -301,6 +320,12 @@ jobs:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-cache-
+
+      - name: Prepare fixtures
+        run: docker cp ./tests/fixtures selenium:/fixtures
+
+      - name: Add host
+        run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
 
       - name: Get build environment
         run: |
