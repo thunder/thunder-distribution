@@ -28,6 +28,8 @@ jobs:
 
   call-workflow:
     uses: thunder/thunder-distribution/.github/workflows/build-env.yml@test/reusable-workflow
+    with:
+      php_version: ${{ matrix.PHP_VERSION }}
 
   build:
     runs-on: ubuntu-20.04

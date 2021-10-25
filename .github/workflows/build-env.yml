@@ -13,7 +13,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           coverage: none
-          php-version: ${{ matrix.PHP_VERSION }}
+          php-version: ${{ inputs.php_version }}
           extensions: Imagick, gd, pdo_mysql
 
       - name: Add host
