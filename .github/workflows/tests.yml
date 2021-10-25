@@ -22,12 +22,12 @@ env:
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
-  SIMPLETEST_BASE_URL: http://host.docker.internal:8888
+  SIMPLETEST_BASE_URL: http://thunder-testing:8888
 
 jobs:
 
   call-workflow:
-    uses: thunder/thunder-distribution/.github/workflows/build-env.yml@reusable-workflow
+    uses: thunder/thunder-distribution/.github/workflows/build-env.yml@test/reusable-workflow
 
   build:
     runs-on: ubuntu-20.04
@@ -48,7 +48,6 @@ jobs:
       DRUPAL_TESTING_TEST_DEPRECATION: true
 
     steps:
-
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
@@ -97,7 +96,7 @@ jobs:
           - 3306:3306
       selenium:
         image: selenium/standalone-chrome
-        options: --shm-size 2g --add-host=host.docker.internal:host-gateway --name selenium
+        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
         ports:
           - 4444:4444
 
@@ -106,9 +105,6 @@ jobs:
         PHP_VERSION: [ '7.4', '8.0' ]
 
     steps:
-
-
-
       - name: Download build
         uses: actions/download-artifact@v1
         with:
@@ -150,7 +146,7 @@ jobs:
           - 3306:3306
       selenium:
         image: selenium/standalone-chrome
-        options: --shm-size 2g --add-host=host.docker.internal:host-gateway --name selenium
+        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
         ports:
           - 4444:4444
 
@@ -167,9 +163,6 @@ jobs:
       DRUPAL_TESTING_PARALLEL_TESTING: false
 
     steps:
-
-
-
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
@@ -238,7 +231,7 @@ jobs:
           - 3306:3306
       selenium:
         image: selenium/standalone-chrome
-        options: --shm-size 2g --add-host=host.docker.internal:host-gateway --name selenium
+        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
         ports:
           - 4444:4444
 
@@ -252,8 +245,6 @@ jobs:
       DRUPAL_TESTING_DRUPAL_VERSION: '~9.2.0'
 
     steps:
-
-
       - name: Get build environment
         run: |
           composer self-update
