@@ -22,7 +22,7 @@ env:
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
-  SIMPLETEST_BASE_URL: http://host.docker.internal:8888
+  SIMPLETEST_BASE_URL: http://thunder-testing:8888
 
 jobs:
 
@@ -63,7 +63,7 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer global require thunder/drupal-testing:dev-feature/newer-chromedriver
+          composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -113,7 +113,7 @@ jobs:
           - 3306:3306
       selenium:
         image: selenium/standalone-chrome
-        options: --shm-size 2g --add-host=host.docker.internal:host-gateway --name selenium
+        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
         ports:
           - 4444:4444
 
@@ -131,13 +131,13 @@ jobs:
           extensions: Imagick, gd, pdo_mysql
 
       - name: Add host
-        run: echo "127.0.0.1 host.docker.internal" | sudo tee -a /etc/hosts
+        run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
 
       - name: Prepare fixtures
         run: docker cp ./ selenium:/project
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing:dev-feature/newer-chromedriver
+        run: composer global require thunder/drupal-testing
 
       - name: Download build
         uses: actions/download-artifact@v1
@@ -180,7 +180,7 @@ jobs:
           - 3306:3306
       selenium:
         image: selenium/standalone-chrome
-        options: --shm-size 2g --add-host=host.docker.internal:host-gateway --name selenium
+        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
         ports:
           - 4444:4444
 
@@ -217,10 +217,10 @@ jobs:
         run: docker cp ./ selenium:/project
 
       - name: Add host
-        run: echo "127.0.0.1 host.docker.internal" | sudo tee -a /etc/hosts
+        run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing:dev-feature/newer-chromedriver
+        run: composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -290,7 +290,7 @@ jobs:
           - 3306:3306
       selenium:
         image: selenium/standalone-chrome
-        options: --shm-size 2g --add-host=host.docker.internal:host-gateway --name selenium
+        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
         ports:
           - 4444:4444
 
@@ -323,12 +323,12 @@ jobs:
         run: docker cp ./ selenium:/project
 
       - name: Add host
-        run: echo "127.0.0.1 host.docker.internal" | sudo tee -a /etc/hosts
+        run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
 
       - name: Get build environment
         run: |
           composer self-update
-          composer global require thunder/drupal-testing:dev-feature/newer-chromedriver
+          composer global require thunder/drupal-testing
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
