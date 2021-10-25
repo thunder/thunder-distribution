@@ -134,7 +134,7 @@ jobs:
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
 
       - name: Prepare fixtures
-        run: docker cp ./test/fixtures selenium:/fixtures
+        run: docker cp ./tests/fixtures selenium:/fixtures
 
       - name: Get build environment
         run: composer global require thunder/drupal-testing
@@ -214,7 +214,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-cache-
 
       - name: Prepare fixtures
-        run: docker cp ./test/fixtures selenium:/fixtures
+        run: docker cp ./tests/fixtures selenium:/fixtures
 
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
@@ -320,7 +320,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-cache-
 
       - name: Prepare fixtures
-        run: docker cp ./test/fixtures selenium:/fixtures
+        run: docker cp ./tests/fixtures selenium:/fixtures
 
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
