@@ -19,8 +19,8 @@ source: 'oembed:instagram'
 queue_thumbnail_downloads: false
 new_revision: false
 source_configuration:
+  source_field: field_url
   thumbnails_directory: 'public://oembed_thumbnails'
   providers: {  }
-  source_field: field_url
 field_map:
   author_name: field_author
