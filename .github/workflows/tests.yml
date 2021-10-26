@@ -120,6 +120,7 @@ jobs:
     strategy:
       matrix:
         PHP_VERSION: [ '7.4', '8.0' ]
+        TESTSUITE: [ 'functional-javascript', 'functional' ]
 
     steps:
       - uses: actions/checkout@v1
@@ -137,7 +138,7 @@ jobs:
         run: docker cp ./tests/fixtures selenium:/fixtures
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: composer global require thunder/drupal-testing:dev-feat/testsuites
 
       - name: Download build
         uses: actions/download-artifact@v1
@@ -154,18 +155,10 @@ jobs:
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
-      - name: Run config tests
-        run: test-drupal-project run_tests -nc
-        env:
-          DRUPAL_TESTING_TEST_GROUP: ThunderConfig
-
-      - name: Run installer tests
-        run: test-drupal-project run_tests -nc
-        env:
-          DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
-
-      - name: Run tests suite
+      - name: Run tests
         run: test-drupal-project run_tests
+        env:
+          DRUPAL_TESTING_TEST_SUITE: ${{ matrix.TESTSUITE }}
 
   test-upgrade:
 
