@@ -82,10 +82,9 @@ trait ThunderParagraphsTestTrait {
     $addButton->click();
     $this->assertWaitOnAjaxRequest();
 
-    // Testing, if we have to wait for javascript to prevent flip-flops.
-    usleep(5000);
-    $page->find('xpath', "//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]")
-      ->click();
+    $addMoreButtonXpath = "//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]";
+    $this->getSession()->wait(5000, "document.evaluate('${addMoreButtonXpath}', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue !== undefined");
+    $page->find('xpath', $addMoreButtonXpath)->click();
 
     $this->assertWaitOnAjaxRequest();
 
