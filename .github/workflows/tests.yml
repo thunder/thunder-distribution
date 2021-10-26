@@ -159,7 +159,7 @@ jobs:
         run: test-drupal-project run_tests
         env:
           DRUPAL_TESTING_TEST_SUITE: ${{ matrix.TESTSUITE }}
-          DRUPAL_TESTING_TEST_GROUP: Thunder,ThunderInstaller,ThunderConfig
+          DRUPAL_TESTING_TEST_GROUP: "Thunder,ThunderInstaller,ThunderConfig"
 
   test-upgrade:
 
