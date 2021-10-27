@@ -64,7 +64,8 @@
                 "Move all action buttons into gin_actions / module incompatibility": "https://www.drupal.org/files/issues/2021-09-06/move_all_actions-3219020-5.patch"
             },
             "drupal/media_library_media_modify": {
-                "Add edit link to the media items in the media library": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/10.diff"
+                "Add edit link to the media items in the media library": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/10.diff",
+                "Add indication of already selected items in the media library": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/11.diff"
             },
             "drupal/graphql": {
                 "fix: language definition in entity reference producers": "https://patch-diff.githubusercontent.com/raw/drupal-graphql/graphql/pull/1241.diff"
