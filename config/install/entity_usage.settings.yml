@@ -1,0 +1,30 @@
+track_enabled_base_fields: false
+local_task_enabled_entity_types:
+  - media
+  - taxonomy_term
+usage_controller_items_per_page: 25
+track_enabled_source_entity_types:
+  - node
+  - media
+  - taxonomy_term
+  - user
+track_enabled_target_entity_types:
+  - node
+  - media
+  - taxonomy_term
+  - user
+edit_warning_message_entity_types:
+  - media
+delete_warning_message_entity_types:
+  - media
+track_enabled_plugins:
+  - dynamic_entity_reference
+  - media_embed
+  - link
+  - linkit
+  - layout_builder
+  - entity_reference
+  - entity_embed
+  - html_link
+  - block_field
+site_domains: {  }

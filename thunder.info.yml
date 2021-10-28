@@ -57,6 +57,7 @@ install:
   - empty_fields:empty_fields
   - entity_reference_actions:entity_reference_actions
   - entity_browser:entity_browser_entity_form
+  - entity_usage:entity_usage
   - field_group:field_group
   - focal_point:focal_point
   - length_indicator:length_indicator
