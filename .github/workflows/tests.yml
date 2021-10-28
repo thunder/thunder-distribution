@@ -23,6 +23,7 @@ env:
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
+  SKIP_TEST_CLEANUP: true
 
 jobs:
 
