@@ -931,10 +931,10 @@ display:
           view_mode: media_library
           entity_type: media
           plugin_id: rendered_entity
-        media_library_edit_link:
-          id: media_library_edit_link
+        media_library_media_modify_edit_link:
+          id: media_library_media_modify_edit_link
           table: media
-          field: media_library_edit_link
+          field: media_library_media_modify_edit_link
           relationship: none
           group_type: group
           admin_label: ''
@@ -980,7 +980,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           entity_type: media
-          plugin_id: media_library_edit_link
+          plugin_id: media_library_media_modify_edit_link
       defaults:
         fields: false
         access: false
