@@ -63,10 +63,6 @@
                 "Collapsible sidebar": "https://git.drupalcode.org/project/gin/-/merge_requests/13.diff",
                 "Move all action buttons into gin_actions / module incompatibility": "https://www.drupal.org/files/issues/2021-09-06/move_all_actions-3219020-5.patch"
             },
-            "drupal/media_library_media_modify": {
-                "Add edit link to the media items in the media library": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/10.diff",
-                "Add indication of already selected items in the media library": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/11.diff"
-            },
             "drupal/graphql": {
                 "fix: language definition in entity reference producers": "https://patch-diff.githubusercontent.com/raw/drupal-graphql/graphql/pull/1241.diff"
             }
@@ -110,7 +106,7 @@
         "drupal/media_entity_slideshow": "^2.0-alpha1",
         "drupal/media_entity_twitter": "^2.5",
         "drupal/media_expire": "^2.4",
-        "drupal/media_library_media_modify": "^1.0",
+        "drupal/media_library_media_modify": "^1.0-beta3",
         "drupal/metatag": "^1.13",
         "drupal/metatag_async_widget": "^1.0-alpha2",
         "drupal/paragraphs": "^1.11",
