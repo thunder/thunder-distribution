@@ -237,12 +237,12 @@ jobs:
 
       - name: Update the docroot
         run: |
-          vendor/bin/drush en thunder_riddle -y
-          composer require thunder/thunder-distribution:^3.5.0 phpunit/phpunit:^7 oomphinc/composer-installers-extender:^2.0 cweagans/composer-patches:^1.7 --no-update
+          composer require drupal/riddle_marketplace thunder/thunder-distribution:^3.5.0 phpunit/phpunit:^7 oomphinc/composer-installers-extender:^2.0 cweagans/composer-patches:^1.7 --no-update
           chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
 
+          vendor/bin/drush en thunder_riddle -y
           vendor/bin/drush pmu libraries update -y
 
           composer self-update --2
