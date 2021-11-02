@@ -38,9 +38,6 @@
     "extra": {
         "installer-name": "thunder",
         "patches": {
-            "drupal/core": {
-                "Create a fault-tolerant method for interacting with links and fields in Javascript tests.": "https://www.drupal.org/files/issues/2021-11-02/3032275-64.patch"
-            },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
