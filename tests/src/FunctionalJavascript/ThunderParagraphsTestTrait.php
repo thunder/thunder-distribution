@@ -64,6 +64,7 @@ trait ThunderParagraphsTestTrait {
   public function addParagraph($fieldName, $type, $position = NULL) {
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
+    $driver = $this->getSession()->getDriver();
     $numberOfParagraphs = $this->getNumberOfParagraphs($fieldName);
 
     $fieldSelector = HTML::cleanCssIdentifier($fieldName);
@@ -82,7 +83,7 @@ trait ThunderParagraphsTestTrait {
     $addButton->click();
     $this->assertWaitOnAjaxRequest();
 
-    $this->getSession()->getDriver()->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
+    $driver->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
 
     $this->assertWaitOnAjaxRequest();
 

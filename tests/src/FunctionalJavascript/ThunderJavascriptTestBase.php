@@ -382,10 +382,9 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    * Click article save.
    */
   protected function clickSave() {
-    $page = $this->getSession()->getPage();
+    $driver = $this->getSession()->getDriver();
 
-    $page->find('xpath', '//div[@data-drupal-selector="edit-actions"]/input[@id="edit-submit"]')
-      ->click();
+    $driver->click('//div[@data-drupal-selector="edit-actions"]/input[@id="edit-submit"]');
   }
 
   /**
@@ -399,17 +398,15 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    */
   protected function setPublishedStatus($status = TRUE) {
 
-    $page = $this->getSession()->getPage();
+    $driver = $this->getSession()->getDriver();
 
     $this->scrollElementInView('#edit-status-value');
 
     if ($status) {
-      $page->find('xpath', '//*[@id="edit-status-value"]')
-        ->check();
+      $driver->check('//*[@id="edit-status-value"]');
     }
     else {
-      $page->find('xpath', '//*[@id="edit-status-value"]')
-        ->uncheck();
+      $driver->uncheck('//*[@id="edit-status-value"]');
     }
   }
 
