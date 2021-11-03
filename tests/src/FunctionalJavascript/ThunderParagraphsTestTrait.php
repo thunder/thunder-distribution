@@ -77,12 +77,8 @@ trait ThunderParagraphsTestTrait {
       $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) input.paragraphs-features__add-in-between__button";
     }
 
-    $addButton = $page->find('css', $addButtonCssSelector);
     $this->scrollElementInView($addButtonCssSelector);
-
-    $addButton->click();
-    $this->assertWaitOnAjaxRequest();
-
+    $this->click($addButtonCssSelector);
     $driver->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
 
     $this->assertWaitOnAjaxRequest();
