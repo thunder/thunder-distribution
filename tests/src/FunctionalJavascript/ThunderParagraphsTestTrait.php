@@ -62,8 +62,6 @@ trait ThunderParagraphsTestTrait {
    * @throws \Exception
    */
   public function addParagraph($fieldName, $type, $position = NULL) {
-    /** @var \Behat\Mink\Element\DocumentElement $page */
-    $page = $this->getSession()->getPage();
     $driver = $this->getSession()->getDriver();
     $numberOfParagraphs = $this->getNumberOfParagraphs($fieldName);
 
