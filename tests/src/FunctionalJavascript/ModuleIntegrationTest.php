@@ -132,10 +132,8 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     $this->drupalGet($node->toUrl('version-history'));
 
-    $firstRightRadio = $page->find('xpath', '//table[contains(@class, "diff-revisions")]/tbody//tr[1]//input[@name="radios_right"]');
-    $firstRightRadio->click();
-    $lastLeftRadio = $page->find('xpath', '//table[contains(@class, "diff-revisions")]/tbody//tr[last()]//input[@name="radios_left"]');
-    $lastLeftRadio->click();
+    $driver->click('//table[contains(@class, "diff-revisions")]/tbody//tr[1]//input[@name="radios_right"]');
+    $driver->click('//table[contains(@class, "diff-revisions")]/tbody//tr[last()]//input[@name="radios_left"]');
 
     // Open diff page.
     $driver->click('//*[@data-drupal-selector="edit-submit"]');
