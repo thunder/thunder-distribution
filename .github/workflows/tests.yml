@@ -19,7 +19,7 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_TEST_GROUP: Thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
-  DRUPAL_TESTING_VERBOSE: true
+  DRUPAL_TESTING_VERBOSE: false
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
@@ -329,8 +329,7 @@ jobs:
       - name: Get build environment
         run: |
           composer self-update
-          composer global require thunder/drupal-testing
-          
+          composer global require thunder/drupal-testing      
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
