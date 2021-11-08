@@ -19,7 +19,8 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_TEST_GROUP: Thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
-  DRUPAL_TESTING_VERBOSE: false
+  DRUPAL_TESTING_VERBOSE: true
+  DRUPAL_TESTING_VERSION: "^1.0.28"
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
@@ -64,7 +65,7 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer global require thunder/drupal-testing
+          composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -138,7 +139,7 @@ jobs:
         run: docker cp ./tests/fixtures selenium:/fixtures
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Download build
         uses: actions/download-artifact@v1
@@ -221,7 +222,7 @@ jobs:
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing
+        run: composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -329,7 +330,7 @@ jobs:
       - name: Get build environment
         run: |
           composer self-update
-          composer global require thunder/drupal-testing      
+          composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
