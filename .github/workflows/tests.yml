@@ -19,10 +19,13 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_TEST_GROUP: Thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
+  DRUPAL_TESTING_VERBOSE: false
+  DRUPAL_TESTING_VERSION: "^1.0.28"
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
+  SKIP_TEST_CLEANUP: true
 
 jobs:
 
@@ -40,7 +43,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4', '8.1' ]
+        PHP_VERSION: [ '7.4', '8.0' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
@@ -63,7 +66,7 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer global require thunder/drupal-testing:dev-remove-patches
+          composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -89,8 +92,6 @@ jobs:
 
       - name: Install drupal
         run: test-drupal-project install
-        env:
-          DRUPAL_TESTING_TEST_DEPRECATION: false
 
       - name: Zip build
         run: cd /tmp/test; tar cfz build-${{ matrix.PHP_VERSION }}.tgz thunder; mv build-${{ matrix.PHP_VERSION }}.tgz ${GITHUB_WORKSPACE}
@@ -121,7 +122,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4', '8.1' ]
+        PHP_VERSION: [ '7.4', '8.0' ]
 
     steps:
       - uses: actions/checkout@v1
@@ -139,7 +140,7 @@ jobs:
         run: docker cp ./tests/fixtures selenium:/fixtures
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing:dev-remove-patches
+        run: composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Download build
         uses: actions/download-artifact@v1
@@ -222,7 +223,7 @@ jobs:
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing:dev-remove-patches
+        run: composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -260,11 +261,11 @@ jobs:
           cd docroot
           php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
 
-          wget https://www.drupal.org/files/issues/2021-10-05/3240601%2B3240813-9.2.x.patch
-          patch -p1 < 3240601+3240813-9.2.x.patch
+          wget https://www.drupal.org/files/issues/2021-10-05/3240601%2B3240813-9.2.x.patch -O 3240601.patch
+          patch -p1 < 3240601.patch
 
-          wget https://www.drupal.org/files/issues/2021-10-05/3192365-17-mkdir-race-condition-in-tests.patch
-          patch -p1 < 3192365-17-mkdir-race-condition-in-tests.patch
+          wget https://www.drupal.org/files/issues/2021-11-03/3032275-78.patch
+          patch -p1 < 3032275-78.patch
         working-directory: /tmp/test/thunder/install
 
       - name: Setup Apache
@@ -330,7 +331,7 @@ jobs:
       - name: Get build environment
         run: |
           composer self-update
-          composer global require thunder/drupal-testing:dev-remove-patches
+          composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
