@@ -88,7 +88,9 @@ abstract class ThunderGqlsTestBase extends ThunderTestBase {
    *   The path to the collection of test query files.
    */
   protected function getQueriesDirectory() {
-    return drupal_get_path('module', explode('\\', get_class($this))[2]) . '/tests/examples';
+    /** @var \Drupal\Core\Extension\ExtensionPathResolver $extensionPathResolver */
+    $extensionPathResolver = \Drupal::service('extension.path.resolver');
+    return $extensionPathResolver->getPath('module', explode('\\', get_class($this))[2]) . '/tests/examples';
   }
 
   /**

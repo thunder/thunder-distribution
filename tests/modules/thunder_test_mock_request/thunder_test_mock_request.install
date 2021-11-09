@@ -11,7 +11,9 @@ use Drupal\thunder_test_mock_request\MockHttpClientMiddleware;
  * Implements hook_install().
  */
 function thunder_test_mock_request_install() {
-  $fixturesDirectory = drupal_get_path('profile', 'thunder') . '/tests/fixtures/oembed';
+  /** @var \Drupal\Core\Extension\ExtensionPathResolver $extensionPathResolver */
+  $extensionPathResolver = \Drupal::service('extension.path.resolver');
+  $fixturesDirectory = $extensionPathResolver->getPath('profile', 'thunder') . '/tests/fixtures/oembed';
   MockHttpClientMiddleware::addUrlResponse('https://oembed.com/providers.json', file_get_contents($fixturesDirectory . '/providers.json'), ['Content-Type' => 'application/json']);
   MockHttpClientMiddleware::addUrlResponse('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=PWjcqE3QKBg', file_get_contents($fixturesDirectory . '/youtube.json'), ['Content-Type' => 'application/json']);
   MockHttpClientMiddleware::addUrlResponse('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=PWjcqE3QKBg&maxwidth=241&maxheight=138', file_get_contents($fixturesDirectory . '/youtube.json'), ['Content-Type' => 'application/json']);
