@@ -209,8 +209,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    */
   public function clickButtonCssSelector(DocumentElement $page, $cssSelector, $waitAfterAction = TRUE) {
     $this->scrollElementInView($cssSelector);
-    $editButton = $page->find('css', $cssSelector);
-    $editButton->click();
+    $this->click($cssSelector);
 
     if ($waitAfterAction) {
       $this->assertWaitOnAjaxRequest();
@@ -247,11 +246,11 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    */
   protected function clickDropButton($fieldName, $toggle = TRUE) {
     $page = $this->getSession()->getPage();
+    $driver = $this->getSession()->getDriver();
 
     if ($toggle) {
       $toggleButtonXpath = '//ul[.//*[@name="' . $fieldName . '"]]/li[contains(@class,"dropbutton-toggle")]/button';
-      $toggleButton = $page->find('xpath', $toggleButtonXpath);
-      $toggleButton->click();
+      $driver->click($toggleButtonXpath);
       $this->assertWaitOnAjaxRequest();
     }
 
@@ -373,19 +372,17 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
     $this->drupalGet('admin/config/system/cron');
 
     $this->getSession()
-      ->getPage()
-      ->find('xpath', '//input[@name="op"]')
-      ->click();
+      ->getDriver()
+      ->click('//input[@name="op"]');
   }
 
   /**
    * Click article save.
    */
   protected function clickSave() {
-    $page = $this->getSession()->getPage();
+    $driver = $this->getSession()->getDriver();
 
-    $page->find('xpath', '//div[@data-drupal-selector="edit-actions"]/input[@id="edit-submit"]')
-      ->click();
+    $driver->click('//div[@data-drupal-selector="edit-actions"]/input[@id="edit-submit"]');
   }
 
   /**
@@ -399,17 +396,15 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    */
   protected function setPublishedStatus($status = TRUE) {
 
-    $page = $this->getSession()->getPage();
+    $driver = $this->getSession()->getDriver();
 
     $this->scrollElementInView('#edit-status-value');
 
     if ($status) {
-      $page->find('xpath', '//*[@id="edit-status-value"]')
-        ->check();
+      $driver->check('//*[@id="edit-status-value"]');
     }
     else {
-      $page->find('xpath', '//*[@id="edit-status-value"]')
-        ->uncheck();
+      $driver->uncheck('//*[@id="edit-status-value"]');
     }
   }
 
@@ -420,11 +415,9 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    *   State id.
    */
   protected function setModerationState($state) {
-
-    $page = $this->getSession()->getPage();
-
-    $page->find('xpath', '//*[@id="edit-moderation-state-0"]')
-      ->selectOption($state);
+    $this->getSession()
+      ->getDriver()
+      ->selectOption('//*[@id="edit-moderation-state-0"]', $state);
   }
 
   /**
