@@ -124,7 +124,6 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     // Remove image.
     $this->clickAjaxButtonCssSelector('[data-drupal-selector="edit-field-paragraphs-0-subform-field-image-current-items-0-remove-button"]');
-    $this->assertWaitOnAjaxRequest();
 
     // Check that there are no errors.
     $this->assertSession()

@@ -249,4 +249,14 @@ trait ThunderTestTrait {
     return reset($medias);
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  protected function cleanupEnvironment() {
+    // No need to cleanup on CI.
+    if (!getenv('SKIP_TEST_CLEANUP')) {
+      parent::cleanupEnvironment();
+    }
+  }
+
 }

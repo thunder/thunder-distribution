@@ -122,11 +122,12 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->drupalGet($pageUrl);
 
     $page = $this->getSession()->getPage();
+    $driver = $this->getSession()->getDriver();
     $this->expandAllTabs();
     $this->setFieldValues($page, $this->generateMetaTagFieldValues($configuration));
 
     $this->scrollElementInView('[name="op"]');
-    $page->find('xpath', '//input[@name="op"]')->click();
+    $driver->click('//input[@name="op"]');
   }
 
   /**
