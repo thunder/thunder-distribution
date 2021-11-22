@@ -10,6 +10,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 trait ThunderArticleTestTrait {
 
   use ThunderFormFieldTestTrait;
+  use ThunderJavascriptTrait;
   use ThunderMediaTestTrait;
 
   /**
