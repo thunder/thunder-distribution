@@ -4,7 +4,7 @@
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.2.2...6.2.3)
 
-Fixes for GraphQLimplementation.
+Fixes for GraphQL implementation.
 
 - [Fix GraphQL responses contain https links](https://www.drupal.org/node/3250583)
 
