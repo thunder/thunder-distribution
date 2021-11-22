@@ -100,9 +100,14 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    *   The redirect data.
    */
   public function resolve(string $path, RefinableCacheableDependencyInterface $metadata) {
+    $emptyRedirect = [
+      'url' => '',
+      'status' => '',
+    ];
     if (!$this->redirectRepository) {
-      return [];
+      return $emptyRedirect;
     }
+
     $language = $this->languageManager->getCurrentLanguage()->getId();
 
     /** @var \Drupal\redirect\Entity\Redirect|null $redirect */
@@ -118,7 +123,7 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
         'status' => $redirect->getStatusCode(),
       ];
     }
-    return [];
+    return $emptyRedirect;
   }
 
 }
