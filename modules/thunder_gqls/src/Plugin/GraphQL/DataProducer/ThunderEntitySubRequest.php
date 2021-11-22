@@ -45,7 +45,7 @@ class ThunderEntitySubRequest extends DataProducerPluginBase implements Containe
    *
    * @var \Symfony\Component\HttpFoundation\Request
    */
-  protected Request $currentRequest;
+  protected $currentRequest;
 
   /**
    * {@inheritdoc}
