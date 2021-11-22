@@ -158,7 +158,9 @@ jobs:
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Run config tests
-        run: test-drupal-project run_tests -nc
+        run: |
+          sudo apt-get install -y libpcre2-8-0
+          test-drupal-project run_tests -nc
         env:
           DRUPAL_TESTING_TEST_GROUP: ThunderConfig
 
