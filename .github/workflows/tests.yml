@@ -31,7 +31,7 @@ jobs:
 
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     services:
       mysql:
@@ -105,7 +105,7 @@ jobs:
   test-max:
     needs: build
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     services:
       mysql:
@@ -172,7 +172,7 @@ jobs:
 
   test-upgrade:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     services:
       mysql:
@@ -282,7 +282,7 @@ jobs:
 
   test-min:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     services:
       mysql:
