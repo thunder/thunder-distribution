@@ -41,6 +41,13 @@ class ThunderEntitySubRequest extends DataProducerPluginBase implements Containe
   protected $httpKernel;
 
   /**
+   * The current request.
+   *
+   * @var \Symfony\Component\HttpFoundation\Request
+   */
+  protected $currentRequest;
+
+  /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
@@ -50,7 +57,8 @@ class ThunderEntitySubRequest extends DataProducerPluginBase implements Containe
       $configuration,
       $pluginId,
       $pluginDefinition,
-      $container->get('http_kernel')
+      $container->get('http_kernel'),
+      $container->get('request_stack')->getCurrentRequest()
     );
   }
 
@@ -65,15 +73,19 @@ class ThunderEntitySubRequest extends DataProducerPluginBase implements Containe
    *   The plugin definition.
    * @param \Symfony\Component\HttpKernel\HttpKernelInterface $httpKernel
    *   The HTTP kernel service.
+   * @param \Symfony\Component\HttpFoundation\Request $currentRequest
+   *   The current request.
    */
   public function __construct(
     array $configuration,
     string $pluginId,
     $pluginDefinition,
-    HttpKernelInterface $httpKernel
+    HttpKernelInterface $httpKernel,
+    Request $currentRequest
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
     $this->httpKernel = $httpKernel;
+    $this->currentRequest = $currentRequest;
   }
 
   /**
@@ -92,6 +104,7 @@ class ThunderEntitySubRequest extends DataProducerPluginBase implements Containe
    * @throws \Drupal\Core\Entity\EntityMalformedException
    */
   public function resolve(string $path, string $key, RefinableCacheableDependencyInterface $metadata) {
+    $path = $this->currentRequest->getSchemeAndHttpHost() . $path;
     $request = Request::create(
       $path,
       'GET',
