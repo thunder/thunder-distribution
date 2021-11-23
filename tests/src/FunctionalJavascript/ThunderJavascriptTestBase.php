@@ -15,6 +15,7 @@ use Drupal\Tests\thunder\Traits\ThunderTestTrait;
  */
 abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
 
+  use ThunderJavascriptTrait;
   use ThunderTestTrait;
   use StringTranslationTrait;
 

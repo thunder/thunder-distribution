@@ -4,7 +4,6 @@ namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderFormFieldTestTrait;
-use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTrait;
 
 /**
  * Test for update hook changes.
@@ -16,7 +15,6 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTrait;
 class InlineEntityFormTest extends ThunderJavascriptTestBase {
 
   use ThunderFormFieldTestTrait;
-  use ThunderJavascriptTrait;
 
   /**
    * Test saving collapsed gallery paragraph.
