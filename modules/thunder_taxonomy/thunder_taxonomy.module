@@ -23,8 +23,11 @@ function thunder_taxonomy_entity_type_alter(array &$entity_types) {
  */
 function thunder_taxonomy_form_taxonomy_term_form_alter(&$form, FormStateInterface $form_state) {
   // @todo Remove after seven / thunder_admin support is dropped.
-  $activeTheme = Drupal::theme()->getActiveTheme()->getName();
-  if (in_array($activeTheme, ['seven', 'thunder_admin'])) {
+  $activeTheme = Drupal::theme()->getActiveTheme();
+  $activeThemes = array_keys($activeTheme->getBaseThemeExtensions());
+  $activeThemes[] = $activeTheme->getName();
+
+  if (in_array($activeThemes, ['seven', 'thunder_admin'])) {
     // Create sidebar group.
     $form['advanced'] = [
       '#type' => 'container',
