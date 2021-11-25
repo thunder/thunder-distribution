@@ -153,10 +153,11 @@ class ThunderNodeForm implements ContainerInjectionInterface {
 
     $element = [];
     // @todo Remove after seven / thunder_admin support is dropped.
-    if (in_array($this->themeManager->getActiveTheme()->getName(), [
-      'seven',
-      'thunder_admin',
-    ])) {
+    $activeTheme = $this->themeManager->getActiveTheme();
+    $activeThemes = array_keys($activeTheme->getBaseThemeExtensions());
+    $activeThemes[] = $activeTheme->getName();
+
+    if (!empty(array_intersect($activeThemes, ['seven', 'thunder_admin']))) {
       /** @var \Drupal\content_moderation\ContentModerationState $state */
       $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
       $element['status'] = [
