@@ -106,7 +106,7 @@
         "drupal/media_entity_slideshow": "^2.0-alpha1",
         "drupal/media_entity_twitter": "^2.5",
         "drupal/media_expire": "^2.4",
-        "drupal/media_library_media_modify": "^1.0-beta3",
+        "drupal/media_library_media_modify": "dev-1.0.x",
         "drupal/metatag": "^1.13",
         "drupal/metatag_async_widget": "^1.0-alpha2",
         "drupal/paragraphs": "^1.11",
