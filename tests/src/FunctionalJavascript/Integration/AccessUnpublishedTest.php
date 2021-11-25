@@ -37,8 +37,9 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
     $this->drupalGet($node->toUrl('edit-form'));
     $this->expandAllTabs();
     $page = $this->getSession()->getPage();
+    $driver = $this->getSession()->getDriver();
     $this->scrollElementInView('[data-drupal-selector="edit-generate-token"]');
-    $page->find('xpath', '//*[@data-drupal-selector="edit-generate-token"]')->click();
+    $driver->click('//*[@data-drupal-selector="edit-generate-token"]');
     $this->waitUntilVisible('[data-drupal-selector="access-token-list"] a.clipboard-button', 5000);
     $copyToClipboard = $page->find('xpath', '//*[@data-drupal-selector="access-token-list"]//a[contains(@class, "clipboard-button")]');
     $tokenUrl = $copyToClipboard->getAttribute('data-unpublished-access-url');
@@ -57,8 +58,8 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
     $this->drupalGet($node->toUrl('edit-form'));
     $this->expandAllTabs();
     $this->scrollElementInView('[data-drupal-selector="edit-generate-token"]');
-    $page->find('css', '[data-drupal-selector="access-token-list"] li.dropbutton-toggle > button')->click();
-    $page->find('css', '[data-drupal-selector="access-token-list"] li.delete > a')->click();
+    $this->click('[data-drupal-selector="access-token-list"] li.dropbutton-toggle > button');
+    $this->click('[data-drupal-selector="access-token-list"] li.delete > a');
     $this->assertWaitOnAjaxRequest();
     $this->clickSave();
 

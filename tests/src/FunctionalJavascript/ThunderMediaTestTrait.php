@@ -29,7 +29,7 @@ trait ThunderMediaTestTrait {
     $this->assertWaitOnAjaxRequest();
 
     foreach ($medias as $media) {
-      $page->find('css', "div.media-library-views-form__rows input[value='$media']")->click();
+      $this->click("div.media-library-views-form__rows input[value='$media']");
     }
 
     $page->find('css', '.media-library-widget-modal .form-actions button')->click();
