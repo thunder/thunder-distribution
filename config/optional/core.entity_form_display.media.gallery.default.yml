@@ -43,6 +43,7 @@ content:
       add_button_text: 'Select images'
       check_selected: true
       replace_checkbox_by_order_indicator: true
+      multi_edit_on_create: true
       form_mode: override
       media_types: {  }
     third_party_settings:
