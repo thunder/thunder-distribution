@@ -1,6 +1,6 @@
 preset_accent_color: custom
 preset_focus_color: gin
-enable_darkmode: false
+enable_darkmode: 'auto'
 classic_toolbar: vertical
 icon_default: false
 icon_path: profiles/contrib/thunder/files/images/thunder.svg
