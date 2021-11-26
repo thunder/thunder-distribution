@@ -36,8 +36,9 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->clickSave();
 
     // Create 1. Article.
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
-      'field_channel' => 6,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Article 1',
       'field_seo_title[0][value]' => 'Article 1',
       'field_tags[]' => ['New Section', 'Tag1'],
@@ -53,7 +54,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
 
     // Create 2. Article.
     $this->articleFillNew([
-      'field_channel' => 6,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Article 2',
       'field_seo_title[0][value]' => 'Article 2',
       'field_tags[]' => [[7, 'New Section'], 'Tag2'],
