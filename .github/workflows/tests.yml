@@ -194,9 +194,7 @@ jobs:
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-upgrade') || github.event_name == 'schedule' }}
 
     env:
-      DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
-      DRUPAL_TESTING_PARALLEL_TESTING: false
 
     steps:
       - uses: actions/checkout@v1
@@ -243,7 +241,6 @@ jobs:
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require brianium/paratest "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
 
-          chmod -R +w docroot/sites/default
           composer update
           vendor/bin/drush updb -y
 
