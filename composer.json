@@ -125,7 +125,8 @@
         "npm-asset/slick-carousel": "^1.8",
         "npm-asset/shariff": "^3.1.1",
         "npm-asset/select2": "^4.0.7",
-        "pusher/pusher-php-server": "^3.0.3 || ^4.1.1"
+        "pusher/pusher-php-server": "^3.0.3 || ^4.1.1",
+        "egulias/email-validator": "^2.1.22"
     },
     "suggest": {
         "drupal/search_api_solr": "Provides a Apache Solr backend for the Search API module"
