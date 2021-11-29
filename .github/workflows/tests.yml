@@ -206,7 +206,6 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick, gd, pdo_mysql
-          tools: composer:v1
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
