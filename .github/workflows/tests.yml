@@ -236,7 +236,7 @@ jobs:
 
       - name: Update the docroot
         run: |
-          composer remove thunder/thunder-distribution
+          composer remove thunder/thunder-distribution -W
 
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require brianium/paratest "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
