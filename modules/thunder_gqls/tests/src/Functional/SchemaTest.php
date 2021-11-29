@@ -51,9 +51,6 @@ class SchemaTest extends ThunderGqlsTestBase {
         'breadcrumb',
       ],
       [
-        'redirect',
-      ],
-      [
         'user',
       ],
     ];
