@@ -3,7 +3,6 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
-use Drupal\Core\EventSubscriber\MainContentViewSubscriber;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Path\PathValidatorInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -11,7 +10,6 @@ use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 use Drupal\redirect\Entity\Redirect;
 use Drupal\redirect\RedirectRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Gets the ID of current user.
@@ -49,6 +47,8 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
   protected $languageManager;
 
   /**
+   * The path validator.
+   *
    * @var \Drupal\Core\Path\PathValidatorInterface
    */
   protected $pathValidator;
@@ -81,7 +81,7 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
    *   The language manager.
    * @param \Drupal\Core\Path\PathValidatorInterface $pathValidator
-   *   The language manager.
+   *   The path validator.
    * @param \Drupal\redirect\RedirectRepository|null $redirectRepository
    *   The redirect repository.
    *
