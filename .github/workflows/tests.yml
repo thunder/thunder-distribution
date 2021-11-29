@@ -194,7 +194,6 @@ jobs:
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-upgrade') || github.event_name == 'schedule' }}
 
     env:
-      DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: 3.0.8
       DRUPAL_TESTING_INSTALLATION_FORM_VALUES: "thunder_module_configure_form.install_modules_thunder_demo=NULL"
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
       DRUPAL_TESTING_PARALLEL_TESTING: false
@@ -228,10 +227,10 @@ jobs:
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
-      - name: Use Thunder 3.4 lockfile
+      - name: Use Thunder 6 lockfile
         run: |
           touch /tmp/test/thunder/finished-stages/build
-          cp ${GITHUB_WORKSPACE}/tests/fixtures/thunder3-4.composer.lock composer.lock
+          cp ${GITHUB_WORKSPACE}/tests/fixtures/thunder6.composer.lock composer.lock
           composer install
         working-directory: /tmp/test/thunder/install
 
@@ -240,19 +239,10 @@ jobs:
 
       - name: Update the docroot
         run: |
-          composer require thunder/thunder-distribution:^3.5.0 phpunit/phpunit:^7 oomphinc/composer-installers-extender:^2.0 cweagans/composer-patches:^1.7 --no-update
-          chmod -R +w docroot/sites/default
-          composer update
-          vendor/bin/drush updb -y
-
-          vendor/bin/drush pmu libraries update -y
-
-          composer self-update --2
-          composer remove phpunit/phpunit --no-update
           composer remove thunder/thunder-distribution
 
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
-          composer require brianium/paratest thunder/thunder_testing_demo:4.x-upgrade-testing-dev phpunit/phpunit:~9.5.8 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
+          composer require brianium/paratest "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
 
           chmod -R +w docroot/sites/default
           composer update
@@ -260,12 +250,6 @@ jobs:
 
           cd docroot
           php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
-
-          wget https://www.drupal.org/files/issues/2021-10-05/3240601%2B3240813-9.2.x.patch -O 3240601.patch
-          patch -p1 < 3240601.patch
-
-          wget https://www.drupal.org/files/issues/2021-11-03/3032275-78.patch
-          patch -p1 < 3032275-78.patch
         working-directory: /tmp/test/thunder/install
 
       - name: Setup Apache
