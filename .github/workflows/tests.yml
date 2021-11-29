@@ -241,7 +241,7 @@ jobs:
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require brianium/paratest "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
 
-          composer update
+          composer update -W
           vendor/bin/drush updb -y
 
           cd docroot
