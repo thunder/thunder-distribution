@@ -18,6 +18,7 @@ env:
   DRUPAL_TESTING_TEST_CODING_STYLES: false
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_TEST_GROUP: Thunder
+  DRUPAL_TESTING_TEST_FILTER: RedirectSchemaTest
   DRUPAL_TESTING_HTTP_PORT: 8888
   DRUPAL_TESTING_VERBOSE: false
   DRUPAL_TESTING_VERSION: "^1.0.28"
@@ -43,7 +44,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4', '8.0' ]
+        PHP_VERSION: [ '7.4' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
