@@ -3,6 +3,7 @@
 namespace Drupal\Tests\thunder_gqls\Functional;
 
 use Drupal\Component\Serialization\Json;
+use Drupal\node\Entity\Node;
 
 /**
  * Test the redirect endpoint.
@@ -10,6 +11,33 @@ use Drupal\Component\Serialization\Json;
  * @group Thunder
  */
 class RedirectSchemaTest extends ThunderGqlsTestBase {
+
+  /**
+   * A node entity, that is set to unpublished in setup method.
+   *
+   * @var \Drupal\node\NodeInterface
+   */
+  private $unpublishedEntity;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
+    parent::setUp();
+
+    $this->unpublishedEntity = $this->loadNodeByUuid('94ad928b-3ec8-4bcb-b617-ab1607bf69cb')
+      ->set('moderation_state', 'unpublished');
+
+    $this->graphqlUser = $this->drupalCreateUser([
+      'execute thunder_graphql arbitrary graphql requests',
+      'access content',
+      'access user profiles',
+      'view media',
+      'view published terms in channel',
+      'view published terms in tags',
+    ]);
+    $this->drupalLogin($this->graphqlUser);
+  }
 
   /**
    * Tests the jsonld extension.
@@ -33,6 +61,8 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
    * A data provider for testRedirect.
    */
   public function redirectTestCases() {
+    $unpublishedEntityPath = $this->unpublishedEntity->toUrl()->toString();
+
     return [
       'Basic redirect' => [
         [
@@ -53,13 +83,22 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
         ],
 
       ],
-      'No redirect' => [
+      'No redirect, but valid path' => [
         [
           'path' => '/burda-launches-open-source-cms-thunder',
         ],
         [
           'url' => '/burda-launches-open-source-cms-thunder',
           'status' => 200,
+        ],
+      ],
+      'unpublished entity' => [
+        [
+          'path' => $unpublishedEntityPath,
+        ],
+        [
+          'url' => $unpublishedEntityPath,
+          'status' => 403,
         ],
       ],
     ];
