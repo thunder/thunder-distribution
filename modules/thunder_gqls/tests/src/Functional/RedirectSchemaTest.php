@@ -27,6 +27,8 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
 
     $responseData = Json::decode($response->getBody())['data'];
 
+    print_r($expectedResponse);
+    print_r($responseData);
     $this->assertEqualsCanonicalizing($expectedResponse, $responseData);
   }
 
@@ -46,28 +48,28 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
           ],
         ],
       ],
-      'Redirect does not exist' => [
-        [
-          'path' => '/unknown-url',
-        ],
-        [
-          'redirect' => [
-            'url' => '/unknown-url',
-            'status' => '404',
-          ],
-        ],
-      ],
-      'No redirect' => [
-        [
-          'path' => '/burda-launches-open-source-cms-thunder',
-        ],
-        [
-          'redirect' => [
-            'url' => '/burda-launches-open-source-cms-thunder',
-            'status' => '200',
-          ],
-        ],
-      ],
+//      'Redirect does not exist' => [
+//        [
+//          'path' => '/unknown-url',
+//        ],
+//        [
+//          'redirect' => [
+//            'url' => '/unknown-url',
+//            'status' => '404',
+//          ],
+//        ],
+//      ],
+//      'No redirect' => [
+//        [
+//          'path' => '/burda-launches-open-source-cms-thunder',
+//        ],
+//        [
+//          'redirect' => [
+//            'url' => '/burda-launches-open-source-cms-thunder',
+//            'status' => '200',
+//          ],
+//        ],
+//      ],
     ];
   }
 
