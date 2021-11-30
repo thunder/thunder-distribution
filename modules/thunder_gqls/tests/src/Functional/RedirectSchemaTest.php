@@ -25,11 +25,11 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
     $response = $this->query($query, Json::encode($variables));
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
 
-    $responseData = Json::decode($response->getBody())['data'];
+    $redirectResponseData = Json::decode($response->getBody())['data']['redirect'];
 
-    print_r($expectedResponse['redirect']);
-    print_r($responseData['redirect']);
-    $this->assertEqualsCanonicalizing($expectedResponse['redirect'], $responseData['redirect']);
+    var_dump($expectedResponse);
+    var_dump($redirectResponseData);
+    $this->assertEqualsCanonicalizing($expectedResponse, $redirectResponseData);
   }
 
   /**
@@ -42,10 +42,8 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
           'path' => '/former-url',
         ],
         [
-          'redirect' => [
-            'url' => 'https://www.google.com',
-            'status' => '301',
-          ],
+          'url' => 'https://www.google.com',
+          'status' => '301',
         ],
       ],
 //      'Redirect does not exist' => [
