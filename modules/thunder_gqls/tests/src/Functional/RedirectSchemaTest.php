@@ -27,6 +27,8 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
 
     $responseData = Json::decode($response->getBody())['data'];
 
+    print_r($expectedResponse);
+    print_r($responseData);
     $this->assertEqualsCanonicalizing($expectedResponse, $responseData);
   }
 
