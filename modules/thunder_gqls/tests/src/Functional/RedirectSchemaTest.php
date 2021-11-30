@@ -93,11 +93,11 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
       ],
       'unpublished entity' => [
         [
-          'path' => 'duis-autem-vel-eum-iriure',
+          'path' => '/duis-autem-vel-eum-iriure',
         ],
         [
-          'url' => 'duis-autem-vel-eum-iriure',
-          'status' => 402,
+          'url' => '/duis-autem-vel-eum-iriure',
+          'status' => 403,
         ],
       ],
     ];
