@@ -19,11 +19,11 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_TEST_GROUP: Thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
-  DRUPAL_TESTING_VERBOSE: true
+  DRUPAL_TESTING_VERBOSE: false
   DRUPAL_TESTING_VERSION: "dev-feat/testsuites"
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
-  DRUPAL_TESTING_PARALLEL_TESTING: false
+  DRUPAL_TESTING_PARALLEL_TESTING: true
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
 
@@ -162,7 +162,7 @@ jobs:
         run: test-drupal-project run_tests
         env:
           DRUPAL_TESTING_TEST_SUITE: ${{ matrix.TESTSUITE }}
-          #DRUPAL_TESTING_TEST_GROUP: "Thunder,ThunderInstaller,ThunderConfig"
+          DRUPAL_TESTING_TEST_GROUP: "Thunder,ThunderInstaller,ThunderConfig"
 
   test-upgrade:
 
