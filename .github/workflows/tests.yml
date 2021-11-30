@@ -195,6 +195,7 @@ jobs:
 
     env:
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
+      DRUPAL_TESTING_PARALLEL_TESTING: false
 
     steps:
       - uses: actions/checkout@v1
@@ -236,12 +237,12 @@ jobs:
 
       - name: Update the docroot
         run: |
-          composer remove thunder/thunder-distribution -W
+          composer remove thunder/thunder-distribution
 
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
-          composer require brianium/paratest drush/drush "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
+          composer require brianium/paratest "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
 
-          composer update -W
+          composer update
           vendor/bin/drush updb -y
 
           cd docroot
