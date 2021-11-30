@@ -22,6 +22,7 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
     $schema = "redirect";
     $query = $this->getQueryFromFile($schema);
 
+
     $response = $this->query($query, Json::encode($variables));
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
 
@@ -43,6 +44,28 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
           'redirect' => [
             'url' => 'https://www.google.com',
             'status' => '301',
+          ],
+        ],
+      ],
+      'Redirect does not exist' => [
+        [
+          'path' => '/unknown-url',
+        ],
+        [
+          'redirect' => [
+            'url' => '/unknown-url',
+            'status' => '404',
+          ],
+        ],
+      ],
+      'No redirect' => [
+        [
+          'path' => '/burda-launches-open-source-cms-thunder',
+        ],
+        [
+          'redirect' => [
+            'url' => '/burda-launches-open-source-cms-thunder',
+            'status' => '200',
           ],
         ],
       ],
