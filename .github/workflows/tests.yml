@@ -19,7 +19,7 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_TEST_GROUP: Thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
-  DRUPAL_TESTING_VERBOSE: true
+  DRUPAL_TESTING_VERBOSE: false
   DRUPAL_TESTING_VERSION: "^1.0.28"
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
@@ -239,7 +239,7 @@ jobs:
         run: |
           composer remove thunder/thunder-distribution --no-update
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
-          composer require brianium/paratest "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
+          composer require brianium/paratest "drupal-testing-thunder/thunder-distribution:*" --no-update
 
           composer update
           vendor/bin/drush updb -y
