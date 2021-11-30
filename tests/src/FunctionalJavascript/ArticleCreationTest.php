@@ -170,7 +170,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->drupalGet($node->toUrl('edit-form'));
 
     $this->setModerationState('unpublished');
-    $this->getSession()->getPage()->find('xpath', '//*[@id="edit-preview"]')->click();
+    $this->getSession()->getDriver()->click('//*[@id="edit-preview"]');
     $this->clickLink('Back to content editing');
     $this->assertSession()->pageTextNotContains('An illegal choice has been detected. Please contact the site administrator.');
 

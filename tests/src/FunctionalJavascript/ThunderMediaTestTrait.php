@@ -20,9 +20,8 @@ trait ThunderMediaTestTrait {
    *   List of media identifiers.
    */
   public function selectMedia($fieldName, $entityBrowser, array $medias) {
-
-    /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
+    $driver = $this->getSession()->getDriver();
 
     $this->assertWaitOnAjaxRequest();
 
@@ -37,7 +36,7 @@ trait ThunderMediaTestTrait {
     $this->assertWaitOnAjaxRequest();
 
     foreach ($medias as $media) {
-      $page->find('xpath', "//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]")->click();
+      $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]");
     }
     $this->assertWaitOnAjaxRequest();
 
