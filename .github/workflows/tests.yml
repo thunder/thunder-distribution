@@ -256,8 +256,6 @@ jobs:
 
       - name: Run tests suite
         run: test-drupal-project run_tests
-        env:
-          DRUPAL_TESTING_PARALLEL_TESTING: true
 
   test-min:
 
