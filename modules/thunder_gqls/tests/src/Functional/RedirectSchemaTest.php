@@ -97,7 +97,7 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
         ],
         [
           'url' => 'duis-autem-vel-eum-iriure',
-          'status' => 403,
+          'status' => 402,
         ],
       ],
     ];
