@@ -3,7 +3,6 @@
 namespace Drupal\Tests\thunder_gqls\Functional;
 
 use Drupal\Component\Serialization\Json;
-use Drupal\node\Entity\Node;
 
 /**
  * Test the redirect endpoint.
