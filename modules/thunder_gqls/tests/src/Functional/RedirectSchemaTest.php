@@ -26,9 +26,6 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
 
     $redirectResponseData = Json::decode($response->getBody())['data']['redirect'];
-
-    var_dump($expectedResponse);
-    var_dump($redirectResponseData);
     $this->assertEqualsCanonicalizing($expectedResponse, $redirectResponseData);
   }
 
