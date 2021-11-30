@@ -16,7 +16,7 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
    *
    * @var \Drupal\node\NodeInterface
    */
-  private $unpublishedEntity;
+  protected $unpublishedEntity;
 
   /**
    * {@inheritdoc}
@@ -62,8 +62,6 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
    * A data provider for testRedirect.
    */
   public function redirectTestCases() {
-    $unpublishedEntityPath = $this->unpublishedEntity->toUrl()->toString();
-
     return [
       'Basic redirect' => [
         [
@@ -95,10 +93,10 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
       ],
       'unpublished entity' => [
         [
-          'path' => $unpublishedEntityPath,
+          'path' => 'duis-autem-vel-eum-iriure',
         ],
         [
-          'url' => $unpublishedEntityPath,
+          'url' => 'duis-autem-vel-eum-iriure',
           'status' => 403,
         ],
       ],
