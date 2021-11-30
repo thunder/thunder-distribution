@@ -24,8 +24,9 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
   protected function setUp(): void {
     parent::setUp();
 
-    $this->unpublishedEntity = $this->loadNodeByUuid('94ad928b-3ec8-4bcb-b617-ab1607bf69cb')
-      ->set('moderation_state', 'unpublished');
+    $this->unpublishedEntity = $this->loadNodeByUuid('94ad928b-3ec8-4bcb-b617-ab1607bf69cb');
+    $this->unpublishedEntity->set('moderation_state', 'unpublished')
+      ->save();
 
     $this->graphqlUser = $this->drupalCreateUser([
       'execute thunder_graphql arbitrary graphql requests',
@@ -35,6 +36,7 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
       'view published terms in channel',
       'view published terms in tags',
     ]);
+
     $this->drupalLogin($this->graphqlUser);
   }
 
