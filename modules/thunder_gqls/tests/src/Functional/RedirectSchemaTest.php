@@ -46,25 +46,25 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
           'status' => 301,
         ],
       ],
-//      'Redirect does not exist' => [
-//        [
-//          'path' => '/unknown-url',
-//        ],
-//        [
-//          'url' => '/unknown-url',
-//          'status' => 404,
-//        ],
-//
-//      ],
-//      'No redirect' => [
-//        [
-//          'path' => '/burda-launches-open-source-cms-thunder',
-//        ],
-//        [
-//          'url' => '/burda-launches-open-source-cms-thunder',
-//          'status' => 200,
-//        ],
-//      ],
+      'Redirect does not exist' => [
+        [
+          'path' => '/unknown-url',
+        ],
+        [
+          'url' => '/unknown-url',
+          'status' => 404,
+        ],
+
+      ],
+      'No redirect' => [
+        [
+          'path' => '/burda-launches-open-source-cms-thunder',
+        ],
+        [
+          'url' => '/burda-launches-open-source-cms-thunder',
+          'status' => 200,
+        ],
+      ],
     ];
   }
 
