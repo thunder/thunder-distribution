@@ -195,7 +195,6 @@ jobs:
 
     env:
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
-      DRUPAL_TESTING_PARALLEL_TESTING: false
 
     steps:
       - uses: actions/checkout@v1
@@ -239,7 +238,7 @@ jobs:
         run: |
           composer remove thunder/thunder-distribution --no-update
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
-          composer require brianium/paratest "drupal-testing-thunder/thunder-distribution:*" --no-update
+          composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
 
           composer update
           vendor/bin/drush updb -y
