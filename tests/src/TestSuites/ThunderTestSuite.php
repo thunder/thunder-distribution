@@ -6,12 +6,12 @@ use Drupal\Core\Test\TestDiscovery;
 use PHPUnit\Framework\TestSuite;
 
 /**
- * Discovers tests for the functional test suite.
+ * Discovers tests for the Thunder test suite.
  */
 class ThunderTestSuite extends TestSuite {
 
   /**
-   * Factory method which loads up a suite with all functional tests.
+   * Factory method which loads up a suite with all Thunder tests.
    *
    * @return static
    *   The test suite.
