@@ -54,6 +54,7 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
    * Redirect test cases.
    *
    * @return array[]
+   *   The redirect test cases.
    */
   public function redirectTestCases() {
     return [
