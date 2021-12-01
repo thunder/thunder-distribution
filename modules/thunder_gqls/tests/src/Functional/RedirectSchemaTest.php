@@ -72,7 +72,7 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
         ],
         [
           'url' => '/unknown-url',
-          'status' => 405,
+          'status' => 404,
         ],
 
       ],
