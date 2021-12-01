@@ -252,7 +252,7 @@ jobs:
           composer remove thunder/thunder-distribution
 
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
-          composer require brianium/paratest thunder/thunder_testing_demo:4.x-upgrade-testing-dev phpunit/phpunit:~9.5.8 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
+          composer require brianium/paratest:^6.3 thunder/thunder_testing_demo:4.x-upgrade-testing-dev phpunit/phpunit:~9.5.8 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
 
           chmod -R +w docroot/sites/default
           composer update
