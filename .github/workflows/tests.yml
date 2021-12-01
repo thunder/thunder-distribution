@@ -23,7 +23,7 @@ env:
   DRUPAL_TESTING_VERSION: "^1.0.28"
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
-  DRUPAL_TESTING_PARALLEL_TESTING: false
+  DRUPAL_TESTING_PARALLEL_TESTING: true
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
 
@@ -72,7 +72,7 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Add needed dependencies
-        run: composer require "drupal/core-dev:~9.2.0" "phpspec/prophecy-phpunit:^2" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: composer require "drupal/core-dev:~9.2.0" "brianium/paratest:^6.3.0" "phpspec/prophecy-phpunit:^2" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Set composer bin path
         run: composer config bin-dir bin/ --working-dir=/tmp/test/thunder/install
@@ -252,7 +252,7 @@ jobs:
           composer remove thunder/thunder-distribution
 
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
-          composer require brianium/paratest thunder/thunder_testing_demo:4.x-upgrade-testing-dev phpunit/phpunit:~9.5.8 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
+          composer require brianium/paratest:^6.3.0 thunder/thunder_testing_demo:4.x-upgrade-testing-dev phpunit/phpunit:~9.5.8 "phpspec/prophecy-phpunit:^2" "drupal-testing-thunder/thunder-distribution:*" --no-update
 
           chmod -R +w docroot/sites/default
           composer update
@@ -278,7 +278,7 @@ jobs:
       - name: Run tests suite
         run: test-drupal-project run_tests
         env:
-          DRUPAL_TESTING_PARALLEL_TESTING: false
+          DRUPAL_TESTING_PARALLEL_TESTING: true
 
   test-min:
 
