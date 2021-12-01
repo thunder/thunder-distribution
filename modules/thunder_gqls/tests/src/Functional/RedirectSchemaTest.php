@@ -31,24 +31,25 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
   /**
    * Tests the jsonld extension.
    *
-   * @dataProvider redirectTestCases
-   *
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public function testRedirect(array $variables, array $expectedResponse) {
-    $schema = "redirect";
-    $query = $this->getQueryFromFile($schema);
+  public function testRedirect() {
+    $testCases = $this-> redirectTestCases();
 
-    $response = $this->query($query, Json::encode($variables));
-    $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
+    foreach ($testCases as $testCase) {
+      list($variables, $expectedResponse) = $testCase;
 
-    $redirectResponseData = Json::decode($response->getBody())['data']['redirect'];
-    $this->assertEqualsCanonicalizing($expectedResponse, $redirectResponseData);
+      $schema = "redirect";
+      $query = $this->getQueryFromFile($schema);
+
+      $response = $this->query($query, Json::encode($variables));
+      $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
+
+      $redirectResponseData = Json::decode($response->getBody())['data']['redirect'];
+      $this->assertEqualsCanonicalizing($expectedResponse, $redirectResponseData);
+    }
   }
 
-  /**
-   * A data provider for testRedirect.
-   */
   public function redirectTestCases() {
     return [
       'Basic redirect' => [

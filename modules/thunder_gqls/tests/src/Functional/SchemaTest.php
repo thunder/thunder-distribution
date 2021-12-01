@@ -23,37 +23,19 @@ class SchemaTest extends ThunderGqlsTestBase {
    * @group NoUpdate
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
-   *
-   * @dataProvider schemas
    */
-  public function testSchema(string $schema) {
-    $this->runAndTestQuery($schema);
-  }
-
-  /**
-   * A data provider for testSchema.
-   */
-  public function schemas(): array {
-    return [
-      [
-        'article',
-      ],
-      [
-        'paragraphs',
-      ],
-      [
-        'entities_with_term',
-      ],
-      [
-        'menu',
-      ],
-      [
-        'breadcrumb',
-      ],
-      [
-        'user',
-      ],
+  public function testSchema() {
+    $schemas = [
+      'article',
+      'paragraphs',
+      'entities_with_term',
+      'menu',
+      'breadcrumb',
+      'user',
     ];
+    foreach ($schemas as $schema) {
+      $this->runAndTestQuery($schema);
+    }
   }
 
   /**
