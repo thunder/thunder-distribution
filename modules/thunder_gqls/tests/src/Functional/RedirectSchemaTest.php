@@ -12,6 +12,23 @@ use Drupal\Component\Serialization\Json;
 class RedirectSchemaTest extends ThunderGqlsTestBase {
 
   /**
+   * A node entity, that is set to unpublished in setup method.
+   *
+   * @var \Drupal\node\NodeInterface
+   */
+  protected $unpublishedEntity;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
+    parent::setUp();
+
+    $this->unpublishedEntity = $this->loadNodeByUuid('94ad928b-3ec8-4bcb-b617-ab1607bf69cb');
+    $this->unpublishedEntity->set('moderation_state', 'unpublished')->save();
+  }
+
+  /**
    * Tests the jsonld extension.
    *
    * @dataProvider redirectTestCases
@@ -62,7 +79,7 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
           'status' => 200,
         ],
       ],
-      'unpublished entity' => [
+      'Unpublished entity' => [
         [
           'path' => '/duis-autem-vel-eum-iriure',
         ],
