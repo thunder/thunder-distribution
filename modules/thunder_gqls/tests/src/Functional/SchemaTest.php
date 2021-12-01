@@ -117,7 +117,7 @@ GQL;
    */
   public function testExpiredImage() {
 
-    \Drupal::service('entity.repository')->loadEntityByUuid('media', '17965877-27b2-428f-8b8c-7dccba9786e5')
+    $this->loadMediaByUuid('17965877-27b2-428f-8b8c-7dccba9786e5')
       ->setUnpublished()
       ->save();
 

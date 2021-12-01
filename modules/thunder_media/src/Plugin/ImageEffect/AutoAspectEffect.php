@@ -60,7 +60,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
       return TRUE;
     }
 
-    /** @var \Drupal\image\ImageStyleInterface $style */
+    /** @var \Drupal\image\ImageStyleInterface|NULL $style */
     $style = $this->entityTypeManager->getStorage('image_style')->load($style_name);
     if (empty($style)) {
       // Required preset has gone missing?

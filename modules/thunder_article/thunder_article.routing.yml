@@ -4,7 +4,7 @@ node.revision_revert_default_confirm:
     _form: '\Drupal\thunder_article\Form\NodeRevisionRevertDefaultForm'
     _title: 'Revert to earlier revision'
   requirements:
-    _access_node_revision: 'update'
+    _entity_access: 'node.revert revision'
     node: \d+
   options:
     _node_operation_route: TRUE
