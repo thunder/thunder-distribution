@@ -120,6 +120,7 @@ jobs:
           - 4444:4444
 
     strategy:
+      fail-fast: false
       matrix:
         PHP_VERSION: [ '7.4', '8.0' ]
         CHUNK: [ 1, 2, 3 ]
