@@ -12,35 +12,6 @@ use Drupal\Component\Serialization\Json;
 class RedirectSchemaTest extends ThunderGqlsTestBase {
 
   /**
-   * A node entity, that is set to unpublished in setup method.
-   *
-   * @var \Drupal\node\NodeInterface
-   */
-  protected $unpublishedEntity;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function setUp(): void {
-    parent::setUp();
-
-    $this->unpublishedEntity = $this->loadNodeByUuid('94ad928b-3ec8-4bcb-b617-ab1607bf69cb');
-    $this->unpublishedEntity->set('moderation_state', 'unpublished')
-      ->save();
-
-    $this->graphqlUser = $this->drupalCreateUser([
-      'execute thunder_graphql arbitrary graphql requests',
-      'access content',
-      'access user profiles',
-      'view media',
-      'view published terms in channel',
-      'view published terms in tags',
-    ]);
-
-    $this->drupalLogin($this->graphqlUser);
-  }
-
-  /**
    * Tests the jsonld extension.
    *
    * @dataProvider redirectTestCases
