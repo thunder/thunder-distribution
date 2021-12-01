@@ -45,7 +45,7 @@
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
             "drupal/entity_browser": {
-                "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2019-07-04/2858438_17.patch",
+                "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2019-07-04/2858438_19.patch",
                 "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2020-06-05/2851580-88.patch",
                 "Trying to access array offset on value of type null in EntityBrowserElement valueCallback": "https://www.drupal.org/files/issues/2021-02-19/3199269-array-value-null.patch"
             },
@@ -77,7 +77,7 @@
         "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.9",
-        "drupal/core": "^9.2.8@STABLE",
+        "drupal/core": "^9.3.0@RC",
         "drupal/config_selector": "^2.1",
         "drupal/config_update": "^1.7",
         "drupal/content_lock": "^2.1",
@@ -133,8 +133,7 @@
         "npm-asset/slick-carousel": "^1.8",
         "npm-asset/shariff": "^3.1.1",
         "npm-asset/select2": "^4.0.7",
-        "pusher/pusher-php-server": "^3.0.3 || ^4.1.1",
-        "egulias/email-validator": "^2.1.22"
+        "pusher/pusher-php-server": "^3.0.3 || ^4.1.1"
     },
     "suggest": {
         "drupal/search_api_solr": "Provides a Apache Solr backend for the Search API module"
