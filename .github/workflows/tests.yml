@@ -17,7 +17,6 @@ env:
   DRUPAL_TESTING_DATABASE_ENGINE: mysql
   DRUPAL_TESTING_TEST_CODING_STYLES: false
   DRUPAL_TESTING_TEST_PROFILE: thunder
-  DRUPAL_TESTING_TEST_GROUP: Thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
   DRUPAL_TESTING_VERBOSE: true
   DRUPAL_TESTING_VERSION: "dev-feat/testsuites"
@@ -123,7 +122,7 @@ jobs:
     strategy:
       matrix:
         PHP_VERSION: [ '7.4', '8.0' ]
-        TESTSUITE: [ 'functional-javascript', 'functional' ]
+        CHUNK: [ 1, 2, 3, 4 ]
 
     steps:
       - uses: actions/checkout@v1
@@ -161,8 +160,8 @@ jobs:
       - name: Run tests
         run: test-drupal-project run_tests
         env:
-          DRUPAL_TESTING_TEST_SUITE: ${{ matrix.TESTSUITE }}
-          #DRUPAL_TESTING_TEST_GROUP: "Thunder,ThunderInstaller,ThunderConfig"
+          THUNDER_TEST_CHUNK: ${{ matrix.TESTSUITE }}
+          DRUPAL_TESTING_TEST_SUITE_FILE: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
 
   test-upgrade:
 
@@ -189,6 +188,7 @@ jobs:
 
     env:
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
+      DRUPAL_TESTING_TEST_GROUP: Thunder
 
     steps:
       - uses: actions/checkout@v1
@@ -276,6 +276,7 @@ jobs:
 
     env:
       DRUPAL_TESTING_DRUPAL_VERSION: '~9.3.0'
+      DRUPAL_TESTING_TEST_GROUP: Thunder
 
     steps:
       - uses: actions/checkout@v1
