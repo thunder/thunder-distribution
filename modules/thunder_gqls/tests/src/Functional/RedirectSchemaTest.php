@@ -39,8 +39,7 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
     foreach ($testCases as $testCase) {
       [$variables, $expectedResponse] = $testCase;
 
-      $schema = "redirect";
-      $query = $this->getQueryFromFile($schema);
+      $query = $this->getQueryFromFile("redirect");
 
       $response = $this->query($query, Json::encode($variables));
       $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
