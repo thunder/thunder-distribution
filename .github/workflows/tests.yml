@@ -122,7 +122,7 @@ jobs:
     strategy:
       matrix:
         PHP_VERSION: [ '7.4', '8.0' ]
-        CHUNK: [ 1, 2, 3, 4 ]
+        CHUNK: [ 1, 2, 3 ]
 
     steps:
       - uses: actions/checkout@v1
@@ -160,7 +160,7 @@ jobs:
       - name: Run tests
         run: test-drupal-project run_tests
         env:
-          THUNDER_TEST_CHUNK: ${{ matrix.TESTSUITE }}
+          THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
           DRUPAL_TESTING_TEST_SUITE_FILE: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
 
   test-upgrade:
