@@ -1,6 +1,31 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.full_html
+    - node.type.article
+    - node.type.page
+    - taxonomy.vocabulary.channel
+    - taxonomy.vocabulary.tags
+    - workflows.workflow.editorial
+  module:
+    - access_unpublished
+    - content_lock
+    - content_moderation
+    - contextual
+    - dropzonejs
+    - entity_browser
+    - file
+    - filter
+    - media
+    - node
+    - path
+    - responsive_preview
+    - scheduler
+    - system
+    - taxonomy
+    - thunder_taxonomy
+    - toolbar
 id: restricted_editor
 label: 'Restricted editor'
 weight: -8
