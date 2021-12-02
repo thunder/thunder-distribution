@@ -10,10 +10,10 @@ use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
-use Drupal\node\Access\NodeRevisionAccessCheck;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Theme\ThemeManagerInterface;
+use Drupal\node\NodeInterface;
 
 /**
  * Base for handler for node add/edit forms.
@@ -42,13 +42,6 @@ class ThunderNodeForm implements ContainerInjectionInterface {
    * @var \Symfony\Component\HttpFoundation\Request
    */
   protected $request;
-
-  /**
-   * The node revision access check service.
-   *
-   * @var \Drupal\node\Access\NodeRevisionAccessCheck
-   */
-  protected $nodeRevisionAccess;
 
   /**
    * The moderation information service.
@@ -80,8 +73,6 @@ class ThunderNodeForm implements ContainerInjectionInterface {
    *   The messenger service.
    * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
    *   The request stack service.
-   * @param \Drupal\node\Access\NodeRevisionAccessCheck $node_revision_access
-   *   The node revision access check service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
    * @param \Drupal\Core\Theme\ThemeManagerInterface $theme_manager
@@ -90,11 +81,10 @@ class ThunderNodeForm implements ContainerInjectionInterface {
    *   (optional) The moderation info service. The optionality is important
    *   otherwise this form becomes dependent on the content_moderation module.
    */
-  public function __construct(AccountInterface $current_user, MessengerInterface $messenger, RequestStack $requestStack, NodeRevisionAccessCheck $node_revision_access, EntityTypeManagerInterface $entity_type_manager, ThemeManagerInterface $theme_manager, ModerationInformationInterface $moderationInfo = NULL) {
+  public function __construct(AccountInterface $current_user, MessengerInterface $messenger, RequestStack $requestStack, EntityTypeManagerInterface $entity_type_manager, ThemeManagerInterface $theme_manager, ModerationInformationInterface $moderationInfo = NULL) {
     $this->currentUser = $current_user;
     $this->messenger = $messenger;
     $this->request = $requestStack->getCurrentRequest();
-    $this->nodeRevisionAccess = $node_revision_access;
     $this->entityTypeManager = $entity_type_manager;
     $this->themeManager = $theme_manager;
     $this->moderationInfo = $moderationInfo;
@@ -108,10 +98,9 @@ class ThunderNodeForm implements ContainerInjectionInterface {
       $container->get('current_user'),
       $container->get('messenger'),
       $container->get('request_stack'),
-      $container->get('access_check.node.revision'),
       $container->get('entity_type.manager'),
       $container->get('theme.manager'),
-      $container->has('content_moderation.moderation_information') ? $container->get('content_moderation.moderation_information') : NULL
+      $container->get('content_moderation.moderation_information', ContainerInterface::NULL_ON_INVALID_REFERENCE)
     );
   }
 
@@ -142,7 +131,7 @@ class ThunderNodeForm implements ContainerInjectionInterface {
   /**
    * {@inheritdoc}
    */
-  protected function actions($entity) {
+  protected function actions(NodeInterface $entity) {
     /** @var \Drupal\Core\Entity\ContentEntityStorageInterface $storage */
     $storage = $this->entityTypeManager->getStorage($entity->getEntityTypeId());
     $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()->getId());
@@ -194,7 +183,7 @@ class ThunderNodeForm implements ContainerInjectionInterface {
       $element['revert_to_default'] = [
         '#type' => 'link',
         '#title' => $this->t('Revert to default revision'),
-        '#access' => $this->nodeRevisionAccess->checkAccess($entity, $this->currentUser, 'update'),
+        '#access' => $entity->access('revert revision', $this->currentUser),
         '#weight' => 101,
         '#attributes' => [
           'class' => ['button', 'button--danger'],

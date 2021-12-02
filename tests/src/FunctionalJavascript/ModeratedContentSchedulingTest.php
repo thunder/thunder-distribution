@@ -93,7 +93,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $node = $this->getNodeByTitle('Test workflow article 2 - Published');
 
     // Set date manually, unpublish cannot be in the past.
-    $node->unpublish_on->value = strtotime('yesterday');
+    $node->set('unpublish_on', strtotime('yesterday'));
     $node->save();
 
     $revision_id = $node->getRevisionId();
