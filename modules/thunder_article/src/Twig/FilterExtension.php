@@ -2,10 +2,13 @@
 
 namespace Drupal\thunder_article\Twig;
 
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+
 /**
  * Introduce some twig filters.
  */
-class FilterExtension extends \Twig_Extension {
+class FilterExtension extends AbstractExtension {
 
   /**
    * Returns introduced filters.
@@ -15,8 +18,8 @@ class FilterExtension extends \Twig_Extension {
    */
   public function getFilters() {
     return [
-      new \Twig_SimpleFilter('plain_text', [$this, 'plainText']),
-      new \Twig_SimpleFilter('basic_format', [$this, 'basicFormat'], ['is_safe' => ['html']]),
+      new TwigFilter('plain_text', [$this, 'plainText']),
+      new TwigFilter('basic_format', [$this, 'basicFormat'], ['is_safe' => ['html']]),
     ];
   }
 
@@ -33,32 +36,30 @@ class FilterExtension extends \Twig_Extension {
   /**
    * Plains a text. Strips everything evil out.
    *
-   * @param string $value
+   * @param array $value
    *   The content to be processed.
    *
    * @return string
    *   The processed content.
    */
-  public static function plainText($value) {
-    $element = render($value);
+  public static function plainText(array $value) {
+    $element = \Drupal::service('renderer')->render($value);
     $element = strip_tags($element);
-    $element = html_entity_decode($element, ENT_QUOTES);
-    return $element;
+    return html_entity_decode($element, ENT_QUOTES);
   }
 
   /**
    * Cleans a text and just allow a few tags.
    *
-   * @param string $value
+   * @param array $value
    *   The content to be processed.
    *
    * @return string
    *   The processed content.
    */
-  public static function basicFormat($value) {
-    $element = render($value);
-    $element = strip_tags($element, '<a><em><strong><b><i>');
-    return $element;
+  public static function basicFormat(array $value) {
+    $element = \Drupal::service('renderer')->render($value);
+    return strip_tags($element, '<a><em><strong><b><i>');
   }
 
 }
