@@ -1,5 +1,14 @@
 # Changelog
 
+## [6.2.4](https://github.com/thunder/thunder-distribution/tree/6.2.4) 2021-12-02
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.2.3...6.2.4)
+
+Bug fix release improving our GraphQL implementation and the integration of third party admin themes.
+
+- [GraphQL undefined index error](https://www.drupal.org/node/3250638)
+- [Add base theme determination](https://www.drupal.org/node/3250864)
+
 ## [6.2.3](https://github.com/thunder/thunder-distribution/tree/6.2.3) 2021-11-22
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.2.2...6.2.3)
