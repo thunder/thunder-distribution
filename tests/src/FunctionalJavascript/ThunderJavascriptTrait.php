@@ -83,13 +83,7 @@ JS;
    */
   public function scrollElementInView($cssSelector) {
     $this->getSession()
-      ->executeScript('
-        var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-        var element = jQuery(\'' . addcslashes($cssSelector, '\'') . '\');
-        var scrollTop = element.offset().top - (viewPortHeight/2);
-        var scrollableParent = jQuery.isFunction(element.scrollParent) ? element.scrollParent() : [];
-        if (scrollableParent.length > 0 && scrollableParent[0] !== document && scrollableParent[0] !== document.body) { scrollableParent[0].scrollTop = scrollableParent[0].scrollTop + scrollTop - scrollableParent.offset().top } else { window.scroll(0, scrollTop); };
-      ');
+      ->executeScript("document.querySelector('{$cssSelector}').scrollIntoView({block: 'center'})");
   }
 
   /**
