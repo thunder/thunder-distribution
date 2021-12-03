@@ -14,32 +14,6 @@ trait ThunderFormFieldTestTrait {
   use ThunderJavascriptTrait;
 
   /**
-   * Set value for group of checkboxes.
-   *
-   * Existing selection will be cleared before new values are applied.
-   *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
-   * @param string $fieldName
-   *   Field name.
-   * @param string $value
-   *   Comma separated values for checkboxes.
-   */
-  protected function setCheckbox(DocumentElement $page, $fieldName, $value) {
-    // UnCheck all checkboxes and check defined.
-    $this->getSession()
-      ->executeScript("jQuery('input[name*=\"{$fieldName}\"]').prop('checked', false);");
-
-    $checkNames = explode(',', $value);
-    foreach ($checkNames as $checkName) {
-      $checkBoxName = $fieldName . '[' . trim($checkName) . ']';
-
-      $this->scrollElementInView('[name="' . $checkBoxName . '"]');
-      $page->checkField($checkBoxName);
-    }
-  }
-
-  /**
    * Set value for defined field name on current page.
    *
    * @param \Behat\Mink\Element\DocumentElement $page
@@ -50,15 +24,6 @@ trait ThunderFormFieldTestTrait {
    *   Value for field.
    */
   public function setFieldValue(DocumentElement $page, $fieldName, $value) {
-    // If field is checkbox list, then use custom functionality to set values.
-    // @todo needs documentation.
-    $checkboxes = $page->findAll('xpath', "//input[@type=\"checkbox\" and starts-with(@name, \"{$fieldName}[\")]");
-    if (!empty($checkboxes)) {
-      $this->setCheckbox($page, $fieldName, $value);
-
-      return;
-    }
-
     // If field is date/time field, then set value directly to field.
     $dateTimeFields = $page->findAll('xpath', "//input[(@type=\"date\" or @type=\"time\") and @name=\"{$fieldName}\"]");
     if (!empty($dateTimeFields)) {
