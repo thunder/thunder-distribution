@@ -18,24 +18,22 @@ trait ThunderFormFieldTestTrait {
    *
    * Existing selection will be cleared before new values are applied.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $fieldName
    *   Field name.
    * @param string $value
    *   Comma separated values for checkboxes.
    */
-  protected function setCheckbox(DocumentElement $page, $fieldName, $value) {
+  protected function setCheckbox($fieldName, $value) {
     // UnCheck all checkboxes and check defined.
     $this->getSession()
-      ->executeScript("jQuery('input[name*=\"{$fieldName}\"]').prop('checked', false);");
+      ->executeScript("document.querySelectorAll('input[name*=\"{$fieldName}\"]').forEach((elem) => { elem.checked = false; });");
 
     $checkNames = explode(',', $value);
     foreach ($checkNames as $checkName) {
       $checkBoxName = $fieldName . '[' . trim($checkName) . ']';
 
       $this->scrollElementInView('[name="' . $checkBoxName . '"]');
-      $page->checkField($checkBoxName);
+      $this->getSession()->getPage()->checkField($checkBoxName);
     }
   }
 
