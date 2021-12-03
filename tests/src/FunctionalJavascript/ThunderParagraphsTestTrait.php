@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-use Behat\Mink\Element\DocumentElement;
 use Drupal\Component\Utility\Html;
 
 /**
@@ -246,17 +245,16 @@ trait ThunderParagraphsTestTrait {
   /**
    * Click button for editing of paragraph.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $paragraphsFieldName
    *   Field name in content type used to paragraphs.
    * @param int $index
    *   Index of paragraph to be edited, starts from 0.
    */
-  public function editParagraph(DocumentElement $page, $paragraphsFieldName, $index) {
+  public function editParagraph($paragraphsFieldName, $index) {
     $editButtonName = "{$paragraphsFieldName}_{$index}_edit";
 
     $this->scrollElementInView("[name=\"{$editButtonName}\"]");
+    $page = $this->getSession()->getPage();
     $page->pressButton($editButtonName);
     $this->assertWaitOnAjaxRequest();
   }

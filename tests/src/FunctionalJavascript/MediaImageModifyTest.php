@@ -118,9 +118,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $node = $this->loadNodeByUuid('0bd5c257-2231-450f-b4c2-ab156af7b78d');
     $this->drupalGet($node->toUrl('edit-form'));
 
-    $page = $this->getSession()->getPage();
-
-    $this->editParagraph($page, 'field_paragraphs', 0);
+    $this->editParagraph('field_paragraphs', 0);
 
     // Remove image.
     $this->clickAjaxButtonCssSelector('[data-drupal-selector="edit-field-paragraphs-0-subform-field-image-current-items-0-remove-button"]');

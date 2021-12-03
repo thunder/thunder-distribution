@@ -42,7 +42,7 @@ END;
 
     $page = $this->getSession()->getPage();
 
-    $this->editParagraph($page, 'field_paragraphs', 0);
+    $this->editParagraph('field_paragraphs', 0);
 
     // Wait for all images to be displayed properly.
     $this->getSession()
@@ -93,7 +93,7 @@ END;
 
     $page = $this->getSession()->getPage();
 
-    $this->editParagraph($page, 'field_paragraphs', 0);
+    $this->editParagraph('field_paragraphs', 0);
 
     // Remove 2nd Image.
     $this->clickAjaxButtonCssSelector('[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current-items-1-remove-button"]');
@@ -116,7 +116,7 @@ END;
     // Test add + reorder inside entity browser.
     $this->drupalGet($node->toUrl('edit-form'));
 
-    $this->editParagraph($page, 'field_paragraphs', 0);
+    $this->editParagraph('field_paragraphs', 0);
 
     // Click Select entities -> to open Entity Browser.
     $this->openEntityBrowser('edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images', 'multiple_image_browser');
@@ -148,7 +148,7 @@ END;
     // Test remove inside entity browser.
     $this->drupalGet($node->toUrl('edit-form'));
 
-    $this->editParagraph($page, 'field_paragraphs', 0);
+    $this->editParagraph('field_paragraphs', 0);
 
     // Click Select entities -> to open Entity Browser.
     $this->openEntityBrowser('edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images', 'multiple_image_browser');
