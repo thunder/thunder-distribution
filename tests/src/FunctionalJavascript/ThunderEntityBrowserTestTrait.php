@@ -16,14 +16,12 @@ trait ThunderEntityBrowserTestTrait {
   /**
    * Open modal entity browser and switch into iframe from it.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $drupalSelector
    *   Drupal selector.
    * @param string $entityBrowser
    *   Entity browser name.
    */
-  public function openEntityBrowser(DocumentElement $page, $drupalSelector, $entityBrowser) {
+  public function openEntityBrowser($drupalSelector, $entityBrowser) {
     $this->clickDrupalSelector($drupalSelector . '-entity-browser-entity-browser-open-modal');
     $this->assertWaitOnAjaxRequest();
 
@@ -39,12 +37,11 @@ trait ThunderEntityBrowserTestTrait {
   /**
    * Submit changes in modal entity browser.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $entityBrowser
    *   Entity browser name.
    */
-  public function submitEntityBrowser(DocumentElement $page, $entityBrowser) {
+  public function submitEntityBrowser($entityBrowser) {
+    $page = $this->getSession()->getPage();
     if ($entityBrowser == 'multiple_image_browser') {
       $this->getSession()->wait(200);
       $this->assertWaitOnAjaxRequest();

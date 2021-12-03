@@ -29,7 +29,7 @@ trait ThunderArticleTestTrait {
         $this->assertWaitOnAjaxRequest();
         $this->expandAllTabs();
       }
-      $this->setFieldValues($this->getSession()->getPage(), $fieldValues);
+      $this->setFieldValues($fieldValues);
     }
   }
 

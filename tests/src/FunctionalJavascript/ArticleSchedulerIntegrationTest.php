@@ -35,7 +35,7 @@ class ArticleSchedulerIntegrationTest extends ThunderJavascriptTestBase {
     $this->drupalGet($edit_url);
     $this->expandAllTabs();
     $publish_timestamp = strtotime('-1 days');
-    $this->setFieldValues($this->getSession()->getPage(), [
+    $this->setFieldValues([
       'publish_on[0][value][date]' => date('Y-m-d', $publish_timestamp),
       'publish_on[0][value][time]' => date('H:i:s', $publish_timestamp),
       'publish_state[0]' => 'published',

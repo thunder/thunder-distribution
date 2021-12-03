@@ -42,14 +42,13 @@ trait ThunderFormFieldTestTrait {
   /**
    * Set value for defined field name on current page.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $fieldName
    *   Field name.
    * @param string|array $value
    *   Value for field.
    */
-  public function setFieldValue(DocumentElement $page, $fieldName, $value) {
+  public function setFieldValue($fieldName, $value) {
+    $page = $this->getSession()->getPage();
     // If field is checkbox list, then use custom functionality to set values.
     // @todo needs documentation.
     $checkboxes = $page->findAll('xpath', "//input[@type=\"checkbox\" and starts-with(@name, \"{$fieldName}[\")]");
@@ -105,14 +104,12 @@ trait ThunderFormFieldTestTrait {
   /**
    * Set fields on current page.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param array $fieldValues
    *   Field values as associative array with field names as keys.
    */
-  public function setFieldValues(DocumentElement $page, array $fieldValues) {
+  public function setFieldValues(array $fieldValues) {
     foreach ($fieldValues as $fieldName => $value) {
-      $this->setFieldValue($page, $fieldName, $value);
+      $this->setFieldValue($fieldName, $value);
     }
   }
 

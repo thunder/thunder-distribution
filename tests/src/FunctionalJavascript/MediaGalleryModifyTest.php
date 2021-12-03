@@ -119,7 +119,7 @@ END;
     $this->editParagraph($page, 'field_paragraphs', 0);
 
     // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images', 'multiple_image_browser');
+    $this->openEntityBrowser('edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images', 'multiple_image_browser');
 
     $this->uploadFile($page, '/fixtures/reference.jpg');
 
@@ -128,7 +128,7 @@ END;
     $item_selector = "$list_selector .item-container";
     $this->sortableAfter("$item_selector:nth-child(5)", "$item_selector:nth-child(2)", $list_selector);
 
-    $this->submitEntityBrowser($page, 'multiple_image_browser');
+    $this->submitEntityBrowser('multiple_image_browser');
 
     $this->clickSave();
 
@@ -151,12 +151,12 @@ END;
     $this->editParagraph($page, 'field_paragraphs', 0);
 
     // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images', 'multiple_image_browser');
+    $this->openEntityBrowser('edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images', 'multiple_image_browser');
 
     $media = $this->getMediaByName('reference.jpg');
     $this->clickDrupalSelector('edit-selected-items-' . $media->id() . '-2-remove-button');
 
-    $this->submitEntityBrowser($page, 'multiple_image_browser');
+    $this->submitEntityBrowser('multiple_image_browser');
 
     $this->clickSave();
 

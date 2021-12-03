@@ -26,10 +26,9 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
    */
   public function testChannelsCreation() {
     $this->drupalGet('admin/structure/taxonomy/manage/channel/add');
-    $page = $this->getSession()->getPage();
 
     // Create new Channel with 2 paragraphs.
-    $this->setFieldValue($page, 'name[0][value]', 'New Section');
+    $this->setFieldValue('name[0][value]', 'New Section');
     $image1 = $this->loadMediaByUuid('5d719c64-7f32-4062-9967-9874f5ca3eba');
     $this->addImageParagraph('field_paragraphs', ['media:' . $image1->id()]);
     $this->addTextParagraph('field_paragraphs', 'Text for Channel');

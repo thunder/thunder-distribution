@@ -23,18 +23,17 @@ trait ThunderMediaTestTrait {
    *   List of media identifiers.
    */
   public function selectMedia($fieldName, $entityBrowser, array $medias) {
-    $page = $this->getSession()->getPage();
     $driver = $this->getSession()->getDriver();
 
     $selector = 'edit-' . str_replace(['[', ']', '_'], '-', $fieldName);
-    $this->openEntityBrowser($page, $selector, $entityBrowser);
+    $this->openEntityBrowser($selector, $entityBrowser);
 
     foreach ($medias as $media) {
       $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]");
     }
     $this->assertWaitOnAjaxRequest();
 
-    $this->submitEntityBrowser($page, $entityBrowser);
+    $this->submitEntityBrowser($entityBrowser);
 
     $this->assertSession()->waitForElementVisible('css', 'div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-wrapper"]');
   }

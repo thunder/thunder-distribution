@@ -98,8 +98,6 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
    * Make some changes to the article.
    */
   protected function makeFormChanges() {
-    $page = $this->getSession()->getPage();
-
     $this->expandAllTabs();
     $this->addTextParagraph('field_paragraphs', 'Awesome quote', 'quote');
 
@@ -117,7 +115,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
       'publish_state[0]' => 'published',
       'unpublish_state[0]' => 'unpublished',
     ];
-    $this->setFieldValues($page, $fieldValues);
+    $this->setFieldValues($fieldValues);
 
     // Wait for autosave to be triggered.
     sleep(3);

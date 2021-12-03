@@ -125,10 +125,9 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   protected function setMetaTagConfigurationForUrl($pageUrl, array $configuration) {
     $this->drupalGet($pageUrl);
 
-    $page = $this->getSession()->getPage();
     $driver = $this->getSession()->getDriver();
     $this->expandAllTabs();
-    $this->setFieldValues($page, $this->generateMetaTagFieldValues($configuration));
+    $this->setFieldValues($this->generateMetaTagFieldValues($configuration));
 
     $this->scrollElementInView('[name="op"]');
     $driver->click('//input[@name="op"]');
@@ -268,7 +267,6 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     // Check that Article is published.
     $this->drupalGet('node/' . $articleId . '/edit');
-    $page = $this->getSession()->getPage();
 
     // Edit article and set un-publish date same as publish date.
     $unPublishDiffSeconds = 5;
@@ -280,7 +278,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     ];
 
     $this->expandAllTabs();
-    $this->setFieldValues($page, $unPublishFieldValues);
+    $this->setFieldValues($unPublishFieldValues);
 
     $this->clickSave();
 
@@ -358,10 +356,9 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     // After sitemap.xml -> we have to open page without setting cookie before.
     $this->getSession()->visit($this->buildUrl('node/' . $articleId . '/edit'));
-    $page = $this->getSession()->getPage();
 
     $this->expandAllTabs();
-    $this->setFieldValues($page, [
+    $this->setFieldValues([
       'priority_article_node_settings' => '0.9',
     ]);
 
@@ -396,10 +393,9 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     // After sitemap.xml -> we have to open page without setting cookie before.
     $this->getSession()->visit($this->buildUrl('node/' . $articleId . '/edit'));
-    $page = $this->getSession()->getPage();
 
     $this->expandAllTabs();
-    $this->setFieldValues($page, [
+    $this->setFieldValues([
       'index_article_node_settings' => '0',
     ]);
 

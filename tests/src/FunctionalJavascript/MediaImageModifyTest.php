@@ -60,12 +60,10 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
    * Test Image modifications (edit fields).
    */
   public function testImageEdit() {
-    $page = $this->getSession()->getPage();
-
     $media = $this->loadMediaByUuid('f5f7fc5d-b2b8-426a-adf3-ee6aff6379da');
     $this->drupalGet($media->toUrl('edit-form'));
 
-    $this->setFieldValues($page, [
+    $this->setFieldValues([
       'name[0][value]' => "Media {$media->id()}",
       'field_image[0][alt]' => "Media {$media->id()} Alt Text",
       'field_image[0][title]' => "Media {$media->id()} Title",
@@ -132,7 +130,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
       ->elementNotExists('css', '[data-drupal-selector="edit-field-paragraphs-0-subform-field-image-wrapper"] div.messages--error');
 
     // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-image', 'image_browser');
+    $this->openEntityBrowser('edit-field-paragraphs-0-subform-field-image', 'image_browser');
 
     // Select another image and store filename.
     $this->clickCssSelector('#entity-browser-image-browser-form div.view-content > div.views-row:nth-child(1)');

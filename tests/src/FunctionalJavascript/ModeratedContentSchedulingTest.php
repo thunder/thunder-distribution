@@ -51,7 +51,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $edit_url = $node->toUrl('edit-form');
     $this->drupalGet($edit_url);
     $this->expandAllTabs();
-    $this->setFieldValues($this->getSession()->getPage(), [
+    $this->setFieldValues([
       'title[0][value]' => 'Test workflow article 1 - Draft',
       'moderation_state[0]' => 'draft',
       'publish_on[0][value][date]' => date('Y-m-d', $publish_timestamp),
