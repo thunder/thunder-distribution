@@ -128,7 +128,7 @@ JS;
    */
   public function clickAjaxButtonCssSelector($cssSelector, $waitAfterAction = TRUE) {
     $this->scrollElementInView($cssSelector);
-    $this->getSession()->executeScript("jQuery('{$cssSelector}').trigger('mousedown');");
+    $this->getSession()->executeScript("document.querySelector('{$cssSelector}').dispatchEvent(new MouseEvent('mousedown'));");
 
     if ($waitAfterAction) {
       $this->assertWaitOnAjaxRequest();
