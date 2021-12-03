@@ -14,6 +14,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
   use ThunderEntityBrowserTestTrait;
   use ThunderParagraphsTestTrait;
+  use ThunderFormFieldTestTrait;
 
   /**
    * Test Focal Point change.
@@ -63,15 +64,15 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $media = $this->loadMediaByUuid('f5f7fc5d-b2b8-426a-adf3-ee6aff6379da');
     $this->drupalGet($media->toUrl('edit-form'));
 
-    $this->assertWaitOnAjaxRequest();
-
-    $page->fillField('name[0][value]', "Media {$media->id()}");
-    $page->fillField('field_image[0][alt]', "Media {$media->id()} Alt Text");
-    $page->fillField('field_image[0][title]', "Media {$media->id()} Title");
-    $this->setRawFieldValue('field_expires[0][value][date]', '2022-12-18');
-    $this->setRawFieldValue('field_expires[0][value][time]', '01:02:03');
-    $page->fillField('field_copyright[0][value]', "Media {$media->id()} Copyright");
-    $page->fillField('field_source[0][value]', "Media {$media->id()} Source");
+    $this->setFieldValues($page, [
+      'name[0][value]' => "Media {$media->id()}",
+      'field_image[0][alt]' => "Media {$media->id()} Alt Text",
+      'field_image[0][title]' => "Media {$media->id()} Title",
+      'field_expires[0][value][date]' => '2022-12-18',
+      'field_expires[0][value][time]' => '01:02:03',
+      'field_copyright[0][value]' => "Media {$media->id()} Copyright",
+      'field_source[0][value]' => "Media {$media->id()} Source",
+    ]);
 
     $this->fillCkEditor('#edit-field-description-0-value', "Media {$media->id()} Description");
 

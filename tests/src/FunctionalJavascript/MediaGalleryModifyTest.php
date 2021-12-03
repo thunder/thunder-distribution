@@ -128,7 +128,7 @@ END;
     $item_selector = "$list_selector .item-container";
     $this->sortableAfter("$item_selector:nth-child(5)", "$item_selector:nth-child(2)", $list_selector);
 
-    $this->submitEntityBrowser($page);
+    $this->submitEntityBrowser($page, 'multiple_image_browser');
 
     $this->clickSave();
 
@@ -156,7 +156,7 @@ END;
     $media = $this->getMediaByName('reference.jpg');
     $this->clickButtonDrupalSelector($page, 'edit-selected-items-' . $media->id() . '-2-remove-button');
 
-    $this->submitEntityBrowser($page);
+    $this->submitEntityBrowser($page, 'multiple_image_browser');
 
     $this->clickSave();
 

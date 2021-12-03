@@ -5,6 +5,8 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Database\Database;
+use Behat\Mink\Element\DocumentElement;
+use Behat\Mink\Driver\Selenium2Driver;
 
 /**
  * Trait adding javascript functionality.
@@ -73,6 +75,105 @@ JS;
       }
       throw new \RuntimeException($message);
     }
+  }
+
+  /**
+   * Scroll element with defined css selector in middle of browser view.
+   *
+   * @param string $cssSelector
+   *   CSS Selector for element that should be centralized.
+   */
+  public function scrollElementInView($cssSelector) {
+    $this->getSession()
+      ->executeScript('
+        var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        var element = jQuery(\'' . addcslashes($cssSelector, '\'') . '\');
+        var scrollTop = element.offset().top - (viewPortHeight/2);
+        var scrollableParent = jQuery.isFunction(element.scrollParent) ? element.scrollParent() : [];
+        if (scrollableParent.length > 0 && scrollableParent[0] !== document && scrollableParent[0] !== document.body) { scrollableParent[0].scrollTop = scrollableParent[0].scrollTop + scrollTop - scrollableParent.offset().top } else { window.scroll(0, scrollTop); };
+      ');
+  }
+
+  /**
+   * Click on Button based on Drupal selector (data-drupal-selector).
+   *
+   * @param \Behat\Mink\Element\DocumentElement $page
+   *   Current active page.
+   * @param string $drupalSelector
+   *   Drupal selector.
+   * @param bool $waitAfterAction
+   *   Flag to wait for AJAX request to finish after click.
+   */
+  public function clickButtonDrupalSelector(DocumentElement $page, $drupalSelector, $waitAfterAction = TRUE) {
+    $this->clickButtonCssSelector($page, '[data-drupal-selector="' . $drupalSelector . '"]', $waitAfterAction);
+  }
+
+  /**
+   * Click on Button based on Drupal selector (data-drupal-selector).
+   *
+   * @param \Behat\Mink\Element\DocumentElement $page
+   *   Current active page.
+   * @param string $cssSelector
+   *   Drupal selector.
+   * @param bool $waitAfterAction
+   *   Flag to wait for AJAX request to finish after click.
+   */
+  public function clickButtonCssSelector(DocumentElement $page, $cssSelector, $waitAfterAction = TRUE) {
+    $this->scrollElementInView($cssSelector);
+    $this->click($cssSelector);
+
+    if ($waitAfterAction) {
+      $this->assertWaitOnAjaxRequest();
+    }
+  }
+
+  /**
+   * Click on Ajax Button based on CSS selector.
+   *
+   * Ajax buttons handler is triggered on "mousedown" event, so it has to be
+   * triggered over JavaScript.
+   *
+   * @param string $cssSelector
+   *   CSS selector.
+   * @param bool $waitAfterAction
+   *   Flag to wait for AJAX request to finish after click.
+   */
+  public function clickAjaxButtonCssSelector($cssSelector, $waitAfterAction = TRUE) {
+    $this->scrollElementInView($cssSelector);
+    $this->getSession()->executeScript("jQuery('{$cssSelector}').trigger('mousedown');");
+
+    if ($waitAfterAction) {
+      $this->assertWaitOnAjaxRequest();
+    }
+  }
+
+  /**
+   * Assert page title.
+   *
+   * @param string $expectedTitle
+   *   Expected title.
+   */
+  protected function assertPageTitle($expectedTitle) {
+    $driver = $this->getSession()->getDriver();
+    if ($driver instanceof Selenium2Driver) {
+      $actualTitle = $driver->getWebDriverSession()->title();
+
+      static::assertEquals($expectedTitle, $actualTitle, 'Title found');
+    }
+    else {
+      $this->assertSession()->titleEquals($expectedTitle);
+    }
+  }
+
+  /**
+   * Execute Cron over UI.
+   */
+  public function runCron() {
+    $this->drupalGet('admin/config/system/cron');
+
+    $this->getSession()
+      ->getDriver()
+      ->click('//input[@name="op"]');
   }
 
 }

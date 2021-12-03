@@ -4,6 +4,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
+use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTrait;
 
 /**
  * Tests integration with the entity_reference_actions and views_bulk_edit.
@@ -13,11 +14,7 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
 class EntityReferenceActionsTest extends ThunderJavascriptTestBase {
 
   use ThunderParagraphsTestTrait;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected static $modules = ['thunder_testing_demo'];
+  use ThunderJavascriptTrait;
 
   /**
    * Test editing of media items in an embedded gallery.

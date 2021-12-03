@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-use Behat\Mink\Driver\Selenium2Driver;
-use Behat\Mink\Element\DocumentElement;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\Tests\thunder\Traits\ThunderTestTrait;
@@ -103,21 +101,6 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
   }
 
   /**
-   * Waits and asserts that a given element is visible.
-   *
-   * @param string $selector
-   *   The CSS selector.
-   * @param int $timeout
-   *   (Optional) Timeout in milliseconds, defaults to 1000.
-   * @param string $message
-   *   (Optional) Message to pass to assertJsCondition().
-   */
-  public function waitUntilVisible($selector, $timeout = 1000, $message = '') {
-    $condition = "jQuery('" . $selector . ":visible').length > 0";
-    $this->assertJsCondition($condition, $timeout, $message);
-  }
-
-  /**
    * Wait for images to load.
    *
    * This functionality is sometimes need, because positions of elements can be
@@ -149,12 +132,6 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
   protected function getScreenshotFolder() {
     $dir = $this->screenshotDirectory;
 
-    // Use Travis Job ID for sub folder.
-    $travisId = getenv('TRAVIS_JOB_ID');
-    if (!empty($travisId)) {
-      $dir .= '/' . $travisId;
-    }
-
     if (!is_dir($dir)) {
       if (mkdir($dir, 0777, TRUE) === FALSE) {
         throw new \Exception('Unable to create directory: ' . $dir);
@@ -162,118 +139,6 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
     }
 
     return realpath($dir);
-  }
-
-  /**
-   * Scroll element with defined css selector in middle of browser view.
-   *
-   * @param string $cssSelector
-   *   CSS Selector for element that should be centralized.
-   */
-  public function scrollElementInView($cssSelector) {
-    $this->getSession()
-      ->executeScript('
-        var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-        var element = jQuery(\'' . addcslashes($cssSelector, '\'') . '\');
-        var scrollTop = element.offset().top - (viewPortHeight/2);
-        var scrollableParent = jQuery.isFunction(element.scrollParent) ? element.scrollParent() : [];
-        if (scrollableParent.length > 0 && scrollableParent[0] !== document && scrollableParent[0] !== document.body) { scrollableParent[0].scrollTop = scrollableParent[0].scrollTop + scrollTop - scrollableParent.offset().top } else { window.scroll(0, scrollTop); };
-      ');
-  }
-
-  /**
-   * Click on Button based on Drupal selector (data-drupal-selector).
-   *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
-   * @param string $drupalSelector
-   *   Drupal selector.
-   * @param bool $waitAfterAction
-   *   Flag to wait for AJAX request to finish after click.
-   */
-  public function clickButtonDrupalSelector(DocumentElement $page, $drupalSelector, $waitAfterAction = TRUE) {
-    $this->clickButtonCssSelector($page, '[data-drupal-selector="' . $drupalSelector . '"]', $waitAfterAction);
-  }
-
-  /**
-   * Click on Button based on Drupal selector (data-drupal-selector).
-   *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
-   * @param string $cssSelector
-   *   Drupal selector.
-   * @param bool $waitAfterAction
-   *   Flag to wait for AJAX request to finish after click.
-   */
-  public function clickButtonCssSelector(DocumentElement $page, $cssSelector, $waitAfterAction = TRUE) {
-    $this->scrollElementInView($cssSelector);
-    $this->click($cssSelector);
-
-    if ($waitAfterAction) {
-      $this->assertWaitOnAjaxRequest();
-    }
-  }
-
-  /**
-   * Click on Ajax Button based on CSS selector.
-   *
-   * Ajax buttons handler is triggered on "mousedown" event, so it has to be
-   * triggered over JavaScript.
-   *
-   * @param string $cssSelector
-   *   CSS selector.
-   * @param bool $waitAfterAction
-   *   Flag to wait for AJAX request to finish after click.
-   */
-  public function clickAjaxButtonCssSelector($cssSelector, $waitAfterAction = TRUE) {
-    $this->scrollElementInView($cssSelector);
-    $this->getSession()->executeScript("jQuery('{$cssSelector}').trigger('mousedown');");
-
-    if ($waitAfterAction) {
-      $this->assertWaitOnAjaxRequest();
-    }
-  }
-
-  /**
-   * Click a button within a dropdown button field.
-   *
-   * @param string $fieldName
-   *   The [name] attribute of the button to be clicked.
-   * @param bool $toggle
-   *   Whether the dropdown button should be expanded before clicking.
-   */
-  protected function clickDropButton($fieldName, $toggle = TRUE) {
-    $page = $this->getSession()->getPage();
-    $driver = $this->getSession()->getDriver();
-
-    if ($toggle) {
-      $toggleButtonXpath = '//ul[.//*[@name="' . $fieldName . '"]]/li[contains(@class,"dropbutton-toggle")]/button';
-      $driver->click($toggleButtonXpath);
-      $this->assertWaitOnAjaxRequest();
-    }
-
-    $this->scrollElementInView('[name="' . $fieldName . '"]');
-
-    $page->pressButton($fieldName);
-    $this->assertWaitOnAjaxRequest();
-  }
-
-  /**
-   * Assert page title.
-   *
-   * @param string $expectedTitle
-   *   Expected title.
-   */
-  protected function assertPageTitle($expectedTitle) {
-    $driver = $this->getSession()->getDriver();
-    if ($driver instanceof Selenium2Driver) {
-      $actualTitle = $driver->getWebDriverSession()->title();
-
-      static::assertEquals($expectedTitle, $actualTitle, 'Title found');
-    }
-    else {
-      $this->assertSession()->titleEquals($expectedTitle);
-    }
   }
 
   /**
@@ -326,109 +191,12 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
   }
 
   /**
-   * Set value directly to field value, without formatting applied.
-   *
-   * @param string $fieldName
-   *   Field name.
-   * @param string $rawValue
-   *   Raw value for field.
-   */
-  public function setRawFieldValue($fieldName, $rawValue) {
-    // Set date over jQuery, because browser drivers handle input value
-    // differently. fe. (Firefox will set it as "value" for field, but Chrome
-    // will use it as text for that input field, and in that case final value
-    // depends on format used for input field. That's why it's better to set it
-    // directly to value, independently from format used.
-    $this->getSession()
-      ->executeScript("jQuery('[name=\"{$fieldName}\"]').val('{$rawValue}')");
-  }
-
-  /**
-   * Expand all tabs on page.
-   *
-   * It goes up to level 3 by default.
-   *
-   * @param int $maxLevel
-   *   Max depth of nested collapsed tabs.
-   */
-  public function expandAllTabs($maxLevel = 3) {
-    $jsScript = 'jQuery(\'details.js-form-wrapper.form-wrapper:not([open]) > summary\').click().length';
-
-    $numOfOpen = $this->getSession()->evaluateScript($jsScript);
-    $this->assertWaitOnAjaxRequest();
-
-    for ($i = 0; $i < $maxLevel && $numOfOpen > 0; $i++) {
-      $numOfOpen = $this->getSession()->evaluateScript($jsScript);
-      $this->assertWaitOnAjaxRequest();
-    }
-  }
-
-  /**
-   * Execute Cron over UI.
-   */
-  public function runCron() {
-    $this->drupalGet('admin/config/system/cron');
-
-    $this->getSession()
-      ->getDriver()
-      ->click('//input[@name="op"]');
-  }
-
-  /**
    * Click article save.
    */
   protected function clickSave() {
     $driver = $this->getSession()->getDriver();
 
     $driver->click('//div[@data-drupal-selector="edit-actions"]/input[@id="edit-submit"]');
-  }
-
-  /**
-   * Set entity status.
-   *
-   * TRUE - Published.
-   * FALSE - Unpublished.
-   *
-   * @param bool $status
-   *   Entity published or not.
-   */
-  protected function setPublishedStatus($status = TRUE) {
-
-    $driver = $this->getSession()->getDriver();
-
-    $this->scrollElementInView('#edit-status-value');
-
-    if ($status) {
-      $driver->check('//*[@id="edit-status-value"]');
-    }
-    else {
-      $driver->uncheck('//*[@id="edit-status-value"]');
-    }
-  }
-
-  /**
-   * Set moderation state.
-   *
-   * @param string $state
-   *   State id.
-   */
-  protected function setModerationState($state) {
-    $this->getSession()
-      ->getDriver()
-      ->selectOption('//*[@id="edit-moderation-state-0"]', $state);
-  }
-
-  /**
-   * Checks if pull request is from fork.
-   *
-   * @return bool
-   *   Returns if pull request is from Fork.
-   */
-  protected function isForkPullRequest() {
-    $pullRequestSlag = getenv('TRAVIS_PULL_REQUEST_SLUG');
-    $repoSlag = getenv('TRAVIS_REPO_SLUG');
-
-    return (!empty($pullRequestSlag) && $pullRequestSlag !== $repoSlag);
   }
 
   /**
