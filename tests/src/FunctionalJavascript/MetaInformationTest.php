@@ -13,6 +13,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
   use ThunderArticleTestTrait;
   use ThunderMetaTagTrait;
+  use ThunderMediaTestTrait;
 
   /**
    * Default user login role used for testing.
