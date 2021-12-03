@@ -152,6 +152,7 @@ JS;
    *   Expected title.
    */
   protected function assertPageTitle($expectedTitle) {
+    /** @var \Drupal\FunctionalJavascriptTests\DrupalSelenium2Driver $driver */
     $driver = $this->getSession()->getDriver();
     $actualTitle = $driver->getWebDriverSession()->title();
     static::assertEquals($expectedTitle, $actualTitle, 'Title found');
