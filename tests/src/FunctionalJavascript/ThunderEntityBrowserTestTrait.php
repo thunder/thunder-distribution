@@ -24,7 +24,7 @@ trait ThunderEntityBrowserTestTrait {
    *   Entity browser name.
    */
   public function openEntityBrowser(DocumentElement $page, $drupalSelector, $entityBrowser) {
-    $this->clickButtonDrupalSelector($drupalSelector . '-entity-browser-entity-browser-open-modal');
+    $this->clickDrupalSelector($drupalSelector . '-entity-browser-entity-browser-open-modal');
     $this->assertWaitOnAjaxRequest();
 
     $this->getSession()

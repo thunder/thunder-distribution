@@ -135,9 +135,9 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-image', 'image_browser');
 
     // Select another image and store filename.
-    $this->clickButtonCssSelector('#entity-browser-image-browser-form div.view-content > div.views-row:nth-child(1)');
+    $this->clickCssSelector('#entity-browser-image-browser-form div.view-content > div.views-row:nth-child(1)');
     $fileName = $this->getSession()->evaluateScript('jQuery(\'#entity-browser-image-browser-form div.view-content > div.views-row:nth-child(1) img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1);');
-    $this->clickButtonDrupalSelector('edit-submit');
+    $this->clickDrupalSelector('edit-submit');
     $this->getSession()->switchToIFrame();
     $this->assertWaitOnAjaxRequest();
 
