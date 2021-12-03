@@ -5,7 +5,6 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Database\Database;
-use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Driver\Selenium2Driver;
 
 /**
@@ -170,6 +169,34 @@ JS;
     $this->getSession()
       ->getDriver()
       ->click('//input[@name="op"]');
+  }
+
+  /**
+   * Click article save.
+   */
+  protected function clickSave() {
+    $driver = $this->getSession()->getDriver();
+
+    $driver->click('//div[@data-drupal-selector="edit-actions"]/input[@id="edit-submit"]');
+  }
+
+  /**
+   * Wait for images to load.
+   *
+   * This functionality is sometimes need, because positions of elements can be
+   * changed in middle of execution and make problems with execution of clicks
+   * or other position depending actions. Image property complete is used.
+   *
+   * @param string $cssSelector
+   *   Css selector, but without single quotes.
+   * @param int $total
+   *   Total number of images that should selected with provided css selector.
+   * @param int $time
+   *   Waiting time, by default 10sec.
+   */
+  public function waitForImages($cssSelector, $total, $time = 10000) {
+    $this->getSession()
+      ->wait($time, "jQuery('{$cssSelector}').filter(function(){return jQuery(this).prop('complete');}).length === {$total}");
   }
 
 }

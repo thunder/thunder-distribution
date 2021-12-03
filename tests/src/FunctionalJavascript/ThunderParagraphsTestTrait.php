@@ -14,6 +14,7 @@ trait ThunderParagraphsTestTrait {
 
   use ThunderJavascriptTrait;
   use ThunderMediaTestTrait;
+  use ThunderCkEditorTestTrait;
 
   /**
    * Get number of paragraphs for defined field on current page.

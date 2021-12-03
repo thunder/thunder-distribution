@@ -101,25 +101,6 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
   }
 
   /**
-   * Wait for images to load.
-   *
-   * This functionality is sometimes need, because positions of elements can be
-   * changed in middle of execution and make problems with execution of clicks
-   * or other position depending actions. Image property complete is used.
-   *
-   * @param string $cssSelector
-   *   Css selector, but without single quotes.
-   * @param int $total
-   *   Total number of images that should selected with provided css selector.
-   * @param int $time
-   *   Waiting time, by default 10sec.
-   */
-  public function waitForImages($cssSelector, $total, $time = 10000) {
-    $this->getSession()
-      ->wait($time, "jQuery('{$cssSelector}').filter(function(){return jQuery(this).prop('complete');}).length === {$total}");
-  }
-
-  /**
    * Get directory for saving of screenshots.
    *
    * Directory will be created if it does not already exist.
@@ -139,86 +120,6 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
     }
 
     return realpath($dir);
-  }
-
-  /**
-   * Fill CKEditor field.
-   *
-   * @param string $ckEditorCssSelector
-   *   CSS selector for CKEditor.
-   * @param string $text
-   *   Text that will be filled into CKEditor.
-   */
-  public function fillCkEditor($ckEditorCssSelector, $text) {
-    $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
-
-    $this->getSession()
-      ->getDriver()
-      ->executeScript("CKEDITOR.instances[\"$ckEditorId\"].insertHtml(\"$text\");");
-  }
-
-  /**
-   * Select CKEditor element.
-   *
-   * @param string $ckEditorCssSelector
-   *   CSS selector for CKEditor.
-   * @param int $childIndex
-   *   The child index under the node.
-   */
-  public function selectCkEditorElement($ckEditorCssSelector, $childIndex) {
-    $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
-
-    $this->getSession()
-      ->getDriver()
-      ->executeScript("let selection = CKEDITOR.instances[\"$ckEditorId\"].getSelection(); selection.selectElement(selection.root.getChild($childIndex)); var ranges = selection.getRanges(); ranges[0].setEndBefore(ranges[0].getBoundaryNodes().endNode); selection.selectRanges(ranges);");
-  }
-
-  /**
-   * Assert that CKEditor instance contains correct data.
-   *
-   * @param string $ckEditorCssSelector
-   *   CSS selector for CKEditor.
-   * @param string $expectedContent
-   *   The expected content.
-   */
-  public function assertCkEditorContent($ckEditorCssSelector, $expectedContent) {
-    $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
-    $ckEditorContent = $this->getSession()
-      ->getDriver()
-      ->evaluateScript("return CKEDITOR.instances[\"$ckEditorId\"].getData();");
-
-    static::assertEquals($expectedContent, $ckEditorContent);
-  }
-
-  /**
-   * Click article save.
-   */
-  protected function clickSave() {
-    $driver = $this->getSession()->getDriver();
-
-    $driver->click('//div[@data-drupal-selector="edit-actions"]/input[@id="edit-submit"]');
-  }
-
-  /**
-   * Get CKEditor id from css selector.
-   *
-   * @param string $ckEditorCssSelector
-   *   CSS selector for CKEditor.
-   *
-   * @return string
-   *   CKEditor ID.
-   */
-  protected function getCkEditorId($ckEditorCssSelector) {
-    // Since CKEditor requires some time to initialize, we are going to wait for
-    // CKEditor instance to be ready before we continue and return ID.
-    $this->getSession()->wait(10000, "(waitForCk = CKEDITOR.instances[jQuery(\"{$ckEditorCssSelector}\").attr('id')]) && waitForCk.instanceReady");
-
-    $ckEditor = $this->getSession()->getPage()->find(
-      'css',
-      $ckEditorCssSelector
-    );
-
-    return $ckEditor->getAttribute('id');
   }
 
 }

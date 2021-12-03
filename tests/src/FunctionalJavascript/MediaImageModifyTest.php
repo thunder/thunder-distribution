@@ -15,6 +15,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
   use ThunderEntityBrowserTestTrait;
   use ThunderParagraphsTestTrait;
   use ThunderFormFieldTestTrait;
+  use ThunderCkEditorTestTrait;
 
   /**
    * Test Focal Point change.
