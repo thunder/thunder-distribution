@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-use Behat\Mink\Element\DocumentElement;
-
 /**
  * Trait with support for handling Entity Browser actions.
  *
