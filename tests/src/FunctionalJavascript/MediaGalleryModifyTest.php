@@ -91,8 +91,6 @@ END;
     $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
     $this->drupalGet($node->toUrl('edit-form'));
 
-    $page = $this->getSession()->getPage();
-
     $this->editParagraph('field_paragraphs', 0);
 
     // Remove 2nd Image.
@@ -121,7 +119,7 @@ END;
     // Click Select entities -> to open Entity Browser.
     $this->openEntityBrowser('edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images', 'multiple_image_browser');
 
-    $this->uploadFile($page, '/fixtures/reference.jpg');
+    $this->uploadFile('/fixtures/reference.jpg');
 
     // Move new image -> that's 5th image in list, to 3rd position.
     $list_selector = '#edit-selected';

@@ -66,14 +66,15 @@ trait ThunderEntityBrowserTestTrait {
    * uploaded there. Upload is done over input file field and it has to be
    * visible for selenium to work.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $filePath
    *   Path to file that should be uploaded.
    *
    * @throws \Exception
    */
-  public function uploadFile(DocumentElement $page, $filePath) {
+  public function uploadFile($filePath) {
+    /** @var \Behat\Mink\Element\DocumentElement $page */
+    $page = $this->getSession()->getPage();
+
     // Click all tabs until we find upload Tab.
     $tabLinks = $page->findAll('css', '.eb-tabs a');
     if (empty($tabLinks)) {

@@ -51,7 +51,7 @@ trait ThunderFormFieldTestTrait {
     // @todo needs documentation.
     $checkboxes = $page->findAll('xpath', "//input[@type=\"checkbox\" and starts-with(@name, \"{$fieldName}[\")]");
     if (!empty($checkboxes)) {
-      $this->setCheckbox($page, $fieldName, $value);
+      $this->setCheckbox($fieldName, $value);
 
       return;
     }
