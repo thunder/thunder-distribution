@@ -94,8 +94,8 @@ JS;
    * @param bool $waitAfterAction
    *   Flag to wait for AJAX request to finish after click.
    */
-  public function clickButtonDrupalSelector($drupalSelector, $waitAfterAction = TRUE) {
-    $this->clickButtonCssSelector('[data-drupal-selector="' . $drupalSelector . '"]', $waitAfterAction);
+  public function clickDrupalSelector($drupalSelector, $waitAfterAction = TRUE) {
+    $this->clickCssSelector('[data-drupal-selector="' . $drupalSelector . '"]', $waitAfterAction);
   }
 
   /**
@@ -106,7 +106,7 @@ JS;
    * @param bool $waitAfterAction
    *   Flag to wait for AJAX request to finish after click.
    */
-  public function clickButtonCssSelector($cssSelector, $waitAfterAction = TRUE) {
+  public function clickCssSelector($cssSelector, $waitAfterAction = TRUE) {
     $this->scrollElementInView($cssSelector);
     $this->click($cssSelector);
 
@@ -149,17 +149,6 @@ JS;
     $driver = $this->getSession()->getDriver();
     $actualTitle = $driver->getWebDriverSession()->title();
     static::assertEquals($expectedTitle, $actualTitle, 'Title found');
-  }
-
-  /**
-   * Execute Cron over UI.
-   */
-  public function runCron() {
-    $this->drupalGet('admin/config/system/cron');
-
-    $this->getSession()
-      ->getDriver()
-      ->click('//input[@name="op"]');
   }
 
   /**

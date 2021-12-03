@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Drupal\Tests\Traits\Core\CronRunTrait;
+
 /**
  * Testing of Meta Information.
  *
@@ -14,6 +16,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   use ThunderArticleTestTrait;
   use ThunderMetaTagTrait;
   use ThunderMediaTestTrait;
+  use CronRunTrait;
 
   /**
    * Default user login role used for testing.
@@ -256,7 +259,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->assertSession()
       ->elementExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
 
-    $this->runCron();
+    $this->cronRun();
 
     // Check that Article is published.
     $this->drupalGet('node/' . $articleId);
@@ -289,7 +292,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     // Wait sufficient time before cron is executed.
     sleep($unPublishDiffSeconds + 2);
 
-    $this->runCron();
+    $this->cronRun();
 
     // Check that Article is unpublished.
     $this->drupalGet('node/' . $articleId);

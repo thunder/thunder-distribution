@@ -118,7 +118,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $teaserText = 'Start with Text. ' . $initialTeaserText . ' End with Text.';
     $teaserField->setValue($teaserText);
 
-    $this->clickButtonDrupalSelector('edit-field-teaser-media-current-items-0-remove-button');
+    $this->clickDrupalSelector('edit-field-teaser-media-current-items-0-remove-button');
     $media1 = $this->loadMediaByUuid('17965877-27b2-428f-8b8c-7dccba9786e5');
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $media1->id()]);
 
