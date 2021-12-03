@@ -14,7 +14,6 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTrait;
 class EntityReferenceActionsTest extends ThunderJavascriptTestBase {
 
   use ThunderParagraphsTestTrait;
-  use ThunderJavascriptTrait;
 
   /**
    * Test editing of media items in an embedded gallery.

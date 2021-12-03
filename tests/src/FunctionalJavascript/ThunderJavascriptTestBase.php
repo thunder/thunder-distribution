@@ -53,7 +53,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    *
    * @var string
    */
-  protected $screenshotDirectory = '/tmp/thunder-travis-ci';
+  protected $screenshotDirectory = '/tmp/thunder-screenshots';
 
   /**
    * Default user login role used for testing.
