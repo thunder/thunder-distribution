@@ -259,17 +259,4 @@ trait ThunderTestTrait {
     }
   }
 
-  /**
-   * Converts a field name to a drupal selector.
-   *
-   * @param string $field_name
-   *   The field name.
-   *
-   * @return string
-   *   The drupal selector.
-   */
-  protected function fieldNameToDrupalSelector(string $field_name) {
-    return 'edit-' . str_replace(['[', ']', '_'], '-', $field_name);
-  }
-
 }

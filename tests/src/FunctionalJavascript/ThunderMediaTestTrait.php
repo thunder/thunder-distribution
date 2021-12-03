@@ -26,7 +26,8 @@ trait ThunderMediaTestTrait {
     $page = $this->getSession()->getPage();
     $driver = $this->getSession()->getDriver();
 
-    $this->openEntityBrowser($page, $this->fieldNameToDrupalSelector($fieldName), $entityBrowser);
+    $selector = 'edit-' . str_replace(['[', ']', '_'], '-', $fieldName);
+    $this->openEntityBrowser($page, $selector, $entityBrowser);
 
     foreach ($medias as $media) {
       $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]");

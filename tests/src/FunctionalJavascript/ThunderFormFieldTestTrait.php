@@ -131,7 +131,7 @@ trait ThunderFormFieldTestTrait {
     // depends on format used for input field. That's why it's better to set it
     // directly to value, independently from format used.
     $this->getSession()
-      ->executeScript("jQuery('[name=\"{$fieldName}\"]').val('{$rawValue}')");
+      ->executeScript("document.querySelector('[name=\"{$fieldName}\"]').value = '{$rawValue}'");
   }
 
 }
