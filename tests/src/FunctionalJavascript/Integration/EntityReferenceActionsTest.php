@@ -4,7 +4,6 @@ namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
-use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTrait;
 
 /**
  * Tests integration with the entity_reference_actions and views_bulk_edit.
