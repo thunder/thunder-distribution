@@ -10,6 +10,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 trait ThunderMediaTestTrait {
 
   use ThunderEntityBrowserTestTrait;
+  use ThunderJavascriptTrait;
 
   /**
    * Select Medias for field.
