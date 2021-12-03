@@ -33,11 +33,11 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
     $page = $this->getSession()->getPage();
 
     // Edit gallery paragraph.
-    $this->clickButtonCssSelector($page, '[data-drupal-selector="field-paragraphs-0-edit-2"]');
+    $this->clickButtonDrupalSelector('field-paragraphs-0-edit-2');
     $this->setFieldValue($page, 'field_paragraphs[0][subform][field_media][0][inline_entity_form][name][0][value]', 'New gallery name before collapse');
 
     // Collapse parargraph form.
-    $this->clickButtonCssSelector($page, '[name="field_paragraphs_0_collapse"]');
+    $this->clickButtonCssSelector('[name="field_paragraphs_0_collapse"]');
     $this->clickSave();
 
     // Re-open edit form, value has changed.

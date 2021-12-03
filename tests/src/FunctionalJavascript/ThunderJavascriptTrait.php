@@ -97,28 +97,24 @@ JS;
   /**
    * Click on Button based on Drupal selector (data-drupal-selector).
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $drupalSelector
    *   Drupal selector.
    * @param bool $waitAfterAction
    *   Flag to wait for AJAX request to finish after click.
    */
-  public function clickButtonDrupalSelector(DocumentElement $page, $drupalSelector, $waitAfterAction = TRUE) {
-    $this->clickButtonCssSelector($page, '[data-drupal-selector="' . $drupalSelector . '"]', $waitAfterAction);
+  public function clickButtonDrupalSelector($drupalSelector, $waitAfterAction = TRUE) {
+    $this->clickButtonCssSelector('[data-drupal-selector="' . $drupalSelector . '"]', $waitAfterAction);
   }
 
   /**
    * Click on Button based on Drupal selector (data-drupal-selector).
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $cssSelector
    *   Drupal selector.
    * @param bool $waitAfterAction
    *   Flag to wait for AJAX request to finish after click.
    */
-  public function clickButtonCssSelector(DocumentElement $page, $cssSelector, $waitAfterAction = TRUE) {
+  public function clickButtonCssSelector($cssSelector, $waitAfterAction = TRUE) {
     $this->scrollElementInView($cssSelector);
     $this->click($cssSelector);
 

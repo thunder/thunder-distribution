@@ -131,12 +131,12 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
       ->elementNotExists('css', '[data-drupal-selector="edit-field-paragraphs-0-subform-field-image-wrapper"] div.messages--error');
 
     // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-image-entity-browser-entity-browser-open-modal', 'image_browser');
+    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-image', 'image_browser');
 
     // Select another image and store filename.
-    $this->clickButtonCssSelector($page, '#entity-browser-image-browser-form div.view-content > div.views-row:nth-child(1)');
+    $this->clickButtonCssSelector('#entity-browser-image-browser-form div.view-content > div.views-row:nth-child(1)');
     $fileName = $this->getSession()->evaluateScript('jQuery(\'#entity-browser-image-browser-form div.view-content > div.views-row:nth-child(1) img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1);');
-    $this->clickButtonDrupalSelector($page, 'edit-submit');
+    $this->clickButtonDrupalSelector('edit-submit');
     $this->getSession()->switchToIFrame();
     $this->assertWaitOnAjaxRequest();
 
