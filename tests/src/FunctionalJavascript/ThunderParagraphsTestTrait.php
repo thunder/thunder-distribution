@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-use Behat\Mink\Element\DocumentElement;
 use Drupal\Component\Utility\Html;
 
 /**
@@ -12,7 +11,9 @@ use Drupal\Component\Utility\Html;
  */
 trait ThunderParagraphsTestTrait {
 
+  use ThunderJavascriptTrait;
   use ThunderMediaTestTrait;
+  use ThunderCkEditorTestTrait;
 
   /**
    * Get number of paragraphs for defined field on current page.
@@ -134,7 +135,6 @@ trait ThunderParagraphsTestTrait {
     $paragraphIndex = $this->addParagraph($fieldName, 'image', $position);
 
     $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_image", 'image_browser', $media);
-
   }
 
   /**
@@ -151,7 +151,6 @@ trait ThunderParagraphsTestTrait {
     $paragraphIndex = $this->addParagraph($fieldName, 'video', $position);
 
     $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_video", 'video_browser', $media);
-
   }
 
   /**
@@ -246,17 +245,16 @@ trait ThunderParagraphsTestTrait {
   /**
    * Click button for editing of paragraph.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $paragraphsFieldName
    *   Field name in content type used to paragraphs.
    * @param int $index
    *   Index of paragraph to be edited, starts from 0.
    */
-  public function editParagraph(DocumentElement $page, $paragraphsFieldName, $index) {
+  public function editParagraph($paragraphsFieldName, $index) {
     $editButtonName = "{$paragraphsFieldName}_{$index}_edit";
 
     $this->scrollElementInView("[name=\"{$editButtonName}\"]");
+    $page = $this->getSession()->getPage();
     $page->pressButton($editButtonName);
     $this->assertWaitOnAjaxRequest();
   }

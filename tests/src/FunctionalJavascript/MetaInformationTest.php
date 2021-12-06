@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Drupal\Tests\Traits\Core\CronRunTrait;
+
 /**
  * Testing of Meta Information.
  *
@@ -13,6 +15,8 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
   use ThunderArticleTestTrait;
   use ThunderMetaTagTrait;
+  use ThunderMediaTestTrait;
+  use CronRunTrait;
 
   /**
    * Default user login role used for testing.
@@ -121,10 +125,9 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   protected function setMetaTagConfigurationForUrl($pageUrl, array $configuration) {
     $this->drupalGet($pageUrl);
 
-    $page = $this->getSession()->getPage();
     $driver = $this->getSession()->getDriver();
     $this->expandAllTabs();
-    $this->setFieldValues($page, $this->generateMetaTagFieldValues($configuration));
+    $this->setFieldValues($this->generateMetaTagFieldValues($configuration));
 
     $this->scrollElementInView('[name="op"]');
     $driver->click('//input[@name="op"]');
@@ -255,7 +258,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->assertSession()
       ->elementExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
 
-    $this->runCron();
+    $this->cronRun();
 
     // Check that Article is published.
     $this->drupalGet('node/' . $articleId);
@@ -264,7 +267,6 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     // Check that Article is published.
     $this->drupalGet('node/' . $articleId . '/edit');
-    $page = $this->getSession()->getPage();
 
     // Edit article and set un-publish date same as publish date.
     $unPublishDiffSeconds = 5;
@@ -276,7 +278,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     ];
 
     $this->expandAllTabs();
-    $this->setFieldValues($page, $unPublishFieldValues);
+    $this->setFieldValues($unPublishFieldValues);
 
     $this->clickSave();
 
@@ -288,7 +290,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     // Wait sufficient time before cron is executed.
     sleep($unPublishDiffSeconds + 2);
 
-    $this->runCron();
+    $this->cronRun();
 
     // Check that Article is unpublished.
     $this->drupalGet('node/' . $articleId);
@@ -354,10 +356,9 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     // After sitemap.xml -> we have to open page without setting cookie before.
     $this->getSession()->visit($this->buildUrl('node/' . $articleId . '/edit'));
-    $page = $this->getSession()->getPage();
 
     $this->expandAllTabs();
-    $this->setFieldValues($page, [
+    $this->setFieldValues([
       'priority_article_node_settings' => '0.9',
     ]);
 
@@ -392,10 +393,9 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     // After sitemap.xml -> we have to open page without setting cookie before.
     $this->getSession()->visit($this->buildUrl('node/' . $articleId . '/edit'));
-    $page = $this->getSession()->getPage();
 
     $this->expandAllTabs();
-    $this->setFieldValues($page, [
+    $this->setFieldValues([
       'index_article_node_settings' => '0',
     ]);
 

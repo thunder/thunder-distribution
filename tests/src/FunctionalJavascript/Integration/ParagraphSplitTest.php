@@ -5,6 +5,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderArticleTestTrait;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
+use Drupal\Tests\thunder\FunctionalJavascript\ThunderCkEditorTestTrait;
 
 /**
  * Tests the paragraph split module integration.
@@ -15,6 +16,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
 
   use ThunderParagraphsTestTrait;
   use ThunderArticleTestTrait;
+  use ThunderCkEditorTestTrait;
 
   /**
    * Field name for paragraphs in article content.

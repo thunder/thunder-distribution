@@ -15,20 +15,14 @@ class EntityReferenceActionsTest extends ThunderJavascriptTestBase {
   use ThunderParagraphsTestTrait;
 
   /**
-   * {@inheritdoc}
-   */
-  protected static $modules = ['thunder_testing_demo'];
-
-  /**
    * Test editing of media items in an embedded gallery.
    */
   public function testMediaEditInArticle() {
 
     $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
     $this->drupalGet($node->toUrl('edit-form'));
-    $page = $this->getSession()->getPage();
 
-    $this->editParagraph($page, 'field_paragraphs', 0);
+    $this->editParagraph('field_paragraphs', 0);
 
     // Wait for all images to be displayed properly.
     $this->getSession()
