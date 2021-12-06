@@ -123,7 +123,7 @@ content:
         delete_confirmation: true
         split_text: true
         show_drag_and_drop: false
-        add_in_between_link_count: '3'
+        add_in_between_link_count: 3
   field_seo_title:
     type: string_textfield
     weight: 4
