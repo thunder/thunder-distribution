@@ -42,7 +42,7 @@ trait ThunderArticleTestTrait {
    *   Max depth of nested collapsed tabs.
    */
   public function expandAllTabs($maxLevel = 3) {
-    $jsScript = "const elements = document.querySelectorAll('details.js-form-wrapper.form-wrapper:not([open]) > summary'); elements.forEach((elem) => { elem.click(); }); elements.length;";
+    $jsScript = "(() => { const elements = document.querySelectorAll('details.js-form-wrapper.form-wrapper:not([open]) > summary'); elements.forEach((elem) => { elem.click(); }); elements.length; })()";
 
     $numOfOpen = $this->getSession()->evaluateScript($jsScript);
     $this->assertWaitOnAjaxRequest();
