@@ -67,23 +67,27 @@ trait ThunderParagraphsTestTrait {
     $driver = $this->getSession()->getDriver();
     $numberOfParagraphs = $this->getNumberOfParagraphs($fieldName);
 
+    $types = ['text' => 1, 'image' => 2, 'gallery' => 3];
+    $index = $types[$type] ?? 4;
+
     $fieldSelector = HTML::cleanCssIdentifier($fieldName);
     if ($position === NULL || $position > $numberOfParagraphs) {
       $position = $numberOfParagraphs;
-      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:last-child input.paragraphs-features__add-in-between__button";
+      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:last-child li:nth-child({$index}) button.paragraphs-features__add-in-between__button";
     }
     else {
       $addButtonPosition = $position * 2 + 1;
-      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) input.paragraphs-features__add-in-between__button";
+      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) li:nth-child({$index}) button.paragraphs-features__add-in-between__button";
     }
 
     $addButton = $page->find('css', $addButtonCssSelector);
     $this->scrollElementInView($addButtonCssSelector);
 
     $addButton->click();
-    $this->assertWaitOnAjaxRequest();
-
-    $driver->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
+    if ($index > 3) {
+      $this->assertWaitOnAjaxRequest();
+      $driver->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
+    }
 
     $this->assertWaitOnAjaxRequest();
 
