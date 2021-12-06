@@ -46,11 +46,8 @@ trait ThunderEntityBrowserTestTrait {
 
       $page->pressButton('Use selected');
     }
-    elseif ($entityBrowser == 'image_browser') {
-      $page->pressButton('Select image');
-    }
-    elseif ($entityBrowser == 'video_browser') {
-      $page->pressButton('Select video');
+    else {
+      $page->pressButton('edit-submit');
     }
 
     $this->getSession()->switchToIFrame();

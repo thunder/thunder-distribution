@@ -34,8 +34,6 @@ trait ThunderMediaTestTrait {
     $this->assertWaitOnAjaxRequest();
 
     $this->submitEntityBrowser($entityBrowser);
-
-    $this->assertSession()->waitForElementVisible('css', 'div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-wrapper"]');
   }
 
   /**
