@@ -39,11 +39,8 @@ class NodeRevisionRevertDefaultForm extends NodeRevisionRevertForm {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, $node = NULL) {
-
-    /** @var \Drupal\node\NodeInterface $revision */
-    $revision = $this->nodeStorage->load($node);
-    $this->revision = $revision;
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL) {
+    $this->revision = $node;
     $form = ConfirmFormBase::buildForm($form, $form_state);
 
     return $form;
@@ -58,7 +55,7 @@ class NodeRevisionRevertDefaultForm extends NodeRevisionRevertForm {
     $original_revision_timestamp = $this->revision->getRevisionCreationTime();
 
     $this->revision = $this->prepareRevertedRevision($this->revision, $form_state);
-    $this->revision->revision_log = $this->t('Copy of the revision from %date.', ['%date' => $this->dateFormatter->format($original_revision_timestamp)]);
+    $this->revision->setRevisionLogMessage($this->t('Copy of the revision from %date.', ['%date' => $this->dateFormatter->format($original_revision_timestamp)]));
     $this->revision->setRevisionUserId($this->currentUser()->id());
     $this->revision->setRevisionCreationTime($this->time->getRequestTime());
     $this->revision->setChangedTime($this->time->getRequestTime());

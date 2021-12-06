@@ -5,6 +5,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderFormFieldTestTrait;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
+use Drupal\Tests\thunder\FunctionalJavascript\ThunderArticleTestTrait;
 
 /**
  * Tests the autosave support for nodes in Thunder.
@@ -15,6 +16,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
 
   use ThunderFormFieldTestTrait;
   use ThunderParagraphsTestTrait;
+  use ThunderArticleTestTrait;
 
   /**
    * {@inheritdoc}
@@ -96,8 +98,6 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
    * Make some changes to the article.
    */
   protected function makeFormChanges() {
-    $page = $this->getSession()->getPage();
-
     $this->expandAllTabs();
     $this->addTextParagraph('field_paragraphs', 'Awesome quote', 'quote');
 
@@ -115,7 +115,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
       'publish_state[0]' => 'published',
       'unpublish_state[0]' => 'unpublished',
     ];
-    $this->setFieldValues($page, $fieldValues);
+    $this->setFieldValues($fieldValues);
 
     // Wait for autosave to be triggered.
     sleep(3);

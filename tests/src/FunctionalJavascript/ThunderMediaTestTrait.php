@@ -9,6 +9,9 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
  */
 trait ThunderMediaTestTrait {
 
+  use ThunderEntityBrowserTestTrait;
+  use ThunderJavascriptTrait;
+
   /**
    * Select Medias for field.
    *
@@ -20,45 +23,17 @@ trait ThunderMediaTestTrait {
    *   List of media identifiers.
    */
   public function selectMedia($fieldName, $entityBrowser, array $medias) {
-    $page = $this->getSession()->getPage();
     $driver = $this->getSession()->getDriver();
 
-    $this->assertWaitOnAjaxRequest();
-
-    $buttonName = $fieldName . '_entity_browser_entity_browser';
-    $this->scrollElementInView("[name=\"{$buttonName}\"]");
-    $page->pressButton($buttonName);
-
-    $this->assertWaitOnAjaxRequest();
-
-    $this->getSession()
-      ->switchToIFrame('entity_browser_iframe_' . $entityBrowser);
-    $this->assertWaitOnAjaxRequest();
+    $selector = 'edit-' . str_replace(['[', ']', '_'], '-', $fieldName);
+    $this->openEntityBrowser($selector, $entityBrowser);
 
     foreach ($medias as $media) {
       $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]");
     }
     $this->assertWaitOnAjaxRequest();
 
-    $element = 'img';
-    if ($entityBrowser == 'multiple_image_browser') {
-      $this->getSession()->wait(200);
-      $this->assertWaitOnAjaxRequest();
-
-      $page->pressButton('Use selected');
-    }
-    elseif ($entityBrowser == 'image_browser') {
-      $page->pressButton('Select image');
-    }
-    elseif ($entityBrowser == 'video_browser') {
-      $page->pressButton('Select video');
-      $element = 'iframe';
-    }
-
-    $this->getSession()->switchToIFrame();
-    $this->assertWaitOnAjaxRequest();
-
-    $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-wrapper"] ' . $element);
+    $this->submitEntityBrowser($entityBrowser);
   }
 
   /**

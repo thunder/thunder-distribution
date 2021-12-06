@@ -33,10 +33,10 @@ class EntityListResponse {
    * @return int
    *   The total amount of results.
    */
-  public function total() {
+  public function total(): int {
     $query = clone $this->query;
     $query->range(NULL, NULL)->count();
-    return $query->execute();
+    return intval($query->execute());
   }
 
   /**

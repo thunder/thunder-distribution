@@ -174,7 +174,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->clickLink('Back to content editing');
     $this->assertSession()->pageTextNotContains('An illegal choice has been detected. Please contact the site administrator.');
 
-    $this->setFieldValues($this->getSession()->getPage(), [
+    $this->setFieldValues([
       'title[0][value]' => 'Test workflow article in draft',
       'field_seo_title[0][value]' => 'Massive gaining even more seo traffic text',
     ]);
@@ -183,7 +183,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->drupalGet($node->toUrl('edit-form'));
 
-    $this->setFieldValues($this->getSession()->getPage(), [
+    $this->setFieldValues([
       'title[0][value]' => 'Test workflow article in draft 2',
       'field_seo_title[0][value]' => 'Massive gaining even more and more seo traffic text',
     ]);

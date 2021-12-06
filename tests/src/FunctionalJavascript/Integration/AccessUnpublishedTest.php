@@ -40,7 +40,7 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
     $driver = $this->getSession()->getDriver();
     $this->scrollElementInView('[data-drupal-selector="edit-generate-token"]');
     $driver->click('//*[@data-drupal-selector="edit-generate-token"]');
-    $this->waitUntilVisible('[data-drupal-selector="access-token-list"] a.clipboard-button', 5000);
+    $this->assertSession()->waitForElementVisible('css', '[data-drupal-selector="access-token-list"] a.clipboard-button', 5000);
     $copyToClipboard = $page->find('xpath', '//*[@data-drupal-selector="access-token-list"]//a[contains(@class, "clipboard-button")]');
     $tokenUrl = $copyToClipboard->getAttribute('data-unpublished-access-url');
 
