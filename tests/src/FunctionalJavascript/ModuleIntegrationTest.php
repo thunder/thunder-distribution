@@ -209,6 +209,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->drupalGet($node->toUrl('edit-form'));
     $this->assertSession()->pageTextContains('This content is now locked against simultaneous editing. This content will remain locked if you navigate away from this page without saving or unlocking it.');
 
+    $this->expandAllTabs();
     $driver = $this->getSession()->getDriver();
     $driver->click('//*[@data-drupal-selector="edit-unlock"]');
 
