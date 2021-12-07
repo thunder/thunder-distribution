@@ -128,7 +128,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - uses: shivammathur/setup-php@v2
+      - uses: shivammathur/setup-php@verbose
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
