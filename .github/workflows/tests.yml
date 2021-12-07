@@ -139,7 +139,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: Imagick, gd, pdo_mysql, mbstring
+          extensions: Imagick, gd, pdo_mysql, mbstring, xmlwriter
 
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
