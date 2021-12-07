@@ -128,18 +128,18 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Setup Apache
-        uses: thunder/apache-shiva-php-action@v1
-        with:
-          php-version: ${{ matrix.PHP_VERSION }}
-          site-directory: /tmp/test/thunder/install/docroot
-          http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-
       - uses: shivammathur/setup-php@v2
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
+          extensions: :sodium, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
+
+      - name: Setup Apache
+          uses: thunder/apache-shiva-php-action@v1
+          with:
+            php-version: ${{ matrix.PHP_VERSION }}
+            site-directory: /tmp/test/thunder/install/docroot
+            http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
