@@ -122,7 +122,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        PHP_VERSION: [ '7.4', '8.0' ]
+        PHP_VERSION: [ '7.4', '8.0', '8.1' ]
         CHUNK: [ 1, 2, 3 ]
 
     steps:
