@@ -10,12 +10,12 @@ pattern: '[node:field_seo_title]'
 selection_criteria:
   3dade791-a55f-4114-9fba-4b38c8f572f7:
     id: node_type
-    bundles:
-      article: article
     negate: false
+    uuid: 3dade791-a55f-4114-9fba-4b38c8f572f7
     context_mapping:
       node: node
-    uuid: 3dade791-a55f-4114-9fba-4b38c8f572f7
+    bundles:
+      article: article
 selection_logic: and
 weight: -5
 relationships: {  }

@@ -17,13 +17,13 @@ mode: thumbnail
 content:
   thumbnail:
     type: image
-    weight: 0
-    region: content
     label: hidden
     settings:
-      image_style: media_thumbnail
       image_link: ''
+      image_style: media_thumbnail
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   created: true
   field_author: true
