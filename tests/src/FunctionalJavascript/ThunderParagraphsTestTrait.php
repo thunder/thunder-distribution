@@ -85,7 +85,7 @@ trait ThunderParagraphsTestTrait {
       $driver = $this->getSession()->getDriver();
       $driver->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
     }
-    $this->getSession()->wait(200);
+    $this->assertSession()->waitForElementVisible('css', "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child(" . (($numberOfParagraphs + 1) * 2 + 1) . ")");
 
     $this->assertWaitOnAjaxRequest();
 
@@ -96,7 +96,7 @@ trait ThunderParagraphsTestTrait {
   }
 
   /**
-   * Get dalta of paragraph item for a given filed on a specific position.
+   * Get the delta of a paragraph item for a given filed on a specific position.
    *
    * @param string $fieldName
    *   Field name.
