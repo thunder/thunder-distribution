@@ -206,7 +206,7 @@ Workflow to generate Thunder configuration update is following:
    active configuration in the database)
 3. Execute update hooks if it's necessary (e.g. in a case when you have a module and/or core updates in your branch)
 4. Now is a moment to generate Thunder configuration update code. For that, we have provided the following drupal
-   console command: `drupal generate:configuration:update`. That command should be executed and there is some
+   console command: `drush generate configuration-update`. That command should be executed and there is some
    information that has to be filled, like module name where all generated data will be saved (CUD file,
    checklist `update.yml` and update hook function). Then also information for checklist entry, like title, success
    message, and failure message. Command will generate CUD file and save it in `config/update` folder of the module, it
