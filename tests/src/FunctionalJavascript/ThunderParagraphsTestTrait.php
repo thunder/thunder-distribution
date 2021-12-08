@@ -63,8 +63,6 @@ trait ThunderParagraphsTestTrait {
    * @throws \Exception
    */
   public function addParagraph($fieldName, $type, $position = NULL) {
-    $page = $this->getSession()->getPage();
-    $driver = $this->getSession()->getDriver();
     $numberOfParagraphs = $this->getNumberOfParagraphs($fieldName);
 
     $types = ['text' => 1, 'image' => 2, 'gallery' => 3];
@@ -80,19 +78,18 @@ trait ThunderParagraphsTestTrait {
       $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) li:nth-child({$index}) button.paragraphs-features__add-in-between__button";
     }
 
-    $addButton = $page->find('css', $addButtonCssSelector);
-    $this->scrollElementInView($addButtonCssSelector);
+    $this->clickCssSelector($addButtonCssSelector);
 
-    $addButton->click();
     if ($index > 3) {
       $this->assertWaitOnAjaxRequest();
+      $driver = $this->getSession()->getDriver();
       $driver->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
     }
 
     $this->assertWaitOnAjaxRequest();
 
     // Test if we have one more paragraph now.
-    static::assertEquals($this->getNumberOfParagraphs($fieldName), ($numberOfParagraphs + 1));
+    static::assertEquals(($numberOfParagraphs + 1), $this->getNumberOfParagraphs($fieldName));
 
     return $this->getParagraphDelta($fieldName, $position);
   }
