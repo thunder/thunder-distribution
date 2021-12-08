@@ -14,11 +14,11 @@ mode: preview
 content:
   field_text:
     type: text_trimmed
-    weight: 0
     label: hidden
     settings:
       trim_length: 600
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   created: true

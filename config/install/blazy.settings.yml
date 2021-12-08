@@ -1,10 +1,9 @@
 admin_css: true
 fx: ''
 noscript: false
-responsive_image: true
 one_pixel: true
 placeholder: ''
-extras: {  }
+responsive_image: true
 blazy:
   loadInvisible: false
   offset: 100
@@ -17,3 +16,4 @@ io:
   rootMargin: 0px
   threshold: '0'
   disconnect: false
+extras: {  }
