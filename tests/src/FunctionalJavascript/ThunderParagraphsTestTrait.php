@@ -85,6 +85,7 @@ trait ThunderParagraphsTestTrait {
       $driver = $this->getSession()->getDriver();
       $driver->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
     }
+    $this->getSession()->wait(200);
 
     $this->assertWaitOnAjaxRequest();
 
