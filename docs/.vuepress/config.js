@@ -8,7 +8,7 @@ module.exports = {
     logo: '/thunder.svg',
     repo: 'https://github.com/thunder/thunder-distribution',
     docsDir: 'docs',
-    docsBranch: '6.2.x',
+    docsBranch: '6.3.x',
     contributors: false,
     navbar: [
       {
@@ -52,6 +52,7 @@ module.exports = {
         {
           text: 'Changelogs',
           children: [
+            '/changelog/6.3.x',
             '/changelog/6.2.x',
             '/changelog/6.1.x',
             '/changelog/6.0.x',
@@ -78,6 +79,7 @@ module.exports = {
       {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.0.x/CHANGELOG.md', title: 'Changelog 6.0.x', path: '/changelog/6.0.x'},
       {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.1.x/CHANGELOG.md', title: 'Changelog 6.1.x', path: '/changelog/6.1.x'},
       {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.2.x/CHANGELOG.md', title: 'Changelog 6.2.x', path: '/changelog/6.2.x'},
+      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.3.x/CHANGELOG.md', title: 'Changelog 6.3.x', path: '/changelog/6.3.x'},
     ]
     await Promise.all(logs.map(async (log) => {
       const content = await rp(log.url);
