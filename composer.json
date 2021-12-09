@@ -53,6 +53,9 @@
             },
             "drupal/graphql": {
                 "fix: language definition in entity reference producers": "https://patch-diff.githubusercontent.com/raw/drupal-graphql/graphql/pull/1241.diff"
+            },
+            "drupal/redirect": {
+                "Deprecated function: parse_str(): Passing null to parameter #1 ($string) of type string is deprecated in Drupal\\redirect\\EventSubscriber\\RedirectRequestSubscriber->onKernelRequestCheckRedirect": "https://git.drupalcode.org/project/redirect/-/merge_requests/26.diff"
             }
         }
     },
