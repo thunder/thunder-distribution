@@ -9,7 +9,7 @@ use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 /**
  * Data producers EntityLinks test class.
  *
- * @group graphql
+ * @group Thunder
  */
 class EntityLinksTest extends GraphQLTestBase {
 
