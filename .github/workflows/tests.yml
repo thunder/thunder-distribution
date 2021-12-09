@@ -42,7 +42,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4', '8.0', '8.1' ]
+        PHP_VERSION: [ '7.4', '8.1' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
@@ -122,24 +122,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        PHP_VERSION: [ '7.4', '8.0', '8.1' ]
+        PHP_VERSION: [ '7.4', '8.1' ]
         CHUNK: [ 1, 2, 3 ]
 
     steps:
       - uses: actions/checkout@v1
 
-      - uses: shivammathur/setup-php@verbose
+      - uses: shivammathur/setup-php@v2
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: :sodium, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
-
-      - name: Setup Apache
-        uses: thunder/apache-shiva-php-action@v1
-        with:
-          php-version: ${{ matrix.PHP_VERSION }}
-          site-directory: /tmp/test/thunder/install/docroot
-          http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
@@ -157,6 +150,13 @@ jobs:
 
       - name: Unzip build artifact
         run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
+
+      - name: Setup Apache
+        uses: thunder/apache-shiva-php-action@v1
+        with:
+          php-version: ${{ matrix.PHP_VERSION }}
+          site-directory: /tmp/test/thunder/install/docroot
+          http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Run tests
         run: test-drupal-project run_tests
@@ -282,13 +282,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Setup Apache
-        uses: thunder/apache-shiva-php-action@v1
-        with:
-          php-version: ${{ matrix.PHP_VERSION }}
-          site-directory: /tmp/test/thunder/install/docroot
-          http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-
       - uses: shivammathur/setup-php@v2
         with:
           coverage: none
@@ -323,6 +316,13 @@ jobs:
         run: test-drupal-project build
         env:
           DRUPAL_TESTING_MIN_BUILD: true
+
+      - name: Setup Apache
+        uses: thunder/apache-shiva-php-action@v1
+        with:
+          php-version: ${{ matrix.PHP_VERSION }}
+          site-directory: /tmp/test/thunder/install/docroot
+          http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Run the tests
         run: test-drupal-project run_tests
