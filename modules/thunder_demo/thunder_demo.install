@@ -5,6 +5,8 @@
  * Contains.
  */
 
+use Drupal\user\Entity\Role;
+
 /**
  * Implements hook_modules_installed().
  */
@@ -25,7 +27,7 @@ function thunder_demo_modules_installed($modules) {
     $tour->set('tips.article-last.body', $article_last)->save();
 
     foreach (['editor', 'restricted_editor', 'seo'] as $role) {
-      if ($role = \Drupal\user\Entity\Role::load($role)) {
+      if ($role = Role::load($role)) {
         $role->grantPermission('access tour')
           ->save();
       }
