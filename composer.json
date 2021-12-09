@@ -59,6 +59,9 @@
             },
             "drupal/entity_reference_actions": {
                 "Exception: Deprecated function: strpos(): Passing null to parameter #1 ($haystack) of type string is deprecated entity_reference_actions_form_alter()() (Line: 70)": "https://git.drupalcode.org/project/entity_reference_actions/-/merge_requests/2.diff"
+            },
+            "drupal/crop": {
+                "Deprecated function: Return type of Drupal\\crop\\Entity\\CropType::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice": "https://git.drupalcode.org/project/crop/-/merge_requests/2.diff"
             }
         }
     },
