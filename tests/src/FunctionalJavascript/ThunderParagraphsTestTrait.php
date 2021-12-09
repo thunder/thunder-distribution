@@ -85,7 +85,7 @@ trait ThunderParagraphsTestTrait {
       $driver = $this->getSession()->getDriver();
       $driver->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
     }
-    $this->assertSession()->waitForElementVisible('css', "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child(" . (($numberOfParagraphs + 1) * 2 + 1) . ")");
+    $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child(" . (($numberOfParagraphs + 1) * 2 + 1) . ")"));
 
     $this->assertWaitOnAjaxRequest();
 
