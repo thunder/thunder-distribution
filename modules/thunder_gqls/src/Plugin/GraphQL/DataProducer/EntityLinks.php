@@ -93,7 +93,8 @@ class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPlug
             $url = $urlObject->toString();
           }
         }
-        catch (\Exception $exception) {}
+        catch (\Exception $exception) {
+        }
       });
 
       $transformed_keys = array_map([$this, 'toCamelCase'], array_keys($links));
