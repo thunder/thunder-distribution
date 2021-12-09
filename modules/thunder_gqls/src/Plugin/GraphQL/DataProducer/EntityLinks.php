@@ -86,11 +86,14 @@ class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPlug
       $links = $entity->getEntityType()->getLinkTemplates();
 
       array_walk($links, function (&$url, $rel) use ($entity) {
+        $url = '';
         try {
-          $url = $entity->toUrl($rel)->toString();
+          $urlObject = $entity->toUrl($rel);
+          if ($urlObject->access()) {
+            $url = $urlObject->toString();
+          }
         }
         catch (\Exception $exception) {
-          $url = '';
         }
       });
 
