@@ -51,7 +51,7 @@ class FileEventSubscriber implements EventSubscriberInterface {
 
       // Check for needed pathinfo array keys.
       if (!empty($pathinfo['filename']) && !empty($pathinfo['extension'])) {
-        $cleanFilename = $this->aliasCleaner->cleanString($pathinfo['filename']) . '.' . $pathinfo['extension'];
+        $cleanFilename = $this->aliasCleaner->cleanString($pathinfo['filename'], ['langcode' => 'en']) . '.' . $pathinfo['extension'];
         $event->setFilename($cleanFilename);
       }
     }
