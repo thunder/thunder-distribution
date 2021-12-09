@@ -17,16 +17,17 @@ content:
   field_media_images:
     type: entity_browser_entity_reference
     weight: 1
+    region: content
     settings:
       entity_browser: multiple_image_browser
       field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true
+      field_widget_replace: false
       open: true
-      selection_mode: selection_edit
       field_widget_display_settings:
         view_mode: thumbnail
-      field_widget_replace: false
+      selection_mode: selection_edit
     third_party_settings:
       entity_reference_actions:
         enabled: true
@@ -39,15 +40,14 @@ content:
             media_publish_action: '0'
             media_save_action: '0'
             media_unpublish_action: '0'
-    region: content
   name:
     type: string_textfield
     weight: 0
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   langcode: true

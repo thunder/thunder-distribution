@@ -8,8 +8,8 @@ third_party_settings:
   crop:
     image_field: null
   media_expire:
-    enable_expiring: null
     expire_field: null
+    enable_expiring: null
     fallback_media: null
 id: video
 label: Video

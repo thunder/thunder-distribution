@@ -3,30 +3,30 @@ status: true
 dependencies:
   module:
     - node
-id: default
 label: Default
+id: default
 description: ''
 matchers:
   abb64004-44db-4254-8189-1a06a4b8c830:
-    uuid: abb64004-44db-4254-8189-1a06a4b8c830
     id: 'entity:node'
-    weight: 0
+    uuid: abb64004-44db-4254-8189-1a06a4b8c830
     settings:
+      metadata: '[node:author] | [node:created:medium]'
       bundles:
         article: article
       group_by_bundle: false
-      include_unpublished: false
-      metadata: '[node:author] | [node:created:medium]'
       substitution_type: canonical
       limit: 100
-  54dba6c0-a78b-4f93-8955-b083b930a2ff:
-    uuid: 54dba6c0-a78b-4f93-8955-b083b930a2ff
-    id: 'entity:media'
+      include_unpublished: false
     weight: 0
+  54dba6c0-a78b-4f93-8955-b083b930a2ff:
+    id: 'entity:media'
+    uuid: 54dba6c0-a78b-4f93-8955-b083b930a2ff
     settings:
+      metadata: '[media:field_caption]'
       bundles:
         image: image
       group_by_bundle: true
-      metadata: '[media:field_caption]'
       substitution_type: media
       limit: 100
+    weight: 0

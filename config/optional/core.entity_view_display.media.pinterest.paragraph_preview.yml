@@ -16,15 +16,15 @@ mode: paragraph_preview
 content:
   thumbnail:
     type: image
-    weight: 0
-    region: content
     label: hidden
     settings:
-      image_style: paragraph_preview_thumbnail
       image_link: ''
+      image_style: paragraph_preview_thumbnail
     third_party_settings:
       empty_fields:
         handler: ''
+    weight: 0
+    region: content
 hidden:
   created: true
   field_url: true

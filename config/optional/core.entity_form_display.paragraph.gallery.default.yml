@@ -15,6 +15,7 @@ content:
   field_media:
     type: inline_entity_form_simple
     weight: 0
+    region: content
     settings:
       form_mode: inline
       override_labels: true
@@ -23,7 +24,6 @@ content:
       collapsible: false
       collapsed: false
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   moderation_state: true
