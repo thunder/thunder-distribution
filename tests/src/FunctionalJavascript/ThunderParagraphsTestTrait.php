@@ -63,7 +63,6 @@ trait ThunderParagraphsTestTrait {
    * @throws \Exception
    */
   public function addParagraph($fieldName, $type, $position = NULL) {
-    $driver = $this->getSession()->getDriver();
     $numberOfParagraphs = $this->getNumberOfParagraphs($fieldName);
 
     $fieldSelector = HTML::cleanCssIdentifier($fieldName);
@@ -78,7 +77,7 @@ trait ThunderParagraphsTestTrait {
 
     $this->clickCssSelector($addButtonCssSelector);
 
-    $driver->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
+    $this->getSession()->getDriver()->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
 
     $this->assertWaitOnAjaxRequest();
 
