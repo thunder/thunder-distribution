@@ -18,8 +18,6 @@ class EntityLinksTest extends GraphQLTestBase {
    */
   protected static $modules = [
     'thunder_gqls',
-    'metatag',
-    'token',
   ];
 
   /**
