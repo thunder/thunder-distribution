@@ -76,7 +76,7 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
     $pluginDefinition,
     HttpKernelInterface $httpKernel,
     Request $currentRequest,
-    RendererInterface $renderer,
+    RendererInterface $renderer
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
     $this->httpKernel = $httpKernel;
@@ -134,7 +134,6 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
 
     $request->attributes->set('_graphql_subrequest', function (CacheableMetadata $cacheableMetadata) use ($fieldContext) {
       $context = new RenderContext();
-      /** @var \Drupal\Component\Render\MarkupInterface $jsonldString */
       return $this->renderer->executeInRenderContext($context, function () use ($cacheableMetadata, $fieldContext) {
         return $this->doResolve($cacheableMetadata, $fieldContext);
       });

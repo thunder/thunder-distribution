@@ -5,9 +5,9 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
-use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Breadcrumb\BreadcrumbManager;
 use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\Core\Routing\CurrentRouteMatch;
 
 /**
  * Gets the breadcrumb of the current path.
@@ -56,10 +56,10 @@ class ThunderBreadcrumb extends ThunderEntitySubRequestBase implements Container
   /**
    * Sets the current route match.
    *
-   * @param \Drupal\Core\Routing\RouteMatchInterface $currentRouteMatch
+   * @param \Drupal\Core\Routing\CurrentRouteMatch $currentRouteMatch
    *   The current route match.
    */
-  protected function setCurrentRouteMatch(RouteMatchInterface $currentRouteMatch): void {
+  protected function setCurrentRouteMatch(CurrentRouteMatch $currentRouteMatch): void {
     $this->currentRouteMatch = $currentRouteMatch;
   }
 

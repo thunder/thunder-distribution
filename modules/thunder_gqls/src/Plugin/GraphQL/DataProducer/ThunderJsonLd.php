@@ -7,9 +7,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\schema_metatag\SchemaMetatagManager;
-use Drupal\metatag\MetatagManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\metatag\MetatagManager;
 
 /**
  * Gets the JSON-LD script of the current path.
@@ -60,10 +60,10 @@ class ThunderJsonLd extends ThunderEntitySubRequestBase implements ContainerFact
   /**
    * Sets the metatag manager.
    *
-   * @param \Drupal\metatag\MetatagManagerInterface $metatagManager
+   * @param \Drupal\metatag\MetatagManager $metatagManager
    *   The metatag manager service.
    */
-  protected function setMetatagManager(MetatagManagerInterface $metatagManager): void {
+  protected function setMetatagManager(MetatagManager $metatagManager): void {
     $this->metatagManager = $metatagManager;
   }
 
