@@ -107,6 +107,7 @@ JS;
    *   Flag to wait for AJAX request to finish after click.
    */
   public function clickCssSelector($cssSelector, $waitAfterAction = TRUE) {
+    $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', $cssSelector));
     $this->scrollElementInView($cssSelector);
     $this->click($cssSelector);
 
