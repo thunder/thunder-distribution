@@ -159,6 +159,24 @@ jobs:
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Run tests
+        run: test-drupal-project run_tests -nc
+        env:
+          THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
+          DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
+
+      - name: Run tests
+        run: test-drupal-project run_tests -nc
+        env:
+          THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
+          DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
+
+      - name: Run tests
+        run: test-drupal-project run_tests -nc
+        env:
+          THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
+          DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
+
+      - name: Run tests
         run: test-drupal-project run_tests
         env:
           THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
