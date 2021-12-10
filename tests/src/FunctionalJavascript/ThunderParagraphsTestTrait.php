@@ -79,12 +79,10 @@ trait ThunderParagraphsTestTrait {
     }
 
     $this->clickCssSelector($addButtonCssSelector);
-
     if ($index > 3) {
-      $driver = $this->getSession()->getDriver();
-      $driver->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
+      $this->getSession()->getDriver()->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
+      $this->assertWaitOnAjaxRequest();
     }
-    $this->assertWaitOnAjaxRequest();
     $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child(" . (($numberOfParagraphs + 1) * 2 + 1) . ")"));
 
     // Test if we have one more paragraph now.
