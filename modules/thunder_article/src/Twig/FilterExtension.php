@@ -42,16 +42,8 @@ class FilterExtension extends AbstractExtension {
    * @return string
    *   The processed content.
    */
-  public static function plainText($value): string {
-    if (empty($value)) {
-      return $value;
-    }
-    if (is_string($value)) {
-      $element = $value;
-    }
-    else {
-      $element = \Drupal::service('renderer')->render($value);
-    }
+  public static function plainText($value) {
+    $element = self::render($value);
     $element = strip_tags($element);
     return html_entity_decode($element, ENT_QUOTES);
   }
@@ -65,17 +57,38 @@ class FilterExtension extends AbstractExtension {
    * @return string
    *   The processed content.
    */
-  public static function basicFormat($value): string {
-    if (empty($value)) {
-      return $value;
-    }
-    if (is_string($value)) {
-      $element = $value;
-    }
-    else {
-      $element = \Drupal::service('renderer')->render($value);
-    }
+  public static function basicFormat($value) {
+    $element = self::render($value);
     return strip_tags($element, '<a><em><strong><b><i>');
   }
 
+  /**
+   * Drop-in replacement for deprecated render() function.
+   *
+   * \Drupal::service('renderer')->render() is not a fully compatible replacement
+   * of render(). It does not handle the input values that are not render arrays
+   * in the same way.
+   *
+   * @param $element
+   *
+   * @return int|mixed|null
+   */
+  private static function render(&$element) {
+    if (!$element && $element !== 0) {
+      return NULL;
+    }
+    if (is_array($element)) {
+      // Early return if this element was pre-rendered (no need to re-render).
+      if (isset($element['#printed']) && $element['#printed'] == TRUE && isset($element['#markup']) && strlen($element['#markup']) > 0) {
+        return $element['#markup'];
+      }
+      show($element);
+      return \Drupal::service('renderer')->render($element);
+    }
+    else {
+      // Safe-guard for inappropriate use of render() on flat variables: return
+      // the variable as-is.
+      return $element;
+    }
+  }
 }
