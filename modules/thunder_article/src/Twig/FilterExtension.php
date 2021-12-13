@@ -44,7 +44,7 @@ class FilterExtension extends AbstractExtension {
    */
   public static function plainText($value): string {
     if (empty($value)) {
-      return '';
+      return $value;
     }
     if (is_string($value)) {
       $element = $value;
@@ -67,7 +67,7 @@ class FilterExtension extends AbstractExtension {
    */
   public static function basicFormat($value): string {
     if (empty($value)) {
-      return '';
+      return $value;
     }
     if (is_string($value)) {
       $element = $value;
