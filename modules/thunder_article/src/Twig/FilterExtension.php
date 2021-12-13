@@ -36,14 +36,22 @@ class FilterExtension extends AbstractExtension {
   /**
    * Plains a text. Strips everything evil out.
    *
-   * @param array|null $value
+   * @param $value
    *   The content to be processed.
    *
    * @return string
    *   The processed content.
    */
-  public static function plainText($value) {
-    $element = \Drupal::service('renderer')->render($value);
+  public static function plainText($value): string {
+    if (empty($value)) {
+      return '';
+    }
+    if (is_string($value)) {
+      $element = $value;
+    }
+    else {
+      $element = \Drupal::service('renderer')->render($value);
+    }
     $element = strip_tags($element);
     return html_entity_decode($element, ENT_QUOTES);
   }
@@ -51,14 +59,22 @@ class FilterExtension extends AbstractExtension {
   /**
    * Cleans a text and just allow a few tags.
    *
-   * @param array $value
+   * @param $value
    *   The content to be processed.
    *
    * @return string
    *   The processed content.
    */
-  public static function basicFormat(array $value) {
-    $element = \Drupal::service('renderer')->render($value);
+  public static function basicFormat($value): string {
+    if (empty($value)) {
+      return '';
+    }
+    if (is_string($value)) {
+      $element = $value;
+    }
+    else {
+      $element = \Drupal::service('renderer')->render($value);
+    }
     return strip_tags($element, '<a><em><strong><b><i>');
   }
 
