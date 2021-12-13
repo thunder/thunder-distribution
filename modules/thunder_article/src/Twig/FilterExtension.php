@@ -36,13 +36,13 @@ class FilterExtension extends AbstractExtension {
   /**
    * Plains a text. Strips everything evil out.
    *
-   * @param array $value
+   * @param array|null $value
    *   The content to be processed.
    *
    * @return string
    *   The processed content.
    */
-  public static function plainText(array $value) {
+  public static function plainText($value) {
     $element = \Drupal::service('renderer')->render($value);
     $element = strip_tags($element);
     return html_entity_decode($element, ENT_QUOTES);
