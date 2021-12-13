@@ -71,11 +71,8 @@ class FilterExtension extends AbstractExtension {
    *
    * @param mixed $element
    *   The render element.
-   *
-   * @return mixed
-   *   The rendered element.
    */
-  private static function render(&$element): mixed {
+  private static function render(&$element) {
     if (!$element && $element !== 0) {
       return NULL;
     }
