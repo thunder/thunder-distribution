@@ -42,7 +42,7 @@ class FilterExtension extends AbstractExtension {
    * @return string
    *   The processed content.
    */
-  public static function plainText($value) {
+  public static function plainText($value): string {
     $element = self::render($value);
     $element = strip_tags($element);
     return html_entity_decode($element, ENT_QUOTES);
@@ -57,7 +57,7 @@ class FilterExtension extends AbstractExtension {
    * @return string
    *   The processed content.
    */
-  public static function basicFormat($value) {
+  public static function basicFormat($value): string {
     $element = self::render($value);
     return strip_tags($element, '<a><em><strong><b><i>');
   }
@@ -65,15 +65,17 @@ class FilterExtension extends AbstractExtension {
   /**
    * Drop-in replacement for deprecated render() function.
    *
-   * \Drupal::service('renderer')->render() is not a fully compatible replacement
-   * of render(). It does not handle the input values that are not render arrays
-   * in the same way.
+   * \Drupal::service('renderer')->render() is not a fully compatible
+   * replacement of render(). It does not handle the input values that are not
+   * render arrays in the same way.
    *
-   * @param $element
+   * @param mixed $element
+   *   The render element.
    *
-   * @return int|mixed|null
+   * @return mixed
+   *   The rendered element.
    */
-  private static function render(&$element) {
+  private static function render(&$element): mixed {
     if (!$element && $element !== 0) {
       return NULL;
     }
@@ -91,4 +93,5 @@ class FilterExtension extends AbstractExtension {
       return $element;
     }
   }
+
 }
