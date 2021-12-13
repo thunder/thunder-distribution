@@ -36,7 +36,7 @@ class FilterExtension extends AbstractExtension {
   /**
    * Plains a text. Strips everything evil out.
    *
-   * @param $value
+   * @param array|string|null $value
    *   The content to be processed.
    *
    * @return string
@@ -59,7 +59,7 @@ class FilterExtension extends AbstractExtension {
   /**
    * Cleans a text and just allow a few tags.
    *
-   * @param $value
+   * @param array|string|null $value
    *   The content to be processed.
    *
    * @return string
