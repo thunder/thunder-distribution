@@ -1,6 +1,7 @@
 # Changelog
 
 ## [6.3.1](https://github.com/thunder/thunder-distribution/tree/6.3.1) 2021-12-16
+
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.0...6.3.1)
 
 Bugfix release to fix issues of twig filter using \Drupal::service('renderer')->render($element).
