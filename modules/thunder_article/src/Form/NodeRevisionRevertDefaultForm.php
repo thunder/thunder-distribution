@@ -4,11 +4,11 @@ namespace Drupal\thunder_article\Form;
 
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
+use Drupal\node\NodeStorageInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -48,14 +48,14 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
   /**
    * Constructs a new NodeRevisionRevertForm.
    *
-   * @param \Drupal\Core\Entity\EntityStorageInterface $node_storage
+   * @param \Drupal\node\NodeStorageInterface $node_storage
    *   The node storage.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   The date formatter service.
    * @param \Drupal\Component\Datetime\TimeInterface $time
    *   The time service.
    */
-  public function __construct(EntityStorageInterface $node_storage, DateFormatterInterface $date_formatter, TimeInterface $time) {
+  public function __construct(NodeStorageInterface $node_storage, DateFormatterInterface $date_formatter, TimeInterface $time) {
     $this->nodeStorage = $node_storage;
     $this->dateFormatter = $date_formatter;
     $this->time = $time;
@@ -104,7 +104,7 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getDescription() {
-    return '';
+    return $this->t('');
   }
 
   /**
