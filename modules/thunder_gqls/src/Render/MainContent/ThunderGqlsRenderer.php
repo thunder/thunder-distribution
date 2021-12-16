@@ -77,12 +77,12 @@ class ThunderGqlsRenderer implements MainContentRendererInterface {
    *   The breadcrumb manager.
    * @param \Drupal\Core\Routing\CurrentRouteMatch $currentRouteMatch
    *   The route match service.
-   * @param \Drupal\metatag\MetatagManager $metatagManager
-   *   The metatag manager service.
    * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
    *   The language manager service.
+   * @param \Drupal\metatag\MetatagManager|null $metatagManager
+   *   The metatag manager service.
    */
-  public function __construct(ModuleHandlerInterface $moduleHandler, RendererInterface $renderer, BreadcrumbBuilderInterface $breadcrumbManager, CurrentRouteMatch $currentRouteMatch, MetatagManager $metatagManager, LanguageManagerInterface $languageManager) {
+  public function __construct(ModuleHandlerInterface $moduleHandler, RendererInterface $renderer, BreadcrumbBuilderInterface $breadcrumbManager, CurrentRouteMatch $currentRouteMatch, LanguageManagerInterface $languageManager, ?MetatagManager $metatagManager = NULL) {
     $this->renderer = $renderer;
     $this->metatagManager = $metatagManager;
     $this->breadcrumbManager = $breadcrumbManager;
