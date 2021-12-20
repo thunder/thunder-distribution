@@ -1,6 +1,6 @@
 # Changelog
 
-## [6.3.1](https://github.com/thunder/thunder-distribution/tree/6.3.1) 2021-12-16
+## [6.3.1](https://github.com/thunder/thunder-distribution/tree/6.3.1) 2021-12-20
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.0...6.3.1)
 
