@@ -8,7 +8,6 @@ use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
-use Drupal\node\NodeStorageInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -23,13 +22,6 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
    * @var \Drupal\node\NodeInterface
    */
   protected $revision;
-
-  /**
-   * The node storage.
-   *
-   * @var \Drupal\node\NodeStorageInterface
-   */
-  protected $nodeStorage;
 
   /**
    * The date formatter service.
@@ -48,15 +40,12 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
   /**
    * Constructs a new NodeRevisionRevertForm.
    *
-   * @param \Drupal\node\NodeStorageInterface $node_storage
-   *   The node storage.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   The date formatter service.
    * @param \Drupal\Component\Datetime\TimeInterface $time
    *   The time service.
    */
-  public function __construct(NodeStorageInterface $node_storage, DateFormatterInterface $date_formatter, TimeInterface $time) {
-    $this->nodeStorage = $node_storage;
+  public function __construct(DateFormatterInterface $date_formatter, TimeInterface $time) {
     $this->dateFormatter = $date_formatter;
     $this->time = $time;
   }
@@ -66,7 +55,6 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('entity_type.manager')->getStorage('node'),
       $container->get('date.formatter'),
       $container->get('datetime.time')
     );
