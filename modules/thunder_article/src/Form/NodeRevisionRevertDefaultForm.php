@@ -6,7 +6,6 @@ use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
 use Drupal\node\NodeStorageInterface;
@@ -105,7 +104,7 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getDescription() {
-    return new TranslatableMarkup('');
+    return $this->t('Revert to the default revision from %revision-date.', ['%revision-date' => $this->dateFormatter->format($this->revision->getRevisionCreationTime())]);
   }
 
   /**

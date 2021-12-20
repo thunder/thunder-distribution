@@ -7,10 +7,12 @@ use PHPUnit\Framework\TestSuite;
 
 /**
  * Discovers tests for the Thunder test suite.
+ * @codingStandardsIgnoreStart
  */
 class ThunderTestSuite extends TestSuite {
 
   /**
+   * @codingStandardsIgnoreEnd
    * Factory method which loads up a suite with all Thunder tests.
    *
    * @return static
