@@ -6,6 +6,7 @@ use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
 use Drupal\node\NodeStorageInterface;
@@ -104,7 +105,7 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getDescription() {
-    return $this->t('');
+    return new TranslatableMarkup('');
   }
 
   /**
