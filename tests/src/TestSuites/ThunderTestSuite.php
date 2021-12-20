@@ -7,6 +7,8 @@ use PHPUnit\Framework\TestSuite;
 
 /**
  * Discovers tests for the Thunder test suite.
+ *
+ * @phpstan-ignore-next-line
  */
 class ThunderTestSuite extends TestSuite {
 
