@@ -12,11 +12,11 @@ bundle: pinterest
 mode: default
 content:
   field_url:
-    weight: 0
+    type: pinterest_embed
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: pinterest_embed
+    weight: 0
     region: content
 hidden:
   created: true

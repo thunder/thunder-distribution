@@ -17,11 +17,11 @@ content:
   field_url:
     type: oembed_textfield
     weight: 0
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   field_author: true

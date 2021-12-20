@@ -18,12 +18,13 @@ content:
   field_meta_tags:
     type: metatag_firehose
     weight: 4
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   field_paragraphs:
     type: paragraphs
     weight: 2
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -35,43 +36,42 @@ content:
       form_display_mode: default
       default_paragraph_type: _none
       features:
-        duplicate: '0'
-        collapse_edit_all: '0'
         add_above: '0'
+        collapse_edit_all: '0'
+        duplicate: '0'
     third_party_settings:
       paragraphs_features:
-        delete_confirmation: true
         add_in_between: true
+        delete_confirmation: true
         split_text: true
         show_drag_and_drop: false
-    region: content
   langcode:
     type: language_select
     weight: 0
+    region: content
     settings:
       include_locked: true
     third_party_settings: {  }
-    region: content
   name:
     type: string_textfield
     weight: 1
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
   path:
     type: path
     weight: 3
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
+    weight: 5
+    region: content
     settings:
       display_label: true
-    weight: 5
     third_party_settings: {  }
-    region: content
 hidden:
   description: true

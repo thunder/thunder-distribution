@@ -21,13 +21,13 @@ content:
   field_channel:
     type: select2_entity_reference
     weight: 0
+    region: content
     settings:
+      width: 100%
       autocomplete: false
       match_operator: CONTAINS
       match_limit: 10
-      width: 100%
     third_party_settings: {  }
-    region: content
   field_tags:
     type: select2_entity_reference
     weight: 1
@@ -39,6 +39,7 @@ content:
       match_limit: 10
     third_party_settings:
       entity_reference_actions:
+        enabled: false
         options:
           action_title: Action
           include_exclude: exclude
@@ -46,7 +47,6 @@ content:
             taxonomy_term_edit_action: '0'
             taxonomy_term_publish_action: '0'
             taxonomy_term_unpublish_action: '0'
-        enabled: false
   uid:
     type: select2_entity_reference
     weight: 2

@@ -20,41 +20,17 @@ bundle: image
 mode: slick
 content:
   field_copyright:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
   field_image:
-    weight: 0
+    type: blazy
     label: hidden
     settings:
-      image_style: ''
-      responsive_image_style: media_image
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      sizes: ''
-      breakpoints:
-        xs:
-          image_style: ''
-          width: ''
-        sm:
-          image_style: ''
-          width: ''
-        md:
-          image_style: ''
-          width: ''
-        lg:
-          image_style: ''
-          width: ''
-        xl:
-          image_style: ''
-          width: ''
-      current_view_mode: slick
-      background: false
       caption:
         title: '0'
         alt: '0'
@@ -62,22 +38,46 @@ content:
       layout: ''
       view_mode: ''
       cache: 0
+      current_view_mode: slick
       skin: ''
+      fx: ''
       style: ''
+      background: false
       box_caption: ''
       box_caption_custom: ''
-      box_style: ''
       box_media_style: ''
-      grid: '0'
+      responsive_image_style: media_image
+      box_style: ''
+      image_style: ''
+      media_switch: ''
+      ratio: ''
+      thumbnail_style: ''
+      _uri: ''
+      breakpoints:
+        xs:
+          width: ''
+          image_style: ''
+        sm:
+          width: ''
+          image_style: ''
+        md:
+          width: ''
+          image_style: ''
+        lg:
+          width: ''
+          image_style: ''
+        xl:
+          width: ''
+          image_style: ''
+      sizes: ''
       grid_header: ''
+      grid: '0'
       grid_medium: '0'
       grid_small: '0'
-      fx: ''
-      _uri: ''
     third_party_settings:
       empty_fields:
         handler: ''
-    type: blazy
+    weight: 0
     region: content
 hidden:
   created: true
