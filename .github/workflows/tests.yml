@@ -77,6 +77,10 @@ jobs:
       - name: Build the docroot
         run: test-drupal-project build
 
+      # Start a debug session.
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - name: Get custom thunder_admin branch
         run: |
           rm -rf thunder_admin
@@ -155,10 +159,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-
-      # Start a debug session.
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
 
       - name: Run tests
         run: test-drupal-project run_tests
