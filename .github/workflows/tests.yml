@@ -74,10 +74,6 @@ jobs:
       - name: Add needed dependencies
         run: composer require "drupal/core-dev:~9.3.0" "phpspec/prophecy-phpunit:^2" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
-      #   Start a debug session.
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Build the docroot
         run: test-drupal-project build
 
