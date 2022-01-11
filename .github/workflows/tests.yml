@@ -159,8 +159,8 @@ jobs:
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
-      - name: Recreate bin dir
-        run: composer install --working-dir=/tmp/test/thunder/install
+      - name: Print bin-dir
+        run: composer config bin-dir --working-dir=/tmp/test/thunder/install
 
       - name: Run tests
         run: test-drupal-project run_tests
