@@ -162,6 +162,10 @@ jobs:
       - name: Print bin-dir
         run: composer config bin-dir --working-dir=/tmp/test/thunder/install
 
+      #   Start a debug session.
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - name: Run tests
         run: test-drupal-project run_tests
         env:
