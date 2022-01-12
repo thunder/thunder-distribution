@@ -431,7 +431,7 @@ class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
     parent::registerResolvers($registry);
 
     // This adds all the Page interface fields to the resolver,
-    $this->resolvePageInterfaceFields('MyContentType');
+    $this->resolvePageInterfaceFields('MyContentType', 'node');
 
     // Now we add field resolvers for our new fields. In this case we simply get
     // the value from the field_mycustomfield. parent::registerResolvers($registry)
