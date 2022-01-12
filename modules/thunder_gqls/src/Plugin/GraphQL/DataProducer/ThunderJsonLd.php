@@ -33,7 +33,7 @@ class ThunderJsonLd extends ThunderEntitySubRequestBase {
   /**
    * The metatag manager service.
    *
-   * @var \Drupal\metatag\MetatagManager
+   * @var \Drupal\metatag\MetatagManager|null
    */
   protected $metatagManager;
 
@@ -51,7 +51,7 @@ class ThunderJsonLd extends ThunderEntitySubRequestBase {
    */
   public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
     $producer = parent::create($container, $configuration, $pluginId, $pluginDefinition);
-    $producer->setMetatagManager($container->get('metatag.manager'));
+    $producer->setMetatagManager($container->get('metatag.manager', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     $producer->setModuleHandler($container->get('module_handler'));
     return $producer;
   }
@@ -59,10 +59,10 @@ class ThunderJsonLd extends ThunderEntitySubRequestBase {
   /**
    * Sets the metatag manager.
    *
-   * @param \Drupal\metatag\MetatagManager $metatagManager
+   * @param \Drupal\metatag\MetatagManager|null $metatagManager
    *   The metatag manager service.
    */
-  protected function setMetatagManager(MetatagManager $metatagManager): void {
+  protected function setMetatagManager(?MetatagManager $metatagManager): void {
     $this->metatagManager = $metatagManager;
   }
 
