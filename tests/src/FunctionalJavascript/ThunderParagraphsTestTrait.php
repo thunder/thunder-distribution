@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-use Behat\Mink\Element\DocumentElement;
 use Drupal\Component\Utility\Html;
 
 /**
@@ -12,7 +11,9 @@ use Drupal\Component\Utility\Html;
  */
 trait ThunderParagraphsTestTrait {
 
+  use ThunderJavascriptTrait;
   use ThunderMediaTestTrait;
+  use ThunderCkEditorTestTrait;
 
   /**
    * Get number of paragraphs for defined field on current page.
@@ -62,8 +63,6 @@ trait ThunderParagraphsTestTrait {
    * @throws \Exception
    */
   public function addParagraph($fieldName, $type, $position = NULL) {
-    /** @var \Behat\Mink\Element\DocumentElement $page */
-    $page = $this->getSession()->getPage();
     $numberOfParagraphs = $this->getNumberOfParagraphs($fieldName);
 
     $fieldSelector = HTML::cleanCssIdentifier($fieldName);
@@ -76,16 +75,11 @@ trait ThunderParagraphsTestTrait {
       $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) input.paragraphs-features__add-in-between__button";
     }
 
-    $addButton = $page->find('css', $addButtonCssSelector);
-    $this->scrollElementInView($addButtonCssSelector);
+    $this->clickCssSelector($addButtonCssSelector);
 
-    $addButton->click();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->getSession()->getDriver()->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
 
-    $page->find('xpath', "//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]")
-      ->click();
-
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     // Test if we have one more paragraph now.
     static::assertEquals($this->getNumberOfParagraphs($fieldName), ($numberOfParagraphs + 1));
@@ -135,7 +129,6 @@ trait ThunderParagraphsTestTrait {
     $paragraphIndex = $this->addParagraph($fieldName, 'image', $position);
 
     $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_image", 'image_browser', $media);
-
   }
 
   /**
@@ -152,7 +145,6 @@ trait ThunderParagraphsTestTrait {
     $paragraphIndex = $this->addParagraph($fieldName, 'video', $position);
 
     $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_video", 'video_browser', $media);
-
   }
 
   /**
@@ -247,19 +239,18 @@ trait ThunderParagraphsTestTrait {
   /**
    * Click button for editing of paragraph.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $paragraphsFieldName
    *   Field name in content type used to paragraphs.
    * @param int $index
    *   Index of paragraph to be edited, starts from 0.
    */
-  public function editParagraph(DocumentElement $page, $paragraphsFieldName, $index) {
+  public function editParagraph($paragraphsFieldName, $index) {
     $editButtonName = "{$paragraphsFieldName}_{$index}_edit";
 
     $this->scrollElementInView("[name=\"{$editButtonName}\"]");
+    $page = $this->getSession()->getPage();
     $page->pressButton($editButtonName);
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
   }
 
 }

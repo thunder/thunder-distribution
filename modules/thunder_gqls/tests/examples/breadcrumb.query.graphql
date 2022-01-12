@@ -1,0 +1,6 @@
+query ($path: String!) {
+  breadcrumb(path: $path) {
+    url
+    title
+  }
+}

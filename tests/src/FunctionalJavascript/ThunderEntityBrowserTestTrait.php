@@ -2,9 +2,6 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-use Behat\Mink\Element\DocumentElement;
-use Behat\Mink\Element\NodeElement;
-
 /**
  * Trait with support for handling Entity Browser actions.
  *
@@ -12,18 +9,19 @@ use Behat\Mink\Element\NodeElement;
  */
 trait ThunderEntityBrowserTestTrait {
 
+  use ThunderJavascriptTrait;
+
   /**
    * Open modal entity browser and switch into iframe from it.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $drupalSelector
    *   Drupal selector.
    * @param string $entityBrowser
    *   Entity browser name.
    */
-  public function openEntityBrowser(DocumentElement $page, $drupalSelector, $entityBrowser) {
-    $this->clickButtonDrupalSelector($page, $drupalSelector);
+  public function openEntityBrowser($drupalSelector, $entityBrowser) {
+    $this->clickDrupalSelector($drupalSelector . '-entity-browser-entity-browser-open-modal');
+    $this->assertWaitOnAjaxRequest();
 
     $this->getSession()
       ->switchToIFrame('entity_browser_iframe_' . $entityBrowser);
@@ -31,20 +29,29 @@ trait ThunderEntityBrowserTestTrait {
     // Wait that iframe is loaded and jQuery is available.
     $this->getSession()->wait(10000, '(typeof jQuery !== "undefined")');
 
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
   }
 
   /**
    * Submit changes in modal entity browser.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
+   * @param string $entityBrowser
+   *   Entity browser name.
    */
-  public function submitEntityBrowser(DocumentElement $page) {
-    $this->clickButtonDrupalSelector($page, 'edit-use-selected', FALSE);
+  public function submitEntityBrowser($entityBrowser) {
+    $page = $this->getSession()->getPage();
+    if ($entityBrowser == 'multiple_image_browser') {
+      $this->getSession()->wait(200);
+      $this->assertWaitOnAjaxRequest();
+
+      $page->pressButton('Use selected');
+    }
+    else {
+      $page->pressButton('edit-submit');
+    }
 
     $this->getSession()->switchToIFrame();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
   }
 
   /**
@@ -54,14 +61,15 @@ trait ThunderEntityBrowserTestTrait {
    * uploaded there. Upload is done over input file field and it has to be
    * visible for selenium to work.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $filePath
    *   Path to file that should be uploaded.
    *
    * @throws \Exception
    */
-  public function uploadFile(DocumentElement $page, $filePath) {
+  public function uploadFile($filePath) {
+    /** @var \Behat\Mink\Element\DocumentElement $page */
+    $page = $this->getSession()->getPage();
+
     // Click all tabs until we find upload Tab.
     $tabLinks = $page->findAll('css', '.eb-tabs a');
     if (empty($tabLinks)) {
@@ -79,7 +87,7 @@ trait ThunderEntityBrowserTestTrait {
     foreach ($tabLinks as $tabLink) {
       /** @var \Behat\Mink\Element\NodeElement $tabLink */
       $tabLink->click();
-      $this->assertSession()->assertWaitOnAjaxRequest();
+      $this->assertWaitOnAjaxRequest();
 
       $fileField = $page->find('css', $fileFieldSelector);
 
@@ -103,7 +111,7 @@ trait ThunderEntityBrowserTestTrait {
 
     $fileField->attachFile($filePath);
 
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     // Wait up to 10 sec that "Use selected" button is active.
     $this->getSession()->wait(
@@ -111,47 +119,12 @@ trait ThunderEntityBrowserTestTrait {
       '(typeof jQuery === "undefined" || !jQuery(\'input[name="op"]\').is(":disabled"))'
     );
 
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     // In case of gallery image upload we should wait additionally so that all
     // command for auto selection are executed.
     $this->getSession()->wait(200);
-    $this->assertSession()->assertWaitOnAjaxRequest();
-  }
-
-  /**
-   * Drag element in document with defined offset position.
-   *
-   * @param \Behat\Mink\Element\NodeElement $element
-   *   Element that will be dragged.
-   * @param int $offsetX
-   *   Vertical offset for element drag in pixels.
-   * @param int $offsetY
-   *   Horizontal offset for element drag in pixels.
-   */
-  protected function dragDropElement(NodeElement $element, $offsetX, $offsetY) {
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    $elemXpath = $element->getXpath();
-
-    $jsCode = "var fireMouseEvent = function (type, element, x, y) {"
-      . "  var event = document.createEvent('MouseEvents');"
-      . "  event.initMouseEvent(type, true, (type !== 'mousemove'), window, 0, 0, 0, x, y, false, false, false, false, 0, element);"
-      . "  element.dispatchEvent(event); };";
-
-    // XPath provided by getXpath uses single quote (') to encapsulate strings,
-    // that's why xpath has to be quited with double quites in javascript code.
-    $jsCode .= "(function() {" .
-      "  var dragElement = document.evaluate(\"{$elemXpath}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;" .
-      "  var pos = dragElement.getBoundingClientRect();" .
-      "  var centerX = Math.floor((pos.left + pos.right) / 2);" .
-      "  var centerY = Math.floor((pos.top + pos.bottom) / 2);" .
-      "  fireMouseEvent('mousedown', dragElement, centerX, centerY);" .
-      "  fireMouseEvent('mousemove', document, centerX + {$offsetX}, centerY + {$offsetY});" .
-      "  fireMouseEvent('mouseup', dragElement, centerX + {$offsetX}, centerY + {$offsetY});" .
-      "})();";
-
-    $this->getSession()->executeScript($jsCode);
+    $this->assertWaitOnAjaxRequest();
   }
 
 }

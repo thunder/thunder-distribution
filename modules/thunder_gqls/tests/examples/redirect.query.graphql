@@ -1,0 +1,6 @@
+query ($path: String!) {
+  redirect(path: $path) {
+    url
+    status
+  }
+}

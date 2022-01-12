@@ -111,13 +111,14 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
+    $driver = $this->getSession()->getDriver();
 
     $teaserField = $page->find('xpath', '//*[@data-drupal-selector="edit-field-teaser-text-0-value"]');
     $initialTeaserText = $teaserField->getValue();
     $teaserText = 'Start with Text. ' . $initialTeaserText . ' End with Text.';
     $teaserField->setValue($teaserText);
 
-    $this->clickButtonDrupalSelector($page, 'edit-field-teaser-media-current-items-0-remove-button');
+    $this->clickDrupalSelector('edit-field-teaser-media-current-items-0-remove-button');
     $media1 = $this->loadMediaByUuid('17965877-27b2-428f-8b8c-7dccba9786e5');
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $media1->id()]);
 
@@ -131,13 +132,11 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
 
     $this->drupalGet($node->toUrl('version-history'));
 
-    $firstRightRadio = $page->find('xpath', '//table[contains(@class, "diff-revisions")]/tbody//tr[1]//input[@name="radios_right"]');
-    $firstRightRadio->click();
-    $lastLeftRadio = $page->find('xpath', '//table[contains(@class, "diff-revisions")]/tbody//tr[last()]//input[@name="radios_left"]');
-    $lastLeftRadio->click();
+    $driver->click('//table[contains(@class, "diff-revisions")]/tbody//tr[1]//input[@name="radios_right"]');
+    $driver->click('//table[contains(@class, "diff-revisions")]/tbody//tr[last()]//input[@name="radios_left"]');
 
     // Open diff page.
-    $page->find('xpath', '//*[@data-drupal-selector="edit-submit"]')->click();
+    $driver->click('//*[@data-drupal-selector="edit-submit"]');
 
     // Validate that diff is correct.
     $this->validateDiff(
@@ -210,10 +209,10 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
     $this->drupalGet($node->toUrl('edit-form'));
     $this->assertSession()->pageTextContains('This content is now locked against simultaneous editing. This content will remain locked if you navigate away from this page without saving or unlocking it.');
 
-    $page = $this->getSession()->getPage();
-    $page->find('xpath', '//*[@id="edit-unlock"]')->click();
+    $driver = $this->getSession()->getDriver();
+    $driver->click('//*[@id="edit-unlock"]');
 
-    $page->find('xpath', '//*[@id="edit-submit"]')->click();
+    $driver->click('//*[@id="edit-submit"]');
     $this->assertSession()->pageTextContains('Lock broken. Anyone can now edit this content.');
 
     $this->drupalGet($node->toUrl('edit-form'));

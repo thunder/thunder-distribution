@@ -164,7 +164,7 @@ class ModuleConfigureForm extends FormBase {
 
     $modules = $this->moduleExtensionList->getList();
     $thunder_features = array_filter($modules, function (Extension $module) {
-      return $module->info['package'] === 'Thunder Optional';
+      return $module->info['package'] === 'Thunder Optional' && (!isset($module->info['hidden']) || !$module->info['hidden']);
     });
 
     foreach ($thunder_features as $id => $module) {

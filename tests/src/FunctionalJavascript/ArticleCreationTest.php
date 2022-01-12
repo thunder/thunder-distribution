@@ -40,10 +40,10 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
     ]);
 
-    $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
+    $image1 = $this->loadMediaByUuid('23f6d444-ece1-465d-a667-b1fb80e641d3');
+    $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $image1->id()]);
 
     // Add Image Paragraph.
-    $image1 = $this->loadMediaByUuid('23f6d444-ece1-465d-a667-b1fb80e641d3');
     $this->addImageParagraph(static::$paragraphsField, ['media:' . $image1->id()]);
 
     // Add Text Paragraph.
@@ -170,11 +170,11 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->drupalGet($node->toUrl('edit-form'));
 
     $this->setModerationState('unpublished');
-    $this->getSession()->getPage()->find('xpath', '//*[@id="edit-preview"]')->click();
+    $this->getSession()->getDriver()->click('//*[@id="edit-preview"]');
     $this->clickLink('Back to content editing');
     $this->assertSession()->pageTextNotContains('An illegal choice has been detected. Please contact the site administrator.');
 
-    $this->setFieldValues($this->getSession()->getPage(), [
+    $this->setFieldValues([
       'title[0][value]' => 'Test workflow article in draft',
       'field_seo_title[0][value]' => 'Massive gaining even more seo traffic text',
     ]);
@@ -183,7 +183,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->drupalGet($node->toUrl('edit-form'));
 
-    $this->setFieldValues($this->getSession()->getPage(), [
+    $this->setFieldValues([
       'title[0][value]' => 'Test workflow article in draft 2',
       'field_seo_title[0][value]' => 'Massive gaining even more and more seo traffic text',
     ]);

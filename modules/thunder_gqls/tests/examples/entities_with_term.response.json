@@ -1,0 +1,17 @@
+{
+  "data": {
+    "page": {
+      "articles": {
+        "total": 2,
+        "items": [
+          {
+            "name": "Burda Launches Open-Source CMS Thunder"
+          },
+          {
+            "name": "Duis autem vel eum iriure"
+          }
+        ]
+      }
+    }
+  }
+}

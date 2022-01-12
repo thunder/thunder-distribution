@@ -1,0 +1,14 @@
+{
+  "data": {
+    "breadcrumb": [
+      {
+        "url": "/",
+        "title": "Home"
+      },
+      {
+        "url": "/events",
+        "title": "Events"
+      }
+    ]
+  }
+}

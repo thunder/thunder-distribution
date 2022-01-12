@@ -51,7 +51,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $edit_url = $node->toUrl('edit-form');
     $this->drupalGet($edit_url);
     $this->expandAllTabs();
-    $this->setFieldValues($this->getSession()->getPage(), [
+    $this->setFieldValues([
       'title[0][value]' => 'Test workflow article 1 - Draft',
       'moderation_state[0]' => 'draft',
       'publish_on[0][value][date]' => date('Y-m-d', $publish_timestamp),
@@ -93,7 +93,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $node = $this->getNodeByTitle('Test workflow article 2 - Published');
 
     // Set date manually, unpublish cannot be in the past.
-    $node->unpublish_on->value = strtotime('yesterday');
+    $node->set('unpublish_on', strtotime('yesterday'));
     $node->save();
 
     $revision_id = $node->getRevisionId();

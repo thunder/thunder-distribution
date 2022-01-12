@@ -1,0 +1,31 @@
+query ($path: String!) {
+  page(path: $path) {
+    ... on Article {
+      content {
+        __typename
+        ... on ParagraphText {
+          text
+        }
+        ... on ParagraphTwitter {
+          url
+        }
+        ... on ParagraphGallery {
+          name
+          images {
+            name
+            source
+          }
+        }
+        ... on ParagraphQuote {
+          text
+        }
+        ... on ParagraphLink {
+          links {
+            url
+            title
+          }
+        }
+      }
+    }
+  }
+}

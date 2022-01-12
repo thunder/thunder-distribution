@@ -45,3 +45,12 @@ v6.1.3:
         '#description': '<p>The async widget provides a smoother node editing experience for site editors.</p>'
         '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+v6.1.4:
+    '#title': 'Update to version v6.1.4'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_update_manual:
+        '#title': 'Change to the simple site map configuration.'
+        '#description': '<p>We changed the default configuration for the simple sitemap module. Articles and taxonomy terms are in separate sitemaps now, and a new variant index sitemap was added the new default sitemap.</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>We did not automatically update your sitemap config. Add the variants you want to have and the add another variant of type variant_index as the default sitemap.</strong><p>'
+        configuration_page: { '#text': 'Add variants', '#url': 'internal:/admin/config/search/simplesitemap/variants' }
