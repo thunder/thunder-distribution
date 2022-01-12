@@ -100,7 +100,7 @@
         "drupal/paragraphs_features": "^1.8",
         "drupal/password_policy": "3.0",
         "drupal/pathauto": "^1.8",
-        "drupal/responsive_preview": "^1.0-alpha7",
+        "drupal/responsive_preview": "^1.1",
         "drupal/redirect": "^1.6",
         "drupal/scheduler": "^1.4",
         "drupal/scheduler_content_moderation_integration": "^1.3",
