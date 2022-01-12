@@ -233,7 +233,7 @@ jobs:
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
 
           composer update
-          composer exec drush updb -y
+          composer exec -- drush updb -y
 
           cd docroot
           php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
