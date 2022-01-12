@@ -55,7 +55,7 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
   }
 
   /**
-   * Breadcrumb constructor.
+   * ThunderEntitySubRequestBase constructor.
    *
    * @param array $configuration
    *   The plugin configuration array.
