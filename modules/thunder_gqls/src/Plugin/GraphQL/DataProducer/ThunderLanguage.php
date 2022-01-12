@@ -2,7 +2,6 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\Core\Cache\CacheableMetadata;
