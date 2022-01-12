@@ -29,7 +29,7 @@ use Drupal\metatag\MetatagManager;
  *   }
  * )
  */
-class ThunderJsonLd extends ThunderEntitySubRequestBase implements ContainerFactoryPluginInterface {
+class ThunderJsonLd extends ThunderEntitySubRequestBase {
 
   /**
    * The metatag manager service.

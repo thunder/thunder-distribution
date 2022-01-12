@@ -26,7 +26,7 @@ use Drupal\Core\Language\LanguageManagerInterface;
  *   }
  * )
  */
-class ThunderLanguage extends ThunderEntitySubRequestBase implements ContainerFactoryPluginInterface {
+class ThunderLanguage extends ThunderEntitySubRequestBase {
 
   /**
    * The language manager service.

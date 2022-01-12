@@ -27,7 +27,7 @@ use Drupal\Core\Routing\CurrentRouteMatch;
  *   }
  * )
  */
-class ThunderBreadcrumb extends ThunderEntitySubRequestBase implements ContainerFactoryPluginInterface {
+class ThunderBreadcrumb extends ThunderEntitySubRequestBase {
 
   /**
    * The breadcrumb manager.
