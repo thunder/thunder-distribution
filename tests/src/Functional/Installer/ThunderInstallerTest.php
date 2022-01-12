@@ -69,8 +69,7 @@ class ThunderInstallerTest extends InstallerTestBase {
     // Set up a minimal container (required by BrowserTestBase). Set cookie and
     // server information so that XDebug works.
     // @see install_begin_request()
-    $global_request = Request::createFromGlobals();
-    $request = Request::create($GLOBALS['base_url'] . '/core/install.php', 'GET', [], $global_request->cookies->all(), [], $global_request->server->all());
+    $request = Request::create($GLOBALS['base_url'] . '/core/install.php', 'GET', [], $_COOKIE, [], $_SERVER);
     $this->container = new ContainerBuilder();
     $request_stack = new RequestStack();
     $request_stack->push($request);
@@ -97,7 +96,7 @@ class ThunderInstallerTest extends InstallerTestBase {
       ->set('http_handler_stack', $handler_stack);
 
     $this->container
-      ->set('app.root', DRUPAL_ROOT);
+      ->setParameter('app.root', DRUPAL_ROOT);
     \Drupal::setContainer($this->container);
 
     // Setup Mink.
@@ -126,12 +125,12 @@ class ThunderInstallerTest extends InstallerTestBase {
     // Configure modules.
     $this->setUpModules();
 
+    /** @phpstan-ignore-next-line */
     if ($this->isInstalled) {
       // Import new settings.php written by the installer.
       $request = Request::createFromGlobals();
-      // @phpstan-ignore-next-line
-      $class_loader = require $this->container->get('app.root') . '/autoload.php';
-      Settings::initialize($this->container->get('app.root'), DrupalKernel::findSitePath($request), $class_loader);
+      $class_loader = require $this->container->getParameter('app.root') . '/autoload.php';
+      Settings::initialize($this->container->getParameter('app.root'), DrupalKernel::findSitePath($request), $class_loader);
 
       // After writing settings.php, the installer removes write permissions
       // from the site directory. To allow drupal_generate_test_ua() to write
@@ -139,8 +138,7 @@ class ThunderInstallerTest extends InstallerTestBase {
       // directory has to be writable.
       // BrowserTestBase::tearDown() will delete the entire test site directory.
       // Not using File API; a potential error must trigger a PHP warning.
-      // @phpstan-ignore-next-line
-      chmod($this->container->get('app.root') . '/' . $this->siteDirectory, 0777);
+      chmod($this->container->getParameter('app.root') . '/' . $this->siteDirectory, 0777);
       $this->kernel = DrupalKernel::createFromRequest($request, $class_loader, 'prod', FALSE);
       $this->kernel->boot();
       $this->kernel->preHandle($request);
