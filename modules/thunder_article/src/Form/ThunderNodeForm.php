@@ -46,7 +46,7 @@ class ThunderNodeForm implements ContainerInjectionInterface {
   /**
    * The moderation information service.
    *
-   * @var \Drupal\content_moderation\ModerationInformationInterface
+   * @var \Drupal\content_moderation\ModerationInformationInterface|null
    */
   protected $moderationInfo;
 
