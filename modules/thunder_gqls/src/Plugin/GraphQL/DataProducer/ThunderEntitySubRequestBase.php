@@ -85,19 +85,16 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
   }
 
   /**
-   * Resolve data from a sub request.
-   *
-   * @param string $path
-   *   The path to request.
-   * @param \Drupal\graphql\GraphQL\Execution\FieldContext $fieldContext
-   *   The cacheable dependency interface.
-   *
-   * @return mixed
-   *   The data.
+   * {@inheritdoc}
    */
-  public function resolve(string $path, FieldContext $fieldContext) {
-    $url = $this->currentRequest->getSchemeAndHttpHost() . $path;
+  public function resolveField(FieldContext $fieldContext) {
+    $contextValues = $this->getContextValues();
 
+    if (!isset($contextValues['path'])){
+      throw new \LogicException('Missing required path argument.');
+    }
+
+    $url = $this->currentRequest->getSchemeAndHttpHost() . $contextValues['path'];
     $request = $this->createRequest($this->currentRequest, $url, $fieldContext);
 
     /** @var \Drupal\graphql\SubRequestResponse $response */
@@ -133,9 +130,20 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
     );
 
     $request->attributes->set('_graphql_subrequest', function (CacheableMetadata $cacheableMetadata) use ($fieldContext) {
+      if (!method_exists($this, 'resolve')) {
+        throw new \LogicException('Missing data producer resolve method.');
+      }
+
       $context = new RenderContext();
-      return $this->renderer->executeInRenderContext($context, function () use ($cacheableMetadata, $fieldContext) {
-        return $this->doResolve($cacheableMetadata, $fieldContext);
+      $contextValues = $this->getContextValues();
+      return $this->renderer->executeInRenderContext($context, function () use ($contextValues, $cacheableMetadata, $fieldContext) {
+        return call_user_func_array(
+          [$this, 'resolve'],
+          array_values(array_merge($contextValues, [
+            $cacheableMetadata,
+            $fieldContext,
+          ]))
+        );
       });
     });
 
@@ -145,18 +153,5 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
 
     return $request;
   }
-
-  /**
-   * Does the actual resolve inside the subrequest.
-   *
-   * @param \Drupal\Core\Cache\CacheableMetadata $cacheableMetadata
-   *   Cache metadata for the subrequest.
-   * @param \Drupal\graphql\GraphQL\Execution\FieldContext $fieldContext
-   *   The field context of the data producer.
-   *
-   * @return mixed
-   *   The response.
-   */
-  abstract protected function doResolve(CacheableMetadata $cacheableMetadata, FieldContext $fieldContext);
 
 }

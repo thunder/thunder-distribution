@@ -73,9 +73,17 @@ class ThunderBreadcrumb extends ThunderEntitySubRequestBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Resolve the breadcrumb.
+   *
+   * @param \Drupal\Core\Cache\CacheableMetadata $cacheableMetadata
+   *   Cache metadata for the subrequest.
+   * @param \Drupal\graphql\GraphQL\Execution\FieldContext $fieldContext
+   *   The field context of the data producer.
+   *
+   * @return array
+   *   The breadcrumb entries.
    */
-  protected function doResolve(CacheableMetadata $cacheableMetadata, FieldContext $fieldContext) {
+  protected function resolve(string $path, CacheableMetadata $cacheableMetadata, FieldContext $fieldContext) : array {
     $breadCrumb = [];
     foreach ($this->breadcrumbManager->build(
       $this->currentRouteMatch->getCurrentRouteMatch()
