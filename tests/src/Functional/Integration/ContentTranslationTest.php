@@ -18,14 +18,14 @@ class ContentTranslationTest extends ThunderTestBase {
    */
   protected static $modules = [
     'thunder_testing_demo',
-    'content_moderation',
-    'content_translation',
+    'thunder_workflow',
+    'thunder_translation',
   ];
 
   /**
    * List of used languages.
    *
-   * @var \Drupal\Core\Language\LanguageInterface[]
+   * @var \Drupal\language\ConfigurableLanguageInterface[]
    */
   protected $languages = [];
 
@@ -69,8 +69,6 @@ class ContentTranslationTest extends ThunderTestBase {
 
   /**
    * Test the field translatable property for all field configs.
-   *
-   * @group NoUpdate
    */
   public function testFieldTranslationKey() {
     $whitelist = [

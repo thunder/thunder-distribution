@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 4f4039ab-65a3-4ade-8d2c-6553b21cad58
+  bundle: image
+  default_langcode: en
+  depends:
+    82aa86b9-645c-4310-a7b6-9770240663b3: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: thunderday_burda_2017011666.jpg
+  created:
+    -
+      value: 1600160861
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_copyright:
+    -
+      value: 'Kerstin Seipt, www.kerstinseipt-photography.de'
+  field_image:
+    -
+      entity: 82aa86b9-645c-4310-a7b6-9770240663b3
+      alt: ''
+      title: ''
+      width: 3543
+      height: 2362

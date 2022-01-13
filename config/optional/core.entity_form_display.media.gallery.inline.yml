@@ -8,6 +8,7 @@ dependencies:
     - media.type.gallery
   module:
     - entity_browser
+    - entity_reference_actions
 id: media.gallery.inline
 targetEntityType: media
 bundle: gallery
@@ -16,26 +17,37 @@ content:
   field_media_images:
     type: entity_browser_entity_reference
     weight: 1
+    region: content
     settings:
       entity_browser: multiple_image_browser
       field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true
+      field_widget_replace: false
       open: true
-      selection_mode: selection_edit
       field_widget_display_settings:
         view_mode: thumbnail
-      field_widget_replace: false
-    third_party_settings: {  }
-    region: content
+      selection_mode: selection_edit
+    third_party_settings:
+      entity_reference_actions:
+        enabled: true
+        options:
+          action_title: Action
+          include_exclude: include
+          selected_actions:
+            media_delete_action: '0'
+            media_edit_action: media_edit_action
+            media_publish_action: '0'
+            media_save_action: '0'
+            media_unpublish_action: '0'
   name:
     type: string_textfield
     weight: 0
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   langcode: true

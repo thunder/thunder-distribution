@@ -1,0 +1,12 @@
+query ($path: String!) {
+  page(path: $path) {
+    ... on Channel {
+      articles {
+        total
+        items {
+          name
+        }
+      }
+    }
+  }
+}

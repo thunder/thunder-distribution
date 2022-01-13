@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.bulk_edit
+label: 'Bulk Edit'
+targetEntityType: media
+cache: true

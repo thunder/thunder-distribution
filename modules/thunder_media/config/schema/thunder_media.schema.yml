@@ -7,3 +7,17 @@ thunder_media.settings:
     enable_filefield_remove_button:
       type: boolean
       label: 'Enable remove button'
+
+image.effect.thunder_media_auto_aspect:
+  type: mapping
+  label: 'Auto Aspect'
+  mapping:
+    landscape:
+      type: string
+      label: 'Landscape image style'
+    portrait:
+      type: string
+      label: 'Portrait image style'
+    ratio_adjustment:
+      type: integer
+      label: 'Ratio adjustment'

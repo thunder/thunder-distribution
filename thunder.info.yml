@@ -1,15 +1,15 @@
 name: Thunder
 type: profile
-description: 'The Drupal8 based CMS for professional publishing.'
+description: 'The Drupal based CMS for professional publishing.'
 project: thunder
-core_version_requirement: ^9
-version: '8.x-5.1'
+core_version_requirement: ^9.3.0
+version: '6.3.1'
 
 distribution:
   name: Thunder
   install:
     theme: thunder_admin
-    finish_url: /?tour=1
+    finish_url: ?tour=1
 
 # Required modules
 dependencies:
@@ -55,6 +55,7 @@ install:
   - diff:diff
   - dropzonejs:dropzonejs_eb_widget
   - empty_fields:empty_fields
+  - entity_reference_actions:entity_reference_actions
   - entity_browser:entity_browser_entity_form
   - field_group:field_group
   - focal_point:focal_point
@@ -69,6 +70,7 @@ install:
   - metatag:metatag_open_graph
   - metatag:metatag_facebook
   - metatag:metatag_twitter_cards
+  - metatag_async_widget:metatag_async_widget
   - paragraphs:paragraphs
   - paragraphs_features:paragraphs_features
   - paragraphs_paste:paragraphs_paste
@@ -82,11 +84,13 @@ install:
   - slick:slick
   - responsive_preview:responsive_preview
   - update_helper_checklist:update_helper_checklist
+  - views_bulk_edit:views_bulk_edit
 # thunder
   - thunder:thunder_article
   - thunder:thunder_media
   - thunder:thunder_paragraphs
   - thunder:thunder_taxonomy
+  - thunder:thunder_workflow
 themes:
   - seven
   - thunder_base

@@ -1,0 +1,7 @@
+thunder.optional_modules_form:
+  path: '/admin/modules/extend-thunder'
+  defaults:
+    _title: 'Optional Thunder modules'
+    _form: '\Drupal\thunder\Installer\Form\ModuleConfigureForm'
+  requirements:
+    _permission: 'administer modules'

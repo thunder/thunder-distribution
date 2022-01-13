@@ -5,27 +5,8 @@
  * Thunder Article module hooks.
  */
 
-use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\thunder_article\Form\ThunderNodeForm;
-
-/**
- * Implements hook_menu_local_tasks_alter().
- */
-function thunder_article_menu_local_tasks_alter(&$data, $route_name) {
-  foreach ($data['tabs'] as $key => $tab) {
-    foreach ($tab as $task => $link) {
-      if (in_array($task, ['views_view:view.scheduler_scheduled_content.overview', 'thunder_article.content_view:thunder_article.scheduler'], TRUE)) {
-        // Access configuration inside the loop so that we don't do unnecessary
-        // queries.
-        $config = \Drupal::service('config.factory')->get('thunder_article.settings');
-        $link_ref = &$data['tabs'][$key][$task];
-        $link_ref['#access'] = ($task === 'views_view:view.scheduler_scheduled_content.overview' xor $config->get('move_scheduler_local_task'));
-        $link_ref['#cache']['tags'] = Cache::mergeTags(isset($link_ref['#cache']['tags']) ? $link_ref['#cache']['tags'] : [], $config->getCacheTags());
-      }
-    }
-  }
-}
 
 /**
  * Implements hook_form_FORM_ID_alter().

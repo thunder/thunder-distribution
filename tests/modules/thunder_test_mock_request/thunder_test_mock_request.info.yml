@@ -1,0 +1,5 @@
+name: Thunder request mock
+description: 'Mock requests in Thunder tests.'
+type: module
+package: Testing
+version: VERSION

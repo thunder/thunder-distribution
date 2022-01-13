@@ -13,7 +13,6 @@ mode: default
 content:
   field_link:
     type: link
-    weight: 0
     label: hidden
     settings:
       trim_length: 80
@@ -22,6 +21,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   created: true

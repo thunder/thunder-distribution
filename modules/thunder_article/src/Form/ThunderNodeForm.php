@@ -10,9 +10,10 @@ use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
-use Drupal\node\Access\NodeRevisionAccessCheck;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Drupal\Core\Theme\ThemeManagerInterface;
+use Drupal\node\NodeInterface;
 
 /**
  * Base for handler for node add/edit forms.
@@ -43,16 +44,9 @@ class ThunderNodeForm implements ContainerInjectionInterface {
   protected $request;
 
   /**
-   * The node revision access check service.
-   *
-   * @var \Drupal\node\Access\NodeRevisionAccessCheck
-   */
-  protected $nodeRevisionAccess;
-
-  /**
    * The moderation information service.
    *
-   * @var \Drupal\content_moderation\ModerationInformationInterface
+   * @var \Drupal\content_moderation\ModerationInformationInterface|null
    */
   protected $moderationInfo;
 
@@ -64,6 +58,13 @@ class ThunderNodeForm implements ContainerInjectionInterface {
   protected $entityTypeManager;
 
   /**
+   * The theme manager.
+   *
+   * @var \Drupal\Core\Theme\ThemeManagerInterface
+   */
+  protected $themeManager;
+
+  /**
    * Constructs a NodeForm object.
    *
    * @param \Drupal\Core\Session\AccountInterface $current_user
@@ -72,20 +73,20 @@ class ThunderNodeForm implements ContainerInjectionInterface {
    *   The messenger service.
    * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
    *   The request stack service.
-   * @param \Drupal\node\Access\NodeRevisionAccessCheck $node_revision_access
-   *   The node revision access check service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
+   * @param \Drupal\Core\Theme\ThemeManagerInterface $theme_manager
+   *   The theme manager.
    * @param \Drupal\content_moderation\ModerationInformationInterface $moderationInfo
    *   (optional) The moderation info service. The optionality is important
    *   otherwise this form becomes dependent on the content_moderation module.
    */
-  public function __construct(AccountInterface $current_user, MessengerInterface $messenger, RequestStack $requestStack, NodeRevisionAccessCheck $node_revision_access, EntityTypeManagerInterface $entity_type_manager, ModerationInformationInterface $moderationInfo = NULL) {
+  public function __construct(AccountInterface $current_user, MessengerInterface $messenger, RequestStack $requestStack, EntityTypeManagerInterface $entity_type_manager, ThemeManagerInterface $theme_manager, ModerationInformationInterface $moderationInfo = NULL) {
     $this->currentUser = $current_user;
     $this->messenger = $messenger;
     $this->request = $requestStack->getCurrentRequest();
-    $this->nodeRevisionAccess = $node_revision_access;
     $this->entityTypeManager = $entity_type_manager;
+    $this->themeManager = $theme_manager;
     $this->moderationInfo = $moderationInfo;
   }
 
@@ -97,9 +98,9 @@ class ThunderNodeForm implements ContainerInjectionInterface {
       $container->get('current_user'),
       $container->get('messenger'),
       $container->get('request_stack'),
-      $container->get('access_check.node.revision'),
       $container->get('entity_type.manager'),
-      $container->has('content_moderation.moderation_information') ? $container->get('content_moderation.moderation_information') : NULL
+      $container->get('theme.manager'),
+      $container->get('content_moderation.moderation_information', ContainerInterface::NULL_ON_INVALID_REFERENCE)
     );
   }
 
@@ -112,10 +113,14 @@ class ThunderNodeForm implements ContainerInjectionInterface {
     /** @var \Drupal\node\NodeInterface $entity */
     $entity = $form_object->getEntity();
 
+    /** @var \Drupal\Core\Entity\ContentEntityStorageInterface $storage */
     $storage = $this->entityTypeManager->getStorage($entity->getEntityTypeId());
     $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()->getId());
     if ($latest_revision_id !== NULL && $this->moderationInfo && $this->moderationInfo->hasPendingRevision($entity)) {
-      $this->messenger->addWarning($this->t('This %entity_type has unpublished changes from user %user.', ['%entity_type' => $entity->get('type')->entity->label(), '%user' => $entity->getRevisionUser()->label()]));
+      $this->messenger->addWarning($this->t('This %entity_type has unpublished changes from user %user.', [
+        '%entity_type' => $entity->get('type')->entity->label(),
+        '%user' => $entity->getRevisionUser()->label(),
+      ]));
     }
 
     $form['actions'] = array_merge($form['actions'], $this->actions($entity));
@@ -126,7 +131,8 @@ class ThunderNodeForm implements ContainerInjectionInterface {
   /**
    * {@inheritdoc}
    */
-  protected function actions($entity) {
+  protected function actions(NodeInterface $entity) {
+    /** @var \Drupal\Core\Entity\ContentEntityStorageInterface $storage */
     $storage = $this->entityTypeManager->getStorage($entity->getEntityTypeId());
     $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()->getId());
 
@@ -134,25 +140,34 @@ class ThunderNodeForm implements ContainerInjectionInterface {
       return [];
     }
 
-    $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
-    $element['status'] = [
-      '#type' => 'item',
-      '#markup' => $entity->isNew() || !$this->moderationInfo->isDefaultRevisionPublished($entity) ? $this->t('of unpublished @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]) : $this->t('of published @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]),
-      '#weight' => 200,
-      '#wrapper_attributes' => [
-        'class' => ['status'],
-      ],
-      '#access' => !$state->isDefaultRevisionState(),
-    ];
+    $element = [];
+    // @todo Remove after seven / thunder_admin support is dropped.
+    $activeTheme = $this->themeManager->getActiveTheme();
+    $activeThemes = array_keys($activeTheme->getBaseThemeExtensions());
+    $activeThemes[] = $activeTheme->getName();
 
-    $element['moderation_state_current'] = [
-      '#type' => 'item',
-      '#markup' => $state->label(),
-      '#weight' => 210,
-      '#wrapper_attributes' => [
-        'class' => ['status', $state->id()],
-      ],
-    ];
+    if (!empty(array_intersect($activeThemes, ['seven', 'thunder_admin']))) {
+      /** @var \Drupal\content_moderation\ContentModerationState $state */
+      $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
+      $element['status'] = [
+        '#type' => 'item',
+        '#markup' => $entity->isNew() || !$this->moderationInfo->isDefaultRevisionPublished($entity) ? $this->t('of unpublished @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]) : $this->t('of published @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]),
+        '#weight' => 200,
+        '#wrapper_attributes' => [
+          'class' => ['status'],
+        ],
+        '#access' => !$state->isDefaultRevisionState(),
+      ];
+
+      $element['moderation_state_current'] = [
+        '#type' => 'item',
+        '#markup' => $state->label(),
+        '#weight' => 210,
+        '#wrapper_attributes' => [
+          'class' => ['status', $state->id()],
+        ],
+      ];
+    }
 
     if ($this->moderationInfo->hasPendingRevision($entity)) {
       $route_info = Url::fromRoute('node.revision_revert_default_confirm', [
@@ -168,7 +183,7 @@ class ThunderNodeForm implements ContainerInjectionInterface {
       $element['revert_to_default'] = [
         '#type' => 'link',
         '#title' => $this->t('Revert to default revision'),
-        '#access' => $this->nodeRevisionAccess->checkAccess($entity, $this->currentUser, 'update'),
+        '#access' => $entity->access('revert revision', $this->currentUser),
         '#weight' => 101,
         '#attributes' => [
           'class' => ['button', 'button--danger'],

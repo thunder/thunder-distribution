@@ -1,4 +1,5 @@
 services:
-  plugin.manager.thunder.optional_modules:
-    class: Drupal\thunder\OptionalModulesManager
-    parent: default_plugin_manager
+  thunder.breadcrumb.default:
+    class: Drupal\thunder\Breadcrumb\ThunderNodeEditBreadcrumbBuilder
+    tags:
+      - { name: breadcrumb_builder, priority: 100 }

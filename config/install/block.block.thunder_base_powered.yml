@@ -14,6 +14,6 @@ plugin: thunder_powered_by_block
 settings:
   id: thunder_powered_by_block
   label: 'Powered by Thunder'
-  provider: thunder
   label_display: '0'
+  provider: thunder
 visibility: {  }

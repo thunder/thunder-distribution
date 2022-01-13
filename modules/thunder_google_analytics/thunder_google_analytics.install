@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * @file
+ * Thunder Google analytics install hooks.
+ */
+
+/* hook_update_n implementations should be in the profile instead of this
+submodule. */

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.type
+  module:
+    - facets
+  theme:
+    - seven
+id: seven_facet_type
+theme: seven
+region: content
+weight: -4
+provider: null
+plugin: 'facet_block:type'
+settings:
+  id: 'facet_block:type'
+  label: Type
+  provider: facets
+  label_display: '0'
+  block_id: seven_facet_type
+visibility: {  }

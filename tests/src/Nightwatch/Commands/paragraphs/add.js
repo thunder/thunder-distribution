@@ -21,31 +21,32 @@ exports.command = function add(fieldName, type, position) {
     browser.perform(() => {
       // eslint-disable-next-line no-console
       console.log(
-        "\x1b[31m\x1b[1m%s\x1b[0m",
-        `Paragraph position has to be 1 or bigger. Following value is provided: ${position}.`
+        '\x1b[31m\x1b[1m%s\x1b[0m',
+        `Paragraph position has to be 1 or bigger. Following value is provided: ${position}.`,
       );
     });
 
     return browser;
   }
 
-  const fieldNameId = fieldName.replace(/_/g, "-");
+  const fieldNameId = fieldName.replace(/_/g, '-');
   const addButtonPosition = position * 2 - 1;
 
   browser
     .scrollIntoMiddleOfView(
-      `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${addButtonPosition}]//input`
+      `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${addButtonPosition}]//input`,
     )
     .click(
-      `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${addButtonPosition}]//input`
+      `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${addButtonPosition}]//input`,
     )
     .click(
-      `//div[contains(@class, "ui-dialog-content")]/*[contains(@class, "paragraphs-add-dialog-list")]//*[@name="${fieldName}_${type}_add_more"]`
+      `//div[contains(@class, "ui-dialog-content")]/*[contains(@class, "paragraphs-add-dialog-list")]//*[@name="${fieldName}_${type}_add_more"]`,
     )
     .waitForElementVisible(
-      `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${addButtonPosition +
-        1}]//div[contains(@class, "ajax-new-content")]`,
-      10000
+      `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${
+        addButtonPosition + 1
+      }]//div[contains(@class, "ajax-new-content")]`,
+      10000,
     );
 
   return browser;

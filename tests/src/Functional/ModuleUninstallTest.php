@@ -14,12 +14,9 @@ class ModuleUninstallTest extends ThunderTestBase {
   /**
    * Modules to test uninstall/install capability.
    *
-   * @var string[]
+   * @var string[][]
    */
   protected static $moduleLists = [
-    ['thunder_liveblog'],
-    ['liveblog_pusher', 'liveblog', 'simple_gmap'],
-    ['thunder_liveblog', 'liveblog_pusher', 'liveblog', 'simple_gmap'],
     ['diff'],
     ['content_lock'],
     ['adsense'],
@@ -30,13 +27,15 @@ class ModuleUninstallTest extends ThunderTestBase {
     ['length_indicator'],
     ['redirect'],
     ['simple_sitemap'],
-
-    // ['harbourmaster'],
-    // Requires update of project on drupal.org.
-    // ['thunder_fia'],
-    // ['fb_instant_articles'],
-    // ['thunder_fia', 'fb_instant_articles'],
-    // Patch provided: https://www.drupal.org/files/issues/2901583_2.patch.
+    [
+      'thunder_search',
+      'search_api_db',
+      'search_api_mark_outdated',
+      'search_api',
+      'facets',
+      'views_bulk_operations',
+      'select2_facets',
+    ],
   ];
 
   /**

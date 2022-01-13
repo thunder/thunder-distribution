@@ -1,0 +1,243 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: bd5c625d-9074-40f8-99e4-91923ffdeb84
+  bundle: article
+  default_langcode: en
+  depends:
+    120b4c9c-82e5-4fe9-97b0-da6fefb9b5f3: taxonomy_term
+    f8ad6684-b110-4751-98b8-dbf9310f91b0: media
+    d6de25c8-c089-4b62-b69a-d43dfee83492: taxonomy_term
+    4fe40f59-8f90-4fc6-8630-fadea609a619: taxonomy_term
+    31457b1e-0122-46a6-b3ab-edfa0c4b801a: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Burda launches worldwide coalition of industry partners and releases open-source online CMS Thunder'
+  created:
+    -
+      value: 1458200750
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /burda-released-open-source-cms-thunder
+      langcode: en
+      pathauto: 1
+  publish_state:
+    -
+      value: _none
+  unpublish_state:
+    -
+      value: _none
+  field_channel:
+    -
+      entity: 120b4c9c-82e5-4fe9-97b0-da6fefb9b5f3
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 8ae4ce87-50e0-4d29-9480-fea3124c4b81
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600152523
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p>As of today, international media group Hubert Burda Media makes it's Drupal 8 based Thunder Content Management System (CMS) available online as a free open-source platform for use and further development by other publishers. With this move, Burda joins forces with sector and industry partners, aiming to develop the best open-source CMS platform for publishers. Burda believes that in today’s world, successful media offerings result from the right combination of quality journalism and technology expertise. For the media company, this meant future-proofing its Content Management System by developing Thunder, an open-source system based on leading-edge technology, now available online free of charge for use and continuous development.</p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 98805d6a-92f6-41d9-92cf-519ac5d96ad7
+          bundle: image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600153544
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_image:
+            -
+              entity: f8ad6684-b110-4751-98b8-dbf9310f91b0
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: e5cb5587-0f9e-44f1-9c63-babdfd8a84f7
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600153597
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p>Board Member Philipp Welte explains, “Success in this new era of publishing can only be achieved by keeping up with the lightning speed of technological progress. No publisher in the world can do this alone, so we have to leave our historical silos behind, share our knowledge, cross traditional boundaries and learn how to work in a much more connected way. Thunder symbolizes this new era of collaboration: We have invested a lot of development effort, but we are not keeping the results for ourselves. We are putting it out there, to the core of our industry, so everyone can contribute to its continued enhancement. Our aim is to work with our partners to develop the best technology foundation for publishing the best journalistic content.”</p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: fb9a345b-bb21-4439-80f8-acca2c97cad6
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600153602
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p><strong>Worldwide collaboration — The Thunder Coalition </strong><br />\r\nWith the launch of the new CMS, Burda is creating a worldwide coalition for publishers, industry partners, and developers. At the core of the community is a team of publishing experts and developers led by Ingo Rübe, CTO for Burda’s German publishing operations, and initiator of Thunder. This team will also be responsible for coordinating the continuous development and enhancement of Thunder. Ingo Rübe explains,“A CMS is no longer a strategic differentiator, especially in the consumer’s perception. Thunder helps media companies break free from expensive legacy systems, and focus on the development of their content and brands.”</p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: fa26621a-16c2-4a33-b2fa-a4ab9c749b93
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600153621
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p><strong>Innovative CMS technology enriched by custom features for publishers</strong><br />\r\nThunder is a Drupal distribution based on the new version 8 of the framework, released in November 2015. It features a range of publisher-centric Drupal modules with custom enhancements, including tools for interactive content, IVW counting tools, single sign-on (SSO) and Responsive Web Design (RWD). With RWD, the layout of both the front-end (websites) and the back-end (authoring tool) automatically adjusts to each user’s device. Thunder users also benefit from a whole range of channel- and feature-specific enhancements through collaboration with industry partners.</p>\r\n\r\n<p>Burda have already migrated their <em>Playboy</em> and <em>Instyle</em> brands to Thunder. Florian Boitin, Editor-in-Chief of <em>Playboy</em>, remembers: “Over six months ago, we were one of the first brands to integrate Thunder into our editorial workflows, and we are proud to have laid the foundations for something really big. We were able to contribute to the design of Thunder by leveraging our long-standing experience of different CMS platforms. We are now reaping the benefits of further development efforts by the community, both in terms of technology and content.”</p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 86b58a17-82ce-4c69-bb2b-e087b6e756a6
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600153630
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p>Thunder was released under the GNU General Public License, meaning the software can be used and enhanced by all users free of charge.</p>\r\n"
+              format: basic_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 086756da-61ba-4447-9727-e6ddca14e0e7
+          bundle: text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1600153642
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_text:
+            -
+              value: "<p>For more information about Thunder, available extensions, and the Thunder Coalition, visit <a href=\"http://www.thunder.org\" rel=\"nofollow\">www.thunder.org</a>.</p>\r\n"
+              format: basic_html
+  field_seo_title:
+    -
+      value: 'Burda released open source CMS Thunder'
+  field_tags:
+    -
+      entity: d6de25c8-c089-4b62-b69a-d43dfee83492
+    -
+      entity: 4fe40f59-8f90-4fc6-8630-fadea609a619
+  field_teaser_media:
+    -
+      entity: 31457b1e-0122-46a6-b3ab-edfa0c4b801a
+  field_teaser_text:
+    -
+      value: 'As of today, international media group Hubert Burda Media makes its Drupal 8 based Thunder Content Management System (CMS) available online as a free open-source platform for use and further development by other publishers. With this move, Burda joins forces with sector and industry partners, aiming to develop the best open-source CMS platform for publishers. Burda believes that in today’s world, successful media offerings result from the right combination of quality journalism and technology expertise. For the media company, this meant future-proofing its Content Management System by developing Thunder, an open-source system based on leading-edge technology, now available online free of charge for use and continuous development.'

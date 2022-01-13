@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: c8b73bd1-1e4b-477e-96d9-580be6dab017
+  bundle: gallery
+  default_langcode: en
+  depends:
+    d3782161-f7b3-4e8c-a24f-f2545bb2d474: media
+    13b6536a-f317-4e74-a71f-66e5c61ede65: media
+    486e2773-81e6-4685-80c0-9e4f26c214a1: media
+    916d281a-6097-4e26-8805-e5392ac53a0b: media
+    3c47da20-33f3-4bf2-bee0-bd7669d8e7aa: media
+    81392281-1bf3-4929-b887-c8096ebc01e4: media
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'ThunderDay 2018'
+  created:
+    -
+      value: 1600162372
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_images:
+    -
+      entity: d3782161-f7b3-4e8c-a24f-f2545bb2d474
+    -
+      entity: 13b6536a-f317-4e74-a71f-66e5c61ede65
+    -
+      entity: 486e2773-81e6-4685-80c0-9e4f26c214a1
+    -
+      entity: 916d281a-6097-4e26-8805-e5392ac53a0b
+    -
+      entity: 3c47da20-33f3-4bf2-bee0-bd7669d8e7aa
+    -
+      entity: 81392281-1bf3-4929-b887-c8096ebc01e4

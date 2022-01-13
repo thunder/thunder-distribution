@@ -1,0 +1,15 @@
+div[data-drupal-selector="edit-install-modules"] {
+  display: flex;
+  flex-flow: column nowrap;
+}
+div[data-drupal-selector="edit-install-modules"] > div {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 2em;
+}
+div[data-drupal-selector="edit-install-modules"] > div > div {
+  flex: 0 1 250px;
+}
+div[data-drupal-selector="edit-install-modules"] > div > div:nth-child(2) {
+  flex-grow: 2;
+}

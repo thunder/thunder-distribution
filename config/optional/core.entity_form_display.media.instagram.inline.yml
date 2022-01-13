@@ -8,20 +8,20 @@ dependencies:
     - field.field.media.instagram.field_url
     - media.type.instagram
   module:
-    - link
+    - media
 id: media.instagram.inline
 targetEntityType: media
 bundle: instagram
 mode: inline
 content:
   field_url:
-    type: link_default
+    type: oembed_textfield
     weight: 0
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
     region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
 hidden:
   created: true
   field_author: true

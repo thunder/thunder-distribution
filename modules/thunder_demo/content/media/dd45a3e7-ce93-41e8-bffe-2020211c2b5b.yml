@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: dd45a3e7-ce93-41e8-bffe-2020211c2b5b
+  bundle: gallery
+  default_langcode: en
+  depends:
+    6fcc43bd-c374-4528-b180-ebe94c8fa6a5: media
+    d5170777-5d26-423a-8710-e009d47ee979: media
+    4f4039ab-65a3-4ade-8d2c-6553b21cad58: media
+    5734cc42-787a-464e-9836-38ffa34aad7f: media
+    d43954eb-0edc-4aa8-a842-d99f413020be: media
+    40bbeede-898b-4574-a239-95aae6112a3d: media
+    1c1b3c83-3f91-4110-871c-d612d7df1bb6: media
+    f34ecf01-3fce-45f6-b507-77cd9104cf96: media
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Thunder Day 2017'
+  created:
+    -
+      value: 1600160816
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_images:
+    -
+      entity: 6fcc43bd-c374-4528-b180-ebe94c8fa6a5
+    -
+      entity: d5170777-5d26-423a-8710-e009d47ee979
+    -
+      entity: 4f4039ab-65a3-4ade-8d2c-6553b21cad58
+    -
+      entity: 5734cc42-787a-464e-9836-38ffa34aad7f
+    -
+      entity: d43954eb-0edc-4aa8-a842-d99f413020be
+    -
+      entity: 40bbeede-898b-4574-a239-95aae6112a3d
+    -
+      entity: 1c1b3c83-3f91-4110-871c-d612d7df1bb6
+    -
+      entity: f34ecf01-3fce-45f6-b507-77cd9104cf96

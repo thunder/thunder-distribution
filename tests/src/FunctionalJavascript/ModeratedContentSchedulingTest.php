@@ -21,8 +21,9 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     /** @var \Drupal\node\NodeStorageInterface $node_storage */
     $node_storage = \Drupal::entityTypeManager()->getStorage('node');
 
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Test workflow article 1 - Published',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text 1',
       'moderation_state[0]' => 'draft',
@@ -32,13 +33,14 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     ]);
     $this->clickSave();
 
-    /* @var $node \Drupal\node\Entity\Node */
+    /** @var \Drupal\node\Entity\Node $node */
     $node = $this->getNodeByTitle('Test workflow article 1 - Published');
     $revision_id = $node->getRevisionId();
     // Make sure node is unpublished.
     $this->assertEquals(FALSE, Node::load($node->id())->isPublished());
     $this->container->get('cron')->run();
 
+    /** @var \Drupal\node\Entity\Node $node */
     $node = $node_storage->loadRevision($node_storage->getLatestRevisionId($node->id()));
     // Assert node is now published.
     $this->assertEquals(TRUE, $node->isPublished());
@@ -49,7 +51,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $edit_url = $node->toUrl('edit-form');
     $this->drupalGet($edit_url);
     $this->expandAllTabs();
-    $this->setFieldValues($this->getSession()->getPage(), [
+    $this->setFieldValues([
       'title[0][value]' => 'Test workflow article 1 - Draft',
       'moderation_state[0]' => 'draft',
       'publish_on[0][value][date]' => date('Y-m-d', $publish_timestamp),
@@ -59,11 +61,13 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $this->clickSave();
     $node_storage->resetCache([$node->id()]);
 
+    /** @var \Drupal\node\Entity\Node $node */
     $node = $node_storage->loadRevision($node_storage->getLatestRevisionId($node->id()));
     $this->assertEquals('Test workflow article 1 - Draft', $node->getTitle());
     $this->assertEquals('draft', $node->moderation_state->value);
     $this->container->get('cron')->run();
 
+    /** @var \Drupal\node\Entity\Node $node */
     $node = $node_storage->loadRevision($node_storage->getLatestRevisionId($node->id()));
     $this->assertEquals(TRUE, $node->isPublished());
     $this->assertEquals('published', $node->moderation_state->value);
@@ -75,9 +79,9 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
    * Tests moderated nodes unpublish scheduling.
    */
   public function testUnpublishStateSchedule() {
-
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Test workflow article 2 - Published',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text 2',
       'moderation_state[0]' => 'published',
@@ -89,7 +93,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $node = $this->getNodeByTitle('Test workflow article 2 - Published');
 
     // Set date manually, unpublish cannot be in the past.
-    $node->unpublish_on->value = strtotime('yesterday');
+    $node->set('unpublish_on', strtotime('yesterday'));
     $node->save();
 
     $revision_id = $node->getRevisionId();
@@ -107,8 +111,9 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
    * Tests publish scheduling for a draft of a published node.
    */
   public function testPublishOfDraft() {
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Test workflow article 3 - Published',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text 3',
       'moderation_state[0]' => 'published',

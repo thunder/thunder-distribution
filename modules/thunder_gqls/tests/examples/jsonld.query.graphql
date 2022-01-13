@@ -1,0 +1,3 @@
+query ($path: String!) {
+  jsonld(path: $path)
+}

@@ -1,0 +1,31 @@
+_meta:
+  version: '1.0'
+  entity_type: crop
+  uuid: 35877b5f-300a-4456-9e8c-760a4c1c37b5
+  bundle: focal_point
+  default_langcode: en
+default:
+  entity_id:
+    -
+      value: 2
+  entity_type:
+    -
+      value: file
+  uri:
+    -
+      value: 'public://2020-09/welte_philipp_final_2.jpg'
+  x:
+    -
+      value: 1060
+  'y':
+    -
+      value: 1189
+  revision_timestamp:
+    -
+      value: 1600157271
+  revision_uid:
+    -
+      target_id: 1
+  revision_translation_affected:
+    -
+      value: true

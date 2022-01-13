@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 41f139d4-f1e7-4cc1-8dd6-37f86c682f49
+  bundle: menu_link_content
+  default_langcode: en
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: News
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      uri: 'internal:/news'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: -50
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true

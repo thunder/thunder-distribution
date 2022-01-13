@@ -20,57 +20,57 @@
 exports.command = function startMeasurement(
   serverUrl,
   transactionName,
-  domain
+  domain,
 ) {
   const browser = this;
 
   browser.perform(() => {
     if (!browser.apm.isStarted()) {
-      browser.apm.start({ serverUrl, serviceName: "NightwatchJS - Test" });
+      browser.apm.start({ serverUrl, serviceName: 'NightwatchJS - Test' });
     }
 
     browser.globals.apmDomain = domain;
     browser.globals.apmTrans = browser.apm.startTransaction(
       transactionName,
-      "test"
+      'test',
     );
     browser.globals.apmSpans = [];
 
     browser
       // We need to open some URL before set cookie.
-      .drupalRelativeURL("/")
+      .drupalRelativeURL('/')
       .setCookie({
         domain,
         httpOnly: false,
-        path: "/",
-        name: "traceId",
-        value: browser.globals.apmTrans.traceId
+        path: '/',
+        name: 'traceId',
+        value: browser.globals.apmTrans.traceId,
       })
       .setCookie({
         domain,
         httpOnly: false,
-        path: "/",
-        name: "serverUrl",
-        value: serverUrl
+        path: '/',
+        name: 'serverUrl',
+        value: serverUrl,
       });
 
     // Label set on Node.JS APM agent should be also set for Browser APM agent.
     browser.performance
-      .setLabel("branch", process.env.THUNDER_BRANCH)
+      .setLabel('branch', process.env.THUNDER_BRANCH)
       .setCookie({
         domain,
         httpOnly: false,
-        path: "/",
-        name: "branchTag",
-        value: process.env.THUNDER_BRANCH
+        path: '/',
+        name: 'branchTag',
+        value: process.env.THUNDER_BRANCH,
       })
-      .performance.setLabel("test", browser.currentTest.name)
+      .performance.setLabel('test', browser.currentTest.name)
       .setCookie({
         domain,
         httpOnly: false,
-        path: "/",
-        name: "testTag",
-        value: browser.currentTest.name
+        path: '/',
+        name: 'testTag',
+        value: browser.currentTest.name,
       });
   });
 

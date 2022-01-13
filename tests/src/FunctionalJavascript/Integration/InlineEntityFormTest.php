@@ -28,19 +28,19 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
   public function testGalleryCollapse() {
 
     // Test saving inline entity form when collapsing paragraph form.
-    $this->drupalGet("node/7/edit");
-    $page = $this->getSession()->getPage();
+    $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
+    $this->drupalGet($node->toUrl('edit-form'));
 
     // Edit gallery paragraph.
-    $this->clickButtonCssSelector($page, '[data-drupal-selector="field-paragraphs-0-edit-2"]');
-    $this->setFieldValue($page, 'field_paragraphs[0][subform][field_media][0][inline_entity_form][name][0][value]', 'New gallery name before collapse');
+    $this->clickDrupalSelector('field-paragraphs-0-edit-2');
+    $this->setFieldValue('field_paragraphs[0][subform][field_media][0][inline_entity_form][name][0][value]', 'New gallery name before collapse');
 
     // Collapse parargraph form.
-    $this->clickButtonCssSelector($page, '[name="field_paragraphs_0_collapse"]');
+    $this->clickCssSelector('[name="field_paragraphs_0_collapse"]');
     $this->clickSave();
 
     // Re-open edit form, value has changed.
-    $this->drupalGet("node/7/edit");
+    $this->drupalGet($node->toUrl('edit-form'));
     $this->assertSession()
       ->pageTextContains('New gallery name before collapse');
   }

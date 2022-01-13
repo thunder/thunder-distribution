@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: df43ad97-ab4f-4f15-84c0-f10009b8fdb0
+  bundle: image
+  default_langcode: en
+  depends:
+    63c664f3-d403-4509-b90c-b945a69431b5: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: Thunder
+  created:
+    -
+      value: 1600163434
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_image:
+    -
+      entity: 63c664f3-d403-4509-b90c-b945a69431b5
+      alt: ''
+      title: ''
+      width: 3500
+      height: 2333

@@ -6,6 +6,7 @@ use Drupal\Core\DrupalKernel;
 use Drupal\Core\Language\Language;
 use Drupal\Core\Session\UserSession;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Test\HttpClientMiddleware\TestHttpClientMiddleware;
 use Drupal\FunctionalTests\Installer\InstallerTestBase;
 use GuzzleHttp\HandlerStack;
@@ -32,6 +33,8 @@ class ThunderInstallerTest extends InstallerTestBase {
    * {@inheritdoc}
    */
   protected function setUp() {
+    parent::setUpAppRoot();
+
     $this->isInstalled = FALSE;
 
     $this->setupBaseUrl();
@@ -94,7 +97,7 @@ class ThunderInstallerTest extends InstallerTestBase {
       ->set('http_handler_stack', $handler_stack);
 
     $this->container
-      ->set('app.root', DRUPAL_ROOT);
+      ->setParameter('app.root', DRUPAL_ROOT);
     \Drupal::setContainer($this->container);
 
     // Setup Mink.
@@ -123,11 +126,12 @@ class ThunderInstallerTest extends InstallerTestBase {
     // Configure modules.
     $this->setUpModules();
 
+    // @phpstan-ignore-next-line
     if ($this->isInstalled) {
       // Import new settings.php written by the installer.
       $request = Request::createFromGlobals();
-      $class_loader = require $this->container->get('app.root') . '/autoload.php';
-      Settings::initialize($this->container->get('app.root'), DrupalKernel::findSitePath($request), $class_loader);
+      $class_loader = require $this->container->getParameter('app.root') . '/autoload.php';
+      Settings::initialize($this->container->getParameter('app.root'), DrupalKernel::findSitePath($request), $class_loader);
 
       // After writing settings.php, the installer removes write permissions
       // from the site directory. To allow drupal_generate_test_ua() to write
@@ -135,7 +139,7 @@ class ThunderInstallerTest extends InstallerTestBase {
       // directory has to be writable.
       // BrowserTestBase::tearDown() will delete the entire test site directory.
       // Not using File API; a potential error must trigger a PHP warning.
-      chmod($this->container->get('app.root') . '/' . $this->siteDirectory, 0777);
+      chmod($this->container->getParameter('app.root') . '/' . $this->siteDirectory, 0777);
       $this->kernel = DrupalKernel::createFromRequest($request, $class_loader, 'prod', FALSE);
       $this->kernel->boot();
       $this->kernel->preHandle($request);
@@ -176,7 +180,9 @@ class ThunderInstallerTest extends InstallerTestBase {
    */
   protected function setUpSite() {
     $edit = $this->translatePostValues($this->parameters['forms']['install_configure_form']);
-    $this->drupalPostForm(NULL, $edit, $this->translations['Save and continue']);
+    $edit['enable_update_status_module'] = NULL;
+    $edit['enable_update_status_emails'] = NULL;
+    $this->submitForm($edit, $this->translations['Save and continue']);
     // If we've got to this point the site is installed using the regular
     // installation workflow.
   }
@@ -185,7 +191,9 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Setup modules -> subroutine of test setUp process.
    */
   protected function setUpModules() {
-    $this->drupalPostForm(NULL, [], $this->translations['Save and continue']);
+    // @todo Add another test that tests interactive install of all optional
+    //   Thunder modules.
+    $this->submitForm([], $this->translations['Save and continue']);
     $this->isInstalled = TRUE;
   }
 
@@ -193,14 +201,13 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Confirms that the installation succeeded.
    */
   public function testInstalled() {
-    $this->assertSession()->addressEquals('?tour=1');
+    $this->assertSession()->addressEquals('user/1');
     $this->assertSession()->statusCodeEquals(200);
     // Confirm that we are logged-in after installation.
     $this->assertSession()->pageTextContains($this->rootUser->getAccountName());
 
-    // Ensure demo content is installed.
-    $this->assertSession()->pageTextContains('Burda Launches Open-Source CMS Thunder');
-    $this->assertSession()->pageTextContains('Come to DrupalCon New Orleans');
+    $message = strip_tags(new TranslatableMarkup('Congratulations, you installed @drupal!', ['@drupal' => 'Thunder'], ['langcode' => $this->langcode]));
+    $this->assertSession()->pageTextContains($message);
 
     /** @var \Drupal\Core\Database\Query\SelectInterface $query */
     $query = \Drupal::database()->select('watchdog', 'w')

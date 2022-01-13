@@ -13,11 +13,11 @@ bundle: page
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 100
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 100
     region: content
   links:
     weight: 101

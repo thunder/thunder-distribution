@@ -18,32 +18,32 @@ mode: paragraph_preview
 content:
   field_author:
     type: string
-    weight: 1
-    region: content
     label: inline
     settings:
       link_to_entity: false
     third_party_settings:
       empty_fields:
         handler: ''
+    weight: 1
+    region: content
   field_content:
     type: basic_string
-    weight: 2
-    region: content
     label: inline
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
   thumbnail:
     type: image
-    weight: 0
-    region: content
     label: hidden
     settings:
-      image_style: paragraph_preview_thumbnail
       image_link: ''
+      image_style: paragraph_preview_thumbnail
     third_party_settings:
       empty_fields:
         handler: ''
+    weight: 0
+    region: content
 hidden:
   created: true
   field_url: true

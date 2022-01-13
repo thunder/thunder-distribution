@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Drupal\Tests\Traits\Core\CronRunTrait;
+
 /**
  * Testing of Meta Information.
  *
@@ -13,6 +15,8 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
   use ThunderArticleTestTrait;
   use ThunderMetaTagTrait;
+  use ThunderMediaTestTrait;
+  use CronRunTrait;
 
   /**
    * Default user login role used for testing.
@@ -121,12 +125,12 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   protected function setMetaTagConfigurationForUrl($pageUrl, array $configuration) {
     $this->drupalGet($pageUrl);
 
-    $page = $this->getSession()->getPage();
+    $driver = $this->getSession()->getDriver();
     $this->expandAllTabs();
-    $this->setFieldValues($page, $this->generateMetaTagFieldValues($configuration));
+    $this->setFieldValues($this->generateMetaTagFieldValues($configuration));
 
     $this->scrollElementInView('[name="op"]');
-    $page->find('xpath', '//input[@name="op"]')->click();
+    $driver->click('//input[@name="op"]');
   }
 
   /**
@@ -136,9 +140,9 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    *   Custom meta tag configuration for article.
    */
   protected function createArticleWithFields(array $fieldValues = []) {
-
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $fieldValues += [
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => static::$tokens['[node:title]'],
       'field_seo_title[0][value]' => static::$tokens['[node:field_seo_title]'],
       'field_teaser_text[0][value]' => static::$tokens['[node:field_teaser_text]'],
@@ -146,7 +150,8 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->articleFillNew($fieldValues);
 
-    $this->selectMedia('field_teaser_media', 'image_browser', ['media:1']);
+    $media = $this->loadMediaByUuid('17965877-27b2-428f-8b8c-7dccba9786e5');
+    $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $media->id()]);
 
     $this->clickSave();
   }
@@ -253,7 +258,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->assertSession()
       ->elementExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
 
-    $this->runCron();
+    $this->cronRun();
 
     // Check that Article is published.
     $this->drupalGet('node/' . $articleId);
@@ -262,7 +267,6 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     // Check that Article is published.
     $this->drupalGet('node/' . $articleId . '/edit');
-    $page = $this->getSession()->getPage();
 
     // Edit article and set un-publish date same as publish date.
     $unPublishDiffSeconds = 5;
@@ -274,7 +278,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     ];
 
     $this->expandAllTabs();
-    $this->setFieldValues($page, $unPublishFieldValues);
+    $this->setFieldValues($unPublishFieldValues);
 
     $this->clickSave();
 
@@ -286,7 +290,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     // Wait sufficient time before cron is executed.
     sleep($unPublishDiffSeconds + 2);
 
-    $this->runCron();
+    $this->cronRun();
 
     // Check that Article is unpublished.
     $this->drupalGet('node/' . $articleId);
@@ -319,6 +323,8 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
   /**
    * Test Site Map for Article.
+   *
+   * @group NoUpdate
    */
   public function testSiteMap() {
     $articleId = 10;
@@ -341,7 +347,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->sitemapGenerator->saveSetting('xsl', FALSE);
     $this->sitemapGenerator->generateSitemap('backend');
 
-    $this->drupalGet('sitemap.xml');
+    $this->drupalGet('article/sitemap.xml');
 
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
@@ -350,17 +356,16 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     // After sitemap.xml -> we have to open page without setting cookie before.
     $this->getSession()->visit($this->buildUrl('node/' . $articleId . '/edit'));
-    $page = $this->getSession()->getPage();
 
     $this->expandAllTabs();
-    $this->setFieldValues($page, [
-      'priority_default_node_settings' => '0.9',
+    $this->setFieldValues([
+      'priority_article_node_settings' => '0.9',
     ]);
 
     $this->clickSave();
 
     $this->sitemapGenerator->generateSitemap('backend');
-    $this->drupalGet('sitemap.xml');
+    $this->drupalGet('article/sitemap.xml');
 
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
@@ -372,15 +377,15 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->sitemapGenerator->generateSitemap('backend');
 
     // Check loc, that it's pointing to sitemap.xml file.
-    $this->drupalGet('sitemap.xml');
+    $this->drupalGet('article/sitemap.xml');
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '(//sm:loc)[last()]');
     $lastSiteMapUrl = $domElements->item(0)->nodeValue;
-    $this->assertStringEndsWith('/sitemap.xml?page=7', $lastSiteMapUrl);
+    $this->assertStringEndsWith('article/sitemap.xml?page=3', $lastSiteMapUrl);
 
     // Get 3rd sitemap.xml file and check that link exits there.
     $urlOptions = ['query' => ['page' => 3]];
-    $this->getSession()->visit($this->buildUrl('sitemap.xml', $urlOptions));
+    $this->getSession()->visit($this->buildUrl('article/sitemap.xml', $urlOptions));
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
     $this->assertEquals(1, $domElements->length);
@@ -388,17 +393,16 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     // After sitemap.xml -> we have to open page without setting cookie before.
     $this->getSession()->visit($this->buildUrl('node/' . $articleId . '/edit'));
-    $page = $this->getSession()->getPage();
 
     $this->expandAllTabs();
-    $this->setFieldValues($page, [
-      'index_default_node_settings' => '0',
+    $this->setFieldValues([
+      'index_article_node_settings' => '0',
     ]);
 
     $this->clickSave();
 
     $this->sitemapGenerator->generateSitemap('backend');
-    $this->drupalGet('sitemap.xml', $urlOptions);
+    $this->drupalGet('article/sitemap.xml', $urlOptions);
 
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]');

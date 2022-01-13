@@ -1,0 +1,7 @@
+name: 'Thunder IVW'
+description: 'Enable your site to track page views for the german Information Community for the Assessment of the Circulation of Media.'
+type: module
+core_version_requirement: ^9
+package: Thunder Optional
+dependencies:
+  - ivw_integration:ivw_integration

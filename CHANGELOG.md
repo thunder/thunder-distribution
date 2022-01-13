@@ -1,13 +1,15 @@
 # Changelog
 
-## [3.5.1](https://github.com/thunder/thunder-distribution/tree/3.5.1) 2020-06-18
-[Full Changelog](https://github.com/thunder/thunder-distribution/compare/3.5.0...3.5.1)
+## [6.3.1](https://github.com/thunder/thunder-distribution/tree/6.3.1) 2021-12-20
 
-Update tarball to include latest security update and updating entity browser and update helper.
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.0...6.3.1)
 
-- Do [Update entity browser to 2.5](https://www.drupal.org/node/3146606)
+Bugfix release to fix issues of twig filter using \Drupal::service('renderer')->render($element) and
+allowing newer versions of facets module.
 
-## [3.5.0](https://github.com/thunder/thunder-distribution/tree/3.5.0) 2020-06-04
+- Fix [Plain text twig filter throws an error if field does not exist or is hidden](https://www.drupal.org/node/3253753)
+- Fix [Facets module > 1.4 not supported](https://www.drupal.org/node/3254295)
 
-Add Drupal 8.9 compatibility
+## [6.3.0](https://github.com/thunder/thunder-distribution/tree/6.3.0) 2021-12-09
 
+Minor release, that bumps the Drupal core dependency to 9.3.x.

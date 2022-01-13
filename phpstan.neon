@@ -2,15 +2,19 @@ parameters:
   drupal:
     drupal_root: %currentWorkingDirectory%/docroot
   customRulesetUsed: true
-  reportUnmatchedIgnoredErrors: false
-  # Ignore phpstan-drupal extension's rules.
+  checkGenericClassInNonGenericObjectType: true
+  checkMissingIterableValueType: true
+  reportUnmatchedIgnoredErrors: true
+  level: 4
   ignoreErrors:
     - '#\Drupal calls should be avoided in classes, use dependency injection instead#'
-    - '#Plugin definitions cannot be altered.#'
-    - '#Missing cache backend declaration for performance.#'
-    - '#Plugin manager has cache backend specified but does not declare cache tags.#'
-  autoload_files:
-    - docroot/modules/contrib/token/token.module
+    - '#\Call to an undefined method Drupal\\Tests\\WebAssert::#'
+    - "#^Unsafe usage of new static\\(\\)\\.$#"
+    - "#https:\/\/www.drupal.org\/node\/3083055#"
+    - "#Function drupal_phpunit_find_extension_directories not found.#"
+    # Drupal allows object property access to custom fields, so we cannot fix
+    # that.
+    - "#^Access to an undefined property Drupal\\\\#"
 includes:
   - ./vendor/mglaman/phpstan-drupal/extension.neon
   - ./vendor/phpstan/phpstan-deprecation-rules/rules.neon

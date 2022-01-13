@@ -23,24 +23,24 @@
 exports.command = function addImage(fieldName, position, config) {
   const browser = this;
 
-  const fieldNameId = fieldName.replace(/_/g, "-");
+  const fieldNameId = fieldName.replace(/_/g, '-');
   const paragraphPosition = position * 2;
 
-  browser.paragraphs.add(fieldName, "image", position);
+  browser.paragraphs.add(fieldName, 'image', position);
 
   browser
     .waitForElementVisible(
       `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${paragraphPosition}]//*[contains(@id, "subform-field-image-entity-browser-entity-browser-open-modal")]`,
-      10000
+      10000,
     )
     .click(
-      `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${paragraphPosition}]//*[contains(@id, "subform-field-image-entity-browser-entity-browser-open-modal")]`
+      `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${paragraphPosition}]//*[contains(@id, "subform-field-image-entity-browser-entity-browser-open-modal")]`,
     )
     .waitForElementVisible(
       '//*[@id="entity_browser_iframe_image_browser"]',
-      10000
+      10000,
     )
-    .frame("entity_browser_iframe_image_browser");
+    .frame('entity_browser_iframe_image_browser');
 
   // Make selection of provided image index.
   if (config.selectIndex) {
@@ -49,10 +49,10 @@ exports.command = function addImage(fieldName, position, config) {
     browser
       .waitForElementVisible(
         `//*[@id="entity-browser-image-browser-form"]/div[1]/div[2]/div[${selectIndex}]/div[1]/span/img`,
-        10000
+        10000,
       )
       .click(
-        `//*[@id="entity-browser-image-browser-form"]/div[1]/div[2]/div[${selectIndex}]`
+        `//*[@id="entity-browser-image-browser-form"]/div[1]/div[2]/div[${selectIndex}]`,
       );
   }
 
@@ -72,20 +72,20 @@ exports.command = function addImage(fieldName, position, config) {
           // use browser.setValue() later, to upload file.
           jQuery(elem)
             .show(0)
-            .css("visibility", "visible")
+            .css('visibility', 'visible')
             .width(200)
             .height(30)
-            .removeAttr("multiple");
+            .removeAttr('multiple');
 
           done();
         },
         [],
-        () => {}
+        () => {},
       )
       .setValue('//input[@type="file"]', config.uploadImage)
       .waitForElementVisible(
         '//*[contains(@id, "ajax-wrapper--")]/div/div/div[1]/div[1]/div/img',
-        10000
+        10000,
       );
   }
 
@@ -94,7 +94,7 @@ exports.command = function addImage(fieldName, position, config) {
     .frame()
     .waitForElementVisible(
       `//table[contains(@id, "${fieldNameId}-values")]/tbody/tr[${paragraphPosition}]//img`,
-      10000
+      10000,
     );
 
   return browser;

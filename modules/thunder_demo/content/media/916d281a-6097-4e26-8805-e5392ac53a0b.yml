@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 916d281a-6097-4e26-8805-e5392ac53a0b
+  bundle: image
+  default_langcode: en
+  depends:
+    038a612e-d318-4959-b23b-ee2978cd1f6c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: impressionen_kaminzimmer_3.jpg
+  created:
+    -
+      value: 1600162381
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_copyright:
+    -
+      value: 'Sophia Vogel'
+  field_image:
+    -
+      entity: 038a612e-d318-4959-b23b-ee2978cd1f6c
+      alt: ''
+      title: ''
+      width: 6000
+      height: 4000

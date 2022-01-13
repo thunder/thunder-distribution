@@ -83,18 +83,6 @@ class DynamicLocalTasks extends DeriverBase implements ContainerDeriverInterface
       ] + $base_plugin_definition;
     }
 
-    if ($this->moduleHandler->moduleExists('scheduler') && $this->routeProvider->getRoutesByNames(['view.scheduler_scheduled_content.overview'])) {
-      // See thunder_article_menu_local_tasks_alter() for how this is displayed
-      // or not depending on configuration.
-      $this->derivatives["thunder_article.scheduler"] = [
-        'route_name' => "view.scheduler_scheduled_content.overview",
-        'title' => $this->t('Scheduled content'),
-        'parent_id' => "system.admin_content",
-        'weight' => 3,
-        'cache_tags' => $this->configFactory->get('thunder_article.settings')->getCacheTags(),
-      ] + $base_plugin_definition;
-    }
-
     if ($this->moduleHandler->moduleExists('access_unpublished') && $this->routeProvider->getRoutesByNames(['access_unpublished.access_token.list'])) {
       $this->derivatives["thunder_article.access_unpublished"] = [
         'route_name' => "access_unpublished.access_token.list",

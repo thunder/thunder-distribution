@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 5e0b1d08-af33-4a38-b3ba-f4cf85b7315a
+  bundle: menu_link_content
+  default_langcode: en
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Contact
+  menu_name:
+    -
+      value: footer
+  link:
+    -
+      uri: 'https://thunder.org/contact-us'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 0
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true

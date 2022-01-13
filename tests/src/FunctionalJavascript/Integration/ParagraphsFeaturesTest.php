@@ -28,9 +28,9 @@ class ParagraphsFeaturesTest extends ThunderJavascriptTestBase {
    */
   public function testDeleteConfirmation() {
     $page = $this->getSession()->getPage();
-
+    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
-      'field_channel' => 1,
+      'field_channel' => $term->id(),
       'title[0][value]' => 'Article 1',
       'field_seo_title[0][value]' => 'Article 1',
     ]);
@@ -51,10 +51,10 @@ class ParagraphsFeaturesTest extends ThunderJavascriptTestBase {
 
     $confirmButton = $page->find('xpath', '//*[contains(@class, "paragraphs-features__delete-confirmation")]//button[contains(@class, "paragraphs-features__delete-confirmation__remove-button")]');
     $confirmButton->click();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
     $this->assertEquals(1, $this->getNumberOfParagraphs(static::$paragraphsField));
 
-    $this->editParagraph($page, 'field_paragraphs', 1);
+    $this->editParagraph('field_paragraphs', 1);
     $customFormDeleteButton = $page->find('xpath', '//div[contains(@id, "field-paragraphs-1-item-wrapper")]//button[contains(@class, "paragraph-form-item__action--remove")]');
     $hiddenFormDeleteButton = $page->find('xpath', '//div[contains(@id, "field-paragraphs-1-item-wrapper")]//button[contains(@class, "paragraph-form-item__action--remove")]');
     $this->assertTrue($customFormDeleteButton->isVisible(), 'Delete button should be visible');

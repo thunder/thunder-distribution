@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 4fc96a05-40d7-4651-9c87-b06f2fcaf95a
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: leeraufbau_festsaal.jpg
+  uri:
+    -
+      value: 'public://2020-09/leeraufbau_festsaal.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 5662638
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1600162381

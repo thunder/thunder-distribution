@@ -1,0 +1,7 @@
+media.type.image:
+  expected_config:
+    field_map: {  }
+  update_actions:
+    change:
+      field_map:
+        name: name

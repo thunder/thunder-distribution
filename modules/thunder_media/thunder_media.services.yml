@@ -1,0 +1,6 @@
+services:
+  thunder_media.file.event.subscriber:
+    class: Drupal\thunder_media\EventSubscriber\FileEventSubscriber
+    arguments: ['@config.factory', '@?pathauto.alias_cleaner']
+    tags:
+      - { name: event_subscriber }

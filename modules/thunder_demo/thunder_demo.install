@@ -5,17 +5,34 @@
  * Contains.
  */
 
+use Drupal\user\Entity\Role;
+
 /**
- * Install thunder demo content.
+ * Implements hook_modules_installed().
  */
-function thunder_demo_install() {
+function thunder_demo_modules_installed($modules) {
+  if (in_array('thunder_demo', $modules)) {
+    /** @var \Drupal\Core\Entity\EntityRepositoryInterface $entityRepository */
+    $entityRepository = \Drupal::service('entity.repository');
 
-  // Set default pages.
-  \Drupal::configFactory()->getEditable('system.site')
-    ->set('page.403', '/node/3')
-    ->set('page.404', '/node/4')
-    ->save(TRUE);
+    $node = $entityRepository->loadEntityByUuid('node', 'efc68dc1-649e-4ac8-ad95-78cd404f22a7');
 
+    \Drupal::configFactory()->getEditable('tour.tour.content-paragraphs')
+      ->set('routes.0.route_params.node', $node->id())
+      ->save();
+
+    $tour = \Drupal::configFactory()->getEditable('tour.tour.content-add');
+    $article_last = $tour->get('tips.article-last.body');
+    $article_last = str_replace('/node/7/edit', $node->toUrl('edit-form')->toString(), $article_last);
+    $tour->set('tips.article-last.body', $article_last)->save();
+
+    foreach (['editor', 'restricted_editor', 'seo'] as $role) {
+      if ($role = Role::load($role)) {
+        $role->grantPermission('access tour')
+          ->save();
+      }
+    }
+  }
 }
 
 /**

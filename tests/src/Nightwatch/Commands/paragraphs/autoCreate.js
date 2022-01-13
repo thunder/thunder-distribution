@@ -18,7 +18,7 @@ exports.command = function autoCreate(fieldName, paragraphs) {
   const { target_type_distribution: paragraphBundles } = paragraphs;
   let position = 1;
 
-  Object.keys(paragraphBundles).forEach(bundleName => {
+  Object.keys(paragraphBundles).forEach((bundleName) => {
     const { instances, fields } = paragraphBundles[bundleName];
 
     for (let i = 0; i < instances; i++) {

@@ -10,7 +10,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 trait ThunderArticleTestTrait {
 
   use ThunderFormFieldTestTrait;
-  use ThunderMediaTestTrait;
+  use ThunderJavascriptTrait;
 
   /**
    * Pre-fill defined article fields for new article.
@@ -19,18 +19,50 @@ trait ThunderArticleTestTrait {
    *   Field values for new article.
    */
   public function articleFillNew(array $fieldValues) {
-    if (!$this instanceof ThunderJavascriptTestBase) {
-      throw new \RuntimeException('Trait is not used in correct context.');
-    }
-
     $this->drupalGet('node/add/article');
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     if (!empty($fieldValues)) {
       $this->expandAllTabs();
-      $this->setFieldValues($this->getSession()->getPage(), $fieldValues);
+      if ($this->getSession()->getPage()->hasButton('Customize meta tags')) {
+        $this->getSession()->getPage()->pressButton('Customize meta tags');
+        $this->assertWaitOnAjaxRequest();
+        $this->expandAllTabs();
+      }
+      $this->setFieldValues($fieldValues);
     }
+  }
 
+  /**
+   * Expand all tabs on page.
+   *
+   * It goes up to level 3 by default.
+   *
+   * @param int $maxLevel
+   *   Max depth of nested collapsed tabs.
+   */
+  public function expandAllTabs($maxLevel = 3) {
+    $jsScript = "(() => { const elements = document.querySelectorAll('details.js-form-wrapper.form-wrapper:not([open]) > summary'); elements.forEach((elem) => { elem.click(); }); elements.length; })()";
+
+    $numOfOpen = $this->getSession()->evaluateScript($jsScript);
+    $this->assertWaitOnAjaxRequest();
+
+    for ($i = 0; $i < $maxLevel && $numOfOpen > 0; $i++) {
+      $numOfOpen = $this->getSession()->evaluateScript($jsScript);
+      $this->assertWaitOnAjaxRequest();
+    }
+  }
+
+  /**
+   * Set moderation state.
+   *
+   * @param string $state
+   *   State id.
+   */
+  protected function setModerationState($state) {
+    $this->getSession()
+      ->getDriver()
+      ->selectOption('//*[@id="edit-moderation-state-0"]', $state);
   }
 
 }

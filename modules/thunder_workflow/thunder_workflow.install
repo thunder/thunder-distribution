@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * The install file.
+ */
+
+use Drupal\Core\Entity\EntityStorageException;
+use Drupal\user\Entity\Role;
+
+/**
+ * Implements hook_install().
+ */
+function thunder_workflow_install() {
+
+  if (!Role::load('restricted_editor')) {
+    /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
+    $configReverter = \Drupal::service('config_update.config_update');
+    $configReverter->import('user_role', 'restricted_editor');
+  }
+
+  // Granting permissions only for "editor" and "seo" user roles.
+  $roles = Role::loadMultiple(['editor', 'seo']);
+  foreach ($roles as $role) {
+    try {
+      $role->grantPermission('use editorial transition create_new_draft');
+      $role->grantPermission('use editorial transition publish');
+      $role->grantPermission('use editorial transition unpublish');
+      $role->grantPermission('use editorial transition unpublished_draft');
+      $role->grantPermission('use editorial transition unpublished_published');
+      $role->grantPermission('view any unpublished content');
+      $role->grantPermission('view latest version');
+      $role->save();
+    }
+    catch (EntityStorageException $storageException) {
+    }
+  }
+
+}
+
+/* hook_update_n implementations should be in the profile instead of this
+submodule. */

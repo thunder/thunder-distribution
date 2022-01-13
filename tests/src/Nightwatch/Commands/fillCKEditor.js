@@ -25,7 +25,7 @@ exports.command = function fillCKEditor(selector, value) {
       done();
     },
     [selector, value],
-    () => {}
+    () => {},
   );
 
   return browser;

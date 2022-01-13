@@ -1,20 +1,15 @@
-thunder_article.configuration_form:
-  path: '/admin/config/thunder_article/configuration'
-  defaults:
-    _form: '\Drupal\thunder_article\Form\ConfigurationForm'
-    _title: 'Thunder Article Configuration'
-  requirements:
-    _permission: 'administer site configuration'
-  options:
-    _admin_route: TRUE
-
 node.revision_revert_default_confirm:
   path: '/node/{node}/revisions/{node_revision}/revert-default'
   defaults:
     _form: '\Drupal\thunder_article\Form\NodeRevisionRevertDefaultForm'
     _title: 'Revert to earlier revision'
   requirements:
-    _access_node_revision: 'update'
+    _entity_access: 'node_revision.revert revision'
     node: \d+
   options:
     _node_operation_route: TRUE
+    parameters:
+      node:
+        type: entity:node
+      node_revision:
+        type: entity_revision:node

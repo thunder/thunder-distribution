@@ -1,0 +1,3 @@
+extend type Query {
+  menu(path: String!, id: String!): Menu
+}

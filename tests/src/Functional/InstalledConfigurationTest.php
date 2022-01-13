@@ -29,20 +29,11 @@ class InstalledConfigurationTest extends ThunderTestBase {
    */
   protected static $modules = [
     'thunder_testing_demo',
-    'google_analytics',
-    'ivw_integration',
+    'thunder_google_analytics',
+    'thunder_ivw',
+    // Because of https://github.com/drupal-graphql/graphql/issues/1177
+    // 'thunder_gqls',
     'adsense',
-    'harbourmaster',
-    'simple_gmap',
-
-    // Additional modules.
-    // 'nexx_integration',
-    // 'thunder_fia',
-    // We are messing around with configuration in
-    // thunder_liveblog_module_preinstall, so it's not possible to check the
-    // thunder_liveblog config in a proper way.
-    // 'thunder_liveblog',
-    // end of list.
   ];
 
   /**
@@ -88,6 +79,21 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_view_mode.taxonomy_term.token',
     'core.entity_view_mode.user.token',
     'core.entity_view_mode.path_alias.token',
+    'core.entity_view_mode.search_api_task.token',
+
+    // SearchAPI tour.
+    'tour.tour.search-api-index',
+    'tour.tour.search-api-index-fields',
+    'tour.tour.search-api-index-form',
+    'tour.tour.search-api-index-processors',
+    'tour.tour.search-api-server',
+    'tour.tour.search-api-server-form',
+
+    // Because of https://www.drupal.org/node/3204093
+    'tour.tour.content-add',
+    'tour.tour.content-list',
+    'tour.tour.content-paragraphs',
+    'tour.tour.homepage',
   ];
 
   /**
@@ -133,6 +139,9 @@ class InstalledConfigurationTest extends ThunderTestBase {
     ],
 
     // Changed on installation.
+    'views.view.content' => [
+      'status' => TRUE,
+    ],
     'views.view.glossary' => [
       'dependencies' => [
         'config' => TRUE,
@@ -158,7 +167,12 @@ class InstalledConfigurationTest extends ThunderTestBase {
     ],
     'views.view.moderated_content' => [
       'display' => [
-        'moderated_content' => ['cache_metadata' => ['max-age' => TRUE, 'tags' => TRUE]],
+        'moderated_content' => [
+          'cache_metadata' => [
+            'max-age' => TRUE,
+            'tags' => TRUE,
+          ],
+        ],
         'default' => ['cache_metadata' => ['max-age' => TRUE, 'tags' => TRUE]],
       ],
     ],
@@ -185,6 +199,11 @@ class InstalledConfigurationTest extends ThunderTestBase {
         'module' => TRUE,
       ],
     ],
+    'core.entity_form_display.node.article.bulk_edit' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
     'core.entity_form_display.taxonomy_term.channel.default' => [
       'content' => [
         'field_ivw' => TRUE,
@@ -209,27 +228,20 @@ class InstalledConfigurationTest extends ThunderTestBase {
         'field_ivw' => TRUE,
       ],
     ],
+    'core.entity_view_display.node.article.search_index' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
     'core.entity_view_display.node.article.teaser' => [
       'hidden' => [
         'field_ivw' => TRUE,
       ],
     ],
-    // Remove this when
-    // https://github.com/BurdaMagazinOrg/module-nexx_integration/pull/37 lands.
-    'core.entity_form_display.media.nexx_video.default' => [
-      'content' => [
-        'path' => TRUE,
-        'moderation_state' => TRUE,
+    'views.view.locked_content' => [
+      'display' => [
+        'default' => ['display_options' => ['sorts' => ['created' => ['expose' => ['field_identifier' => TRUE]]]]],
       ],
-    ],
-    'core.entity_form_display.paragraph.nexx_video.default' => [
-      'content' => [
-        'moderation_state' => TRUE,
-      ],
-    ],
-    'paragraphs.paragraphs_type.nexx_video' => [
-      'icon_uuid' => TRUE,
-      'description' => TRUE,
     ],
   ];
 
@@ -243,6 +255,8 @@ class InstalledConfigurationTest extends ThunderTestBase {
   /**
    * Ignore configuration list values. Path to key is separated by '::'.
    *
+   * @var array
+   *
    * Example:
    * 'field.field.node.article.field_example' => [
    *   'settings::settings_part1::list_part' => [
@@ -251,15 +265,16 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *   ]
    * ]
    *
-   * TODO: use this functionality for more strict "dependencies" checking.
-   *
-   * @var array
+   * @todo use this functionality for more strict "dependencies" checking.
    */
   protected static $ignoreConfigListValues = [
     // Google analytics adds one permission dynamically in the install hook.
     'user.role.authenticated' => [
       'permissions' => [
         'opt-in or out of google analytics tracking',
+      ],
+      'dependencies::module' => [
+        'google_analytics',
       ],
     ],
   ];

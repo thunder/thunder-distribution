@@ -19,27 +19,27 @@ mode: default
 content:
   field_copyright:
     type: string
-    weight: 1
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 1
     region: content
   field_description:
     type: text_default
-    weight: 2
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 2
     region: content
   field_media_video_embed_field:
-    weight: 0
+    type: oembed
     label: hidden
     settings:
       max_width: 854
       max_height: 480
     third_party_settings: {  }
-    type: oembed
+    weight: 0
     region: content
 hidden:
   created: true
