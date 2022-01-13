@@ -68,11 +68,11 @@ trait ThunderParagraphsTestTrait {
     $fieldSelector = HTML::cleanCssIdentifier($fieldName);
     if ($position === NULL || $position > $numberOfParagraphs) {
       $position = $numberOfParagraphs;
-      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:last-child input.paragraphs-features__add-in-between__button";
+      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:last-child button.paragraphs-features__add-in-between__button";
     }
     else {
       $addButtonPosition = $position * 2 + 1;
-      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) input.paragraphs-features__add-in-between__button";
+      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) button.paragraphs-features__add-in-between__button";
     }
 
     $this->clickCssSelector($addButtonCssSelector);
