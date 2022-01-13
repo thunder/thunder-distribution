@@ -90,7 +90,7 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
   public function resolveField(FieldContext $fieldContext) {
     $contextValues = $this->getContextValues();
 
-    if (!isset($contextValues['path'])){
+    if (!isset($contextValues['path'])) {
       throw new \LogicException('Missing required path argument.');
     }
 

@@ -2,7 +2,6 @@
 
 namespace Drupal\thunder_gqls\Traits;
 
-use Drupal\Core\Language\LanguageInterface;
 use Drupal\graphql\GraphQL\Resolver\ResolverInterface;
 use Drupal\graphql\GraphQL\ResolverBuilder;
 
@@ -116,10 +115,8 @@ trait ResolverHelperTrait {
         ->map('path', $path),
       $this->builder->produce('route_entity')
         ->map('url', $this->builder->fromParent())
-        ->map('language',
-          $this->builder->produce('thunder_language')
-            ->map('path', $path)
-            ->map('type', $this->builder->fromValue(LanguageInterface::TYPE_URL))
+        ->map('language', $this->builder->produce('thunder_language')
+          ->map('path', $path)
         )
     );
   }

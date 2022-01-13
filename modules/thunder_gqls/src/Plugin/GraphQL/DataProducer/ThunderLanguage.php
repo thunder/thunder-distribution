@@ -24,8 +24,8 @@ use Drupal\Core\Language\LanguageManagerInterface;
  *     ),
  *     "type" = @ContextDefinition("string",
  *       label = @Translation("Language type"),
- *       description = @Translation("The language type as defined in \Drupal\Core\Language\LanguageInterface. Defaults to interface language."),
- *       default_value = \Drupal\Core\Language\LanguageInterface::TYPE_INTERFACE,
+ *       description = @Translation("The language type as defined in \Drupal\Core\Language\LanguageInterface. Defaults to url language."),
+ *       default_value = \Drupal\Core\Language\LanguageInterface::TYPE_URL,
  *       required = FALSE
  *     ),
  *   }
@@ -62,6 +62,10 @@ class ThunderLanguage extends ThunderEntitySubRequestBase {
   /**
    * Resolve language.
    *
+   * @param string $path
+   *   The path.
+   * @param string $type
+   *   The language type.
    * @param \Drupal\Core\Cache\CacheableMetadata $cacheableMetadata
    *   Cache metadata for the subrequest.
    * @param \Drupal\graphql\GraphQL\Execution\FieldContext $fieldContext

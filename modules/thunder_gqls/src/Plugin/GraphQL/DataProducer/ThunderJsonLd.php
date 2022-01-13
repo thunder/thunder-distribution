@@ -79,6 +79,8 @@ class ThunderJsonLd extends ThunderEntitySubRequestBase {
   /**
    * Resolve json-ld.
    *
+   * @param string $path
+   *   The path.
    * @param \Drupal\Core\Cache\CacheableMetadata $cacheableMetadata
    *   Cache metadata for the subrequest.
    * @param \Drupal\graphql\GraphQL\Execution\FieldContext $fieldContext
