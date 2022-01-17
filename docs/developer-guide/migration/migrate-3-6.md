@@ -49,6 +49,7 @@ the update process.
 ```bash
 drush pmu thunder_riddle
 ```
+
 ## Drupal 9 compatibility
 
 Because Thunder 6 is based on Drupal 9, check your compatibility before your run the upgrade.
