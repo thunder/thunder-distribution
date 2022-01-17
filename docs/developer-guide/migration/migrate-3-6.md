@@ -50,6 +50,13 @@ the update process.
 drush pmu thunder_riddle
 ```
 
+Since the riddle_marketplace module will not be required by Thunder anymore, you ned to add it to your own
+composer.json.
+
+```bash
+composer require drupal/riddle_marketplace
+```
+
 ## Drupal 9 compatibility
 
 Because Thunder 6 is based on Drupal 9, check your compatibility before your run the upgrade.
