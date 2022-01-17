@@ -43,14 +43,14 @@ functionality. See [https://www.drupal.org/node/3099614](https://www.drupal.org/
 drush pmu libraries
 ```
 
-Also, the thunder_riddle module was removed from the distribution. Make sure you disable the module, before you start
+The thunder_riddle module was removed from the distribution as well. Make sure you disable the module, before you start
 the update process.
 
 ```bash
 drush pmu thunder_riddle
 ```
 
-Since the riddle_marketplace module will not be required by Thunder anymore, you ned to add it to your own
+Since the riddle_marketplace module will not be required by Thunder anymore, you need to add it to your own
 composer.json.
 
 ```bash
