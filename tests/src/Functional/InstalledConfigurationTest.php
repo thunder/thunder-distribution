@@ -277,6 +277,30 @@ class InstalledConfigurationTest extends ThunderTestBase {
         'google_analytics',
       ],
     ],
+    'user.role.editor' => [
+      'permissions' => [
+        'access tour',
+      ],
+      'dependencies::module' => [
+        'tour',
+      ],
+    ],
+    'user.role.restricted_editor' => [
+      'permissions' => [
+        'access tour',
+      ],
+      'dependencies::module' => [
+        'tour',
+      ],
+    ],
+    'user.role.seo' => [
+      'permissions' => [
+        'access tour',
+      ],
+      'dependencies::module' => [
+        'tour',
+      ],
+    ],
   ];
 
   /**

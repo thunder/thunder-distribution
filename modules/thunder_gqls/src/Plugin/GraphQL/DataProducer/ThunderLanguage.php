@@ -22,6 +22,12 @@ use Drupal\Core\Language\LanguageManagerInterface;
  *       label = @Translation("Path"),
  *       required = TRUE
  *     ),
+ *     "type" = @ContextDefinition("string",
+ *       label = @Translation("Language type"),
+ *       description = @Translation("The language type as defined in \Drupal\Core\Language\LanguageInterface. Defaults to url language."),
+ *       default_value = \Drupal\Core\Language\LanguageInterface::TYPE_URL,
+ *       required = FALSE
+ *     ),
  *   }
  * )
  */
@@ -54,10 +60,22 @@ class ThunderLanguage extends ThunderEntitySubRequestBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Resolve language.
+   *
+   * @param string $path
+   *   The path.
+   * @param string $type
+   *   The language type.
+   * @param \Drupal\Core\Cache\CacheableMetadata $cacheableMetadata
+   *   Cache metadata for the subrequest.
+   * @param \Drupal\graphql\GraphQL\Execution\FieldContext $fieldContext
+   *   The field context of the data producer.
+   *
+   * @return string
+   *   The resolved language code.
    */
-  protected function doResolve(CacheableMetadata $cacheableMetadata, FieldContext $fieldContext) {
-    return $this->languageManager->getCurrentLanguage()->getId();
+  protected function resolve(string $path, string $type, CacheableMetadata $cacheableMetadata, FieldContext $fieldContext) : string {
+    return $this->languageManager->getCurrentLanguage($type)->getId();
   }
 
 }
