@@ -214,7 +214,7 @@ class ModuleConfigureForm extends FormBase {
         '#context' => ['list_style' => 'comma-list'],
       ];
 
-      $form['install_modules'][$id]['info']['lifecycle'] =  [
+      $form['install_modules'][$id]['info']['lifecycle'] = [
         '#prefix' => '<div class="admin-requirements">',
         '#suffix' => '</div>',
         '#type' => 'item',
