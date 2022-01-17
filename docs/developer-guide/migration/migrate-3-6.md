@@ -39,6 +39,16 @@ Drupal 9 compatible and its most used functionality is now part of Drupal core. 
 you use other contrib modules that require the libraries module, please check if these modules support the new core
 functionality. See [https://www.drupal.org/node/3099614](https://www.drupal.org/node/3099614)
 
+```bash
+drush pmu libraries
+```
+
+Also, the thunder_riddle module was removed from the distribution. Make sure you disable the module, before you start
+the update process.
+
+```bash
+drush pmu thunder_riddle
+```
 ## Drupal 9 compatibility
 
 Because Thunder 6 is based on Drupal 9, check your compatibility before your run the upgrade.
