@@ -97,7 +97,7 @@
         "drupal/metatag": "^1.13",
         "drupal/metatag_async_widget": "^1.0-alpha2",
         "drupal/paragraphs": "^1.11",
-        "drupal/paragraphs_features": "^1.14",
+        "drupal/paragraphs_features": "^1.15",
         "drupal/password_policy": "3.0",
         "drupal/pathauto": "^1.8",
         "drupal/responsive_preview": "^1.0-alpha7",
