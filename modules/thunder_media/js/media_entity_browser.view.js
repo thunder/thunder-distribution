@@ -28,19 +28,16 @@
           $row[$input.prop('checked') ? 'addClass' : 'removeClass']('checked');
 
           $row.once('register-row-click').click(() => {
-            if ($input.attr('type' ) === 'checkbox') {
+            if ($input.attr('type') === 'checkbox') {
               $input.prop('checked', !$input.prop('checked'));
               $row[$input.prop('checked') ? 'addClass' : 'removeClass'](
                 'checked',
               );
-            } else if(!$input.is('checked')) {
+            } else if (!$input.is('checked')) {
               // Remove checked class from previous selection.
-              $row
-                .parent()
-                .find('.views-row.checked')
-                .removeClass('checked');
+              $row.parent().find('.views-row.checked').removeClass('checked');
               // Mark current selection as checked.
-              $row.addClass('checked')
+              $row.addClass('checked');
               $input.attr('checked', 'checked');
             }
           });
