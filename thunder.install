@@ -227,15 +227,29 @@ function thunder_update_8317() {
 }
 
 /**
- * Install schema_metatag module.
+ * Enable paragraphs quick links.
  */
 function thunder_update_8318() {
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updateHelper = \Drupal::service('update_helper.updater');
 
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8318');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
+}
+
+/**
+ * Install schema_metatag module.
+ */
+function thunder_update_8319() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
   if (\Drupal::moduleHandler()->moduleExists('metatag') && !\Drupal::moduleHandler()->moduleExists('schema_article')) {
     // Execute configuration update definitions with logging of success.
-    $updateHelper->executeUpdate('thunder', 'thunder_update_8318');
+    $updateHelper->executeUpdate('thunder', 'thunder_update_8319');
   }
 
   // Output logged messages to related channel of update execution.

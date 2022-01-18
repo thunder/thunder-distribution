@@ -70,7 +70,9 @@ function thunder_taxonomy_form_taxonomy_term_form_alter(&$form, FormStateInterfa
  * Implements hook_form_taxonomy_overview_terms_alter().
  */
 function thunder_taxonomy_form_taxonomy_overview_terms_alter(&$form, FormStateInterface $formState) {
-
+  if (!isset($form['terms']['#header'])) {
+    return;
+  }
   $form['terms']['#header'] = array_merge(array_slice($form['terms']['#header'], 0, 1, TRUE),
     [t('Status')],
     array_slice($form['terms']['#header'], 1, NULL, TRUE));

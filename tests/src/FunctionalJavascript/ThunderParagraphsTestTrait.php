@@ -65,30 +65,34 @@ trait ThunderParagraphsTestTrait {
   public function addParagraph($fieldName, $type, $position = NULL) {
     $numberOfParagraphs = $this->getNumberOfParagraphs($fieldName);
 
+    $types = ['text' => 1, 'image' => 2, 'gallery' => 3];
+    $index = $types[$type] ?? 4;
+
     $fieldSelector = HTML::cleanCssIdentifier($fieldName);
     if ($position === NULL || $position > $numberOfParagraphs) {
       $position = $numberOfParagraphs;
-      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:last-child input.paragraphs-features__add-in-between__button";
+      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:last-child li:nth-child({$index}) button.paragraphs-features__add-in-between__button";
     }
     else {
       $addButtonPosition = $position * 2 + 1;
-      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) input.paragraphs-features__add-in-between__button";
+      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) li:nth-child({$index}) button.paragraphs-features__add-in-between__button";
     }
 
     $this->clickCssSelector($addButtonCssSelector);
-
-    $this->getSession()->getDriver()->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
-
-    $this->assertWaitOnAjaxRequest();
+    if ($index > 3) {
+      $this->getSession()->getDriver()->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
+      $this->assertWaitOnAjaxRequest();
+    }
+    $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child(" . (($numberOfParagraphs + 1) * 2 + 1) . ")"));
 
     // Test if we have one more paragraph now.
-    static::assertEquals($this->getNumberOfParagraphs($fieldName), ($numberOfParagraphs + 1));
+    $this->assertEquals(($numberOfParagraphs + 1), $this->getNumberOfParagraphs($fieldName));
 
     return $this->getParagraphDelta($fieldName, $position);
   }
 
   /**
-   * Get dalta of paragraph item for a given filed on a specific position.
+   * Get the delta of a paragraph item for a given filed on a specific position.
    *
    * @param string $fieldName
    *   Field name.

@@ -77,9 +77,21 @@ class ThunderJsonLd extends ThunderEntitySubRequestBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Resolve json-ld.
+   *
+   * @param string $path
+   *   The path.
+   * @param \Drupal\Core\Cache\CacheableMetadata $cacheableMetadata
+   *   Cache metadata for the subrequest.
+   * @param \Drupal\graphql\GraphQL\Execution\FieldContext $fieldContext
+   *   The field context of the data producer.
+   *
+   * @return string
+   *   The json-ld string.
+   *
+   * @throws \Exception
    */
-  protected function doResolve(CacheableMetadata $cacheableMetadata, FieldContext $fieldContext) {
+  protected function resolve(string $path, CacheableMetadata $cacheableMetadata, FieldContext $fieldContext) : string {
     // If nothing was passed in, assume the current entity.
     // @see schema_metatag_entity_load() to understand why this works.
     if (!$this->metatagManager || !$this->moduleHandler->moduleExists('schema_metatag')) {
