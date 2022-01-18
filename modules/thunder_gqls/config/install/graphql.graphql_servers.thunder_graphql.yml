@@ -13,7 +13,7 @@ schema_configuration:
       thunder_media: thunder_media
       thunder_menu: thunder_menu
       thunder_pages: thunder_pages
-      thunder_jsonld: 0
+      thunder_jsonld: thunder_jsonld
 persisted_queries_settings: {  }
 endpoint: /graphql
 debug_flag: 0
