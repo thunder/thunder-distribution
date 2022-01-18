@@ -14,6 +14,7 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - entity_browser
+    - entity_reference_actions
     - field_group
     - metatag_async_widget
     - paragraphs
@@ -111,10 +112,17 @@ content:
         collapse_edit_all: '0'
         duplicate: '0'
     third_party_settings:
+      entity_reference_actions:
+        enabled: false
+        options:
+          action_title: Action
+          include_exclude: exclude
+          selected_actions: {  }
       paragraphs_features:
         add_in_between: true
-        sorting: true
+        add_in_between_link_count: 3
         delete_confirmation: true
+        sorting: true
         split_text: true
         show_drag_and_drop: false
   field_seo_title:
