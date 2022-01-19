@@ -39,12 +39,8 @@ jobs:
       - name: Get build environment
         run: |
           composer create-project thunder/thunder-project thunder --no-interaction --no-install
-
-      - name: Prepare the build
-        run: test-drupal-project prepare_build
-
-      - name: Build the docroot
-        run: test-drupal-project build
+          composer require thunder/thunder-distribution:dev-${{ env.RELEASE_VERSION }} --no-install
+          composer update
 
         #   Start a debug session.
       - name: Setup tmate session
