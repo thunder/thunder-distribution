@@ -1,0 +1,41 @@
+name: Deploy docs
+
+on:
+  push:
+    tags:
+      - '*'
+    branches:
+      - test-create-lock
+jobs:
+  docs:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          coverage: none
+          php-version: 8.0
+          extensions: Imagick
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-cache-
+
+      - name: Get build environment
+        run: |
+          composer global require thunder/drupal-testing
+
+      - name: Prepare the build
+        run: test-drupal-project prepare_build
+
+      - name: Build the docroot
+        run: test-drupal-project build
+
+        #   Start a debug session.
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
