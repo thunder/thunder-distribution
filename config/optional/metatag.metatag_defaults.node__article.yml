@@ -4,7 +4,7 @@ dependencies: {  }
 id: node__article
 label: 'Content: Article'
 tags:
-  canonical_url: '[node:path]'
+  canonical_url: '[node:url]'
   content_language: '[node:langcode]'
   description: '[node:field_teaser_text]'
   image_src: '[node:field_teaser_media:entity:field_image]'
@@ -20,7 +20,7 @@ tags:
   og_title: '[node:field_seo_title]'
   og_type: article
   og_updated_time: '[node:changed:html_datetime]'
-  og_url: '[node:path]'
+  og_url: '[node:url]'
   twitter_cards_description: '[node:field_teaser_text]'
   twitter_cards_image: '[node:field_teaser_media:entity:field_image:twitter]'
   twitter_cards_image_height: '[node:field_teaser_media:entity:field_image:twitter:height]'
