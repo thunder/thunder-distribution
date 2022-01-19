@@ -7,15 +7,20 @@ on:
     branches:
       - test-create-lock
 
-env:
-  DRUPAL_TESTING_COMPOSER_PROJECT: thunder/thunder-project
-  DRUPAL_TESTING_TEST_CODING_STYLES: false
-
 jobs:
   run:
     runs-on: ubuntu-20.04
 
     steps:
+
+      - name: Set env
+          run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: Test
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ env.RELEASE_VERSION }}
+
       - uses: actions/checkout@v1
 
       - uses: shivammathur/setup-php@v2
@@ -33,7 +38,7 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer global require thunder/drupal-testing
+          composer create-project thunder/thunder-project thunder --no-interaction --no-install
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
