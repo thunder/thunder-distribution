@@ -38,7 +38,6 @@ class ThunderMetatagsTest extends GraphQLTestBase {
     'focal_point',
     'crop',
     'media_expire',
-    'entity_reference',
     'metatag',
     'metatag_open_graph',
     'metatag_twitter_cards',
@@ -84,11 +83,9 @@ class ThunderMetatagsTest extends GraphQLTestBase {
       'bundle' => 'image',
       'name' => 'Test image media',
       'field_image' => [
-        [
-          'target_id' => $imageFile->id(),
-          'alt' => 'Alt text',
-          'title' => 'Title text',
-        ],
+        'target_id' => $imageFile->id(),
+        'alt' => 'Alt text',
+        'title' => 'Title text',
       ],
     ]);
     $mediaImage->save();
@@ -99,9 +96,7 @@ class ThunderMetatagsTest extends GraphQLTestBase {
       'type' => 'article',
       'field_seo_title' => 'SEO-title',
       'field_teaser_media' => [
-        [
-          'target_id' => $mediaImage->id(),
-        ],
+        'target_id' => $mediaImage->id(),
       ],
     ]);
 
@@ -109,7 +104,7 @@ class ThunderMetatagsTest extends GraphQLTestBase {
   }
 
   /**
-   * @covers \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntityLinks::resolve
+   * @covers \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\MetaTags::resolve
    */
   public function testThunderMetatag(): void {
     $title = 'SEO-title';
