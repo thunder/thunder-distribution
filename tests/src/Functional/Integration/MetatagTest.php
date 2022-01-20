@@ -43,7 +43,7 @@ class MetatagTest extends ThunderTestBase {
     $this->assertEquals('630', $elements['og_image_height']['#attributes']['content']);
     $this->assertEquals('1200', $elements['og_image_width']['#attributes']['content']);
     $this->assertEquals('image/jpeg', $elements['og_image_type']['#attributes']['content']);
-    $this->assertEquals('Drupal', $elements['og_site_name']['#attributes']['content']);
+    $this->assertEquals('Drush Site-Install', $elements['og_site_name']['#attributes']['content']);
     $this->assertEquals($title, $elements['og_title']['#attributes']['content']);
     $this->assertNotEmpty($elements['og_updated_time']['#attributes']['content']);
     $this->assertStringEndsWith('/burda-launches-open-source-cms-thunder', $elements['og_url']['#attributes']['content']);
