@@ -26,7 +26,7 @@ tags:
   twitter_cards_image_height: '[node:field_teaser_media:entity:field_image:twitter:height]'
   twitter_cards_image_width: '[node:field_teaser_media:entity:field_image:twitter:width]'
   twitter_cards_type: summary_large_image
-  schema_article_about: '[node:field_channel]'
+  schema_article_about: '[node:field_channel:entity:name]'
   schema_article_date_modified: '[node:changed:html_datetime]'
   schema_article_date_published: '[node:created:html_datetime]'
   schema_article_description: '[node:field_teaser_text]'
