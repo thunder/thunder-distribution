@@ -23,7 +23,7 @@ class MetatagTest extends ThunderTestBase {
     $node = $this->loadNodeByUuid('0bd5c257-2231-450f-b4c2-ab156af7b78d');
 
     /** @var \Drupal\metatag\MetatagManager $metatagManager */
-    $metatagManager = \Drupal::service('metatag.manager');
+    $metatagManager = $this->container->get('metatag.manager');
 
     $tags = $metatagManager->tagsFromEntityWithDefaults($node);
     $elements = $metatagManager->generateRawElements($tags, $node);
