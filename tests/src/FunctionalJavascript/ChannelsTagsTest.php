@@ -92,12 +92,17 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ChannelsTagsTest_testChannelsCreation_' . date('Ymd_His') . '.png');
 
+    $source_field = $image1->getSource()->getConfiguration()['source_field'];
+
+    $image1_name = $image1->get($source_field)->entity->getFilename();
+    $image2_name = $image2->get($source_field)->entity->getFilename();
+    $image3_name = $image3->get($source_field)->entity->getFilename();
     $this->assertSession()
-      ->elementExists('xpath', '//img[contains(@src, "picjumbo.com_HNCK7373.jpg")]');
+      ->elementExists('xpath', '//img[contains(@src, "' . $image3_name . '")]');
     $this->assertSession()
-      ->elementExists('xpath', '//img[contains(@src, "picjumbo.com_HNCK7731.jpg")]');
+      ->elementExists('xpath', '//img[contains(@src, "' . $image2_name . '")]');
     $this->assertSession()
-      ->elementExists('xpath', '//img[contains(@src, "thunder-city.jpg")]');
+      ->elementExists('xpath', '//img[contains(@src, "' . $image1_name . '")]');
 
     $this->assertSession()->linkExists('Article 1');
     $this->assertSession()->linkExists('Article 2');
