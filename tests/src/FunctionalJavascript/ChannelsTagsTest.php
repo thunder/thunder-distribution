@@ -94,15 +94,18 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
 
     $source_field = $image1->getSource()->getConfiguration()['source_field'];
 
-    $image1_name = $image1->get($source_field)->entity->getFilename();
-    $image2_name = $image2->get($source_field)->entity->getFilename();
-    $image3_name = $image3->get($source_field)->entity->getFilename();
+    /** @var \Drupal\file\FileInterface $image1_file */
+    $image1_file = $image1->get($source_field)->entity;
+    /** @var \Drupal\file\FileInterface $image2_file */
+    $image2_file = $image2->get($source_field)->entity;
+    /** @var \Drupal\file\FileInterface $image3_file */
+    $image3_file = $image3->get($source_field)->entity;
     $this->assertSession()
-      ->elementExists('xpath', '//img[contains(@src, "' . $image3_name . '")]');
+      ->elementExists('xpath', '//img[contains(@src, "' . $image3_file->getFilename() . '")]');
     $this->assertSession()
-      ->elementExists('xpath', '//img[contains(@src, "' . $image2_name . '")]');
+      ->elementExists('xpath', '//img[contains(@src, "' . $image2_file->getFilename() . '")]');
     $this->assertSession()
-      ->elementExists('xpath', '//img[contains(@src, "' . $image1_name . '")]');
+      ->elementExists('xpath', '//img[contains(@src, "' . $image1_file->getFilename() . '")]');
 
     $this->assertSession()->linkExists('Article 1');
     $this->assertSession()->linkExists('Article 2');
