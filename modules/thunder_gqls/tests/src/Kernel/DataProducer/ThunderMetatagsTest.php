@@ -73,9 +73,10 @@ class ThunderMetatagsTest extends GraphQLTestBase {
     $configInstaller->installDefaultConfig('module', 'focal_point');
 
     // Create a sample media.
-    print_r($this->getTestFiles('image'));
+    /** @var \stdClass $image */
+    $image = $this->getTestFiles('image')[0];
     $imageFile = File::create([
-      'uri' => $this->getTestFiles('image')[0]->uri,
+      'uri' => $image->uri,
     ]);
     $imageFile->save();
 
