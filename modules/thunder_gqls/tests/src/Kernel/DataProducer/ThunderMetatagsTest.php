@@ -21,6 +21,8 @@ class ThunderMetatagsTest extends GraphQLTestBase {
   use TestFileCreationTrait;
 
   /**
+   * The article node.
+   *
    * @var \Drupal\node\NodeInterface
    */
   protected $node;
@@ -96,9 +98,9 @@ class ThunderMetatagsTest extends GraphQLTestBase {
       'field_seo_title' => 'SEO-title',
       'field_teaser_media' => [
         [
-          'target_id' => $mediaImage->id()
-        ]
-      ]
+          'target_id' => $mediaImage->id(),
+        ],
+      ],
     ]);
 
     $this->node->save();
@@ -118,7 +120,7 @@ class ThunderMetatagsTest extends GraphQLTestBase {
     $this->assertNotEmpty($results);
 
     $tags = [];
-    foreach($results as $result) {
+    foreach ($results as $result) {
       $attributes = Json::decode($result['attributes']);
       $key = '';
       foreach (['name', 'property', 'rel', 'http-equiv'] as $nameAttribute) {
