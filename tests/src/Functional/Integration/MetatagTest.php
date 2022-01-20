@@ -17,7 +17,7 @@ class MetatagTest extends ThunderTestBase {
   protected static $modules = ['thunder_testing_demo'];
 
   /**
-   * Tests tag default values as defined in metatag.metatag_defaults.node__article.yml.
+   * Tests default values as defined in metatag.metatag_defaults.node__article.
    */
   public function testTagDefaultValues() {
     $node = $this->loadNodeByUuid('0bd5c257-2231-450f-b4c2-ab156af7b78d');
