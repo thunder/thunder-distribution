@@ -4,7 +4,6 @@ dependencies: {  }
 id: node__article
 label: 'Content: Article'
 tags:
-  canonical_url: '[node:url]'
   content_language: '[node:langcode]'
   description: '[node:field_teaser_text]'
   image_src: '[node:field_teaser_media:entity:field_image]'
