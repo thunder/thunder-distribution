@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Drupal\Tests\node\Traits\NodeCreationTrait;
+
 /**
  * Testing of Channels and Tags.
  *
@@ -13,6 +15,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
 
   use ThunderArticleTestTrait;
   use ThunderParagraphsTestTrait;
+  use NodeCreationTrait;
 
   /**
    * Default user login role used for testing.
@@ -63,6 +66,9 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->addTextParagraph('field_paragraphs', 'Article Text 2');
     $this->setModerationState('published');
     $this->clickSave();
+
+    $node = $this->drupalGetNodeByTitle('Article 2');
+    $this->assertSame($image3->id(), $node->get('field_teaser_media')->target_id);
 
     // Check is everything created properly for Article 1.
     $this->drupalGet('article-1');
