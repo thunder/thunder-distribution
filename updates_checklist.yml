@@ -67,8 +67,14 @@ v6.3.2:
       '#description': '<p>The update will only be executed if the metatag module is enabled and the schema_article module is still disabled.</p>'
       '#description_successful': '<p>Configuration is successfully updated.</p>'
       '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+    thunder_update_8320:
+      '#title': 'Update metatag config.'
+      '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
+      '#description_successful': '<p>Configuration is successfully updated.</p>'
+      '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
     thunder_update_8321:
-        '#title': 'Use radio input for cardinality 1 in entity browsers.'
-        '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
-        '#description_successful': '<p>Configuration is successfully updated.</p>'
-        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+      '#title': 'Use radio input for cardinality 1 in entity browsers.'
+      '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
+      '#description_successful': '<p>Configuration is successfully updated.</p>'
+      '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+
