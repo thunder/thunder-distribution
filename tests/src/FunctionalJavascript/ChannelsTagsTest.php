@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-use Drupal\Tests\node\Traits\NodeCreationTrait;
-
 /**
  * Testing of Channels and Tags.
  *
