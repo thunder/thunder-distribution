@@ -259,7 +259,7 @@ function thunder_update_8319() {
 /**
  * Use radio input for cardinality 1 in entity browsers.
  */
-function thunder_update_8320() {
+function thunder_update_8321() {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
 
