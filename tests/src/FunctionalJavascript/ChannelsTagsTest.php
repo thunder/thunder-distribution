@@ -15,7 +15,6 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
 
   use ThunderArticleTestTrait;
   use ThunderParagraphsTestTrait;
-  use NodeCreationTrait;
 
   /**
    * Default user login role used for testing.
@@ -67,9 +66,6 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->setModerationState('published');
     $this->clickSave();
 
-    $node = $this->drupalGetNodeByTitle('Article 2');
-    $this->assertSame($image3->id(), $node->get('field_teaser_media')->target_id);
-
     // Check is everything created properly for Article 1.
     $this->drupalGet('article-1');
     $tagLinks = $this->xpath("//div[contains(@class, 'field--name-field-tags')]//a");
@@ -98,20 +94,12 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ChannelsTagsTest_testChannelsCreation_' . date('Ymd_His') . '.png');
 
-    $source_field = $image1->getSource()->getConfiguration()['source_field'];
-
-    /** @var \Drupal\file\FileInterface $image1_file */
-    $image1_file = $image1->get($source_field)->entity;
-    /** @var \Drupal\file\FileInterface $image2_file */
-    $image2_file = $image2->get($source_field)->entity;
-    /** @var \Drupal\file\FileInterface $image3_file */
-    $image3_file = $image3->get($source_field)->entity;
     $this->assertSession()
-      ->elementExists('xpath', '//img[contains(@src, "' . $image3_file->getFilename() . '")]');
+      ->elementExists('xpath', '//img[contains(@src, "picjumbo.com_HNCK7373.jpg")]');
     $this->assertSession()
-      ->elementExists('xpath', '//img[contains(@src, "' . $image2_file->getFilename() . '")]');
+      ->elementExists('xpath', '//img[contains(@src, "picjumbo.com_HNCK7731.jpg")]');
     $this->assertSession()
-      ->elementExists('xpath', '//img[contains(@src, "' . $image1_file->getFilename() . '")]');
+      ->elementExists('xpath', '//img[contains(@src, "thunder-city.jpg")]');
 
     $this->assertSession()->linkExists('Article 1');
     $this->assertSession()->linkExists('Article 2');
