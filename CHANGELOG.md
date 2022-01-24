@@ -6,8 +6,8 @@
 
 We added two new features and some bug fixes in this release.
 
-The schema_metatag module has finally been added to Thunder. More Importantly, we added a new feature for fast access to your
-favorite paragraph types!
+The schema_metatag module has finally been added to Thunder. More Importantly, we added a new feature for fast access
+to your favorite paragraph types!
 
 - Fix [Invalid token used in metatag config](https://www.drupal.org/node/3260090)
 - Fix [Conflict with hierarchy manager](https://www.drupal.org/node/3255519)
