@@ -99,7 +99,7 @@ class MetatagTest extends KernelTestBase {
     $tags = $metatagManager->tagsFromEntityWithDefaults($this->node);
     $elements = $metatagManager->generateRawElements($tags, $this->node);
 
-    $this->assertStringEndsWith('/node/1', $elements['canonical_url']['#attributes']['href']);
+    $this->assertStringEndsWith('/node/2', $elements['canonical_url']['#attributes']['href']);
     $this->assertEquals('en', $elements['content_language']['#attributes']['content']);
     $this->assertEquals($description, $elements['description']['#attributes']['content']);
     $this->assertStringEndsWith('/files/image-test.png', $elements['image_src']['#attributes']['href']);
