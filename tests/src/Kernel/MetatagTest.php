@@ -107,7 +107,6 @@ class MetatagTest extends KernelTestBase {
     $this->assertEquals('no-referrer', $elements['referrer']['#attributes']['content']);
     $this->assertEquals('index, follow', $elements['robots']['#attributes']['content']);
     $this->assertEquals($title, $elements['title']['#attributes']['content']);
-
     $this->assertEquals($description, $elements['og_description']['#attributes']['content']);
     $this->assertStringContainsString('/files/styles/facebook/public/image-test.png', $elements['og_image_0']['#attributes']['content']);
     $this->assertEquals('630', $elements['og_image_height']['#attributes']['content']);
