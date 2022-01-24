@@ -23,7 +23,7 @@ trait ThunderKernelTestTrait {
    * @param string $fileType
    *   The type of file to create.
    *
-   * @return \Drupal\file\Entity\FileInterface
+   * @return \Drupal\file\FileInterface
    *   The File entity.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
