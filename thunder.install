@@ -269,3 +269,17 @@ function thunder_update_8320() {
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
 }
+
+/**
+ * Use radio input for cardinality 1 in entity browsers.
+ */
+function thunder_update_8321() {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_update_8321');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
