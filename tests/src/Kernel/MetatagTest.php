@@ -70,8 +70,7 @@ class MetatagTest extends KernelTestBase {
     $this->container->get('config.installer')->installDefaultConfig('module', 'focal_point');
     $this->installThunderOptionalConfig();
 
-    $image = $this->createSampleFile('image');
-    $mediaImage = $this->createSampleImageMedia($image);
+    $mediaImage = $this->createSampleImageMedia();
 
     // Create sample node with the fields we need for metatag tokens.
     $this->node = Node::create([

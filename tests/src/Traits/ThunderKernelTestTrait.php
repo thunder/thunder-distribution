@@ -44,15 +44,14 @@ trait ThunderKernelTestTrait {
   /**
    * Create image media entity.
    *
-   * @param \Drupal\file\FileInterface $image
-   *   The file entity.
-   *
    * @return \Drupal\media\MediaInterface
    *   The media entity.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  protected function createSampleImageMedia(FileInterface $image): MediaInterface {
+  protected function createSampleImageMedia(): MediaInterface {
+    $image = $this->createSampleFile('image');
+
     /** @var \Drupal\media\MediaInterface $mediaImage */
     $mediaImage = Media::create([
       'bundle' => 'image',
