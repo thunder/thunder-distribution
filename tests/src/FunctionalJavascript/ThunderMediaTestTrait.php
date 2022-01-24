@@ -35,7 +35,7 @@ trait ThunderMediaTestTrait {
     }
     else {
       $media = current($medias);
-      $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select' and contains(@value, '$media') ]]");
+      $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select' and @value='$media']]");
     }
     $this->assertWaitOnAjaxRequest();
 
