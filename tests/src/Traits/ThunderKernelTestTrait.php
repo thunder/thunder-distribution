@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder\Traits;
 
+use Drupal\Core\Config\FileStorage;
+use Drupal\Core\Config\InstallStorage;
 use Drupal\file\Entity\File;
 use Drupal\file\FileInterface;
 use Drupal\media\Entity\Media;
@@ -21,7 +23,7 @@ trait ThunderKernelTestTrait {
    * @param string $fileType
    *   The type of file to create.
    *
-   * @return FileInterface
+   * @return \Drupal\file\Entity\FileInterface
    *   The File entity.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
@@ -39,15 +41,14 @@ trait ThunderKernelTestTrait {
     return $fileEntity;
   }
 
-
   /**
    * Create image media entity.
    *
    * @param \Drupal\file\FileInterface $image
-   *  The file entity.
+   *   The file entity.
    *
    * @return \Drupal\media\MediaInterface
-   *  The media entity.
+   *   The media entity.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
@@ -67,5 +68,17 @@ trait ThunderKernelTestTrait {
     return $mediaImage;
   }
 
+  /**
+   * Install thunder optional config.
+   */
+  protected function installThunderOptionalConfig(): void {
+    /** @var \Drupal\Core\Config\ConfigInstallerInterface $configInstaller */
+    $configInstaller = $this->container->get('config.installer');
+    $extension_path = $this->container->get('extension.list.profile')
+      ->getPath('thunder');
+    $optional_install_path = $extension_path . '/' . InstallStorage::CONFIG_OPTIONAL_DIRECTORY;
+    $storage = new FileStorage($optional_install_path);
+    $configInstaller->installOptionalConfig($storage);
+  }
 
 }

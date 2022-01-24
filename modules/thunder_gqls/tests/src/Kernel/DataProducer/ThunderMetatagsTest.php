@@ -2,11 +2,6 @@
 
 namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
-use Drupal\Component\Serialization\Json;
-use Drupal\Core\Config\FileStorage;
-use Drupal\Core\Config\InstallStorage;
-use Drupal\file\Entity\File;
-use Drupal\media\Entity\Media;
 use Drupal\node\Entity\Node;
 use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 use Drupal\Tests\TestFileCreationTrait;
@@ -47,7 +42,7 @@ class ThunderMetatagsTest extends GraphQLTestBase {
     parent::setUp();
     $this->installConfig(['metatag']);
 
-    // Set site name
+    // Set site name.
     $this->config('system.site')->set('name', 'Test Site')->save();
 
     $this->node = Node::create([

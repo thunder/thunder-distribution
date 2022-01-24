@@ -2,10 +2,7 @@
 
 namespace Drupal\Tests\thunder\Kernel\Integration;
 
-use Drupal\Core\Config\FileStorage;
-use Drupal\Core\Config\InstallStorage;
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\media\Entity\Media;
 use Drupal\node\Entity\Node;
 use Drupal\Tests\thunder\Traits\ThunderKernelTestTrait;
 
@@ -66,20 +63,12 @@ class MetatagTest extends KernelTestBase {
 
     $this->installConfig(['metatag']);
 
-    /** @var \Drupal\Core\Config\ConfigInstallerInterface $configInstaller */
-    $configInstaller = $this->container->get('config.installer');
-
-    // Set site name
+    // Set site name.
     $this->config('system.site')->set('name', 'Test Site')->save();
 
     // Install focal point config for focal_point crop type.
-    $configInstaller->installDefaultConfig('module', 'focal_point');
-
-    // Install Thunder optional config.
-    $extension_path = $this->container->get('extension.list.profile')->getPath('thunder');
-    $optional_install_path = $extension_path . '/' . InstallStorage::CONFIG_OPTIONAL_DIRECTORY;
-    $storage = new FileStorage($optional_install_path);
-    $configInstaller->installOptionalConfig($storage);
+    $this->container->get('config.installer')->installDefaultConfig('module', 'focal_point');
+    $this->installThunderOptionalConfig();
 
     $image = $this->createSampleFile('image');
     $mediaImage = $this->createSampleImageMedia($image);
@@ -118,6 +107,7 @@ class MetatagTest extends KernelTestBase {
     $this->assertEquals('no-referrer', $elements['referrer']['#attributes']['content']);
     $this->assertEquals('index, follow', $elements['robots']['#attributes']['content']);
     $this->assertEquals($title, $elements['title']['#attributes']['content']);
+
     $this->assertEquals($description, $elements['og_description']['#attributes']['content']);
     $this->assertStringContainsString('/files/styles/facebook/public/image-test.png', $elements['og_image_0']['#attributes']['content']);
     $this->assertEquals('630', $elements['og_image_height']['#attributes']['content']);
@@ -127,6 +117,7 @@ class MetatagTest extends KernelTestBase {
     $this->assertEquals($title, $elements['og_title']['#attributes']['content']);
     $this->assertNotEmpty($elements['og_updated_time']['#attributes']['content']);
     $this->assertStringEndsWith('/node/1', $elements['og_url']['#attributes']['content']);
+
     $this->assertEquals($description, $elements['twitter_cards_description']['#attributes']['content']);
     $this->assertStringContainsString('/files/styles/twitter/public/image-test.png', $elements['twitter_cards_image']['#attributes']['content']);
     $this->assertEquals('512', $elements['twitter_cards_image_height']['#attributes']['content']);
