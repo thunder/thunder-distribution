@@ -200,12 +200,16 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
   }
 
   /**
-   * Add fields common to all media types.
+   * Add fields common to all paragraph types.
    *
    * @param string $type
    *   The type name.
    */
   protected function resolveParagraphInterfaceFields(string $type) {
+    $this->addFieldResolverIfNotExists($type, 'options',
+      $this->builder->produce('paragraph_options')
+        ->map('paragraph', $this->builder->fromParent())
+    );
     $this->addFieldResolverIfNotExists($type, 'summary',
       $this->builder->produce('paragraph_summary')
         ->map('paragraph', $this->builder->fromParent())

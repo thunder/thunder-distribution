@@ -1,38 +1,45 @@
 interface Paragraph {
+  options: String
   summary: [String]
 }
 
 type ParagraphImage implements Paragraph {
+  options: String
   summary: [String]
 
   image: MediaImage
 }
 
 type ParagraphTwitter implements Paragraph {
+  options: String
   summary: [String]
 
   url: String
 }
 
 type ParagraphInstagram implements Paragraph {
+  options: String
   summary: [String]
 
   url: String
 }
 
 type ParagraphPinterest implements Paragraph {
+  options: String
   summary: [String]
 
   url: String
 }
 
 type ParagraphText implements Paragraph {
+  options: String
   summary: [String]
 
   text: String
 }
 
 type ParagraphGallery implements Paragraph {
+  options: String
   summary: [String]
 
   name: String!
@@ -40,18 +47,21 @@ type ParagraphGallery implements Paragraph {
 }
 
 type ParagraphLink implements Paragraph {
+  options: String
   summary: [String]
 
   links: [Link]
 }
 
 type ParagraphVideo implements Paragraph {
+  options: String
   summary: [String]
 
   video: MediaVideo
 }
 
 type ParagraphQuote implements Paragraph {
+  options: String
   summary: [String]
 
   text: String
