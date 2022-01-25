@@ -41,6 +41,8 @@ class ParagraphBehavior extends DataProducerPluginBase {
    *   Key for requested value of this paragraph behavior plugin.
    *
    * @return mixed
+   *   Value of this paragraph behavior plugin key.
+   *
    * @throws \Exception
    */
   public function resolve(ParagraphInterface $paragraph, string $behavior_plugin_id, string $behavior_plugin_key) {
