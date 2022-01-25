@@ -246,13 +246,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
   ];
 
   /**
-   * Configuration key path separator.
-   *
-   * @var string
-   */
-  protected static $configPathSeparator = '::';
-
-  /**
    * Ignore configuration list values. Path to key is separated by '::'.
    *
    * @var array
@@ -353,7 +346,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     if (array_key_exists($configurationName, static::$ignoreConfigListValues)) {
       foreach (static::$ignoreConfigListValues[$configurationName] as $keyPath => $ignoreValues) {
         $ignoreListRules[] = [
-          'key_path' => explode(static::$configPathSeparator, $keyPath),
+          'key_path' => explode('::', $keyPath),
           'ignore_values' => $ignoreValues,
         ];
       }
