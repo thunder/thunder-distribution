@@ -86,7 +86,7 @@ class ThunderSchema extends ComposableSchema {
   protected function getExtensions() {
     return array_map(function ($id) {
       return $this->extensionManager->createInstance($id);
-    }, array_unique(array_filter($this->getConfiguration()['extensions']) + static::REQUIRED_EXTENSIONS));
+    }, array_unique(array_merge(array_filter($this->getConfiguration()['extensions']), static::REQUIRED_EXTENSIONS)));
   }
 
   /**
