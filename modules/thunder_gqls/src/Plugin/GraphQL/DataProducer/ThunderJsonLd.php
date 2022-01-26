@@ -49,7 +49,7 @@ class ThunderJsonLd extends ThunderEntitySubRequestBase {
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition): static {
+  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
     $producer = parent::create($container, $configuration, $pluginId, $pluginDefinition);
     $producer->setMetatagManager($container->get('metatag.manager', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     $producer->setModuleHandler($container->get('module_handler'));

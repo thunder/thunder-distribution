@@ -309,10 +309,10 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @param string $xpathQuery
    *   XPath to fetch elements from Site Map.
    *
-   * @return \DOMNodeList|false
+   * @return \DOMNodeList
    *   Returns list of elements matching provided XPath.
    */
-  public function getSiteMapDomElements(string $content, string $xpathQuery): \DOMNodeList|bool {
+  public function getSiteMapDomElements(string $content, string $xpathQuery): \DOMNodeList {
     $domDoc = new \DOMDocument();
     $domDoc->loadXML($content);
 
