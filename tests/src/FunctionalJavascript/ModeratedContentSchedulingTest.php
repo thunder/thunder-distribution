@@ -16,7 +16,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
   /**
    * Tests moderated nodes publish scheduling.
    */
-  public function testPublishStateSchedule() {
+  public function testPublishStateSchedule(): void {
     $publish_timestamp = strtotime('yesterday');
     /** @var \Drupal\node\NodeStorageInterface $node_storage */
     $node_storage = \Drupal::entityTypeManager()->getStorage('node');
@@ -78,7 +78,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
   /**
    * Tests moderated nodes unpublish scheduling.
    */
-  public function testUnpublishStateSchedule() {
+  public function testUnpublishStateSchedule(): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
       'field_channel' => $term->id(),
@@ -110,7 +110,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
   /**
    * Tests publish scheduling for a draft of a published node.
    */
-  public function testPublishOfDraft() {
+  public function testPublishOfDraft(): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
       'field_channel' => $term->id(),

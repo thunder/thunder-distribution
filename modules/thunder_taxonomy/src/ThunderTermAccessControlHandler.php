@@ -6,6 +6,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\taxonomy\TermAccessControlHandler;
+use Drupal\Core\Access\AccessResultInterface;
 
 /**
  * Defines the access control handler for the taxonomy term entity type.
@@ -17,7 +18,7 @@ class ThunderTermAccessControlHandler extends TermAccessControlHandler {
   /**
    * {@inheritdoc}
    */
-  protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
+  protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account): AccessResultInterface {
 
     switch ($operation) {
       case 'view':

@@ -18,7 +18,7 @@ trait ThunderArticleTestTrait {
    * @param array $fieldValues
    *   Field values for new article.
    */
-  public function articleFillNew(array $fieldValues) {
+  public function articleFillNew(array $fieldValues): void {
     $this->drupalGet('node/add/article');
     $this->assertWaitOnAjaxRequest();
 
@@ -41,7 +41,7 @@ trait ThunderArticleTestTrait {
    * @param int $maxLevel
    *   Max depth of nested collapsed tabs.
    */
-  public function expandAllTabs($maxLevel = 3) {
+  public function expandAllTabs(int $maxLevel = 3): void {
     $jsScript = "(() => { const elements = document.querySelectorAll('details.js-form-wrapper.form-wrapper:not([open]) > summary'); elements.forEach((elem) => { elem.click(); }); elements.length; })()";
 
     $numOfOpen = $this->getSession()->evaluateScript($jsScript);
@@ -59,7 +59,7 @@ trait ThunderArticleTestTrait {
    * @param string $state
    *   State id.
    */
-  protected function setModerationState($state) {
+  protected function setModerationState(string $state): void {
     $this->getSession()
       ->getDriver()
       ->selectOption('//*[@id="edit-moderation-state-0"]', $state);

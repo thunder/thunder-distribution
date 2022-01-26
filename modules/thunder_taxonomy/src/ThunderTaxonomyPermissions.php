@@ -36,7 +36,7 @@ class ThunderTaxonomyPermissions implements ContainerInjectionInterface {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): self {
     return new static($container->get('entity_type.manager'));
   }
 
@@ -46,7 +46,7 @@ class ThunderTaxonomyPermissions implements ContainerInjectionInterface {
    * @return array
    *   Permissions array.
    */
-  public function permissions() {
+  public function permissions(): array {
     $permissions = [];
     foreach ($this->entityTypeManager->getStorage('taxonomy_vocabulary')->loadMultiple() as $vocabulary) {
       $permissions += [

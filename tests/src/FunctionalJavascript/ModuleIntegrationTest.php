@@ -43,7 +43,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
    * @param array $newHighlighted
    *   New highlighted texts.
    */
-  protected function validateDiff($fieldName, array $previous = [], array $previousHighlighted = [], array $new = [], array $newHighlighted = []) {
+  protected function validateDiff(string $fieldName, array $previous = [], array $previousHighlighted = [], array $new = [], array $newHighlighted = []): void {
     // Check for old Text.
     $this->checkFullText($fieldName, static::$previousTextColumn, $previous);
 
@@ -67,7 +67,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
    * @param array $textRows
    *   Associative array with text per row.
    */
-  protected function checkFullText($fieldName, $columnIndex, array $textRows = []) {
+  protected function checkFullText(string $fieldName, int $columnIndex, array $textRows = []): void {
     $page = $this->getSession()->getPage();
 
     foreach ($textRows as $indexRow => $expectedText) {
@@ -88,7 +88,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
    * @param array $highlightedTextRows
    *   New highlighted texts per row.
    */
-  protected function checkHighlightedText($fieldName, $columnIndex, array $highlightedTextRows) {
+  protected function checkHighlightedText(string $fieldName, int $columnIndex, array $highlightedTextRows): void {
     $page = $this->getSession()->getPage();
 
     foreach ($highlightedTextRows as $indexRow => $expectedTexts) {
@@ -104,7 +104,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
   /**
    * Testing integration of "diff" module.
    */
-  public function testDiffModule() {
+  public function testDiffModule(): void {
 
     $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
     $this->drupalGet($node->toUrl('edit-form'));
@@ -175,7 +175,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
   /**
    * Testing integration of "metatag_facebook" module.
    */
-  public function testFacebookMetaTags() {
+  public function testFacebookMetaTags(): void {
 
     $facebookMetaTags = $this->generateMetaTagConfiguration([
       [
@@ -203,7 +203,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
   /**
    * Testing the content lock integration.
    */
-  public function testContentLock() {
+  public function testContentLock(): void {
 
     $node = $this->loadNodeByUuid('0bd5c257-2231-450f-b4c2-ab156af7b78d');
     $this->drupalGet($node->toUrl('edit-form'));

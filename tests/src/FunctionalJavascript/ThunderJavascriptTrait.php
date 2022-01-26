@@ -15,8 +15,17 @@ trait ThunderJavascriptTrait {
 
   /**
    * Overrides this for testing purposes.
+   *
+   * @param int $timeout
+   *   (Optional) Timeout in milliseconds, defaults to 10000.
+   * @param string $message
+   *   (optional) A message for exception.
+   *
+   * @throws \RuntimeException
+   *   When the request is not completed. If left blank, a default message will
+   *   be displayed.
    */
-  public function assertWaitOnAjaxRequest($timeout = 10000, $message = 'Unable to complete AJAX request.') {
+  public function assertWaitOnAjaxRequest(int $timeout = 10000, string $message = 'Unable to complete AJAX request.'): void {
     $attach_error_handler = <<<JS
       (function() {
         window.addEventListener('error', function (event) {
@@ -81,7 +90,7 @@ JS;
    * @param string $cssSelector
    *   CSS Selector for element that should be centralized.
    */
-  public function scrollElementInView($cssSelector) {
+  public function scrollElementInView(string $cssSelector): void {
     $this->getSession()
       ->executeScript("document.querySelector('{$cssSelector}').scrollIntoView({block: 'center'})");
   }
@@ -94,7 +103,7 @@ JS;
    * @param bool $waitAfterAction
    *   Flag to wait for AJAX request to finish after click.
    */
-  public function clickDrupalSelector($drupalSelector, $waitAfterAction = TRUE) {
+  public function clickDrupalSelector(string $drupalSelector, bool $waitAfterAction = TRUE): void {
     $this->clickCssSelector('[data-drupal-selector="' . $drupalSelector . '"]', $waitAfterAction);
   }
 
@@ -106,7 +115,7 @@ JS;
    * @param bool $waitAfterAction
    *   Flag to wait for AJAX request to finish after click.
    */
-  public function clickCssSelector($cssSelector, $waitAfterAction = TRUE) {
+  public function clickCssSelector(string $cssSelector, bool $waitAfterAction = TRUE): void {
     $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', $cssSelector));
     $this->scrollElementInView($cssSelector);
     $this->click($cssSelector);
@@ -127,7 +136,7 @@ JS;
    * @param bool $waitAfterAction
    *   Flag to wait for AJAX request to finish after click.
    */
-  public function clickAjaxButtonCssSelector($cssSelector, $waitAfterAction = TRUE) {
+  public function clickAjaxButtonCssSelector(string $cssSelector, bool $waitAfterAction = TRUE): void {
     $this->scrollElementInView($cssSelector);
     $this->getSession()->executeScript("document.querySelector('{$cssSelector}').dispatchEvent(new MouseEvent('mousedown'));");
 
@@ -145,7 +154,7 @@ JS;
    * @param string $expectedTitle
    *   Expected title.
    */
-  protected function assertPageTitle($expectedTitle) {
+  protected function assertPageTitle(string $expectedTitle): void {
     /** @var \Drupal\FunctionalJavascriptTests\DrupalSelenium2Driver $driver */
     $driver = $this->getSession()->getDriver();
     $actualTitle = $driver->getWebDriverSession()->title();
@@ -155,7 +164,7 @@ JS;
   /**
    * Click article save.
    */
-  protected function clickSave() {
+  protected function clickSave(): void {
     $driver = $this->getSession()->getDriver();
 
     $driver->click('//div[@data-drupal-selector="edit-actions"]/input[@id="edit-submit"]');

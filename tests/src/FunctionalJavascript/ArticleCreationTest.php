@@ -26,7 +26,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   /**
    * Test Creation of Article.
    */
-  public function testCreateArticle() {
+  public function testCreateArticle(): void {
     // Create a video media item.
     $this->drupalGet("media/add/video");
     $this->assertSession()->fieldExists('Video URL')->setValue('https://www.youtube.com/watch?v=PWjcqE3QKBg');
@@ -132,7 +132,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   /**
    * Test Creation of Article without content moderation.
    */
-  public function testCreateArticleWithNoModeration() {
+  public function testCreateArticleWithNoModeration(): void {
     // Delete all the articles so we can disable content moderation.
     foreach (\Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'article']) as $node) {
       $node->delete();
@@ -154,7 +154,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   /**
    * Tests draft creation and that reverting to the default revision works.
    */
-  public function testModerationWorkflow() {
+  public function testModerationWorkflow(): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
       'field_channel' => $term->id(),

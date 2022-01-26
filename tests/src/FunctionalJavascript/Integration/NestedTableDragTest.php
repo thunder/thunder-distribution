@@ -33,7 +33,7 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
   /**
    * Test tabledrag sorting in nested table.
    */
-  public function testNestedTableSorting() {
+  public function testNestedTableSorting(): void {
     $this->articleFillNew([]);
 
     // Add text paragraph with two elements.
@@ -125,7 +125,7 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
    * @param int $position
    *   Position.
    */
-  protected function addLinkField($paragraphName, $paragraphIndex, $fieldName, $fieldIndex, $urlText, $url, $position = NULL) {
+  protected function addLinkField(string $paragraphName, int $paragraphIndex, string $fieldName, int $fieldIndex, string $urlText, string $url, $position = NULL): void {
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 

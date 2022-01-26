@@ -65,7 +65,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->logWithRole(static::$defaultUserRole);
@@ -83,7 +83,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function initFrontPage() {
+  protected function initFrontPage(): void {
     parent::initFrontPage();
     // Set a standard window size so that all javascript tests start with the
     // same viewport.

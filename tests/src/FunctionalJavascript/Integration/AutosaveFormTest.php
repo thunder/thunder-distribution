@@ -21,7 +21,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Adjust the autosave form submission interval.
@@ -33,7 +33,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
   /**
    * Tests the autosave functionality in an existing article.
    */
-  public function testAutosaveInExistingEntity() {
+  public function testAutosaveInExistingEntity(): void {
     $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
     $this->drupalGet($node->toUrl('edit-form'));
     $page = $this->getSession()->getPage();
@@ -73,7 +73,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
   /**
    * Press the restore button.
    */
-  protected function pressRestoreButton() {
+  protected function pressRestoreButton(): void {
     $page = $this->getSession()->getPage();
 
     // Press restore button.
@@ -85,7 +85,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
   /**
    * Press the reject button.
    */
-  protected function pressRejectButton() {
+  protected function pressRejectButton(): void {
     $page = $this->getSession()->getPage();
 
     // Press restore button.
@@ -97,7 +97,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
   /**
    * Make some changes to the article.
    */
-  protected function makeFormChanges() {
+  protected function makeFormChanges(): void {
     $this->expandAllTabs();
     $this->addTextParagraph('field_paragraphs', 'Awesome quote', 'quote');
 
