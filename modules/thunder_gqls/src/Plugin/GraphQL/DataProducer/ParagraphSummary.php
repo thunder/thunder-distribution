@@ -27,7 +27,7 @@ class ParagraphSummary extends DataProducerPluginBase {
   /**
    * Resolves the paragraphs summary.
    *
-   * @param ParagraphInterface $paragraph
+   * @param \Drupal\paragraphs\ParagraphInterface $paragraph
    *   The entity.
    *
    * @return mixed
