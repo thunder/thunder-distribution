@@ -22,12 +22,12 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
   /**
    * {@inheritdoc}
    */
-  public function registerResolvers(ResolverRegistryInterface $registry) {
+  public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 
     $this->registry->addTypeResolver('Paragraph',
       \Closure::fromCallable([
-        __CLASS__,
+        self::class,
         'resolveParagraphTypes',
       ])
     );
@@ -38,7 +38,7 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
   /**
    * Add paragraph field resolvers.
    */
-  protected function resolveFields() {
+  protected function resolveFields(): void {
 
     // Text.
     $this->resolveParagraphInterfaceFields('ParagraphText');

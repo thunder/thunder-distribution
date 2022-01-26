@@ -20,7 +20,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
   /**
    * Test Focal Point change.
    */
-  public function testFocalPointChange() {
+  public function testFocalPointChange(): void {
 
     $media = $this->loadMediaByUuid('f5f7fc5d-b2b8-426a-adf3-ee6aff6379da');
     $this->drupalGet($media->toUrl('edit-form'));
@@ -46,7 +46,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     ImageStyle::load('teaser')->createDerivative($path, $derivativeUri);
 
     $image1 = new \Imagick($derivativeUri);
-    $image2 = new \Imagick(realpath(dirname(__FILE__) . '/../../fixtures/reference.jpg'));
+    $image2 = new \Imagick(realpath(__DIR__ . '/../../fixtures/reference.jpg'));
 
     $result = $image1->compareImages($image2, \Imagick::METRIC_MEANSQUAREERROR);
 
@@ -59,7 +59,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
   /**
    * Test Image modifications (edit fields).
    */
-  public function testImageEdit() {
+  public function testImageEdit(): void {
     $media = $this->loadMediaByUuid('f5f7fc5d-b2b8-426a-adf3-ee6aff6379da');
     $this->drupalGet($media->toUrl('edit-form'));
 
@@ -112,7 +112,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
    *   - reorder inside entity browser
    *   - remove inside entity browser.
    */
-  public function testRemoveAdd() {
+  public function testRemoveAdd(): void {
 
     // Test remove inside inline entity form.
     $node = $this->loadNodeByUuid('0bd5c257-2231-450f-b4c2-ab156af7b78d');

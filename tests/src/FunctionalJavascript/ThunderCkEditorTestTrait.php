@@ -18,7 +18,7 @@ trait ThunderCkEditorTestTrait {
    * @return string
    *   CKEditor ID.
    */
-  protected function getCkEditorId($ckEditorCssSelector) {
+  protected function getCkEditorId(string $ckEditorCssSelector) {
     // Since CKEditor requires some time to initialize, we are going to wait for
     // CKEditor instance to be ready before we continue and return ID.
     $this->getSession()->wait(10000, "(waitForCk = CKEDITOR.instances[jQuery(\"{$ckEditorCssSelector}\").attr('id')]) && waitForCk.instanceReady");
@@ -39,7 +39,7 @@ trait ThunderCkEditorTestTrait {
    * @param string $text
    *   Text that will be filled into CKEditor.
    */
-  public function fillCkEditor($ckEditorCssSelector, $text) {
+  public function fillCkEditor(string $ckEditorCssSelector, string $text): void {
     $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
 
     $this->getSession()
@@ -55,7 +55,7 @@ trait ThunderCkEditorTestTrait {
    * @param int $childIndex
    *   The child index under the node.
    */
-  public function selectCkEditorElement($ckEditorCssSelector, $childIndex) {
+  public function selectCkEditorElement(string $ckEditorCssSelector, int $childIndex): void {
     $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
 
     $this->getSession()
@@ -71,7 +71,7 @@ trait ThunderCkEditorTestTrait {
    * @param string $expectedContent
    *   The expected content.
    */
-  public function assertCkEditorContent($ckEditorCssSelector, $expectedContent) {
+  public function assertCkEditorContent(string $ckEditorCssSelector, string $expectedContent): void {
     $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
     $ckEditorContent = $this->getSession()
       ->getDriver()

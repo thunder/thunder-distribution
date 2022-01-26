@@ -24,7 +24,7 @@ class ConfigSelectorTest extends ThunderJavascriptTestBase {
   /**
    * Tests content view with and without search_api.
    */
-  public function testContentViewSearchApi() {
+  public function testContentViewSearchApi(): void {
 
     $assert_session = $this->assertSession();
 
