@@ -19,7 +19,7 @@ class ContentListTest extends ThunderTestBase {
   /**
    * Tests scheduler tab is in local tasks.
    */
-  public function testSchedulerLocalTask() {
+  public function testSchedulerLocalTask(): void {
 
     $this->logWithRole('administrator');
     $this->drupalGet('admin/content');

@@ -82,7 +82,7 @@ class ModerationStateWidget extends CoreModerationStateWidget {
   /**
    * {@inheritdoc}
    */
-  public static function validateElement(array $element, FormStateInterface $form_state) {
+  public static function validateElement(array $element, FormStateInterface $form_state): void {
     $form_state->setValueForElement($element, [$element['#key_column'] => $element['#value']]);
   }
 

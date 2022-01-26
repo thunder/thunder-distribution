@@ -19,7 +19,7 @@ trait ThunderEntityBrowserTestTrait {
    * @param string $entityBrowser
    *   Entity browser name.
    */
-  public function openEntityBrowser($drupalSelector, $entityBrowser) {
+  public function openEntityBrowser(string $drupalSelector, string $entityBrowser): void {
     $this->clickDrupalSelector($drupalSelector . '-entity-browser-entity-browser-open-modal');
     $this->assertWaitOnAjaxRequest();
 
@@ -38,7 +38,7 @@ trait ThunderEntityBrowserTestTrait {
    * @param string $entityBrowser
    *   Entity browser name.
    */
-  public function submitEntityBrowser($entityBrowser) {
+  public function submitEntityBrowser(string $entityBrowser): void {
     $page = $this->getSession()->getPage();
     if ($entityBrowser == 'multiple_image_browser') {
       $this->getSession()->wait(200);
@@ -66,7 +66,7 @@ trait ThunderEntityBrowserTestTrait {
    *
    * @throws \Exception
    */
-  public function uploadFile($filePath) {
+  public function uploadFile(string $filePath): void {
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 

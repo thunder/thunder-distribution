@@ -71,6 +71,8 @@ class FilterExtension extends AbstractExtension {
    *
    * @param mixed $element
    *   The render element.
+   *
+   * @phpstan-ignore-next-line
    */
   private static function render(&$element) {
     if (!$element && $element !== 0) {

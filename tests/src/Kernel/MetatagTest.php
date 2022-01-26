@@ -89,7 +89,7 @@ class MetatagTest extends KernelTestBase {
   /**
    * Tests default values as defined in metatag.metatag_defaults.node__article.
    */
-  public function testTagDefaultValues() {
+  public function testTagDefaultValues(): void {
     $title = 'SEO-title';
     $description = 'The description';
 

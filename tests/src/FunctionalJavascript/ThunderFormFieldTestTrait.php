@@ -21,7 +21,7 @@ trait ThunderFormFieldTestTrait {
    * @param string $value
    *   Comma separated values for checkboxes.
    */
-  protected function setCheckbox($fieldName, $value) {
+  protected function setCheckbox(string $fieldName, string $value): void {
     // UnCheck all checkboxes and check defined.
     $this->getSession()
       ->executeScript("document.querySelectorAll('input[name*=\"{$fieldName}\"]').forEach((elem) => { elem.checked = false; });");
@@ -43,7 +43,7 @@ trait ThunderFormFieldTestTrait {
    * @param string|array $value
    *   Value for field.
    */
-  public function setFieldValue($fieldName, $value) {
+  public function setFieldValue(string $fieldName, $value): void {
     $page = $this->getSession()->getPage();
     // If field is checkbox list, then use custom functionality to set values.
     // @todo needs documentation.
@@ -103,7 +103,7 @@ trait ThunderFormFieldTestTrait {
    * @param array $fieldValues
    *   Field values as associative array with field names as keys.
    */
-  public function setFieldValues(array $fieldValues) {
+  public function setFieldValues(array $fieldValues): void {
     foreach ($fieldValues as $fieldName => $value) {
       $this->setFieldValue($fieldName, $value);
     }
@@ -117,7 +117,7 @@ trait ThunderFormFieldTestTrait {
    * @param string $rawValue
    *   Raw value for field.
    */
-  public function setRawFieldValue($fieldName, $rawValue) {
+  public function setRawFieldValue(string $fieldName, string $rawValue): void {
     // Set date over jQuery, because browser drivers handle input value
     // differently. fe. (Firefox will set it as "value" for field, but Chrome
     // will use it as text for that input field, and in that case final value

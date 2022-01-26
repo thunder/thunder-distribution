@@ -18,7 +18,7 @@ class ThunderTestSuite extends TestSuite {
    * @return static
    *   The test suite.
    */
-  public static function suite() {
+  public static function suite(): self {
     $root = dirname(__DIR__, 3);
 
     $suite = new static('thunder');

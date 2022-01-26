@@ -60,7 +60,7 @@ class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPlu
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
+  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition): self {
     return new static(
       $configuration,
       $pluginId,
@@ -123,7 +123,7 @@ class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPlu
       $context = new RenderContext();
       $imageFactory = $this->imageFactory;
 
-      $data = $this->renderer->executeInRenderContext($context, function () use ($entity, $imageFactory, $field) {
+      $data = $this->renderer->executeInRenderContext($context, function () use ($entity, $imageFactory, $field): array {
         $uri = $entity->getFileUri();
         $image = $imageFactory->get($uri);
         $current_field = reset($field);

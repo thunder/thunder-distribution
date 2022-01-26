@@ -22,7 +22,7 @@ class FilenameTransliterationTest extends ThunderTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
 
     parent::setUp();
 
@@ -34,7 +34,7 @@ class FilenameTransliterationTest extends ThunderTestBase {
   /**
    * Test for transliteration of file name.
    */
-  public function testFileTransliteration() {
+  public function testFileTransliteration(): void {
 
     $account = $this->drupalCreateUser(['access site reports']);
     $this->drupalLogin($account);

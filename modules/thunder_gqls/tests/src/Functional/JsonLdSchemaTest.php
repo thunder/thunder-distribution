@@ -14,7 +14,7 @@ class JsonLdSchemaTest extends ThunderGqlsTestBase {
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public function testSchema() {
+  public function testSchema(): void {
     $tags = $this->config('metatag.metatag_defaults.node__article')->get('tags');
     unset($tags['schema_article_date_modified'], $tags['schema_article_image'], $tags['schema_article_publisher']);
     $this->config('metatag.metatag_defaults.node__article')->set('tags', $tags)

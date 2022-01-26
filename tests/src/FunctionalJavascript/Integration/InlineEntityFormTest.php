@@ -25,7 +25,7 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
    *
    * Demo Article (node Id: 7) is used for testing.
    */
-  public function testGalleryCollapse() {
+  public function testGalleryCollapse(): void {
 
     // Test saving inline entity form when collapsing paragraph form.
     $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');

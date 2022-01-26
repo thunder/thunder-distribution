@@ -26,7 +26,7 @@ class ParagraphsFeaturesTest extends ThunderJavascriptTestBase {
   /**
    * Testing of delete confirmation for paragraphs.
    */
-  public function testDeleteConfirmation() {
+  public function testDeleteConfirmation(): void {
     $page = $this->getSession()->getPage();
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([

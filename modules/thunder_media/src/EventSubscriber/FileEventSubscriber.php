@@ -45,7 +45,7 @@ class FileEventSubscriber implements EventSubscriberInterface {
    * @param \Drupal\Core\File\Event\FileUploadSanitizeNameEvent $event
    *   The file upload event.
    */
-  public function sanitizeFilename(FileUploadSanitizeNameEvent $event) {
+  public function sanitizeFilename(FileUploadSanitizeNameEvent $event): void {
     if ($this->config->get('enable_filename_transliteration')) {
       $pathinfo = pathinfo($event->getFilename());
 

@@ -14,7 +14,7 @@ class ResponsivePreviewTest extends ThunderJavascriptTestBase {
   /**
    * Testing integration of "responsive_preview" module.
    */
-  public function testDevicePreview() {
+  public function testDevicePreview(): void {
     /** @var \Drupal\FunctionalJavascriptTests\WebDriverWebAssert $assert_session */
     $assert_session = $this->assertSession();
 
@@ -74,7 +74,7 @@ class ResponsivePreviewTest extends ThunderJavascriptTestBase {
   /**
    * Change device rotation for device preview.
    */
-  protected function changeDeviceRotation() {
+  protected function changeDeviceRotation(): void {
     $this->getSession()
       ->getPage()
       ->find('xpath', '//*[@id="responsive-preview-orientation"]')
@@ -85,7 +85,7 @@ class ResponsivePreviewTest extends ThunderJavascriptTestBase {
   /**
    * Wait for iframe content loaded.
    */
-  protected function waitForIframeContent() {
+  protected function waitForIframeContent(): void {
     $this->getSession()->evaluateScript("document.getElementById('responsive-preview-frame').setAttribute('name', 'responsive-preview-frame-testing')");
     $this->getSession()->switchToIFrame('responsive-preview-frame-testing');
     $this->assertSession()->waitForElement('css', 'h1.page-title');
@@ -100,7 +100,7 @@ class ResponsivePreviewTest extends ThunderJavascriptTestBase {
    * @param string $xpath_device_button
    *   The xpath of the device in drop-down list.
    */
-  protected function selectDevice(string $xpath_device_button) {
+  protected function selectDevice(string $xpath_device_button): void {
     $page = $this->getSession()->getPage();
 
     $page->find('xpath', '//*[@id="responsive-preview-toolbar-tab"]/button')

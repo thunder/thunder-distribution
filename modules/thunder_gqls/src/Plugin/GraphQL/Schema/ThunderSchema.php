@@ -24,7 +24,7 @@ class ThunderSchema extends ComposableSchema {
 
   use ResolverHelperTrait;
 
-  const REQUIRED_EXTENSIONS = [
+  public const REQUIRED_EXTENSIONS = [
     'thunder_pages',
     'thunder_media',
     'thunder_paragraphs',
@@ -52,7 +52,7 @@ class ThunderSchema extends ComposableSchema {
    * @param \Drupal\graphql\Plugin\DataProducerPluginManager $pluginManager
    *   The data producer plugin manager.
    */
-  protected function setDataProducerManager(DataProducerPluginManager $pluginManager) {
+  protected function setDataProducerManager(DataProducerPluginManager $pluginManager): void {
     $this->dataProducerManager = $pluginManager;
   }
 
@@ -83,10 +83,8 @@ class ThunderSchema extends ComposableSchema {
   /**
    * {@inheritdoc}
    */
-  protected function getExtensions() {
-    return array_map(function ($id) {
-      return $this->extensionManager->createInstance($id);
-    }, array_unique(array_merge(array_filter($this->getConfiguration()['extensions']), static::REQUIRED_EXTENSIONS)));
+  protected function getExtensions(): array {
+    return array_map(fn($id): object => $this->extensionManager->createInstance($id), array_unique(array_merge(array_filter($this->getConfiguration()['extensions']), static::REQUIRED_EXTENSIONS)));
   }
 
   /**
@@ -106,14 +104,14 @@ class ThunderSchema extends ComposableSchema {
   /**
    * {@inheritdoc}
    */
-  protected function getSchemaDefinition() {
+  protected function getSchemaDefinition(): string {
     return SdlSchemaPluginBase::getSchemaDefinition();
   }
 
   /**
    * Resolve custom types, that are used in multiple places.
    */
-  private function resolveBaseTypes() {
+  private function resolveBaseTypes(): void {
     $this->addFieldResolverIfNotExists('Link', 'url',
       $this->builder->callback(function ($parent) {
         if (!empty($parent) && isset($parent['uri'])) {

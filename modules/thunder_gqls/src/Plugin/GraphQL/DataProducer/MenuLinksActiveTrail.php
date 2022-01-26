@@ -57,7 +57,7 @@ class MenuLinksActiveTrail extends DataProducerPluginBase implements ContainerFa
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
+  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition): self {
     return new static(
       $configuration,
       $pluginId,
@@ -102,7 +102,7 @@ class MenuLinksActiveTrail extends DataProducerPluginBase implements ContainerFa
    *
    * @throws \Drupal\Core\Entity\EntityMalformedException
    */
-  public function resolve(MenuInterface $menu, ContentEntityInterface $entity) {
+  public function resolve(MenuInterface $menu, ContentEntityInterface $entity): array {
     $parameters = new MenuTreeParameters();
     $links = $this->menuLinkManager->loadLinksByRoute($entity->toUrl()->getRouteName(), $entity->toUrl()->getRouteParameters(), $menu->id());
 
@@ -125,9 +125,7 @@ class MenuLinksActiveTrail extends DataProducerPluginBase implements ContainerFa
       ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
     ];
 
-    return array_filter($this->menuLinkTree->transform($tree, $manipulators), function (MenuLinkTreeElement $item) {
-      return $item->link instanceof MenuLinkInterface && $item->link->isEnabled();
-    });
+    return array_filter($this->menuLinkTree->transform($tree, $manipulators), fn(MenuLinkTreeElement $item): bool => $item->link instanceof MenuLinkInterface && $item->link->isEnabled());
   }
 
 }

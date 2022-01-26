@@ -2,6 +2,7 @@
 
 namespace Drupal\thunder_article\Form;
 
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Form\ConfirmFormBase;
@@ -53,7 +54,7 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): self {
     return new static(
       $container->get('date.formatter'),
       $container->get('datetime.time')
@@ -70,28 +71,28 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
   /**
    * {@inheritdoc}
    */
-  public function getQuestion() {
+  public function getQuestion(): TranslatableMarkup {
     return $this->t('Are you sure you want to revert to the default revision from %revision-date?', ['%revision-date' => $this->dateFormatter->format($this->revision->getRevisionCreationTime())]);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getCancelUrl() {
+  public function getCancelUrl(): Url {
     return new Url('entity.node.edit_form', ['node' => $this->revision->id()]);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getConfirmText() {
+  public function getConfirmText(): TranslatableMarkup {
     return $this->t('Revert');
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDescription() {
+  public function getDescription(): TranslatableMarkup {
     return $this->t('Revert to the default revision from %revision-date.', ['%revision-date' => $this->dateFormatter->format($this->revision->getRevisionCreationTime())]);
   }
 
@@ -108,7 +109,7 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     // The revision timestamp will be updated when the revision is saved. Keep
     // the original one for the confirmation message.
     $original_revision_timestamp = $this->revision->getRevisionCreationTime();

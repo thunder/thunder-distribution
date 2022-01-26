@@ -41,7 +41,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager service.
    */
-  protected function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager) {
+  protected function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager): void {
     $this->entityTypeManager = $entityTypeManager;
   }
 
@@ -78,7 +78,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function transformDimensions(array &$dimensions, $uri) {
+  public function transformDimensions(array &$dimensions, $uri): void {
     if (!isset($dimensions['width']) || !isset($dimensions['height'])) {
       // We cannot know which preset would be executed and thus cannot know the
       // resulting dimensions, unless both styles return the same dimensions:
@@ -182,7 +182,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
 
     $this->configuration['landscape'] = $form_state->getValue('landscape');

@@ -21,7 +21,7 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
   /**
    * Testing integration of "access_unpublished" module.
    */
-  public function testAccessUnpublished() {
+  public function testAccessUnpublished(): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     // Create article and save it as unpublished.
     $this->articleFillNew([

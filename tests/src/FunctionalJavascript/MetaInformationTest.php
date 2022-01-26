@@ -111,7 +111,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->sitemapGenerator = $this->container->get('simple_sitemap.generator');
@@ -125,7 +125,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @param array $configuration
    *   List of configuration what will be set for meta tag.
    */
-  protected function setMetaTagConfigurationForUrl($pageUrl, array $configuration) {
+  protected function setMetaTagConfigurationForUrl(string $pageUrl, array $configuration): void {
     $this->drupalGet($pageUrl);
 
     $driver = $this->getSession()->getDriver();
@@ -142,7 +142,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @param array $fieldValues
    *   Custom meta tag configuration for article.
    */
-  protected function createArticleWithFields(array $fieldValues = []) {
+  protected function createArticleWithFields(array $fieldValues = []): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $fieldValues += [
       'field_channel' => $term->id(),
@@ -167,7 +167,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @param array $configuration
    *   List of configuration what will be set for meta tag.
    */
-  protected function checkSavedConfiguration($configurationUrl, array $configuration) {
+  protected function checkSavedConfiguration(string $configurationUrl, array $configuration): void {
     $this->drupalGet('admin/config/search/metatag');
     $page = $this->getSession()->getPage();
 
@@ -190,7 +190,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   /**
    * Test Meta Tag default configuration and custom configuration for article.
    */
-  public function testArticleMetaTags() {
+  public function testArticleMetaTags(): void {
     $globalConfigs = $this->generateMetaTagConfiguration([static::$globalMetaTags]);
     $contentConfigs = $this->generateMetaTagConfiguration([static::$contentMetaTags]);
     $articleConfigs = $this->generateMetaTagConfiguration([static::$articleMetaTags]);
@@ -238,7 +238,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   /**
    * Test Scheduling of Article.
    */
-  public function testArticleScheduling() {
+  public function testArticleScheduling(): void {
     $articleId = 10;
 
     // Create article with published 2 days ago, unpublish tomorrow.
@@ -309,19 +309,17 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @param string $xpathQuery
    *   XPath to fetch elements from Site Map.
    *
-   * @return \DOMNodeList
+   * @return \DOMNodeList|false
    *   Returns list of elements matching provided XPath.
    */
-  public function getSiteMapDomElements($content, $xpathQuery) {
+  public function getSiteMapDomElements(string $content, string $xpathQuery): \DOMNodeList|bool {
     $domDoc = new \DOMDocument();
     $domDoc->loadXML($content);
 
     $xpath = new \DOMXpath($domDoc);
     $xpath->registerNamespace('sm', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
-    $elements = $xpath->query($xpathQuery);
-
-    return $elements;
+    return $xpath->query($xpathQuery);
   }
 
   /**
@@ -329,7 +327,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    *
    * @group NoUpdate
    */
-  public function testSiteMap() {
+  public function testSiteMap(): void {
     $articleId = 10;
     $articleUrl = 'test-sitemap-seo-title';
 
