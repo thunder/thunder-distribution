@@ -28,8 +28,14 @@ trait ThunderMediaTestTrait {
     $selector = 'edit-' . str_replace(['[', ']', '_'], '-', $fieldName);
     $this->openEntityBrowser($selector, $entityBrowser);
 
-    foreach ($medias as $media) {
-      $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]");
+    if ($entityBrowser === 'multiple_image_browser') {
+      foreach ($medias as $media) {
+        $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]");
+      }
+    }
+    else {
+      $media = current($medias);
+      $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select' and @value='$media']]");
     }
     $this->assertWaitOnAjaxRequest();
 

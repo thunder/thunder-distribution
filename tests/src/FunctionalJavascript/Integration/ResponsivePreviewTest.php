@@ -91,10 +91,10 @@ class ResponsivePreviewTest extends ThunderJavascriptTestBase {
    *
    * NOTE: Index starts from 1.
    *
-   * @param int $xpath_device_button
-   *   The index number of device in drop-down list.
+   * @param string $xpath_device_button
+   *   The xpath of the device in drop-down list.
    */
-  protected function selectDevice($xpath_device_button) {
+  protected function selectDevice(string $xpath_device_button) {
     $page = $this->getSession()->getPage();
 
     $page->find('xpath', '//*[@id="responsive-preview-toolbar-tab"]/button')

@@ -209,9 +209,8 @@ class ThunderInstallerTest extends InstallerTestBase {
     $message = strip_tags(new TranslatableMarkup('Congratulations, you installed @drupal!', ['@drupal' => 'Thunder'], ['langcode' => $this->langcode]));
     $this->assertSession()->pageTextContains($message);
 
-    /** @var \Drupal\Core\Database\Query\SelectInterface $query */
     $query = \Drupal::database()->select('watchdog', 'w')
-      ->condition('severity', 4, '<');
+      ->condition('severity', '4', '<');
 
     // Check that there are no warnings in the log after installation.
     $this->assertEquals($this->knownWarnings, $query->countQuery()->execute()->fetchField());

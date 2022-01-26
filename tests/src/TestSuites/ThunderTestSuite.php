@@ -29,7 +29,7 @@ class ThunderTestSuite extends TestSuite {
     // will have all kinds of tests.
     $tests = [];
     foreach (drupal_phpunit_find_extension_directories($root) as $extension_name => $dir) {
-      foreach (['Functional', 'FunctionalJavascript'] as $suite_namespace) {
+      foreach (['Functional', 'FunctionalJavascript', 'Kernel'] as $suite_namespace) {
         $test_path = "$dir/tests/src/$suite_namespace";
         if (is_dir($test_path)) {
           $tests += TestDiscovery::scanDirectory("Drupal\\Tests\\$extension_name\\$suite_namespace\\", $test_path);
@@ -37,8 +37,8 @@ class ThunderTestSuite extends TestSuite {
       }
     }
 
-    if ($chunk = intval(getenv('THUNDER_TEST_CHUNK'))) {
-      $chunks = array_chunk($tests, ceil(count($tests) / 3));
+    if ($chunk = (int) getenv('THUNDER_TEST_CHUNK')) {
+      $chunks = array_chunk($tests, (int) ceil(count($tests) / 3));
       $suite->addTestFiles($chunks[$chunk - 1]);
     }
     else {
