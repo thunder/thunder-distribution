@@ -150,7 +150,7 @@ function thunder_media_form_media_gallery_form_alter(array &$form, FormStateInte
  * @param string $media_type
  *   The type of media.
  */
-function _thunder_media_media_field_widget_form_alter_helper(array &$widget, $media_type): void {
+function _thunder_media_media_field_widget_form_alter_helper(array &$widget, string $media_type): void {
   // Process the media field widget.
   $widget['#attributes']['class'][] = 'media-form__items-widget';
   if (isset($widget['current']['items'])) {

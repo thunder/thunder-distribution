@@ -2,6 +2,7 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\Schema;
 
+use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Url;
@@ -40,7 +41,7 @@ class ThunderSchema extends ComposableSchema {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     $schema = parent::create($container, $configuration, $plugin_id, $plugin_definition);
     $schema->setDataProducerManager($container->get('plugin.manager.graphql.data_producer'));
     return $schema;
@@ -59,7 +60,7 @@ class ThunderSchema extends ComposableSchema {
   /**
    * {@inheritdoc}
    */
-  public function getResolverRegistry() {
+  public function getResolverRegistry(): ResolverRegistryInterface {
     $this->registry = new ResolverRegistry();
     $this->createResolverBuilder();
 
@@ -90,7 +91,7 @@ class ThunderSchema extends ComposableSchema {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form = parent::buildConfigurationForm($form, $form_state);
     foreach (Element::children($form['extensions']) as $extension) {
       if (in_array($extension, static::REQUIRED_EXTENSIONS)) {

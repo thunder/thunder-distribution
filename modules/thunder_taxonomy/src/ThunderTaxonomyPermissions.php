@@ -46,7 +46,7 @@ class ThunderTaxonomyPermissions implements ContainerInjectionInterface {
    * @return array
    *   Permissions array.
    */
-  public function permissions() {
+  public function permissions(): array {
     $permissions = [];
     foreach ($this->entityTypeManager->getStorage('taxonomy_vocabulary')->loadMultiple() as $vocabulary) {
       $permissions += [

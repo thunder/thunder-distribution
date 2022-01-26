@@ -112,7 +112,7 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    * @return array
    *   The redirect data.
    */
-  public function resolve(string $path, RefinableCacheableDependencyInterface $metadata) {
+  public function resolve(string $path, RefinableCacheableDependencyInterface $metadata): array {
     $metadata->addCacheTags(['redirect_list']);
     if ($this->redirectRepository) {
       $language = $this->languageManager->getCurrentLanguage()->getId();

@@ -25,7 +25,7 @@ trait ThunderJavascriptTrait {
    *   When the request is not completed. If left blank, a default message will
    *   be displayed.
    */
-  public function assertWaitOnAjaxRequest($timeout = 10000, $message = 'Unable to complete AJAX request.'): void {
+  public function assertWaitOnAjaxRequest(int $timeout = 10000, string $message = 'Unable to complete AJAX request.'): void {
     $attach_error_handler = <<<JS
       (function() {
         window.addEventListener('error', function (event) {

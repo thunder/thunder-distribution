@@ -116,7 +116,7 @@ class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPlu
    * @return array
    *   The image meta data
    */
-  public function resolve(FileInterface $entity, array $field, RefinableCacheableDependencyInterface $metadata) {
+  public function resolve(FileInterface $entity, array $field, RefinableCacheableDependencyInterface $metadata): array {
     $access = $entity->access('view', NULL, TRUE);
     $metadata->addCacheableDependency($access);
     if ($access->isAllowed()) {

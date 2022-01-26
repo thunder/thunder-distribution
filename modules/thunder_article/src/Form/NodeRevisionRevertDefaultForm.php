@@ -64,7 +64,7 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId(): string {
     return 'node_revision_revert_default_confirm';
   }
 
@@ -99,7 +99,7 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL): array {
     $this->revision = $node;
     $form = parent::buildForm($form, $form_state);
 
@@ -147,7 +147,7 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
    * @return \Drupal\node\NodeInterface
    *   The prepared revision ready to be stored.
    */
-  protected function prepareRevertedRevision(NodeInterface $revision, FormStateInterface $form_state) {
+  protected function prepareRevertedRevision(NodeInterface $revision, FormStateInterface $form_state): NodeInterface {
     $revision->setNewRevision();
     $revision->isDefaultRevision(TRUE);
     $revision->setRevisionTranslationAffected(TRUE);

@@ -99,7 +99,7 @@ function thunder_paragraphs_field_widget_paragraphs_form_alter(array &$element, 
  * @param bool $is_displayed
  *   Flag if "Collapse and save" button should be visible.
  */
-function _thunder_paragraph_attach_ief_submit(array &$element, array $button_parents, $is_displayed = TRUE): void {
+function _thunder_paragraph_attach_ief_submit(array &$element, array $button_parents, bool $is_displayed = TRUE): void {
   if (isset($element['subform'])) {
     foreach (Element::children($element['subform']) as $index) {
       if (isset($element['subform'][$index]['widget'][0]['inline_entity_form'])

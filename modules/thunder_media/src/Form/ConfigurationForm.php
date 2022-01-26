@@ -13,7 +13,7 @@ class ConfigurationForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  protected function getEditableConfigNames() {
+  protected function getEditableConfigNames(): array {
     return [
       'thunder_media.settings',
     ];
@@ -22,7 +22,7 @@ class ConfigurationForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId(): string {
     return 'configuration_form';
   }
 

@@ -80,7 +80,7 @@ class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPlug
    * @return string[]
    *   The entity links.
    */
-  public function resolve(EntityInterface $entity) {
+  public function resolve(EntityInterface $entity): array {
     $context = new RenderContext();
     $result = $this->renderer->executeInRenderContext($context, function () use ($entity): array {
       $links = $entity->getEntityType()->getLinkTemplates();
@@ -112,7 +112,7 @@ class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPlug
    * @return string
    *   Camel case string.
    */
-  public static function toCamelCase($input): string {
+  public static function toCamelCase(string $input): string {
     return lcfirst(str_replace(' ', '', ucwords(str_replace('-', ' ', $input))));
   }
 

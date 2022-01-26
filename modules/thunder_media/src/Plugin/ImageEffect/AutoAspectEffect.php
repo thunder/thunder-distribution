@@ -29,7 +29,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     $style = parent::create($container, $configuration, $plugin_id, $plugin_definition);
     $style->setEntityTypeManager($container->get('entity_type.manager'));
     return $style;
@@ -48,7 +48,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     $ratio_adjustment = isset($this->configuration['ratio_adjustment']) ? floatval($this->configuration['ratio_adjustment']) : 1;
     $aspect = $image->getWidth() / $image->getHeight();
 
@@ -113,7 +113,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     $summary = [
       '#theme' => 'image_resize_summary',
       '#data' => $this->configuration,
@@ -126,7 +126,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'landscape' => NULL,
       'portrait' => NULL,
@@ -137,7 +137,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function calculateDependencies() {
+  public function calculateDependencies(): array {
     $dependencies = parent::calculateDependencies();
 
     $image_style_storage = $this->entityTypeManager->getStorage('image_style');
@@ -158,7 +158,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $image_styles = image_style_options(FALSE);
     $form['landscape'] = [
       '#type' => 'select',
