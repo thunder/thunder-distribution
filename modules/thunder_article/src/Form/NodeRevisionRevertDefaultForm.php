@@ -101,9 +101,7 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL): array {
     $this->revision = $node;
-    $form = parent::buildForm($form, $form_state);
-
-    return $form;
+    return parent::buildForm($form, $form_state);
   }
 
   /**

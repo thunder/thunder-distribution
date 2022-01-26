@@ -3,7 +3,7 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
-use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\paragraphs\ParagraphInterface;
 
 /**
  * Resolves the paragraphs summary.
@@ -27,13 +27,13 @@ class ParagraphSummary extends DataProducerPluginBase {
   /**
    * Resolves the paragraphs summary.
    *
-   * @param \Drupal\paragraphs\Entity\Paragraph $paragraph
+   * @param ParagraphInterface $paragraph
    *   The entity.
    *
    * @return mixed
    *   The paragraphs summary.
    */
-  public function resolve(Paragraph $paragraph) {
+  public function resolve(ParagraphInterface $paragraph) {
     return $paragraph->getSummaryItems()['content'];
   }
 
