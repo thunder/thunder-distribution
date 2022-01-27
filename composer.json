@@ -53,6 +53,9 @@
             },
             "drupal/graphql": {
                 "fix: language definition in entity reference producers": "https://patch-diff.githubusercontent.com/raw/drupal-graphql/graphql/pull/1241.diff"
+            },
+            "drupal/paragraphs_paste": {
+                "Use regular textarea": "https://git.drupalcode.org/project/paragraphs_paste/-/merge_requests/1.diff"
             }
         }
     },
@@ -98,7 +101,7 @@
         "drupal/metatag_async_widget": "^1.0-alpha2",
         "drupal/paragraphs": "^1.11",
         "drupal/paragraphs_features": "^1.15",
-        "drupal/paragraphs_paste": "dev-improve-ux",
+        "drupal/paragraphs_paste": "dev-2.x",
         "drupal/password_policy": "3.0",
         "drupal/pathauto": "^1.8",
         "drupal/responsive_preview": "^1.0-alpha7",
