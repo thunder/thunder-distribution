@@ -153,6 +153,9 @@ END;
     // Click Select entities -> to open Entity Browser.
     $this->openEntityBrowser('edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images', 'multiple_image_browser');
 
+    $this->markTestIncomplete(
+      'Entity Browser is broken. We want to remove it.'
+    );
     $media = $this->getMediaByName('reference.jpg');
     $this->clickDrupalSelector('edit-selected-items-' . $media->id() . '-2-remove-button');
 
