@@ -39,6 +39,7 @@ class ThunderTestSuite extends TestSuite {
 
     if ($chunk = (int) getenv('THUNDER_TEST_CHUNK')) {
       $chunks = array_chunk($tests, (int) ceil(count($tests) / 3));
+      var_dump($chunks[$chunk - 1]);
       $suite->addTestFiles($chunks[$chunk - 1]);
     }
     else {
