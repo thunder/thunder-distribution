@@ -10,6 +10,7 @@ use Drupal\Tests\Traits\Core\CronRunTrait;
  * @group Thunder
  *
  * @package Drupal\Tests\thunder\FunctionalJavascript
+ * @todo Convert to functional test.
  */
 class MetaInformationTest extends ThunderJavascriptTestBase {
 

@@ -83,6 +83,7 @@ class ModeratedContentSchedulingTest extends ThunderTestBase {
     $this->assertEquals('Test workflow article 1 - Draft', $node->getTitle());
     $this->assertEquals('draft', $node->moderation_state->value);
     $this->cronRun();
+    $node_storage->resetCache([$node->id()]);
 
     /** @var \Drupal\node\Entity\Node $node */
     $node = $node_storage->loadRevision($node_storage->getLatestRevisionId($node->id()));

@@ -56,7 +56,6 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $image2->clear();
   }
 
-
   /**
    * Test add/remove image in image paragraph.
    *

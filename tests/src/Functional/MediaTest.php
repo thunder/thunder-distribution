@@ -2,6 +2,11 @@
 
 namespace Drupal\Tests\thunder\Functional;
 
+/**
+ * Tests the media system.
+ *
+ * @group Thunder
+ */
 class MediaTest extends ThunderTestBase {
 
   /**
@@ -33,7 +38,6 @@ class MediaTest extends ThunderTestBase {
       'field_description[0][value]' => "<p>Media {$media->id()} Description</p>",
     ], 'Save');
 
-
     // Edit media and check are fields correct.
     $this->drupalGet($media->toUrl('edit-form'));
 
@@ -54,4 +58,5 @@ class MediaTest extends ThunderTestBase {
     $this->assertSession()
       ->fieldValueEquals('field_description[0][value]', "<p>Media {$media->id()} Description</p>");
   }
+
 }
