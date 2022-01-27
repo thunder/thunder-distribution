@@ -14,11 +14,6 @@ class ConfigSelectorTest extends ThunderJavascriptTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['thunder_testing_demo'];
-
-  /**
-   * {@inheritdoc}
-   */
   protected static $defaultUserRole = 'administrator';
 
   /**
