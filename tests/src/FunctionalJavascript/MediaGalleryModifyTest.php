@@ -156,6 +156,7 @@ END;
     $this->markTestIncomplete(
       'Entity Browser is broken. We want to remove it.'
     );
+    // @phpstan-ignore-next-line
     $media = $this->getMediaByName('reference.jpg');
     $this->clickDrupalSelector('edit-selected-items-' . $media->id() . '-2-remove-button');
 
