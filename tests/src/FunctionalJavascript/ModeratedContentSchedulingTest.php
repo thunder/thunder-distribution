@@ -16,7 +16,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
   /**
    * Tests moderated nodes publish scheduling.
    */
-  public function testPublishStateSchedule() {
+  public function testPublishStateSchedule(): void {
     $publish_timestamp = strtotime('yesterday');
     /** @var \Drupal\node\NodeStorageInterface $node_storage */
     $node_storage = \Drupal::entityTypeManager()->getStorage('node');
@@ -51,7 +51,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $edit_url = $node->toUrl('edit-form');
     $this->drupalGet($edit_url);
     $this->expandAllTabs();
-    $this->setFieldValues($this->getSession()->getPage(), [
+    $this->setFieldValues([
       'title[0][value]' => 'Test workflow article 1 - Draft',
       'moderation_state[0]' => 'draft',
       'publish_on[0][value][date]' => date('Y-m-d', $publish_timestamp),
@@ -78,7 +78,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
   /**
    * Tests moderated nodes unpublish scheduling.
    */
-  public function testUnpublishStateSchedule() {
+  public function testUnpublishStateSchedule(): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
       'field_channel' => $term->id(),
@@ -93,7 +93,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $node = $this->getNodeByTitle('Test workflow article 2 - Published');
 
     // Set date manually, unpublish cannot be in the past.
-    $node->unpublish_on->value = strtotime('yesterday');
+    $node->set('unpublish_on', strtotime('yesterday'));
     $node->save();
 
     $revision_id = $node->getRevisionId();
@@ -110,7 +110,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
   /**
    * Tests publish scheduling for a draft of a published node.
    */
-  public function testPublishOfDraft() {
+  public function testPublishOfDraft(): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
       'field_channel' => $term->id(),

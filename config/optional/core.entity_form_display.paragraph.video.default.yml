@@ -12,13 +12,13 @@ bundle: video
 mode: default
 content:
   field_video:
+    type: media_library_media_modify_widget
     weight: 0
+    region: content
     settings:
       media_types: {  }
       form_mode: override
     third_party_settings: {  }
-    region: content
-    type: media_library_media_modify_widget
 hidden:
   created: true
   moderation_state: true

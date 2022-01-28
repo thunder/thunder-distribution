@@ -26,7 +26,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   /**
    * Test Creation of Article.
    */
-  public function testCreateArticle() {
+  public function testCreateArticle(): void {
     // Create a video media item.
     $this->drupalGet("media/add/video");
     $this->assertSession()->fieldExists('Video URL')->setValue('https://www.youtube.com/watch?v=PWjcqE3QKBg');
@@ -132,7 +132,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   /**
    * Test Creation of Article without content moderation.
    */
-  public function testCreateArticleWithNoModeration() {
+  public function testCreateArticleWithNoModeration(): void {
     // Delete all the articles so we can disable content moderation.
     foreach (\Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'article']) as $node) {
       $node->delete();
@@ -154,7 +154,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
   /**
    * Tests draft creation and that reverting to the default revision works.
    */
-  public function testModerationWorkflow() {
+  public function testModerationWorkflow(): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
       'field_channel' => $term->id(),
@@ -174,7 +174,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->clickLink('Back to content editing');
     $this->assertSession()->pageTextNotContains('An illegal choice has been detected. Please contact the site administrator.');
 
-    $this->setFieldValues($this->getSession()->getPage(), [
+    $this->setFieldValues([
       'title[0][value]' => 'Test workflow article in draft',
       'field_seo_title[0][value]' => 'Massive gaining even more seo traffic text',
     ]);
@@ -183,7 +183,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     $this->drupalGet($node->toUrl('edit-form'));
 
-    $this->setFieldValues($this->getSession()->getPage(), [
+    $this->setFieldValues([
       'title[0][value]' => 'Test workflow article in draft 2',
       'field_seo_title[0][value]' => 'Massive gaining even more and more seo traffic text',
     ]);

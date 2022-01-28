@@ -13,16 +13,16 @@ third_party_settings:
     group_basis:
       children:
         - field_url
+      label: Basis
+      region: content
       parent_name: ''
       weight: 0
       format_type: fieldset
       format_settings:
-        id: ''
         classes: content-form__form-section
+        id: ''
         description: ''
         required_fields: true
-      label: Basis
-      region: content
 id: media.pinterest.default
 targetEntityType: media
 bundle: pinterest
@@ -35,13 +35,13 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_url:
+    type: link_default
     weight: 1
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    type: link_default
-    region: content
   status:
     type: boolean_checkbox
     weight: 1

@@ -12,13 +12,13 @@ bundle: image
 mode: default
 content:
   field_image:
+    type: media_library_media_modify_widget
     weight: 0
+    region: content
     settings:
       media_types: {  }
       form_mode: override
     third_party_settings: {  }
-    type: media_library_media_modify_widget
-    region: content
 hidden:
   created: true
   moderation_state: true

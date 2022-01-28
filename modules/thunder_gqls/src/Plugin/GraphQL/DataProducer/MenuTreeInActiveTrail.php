@@ -33,7 +33,7 @@ class MenuTreeInActiveTrail extends DataProducerPluginBase {
    * @return bool
    *   Is current element in active trail.
    */
-  public function resolve(MenuLinkTreeElement $element) {
+  public function resolve(MenuLinkTreeElement $element): bool {
     return $element->inActiveTrail;
   }
 

@@ -8,6 +8,7 @@ on:
       - '**.module'
       - '**.profile'
       - '**.theme'
+      - '**.install'
 
 jobs:
   eslint:

@@ -14,7 +14,7 @@ class ArticleSchedulerIntegrationTest extends ThunderJavascriptTestBase {
   /**
    * Test Creation of Article.
    */
-  public function testSchedulerAccess() {
+  public function testSchedulerAccess(): void {
     $this->logWithRole('restricted_editor');
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
@@ -35,7 +35,7 @@ class ArticleSchedulerIntegrationTest extends ThunderJavascriptTestBase {
     $this->drupalGet($edit_url);
     $this->expandAllTabs();
     $publish_timestamp = strtotime('-1 days');
-    $this->setFieldValues($this->getSession()->getPage(), [
+    $this->setFieldValues([
       'publish_on[0][value][date]' => date('Y-m-d', $publish_timestamp),
       'publish_on[0][value][time]' => date('H:i:s', $publish_timestamp),
       'publish_state[0]' => 'published',

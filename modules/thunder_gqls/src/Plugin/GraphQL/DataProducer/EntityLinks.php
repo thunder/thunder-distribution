@@ -40,7 +40,7 @@ class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPlug
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
+  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition): self {
     return new static(
       $configuration,
       $pluginId,
@@ -80,17 +80,20 @@ class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPlug
    * @return string[]
    *   The entity links.
    */
-  public function resolve(EntityInterface $entity) {
+  public function resolve(EntityInterface $entity): array {
     $context = new RenderContext();
-    $result = $this->renderer->executeInRenderContext($context, function () use ($entity) {
+    $result = $this->renderer->executeInRenderContext($context, function () use ($entity): array {
       $links = $entity->getEntityType()->getLinkTemplates();
 
-      array_walk($links, function (&$url, $rel) use ($entity) {
+      array_walk($links, function (&$url, $rel) use ($entity): void {
+        $url = '';
         try {
-          $url = $entity->toUrl($rel)->toString();
+          $urlObject = $entity->toUrl($rel);
+          if ($urlObject->access()) {
+            $url = $urlObject->toString();
+          }
         }
         catch (\Exception $exception) {
-          $url = '';
         }
       });
 
@@ -109,7 +112,7 @@ class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPlug
    * @return string
    *   Camel case string.
    */
-  public static function toCamelCase($input) {
+  public static function toCamelCase(string $input): string {
     return lcfirst(str_replace(' ', '', ucwords(str_replace('-', ' ', $input))));
   }
 

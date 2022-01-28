@@ -4,6 +4,7 @@ cron_generate_interval: 0
 generate_duration: 10000
 remove_duplicates: true
 skip_untranslated: false
+disable_language_hreflang: false
 xsl: false
 base_url: ''
 default_variant: index
@@ -12,5 +13,4 @@ excluded_languages: {  }
 enabled_entity_types:
   - node
   - taxonomy_term
-disable_language_hreflang: false
 entities_per_queue_item: 50

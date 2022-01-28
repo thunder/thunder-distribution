@@ -11,7 +11,7 @@ use Drupal\search_api\Plugin\views\query\SearchApiQuery;
 /**
  * Implements hook_views_pre_render().
  */
-function thunder_search_views_pre_render(ViewExecutable $view) {
+function thunder_search_views_pre_render(ViewExecutable $view): void {
   if ($view->result || !$view->query instanceof SearchApiQuery) {
     return;
   }

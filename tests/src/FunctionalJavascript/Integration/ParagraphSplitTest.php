@@ -5,6 +5,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderArticleTestTrait;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
+use Drupal\Tests\thunder\FunctionalJavascript\ThunderCkEditorTestTrait;
 
 /**
  * Tests the paragraph split module integration.
@@ -15,6 +16,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
 
   use ThunderParagraphsTestTrait;
   use ThunderArticleTestTrait;
+  use ThunderCkEditorTestTrait;
 
   /**
    * Field name for paragraphs in article content.
@@ -36,7 +38,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
   /**
    * Test split of paragraph before a selection.
    */
-  public function testParagraphSplitBefore() {
+  public function testParagraphSplitBefore(): void {
     $firstParagraphContent = '<p>Content that will be in the first paragraph after the split.</p>';
     $secondParagraphContent = '<p>Content that will be in the second paragraph after the split.</p>';
 
@@ -60,7 +62,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
   /**
    * Test if a deleted paragraph leads to data loss.
    */
-  public function testParagraphSplitDataLoss() {
+  public function testParagraphSplitDataLoss(): void {
     $firstParagraphContent = '<p>Content that will be in the first paragraph after the split.</p>';
     $secondParagraphContent = '<p>Content that will be in the second paragraph after the split.</p>';
 
@@ -92,7 +94,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
   /**
    * Test if a adding paragraph after split leads to data loss.
    */
-  public function testAddParagraphAfterSplitDataLoss() {
+  public function testAddParagraphAfterSplitDataLoss(): void {
     $firstParagraphContent = '<p>Content that will be in the first paragraph after the split.</p>';
     $secondParagraphContent = '<p>Content that will be in the second paragraph after the split.</p>';
     $thirdParagraphContent = '<p>Content that will be placed into the first paragraph after split.</p>';
@@ -133,7 +135,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
   /**
    * Click on split button.
    */
-  protected function clickParagraphSplitButton() {
+  protected function clickParagraphSplitButton(): void {
     $this->getSession()->executeScript("jQuery('.cke_button__splittext')[0].click();");
   }
 
@@ -146,7 +148,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
    * @return string
    *   Css selector for the paragraph.
    */
-  protected function getCkEditorCssSelector($paragraphDelta) {
+  protected function getCkEditorCssSelector(int $paragraphDelta): string {
     return sprintf(static::$selectorTemplate, static::$paragraphsField, $paragraphDelta);
   }
 

@@ -21,7 +21,7 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
   /**
    * Testing integration of "access_unpublished" module.
    */
-  public function testAccessUnpublished() {
+  public function testAccessUnpublished(): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     // Create article and save it as unpublished.
     $this->articleFillNew([
@@ -40,7 +40,7 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
     $driver = $this->getSession()->getDriver();
     $this->scrollElementInView('[data-drupal-selector="edit-generate-token"]');
     $driver->click('//*[@data-drupal-selector="edit-generate-token"]');
-    $this->waitUntilVisible('[data-drupal-selector="access-token-list"] a.clipboard-button', 5000);
+    $this->assertSession()->waitForElementVisible('css', '[data-drupal-selector="access-token-list"] a.clipboard-button', 5000);
     $copyToClipboard = $page->find('xpath', '//*[@data-drupal-selector="access-token-list"]//a[contains(@class, "clipboard-button")]');
     $tokenUrl = $copyToClipboard->getAttribute('data-unpublished-access-url');
 

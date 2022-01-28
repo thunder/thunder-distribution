@@ -1,11 +1,6 @@
 <template>
-  <header ref="navbar" class="navbar">
-    <ToggleSidebarButton @toggle="$emit('toggle-sidebar')" />
-
-    <span ref="siteBrand">
-      <RouterLink :to="siteBrandLink">
-        <svg class="logo" :alt="siteBrandTitle" version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-             viewBox="0 0 492 110.7" enable-background="new 0 0 492 110.7" xml:space="preserve">
+  <svg class="logo" :alt="heroAlt"  version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+       viewBox="0 0 492 110.7" enable-background="new 0 0 492 110.7" xml:space="preserve">
 <g>
 	<path class="light" fill="#009FE3" d="M26.9,107c1.9,0.3,3.9,0.5,5.7,0.6c1.9,0.1,3.7,0.1,5.3,0.1c1.6,0,3.3-0.1,5.1-0.2c1.7-0.1,3.5-0.3,5.2-0.5
 		V20.5h26c0.6-2.9,0.9-6,0.9-9.2c0-3-0.3-6-0.9-8.9H0.9C0.3,5.4,0,8.3,0,11.3c0,3.2,0.3,6.3,0.9,9.2h26V107L26.9,107z M80.9,107.2
@@ -51,91 +46,5 @@
 		C274.5,107.9,277.9,107.6,281.4,107L281.4,107z"/>
 </g>
 </svg>
-        <span
-          v-if="siteBrandTitle"
-          class="site-name"
-          :class="{ 'can-hide': siteBrandLogo }"
-        >
-          {{ siteBrandTitle }}
-        </span>
-      </RouterLink>
-    </span>
 
-    <div class="navbar-links-wrapper" :style="linksWrapperStyle">
-      <slot name="before" />
-
-      <NavbarLinks class="can-hide" />
-
-      <slot name="after" />
-
-      <ToggleDarkModeButton v-if="enableDarkMode" />
-
-      <NavbarSearch />
-    </div>
-  </header>
 </template>
-
-<script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
-import { useRouteLocale, useSiteLocaleData, withBase } from '@vuepress/client'
-import { useThemeLocaleData } from '@vuepress/theme-default/lib/client/composables'
-import NavbarLinks from '@vuepress/theme-default/lib/client/components/NavbarLinks.vue'
-import ToggleDarkModeButton from '@vuepress/theme-default/lib/client/components/ToggleDarkModeButton.vue'
-import ToggleSidebarButton from '@vuepress/theme-default/lib/client/components/ToggleSidebarButton.vue'
-
-defineEmits(['toggle-sidebar'])
-
-const routeLocale = useRouteLocale()
-const siteLocale = useSiteLocaleData()
-const themeLocale = useThemeLocaleData()
-
-const navbar = ref<HTMLElement | null>(null)
-const siteBrand = ref<HTMLElement | null>(null)
-const siteBrandLink = computed(
-  () => themeLocale.value.home || routeLocale.value
-)
-const siteBrandLogo = computed(() => themeLocale.value.logo)
-const siteBrandTitle = computed(() => siteLocale.value.title)
-const linksWrapperMaxWidth = ref(0)
-const linksWrapperStyle = computed(() => {
-  if (!linksWrapperMaxWidth.value) {
-    return {}
-  }
-  return {
-    maxWidth: linksWrapperMaxWidth.value + 'px',
-  }
-})
-const enableDarkMode = computed(() => themeLocale.value.darkMode)
-
-// avoid overlapping of long title and long navbar links
-onMounted(() => {
-  // TODO: migrate to css var
-  // refer to _variables.scss
-  const MOBILE_DESKTOP_BREAKPOINT = 719
-  const navbarHorizontalPadding =
-    getCssValue(navbar.value, 'paddingLeft') +
-    getCssValue(navbar.value, 'paddingRight')
-  const handleLinksWrapWidth = (): void => {
-    if (window.innerWidth <= MOBILE_DESKTOP_BREAKPOINT) {
-      linksWrapperMaxWidth.value = 0
-    } else {
-      linksWrapperMaxWidth.value =
-        navbar.value!.offsetWidth -
-        navbarHorizontalPadding -
-        (siteBrand.value?.offsetWidth || 0)
-    }
-  }
-  handleLinksWrapWidth()
-  window.addEventListener('resize', handleLinksWrapWidth, false)
-  window.addEventListener('orientationchange', handleLinksWrapWidth, false)
-})
-
-function getCssValue(el: HTMLElement | null, property: string): number {
-  // NOTE: Known bug, will return 'auto' if style value is 'auto'
-  const val = el?.ownerDocument?.defaultView?.getComputedStyle(el, null)?.[
-    property
-  ]
-  const num = Number.parseInt(val, 10)
-  return Number.isNaN(num) ? 0 : num
-}
-</script>

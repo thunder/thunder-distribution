@@ -1,9 +1,9 @@
-shariff_css: complete
-shariff_theme: grey
-shariff_orientation: horizontal
 shariff_services:
   twitter: twitter
   facebook: facebook
+shariff_theme: grey
+shariff_css: complete
+shariff_orientation: horizontal
 shariff_twitter_via: ''
 shariff_mail_url: 'mailto:'
 shariff_mail_subject: ''

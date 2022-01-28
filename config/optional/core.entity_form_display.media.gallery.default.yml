@@ -15,16 +15,16 @@ third_party_settings:
       children:
         - name
         - field_media_images
+      label: Basis
+      region: content
       parent_name: ''
       weight: 0
       format_type: fieldset
       format_settings:
-        id: ''
         classes: content-form__form-section
+        id: ''
         description: ''
         required_fields: true
-      label: Basis
-      region: content
 id: media.gallery.default
 targetEntityType: media
 bundle: gallery
@@ -39,13 +39,14 @@ content:
   field_media_images:
     type: media_library_media_modify_widget
     weight: 2
+    region: content
     settings:
-      add_button_text: 'Select images'
       check_selected: true
       replace_checkbox_by_order_indicator: true
       multi_edit_on_create: true
       form_mode: override
       media_types: {  }
+      add_button_text: 'Select images'
     third_party_settings:
       entity_reference_actions:
         enabled: true
@@ -58,15 +59,14 @@ content:
             media_publish_action: '0'
             media_save_action: '0'
             media_unpublish_action: '0'
-    region: content
   name:
     type: string_textfield
     weight: 1
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
     weight: 2

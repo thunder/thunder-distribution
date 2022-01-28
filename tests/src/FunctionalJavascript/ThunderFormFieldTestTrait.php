@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-use Behat\Mink\Element\DocumentElement;
-
 /**
  * Trait for manipulation of form fields.
  *
@@ -11,48 +9,47 @@ use Behat\Mink\Element\DocumentElement;
  */
 trait ThunderFormFieldTestTrait {
 
+  use ThunderJavascriptTrait;
+
   /**
    * Set value for group of checkboxes.
    *
    * Existing selection will be cleared before new values are applied.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $fieldName
    *   Field name.
    * @param string $value
    *   Comma separated values for checkboxes.
    */
-  protected function setCheckbox(DocumentElement $page, $fieldName, $value) {
+  protected function setCheckbox(string $fieldName, string $value): void {
     // UnCheck all checkboxes and check defined.
     $this->getSession()
-      ->executeScript("jQuery('input[name*=\"{$fieldName}\"]').prop('checked', false);");
+      ->executeScript("document.querySelectorAll('input[name*=\"{$fieldName}\"]').forEach((elem) => { elem.checked = false; });");
 
     $checkNames = explode(',', $value);
     foreach ($checkNames as $checkName) {
       $checkBoxName = $fieldName . '[' . trim($checkName) . ']';
 
       $this->scrollElementInView('[name="' . $checkBoxName . '"]');
-      $page->checkField($checkBoxName);
+      $this->getSession()->getPage()->checkField($checkBoxName);
     }
   }
 
   /**
    * Set value for defined field name on current page.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $fieldName
    *   Field name.
    * @param string|array $value
    *   Value for field.
    */
-  public function setFieldValue(DocumentElement $page, $fieldName, $value) {
+  public function setFieldValue(string $fieldName, $value): void {
+    $page = $this->getSession()->getPage();
     // If field is checkbox list, then use custom functionality to set values.
     // @todo needs documentation.
     $checkboxes = $page->findAll('xpath', "//input[@type=\"checkbox\" and starts-with(@name, \"{$fieldName}[\")]");
     if (!empty($checkboxes)) {
-      $this->setCheckbox($page, $fieldName, $value);
+      $this->setCheckbox($fieldName, $value);
 
       return;
     }
@@ -103,15 +100,31 @@ trait ThunderFormFieldTestTrait {
   /**
    * Set fields on current page.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param array $fieldValues
    *   Field values as associative array with field names as keys.
    */
-  public function setFieldValues(DocumentElement $page, array $fieldValues) {
+  public function setFieldValues(array $fieldValues): void {
     foreach ($fieldValues as $fieldName => $value) {
-      $this->setFieldValue($page, $fieldName, $value);
+      $this->setFieldValue($fieldName, $value);
     }
+  }
+
+  /**
+   * Set value directly to field value, without formatting applied.
+   *
+   * @param string $fieldName
+   *   Field name.
+   * @param string $rawValue
+   *   Raw value for field.
+   */
+  public function setRawFieldValue(string $fieldName, string $rawValue): void {
+    // Set date over jQuery, because browser drivers handle input value
+    // differently. fe. (Firefox will set it as "value" for field, but Chrome
+    // will use it as text for that input field, and in that case final value
+    // depends on format used for input field. That's why it's better to set it
+    // directly to value, independently from format used.
+    $this->getSession()
+      ->executeScript("document.querySelector('[name=\"{$fieldName}\"]').value = '{$rawValue}'");
   }
 
 }

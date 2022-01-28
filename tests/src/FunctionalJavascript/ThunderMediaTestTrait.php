@@ -9,6 +9,9 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
  */
 trait ThunderMediaTestTrait {
 
+  use ThunderEntityBrowserTestTrait;
+  use ThunderJavascriptTrait;
+
   /**
    * Select Medias for field.
    *
@@ -35,7 +38,6 @@ trait ThunderMediaTestTrait {
     $page->find('css', '.media-library-widget-modal .form-actions button')->click();
 
     $this->assertWaitOnAjaxRequest();
-    $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-wrapper"] img');
   }
 
   /**
@@ -48,7 +50,7 @@ trait ThunderMediaTestTrait {
    * @param array $medias
    *   List of media identifiers.
    */
-  public function createGallery($name, $fieldName, array $medias) {
+  public function createGallery(string $name, string $fieldName, array $medias): void {
 
     $page = $this->getSession()->getPage();
 

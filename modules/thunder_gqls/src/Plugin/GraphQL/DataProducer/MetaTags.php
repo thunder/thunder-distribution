@@ -67,7 +67,7 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
+  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition): self {
     return new static(
       $configuration,
       $pluginId,
@@ -124,7 +124,7 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
   public function resolve($value, ?string $type, RefinableCacheableDependencyInterface $metadata) {
     if ($value instanceof ContentEntityInterface) {
       $context = new RenderContext();
-      $result = $this->renderer->executeInRenderContext($context, function () use ($value) {
+      $result = $this->renderer->executeInRenderContext($context, function () use ($value): array {
         $tags = $this->metatagManager->tagsFromEntityWithDefaults($value);
 
         // Trigger hook_metatags_attachments_alter().
@@ -136,15 +136,13 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
         $elements = $this->metatagManager->generateRawElements($tags, $value);
         $elements = array_filter(
           $elements,
-          function ($metatag_object) {
-            return !NestedArray::getValue(
-              $metatag_object,
-              [
-                '#attributes',
-                'schema_metatag',
-              ]
-            );
-          }
+          fn($metatag_object): bool => !NestedArray::getValue(
+            $metatag_object,
+            [
+              '#attributes',
+              'schema_metatag',
+            ]
+          )
         );
 
         $data = [];

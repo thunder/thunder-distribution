@@ -1,0 +1,12 @@
+metatag.metatag_defaults.node__article:
+  expected_config:
+    tags:
+      canonical_url: '[node:path]'
+      og_url: '[node:path]'
+  update_actions:
+    delete:
+      tags:
+        canonical_url: '[node:path]'
+    change:
+      tags:
+        og_url: '[node:url]'

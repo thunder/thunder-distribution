@@ -1,6 +1,14 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.restricted_html
+  module:
+    - access_unpublished
+    - filter
+    - media
+    - system
+    - thunder_taxonomy
 id: anonymous
 label: 'Anonymous user'
 weight: -10
@@ -9,7 +17,6 @@ permissions:
   - 'access content'
   - 'access user profiles'
   - 'access_unpublished node article'
-  - 'opt-in or out of tracking'
   - 'use text format restricted_html'
   - 'view media'
   - 'view published terms in channel'

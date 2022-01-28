@@ -15,16 +15,14 @@ use Drupal\Tests\thunder\Functional\ThunderTestBase;
 class FilenameTransliterationTest extends ThunderTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
-  public static $modules = ['file_test', 'file'];
+  protected static $modules = ['file_test', 'file'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
 
     parent::setUp();
 
@@ -36,7 +34,7 @@ class FilenameTransliterationTest extends ThunderTestBase {
   /**
    * Test for transliteration of file name.
    */
-  public function testFileTransliteration() {
+  public function testFileTransliteration(): void {
 
     $account = $this->drupalCreateUser(['access site reports']);
     $this->drupalLogin($account);
@@ -46,7 +44,9 @@ class FilenameTransliterationTest extends ThunderTestBase {
     }
     else {
       // Needed for min testing.
-      $original = drupal_get_path('module', 'simpletest') . '/files';
+      /** @var \Drupal\Core\Extension\ExtensionPathResolver $extensionPathResolver */
+      $extensionPathResolver = \Drupal::service('extension.path.resolver');
+      $original = $extensionPathResolver->getPath('module', 'simpletest') . '/files';
       \Drupal::service('file_system')->copy($original . '/image-1.png', PublicStream::basePath() . '/foo°.png');
     }
 

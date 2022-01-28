@@ -31,7 +31,7 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
   /**
    * {@inheritdoc}
    */
-  protected function visitInstaller() {
+  protected function visitInstaller(): void {
     include_once DRUPAL_ROOT . '/core/includes/install.core.inc';
     $version = _install_get_version_info(\Drupal::VERSION)['major'] . '.0.0';
 
@@ -52,7 +52,7 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
    * @return string
    *   Contents for the test .po file.
    */
-  protected function getPo($langcode) {
+  protected function getPo(string $langcode): string {
     return <<<ENDPO
 msgid ""
 msgstr ""
@@ -75,9 +75,9 @@ ENDPO;
   /**
    * {@inheritdoc}
    */
-  protected function continueOnExpectedWarnings($expected_warnings = []) {
+  protected function continueOnExpectedWarnings($expected_warnings = []): void {
     // Don't try to continue if there are errors.
-    if (strpos($this->getTextContent(), $this->translations['Errors found']) !== FALSE) {
+    if (strpos($this->getTextContent(), (string) $this->translations['Errors found']) !== FALSE) {
       return;
     }
     // Allow only details elements that are directly after the warning header

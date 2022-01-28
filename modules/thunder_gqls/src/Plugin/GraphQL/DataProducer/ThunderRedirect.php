@@ -4,6 +4,7 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Path\PathValidatorInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 use Drupal\redirect\Entity\Redirect;
@@ -46,16 +47,24 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
   protected $languageManager;
 
   /**
+   * The path validator.
+   *
+   * @var \Drupal\Core\Path\PathValidatorInterface
+   */
+  protected $pathValidator;
+
+  /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     return new static(
       $configuration,
       $plugin_id,
       $plugin_definition,
       $container->get('language_manager'),
+      $container->get('path.validator'),
       $container->get('redirect.repository', ContainerInterface::NULL_ON_INVALID_REFERENCE)
     );
   }
@@ -71,6 +80,8 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    *   The plugin definition.
    * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
    *   The language manager.
+   * @param \Drupal\Core\Path\PathValidatorInterface $pathValidator
+   *   The path validator.
    * @param \Drupal\redirect\RedirectRepository|null $redirectRepository
    *   The redirect repository.
    *
@@ -81,10 +92,12 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
     $pluginId,
     $pluginDefinition,
     LanguageManagerInterface $languageManager,
+    PathValidatorInterface $pathValidator,
     ?RedirectRepository $redirectRepository = NULL
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
     $this->languageManager = $languageManager;
+    $this->pathValidator = $pathValidator;
     $this->redirectRepository = $redirectRepository;
   }
 
@@ -99,26 +112,49 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    * @return array
    *   The redirect data.
    */
-  public function resolve(string $path, RefinableCacheableDependencyInterface $metadata) {
-    if (!$this->redirectRepository) {
-      return [];
-    }
-    $language = $this->languageManager->getCurrentLanguage()->getId();
+  public function resolve(string $path, RefinableCacheableDependencyInterface $metadata): array {
+    $metadata->addCacheTags(['redirect_list']);
+    if ($this->redirectRepository) {
+      $language = $this->languageManager->getCurrentLanguage()->getId();
 
-    /** @var \Drupal\redirect\Entity\Redirect|null $redirect */
-    $redirect = $this->redirectRepository->findMatchingRedirect($path, [], $language);
-    if ($redirect instanceof Redirect) {
-      $urlObject = $redirect->getRedirectUrl();
-      $metadata->addCacheTags(
-        array_merge($redirect->getCacheTags(), ['redirect_list'])
+      /** @var \Drupal\redirect\Entity\Redirect|null $redirect */
+      $redirect = $this->redirectRepository->findMatchingRedirect(
+        $path,
+        [],
+        $language
       );
+      if ($redirect instanceof Redirect) {
+        $urlObject = $redirect->getRedirectUrl();
+        $metadata->addCacheTags($redirect->getCacheTags());
 
-      return [
-        'url' => $urlObject->toString(TRUE)->getGeneratedUrl(),
-        'status' => $redirect->getStatusCode(),
-      ];
+        return [
+          'url' => $urlObject->toString(TRUE)->getGeneratedUrl(),
+          'status' => $redirect->getStatusCode(),
+        ];
+      }
     }
-    return [];
+
+    if (($url = $this->pathValidator->getUrlIfValidWithoutAccessCheck($path)) && $url->isRouted()) {
+      if ($url->access()) {
+        return [
+          'url' => $path,
+          'status' => 200,
+        ];
+      }
+      else {
+        $metadata->addCacheTags(['4xx-response']);
+        return [
+          'url' => $path,
+          'status' => 403,
+        ];
+      }
+    }
+
+    $metadata->addCacheTags(['4xx-response']);
+    return [
+      'url' => $path,
+      'status' => 404,
+    ];
   }
 
 }

@@ -17,16 +17,16 @@ third_party_settings:
         - field_url
         - field_author
         - field_content
+      label: Basis
+      region: content
       parent_name: ''
       weight: 0
       format_type: fieldset
       format_settings:
-        id: ''
         classes: content-form__form-section
+        id: ''
         description: ''
         required_fields: true
-      label: Basis
-      region: content
 id: media.twitter.default
 targetEntityType: media
 bundle: twitter
@@ -57,11 +57,11 @@ content:
   field_url:
     type: link_default
     weight: 0
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
     weight: 1
