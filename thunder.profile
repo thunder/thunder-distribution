@@ -104,9 +104,9 @@ function thunder_preprocess_html(array &$variables): void {
 /**
  * Implements template_preprocess_status_report().
  */
-function thunder_preprocess_status_report_general_info(&$variables) {
+function thunder_preprocess_status_report_general_info(array &$variables): void {
   if (!empty($thunder_version = \Drupal::service('extension.list.module')->get('thunder')->info['version'])) {
-    $variables['drupal']['value'] = $variables['drupal']['value'] . ' (Thunder ' . $thunder_version . ')';
+    $variables['drupal']['value'] .= ' (Thunder ' . $thunder_version . ')';
   }
 }
 

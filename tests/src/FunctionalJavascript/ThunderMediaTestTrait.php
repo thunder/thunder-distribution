@@ -20,7 +20,7 @@ trait ThunderMediaTestTrait {
    * @param array $medias
    *   List of media identifiers.
    */
-  public function selectMedia($fieldName, array $medias) {
+  public function selectMedia(string $fieldName, array $medias): void {
 
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();

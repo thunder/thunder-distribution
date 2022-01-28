@@ -156,11 +156,12 @@ content:
     weight: 4
     region: content
     settings:
-      form_mode: override
       media_types: {  }
       add_button_text: 'Select image'
+      form_mode: override
     third_party_settings:
       entity_reference_actions:
+        enabled: false
         options:
           action_title: Action
           include_exclude: exclude
@@ -170,7 +171,6 @@ content:
             media_publish_action: '0'
             media_save_action: '0'
             media_unpublish_action: '0'
-        enabled: false
   field_teaser_text:
     type: string_textarea
     weight: 6
