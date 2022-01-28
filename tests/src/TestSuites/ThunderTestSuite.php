@@ -40,7 +40,7 @@ class ThunderTestSuite extends TestSuite {
     if ($chunk = (int) getenv('THUNDER_TEST_CHUNK')) {
       $sorted_tests = [];
       foreach (array_values($tests) as $key => $value) {
-        if ($key % 3 === ($chunk -1)) {
+        if ($key % 3 === ($chunk - 1)) {
           $sorted_tests[] = $value;
         }
       }
