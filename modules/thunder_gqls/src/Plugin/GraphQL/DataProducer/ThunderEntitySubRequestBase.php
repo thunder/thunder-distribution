@@ -100,7 +100,7 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
 
     /** @var \Drupal\graphql\SubRequestResponse $response */
     $response = $this->httpKernel->handle($request, HttpKernelInterface::SUB_REQUEST);
-    if ($response instanceof SubRequestResponses) {
+    if ($response instanceof SubRequestResponse) {
       return $response->getResult();
     }
 
