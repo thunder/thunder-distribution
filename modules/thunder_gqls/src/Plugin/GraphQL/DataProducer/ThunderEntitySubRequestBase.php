@@ -4,6 +4,7 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
+use Drupal\graphql\SubRequestResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -99,7 +100,11 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
 
     /** @var \Drupal\graphql\SubRequestResponse $response */
     $response = $this->httpKernel->handle($request, HttpKernelInterface::SUB_REQUEST);
-    return $response->getResult();
+    if ($response instanceof SubRequestResponses) {
+      return $response->getResult();
+    }
+
+    return '';
   }
 
   /**
