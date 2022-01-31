@@ -26,10 +26,7 @@ trait ThunderMediaTestTrait {
     $page = $this->getSession()->getPage();
 
     $button_selector = '[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '"] .media-library-open-button';
-    $this->scrollElementInView($button_selector);
-    $page->find('css', $button_selector)->press();
-
-    $this->assertWaitOnAjaxRequest();
+    $this->clickCssSelector($button_selector);
 
     foreach ($medias as $media) {
       $this->click("div.media-library-views-form__rows input[value='$media']");
