@@ -17,7 +17,7 @@ class EntityReferenceActionsTest extends ThunderJavascriptTestBase {
   /**
    * Test editing of media items in an embedded gallery.
    */
-  public function testMediaEditInArticle() {
+  public function testMediaEditInArticle(): void {
 
     $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
     $this->drupalGet($node->toUrl('edit-form'));

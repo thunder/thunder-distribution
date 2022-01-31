@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.3.3](https://github.com/thunder/thunder-distribution/tree/6.3.3) 2022-01-26
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.2...6.3.3)
+
+Drush 11 compatibility and improved entity browser integration for single images.
+
 ## [6.3.2](https://github.com/thunder/thunder-distribution/tree/6.3.2) 2022-01-24
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.1...6.3.2)

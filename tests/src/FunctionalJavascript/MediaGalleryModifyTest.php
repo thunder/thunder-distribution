@@ -17,8 +17,10 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
   /**
    * {@inheritdoc}
+   *
+   * @phpstan-ignore-next-line
    */
-  protected function sortableUpdate($item, $from, $to = NULL) {
+  protected function sortableUpdate($item, $from, $to = NULL): void {
     [$container] = explode(' ', $item, 2);
     $js = <<<END
 if (typeof Drupal.entityBrowserEntityReference === 'object') {
@@ -36,7 +38,7 @@ END;
    *
    * @throws \Exception
    */
-  public function testOrderChange() {
+  public function testOrderChange(): void {
     $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
     $this->drupalGet($node->toUrl('edit-form'));
 
@@ -85,7 +87,7 @@ END;
    *   - reorder inside entity browser
    *   - remove inside entity browser.
    */
-  public function testAddRemove() {
+  public function testAddRemove(): void {
 
     // Test remove inside inline entity form.
     $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');

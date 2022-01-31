@@ -10,7 +10,7 @@ use Drupal\thunder_test_mock_request\MockHttpClientMiddleware;
 /**
  * Implements hook_install().
  */
-function thunder_test_mock_request_install() {
+function thunder_test_mock_request_install(): void {
   /** @var \Drupal\Core\Extension\ExtensionPathResolver $extensionPathResolver */
   $extensionPathResolver = \Drupal::service('extension.path.resolver');
   $fixturesDirectory = $extensionPathResolver->getPath('profile', 'thunder') . '/tests/fixtures/oembed';

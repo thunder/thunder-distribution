@@ -24,7 +24,7 @@ trait ThunderParagraphsTestTrait {
    * @return int
    *   Returns number of paragraphs.
    */
-  protected function getNumberOfParagraphs($fieldName) {
+  protected function getNumberOfParagraphs(string $fieldName): int {
     $paragraphRows = $this->getParagraphItems($fieldName);
 
     return count($paragraphRows);
@@ -39,7 +39,7 @@ trait ThunderParagraphsTestTrait {
    * @return \Behat\Mink\Element\NodeElement[]
    *   The paragraph node element.
    */
-  protected function getParagraphItems($fieldName) {
+  protected function getParagraphItems(string $fieldName) {
     $fieldNamePart = HTML::cleanCssIdentifier($fieldName);
 
     return $this->xpath("//*[@id=\"edit-{$fieldNamePart}-wrapper\"]//table[starts-with(@id, \"{$fieldNamePart}-values\")]/tbody/tr[contains(@class, \"draggable\")]//div[number(substring-after(@data-drupal-selector, \"edit-{$fieldNamePart}-\")) >= 0]");
@@ -62,7 +62,7 @@ trait ThunderParagraphsTestTrait {
    *
    * @throws \Exception
    */
-  public function addParagraph($fieldName, $type, $position = NULL) {
+  public function addParagraph(string $fieldName, string $type, $position = NULL) {
     $numberOfParagraphs = $this->getNumberOfParagraphs($fieldName);
 
     $types = ['text' => 1, 'image' => 2, 'gallery' => 3];
@@ -104,7 +104,7 @@ trait ThunderParagraphsTestTrait {
    *
    * @throws \Exception
    */
-  public function getParagraphDelta($fieldName, $position) {
+  public function getParagraphDelta(string $fieldName, int $position) {
     $fieldSelector = HTML::cleanCssIdentifier($fieldName);
 
     // Retrieve new paragraphs delta from id attribute of the item.
@@ -129,7 +129,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   Position of the paragraph.
    */
-  public function addImageParagraph($fieldName, array $media, $position = NULL) {
+  public function addImageParagraph(string $fieldName, array $media, $position = NULL): void {
     $paragraphIndex = $this->addParagraph($fieldName, 'image', $position);
 
     $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_image", 'image_browser', $media);
@@ -145,7 +145,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   Position of the paragraph.
    */
-  public function addVideoParagraph($fieldName, array $media, $position = NULL) {
+  public function addVideoParagraph(string $fieldName, array $media, $position = NULL): void {
     $paragraphIndex = $this->addParagraph($fieldName, 'video', $position);
 
     $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_video", 'video_browser', $media);
@@ -163,7 +163,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   Position of the paragraph.
    */
-  public function addGalleryParagraph($fieldName, $name, array $media, $position = NULL) {
+  public function addGalleryParagraph(string $fieldName, string $name, array $media, $position = NULL): void {
     $paragraphIndex = $this->addParagraph($fieldName, 'gallery', $position);
 
     $this->createGallery($name, "{$fieldName}_{$paragraphIndex}_subform_field_media", $media);
@@ -181,7 +181,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   Position of the paragraph.
    */
-  public function addTextParagraph($fieldName, $text, $type = 'text', $position = NULL) {
+  public function addTextParagraph(string $fieldName, string $text, string $type = 'text', $position = NULL): void {
     $paragraphIndex = $this->addParagraph($fieldName, $type, $position);
 
     if (!empty($text)) {
@@ -204,7 +204,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   Position of the paragraph.
    */
-  public function addSocialParagraph($fieldName, $socialUrl, $type, $position = NULL) {
+  public function addSocialParagraph(string $fieldName, string $socialUrl, string $type, $position = NULL): void {
     $paragraphIndex = $this->addParagraph($fieldName, $type, $position);
 
     /** @var \Behat\Mink\Element\DocumentElement $page */
@@ -230,7 +230,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   Position of the paragraph.
    */
-  public function addLinkParagraph($fieldName, $urlText, $url, $position = NULL) {
+  public function addLinkParagraph(string $fieldName, string $urlText, string $url, $position = NULL): void {
     $paragraphIndex = $this->addParagraph($fieldName, 'link', $position);
 
     /** @var \Behat\Mink\Element\DocumentElement $page */
@@ -248,7 +248,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $index
    *   Index of paragraph to be edited, starts from 0.
    */
-  public function editParagraph($paragraphsFieldName, $index) {
+  public function editParagraph(string $paragraphsFieldName, int $index): void {
     $editButtonName = "{$paragraphsFieldName}_{$index}_edit";
 
     $this->scrollElementInView("[name=\"{$editButtonName}\"]");

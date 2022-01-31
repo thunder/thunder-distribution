@@ -18,7 +18,7 @@ class ThunderTestSuite extends TestSuite {
    * @return static
    *   The test suite.
    */
-  public static function suite() {
+  public static function suite(): self {
     $root = dirname(__DIR__, 3);
 
     $suite = new static('thunder');
@@ -37,8 +37,8 @@ class ThunderTestSuite extends TestSuite {
       }
     }
 
-    if ($chunk = intval(getenv('THUNDER_TEST_CHUNK'))) {
-      $chunks = array_chunk($tests, ceil(count($tests) / 3));
+    if ($chunk = (int) getenv('THUNDER_TEST_CHUNK')) {
+      $chunks = array_chunk($tests, (int) ceil(count($tests) / 3));
       $suite->addTestFiles($chunks[$chunk - 1]);
     }
     else {

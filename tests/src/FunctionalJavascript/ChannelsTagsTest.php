@@ -24,7 +24,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
   /**
    * Test channel creation, tagging of articles and channel page with articles.
    */
-  public function testChannelsCreation() {
+  public function testChannelsCreation(): void {
     $this->drupalGet('admin/structure/taxonomy/manage/channel/add');
 
     // Create new Channel with 2 paragraphs.

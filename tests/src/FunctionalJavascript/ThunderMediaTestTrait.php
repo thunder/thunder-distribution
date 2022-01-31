@@ -22,7 +22,7 @@ trait ThunderMediaTestTrait {
    * @param array $medias
    *   List of media identifiers.
    */
-  public function selectMedia($fieldName, $entityBrowser, array $medias) {
+  public function selectMedia(string $fieldName, string $entityBrowser, array $medias): void {
     $driver = $this->getSession()->getDriver();
 
     $selector = 'edit-' . str_replace(['[', ']', '_'], '-', $fieldName);
@@ -52,7 +52,7 @@ trait ThunderMediaTestTrait {
    * @param array $medias
    *   List of media identifiers.
    */
-  public function createGallery($name, $fieldName, array $medias) {
+  public function createGallery(string $name, string $fieldName, array $medias): void {
 
     $page = $this->getSession()->getPage();
 

@@ -26,12 +26,12 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function registerResolvers(ResolverRegistryInterface $registry) {
+  public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 
     $this->registry->addTypeResolver('Page',
       \Closure::fromCallable([
-        __CLASS__,
+        self::class,
         'resolvePageTypes',
       ])
     );
@@ -42,7 +42,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
   /**
    * Add article field resolvers.
    */
-  protected function resolveFields() {
+  protected function resolveFields(): void {
 
     // Page.
     $this->addFieldResolverIfNotExists('Query', 'page',
@@ -73,12 +73,10 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
     );
 
     $this->addFieldResolverIfNotExists('Article', 'teaser',
-     $this->builder->callback(function (ContentEntityInterface $entity) {
-       return [
-         'image' => $entity->field_teaser_media->entity,
-         'text' => $entity->field_teaser_text->value,
-       ];
-     })
+     $this->builder->callback(fn(ContentEntityInterface $entity): array => [
+       'image' => $entity->field_teaser_media->entity,
+       'text' => $entity->field_teaser_text->value,
+     ])
     );
 
     // Basic page.
@@ -167,15 +165,11 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
 
     // Entity List.
     $this->addFieldResolverIfNotExists('EntityList', 'total',
-      $this->builder->callback(function (EntityListResponse $entityList) {
-        return $entityList->total();
-      })
+      $this->builder->callback(fn(EntityListResponse $entityList): int => $entityList->total())
     );
 
     $this->addFieldResolverIfNotExists('EntityList', 'items',
-      $this->builder->callback(function (EntityListResponse $entityList) {
-        return $entityList->items();
-      })
+      $this->builder->callback(fn(EntityListResponse $entityList) => $entityList->items())
     );
   }
 
