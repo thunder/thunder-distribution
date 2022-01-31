@@ -104,7 +104,10 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
       return $response->getResult();
     }
 
-    return '';
+    $produces = $this->getPluginDefinition()['produces'];
+    $dataDefinition = $produces->getDataDefinition();
+
+    return $produces->getTypedDataManager()->create($dataDefinition)->getValue();
   }
 
   /**

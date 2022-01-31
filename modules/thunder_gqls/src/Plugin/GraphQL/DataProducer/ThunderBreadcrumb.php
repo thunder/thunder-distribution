@@ -15,7 +15,7 @@ use Drupal\Core\Routing\CurrentRouteMatch;
  *   id = "thunder_breadcrumb",
  *   name = @Translation("Breadcrumb"),
  *   description = @Translation("Breadcrumb"),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("map",
  *     label = @Translation("Breadcrumb")
  *   ),
  *   consumes = {
