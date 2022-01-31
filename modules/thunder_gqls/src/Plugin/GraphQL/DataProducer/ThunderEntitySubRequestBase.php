@@ -97,9 +97,9 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
     $url = $this->currentRequest->getSchemeAndHttpHost() . $contextValues['path'];
     $request = $this->createRequest($this->currentRequest, $url, $fieldContext);
 
-    return $this->httpKernel
-      ->handle($request, HttpKernelInterface::SUB_REQUEST)
-      ->getResult();
+    /** @var \Drupal\graphql\SubRequestResponse $response */
+    $response = $this->httpKernel->handle($request, HttpKernelInterface::SUB_REQUEST);
+    return $response->getResult();
   }
 
   /**
