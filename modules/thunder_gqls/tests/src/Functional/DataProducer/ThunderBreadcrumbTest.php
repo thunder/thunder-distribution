@@ -23,13 +23,6 @@ class ThunderBreadcrumbTest extends ThunderGqlsTestBase {
   ];
 
   /**
-   * {@inheritdoc}
-   */
-  public function setUp(): void {
-    parent::setUp();
-  }
-
-  /**
    * @covers \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\ThunderBreadCrumb::resolve
    */
   public function testThunderBreadCrumb(): void {
@@ -67,11 +60,12 @@ class ThunderBreadcrumbTest extends ThunderGqlsTestBase {
   }
 
   /**
-   * @param $result
+   * Assert the breadcromb for the test node.
    *
-   * @return void
+   * @param array $result
+   *   The data producer result.
    */
-  protected function assertBreadcrumb($result): void {
+  protected function assertBreadcrumb(array $result): void {
     $this->assertNotNull($result[0]);
     $this->assertEquals('route:<front>', $result[0]['uri']);
     $this->assertEquals('Home', $result[0]['title']);

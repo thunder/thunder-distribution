@@ -92,7 +92,7 @@ class ThunderBreadcrumb extends ThunderEntitySubRequestBase {
       $this->currentRouteMatch->getCurrentRouteMatch()
     )->getLinks() as $link) {
       $text = $link->getText();
-      if ($text instanceof TranslatableMarkup){
+      if ($text instanceof TranslatableMarkup) {
         $text = $text->render();
       }
       $breadCrumb[] = [
