@@ -14,7 +14,7 @@ bundle: article
 label: 'Teaser Media'
 description: 'The teaser image is displayed on overview pages.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

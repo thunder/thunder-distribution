@@ -21,20 +21,14 @@ trait ThunderMediaTestTrait {
    *   List of media identifiers.
    */
   public function selectMedia(string $fieldName, array $medias): void {
-
-    /** @var \Behat\Mink\Element\DocumentElement $page */
-    $page = $this->getSession()->getPage();
-
     $button_selector = '[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '"] .media-library-open-button';
     $this->clickCssSelector($button_selector);
 
     foreach ($medias as $media) {
-      $this->click("div.media-library-views-form__rows input[value='$media']");
+      $this->clickCssSelector("div.media-library-views-form__rows input[value='$media']", FALSE);
     }
 
-    $page->find('css', '.media-library-widget-modal .form-actions button')->click();
-
-    $this->assertWaitOnAjaxRequest();
+    $this->clickCssSelector('.media-library-widget-modal .form-actions button');
   }
 
   /**
