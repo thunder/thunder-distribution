@@ -54,7 +54,7 @@ class ParagraphsFeaturesTest extends ThunderJavascriptTestBase {
     $this->assertWaitOnAjaxRequest();
     $this->assertEquals(1, $this->getNumberOfParagraphs(static::$paragraphsField));
 
-    $this->editParagraph('field_paragraphs', 1);
+    $this->editParagraph(static::$paragraphsField, 1);
     $customFormDeleteButton = $page->find('xpath', '//div[contains(@id, "field-paragraphs-1-item-wrapper")]//button[contains(@class, "paragraph-form-item__action--remove")]');
     $hiddenFormDeleteButton = $page->find('xpath', '//div[contains(@id, "field-paragraphs-1-item-wrapper")]//button[contains(@class, "paragraph-form-item__action--remove")]');
     $this->assertTrue($customFormDeleteButton->isVisible(), 'Delete button should be visible');
