@@ -73,6 +73,7 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
 
     // Select and move link field.
     $driver->click('//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/tbody/tr[4]/td[1]/div/span/input');
+    $this->scrollElementInView('[data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"] tr.tabledrag-sort-target-wrapper');
     $driver->click('//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/tbody/tr[1]/td/a');
 
     // Check content of field url on certain position.

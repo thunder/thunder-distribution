@@ -167,7 +167,7 @@ JS;
   protected function clickSave(): void {
     $driver = $this->getSession()->getDriver();
 
-    $driver->click('//div[@data-drupal-selector="edit-actions"]/input[@id="edit-submit"]');
+    $driver->click('//div[@data-drupal-selector="edit-actions"]/input[@data-drupal-selector="edit-submit"]');
   }
 
 }
