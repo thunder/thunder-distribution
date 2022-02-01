@@ -62,8 +62,8 @@ class ThunderBreadcrumbTest extends ThunderGqlsTestBase {
       'path' => '/redirected-url',
     ]);
 
+    $this->assertIsArray($result);
     $this->assertEmpty($result);
-
   }
 
   /**

@@ -2,6 +2,7 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\Core\Breadcrumb\BreadcrumbManager;
@@ -15,7 +16,7 @@ use Drupal\Core\Routing\CurrentRouteMatch;
  *   id = "thunder_breadcrumb",
  *   name = @Translation("Breadcrumb"),
  *   description = @Translation("Breadcrumb"),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("map",
  *     label = @Translation("Breadcrumb")
  *   ),
  *   consumes = {
@@ -90,9 +91,13 @@ class ThunderBreadcrumb extends ThunderEntitySubRequestBase {
     foreach ($this->breadcrumbManager->build(
       $this->currentRouteMatch->getCurrentRouteMatch()
     )->getLinks() as $link) {
+      $text = $link->getText();
+      if ($text instanceof TranslatableMarkup){
+        $text = $text->render();
+      }
       $breadCrumb[] = [
         'uri' => $link->getUrl()->toUriString(),
-        'title' => $link->getText(),
+        'title' => $text,
       ];
     }
     return $breadCrumb;

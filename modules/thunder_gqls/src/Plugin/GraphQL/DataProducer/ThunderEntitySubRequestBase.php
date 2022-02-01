@@ -4,7 +4,6 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
-use Drupal\graphql\SubRequestResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -98,15 +97,13 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
     $url = $this->currentRequest->getSchemeAndHttpHost() . $contextValues['path'];
     $request = $this->createRequest($this->currentRequest, $url, $fieldContext);
 
+    /** @var \Drupal\graphql\SubRequestResponse $response */
     $response = $this->httpKernel->handle($request, HttpKernelInterface::SUB_REQUEST);
-    if ($response instanceof SubRequestResponse) {
-      return $response->getResult();
+    if ($response->getStatusCode() !== 200) {
+      return '';
     }
 
-    $produces = $this->getPluginDefinition()['produces'];
-    $dataDefinition = $produces->getDataDefinition();
-
-    return $produces->getTypedDataManager()->create($dataDefinition)->getValue();
+    return $response->getResult();
   }
 
   /**
