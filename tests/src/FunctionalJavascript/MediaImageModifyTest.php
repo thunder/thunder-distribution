@@ -84,7 +84,9 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     // Save paragraph.
     $this->clickAjaxButtonCssSelector('[name="field_paragraphs_0_collapse"]');
-    $this->assertEquals([$image2->field_image->entity->getFilename()], $this->getSession()->evaluateScript('jQuery(\'[data-drupal-selector="edit-field-paragraphs-0-preview"] article.media--view-mode-paragraph-preview img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1)'), 'Image file should be identical to previously selected.');
+    /** @var \Drupal\file\FileInterface $file */
+    $file = $image2->field_image->entity;
+    $this->assertEquals([$file->getFilename()], $this->getSession()->evaluateScript('jQuery(\'[data-drupal-selector="edit-field-paragraphs-0-preview"] article.media--view-mode-paragraph-preview img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1)'), 'Image file should be identical to previously selected.');
   }
 
 }
