@@ -64,7 +64,7 @@ JS;
       $php_log_entries = [];
       foreach ($rows as $row) {
         // @see \Drupal\dblog\Controller\DbLogController::formatMessage()
-        $variables = @unserialize($row->variables);
+        $variables = @unserialize($row->variables, ['allowed_classes' => FALSE]);
         // Messages without variables or user specified text.
         if ($variables === NULL) {
           $message = Xss::filterAdmin($row->message);
@@ -167,7 +167,7 @@ JS;
   protected function clickSave(): void {
     $driver = $this->getSession()->getDriver();
 
-    $driver->click('//div[@data-drupal-selector="edit-actions"]/input[@id="edit-submit"]');
+    $driver->click('//div[@data-drupal-selector="edit-actions"]/input[@data-drupal-selector="edit-submit"]');
   }
 
 }

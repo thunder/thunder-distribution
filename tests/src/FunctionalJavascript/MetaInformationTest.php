@@ -10,6 +10,7 @@ use Drupal\Tests\Traits\Core\CronRunTrait;
  * @group Thunder
  *
  * @package Drupal\Tests\thunder\FunctionalJavascript
+ * @todo Convert to functional test.
  */
 class MetaInformationTest extends ThunderJavascriptTestBase {
 
@@ -67,8 +68,15 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     'open_graph og:title' => '[node:field_seo_title]',
     'open_graph og:site_name' => '[node:title]',
     'open_graph og:type' => 'article',
+
+    // Schema.org metatags.
     'schema_article schema_article_headline' => '[node:field_seo_title]',
     'schema_article schema_article_description' => '[node:field_teaser_text]',
+
+    // Facebook Metatags.
+    'facebook fb:admins' => 'zuck',
+    'facebook fb:pages' => 'some-fancy-fb-page-url',
+    'facebook fb:app_id' => '1121151812167212,1121151812167213',
   ];
 
   /**

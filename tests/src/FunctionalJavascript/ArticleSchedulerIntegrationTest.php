@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Drupal\Tests\Traits\Core\CronRunTrait;
+
 /**
  * Tests content moderation and scheduling.
  *
@@ -10,11 +12,12 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 class ArticleSchedulerIntegrationTest extends ThunderJavascriptTestBase {
 
   use ThunderArticleTestTrait;
+  use CronRunTrait;
 
   /**
-   * Test Creation of Article.
+   * Test that restricted editors are not allowed to edit scheduled articles.
    */
-  public function testSchedulerAccess(): void {
+  public function testRestrictedEditorSchedulerAccess(): void {
     $this->logWithRole('restricted_editor');
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
@@ -45,12 +48,12 @@ class ArticleSchedulerIntegrationTest extends ThunderJavascriptTestBase {
     // Test restricted editor access.
     $this->logWithRole('restricted_editor');
     $this->drupalGet($edit_url);
-    $this->assertEquals(1, count($this->xpath('//h1[contains(@class, "page-title")]//span[text() = "403"]')));
+    $this->assertCount(1, $this->xpath('//h1[contains(@class, "page-title") and text() = "403"]'));
 
-    $this->container->get('cron')->run();
+    $this->cronRun();
 
     $this->drupalGet($edit_url);
-    $this->assertEquals(1, count($this->xpath('//h1[contains(@class, "page-title")]//em[text() = "Edit Article"]')));
+    $this->assertCount(1, $this->xpath('//h1[contains(@class, "page-title") and text() = "Scheduler integration testing"]'));
 
   }
 
