@@ -71,7 +71,7 @@ class ThunderBreadcrumbTest extends ThunderGqlsTestBase {
     $this->assertEquals('Home', $result[0]['title']);
 
     $this->assertNotNull($result[1]);
-    $this->assertEquals('route:entity.taxonomy_term.canonical;taxonomy_term=2', $result[1]['uri']);
+    $this->assertStringStartsWith('route:entity.taxonomy_term.canonical;taxonomy_term=', $result[1]['uri']);
     $this->assertEquals('Events', $result[1]['title']);
   }
 
