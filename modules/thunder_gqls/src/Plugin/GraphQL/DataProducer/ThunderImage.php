@@ -19,7 +19,7 @@ use Drupal\Core\File\FileUrlGeneratorInterface;
  *   id = "thunder_image",
  *   name = @Translation("Image meta data"),
  *   description = @Translation("Returns the meta data of an image entity."),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("map",
  *     label = @Translation("Metadata")
  *   ),
  *   consumes = {
