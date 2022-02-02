@@ -21,14 +21,27 @@ trait ThunderMediaTestTrait {
    *   List of media identifiers.
    */
   public function selectMedia(string $fieldName, array $medias): void {
-    $button_selector = '[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '"] .media-library-open-button';
-    $this->clickCssSelector($button_selector);
+    $this->openEntityBrowser($fieldName);
 
+    $this->toggleMedia($medias);
+
+    $this->submitEntityBrowser();
+  }
+
+  /**
+   * Toggle media items in the library.
+   *
+   * @param array $medias
+   *   List of media identifiers.
+   */
+  public function toggleMedia(array $medias): void {
     foreach ($medias as $media) {
-      $this->clickCssSelector("div.media-library-views-form__rows input[value='$media']", FALSE);
+      // Checkboxes are hidden if replace_checkbox_by_order_indicator is
+      // enabled, so we need to show them before every click.
+      $this->getSession()
+        ->executeScript("document.querySelectorAll('div.media-library-views-form__rows input').forEach(item => { item.style.display = 'block'; })");
+      $this->clickCssSelector("div.media-library-views-form__rows input[value=\"$media\"]", FALSE);
     }
-
-    $this->clickCssSelector('.media-library-widget-modal .form-actions button');
   }
 
   /**

@@ -21,16 +21,20 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
    * @phpstan-ignore-next-line
    */
   protected function sortableUpdate($item, $from, $to = NULL): void {
-    [$container] = explode(' ', $item, 2);
-    $js = <<<END
-if (typeof Drupal.entityBrowserEntityReference === 'object') {
-  Drupal.entityBrowserEntityReference.entitiesReordered(document.querySelector("$container"));
-}
-if (typeof Drupal.entityBrowserMultiStepDisplay === 'object') {
-  Drupal.entityBrowserMultiStepDisplay.entitiesReordered(document.querySelector("$container"));
-}
-END;
-    $this->getSession()->executeScript($js);
+    // See core/modules/media_library/js/media_library.widget.es6.js.
+    $script = <<<JS
+(function ($) {
+    var selection = document.querySelectorAll('.js-media-library-selection');
+    selection.forEach(function (widget) {
+        $(widget).children().each(function (index, child) {
+            $(child).find('.js-media-library-item-weight').val(index);
+        });
+    });
+})(jQuery)
+
+JS;
+
+    $this->getSession()->executeScript($script);
   }
 
   /**
@@ -46,25 +50,20 @@ END;
 
     $this->editParagraph('field_paragraphs', 0);
 
-    // Wait for all images to be displayed properly.
-    $this->getSession()
-      ->wait(10000, "jQuery('[data-drupal-selector=\"edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current\"] .media-form__item-widget--image').filter(function() {return jQuery(this).width() === 182;}).length === 5");
-
-    $list_selector = 'div[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current"]';
+    $list_selector = '#field_media_images-media-library-wrapper-field_paragraphs-0-subform-field_media-0-inline_entity_form .js-media-library-selection';
     $this->scrollElementInView($list_selector . ' > *:nth-child(2)');
 
-    $item_selector = "$list_selector .item-container";
-    $this->sortableAfter("$item_selector:first-child", "$item_selector:nth-child(2)", $list_selector);
+    $this->sortableAfter($list_selector . ' [data-media-library-item-delta="0"]', $list_selector . ' [data-media-library-item-delta="1"]', $list_selector);
 
     $this->createScreenshot($this->getScreenshotFolder() . '/MediaGalleryModifyTest_AfterOrderChange_' . date('Ymd_His') . '.png');
 
-    $secondElement = $page->find('xpath', '//div[@data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current"]/div[2]');
+    $secondElement = $page->find('xpath', '//div[@data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-selection"]/div[2]/input[@type="hidden"]');
     if (empty($secondElement)) {
       throw new \Exception('Second element in Gallery is not found');
     }
 
     $media = $this->loadMediaByUuid('159797c5-d9f9-4e27-b425-0f703a8a416d');
-    $this->assertSame('media:' . $media->id(), $secondElement->getAttribute('data-entity-id'));
+    $this->assertSame($media->id(), $secondElement->getAttribute('value'));
 
     $this->clickSave();
 
@@ -96,7 +95,7 @@ END;
     $this->editParagraph('field_paragraphs', 0);
 
     // Remove 2nd Image.
-    $this->clickAjaxButtonCssSelector('[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current-items-1-remove-button"]');
+    $this->clickDrupalSelector('edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-selection-1-remove-button');
 
     $this->clickSave();
 
@@ -119,16 +118,14 @@ END;
     $this->editParagraph('field_paragraphs', 0);
 
     // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser('edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images', 'multiple_image_browser');
+    $this->openEntityBrowser('field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images');
 
     $this->uploadFile('/fixtures/reference.jpg');
 
-    // Move new image -> that's 5th image in list, to 3rd position.
-    $list_selector = '#edit-selected';
-    $item_selector = "$list_selector .item-container";
-    $this->sortableAfter("$item_selector:nth-child(5)", "$item_selector:nth-child(2)", $list_selector);
+    $this->submitEntityBrowser();
 
-    $this->submitEntityBrowser('multiple_image_browser');
+    // Move new image -> that's 5th image in list, to 3rd position.
+    $this->sortableAfter('[data-media-library-item-delta="4"]', '[data-media-library-item-delta="1"]', '#field_media_images-media-library-wrapper-field_paragraphs-0-subform-field_media-0-inline_entity_form .js-media-library-selection');
 
     $this->clickSave();
 
@@ -151,16 +148,12 @@ END;
     $this->editParagraph('field_paragraphs', 0);
 
     // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser('edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images', 'multiple_image_browser');
+    $this->openEntityBrowser('field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images');
 
-    $this->markTestIncomplete(
-      'Entity Browser is broken. We want to remove it.'
-    );
-    // @phpstan-ignore-next-line
     $media = $this->getMediaByName('reference.jpg');
-    $this->clickDrupalSelector('edit-selected-items-' . $media->id() . '-2-remove-button');
+    $this->toggleMedia([$media->id()]);
 
-    $this->submitEntityBrowser('multiple_image_browser');
+    $this->submitEntityBrowser();
 
     $this->clickSave();
 

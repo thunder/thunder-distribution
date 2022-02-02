@@ -12,45 +12,22 @@ trait ThunderEntityBrowserTestTrait {
   use ThunderJavascriptTrait;
 
   /**
-   * Open modal entity browser and switch into iframe from it.
+   * Open modal entity browser.
    *
-   * @param string $drupalSelector
-   *   Drupal selector.
-   * @param string $entityBrowser
-   *   Entity browser name.
+   * @param string $fieldName
+   *   Field name.
    */
-  public function openEntityBrowser(string $drupalSelector, string $entityBrowser): void {
-    $this->clickDrupalSelector($drupalSelector . '-entity-browser-entity-browser-open-modal');
-    $this->assertWaitOnAjaxRequest();
-
-    $this->getSession()
-      ->switchToIFrame('entity_browser_iframe_' . $entityBrowser);
-
-    // Wait that iframe is loaded and jQuery is available.
-    $this->getSession()->wait(10000, '(typeof jQuery !== "undefined")');
-
-    $this->assertWaitOnAjaxRequest();
+  public function openEntityBrowser(string $fieldName): void {
+    $button_selector = '[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '"] .media-library-open-button';
+    $this->clickCssSelector($button_selector);
   }
 
   /**
    * Submit changes in modal entity browser.
-   *
-   * @param string $entityBrowser
-   *   Entity browser name.
    */
-  public function submitEntityBrowser(string $entityBrowser): void {
-    $page = $this->getSession()->getPage();
-    if ($entityBrowser == 'multiple_image_browser') {
-      $this->getSession()->wait(200);
-      $this->assertWaitOnAjaxRequest();
+  public function submitEntityBrowser(): void {
+    $this->clickCssSelector('.media-library-widget-modal .form-actions button');
 
-      $page->pressButton('Use selected');
-    }
-    else {
-      $page->pressButton('edit-submit');
-    }
-
-    $this->getSession()->switchToIFrame();
     $this->assertWaitOnAjaxRequest();
   }
 
@@ -70,31 +47,8 @@ trait ThunderEntityBrowserTestTrait {
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
-    // Click all tabs until we find upload Tab.
-    $tabLinks = $page->findAll('css', '.eb-tabs a');
-    if (empty($tabLinks)) {
-      throw new \Exception(
-        sprintf(
-          'Unable to find tabs in entity browser iframe on page %s',
-          $this->getSession()->getCurrentUrl()
-        )
-      );
-    }
-
-    // Click all tabs until input file field for upload is found.
     $fileFieldSelector = "input[type='file'].dz-hidden-input";
-    $fileField = NULL;
-    foreach ($tabLinks as $tabLink) {
-      /** @var \Behat\Mink\Element\NodeElement $tabLink */
-      $tabLink->click();
-      $this->assertWaitOnAjaxRequest();
-
-      $fileField = $page->find('css', $fileFieldSelector);
-
-      if (!empty($fileField)) {
-        break;
-      }
-    }
+    $fileField = $page->find('css', $fileFieldSelector);
 
     if (empty($fileField)) {
       throw new \Exception(
@@ -109,7 +63,8 @@ trait ThunderEntityBrowserTestTrait {
     $this->getSession()
       ->executeScript('jQuery("' . $fileFieldSelector . '").show(0).css("visibility","visible").width(200).height(30).removeAttr("multiple");');
 
-    $fileField->attachFile($filePath);
+    $f = '/Users/d430774/Sites/thunder/thunder-develop/docroot/profiles/contrib/thunder/tests';
+    $fileField->attachFile($f . $filePath);
 
     $this->assertWaitOnAjaxRequest();
 
@@ -121,9 +76,8 @@ trait ThunderEntityBrowserTestTrait {
 
     $this->assertWaitOnAjaxRequest();
 
-    // In case of gallery image upload we should wait additionally so that all
-    // command for auto selection are executed.
-    $this->getSession()->wait(200);
+    $this->assertSession()->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Save and select');
+
     $this->assertWaitOnAjaxRequest();
   }
 
