@@ -17,7 +17,7 @@ use Drupal\metatag\MetatagManager;
  *   id = "thunder_jsonld",
  *   name = @Translation("JSON-LD"),
  *   description = @Translation("JSON-LD."),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("string",
  *     label = @Translation("Script tag")
  *   ),
  *   consumes = {

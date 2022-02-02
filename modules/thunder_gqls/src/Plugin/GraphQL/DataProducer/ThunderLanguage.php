@@ -14,7 +14,7 @@ use Drupal\Core\Language\LanguageManagerInterface;
  *   id = "thunder_language",
  *   name = @Translation("Language"),
  *   description = @Translation("Language."),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("string",
  *     label = @Translation("Langcode")
  *   ),
  *   consumes = {
