@@ -63,8 +63,7 @@ trait ThunderEntityBrowserTestTrait {
     $this->getSession()
       ->executeScript('jQuery("' . $fileFieldSelector . '").show(0).css("visibility","visible").width(200).height(30).removeAttr("multiple");');
 
-    $f = '/Users/d430774/Sites/thunder/thunder-develop/docroot/profiles/contrib/thunder/tests';
-    $fileField->attachFile($f . $filePath);
+    $fileField->attachFile($filePath);
 
     $this->assertWaitOnAjaxRequest();
 
