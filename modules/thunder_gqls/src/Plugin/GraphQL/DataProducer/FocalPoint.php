@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "focal_point",
  *   name = @Translation("FocalPoint"),
  *   description = @Translation("Resolves the focal point positions for a file."),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("map",
  *     label = @Translation("Focal point positions")
  *   ),
  *   consumes = {
@@ -102,12 +102,12 @@ class FocalPoint extends DataProducerPluginBase implements ContainerFactoryPlugi
    * @param \Drupal\file\FileInterface $file
    *   The entity.
    *
-   * @return mixed
+   * @return array
    *   The focal point position tag.
    */
-  public function resolve(FileInterface $file) {
+  public function resolve(FileInterface $file): array {
     if (!$this->moduleHandler->moduleExists('focal_point')) {
-      return '';
+      return ['x' => '', 'y' => ''];
     }
     return $this->focalPointManager->getCropEntity($file, $this->config->get('crop_type'))->position();
   }
