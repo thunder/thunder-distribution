@@ -170,16 +170,6 @@ function thunder_field_widget_info_alter(array &$info): void {
 }
 
 /**
- * Implements hook_field_widget_multivalue_WIDGET_TYPE_form_alter().
- *
- * Removes the cardinality information from the #prefix element of the current
- * selection.
- */
-function thunder_field_widget_multivalue_entity_browser_entity_reference_form_alter(array &$elements, FormStateInterface $form_state, array $context): void {
-  unset($elements['current']['#prefix']);
-}
-
-/**
  * Implements hook_action_info_alter().
  */
 function thunder_action_info_alter(array &$definitions): void {
