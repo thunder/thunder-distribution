@@ -107,7 +107,7 @@ class FocalPoint extends DataProducerPluginBase implements ContainerFactoryPlugi
    */
   public function resolve(FileInterface $file): array {
     if (!$this->moduleHandler->moduleExists('focal_point')) {
-      return ['x' => '', 'y' => ''];
+      return ['x' => NULL, 'y' => NULL];
     }
     return $this->focalPointManager->getCropEntity($file, $this->config->get('crop_type'))->position();
   }
