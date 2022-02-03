@@ -60,9 +60,6 @@
             },
             "drupal/graphql": {
                 "fix: language definition in entity reference producers": "https://patch-diff.githubusercontent.com/raw/drupal-graphql/graphql/pull/1241.diff"
-            },
-            "drupal/media_library_media_modify": {
-                "Media library does not preserve reordering when happened in an IEF ": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/25.diff"
             }
         }
     },
