@@ -38,7 +38,8 @@
                 "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2020-07-30/3133639-8.patch",
                 "It is possible to overflow the number of items allowed in Media Library": "https://git.drupalcode.org/project/drupal/-/merge_requests/760.diff",
                 "Media library widget forgets ordering when adding or removing items": "https://git.drupalcode.org/project/drupal/-/merge_requests/1427.diff",
-                "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch"
+                "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch",
+                "Simplify form logic in media library": "https://git.drupalcode.org/project/drupal/-/merge_requests/1793.diff"
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
@@ -55,11 +56,11 @@
             "drupal/simple_sitemap": {
                 "Sitemap variant index functionality": "https://www.drupal.org/files/issues/2021-03-03/simple_sitemap-sitemap_variant_index-3109090-16.patch"
             },
-            "drupal/gin": {
-                "Add a form description toggle": "https://git.drupalcode.org/project/gin/-/merge_requests/12.diff"
-            },
             "drupal/graphql": {
                 "fix: language definition in entity reference producers": "https://patch-diff.githubusercontent.com/raw/drupal-graphql/graphql/pull/1241.diff"
+            },
+            "drupal/media_library_media_modify": {
+                "Refactor field handling": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/26.diff"
             }
         }
     },
