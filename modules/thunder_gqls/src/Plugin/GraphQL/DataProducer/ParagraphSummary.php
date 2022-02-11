@@ -12,7 +12,7 @@ use Drupal\paragraphs\ParagraphInterface;
  *   id = "paragraph_summary",
  *   name = @Translation("Paragraphs Summary"),
  *   description = @Translation("Resolves the paragraphs summary."),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("map",
  *     label = @Translation("Summary")
  *   ),
  *   consumes = {
@@ -30,11 +30,11 @@ class ParagraphSummary extends DataProducerPluginBase {
    * @param \Drupal\paragraphs\ParagraphInterface $paragraph
    *   The entity.
    *
-   * @return mixed
+   * @return array
    *   The paragraphs summary.
    */
-  public function resolve(ParagraphInterface $paragraph) {
-    return $paragraph->getSummaryItems()['content'];
+  public function resolve(ParagraphInterface $paragraph): array {
+    return $paragraph->getSummaryItems()['content'] ?? [];
   }
 
 }

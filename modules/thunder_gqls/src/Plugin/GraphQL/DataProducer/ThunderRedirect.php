@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "thunder_redirect",
  *   name = @Translation("Redirect"),
  *   description = @Translation("Redirect."),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("map",
  *     label = @Translation("Redirect")
  *   ),
  *   consumes = {
