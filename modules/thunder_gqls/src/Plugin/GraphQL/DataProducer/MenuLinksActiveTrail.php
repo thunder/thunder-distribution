@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "menu_links_active_trail",
  *   name = @Translation("Menu links"),
  *   description = @Translation("Returns the menu links of a menu with active trail."),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("map",
  *     label = @Translation("Menu link"),
  *     multiple = TRUE
  *   ),
