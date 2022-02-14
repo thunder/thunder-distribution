@@ -56,4 +56,28 @@ class EntityListResponse {
     return new Deferred(fn() => $callback());
   }
 
+  /**
+   * Return the result ids.
+   *
+   * @return array
+   *   The list of the result ids.
+   */
+  public function getEntityIds(): array {
+    $result = $this->query->execute();
+    if (empty($result)) {
+      return [];
+    }
+    return $result;
+  }
+
+  /**
+   * Returns the query.
+   *
+   * @return QueryInterface
+   *   The query.
+   */
+  public function getQuery(): QueryInterface {
+    return $this->query;
+  }
+
 }
