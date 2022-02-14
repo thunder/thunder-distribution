@@ -73,7 +73,7 @@ class EntityListResponse {
   /**
    * Returns the query.
    *
-   * @return QueryInterface
+   * @return \Drupal\Core\Entity\Query\QueryInterface
    *   The query.
    */
   public function getQuery(): QueryInterface {
