@@ -65,6 +65,9 @@
             },
             "drupal/media_library_media_modify": {
                 "Refactor field handling": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/26.diff"
+            },
+            "drupal/entity_reference_actions": {
+                "Do not store the entire form context in the form state": "https://git.drupalcode.org/project/entity_reference_actions/-/merge_requests/4.diff"
             }
         }
     },
