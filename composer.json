@@ -60,6 +60,13 @@
             "drupal/gin": {
                 "Add a form description toggle": "https://git.drupalcode.org/project/gin/-/merge_requests/12.diff"
             }
+        },
+        "patches-ignore": {
+            "drupal/media_library_media_modify": {
+                "drupal/core": {
+                    "Simplify form logic in media library": "https://git.drupalcode.org/project/drupal/-/merge_requests/1793.diff"
+                }
+            }
         }
     },
     "require": {
