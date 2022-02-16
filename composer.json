@@ -56,9 +56,6 @@
             },
             "drupal/gin": {
                 "Add a form description toggle": "https://git.drupalcode.org/project/gin/-/merge_requests/12.diff"
-            },
-            "drupal/graphql": {
-                "fix: language definition in entity reference producers": "https://patch-diff.githubusercontent.com/raw/drupal-graphql/graphql/pull/1241.diff"
             }
         }
     },
@@ -90,7 +87,7 @@
         "drupal/facets": "^2.0",
         "drupal/gin": "3.x-dev",
         "drupal/google_analytics": "^2.0",
-        "drupal/graphql": "^4.2",
+        "drupal/graphql": "^4.3",
         "drupal/inline_entity_form": "^1.0-rc7",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.1",
