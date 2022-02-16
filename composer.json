@@ -37,8 +37,6 @@
             "drupal/core": {
                 "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2020-07-30/3133639-8.patch",
                 "It is possible to overflow the number of items allowed in Media Library": "https://git.drupalcode.org/project/drupal/-/merge_requests/760.diff",
-                "Media library widget forgets ordering when adding or removing items": "https://git.drupalcode.org/project/drupal/-/merge_requests/1427.diff",
-                "Simplify form logic in media library": "https://git.drupalcode.org/project/drupal/-/merge_requests/1793.diff",
                 "Allow field types extending entity_reference to use field widgets extending media_library": "https://www.drupal.org/files/issues/2020-09-29/core-3173770-2.patch",
                 "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch"
             },
@@ -107,7 +105,7 @@
         "drupal/media_entity_slideshow": "^2.0-alpha1",
         "drupal/media_entity_twitter": "^2.5",
         "drupal/media_expire": "^2.4",
-        "drupal/media_library_media_modify": "^1.0-beta4",
+        "drupal/media_library_media_modify": "dev-1.x",
         "drupal/metatag": "^1.19",
         "drupal/metatag_async_widget": "^1.0-alpha2",
         "drupal/paragraphs": "^1.11",
