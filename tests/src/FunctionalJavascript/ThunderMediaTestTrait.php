@@ -9,7 +9,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
  */
 trait ThunderMediaTestTrait {
 
-  use ThunderEntityBrowserTestTrait;
+  use ThunderMediaLibraryTestTrait;
   use ThunderJavascriptTrait;
 
   /**
@@ -17,29 +17,31 @@ trait ThunderMediaTestTrait {
    *
    * @param string $fieldName
    *   Field name.
-   * @param string $entityBrowser
-   *   Entity browser identifier.
    * @param array $medias
    *   List of media identifiers.
    */
-  public function selectMedia(string $fieldName, string $entityBrowser, array $medias): void {
-    $driver = $this->getSession()->getDriver();
+  public function selectMedia(string $fieldName, array $medias): void {
+    $this->openMediaLibrary($fieldName);
 
-    $selector = 'edit-' . str_replace(['[', ']', '_'], '-', $fieldName);
-    $this->openEntityBrowser($selector, $entityBrowser);
+    $this->toggleMedia($medias);
 
-    if ($entityBrowser === 'multiple_image_browser') {
-      foreach ($medias as $media) {
-        $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]");
-      }
+    $this->submitMediaLibrary();
+  }
+
+  /**
+   * Toggle media items in the library.
+   *
+   * @param array $medias
+   *   List of media identifiers.
+   */
+  public function toggleMedia(array $medias): void {
+    foreach ($medias as $media) {
+      // Checkboxes are hidden if replace_checkbox_by_order_indicator is
+      // enabled, so we need to show them before every click.
+      $this->getSession()
+        ->executeScript("document.querySelectorAll('div.media-library-views-form__rows input').forEach(item => { item.style.display = 'block'; })");
+      $this->clickCssSelector("div.media-library-views-form__rows input[value=\"$media\"]", FALSE);
     }
-    else {
-      $media = current($medias);
-      $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select' and @value='$media']]");
-    }
-    $this->assertWaitOnAjaxRequest();
-
-    $this->submitEntityBrowser($entityBrowser);
   }
 
   /**
@@ -62,7 +64,7 @@ trait ThunderMediaTestTrait {
     $nameField = $page->find('css', $selector);
     $nameField->setValue($name);
 
-    $this->selectMedia("{$fieldName}_0_inline_entity_form_field_media_images", 'multiple_image_browser', $medias);
+    $this->selectMedia("{$fieldName}_0_inline_entity_form_field_media_images", $medias);
   }
 
 }

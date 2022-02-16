@@ -92,7 +92,7 @@ JS;
    */
   public function scrollElementInView(string $cssSelector): void {
     $this->getSession()
-      ->executeScript("document.querySelector('{$cssSelector}').scrollIntoView({block: 'center'})");
+      ->executeScript("document.querySelector('$cssSelector').scrollIntoView({block: 'center'})");
   }
 
   /**

@@ -106,7 +106,7 @@ function thunder_preprocess_html(array &$variables): void {
  */
 function thunder_preprocess_status_report_general_info(array &$variables): void {
   if (!empty($thunder_version = \Drupal::service('extension.list.module')->get('thunder')->info['version'])) {
-    $variables['drupal']['value'] = $variables['drupal']['value'] . ' (Thunder ' . $thunder_version . ')';
+    $variables['drupal']['value'] .= ' (Thunder ' . $thunder_version . ')';
   }
 }
 
@@ -167,16 +167,6 @@ function thunder_field_widget_info_alter(array &$info): void {
   if (!\Drupal::moduleHandler()->moduleExists('content_moderation')) {
     unset($info['thunder_moderation_state_default']);
   }
-}
-
-/**
- * Implements hook_field_widget_multivalue_WIDGET_TYPE_form_alter().
- *
- * Removes the cardinality information from the #prefix element of the current
- * selection.
- */
-function thunder_field_widget_multivalue_entity_browser_entity_reference_form_alter(array &$elements, FormStateInterface $form_state, array $context): void {
-  unset($elements['current']['#prefix']);
 }
 
 /**
