@@ -12,7 +12,7 @@ use Drupal\image\Entity\ImageStyle;
  */
 class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
-  use ThunderEntityBrowserTestTrait;
+  use ThunderMediaLibraryTestTrait;
   use ThunderParagraphsTestTrait;
   use ThunderFormFieldTestTrait;
   use ThunderCkEditorTestTrait;
@@ -62,7 +62,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
    * Demo Article (node Id: 6) is used for testing.
    * Cases tested:
    *   - remove inside inline entity form
-   *   - add inside entity browser.
+   *   - add inside media library.
    */
   public function testRemoveAdd(): void {
 

@@ -11,7 +11,7 @@ use Drupal\FunctionalJavascriptTests\SortableTestTrait;
  */
 class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
-  use ThunderEntityBrowserTestTrait;
+  use ThunderMediaLibraryTestTrait;
   use ThunderParagraphsTestTrait;
   use SortableTestTrait;
 
@@ -82,9 +82,9 @@ JS;
    * Demo Article (node Id: 7) is used for testing.
    * Cases tested:
    *   - remove inside inline entity form
-   *   - add inside entity browser
-   *   - reorder inside entity browser
-   *   - remove inside entity browser.
+   *   - add inside media library
+   *   - reorder inside media library
+   *   - remove inside media library.
    */
   public function testAddRemove(): void {
 
@@ -112,17 +112,17 @@ JS;
       ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("26315068204_24ffa6cfc4_o.jpg")');
     $this->assertNotEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should be "26315068204_24ffa6cfc4_o.jpg".');
 
-    // Test add + reorder inside entity browser.
+    // Test add + reorder inside media library.
     $this->drupalGet($node->toUrl('edit-form'));
 
     $this->editParagraph('field_paragraphs', 0);
 
-    // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser('field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images');
+    // Click Select entities -> to open media library.
+    $this->openMediaLibrary('field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images');
 
     $this->uploadFile('/fixtures/reference.jpg');
 
-    $this->submitEntityBrowser();
+    $this->submitMediaLibrary();
 
     // Move new image -> that's 5th image in list, to 3rd position.
     $this->sortableAfter('[data-media-library-item-delta="4"]', '[data-media-library-item-delta="1"]', '#field_media_images-media-library-wrapper-field_paragraphs-0-subform-field_media-0-inline_entity_form .js-media-library-selection');
@@ -142,18 +142,18 @@ JS;
       ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'src\').indexOf("reference.jpg")');
     $this->assertNotEquals(-1, $fileNamePosition, 'For 3rd image in gallery, used file should be "reference.jpg".');
 
-    // Test remove inside entity browser.
+    // Test remove inside media library.
     $this->drupalGet($node->toUrl('edit-form'));
 
     $this->editParagraph('field_paragraphs', 0);
 
-    // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser('field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images');
+    // Click Select entities -> to open media library.
+    $this->openMediaLibrary('field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images');
 
     $media = $this->getMediaByName('reference.jpg');
     $this->toggleMedia([$media->id()]);
 
-    $this->submitEntityBrowser();
+    $this->submitMediaLibrary();
 
     $this->clickSave();
 

@@ -3,36 +3,36 @@
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 /**
- * Trait with support for handling Entity Browser actions.
+ * Trait with support for handling media library actions.
  *
  * @package Drupal\Tests\thunder\FunctionalJavascript
  */
-trait ThunderEntityBrowserTestTrait {
+trait ThunderMediaLibraryTestTrait {
 
   use ThunderJavascriptTrait;
 
   /**
-   * Open modal entity browser.
+   * Open media library modal.
    *
    * @param string $fieldName
    *   Field name.
    */
-  public function openEntityBrowser(string $fieldName): void {
+  public function openMediaLibrary(string $fieldName): void {
     $button_selector = '[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '"] .media-library-open-button';
     $this->clickCssSelector($button_selector);
   }
 
   /**
-   * Submit changes in modal entity browser.
+   * Submit changes in media library modal.
    */
-  public function submitEntityBrowser(): void {
+  public function submitMediaLibrary(): void {
     $this->clickCssSelector('.media-library-widget-modal .form-actions button');
 
     $this->assertWaitOnAjaxRequest();
   }
 
   /**
-   * Upload file inside entity browser.
+   * Upload file inside media library.
    *
    * NOTE: It will search for first tab with upload widget and file will be
    * uploaded there. Upload is done over input file field and it has to be

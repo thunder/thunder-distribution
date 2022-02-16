@@ -9,7 +9,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
  */
 trait ThunderMediaTestTrait {
 
-  use ThunderEntityBrowserTestTrait;
+  use ThunderMediaLibraryTestTrait;
   use ThunderJavascriptTrait;
 
   /**
@@ -21,11 +21,11 @@ trait ThunderMediaTestTrait {
    *   List of media identifiers.
    */
   public function selectMedia(string $fieldName, array $medias): void {
-    $this->openEntityBrowser($fieldName);
+    $this->openMediaLibrary($fieldName);
 
     $this->toggleMedia($medias);
 
-    $this->submitEntityBrowser();
+    $this->submitMediaLibrary();
   }
 
   /**
