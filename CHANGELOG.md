@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.3.4](https://github.com/thunder/thunder-distribution/tree/6.3.4) 2022-02-17
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.3...6.3.4)
+
+Maintenance release to remove patch for the graphql module, that was merged and prevents installation.
+
 ## [6.3.3](https://github.com/thunder/thunder-distribution/tree/6.3.3) 2022-01-26
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.2...6.3.3)
