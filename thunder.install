@@ -284,3 +284,38 @@ function thunder_update_8321(): string {
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
 }
+
+/**
+ * Configuration update.
+ */
+function thunder_update_8322() {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_update_8322');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
+
+/**
+ * Configuration update.
+ */
+function thunder_update_8323() {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  /** @var \Drupal\media_library_media_modify\EntityReferenceOverrideService $entityReferenceOverrideService */
+  $entityReferenceOverrideService = \Drupal::service('media_library_media_modify');
+  $entityReferenceOverrideService->migrateEntityReferenceField('node', 'field_teaser_media');
+  $entityReferenceOverrideService->migrateEntityReferenceField('media', 'field_media_images');
+  $entityReferenceOverrideService->migrateEntityReferenceField('paragraph', 'field_image');
+  $entityReferenceOverrideService->migrateEntityReferenceField('paragraph', 'field_video');
+
+
+  $updater->executeUpdate('thunder', 'thunder_update_8323');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
