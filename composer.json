@@ -35,7 +35,8 @@
         "installer-name": "thunder",
         "patches": {
             "drupal/diff": {
-                "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
+                "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch",
+                "Deprecated function: strlen(): Passing null to parameter #1 ($string) of type string is deprecated": "https://git.drupalcode.org/project/diff/-/merge_requests/10.diff"
             },
             "drupal/entity_browser": {
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2019-07-04/2858438_19.patch",
@@ -55,7 +56,7 @@
                 "Deprecated function: addcslashes(): Passing null to parameter #1 ($string) of type string is deprecated in Drupal\\Core\\Database\\Connection->escapeLike() (line 1483 of core/lib/Drupal/Core/Database/Connection.php).": "https://www.drupal.org/files/issues/2022-02-08/paragraphs-d9.3-php-8.1-fixes-for-1.12-3253545-12.patch"
             },
             "drupal/schema_metatag": {
-                "Metatags have encoded HTML entities instead of plain text content": "https://git.drupalcode.org/project/schema_metatag/-/merge_requests/2.diff"
+                "Metatags have encoded HTML entities instead of plain text content": "https://www.drupal.org/files/issues/2022-02-01/3192117-21.patch"
             }
         }
     },
