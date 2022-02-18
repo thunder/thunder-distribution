@@ -44,7 +44,7 @@ class ModuleUninstallTest extends ThunderTestBase {
    * @param array $modules
    *   Modules that should be installed.
    */
-  protected function installModules(array $modules = []) {
+  protected function installModules(array $modules = []): void {
     if ($modules) {
       $success = $this->container->get('module_installer')
         ->install($modules, TRUE);
@@ -60,7 +60,7 @@ class ModuleUninstallTest extends ThunderTestBase {
    * @param array $modules
    *   Modules that should be uninstalled.
    */
-  protected function uninstallModules(array $modules = []) {
+  protected function uninstallModules(array $modules = []): void {
     if ($modules) {
       $success = $this->container->get('module_installer')
         ->uninstall($modules, TRUE);
@@ -73,7 +73,7 @@ class ModuleUninstallTest extends ThunderTestBase {
   /**
    * Compare active configuration with configuration Yaml files.
    */
-  public function testModules() {
+  public function testModules(): void {
     $uninstallFailures = [];
 
     foreach (static::$moduleLists as $modules) {

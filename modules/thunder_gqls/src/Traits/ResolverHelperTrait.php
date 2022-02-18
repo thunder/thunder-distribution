@@ -34,7 +34,7 @@ trait ResolverHelperTrait {
    * @param \Drupal\graphql\GraphQL\Resolver\ResolverInterface $resolver
    *   The field resolver.
    */
-  protected function addFieldResolverIfNotExists(string $type, string $field, ResolverInterface $resolver) {
+  protected function addFieldResolverIfNotExists(string $type, string $field, ResolverInterface $resolver): void {
     if (!$this->registry->getFieldResolver($type, $field)) {
       $this->registry->addFieldResolver($type, $field, $resolver);
     }
@@ -43,7 +43,7 @@ trait ResolverHelperTrait {
   /**
    * Create the ResolverBuilder.
    */
-  protected function createResolverBuilder() {
+  protected function createResolverBuilder(): void {
     $this->builder = new ResolverBuilder();
   }
 
@@ -90,12 +90,10 @@ trait ResolverHelperTrait {
    * @param array $fields
    *   The fields.
    */
-  public function addSimpleCallbackFields(string $type, array $fields) {
+  public function addSimpleCallbackFields(string $type, array $fields): void {
     foreach ($fields as $field) {
       $this->addFieldResolverIfNotExists($type, $field,
-        $this->builder->callback(function ($arr) use ($field) {
-          return $arr[$field];
-        })
+        $this->builder->callback(fn($arr) => $arr[$field])
       );
     }
   }
@@ -115,9 +113,8 @@ trait ResolverHelperTrait {
         ->map('path', $path),
       $this->builder->produce('route_entity')
         ->map('url', $this->builder->fromParent())
-        ->map('language', $this->builder->produce('thunder_entity_sub_request')
+        ->map('language', $this->builder->produce('thunder_language')
           ->map('path', $path)
-          ->map('key', $this->builder->fromValue('language'))
         )
     );
   }

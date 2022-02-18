@@ -20,7 +20,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
   /**
    * Test Focal Point change.
    */
-  public function testFocalPointChange() {
+  public function testFocalPointChange(): void {
 
     $media = $this->loadMediaByUuid('f5f7fc5d-b2b8-426a-adf3-ee6aff6379da');
     $this->drupalGet($media->toUrl('edit-form'));
@@ -46,7 +46,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     ImageStyle::load('teaser')->createDerivative($path, $derivativeUri);
 
     $image1 = new \Imagick($derivativeUri);
-    $image2 = new \Imagick(realpath(dirname(__FILE__) . '/../../fixtures/reference.jpg'));
+    $image2 = new \Imagick(realpath(__DIR__ . '/../../fixtures/reference.jpg'));
 
     $result = $image1->compareImages($image2, \Imagick::METRIC_MEANSQUAREERROR);
 
@@ -54,52 +54,6 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     $image1->clear();
     $image2->clear();
-  }
-
-  /**
-   * Test Image modifications (edit fields).
-   */
-  public function testImageEdit() {
-    $media = $this->loadMediaByUuid('f5f7fc5d-b2b8-426a-adf3-ee6aff6379da');
-    $this->drupalGet($media->toUrl('edit-form'));
-
-    $this->setFieldValues([
-      'name[0][value]' => "Media {$media->id()}",
-      'field_image[0][alt]' => "Media {$media->id()} Alt Text",
-      'field_image[0][title]' => "Media {$media->id()} Title",
-      'field_expires[0][value][date]' => '2022-12-18',
-      'field_expires[0][value][time]' => '01:02:03',
-      'field_copyright[0][value]' => "Media {$media->id()} Copyright",
-      'field_source[0][value]' => "Media {$media->id()} Source",
-    ]);
-
-    $this->fillCkEditor('#edit-field-description-0-value', "Media {$media->id()} Description");
-
-    $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_BeforeImageEditSave_' . date('Ymd_His') . '.png');
-
-    $this->clickSave();
-
-    // Edit media and check are fields correct.
-    $this->drupalGet($media->toUrl('edit-form'));
-
-    $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_AfterImageEdit_' . date('Ymd_His') . '.png');
-
-    $this->assertSession()
-      ->fieldValueEquals('name[0][value]', "Media {$media->id()}");
-    $this->assertSession()
-      ->fieldValueEquals('field_image[0][alt]', "Media {$media->id()} Alt Text");
-    $this->assertSession()
-      ->fieldValueEquals('field_image[0][title]', "Media {$media->id()} Title");
-    $this->assertSession()
-      ->fieldValueEquals('field_expires[0][value][date]', '2022-12-18');
-    $this->assertSession()
-      ->fieldValueEquals('field_expires[0][value][time]', '01:02:03');
-    $this->assertSession()
-      ->fieldValueEquals('field_copyright[0][value]', "Media {$media->id()} Copyright");
-    $this->assertSession()
-      ->fieldValueEquals('field_source[0][value]', "Media {$media->id()} Source");
-    $this->assertSession()
-      ->fieldValueEquals('field_description[0][value]', "<p>Media {$media->id()} Description</p>");
   }
 
   /**
@@ -112,7 +66,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
    *   - reorder inside entity browser
    *   - remove inside entity browser.
    */
-  public function testRemoveAdd() {
+  public function testRemoveAdd(): void {
 
     // Test remove inside inline entity form.
     $node = $this->loadNodeByUuid('0bd5c257-2231-450f-b4c2-ab156af7b78d');

@@ -268,6 +268,7 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
+          use_field_cardinality: true
       pager:
         type: full
         options:

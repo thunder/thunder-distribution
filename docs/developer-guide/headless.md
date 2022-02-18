@@ -592,6 +592,14 @@ to use either more query arguments (which could be bad), or implement your own d
 ThunderEntityListProducerBase. You can find an example in EntitiesWithTerm.php where we dynamically add term IDs to the
 query conditions.
 
+### Use subrequest data producer
+
+Sometimes it's needed to execute a data producer in the context of an URL. Thunder uses this functionality for resolving
+the breadcrumb, JSON-LD structure or the entity language.
+
+The *ThunderEntitySubRequestBase* is data producer base class that can be used for this use cases. See
+*ThunderBreadcrumb*, *ThunderJsonLd* or *ThunderLanguage* as an implementation example.
+
 ## Supported contrib modules
 
 ### Access unpublished

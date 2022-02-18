@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Drupal\Component\Serialization\Json;
+
 /**
  * Trait for manipulation of meta tag configuration and meta tags on page.
  *
@@ -22,7 +24,7 @@ trait ThunderMetaTagTrait {
    * @return string
    *   Full meta tag field name that can be used to set value for it.
    */
-  protected function getMetaTagFieldName($metaTagName, $groupName = '', $fieldNamePrefix = '') {
+  protected function getMetaTagFieldName(string $metaTagName, string $groupName = '', string $fieldNamePrefix = '') {
     // Based on examples, this way of forming field name works properly.
     $fieldName = str_replace(['.', ':'], '_', $metaTagName);
 
@@ -39,7 +41,7 @@ trait ThunderMetaTagTrait {
    * @param array $metaTagConfiguration
    *   Meta tag configuration.
    */
-  public function checkMetaTags(array $metaTagConfiguration) {
+  public function checkMetaTags(array $metaTagConfiguration): void {
     // Check on article are custom meta tags properly populated.
     foreach ($metaTagConfiguration as $metaTagName => $value) {
       $metaTag = explode(' ', $metaTagName);
@@ -61,18 +63,23 @@ trait ThunderMetaTagTrait {
    * @param string $value
    *   Meta tag value.
    */
-  protected function checkMetaTag($name, $value) {
-    $htmlValue = htmlentities($value);
-
-    $checkXPath = "@content='{$htmlValue}'";
-    if (strpos($value, 'LIKE:') === 0) {
-      $valueToCheck = substr($htmlValue, strlen('LIKE:'));
-
-      $checkXPath = "contains(@content, '{$valueToCheck}')";
+  protected function checkMetaTag(string $name, string $value): void {
+    if (strpos($name, 'schema_article') === 0) {
+      $jsonLd = Json::decode($this->getSession()->getPage()->find('xpath', '//head/script[(@type="application/ld+json")]')->getHtml());
+      $key = substr($name, strlen('schema_article_'));
+      $this->assertSame($jsonLd['@graph'][0][$key], $value);
     }
+    else {
+      $htmlValue = htmlentities($value);
+      $checkXPath = "@content='{$htmlValue}'";
+      if (strpos($value, 'LIKE:') === 0) {
+        $valueToCheck = substr($htmlValue, strlen('LIKE:'));
 
-    $this->assertSession()
-      ->elementExists('xpath', "//head/meta[(@name='{$name}' or @property='{$name}') and {$checkXPath}]");
+        $checkXPath = "contains(@content, '{$valueToCheck}')";
+      }
+      $this->assertSession()
+        ->elementExists('xpath', "//head/meta[(@name='{$name}' or @property='{$name}') and {$checkXPath}]");
+    }
   }
 
   /**
@@ -111,7 +118,7 @@ trait ThunderMetaTagTrait {
    * @return array
    *   List with field names and values for it.
    */
-  public function generateMetaTagFieldValues(array $configuration, $fieldNamePrefix = '') {
+  public function generateMetaTagFieldValues(array $configuration, string $fieldNamePrefix = '') {
     $fieldValues = [];
 
     foreach ($configuration as $metaTagName => $metaTagValue) {
@@ -142,7 +149,7 @@ trait ThunderMetaTagTrait {
   public function replaceTokens(array $configuration, array $tokens) {
     foreach ($configuration as $metaTagName => $metaTagValue) {
       foreach ($tokens as $tokenName => $tokenValue) {
-        if (strpos($metaTagValue, $tokenName) !== FALSE) {
+        if (strpos($metaTagValue, (string) $tokenName) !== FALSE) {
           $configuration[$metaTagName] = str_replace($tokenName, $tokenValue, $metaTagValue);
         }
       }

@@ -19,7 +19,7 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
   DRUPAL_TESTING_VERBOSE: false
-  DRUPAL_TESTING_VERSION: "^1.0.31"
+  DRUPAL_TESTING_VERSION: "^1.0.33"
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
@@ -72,9 +72,6 @@ jobs:
 
       - name: Add needed dependencies
         run: composer require "drupal/core-dev:~9.3.0" "phpspec/prophecy-phpunit:^2" --no-update --no-progress --working-dir=/tmp/test/thunder/install
-
-      - name: Set composer bin path
-        run: composer config bin-dir bin/ --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build
@@ -236,7 +233,7 @@ jobs:
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
 
           composer update
-          vendor/bin/drush updb -y
+          composer exec -- drush updb -y
 
           cd docroot
           php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
@@ -368,7 +365,6 @@ jobs:
         run: |
           echo ${{ secrets.DOCKER_TOKEN }} | docker login -u thundertechnology --password-stdin
           export DOCKER_IMAGE_TAG="burda/thunder-performance:${{ steps.vars.outputs.DOCKER_TAG }}"
-          composer config bin-dir vendor/bin/ --working-dir=./www
           chmod u+w www/docroot/sites/default
           bash -x ./build.sh --tag "${DOCKER_IMAGE_TAG}"
           docker push "${DOCKER_IMAGE_TAG}"

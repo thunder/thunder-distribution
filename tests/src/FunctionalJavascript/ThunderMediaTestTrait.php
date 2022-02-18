@@ -22,14 +22,20 @@ trait ThunderMediaTestTrait {
    * @param array $medias
    *   List of media identifiers.
    */
-  public function selectMedia($fieldName, $entityBrowser, array $medias) {
+  public function selectMedia(string $fieldName, string $entityBrowser, array $medias): void {
     $driver = $this->getSession()->getDriver();
 
     $selector = 'edit-' . str_replace(['[', ']', '_'], '-', $fieldName);
     $this->openEntityBrowser($selector, $entityBrowser);
 
-    foreach ($medias as $media) {
-      $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]");
+    if ($entityBrowser === 'multiple_image_browser') {
+      foreach ($medias as $media) {
+        $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]");
+      }
+    }
+    else {
+      $media = current($medias);
+      $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select' and @value='$media']]");
     }
     $this->assertWaitOnAjaxRequest();
 
@@ -46,7 +52,7 @@ trait ThunderMediaTestTrait {
    * @param array $medias
    *   List of media identifiers.
    */
-  public function createGallery($name, $fieldName, array $medias) {
+  public function createGallery(string $name, string $fieldName, array $medias): void {
 
     $page = $this->getSession()->getPage();
 

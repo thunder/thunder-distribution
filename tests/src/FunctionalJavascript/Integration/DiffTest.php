@@ -1,19 +1,18 @@
 <?php
 
-namespace Drupal\Tests\thunder\FunctionalJavascript;
+namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
+
+use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
+use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
 
 /**
- * Testing of module integrations.
+ * Testing the integration of the diff module.
  *
  * @group Thunder
- *
- * @package Drupal\Tests\thunder\FunctionalJavascript
  */
-class ModuleIntegrationTest extends ThunderJavascriptTestBase {
+class DiffTest extends ThunderJavascriptTestBase {
 
   use ThunderParagraphsTestTrait;
-  use ThunderArticleTestTrait;
-  use ThunderMetaTagTrait;
 
   /**
    * Column in diff table used for previous text.
@@ -43,7 +42,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
    * @param array $newHighlighted
    *   New highlighted texts.
    */
-  protected function validateDiff($fieldName, array $previous = [], array $previousHighlighted = [], array $new = [], array $newHighlighted = []) {
+  protected function validateDiff(string $fieldName, array $previous = [], array $previousHighlighted = [], array $new = [], array $newHighlighted = []): void {
     // Check for old Text.
     $this->checkFullText($fieldName, static::$previousTextColumn, $previous);
 
@@ -67,7 +66,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
    * @param array $textRows
    *   Associative array with text per row.
    */
-  protected function checkFullText($fieldName, $columnIndex, array $textRows = []) {
+  protected function checkFullText(string $fieldName, int $columnIndex, array $textRows = []): void {
     $page = $this->getSession()->getPage();
 
     foreach ($textRows as $indexRow => $expectedText) {
@@ -88,7 +87,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
    * @param array $highlightedTextRows
    *   New highlighted texts per row.
    */
-  protected function checkHighlightedText($fieldName, $columnIndex, array $highlightedTextRows) {
+  protected function checkHighlightedText(string $fieldName, int $columnIndex, array $highlightedTextRows): void {
     $page = $this->getSession()->getPage();
 
     foreach ($highlightedTextRows as $indexRow => $expectedTexts) {
@@ -104,7 +103,7 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
   /**
    * Testing integration of "diff" module.
    */
-  public function testDiffModule() {
+  public function testDiffModule(): void {
 
     $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
     $this->drupalGet($node->toUrl('edit-form'));
@@ -170,61 +169,6 @@ class ModuleIntegrationTest extends ThunderJavascriptTestBase {
       ['1' => 'Thunder City'],
       []
     );
-  }
-
-  /**
-   * Testing integration of "metatag_facebook" module.
-   */
-  public function testFacebookMetaTags() {
-
-    $facebookMetaTags = $this->generateMetaTagConfiguration([
-      [
-        'facebook fb:admins' => 'zuck',
-        'facebook fb:pages' => 'some-fancy-fb-page-url',
-        'facebook fb:app_id' => '1121151812167212,1121151812167213',
-      ],
-    ]);
-
-    // Create Article with facebook meta tags and check it.
-    $fieldValues = $this->generateMetaTagFieldValues($facebookMetaTags, 'field_meta_tags[0]');
-    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
-    $fieldValues += [
-      'field_channel' => $term->id(),
-      'title[0][value]' => 'Test FB MetaTags Article',
-      'field_seo_title[0][value]' => 'Facebook MetaTags',
-      'field_teaser_text[0][value]' => 'Facebook MetaTags Testing',
-    ];
-    $this->articleFillNew($fieldValues);
-    $this->clickSave();
-
-    $this->checkMetaTags($facebookMetaTags);
-  }
-
-  /**
-   * Testing the content lock integration.
-   */
-  public function testContentLock() {
-
-    $node = $this->loadNodeByUuid('0bd5c257-2231-450f-b4c2-ab156af7b78d');
-    $this->drupalGet($node->toUrl('edit-form'));
-    $this->assertSession()->pageTextContains('This content is now locked against simultaneous editing. This content will remain locked if you navigate away from this page without saving or unlocking it.');
-
-    $driver = $this->getSession()->getDriver();
-    $driver->click('//*[@id="edit-unlock"]');
-
-    $driver->click('//*[@id="edit-submit"]');
-    $this->assertSession()->pageTextContains('Lock broken. Anyone can now edit this content.');
-
-    $this->drupalGet($node->toUrl('edit-form'));
-    $loggedInUser = $this->loggedInUser->label();
-
-    $this->drupalLogout();
-
-    // Login with other user.
-    $this->logWithRole(static::$defaultUserRole);
-
-    $this->drupalGet($node->toUrl('edit-form'));
-    $this->assertSession()->pageTextContains('This content is being edited by the user ' . $loggedInUser . ' and is therefore locked to prevent other users changes.');
   }
 
 }

@@ -1,28 +1,48 @@
 <?php
 
-namespace Drupal\Tests\thunder\FunctionalJavascript;
+namespace Drupal\Tests\thunder\Functional;
 
 use Drupal\node\Entity\Node;
+use Drupal\Tests\Traits\Core\CronRunTrait;
 
 /**
  * Tests publishing/unpublishing scheduling for moderated nodes.
  *
  * @group Thunder
  */
-class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
+class ModeratedContentSchedulingTest extends ThunderTestBase {
 
-  use ThunderArticleTestTrait;
+  use CronRunTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static $modules = [
+    'thunder_testing_demo',
+    'thunder_workflow',
+    'thunder_test_mock_request',
+  ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
+    parent::setUp();
+
+    $this->logWithRole('editor');
+    $this->drupalGet('node/add/article');
+  }
 
   /**
    * Tests moderated nodes publish scheduling.
    */
-  public function testPublishStateSchedule() {
+  public function testPublishStateSchedule(): void {
     $publish_timestamp = strtotime('yesterday');
     /** @var \Drupal\node\NodeStorageInterface $node_storage */
     $node_storage = \Drupal::entityTypeManager()->getStorage('node');
 
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
-    $this->articleFillNew([
+    $this->submitForm([
       'field_channel' => $term->id(),
       'title[0][value]' => 'Test workflow article 1 - Published',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text 1',
@@ -30,8 +50,7 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
       'publish_on[0][value][date]' => date('Y-m-d', $publish_timestamp),
       'publish_on[0][value][time]' => date('H:i:s', $publish_timestamp),
       'publish_state[0]' => 'published',
-    ]);
-    $this->clickSave();
+    ], 'Save');
 
     /** @var \Drupal\node\Entity\Node $node */
     $node = $this->getNodeByTitle('Test workflow article 1 - Published');
@@ -50,22 +69,21 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
 
     $edit_url = $node->toUrl('edit-form');
     $this->drupalGet($edit_url);
-    $this->expandAllTabs();
-    $this->setFieldValues([
+    $this->submitForm([
       'title[0][value]' => 'Test workflow article 1 - Draft',
       'moderation_state[0]' => 'draft',
       'publish_on[0][value][date]' => date('Y-m-d', $publish_timestamp),
       'publish_on[0][value][time]' => date('H:i:s', $publish_timestamp),
       'publish_state[0]' => 'published',
-    ]);
-    $this->clickSave();
+    ], 'Save');
     $node_storage->resetCache([$node->id()]);
 
     /** @var \Drupal\node\Entity\Node $node */
     $node = $node_storage->loadRevision($node_storage->getLatestRevisionId($node->id()));
     $this->assertEquals('Test workflow article 1 - Draft', $node->getTitle());
     $this->assertEquals('draft', $node->moderation_state->value);
-    $this->container->get('cron')->run();
+    $this->cronRun();
+    $node_storage->resetCache([$node->id()]);
 
     /** @var \Drupal\node\Entity\Node $node */
     $node = $node_storage->loadRevision($node_storage->getLatestRevisionId($node->id()));
@@ -78,17 +96,16 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
   /**
    * Tests moderated nodes unpublish scheduling.
    */
-  public function testUnpublishStateSchedule() {
+  public function testUnpublishStateSchedule(): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
-    $this->articleFillNew([
+    $this->submitForm([
       'field_channel' => $term->id(),
       'title[0][value]' => 'Test workflow article 2 - Published',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text 2',
       'moderation_state[0]' => 'published',
       'unpublish_on[0][value][date]' => date('Y-m-d', strtotime('tomorrow')),
       'unpublish_state[0]' => 'unpublished',
-    ]);
-    $this->clickSave();
+    ], 'Save');
 
     $node = $this->getNodeByTitle('Test workflow article 2 - Published');
 
@@ -99,26 +116,27 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     $revision_id = $node->getRevisionId();
     // Make sure node is published.
     $this->assertEquals(TRUE, Node::load($node->id())->isPublished());
-    $this->container->get('cron')->run();
+    $this->cronRun();
+
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
 
     // Assert node is now unpublished.
-    $this->assertEquals(FALSE, Node::load($node->id())->isPublished());
+    $this->assertEquals(FALSE, $node_storage->loadUnchanged($node->id())->isPublished());
     // Assert only one revision is created during the operation.
-    $this->assertEquals($revision_id + 1, Node::load($node->id())->getRevisionId());
+    $this->assertEquals($revision_id + 1, $node_storage->load($node->id())->getRevisionId());
   }
 
   /**
    * Tests publish scheduling for a draft of a published node.
    */
-  public function testPublishOfDraft() {
+  public function testPublishOfDraft(): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
-    $this->articleFillNew([
+    $this->submitForm([
       'field_channel' => $term->id(),
       'title[0][value]' => 'Test workflow article 3 - Published',
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text 3',
       'moderation_state[0]' => 'published',
-    ]);
-    $this->clickSave();
+    ], 'Save');
 
     $node = $this->getNodeByTitle('Test workflow article 3 - Published');
     $nid = $node->id();
@@ -138,13 +156,14 @@ class ModeratedContentSchedulingTest extends ThunderJavascriptTestBase {
     // Test latest revision is not the published one.
     $this->assertEquals('Test workflow article 3 - Published', Node::load($nid)->getTitle());
 
-    $this->container->get('cron')->run();
+    $this->cronRun();
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
 
     // Test latest revision is now the published one.
-    $this->assertEquals('Test workflow article 3 - Draft', Node::load($nid)->getTitle());
+    $this->assertEquals('Test workflow article 3 - Draft', $node_storage->loadUnchanged($nid)->getTitle());
 
     // Assert only one revision is created during the operation.
-    $this->assertEquals($revision_id + 1, Node::load($node->id())->getRevisionId());
+    $this->assertEquals($revision_id + 1, $node_storage->load($node->id())->getRevisionId());
 
   }
 

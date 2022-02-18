@@ -46,7 +46,7 @@ class ThunderNodeForm implements ContainerInjectionInterface {
   /**
    * The moderation information service.
    *
-   * @var \Drupal\content_moderation\ModerationInformationInterface
+   * @var \Drupal\content_moderation\ModerationInformationInterface|null
    */
   protected $moderationInfo;
 
@@ -93,7 +93,7 @@ class ThunderNodeForm implements ContainerInjectionInterface {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): self {
     return new static(
       $container->get('current_user'),
       $container->get('messenger'),
@@ -107,7 +107,7 @@ class ThunderNodeForm implements ContainerInjectionInterface {
   /**
    * {@inheritdoc}
    */
-  public function formAlter(array &$form, FormStateInterface $form_state) {
+  public function formAlter(array &$form, FormStateInterface $form_state): array {
     /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
     $form_object = $form_state->getFormObject();
     /** @var \Drupal\node\NodeInterface $entity */
@@ -131,7 +131,7 @@ class ThunderNodeForm implements ContainerInjectionInterface {
   /**
    * {@inheritdoc}
    */
-  protected function actions(NodeInterface $entity) {
+  protected function actions(NodeInterface $entity): array {
     /** @var \Drupal\Core\Entity\ContentEntityStorageInterface $storage */
     $storage = $this->entityTypeManager->getStorage($entity->getEntityTypeId());
     $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()->getId());

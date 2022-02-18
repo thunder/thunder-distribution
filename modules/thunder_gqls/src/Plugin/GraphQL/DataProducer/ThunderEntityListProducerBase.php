@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class ThunderEntityListProducerBase extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
-  const MAX_ITEMS = 100;
+  public const MAX_ITEMS = 100;
 
   /**
    * The entity type manager service.
@@ -35,7 +35,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     return new static(
       $configuration,
       $plugin_id,
@@ -137,7 +137,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
 
     // Filter by given conditions.
     foreach ($conditions as $condition) {
-      $operation = isset($condition['operator']) ? $condition['operator'] : NULL;
+      $operation = $condition['operator'] ?? NULL;
       $query->condition($condition['field'], $condition['value'], $operation);
     }
 

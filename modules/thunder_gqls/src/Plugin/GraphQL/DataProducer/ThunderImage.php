@@ -19,7 +19,7 @@ use Drupal\Core\File\FileUrlGeneratorInterface;
  *   id = "thunder_image",
  *   name = @Translation("Image meta data"),
  *   description = @Translation("Returns the meta data of an image entity."),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("map",
  *     label = @Translation("Metadata")
  *   ),
  *   consumes = {
@@ -60,7 +60,7 @@ class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPlu
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
+  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition): self {
     return new static(
       $configuration,
       $pluginId,
@@ -116,14 +116,14 @@ class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPlu
    * @return array
    *   The image meta data
    */
-  public function resolve(FileInterface $entity, array $field, RefinableCacheableDependencyInterface $metadata) {
+  public function resolve(FileInterface $entity, array $field, RefinableCacheableDependencyInterface $metadata): array {
     $access = $entity->access('view', NULL, TRUE);
     $metadata->addCacheableDependency($access);
     if ($access->isAllowed()) {
       $context = new RenderContext();
       $imageFactory = $this->imageFactory;
 
-      $data = $this->renderer->executeInRenderContext($context, function () use ($entity, $imageFactory, $field) {
+      $data = $this->renderer->executeInRenderContext($context, function () use ($entity, $imageFactory, $field): array {
         $uri = $entity->getFileUri();
         $image = $imageFactory->get($uri);
         $current_field = reset($field);

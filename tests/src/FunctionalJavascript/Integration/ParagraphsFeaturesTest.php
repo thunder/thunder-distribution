@@ -26,7 +26,7 @@ class ParagraphsFeaturesTest extends ThunderJavascriptTestBase {
   /**
    * Testing of delete confirmation for paragraphs.
    */
-  public function testDeleteConfirmation() {
+  public function testDeleteConfirmation(): void {
     $page = $this->getSession()->getPage();
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->articleFillNew([
@@ -54,7 +54,7 @@ class ParagraphsFeaturesTest extends ThunderJavascriptTestBase {
     $this->assertWaitOnAjaxRequest();
     $this->assertEquals(1, $this->getNumberOfParagraphs(static::$paragraphsField));
 
-    $this->editParagraph('field_paragraphs', 1);
+    $this->editParagraph(static::$paragraphsField, 1);
     $customFormDeleteButton = $page->find('xpath', '//div[contains(@id, "field-paragraphs-1-item-wrapper")]//button[contains(@class, "paragraph-form-item__action--remove")]');
     $hiddenFormDeleteButton = $page->find('xpath', '//div[contains(@id, "field-paragraphs-1-item-wrapper")]//button[contains(@class, "paragraph-form-item__action--remove")]');
     $this->assertTrue($customFormDeleteButton->isVisible(), 'Delete button should be visible');

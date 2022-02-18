@@ -250,7 +250,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *
    * @var string
    */
-  protected static $configPathSeparator = '::';
+  public const CONFIG_PATH_SEPARATOR = '::';
 
   /**
    * Ignore configuration list values. Path to key is separated by '::'.
@@ -277,6 +277,30 @@ class InstalledConfigurationTest extends ThunderTestBase {
         'google_analytics',
       ],
     ],
+    'user.role.editor' => [
+      'permissions' => [
+        'access tour',
+      ],
+      'dependencies::module' => [
+        'tour',
+      ],
+    ],
+    'user.role.restricted_editor' => [
+      'permissions' => [
+        'access tour',
+      ],
+      'dependencies::module' => [
+        'tour',
+      ],
+    ],
+    'user.role.seo' => [
+      'permissions' => [
+        'access tour',
+      ],
+      'dependencies::module' => [
+        'tour',
+      ],
+    ],
   ];
 
   /**
@@ -295,7 +319,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    * @param string $defaultTheme
    *   Default Theme.
    */
-  protected function setDefaultTheme($defaultTheme) {
+  protected function setDefaultTheme(string $defaultTheme): void {
     \Drupal::service('theme_installer')->install([$defaultTheme]);
 
     $themeConfig = \Drupal::configFactory()->getEditable('system.theme');
@@ -314,7 +338,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    * @return array
    *   Returns cleaned-up configurations.
    */
-  protected function cleanupConfigurations(array $configurations, $configurationName) {
+  protected function cleanupConfigurations(array $configurations, string $configurationName): array {
     /** @var \Drupal\Core\Config\ExtensionInstallStorage $optionalStorage */
     $optionalStorage = \Drupal::service('config_update.extension_optional_storage');
 
@@ -329,7 +353,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     if (array_key_exists($configurationName, static::$ignoreConfigListValues)) {
       foreach (static::$ignoreConfigListValues[$configurationName] as $keyPath => $ignoreValues) {
         $ignoreListRules[] = [
-          'key_path' => explode(static::$configPathSeparator, $keyPath),
+          'key_path' => explode(self::CONFIG_PATH_SEPARATOR, $keyPath),
           'ignore_values' => $ignoreValues,
         ];
       }
@@ -380,7 +404,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    * @return array
    *   Return cleaned-up list.
    */
-  protected function cleanupConfigList(array $list, array $ignoreValues) {
+  protected function cleanupConfigList(array $list, array $ignoreValues): array {
     $cleanList = $list;
 
     if (!empty($cleanList)) {
@@ -403,7 +427,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
   /**
    * Compare active configuration with configuration Yaml files.
    */
-  public function testInstalledConfiguration() {
+  public function testInstalledConfiguration(): void {
     $this->setDefaultTheme($this->defaultTheme);
 
     /** @var \Drupal\config_update\ConfigReverter $configUpdate */
@@ -466,7 +490,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
       }
 
       // Clean up configuration if it's required.
-      list($activeConfig, $fileConfig) = $this->cleanupConfigurations(
+      [$activeConfig, $fileConfig] = $this->cleanupConfigurations(
         [
           $activeConfig,
           $fileConfig,

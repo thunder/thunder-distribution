@@ -8,7 +8,7 @@
 /**
  * Implements hook_install().
  */
-function thunder_ivw_install() {
+function thunder_ivw_install(): void {
 
   $fieldWidget = 'ivw_integration_widget';
 
