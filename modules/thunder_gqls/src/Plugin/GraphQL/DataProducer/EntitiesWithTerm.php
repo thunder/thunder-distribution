@@ -105,7 +105,7 @@ class EntitiesWithTerm extends ThunderEntityListProducerBase {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function resolve(TermInterface $term, string $type, array $bundles, string $field, int $offset, int $limit, array $conditions, array $languages, array $sortBy, int $depth, FieldContext $cacheContext): EntityListResponse {
-    $conditions = array_merge($conditions, $this->getConditions($term, $depth, $field));
+    $conditions = array_merge($conditions, $this->getConditions($term, $field, $depth));
 
     $query = $this->query(
       $type,
@@ -122,15 +122,22 @@ class EntitiesWithTerm extends ThunderEntityListProducerBase {
   }
 
   /**
+   * Get conditions for term query.
+   *
    * @param \Drupal\taxonomy\TermInterface $term
-   * @param int $depth
+   *   The taxonomy term.
    * @param string $field
+   *   The term reference field.
+   * @param int $depth
+   *   The depth of term relations.
    *
    * @return array[]
+   *   The entity query conditions.
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  protected function getConditions(TermInterface $term, int $depth, string $field): array {
+  protected function getConditions(TermInterface $term, string $field, int $depth): array {
     $termIds = [$term->id()];
 
     if ($depth > 0) {
