@@ -206,7 +206,7 @@ class EntitiesWithTermTest extends GraphQLTestBase {
         [
           'total' => 1,
         ],
-      ]
+      ],
     ];
   }
 
