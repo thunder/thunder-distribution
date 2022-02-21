@@ -9,7 +9,6 @@ use Drupal\node\Entity\NodeType;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\Entity\Vocabulary;
 use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
-use Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntitiesWithTerm;
 
 /**
  * Test entities_with_term data producer.
