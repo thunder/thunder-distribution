@@ -2,7 +2,6 @@
 
 namespace Drupal\thunder_gqls\Wrappers;
 
-
 /**
  * The thunder entity list response class.
  */

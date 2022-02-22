@@ -201,12 +201,12 @@ class EntitiesWithTermTest extends GraphQLTestBase {
             [
               'field' => 'title',
               'value' => 'Title%',
-              'operator' => 'like'
+              'operator' => 'like',
             ],
             [
               'field' => 'status',
               'value' => 1,
-            ]
+            ],
           ],
           'languages' => [],
           'sortBy' => [],
