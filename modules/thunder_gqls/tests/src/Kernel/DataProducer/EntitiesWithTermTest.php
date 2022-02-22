@@ -95,9 +95,11 @@ class EntitiesWithTermTest extends GraphQLTestBase {
     ]);
     $field->save();
 
+    // Some nodes to test with.
     $node1 = Node::create([
       'title' => 'Title1',
       'type' => 'article',
+      'status' => 1,
       self::TAXONOMY_FIELD_NAME => $parent->id(),
     ]);
     $node1->save();
@@ -105,6 +107,7 @@ class EntitiesWithTermTest extends GraphQLTestBase {
     $node2 = Node::create([
       'title' => 'Title2',
       'type' => 'article',
+      'status' => 0,
       self::TAXONOMY_FIELD_NAME => $parent->id(),
     ]);
     $node2->save();
@@ -112,6 +115,7 @@ class EntitiesWithTermTest extends GraphQLTestBase {
     $node3 = Node::create([
       'title' => 'Title3',
       'type' => 'article',
+      'status' => 1,
       self::TAXONOMY_FIELD_NAME => $child->id(),
     ]);
     $node3->save();
@@ -196,8 +200,13 @@ class EntitiesWithTermTest extends GraphQLTestBase {
           'conditions' => [
             [
               'field' => 'title',
-              'value' => 'Title1',
+              'value' => 'Title%',
+              'operator' => 'like'
             ],
+            [
+              'field' => 'status',
+              'value' => 1,
+            ]
           ],
           'languages' => [],
           'sortBy' => [],

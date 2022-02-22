@@ -44,7 +44,7 @@ use Drupal\thunder_gqls\Wrappers\EntityListResponse;
  *       required = FALSE,
  *       default_value = 100
  *     ),
- *     "conditions" = @ContextDefinition("any",
+ *     "conditions" = @ContextDefinition("list",
  *       label = @Translation("Filter conditions"),
  *       multiple = FALSE,
  *       required = FALSE,
