@@ -5,6 +5,7 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\taxonomy\TermInterface;
 use Drupal\thunder_gqls\Wrappers\EntityListResponse;
+use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
 
 /**
  * The channel list producer class.
@@ -23,13 +24,13 @@ use Drupal\thunder_gqls\Wrappers\EntityListResponse;
  *     "type" = @ContextDefinition("string",
  *       label = @Translation("Entity type")
  *     ),
- *     "bundles" = @ContextDefinition("any",
+ *     "bundles" = @ContextDefinition("string",
  *       label = @Translation("Entity bundles"),
  *       multiple = TRUE,
  *       required = FALSE,
  *       default_value = {}
  *     ),
- *     "field" = @ContextDefinition("any",
+ *     "field" = @ContextDefinition("string",
  *       label = @Translation("The term reference field"),
  *       multiple = FALSE,
  *       required = TRUE
@@ -44,13 +45,19 @@ use Drupal\thunder_gqls\Wrappers\EntityListResponse;
  *       required = FALSE,
  *       default_value = 100
  *     ),
+ *     "conditions" = @ContextDefinition("map",
+ *       label = @Translation("Filter conditions"),
+ *       multiple = TRUE,
+ *       required = FALSE,
+ *       default_value = {}
+ *     ),
  *     "languages" = @ContextDefinition("string",
  *       label = @Translation("Entity languages"),
  *       multiple = TRUE,
  *       required = FALSE,
  *       default_value = {}
  *     ),
- *     "sortBy" = @ContextDefinition("any",
+ *     "sortBy" = @ContextDefinition("map",
  *       label = @Translation("Sorts"),
  *       multiple = TRUE,
  *       default_value = {},
@@ -81,6 +88,8 @@ class EntitiesWithTerm extends ThunderEntityListProducerBase {
    *   Query only entities owned by current user.
    * @param int $limit
    *   Maximum number of queried entities.
+   * @param array $conditions
+   *   List of conditions to filter the entities.
    * @param string[] $languages
    *   Languages for queried entities.
    * @param array $sortBy
@@ -96,23 +105,8 @@ class EntitiesWithTerm extends ThunderEntityListProducerBase {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function resolve(TermInterface $term, string $type, array $bundles, string $field, int $offset, int $limit, array $languages, array $sortBy, int $depth, FieldContext $cacheContext): EntityListResponse {
-    $termIds = [$term->id()];
-
-    if ($depth > 0) {
-      $terms = $this->entityTypeManager
-        ->getStorage('taxonomy_term')
-        ->loadTree($term->bundle(), $term->id(), $depth);
-      $termIds = array_merge($termIds, array_column($terms, 'tid'));
-    }
-
-    $conditions = [
-      [
-        'field' => $field,
-        'value' => $termIds,
-        'operator' => 'IN',
-      ],
-    ];
+  public function resolve(TermInterface $term, string $type, array $bundles, string $field, int $offset, int $limit, array $conditions, array $languages, array $sortBy, int $depth, FieldContext $cacheContext): EntityListResponseInterface {
+    $conditions = array_merge($conditions, $this->getConditions($term, $field, $depth));
 
     $query = $this->query(
       $type,
@@ -126,6 +120,41 @@ class EntitiesWithTerm extends ThunderEntityListProducerBase {
     );
 
     return new EntityListResponse($query);
+  }
+
+  /**
+   * Get conditions for term query.
+   *
+   * @param \Drupal\taxonomy\TermInterface $term
+   *   The taxonomy term.
+   * @param string $field
+   *   The term reference field.
+   * @param int $depth
+   *   The depth of term relations.
+   *
+   * @return array[]
+   *   The entity query conditions.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  protected function getConditions(TermInterface $term, string $field, int $depth): array {
+    $termIds = [$term->id()];
+
+    if ($depth > 0) {
+      $terms = $this->entityTypeManager
+        ->getStorage('taxonomy_term')
+        ->loadTree($term->bundle(), $term->id(), $depth);
+      $termIds = array_merge($termIds, array_column($terms, 'tid'));
+    }
+
+    return [
+      [
+        'field' => $field,
+        'value' => $termIds,
+        'operator' => 'IN',
+      ],
+    ];
   }
 
 }
