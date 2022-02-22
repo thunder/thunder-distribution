@@ -20,7 +20,7 @@ use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
  *     "type" = @ContextDefinition("string",
  *       label = @Translation("Entity type")
  *     ),
- *     "bundles" = @ContextDefinition("any",
+ *     "bundles" = @ContextDefinition("string",
  *       label = @Translation("Entity bundles"),
  *       multiple = TRUE,
  *       required = FALSE,
@@ -48,7 +48,7 @@ use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
  *       required = FALSE,
  *       default_value = {}
  *     ),
- *     "sortBy" = @ContextDefinition("any",
+ *     "sortBy" = @ContextDefinition("map",
  *       label = @Translation("Sorts"),
  *       multiple = TRUE,
  *       default_value = {},
