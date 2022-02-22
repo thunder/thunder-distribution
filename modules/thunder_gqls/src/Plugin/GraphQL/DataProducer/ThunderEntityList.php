@@ -4,6 +4,7 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\thunder_gqls\Wrappers\EntityListResponse;
+use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
 
 /**
  * The entity list producer class.
@@ -84,7 +85,7 @@ class ThunderEntityList extends ThunderEntityListProducerBase {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  protected function resolve(string $type, array $bundles, int $offset, int $limit, array $conditions, array $languages, array $sortBy, FieldContext $cacheContext): EntityListResponse {
+  protected function resolve(string $type, array $bundles, int $offset, int $limit, array $conditions, array $languages, array $sortBy, FieldContext $cacheContext): EntityListResponseInterface {
     $query = $this->query(
       $type,
       $bundles,

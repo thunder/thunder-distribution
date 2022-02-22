@@ -5,6 +5,7 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\taxonomy\TermInterface;
 use Drupal\thunder_gqls\Wrappers\EntityListResponse;
+use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
 
 /**
  * The channel list producer class.
@@ -104,7 +105,7 @@ class EntitiesWithTerm extends ThunderEntityListProducerBase {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function resolve(TermInterface $term, string $type, array $bundles, string $field, int $offset, int $limit, array $conditions, array $languages, array $sortBy, int $depth, FieldContext $cacheContext): EntityListResponse {
+  public function resolve(TermInterface $term, string $type, array $bundles, string $field, int $offset, int $limit, array $conditions, array $languages, array $sortBy, int $depth, FieldContext $cacheContext): EntityListResponseInterface {
     $conditions = array_merge($conditions, $this->getConditions($term, $field, $depth));
 
     $query = $this->query(
