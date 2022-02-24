@@ -28,13 +28,8 @@ widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
   89532aea-140d-4b9e-96f4-2aa489c095cb:
-    id: dropzonejs_media_entity
-    uuid: 89532aea-140d-4b9e-96f4-2aa489c095cb
-    label: 'Import image'
-    weight: -9
     settings:
-      submit_text: 'Import images'
-      auto_select: true
+      media_type: image
       upload_location: 'public://[date:custom:Y]-[date:custom:m]'
       dropzone_description: 'Drop files here to upload them'
       max_filesize: 128M
@@ -45,14 +40,19 @@ widgets:
       resize_quality: !!float 1
       resize_method: contain
       thumbnail_method: contain
-      media_type: image
-  7d7f8f45-f628-48a3-84a8-c962c73f39e8:
-    id: view
-    uuid: 7d7f8f45-f628-48a3-84a8-c962c73f39e8
-    label: 'Select existing'
-    weight: -10
-    settings:
-      submit_text: 'Select images'
+      submit_text: 'Import images'
       auto_select: true
+    uuid: 89532aea-140d-4b9e-96f4-2aa489c095cb
+    weight: -9
+    label: 'Import image'
+    id: dropzonejs_media_entity
+  7d7f8f45-f628-48a3-84a8-c962c73f39e8:
+    settings:
       view: entity_browser
       view_display: entity_browser_1
+      submit_text: 'Select images'
+      auto_select: true
+    uuid: 7d7f8f45-f628-48a3-84a8-c962c73f39e8
+    weight: -10
+    label: 'Select existing'
+    id: view
