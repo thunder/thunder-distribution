@@ -23,10 +23,10 @@ widget_selector_configuration: {  }
 widgets:
   f09e2255-6bd8-4301-ba02-1d446f7fca70:
     settings:
-      view: entity_browser
-      view_display: entity_browser_1
       submit_text: 'Select image'
       auto_select: false
+      view: entity_browser
+      view_display: entity_browser_1
     uuid: f09e2255-6bd8-4301-ba02-1d446f7fca70
     weight: -10
     label: 'Select existing'
