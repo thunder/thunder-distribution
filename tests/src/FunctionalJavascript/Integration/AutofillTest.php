@@ -19,7 +19,7 @@ class AutofillTest extends ThunderJavascriptTestBase {
   /**
    * Tests the autofill of a new field based on the node title.
    */
-  public function testAutofill() {
+  public function testAutofill(): void {
 
     $page = $this->getSession()->getPage();
 

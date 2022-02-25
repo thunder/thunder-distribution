@@ -3,3 +3,5 @@ description: 'Provide taxonomy functions for Thunder.'
 type: module
 core_version_requirement: ^9
 package: Thunder
+dependencies:
+  - drupal:taxonomy

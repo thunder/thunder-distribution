@@ -17,9 +17,11 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
 
   /**
    * {@inheritdoc}
+   *
+   * @phpstan-ignore-next-line
    */
-  protected function sortableUpdate($item, $from, $to = NULL) {
-    list ($container) = explode(' ', $item, 2);
+  protected function sortableUpdate($item, $from, $to = NULL): void {
+    [$container] = explode(' ', $item, 2);
     $js = <<<END
 if (typeof Drupal.entityBrowserEntityReference === 'object') {
   Drupal.entityBrowserEntityReference.entitiesReordered(document.querySelector("$container"));
@@ -36,13 +38,13 @@ END;
    *
    * @throws \Exception
    */
-  public function testOrderChange() {
+  public function testOrderChange(): void {
     $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
     $this->drupalGet($node->toUrl('edit-form'));
 
     $page = $this->getSession()->getPage();
 
-    $this->editParagraph($page, 'field_paragraphs', 0);
+    $this->editParagraph('field_paragraphs', 0);
 
     // Wait for all images to be displayed properly.
     $this->getSession()
@@ -67,7 +69,7 @@ END;
     $this->clickSave();
 
     $gallery = $this->loadMediaByUuid('df67621b-518f-4159-a59e-1bad0700800c');
-    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
+    $this->clickCssSelector('#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
 
     // Check that, 2nd image is file: 26357237683_0891e46ba5_k.jpg.
     $fileNamePosition = $this->getSession()
@@ -85,15 +87,13 @@ END;
    *   - reorder inside entity browser
    *   - remove inside entity browser.
    */
-  public function testAddRemove() {
+  public function testAddRemove(): void {
 
     // Test remove inside inline entity form.
     $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
     $this->drupalGet($node->toUrl('edit-form'));
 
-    $page = $this->getSession()->getPage();
-
-    $this->editParagraph($page, 'field_paragraphs', 0);
+    $this->editParagraph('field_paragraphs', 0);
 
     // Remove 2nd Image.
     $this->clickAjaxButtonCssSelector('[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current-items-1-remove-button"]');
@@ -101,7 +101,7 @@ END;
     $this->clickSave();
 
     $gallery = $this->loadMediaByUuid('df67621b-518f-4159-a59e-1bad0700800c');
-    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
+    $this->clickCssSelector('#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
 
     // Check that, there are 4 images in gallery.
     $numberOfImages = $this->getSession()
@@ -116,19 +116,19 @@ END;
     // Test add + reorder inside entity browser.
     $this->drupalGet($node->toUrl('edit-form'));
 
-    $this->editParagraph($page, 'field_paragraphs', 0);
+    $this->editParagraph('field_paragraphs', 0);
 
     // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
+    $this->openEntityBrowser('edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images', 'multiple_image_browser');
 
-    $this->uploadFile($page, '/project/tests/fixtures/reference.jpg');
+    $this->uploadFile('/fixtures/reference.jpg');
 
     // Move new image -> that's 5th image in list, to 3rd position.
     $list_selector = '#edit-selected';
     $item_selector = "$list_selector .item-container";
     $this->sortableAfter("$item_selector:nth-child(5)", "$item_selector:nth-child(2)", $list_selector);
 
-    $this->submitEntityBrowser($page);
+    $this->submitEntityBrowser('multiple_image_browser');
 
     $this->clickSave();
 
@@ -137,8 +137,8 @@ END;
       ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(5, $numberOfImages, 'There should be 5 images in Gallery.');
 
-    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
-    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
+    $this->clickCssSelector('#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
+    $this->clickCssSelector('#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
 
     // Check that, 3rd image is file: reference.jpg.
     $fileNamePosition = $this->getSession()
@@ -148,15 +148,15 @@ END;
     // Test remove inside entity browser.
     $this->drupalGet($node->toUrl('edit-form'));
 
-    $this->editParagraph($page, 'field_paragraphs', 0);
+    $this->editParagraph('field_paragraphs', 0);
 
     // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-entity-browser-entity-browser-open-modal', 'multiple_image_browser');
+    $this->openEntityBrowser('edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images', 'multiple_image_browser');
 
     $media = $this->getMediaByName('reference.jpg');
-    $this->clickButtonDrupalSelector($page, 'edit-selected-items-' . $media->id() . '-2-remove-button');
+    $this->clickDrupalSelector('edit-selected-items-' . $media->id() . '-2-remove-button');
 
-    $this->submitEntityBrowser($page);
+    $this->submitEntityBrowser('multiple_image_browser');
 
     $this->clickSave();
 
@@ -165,8 +165,8 @@ END;
       ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(4, $numberOfImages, 'There should be 4 images in Gallery.');
 
-    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
-    $this->clickButtonCssSelector($page, '#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
+    $this->clickCssSelector('#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
+    $this->clickCssSelector('#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
 
     // Check that, 3rd image is not file: reference.jpg.
     $fileNamePosition = $this->getSession()

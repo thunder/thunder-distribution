@@ -26,15 +26,16 @@ class ModerationStateWidget extends CoreModerationStateWidget {
   /**
    * {@inheritdoc}
    */
-  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
+  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state): array {
     /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
-    $entity = $original_entity = $items->getEntity();
+    $entity = $items->getEntity();
+    $original_entity = $entity;
 
     $default = $this->moderationInformation->getOriginalState($entity);
 
     // If the entity already exists, grab the most recent revision and load it.
     // The moderation state of the saved revision will be used to display the
-    // current state as well determine the the appropriate transitions.
+    // current state as well determine the appropriate transitions.
     if (!$entity->isNew()) {
       /** @var \Drupal\Core\Entity\ContentEntityInterface $original_entity */
       $original_entity = $this->entityTypeManager->getStorage($entity->getEntityTypeId())->loadRevision($entity->getLoadedRevisionId());
@@ -81,7 +82,7 @@ class ModerationStateWidget extends CoreModerationStateWidget {
   /**
    * {@inheritdoc}
    */
-  public static function validateElement(array $element, FormStateInterface $form_state) {
+  public static function validateElement(array $element, FormStateInterface $form_state): void {
     $form_state->setValueForElement($element, [$element['#key_column'] => $element['#value']]);
   }
 

@@ -1,0 +1,10 @@
+views.view.entity_browser:
+  expected_config: {  }
+  update_actions:
+    add:
+      display:
+        default:
+          display_options:
+            fields:
+              entity_browser_select:
+                use_field_cardinality: true

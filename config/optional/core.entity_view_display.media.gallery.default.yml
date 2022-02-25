@@ -14,55 +14,63 @@ bundle: gallery
 mode: default
 content:
   field_media_images:
-    weight: 0
+    type: slick_media
     label: hidden
     settings:
-      vanilla: true
-      optionset: thunder_gallery
-      optionset_thumbnail: ''
-      skin: classic
-      skin_thumbnail: ''
-      image_style: gallery
-      responsive_image_style: ''
-      thumbnail_effect: ''
-      thumbnail_position: ''
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: slick
-      image: ''
-      title: field_description
-      link: ''
-      layout: below
-      thumbnail_caption: ''
-      class: ''
       caption:
         field_copyright: field_copyright
         field_description: '0'
         field_expires: '0'
         field_image: '0'
         field_tags: '0'
+      optionset: thunder_gallery
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: field_description
+      vanilla: true
+      icon: ''
+      layout: below
+      view_mode: slick
       cache: 0
-      sizes: ''
       current_view_mode: default
+      skin: classic
+      fx: ''
+      style: ''
       background: false
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      responsive_image_style: ''
+      box_style: ''
+      image_style: gallery
+      media_switch: ''
+      ratio: ''
+      thumbnail_style: ''
+      _uri: ''
       breakpoints:
         xs:
-          image_style: ''
           width: ''
+          image_style: ''
         sm:
-          image_style: ''
           width: ''
+          image_style: ''
         md:
-          image_style: ''
           width: ''
+          image_style: ''
         lg:
-          image_style: ''
           width: ''
+          image_style: ''
         xl:
-          image_style: ''
           width: ''
-      override: false
+          image_style: ''
+      sizes: ''
+      grid_header: ''
+      grid: '0'
+      grid_medium: '0'
+      grid_small: '0'
       overridables:
         arrows: '0'
         autoplay: '0'
@@ -73,26 +81,21 @@ content:
         randomize: '0'
         variableWidth: '0'
       thumbnail: ''
+      optionset_thumbnail: ''
+      skin_thumbnail: ''
+      thumbnail_caption: ''
+      thumbnail_effect: ''
+      thumbnail_position: ''
+      override: false
       skin_arrows: ''
       skin_dots: ''
-      style: ''
-      icon: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_style: ''
-      box_media_style: ''
+      use_theme_field: false
       preserve_keys: false
       visible_items: 0
-      grid: 0
-      grid_header: ''
-      grid_medium: 0
-      grid_small: 0
-      id: ''
-      overlay: ''
     third_party_settings:
       empty_fields:
         handler: ''
-    type: slick_media
+    weight: 0
     region: content
 hidden:
   created: true

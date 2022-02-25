@@ -17,44 +17,22 @@ class SchemaTest extends ThunderGqlsTestBase {
   /**
    * Tests the article schema.
    *
-   * @param string $schema
-   *   Schema name to test.
+   * @group NoUpdate
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
-   *
-   * @dataProvider schemas
    */
-  public function testSchema(string $schema) {
-    $this->runAndTestQuery($schema);
-  }
-
-  /**
-   * A data provider for testSchema.
-   */
-  public function schemas(): array {
-    return [
-      [
-        'article',
-      ],
-      [
-        'paragraphs',
-      ],
-      [
-        'entities_with_term',
-      ],
-      [
-        'menu',
-      ],
-      [
-        'breadcrumb',
-      ],
-      [
-        'redirect',
-      ],
-      [
-        'user',
-      ],
+  public function testSchema(): void {
+    $schemas = [
+      'article',
+      'paragraphs',
+      'entities_with_term',
+      'menu',
+      'breadcrumb',
+      'user',
     ];
+    foreach ($schemas as $schema) {
+      $this->runAndTestQuery($schema);
+    }
   }
 
   /**
@@ -62,7 +40,7 @@ class SchemaTest extends ThunderGqlsTestBase {
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public function testUnpublishedAccess() {
+  public function testUnpublishedAccess(): void {
 
     $node = Node::create([
       'title' => 'Test node',
@@ -90,7 +68,7 @@ GQL;
     $variables = ['path' => $node->toUrl()->toString()];
     $response = $this->query($query, Json::encode($variables));
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
-    $this->assertEmpty(json_decode($response->getBody(), TRUE)['data']['page']);
+    $this->assertEmpty(json_decode($response->getBody(), TRUE, 512, JSON_THROW_ON_ERROR)['data']['page']);
 
     $query = <<<GQL
       query (\$path: String!, \$token: String!) {
@@ -105,7 +83,7 @@ GQL;
     $response = $this->query($query, Json::encode($variables));
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
 
-    $this->assertEqualsCanonicalizing(['name' => 'Test node'], json_decode($response->getBody(), TRUE)['data']['page']);
+    $this->assertEqualsCanonicalizing(['name' => 'Test node'], json_decode($response->getBody(), TRUE, 512, JSON_THROW_ON_ERROR)['data']['page']);
   }
 
   /**
@@ -113,9 +91,9 @@ GQL;
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public function testExpiredImage() {
+  public function testExpiredImage(): void {
 
-    \Drupal::service('entity.repository')->loadEntityByUuid('media', '17965877-27b2-428f-8b8c-7dccba9786e5')
+    $this->loadMediaByUuid('17965877-27b2-428f-8b8c-7dccba9786e5')
       ->setUnpublished()
       ->save();
 
@@ -157,13 +135,13 @@ GQL;
           ],
         ],
       ],
-    ], json_decode($response->getBody(), TRUE)['data']['page']);
+    ], json_decode($response->getBody(), TRUE, 512, JSON_THROW_ON_ERROR)['data']['page']);
   }
 
   /**
    * Validates the thunder schema.
    */
-  public function testValidSchema() {
+  public function testValidSchema(): void {
     /** @var \Drupal\graphql\GraphQL\ValidatorInterface $validator */
     $validator = \Drupal::service('graphql.validator');
 

@@ -61,7 +61,7 @@ class DynamicLocalTasks extends DeriverBase implements ContainerDeriverInterface
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, $base_plugin_id) {
+  public static function create(ContainerInterface $container, $base_plugin_id): self {
     return new static(
       $container->get('string_translation'),
       $container->get('module_handler'),
@@ -73,25 +73,13 @@ class DynamicLocalTasks extends DeriverBase implements ContainerDeriverInterface
   /**
    * {@inheritdoc}
    */
-  public function getDerivativeDefinitions($base_plugin_definition) {
+  public function getDerivativeDefinitions($base_plugin_definition): array {
     if ($this->moduleHandler->moduleExists('content_lock') && $this->routeProvider->getRoutesByNames(['view.locked_content.page_1'])) {
       $this->derivatives["thunder_article.content_lock"] = [
         'route_name' => "view.locked_content.page_1",
         'title' => $this->t('Locked content'),
         'parent_id' => "system.admin_content",
         'weight' => 2,
-      ] + $base_plugin_definition;
-    }
-
-    if ($this->moduleHandler->moduleExists('scheduler') && $this->routeProvider->getRoutesByNames(['view.scheduler_scheduled_content.overview'])) {
-      // See thunder_article_menu_local_tasks_alter() for how this is displayed
-      // or not depending on configuration.
-      $this->derivatives["thunder_article.scheduler"] = [
-        'route_name' => "view.scheduler_scheduled_content.overview",
-        'title' => $this->t('Scheduled content'),
-        'parent_id' => "system.admin_content",
-        'weight' => 3,
-        'cache_tags' => $this->configFactory->get('thunder_article.settings')->getCacheTags(),
       ] + $base_plugin_definition;
     }
 

@@ -6,5 +6,6 @@ Make sure these boxes are checked before submitting your pull request - thank yo
 - [ ] User roles have correct access for new introduced permission.
 - [ ] Every thunder module has a README.md in its root. Follow [this guidelines](https://www.drupal.org/node/2181737), but we don't need every topic.
 - [ ] Code is covered with well-balanced amount of inline comments.
+- [ ] New features or changes are documented.
 
 If you are really awesome, then your feature is covered by additional tests. Well done!

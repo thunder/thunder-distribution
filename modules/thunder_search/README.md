@@ -1,4 +1,4 @@
-#Thunder Search
+# Thunder Search
 
 This module integrates the Search API module into Thunder.
 

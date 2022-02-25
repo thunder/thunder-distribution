@@ -1,6 +1,14 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.basic_html
+  module:
+    - access_unpublished
+    - filter
+    - media
+    - system
+    - thunder_taxonomy
 id: authenticated
 label: 'Authenticated user'
 weight: -9

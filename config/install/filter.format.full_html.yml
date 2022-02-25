@@ -4,6 +4,7 @@ dependencies:
   module:
     - editor
     - linkit
+    - slick
 name: 'Full HTML'
 format: full_html
 weight: 2
@@ -39,3 +40,11 @@ filters:
     weight: 0
     settings:
       title: true
+  slick_filter:
+    id: slick_filter
+    provider: slick
+    status: false
+    weight: 4
+    settings:
+      optionset: default
+      media_switch: ''

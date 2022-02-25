@@ -8,8 +8,8 @@ third_party_settings:
   crop:
     image_field: null
   media_expire:
-    enable_expiring: null
     expire_field: null
+    enable_expiring: null
     fallback_media: null
 id: video
 label: Video
@@ -18,11 +18,11 @@ source: 'oembed:video'
 queue_thumbnail_downloads: false
 new_revision: false
 source_configuration:
+  source_field: field_media_video_embed_field
   thumbnails_directory: 'public://oembed_thumbnails'
   providers:
     - YouTube
     - Vimeo
-  source_field: field_media_video_embed_field
 field_map:
   title: name
   author_name: field_author

@@ -2,6 +2,10 @@
 
 namespace Drupal\Tests\thunder\Functional\Installer;
 
+use Drupal\Core\Language\LanguageDefault;
+use Drupal\Core\StringTranslation\TranslationManager;
+use GuzzleHttp\Client;
+use Drupal\Core\Http\ClientFactory;
 use Drupal\Core\DrupalKernel;
 use Drupal\Core\Language\Language;
 use Drupal\Core\Session\UserSession;
@@ -32,7 +36,7 @@ class ThunderInstallerTest extends InstallerTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUpAppRoot();
 
     $this->isInstalled = FALSE;
@@ -79,16 +83,16 @@ class ThunderInstallerTest extends InstallerTestBase {
     $this->container
       ->setParameter('language.default_values', Language::$defaultValues);
     $this->container
-      ->register('language.default', 'Drupal\Core\Language\LanguageDefault')
+      ->register('language.default', LanguageDefault::class)
       ->addArgument('%language.default_values%');
     $this->container
-      ->register('string_translation', 'Drupal\Core\StringTranslation\TranslationManager')
+      ->register('string_translation', TranslationManager::class)
       ->addArgument(new Reference('language.default'));
     $this->container
-      ->register('http_client', 'GuzzleHttp\Client')
+      ->register('http_client', Client::class)
       ->setFactory('http_client_factory:fromOptions');
     $this->container
-      ->register('http_client_factory', 'Drupal\Core\Http\ClientFactory')
+      ->register('http_client_factory', ClientFactory::class)
       ->setArguments([new Reference('http_handler_stack')]);
     $handler_stack = HandlerStack::create();
     $test_http_client_middleware = new TestHttpClientMiddleware();
@@ -97,7 +101,7 @@ class ThunderInstallerTest extends InstallerTestBase {
       ->set('http_handler_stack', $handler_stack);
 
     $this->container
-      ->set('app.root', DRUPAL_ROOT);
+      ->setParameter('app.root', DRUPAL_ROOT);
     \Drupal::setContainer($this->container);
 
     // Setup Mink.
@@ -129,9 +133,8 @@ class ThunderInstallerTest extends InstallerTestBase {
     if ($this->isInstalled) {
       // Import new settings.php written by the installer.
       $request = Request::createFromGlobals();
-      // @phpstan-ignore-next-line
-      $class_loader = require $this->container->get('app.root') . '/autoload.php';
-      Settings::initialize($this->container->get('app.root'), DrupalKernel::findSitePath($request), $class_loader);
+      $class_loader = require $this->container->getParameter('app.root') . '/autoload.php';
+      Settings::initialize($this->container->getParameter('app.root'), DrupalKernel::findSitePath($request), $class_loader);
 
       // After writing settings.php, the installer removes write permissions
       // from the site directory. To allow drupal_generate_test_ua() to write
@@ -139,8 +142,7 @@ class ThunderInstallerTest extends InstallerTestBase {
       // directory has to be writable.
       // BrowserTestBase::tearDown() will delete the entire test site directory.
       // Not using File API; a potential error must trigger a PHP warning.
-      // @phpstan-ignore-next-line
-      chmod($this->container->get('app.root') . '/' . $this->siteDirectory, 0777);
+      chmod($this->container->getParameter('app.root') . '/' . $this->siteDirectory, 0777);
       $this->kernel = DrupalKernel::createFromRequest($request, $class_loader, 'prod', FALSE);
       $this->kernel->boot();
       $this->kernel->preHandle($request);
@@ -160,7 +162,7 @@ class ThunderInstallerTest extends InstallerTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpLanguage() {
+  protected function setUpLanguage(): void {
     // Verify that the distribution name appears.
     $this->assertSession()->responseContains('thunder');
     // Verify that the "Choose profile" step does not appear.
@@ -172,14 +174,14 @@ class ThunderInstallerTest extends InstallerTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpProfile() {
+  protected function setUpProfile(): void {
     // This step is skipped, because there is a distribution profile.
   }
 
   /**
    * Final installer step: Configure site.
    */
-  protected function setUpSite() {
+  protected function setUpSite(): void {
     $edit = $this->translatePostValues($this->parameters['forms']['install_configure_form']);
     $edit['enable_update_status_module'] = NULL;
     $edit['enable_update_status_emails'] = NULL;
@@ -191,7 +193,7 @@ class ThunderInstallerTest extends InstallerTestBase {
   /**
    * Setup modules -> subroutine of test setUp process.
    */
-  protected function setUpModules() {
+  protected function setUpModules(): void {
     // @todo Add another test that tests interactive install of all optional
     //   Thunder modules.
     $this->submitForm([], $this->translations['Save and continue']);
@@ -201,7 +203,7 @@ class ThunderInstallerTest extends InstallerTestBase {
   /**
    * Confirms that the installation succeeded.
    */
-  public function testInstalled() {
+  public function testInstalled(): void {
     $this->assertSession()->addressEquals('user/1');
     $this->assertSession()->statusCodeEquals(200);
     // Confirm that we are logged-in after installation.
@@ -210,9 +212,8 @@ class ThunderInstallerTest extends InstallerTestBase {
     $message = strip_tags(new TranslatableMarkup('Congratulations, you installed @drupal!', ['@drupal' => 'Thunder'], ['langcode' => $this->langcode]));
     $this->assertSession()->pageTextContains($message);
 
-    /** @var \Drupal\Core\Database\Query\SelectInterface $query */
     $query = \Drupal::database()->select('watchdog', 'w')
-      ->condition('severity', 4, '<');
+      ->condition('severity', '4', '<');
 
     // Check that there are no warnings in the log after installation.
     $this->assertEquals($this->knownWarnings, $query->countQuery()->execute()->fetchField());
