@@ -16,7 +16,7 @@ class FilterExtension extends AbstractExtension {
    * @return array
    *   Declared Twig filters
    */
-  public function getFilters() {
+  public function getFilters(): array {
     return [
       new TwigFilter('plain_text', [$this, 'plainText']),
       new TwigFilter('basic_format', [$this, 'basicFormat'], ['is_safe' => ['html']]),
@@ -29,7 +29,7 @@ class FilterExtension extends AbstractExtension {
    * @return string
    *   The extension name
    */
-  public function getName() {
+  public function getName(): string {
     return 'thunder_article_filter_extension';
   }
 
@@ -71,6 +71,8 @@ class FilterExtension extends AbstractExtension {
    *
    * @param mixed $element
    *   The render element.
+   *
+   * @phpstan-ignore-next-line
    */
   private static function render(&$element) {
     if (!$element && $element !== 0) {

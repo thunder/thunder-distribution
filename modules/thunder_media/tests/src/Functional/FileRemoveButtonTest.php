@@ -19,7 +19,7 @@ class FileRemoveButtonTest extends ThunderTestBase {
   /**
    * Test for transliteration of file name.
    */
-  public function testRemoveButtonGone() {
+  public function testRemoveButtonGone(): void {
 
     $this->logWithRole('editor');
     $media = $this->getMediaByName('Image 1');

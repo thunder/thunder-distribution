@@ -2,10 +2,10 @@ parameters:
   drupal:
     drupal_root: %currentWorkingDirectory%/docroot
   customRulesetUsed: true
-  checkGenericClassInNonGenericObjectType: true
-  checkMissingIterableValueType: true
+  checkGenericClassInNonGenericObjectType: false
+  checkMissingIterableValueType: false
   reportUnmatchedIgnoredErrors: true
-  level: 4
+  level: 6
   ignoreErrors:
     - '#\Drupal calls should be avoided in classes, use dependency injection instead#'
     - '#\Call to an undefined method Drupal\\Tests\\WebAssert::#'

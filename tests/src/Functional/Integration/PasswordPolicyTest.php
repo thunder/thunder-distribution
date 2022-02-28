@@ -21,7 +21,8 @@ class PasswordPolicyTest extends ThunderTestBase {
   /**
    * Tests redirect from old URL to new one.
    */
-  public function testPasswordPolicies() {
+  public function testPasswordPolicies(): void {
+    $edit = [];
     $editor = $this->logWithRole('editor');
 
     $current_password = $editor->passRaw;

@@ -148,10 +148,12 @@ abstract class ThunderGqlsTestBase extends ThunderTestBase {
 
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
 
-    $responseData = json_decode($response->getBody(), TRUE)['data'];
+    $responseData = json_decode($response->getBody(), TRUE, 512, JSON_THROW_ON_ERROR)['data'];
     $expectedData = json_decode(
       $this->getExpectedResponseFromFile($schema),
-      TRUE
+      TRUE,
+      512,
+      JSON_THROW_ON_ERROR
     )['data'];
 
     $this->assertEqualsCanonicalizing($expectedData, $responseData);

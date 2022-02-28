@@ -32,7 +32,7 @@ class ContentTranslationTest extends ThunderTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->languages['en'] = ConfigurableLanguage::createFromLangcode('en');
@@ -43,7 +43,7 @@ class ContentTranslationTest extends ThunderTestBase {
   /**
    * Test that basic translation creation works.
    */
-  public function testBasicContentTranslation() {
+  public function testBasicContentTranslation(): void {
 
     $this->logWithRole('editor');
 
@@ -70,7 +70,7 @@ class ContentTranslationTest extends ThunderTestBase {
   /**
    * Test the field translatable property for all field configs.
    */
-  public function testFieldTranslationKey() {
+  public function testFieldTranslationKey(): void {
     $whitelist = [
       'field.field.media.instagram.field_url',
       'field.field.media.pinterest.field_url',
