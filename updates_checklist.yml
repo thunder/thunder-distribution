@@ -81,3 +81,12 @@ v6.3.3:
         '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
 
+
+v6.3.5:
+    '#title': 'Update to version v6.3.5'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_update_8322:
+        '#title': 'Add paragraphs and metatag fields to basic page.'
+        '#description': '<p>Add paragraphs and metatag fields to basic page.</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'

@@ -284,3 +284,17 @@ function thunder_update_8321(): string {
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
 }
+
+/**
+ * Add paragraphs and metatag fields to basic page.
+ */
+function thunder_update_8322() {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_update_8322');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
