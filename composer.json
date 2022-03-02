@@ -54,7 +54,10 @@
             },
             "drupal/schema_metatag": {
                 "Metatags have encoded HTML entities instead of plain text content": "https://www.drupal.org/files/issues/2022-02-01/3192117-21.patch"
-            }
+            },
+            "drupal/paragraphs_features": {
+                "Fix 8.x-1.13": "https://patch-diff.githubusercontent.com/raw/thunder/paragraphs_features/pull/58.diff"
+           }
         }
     },
     "require": {
