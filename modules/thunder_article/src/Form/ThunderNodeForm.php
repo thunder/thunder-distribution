@@ -125,6 +125,22 @@ class ThunderNodeForm implements ContainerInjectionInterface {
 
     $form['actions'] = array_merge($form['actions'], $this->actions($entity));
 
+    if (isset($form['meta']['published'])) {
+      if ($latest_revision_id && $this->moderationInfo && $this->moderationInfo->isModeratedEntity($entity)) {
+        /** @var \Drupal\content_moderation\ContentModerationState $state */
+        $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
+        if (!$state->isDefaultRevisionState()) {
+          $args = [
+            '@state' => $state->label(),
+            '@entity_type' => strtolower($entity->type->entity->label()),
+          ];
+          $form['meta']['published']['#markup'] = $entity->isNew() || !$this->moderationInfo->isDefaultRevisionPublished($entity) ?
+            $this->t('@state of unpublished @entity_type', $args) :
+            $this->t('@state of published @entity_type', $args);
+        }
+      }
+    }
+
     return $form;
   }
 
