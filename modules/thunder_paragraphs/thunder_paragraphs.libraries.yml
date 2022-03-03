@@ -4,3 +4,8 @@ fieldwidget_settings:
   dependencies:
     - core/jquery
     - core/drupal
+
+paragraphs.widget:
+  css:
+    theme:
+      css/paragraphs.widget.css: {}
