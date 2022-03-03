@@ -5,6 +5,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderFormFieldTestTrait;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
+use Drupal\Tests\thunder\FunctionalJavascript\ThunderArticleTestTrait;
 
 /**
  * Tests the autosave support for nodes in Thunder.
@@ -15,11 +16,12 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
 
   use ThunderFormFieldTestTrait;
   use ThunderParagraphsTestTrait;
+  use ThunderArticleTestTrait;
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Adjust the autosave form submission interval.
@@ -31,7 +33,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
   /**
    * Tests the autosave functionality in an existing article.
    */
-  public function testAutosaveInExistingEntity() {
+  public function testAutosaveInExistingEntity(): void {
     $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
     $this->drupalGet($node->toUrl('edit-form'));
     $page = $this->getSession()->getPage();
@@ -71,7 +73,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
   /**
    * Press the restore button.
    */
-  protected function pressRestoreButton() {
+  protected function pressRestoreButton(): void {
     $page = $this->getSession()->getPage();
 
     // Press restore button.
@@ -83,7 +85,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
   /**
    * Press the reject button.
    */
-  protected function pressRejectButton() {
+  protected function pressRejectButton(): void {
     $page = $this->getSession()->getPage();
 
     // Press restore button.
@@ -95,9 +97,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
   /**
    * Make some changes to the article.
    */
-  protected function makeFormChanges() {
-    $page = $this->getSession()->getPage();
-
+  protected function makeFormChanges(): void {
     $this->expandAllTabs();
     $this->addTextParagraph('field_paragraphs', 'Awesome quote', 'quote');
 
@@ -115,7 +115,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
       'publish_state[0]' => 'published',
       'unpublish_state[0]' => 'unpublished',
     ];
-    $this->setFieldValues($page, $fieldValues);
+    $this->setFieldValues($fieldValues);
 
     // Wait for autosave to be triggered.
     sleep(3);

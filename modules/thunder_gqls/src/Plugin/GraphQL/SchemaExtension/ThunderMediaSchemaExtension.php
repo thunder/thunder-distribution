@@ -22,12 +22,12 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function registerResolvers(ResolverRegistryInterface $registry) {
+  public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 
     $this->registry->addTypeResolver('Media',
       \Closure::fromCallable([
-        __CLASS__,
+        self::class,
         'resolveMediaTypes',
       ])
     );
@@ -38,7 +38,7 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
   /**
    * Add image media field resolvers.
    */
-  protected function resolveFields() {
+  protected function resolveFields(): void {
     // Image.
     $this->resolveMediaInterfaceFields('MediaImage');
     $this->addFieldResolverIfNotExists('MediaImage', 'copyright',

@@ -15,7 +15,7 @@ use Drupal\paragraphs\Plugin\Field\FieldWidget\ParagraphsWidget;
 /**
  * Implements hook_field_widget_third_party_settings_form().
  */
-function thunder_paragraphs_field_widget_third_party_settings_form(WidgetInterface $plugin, FieldDefinitionInterface $field_definition, $form_mode, $form, FormStateInterface $form_state) {
+function thunder_paragraphs_field_widget_third_party_settings_form(WidgetInterface $plugin, FieldDefinitionInterface $field_definition, string $form_mode, array $form, FormStateInterface $form_state): array {
   $element = [];
 
   if ($plugin instanceof ParagraphsWidget) {
@@ -29,22 +29,9 @@ function thunder_paragraphs_field_widget_third_party_settings_form(WidgetInterfa
 /**
  * Implements hook_field_widget_WIDGET_TYPE_form_alter().
  *
- * @todo Remove in Thunder 4, or when the inline entity form FieldWidgetDisplay
- *       was removed.
- */
-function thunder_paragraphs_field_widget_entity_browser_entity_reference_form_alter(&$element, FormStateInterface $form_state, $context) {
-  if (isset($context['widget']) && ($context['widget']->getSetting('field_widget_display') === 'inline_entity_form')) {
-    \Drupal::messenger()->addWarning(t('The inline_entity_form field widget display is broken and will be removed in Thunder 4.0.0. Please use a different display for your %title field.', ['%title' => $element['#title']]));
-    $element['#attach_ief_submit'] = TRUE;
-  }
-}
-
-/**
- * Implements hook_field_widget_WIDGET_TYPE_form_alter().
- *
  * Used for Classic Paragraphs widget.
  */
-function thunder_paragraphs_field_widget_entity_reference_paragraphs_form_alter(&$element, FormStateInterface $form_state, $context) {
+function thunder_paragraphs_field_widget_entity_reference_paragraphs_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
   _thunder_paragraph_attach_ief_submit(
     $element,
     [
@@ -60,7 +47,7 @@ function thunder_paragraphs_field_widget_entity_reference_paragraphs_form_alter(
  *
  * Used for Experimental Paragraphs widget.
  */
-function thunder_paragraphs_field_widget_paragraphs_form_alter(&$element, FormStateInterface $form_state, $context) {
+function thunder_paragraphs_field_widget_paragraphs_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
   // Based on logic in ParagraphsWidget::formMultipleElements - execution of
   // alter hook for existing paragraphs will be executed first and only with
   // list of editable paragraphs. Since all editable paragraphs are processed
@@ -109,7 +96,7 @@ function thunder_paragraphs_field_widget_paragraphs_form_alter(&$element, FormSt
  * @param bool $is_displayed
  *   Flag if "Collapse and save" button should be visible.
  */
-function _thunder_paragraph_attach_ief_submit(array &$element, array $button_parents, $is_displayed = TRUE) {
+function _thunder_paragraph_attach_ief_submit(array &$element, array $button_parents, bool $is_displayed = TRUE): void {
   if (isset($element['subform'])) {
     foreach (Element::children($element['subform']) as $index) {
       if (isset($element['subform'][$index]['widget'][0]['inline_entity_form'])

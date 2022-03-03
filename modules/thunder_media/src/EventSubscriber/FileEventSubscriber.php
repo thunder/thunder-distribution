@@ -45,13 +45,13 @@ class FileEventSubscriber implements EventSubscriberInterface {
    * @param \Drupal\Core\File\Event\FileUploadSanitizeNameEvent $event
    *   The file upload event.
    */
-  public function sanitizeFilename(FileUploadSanitizeNameEvent $event) {
+  public function sanitizeFilename(FileUploadSanitizeNameEvent $event): void {
     if ($this->config->get('enable_filename_transliteration')) {
       $pathinfo = pathinfo($event->getFilename());
 
       // Check for needed pathinfo array keys.
       if (!empty($pathinfo['filename']) && !empty($pathinfo['extension'])) {
-        $cleanFilename = $this->aliasCleaner->cleanString($pathinfo['filename']) . '.' . $pathinfo['extension'];
+        $cleanFilename = $this->aliasCleaner->cleanString($pathinfo['filename'], ['langcode' => 'en']) . '.' . $pathinfo['extension'];
         $event->setFilename($cleanFilename);
       }
     }
@@ -60,7 +60,7 @@ class FileEventSubscriber implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     return [
       FileUploadSanitizeNameEvent::class => 'sanitizeFilename',
     ];

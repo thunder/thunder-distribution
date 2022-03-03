@@ -9,64 +9,39 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
  */
 trait ThunderMediaTestTrait {
 
+  use ThunderMediaLibraryTestTrait;
+  use ThunderJavascriptTrait;
+
   /**
    * Select Medias for field.
    *
    * @param string $fieldName
    *   Field name.
-   * @param string $entityBrowser
-   *   Entity browser identifier.
    * @param array $medias
    *   List of media identifiers.
    */
-  public function selectMedia($fieldName, $entityBrowser, array $medias) {
+  public function selectMedia(string $fieldName, array $medias): void {
+    $this->openMediaLibrary($fieldName);
 
-    /** @var \Behat\Mink\Element\DocumentElement $page */
-    $page = $this->getSession()->getPage();
+    $this->toggleMedia($medias);
 
-    $this->assertWaitOnAjaxRequest();
+    $this->submitMediaLibrary();
+  }
 
-    $buttonName = $fieldName . '_entity_browser_entity_browser';
-    $this->scrollElementInView("[name=\"{$buttonName}\"]");
-    $page->pressButton($buttonName);
-
-    $this->assertWaitOnAjaxRequest();
-
-    $this->getSession()
-      ->switchToIFrame('entity_browser_iframe_' . $entityBrowser);
-    $this->assertWaitOnAjaxRequest();
-
+  /**
+   * Toggle media items in the library.
+   *
+   * @param array $medias
+   *   List of media identifiers.
+   */
+  public function toggleMedia(array $medias): void {
     foreach ($medias as $media) {
-      $input = $page->find('xpath', "//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]");
-      if ($entityBrowser == 'multiple_image_browser') {
-        $input->click();
-      }
-      else {
-        $this->scrollElementInView("[name=\"entity_browser_select[$media]\"]");
-        $page->checkField("entity_browser_select[$media]");
-      }
+      // Checkboxes are hidden if replace_checkbox_by_order_indicator is
+      // enabled, so we need to show them before every click.
+      $this->getSession()
+        ->executeScript("document.querySelectorAll('div.media-library-views-form__rows input').forEach(item => { item.style.display = 'block'; })");
+      $this->clickCssSelector("div.media-library-views-form__rows input[value=\"$media\"]", FALSE);
     }
-    $this->assertWaitOnAjaxRequest();
-
-    $element = 'img';
-    if ($entityBrowser == 'multiple_image_browser') {
-      $this->getSession()->wait(200);
-      $this->assertWaitOnAjaxRequest();
-
-      $page->pressButton('Use selected');
-    }
-    elseif ($entityBrowser == 'image_browser') {
-      $page->pressButton('Select image');
-    }
-    elseif ($entityBrowser == 'video_browser') {
-      $page->pressButton('Select video');
-      $element = 'iframe';
-    }
-
-    $this->getSession()->switchToIFrame();
-    $this->assertWaitOnAjaxRequest();
-
-    $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-wrapper"] ' . $element);
   }
 
   /**
@@ -79,7 +54,7 @@ trait ThunderMediaTestTrait {
    * @param array $medias
    *   List of media identifiers.
    */
-  public function createGallery($name, $fieldName, array $medias) {
+  public function createGallery(string $name, string $fieldName, array $medias): void {
 
     $page = $this->getSession()->getPage();
 
@@ -89,7 +64,7 @@ trait ThunderMediaTestTrait {
     $nameField = $page->find('css', $selector);
     $nameField->setValue($name);
 
-    $this->selectMedia("{$fieldName}_0_inline_entity_form_field_media_images", 'multiple_image_browser', $medias);
+    $this->selectMedia("{$fieldName}_0_inline_entity_form_field_media_images", $medias);
   }
 
 }

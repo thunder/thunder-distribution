@@ -11,8 +11,10 @@ classes.
 There are also some traits, that provides useful functionalities:
 
 - `ThunderTestTrait.php`
+- `ThunderJavascriptTrait.php`
 - `ThunderArticleTestTrait.php`
-- `ThunderEntityBrowserTestTrait.php`
+- `ThunderCkEditorTestTrait.php`
+- `ThunderMediaLibraryTestTrait.php`
 - `ThunderFormFieldTestTrait.php`
 - `ThunderMediaTestTrait.php`
 - `ThunderMetaTagTrait.php`

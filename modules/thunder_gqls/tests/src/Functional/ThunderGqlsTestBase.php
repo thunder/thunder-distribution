@@ -88,7 +88,9 @@ abstract class ThunderGqlsTestBase extends ThunderTestBase {
    *   The path to the collection of test query files.
    */
   protected function getQueriesDirectory() {
-    return drupal_get_path('module', explode('\\', get_class($this))[2]) . '/tests/examples';
+    /** @var \Drupal\Core\Extension\ExtensionPathResolver $extensionPathResolver */
+    $extensionPathResolver = \Drupal::service('extension.path.resolver');
+    return $extensionPathResolver->getPath('module', explode('\\', get_class($this))[2]) . '/tests/examples';
   }
 
   /**
@@ -146,10 +148,12 @@ abstract class ThunderGqlsTestBase extends ThunderTestBase {
 
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
 
-    $responseData = json_decode($response->getBody(), TRUE)['data'];
+    $responseData = json_decode($response->getBody(), TRUE, 512, JSON_THROW_ON_ERROR)['data'];
     $expectedData = json_decode(
       $this->getExpectedResponseFromFile($schema),
-      TRUE
+      TRUE,
+      512,
+      JSON_THROW_ON_ERROR
     )['data'];
 
     $this->assertEqualsCanonicalizing($expectedData, $responseData);

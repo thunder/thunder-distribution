@@ -16,10 +16,8 @@ anything you want from a simple text block or image to a complex and configurabl
 structure an article into sub-elements, which can easily be created, edited, and reorganized.\
 [https://www.drupal.org/project/paragraphs](https://www.drupal.org/project/paragraphs)
 
-**Entity Browser**: This module provides a generic entity browser/picker/selector. In Thunder, it serves as media
-library which gives you an overview of all your media entities, such as pictures and videos. You can filter and search
-for them, edit them, and add new media.\
-[https://www.drupal.org/project/entity_browser](https://www.drupal.org/project/entity_browser)
+**Media Library**: The media library gives you an overview of all your media entities, such as pictures and videos.
+You can filter and search for them, edit them, and add new media.
 
 **Autosave Form**: The “Autosave Form” module provides an autosave feature for all forms. The autosave submits will be
 triggered every 60 seconds and store the changes from the currently logged-in user in the database.\

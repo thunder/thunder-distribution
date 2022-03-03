@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-use Behat\Mink\Element\DocumentElement;
 use Drupal\Component\Utility\Html;
 
 /**
@@ -12,7 +11,9 @@ use Drupal\Component\Utility\Html;
  */
 trait ThunderParagraphsTestTrait {
 
+  use ThunderJavascriptTrait;
   use ThunderMediaTestTrait;
+  use ThunderCkEditorTestTrait;
 
   /**
    * Get number of paragraphs for defined field on current page.
@@ -23,7 +24,7 @@ trait ThunderParagraphsTestTrait {
    * @return int
    *   Returns number of paragraphs.
    */
-  protected function getNumberOfParagraphs($fieldName) {
+  protected function getNumberOfParagraphs(string $fieldName): int {
     $paragraphRows = $this->getParagraphItems($fieldName);
 
     return count($paragraphRows);
@@ -38,7 +39,7 @@ trait ThunderParagraphsTestTrait {
    * @return \Behat\Mink\Element\NodeElement[]
    *   The paragraph node element.
    */
-  protected function getParagraphItems($fieldName) {
+  protected function getParagraphItems(string $fieldName) {
     $fieldNamePart = HTML::cleanCssIdentifier($fieldName);
 
     return $this->xpath("//*[@id=\"edit-{$fieldNamePart}-wrapper\"]//table[starts-with(@id, \"{$fieldNamePart}-values\")]/tbody/tr[contains(@class, \"draggable\")]//div[number(substring-after(@data-drupal-selector, \"edit-{$fieldNamePart}-\")) >= 0]");
@@ -61,40 +62,37 @@ trait ThunderParagraphsTestTrait {
    *
    * @throws \Exception
    */
-  public function addParagraph($fieldName, $type, $position = NULL) {
-    /** @var \Behat\Mink\Element\DocumentElement $page */
-    $page = $this->getSession()->getPage();
+  public function addParagraph(string $fieldName, string $type, $position = NULL) {
     $numberOfParagraphs = $this->getNumberOfParagraphs($fieldName);
+
+    $types = ['text' => 1, 'image' => 2, 'gallery' => 3];
+    $index = $types[$type] ?? 4;
 
     $fieldSelector = HTML::cleanCssIdentifier($fieldName);
     if ($position === NULL || $position > $numberOfParagraphs) {
       $position = $numberOfParagraphs;
-      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:last-child input.paragraphs-features__add-in-between__button";
+      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:last-child li:nth-child({$index}) button.paragraphs-features__add-in-between__button";
     }
     else {
       $addButtonPosition = $position * 2 + 1;
-      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) input.paragraphs-features__add-in-between__button";
+      $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) li:nth-child({$index}) button.paragraphs-features__add-in-between__button";
     }
 
-    $addButton = $page->find('css', $addButtonCssSelector);
-    $this->scrollElementInView($addButtonCssSelector);
-
-    $addButton->click();
-    $this->assertWaitOnAjaxRequest();
-
-    $page->find('xpath', "//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]")
-      ->click();
-
-    $this->assertWaitOnAjaxRequest();
+    $this->clickCssSelector($addButtonCssSelector);
+    if ($index > 3) {
+      $this->getSession()->getDriver()->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"${fieldName}_${type}_add_more\"]");
+      $this->assertWaitOnAjaxRequest();
+    }
+    $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child(" . (($numberOfParagraphs + 1) * 2 + 1) . ")"));
 
     // Test if we have one more paragraph now.
-    static::assertEquals($this->getNumberOfParagraphs($fieldName), ($numberOfParagraphs + 1));
+    $this->assertEquals(($numberOfParagraphs + 1), $this->getNumberOfParagraphs($fieldName));
 
     return $this->getParagraphDelta($fieldName, $position);
   }
 
   /**
-   * Get dalta of paragraph item for a given filed on a specific position.
+   * Get the delta of a paragraph item for a given filed on a specific position.
    *
    * @param string $fieldName
    *   Field name.
@@ -106,7 +104,7 @@ trait ThunderParagraphsTestTrait {
    *
    * @throws \Exception
    */
-  public function getParagraphDelta($fieldName, $position) {
+  public function getParagraphDelta(string $fieldName, int $position) {
     $fieldSelector = HTML::cleanCssIdentifier($fieldName);
 
     // Retrieve new paragraphs delta from id attribute of the item.
@@ -131,11 +129,10 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   Position of the paragraph.
    */
-  public function addImageParagraph($fieldName, array $media, $position = NULL) {
+  public function addImageParagraph(string $fieldName, array $media, $position = NULL): void {
     $paragraphIndex = $this->addParagraph($fieldName, 'image', $position);
 
-    $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_image", 'image_browser', $media);
-
+    $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_image", $media);
   }
 
   /**
@@ -148,11 +145,10 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   Position of the paragraph.
    */
-  public function addVideoParagraph($fieldName, array $media, $position = NULL) {
+  public function addVideoParagraph(string $fieldName, array $media, $position = NULL): void {
     $paragraphIndex = $this->addParagraph($fieldName, 'video', $position);
 
-    $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_video", 'video_browser', $media);
-
+    $this->selectMedia("{$fieldName}_{$paragraphIndex}_subform_field_video", $media);
   }
 
   /**
@@ -167,7 +163,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   Position of the paragraph.
    */
-  public function addGalleryParagraph($fieldName, $name, array $media, $position = NULL) {
+  public function addGalleryParagraph(string $fieldName, string $name, array $media, $position = NULL): void {
     $paragraphIndex = $this->addParagraph($fieldName, 'gallery', $position);
 
     $this->createGallery($name, "{$fieldName}_{$paragraphIndex}_subform_field_media", $media);
@@ -185,7 +181,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   Position of the paragraph.
    */
-  public function addTextParagraph($fieldName, $text, $type = 'text', $position = NULL) {
+  public function addTextParagraph(string $fieldName, string $text, string $type = 'text', $position = NULL): void {
     $paragraphIndex = $this->addParagraph($fieldName, $type, $position);
 
     if (!empty($text)) {
@@ -208,7 +204,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   Position of the paragraph.
    */
-  public function addSocialParagraph($fieldName, $socialUrl, $type, $position = NULL) {
+  public function addSocialParagraph(string $fieldName, string $socialUrl, string $type, $position = NULL): void {
     $paragraphIndex = $this->addParagraph($fieldName, $type, $position);
 
     /** @var \Behat\Mink\Element\DocumentElement $page */
@@ -234,7 +230,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   Position of the paragraph.
    */
-  public function addLinkParagraph($fieldName, $urlText, $url, $position = NULL) {
+  public function addLinkParagraph(string $fieldName, string $urlText, string $url, $position = NULL): void {
     $paragraphIndex = $this->addParagraph($fieldName, 'link', $position);
 
     /** @var \Behat\Mink\Element\DocumentElement $page */
@@ -247,17 +243,16 @@ trait ThunderParagraphsTestTrait {
   /**
    * Click button for editing of paragraph.
    *
-   * @param \Behat\Mink\Element\DocumentElement $page
-   *   Current active page.
    * @param string $paragraphsFieldName
    *   Field name in content type used to paragraphs.
    * @param int $index
    *   Index of paragraph to be edited, starts from 0.
    */
-  public function editParagraph(DocumentElement $page, $paragraphsFieldName, $index) {
+  public function editParagraph(string $paragraphsFieldName, int $index): void {
     $editButtonName = "{$paragraphsFieldName}_{$index}_edit";
 
     $this->scrollElementInView("[name=\"{$editButtonName}\"]");
+    $page = $this->getSession()->getPage();
     $page->pressButton($editButtonName);
     $this->assertWaitOnAjaxRequest();
   }

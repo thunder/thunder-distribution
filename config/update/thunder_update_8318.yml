@@ -1,0 +1,61 @@
+core.entity_form_display.node.article.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        field_paragraphs:
+          third_party_settings:
+            entity_reference_actions:
+              enabled: false
+              options:
+                action_title: Action
+                include_exclude: exclude
+                selected_actions: {  }
+            paragraphs_features:
+              add_in_between_link_count: 3
+core.entity_form_display.taxonomy_term.channel.default:
+  expected_config:
+    content:
+      field_meta_tags:
+        settings: {  }
+  update_actions:
+    add:
+      content:
+        field_paragraphs:
+          third_party_settings:
+            entity_reference_actions:
+              enabled: false
+              options:
+                action_title: Action
+                include_exclude: exclude
+                selected_actions: {  }
+            paragraphs_features:
+              add_in_between_link_count: 3
+    change:
+      content:
+        field_meta_tags:
+          settings:
+            sidebar: true
+core.entity_form_display.taxonomy_term.tags.default:
+  expected_config:
+    content:
+      field_meta_tags:
+        settings: {  }
+  update_actions:
+    add:
+      content:
+        field_paragraphs:
+          third_party_settings:
+            entity_reference_actions:
+              enabled: false
+              options:
+                action_title: Action
+                include_exclude: exclude
+                selected_actions: {  }
+            paragraphs_features:
+              add_in_between_link_count: 3
+    change:
+      content:
+        field_meta_tags:
+          settings:
+            sidebar: true

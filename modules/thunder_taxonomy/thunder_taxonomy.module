@@ -6,25 +6,28 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\thunder_taxonomy\ThunderTermAccessControlHandler;
 
 /**
  * Implements hook_entity_type_alter().
  */
-function thunder_taxonomy_entity_type_alter(array &$entity_types) {
-
+function thunder_taxonomy_entity_type_alter(array &$entity_types): void {
   /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
   if (!empty($entity_types['taxonomy_term'])) {
-    $entity_types['taxonomy_term']->setAccessClass('Drupal\thunder_taxonomy\ThunderTermAccessControlHandler');
+    $entity_types['taxonomy_term']->setAccessClass(ThunderTermAccessControlHandler::class);
   }
 }
 
 /**
  * Implements hook_form_BASE_FORM_ID_alter() for \Drupal\taxonomy\TermForm.
  */
-function thunder_taxonomy_form_taxonomy_term_form_alter(&$form, FormStateInterface $form_state) {
+function thunder_taxonomy_form_taxonomy_term_form_alter(array &$form, FormStateInterface $form_state): void {
   // @todo Remove after seven / thunder_admin support is dropped.
-  $activeTheme = Drupal::theme()->getActiveTheme()->getName();
-  if (in_array($activeTheme, ['seven', 'thunder_admin'])) {
+  $activeTheme = Drupal::theme()->getActiveTheme();
+  $activeThemes = array_keys($activeTheme->getBaseThemeExtensions());
+  $activeThemes[] = $activeTheme->getName();
+
+  if (!empty(array_intersect($activeThemes, ['seven', 'thunder_admin']))) {
     // Create sidebar group.
     $form['advanced'] = [
       '#type' => 'container',
@@ -65,8 +68,10 @@ function thunder_taxonomy_form_taxonomy_term_form_alter(&$form, FormStateInterfa
 /**
  * Implements hook_form_taxonomy_overview_terms_alter().
  */
-function thunder_taxonomy_form_taxonomy_overview_terms_alter(&$form, FormStateInterface $formState) {
-  // Add status to overview page.
+function thunder_taxonomy_form_taxonomy_overview_terms_alter(array &$form, FormStateInterface $formState): void {
+  if (!isset($form['terms']['#header'])) {
+    return;
+  }
   $form['terms']['#header'] = array_merge(array_slice($form['terms']['#header'], 0, 1, TRUE),
     [t('Status')],
     array_slice($form['terms']['#header'], 1, NULL, TRUE));

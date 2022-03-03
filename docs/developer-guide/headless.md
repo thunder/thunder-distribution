@@ -431,7 +431,7 @@ class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
     parent::registerResolvers($registry);
 
     // This adds all the Page interface fields to the resolver,
-    $this->resolvePageInterfaceFields('MyContentType');
+    $this->resolvePageInterfaceFields('MyContentType', 'node');
 
     // Now we add field resolvers for our new fields. In this case we simply get
     // the value from the field_mycustomfield. parent::registerResolvers($registry)
@@ -591,6 +591,14 @@ As you can see, you can give either set hard coded values for the producers para
 to use either more query arguments (which could be bad), or implement your own data producer based on
 ThunderEntityListProducerBase. You can find an example in EntitiesWithTerm.php where we dynamically add term IDs to the
 query conditions.
+
+### Use subrequest data producer
+
+Sometimes it's needed to execute a data producer in the context of an URL. Thunder uses this functionality for resolving
+the breadcrumb, JSON-LD structure or the entity language.
+
+The *ThunderEntitySubRequestBase* is data producer base class that can be used for this use cases. See
+*ThunderBreadcrumb*, *ThunderJsonLd* or *ThunderLanguage* as an implementation example.
 
 ## Supported contrib modules
 

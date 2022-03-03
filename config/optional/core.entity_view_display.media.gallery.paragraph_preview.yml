@@ -15,23 +15,21 @@ bundle: gallery
 mode: paragraph_preview
 content:
   field_media_images:
-    weight: 0
+    type: media_thumbnail
     label: hidden
     settings:
-      image_style: entity_browser_thumbnail
       image_link: ''
-    third_party_settings:
-      empty_fields:
-        handler: ''
-    type: media_thumbnail
+      image_style: paragraph_preview_thumbnail
+    third_party_settings: {  }
+    weight: 0
     region: content
   name:
     type: string
-    weight: 1
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   created: true

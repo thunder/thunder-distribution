@@ -52,7 +52,7 @@ class MockHttpClientMiddleware {
    * @param int $status
    *   The response status code.
    */
-  public static function addUrlResponse($url, $body, array $headers = [], $status = 200) {
+  public static function addUrlResponse(string $url, string $body, array $headers = [], int $status = 200): void {
 
     $items = \Drupal::state()->get(static::class, []);
     $items[$url] = ['body' => $body, 'headers' => $headers, 'status' => $status];
@@ -65,22 +65,20 @@ class MockHttpClientMiddleware {
    *
    * HTTP middleware that adds the next mocked response.
    */
-  public function __invoke() {
-    return function ($handler) {
-      return function (RequestInterface $request, array $options) use ($handler) {
-        $items = $this->state->get(static::class, []);
-        $url = (string) $request->getUri();
-        if (!empty($items[$url])) {
-          $response = new Response($items[$url]['status'], $items[$url]['headers'], $items[$url]['body']);
-          // @phpstan-ignore-next-line
-          return promise_for($response);
-        }
-        elseif (strstr($this->request->getHttpHost(), $request->getUri()->getHost()) === FALSE) {
-          throw new \Exception(sprintf("No response for %s defined. See MockHttpClientMiddleware::addUrlResponse().", $url));
-        }
+  public function __invoke(): callable {
+    return fn($handler): callable => function (RequestInterface $request, array $options) use ($handler) {
+      $items = $this->state->get(static::class, []);
+      $url = (string) $request->getUri();
+      if (!empty($items[$url])) {
+        $response = new Response($items[$url]['status'], $items[$url]['headers'], $items[$url]['body']);
+        // @phpstan-ignore-next-line
+        return promise_for($response);
+      }
+      if (strpos($this->request->getHttpHost(), $request->getUri()->getHost()) === FALSE) {
+        throw new \Exception(sprintf("No response for %s defined. See MockHttpClientMiddleware::addUrlResponse().", $url));
+      }
 
-        return $handler($request, $options);
-      };
+      return $handler($request, $options);
     };
   }
 

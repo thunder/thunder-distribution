@@ -34,7 +34,7 @@ trait ResolverHelperTrait {
    * @param \Drupal\graphql\GraphQL\Resolver\ResolverInterface $resolver
    *   The field resolver.
    */
-  protected function addFieldResolverIfNotExists(string $type, string $field, ResolverInterface $resolver) {
+  protected function addFieldResolverIfNotExists(string $type, string $field, ResolverInterface $resolver): void {
     if (!$this->registry->getFieldResolver($type, $field)) {
       $this->registry->addFieldResolver($type, $field, $resolver);
     }
@@ -43,7 +43,7 @@ trait ResolverHelperTrait {
   /**
    * Create the ResolverBuilder.
    */
-  protected function createResolverBuilder() {
+  protected function createResolverBuilder(): void {
     $this->builder = new ResolverBuilder();
   }
 
@@ -78,7 +78,8 @@ trait ResolverHelperTrait {
   public function fromEntityReferenceRevisions(string $field, $entity = NULL) {
     return $this->builder->produce('entity_reference_revisions')
       ->map('field', $this->builder->fromValue($field))
-      ->map('entity', $entity ?: $this->builder->fromParent());
+      ->map('entity', $entity ?: $this->builder->fromParent())
+      ->map('language', $this->builder->fromPath('entity', 'langcode.value', $this->builder->fromParent()));
   }
 
   /**
@@ -89,14 +90,33 @@ trait ResolverHelperTrait {
    * @param array $fields
    *   The fields.
    */
-  public function addSimpleCallbackFields(string $type, array $fields) {
+  public function addSimpleCallbackFields(string $type, array $fields): void {
     foreach ($fields as $field) {
       $this->addFieldResolverIfNotExists($type, $field,
-        $this->builder->callback(function ($arr) use ($field) {
-          return $arr[$field];
-        })
+        $this->builder->callback(fn($arr) => $arr[$field])
       );
     }
+  }
+
+  /**
+   * Produces an entity from a given path.
+   *
+   * @param \Drupal\graphql\GraphQL\Resolver\ResolverInterface $path
+   *   The path resolver.
+   *
+   * @return \Drupal\graphql\GraphQL\Resolver\ResolverInterface
+   *   The resolved entity.
+   */
+  public function fromRoute(ResolverInterface $path) {
+    return $this->builder->compose(
+      $this->builder->produce('route_load')
+        ->map('path', $path),
+      $this->builder->produce('route_entity')
+        ->map('url', $this->builder->fromParent())
+        ->map('language', $this->builder->produce('thunder_language')
+          ->map('path', $path)
+        )
+    );
   }
 
 }

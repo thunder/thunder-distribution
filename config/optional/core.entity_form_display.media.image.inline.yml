@@ -21,132 +21,133 @@ third_party_settings:
     group_left:
       children:
         - field_image
+      label: Left
+      region: content
       parent_name: group_wrapper
       weight: 1
       format_type: html_element
       format_settings:
-        id: ''
         classes: left
+        id: ''
         element: div
         show_label: false
         label_element: h3
-        required_fields: true
         attributes: ''
         effect: none
         speed: fast
-      label: Left
-      region: content
+        required_fields: true
     group_right:
       children:
         - name
         - field_source
         - field_expires
         - field_copyright
+      label: Right
+      region: content
       parent_name: group_wrapper
       weight: 2
       format_type: html_element
       format_settings:
-        id: ''
         classes: right
+        id: ''
         element: div
         show_label: false
         label_element: h3
-        required_fields: true
         attributes: ''
         effect: none
         speed: fast
-      label: Right
-      region: content
+        required_fields: true
     group_bottom:
       children:
         - field_description
+      label: Bottom
+      region: content
       parent_name: ''
       weight: 3
       format_type: html_element
       format_settings:
+        label: Bottom
+        classes: bottom
+        id: ''
         element: div
         show_label: false
         label_element: h3
-        required_fields: true
         attributes: ''
         effect: none
         speed: fast
-        id: ''
-        classes: bottom
-      label: Bottom
-      region: content
+        required_fields: true
     group_wrapper:
       children:
         - group_left
         - group_right
+      label: Wrapper
+      region: content
       parent_name: ''
       weight: 0
       format_type: html_element
       format_settings:
-        id: ''
         classes: column-container
+        id: ''
         element: div
         show_label: false
         label_element: h3
-        required_fields: true
         attributes: ''
         effect: none
         speed: fast
-      label: Wrapper
-      region: content
+        required_fields: true
 id: media.image.inline
 targetEntityType: media
 bundle: image
 mode: inline
 content:
   field_copyright:
+    type: string_textfield
     weight: 5
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_description:
     type: text_textarea
     weight: 3
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    region: content
   field_expires:
+    type: datetime_default
     weight: 4
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: datetime_default
-    region: content
   field_image:
+    type: image_focal_point
     weight: 2
+    region: content
     settings:
-      preview_image_style: entity_browser_thumbnail
+      progress_indicator: throbber
+      preview_image_style: medium
       preview_link: true
       offsets: '50,50'
-      progress_indicator: throbber
     third_party_settings: {  }
-    type: image_focal_point
-    region: content
   field_source:
     type: string_textfield
     weight: 3
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
   name:
     type: string_textfield
     weight: 2
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   field_tags: true

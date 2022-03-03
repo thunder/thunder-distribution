@@ -19,7 +19,7 @@ class RedirectTest extends ThunderTestBase {
   /**
    * Tests redirect from old URL to new one.
    */
-  public function testRedirectFromOldToNewUrl() {
+  public function testRedirectFromOldToNewUrl(): void {
 
     $this->logWithRole('editor');
 

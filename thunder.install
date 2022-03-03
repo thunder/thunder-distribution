@@ -17,11 +17,12 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
  * Ensure that Thunder updates come last so entity schema updates and more
  * fundamental updates occur first.
  *
- * @return mixed
+ * @return array
  *   Returns list of update hook dependencies.
  */
-function thunder_update_dependencies() {
+function thunder_update_dependencies(): array {
 
+  $dependencies = [];
   $dependencies['thunder'] = [];
 
   // Ensure that all thunder hook_update_N functions are called after all other
@@ -75,10 +76,9 @@ function thunder_update_dependencies() {
  *   Identifier of update in checklist.
  * @param bool $successful
  *   The success or failure of update.
- * @param \Drupal\update_helper\UpdateLogger $updateLogger
  *   Used update logger service in update hook.
  */
-function _thunder_mark_update_checklist($update_id, $successful, UpdateLogger $updateLogger) {
+function _thunder_mark_update_checklist(string $update_id, bool $successful, UpdateLogger $updateLogger): void {
   try {
     /** @var \Drupal\update_helper_checklist\UpdateChecklist $update_checklist */
     $update_checklist = \Drupal::service('update_helper_checklist.update_checklist');
@@ -101,14 +101,14 @@ function _thunder_mark_update_checklist($update_id, $successful, UpdateLogger $u
 /**
  * Implements hook_update_last_removed().
  */
-function thunder_update_last_removed() {
+function thunder_update_last_removed(): int {
   return 8309;
 }
 
 /**
  * Prepare the content view for the config selector.
  */
-function thunder_update_8310() {
+function thunder_update_8310(): string {
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updateHelper = \Drupal::service('update_helper.updater');
 
@@ -122,7 +122,7 @@ function thunder_update_8310() {
 /**
  * Enable bulk editing for media images.
  */
-function thunder_update_8311() {
+function thunder_update_8311(): string {
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updateHelper = \Drupal::service('update_helper.updater');
 
@@ -136,7 +136,7 @@ function thunder_update_8311() {
 /**
  * Clean-up bulk operations on content views.
  */
-function thunder_update_8312() {
+function thunder_update_8312(): string {
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updateHelper = \Drupal::service('update_helper.updater');
 
@@ -150,7 +150,7 @@ function thunder_update_8312() {
 /**
  * Add image name to media type field map.
  */
-function thunder_update_8313() {
+function thunder_update_8313(): string {
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updateHelper = \Drupal::service('update_helper.updater');
 
@@ -164,7 +164,7 @@ function thunder_update_8313() {
 /**
  * Disable xsl on sitemap.
  */
-function thunder_update_8314() {
+function thunder_update_8314(): string {
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updateHelper = \Drupal::service('update_helper.updater');
 
@@ -178,7 +178,7 @@ function thunder_update_8314() {
 /**
  * Change to the async metatag widget.
  */
-function thunder_update_8315() {
+function thunder_update_8315(): string {
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updateHelper = \Drupal::service('update_helper.updater');
 
@@ -192,15 +192,17 @@ function thunder_update_8315() {
 /**
  * Uninstall thunder_liveblog.
  */
-function thunder_update_8316() {
+function thunder_update_8316(): void {
   $configFactory = \Drupal::configFactory();
-  $configFactory->getEditable('field.field.node.liveblog.field_paragraphs')
-    ->clear('dependencies.enforced')
-    ->save();
 
-  $configFactory->getEditable('field.storage.liveblog_post.field_embed_media')
-    ->clear('dependencies.enforced')
-    ->save();
+  $liveblogNodeConfig = $configFactory->getEditable('field.field.node.liveblog.field_paragraphs');
+  if (!$liveblogNodeConfig->isNew()) {
+    $liveblogNodeConfig->clear('dependencies.enforced')->save();
+  }
+  $liveblogStorageConfig = $configFactory->getEditable('field.storage.liveblog_post.field_embed_media');
+  if (!$liveblogStorageConfig->isNew()) {
+    $liveblogStorageConfig->clear('dependencies.enforced')->save();
+  }
 
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
   $moduleInstaller = \Drupal::service('module_installer');
@@ -210,7 +212,7 @@ function thunder_update_8316() {
 /**
  * Remove thunder_article.settings.
  */
-function thunder_update_8317() {
+function thunder_update_8317(): string {
   \Drupal::configFactory()
     ->getEditable('thunder_article.settings')
     ->delete();
@@ -222,4 +224,63 @@ function thunder_update_8317() {
     $view->save();
     return t('The "Scheduled" menu entry was removed.');
   }
+  return t('Scheduler view not found.');
+}
+
+/**
+ * Enable paragraphs quick links.
+ */
+function thunder_update_8318(): string {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder', 'thunder_update_8318');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
+}
+
+/**
+ * Install schema_metatag module.
+ */
+function thunder_update_8319(): string {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  if (\Drupal::moduleHandler()->moduleExists('metatag') && !\Drupal::moduleHandler()->moduleExists('schema_article')) {
+    // Execute configuration update definitions with logging of success.
+    $updateHelper->executeUpdate('thunder', 'thunder_update_8319');
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
+}
+
+/**
+ * Update metatag config.
+ */
+function thunder_update_8320(): string {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_update_8320');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
+
+/**
+ * Use radio input for cardinality 1 in entity browsers.
+ */
+function thunder_update_8321(): string {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_update_8321');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
 }
