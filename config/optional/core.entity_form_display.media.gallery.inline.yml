@@ -3,30 +3,27 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.media.inline
-    - entity_browser.browser.multiple_image_browser
     - field.field.media.gallery.field_media_images
     - media.type.gallery
   module:
-    - entity_browser
     - entity_reference_actions
+    - media_library_media_modify
 id: media.gallery.inline
 targetEntityType: media
 bundle: gallery
 mode: inline
 content:
   field_media_images:
-    type: entity_browser_entity_reference
+    type: media_library_media_modify_widget
     weight: 1
+    region: content
     settings:
-      entity_browser: multiple_image_browser
-      field_widget_display: rendered_entity
-      field_widget_edit: true
-      field_widget_remove: true
-      open: true
-      selection_mode: selection_edit
-      field_widget_display_settings:
-        view_mode: thumbnail
-      field_widget_replace: false
+      media_types: {  }
+      add_button_text: 'Select images'
+      form_mode: override
+      check_selected: true
+      replace_checkbox_by_order_indicator: true
+      multi_edit_on_create: true
     third_party_settings:
       entity_reference_actions:
         enabled: true
@@ -34,20 +31,19 @@ content:
           action_title: Action
           include_exclude: include
           selected_actions:
-            media_delete_action: '0'
             media_edit_action: media_edit_action
+            media_delete_action: '0'
             media_publish_action: '0'
             media_save_action: '0'
             media_unpublish_action: '0'
-    region: content
   name:
     type: string_textfield
     weight: 0
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   langcode: true

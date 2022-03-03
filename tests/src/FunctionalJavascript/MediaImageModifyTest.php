@@ -12,13 +12,15 @@ use Drupal\image\Entity\ImageStyle;
  */
 class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
-  use ThunderEntityBrowserTestTrait;
+  use ThunderMediaLibraryTestTrait;
   use ThunderParagraphsTestTrait;
+  use ThunderFormFieldTestTrait;
+  use ThunderCkEditorTestTrait;
 
   /**
    * Test Focal Point change.
    */
-  public function testFocalPointChange() {
+  public function testFocalPointChange(): void {
 
     $media = $this->loadMediaByUuid('f5f7fc5d-b2b8-426a-adf3-ee6aff6379da');
     $this->drupalGet($media->toUrl('edit-form'));
@@ -44,7 +46,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     ImageStyle::load('teaser')->createDerivative($path, $derivativeUri);
 
     $image1 = new \Imagick($derivativeUri);
-    $image2 = new \Imagick(realpath(dirname(__FILE__) . '/../../fixtures/reference.jpg'));
+    $image2 = new \Imagick(realpath(__DIR__ . '/../../fixtures/reference.jpg'));
 
     $result = $image1->compareImages($image2, \Imagick::METRIC_MEANSQUAREERROR);
 
@@ -55,95 +57,36 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
   }
 
   /**
-   * Test Image modifications (edit fields).
-   */
-  public function testImageEdit() {
-    $page = $this->getSession()->getPage();
-
-    $media = $this->loadMediaByUuid('f5f7fc5d-b2b8-426a-adf3-ee6aff6379da');
-    $this->drupalGet($media->toUrl('edit-form'));
-
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    $page->fillField('name[0][value]', "Media {$media->id()}");
-    $page->fillField('field_image[0][alt]', "Media {$media->id()} Alt Text");
-    $page->fillField('field_image[0][title]', "Media {$media->id()} Title");
-    $this->setRawFieldValue('field_expires[0][value][date]', '2022-12-18');
-    $this->setRawFieldValue('field_expires[0][value][time]', '01:02:03');
-    $page->fillField('field_copyright[0][value]', "Media {$media->id()} Copyright");
-    $page->fillField('field_source[0][value]', "Media {$media->id()} Source");
-
-    $this->fillCkEditor('#edit-field-description-0-value', "Media {$media->id()} Description");
-
-    $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_BeforeImageEditSave_' . date('Ymd_His') . '.png');
-
-    $this->clickSave();
-
-    // Edit media and check are fields correct.
-    $this->drupalGet($media->toUrl('edit-form'));
-
-    $this->createScreenshot($this->getScreenshotFolder() . '/MediaImageModifyTest_AfterImageEdit_' . date('Ymd_His') . '.png');
-
-    $this->assertSession()
-      ->fieldValueEquals('name[0][value]', "Media {$media->id()}");
-    $this->assertSession()
-      ->fieldValueEquals('field_image[0][alt]', "Media {$media->id()} Alt Text");
-    $this->assertSession()
-      ->fieldValueEquals('field_image[0][title]', "Media {$media->id()} Title");
-    $this->assertSession()
-      ->fieldValueEquals('field_expires[0][value][date]', '2022-12-18');
-    $this->assertSession()
-      ->fieldValueEquals('field_expires[0][value][time]', '01:02:03');
-    $this->assertSession()
-      ->fieldValueEquals('field_copyright[0][value]', "Media {$media->id()} Copyright");
-    $this->assertSession()
-      ->fieldValueEquals('field_source[0][value]', "Media {$media->id()} Source");
-    $this->assertSession()
-      ->fieldValueEquals('field_description[0][value]', "<p>Media {$media->id()} Description</p>");
-  }
-
-  /**
    * Test add/remove image in image paragraph.
    *
    * Demo Article (node Id: 6) is used for testing.
    * Cases tested:
    *   - remove inside inline entity form
-   *   - add inside entity browser
-   *   - reorder inside entity browser
-   *   - remove inside entity browser.
+   *   - add inside media library.
    */
-  public function testRemoveAdd() {
+  public function testRemoveAdd(): void {
 
     // Test remove inside inline entity form.
     $node = $this->loadNodeByUuid('0bd5c257-2231-450f-b4c2-ab156af7b78d');
     $this->drupalGet($node->toUrl('edit-form'));
 
-    $page = $this->getSession()->getPage();
-
-    $this->editParagraph($page, 'field_paragraphs', 0);
+    $this->editParagraph('field_paragraphs', 0);
 
     // Remove image.
-    $this->clickAjaxButtonCssSelector('[data-drupal-selector="edit-field-paragraphs-0-subform-field-image-current-items-0-remove-button"]');
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->clickDrupalSelector('edit-field-paragraphs-0-subform-field-image-selection-0-remove-button');
 
     // Check that there are no errors.
     $this->assertSession()
       ->elementNotExists('css', '[data-drupal-selector="edit-field-paragraphs-0-subform-field-image-wrapper"] div.messages--error');
 
-    // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser($page, 'edit-field-paragraphs-0-subform-field-image-entity-browser-entity-browser-open-modal', 'image_browser');
-
-    // Select another image and store filename.
-    $this->clickButtonCssSelector($page, '#entity-browser-image-browser-form div.view-content > div.views-row:nth-child(1)');
-    $fileName = $this->getSession()->evaluateScript('jQuery(\'#entity-browser-image-browser-form div.view-content > div.views-row:nth-child(1) img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1);');
-    $this->clickButtonDrupalSelector($page, 'edit-submit');
-    $this->getSession()->switchToIFrame();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $image2 = $this->loadMediaByUuid('a4b2fa51-8340-4982-b792-92e060b71eb9');
+    $this->selectMedia('field-paragraphs-0-subform-field-image', [$image2->id()]);
 
     // Save paragraph.
     $this->clickAjaxButtonCssSelector('[name="field_paragraphs_0_collapse"]');
-
-    $this->assertEquals($fileName, $this->getSession()->evaluateScript('jQuery(\'[data-drupal-selector="edit-field-paragraphs-0-preview"] article.media--view-mode-paragraph-preview img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1)'), 'Image file should be identical to previously selected.');
+    /** @var \Drupal\file\FileInterface $file */
+    $file = $image2->field_image->entity;
+    $this->assertEquals([$file->getFilename()], $this->getSession()->evaluateScript('jQuery(\'[data-drupal-selector="edit-field-paragraphs-0-preview"] article.media--view-mode-paragraph-preview img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1)'), 'Image file should be identical to previously selected.');
   }
 
 }

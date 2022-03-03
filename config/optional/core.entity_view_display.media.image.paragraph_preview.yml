@@ -20,30 +20,30 @@ mode: paragraph_preview
 content:
   field_copyright:
     type: string
-    weight: 2
-    region: content
     label: inline
     settings:
       link_to_entity: false
     third_party_settings:
       empty_fields:
         handler: nbsp
+    weight: 2
+    region: content
   field_image:
     type: image
-    weight: 0
-    region: content
     label: hidden
     settings:
-      image_style: paragraph_preview_thumbnail
       image_link: ''
+      image_style: paragraph_preview_thumbnail
     third_party_settings: {  }
+    weight: 0
+    region: content
   name:
     type: string
-    weight: 1
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   created: true

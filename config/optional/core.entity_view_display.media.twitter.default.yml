@@ -15,10 +15,10 @@ mode: default
 content:
   field_url:
     type: twitter_embed
-    weight: 0
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   created: true

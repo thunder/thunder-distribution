@@ -5,12 +5,15 @@
  * Contains media related functions.
  */
 
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Render\Element;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_preprocess_media().
  */
-function thunder_media_preprocess_media(&$variables) {
+function thunder_media_preprocess_media(array &$variables): void {
   // Remove contextual links from preview in node form.
   if ($variables['elements']['#view_mode'] === 'paragraph_preview' && isset($variables['title_suffix']['contextual_links'])) {
     unset($variables['title_suffix']['contextual_links']);
@@ -20,55 +23,10 @@ function thunder_media_preprocess_media(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_views_view().
- */
-function thunder_media_preprocess_views_view(&$variables) {
-
-  $thunder_media_browser = [
-    'entity_browser',
-
-    // @todo Legacy support, remove it with new major version.
-    'image_browser',
-    'video_browser',
-  ];
-
-  if (in_array($variables['view']->id(), $thunder_media_browser)) {
-    $variables['view_array']['#attached']['library'][] = 'thunder_media/entity_browser_view';
-  }
-}
-
-/**
  * Implements hook_page_attachments().
  */
-function thunder_media_page_attachments(array &$page) {
+function thunder_media_page_attachments(array &$page): void {
   $page['#attached']['library'][] = 'thunder_media/gallery';
-}
-
-/**
- * Implements hook_field_widget_WIDGET_ID_form_alter().
- *
- * Alter the widget to apply classes and identify widget buttons and their types
- * for the theme.
- */
-function thunder_media_field_widget_entity_browser_entity_reference_form_alter(&$element, FormStateInterface $form_state, $context) {
-  /** @var \Drupal\Core\Field\EntityReferenceFieldItemList $items */
-  $items = $context['items'];
-  $field_name = $items->getName();
-  switch ($field_name) {
-    case 'field_teaser_media':
-    case 'field_image':
-    case 'field_video':
-    case 'field_media_images':
-      _thunder_media_media_field_widget_form_alter_helper($element, 'image');
-      break;
-  }
-}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- */
-function thunder_media_form_entity_browser_multiple_image_browser_form_alter(&$form, FormStateInterface $form_state) {
-  $form['#attached']['library'][] = 'thunder_media/entity_browser_view';
 }
 
 /**
@@ -77,17 +35,17 @@ function thunder_media_form_entity_browser_multiple_image_browser_form_alter(&$f
  * Add process function to hide 'remove' button of image field widget on inline
  * entity forms.
  */
-function thunder_media_field_widget_image_focal_point_form_alter(&$element, FormStateInterface $form_state, $context) {
+function thunder_media_field_widget_image_focal_point_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
   $config = \Drupal::config('thunder_media.settings');
 
   if (!$config->get('enable_filefield_remove_button')) {
     $type = NULL;
-    /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
+    /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface|null $form_display */
     $form_display = !empty($form_state->getStorage()['form_display']) ? $form_state->getStorage()['form_display'] : NULL;
-    if ($form_display && $form_display->getTargetEntityTypeId() == 'media') {
+    if ($form_display && $form_display->getTargetEntityTypeId() === 'media') {
       $type = $form_display->getTargetBundle();
     }
-    elseif (isset($context['form']['#type']) && $context['form']['#type'] == 'inline_entity_form' && $context['form']['#entity_type'] == 'media') {
+    elseif (isset($context['form']['#type']) && $context['form']['#type'] === 'inline_entity_form' && $context['form']['#entity_type'] === 'media') {
       $type = $context['form']['#bundle'];
     }
     if ($type) {
@@ -103,7 +61,7 @@ function thunder_media_field_widget_image_focal_point_form_alter(&$element, Form
 /**
  * Process function to hide 'Remove' button on image widget forms.
  */
-function thunder_media_inline_entity_form_image_widget_process($element, FormStateInterface $form_state, $form) {
+function thunder_media_inline_entity_form_image_widget_process(array $element, FormStateInterface $form_state, array $form): array {
   if (isset($element['remove_button'])) {
     $element['remove_button']['#access'] = FALSE;
   }
@@ -114,7 +72,7 @@ function thunder_media_inline_entity_form_image_widget_process($element, FormSta
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
  */
-function thunder_media_inline_entity_form_entity_form_alter(&$entity_form, FormStateInterface $form_state) {
+function thunder_media_inline_entity_form_entity_form_alter(array &$entity_form, FormStateInterface $form_state): void {
   if (isset($entity_form['field_media_images'])) {
     $entity_form['field_media_images']['#attributes']['class'][] = 'media-form__items-widget-container';
   }
@@ -125,7 +83,7 @@ function thunder_media_inline_entity_form_entity_form_alter(&$entity_form, FormS
  *
  * Adds classes to theme media:gallery edit form.
  */
-function thunder_media_form_media_gallery_edit_form_alter(&$form, FormStateInterface $form_state) {
+function thunder_media_form_media_gallery_edit_form_alter(array &$form, FormStateInterface $form_state): void {
   if (isset($form['field_media_images'])) {
     $form['field_media_images']['#attributes']['class'][] = 'media-form__items-widget-container';
   }
@@ -136,7 +94,7 @@ function thunder_media_form_media_gallery_edit_form_alter(&$form, FormStateInter
  *
  * Adds classes to theme media:gallery form.
  */
-function thunder_media_form_media_gallery_form_alter(&$form, FormStateInterface $form_state) {
+function thunder_media_form_media_gallery_form_alter(array &$form, FormStateInterface $form_state): void {
   if (isset($form['field_media_images'])) {
     $form['field_media_images']['#attributes']['class'][] = 'media-form__items-widget-container';
   }
@@ -150,11 +108,11 @@ function thunder_media_form_media_gallery_form_alter(&$form, FormStateInterface 
  * @param string $media_type
  *   The type of media.
  */
-function _thunder_media_media_field_widget_form_alter_helper(array &$widget, $media_type) {
+function _thunder_media_media_field_widget_form_alter_helper(array &$widget, string $media_type): void {
   // Process the media field widget.
   $widget['#attributes']['class'][] = 'media-form__items-widget';
   if (isset($widget['current']['items'])) {
-    if (count($widget['current']['items']) == 1) {
+    if ((is_countable($widget['current']['items']) ? count($widget['current']['items']) : 0) == 1) {
       $widget['current']['#attributes']['class'][] = 'entities-list--single-item';
     }
     foreach ($widget['current']['items'] as &$media_item) {
@@ -173,6 +131,20 @@ function _thunder_media_media_field_widget_form_alter_helper(array &$widget, $me
         // Add our own "button action type" key to be able to use a distinct
         // template via suggestions in the theme.
         $media_item['edit_button']['#button_action_type'] = 'media_edit';
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view_alter() for media entities.
+ */
+function thunder_media_media_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display): void {
+  if ($entity->bundle() === 'gallery' && $display->getMode() === 'paragraph_preview') {
+    $build['#attached']['library'][] = 'thunder_media/gallery.paragraph_preview';
+    foreach (Element::children($build['field_media_images']) as $key) {
+      if ($key > 3) {
+        $build['field_media_images'][$key]['#access'] = FALSE;
       }
     }
   }

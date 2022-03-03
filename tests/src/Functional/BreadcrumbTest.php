@@ -27,7 +27,7 @@ class BreadcrumbTest extends ThunderTestBase {
    *
    * @group NoUpdate
    */
-  public function testBreadCrumbs() {
+  public function testBreadCrumbs(): void {
 
     $home = [Url::fromRoute('<front>')->toString() => 'Home'];
     $overview = [Url::fromRoute('system.admin_content')->toString() => 'Overview'];

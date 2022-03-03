@@ -33,7 +33,7 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
   /**
    * Test tabledrag sorting in nested table.
    */
-  public function testNestedTableSorting() {
+  public function testNestedTableSorting(): void {
     $this->articleFillNew([]);
 
     // Add text paragraph with two elements.
@@ -44,12 +44,12 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     $this->addLinkParagraph(static::$paragraphsField, 'Example 21', 'https://example.com/21');
     $this->addLinkField(static::$paragraphsField, 2, static::$linkField, 1, 'Example 22', 'https://example.com/22');
 
-    /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
+    $driver = $this->getSession()->getDriver();
 
     // Enable sorting on second link paragraph.
     $this->scrollElementInView('[data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]');
-    $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/thead/tr/th/div/button')->click();
+    $driver->click('//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/thead/tr/th/div/button');
 
     // Check that related sort buttons are disabled, but not this one.
     $this->assertTrue(
@@ -72,8 +72,9 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     );
 
     // Select and move link field.
-    $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/tbody/tr[4]/td[1]/div/span/input')->click();
-    $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/tbody/tr[1]/td/a')->click();
+    $driver->click('//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/tbody/tr[4]/td[1]/div/span/input');
+    $this->scrollElementInView('[data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"] tr.tabledrag-sort-target-wrapper');
+    $driver->click('//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/tbody/tr[1]/td/a');
 
     // Check content of field url on certain position.
     $this->assertTrue(
@@ -82,7 +83,7 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     );
 
     // Disable sorting on second link paragraph.
-    $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/thead/tr/th/div/button')->click();
+    $driver->click('//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/thead/tr/th/div/button');
 
     // Check that all sort buttons are enabled again.
     $message = 'All sort buttons should be enabled again.';
@@ -100,7 +101,7 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     );
 
     // Enable sorting on second link paragraph.
-    $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/thead/tr/th/div/button')->click();
+    $driver->click('//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/thead/tr/th/div/button');
     $this->assertFalse(
       $page->find('xpath', '//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/tbody/tr[2]/td[1]/div/span/input')->isChecked(),
       'Checkbox is still checked after sort completed.'
@@ -125,14 +126,14 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
    * @param int $position
    *   Position.
    */
-  protected function addLinkField($paragraphName, $paragraphIndex, $fieldName, $fieldIndex, $urlText, $url, $position = NULL) {
+  protected function addLinkField(string $paragraphName, int $paragraphIndex, string $fieldName, int $fieldIndex, string $urlText, string $url, $position = NULL): void {
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
     $addButtonName = $paragraphName . "_" . $paragraphIndex . "_subform_" . $fieldName . "_add_more";
     $this->scrollElementInView("[name=\"{$addButtonName}\"]");
     $page->pressButton($addButtonName);
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     $page->fillField("{$paragraphName}[{$paragraphIndex}][subform][{$fieldName}][{$fieldIndex}][title]", $urlText);
     $page->fillField("{$paragraphName}[{$paragraphIndex}][subform][{$fieldName}][{$fieldIndex}][uri]", $url);

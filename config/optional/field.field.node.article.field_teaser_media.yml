@@ -5,14 +5,16 @@ dependencies:
     - field.storage.node.field_teaser_media
     - media.type.image
     - node.type.article
+  module:
+    - media_library_media_modify
 id: node.article.field_teaser_media
 field_name: field_teaser_media
 entity_type: node
 bundle: article
 label: 'Teaser Media'
-description: 'The teaser image is displayed on overview pages. Additionally, it''s used in <a href="https://instantarticles.fb.com" target="_blank">Facebook Instant Articles</a>.'
+description: 'The teaser image is displayed on overview pages.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
@@ -22,4 +24,4 @@ settings:
       image: image
     sort:
       field: _none
-field_type: entity_reference
+field_type: entity_reference_entity_modify

@@ -17,16 +17,16 @@ third_party_settings:
         - field_url
         - field_author
         - field_content
+      label: Basis
+      region: content
       parent_name: ''
       weight: 0
       format_type: fieldset
       format_settings:
-        id: ''
         classes: content-form__form-section
+        id: ''
         description: ''
         required_fields: true
-      label: Basis
-      region: content
 id: media.instagram.default
 targetEntityType: media
 bundle: instagram
@@ -57,11 +57,11 @@ content:
   field_url:
     type: oembed_textfield
     weight: 1
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
     weight: 1
