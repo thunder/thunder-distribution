@@ -1,5 +1,5 @@
 name: 'Thunder Paragraphs'
-description: 'Provide paragaphs functions for Thunder.'
+description: 'Provide paragraphs functions for Thunder.'
 type: module
 core_version_requirement: ^9
 package: Thunder
