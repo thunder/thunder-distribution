@@ -67,7 +67,7 @@ For additional help, you can use one of this channel to ask question:
 
 ## Contributing
 
-If you want to help, to make Thunder even better, please take a look at the [contributing guidelines](CONTRIBUTING.md).
+If you want to help, to make Thunder even better, please take a look at the [contributing guidelines](docs/contributing.md).
 
 ## Development
 

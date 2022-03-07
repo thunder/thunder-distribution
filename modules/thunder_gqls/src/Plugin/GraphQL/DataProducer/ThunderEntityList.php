@@ -4,6 +4,7 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\thunder_gqls\Wrappers\EntityListResponse;
+use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
 
 /**
  * The entity list producer class.
@@ -19,7 +20,7 @@ use Drupal\thunder_gqls\Wrappers\EntityListResponse;
  *     "type" = @ContextDefinition("string",
  *       label = @Translation("Entity type")
  *     ),
- *     "bundles" = @ContextDefinition("any",
+ *     "bundles" = @ContextDefinition("string",
  *       label = @Translation("Entity bundles"),
  *       multiple = TRUE,
  *       required = FALSE,
@@ -35,9 +36,9 @@ use Drupal\thunder_gqls\Wrappers\EntityListResponse;
  *       required = FALSE,
  *       default_value = 100
  *     ),
- *     "conditions" = @ContextDefinition("any",
+ *     "conditions" = @ContextDefinition("map",
  *       label = @Translation("Filter conditions"),
- *       multiple = FALSE,
+ *       multiple = TRUE,
  *       required = FALSE,
  *       default_value = {}
  *     ),
@@ -47,7 +48,7 @@ use Drupal\thunder_gqls\Wrappers\EntityListResponse;
  *       required = FALSE,
  *       default_value = {}
  *     ),
- *     "sortBy" = @ContextDefinition("any",
+ *     "sortBy" = @ContextDefinition("map",
  *       label = @Translation("Sorts"),
  *       multiple = TRUE,
  *       default_value = {},
@@ -84,7 +85,7 @@ class ThunderEntityList extends ThunderEntityListProducerBase {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  protected function resolve(string $type, array $bundles, int $offset, int $limit, array $conditions, array $languages, array $sortBy, FieldContext $cacheContext): EntityListResponse {
+  protected function resolve(string $type, array $bundles, int $offset, int $limit, array $conditions, array $languages, array $sortBy, FieldContext $cacheContext): EntityListResponseInterface {
     $query = $this->query(
       $type,
       $bundles,
