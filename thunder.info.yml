@@ -60,6 +60,7 @@ install:
   - media_library_media_modify:media_library_media_modify
   - field_group:field_group
   - focal_point:focal_point
+  - gin_toolbar:gin_toolbar
   - inline_entity_form:inline_entity_form
   - length_indicator:length_indicator
   - linkit:linkit
@@ -95,6 +96,4 @@ install:
   - thunder:thunder_workflow
 themes:
   - gin
-  - seven
   - thunder_base
-  - thunder_admin
