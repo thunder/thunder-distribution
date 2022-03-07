@@ -8,7 +8,7 @@ use GraphQL\Deferred;
 /**
  * The thunder entity list response class.
  */
-class EntityListResponse {
+class EntityListResponse implements EntityListResponseInterface {
 
   /**
    * The query interface.
