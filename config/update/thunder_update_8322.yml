@@ -2,13 +2,6 @@ core.entity_form_display.node.page.default:
   expected_config:
     content:
       body:
-        region: content
-        settings:
-          placeholder: ''
-          rows: 9
-          summary_rows: 3
-        third_party_settings: {  }
-        type: text_textarea_with_summary
         weight: 31
       created:
         weight: 10
@@ -50,8 +43,27 @@ core.entity_form_display.node.page.default:
         weight: 50
     hidden: {  }
   update_actions:
+    delete:
+      content:
+        promote:
+          region: content
+          settings:
+            display_label: true
+          third_party_settings: {  }
+          type: boolean_checkbox
+          weight: 15
+        sticky:
+          region: content
+          settings:
+            display_label: true
+          third_party_settings: {  }
+          type: boolean_checkbox
+          weight: 16
     add:
       content:
+        body:
+          settings:
+            show_summary: false
         uid:
           settings:
             match_limit: 10
@@ -61,6 +73,7 @@ core.entity_form_display.node.page.default:
             children:
               - langcode
               - title
+              - body
             format_settings:
               classes: content-form__form-section
               description: ''
@@ -88,6 +101,8 @@ core.entity_form_display.node.page.default:
             weight: 3
     change:
       content:
+        body:
+          weight: 3
         created:
           weight: 5
         field_meta_tags:
@@ -159,10 +174,6 @@ core.entity_view_display.node.page.default:
     content:
       body:
         label: hidden
-        region: content
-        settings: {  }
-        third_party_settings: {  }
-        type: text_default
         weight: 100
       links:
         weight: 101
@@ -172,6 +183,9 @@ core.entity_view_display.node.page.default:
         field_meta_tags: true
     change:
       content:
+        body:
+          label: above
+          weight: 0
         field_paragraphs:
           label: above
           region: content
@@ -197,8 +211,19 @@ core.entity_view_display.node.page.teaser:
         type: text_summary_or_trimmed
         weight: 100
   update_actions:
+    delete:
+      content:
+        body:
+          label: hidden
+          region: content
+          settings:
+            trim_length: 600
+          third_party_settings: {  }
+          type: text_summary_or_trimmed
+          weight: 100
     add:
       hidden:
+        body: true
         field_meta_tags: true
         field_paragraphs: true
 diff.settings:
@@ -215,15 +240,18 @@ diff.settings:
             enabled: false
 scheduler.settings:
   expected_config:
-    lightweight_cron_access_key: c70ac1d41e5219403227
+    lightweight_cron_access_key: ce8d522a2eaf67b430db
   update_actions:
     delete:
-      lightweight_cron_access_key: c70ac1d41e5219403227
+      lightweight_cron_access_key: ce8d522a2eaf67b430db
 core.entity_form_display.node.page.bulk_edit:
   expected_config:
     hidden:
       body: true
   update_actions:
+    delete:
+      hidden:
+        body: true
     add:
       hidden:
         field_meta_tags: true
