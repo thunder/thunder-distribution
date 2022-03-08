@@ -59,8 +59,8 @@
             "drupal/schema_metatag": {
                 "Metatags have encoded HTML entities instead of plain text content": "https://www.drupal.org/files/issues/2022-02-01/3192117-21.patch"
             },
-            "drupal/update_helper": {
-                "Allow installing themes during the update": "https://git.drupalcode.org/project/update_helper/-/merge_requests/10.diff"
+            "drupal/media_library_media_modify": {
+                "Add field diff builder": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/29.diff"
             }
         }
     },

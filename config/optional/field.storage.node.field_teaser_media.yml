@@ -3,11 +3,12 @@ status: true
 dependencies:
   module:
     - media
+    - media_library_media_modify
     - node
 id: node.field_teaser_media
 field_name: field_teaser_media
 entity_type: node
-type: entity_reference
+type: entity_reference_entity_modify
 settings:
   target_type: media
 module: core
