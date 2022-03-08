@@ -11,7 +11,7 @@ entity_type: node
 type: entity_reference_entity_modify
 settings:
   target_type: media
-module: core
+module: media_library_media_modify
 locked: false
 cardinality: 1
 translatable: true
