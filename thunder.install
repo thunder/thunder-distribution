@@ -290,7 +290,7 @@ function thunder_update_8321(): string {
 /**
  * Add paragraphs and metatag fields to basic page.
  */
-function thunder_update_8322() {
+function thunder_update_8322(): string {
   $newFields = [
     'field.field.node.page.field_meta_tags',
     'field.field.node.page.field_paragraphs',
