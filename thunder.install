@@ -8,6 +8,7 @@
 use Drupal\Component\Utility\NestedArray;
 use Drupal\update_helper\UpdateLogger;
 use Drupal\Core\Entity\EntityStorageException;
+use Drupal\field\Entity\FieldConfig;
 use Drupal\views\Entity\View;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
@@ -289,6 +290,20 @@ function thunder_update_8321(): string {
  * Add paragraphs and metatag fields to basic page.
  */
 function thunder_update_8322() {
+  $newFields = [
+    'field.field.node.page.field_meta_tags',
+    'field.field.node.page.field_paragraphs',
+  ];
+
+  foreach ($newFields as $newField) {
+    $configDirectory = new FileStorage(\Drupal::service('extension.path.resolver')
+        ->getPath('profile', 'thunder') . '/config/optional');
+    $configRecord = $configDirectory->read($newField);
+    if (!FieldConfig::loadByName($configRecord['entity_type'], $configRecord['bundle'], $configRecord['field_name'])) {
+      FieldConfig::create($configRecord)->save();
+    }
+  }
+
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
 
