@@ -226,33 +226,3 @@ core.entity_view_display.node.page.teaser:
         body: true
         field_meta_tags: true
         field_paragraphs: true
-diff.settings:
-  expected_config:
-    general_settings:
-      layout_plugins:
-        visual_inline:
-          enabled: true
-  update_actions:
-    change:
-      general_settings:
-        layout_plugins:
-          visual_inline:
-            enabled: false
-scheduler.settings:
-  expected_config:
-    lightweight_cron_access_key: ce8d522a2eaf67b430db
-  update_actions:
-    delete:
-      lightweight_cron_access_key: ce8d522a2eaf67b430db
-core.entity_form_display.node.page.bulk_edit:
-  expected_config:
-    hidden:
-      body: true
-  update_actions:
-    delete:
-      hidden:
-        body: true
-    add:
-      hidden:
-        field_meta_tags: true
-        field_paragraphs: true
