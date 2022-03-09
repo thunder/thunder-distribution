@@ -48,7 +48,7 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
     $driver = $this->getSession()->getDriver();
 
     // Enable sorting on second link paragraph.
-    $this->scrollElementInView('[data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]');
+    $this->scrollElementInView('[data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"] th');
     $driver->click('//*[@data-drupal-selector="edit-field-paragraphs-2-subform-field-link-wrapper"]/div/div/div/table/thead/tr/th/div/button');
 
     // Check that related sort buttons are disabled, but not this one.

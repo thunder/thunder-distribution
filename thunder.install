@@ -291,7 +291,7 @@ function thunder_update_8321(): string {
 function thunder_update_8322(): string {
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
   $moduleInstaller = \Drupal::service('module_installer');
-  $moduleInstaller->install(['media_library_media_modify']);
+  $moduleInstaller->install(['media_library_media_modify', 'gin_toolbar']);
 
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
