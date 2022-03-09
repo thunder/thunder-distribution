@@ -43,6 +43,12 @@ to your own composer.json. Both are no longer part of Thunder and can be removed
 composer require drupal/entity_browser drupal/thunder_admin
 ```
 
+Also, if you are using the liveblog module, you have to require it own your own, since Thunder removed it from the distribution.
+
+```bash
+composer require drupal/liveblog
+```
+
 ## Execute the update
 
 All you need to do now is:
