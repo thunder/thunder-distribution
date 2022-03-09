@@ -234,7 +234,6 @@ jobs:
           composer require "drupal/entity_browser" --no-update
 
           composer update
-          composer update
           composer exec -- drush updb -y
 
           cd docroot
