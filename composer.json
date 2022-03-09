@@ -58,6 +58,9 @@
             },
             "drupal/schema_metatag": {
                 "Metatags have encoded HTML entities instead of plain text content": "https://www.drupal.org/files/issues/2022-02-01/3192117-21.patch"
+            },
+            "drupal/media_library_media_modify": {
+                "Add field diff builder": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/29.diff"
             }
         }
     },
@@ -119,7 +122,7 @@
         "drupal/slick": "^2.4",
         "drupal/thunder_admin": "^4.0.2",
         "drupal/token": "^1.7",
-        "drupal/update_helper": "^2.0||^3.0.1",
+        "drupal/update_helper": "^2.0||^3.0.2",
         "drupal/search_api": "^1.17",
         "drupal/views_bulk_edit": "^2.5",
         "drupal/views_bulk_operations": "^4.0",
