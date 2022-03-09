@@ -9,8 +9,8 @@ use Drupal\graphql\GraphQL\ResolverRegistryInterface;
  *
  * @SchemaExtension(
  *   id = "thunder_bc_layer_basic_page_body",
- *   name = "BC layer for basic page body field.",
- *   description = "BC layer for basic page body field. Not needed, if you use the paragraphs field instead of the body field in the basic page content type.",
+ *   name = "Back compatibility layer for the basic page body field.",
+ *   description = "The body field is available as body instead of content.",
  *   schema = "thunder"
  * )
  */
