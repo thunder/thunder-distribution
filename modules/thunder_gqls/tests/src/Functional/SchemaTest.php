@@ -29,6 +29,7 @@ class SchemaTest extends ThunderGqlsTestBase {
       'menu',
       'breadcrumb',
       'user',
+      'basic_page',
     ];
     foreach ($schemas as $schema) {
       $this->runAndTestQuery($schema);
