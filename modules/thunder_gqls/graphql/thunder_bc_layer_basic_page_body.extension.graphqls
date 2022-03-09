@@ -1,3 +1,3 @@
 extend type BasicPage {
-  content: String
+  body: String
 }
