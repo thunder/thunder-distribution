@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Update functions for the thunder installation profile.
+ */
+
+/**
  * Update to Thunder 7.
  */
 function thunder_post_update_upgrade_to_thunder7(&$sandbox) {
