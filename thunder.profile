@@ -179,3 +179,21 @@ function thunder_action_info_alter(array &$definitions): void {
     }
   }
 }
+
+/**
+ * Implements hook_gin_content_form_routes().
+ */
+function thunder_gin_content_form_routes(): array {
+  $routes = [
+    'entity.taxonomy_term.edit_form',
+    'entity.taxonomy_term.add_form',
+    'entity.media.add_form',
+  ];
+  if (\Drupal::config('media.settings')->get('standalone_url')) {
+    $routes[] = 'entity.media.edit_form';
+  }
+  else {
+    $routes[] = 'entity.media.canonical';
+  }
+  return $routes;
+}
