@@ -8,7 +8,7 @@
 /**
  * Update to Thunder 7.
  */
-function thunder_post_update_upgrade_to_thunder7(&$sandbox) {
+function thunder_post_update_upgrade_to_thunder7(array &$sandbox): string {
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
   $moduleInstaller = \Drupal::service('module_installer');
   $moduleInstaller->install(['media_library_media_modify', 'gin_toolbar']);
