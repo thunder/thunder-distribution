@@ -9,8 +9,8 @@ use Drupal\graphql\GraphQL\ResolverRegistryInterface;
  *
  * @SchemaExtension(
  *   id = "thunder_bc_layer_basic_page_body",
- *   name = "Back compatibility layer for the basic page body field.",
- *   description = "The body field is available as body instead of content.",
+ *   name = "Backwards compatibility layer for the basic page body field.",
+ *   description = "The body field is now available as body instead of content.",
  *   schema = "thunder"
  * )
  */
