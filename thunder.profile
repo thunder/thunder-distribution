@@ -179,3 +179,13 @@ function thunder_action_info_alter(array &$definitions): void {
     }
   }
 }
+
+/**
+ * Implements hook_gin_content_form_routes_alter().
+ */
+function thunder_gin_content_form_routes_alter(array &$routes): void {
+  $routes[] = 'entity.taxonomy_term.edit_form';
+  $routes[] = 'entity.taxonomy_term.add_form';
+  $routes[] = 'entity.media.add_form';
+  $routes[] = 'entity.media.add_form';
+}
