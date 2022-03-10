@@ -35,7 +35,9 @@ function thunder_taxonomy_form_taxonomy_term_form_alter(array &$form, FormStateI
     /** @var \Drupal\taxonomy\TermInterface $term */
     $term = $form_object->getEntity();
 
-    // Move pathauto into sidebar.
+    // Move pathauto into sidebar. We have to copy this code from the PathWidget
+    // because, at the time the PathWidget is processed the advanced group is
+    // still not present. The group will be created later in a form alter.
     $form['path_settings'] = [
       '#type' => 'details',
       '#title' => t('URL path settings'),
