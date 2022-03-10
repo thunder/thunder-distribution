@@ -16,7 +16,7 @@ third_party_settings:
 preset_accent_color: custom
 preset_focus_color: gin
 enable_darkmode: auto
-classic_toolbar: vertical
+classic_toolbar: classic
 high_contrast_mode: false
 accent_color: '#00a0e6'
 focus_color: ''
