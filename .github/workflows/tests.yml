@@ -228,6 +228,7 @@ jobs:
 
       - name: Update the docroot
         run: |
+          composer config --unset repositories.0
           composer require "thunder/thunder-distribution:^6.3.0" --no-update
           composer update
           composer exec -- drush updb -y
