@@ -229,10 +229,11 @@ jobs:
       - name: Update the docroot
         run: |
           composer config --unset repositories.0
-          composer require "thunder/thunder-distribution:^6.3.0" --no-update
+          composer require "thunder/thunder-distribution:6.3.x-dev" --no-update
           composer update
           composer exec -- drush updb -y
 
+          composer config repositories.0 path "${GITHUB_WORKSPACE}"
           composer remove thunder/thunder-distribution --no-update
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
