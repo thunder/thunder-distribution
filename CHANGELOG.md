@@ -7,8 +7,8 @@
 Thunder and its dependencies are now PHP 8.1 compatible, a first little step to Drupal 10!
 Our basic page finally got a little love, which it definitely deserved. It now has paragraphs support and metatags.
 
-This leads to backwards compatibility problems with the removed body field and the changed GraphQL schema.
-To resolve these issues, we will only add the paragraphs field on update, but not remove the body field.
+This leads to backward compatibility problems with the removed body field and the changed GraphQL schema.
+To resolve these issues, we will only add the paragraphs field on the update, but not remove the body field.
 The body field will be considered to be deprecated.
 
 We cannot really get a fully backward compatible GraphQl schema, but we added an optional schema extension that will
