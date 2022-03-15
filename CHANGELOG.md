@@ -1,5 +1,22 @@
 # Changelog
 
+## [6.3.5](https://github.com/thunder/thunder-distribution/tree/6.3.5) 2022-03-15
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.4...6.3.5)
+
+Thunder and its dependencies are now PHP 8.1 compatible, a first little step to Drupal 10!
+Our basic page finally got a little love, which it definitely deserved. It now has paragraphs support and metatags.
+
+This leads to backward compatibility problems with the removed body field and the changed GraphQL schema.
+To resolve these issues, we will only add the paragraphs field on the update, but not remove the body field.
+The body field will be considered to be deprecated.
+
+We cannot really get a fully backward compatible GraphQl schema, but we added an optional schema extension that will
+expose the body field as "body" instead of content.
+
+- [PHP8.1 compatibility](https://www.drupal.org/node/3265222)
+- [Improved basic page](https://www.drupal.org/node/3269389)
+
 ## [6.3.4](https://github.com/thunder/thunder-distribution/tree/6.3.4) 2022-02-17
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.3...6.3.4)
