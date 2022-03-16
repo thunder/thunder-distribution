@@ -8,7 +8,7 @@
 /**
  * Implements hook_install().
  */
-function thunder_paragraphs_paste_install() {
+function thunder_paragraphs_paste_install(): void {
 
   try {
     /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
