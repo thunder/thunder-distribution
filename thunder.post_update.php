@@ -5,6 +5,8 @@
  * Update functions for the thunder installation profile.
  */
 
+use Drupal\user\Entity\Role;
+
 /**
  * Update to Thunder 7.
  */
@@ -24,6 +26,22 @@ function thunder_post_update_upgrade_to_thunder7(array &$sandbox): string {
   $entityReferenceOverrideService->migrateEntityReferenceField('paragraph', 'field_video');
 
   $updater->executeUpdate('thunder', 'thunder_update_8323');
+
+  $permissions = [
+    'access image_browser entity browser pages',
+    'access multiple_image_browser entity browser pages',
+    'access video_browser entity browser pages',
+  ];
+  foreach (['seo', 'editor', 'restricted_editor'] as $role_name) {
+    try {
+      if ($role = Role::load($role_name)) {
+        foreach ($permissions as $permission) {
+          $role->revokePermission($permission);
+        }
+        $role->save();
+      }
+    } catch (\Exception $exception) {}
+  }
 
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
   $moduleInstaller = \Drupal::service('module_installer');
