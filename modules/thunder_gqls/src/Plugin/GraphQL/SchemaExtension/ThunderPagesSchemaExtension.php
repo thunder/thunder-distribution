@@ -83,7 +83,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
     $this->resolvePageInterfaceFields('BasicPage', 'node');
 
     $this->addFieldResolverIfNotExists('BasicPage', 'content',
-      $this->builder->fromPath('entity', 'body.processed')
+      $this->fromEntityReferenceRevisions('field_paragraphs')
     );
 
     // Tags.
