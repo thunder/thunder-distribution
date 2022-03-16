@@ -1,11 +1,20 @@
 # Paragraphs Paste
 
-Paragraph paste is a module that enables editors to use copy and paste to create multiple paragraphs from pre-written content.
+Paragraph paste is a module that enables editors to use copy and paste to create multiple paragraphs from pre-written
+content.
 
-To accommodate various paragraph types available in a project, it is possible to map different types of data to their relevant paragraph types by changing the configuration on the form display settings for paragraphs fields, f.e. `admin/structure/types/manage/article/form-display`. Set a property path in the pattern of `{entity_type}.{bundle}.{field_name}` or `{entity_type}.{bundle}.{entity_reference_field_name}:{referenced_entity_bundle}.{field_name}` for the plugin to map to the paragraphs source field.
+To accommodate various paragraph types available in a project, it is possible to map different types of data to their
+relevant paragraph types by changing the configuration on the form display settings for paragraphs fields, f.e.
+`admin/structure/types/manage/article/form-display`. Set a property path in the pattern of
+`{entity_type}.{bundle}.{field_name}` or
+`{entity_type}.{bundle}.{entity_reference_field_name}:{referenced_entity_bundle}.{field_name}` for the plugin to map to
+the paragraphs source field.
 
-To support inserting content into paragraph types containing multiple fields, it is possible to create custom paragraphs paste plugins. Implement the `ParagraphsPastePluginInterface` by extending the `ParagraphsPastePluginBase`class.
-First provide an `isApplicable()` method to determine for which type of data the plugin should, usually this would consist of grepping for some kind of keyword on the passed data. Next, implement the `createParagraphEntity()` method to create the desired paragraph entity and fill its fields with a processed value from the passed data.
+To support inserting content into paragraph types containing multiple fields, it is possible to create custom paragraphs
+paste plugins. Implement the `ParagraphsPastePluginInterface` by extending the `ParagraphsPastePluginBase`class.
+First provide an `isApplicable()` method to determine for which type of data the plugin should, usually this would
+consist of grepping for some kind of keyword on the passed data. Next, implement the `createParagraphEntity()` method
+to create the desired paragraph entity and fill its fields with a processed value from the passed data.
 
 Here is an example for a paragraph type with additional headline fields.
 
