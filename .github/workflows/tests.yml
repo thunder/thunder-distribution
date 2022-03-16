@@ -187,7 +187,7 @@ jobs:
     env:
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
       DRUPAL_TESTING_TEST_GROUP: Thunder
-      DRUPAL_TESTING_TEST_FILTER: FileRemoveButtonTest::testRemoveButtonGone
+      DRUPAL_TESTING_TEST_FILTER: "FileRemoveButtonTest::testRemoveButtonGone"
 
     steps:
       - uses: actions/checkout@v1
