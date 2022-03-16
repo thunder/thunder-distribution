@@ -187,6 +187,7 @@ jobs:
     env:
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
       DRUPAL_TESTING_TEST_GROUP: Thunder
+      DRUPAL_TESTING_TEST_FILTER=FileRemoveButtonTest::testRemoveButtonGone
 
     steps:
       - uses: actions/checkout@v1
@@ -255,8 +256,11 @@ jobs:
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Run tests suite
-        run: test-drupal-project run_tests
+        run: test-drupal-project run_tests -nc
 
+  #   Start a debug session.
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
   test-min:
 
     runs-on: ubuntu-20.04
