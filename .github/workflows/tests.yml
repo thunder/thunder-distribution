@@ -22,6 +22,7 @@ env:
   DRUPAL_TESTING_VERSION: "^1.0.33"
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
+  DRUPAL_TESTING_PARALLEL_TESTING: true
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
 
@@ -186,7 +187,6 @@ jobs:
     env:
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
       DRUPAL_TESTING_TEST_GROUP: Thunder
-      DRUPAL_TESTING_TEST_FILTER: "FileRemoveButtonTest::testRemoveButtonGone"
 
     steps:
       - uses: actions/checkout@v1
@@ -254,13 +254,8 @@ jobs:
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Run tests suite
-        run: test-drupal-project run_tests -nc
-
-  #   Start a debug session.
+        run: test-drupal-project run_tests
 
   test-min:
 
