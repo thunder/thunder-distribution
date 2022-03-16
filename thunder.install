@@ -286,9 +286,23 @@ function thunder_update_8321(): string {
 }
 
 /**
- * Update to Thunder 7.
+ * Add paragraphs and metatag fields to basic page.
  */
 function thunder_update_8322(): string {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_update_8322');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
+
+/**
+ * Update to Thunder 7.
+ */
+function thunder_update_8323(): string {
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
   $moduleInstaller = \Drupal::service('module_installer');
   $moduleInstaller->install(['media_library_media_modify', 'gin_toolbar']);
@@ -303,7 +317,8 @@ function thunder_update_8322(): string {
   $entityReferenceOverrideService->migrateEntityReferenceField('paragraph', 'field_image');
   $entityReferenceOverrideService->migrateEntityReferenceField('paragraph', 'field_video');
 
-  $updater->executeUpdate('thunder', 'thunder_update_8322');
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_update_8323');
 
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
@@ -312,7 +327,7 @@ function thunder_update_8322(): string {
 /**
  * Uninstall outdated extensions.
  */
-function thunder_update_8323(): void {
+function thunder_update_8324(): void {
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
   $moduleInstaller = \Drupal::service('module_installer');
   $moduleInstaller->uninstall([

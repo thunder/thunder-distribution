@@ -1,0 +1,11 @@
+query ($path: String!) {
+  page(path: $path) {
+    ... on BasicPage {
+      content {
+        ... on ParagraphText {
+          text
+        }
+      }
+    }
+  }
+}

@@ -56,7 +56,7 @@ type BasicPage implements Page & Entity {
 
   created: String!
   author: User
-  content: String
+  content: [Paragraph]
 }
 
 type Tags implements Page & Entity {

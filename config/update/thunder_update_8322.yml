@@ -1,237 +1,232 @@
 __global_actions:
   import_configs:
-    - core.entity_form_mode.media.override
-    - core.entity_form_display.media.image.override
-  install_themes:
-    - gin
-system.theme:
-  expected_config:
-    admin: thunder_admin
-  update_actions:
-    change:
-      admin: gin
-core.entity_form_display.media.gallery.default:
+    - field.field.node.page.field_meta_tags
+    - field.field.node.page.field_paragraphs
+core.entity_form_display.node.page.default:
   expected_config:
     content:
-      field_media_images:
+      body:
+        weight: 31
+      created:
+        weight: 10
+      langcode:
+        weight: 2
+      moderation_state:
+        weight: 100
+      path:
+        weight: 30
+      promote:
+        region: content
         settings:
-          add_button_text: 'Add media'
-          check_selected: false
-          form_mode: default
-          multi_edit_on_create: false
-          replace_checkbox_by_order_indicator: false
+          display_label: true
         third_party_settings: {  }
-        weight: 26
-  update_actions:
-    change:
-      content:
-        field_media_images:
-          settings:
-            add_button_text: 'Select images'
-            check_selected: true
-            form_mode: override
-            multi_edit_on_create: true
-            replace_checkbox_by_order_indicator: true
-          third_party_settings:
-            entity_reference_actions:
-              enabled: true
-              options:
-                action_title: Action
-                include_exclude: include
-                selected_actions:
-                  media_delete_action: '0'
-                  media_edit_action: media_edit_action
-                  media_publish_action: '0'
-                  media_save_action: '0'
-                  media_unpublish_action: '0'
-          weight: 2
-core.entity_form_display.media.gallery.inline:
-  expected_config:
-    content:
-      field_media_images:
+        type: boolean_checkbox
+        weight: 15
+      publish_on:
+        weight: 30
+      publish_state:
+        weight: 30
+      status:
+        weight: 120
+      sticky:
+        region: content
         settings:
-          add_button_text: 'Add media'
-          check_selected: false
-          form_mode: default
-          multi_edit_on_create: false
-          replace_checkbox_by_order_indicator: false
+          display_label: true
         third_party_settings: {  }
-        weight: 26
-  update_actions:
-    change:
-      content:
-        field_media_images:
-          settings:
-            add_button_text: 'Select images'
-            check_selected: true
-            form_mode: override
-            multi_edit_on_create: true
-            replace_checkbox_by_order_indicator: true
-          third_party_settings:
-            entity_reference_actions:
-              enabled: true
-              options:
-                action_title: Action
-                include_exclude: include
-                selected_actions:
-                  media_delete_action: '0'
-                  media_edit_action: media_edit_action
-                  media_publish_action: '0'
-                  media_save_action: '0'
-                  media_unpublish_action: '0'
-          weight: 1
-core.entity_form_display.node.article.default:
-  expected_config:
-    content:
-      field_teaser_media:
-        settings:
-          add_button_text: 'Add media'
-          check_selected: false
-          form_mode: default
-          multi_edit_on_create: false
-          replace_checkbox_by_order_indicator: false
-        third_party_settings: {  }
-        weight: 121
+        type: boolean_checkbox
+        weight: 16
+      title:
+        weight: -5
+      uid:
+        weight: 5
+      unpublish_on:
+        weight: 30
+      unpublish_state:
+        weight: 30
+      url_redirects:
+        weight: 50
+    hidden: {  }
   update_actions:
     delete:
       content:
-        field_teaser_media:
+        promote:
+          region: content
           settings:
-            check_selected: false
-            multi_edit_on_create: false
-            replace_checkbox_by_order_indicator: false
+            display_label: true
+          third_party_settings: {  }
+          type: boolean_checkbox
+          weight: 15
+        sticky:
+          region: content
+          settings:
+            display_label: true
+          third_party_settings: {  }
+          type: boolean_checkbox
+          weight: 16
     add:
       content:
-        field_paragraphs:
-          third_party_settings:
-            paragraphs_features:
-              sorting: true
+        body:
+          settings:
+            show_summary: false
+        uid:
+          settings:
+            match_limit: 10
+      third_party_settings:
+        field_group:
+          group_basis:
+            children:
+              - langcode
+              - title
+              - body
+            format_settings:
+              classes: content-form__form-section
+              description: ''
+              id: ''
+              required_fields: true
+              show_empty_fields: false
+            format_type: fieldset
+            label: Basis
+            parent_name: ''
+            region: content
+            weight: 2
+          group_paragraphs:
+            children:
+              - field_paragraphs
+            format_settings:
+              classes: 'content-form__form-section paragraphs-container'
+              description: ''
+              id: ''
+              required_fields: true
+              show_empty_fields: false
+            format_type: fieldset
+            label: Paragraphs
+            parent_name: ''
+            region: content
+            weight: 3
     change:
       content:
-        field_teaser_media:
+        body:
+          weight: 3
+        created:
+          weight: 5
+        field_meta_tags:
+          region: content
           settings:
-            add_button_text: 'Select image'
-            form_mode: override
+            sidebar: true
+            use_details: true
+          third_party_settings: {  }
+          type: metatag_async_widget_firehose
+          weight: 7
+        field_paragraphs:
+          region: content
+          settings:
+            add_mode: modal
+            autocollapse: none
+            closed_mode: preview
+            closed_mode_threshold: 0
+            default_paragraph_type: text
+            edit_mode: closed
+            features:
+              add_above: '0'
+              collapse_edit_all: '0'
+              duplicate: '0'
+            form_display_mode: default
+            title: Paragraph
+            title_plural: Paragraphs
           third_party_settings:
             entity_reference_actions:
               enabled: false
               options:
                 action_title: Action
                 include_exclude: exclude
-                selected_actions:
-                  media_delete_action: '0'
-                  media_edit_action: '0'
-                  media_publish_action: '0'
-                  media_save_action: '0'
-                  media_unpublish_action: '0'
+                selected_actions: {  }
+            paragraphs_features:
+              add_in_between: true
+              add_in_between_link_count: 3
+              delete_confirmation: true
+              show_drag_and_drop: false
+              split_text: true
+          type: paragraphs
+          weight: 16
+        langcode:
+          weight: 1
+        moderation_state:
+          weight: 14
+        path:
+          weight: 6
+        publish_on:
+          weight: 8
+        publish_state:
+          weight: 10
+        status:
+          weight: 15
+        title:
+          weight: 2
+        uid:
           weight: 4
-core.entity_form_display.paragraph.image.default:
+        unpublish_on:
+          weight: 9
+        unpublish_state:
+          weight: 11
+        url_redirects:
+          weight: 13
+      hidden:
+        promote: true
+        sticky: true
+core.entity_view_display.node.page.default:
   expected_config:
     content:
-      field_image:
-        settings:
-          add_button_text: 'Add media'
-          check_selected: false
-          form_mode: default
-          multi_edit_on_create: false
-          replace_checkbox_by_order_indicator: false
-        weight: 1
+      body:
+        label: hidden
+        weight: 100
+      links:
+        weight: 101
   update_actions:
-    delete:
-      content:
-        field_image:
-          settings:
-            add_button_text: 'Add media'
-            check_selected: false
-            multi_edit_on_create: false
-            replace_checkbox_by_order_indicator: false
+    add:
+      hidden:
+        field_meta_tags: true
     change:
       content:
-        field_image:
-          settings:
-            form_mode: override
+        body:
+          label: above
           weight: 0
-core.entity_form_display.paragraph.video.default:
+        field_paragraphs:
+          label: above
+          region: content
+          settings:
+            link: ''
+            view_mode: default
+          third_party_settings: {  }
+          type: entity_reference_revisions_entity_view
+          weight: 1
+        links:
+          settings: {  }
+          third_party_settings: {  }
+          weight: 2
+core.entity_view_display.node.page.teaser:
   expected_config:
     content:
-      field_video:
+      body:
+        label: hidden
+        region: content
         settings:
-          add_button_text: 'Add media'
-          check_selected: false
-          form_mode: default
-          multi_edit_on_create: false
-          replace_checkbox_by_order_indicator: false
-        weight: 1
+          trim_length: 600
+        third_party_settings: {  }
+        type: text_summary_or_trimmed
+        weight: 100
   update_actions:
     delete:
       content:
-        field_video:
+        body:
+          label: hidden
+          region: content
           settings:
-            add_button_text: 'Add media'
-            check_selected: false
-            multi_edit_on_create: false
-            replace_checkbox_by_order_indicator: false
-    change:
-      content:
-        field_video:
-          settings:
-            form_mode: override
-          weight: 0
-field.field.media.gallery.field_media_images:
-  expected_config:
-    translatable: false
-  update_actions:
-    change:
-      translatable: true
-field.field.node.article.field_teaser_media:
-  expected_config:
-    translatable: false
-  update_actions:
-    change:
-      translatable: true
-field.field.paragraph.image.field_image:
-  expected_config:
-    translatable: false
-  update_actions:
-    change:
-      translatable: true
-field.field.paragraph.video.field_video:
-  expected_config:
-    translatable: false
-  update_actions:
-    change:
-      translatable: true
-views.view.media:
-  expected_config:
-    display:
-      media_page_list:
-        display_options:
-          menu:
-            context: '0'
-            description: ''
-            expanded: false
-            menu_name: main
-            parent: ''
-            title: Media
-            type: tab
-            weight: 0
-          path: admin/content/media
-  update_actions:
-    delete:
-      display:
-        media_page_list:
-          display_options:
-            menu:
-              context: '0'
-              description: ''
-              expanded: false
-              menu_name: main
-              parent: ''
-              title: Media
-              type: tab
-              weight: 0
-    change:
-      display:
-        media_page_list:
-          display_options:
-            path: admin/content/media-table
+            trim_length: 600
+          third_party_settings: {  }
+          type: text_summary_or_trimmed
+          weight: 100
+    add:
+      hidden:
+        body: true
+        field_meta_tags: true
+        field_paragraphs: true

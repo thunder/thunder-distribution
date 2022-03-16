@@ -1,0 +1,3 @@
+extend type BasicPage {
+  body: String @deprecated(reason: "The body: String field is deprecated. Use content: [Paragraph] instead.")
+}
