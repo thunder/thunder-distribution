@@ -23,7 +23,7 @@ function thunder_post_update_upgrade_to_thunder7(array &$sandbox): string {
   $entityReferenceOverrideService->migrateEntityReferenceField('paragraph', 'field_image');
   $entityReferenceOverrideService->migrateEntityReferenceField('paragraph', 'field_video');
 
-  $updater->executeUpdate('thunder', 'thunder_update_8322');
+  $updater->executeUpdate('thunder', 'thunder_update_8323');
 
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
   $moduleInstaller = \Drupal::service('module_installer');
