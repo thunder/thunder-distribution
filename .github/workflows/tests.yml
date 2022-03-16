@@ -254,12 +254,14 @@ jobs:
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - name: Run tests suite
         run: test-drupal-project run_tests -nc
 
   #   Start a debug session.
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+
   test-min:
 
     runs-on: ubuntu-20.04
