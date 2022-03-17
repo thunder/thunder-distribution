@@ -38,7 +38,8 @@
                 "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2020-07-30/3133639-8.patch",
                 "It is possible to overflow the number of items allowed in Media Library": "https://git.drupalcode.org/project/drupal/-/merge_requests/760.diff",
                 "Allow field types extending entity_reference to use field widgets extending media_library": "https://www.drupal.org/files/issues/2020-09-29/core-3173770-2.patch",
-                "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch"
+                "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch",
+                "Apply width and height attributes to allow responsive image tag use loading=lazy": "https://www.drupal.org/files/issues/2022-03-09/3192234-178.patch"
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch",
@@ -73,7 +74,6 @@
         "drupal/autofill": "^1.0",
         "drupal/autosave_form": "^1.2",
         "drupal/better_normalizers": "^1.0-beta3",
-        "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.9",
         "drupal/core": "~9.3.2@STABLE",
         "drupal/config_selector": "^2.1",
@@ -128,7 +128,6 @@
         "drupal/views_bulk_operations": "^4.0",
         "npm-asset/dropzone": "^5.5.1",
         "npm-asset/exif-js": "^2.3.0",
-        "npm-asset/blazy": "^1.8",
         "npm-asset/slick-carousel": "^1.8",
         "npm-asset/shariff": "^3.1.1",
         "npm-asset/select2": "^4.0.7"

@@ -44,10 +44,6 @@ all administration pages.\
 Once your field input was customized the autofill functionality will be detached.\
 [https://www.drupal.org/project/autofill](https://www.drupal.org/project/autofill)
 
-**Blazy**: Lazy load and multi-serve images to save bandwidth and server requests. The user will have faster load times
-and save data usage if they don't browse the whole page. A friend of mobile devices.\
-[https://www.drupal.org/project/blazy](https://www.drupal.org/project/blazy)
-
 **Content Lock**: When a user is editing a node, any other user that attempts to edit the same node will be blocked from
 doing so, and notified that the content is already being edited.\
 [https://www.drupal.org/project/content_lock](https://www.drupal.org/project/content_lock)

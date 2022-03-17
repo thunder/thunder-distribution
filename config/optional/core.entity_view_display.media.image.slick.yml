@@ -12,8 +12,8 @@ dependencies:
     - media.type.image
     - responsive_image.styles.media_image
   module:
-    - blazy
     - empty_fields
+    - responsive_image
 id: media.image.slick
 targetEntityType: media
 bundle: image
@@ -28,52 +28,13 @@ content:
     weight: 1
     region: content
   field_image:
-    type: blazy
+    type: responsive_image
     label: hidden
     settings:
-      caption:
-        title: '0'
-        alt: '0'
-      icon: ''
-      layout: ''
-      view_mode: ''
-      cache: 0
-      current_view_mode: slick
-      skin: ''
-      fx: ''
-      style: ''
-      background: false
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
       responsive_image_style: media_image
-      box_style: ''
-      image_style: ''
-      media_switch: ''
-      ratio: ''
-      thumbnail_style: ''
-      _uri: ''
-      breakpoints:
-        xs:
-          width: ''
-          image_style: ''
-        sm:
-          width: ''
-          image_style: ''
-        md:
-          width: ''
-          image_style: ''
-        lg:
-          width: ''
-          image_style: ''
-        xl:
-          width: ''
-          image_style: ''
-      sizes: ''
-      grid_header: ''
-      grid: '0'
-      grid_medium: '0'
-      grid_small: '0'
+      image_link: ''
+      image_loading:
+        attribute: lazy
     third_party_settings:
       empty_fields:
         handler: ''

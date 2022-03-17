@@ -18,22 +18,15 @@ options:
     mobileFirst: false
     asNavFor: ''
     accessibility: true
-    regionLabel: carousel
-    useGroupRole: true
-    instructionsText: ''
     adaptiveHeight: false
     autoplay: false
-    autoplaySpeed: 3000
-    useAutoplayToggleButton: true
-    pauseIcon: slick-pause-icon
-    playIcon: slick-play-icon
     pauseOnHover: true
     pauseOnDotsHover: false
     pauseOnFocus: true
+    autoplaySpeed: 3000
     arrows: true
     prevArrow: Previous
     nextArrow: Next
-    arrowsPlacement: ''
     downArrow: false
     downArrowTarget: ''
     downArrowOffset: 0
@@ -47,12 +40,12 @@ options:
     focusOnSelect: false
     infinite: true
     initialSlide: 0
-    lazyLoad: blazy
+    lazyLoad: progressive
     mouseWheel: false
     randomize: false
     respondTo: window
     rtl: false
-    rows: 1
+    rows: 0
     slidesPerRow: 1
     slide: ''
     slidesToShow: 1
