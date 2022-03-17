@@ -241,6 +241,7 @@ jobs:
 
           composer update
           composer update
+          composer update
           composer exec -- drush updb -y
 
           cd docroot
