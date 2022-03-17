@@ -9,6 +9,9 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
  */
 trait ThunderMediaTestTrait {
 
+  use ThunderEntityBrowserTestTrait;
+  use ThunderJavascriptTrait;
+
   /**
    * Select Medias for field.
    *
@@ -19,47 +22,24 @@ trait ThunderMediaTestTrait {
    * @param array $medias
    *   List of media identifiers.
    */
-  public function selectMedia($fieldName, $entityBrowser, array $medias) {
+  public function selectMedia(string $fieldName, string $entityBrowser, array $medias): void {
+    $driver = $this->getSession()->getDriver();
 
-    /** @var \Behat\Mink\Element\DocumentElement $page */
-    $page = $this->getSession()->getPage();
+    $selector = 'edit-' . str_replace(['[', ']', '_'], '-', $fieldName);
+    $this->openEntityBrowser($selector, $entityBrowser);
 
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    $buttonName = $fieldName . '_entity_browser_entity_browser';
-    $this->scrollElementInView("[name=\"{$buttonName}\"]");
-    $page->pressButton($buttonName);
-
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    $this->getSession()
-      ->switchToIFrame('entity_browser_iframe_' . $entityBrowser);
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    foreach ($medias as $media) {
-      $page->find('xpath', "//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]")->click();
+    if ($entityBrowser === 'multiple_image_browser') {
+      foreach ($medias as $media) {
+        $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select[$media]']]");
+      }
     }
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    $element = 'img';
-    if ($entityBrowser == 'multiple_image_browser') {
-      $this->getSession()->wait(200);
-      $this->assertSession()->assertWaitOnAjaxRequest();
-
-      $page->pressButton('Use selected');
+    else {
+      $media = current($medias);
+      $driver->click("//div[contains(@class, 'views-row') and .//*[@name='entity_browser_select' and @value='$media']]");
     }
-    elseif ($entityBrowser == 'image_browser') {
-      $page->pressButton('Select image');
-    }
-    elseif ($entityBrowser == 'video_browser') {
-      $page->pressButton('Select video');
-      $element = 'iframe';
-    }
+    $this->assertWaitOnAjaxRequest();
 
-    $this->getSession()->switchToIFrame();
-    $this->assertSession()->assertWaitOnAjaxRequest();
-
-    $this->waitUntilVisible('div[data-drupal-selector="edit-' . str_replace('_', '-', $fieldName) . '-wrapper"] ' . $element);
+    $this->submitEntityBrowser($entityBrowser);
   }
 
   /**
@@ -72,7 +52,7 @@ trait ThunderMediaTestTrait {
    * @param array $medias
    *   List of media identifiers.
    */
-  public function createGallery($name, $fieldName, array $medias) {
+  public function createGallery(string $name, string $fieldName, array $medias): void {
 
     $page = $this->getSession()->getPage();
 

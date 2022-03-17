@@ -17,7 +17,7 @@ class ThunderNodeEditBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   /**
    * {@inheritdoc}
    */
-  public function applies(RouteMatchInterface $route_match) {
+  public function applies(RouteMatchInterface $route_match): bool {
     return in_array($route_match->getRouteName(), [
       'entity.node.edit_form',
       'node.add',
@@ -28,7 +28,8 @@ class ThunderNodeEditBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   /**
    * {@inheritdoc}
    */
-  public function build(RouteMatchInterface $route_match) {
+  public function build(RouteMatchInterface $route_match): Breadcrumb {
+    $links = [];
     $breadcrumb = new Breadcrumb();
     $breadcrumb->addCacheContexts(['route']);
 

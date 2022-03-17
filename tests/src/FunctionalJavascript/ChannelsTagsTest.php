@@ -24,12 +24,11 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
   /**
    * Test channel creation, tagging of articles and channel page with articles.
    */
-  public function testChannelsCreation() {
+  public function testChannelsCreation(): void {
     $this->drupalGet('admin/structure/taxonomy/manage/channel/add');
-    $page = $this->getSession()->getPage();
 
     // Create new Channel with 2 paragraphs.
-    $this->setFieldValue($page, 'name[0][value]', 'New Section');
+    $this->setFieldValue('name[0][value]', 'New Section');
     $image1 = $this->loadMediaByUuid('5d719c64-7f32-4062-9967-9874f5ca3eba');
     $this->addImageParagraph('field_paragraphs', ['media:' . $image1->id()]);
     $this->addTextParagraph('field_paragraphs', 'Text for Channel');
@@ -45,7 +44,6 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     ]);
     $image2 = $this->loadMediaByUuid('a4b2fa51-8340-4982-b792-92e060b71eb9');
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $image2->id()]);
-    $this->waitForImages('[data-drupal-selector="edit-field-teaser-media-current-items-0"] img', 1);
 
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
     $this->setModerationState('published');
@@ -61,7 +59,6 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     ]);
     $image3 = $this->loadMediaByUuid('5bd93c54-469b-4ac7-927b-cf6bb1dcf3dd');
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $image3->id()]);
-    $this->waitForImages('[data-drupal-selector="edit-field-teaser-media-current-items-0"] img', 1);
 
     $this->addTextParagraph('field_paragraphs', 'Article Text 2');
     $this->setModerationState('published');

@@ -19,13 +19,13 @@ bundle: image
 mode: thumbnail
 content:
   field_image:
-    weight: 0
+    type: image
     label: hidden
     settings:
-      image_style: media_thumbnail
       image_link: ''
+      image_style: media_thumbnail
     third_party_settings: {  }
-    type: image
+    weight: 0
     region: content
 hidden:
   created: true

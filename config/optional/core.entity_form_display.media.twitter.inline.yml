@@ -17,11 +17,11 @@ content:
   field_url:
     type: link_default
     weight: 0
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   field_author: true

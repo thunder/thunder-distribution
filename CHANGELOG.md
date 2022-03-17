@@ -1,28 +1,59 @@
 # Changelog
 
-## [6.2.1](https://github.com/thunder/thunder-distribution/tree/6.2.1) 2021-07-08
+## [6.3.5](https://github.com/thunder/thunder-distribution/tree/6.3.5) 2022-03-15
 
-[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.2.0...6.2.1)
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.4...6.3.5)
 
-This release is a bit larger than usually. While it contains some smaller bugfixes and module updates, the release is
-also adding one of the biggest features we had in a while. Thunder now has an official API for all your headless and
-decoupled approaches. We decided to not simply enable the JSON:API module and be done with it, but went instead with a
-custom GraphQL schema, based on the GraphQL version 4 module. You can read more about this on our
-new [API documentation](https://thunder.github.io/developer-guide/headless.html).
+Thunder and its dependencies are now PHP 8.1 compatible, a first little step to Drupal 10!
+Our basic page finally got a little love, which it definitely deserved. It now has paragraphs support and metatags.
 
-Additionally, we added a new type of Sitemap to Thunder, which creates index sitemaps to index all the existing use-case
-specific sitemaps.
+This leads to backward compatibility problems with the removed body field and the changed GraphQL schema.
+To resolve these issues, we will only add the paragraphs field on the update, but not remove the body field.
+The body field will be considered to be deprecated.
 
-- [Fix broken tour](https://www.drupal.org/node/3219546)
+We cannot really get a fully backward compatible GraphQl schema, but we added an optional schema extension that will
+expose the body field as "body" instead of content.
 
-- [Update password policy module](https://www.drupal.org/node/3222188)
-- [Update entity browser](https://www.drupal.org/node/3222146)
+- [PHP8.1 compatibility](https://www.drupal.org/node/3265222)
+- [Improved basic page](https://www.drupal.org/node/3269389)
 
-- [Provide multiple sitemaps for specific content types](https://www.drupal.org/node/3222332)
-- [Add GraphQL schema](https://www.drupal.org/node/3220096)
+## [6.3.4](https://github.com/thunder/thunder-distribution/tree/6.3.4) 2022-02-17
 
-- [Deprecate liveblog integration](https://www.drupal.org/node/3220009)
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.3...6.3.4)
 
-## [6.2.0](https://github.com/thunder/thunder-distribution/tree/6.2.0) 2021-06-17
+Maintenance release to remove patch for the graphql module, that was merged and prevents installation.
 
-Minor release, that bumps the Drupal core dependency to 9.2.x.
+## [6.3.3](https://github.com/thunder/thunder-distribution/tree/6.3.3) 2022-01-26
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.2...6.3.3)
+
+Drush 11 compatibility and improved entity browser integration for single images.
+
+## [6.3.2](https://github.com/thunder/thunder-distribution/tree/6.3.2) 2022-01-24
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.1...6.3.2)
+
+We added two new features and some bug fixes in this release.
+
+The schema_metatag module has finally been added to Thunder. More Importantly, we added a new feature for fast access
+to your favorite paragraph types!
+
+- Fix [Invalid token used in metatag config](https://www.drupal.org/node/3260090)
+- Fix [Conflict with hierarchy manager](https://www.drupal.org/node/3255519)
+- Documentation update [The module thunder_riddle is missing after upgrading from thunder 3 to 6](https://www.drupal.org/node/3244796)
+- Add [Structured data for Thunder article](https://www.drupal.org/node/3259163)
+- Add [paragraphs_features quick links functionality](https://www.drupal.org/node/3259071)
+
+## [6.3.1](https://github.com/thunder/thunder-distribution/tree/6.3.1) 2021-12-20
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.0...6.3.1)
+
+Bugfix release to fix issues of twig filter using \Drupal::service('renderer')->render($element) and
+allowing newer versions of facets module.
+
+- Fix [Plain text twig filter throws an error if field does not exist or is hidden](https://www.drupal.org/node/3253753)
+- Fix [Facets module > 1.4 not supported](https://www.drupal.org/node/3254295)
+
+## [6.3.0](https://github.com/thunder/thunder-distribution/tree/6.3.0) 2021-12-09
+
+Minor release, that bumps the Drupal core dependency to 9.3.x.

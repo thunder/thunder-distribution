@@ -19,32 +19,32 @@ bundle: article
 mode: rss
 content:
   content_moderation_control:
-    weight: -20
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: -20
+    region: content
   field_channel:
     type: entity_reference_label
-    weight: 0
     label: inline
     settings:
       link: false
     third_party_settings: {  }
+    weight: 0
     region: content
   field_teaser_media:
     type: entity_reference_entity_view
-    weight: 1
     label: inline
     settings:
       view_mode: square_m
       link: false
     third_party_settings: {  }
+    weight: 1
     region: content
   links:
-    weight: 3
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 3
+    region: content
 hidden:
   field_meta_tags: true
   field_paragraphs: true

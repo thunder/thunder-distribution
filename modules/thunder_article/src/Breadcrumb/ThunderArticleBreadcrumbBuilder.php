@@ -102,7 +102,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   /**
    * {@inheritdoc}
    */
-  public function applies(RouteMatchInterface $route_match) {
+  public function applies(RouteMatchInterface $route_match): bool {
     // This breadcrumb apply only for all articles.
     $parameters = $route_match->getParameters()->all();
     if (($route_match->getRouteName() === 'entity.node.canonical') && is_object($parameters['node'])) {
@@ -114,7 +114,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   /**
    * {@inheritdoc}
    */
-  public function build(RouteMatchInterface $route_match) {
+  public function build(RouteMatchInterface $route_match): Breadcrumb {
     $breadcrumb = new Breadcrumb();
     $breadcrumb->addCacheContexts(['route']);
 
@@ -124,7 +124,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     $breadcrumb->addCacheableDependency($node);
 
     // Add all parent forums to breadcrumbs.
-    /** @var \Drupal\taxonomy\TermInterface $term */
+    /** @var \Drupal\taxonomy\TermInterface|NULL $term */
     $term = !empty($node->field_channel) ? $node->field_channel->entity : NULL;
 
     $links = [];

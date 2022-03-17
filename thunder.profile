@@ -9,6 +9,7 @@ use Drupal\Core\Extension\Dependency;
 use Drupal\Core\Extension\Extension;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Installer\InstallerKernel;
+use Drupal\thunder\Installer\Form\ModuleConfigureForm;
 use Drupal\user\Entity\User;
 
 /**
@@ -16,7 +17,7 @@ use Drupal\user\Entity\User;
  *
  * Allows the profile to alter the site configuration form.
  */
-function thunder_form_install_configure_form_alter(&$form, FormStateInterface $form_state) {
+function thunder_form_install_configure_form_alter(array &$form, FormStateInterface $form_state): void {
   // Add a value as example that one can choose an arbitrary site name.
   $form['site_information']['site_name']['#placeholder'] = t('Thunder');
 }
@@ -24,13 +25,13 @@ function thunder_form_install_configure_form_alter(&$form, FormStateInterface $f
 /**
  * Implements hook_install_tasks().
  */
-function thunder_install_tasks(&$install_state) {
+function thunder_install_tasks(array &$install_state): array {
   $tasks = [];
   if (empty($install_state['config_install_path'])) {
     $tasks['thunder_module_configure_form'] = [
       'display_name' => t('Configure additional modules'),
       'type' => 'form',
-      'function' => 'Drupal\thunder\Installer\Form\ModuleConfigureForm',
+      'function' => ModuleConfigureForm::class,
     ];
     $tasks['thunder_module_install'] = [
       'display_name' => t('Install additional modules'),
@@ -52,7 +53,7 @@ function thunder_install_tasks(&$install_state) {
  * @return array
  *   A batch array to execute.
  */
-function thunder_module_install(array &$install_state) {
+function thunder_module_install(array &$install_state): array {
   return $install_state['thunder_install_batch'] ?? [];
 }
 
@@ -64,7 +65,7 @@ function thunder_module_install(array &$install_state) {
  *
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
-function thunder_finish_installation(array &$install_state) {
+function thunder_finish_installation(array &$install_state): void {
   // Assign user 1 the "administrator" role.
   $user = User::load(1);
   $user->roles[] = 'administrator';
@@ -74,19 +75,15 @@ function thunder_finish_installation(array &$install_state) {
 /**
  * Implements hook_modules_installed().
  */
-function thunder_modules_installed($modules) {
+function thunder_modules_installed(array $modules): void {
   if (!InstallerKernel::installationAttempted() && !Drupal::isConfigSyncing()) {
     /** @var \Drupal\Core\Extension\ModuleExtensionList $moduleExtensionList */
     $moduleExtensionList = \Drupal::service('extension.list.module');
-    $thunder_features = array_filter($moduleExtensionList->getList(), function (Extension $module) {
-      return $module->info['package'] === 'Thunder Optional';
-    });
+    $thunder_features = array_filter($moduleExtensionList->getList(), fn(Extension $module): bool => $module->info['package'] === 'Thunder Optional');
 
     foreach ($thunder_features as $id => $extension) {
 
-      $dependencies = array_map(function ($dependency) {
-        return Dependency::createFromString($dependency)->getName();
-      }, $extension->info['dependencies']);
+      $dependencies = array_map(fn($dependency): string => Dependency::createFromString($dependency)->getName(), $extension->info['dependencies']);
 
       if (!in_array($id, $modules) && !empty(array_intersect($modules, $dependencies))) {
         \Drupal::messenger()->addWarning(t('To get the full Thunder experience, we recommend to install the @module module. See all supported optional modules at <a href="/admin/modules/extend-thunder">Thunder Optional modules</a>.', ['@module' => $extension->info['name']]));
@@ -98,7 +95,7 @@ function thunder_modules_installed($modules) {
 /**
  * Implements hook_preprocess_html().
  */
-function thunder_preprocess_html(&$variables) {
+function thunder_preprocess_html(array &$variables): void {
   if (!InstallerKernel::installationAttempted() && \Drupal::currentUser()->hasPermission('access toolbar')) {
     $variables['attributes']['class'][] = 'toolbar-icon-thunder';
   }
@@ -107,7 +104,7 @@ function thunder_preprocess_html(&$variables) {
 /**
  * Implements hook_modules_uninstalled().
  */
-function thunder_modules_uninstalled($modules) {
+function thunder_modules_uninstalled(array $modules): void {
   // Import the content view if it was deleted during module uninstalling.
   // This could happen if content_lock was uninstalled and the content view
   // contained content_lock fields at that time.
@@ -132,7 +129,7 @@ function thunder_modules_uninstalled($modules) {
 /**
  * Implements hook_page_attachments().
  */
-function thunder_page_attachments(array &$attachments) {
+function thunder_page_attachments(array &$attachments): void {
 
   foreach ($attachments['#attached']['html_head'] as &$html_head) {
 
@@ -148,7 +145,7 @@ function thunder_page_attachments(array &$attachments) {
 /**
  * Implements hook_library_info_alter().
  */
-function thunder_toolbar_alter(&$items) {
+function thunder_toolbar_alter(array &$items): void {
   if (!empty($items['admin_toolbar_tools'])) {
     $items['admin_toolbar_tools']['#attached']['library'][] = 'thunder/toolbar.icon';
   }
@@ -157,7 +154,7 @@ function thunder_toolbar_alter(&$items) {
 /**
  * Implements hook_field_widget_info_alter().
  */
-function thunder_field_widget_info_alter(array &$info) {
+function thunder_field_widget_info_alter(array &$info): void {
   if (!\Drupal::moduleHandler()->moduleExists('content_moderation')) {
     unset($info['thunder_moderation_state_default']);
   }
@@ -169,14 +166,14 @@ function thunder_field_widget_info_alter(array &$info) {
  * Removes the cardinality information from the #prefix element of the current
  * selection.
  */
-function thunder_field_widget_multivalue_entity_browser_entity_reference_form_alter(array &$elements, FormStateInterface $form_state, array $context) {
+function thunder_field_widget_multivalue_entity_browser_entity_reference_form_alter(array &$elements, FormStateInterface $form_state, array $context): void {
   unset($elements['current']['#prefix']);
 }
 
 /**
  * Implements hook_action_info_alter().
  */
-function thunder_action_info_alter(&$definitions) {
+function thunder_action_info_alter(array &$definitions): void {
   foreach ($definitions as &$definition) {
     if ($definition['id'] === 'entity:edit_action') {
       $definition['action_label'] = t('Edit');

@@ -8,7 +8,7 @@ use GraphQL\Deferred;
 /**
  * The thunder entity list response class.
  */
-class EntityListResponse {
+class EntityListResponse implements EntityListResponseInterface {
 
   /**
    * The query interface.
@@ -33,10 +33,10 @@ class EntityListResponse {
    * @return int
    *   The total amount of results.
    */
-  public function total() {
+  public function total(): int {
     $query = clone $this->query;
     $query->range(NULL, NULL)->count();
-    return $query->execute();
+    return intval($query->execute());
   }
 
   /**
@@ -53,9 +53,7 @@ class EntityListResponse {
 
     $buffer = \Drupal::service('graphql.buffer.entity');
     $callback = $buffer->add($this->query->getEntityTypeId(), array_values($result));
-    return new Deferred(function () use ($callback) {
-      return $callback();
-    });
+    return new Deferred(fn() => $callback());
   }
 
 }
