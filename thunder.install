@@ -334,6 +334,7 @@ function thunder_update_8324(): void {
     'entity_browser',
     'entity_browser_entity_form',
     'dropzonejs_eb_widget',
+    'blazy',
   ]);
 
   /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */

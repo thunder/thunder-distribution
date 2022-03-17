@@ -235,3 +235,238 @@ views.view.media:
         media_page_list:
           display_options:
             path: admin/content/media-table
+core.entity_view_display.media.image.default:
+  expected_config:
+    content:
+      field_image:
+        settings:
+          _uri: ''
+          background: false
+          box_caption: ''
+          box_caption_custom: ''
+          box_media_style: ''
+          box_style: ''
+          breakpoints:
+            lg:
+              image_style: ''
+              width: ''
+            md:
+              image_style: ''
+              width: ''
+            sm:
+              image_style: ''
+              width: ''
+            xl:
+              image_style: ''
+              width: ''
+            xs:
+              image_style: ''
+              width: ''
+          cache: 0
+          caption:
+            alt: '0'
+            title: '0'
+          current_view_mode: default
+          fx: ''
+          grid: '0'
+          grid_header: ''
+          grid_medium: '0'
+          grid_small: '0'
+          icon: ''
+          image_style: ''
+          layout: ''
+          media_switch: ''
+          ratio: ''
+          sizes: ''
+          skin: ''
+          style: ''
+          thumbnail_style: ''
+          view_mode: ''
+        type: blazy
+  update_actions:
+    delete:
+      content:
+        field_image:
+          settings:
+            _uri: ''
+            background: false
+            box_caption: ''
+            box_caption_custom: ''
+            box_media_style: ''
+            box_style: ''
+            breakpoints:
+              lg:
+                image_style: ''
+                width: ''
+              md:
+                image_style: ''
+                width: ''
+              sm:
+                image_style: ''
+                width: ''
+              xl:
+                image_style: ''
+                width: ''
+              xs:
+                image_style: ''
+                width: ''
+            cache: 0
+            caption:
+              alt: '0'
+              title: '0'
+            current_view_mode: default
+            fx: ''
+            grid: '0'
+            grid_header: ''
+            grid_medium: '0'
+            grid_small: '0'
+            icon: ''
+            image_style: ''
+            layout: ''
+            media_switch: ''
+            ratio: ''
+            sizes: ''
+            skin: ''
+            style: ''
+            thumbnail_style: ''
+            view_mode: ''
+    change:
+      content:
+        field_image:
+          settings:
+            image_link: ''
+            image_loading:
+              attribute: lazy
+          type: responsive_image
+core.entity_view_display.media.image.slick:
+  expected_config:
+    content:
+      field_image:
+        settings:
+          _uri: ''
+          background: false
+          box_caption: ''
+          box_caption_custom: ''
+          box_media_style: ''
+          box_style: ''
+          breakpoints:
+            lg:
+              image_style: ''
+              width: ''
+            md:
+              image_style: ''
+              width: ''
+            sm:
+              image_style: ''
+              width: ''
+            xl:
+              image_style: ''
+              width: ''
+            xs:
+              image_style: ''
+              width: ''
+          cache: 0
+          caption:
+            alt: '0'
+            title: '0'
+          current_view_mode: slick
+          fx: ''
+          grid: '0'
+          grid_header: ''
+          grid_medium: '0'
+          grid_small: '0'
+          icon: ''
+          image_style: ''
+          layout: ''
+          media_switch: ''
+          ratio: ''
+          sizes: ''
+          skin: ''
+          style: ''
+          thumbnail_style: ''
+          view_mode: ''
+        type: blazy
+  update_actions:
+    delete:
+      content:
+        field_image:
+          settings:
+            _uri: ''
+            background: false
+            box_caption: ''
+            box_caption_custom: ''
+            box_media_style: ''
+            box_style: ''
+            breakpoints:
+              lg:
+                image_style: ''
+                width: ''
+              md:
+                image_style: ''
+                width: ''
+              sm:
+                image_style: ''
+                width: ''
+              xl:
+                image_style: ''
+                width: ''
+              xs:
+                image_style: ''
+                width: ''
+            cache: 0
+            caption:
+              alt: '0'
+              title: '0'
+            current_view_mode: slick
+            fx: ''
+            grid: '0'
+            grid_header: ''
+            grid_medium: '0'
+            grid_small: '0'
+            icon: ''
+            image_style: ''
+            layout: ''
+            media_switch: ''
+            ratio: ''
+            sizes: ''
+            skin: ''
+            style: ''
+            thumbnail_style: ''
+            view_mode: ''
+    change:
+      content:
+        field_image:
+          settings:
+            image_link: ''
+            image_loading:
+              attribute: lazy
+          type: responsive_image
+slick.optionset.thunder_gallery:
+  expected_config:
+    options:
+      settings:
+        arrowsPlacement: ''
+        instructionsText: ''
+        lazyLoad: blazy
+        pauseIcon: slick-pause-icon
+        playIcon: slick-play-icon
+        regionLabel: carousel
+        rows: 1
+        useAutoplayToggleButton: true
+        useGroupRole: true
+  update_actions:
+    delete:
+      options:
+        settings:
+          arrowsPlacement: ''
+          instructionsText: ''
+          pauseIcon: slick-pause-icon
+          playIcon: slick-play-icon
+          regionLabel: carousel
+          useAutoplayToggleButton: true
+          useGroupRole: true
+    change:
+      options:
+        settings:
+          lazyLoad: progressive
+          rows: 0
