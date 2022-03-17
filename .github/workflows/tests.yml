@@ -236,11 +236,9 @@ jobs:
           composer config repositories.0 path "${GITHUB_WORKSPACE}"
           composer remove thunder/thunder-distribution --no-update
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
-          composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
-          composer require "drupal/entity_browser" --no-update
+          composer require "drupal-testing-thunder/thunder-distribution:*"
+          composer require "drupal/entity_browser"
 
-          composer update
-          composer update
           composer update
           composer exec -- drush updb -y
 
