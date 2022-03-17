@@ -10,7 +10,7 @@ use Drupal\user\Entity\Role;
 /**
  * Update to Thunder 7.
  */
-function thunder_post_update_upgrade_to_thunder7(array &$sandbox): string {
+function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
   $moduleInstaller = \Drupal::service('module_installer');
   $moduleInstaller->install(['media_library_media_modify', 'gin_toolbar']);
@@ -25,7 +25,7 @@ function thunder_post_update_upgrade_to_thunder7(array &$sandbox): string {
   $entityReferenceOverrideService->migrateEntityReferenceField('paragraph', 'field_image');
   $entityReferenceOverrideService->migrateEntityReferenceField('paragraph', 'field_video');
 
-  $updater->executeUpdate('thunder', 'thunder_update_8323');
+  $updater->executeUpdate('thunder', 'thunder_post_update_0001_upgrade_to_thunder7');
 
   $permissions = [
     'access image_browser entity browser pages',
