@@ -40,7 +40,9 @@ function thunder_post_update_upgrade_to_thunder7(array &$sandbox): string {
         }
         $role->save();
       }
-    } catch (\Exception $exception) {}
+    }
+    catch (\Exception $exception) {
+    }
   }
 
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
