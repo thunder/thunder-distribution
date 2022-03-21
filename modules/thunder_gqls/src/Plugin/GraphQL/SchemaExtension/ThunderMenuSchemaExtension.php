@@ -23,8 +23,7 @@ class ThunderMenuSchemaExtension extends ThunderSchemaExtensionPluginBase {
     parent::registerResolvers($registry);
 
     $this->addFieldResolverIfNotExists('Query', 'menu', $this->builder->compose(
-      $this->fromRoute($this->builder->fromArgument('path')),
-      $this->builder->context('entity', $this->builder->fromParent()),
+      $this->builder->context('route_path_argument', $this->builder->fromArgument('path')),
       $this->builder->produce('entity_load')
         ->map('type', $this->builder->fromValue('menu'))
         ->map('id', $this->builder->fromArgument('id'))
@@ -47,7 +46,10 @@ class ThunderMenuSchemaExtension extends ThunderSchemaExtensionPluginBase {
       'items',
       $this->builder->produce('menu_links_active_trail')
         ->map('menu', $this->builder->fromParent())
-        ->map('entity', $this->builder->fromContext('entity'))
+        ->map('url', $this->builder->produce('route_load')
+          ->map('path', $this->builder->fromContext('route_path_argument'))
+        )
+
     );
 
     // Menu title.
