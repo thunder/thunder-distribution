@@ -43,10 +43,11 @@ to your own composer.json. Both are no longer part of Thunder and can be removed
 composer require drupal/entity_browser drupal/thunder_admin
 ```
 
-Also, if you are using the liveblog module, you have to require it own your own, since Thunder removed it from the distribution.
+Also, if you are using the liveblog or better_normalizers module, you have to require them own your own, since Thunder removed them from the distribution.
 
 ```bash
 composer require drupal/liveblog
+composer require drupal/better_normalizers
 ```
 
 ## Execute the update

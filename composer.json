@@ -69,7 +69,6 @@
         "drupal/admin_toolbar": "^2.5||^3.0.2",
         "drupal/autofill": "^1.0",
         "drupal/autosave_form": "^1.2",
-        "drupal/better_normalizers": "^1.0-beta3",
         "drupal/blazy": "^2.0",
         "drupal/checklistapi": "^1.9",
         "drupal/core": "~9.3.2@STABLE",
