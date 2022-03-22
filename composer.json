@@ -51,9 +51,6 @@
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
             },
-            "drupal/dropzonejs": {
-                "Make dropzonejs widget available to the new Media Library in core": "https://www.drupal.org/files/issues/2021-06-25/3051658-35.patch"
-            },
             "drupal/simple_sitemap": {
                 "Sitemap variant index functionality": "https://www.drupal.org/files/issues/2021-03-03/simple_sitemap-sitemap_variant_index-3109090-16.patch"
             },
@@ -73,7 +70,6 @@
         "drupal/admin_toolbar": "^2.5||^3.0.2",
         "drupal/autofill": "^1.0",
         "drupal/autosave_form": "^1.2",
-        "drupal/better_normalizers": "^1.0-beta3",
         "drupal/checklistapi": "^1.9",
         "drupal/core": "~9.3.2@STABLE",
         "drupal/config_selector": "^2.1",
@@ -83,7 +79,7 @@
         "drupal/ctools": "^3.4",
         "drupal/default_content": "^1.0-alpha7||^2.0@ALPHA",
         "drupal/diff": "1.0",
-        "drupal/dropzonejs": "^2.1",
+        "drupal/dropzonejs": "^2.6",
         "drupal/empty_fields": "^1.0-alpha1",
         "drupal/entity_reference_actions": "^1.0-beta9",
         "drupal/entity_reference_revisions": "^1.3",

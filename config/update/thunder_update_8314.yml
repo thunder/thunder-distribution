@@ -1,8 +1,0 @@
-simple_sitemap.settings:
-  expected_config:
-    xsl: true
-  update_actions:
-    add:
-      disable_language_hreflang: false
-    change:
-      xsl: false

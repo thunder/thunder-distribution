@@ -91,6 +91,6 @@ v6.3.5:
 v7.0.0:
     '#title': 'Update to version v7.0'
     '#description': '<h3>These are the new features for this release:</h3>'
-    thunder_update_8323:
+    thunder_post_update_0001_upgrade_to_thunder7:
         '#title': 'Update path to Thunder 7.'
         '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
