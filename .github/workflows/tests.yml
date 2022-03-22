@@ -241,6 +241,15 @@ jobs:
 
           rm vendor/composer/installed.json
           composer update
+
+        working-directory: /tmp/test/thunder/install
+
+#   Start a debug session.
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
+      - name: Update the docroot 2
+        run: |
           composer exec -- drush updb -y
 
           cd docroot
