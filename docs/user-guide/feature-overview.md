@@ -162,6 +162,10 @@ tokens.\
 kind of search engine.\
 [https://www.drupal.org/project/search_api](https://www.drupal.org/project/search_api)
 
+**Google AdSense integration**: This module provides web content providers with the means to earn revenue from visitors
+by displaying ads from Google AdSense advertising service on their sites.\
+[https://www.drupal.org/project/adsense](https://www.drupal.org/project/adsense)
+
 **Google Analytics**: Adds the Google Analytics web statistics tracking system to your website.\
 [https://www.drupal.org/project/google_analytics](https://www.drupal.org/project/google_analytics)
 

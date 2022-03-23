@@ -19,6 +19,7 @@ class ModuleUninstallTest extends ThunderTestBase {
   protected static $moduleLists = [
     ['diff'],
     ['content_lock'],
+    ['adsense'],
     ['google_analytics'],
     ['access_unpublished'],
     ['responsive_preview'],
