@@ -31,29 +31,4 @@ abstract class ThunderGqlsTestBase extends ThunderTestBase {
     'graphql.graphql_servers.thunder_graphql',
   ];
 
-  /**
-   * User with graphql request privileges.
-   *
-   * @var \Drupal\user\UserInterface
-   */
-  protected $graphqlUser;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function setUp(): void {
-    parent::setUp();
-
-    $this->graphqlUser = $this->drupalCreateUser([
-      'execute thunder_graphql arbitrary graphql requests',
-      'access content',
-      'access user profiles',
-      'view media',
-      'view published terms in channel',
-      'view published terms in tags',
-    ]);
-    $this->drupalLogin($this->graphqlUser);
-
-  }
-
 }

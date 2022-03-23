@@ -56,7 +56,6 @@ trait ThunderGqlsTestTrait {
 
     $requestOptions = [];
     $requestOptions[RequestOptions::HEADERS]['Content-Type'] = 'application/json';
-    $requestOptions[RequestOptions::COOKIES] = $this->getSessionCookies();
     $requestOptions[RequestOptions::JSON]['query'] = $query;
     $requestOptions[RequestOptions::JSON]['variables'] = $variables;
 
