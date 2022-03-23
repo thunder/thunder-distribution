@@ -33,7 +33,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'thunder_ivw',
     // Because of https://github.com/drupal-graphql/graphql/issues/1177
     // 'thunder_gqls',
-    'adsense',
   ];
 
   /**
