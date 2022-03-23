@@ -19,7 +19,6 @@ There are also some traits, that provides useful functionalities:
 - `ThunderMediaTestTrait.php`
 - `ThunderMetaTagTrait.php`
 - `ThunderParagraphsTestTrait.php`
-- `ThunderGqlsTestTrait.php`
 
 ### Use thunder_test_mock_request for external requests
 
