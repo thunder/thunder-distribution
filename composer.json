@@ -59,6 +59,9 @@
             },
             "drupal/media_library_media_modify": {
                 "Add field diff builder": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/29.diff"
+            },
+            "drupal/slick": {
+                "Fix update hook and add new options to all option sets": "https://www.drupal.org/files/issues/2022-03-23/3271217-fix-update-hook-3.patch"
             }
         }
     },
