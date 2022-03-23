@@ -6,6 +6,7 @@
  */
 
 use Drupal\user\Entity\Role;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
 
 /**
  * Update to Thunder 7.
@@ -43,6 +44,32 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
     }
     catch (\Exception $exception) {
     }
+  }
+
+  $viewDisplay = EntityViewDisplay::load('media.image.default');
+  if ($viewDisplay) {
+    $viewDisplay->set('type', 'responsive_image');
+    $viewDisplay->set('settings', [
+      'responsive_image_style' => 'media_image',
+      'image_link' => '',
+      'image_loading' => [
+        'attribute' => 'lazy',
+      ],
+    ]);
+    $viewDisplay->save();
+  }
+
+  $viewDisplay = EntityViewDisplay::load('media.image.slick');
+  if ($viewDisplay) {
+    $viewDisplay->set('type', 'responsive_image');
+    $viewDisplay->set('settings', [
+      'responsive_image_style' => 'media_image',
+      'image_link' => '',
+      'image_loading' => [
+        'attribute' => 'lazy',
+      ],
+    ]);
+    $viewDisplay->save();
   }
 
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
