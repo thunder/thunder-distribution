@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\thunder_gqls\Traits;
 
+use Drupal\Tests\BrowserHtmlDebugTrait;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 
@@ -9,6 +10,8 @@ use Psr\Http\Message\ResponseInterface;
  * Use this trait query your GraphQL endpoint.
  */
 trait ThunderGqlsTestTrait {
+
+  use BrowserHtmlDebugTrait;
 
   /**
    * Execute query and compare to expected response.
