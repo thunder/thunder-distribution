@@ -231,6 +231,9 @@ jobs:
           composer config --unset repositories.0
           composer require "thunder/thunder-distribution:6.3.x-dev" --no-update
           composer update
+          cd docroot/modules/contrib/slick
+          curl https://www.drupal.org/files/issues/2022-03-23/3271217-fix-update-hook-3.patch | git apply
+          cd -
           composer exec -- drush updb -y
 
           composer config repositories.0 path "${GITHUB_WORKSPACE}"
@@ -245,8 +248,8 @@ jobs:
         working-directory: /tmp/test/thunder/install
 
 #   Start a debug session.
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+#      - name: Setup tmate session
+#        uses: mxschmitt/action-tmate@v3
 
       - name: Update the docroot 2
         run: |
