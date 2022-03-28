@@ -19,7 +19,7 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
    * {@inheritdoc}
    */
   protected function sortableUpdate($item, $from, $to = NULL) {
-    list ($container) = explode(' ', $item, 2);
+    [$container] = explode(' ', $item, 2);
     $js = <<<END
 if (typeof Drupal.entityBrowserEntityReference === 'object') {
   Drupal.entityBrowserEntityReference.entitiesReordered(document.querySelector("$container"));

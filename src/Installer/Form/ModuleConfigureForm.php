@@ -250,7 +250,7 @@ class ModuleConfigureForm extends FormBase {
 
         // Generate link for module's configuration page, if it has one.
         if (isset($module->info['configure'])) {
-          $route_parameters = isset($module->info['configure_parameters']) ? $module->info['configure_parameters'] : [];
+          $route_parameters = $module->info['configure_parameters'] ?? [];
           if ($this->accessManager->checkNamedRoute($module->info['configure'], $route_parameters, $this->currentUser)) {
             $form['install_modules'][$id]['info']['links']['configure'] = [
               '#type' => 'link',

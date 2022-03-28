@@ -137,7 +137,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
 
     // Filter by given conditions.
     foreach ($conditions as $condition) {
-      $operation = isset($condition['operator']) ? $condition['operator'] : NULL;
+      $operation = $condition['operator'] ?? NULL;
       $query->condition($condition['field'], $condition['value'], $operation);
     }
 

@@ -458,7 +458,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
       }
 
       // Clean up configuration if it's required.
-      list($activeConfig, $fileConfig) = $this->cleanupConfigurations(
+      [$activeConfig, $fileConfig] = $this->cleanupConfigurations(
         [
           $activeConfig,
           $fileConfig,
