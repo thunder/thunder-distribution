@@ -162,9 +162,6 @@ tokens.\
 kind of search engine.\
 [https://www.drupal.org/project/search_api](https://www.drupal.org/project/search_api)
 
-**Google Analytics**: Adds the Google Analytics web statistics tracking system to your website.\
-[https://www.drupal.org/project/google_analytics](https://www.drupal.org/project/google_analytics)
-
 **IVW Integration**: This is an integration module for the German audience measurement organisation IVW.\
 [https://www.drupal.org/project/ivw_integration](https://www.drupal.org/project/ivw_integration)
 

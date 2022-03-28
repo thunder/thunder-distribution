@@ -87,7 +87,6 @@
         "drupal/facets": "^2.0",
         "drupal/gin": "3.x-dev",
         "drupal/gin_toolbar": "1.x-dev",
-        "drupal/google_analytics": "^2.0",
         "drupal/graphql": "^4.3",
         "drupal/inline_entity_form": "^1.0-rc7",
         "drupal/ivw_integration": "^2.0",
