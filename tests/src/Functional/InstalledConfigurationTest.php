@@ -29,7 +29,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
    */
   protected static $modules = [
     'thunder_testing_demo',
-    'thunder_google_analytics',
     'thunder_ivw',
     // Because of https://github.com/drupal-graphql/graphql/issues/1177
     // 'thunder_gqls',
@@ -267,15 +266,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
    * @todo use this functionality for more strict "dependencies" checking.
    */
   protected static $ignoreConfigListValues = [
-    // Google analytics adds one permission dynamically in the install hook.
-    'user.role.authenticated' => [
-      'permissions' => [
-        'opt-in or out of google analytics tracking',
-      ],
-      'dependencies::module' => [
-        'google_analytics',
-      ],
-    ],
     'user.role.editor' => [
       'permissions' => [
         'access tour',
