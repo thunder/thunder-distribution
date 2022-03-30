@@ -7,7 +7,6 @@ use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\TermInterface;
-use Drupal\thunder_gqls\Wrappers\EntityListResponse;
 use Drupal\user\UserInterface;
 use GraphQL\Type\Definition\ResolveInfo;
 
@@ -26,12 +25,12 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function registerResolvers(ResolverRegistryInterface $registry) {
+  public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 
     $this->registry->addTypeResolver('Page',
       \Closure::fromCallable([
-        __CLASS__,
+        self::class,
         'resolvePageTypes',
       ])
     );
@@ -42,7 +41,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
   /**
    * Add article field resolvers.
    */
-  protected function resolveFields() {
+  protected function resolveFields(): void {
 
     // Page.
     $this->addFieldResolverIfNotExists('Query', 'page',
@@ -167,9 +166,11 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
 
     // Entity List.
     $this->addFieldResolverIfNotExists('EntityList', 'total',
-      $this->builder->callback(function (EntityListResponse $entityList) {
-        return $entityList->total();
-      })
+      $this->builder->callback(
+        function (EntityListResponse $entityList) {
+          return $entityList->total();
+        }
+      )
     );
 
     $this->addFieldResolverIfNotExists('EntityList', 'items',

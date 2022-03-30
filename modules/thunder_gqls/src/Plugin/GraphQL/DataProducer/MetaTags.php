@@ -10,7 +10,6 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\RenderContext;
 use Drupal\Core\Render\RendererInterface;
-use Drupal\Core\TypedData\TypedDataTrait;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 use Drupal\metatag\MetatagManager;
 use Drupal\typed_data\DataFetcherTrait;
@@ -23,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "thunder_metatags",
  *   name = @Translation("Metatags"),
  *   description = @Translation("Resolves metatags."),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("map",
  *     label = @Translation("Metatag values")
  *   ),
  *   consumes = {
@@ -38,7 +37,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
-  use TypedDataTrait;
   use DataFetcherTrait;
 
   /**
@@ -67,7 +65,7 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
+  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition): self {
     return new static(
       $configuration,
       $pluginId,
@@ -118,13 +116,13 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
    * @param \Drupal\Core\Cache\RefinableCacheableDependencyInterface $metadata
    *   The cacheable dependency interface.
    *
-   * @return mixed
+   * @return array
    *   Normalized metatags.
    */
-  public function resolve($value, ?string $type, RefinableCacheableDependencyInterface $metadata) {
+  public function resolve($value, ?string $type, RefinableCacheableDependencyInterface $metadata): array {
     if ($value instanceof ContentEntityInterface) {
       $context = new RenderContext();
-      $result = $this->renderer->executeInRenderContext($context, function () use ($value) {
+      $result = $this->renderer->executeInRenderContext($context, function () use ($value): array {
         $tags = $this->metatagManager->tagsFromEntityWithDefaults($value);
 
         // Trigger hook_metatags_attachments_alter().
@@ -163,7 +161,7 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
       }
     }
 
-    return $result ?? NULL;
+    return $result ?? [];
   }
 
 }

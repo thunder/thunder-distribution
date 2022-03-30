@@ -33,7 +33,7 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public function testRedirect() {
+  public function testRedirect(): void {
     $testCases = $this->redirectTestCases();
 
     foreach ($testCases as $description => $testCase) {
@@ -55,7 +55,7 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
    * @return array[]
    *   The redirect test cases.
    */
-  public function redirectTestCases() {
+  public function redirectTestCases(): array {
     return [
       'Basic redirect' => [
         [
