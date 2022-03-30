@@ -7,6 +7,7 @@ use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\TermInterface;
+use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
 use Drupal\user\UserInterface;
 use GraphQL\Type\Definition\ResolveInfo;
 
@@ -167,14 +168,14 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
     // Entity List.
     $this->addFieldResolverIfNotExists('EntityList', 'total',
       $this->builder->callback(
-        function (EntityListResponse $entityList) {
+        function (EntityListResponseInterface $entityList) {
           return $entityList->total();
         }
       )
     );
 
     $this->addFieldResolverIfNotExists('EntityList', 'items',
-      $this->builder->callback(function (EntityListResponse $entityList) {
+      $this->builder->callback(function (EntityListResponseInterface $entityList) {
         return $entityList->items();
       })
     );
