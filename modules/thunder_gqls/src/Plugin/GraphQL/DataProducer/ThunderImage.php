@@ -10,7 +10,6 @@ use Drupal\Core\Render\RendererInterface;
 use Drupal\file\FileInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\File\FileUrlGeneratorInterface;
 
 /**
  * Returns image meta data.
@@ -49,13 +48,6 @@ class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPlu
   protected $imageFactory;
 
   /**
-   * The file URL generator service.
-   *
-   * @var \Drupal\Core\File\FileUrlGeneratorInterface
-   */
-  protected $fileUrlGenerator;
-
-  /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
@@ -66,8 +58,7 @@ class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPlu
       $pluginId,
       $pluginDefinition,
       $container->get('renderer'),
-      $container->get('image.factory'),
-      $container->get('file_url_generator')
+      $container->get('image.factory')
     );
   }
 
@@ -84,8 +75,6 @@ class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPlu
    *   The renderer service.
    * @param \Drupal\Core\Image\ImageFactory $imageFactory
    *   The image factory.
-   * @param \Drupal\Core\File\FileUrlGeneratorInterface $fileUrlGenerator
-   *   The file URL generator service.
    *
    * @codeCoverageIgnore
    */
@@ -94,13 +83,11 @@ class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPlu
     $pluginId,
     $pluginDefinition,
     RendererInterface $renderer,
-    ImageFactory $imageFactory,
-    FileUrlGeneratorInterface $fileUrlGenerator
+    ImageFactory $imageFactory
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
     $this->renderer = $renderer;
     $this->imageFactory = $imageFactory;
-    $this->fileUrlGenerator = $fileUrlGenerator;
   }
 
   /**
@@ -128,7 +115,7 @@ class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPlu
         $image = $imageFactory->get($uri);
         $current_field = reset($field);
         return [
-          'src' => $this->fileUrlGenerator->generateAbsoluteString($uri),
+          'src' => file_create_url($uri),
           'width' => $image->getWidth(),
           'height' => $image->getHeight(),
           'alt' => $current_field['alt'],

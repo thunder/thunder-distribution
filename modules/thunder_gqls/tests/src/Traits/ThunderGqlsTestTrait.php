@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\thunder_gqls\Traits;
 
-use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Tests\BrowserHtmlDebugTrait;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
@@ -84,9 +83,7 @@ trait ThunderGqlsTestTrait {
    *   The path to the collection of test query files.
    */
   protected function getQueriesDirectory() {
-    /** @var ExtensionPathResolver $extensionPathResolver */
-    $extensionPathResolver = \Drupal::service('extension.path.resolver');
-    return $extensionPathResolver->getPath('module', explode('\\', get_class($this))[2]) . '/tests/examples';
+    return drupal_get_path('module', explode('\\', get_class($this))[2]) . '/tests/examples';
   }
 
   /**
