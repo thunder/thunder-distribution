@@ -15,3 +15,6 @@ insert_final_newline = true
 
 [composer.json]
 indent_size = 4
+
+[*.md]
+max_line_length = 120

@@ -6,8 +6,8 @@
  */
 
 use Drupal\Component\Utility\NestedArray;
-use Drupal\update_helper\UpdateLogger;
 use Drupal\Core\Entity\EntityStorageException;
+use Drupal\update_helper\UpdateLogger;
 use Drupal\views\Entity\View;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
@@ -297,4 +297,13 @@ function thunder_update_8322(): string {
 
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
+}
+
+/**
+ * Uninstall thunder_google_analytics.
+ */
+function thunder_update_8323(): void {
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
+  $moduleInstaller = \Drupal::service('module_installer');
+  $moduleInstaller->uninstall(['thunder_google_analytics']);
 }
