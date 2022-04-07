@@ -18,7 +18,7 @@ to create the desired paragraph entity and fill its fields with a processed valu
 
 Here is an example for a paragraph type with additional headline fields.
 
-```
+```php
 <?php
 
 namespace Drupal\custom\Plugin\ParagraphsPastePlugin;
