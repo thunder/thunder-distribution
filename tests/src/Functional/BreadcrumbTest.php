@@ -30,7 +30,10 @@ class BreadcrumbTest extends ThunderTestBase {
   public function testBreadCrumbs(): void {
 
     $home = [Url::fromRoute('<front>')->toString() => 'Home'];
-    $overview = [Url::fromRoute('system.admin_content')->toString() => 'Overview'];
+    $overview = [
+      Url::fromRoute('system.admin_content')
+        ->toString() => 'Overview',
+    ];
     $node_add = [Url::fromRoute('node.add_page')->toString() => 'Add content'];
 
     // Page content.
@@ -51,6 +54,24 @@ class BreadcrumbTest extends ThunderTestBase {
     $this->assertBreadcrumb($node1->toUrl('edit-form'), $home + $overview);
     // Article content.
     $this->assertBreadcrumb($node2->toUrl('edit-form'), $home + $overview);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  protected function getBreadcrumbParts(): array {
+    $parts = [];
+    $elements = $this->xpath('//nav[@aria-labelledby="system-breadcrumb"]//ol/li/a');
+    if (!empty($elements)) {
+      foreach ($elements as $element) {
+        $parts[] = [
+          'text' => $element->getText(),
+          'href' => $element->getAttribute('href'),
+          'title' => $element->getAttribute('title'),
+        ];
+      }
+    }
+    return $parts;
   }
 
 }
