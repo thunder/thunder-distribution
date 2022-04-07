@@ -1,6 +1,6 @@
 /**
  * @file
- * Defines the behavior of the media entity browser view.
+ * Defines the behavior of the paragraphs widget.
  */
 (($, Drupal) => {
   Drupal.theme.thunderParagraphsFieldWidgetSettingsWarning = (options) => {

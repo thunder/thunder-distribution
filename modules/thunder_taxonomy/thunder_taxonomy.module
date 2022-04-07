@@ -16,30 +16,17 @@ function thunder_taxonomy_entity_type_alter(array &$entity_types): void {
   if (!empty($entity_types['taxonomy_term'])) {
     $entity_types['taxonomy_term']->setAccessClass(ThunderTermAccessControlHandler::class);
   }
-
 }
 
 /**
  * Implements hook_form_BASE_FORM_ID_alter() for \Drupal\taxonomy\TermForm.
  */
 function thunder_taxonomy_form_taxonomy_term_form_alter(array &$form, FormStateInterface $form_state): void {
-  // @todo Remove after seven / thunder_admin support is dropped.
   $activeTheme = Drupal::theme()->getActiveTheme();
   $activeThemes = array_keys($activeTheme->getBaseThemeExtensions());
   $activeThemes[] = $activeTheme->getName();
 
-  if (!empty(array_intersect($activeThemes, ['seven', 'thunder_admin']))) {
-    // Create sidebar group.
-    $form['advanced'] = [
-      '#type' => 'container',
-      '#attributes' => ['class' => ['entity-meta']],
-      '#weight' => 99,
-    ];
-
-    // Use the same form like node edit.
-    $form['#theme'] = ['node_edit_form'];
-    $form['#attached']['library'][] = 'seven/node-form';
-
+  if (!empty(array_intersect($activeThemes, ['gin']))) {
     // Move relations into sidebar.
     $form['relations']['#group'] = 'advanced';
 
@@ -48,7 +35,9 @@ function thunder_taxonomy_form_taxonomy_term_form_alter(array &$form, FormStateI
     /** @var \Drupal\taxonomy\TermInterface $term */
     $term = $form_object->getEntity();
 
-    // Move pathauto into sidebar.
+    // Move pathauto into sidebar. We have to copy this code from the PathWidget
+    // because, at the time the PathWidget is processed the advanced group is
+    // still not present. The group will be created later in a form alter.
     $form['path_settings'] = [
       '#type' => 'details',
       '#title' => t('URL path settings'),

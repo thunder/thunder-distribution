@@ -20,7 +20,6 @@ class JsonLdSchemaTest extends ThunderGqlsTestBase {
     $this->config('metatag.metatag_defaults.node__article')->set('tags', $tags)
       ->save();
 
-    $this->drupalLogin($this->graphqlUser);
     $this->runAndTestQuery('jsonld');
   }
 

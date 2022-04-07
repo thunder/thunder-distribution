@@ -1,9 +1,0 @@
-__global_actions:
-  install_themes:
-    - olivero
-system.theme:
-  expected_config:
-    default: thunder_base
-  update_actions:
-    change:
-      default: olivero

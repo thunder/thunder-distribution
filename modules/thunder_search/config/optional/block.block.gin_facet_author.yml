@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.author
+  module:
+    - facets
+  theme:
+    - gin
+id: gin_facet_author
+theme: gin
+region: content
+weight: -5
+provider: null
+plugin: 'facet_block:author'
+settings:
+  id: 'facet_block:author'
+  label: Author
+  provider: facets
+  label_display: '0'
+  block_id: gin_facet_author
+visibility: {  }
