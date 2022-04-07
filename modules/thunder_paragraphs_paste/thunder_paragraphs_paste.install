@@ -23,7 +23,6 @@ function thunder_paragraphs_paste_install(): void {
         'oembed_url:twitter' => 'paragraph.twitter.field_media:twitter.field_url',
         'text' => 'paragraph.text.field_text',
       ],
-      'processing' => 'plain',
       'custom_split_method' => FALSE,
       'custom_split_method_regex' => '',
     ];
