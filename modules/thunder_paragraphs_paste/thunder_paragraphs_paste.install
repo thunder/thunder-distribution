@@ -21,7 +21,6 @@ function thunder_paragraphs_paste_install(): void {
       'property_path_mapping' => [
         'oembed_url:video' => 'paragraph.video.field_video:video.field_media_video_embed_field',
         'oembed_url:twitter' => 'paragraph.twitter.field_media:twitter.field_url',
-        'textile' => '',
         'text' => 'paragraph.text.field_text',
       ],
       'processing' => 'plain',
