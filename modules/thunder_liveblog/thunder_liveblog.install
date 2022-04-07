@@ -44,10 +44,10 @@ function thunder_liveblog_install(): void {
 function thunder_liveblog_module_preinstall(string $module): void {
   if ('thunder_liveblog' == $module) {
     $results = \Drupal::entityQuery('node')
-      ->accessCheck(FALSE)
       ->condition('type', 'liveblog')
       ->exists('body')
       ->count()
+      ->accessCheck(FALSE)
       ->execute();
     if (($field = FieldConfig::load('node.liveblog.body')) && !$results) {
       $field->delete();
