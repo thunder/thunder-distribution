@@ -2,21 +2,19 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.body
+    - field.storage.node.field_meta_tags
     - node.type.page
   module:
-    - text
-id: node.page.body
-field_name: body
+    - metatag
+id: node.page.field_meta_tags
+field_name: field_meta_tags
 entity_type: node
 bundle: page
-label: Body
+label: 'Meta Tags'
 description: ''
 required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
-settings:
-  display_summary: true
-  required_summary: false
-field_type: text_with_summary
+settings: {  }
+field_type: metatag

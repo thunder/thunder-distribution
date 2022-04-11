@@ -6,8 +6,8 @@
  */
 
 use Drupal\Component\Utility\NestedArray;
-use Drupal\update_helper\UpdateLogger;
 use Drupal\Core\Entity\EntityStorageException;
+use Drupal\update_helper\UpdateLogger;
 use Drupal\views\Entity\View;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
@@ -283,4 +283,27 @@ function thunder_update_8321(): string {
 
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
+}
+
+/**
+ * Add paragraphs and metatag fields to basic page.
+ */
+function thunder_update_8322(): string {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_update_8322');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
+
+/**
+ * Uninstall thunder_google_analytics.
+ */
+function thunder_update_8323(): void {
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
+  $moduleInstaller = \Drupal::service('module_installer');
+  $moduleInstaller->uninstall(['thunder_google_analytics']);
 }

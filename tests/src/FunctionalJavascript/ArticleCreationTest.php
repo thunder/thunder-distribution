@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-use Drupal\Core\Url;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 
 /**
@@ -127,86 +126,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Check that one Pinterest widget is on page.
     $this->assertSession()
       ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][9]//span[contains(@data-pin-id, "478085316687452268")]', 2);
-  }
-
-  /**
-   * Test Creation of Article without content moderation.
-   */
-  public function testCreateArticleWithNoModeration(): void {
-    // Delete all the articles so we can disable content moderation.
-    foreach (\Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'article']) as $node) {
-      $node->delete();
-    }
-    \Drupal::service('module_installer')->uninstall(['thunder_workflow']);
-
-    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
-    // Try to create an article.
-    $this->articleFillNew([
-      'field_channel' => $term->id(),
-      'title[0][value]' => 'Test article',
-      'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
-    ]);
-    $this->clickSave();
-    $this->assertPageTitle('Massive gaining seo traffic text');
-    $this->assertSession()->pageTextContains('Test article');
-  }
-
-  /**
-   * Tests draft creation and that reverting to the default revision works.
-   */
-  public function testModerationWorkflow(): void {
-    $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
-    $this->articleFillNew([
-      'field_channel' => $term->id(),
-      'title[0][value]' => 'Test workflow article',
-      'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
-    ]);
-    $this->setModerationState('published');
-    $this->clickSave();
-    $this->assertPageTitle('Massive gaining seo traffic text');
-
-    $node = $this->getNodeByTitle('Test workflow article');
-
-    $this->drupalGet($node->toUrl('edit-form'));
-
-    $this->setModerationState('unpublished');
-    $this->getSession()->getDriver()->click('//*[@id="edit-preview"]');
-    $this->clickLink('Back to content editing');
-    $this->assertSession()->pageTextNotContains('An illegal choice has been detected. Please contact the site administrator.');
-
-    $this->setFieldValues([
-      'title[0][value]' => 'Test workflow article in draft',
-      'field_seo_title[0][value]' => 'Massive gaining even more seo traffic text',
-    ]);
-    $this->setModerationState('draft');
-    $this->clickSave();
-
-    $this->drupalGet($node->toUrl('edit-form'));
-
-    $this->setFieldValues([
-      'title[0][value]' => 'Test workflow article in draft 2',
-      'field_seo_title[0][value]' => 'Massive gaining even more and more seo traffic text',
-    ]);
-    $this->setModerationState('draft');
-    $this->clickSave();
-
-    $this->assertPageTitle('Massive gaining even more and more seo traffic text');
-
-    /** @var \Drupal\node\NodeStorageInterface $node_storage */
-    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
-
-    $revert_url = Url::fromRoute('node.revision_revert_default_confirm', [
-      'node' => $node->id(),
-      'node_revision' => $node_storage->getLatestRevisionId($node->id()),
-    ]);
-    $this->drupalGet($revert_url);
-    $this->submitForm([], $this->t('Revert'));
-
-    $this->drupalGet($node->toUrl());
-    $this->assertPageTitle('Massive gaining seo traffic text');
-
-    $this->drupalGet($node->toUrl('edit-form'));
-    $this->assertSession()->fieldValueEquals('field_seo_title[0][value]', 'Massive gaining seo traffic text');
   }
 
 }

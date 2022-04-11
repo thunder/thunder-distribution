@@ -1,30 +1,30 @@
 <?php
 
-namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
+namespace Drupal\Tests\thunder\Functional\Integration;
 
-use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
+use Drupal\Tests\thunder\Functional\ThunderTestBase;
 
 /**
  * Tests integration with the config_selector.
  *
  * @group Thunder
  */
-class ConfigSelectorTest extends ThunderJavascriptTestBase {
+class ConfigSelectorTest extends ThunderTestBase {
 
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['thunder_testing_demo'];
-
-  /**
-   * {@inheritdoc}
-   */
-  protected static $defaultUserRole = 'administrator';
+  protected static $modules = [
+    'thunder_testing_demo',
+    'thunder_workflow',
+    'thunder_test_mock_request',
+  ];
 
   /**
    * Tests content view with and without search_api.
    */
   public function testContentViewSearchApi(): void {
+    $this->logWithRole('administrator');
 
     $assert_session = $this->assertSession();
 
@@ -43,8 +43,9 @@ class ConfigSelectorTest extends ThunderJavascriptTestBase {
 
     // Now we have a search_api based view.
     $this->drupalGet('admin/config/search/search-api/index/content');
-    $this->getSession()->getPage()->pressButton('Index now');
-    $assert_session->waitForId('edit-index-now');
+    $this->submitForm([], 'Index now');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->checkForMetaRefresh();
 
     $this->drupalGet('admin/content');
     $assert_session->elementExists('xpath', '//*[@id="view-title-table-column"]/a');
