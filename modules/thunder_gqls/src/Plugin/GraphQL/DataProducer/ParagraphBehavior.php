@@ -25,6 +25,9 @@ use Drupal\paragraphs\ParagraphInterface;
  *     "behavior_plugin_key" = @ContextDefinition("string",
  *       label = @Translation("Paragraphs behavior plugin key")
  *     ),
+ *     "behavior_plugin_default" = @ContextDefinition("any",
+ *       label = @Translation("Paragraphs behavior plugin default for this key")
+ *     ),
  *   }
  * )
  */
@@ -39,7 +42,7 @@ class ParagraphBehavior extends DataProducerPluginBase {
    *   Plugin ID of paragraph behavior plugin.
    * @param string $behavior_plugin_key
    *   Key for requested value of this paragraph behavior plugin.
-   * @param $default
+   * @param $behavior_plugin_default
    *   Provided default value for requested key or NULL.
    *
    * @return mixed
@@ -47,9 +50,9 @@ class ParagraphBehavior extends DataProducerPluginBase {
    *
    * @throws \Exception
    */
-  public function resolve(ParagraphInterface $paragraph, string $behavior_plugin_id, string $behavior_plugin_key, $default = NULL) {
+  public function resolve(ParagraphInterface $paragraph, string $behavior_plugin_id, string $behavior_plugin_key, $behavior_plugin_default = NULL) {
     if ($paragraph->getParagraphType()->hasEnabledBehaviorPlugin($behavior_plugin_id)) {
-      return $paragraph->getBehaviorSetting($behavior_plugin_id, $behavior_plugin_key, $default);
+      return $paragraph->getBehaviorSetting($behavior_plugin_id, $behavior_plugin_key, $behavior_plugin_default);
     }
     throw new \Exception('Not enabled or invalid paragraphs behavior plugin.');
   }
