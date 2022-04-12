@@ -39,15 +39,17 @@ class ParagraphBehavior extends DataProducerPluginBase {
    *   Plugin ID of paragraph behavior plugin.
    * @param string $behavior_plugin_key
    *   Key for requested value of this paragraph behavior plugin.
+   * @param $default
+   *   Provided default value for requested key or NULL.
    *
    * @return mixed
    *   Value of this paragraph behavior plugin key.
    *
    * @throws \Exception
    */
-  public function resolve(ParagraphInterface $paragraph, string $behavior_plugin_id, string $behavior_plugin_key) {
+  public function resolve(ParagraphInterface $paragraph, string $behavior_plugin_id, string $behavior_plugin_key, $default = NULL) {
     if ($paragraph->getParagraphType()->hasEnabledBehaviorPlugin($behavior_plugin_id)) {
-      return $paragraph->getBehaviorSetting($behavior_plugin_id, $behavior_plugin_key, $paragraph->getParagraphType()->getBehaviorPlugin($behavior_plugin_id)->defaultConfiguration());
+      return $paragraph->getBehaviorSetting($behavior_plugin_id, $behavior_plugin_key, $default);
     }
     throw new \Exception('Not enabled or invalid paragraphs behavior plugin.');
   }
