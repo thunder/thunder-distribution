@@ -282,6 +282,7 @@ To help with the documentation, please run:
   ```bash
   git clone git@github.com:thunder/thunder-distribution.git
   cd thunder-distribution
+  nvm use
   npm install
   npm run docs:dev
   ```
