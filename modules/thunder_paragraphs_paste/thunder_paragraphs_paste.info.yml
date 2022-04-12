@@ -1,0 +1,8 @@
+name: 'Thunder Paragraphs Paste'
+description: 'Add paste area to the article content type to easily import text from other sources.'
+type: module
+core_version_requirement: ^9
+package: Thunder Optional
+dependencies:
+  - paragraphs_paste:paragraphs_paste
+lifecycle: experimental
