@@ -42,7 +42,7 @@ class ParagraphBehavior extends DataProducerPluginBase {
    *   Plugin ID of paragraph behavior plugin.
    * @param string $behavior_plugin_key
    *   Key for requested value of this paragraph behavior plugin.
-   * @param $behavior_plugin_default
+   * @param mixed $behavior_plugin_default
    *   Provided default value for requested key or NULL.
    *
    * @return mixed
