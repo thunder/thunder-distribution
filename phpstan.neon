@@ -9,7 +9,6 @@ parameters:
   ignoreErrors:
     - '#\Call to an undefined method Drupal\\Tests\\WebAssert::#'
     - "#^Unsafe usage of new static\\(\\)\\.$#"
-    - "#https:\/\/www.drupal.org\/node\/3083055#"
     - "#Function drupal_phpunit_find_extension_directories not found.#"
     # Drupal allows object property access to custom fields, so we cannot fix
     # that.
