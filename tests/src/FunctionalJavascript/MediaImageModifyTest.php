@@ -12,7 +12,7 @@ use Drupal\image\Entity\ImageStyle;
  */
 class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
-  use ThunderEntityBrowserTestTrait;
+  use ThunderMediaLibraryTestTrait;
   use ThunderParagraphsTestTrait;
   use ThunderFormFieldTestTrait;
   use ThunderCkEditorTestTrait;
@@ -62,9 +62,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
    * Demo Article (node Id: 6) is used for testing.
    * Cases tested:
    *   - remove inside inline entity form
-   *   - add inside entity browser
-   *   - reorder inside entity browser
-   *   - remove inside entity browser.
+   *   - add inside media library.
    */
   public function testRemoveAdd(): void {
 
@@ -75,26 +73,20 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $this->editParagraph('field_paragraphs', 0);
 
     // Remove image.
-    $this->clickAjaxButtonCssSelector('[data-drupal-selector="edit-field-paragraphs-0-subform-field-image-current-items-0-remove-button"]');
+    $this->clickDrupalSelector('edit-field-paragraphs-0-subform-field-image-selection-0-remove-button');
 
     // Check that there are no errors.
     $this->assertSession()
       ->elementNotExists('css', '[data-drupal-selector="edit-field-paragraphs-0-subform-field-image-wrapper"] div.messages--error');
 
-    // Click Select entities -> to open Entity Browser.
-    $this->openEntityBrowser('edit-field-paragraphs-0-subform-field-image', 'image_browser');
-
-    // Select another image and store filename.
-    $this->clickCssSelector('#entity-browser-image-browser-form div.view-content > div.views-row:nth-child(1)');
-    $fileName = $this->getSession()->evaluateScript('jQuery(\'#entity-browser-image-browser-form div.view-content > div.views-row:nth-child(1) img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1);');
-    $this->clickDrupalSelector('edit-submit');
-    $this->getSession()->switchToIFrame();
-    $this->assertWaitOnAjaxRequest();
+    $image2 = $this->loadMediaByUuid('a4b2fa51-8340-4982-b792-92e060b71eb9');
+    $this->selectMedia('field-paragraphs-0-subform-field-image', [$image2->id()]);
 
     // Save paragraph.
     $this->clickAjaxButtonCssSelector('[name="field_paragraphs_0_collapse"]');
-
-    $this->assertEquals($fileName, $this->getSession()->evaluateScript('jQuery(\'[data-drupal-selector="edit-field-paragraphs-0-preview"] div.paragraph-preview__thumbnail img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1)'), 'Image file should be identical to previously selected.');
+    /** @var \Drupal\file\FileInterface $file */
+    $file = $image2->field_image->entity;
+    $this->assertEquals([$file->getFilename()], $this->getSession()->evaluateScript('jQuery(\'[data-drupal-selector="edit-field-paragraphs-0-preview"] article.media--view-mode-paragraph-preview img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1)'), 'Image file should be identical to previously selected.');
   }
 
 }

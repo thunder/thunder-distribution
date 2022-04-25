@@ -40,10 +40,10 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     ]);
 
     $image1 = $this->loadMediaByUuid('23f6d444-ece1-465d-a667-b1fb80e641d3');
-    $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $image1->id()]);
+    $this->selectMedia('field_teaser_media', [$image1->id()]);
 
     // Add Image Paragraph.
-    $this->addImageParagraph(static::$paragraphsField, ['media:' . $image1->id()]);
+    $this->addImageParagraph(static::$paragraphsField, [$image1->id()]);
 
     // Add Text Paragraph.
     $this->addTextParagraph(static::$paragraphsField, '<p>Awesome text</p><p>With a new line</p>');
@@ -51,8 +51,8 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Add Gallery Paragraph between Image and Text.
     $image2 = $this->loadMediaByUuid('05048c57-942d-4251-ad12-ce562f8c79a0');
     $this->addGalleryParagraph(static::$paragraphsField, 'Test gallery', [
-      'media:' . $image1->id(),
-      'media:' . $image2->id(),
+      $image1->id(),
+      $image2->id(),
     ], 1);
 
     // Add Quote Paragraph.
@@ -69,7 +69,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Add Video paragraph at the beginning.
     $video = $this->getMediaByName('Youtube');
-    $this->addVideoParagraph(static::$paragraphsField, ['media:' . $video->id()], 0);
+    $this->addVideoParagraph(static::$paragraphsField, [$video->id()], 0);
 
     // Add Pinterest Paragraph.
     $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/478085316687452268/', 'pinterest');

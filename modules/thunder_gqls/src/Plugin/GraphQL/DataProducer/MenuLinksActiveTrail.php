@@ -3,13 +3,13 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;
-use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Menu\MenuLinkInterface;
 use Drupal\Core\Menu\MenuLinkManagerInterface;
 use Drupal\Core\Menu\MenuLinkTreeElement;
 use Drupal\Core\Menu\MenuLinkTreeInterface;
 use Drupal\Core\Menu\MenuTreeParameters;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Url;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 use Drupal\system\MenuInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -29,8 +29,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *     "menu" = @ContextDefinition("entity:menu",
  *       label = @Translation("Menu")
  *     ),
- *     "entity" = @ContextDefinition("entity",
- *       label = @Translation("The entity")
+ *     "url" = @ContextDefinition("any",
+ *       label = @Translation("The url")
  *     ),
  *   }
  * )
@@ -94,17 +94,17 @@ class MenuLinksActiveTrail extends DataProducerPluginBase implements ContainerFa
    *
    * @param \Drupal\system\MenuInterface $menu
    *   The menu interface.
-   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
-   *   The content entity interface.
+   * @param \Drupal\Core\Url $url
+   *   The path argument.
    *
    * @return array
    *   The menu links.
    *
    * @throws \Drupal\Core\Entity\EntityMalformedException
    */
-  public function resolve(MenuInterface $menu, ContentEntityInterface $entity): array {
+  public function resolve(MenuInterface $menu, Url $url): array {
     $parameters = new MenuTreeParameters();
-    $links = $this->menuLinkManager->loadLinksByRoute($entity->toUrl()->getRouteName(), $entity->toUrl()->getRouteParameters(), $menu->id());
+    $links = $this->menuLinkManager->loadLinksByRoute($url->getRouteName(), $url->getRouteParameters(), $menu->id());
 
     $activeLink = reset($links);
     if ($activeLink) {

@@ -2,8 +2,8 @@ name: Thunder
 type: profile
 description: 'The Drupal based CMS for professional publishing.'
 project: thunder
-core_version_requirement: ^10
-version: '6.3.5'
+core_version_requirement: ^9.3.0
+version: '6.3.6'
 
 distribution:
   name: Thunder
@@ -30,6 +30,7 @@ install:
   - drupal:editor
   - drupal:image
   - drupal:inline_form_errors
+  - drupal:media_library
   - drupal:menu_ui
   - drupal:language
   - drupal:options
@@ -43,7 +44,7 @@ install:
   - drupal:file
   - drupal:responsive_image
   - drupal:views_ui
-# contrib
+  # contrib
   - access_unpublished:access_unpublished
   - admin_toolbar:admin_toolbar_tools
   - admin_toolbar:admin_toolbar_links_access_filter
@@ -53,12 +54,14 @@ install:
   - content_lock:content_lock
   - ctools:ctools
   - diff:diff
-  - dropzonejs:dropzonejs_eb_widget
+  - dropzonejs:dropzonejs
   - empty_fields:empty_fields
   - entity_reference_actions:entity_reference_actions
-  - entity_browser:entity_browser_entity_form
+  - media_library_media_modify:media_library_media_modify
   - field_group:field_group
   - focal_point:focal_point
+  - gin_toolbar:gin_toolbar
+  - inline_entity_form:inline_entity_form
   - length_indicator:length_indicator
   - linkit:linkit
   - media_entity_instagram:media_entity_instagram
@@ -85,13 +88,12 @@ install:
   - responsive_preview:responsive_preview
   - update_helper_checklist:update_helper_checklist
   - views_bulk_edit:views_bulk_edit
-# thunder
+  # thunder
   - thunder:thunder_article
   - thunder:thunder_media
   - thunder:thunder_paragraphs
   - thunder:thunder_taxonomy
   - thunder:thunder_workflow
 themes:
-  - seven
+  - gin
   - thunder_base
-  - thunder_admin

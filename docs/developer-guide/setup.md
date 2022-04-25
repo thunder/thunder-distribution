@@ -230,8 +230,10 @@ If you want to remove a module, that was provided by Thunder, you will have to a
 replace block. Modules, that you added yourself by the above commands, do not have to be placed there.
 
 ```json
-"replace": {
-  "drupal/google_analytics": "*"
+{
+  "replace": {
+    "drupal/diff": "*"
+  }
 }
 ```
 
