@@ -162,15 +162,15 @@ END;
 
     // Check that, there are 4 images in gallery.
     $numberOfImages = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned)\').length;');
+      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-slick-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(4, $numberOfImages, 'There should be 4 images in Gallery.');
 
-    $this->clickCssSelector('#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
-    $this->clickCssSelector('#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
+    $this->clickCssSelector('#slick-media-gallery-media-images-slick-' . $gallery->id() . '-1 button.slick-next');
+    $this->clickCssSelector('#slick-media-gallery-media-images-slick-' . $gallery->id() . '-1 button.slick-next');
 
     // Check that, 3rd image is not file: reference.jpg.
     $fileNamePosition = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'src\').indexOf("reference.jpg")');
+      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-slick-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned):nth(2) img\').attr(\'src\').indexOf("reference.jpg")');
     $this->assertEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should not be "reference.jpg".');
   }
 
