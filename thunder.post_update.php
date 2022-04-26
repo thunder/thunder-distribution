@@ -51,6 +51,7 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
     'entity_browser',
     'entity_browser_entity_form',
     'dropzonejs_eb_widget',
+    'blazy',
   ]);
 
   /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */

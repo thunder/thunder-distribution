@@ -4,10 +4,12 @@ dependencies:
   enforced:
     module:
       - slick
+_core:
+  default_config_hash: '-i3AgqI9kADux11xnA9_DmRnDrMGy-hrpMaZKvJI4nY'
 id: thunder_gallery
 name: thunder_gallery
-weight: -10
 label: 'Thunder Gallery'
+weight: -10
 group: ''
 skin: default
 breakpoints: 0
@@ -20,13 +22,13 @@ options:
     accessibility: true
     adaptiveHeight: false
     autoplay: false
+    autoplaySpeed: 3000
     pauseOnHover: true
     pauseOnDotsHover: false
     pauseOnFocus: true
-    autoplaySpeed: 3000
     arrows: true
-    prevArrow: Previous
-    nextArrow: Next
+    prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="Previous" tabindex="0" role="button">Previous</button>'
+    nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="Next" tabindex="0" role="button">Next</button>'
     downArrow: false
     downArrowTarget: ''
     downArrowOffset: 0
@@ -40,12 +42,12 @@ options:
     focusOnSelect: false
     infinite: true
     initialSlide: 0
-    lazyLoad: progressive
+    lazyLoad: blazy
     mouseWheel: false
     randomize: false
     respondTo: window
     rtl: false
-    rows: 0
+    rows: 1
     slidesPerRow: 1
     slide: ''
     slidesToShow: 1
