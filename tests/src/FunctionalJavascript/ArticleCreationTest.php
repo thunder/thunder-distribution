@@ -113,10 +113,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->assertSession()->linkExists('Link to Thunder');
     $this->assertSession()->linkByHrefExists('http://www.thunder.org');
 
-    // Check for sharing buttons.
-    $this->assertSession()->elementExists('css', '.shariff-button.twitter');
-    $this->assertSession()->elementExists('css', '.shariff-button.facebook');
-
     // Check Video paragraph.
     $this->getSession()
       ->wait(5000, "jQuery('iframe').filter(function(){return (this.src.indexOf('media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DPWjcqE3QKBg') !== -1);}).length === 1");
