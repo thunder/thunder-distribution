@@ -76,7 +76,7 @@ class ParagraphsPasteTest extends ThunderJavascriptTestBase {
     $this->simulatePasteEvent(static::$paragraphsField, $text);
     $this->waitForElementPresent('[data-drupal-selector="edit-field-paragraphs-0-subform-field-text-0-value"]', 10000, 'Text field in paragraph form should be present.');
     $this->assertEquals(sprintf('<p>%s</p>', "Spicy jalapeno bacon ipsum dolor amet short ribs ribeye chislic, turkey shank chuck cupim bacon bresaola."), $this->getSession()->getPage()->find('xpath', '//textarea[@data-drupal-selector="edit-field-paragraphs-0-subform-field-text-0-value"]')->getValue(), 'Text should be pasted into paragraph subform.');
-    $this->assertEquals("media:20", $this->getSession()->getPage()->find('xpath', '//input[@name="field_paragraphs[1][subform][field_video][target_id]"]')->getValue(), 'Video should be connected to the paragraph subform.');
+    $this->assertEquals("20", $this->getSession()->getPage()->find('xpath', '//input[@name="field_paragraphs[1][subform][field_video][selection][0][target_id]"]')->getValue(), 'Video should be connected to the paragraph subform.');
     $this->assertEquals(sprintf('<p>%s</p>', "Picanha porchetta cupim, salami jerky alcatra doner strip steak pork loin short loin pork belly tail ham hock cow shoulder."), $this->getSession()->getPage()->find('xpath', '//textarea[@data-drupal-selector="edit-field-paragraphs-2-subform-field-text-0-value"]')->getValue(), 'Text should be pasted into paragraph subform.');
   }
 
