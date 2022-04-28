@@ -42,14 +42,15 @@ executed.
 composer require drupal/entity_browser drupal/thunder_admin
 ```
 
-Also, if you are using the liveblog, better_normalizers, google_analytics or adsense module, you have to require them
-own your own, since Thunder removed them from the distribution.
+Also, if you have the liveblog, better_normalizers, google_analytics, shariff or adsense module enabled, you have to
+require them own your own, since Thunder removed them from the distribution.
 
 ```bash
 composer require drupal/liveblog
 composer require drupal/better_normalizers
 composer require drupal/adsense
 composer require drupal/google_analytics
+composer require drupal/shariff
 ```
 
 ## Execute the update
