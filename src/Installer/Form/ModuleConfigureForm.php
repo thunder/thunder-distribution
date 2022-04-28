@@ -16,6 +16,7 @@ use Drupal\Core\Extension\ModuleDependencyMessageTrait;
 use Drupal\user\PermissionHandlerInterface;
 use Drupal\Component\Utility\Environment;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Extension\ExtensionLifecycle;
 
 /**
  * Provides the site configuration form.
@@ -209,6 +210,13 @@ class ModuleConfigureForm extends FormBase {
         '#theme' => 'item_list',
         '#items' => $requires,
         '#context' => ['list_style' => 'comma-list'],
+      ];
+
+      $form['install_modules'][$id]['info']['lifecycle'] = [
+        '#prefix' => '<div class="admin-requirements">',
+        '#suffix' => '</div>',
+        '#type' => 'item',
+        '#markup' => $this->t('Lifecycle status: @lifecycle', ['@lifecycle' => $module->info[ExtensionLifecycle::LIFECYCLE_IDENTIFIER]]),
       ];
 
       if ($module->status) {

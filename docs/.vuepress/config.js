@@ -42,6 +42,7 @@ module.exports = {
         },
         '/developer-guide/testing.md',
         '/developer-guide/headless.md',
+        '/developer-guide/paragraphs_paste.md',
         {
           text: 'Migration',
           children: [
