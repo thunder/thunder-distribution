@@ -1,5 +1,17 @@
 # Changelog
 
+## [6.3.7](https://github.com/thunder/thunder-distribution/tree/6.3.7) 2022-04-02
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.6...6.3.7)
+
+The experimental paragraphs paste feature was added.
+
+To test the feature enable the thunder_paragraphs_paste module. The UX and documentation of this feature is not very
+fleshed out, but the general idea is, that you can text with multiple paragraphs, some textile markup and URLs to
+embeds into a single field on your article edit and all necessary paragraphs will be created for you.
+
+- [Paragraphs paste feature](https://www.drupal.org/node/2908496)
+
 ## [6.3.6](https://github.com/thunder/thunder-distribution/tree/6.3.6) 2022-03-24
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.3.5...6.3.6)
