@@ -102,7 +102,7 @@
         "drupal/metatag_async_widget": "^1.0-alpha2",
         "drupal/paragraphs": "^1.12",
         "drupal/paragraphs_features": "dev-2.x",
-        "drupal/paragraphs_paste": "^2.0@BETA",
+        "drupal/paragraphs_paste": "^2.0-beta3",
         "drupal/password_policy": "3.1",
         "drupal/pathauto": "^1.9",
         "drupal/responsive_preview": "^1.0-alpha7",
