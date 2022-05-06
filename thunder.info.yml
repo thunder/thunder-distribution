@@ -55,7 +55,6 @@ install:
   - ctools:ctools
   - diff:diff
   - dropzonejs:dropzonejs
-  - empty_fields:empty_fields
   - entity_reference_actions:entity_reference_actions
   - media_library_media_modify:media_library_media_modify
   - field_group:field_group

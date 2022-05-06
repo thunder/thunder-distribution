@@ -59,9 +59,6 @@ added/changed/deleted words between revisions.\
 **Dropzonejs**: Open source library that provides drag’n’drop file uploads with image previews.\
 [https://www.drupal.org/project/dropzonejs](https://www.drupal.org/project/dropzonejs)
 
-**Empty Fields**: This module provides a way to show empty fields that would otherwise be hidden.\
-[https://www.drupal.org/project/empty_fields](https://www.drupal.org/project/empty_fields)
-
 **Field Group**: Fieldgroup will group fields together. All fieldable entities will have the possibility to add groups
 to wrap their fields together.\
 [https://www.drupal.org/project/field_group](https://www.drupal.org/project/field_group)

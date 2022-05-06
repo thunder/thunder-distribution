@@ -23,9 +23,7 @@ content:
     label: inline
     settings:
       link_to_entity: false
-    third_party_settings:
-      empty_fields:
-        handler: nbsp
+    third_party_settings: {  }
     weight: 2
     region: content
   name:
