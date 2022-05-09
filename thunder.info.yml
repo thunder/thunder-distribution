@@ -54,7 +54,6 @@ install:
   - ctools:ctools
   - diff:diff
   - dropzonejs:dropzonejs_eb_widget
-  - empty_fields:empty_fields
   - entity_reference_actions:entity_reference_actions
   - entity_browser:entity_browser_entity_form
   - field_group:field_group
