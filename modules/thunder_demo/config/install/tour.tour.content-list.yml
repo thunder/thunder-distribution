@@ -2,10 +2,10 @@ langcode: en
 status: true
 dependencies:
   module:
-    - thunder_demo
+    - thunder_testing_demo
 id: content-list
 label: 'Content listing'
-module: thunder_demo
+module: thunder_testing_demo
 routes:
   -
     route_name: view.content.page_1
@@ -38,7 +38,8 @@ tips:
     label: Actions
     body: '<p>In order to define which items to execute an action on use the checkboxes. The one in the header row will select all items on a page and the ones in the rows below will select corresponding individual items.</p>'
     weight: 4
-    position: right
+    attributes:
+      data-options: 'tipLocation: right'
     selector: '.views-table .select-all'
   sort:
     id: sort
@@ -46,7 +47,8 @@ tips:
     label: Sorting
     body: '<p>Click on the links in the header row to sort the list. Arrow next to the active sort link indicates the sort direction (ascending or descending).</p>'
     weight: 5
-    position: top
+    attributes:
+      data-options: 'nubPosition: top-right'
     selector: '.views-table #view-changed-table-column'
   operations:
     id: operations
@@ -54,11 +56,12 @@ tips:
     label: 'Content operations'
     body: '<p>Use content operations dropbutton to edit or delete a given content item.</p>'
     weight: 6
-    position: left
+    attributes:
+      data-options: 'tipLocation: left'
     selector: '.views-table tr:nth-child(2) .views-field-operations'
   last:
     id: last
     plugin: text
-    label: 'That is it for now'
-    body: '<p>Nice! Let us just mention that it is very easy to modify most of things on this page (as it is the case with any listing in Thunder). A very powerful module called "Views" can be used to do that. Details about it are out of scope for this tour. For now just keep in mind that you will be able to tweak it if you need to.</p><p>This is it for now. I hope that you enjoyed our company. Now you can navigate back to the <a href="/">front page</a> and start exploring on your own.'
+    label: 'That''s it for now'
+    body: '<p>Nice! Let us just mention that it is very easy to modify most of things on this page (as it is the case with any listing in Thunder). A very powerfull module called "Views" can be used to do that. Details about it are out of scope for this tour. For now just keep in mind that you will be able to tweak it if you need to.</p><p>This is it for now. I hope that you enjoyed our company. Now you can navigate back to the <a href="/">front page</a> and start exploring on your own.'
     weight: 7

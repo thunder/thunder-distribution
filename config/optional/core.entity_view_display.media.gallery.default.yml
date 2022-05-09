@@ -6,7 +6,6 @@ dependencies:
     - image.style.gallery
     - media.type.gallery
   module:
-    - empty_fields
     - slick
 id: media.gallery.default
 targetEntityType: media
@@ -31,42 +30,24 @@ content:
       overlay: ''
       title: field_description
       vanilla: true
-      icon: ''
       layout: below
       view_mode: slick
       cache: 0
-      current_view_mode: default
       skin: classic
-      fx: ''
+      lazy: ''
       style: ''
       background: false
       box_caption: ''
       box_caption_custom: ''
       box_media_style: ''
+      loading: lazy
+      preload: false
       responsive_image_style: ''
       box_style: ''
       image_style: gallery
       media_switch: ''
       ratio: ''
       thumbnail_style: ''
-      breakpoints:
-        xs:
-          width: ''
-          image_style: ''
-        sm:
-          width: ''
-          image_style: ''
-        md:
-          width: ''
-          image_style: ''
-        lg:
-          width: ''
-          image_style: ''
-        xl:
-          width: ''
-          image_style: ''
-      sizes: ''
-      grid_header: ''
       grid: '0'
       grid_medium: '0'
       grid_small: '0'
@@ -91,9 +72,7 @@ content:
       use_theme_field: false
       preserve_keys: false
       visible_items: 0
-    third_party_settings:
-      empty_fields:
-        handler: ''
+    third_party_settings: {  }
     weight: 0
     region: content
 hidden:

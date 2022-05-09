@@ -1,3 +1,4 @@
+uuid: 83f75c9e-b19e-4ebe-8b15-dbd48c16fb51
 langcode: en
 status: true
 dependencies:
@@ -10,6 +11,8 @@ dependencies:
     - media.type.twitter
   module:
     - image
+_core:
+  default_config_hash: lKYKaN11pEIVMmMQq8LzHNb9IPvIa6F_kEqjsi4dxIk
 id: media.twitter.paragraph_preview
 targetEntityType: media
 bundle: twitter

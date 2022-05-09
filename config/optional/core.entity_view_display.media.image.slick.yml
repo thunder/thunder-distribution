@@ -13,7 +13,6 @@ dependencies:
     - responsive_image.styles.media_image
   module:
     - blazy
-    - empty_fields
 id: media.image.slick
 targetEntityType: media
 bundle: image
@@ -34,48 +33,28 @@ content:
       caption:
         title: '0'
         alt: '0'
-      icon: ''
       layout: ''
       view_mode: ''
       cache: 0
-      current_view_mode: slick
       skin: ''
-      fx: ''
+      lazy: ''
       style: ''
       background: false
       box_caption: ''
       box_caption_custom: ''
       box_media_style: ''
+      loading: lazy
+      preload: false
       responsive_image_style: media_image
       box_style: ''
       image_style: ''
       media_switch: ''
       ratio: ''
       thumbnail_style: ''
-      breakpoints:
-        xs:
-          width: ''
-          image_style: ''
-        sm:
-          width: ''
-          image_style: ''
-        md:
-          width: ''
-          image_style: ''
-        lg:
-          width: ''
-          image_style: ''
-        xl:
-          width: ''
-          image_style: ''
-      sizes: ''
-      grid_header: ''
       grid: '0'
       grid_medium: '0'
       grid_small: '0'
-    third_party_settings:
-      empty_fields:
-        handler: ''
+    third_party_settings: {  }
     weight: 0
     region: content
 hidden:

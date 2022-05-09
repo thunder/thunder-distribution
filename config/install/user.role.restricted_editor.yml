@@ -26,6 +26,7 @@ dependencies:
     - taxonomy
     - thunder_taxonomy
     - toolbar
+    - tour
 id: restricted_editor
 label: 'Restricted editor'
 weight: -8
@@ -40,6 +41,7 @@ permissions:
   - 'access responsive preview'
   - 'access tokens overview'
   - 'access toolbar'
+  - 'access tour'
   - 'access video_browser entity browser pages'
   - 'break content lock'
   - 'create article content'
