@@ -1,4 +1,3 @@
-uuid: cf41d7b0-b73e-4370-b7b2-6b73452e7a05
 langcode: en
 status: true
 dependencies:
@@ -11,8 +10,6 @@ dependencies:
     - media.type.instagram
   module:
     - image
-_core:
-  default_config_hash: E6mxPDq2J7F2uMe6ZNOK-gJdqLw8j5dUHh6vn48ruBc
 id: media.instagram.paragraph_preview
 targetEntityType: media
 bundle: instagram

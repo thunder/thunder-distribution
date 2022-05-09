@@ -2,13 +2,15 @@ langcode: en
 status: true
 dependencies:
   module:
-    - thunder_testing_demo
+    - thunder_demo
 id: homepage
 label: Homepage
-module: thunder_testing_demo
+module: thunder_demo
 routes:
   -
-    route_name: view.frontpage.page_1
+    route_name: entity.user.canonical
+    route_params:
+      user: '1'
 tips:
   homepage:
     id: homepage
@@ -20,10 +22,9 @@ tips:
     id: main_content
     plugin: text
     label: 'Main content region'
-    body: 'Meat and bones of a Thunder site. Depending on the page you are on you''ll find article content, list of articles in a channel, media asstes and many more here.'
+    body: 'Meat and bones of a Thunder site. Depending on the page you are on you''ll find article content, list of articles in a channel, media assets and many more here.'
     weight: 2
-    attributes:
-      data-options: 'tipLocation: left'
+    position: left
     selector: '#content'
   main_menu:
     id: main_menu
@@ -43,11 +44,8 @@ tips:
     id: restart_tour
     plugin: text
     label: 'Need some more time to explore on your own?'
-    body: 'You can stop the tour at any time and re-start it by pressing this button.'
+    body: 'You can stop the tour at any time and re-start it by pressing the tour button in the top-right corner.'
     weight: 5
-    attributes:
-      data-options: 'nubPosition: top-right'
-    selector: '#toolbar-tab-tour'
   next_step:
     id: next_step
     plugin: text

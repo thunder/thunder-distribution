@@ -1,4 +1,3 @@
-uuid: bd6475f2-7578-47f9-aa96-88e1aa4ced17
 langcode: en
 status: true
 dependencies:
@@ -9,8 +8,6 @@ dependencies:
     - media.type.pinterest
   module:
     - image
-_core:
-  default_config_hash: UfVhuRWhnnmDv6W-GKjxZg3HyozFgVdvRLP2fJ8dXWY
 id: media.pinterest.paragraph_preview
 targetEntityType: media
 bundle: pinterest

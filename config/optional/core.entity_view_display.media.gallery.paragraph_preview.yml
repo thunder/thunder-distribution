@@ -1,4 +1,3 @@
-uuid: 30cd5277-e17c-4711-8f42-269b468fb205
 langcode: en
 status: true
 dependencies:
@@ -9,8 +8,6 @@ dependencies:
     - media.type.gallery
   module:
     - media
-_core:
-  default_config_hash: tapizlIwprTNbCoqlbDj0eyx7UYr-hBbq02fqkfi3gM
 id: media.gallery.paragraph_preview
 targetEntityType: media
 bundle: gallery
