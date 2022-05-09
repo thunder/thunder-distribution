@@ -26,7 +26,6 @@ dependencies:
     - taxonomy
     - thunder_taxonomy
     - toolbar
-    - tour
     - views_bulk_edit
 id: editor
 label: Editor
@@ -43,7 +42,6 @@ permissions:
   - 'access responsive preview'
   - 'access tokens overview'
   - 'access toolbar'
-  - 'access tour'
   - 'access video_browser entity browser pages'
   - 'administer menu'
   - 'administer nodes'
