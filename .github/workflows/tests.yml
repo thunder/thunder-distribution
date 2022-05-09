@@ -119,9 +119,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        PHP_VERSION: [ '7.4', '8.1' ]
-        CHUNK: [ 1, 2, 3 ]
-
+        PHP_VERSION: [ '8.1' ]
     steps:
       - uses: actions/checkout@v1
 
@@ -151,7 +149,7 @@ jobs:
       - name: Update the docroot
         run: |
           ls -alh
-          composer require config_profile
+          composer require drupal/config_profile
           vendor/bin/drush cex
           cd docroot/profile/contrib/thunder
           git clean -fd
