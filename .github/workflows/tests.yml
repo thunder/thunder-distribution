@@ -146,13 +146,14 @@ jobs:
       - name: Unzip build artifact
         run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
 
-#      - name: Setup tmate session
-#        uses: mxschmitt/action-tmate@v3
 
       - name: Do install
         run: test-drupal-project install
         env:
           DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - name: Check profile config
         working-directory: /tmp/test/thunder/install
