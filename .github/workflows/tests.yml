@@ -224,9 +224,6 @@ jobs:
       - name: Install drupal
         run: test-drupal-project install
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Update the docroot
         run: |
           composer remove thunder/thunder-distribution --no-update
@@ -246,7 +243,7 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-  
+
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
 
