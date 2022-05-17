@@ -1,0 +1,231 @@
+__global_actions:
+  import_configs:
+    - core.entity_form_mode.media.override
+    - core.entity_form_display.media.image.override
+  install_themes:
+    - gin
+system.theme:
+  expected_config:
+    admin: thunder_admin
+  update_actions:
+    change:
+      admin: gin
+core.entity_form_display.media.gallery.default:
+  expected_config:
+    content:
+      field_media_images:
+        settings:
+          add_button_text: 'Add media'
+          check_selected: false
+          form_mode: default
+          multi_edit_on_create: false
+          replace_checkbox_by_order_indicator: false
+        third_party_settings: { }
+        weight: 26
+  update_actions:
+    change:
+      content:
+        field_media_images:
+          settings:
+            add_button_text: 'Select images'
+            check_selected: true
+            form_mode: override
+            multi_edit_on_create: true
+            replace_checkbox_by_order_indicator: true
+          third_party_settings:
+            entity_reference_actions:
+              enabled: true
+              options:
+                action_title: Action
+                include_exclude: include
+                selected_actions:
+                  media_delete_action: '0'
+                  media_edit_action: media_edit_action
+                  media_publish_action: '0'
+                  media_save_action: '0'
+                  media_unpublish_action: '0'
+          weight: 2
+core.entity_form_display.media.gallery.inline:
+  expected_config:
+    content:
+      field_media_images:
+        settings:
+          add_button_text: 'Add media'
+          check_selected: false
+          form_mode: default
+          multi_edit_on_create: false
+          replace_checkbox_by_order_indicator: false
+        third_party_settings: { }
+        weight: 26
+  update_actions:
+    change:
+      content:
+        field_media_images:
+          settings:
+            add_button_text: 'Select images'
+            check_selected: true
+            form_mode: override
+            multi_edit_on_create: true
+            replace_checkbox_by_order_indicator: true
+          third_party_settings:
+            entity_reference_actions:
+              enabled: true
+              options:
+                action_title: Action
+                include_exclude: include
+                selected_actions:
+                  media_delete_action: '0'
+                  media_edit_action: media_edit_action
+                  media_publish_action: '0'
+                  media_save_action: '0'
+                  media_unpublish_action: '0'
+          weight: 1
+core.entity_form_display.node.article.default:
+  expected_config:
+    content:
+      field_teaser_media:
+        settings:
+          add_button_text: 'Add media'
+          check_selected: false
+          form_mode: default
+          multi_edit_on_create: false
+          replace_checkbox_by_order_indicator: false
+        third_party_settings: { }
+        weight: 121
+  update_actions:
+    delete:
+      content:
+        field_teaser_media:
+          settings:
+            check_selected: false
+            multi_edit_on_create: false
+            replace_checkbox_by_order_indicator: false
+    change:
+      content:
+        field_teaser_media:
+          settings:
+            add_button_text: 'Select image'
+            form_mode: override
+          third_party_settings:
+            entity_reference_actions:
+              enabled: false
+              options:
+                action_title: Action
+                include_exclude: exclude
+                selected_actions:
+                  media_delete_action: '0'
+                  media_edit_action: '0'
+                  media_publish_action: '0'
+                  media_save_action: '0'
+                  media_unpublish_action: '0'
+          weight: 4
+core.entity_form_display.paragraph.image.default:
+  expected_config:
+    content:
+      field_image:
+        settings:
+          add_button_text: 'Add media'
+          check_selected: false
+          form_mode: default
+          multi_edit_on_create: false
+          replace_checkbox_by_order_indicator: false
+        weight: 1
+  update_actions:
+    delete:
+      content:
+        field_image:
+          settings:
+            add_button_text: 'Add media'
+            check_selected: false
+            multi_edit_on_create: false
+            replace_checkbox_by_order_indicator: false
+    change:
+      content:
+        field_image:
+          settings:
+            form_mode: override
+          weight: 0
+core.entity_form_display.paragraph.video.default:
+  expected_config:
+    content:
+      field_video:
+        settings:
+          add_button_text: 'Add media'
+          check_selected: false
+          form_mode: default
+          multi_edit_on_create: false
+          replace_checkbox_by_order_indicator: false
+        weight: 1
+  update_actions:
+    delete:
+      content:
+        field_video:
+          settings:
+            add_button_text: 'Add media'
+            check_selected: false
+            multi_edit_on_create: false
+            replace_checkbox_by_order_indicator: false
+    change:
+      content:
+        field_video:
+          settings:
+            form_mode: override
+          weight: 0
+field.field.media.gallery.field_media_images:
+  expected_config:
+    translatable: false
+  update_actions:
+    change:
+      translatable: true
+field.field.node.article.field_teaser_media:
+  expected_config:
+    translatable: false
+  update_actions:
+    change:
+      translatable: true
+field.field.paragraph.image.field_image:
+  expected_config:
+    translatable: false
+  update_actions:
+    change:
+      translatable: true
+field.field.paragraph.video.field_video:
+  expected_config:
+    translatable: false
+  update_actions:
+    change:
+      translatable: true
+views.view.media:
+  expected_config:
+    display:
+      media_page_list:
+        display_options:
+          menu:
+            context: '0'
+            description: ''
+            expanded: false
+            menu_name: main
+            parent: ''
+            title: Media
+            type: tab
+            weight: 0
+          path: admin/content/media
+  update_actions:
+    delete:
+      display:
+        media_page_list:
+          display_options:
+            menu:
+              context: '0'
+              description: ''
+              expanded: false
+              menu_name: main
+              parent: ''
+              title: Media
+              type: tab
+              weight: 0
+    change:
+      display:
+        media_page_list:
+          display_options:
+            path: admin/content/media-table

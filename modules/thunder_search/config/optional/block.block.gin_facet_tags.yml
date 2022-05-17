@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.tags
+  module:
+    - facets
+  theme:
+    - gin
+id: gin_facet_tags
+theme: gin
+region: content
+weight: -6
+provider: null
+plugin: 'facet_block:tags'
+settings:
+  id: 'facet_block:tags'
+  label: Tags
+  provider: facets
+  label_display: '0'
+  block_id: gin_facet_tags
+visibility: {  }

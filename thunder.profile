@@ -102,6 +102,15 @@ function thunder_preprocess_html(array &$variables): void {
 }
 
 /**
+ * Implements template_preprocess_status_report().
+ */
+function thunder_preprocess_status_report_general_info(array &$variables): void {
+  if (!empty($thunder_version = \Drupal::service('extension.list.module')->get('thunder')->info['version'])) {
+    $variables['drupal']['value'] .= ' (Thunder ' . $thunder_version . ')';
+  }
+}
+
+/**
  * Implements hook_modules_uninstalled().
  */
 function thunder_modules_uninstalled(array $modules): void {
@@ -161,16 +170,6 @@ function thunder_field_widget_info_alter(array &$info): void {
 }
 
 /**
- * Implements hook_field_widget_multivalue_WIDGET_TYPE_form_alter().
- *
- * Removes the cardinality information from the #prefix element of the current
- * selection.
- */
-function thunder_field_widget_multivalue_entity_browser_entity_reference_form_alter(array &$elements, FormStateInterface $form_state, array $context): void {
-  unset($elements['current']['#prefix']);
-}
-
-/**
  * Implements hook_action_info_alter().
  */
 function thunder_action_info_alter(array &$definitions): void {
@@ -179,4 +178,22 @@ function thunder_action_info_alter(array &$definitions): void {
       $definition['action_label'] = t('Edit');
     }
   }
+}
+
+/**
+ * Implements hook_gin_content_form_routes().
+ */
+function thunder_gin_content_form_routes(): array {
+  $routes = [
+    'entity.taxonomy_term.edit_form',
+    'entity.taxonomy_term.add_form',
+    'entity.media.add_form',
+  ];
+  if (\Drupal::config('media.settings')->get('standalone_url')) {
+    $routes[] = 'entity.media.edit_form';
+  }
+  else {
+    $routes[] = 'entity.media.canonical';
+  }
+  return $routes;
 }

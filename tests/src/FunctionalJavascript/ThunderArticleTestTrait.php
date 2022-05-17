@@ -25,6 +25,7 @@ trait ThunderArticleTestTrait {
     if (!empty($fieldValues)) {
       $this->expandAllTabs();
       if ($this->getSession()->getPage()->hasButton('Customize meta tags')) {
+        $this->scrollElementInView('#metatag-async-widget-wrapper');
         $this->getSession()->getPage()->pressButton('Customize meta tags');
         $this->assertWaitOnAjaxRequest();
         $this->expandAllTabs();

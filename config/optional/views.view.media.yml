@@ -950,16 +950,7 @@ display:
     display_options:
       display_description: ''
       display_extenders: {  }
-      path: admin/content/media
-      menu:
-        type: tab
-        title: Media
-        description: ''
-        weight: 0
-        expanded: false
-        menu_name: main
-        parent: ''
-        context: '0'
+      path: admin/content/media-table
     cache_metadata:
       max-age: 0
       contexts:

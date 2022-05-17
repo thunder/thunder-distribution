@@ -63,12 +63,6 @@ class ResponsivePreviewTest extends ThunderJavascriptTestBase {
     $this->waitForIframeContent();
     $this->assertNotEquals(-1, $session->evaluateScript("document.getElementById('responsive-preview-frame').contentWindow.location.href.indexOf('/node/preview/')"));
     $this->changeDeviceRotation();
-
-    // Un-checking device from dropdown should turn off preview.
-    $this->selectDevice('(//*[@id="responsive-preview-toolbar-tab"]//button[@data-responsive-preview-name])[1]');
-    $this->getSession()
-      ->wait(5000, "document.getElementById('responsive-preview-frame') === null");
-    $assert_session->elementNotExists('xpath', '//*[@id="responsive-preview"]');
   }
 
   /**

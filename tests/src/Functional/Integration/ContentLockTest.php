@@ -30,10 +30,8 @@ class ContentLockTest extends ThunderTestBase {
     $this->drupalGet($node->toUrl('edit-form'));
     $this->assertSession()->pageTextContains('This content is now locked against simultaneous editing. This content will remain locked if you navigate away from this page without saving or unlocking it.');
 
-    $driver = $this->getSession()->getDriver();
-    $driver->click('//*[@id="edit-unlock"]');
-
-    $driver->click('//*[@id="edit-submit"]');
+    $this->click('[data-drupal-selector="edit-unlock"]');
+    $this->click('[data-drupal-selector="edit-submit"]');
     $this->assertSession()->pageTextContains('Lock broken. Anyone can now edit this content.');
 
     $this->drupalGet($node->toUrl('edit-form'));
