@@ -54,7 +54,10 @@
             },
             "drupal/schema_metatag": {
                 "Metatags have encoded HTML entities instead of plain text content": "https://www.drupal.org/files/issues/2022-02-01/3192117-21.patch"
-            }
+            },
+            "drupal/paragraphs_paste": {
+               "Make oembed handling more robust": "https://git.drupalcode.org/project/paragraphs_paste/-/merge_requests/8.diff"
+           }
         }
     },
     "require": {

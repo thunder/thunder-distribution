@@ -182,6 +182,8 @@ jobs:
       matrix:
         PHP_VERSION: [ '7.4' ]
 
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'test-upgrade') || github.event_name == 'schedule' }}
+
     env:
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
       DRUPAL_TESTING_TEST_GROUP: Thunder
@@ -243,9 +245,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
 
       - name: Run tests suite
         run: test-drupal-project run_tests
