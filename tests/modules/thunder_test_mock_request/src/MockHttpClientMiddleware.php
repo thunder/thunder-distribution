@@ -74,7 +74,7 @@ class MockHttpClientMiddleware {
         // @phpstan-ignore-next-line
         return promise_for($response);
       }
-      if (strpos($this->request->getHost(), $request->getUri()->getHost()) === FALSE) {
+      if (strpos($this->request->getHttpHost(), $request->getUri()->getHost()) === FALSE) {
         throw new \Exception(sprintf("No response for %s defined. See MockHttpClientMiddleware::addUrlResponse().", $url));
       }
 
