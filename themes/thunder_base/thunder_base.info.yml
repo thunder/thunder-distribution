@@ -4,7 +4,8 @@ core_version_requirement: ^9
 base theme: bartik
 libraries:
   - thunder_base/global-styling
-
+lifecycle: deprecated
+lifecycle_link: https://www.drupal.org/node/3280874
 regions:
   header: Header
   primary_menu: 'Primary menu'
