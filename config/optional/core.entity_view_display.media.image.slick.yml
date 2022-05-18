@@ -23,7 +23,7 @@ content:
     label: hidden
     settings:
       link_to_entity: false
-    third_party_settings: {  }
+    third_party_settings: { }
     weight: 1
     region: content
   field_image:
@@ -54,7 +54,28 @@ content:
       grid: '0'
       grid_medium: '0'
       grid_small: '0'
-    third_party_settings: {  }
+      breakpoints:
+        xs:
+          width: ''
+          image_style: ''
+        sm:
+          width: ''
+          image_style: ''
+        md:
+          width: ''
+          image_style: ''
+        lg:
+          width: ''
+          image_style: ''
+        xl:
+          width: ''
+          image_style: ''
+      current_view_mode: slick
+      fx: ''
+      icon: ''
+      sizes: ''
+      grid_header: ''
+    third_party_settings: { }
     weight: 0
     region: content
 hidden:

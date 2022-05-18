@@ -34,7 +34,6 @@ content:
       view_mode: slick
       cache: 0
       skin: classic
-      lazy: ''
       style: ''
       background: false
       box_caption: ''
@@ -51,6 +50,27 @@ content:
       grid: '0'
       grid_medium: '0'
       grid_small: '0'
+      breakpoints:
+        xs:
+          width: ''
+          image_style: ''
+        sm:
+          width: ''
+          image_style: ''
+        md:
+          width: ''
+          image_style: ''
+        lg:
+          width: ''
+          image_style: ''
+        xl:
+          width: ''
+          image_style: ''
+      current_view_mode: default
+      fx: ''
+      icon: ''
+      sizes: ''
+      grid_header: ''
       overridables:
         arrows: '0'
         autoplay: '0'
@@ -72,7 +92,7 @@ content:
       use_theme_field: false
       preserve_keys: false
       visible_items: 0
-    third_party_settings: {  }
+    third_party_settings: { }
     weight: 0
     region: content
 hidden:
