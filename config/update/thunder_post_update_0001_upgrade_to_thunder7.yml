@@ -20,7 +20,7 @@ core.entity_form_display.media.gallery.default:
           form_mode: default
           multi_edit_on_create: false
           replace_checkbox_by_order_indicator: false
-        third_party_settings: {  }
+        third_party_settings: { }
         weight: 26
   update_actions:
     change:
@@ -55,7 +55,7 @@ core.entity_form_display.media.gallery.inline:
           form_mode: default
           multi_edit_on_create: false
           replace_checkbox_by_order_indicator: false
-        third_party_settings: {  }
+        third_party_settings: { }
         weight: 26
   update_actions:
     change:
@@ -90,7 +90,7 @@ core.entity_form_display.node.article.default:
           form_mode: default
           multi_edit_on_create: false
           replace_checkbox_by_order_indicator: false
-        third_party_settings: {  }
+        third_party_settings: { }
         weight: 121
   update_actions:
     delete:
@@ -100,12 +100,6 @@ core.entity_form_display.node.article.default:
             check_selected: false
             multi_edit_on_create: false
             replace_checkbox_by_order_indicator: false
-    add:
-      content:
-        field_paragraphs:
-          third_party_settings:
-            paragraphs_features:
-              sorting: true
     change:
       content:
         field_teaser_media:

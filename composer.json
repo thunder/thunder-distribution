@@ -102,6 +102,7 @@
         "drupal/metatag_async_widget": "^1.0-alpha2",
         "drupal/paragraphs": "^1.12",
         "drupal/paragraphs_features": "dev-2.x",
+        "drupal/paragraphs_paste": "^2.0-beta3",
         "drupal/password_policy": "3.1",
         "drupal/pathauto": "^1.9",
         "drupal/responsive_preview": "^1.0-alpha7",
@@ -112,7 +113,6 @@
         "drupal/select2": "^1.7",
         "drupal/search_api_mark_outdated": "^1.0",
         "drupal/simple_sitemap": "^3.10",
-        "drupal/shariff": "^1.5",
         "drupal/slick": "^2.4",
         "drupal/token": "^1.7",
         "drupal/update_helper": "^2.0||^3.0.2",
@@ -123,7 +123,6 @@
         "npm-asset/exif-js": "^2.3.0",
         "npm-asset/blazy": "^1.8",
         "npm-asset/slick-carousel": "^1.8",
-        "npm-asset/shariff": "^3.1.1",
         "npm-asset/select2": "^4.0.7"
     },
     "suggest": {

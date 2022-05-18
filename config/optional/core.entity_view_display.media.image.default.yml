@@ -51,7 +51,6 @@ content:
       media_switch: ''
       ratio: ''
       thumbnail_style: ''
-      _uri: ''
       breakpoints:
         xs:
           width: ''
