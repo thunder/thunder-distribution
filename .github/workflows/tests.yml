@@ -54,7 +54,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: none, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, Imagick, gd, PDO, pdo_mysql
+          extensions: none, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, Imagick, gd, PDO, pdo_mysql, mbstring
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -129,7 +129,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: none, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, Imagick, gd, PDO, pdo_mysql
+          extensions: none, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, Imagick, gd, PDO, pdo_mysql, mbstring
 
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
@@ -195,7 +195,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: none, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, Imagick, gd, PDO, pdo_mysql
+          extensions: none, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, Imagick, gd, PDO, pdo_mysql, mbstring
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -291,7 +291,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: none, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, Imagick, gd, PDO, pdo_mysql
+          extensions: none, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, Imagick, gd, PDO, pdo_mysql, mbstring
 
       - name: Cache composer dependencies
         uses: actions/cache@v1
@@ -350,7 +350,7 @@ jobs:
         with:
           coverage: none
           php-version: '7.4'
-          extensions: none, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, Imagick, gd, PDO, pdo_mysql
+          extensions: none, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, Imagick, gd, PDO, pdo_mysql, mbstring
 
       - name: Download build
         uses: actions/download-artifact@v1
