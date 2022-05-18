@@ -234,9 +234,9 @@ jobs:
           composer require "drupal/thunder_admin" --no-update
           composer require "drupal/shariff" --no-update
 
-          drush theme:enable olivero --yes
-          drush config:set system.theme default olivero --yes
-          drush theme:uninstall thunder_base --yes
+          composer exec -- drush theme:enable olivero --yes
+          composer exec -- drush config:set system.theme default olivero --yes
+          composer exec -- drush theme:uninstall thunder_base --yes
 
           rm vendor/composer/installed.json
           composer update
