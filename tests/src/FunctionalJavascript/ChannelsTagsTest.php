@@ -29,7 +29,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
 
     // Create new Channel with 2 paragraphs.
     $this->setFieldValue('name[0][value]', 'New Section');
-    $image1 = $this->loadMediaByUuid('5d719c64-7f32-4062-9967-9874f5ca3eba');
+    $image1 = $this->loadMediaByUuid('5378c127-e8b2-4242-877d-d982736a237b');
     $this->addImageParagraph('field_paragraphs', [$image1->id()]);
     $this->addTextParagraph('field_paragraphs', 'Text for Channel');
     $this->clickSave();
@@ -42,7 +42,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
       'field_tags[]' => ['New Section', 'Tag1'],
       'field_teaser_text[0][value]' => 'Teaser 1',
     ]);
-    $image2 = $this->loadMediaByUuid('5378c127-e8b2-4242-877d-d982736a237b');
+    $image2 = $this->loadMediaByUuid('5bd93c54-469b-4ac7-927b-cf6bb1dcf3dd');
     $this->selectMedia('field_teaser_media', [$image2->id()]);
 
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
