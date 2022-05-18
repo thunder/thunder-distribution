@@ -34,12 +34,13 @@ drush updb
 @TODO You should at least see the Thunder 8323 schema update. If not, double check that the correct version of Thunder
 is installed, and that `drush updb` did not throw any errors.
 
-Before you start with the code and database update please add the Entity Browser module and the Thunder Admin theme to
-your own composer.json. Both are no longer part of Thunder and can be removed after the update was successfully
+Before you start with the code and database update please add the Entity Browser and Empty fields modules and the
+Thunder Admin theme to
+your own composer.json. All are no longer part of Thunder and can be removed after the update was successfully
 executed.
 
 ```bash
-composer require drupal/entity_browser drupal/thunder_admin
+composer require drupal/entity_browser drupal/thunder_admin drupal/empty_fields
 ```
 
 Also, if you have the liveblog, better_normalizers, google_analytics, shariff or adsense module enabled, you have to
@@ -65,8 +66,8 @@ drush updb
 drush cr
 ```
 
-After the update was executed successfully, you can remove the outdated extensions.
+After the update was executed successfully, you can remove the outdated extensions, if you don't need them anymore.
 
 ```bash
-composer remove drupal/entity_browser drupal/thunder_admin
+composer remove drupal/entity_browser drupal/thunder_admin drupal/empty_fields
 ```

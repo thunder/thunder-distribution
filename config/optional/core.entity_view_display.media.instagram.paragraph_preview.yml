@@ -9,7 +9,6 @@ dependencies:
     - image.style.paragraph_preview_thumbnail
     - media.type.instagram
   module:
-    - empty_fields
     - image
 id: media.instagram.paragraph_preview
 targetEntityType: media
@@ -21,16 +20,14 @@ content:
     label: inline
     settings:
       link_to_entity: false
-    third_party_settings:
-      empty_fields:
-        handler: ''
+    third_party_settings: { }
     weight: 1
     region: content
   field_content:
     type: basic_string
     label: inline
-    settings: {  }
-    third_party_settings: {  }
+    settings: { }
+    third_party_settings: { }
     weight: 2
     region: content
   thumbnail:
@@ -39,9 +36,7 @@ content:
     settings:
       image_link: ''
       image_style: paragraph_preview_thumbnail
-    third_party_settings:
-      empty_fields:
-        handler: ''
+    third_party_settings: { }
     weight: 0
     region: content
 hidden:

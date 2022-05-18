@@ -23,9 +23,7 @@ content:
     label: inline
     settings:
       link_to_entity: false
-    third_party_settings:
-      empty_fields:
-        handler: nbsp
+    third_party_settings: { }
     weight: 2
     region: content
   name:
@@ -33,7 +31,7 @@ content:
     label: inline
     settings:
       link_to_entity: false
-    third_party_settings: {  }
+    third_party_settings: { }
     weight: 1
     region: content
   thumbnail:
@@ -42,7 +40,7 @@ content:
     settings:
       image_link: ''
       image_style: paragraph_preview_thumbnail
-    third_party_settings: {  }
+    third_party_settings: { }
     weight: 0
     region: content
 hidden:

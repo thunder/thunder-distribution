@@ -7,7 +7,6 @@ dependencies:
     - image.style.paragraph_preview_thumbnail
     - media.type.pinterest
   module:
-    - empty_fields
     - image
 id: media.pinterest.paragraph_preview
 targetEntityType: media
@@ -20,9 +19,7 @@ content:
     settings:
       image_link: ''
       image_style: paragraph_preview_thumbnail
-    third_party_settings:
-      empty_fields:
-        handler: ''
+    third_party_settings: { }
     weight: 0
     region: content
 hidden:

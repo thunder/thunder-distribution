@@ -4,8 +4,6 @@ dependencies:
   config:
     - field.field.paragraph.pinterest.field_media
     - paragraphs.paragraphs_type.pinterest
-  module:
-    - empty_fields
 id: paragraph.pinterest.default
 targetEntityType: paragraph
 bundle: pinterest
@@ -17,9 +15,7 @@ content:
     settings:
       view_mode: default
       link: false
-    third_party_settings:
-      empty_fields:
-        handler: ''
+    third_party_settings: { }
     weight: 0
     region: content
-hidden: {  }
+hidden: { }

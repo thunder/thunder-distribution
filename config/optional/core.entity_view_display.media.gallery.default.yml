@@ -6,7 +6,6 @@ dependencies:
     - image.style.gallery
     - media.type.gallery
   module:
-    - empty_fields
     - slick
 id: media.gallery.default
 targetEntityType: media
@@ -91,9 +90,7 @@ content:
       use_theme_field: false
       preserve_keys: false
       visible_items: 0
-    third_party_settings:
-      empty_fields:
-        handler: ''
+    third_party_settings: { }
     weight: 0
     region: content
 hidden:

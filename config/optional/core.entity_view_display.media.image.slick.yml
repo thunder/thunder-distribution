@@ -13,7 +13,6 @@ dependencies:
     - responsive_image.styles.media_image
   module:
     - blazy
-    - empty_fields
 id: media.image.slick
 targetEntityType: media
 bundle: image
@@ -24,7 +23,7 @@ content:
     label: hidden
     settings:
       link_to_entity: false
-    third_party_settings: {  }
+    third_party_settings: { }
     weight: 1
     region: content
   field_image:
@@ -73,9 +72,7 @@ content:
       icon: ''
       sizes: ''
       grid_header: ''
-    third_party_settings:
-      empty_fields:
-        handler: ''
+    third_party_settings: { }
     weight: 0
     region: content
 hidden:
