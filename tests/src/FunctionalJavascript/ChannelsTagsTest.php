@@ -42,7 +42,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
       'field_tags[]' => ['New Section', 'Tag1'],
       'field_teaser_text[0][value]' => 'Teaser 1',
     ]);
-    $image2 = $this->loadMediaByUuid('5bd93c54-469b-4ac7-927b-cf6bb1dcf3dd');
+    $image2 = $this->loadMediaByUuid('a4b2fa51-8340-4982-b792-92e060b71eb9');
     $this->selectMedia('field_teaser_media', [$image2->id()]);
 
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
