@@ -9,8 +9,8 @@ use Drupal\Tests\Traits\Core\CronRunTrait;
  *
  * @group Thunder
  *
- * @todo Convert to functional test.
  * @package Drupal\Tests\thunder\FunctionalJavascript
+ * @todo Convert to functional test.
  */
 class MetaInformationTest extends ThunderJavascriptTestBase {
 
@@ -267,14 +267,14 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     // Check that Article is unpublished.
     $this->drupalGet('node/' . $articleId);
     $this->assertSession()
-      ->elementExists('xpath', '//div[@id="content"]//article[contains(@class, "node--unpublished")]');
+      ->elementExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
 
     $this->cronRun();
 
     // Check that Article is published.
     $this->drupalGet('node/' . $articleId);
     $this->assertSession()
-      ->elementNotExists('xpath', '//div[@id="content"]//article[contains(@class, "node--unpublished")]');
+      ->elementNotExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
 
     // Check that Article is published.
     $this->drupalGet('node/' . $articleId . '/edit');
@@ -296,7 +296,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     // Check that Article is published.
     $this->drupalGet('node/' . $articleId);
     $this->assertSession()
-      ->elementNotExists('xpath', '//div[@id="content"]//article[contains(@class, "node--unpublished")]');
+      ->elementNotExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
 
     // Wait sufficient time before cron is executed.
     sleep($unPublishDiffSeconds + 2);
@@ -306,7 +306,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     // Check that Article is unpublished.
     $this->drupalGet('node/' . $articleId);
     $this->assertSession()
-      ->elementExists('xpath', '//div[@id="content"]//article[contains(@class, "node--unpublished")]');
+      ->elementExists('xpath', '//div[@class="content"]/article[contains(@class, "node--unpublished")]');
   }
 
   /**
@@ -382,10 +382,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->assertEquals('0.9', $domElements->item(0)->nodeValue);
 
     // After sitemap.xml -> we have to open page without setting cookie before.
-    $this->container->get('config.factory')
-      ->getEditable('simple_sitemap.settings')
-      ->set('max_links', 2)
-      ->save();
+    $this->container->get('config.factory')->getEditable('simple_sitemap.settings')->set('max_links', 2)->save();
     $this->sitemapGenerator->generateSitemap('backend');
 
     // Check loc, that it's pointing to sitemap.xml file.
@@ -397,8 +394,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     // Get 3rd sitemap.xml file and check that link exits there.
     $urlOptions = ['query' => ['page' => 3]];
-    $this->getSession()
-      ->visit($this->buildUrl('article/sitemap.xml', $urlOptions));
+    $this->getSession()->visit($this->buildUrl('article/sitemap.xml', $urlOptions));
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
     $this->assertEquals(1, $domElements->length);

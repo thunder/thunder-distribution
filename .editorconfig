@@ -12,7 +12,6 @@ indent_size = 2
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
-ij_php_catch_on_new_line = true
 
 [composer.json]
 indent_size = 4
