@@ -144,23 +144,3 @@ core.entity_view_display.media.image.slick:
             grid_small: ''
             image_style: media_image
             responsive_image_style: ''
-responsive_image.styles.media_image:
-  expected_config:
-    breakpoint_group: thunder_base
-    image_style_mappings:
-      -1:
-        breakpoint_id: thunder_base.wide
-      0:
-        breakpoint_id: thunder_base.narrow
-      1:
-        breakpoint_id: thunder_base.mobile
-  update_actions:
-    change:
-      breakpoint_group: olivero
-      image_style_mappings:
-        -1:
-          breakpoint_id: olivero.lg
-        0:
-          breakpoint_id: olivero.md
-        1:
-          breakpoint_id: olivero.sm
