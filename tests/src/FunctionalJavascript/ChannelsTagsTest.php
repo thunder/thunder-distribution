@@ -29,7 +29,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
 
     // Create new Channel with 2 paragraphs.
     $this->setFieldValue('name[0][value]', 'New Section');
-    $image1 = $this->loadMediaByUuid('5378c127-e8b2-4242-877d-d982736a237b');
+    $image1 = $this->loadMediaByUuid('507fcccf-b8ff-47d0-a704-2ee2de1dcab5');
     $this->addImageParagraph('field_paragraphs', [$image1->id()]);
     $this->addTextParagraph('field_paragraphs', 'Text for Channel');
     $this->clickSave();
@@ -97,7 +97,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->assertSession()
       ->elementExists('xpath', '//img[contains(@src, "picjumbo.com_HNCK7731.jpg")]');
     $this->assertSession()
-      ->elementExists('xpath', '//img[contains(@src, "picjumbo.com_P1000203.jpg")]');
+      ->elementExists('xpath', '//img[contains(@src, "26672422700_25e081cf78_k.jpg")]');
 
     $this->assertSession()->linkExists('Article 1');
     $this->assertSession()->linkExists('Article 2');
