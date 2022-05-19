@@ -307,3 +307,17 @@ function thunder_update_8323(): void {
   $moduleInstaller = \Drupal::service('module_installer');
   $moduleInstaller->uninstall(['thunder_google_analytics']);
 }
+
+/**
+ * Configuration update.
+ */
+function thunder_update_8324() {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_update_8324');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}

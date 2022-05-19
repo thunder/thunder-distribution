@@ -89,3 +89,9 @@ v6.3.5:
         '#description': '<p>Add paragraphs and metatag fields to basic page.</p>'
         '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+
+    thunder_update_8324:
+        '#title': 'Configuration update.'
+        '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
