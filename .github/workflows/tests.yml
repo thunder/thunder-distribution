@@ -222,6 +222,10 @@ jobs:
 
       - name: Update the docroot
         run: |
+          composer exec -- drush theme:enable olivero --yes
+          composer exec -- drush config:set system.theme default olivero --yes
+          composer exec -- drush theme:uninstall thunder_base --yes
+
           composer config --unset repositories.0
           composer require "thunder/thunder-distribution:6.3.x-dev" --no-update
           composer update
@@ -234,10 +238,6 @@ jobs:
           composer require "drupal/entity_browser" --no-update
           composer require "drupal/thunder_admin" --no-update
           composer require "drupal/shariff" --no-update
-
-          composer exec -- drush theme:enable olivero --yes
-          composer exec -- drush config:set system.theme default olivero --yes
-          composer exec -- drush theme:uninstall thunder_base --yes
 
           rm vendor/composer/installed.json
           composer update
