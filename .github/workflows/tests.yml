@@ -222,14 +222,13 @@ jobs:
 
       - name: Update the docroot
         run: |
-          composer exec -- drush theme:enable olivero --yes
-          composer exec -- drush config:set system.theme default olivero --yes
-          composer exec -- drush theme:uninstall thunder_base --yes
-
           composer config --unset repositories.0
           composer require "thunder/thunder-distribution:6.3.x-dev" --no-update
           composer update
           composer exec -- drush updb -y
+          composer exec -- drush theme:enable olivero --yes
+          composer exec -- drush config:set system.theme default olivero --yes
+          composer exec -- drush theme:uninstall thunder_base --yes
 
           composer config repositories.0 path "${GITHUB_WORKSPACE}"
           composer remove thunder/thunder-distribution --no-update
