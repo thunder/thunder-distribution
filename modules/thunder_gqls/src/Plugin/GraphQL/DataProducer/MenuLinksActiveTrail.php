@@ -30,7 +30,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *       label = @Translation("Menu")
  *     ),
  *     "url" = @ContextDefinition("any",
- *       label = @Translation("The url")
+ *       label = @Translation("The url"),
+ *       required = FALSE
  *     ),
  *   }
  * )
@@ -94,7 +95,7 @@ class MenuLinksActiveTrail extends DataProducerPluginBase implements ContainerFa
    *
    * @param \Drupal\system\MenuInterface $menu
    *   The menu interface.
-   * @param \Drupal\Core\Url $url
+   * @param \Drupal\Core\Url|null $url
    *   The path argument.
    *
    * @return array
@@ -102,22 +103,26 @@ class MenuLinksActiveTrail extends DataProducerPluginBase implements ContainerFa
    *
    * @throws \Drupal\Core\Entity\EntityMalformedException
    */
-  public function resolve(MenuInterface $menu, Url $url): array {
+  public function resolve(MenuInterface $menu, ?Url $url): array {
     $parameters = new MenuTreeParameters();
-    $links = $this->menuLinkManager->loadLinksByRoute($url->getRouteName(), $url->getRouteParameters(), $menu->id());
 
-    $activeLink = reset($links);
-    if ($activeLink) {
-      $activeTrail = ['' => ''];
+    if ($url) {
+      $links = $this->menuLinkManager->loadLinksByRoute($url->getRouteName(), $url->getRouteParameters(), $menu->id());
 
-      if ($parents = $this->menuLinkManager->getParentIds(
-        $activeLink->getPluginId()
-      )) {
-        $activeTrail = $parents + $activeTrail;
+      $activeLink = reset($links);
+      if ($activeLink) {
+        $activeTrail = ['' => ''];
+
+        if ($parents = $this->menuLinkManager->getParentIds(
+          $activeLink->getPluginId()
+        )) {
+          $activeTrail = $parents + $activeTrail;
+        }
+
+        $parameters->setActiveTrail($activeTrail);
       }
-
-      $parameters->setActiveTrail($activeTrail);
     }
+
     $tree = $this->menuLinkTree->load($menu->id(), $parameters);
 
     $manipulators = [
