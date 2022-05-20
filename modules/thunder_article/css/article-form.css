@@ -1,0 +1,49 @@
+/* Article teaser group */
+
+/*
+ * Render fields inline.
+ * Media query as found in gin theme.
+ */
+@media only screen and (min-width: 36em) {
+  fieldset.article-teaser > .fieldset__wrapper {
+    display: flex;
+  }
+}
+/* Fix throbber position */
+fieldset.article-teaser .fieldset__suffix {
+  display: flex;
+  flex-direction: column;
+}
+/* Reset media widget fieldset */
+fieldset.article-teaser .field--name-field-teaser-media .media-library-widget-empty-text,
+fieldset.article-teaser .field--name-field-teaser-media legend {
+  display: none;
+}
+fieldset.article-teaser .field--name-field-teaser-media fieldset {
+  border: none;
+  padding: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+fieldset.article-teaser .field--name-field-teaser-media .fieldset__wrapper {
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-top: 0;
+}
+/* Add space for throbber */
+fieldset.article-teaser .field--name-field-teaser-media  .fieldset__suffix {
+  min-width: 200px;
+}
+/* Remove margins for single item. */
+fieldset.article-teaser .field--name-field-teaser-media .media-library-selection {
+  margin: 0;
+}
+/* Full width for single item. */
+fieldset.article-teaser .field--name-field-teaser-media .media-library-selection .media-library-item--grid {
+  width: 100%;
+}
+/* Remove margin on teaser text. */
+.fieldset.article-teaser .field--name-field-teaser-text .form-type--textarea {
+  margin-bottom: 0;
+  margin-top: 0;
+}

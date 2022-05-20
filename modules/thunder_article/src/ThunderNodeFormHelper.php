@@ -108,6 +108,10 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
    * {@inheritdoc}
    */
   public function formAlter(array &$form, FormStateInterface $form_state): array {
+    if (in_array('gin', $this->getActiveThemes())) {
+      $form['#attached']['library'][] = 'thunder_article/article-form' ;
+    }
+
     /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
     $form_object = $form_state->getFormObject();
     /** @var \Drupal\node\NodeInterface $entity */
@@ -144,11 +148,7 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
 
     $element = [];
     // @todo Remove after seven / thunder_admin support is dropped.
-    $activeTheme = $this->themeManager->getActiveTheme();
-    $activeThemes = array_keys($activeTheme->getBaseThemeExtensions());
-    $activeThemes[] = $activeTheme->getName();
-
-    if (!empty(array_intersect($activeThemes, ['seven', 'thunder_admin']))) {
+    if (!empty(array_intersect($this->getActiveThemes(), ['seven', 'thunder_admin']))) {
       /** @var \Drupal\content_moderation\ContentModerationState $state */
       $state = $this->moderationInfo->getWorkflowForEntity($entity)
         ->getTypePlugin()
@@ -199,4 +199,14 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
     return $element;
   }
 
+  /**
+   * Return current active theme including base themes.
+   */
+  public function getActiveThemes() {
+    $activeTheme = $this->themeManager->getActiveTheme();
+    $activeThemes = array_keys($activeTheme->getBaseThemeExtensions());
+    $activeThemes[] = $activeTheme->getName();
+
+    return $activeThemes;
+  }
 }
