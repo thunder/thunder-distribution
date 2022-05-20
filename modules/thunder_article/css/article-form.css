@@ -1,3 +1,12 @@
+/* Basis group */
+
+/* Same length for input fields */
+[data-drupal-selector="edit-group-basis"].content-form__form-section .field--name-title .form-element,
+[data-drupal-selector="edit-group-basis"].content-form__form-section .field--name-field-seo-title .form-element,
+[data-drupal-selector="edit-group-basis"].content-form__form-section .field--name-field-tags .form-element {
+  width: 100%;
+}
+
 /* Article teaser group */
 
 /*
@@ -5,45 +14,45 @@
  * Media query as found in gin theme.
  */
 @media only screen and (min-width: 36em) {
-  fieldset.article-teaser > .fieldset__wrapper {
+  .content-form__form-section.article-teaser > .fieldset__wrapper {
     display: flex;
   }
 }
 /* Fix throbber position */
-fieldset.article-teaser .fieldset__suffix {
+.content-form__form-section.article-teaser .fieldset__suffix {
   display: flex;
   flex-direction: column;
 }
 /* Reset media widget fieldset */
-fieldset.article-teaser .field--name-field-teaser-media .media-library-widget-empty-text,
-fieldset.article-teaser .field--name-field-teaser-media legend {
+.content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-widget-empty-text,
+.content-form__form-section.article-teaser .field--name-field-teaser-media legend {
   display: none;
 }
-fieldset.article-teaser .field--name-field-teaser-media fieldset {
+.content-form__form-section.article-teaser .field--name-field-teaser-media fieldset {
   border: none;
   padding: 0;
   margin-bottom: 0;
   margin-top: 0;
 }
-fieldset.article-teaser .field--name-field-teaser-media .fieldset__wrapper {
+.content-form__form-section.article-teaser .field--name-field-teaser-media .fieldset__wrapper {
   margin-bottom: 0;
   margin-left: 0;
   margin-top: 0;
 }
 /* Add space for throbber */
-fieldset.article-teaser .field--name-field-teaser-media  .fieldset__suffix {
+.content-form__form-section.article-teaser .field--name-field-teaser-media  .fieldset__suffix {
   min-width: 200px;
 }
 /* Remove margins for single item. */
-fieldset.article-teaser .field--name-field-teaser-media .media-library-selection {
+.content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-selection {
   margin: 0;
 }
 /* Full width for single item. */
-fieldset.article-teaser .field--name-field-teaser-media .media-library-selection .media-library-item--grid {
+.content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-selection .media-library-item--grid {
   width: 100%;
 }
 /* Remove margin on teaser text. */
-.fieldset.article-teaser .field--name-field-teaser-text .form-type--textarea {
+.content-form__form-section.article-teaser .field--name-field-teaser-text .form-type--textarea {
   margin-bottom: 0;
   margin-top: 0;
 }
