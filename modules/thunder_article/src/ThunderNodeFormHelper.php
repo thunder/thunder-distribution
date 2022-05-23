@@ -202,7 +202,7 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
   /**
    * Return current active theme including base themes.
    */
-  public function getActiveThemes() {
+  public function getActiveThemes(): array {
     $activeTheme = $this->themeManager->getActiveTheme();
     $activeThemes = array_keys($activeTheme->getBaseThemeExtensions());
     $activeThemes[] = $activeTheme->getName();
