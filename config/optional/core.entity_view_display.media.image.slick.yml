@@ -34,13 +34,10 @@ content:
       caption:
         title: '0'
         alt: '0'
-      icon: ''
       layout: ''
       view_mode: ''
       cache: 0
-      current_view_mode: slick
       skin: ''
-      fx: ''
       style: ''
       background: false
       box_caption: ''
@@ -52,7 +49,9 @@ content:
       media_switch: ''
       ratio: ''
       thumbnail_style: ''
-      _uri: ''
+      grid: '0'
+      grid_medium: '0'
+      grid_small: '0'
       breakpoints:
         xs:
           width: ''
@@ -69,11 +68,11 @@ content:
         xl:
           width: ''
           image_style: ''
+      current_view_mode: slick
+      fx: ''
+      icon: ''
       sizes: ''
       grid_header: ''
-      grid: '0'
-      grid_medium: '0'
-      grid_small: '0'
     third_party_settings:
       empty_fields:
         handler: ''

@@ -3,7 +3,7 @@ type: profile
 description: 'The Drupal based CMS for professional publishing.'
 project: thunder
 core_version_requirement: ^9.3.0
-version: '6.3.4'
+version: '6.3.7'
 
 distribution:
   name: Thunder
@@ -44,7 +44,7 @@ install:
   - drupal:file
   - drupal:responsive_image
   - drupal:views_ui
-# contrib
+  # contrib
   - access_unpublished:access_unpublished
   - admin_toolbar:admin_toolbar_tools
   - admin_toolbar:admin_toolbar_links_access_filter
@@ -81,14 +81,13 @@ install:
   - scheduler:scheduler
   - scheduler:scheduler_content_moderation_integration
   - schema_metatag:schema_article
-  - shariff:shariff
   - select2:select2
   - simple_sitemap:simple_sitemap
   - slick:slick
   - responsive_preview:responsive_preview
   - update_helper_checklist:update_helper_checklist
   - views_bulk_edit:views_bulk_edit
-# thunder
+  # thunder
   - thunder:thunder_article
   - thunder:thunder_media
   - thunder:thunder_paragraphs
@@ -96,4 +95,4 @@ install:
   - thunder:thunder_workflow
 themes:
   - gin
-  - thunder_base
+  - olivero

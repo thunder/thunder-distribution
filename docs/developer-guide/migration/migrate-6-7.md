@@ -15,8 +15,7 @@ versions. Run the following command in your docroot:
 drush ev "print drupal_get_installed_schema_version('thunder') . PHP_EOL;"
 ```
 
-@TODO
-This should print the number 8309 or greater. If that is not the case, update your project.
+@TODO This should print the number 8323 or greater. If that is not the case, update your project.
 
 ```bash
 cd ..
@@ -32,21 +31,26 @@ cd docroot
 drush updb
 ```
 
-@TODO
-You should at least see the Thunder 8308 schema update. If not, double check that the correct version of Thunder is
-installed, and that `drush updb` did not throw any errors.
+@TODO You should at least see the Thunder 8323 schema update. If not, double check that the correct version of Thunder
+is installed, and that `drush updb` did not throw any errors.
 
-Before you start with the code and database update please add the Entity Browser module and the Thunder Admin theme
-to your own composer.json. Both are no longer part of Thunder and can be removed after the update was successfully executed.
+Before you start with the code and database update please add the Entity Browser module and the Thunder Admin theme to
+your own composer.json. Both are no longer part of Thunder and can be removed after the update was successfully
+executed.
 
 ```bash
 composer require drupal/entity_browser drupal/thunder_admin
 ```
 
-Also, if you are using the liveblog module, you have to require it own your own, since Thunder removed it from the distribution.
+Also, if you have the liveblog, better_normalizers, google_analytics, shariff or adsense module enabled, you have to
+require them own your own, since Thunder removed them from the distribution.
 
 ```bash
 composer require drupal/liveblog
+composer require drupal/better_normalizers
+composer require drupal/adsense
+composer require drupal/google_analytics
+composer require drupal/shariff
 ```
 
 ## Execute the update

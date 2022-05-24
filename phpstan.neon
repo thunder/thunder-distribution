@@ -7,10 +7,8 @@ parameters:
   reportUnmatchedIgnoredErrors: true
   level: 6
   ignoreErrors:
-    - '#\Drupal calls should be avoided in classes, use dependency injection instead#'
     - '#\Call to an undefined method Drupal\\Tests\\WebAssert::#'
     - "#^Unsafe usage of new static\\(\\)\\.$#"
-    - "#https:\/\/www.drupal.org\/node\/3083055#"
     - "#Function drupal_phpunit_find_extension_directories not found.#"
     # Drupal allows object property access to custom fields, so we cannot fix
     # that.
