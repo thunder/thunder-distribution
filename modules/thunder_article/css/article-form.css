@@ -1,9 +1,9 @@
 /* Basis group */
 
 /* Same length for input fields */
-[data-drupal-selector="edit-group-basis"].content-form__form-section .field--name-title .form-element,
-[data-drupal-selector="edit-group-basis"].content-form__form-section .field--name-field-seo-title .form-element,
-[data-drupal-selector="edit-group-basis"].content-form__form-section .field--name-field-tags .form-element {
+.content-form__form-section.base-info .field--name-title .form-element,
+.content-form__form-section.base-info .field--name-field-seo-title .form-element,
+.content-form__form-section.base-info .field--name-field-tags .form-element {
   width: 100%;
 }
 
@@ -24,8 +24,7 @@
   flex-direction: column;
 }
 /* Reset media widget fieldset */
-.content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-widget-empty-text,
-.content-form__form-section.article-teaser .field--name-field-teaser-media legend {
+.content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-widget-empty-text {
   display: none;
 }
 .content-form__form-section.article-teaser .field--name-field-teaser-media fieldset {
@@ -34,14 +33,29 @@
   margin-bottom: 0;
   margin-top: 0;
 }
+.content-form__form-section.article-teaser .field--name-field-teaser-media .fieldset__label {
+  font-size: 0.889rem;
+  line-height: 1.125rem;
+  padding-bottom: 4px;
+  padding-left: 0;
+  padding-top: 0;
+}
+.content-form__form-section.article-teaser .field--name-field-teaser-media .help-icon > .help-icon__description-toggle {
+  margin-top: 0.3em;
+}
 .content-form__form-section.article-teaser .field--name-field-teaser-media .fieldset__wrapper {
   margin-bottom: 0;
   margin-left: 0;
   margin-top: 0;
 }
 /* Add space for throbber */
-.content-form__form-section.article-teaser .field--name-field-teaser-media  .fieldset__suffix {
-  min-width: 200px;
+.content-form__form-section.article-teaser .field--name-field-teaser-media .fieldset__suffix {
+  margin-top: 0.5em;
+  width: 200px;
+}
+.content-form__form-section.article-teaser .field--name-field-teaser-media .fieldset__description {
+  max-width: 200px;
+  padding-left: 0;
 }
 /* Remove margins for single item. */
 .content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-selection {
