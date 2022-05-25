@@ -15,7 +15,7 @@ versions. Run the following command in your docroot:
 drush ev "print drupal_get_installed_schema_version('thunder') . PHP_EOL;"
 ```
 
-@TODO This should print the number 8323 or greater. If that is not the case, update your project.
+@TODO This should print the number 8324 or greater. If that is not the case, update your project.
 
 ```bash
 cd ..
@@ -31,7 +31,7 @@ cd docroot
 drush updb
 ```
 
-@TODO You should at least see the Thunder 8323 schema update. If not, double check that the correct version of Thunder
+@TODO You should at least see the Thunder 8324 schema update. If not, double check that the correct version of Thunder
 is installed, and that `drush updb` did not throw any errors.
 
 Before you start with the code and database update please add the Entity Browser module and the Thunder Admin theme to

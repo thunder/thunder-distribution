@@ -42,19 +42,5 @@ function _thunder_mark_update_checklist(string $update_id, bool $successful, Upd
  * Implements hook_update_last_removed().
  */
 function thunder_update_last_removed(): int {
-  return 8323;
-}
-
-/**
- * Replace responsive image style with normal image style.
- */
-function thunder_update_8324(): string {
-  /** @var \Drupal\update_helper\Updater $updater */
-  $updater = \Drupal::service('update_helper.updater');
-
-  // Execute configuration update definitions with logging of success.
-  $updater->executeUpdate('thunder', 'thunder_update_8324');
-
-  // Output logged messages to related channel of update execution.
-  return $updater->logger()->output();
+  return 8324;
 }
