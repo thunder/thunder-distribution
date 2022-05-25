@@ -82,6 +82,11 @@ core.entity_form_display.media.gallery.inline:
           weight: 1
 core.entity_form_display.node.article.default:
   expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          format_settings:
+            classes: content-form__form-section
     content:
       field_teaser_media:
         settings:
@@ -101,6 +106,11 @@ core.entity_form_display.node.article.default:
             multi_edit_on_create: false
             replace_checkbox_by_order_indicator: false
     change:
+      third_party_settings:
+        field_group:
+          group_basis:
+            format_settings:
+              classes: 'content-form__form-section base-info'
       content:
         field_teaser_media:
           settings:
