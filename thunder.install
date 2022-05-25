@@ -309,7 +309,7 @@ function thunder_update_8323(): void {
 }
 
 /**
- * Configuration update.
+ * Replace responsive image style with normal image style.
  */
 function thunder_update_8324(): string {
   /** @var \Drupal\update_helper\Updater $updater */

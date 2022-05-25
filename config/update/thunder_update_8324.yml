@@ -3,72 +3,13 @@ core.entity_view_display.media.image.default:
     content:
       field_image:
         settings:
-          breakpoints:
-            lg:
-              image_style: ''
-              width: ''
-            md:
-              image_style: ''
-              width: ''
-            sm:
-              image_style: ''
-              width: ''
-            xl:
-              image_style: ''
-              width: ''
-            xs:
-              image_style: ''
-              width: ''
-          current_view_mode: default
-          fx: ''
-          grid: '0'
-          grid_header: ''
-          grid_medium: '0'
-          grid_small: '0'
-          icon: ''
           image_style: ''
           responsive_image_style: media_image
-          sizes: ''
   update_actions:
-    delete:
-      content:
-        field_image:
-          settings:
-            breakpoints:
-              lg:
-                image_style: ''
-                width: ''
-              md:
-                image_style: ''
-                width: ''
-              sm:
-                image_style: ''
-                width: ''
-              xl:
-                image_style: ''
-                width: ''
-              xs:
-                image_style: ''
-                width: ''
-            current_view_mode: default
-            fx: ''
-            grid_header: ''
-            icon: ''
-            sizes: ''
-    add:
-      content:
-        field_image:
-          settings:
-            lazy: ''
-            loading: ''
-            preload: false
     change:
       content:
         field_image:
           settings:
-            grid: ''
-            grid_medium: ''
-            grid_small: ''
             image_style: media_image
             responsive_image_style: ''
 core.entity_view_display.media.image.slick:
@@ -76,71 +17,12 @@ core.entity_view_display.media.image.slick:
     content:
       field_image:
         settings:
-          breakpoints:
-            lg:
-              image_style: ''
-              width: ''
-            md:
-              image_style: ''
-              width: ''
-            sm:
-              image_style: ''
-              width: ''
-            xl:
-              image_style: ''
-              width: ''
-            xs:
-              image_style: ''
-              width: ''
-          current_view_mode: slick
-          fx: ''
-          grid: '0'
-          grid_header: ''
-          grid_medium: '0'
-          grid_small: '0'
-          icon: ''
           image_style: ''
           responsive_image_style: media_image
-          sizes: ''
   update_actions:
-    delete:
-      content:
-        field_image:
-          settings:
-            breakpoints:
-              lg:
-                image_style: ''
-                width: ''
-              md:
-                image_style: ''
-                width: ''
-              sm:
-                image_style: ''
-                width: ''
-              xl:
-                image_style: ''
-                width: ''
-              xs:
-                image_style: ''
-                width: ''
-            current_view_mode: slick
-            fx: ''
-            grid_header: ''
-            icon: ''
-            sizes: ''
-    add:
-      content:
-        field_image:
-          settings:
-            lazy: ''
-            loading: ''
-            preload: false
     change:
       content:
         field_image:
           settings:
-            grid: ''
-            grid_medium: ''
-            grid_small: ''
             image_style: media_image
             responsive_image_style: ''
