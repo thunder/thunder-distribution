@@ -10,7 +10,49 @@ dependencies:
     - media.type.instagram
   module:
     - empty_fields
+    - field_group
     - image
+third_party_settings:
+  field_group:
+    group_left:
+      children:
+        - thumbnail
+      label: Left
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: group-left
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_right:
+      children:
+        - field_author
+        - field_content
+      label: Right
+      parent_name: ''
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: group-right
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: media.instagram.paragraph_preview
 targetEntityType: media
 bundle: instagram
@@ -24,14 +66,14 @@ content:
     third_party_settings:
       empty_fields:
         handler: ''
-    weight: 1
+    weight: 0
     region: content
   field_content:
     type: basic_string
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
   thumbnail:
     type: image
