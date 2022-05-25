@@ -9,8 +9,8 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
+    - image.style.media_image
     - media.type.image
-    - responsive_image.styles.media_image
   module:
     - blazy
     - empty_fields
@@ -43,9 +43,9 @@ content:
       box_caption: ''
       box_caption_custom: ''
       box_media_style: ''
-      responsive_image_style: media_image
+      responsive_image_style: ''
       box_style: ''
-      image_style: ''
+      image_style: media_image
       media_switch: ''
       ratio: ''
       thumbnail_style: ''
