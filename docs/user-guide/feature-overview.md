@@ -2,9 +2,11 @@
 
 ## Highlights
 
-**Thunder Admin Theme**: Admin theme created for Thunder with bigger UX improvements according to the findings of recent
-user tests and a survey conducted with editors currently working with Thunder.\
-[https://www.drupal.org/project/thunder_admin](https://www.drupal.org/project/thunder_admin)
+**Gin Admin Theme**: A radically new UI layout paired with goodies like a Darkmode will give your Drupal's Admin
+interface a facelift. The Gin theme also includes things which are currently out of scope for Claro and/or some
+customisations we're experimenting with for the future. Built on the foundation of Claro from one of the lead
+designers of Claro & Drupal Design System.\
+[https://www.drupal.org/project/gin](https://www.drupal.org/project/gin)
 
 **Content Moderation**: Content Moderation enables you to have an editorial workflow. Editors can have different
 permissions for creating, editing and publishing articles. It also allows you to have a published version of an article,

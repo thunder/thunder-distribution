@@ -52,6 +52,10 @@ composer require drupal/adsense
 composer require drupal/google_analytics
 ```
 
+Thunder's new default frontend theme is Olivero, and we removed Thunder Base which was based on the Bartik theme, which
+was removed from Drupal 10 as well. In case you use Thunder Base as your theme, you have to switch to a different one
+before updating. We recommend to switch to Olivero as well.
+
 ## Execute the update
 
 All you need to do now is:

@@ -114,7 +114,6 @@
         "drupal/search_api_mark_outdated": "^1.0",
         "drupal/simple_sitemap": "^3.10",
         "drupal/slick": "^2.6",
-        "drupal/thunder_admin": "^4.0.2",
         "drupal/token": "^1.7",
         "drupal/update_helper": "^2.0||^3.0.3",
         "drupal/search_api": "^1.17",

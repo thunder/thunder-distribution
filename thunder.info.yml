@@ -8,7 +8,6 @@ version: '6.3.7'
 distribution:
   name: Thunder
   install:
-    theme: thunder_admin
     finish_url: ?tour=1
 
 # Required modules
