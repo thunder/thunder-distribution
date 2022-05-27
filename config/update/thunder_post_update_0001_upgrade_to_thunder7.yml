@@ -82,6 +82,11 @@ core.entity_form_display.media.gallery.inline:
           weight: 1
 core.entity_form_display.node.article.default:
   expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          format_settings:
+            classes: content-form__form-section
     content:
       field_teaser_media:
         settings:
@@ -101,6 +106,11 @@ core.entity_form_display.node.article.default:
             multi_edit_on_create: false
             replace_checkbox_by_order_indicator: false
     change:
+      third_party_settings:
+        field_group:
+          group_basis:
+            format_settings:
+              classes: 'content-form__form-section base-info'
       content:
         field_teaser_media:
           settings:
@@ -171,6 +181,297 @@ core.entity_form_display.paragraph.video.default:
           settings:
             form_mode: override
           weight: 0
+core.entity_view_display.media.gallery.paragraph_preview:
+  expected_config:
+    content:
+      field_media_images:
+        weight: 0
+      name:
+        weight: 1
+  update_actions:
+    add:
+      third_party_settings:
+        field_group:
+          group_left:
+            children:
+              - field_media_images
+            format_settings:
+              attributes: ''
+              classes: group-left
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Left
+            parent_name: ''
+            region: content
+            weight: 0
+          group_right:
+            children:
+              - name
+            format_settings:
+              attributes: ''
+              classes: group-right
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Right
+            parent_name: ''
+            region: content
+            weight: 1
+    change:
+      content:
+        field_media_images:
+          weight: 2
+        name:
+          weight: 3
+core.entity_view_display.media.image.paragraph_preview:
+  expected_config:
+    content:
+      field_copyright:
+        weight: 2
+      field_image:
+        weight: 0
+      name:
+        weight: 1
+  update_actions:
+    add:
+      third_party_settings:
+        field_group:
+          group_left:
+            children:
+              - field_image
+            format_settings:
+              attributes: ''
+              classes: group-left
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Left
+            parent_name: ''
+            region: content
+            weight: 0
+          group_right:
+            children:
+              - name
+              - field_copyright
+            format_settings:
+              attributes: ''
+              classes: group-right
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Right
+            parent_name: ''
+            region: content
+            weight: 2
+    change:
+      content:
+        field_copyright:
+          weight: 4
+        field_image:
+          weight: 1
+        name:
+          weight: 3
+core.entity_view_display.media.instagram.paragraph_preview:
+  expected_config:
+    content:
+      field_author:
+        weight: 1
+      field_content:
+        weight: 2
+  update_actions:
+    add:
+      third_party_settings:
+        field_group:
+          group_left:
+            children:
+              - thumbnail
+            format_settings:
+              attributes: ''
+              classes: group-left
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Left
+            parent_name: ''
+            region: content
+            weight: 1
+          group_right:
+            children:
+              - field_author
+              - field_content
+            format_settings:
+              attributes: ''
+              classes: group-right
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Right
+            parent_name: ''
+            region: content
+            weight: 2
+    change:
+      content:
+        field_author:
+          weight: 0
+        field_content:
+          weight: 1
+core.entity_view_display.media.twitter.paragraph_preview:
+  expected_config:
+    content:
+      field_author:
+        weight: 1
+      field_content:
+        weight: 2
+      thumbnail:
+        weight: 0
+  update_actions:
+    add:
+      third_party_settings:
+        field_group:
+          group_left:
+            children:
+              - thumbnail
+            format_settings:
+              attributes: ''
+              classes: group-left
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Left
+            parent_name: ''
+            region: content
+            weight: 0
+          group_right:
+            children:
+              - field_author
+              - field_content
+            format_settings:
+              attributes: ''
+              classes: group-right
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Right
+            parent_name: ''
+            region: content
+            weight: 2
+    change:
+      content:
+        field_author:
+          weight: 3
+        field_content:
+          weight: 4
+        thumbnail:
+          weight: 1
+core.entity_view_display.media.video.paragraph_preview:
+  expected_config:
+    content:
+      field_copyright:
+        weight: 2
+      name:
+        weight: 1
+      thumbnail:
+        weight: 0
+  update_actions:
+    add:
+      third_party_settings:
+        field_group:
+          group_left:
+            children:
+              - thumbnail
+            format_settings:
+              attributes: ''
+              classes: group-left
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Left
+            parent_name: ''
+            region: content
+            weight: 0
+          group_right:
+            children:
+              - name
+              - field_copyright
+            format_settings:
+              attributes: ''
+              classes: group-right
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Right
+            parent_name: ''
+            region: content
+            weight: 2
+    change:
+      content:
+        field_copyright:
+          weight: 4
+        name:
+          weight: 3
+        thumbnail:
+          weight: 1
 field.field.media.gallery.field_media_images:
   expected_config:
     translatable: false

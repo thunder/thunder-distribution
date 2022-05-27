@@ -8,7 +8,6 @@ version: '6.3.6'
 distribution:
   name: Thunder
   install:
-    theme: thunder_admin
     finish_url: ?tour=1
 
 # Required modules
@@ -95,4 +94,4 @@ install:
   - thunder:thunder_workflow
 themes:
   - gin
-  - thunder_base
+  - olivero

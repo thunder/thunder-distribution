@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder_article\Form;
+namespace Drupal\thunder_article;
 
 use Drupal\content_moderation\ModerationInformationInterface;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
@@ -18,7 +18,7 @@ use Drupal\node\NodeInterface;
 /**
  * Base for handler for node add/edit forms.
  */
-class ThunderNodeForm implements ContainerInjectionInterface {
+class ThunderNodeFormHelper implements ContainerInjectionInterface {
 
   use StringTranslationTrait;
 
@@ -108,6 +108,10 @@ class ThunderNodeForm implements ContainerInjectionInterface {
    * {@inheritdoc}
    */
   public function formAlter(array &$form, FormStateInterface $form_state): array {
+    if (isset($this->getActiveThemes()['gin'])) {
+      $form['#attached']['library'][] = 'thunder_article/article-form';
+    }
+
     /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
     $form_object = $form_state->getFormObject();
     /** @var \Drupal\node\NodeInterface $entity */
@@ -115,7 +119,8 @@ class ThunderNodeForm implements ContainerInjectionInterface {
 
     /** @var \Drupal\Core\Entity\ContentEntityStorageInterface $storage */
     $storage = $this->entityTypeManager->getStorage($entity->getEntityTypeId());
-    $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()->getId());
+    $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()
+      ->getId());
     if ($latest_revision_id !== NULL && $this->moderationInfo && $this->moderationInfo->hasPendingRevision($entity)) {
       $this->messenger->addWarning($this->t('This %entity_type has unpublished changes from user %user.', [
         '%entity_type' => $entity->get('type')->entity->label(),
@@ -134,7 +139,8 @@ class ThunderNodeForm implements ContainerInjectionInterface {
   protected function actions(NodeInterface $entity): array {
     /** @var \Drupal\Core\Entity\ContentEntityStorageInterface $storage */
     $storage = $this->entityTypeManager->getStorage($entity->getEntityTypeId());
-    $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()->getId());
+    $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()
+      ->getId());
 
     if ($latest_revision_id == NULL || !$this->moderationInfo || !$this->moderationInfo->isModeratedEntity($entity)) {
       return [];
@@ -142,13 +148,11 @@ class ThunderNodeForm implements ContainerInjectionInterface {
 
     $element = [];
     // @todo Remove after seven / thunder_admin support is dropped.
-    $activeTheme = $this->themeManager->getActiveTheme();
-    $activeThemes = array_keys($activeTheme->getBaseThemeExtensions());
-    $activeThemes[] = $activeTheme->getName();
-
-    if (!empty(array_intersect($activeThemes, ['seven', 'thunder_admin']))) {
+    if (isset($this->getActiveThemes()['seven'])) {
       /** @var \Drupal\content_moderation\ContentModerationState $state */
-      $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
+      $state = $this->moderationInfo->getWorkflowForEntity($entity)
+        ->getTypePlugin()
+        ->getState($entity->moderation_state->value);
       $element['status'] = [
         '#type' => 'item',
         '#markup' => $entity->isNew() || !$this->moderationInfo->isDefaultRevisionPublished($entity) ? $this->t('of unpublished @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]) : $this->t('of published @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]),
@@ -193,6 +197,17 @@ class ThunderNodeForm implements ContainerInjectionInterface {
     }
 
     return $element;
+  }
+
+  /**
+   * Return current active theme including base themes.
+   */
+  public function getActiveThemes(): array {
+    $activeTheme = $this->themeManager->getActiveTheme();
+    $activeThemes = $activeTheme->getBaseThemeExtensions();
+    $activeThemes[$activeTheme->getName()] = $activeTheme;
+
+    return $activeThemes;
   }
 
 }

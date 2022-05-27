@@ -74,6 +74,16 @@ function thunder_paragraphs_field_widget_paragraphs_form_alter(array &$element, 
     ],
     !$processing_new_paragraphs
   );
+
+  if (isset($element['preview'])) {
+    $element['#attributes']['class'][] = 'paragraph-form-item--has-preview';
+  }
+  elseif (isset($element['subform'])) {
+    $element['#attributes']['class'][] = 'paragraph-form-item--has-subform';
+  }
+
+  // Add custom styling.
+  $element['#attached']['library'][] = 'thunder_paragraphs/paragraphs.widget';
 }
 
 /**
