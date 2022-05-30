@@ -93,5 +93,5 @@ install:
   - thunder:thunder_workflow
 themes:
   - seven
-  - thunder_base
+  - olivero
   - thunder_admin

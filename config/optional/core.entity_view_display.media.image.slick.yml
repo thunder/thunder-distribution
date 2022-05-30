@@ -9,8 +9,8 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
+    - image.style.media_image
     - media.type.image
-    - responsive_image.styles.media_image
   module:
     - blazy
     - empty_fields
@@ -34,24 +34,24 @@ content:
       caption:
         title: '0'
         alt: '0'
-      icon: ''
       layout: ''
       view_mode: ''
       cache: 0
-      current_view_mode: slick
       skin: ''
-      fx: ''
       style: ''
       background: false
       box_caption: ''
       box_caption_custom: ''
       box_media_style: ''
-      responsive_image_style: media_image
+      responsive_image_style: ''
       box_style: ''
-      image_style: ''
+      image_style: media_image
       media_switch: ''
       ratio: ''
       thumbnail_style: ''
+      grid: '0'
+      grid_medium: '0'
+      grid_small: '0'
       breakpoints:
         xs:
           width: ''
@@ -68,11 +68,11 @@ content:
         xl:
           width: ''
           image_style: ''
+      current_view_mode: slick
+      fx: ''
+      icon: ''
       sizes: ''
       grid_header: ''
-      grid: '0'
-      grid_medium: '0'
-      grid_small: '0'
     third_party_settings:
       empty_fields:
         handler: ''

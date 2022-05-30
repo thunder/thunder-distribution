@@ -89,3 +89,11 @@ v6.3.5:
         '#description': '<p>Add paragraphs and metatag fields to basic page.</p>'
         '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+v6.3.8:
+    '#title': 'Update to version v6.3.8'
+    '#description': '<h3>These are the new features for this release:</h3>'
+    thunder_update_8324:
+        '#title': 'Replace responsive image style with normal image style.'
+        '#description': '<p>Updates the core.entity_view_display.media.image.default and core.entity_view_display.media.image.slick configs to not depend on responsive_image.styles.media_image anymore.</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
