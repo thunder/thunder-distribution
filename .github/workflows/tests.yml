@@ -238,10 +238,10 @@ jobs:
 
           composer update
           composer exec -- drush updb -y
+          composer exec -- drush sql-dump > docroot/dump.sql
 
           cd docroot
           php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
-          composer exec -- drush sql-dump > dump.sql
 
         working-directory: /tmp/test/thunder/install
 
