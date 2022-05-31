@@ -242,7 +242,6 @@ jobs:
 
           cd docroot
           php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
-
         working-directory: /tmp/test/thunder/install
 
       - name: Zip build
@@ -388,6 +387,7 @@ jobs:
         run: mkdir -p /tmp/test; tar xCfz /tmp/test upgrade-${{ matrix.PHP_VERSION }}/upgrade-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf upgrade-${{ matrix.PHP_VERSION }}
 
       - name: Update the docroot
+        working-directory: /tmp/test/thunder/install
         run: |
           composer remove thunder/thunder-distribution --no-update
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
