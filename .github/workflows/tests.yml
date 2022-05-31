@@ -360,7 +360,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        PHP_VERSION: [ '8.1' ]
+        PHP_VERSION: [ '7.4' ]
     steps:
       - uses: actions/checkout@v1
 
