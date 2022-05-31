@@ -387,15 +387,26 @@ jobs:
       - name: Unzip upgrade build artifact
         run: mkdir -p /tmp/test; tar xCfz /tmp/test upgrade-${{ matrix.PHP_VERSION }}/upgrade-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf upgrade-${{ matrix.PHP_VERSION }}
 
+      - name: Update the docroot
+        run: |
+          composer remove thunder/thunder-distribution --no-update
+          composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
+          composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
+
+      - name: Load database dump
+        working-directory: /tmp/test/thunder/install
+        run: |
+          composer exec -- drush sql:create -y
+          composer exec -- drush sql:cli < docroot/dump.sql
+
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
 
       - name: Check profile config
         working-directory: /tmp/test/thunder/install
         run: |
-          ls -alh
           composer require drupal/config_profile
-          vendor/bin/drush cex
+          composer exec -- drush cex
           cd docroot/profile/contrib/thunder
           git clean -fd
           git status
