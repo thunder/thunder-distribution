@@ -230,9 +230,6 @@ jobs:
       - name: Install drupal
         run: test-drupal-project install
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Update the docroot
         run: |
           composer remove thunder/thunder-distribution --no-update
@@ -241,7 +238,7 @@ jobs:
 
           composer update
           composer exec -- drush updb -y
-          composer exec -- drush sql-dump > docroot/dump.sql
+          composer exec -- drush sql:dump --extra-dump='--column-statistics=0' > docroot/dump.sql
 
           cd docroot
           php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
