@@ -389,23 +389,22 @@ jobs:
       - name: Load database dump
         working-directory: /tmp/test/thunder/install
         run: |
-          composer exec -- drush sql:create -y
-          composer exec -- drush sql:cli < docroot/dump.sql
+          vendor/bin/drush sql:create -y
+          vendor/bin/drush sql:cli < docroot/dump.sql
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
-      - name: Update the docroot
+      - name: Link the distribution
         working-directory: /tmp/test/thunder/install
         run: |
           composer remove thunder/thunder-distribution --no-update
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
+          composer require drupal/config_profile
+          rm -rf docroot/profiles/contrib/thunder-distribution
+          ln -s "${GITHUB_WORKSPACE}" docroot/profiles/contrib/thunder
 
       - name: Check profile config
         working-directory: /tmp/test/thunder/install
         run: |
-          composer require drupal/config_profile
           vendor/bin/drush -y en config_profile
           vendor/bin/drush cex
 
