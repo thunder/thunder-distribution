@@ -402,6 +402,9 @@ jobs:
           rm -rf docroot/profiles/contrib/thunder-distribution
           ln -s "${GITHUB_WORKSPACE}" docroot/profiles/contrib/thunder
 
+         - name: Setup tmate session
+           uses: mxschmitt/action-tmate@v3
+
       - name: Check profile config
         working-directory: /tmp/test/thunder/install
         run: |
