@@ -62,16 +62,17 @@ trait ThunderGqlsTestTrait {
     $requestOptions[RequestOptions::JSON]['query'] = $query;
     $requestOptions[RequestOptions::JSON]['variables'] = $variables;
 
+    // Inject a Guzzle middleware to generate debug output for every request
+    // performed in the test.
+    $handler_stack = \Drupal::service('http_handler_stack');
+    $handler_stack->push($this->getResponseLogHandler());
+
     /** @var \GuzzleHttp\Client $client */
     $client = $this->container->get('http_client_factory')->fromOptions([
       'timeout' => NULL,
       'verify' => FALSE,
+      'handler' => $handler_stack,
     ]);
-
-    // Inject a Guzzle middleware to generate debug output for every request
-    // performed in the test.
-    $handler_stack = $client->getConfig('handler');
-    $handler_stack->push($this->getResponseLogHandler());
 
     return $client->request('POST', $this->getAbsoluteUrl($url), $requestOptions);
   }
