@@ -14,5 +14,5 @@ parameters:
     # that.
     - "#^Access to an undefined property Drupal\\\\#"
 includes:
-  - ./vendor/mglaman/phpstan-drupal/extension.neon
-  - ./vendor/phpstan/phpstan-deprecation-rules/rules.neon
+  - %currentWorkingDirectory%/vendor/mglaman/phpstan-drupal/extension.neon
+  - %currentWorkingDirectory%/vendor/phpstan/phpstan-deprecation-rules/rules.neon
