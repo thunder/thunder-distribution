@@ -27,6 +27,7 @@ class SchemaTest extends ThunderGqlsTestBase {
       'paragraphs',
       'entities_with_term',
       'menu',
+      'menu404',
       'views_menu',
       'breadcrumb',
       'user',
