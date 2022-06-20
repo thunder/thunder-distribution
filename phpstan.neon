@@ -1,6 +1,4 @@
 parameters:
-  drupal:
-    drupal_root: %currentWorkingDirectory%/docroot
   customRulesetUsed: true
   checkGenericClassInNonGenericObjectType: false
   checkMissingIterableValueType: false
@@ -14,5 +12,5 @@ parameters:
     # that.
     - "#^Access to an undefined property Drupal\\\\#"
 includes:
-  - ./vendor/mglaman/phpstan-drupal/extension.neon
-  - ./vendor/phpstan/phpstan-deprecation-rules/rules.neon
+  - ../../../../vendor/mglaman/phpstan-drupal/extension.neon
+  - ../../../../vendor/phpstan/phpstan-deprecation-rules/rules.neon
