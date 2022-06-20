@@ -13,9 +13,7 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 ij_php_catch_on_new_line = true
+max_line_length = 120
 
 [composer.json]
 indent_size = 4
-
-[*.md]
-max_line_length = 120
