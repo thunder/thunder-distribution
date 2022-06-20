@@ -8,7 +8,7 @@ on:
       - 'package-lock.json'
       - 'CHANGELOG.md'
     branches:
-      - 6.3.x
+      - 6.4.x
 jobs:
   docs:
     runs-on: ubuntu-latest
