@@ -7,7 +7,7 @@
 Olivero is now our default frontend theme, and we have a fix for menus in GraphQL.
 
 - [Use olivero as Thunder's new frontend theme](https://www.drupal.org/node/3281046)
-- [GraphQL Menus are not working for 404 urls](https://www.drupal.org/node/3281562)
+- [GraphQL menus are not working for 404 urls](https://www.drupal.org/node/3281562)
 
 ## [6.3.7](https://github.com/thunder/thunder-distribution/tree/6.3.7) 2022-04-02
 
