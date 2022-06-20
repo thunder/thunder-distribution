@@ -29,7 +29,7 @@ class BreadcrumbTest extends ThunderTestBase {
    */
   public function testBreadCrumbs(): void {
 
-    $home = [Url::fromRoute('<front>')->toString() => 'Home'];
+    $home = [Url::fromRoute('<front>')->toString() => 'Back to site'];
     $overview = [
       Url::fromRoute('system.admin_content')
         ->toString() => 'Overview',
