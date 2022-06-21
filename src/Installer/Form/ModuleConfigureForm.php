@@ -224,7 +224,7 @@ class ModuleConfigureForm extends FormBase {
         // Generate link for module's help page. Assume that if a hook_help()
         // implementation exists then the module provides an overview page,
         // rather than checking to see if the page exists, which is costly.
-        if ($this->moduleHandler->moduleExists('help') && in_array($module->getName(), $this->moduleHandler->getImplementations('help'))) {
+        if ($this->moduleHandler->moduleExists('help') && $this->moduleHandler->hasImplementations('help', $module->getName())) {
           $form['install_modules'][$id]['info']['links']['help'] = [
             '#type' => 'link',
             '#title' => $this->t('Help'),
