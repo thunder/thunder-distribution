@@ -65,6 +65,7 @@ jobs:
 
       - name: Get build environment
         run: |
+          composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true --no-plugins
           composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Prepare the build
