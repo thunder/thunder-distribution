@@ -25,7 +25,6 @@ env:
   DRUPAL_TESTING_PARALLEL_TESTING: true
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
-  DRUPAL_TESTING_SELENIUM_CHROME_VERSION: "LATEST_RELEASE_102"
 
 jobs:
 
@@ -113,7 +112,7 @@ jobs:
         ports:
           - 3306:3306
       selenium:
-        image: selenium/standalone-chrome
+        image: selenium/standalone-chrome:LATEST_RELEASE_102
         options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
         ports:
           - 4444:4444
