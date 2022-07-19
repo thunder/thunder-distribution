@@ -1,0 +1,17 @@
+{
+  "data": {
+    "page": {
+      "name": "Events",
+      "url": "/events",
+      "articles": {
+        "items": [
+          {
+            "id": 8,
+            "name": "Come to DrupalCon New Orleans",
+            "published": true
+          }
+        ]
+      }
+    }
+  }
+}
