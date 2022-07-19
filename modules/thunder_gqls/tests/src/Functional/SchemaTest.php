@@ -41,7 +41,7 @@ class SchemaTest extends ThunderGqlsTestBase {
   /**
    * Test node lists with unpublished nodes.
    */
-  public function testUnpublishedNodesEntityQuery() {
+  public function testUnpublishedNodesEntityQuery(): void {
     $node = $this->loadNodeByUuid('bbb1ee17-15f8-46bd-9df5-21c58040d741');
     $node->setPublished()->save();
     $this->runAndTestQuery('channel');
