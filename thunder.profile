@@ -68,7 +68,7 @@ function thunder_module_install(array &$install_state): array {
 function thunder_finish_installation(array &$install_state): void {
   // Assign user 1 the "administrator" role.
   $user = User::load(1);
-  $user->roles[] = 'administrator';
+  $user->addRole('administrator');
   $user->save();
 }
 
@@ -83,10 +83,12 @@ function thunder_modules_installed(array $modules): void {
 
     foreach ($thunder_features as $id => $extension) {
 
-      $dependencies = array_map(fn($dependency): string => Dependency::createFromString($dependency)->getName(), $extension->info['dependencies']);
+      $dependencies = array_map(fn($dependency): string => Dependency::createFromString($dependency)
+        ->getName(), $extension->info['dependencies']);
 
       if (!in_array($id, $modules) && !empty(array_intersect($modules, $dependencies))) {
-        \Drupal::messenger()->addWarning(t('To get the full Thunder experience, we recommend to install the @module module. See all supported optional modules at <a href="/admin/modules/extend-thunder">Thunder Optional modules</a>.', ['@module' => $extension->info['name']]));
+        \Drupal::messenger()
+          ->addWarning(t('To get the full Thunder experience, we recommend to install the @module module. See all supported optional modules at <a href="/admin/modules/extend-thunder">Thunder Optional modules</a>.', ['@module' => $extension->info['name']]));
       }
     }
   }
@@ -96,7 +98,8 @@ function thunder_modules_installed(array $modules): void {
  * Implements hook_preprocess_html().
  */
 function thunder_preprocess_html(array &$variables): void {
-  if (!InstallerKernel::installationAttempted() && \Drupal::currentUser()->hasPermission('access toolbar')) {
+  if (!InstallerKernel::installationAttempted() &&
+    \Drupal::currentUser()->hasPermission('access toolbar')) {
     $variables['attributes']['class'][] = 'toolbar-icon-thunder';
   }
 }
