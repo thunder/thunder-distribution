@@ -205,8 +205,8 @@ class EntitiesWithTermTest extends GraphQLTestBase {
             ],
             [
               'field' => 'status',
-              'value' => [0,1],
-              'operator' => 'BETWEEN'
+              'value' => [0, 1],
+              'operator' => 'BETWEEN',
             ],
           ],
           'languages' => [],
