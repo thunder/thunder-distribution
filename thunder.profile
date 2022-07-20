@@ -68,7 +68,7 @@ function thunder_module_install(array &$install_state): array {
 function thunder_finish_installation(array &$install_state): void {
   // Assign user 1 the "administrator" role.
   $user = User::load(1);
-  $user->roles[] = 'administrator';
+  $user->addRole('administrator');
   $user->save();
 }
 
