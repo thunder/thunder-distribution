@@ -1,0 +1,28 @@
+core.entity_view_display.media.image.default:
+  expected_config:
+    content:
+      field_image:
+        settings:
+          image_style: ''
+          responsive_image_style: media_image
+  update_actions:
+    change:
+      content:
+        field_image:
+          settings:
+            image_style: media_image
+            responsive_image_style: ''
+core.entity_view_display.media.image.slick:
+  expected_config:
+    content:
+      field_image:
+        settings:
+          image_style: ''
+          responsive_image_style: media_image
+  update_actions:
+    change:
+      content:
+        field_image:
+          settings:
+            image_style: media_image
+            responsive_image_style: ''
