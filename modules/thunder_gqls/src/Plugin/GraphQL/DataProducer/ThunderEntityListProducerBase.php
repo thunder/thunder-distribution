@@ -120,7 +120,9 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
     $query->currentRevision()->accessCheck(TRUE);
 
     // Ensure that only published entities are shown.
-    $conditions = array_merge($conditions, $this->createPublishedCondition($type, $conditions));
+    if ($publishedCondition = $this->createPublishedCondition($type, $conditions)) {
+      $conditions[] = $publishedCondition;
+    }
 
     // Filter entities only of given bundles, if desired.
     if ($bundles) {
@@ -176,28 +178,27 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
    * @param array $conditions
    *   The existing conditions.
    *
-   * @return array[]
+   * @return bool|array[]
    *   The published entity query condition for the given entity type.
    *
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  protected function createPublishedCondition(string $type, array $conditions): array {
+  protected function createPublishedCondition(string $type, array $conditions): array|bool {
     $definition = $this->entityTypeManager->getDefinition($type);
     if (!$definition->hasKey('published')) {
-      return [[]];
+      return FALSE;
     }
 
     $publishedKey = $definition->getKey('published');
     foreach ($conditions as $condition) {
       if (isset($condition['field']) && $condition['field'] === $publishedKey) {
-        return [[]];
+        return FALSE;
       }
     }
 
-    return [[
+    return [
       'field' => $publishedKey,
       'value' => '1',
-    ],
     ];
   }
 
