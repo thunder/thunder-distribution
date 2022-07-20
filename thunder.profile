@@ -83,12 +83,10 @@ function thunder_modules_installed(array $modules): void {
 
     foreach ($thunder_features as $id => $extension) {
 
-      $dependencies = array_map(fn($dependency): string => Dependency::createFromString($dependency)
-        ->getName(), $extension->info['dependencies']);
+      $dependencies = array_map(fn($dependency): string => Dependency::createFromString($dependency)->getName(), $extension->info['dependencies']);
 
       if (!in_array($id, $modules) && !empty(array_intersect($modules, $dependencies))) {
-        \Drupal::messenger()
-          ->addWarning(t('To get the full Thunder experience, we recommend to install the @module module. See all supported optional modules at <a href="/admin/modules/extend-thunder">Thunder Optional modules</a>.', ['@module' => $extension->info['name']]));
+        \Drupal::messenger()->addWarning(t('To get the full Thunder experience, we recommend to install the @module module. See all supported optional modules at <a href="/admin/modules/extend-thunder">Thunder Optional modules</a>.', ['@module' => $extension->info['name']]));
       }
     }
   }
