@@ -96,8 +96,7 @@ function thunder_modules_installed(array $modules): void {
  * Implements hook_preprocess_html().
  */
 function thunder_preprocess_html(array &$variables): void {
-  if (!InstallerKernel::installationAttempted() &&
-    \Drupal::currentUser()->hasPermission('access toolbar')) {
+  if (!InstallerKernel::installationAttempted() && \Drupal::currentUser()->hasPermission('access toolbar')) {
     $variables['attributes']['class'][] = 'toolbar-icon-thunder';
   }
 }
