@@ -183,7 +183,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
    *
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  protected function createPublishedCondition(string $type, array $conditions): array|bool {
+  protected function createPublishedCondition(string $type, array $conditions) {
     $definition = $this->entityTypeManager->getDefinition($type);
     if (!$definition->hasKey('published')) {
       return FALSE;
