@@ -178,7 +178,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
    * @param array $conditions
    *   The existing conditions.
    *
-   * @return bool|array[]
+   * @return array|bool
    *   The published entity query condition for the given entity type.
    *
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
