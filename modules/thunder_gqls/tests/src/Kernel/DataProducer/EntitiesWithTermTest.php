@@ -171,7 +171,7 @@ class EntitiesWithTermTest extends GraphQLTestBase {
           'depth' => 0,
         ],
         [
-          'total' => 2,
+          'total' => 1,
         ],
       ],
       'query with depth=1' => [
@@ -187,7 +187,7 @@ class EntitiesWithTermTest extends GraphQLTestBase {
           'depth' => 1,
         ],
         [
-          'total' => 3,
+          'total' => 2,
         ],
       ],
       'query with custom conditions' => [
@@ -205,7 +205,8 @@ class EntitiesWithTermTest extends GraphQLTestBase {
             ],
             [
               'field' => 'status',
-              'value' => 1,
+              'value' => [0,1],
+              'operator' => 'BETWEEN'
             ],
           ],
           'languages' => [],
@@ -213,7 +214,7 @@ class EntitiesWithTermTest extends GraphQLTestBase {
           'depth' => 0,
         ],
         [
-          'total' => 1,
+          'total' => 2,
         ],
       ],
     ];
