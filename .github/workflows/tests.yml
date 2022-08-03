@@ -20,6 +20,7 @@ env:
   DRUPAL_TESTING_HTTP_PORT: 8888
   DRUPAL_TESTING_VERBOSE: false
   DRUPAL_TESTING_VERSION: "dev-code-coverage"
+  DRUPAL_TESTING_TEST_FILTER: "EntitiesWithTermTest"
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: false
@@ -163,6 +164,9 @@ jobs:
         env:
           #THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
           DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
+      #   Start a debug session.
+      - name: Setup tmate session
+         uses: mxschmitt/action-tmate@v3
 
       - name: Zip code coverage
         run: cd /tmp; tar cfz coverage-${{ matrix.PHP_VERSION }}.tgz coverage; mv coverage-${{ matrix.PHP_VERSION }}.tgz ${GITHUB_WORKSPACE}
