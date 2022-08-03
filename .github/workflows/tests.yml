@@ -121,7 +121,7 @@ jobs:
       fail-fast: false
       matrix:
         PHP_VERSION: [ '7.4', '8.1' ]
-        CHUNK: [ 1, 2, 3 ]
+        #CHUNK: [ 1, 2, 3 ]
 
     steps:
       - uses: actions/checkout@v1
@@ -161,7 +161,7 @@ jobs:
       - name: Run tests
         run: test-drupal-project run_tests
         env:
-          THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
+          #THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
           DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
 
       - name: Zip code coverage
