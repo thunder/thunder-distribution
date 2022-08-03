@@ -22,7 +22,7 @@ env:
   DRUPAL_TESTING_VERSION: "dev-code-coverage"
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
-  DRUPAL_TESTING_PARALLEL_TESTING: true
+  DRUPAL_TESTING_PARALLEL_TESTING: false
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
 
@@ -157,10 +157,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-
-      #   Start a debug session.
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
 
       - name: Run tests
         run: test-drupal-project run_tests
