@@ -9,7 +9,7 @@ type: 'canonical_entities:node'
 pattern: '[node:field_seo_title]'
 selection_criteria:
   3dade791-a55f-4114-9fba-4b38c8f572f7:
-    id: entity_bundle:node
+    id: 'entity_bundle:node'
     negate: false
     uuid: 3dade791-a55f-4114-9fba-4b38c8f572f7
     context_mapping:
