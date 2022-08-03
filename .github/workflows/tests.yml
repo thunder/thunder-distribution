@@ -164,9 +164,10 @@ jobs:
         env:
           #THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
           DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
+
       #   Start a debug session.
       - name: Setup tmate session
-         uses: mxschmitt/action-tmate@v3
+        uses: mxschmitt/action-tmate@v3
 
       - name: Zip code coverage
         run: cd /tmp; tar cfz coverage-${{ matrix.PHP_VERSION }}.tgz coverage; mv coverage-${{ matrix.PHP_VERSION }}.tgz ${GITHUB_WORKSPACE}
