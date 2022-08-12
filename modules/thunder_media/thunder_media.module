@@ -177,3 +177,20 @@ function _thunder_media_media_field_widget_form_alter_helper(array &$widget, str
     }
   }
 }
+
+/**
+ * Implements hook_media_source_info_alter().
+ */
+function thunder_media_media_source_info_alter(array &$sources) {
+  $sources['tiktok'] = [
+    'id' => 'tiktok',
+    'label' => t('TikTok'),
+    'description' => t('Embed TikToks.'),
+    'allowed_field_types' => ['string'],
+    'default_thumbnail_filename' => 'no-thumbnail.png',
+    'default_name_metadata_attribute' => 'default_name',
+    'thumbnail_uri_metadata_attribute' => 'thumbnail_uri',
+    'providers' => ['TikTok'],
+    'class' => 'Drupal\media\Plugin\media\Source\OEmbed',
+  ];
+}

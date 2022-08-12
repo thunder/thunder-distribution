@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: tiktok
+label: TikTok
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_video
+    - media.type.tiktok
+    - paragraphs.paragraphs_type.tiktok
+id: paragraph.tiktok.field_video
+field_name: field_video
+entity_type: paragraph
+bundle: tiktok
+label: Video
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      tiktok: tiktok
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
