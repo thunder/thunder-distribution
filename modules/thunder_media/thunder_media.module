@@ -181,7 +181,7 @@ function _thunder_media_media_field_widget_form_alter_helper(array &$widget, str
 /**
  * Implements hook_media_source_info_alter().
  */
-function thunder_media_media_source_info_alter(array &$sources) {
+function thunder_media_media_source_info_alter(array &$sources): void {
   $sources['tiktok'] = [
     'id' => 'tiktok',
     'label' => t('TikTok'),
