@@ -4,6 +4,7 @@ dependencies:
   module:
     - crop
     - media_expire
+    - thunder_media
 third_party_settings:
   crop:
     image_field: null
