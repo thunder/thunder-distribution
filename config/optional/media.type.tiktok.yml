@@ -4,7 +4,9 @@ dependencies:
   module:
     - crop
     - media_expire
-    - thunder_media
+  enforced:
+    - module:
+        - thunder_media
 third_party_settings:
   crop:
     image_field: null
