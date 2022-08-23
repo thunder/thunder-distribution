@@ -325,7 +325,7 @@ function thunder_update_8324(): string {
 /**
  * Allow tiktok video URLs.
  */
-function thunder_update_8325() {
+function thunder_update_8325(): string {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
 
