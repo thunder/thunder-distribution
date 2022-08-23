@@ -180,3 +180,12 @@ function thunder_action_info_alter(array &$definitions): void {
     }
   }
 }
+
+/**
+ * Implements hook_media_source_info_alter().
+ */
+function thunder_media_source_info_alter(array &$sources): void {
+  if ($sources['oembed:video']) {
+    $sources['oembed:video']['providers'][] = 'TikTok';
+  }
+}

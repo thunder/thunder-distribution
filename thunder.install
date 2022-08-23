@@ -321,3 +321,17 @@ function thunder_update_8324(): string {
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
 }
+
+/**
+ * Allow tiktok video URLs.
+ */
+function thunder_update_8325(): string {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_update_8325');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
