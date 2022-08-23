@@ -97,3 +97,11 @@ v6.3.8:
         '#description': '<p>Updates the core.entity_view_display.media.image.default and core.entity_view_display.media.image.slick configs to not depend on responsive_image.styles.media_image anymore.</p>'
         '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+v6.3.9:
+  '#title': 'Update to version v6.3.9'
+  '#description': '<h3>These are the new features for this release:</h3>'
+  thunder_update_8325:
+        '#title': 'Configuration update.'
+        '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
+        '#description_successful': '<p>Configuration is successfully updated.</p>'
+        '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'

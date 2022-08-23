@@ -1,0 +1,7 @@
+media.type.video:
+  expected_config: {  }
+  update_actions:
+    add:
+      source_configuration:
+        providers:
+          - TikTok
