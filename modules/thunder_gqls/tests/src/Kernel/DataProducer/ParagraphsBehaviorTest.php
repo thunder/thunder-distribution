@@ -73,7 +73,7 @@ class ParagraphsBehaviorTest extends GraphQLTestBase {
       'behavior_setting' => 'text_color'
     ]);
 
-    $this->assertEquals('red', $result['data']['paragraph_behavior']['text_color']);
+    $this->assertEquals('red', $result);
 
   }
 
