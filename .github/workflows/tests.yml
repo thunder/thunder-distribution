@@ -42,7 +42,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.1' ]
+        PHP_VERSION: [ '7.4', '8.1' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
@@ -250,9 +250,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
 
       - name: Run tests suite
         run: test-drupal-project run_tests
