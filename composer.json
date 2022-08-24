@@ -145,7 +145,7 @@
         "burdamagazinorg/thunder-dev-tools": "dev-master",
         "thunder/testsite_builder": "dev-master",
         "thunder/thunder_performance_measurement": "dev-master",
-        "thunder/thunder_testing_demo": "dev-more-embed-paragraphs",
+        "thunder/thunder_testing_demo": "4.x-dev",
         "mglaman/phpstan-drupal": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0"
     }
