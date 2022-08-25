@@ -2,13 +2,8 @@
 
 namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
-use Drupal\field\Entity\FieldConfig;
-use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\node\Entity\Node;
-use Drupal\node\Entity\NodeType;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\paragraphs\Entity\ParagraphsType;
-use Drupal\KernelTests\KernelTestBase;
 use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 
 /**
@@ -24,9 +19,11 @@ class ParagraphsBehaviorTest extends GraphQLTestBase {
    * @var array
    */
   protected static $modules = [
+    'thunder_gqls',
     'paragraphs',
     'entity_reference_revisions',
     'paragraphs_test',
+    'file',
   ];
 
   /**
@@ -35,7 +32,6 @@ class ParagraphsBehaviorTest extends GraphQLTestBase {
   protected function setUp(): void {
     parent::setUp();
     $this->installEntitySchema('paragraph');
-    $this->installSchema('system', ['sequences']);
     \Drupal::moduleHandler()->loadInclude('paragraphs', 'install');
   }
 
@@ -44,15 +40,15 @@ class ParagraphsBehaviorTest extends GraphQLTestBase {
    */
   public function testBehaviorSettings() {
     // Create a paragraph type.
-    $paragraph_type = ParagraphsType::create(array(
+    $paragraph_type = ParagraphsType::create([
       'label' => 'test_text',
       'id' => 'test_text',
       'behavior_plugins' => [
         'test_text_color' => [
           'enabled' => TRUE,
-        ]
+        ],
       ],
-    ));
+    ]);
     $paragraph_type->save();
 
     // Create a paragraph and set its feature settings.
@@ -61,7 +57,7 @@ class ParagraphsBehaviorTest extends GraphQLTestBase {
     ]);
     $feature_settings = [
       'test_text_color' => [
-        'text_color' => 'red'
+        'text_color' => 'red',
       ],
     ];
     $paragraph->setAllBehaviorSettings($feature_settings);
@@ -69,8 +65,8 @@ class ParagraphsBehaviorTest extends GraphQLTestBase {
 
     $result = $this->executeDataProducer('paragraph_behavior', [
       'paragraph' => $paragraph,
-      'behavior_plugin' => 'test_text_color',
-      'behavior_setting' => 'text_color'
+      'behavior_plugin_id' => 'test_text_color',
+      'behavior_plugin_key' => 'text_color',
     ]);
 
     $this->assertEquals('red', $result);
