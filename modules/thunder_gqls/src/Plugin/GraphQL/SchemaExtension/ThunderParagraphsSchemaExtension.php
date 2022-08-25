@@ -13,7 +13,7 @@ use GraphQL\Type\Definition\ResolveInfo;
  * @SchemaExtension(
  *   id = "thunder_paragraphs",
  *   name = "Paragraph extension",
- *   description = "Adds paragraphs and their fields.",
+ *   description = "Adds paragraphs and their fields (required).",
  *   schema = "thunder"
  * )
  */
