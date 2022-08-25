@@ -38,7 +38,7 @@ class ParagraphsBehaviorTest extends GraphQLTestBase {
   /**
    * Tests the behavior settings API.
    */
-  public function testBehaviorSettings() {
+  public function testBehaviorSettings(): void {
     // Create a paragraph type.
     $paragraph_type = ParagraphsType::create([
       'label' => 'test_text',
