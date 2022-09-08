@@ -5,7 +5,6 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\Schema;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
-use Drupal\Core\Url;
 use Drupal\graphql\GraphQL\ResolverRegistry;
 use Drupal\graphql\Plugin\DataProducerPluginManager;
 use Drupal\graphql\Plugin\GraphQL\Schema\ComposableSchema;
@@ -114,16 +113,17 @@ class ThunderSchema extends ComposableSchema {
    */
   private function resolveBaseTypes(): void {
     $this->addFieldResolverIfNotExists('Link', 'url',
-      $this->builder->callback(function ($parent) {
-        if (!empty($parent) && isset($parent['uri'])) {
-          $urlObject = Url::fromUri($parent['uri']);
-          $url = $urlObject->toString(TRUE)->getGeneratedUrl();
-        }
-        return $url ?? '';
-      })
+      $this->builder->produce('link_field')
+        ->map('field', $this->builder->fromParent())
+        ->map('property', $this->builder->fromValue('uri'))
     );
 
-    $this->addSimpleCallbackFields('Link', ['title']);
+    $this->addFieldResolverIfNotExists('Link', 'title',
+      $this->builder->produce('link_field')
+        ->map('field', $this->builder->fromParent())
+        ->map('property', $this->builder->fromValue('title'))
+    );
+
     $this->addSimpleCallbackFields('FocalPoint', ['x', 'y']);
     $this->addSimpleCallbackFields('Redirect', ['url', 'status']);
     $this->addSimpleCallbackFields('EntityLinks', [
