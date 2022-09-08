@@ -76,7 +76,7 @@ class LinkFieldTest extends GraphQLTestBase {
   /**
    * Tests the LinkField data provider.
    */
-  public function testLinkField() {
+  public function testLinkField(): void {
     $node = Node::create([
       'title' => 'Title1',
       'type' => 'article',
