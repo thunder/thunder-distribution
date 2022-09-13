@@ -1,7 +1,7 @@
 name: '(Deprecated) Thunder Google Analytics'
 description: 'Do not use this module. It is deprecated and will be removed in the next Thunder major version.'
 type: module
-core_version_requirement: ^9
+core_version_requirement: ^10
 package: Thunder Optional
 hidden: true
 dependencies:

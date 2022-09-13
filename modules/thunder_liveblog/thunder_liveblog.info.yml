@@ -1,7 +1,7 @@
 name: 'Thunder Liveblog'
 description: 'Integrates with the Paragraphs module and Thunder for media embedding'
 type: module
-core_version_requirement: ^9
+core_version_requirement: ^10
 package: Thunder Optional
 hidden: true
 dependencies:
