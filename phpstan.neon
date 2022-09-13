@@ -4,13 +4,7 @@ parameters:
   checkMissingIterableValueType: false
   reportUnmatchedIgnoredErrors: true
   level: 6
-  ignoreErrors:
-    - '#\Call to an undefined method Drupal\\Tests\\WebAssert::#'
-    - "#^Unsafe usage of new static\\(\\)\\.$#"
-    - "#Function drupal_phpunit_find_extension_directories not found.#"
-    # Drupal allows object property access to custom fields, so we cannot fix
-    # that.
-    - "#^Access to an undefined property Drupal\\\\#"
 includes:
   - ../../../../vendor/mglaman/phpstan-drupal/extension.neon
   - ../../../../vendor/phpstan/phpstan-deprecation-rules/rules.neon
+  - ./phpstan-baseline.neon
