@@ -16,7 +16,7 @@ use Drupal\paragraphs\ParagraphInterface;
  *     label = @Translation("Option")
  *   ),
  *   consumes = {
- *     "paragraph" = @ContextDefinition("entity",
+ *     "paragraph" = @ContextDefinition("entity:paragraph",
  *       label = @Translation("Root value")
  *     ),
  *     "behavior_plugin_id" = @ContextDefinition("string",
