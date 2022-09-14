@@ -56,6 +56,16 @@
         {
           "__typename": "ParagraphQuote",
           "text": "<p><em>\"Flying is learning how to throw yourself at the ground and miss\" (Douglas Adams)</em>.</p>"
+        },
+        {
+          "__typename": "ParagraphVideo",
+          "url": "https://www.youtube.com/watch?v=Hu5hC46z5LI",
+          "provider": "youtube"
+        },
+        {
+          "__typename": "ParagraphPinterest",
+          "url": "https://www.pinterest.de/pin/983755112328843202",
+          "provider": "pinterest"
         }
       ]
     }

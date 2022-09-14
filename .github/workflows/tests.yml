@@ -7,7 +7,7 @@ on:
       - 'package.json'
       - 'package-lock.json'
   schedule:
-    - cron:  '0 6 * * *'
+    - cron: '0 6 * * *'
 
 env:
   DRUPAL_TESTING_COMPOSER_PROJECT: thunder/thunder-project
@@ -19,7 +19,7 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
   DRUPAL_TESTING_VERBOSE: false
-  DRUPAL_TESTING_VERSION: "^1.0.33"
+  DRUPAL_TESTING_VERSION: "^1.0.36"
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
@@ -65,6 +65,7 @@ jobs:
 
       - name: Get build environment
         run: |
+          composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true --no-plugins
           composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Prepare the build
@@ -111,7 +112,7 @@ jobs:
         ports:
           - 3306:3306
       selenium:
-        image: selenium/standalone-chrome
+        image: selenium/standalone-chrome:102.0
         options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
         ports:
           - 4444:4444
@@ -138,7 +139,9 @@ jobs:
         run: docker cp ./tests/fixtures selenium:/fixtures
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
+        run: |
+          composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true --no-plugins
+          composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Download build
         uses: actions/download-artifact@v1
@@ -211,7 +214,9 @@ jobs:
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
 
       - name: Get build environment
-        run: composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
+        run: |
+          composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true --no-plugins
+          composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
@@ -300,7 +305,7 @@ jobs:
 
       - name: Get build environment
         run: |
-          composer self-update
+          composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true --no-plugins
           composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Prepare the build
@@ -325,7 +330,7 @@ jobs:
         run: test-drupal-project run_tests
 
   test-performance:
-    needs: [build, test-max]
+    needs: [ build, test-max ]
 
     runs-on: ubuntu-20.04
 

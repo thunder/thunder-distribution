@@ -307,3 +307,31 @@ function thunder_update_8323(): void {
   $moduleInstaller = \Drupal::service('module_installer');
   $moduleInstaller->uninstall(['thunder_google_analytics']);
 }
+
+/**
+ * Replace responsive image style with normal image style.
+ */
+function thunder_update_8324(): string {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_update_8324');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
+
+/**
+ * Allow tiktok video URLs.
+ */
+function thunder_update_8325(): string {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_update_8325');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}

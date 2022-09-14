@@ -2,8 +2,8 @@ name: Thunder
 type: profile
 description: 'The Drupal based CMS for professional publishing.'
 project: thunder
-core_version_requirement: ^9.3.0
-version: '6.3.6'
+core_version_requirement: ~9.4.0
+version: '6.4.2'
 
 distribution:
   name: Thunder
@@ -93,5 +93,5 @@ install:
   - thunder:thunder_workflow
 themes:
   - seven
-  - thunder_base
+  - olivero
   - thunder_admin

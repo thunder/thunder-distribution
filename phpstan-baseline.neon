@@ -1,0 +1,224 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: modules/thunder_article/src/Form/NodeRevisionRevertDefaultForm.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: modules/thunder_article/src/Form/ThunderNodeForm.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: modules/thunder_article/src/Plugin/Derivative/DynamicLocalTasks.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/EntityLinks.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/FocalPoint.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/MenuLinksActiveTrail.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/MetaTags.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/ThunderEntityListProducerBase.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/ThunderEntitySubRequestBase.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/ThunderImage.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/ThunderRedirect.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\Core\\\\Entity\\\\ContentEntityInterface\\:\\:\\$field_teaser_media\\.$#"
+			count: 1
+			path: modules/thunder_gqls/src/Plugin/GraphQL/SchemaExtension/ThunderPagesSchemaExtension.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\Core\\\\Entity\\\\ContentEntityInterface\\:\\:\\$field_teaser_text\\.$#"
+			count: 1
+			path: modules/thunder_gqls/src/Plugin/GraphQL/SchemaExtension/ThunderPagesSchemaExtension.php
+
+		-
+			message: """
+				#^Call to deprecated method getConfig\\(\\) of class GuzzleHttp\\\\Client\\:
+				Client\\:\\:getConfig will be removed in guzzlehttp/guzzle\\:8\\.0\\.$#
+			"""
+			count: 1
+			path: modules/thunder_gqls/tests/src/Functional/ThunderGqlsTestBase.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\Tests\\\\thunder_gqls\\\\Kernel\\\\DataProducer\\\\EntityLinksTest\\:\\:\\$node\\.$#"
+			count: 4
+			path: modules/thunder_gqls/tests/src/Kernel/DataProducer/EntityLinksTest.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: modules/thunder_taxonomy/src/ThunderTaxonomyPermissions.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\Core\\\\Entity\\\\EntityInterface\\:\\:\\$status\\.$#"
+			count: 1
+			path: modules/thunder_taxonomy/src/ThunderTermAccessControlHandler.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\Core\\\\Extension\\\\Extension\\:\\:\\$info\\.$#"
+			count: 5
+			path: src/Installer/Form/ModuleConfigureForm.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\Core\\\\Extension\\\\Extension\\:\\:\\$requires\\.$#"
+			count: 1
+			path: src/Installer/Form/ModuleConfigureForm.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\Core\\\\Extension\\\\Extension\\:\\:\\$status\\.$#"
+			count: 5
+			path: src/Installer/Form/ModuleConfigureForm.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\Core\\\\Session\\\\AccountInterface\\:\\:\\$pass_raw\\.$#"
+			count: 1
+			path: tests/src/Functional/ThunderTestBase.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 6
+			path: tests/src/FunctionalJavascript/ArticleCreationTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 2
+			path: tests/src/FunctionalJavascript/ArticleSchedulerIntegrationTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 6
+			path: tests/src/FunctionalJavascript/ChannelsTagsTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 7
+			path: tests/src/FunctionalJavascript/Integration/AccessUnpublishedTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 2
+			path: tests/src/FunctionalJavascript/Integration/AutofillTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 7
+			path: tests/src/FunctionalJavascript/Integration/AutosaveFormTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForText\\(\\)\\.$#"
+			count: 2
+			path: tests/src/FunctionalJavascript/Integration/AutosaveFormTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 4
+			path: tests/src/FunctionalJavascript/Integration/DiffTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 4
+			path: tests/src/FunctionalJavascript/Integration/EntityReferenceActionsTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 1
+			path: tests/src/FunctionalJavascript/Integration/InlineEntityFormTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 6
+			path: tests/src/FunctionalJavascript/Integration/NestedTableDragTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 6
+			path: tests/src/FunctionalJavascript/Integration/ParagraphSplitTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 6
+			path: tests/src/FunctionalJavascript/Integration/ParagraphsFeaturesTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 6
+			path: tests/src/FunctionalJavascript/Integration/ParagraphsPasteTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElement\\(\\)\\.$#"
+			count: 1
+			path: tests/src/FunctionalJavascript/Integration/ResponsivePreviewTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 5
+			path: tests/src/FunctionalJavascript/MediaGalleryModifyTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 6
+			path: tests/src/FunctionalJavascript/MediaImageModifyTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 4
+			path: tests/src/FunctionalJavascript/MetaInformationTest.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\Core\\\\Session\\\\AccountInterface\\:\\:\\$pass_raw\\.$#"
+			count: 1
+			path: tests/src/FunctionalJavascript/ThunderJavascriptTestBase.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 1
+			path: tests/src/FunctionalJavascript/ThunderJavascriptTestBase.php
+
+		-
+			message: "#^Function drupal_phpunit_find_extension_directories not found\\.$#"
+			count: 1
+			path: tests/src/TestSuites/ThunderTestSuite.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: tests/src/TestSuites/ThunderTestSuite.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\Core\\\\Extension\\\\Extension\\:\\:\\$info\\.$#"
+			count: 3
+			path: thunder.profile

@@ -116,10 +116,13 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
     $entity_type = $this->entityTypeManager->getStorage($type);
     $query = $entity_type->getQuery();
 
-    $query->currentRevision()->accessCheck();
-
     // Ensure that access checking is performed on the query.
     $query->currentRevision()->accessCheck(TRUE);
+
+    // Ensure that only published entities are shown.
+    if ($publishedCondition = $this->createPublishedCondition($type, $conditions)) {
+      $conditions[] = $publishedCondition;
+    }
 
     // Filter entities only of given bundles, if desired.
     if ($bundles) {
@@ -165,6 +168,38 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
     $cacheContext->addCacheTags($entityType->getListCacheTags());
     $cacheContext->addCacheContexts($entityType->getListCacheContexts());
     return $query;
+  }
+
+  /**
+   * Creates a published entity query condition, if it does not exist.
+   *
+   * @param string $type
+   *   The entity type.
+   * @param array $conditions
+   *   The existing conditions.
+   *
+   * @return array|bool
+   *   The published entity query condition for the given entity type.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  protected function createPublishedCondition(string $type, array $conditions) {
+    $definition = $this->entityTypeManager->getDefinition($type);
+    if (!$definition->hasKey('published')) {
+      return FALSE;
+    }
+
+    $publishedKey = $definition->getKey('published');
+    foreach ($conditions as $condition) {
+      if (isset($condition['field']) && $condition['field'] === $publishedKey) {
+        return FALSE;
+      }
+    }
+
+    return [
+      'field' => $publishedKey,
+      'value' => '1',
+    ];
   }
 
 }
