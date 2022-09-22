@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.4.3](https://github.com/thunder/thunder-distribution/tree/6.4.3) 2022-09-22
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.4.2...6.4.3)
+
+Add ParagraphBehavior GraphQL data producer.
+
 ## [6.4.2](https://github.com/thunder/thunder-distribution/tree/6.4.2) 2022-08-25
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.4.1...6.4.2)
