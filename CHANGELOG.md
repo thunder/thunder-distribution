@@ -1,6 +1,6 @@
 # Changelog
 
-## [6.4.3](https://github.com/thunder/thunder-distribution/tree/6.4.2) 2022-09.22
+## [6.4.3](https://github.com/thunder/thunder-distribution/tree/6.4.3) 2022-09.22
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.4.2...6.4.3)
 
