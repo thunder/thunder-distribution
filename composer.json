@@ -57,6 +57,9 @@
             },
             "drupal/media_library_media_modify": {
                 "Add field diff builder": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/29.diff"
+            },
+            "drupal/gin": {
+                "Error in dialog.position.js on media library selection": "https://git.drupalcode.org/project/gin/-/merge_requests/188.diff"
             }
         }
     },
