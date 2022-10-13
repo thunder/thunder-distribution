@@ -47,26 +47,13 @@ class BreadcrumbTest extends ThunderTestBase {
     $this->assertBreadcrumb('node/add/article', $home + $overview + $node_add);
     $this->assertBreadcrumb('node/add/page', $home + $overview + $node_add);
 
-    $this->assertBreadcrumb($node1->toUrl('edit-form'), [$node1->toUrl()->toString() => 'Back to site'] + $overview);
-    $this->assertBreadcrumb($node2->toUrl('edit-form'), [$node2->toUrl()->toString() => 'Back to site'] + $overview);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  protected function getBreadcrumbParts(): array {
-    $parts = [];
-    $elements = $this->xpath('//nav[@aria-labelledby="system-breadcrumb"]//ol/li/a');
-    if (!empty($elements)) {
-      foreach ($elements as $element) {
-        $parts[] = [
-          'text' => $element->getText(),
-          'href' => $element->getAttribute('href'),
-          'title' => $element->getAttribute('title'),
-        ];
-      }
-    }
-    return $parts;
+    // @todo gin removes all custom breadcrumb links from edit pages
+    // Page content.
+    // $this->assertBreadcrumb($node1->toUrl('edit-form'), [$node1->toUrl()->toString() => 'Back to site'] + $overview);
+    $this->assertBreadcrumb($node1->toUrl('edit-form'), [$node1->toUrl()->toString() => 'Back to site']);
+    // Article content.
+    //$this->assertBreadcrumb($node2->toUrl('edit-form'), [$node2->toUrl()->toString() => 'Back to site'] + $overview);
+    $this->assertBreadcrumb($node2->toUrl('edit-form'), [$node2->toUrl()->toString() => 'Back to site']);
   }
 
 }
