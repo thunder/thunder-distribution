@@ -47,12 +47,12 @@ class BreadcrumbTest extends ThunderTestBase {
     $this->assertBreadcrumb('node/add/article', $home + $overview + $node_add);
     $this->assertBreadcrumb('node/add/page', $home + $overview + $node_add);
 
-    // @todo gin removes all custom breadcrumb links from edit pages
+    // Removed overview breadrumb due to https://drupal.org/i/3315662
+    // @todo gin removes custom breadcrumb links from edit pages
+    // $node1->toUrl()->toString() => 'Back to site'] + $overview);
     // Page content.
-    // $this->assertBreadcrumb($node1->toUrl('edit-form'), [$node1->toUrl()->toString() => 'Back to site'] + $overview);
     $this->assertBreadcrumb($node1->toUrl('edit-form'), [$node1->toUrl()->toString() => 'Back to site']);
     // Article content.
-    //$this->assertBreadcrumb($node2->toUrl('edit-form'), [$node2->toUrl()->toString() => 'Back to site'] + $overview);
     $this->assertBreadcrumb($node2->toUrl('edit-form'), [$node2->toUrl()->toString() => 'Back to site']);
   }
 
