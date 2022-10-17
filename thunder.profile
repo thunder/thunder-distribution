@@ -68,7 +68,7 @@ function thunder_module_install(array &$install_state): array {
 function thunder_finish_installation(array &$install_state): void {
   // Assign user 1 the "administrator" role.
   $user = User::load(1);
-  $user->roles[] = 'administrator';
+  $user->addRole('administrator');
   $user->save();
 }
 
@@ -196,4 +196,13 @@ function thunder_gin_content_form_routes(): array {
     $routes[] = 'entity.media.canonical';
   }
   return $routes;
+}
+
+/**
+ * Implements hook_media_source_info_alter().
+ */
+function thunder_media_source_info_alter(array &$sources): void {
+  if ($sources['oembed:video']) {
+    $sources['oembed:video']['providers'][] = 'TikTok';
+  }
 }

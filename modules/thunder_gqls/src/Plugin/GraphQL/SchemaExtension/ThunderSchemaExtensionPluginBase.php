@@ -200,7 +200,7 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
   }
 
   /**
-   * Add fields common to all media types.
+   * Add fields common to all paragraph types.
    *
    * @param string $type
    *   The type name.

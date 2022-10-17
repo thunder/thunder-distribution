@@ -60,7 +60,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     $this->pressRestoreButton();
     $this->assertEquals([$term->id(), '$ID:Tag2'], $page->findField('field_tags[]')->getValue());
     $this->assertEquals('New title', $page->findField('title[0][value]')->getValue());
-    $this->assertSession()->elementExists('css', '.form-item--field-paragraphs-5-subform-field-text-0-value');
+    $this->assertSession()->elementExists('css', '.form-item--field-paragraphs-7-subform-field-text-0-value');
 
     // Save the article.
     $this->clickSave();
