@@ -1,7 +1,8 @@
 name: 'Thunder Article'
-description: 'Provide content related configs and code for thunder.'
+description: 'Provide Article content type for Thunder.'
 type: module
 core_version_requirement: ^9
 package: Thunder
 dependencies:
   - drupal:node
+  - thunder:thunder_article

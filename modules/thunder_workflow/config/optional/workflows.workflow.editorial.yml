@@ -62,3 +62,4 @@ type_settings:
   entity_types:
     node:
       - article
+  default_moderation_state: draft
