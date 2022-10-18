@@ -13,7 +13,7 @@ use GraphQL\Type\Definition\ResolveInfo;
  * @SchemaExtension(
  *   id = "thunder_media",
  *   name = "Media extension",
- *   description = "Adds media entities and their fields.",
+ *   description = "Adds media entities and their fields (required).",
  *   schema = "thunder"
  * )
  */
