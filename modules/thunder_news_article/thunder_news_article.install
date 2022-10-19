@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * The install file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function thunder_news_article_install(): void {
+  try {
+    // Ignore, if workflow entity is not available.
+    $handlerClass = 'workflow';
+    if (!\Drupal::entityTypeManager()->getDefinition($handlerClass, FALSE)) {
+      return;
+    }
+
+    // Ignore, if editorial workflow is not available.
+    $workflowId = 'editorial';
+
+    if (!$editorialWorkflow = \Drupal::entityTypeManager()->getStorage($handlerClass)->load($workflowId)) {
+      return;
+    }
+
+    // Ignore, if news_article is already configured.
+    $config = $editorialWorkflow->getTypePlugin()->getConfiguration();
+    if (isset($config['entity_types']['node']['news_article'])) {
+      return;
+    }
+
+    $config['entity_types']['node'][] = 'news_article';
+    $editorialWorkflow->getTypePlugin()->setConfiguration($config);
+    $editorialWorkflow->save();
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('thunder')->info(t('Could not add news_article content type to editorial workflow: "@message"', ['@message' => $e->getMessage()]));
+    return;
+  }
+}
+
+/* hook_update_n implementations should be in the profile instead of this
+submodule. */
