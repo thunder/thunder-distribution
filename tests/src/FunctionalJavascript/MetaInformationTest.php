@@ -159,7 +159,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       'field_teaser_text[0][value]' => static::$tokens['[node:field_teaser_text]'],
     ];
 
-    $this->articleFillNew($fieldValues);
+    $this->nodeFillNew($fieldValues);
 
     $media = $this->loadMediaByUuid('17965877-27b2-428f-8b8c-7dccba9786e5');
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $media->id()]);

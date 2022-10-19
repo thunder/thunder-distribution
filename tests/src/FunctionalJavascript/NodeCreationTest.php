@@ -9,23 +9,25 @@ use Drupal\Tests\node\Traits\NodeCreationTrait;
  *
  * @group Thunder
  */
-class ArticleCreationTest extends ThunderJavascriptTestBase {
+class NodeCreationTest extends ThunderJavascriptTestBase {
 
   use ThunderParagraphsTestTrait;
   use ThunderArticleTestTrait;
   use NodeCreationTrait;
 
   /**
-   * Field name for paragraphs in article content.
+   * Field name for paragraphs in node content.
    *
    * @var string
    */
-  protected static $paragraphsField = 'field_paragraphs';
+  protected static string $paragraphsField = 'field_paragraphs';
 
   /**
-   * Test Creation of Article.
+   * Test Creation of nodes.
+   *
+   * @dataProvider providerContentTypes
    */
-  public function testCreateArticle(): void {
+  public function testCreateNode(string $type): void {
     // Create a video media item.
     $this->drupalGet("media/add/video");
     $this->assertSession()->fieldExists('Video URL')->setValue('https://www.youtube.com/watch?v=PWjcqE3QKBg');
@@ -33,11 +35,11 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     $this->assertSession()->buttonExists('Save')->press();
 
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
-    $this->articleFillNew([
+    $this->nodeFillNew([
       'field_channel' => $term->id(),
-      'title[0][value]' => 'Test article',
+      'title[0][value]' => 'Test ' . $type,
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
-    ]);
+    ], $type);
 
     $image1 = $this->loadMediaByUuid('23f6d444-ece1-465d-a667-b1fb80e641d3');
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $image1->id()]);
@@ -74,14 +76,14 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Add Pinterest Paragraph.
     $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/478085316687452268/', 'pinterest');
 
-    $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_BeforeSave_' . date('Ymd_His') . '.png');
+    $this->createScreenshot($this->getScreenshotFolder() . '/' . uc_first($type) . 'CreationTest_BeforeSave_' . date('Ymd_His') . '.png');
 
     $this->clickSave();
 
-    $this->createScreenshot($this->getScreenshotFolder() . '/ArticleCreationTest_AfterSave_' . date('Ymd_His') . '.png');
+    $this->createScreenshot($this->getScreenshotFolder() . '/' . uc_first($type) . 'CreationTest_AfterSave_' . date('Ymd_His') . '.png');
 
     $this->assertPageTitle('Massive gaining seo traffic text');
-    $this->assertSession()->pageTextContains('Test article');
+    $this->assertSession()->pageTextContains('Test ' . $type);
 
     // Check Image paragraph.
     $this->assertSession()
@@ -126,6 +128,16 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Check that one Pinterest widget is on page.
     $this->assertSession()
       ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][9]//span[contains(@data-pin-id, "478085316687452268")]', 2);
+  }
+
+  /**
+   * Content type provider for node tests.
+   */
+  public function providerContentTypes(): array {
+    return [
+      'Article' => ['article'],
+      'News Article' => ['news_article'],
+    ];
   }
 
 }

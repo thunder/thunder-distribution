@@ -35,7 +35,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->clickSave();
 
     // Create 1. Article.
-    $this->articleFillNew([
+    $this->nodeFillNew([
       'field_channel' => 6,
       'title[0][value]' => 'Article 1',
       'field_seo_title[0][value]' => 'Article 1',
@@ -50,7 +50,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->clickSave();
 
     // Create 2. Article.
-    $this->articleFillNew([
+    $this->nodeFillNew([
       'field_channel' => 6,
       'title[0][value]' => 'Article 2',
       'field_seo_title[0][value]' => 'Article 2',

@@ -20,7 +20,7 @@ class ArticleSchedulerIntegrationTest extends ThunderJavascriptTestBase {
   public function testRestrictedEditorSchedulerAccess(): void {
     $this->logWithRole('restricted_editor');
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
-    $this->articleFillNew([
+    $this->nodeFillNew([
       'field_channel' => $term->id(),
       'title[0][value]' => 'Scheduler integration testing',
       'field_seo_title[0][value]' => 'Scheduler integration testing seo title',
