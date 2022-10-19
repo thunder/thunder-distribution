@@ -76,11 +76,11 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
     // Add Pinterest Paragraph.
     $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/478085316687452268/', 'pinterest');
 
-    $this->createScreenshot($this->getScreenshotFolder() . '/' . uc_first($type) . 'CreationTest_BeforeSave_' . date('Ymd_His') . '.png');
+    $this->createScreenshot($this->getScreenshotFolder() . '/' . ucfirst($type) . 'CreationTest_BeforeSave_' . date('Ymd_His') . '.png');
 
     $this->clickSave();
 
-    $this->createScreenshot($this->getScreenshotFolder() . '/' . uc_first($type) . 'CreationTest_AfterSave_' . date('Ymd_His') . '.png');
+    $this->createScreenshot($this->getScreenshotFolder() . '/' . ucfirst($type) . 'CreationTest_AfterSave_' . date('Ymd_His') . '.png');
 
     $this->assertPageTitle('Massive gaining seo traffic text');
     $this->assertSession()->pageTextContains('Test ' . $type);
