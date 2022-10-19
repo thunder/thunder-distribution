@@ -18,7 +18,6 @@ function thunder_news_article_install(): void {
 
     // Ignore, if editorial workflow is not available.
     $workflowId = 'editorial';
-
     if (!$editorialWorkflow = \Drupal::entityTypeManager()->getStorage($handlerClass)->load($workflowId)) {
       return;
     }
