@@ -205,7 +205,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
       ],
     ],
     'core.entity_form_display.node.news_article.default' => [
-      'content' => [
+      'hidden' => [
         'field_ivw' => TRUE,
       ],
       'dependencies' => [
