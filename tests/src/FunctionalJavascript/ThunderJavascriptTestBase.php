@@ -37,7 +37,6 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
    */
   protected static $modules = [
     'thunder_testing_demo',
-    'thunder_news_article',
     'thunder_workflow',
     'thunder_test_mock_request',
   ];

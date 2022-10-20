@@ -87,6 +87,7 @@ install:
   - views_bulk_edit:views_bulk_edit
   # thunder
   - thunder:thunder_article
+  - thunder:thunder_news_article
   - thunder:thunder_media
   - thunder:thunder_paragraphs
   - thunder:thunder_taxonomy
