@@ -64,9 +64,6 @@ trait ThunderFormFieldTestTrait {
 
     // Handle specific types of form fields.
     $field = $page->findField($fieldName);
-    if (empty($field)) {
-      print "Field: $fieldName" . PHP_EOL;
-    }
     $fieldTag = $field->getTagName();
     if ($fieldTag === 'textarea') {
       // Clear text first, before setting value for "textarea" field.
