@@ -63,7 +63,7 @@ trait ThunderFormFieldTestTrait {
     }
 
     // Handle specific types of form fields.
-    $this->assertSession()->fieldExists($fieldName, 'Field ' . $fieldName . ' not found on page.');
+    print "Field: $fieldName" . PHP_EOL;
     $field = $page->findField($fieldName);
     $fieldTag = $field->getTagName();
     if ($fieldTag === 'textarea') {
