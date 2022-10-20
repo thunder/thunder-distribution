@@ -500,7 +500,9 @@ class InstalledConfigurationTest extends ThunderTestBase {
 
       // Check is active configuration same as in Yaml file.
       if (!$configDiffer->same($fileConfig, $activeConfig)) {
-        $differentConfigNames[] = $activeConfigName;
+        $differentConfigNames[] = [
+          $activeConfigName => $configDiffer->diff($fileConfig, $activeConfig)->getEdits()
+        ];
       }
     }
 
