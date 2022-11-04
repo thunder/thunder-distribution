@@ -57,7 +57,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   Position of the paragraph.
    *
-   * @return int
+   * @return string
    *   Returns index for added paragraph.
    *
    * @throws \Exception
@@ -99,7 +99,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   The Position of the paragraph item.
    *
-   * @return int
+   * @return string
    *   The delta of the paragraph
    *
    * @throws \Exception
