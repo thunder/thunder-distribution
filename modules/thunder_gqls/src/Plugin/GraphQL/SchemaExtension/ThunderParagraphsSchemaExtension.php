@@ -67,7 +67,7 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
       $this->builder->fromPath('entity', 'field_media.entity.field_url.value'),
     );
     $this->addFieldResolverIfNotExists('ParagraphInstagram', 'provider',
-      $this->builder->fromValue('pinterest')
+      $this->builder->fromValue('instagram')
     );
 
     // Pinterest.
