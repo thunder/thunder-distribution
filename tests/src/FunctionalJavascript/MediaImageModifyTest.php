@@ -6,8 +6,6 @@ use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\media\Entity\Media;
 use Drupal\user\Entity\Role;
-use Rector\TypeDeclaration\TypeInferer\VarDocPropertyTypeInferer;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Tests the Image media modification.
