@@ -335,3 +335,12 @@ function thunder_update_8325(): string {
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
 }
+
+/**
+ * Install media_file_delete.
+ */
+function thunder_update_8326(): void {
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
+  $moduleInstaller = \Drupal::service('module_installer');
+  $moduleInstaller->install(['media_file_delete']);
+}
