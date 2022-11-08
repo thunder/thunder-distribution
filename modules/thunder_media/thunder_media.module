@@ -188,7 +188,7 @@ function _thunder_media_media_field_widget_form_alter_helper(array &$widget, str
  *   in Drupal core and the version it lands in is the minimum supported
  *   version.
  */
-function thunder_media_file_access(FileInterface $file, $op, AccountInterface $account) {
+function thunder_media_file_access(FileInterface $file, string $op, AccountInterface $account): AccessResult {
   switch ($op) {
     case 'delete':
       $access = AccessResult::allowedIfHasPermission($account, 'delete any file');
