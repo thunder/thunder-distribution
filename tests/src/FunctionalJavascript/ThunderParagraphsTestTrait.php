@@ -57,7 +57,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   Position of the paragraph.
    *
-   * @return string
+   * @return int
    *   Returns index for added paragraph.
    *
    * @throws \Exception
@@ -99,7 +99,7 @@ trait ThunderParagraphsTestTrait {
    * @param int $position
    *   The Position of the paragraph item.
    *
-   * @return string
+   * @return int
    *   The delta of the paragraph
    *
    * @throws \Exception
@@ -116,7 +116,7 @@ trait ThunderParagraphsTestTrait {
       throw new \Exception('No new paragraph is found');
     }
 
-    return $matches[1];
+    return (int) $matches[1];
   }
 
   /**
