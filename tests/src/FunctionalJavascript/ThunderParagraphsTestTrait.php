@@ -116,7 +116,7 @@ trait ThunderParagraphsTestTrait {
       throw new \Exception('No new paragraph is found');
     }
 
-    return $matches[1];
+    return (int) $matches[1];
   }
 
   /**
