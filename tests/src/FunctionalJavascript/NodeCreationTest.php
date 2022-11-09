@@ -135,7 +135,7 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
    */
   public function providerContentTypes(): array {
     return [
-      #'Article' => ['article'],
+      'Article' => ['article'],
       'News Article' => ['news_article'],
     ];
   }
