@@ -26,7 +26,6 @@ trait ThunderArticleTestTrait {
     }
 
     $this->drupalGet('node/add/' . $type);
-    $this->assertSession()->statusCodeEquals(200);
     $this->assertWaitOnAjaxRequest();
 
     $this->expandAllTabs();
