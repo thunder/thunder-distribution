@@ -28,6 +28,11 @@ trait ThunderArticleTestTrait {
     $this->drupalGet('node/add/' . $type);
     $this->assertWaitOnAjaxRequest();
 
+    file_put_contents('/tmp/test/output.txt', "Type: $type" . PHP_EOL, FILE_APPEND);
+    if ($type != 'article') {
+      file_put_contents('/tmp/test/output.txt', $this->getSession()->getPage()->getHtml(), FILE_APPEND);
+    }
+
     $this->expandAllTabs();
     if ($this->getSession()->getPage()->hasButton('Customize meta tags')) {
       $this->getSession()->getPage()->pressButton('Customize meta tags');
