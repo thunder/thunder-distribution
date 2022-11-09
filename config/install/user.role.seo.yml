@@ -63,6 +63,7 @@ permissions:
   - 'delete any page content'
   - 'delete article revisions'
   - 'delete media'
+  - 'create news_article content'
   - 'delete news_article revisions'
   - 'delete own article content'
   - 'delete own news_article content'

@@ -49,6 +49,7 @@ permissions:
   - 'break content lock'
   - 'create article content'
   - 'create media'
+  - 'create news_article content'
   - 'create page content'
   - 'create url aliases'
   - 'delete any article content'
