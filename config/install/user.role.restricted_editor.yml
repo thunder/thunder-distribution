@@ -4,6 +4,7 @@ dependencies:
   config:
     - filter.format.full_html
     - node.type.article
+    - node.type.news_article
     - node.type.page
     - taxonomy.vocabulary.channel
     - taxonomy.vocabulary.tags
@@ -44,18 +45,23 @@ permissions:
   - 'break content lock'
   - 'create article content'
   - 'create media'
+  - 'create news_article content'
   - 'create page content'
   - 'create url aliases'
   - 'delete article revisions'
   - 'delete media'
+  - 'delete news_article revisions'
   - 'delete own article content'
+  - 'delete own news_article content'
   - 'delete own page content'
   - 'delete page revisions'
   - 'delete token'
   - 'dropzone upload files'
   - 'edit any article content'
+  - 'edit any news_article content'
   - 'edit any page content'
   - 'edit own article content'
+  - 'edit own news_article content'
   - 'edit own page content'
   - 'edit terms in channel'
   - 'edit terms in tags'
@@ -69,6 +75,7 @@ permissions:
   - 'view any unpublished content'
   - 'view article revisions'
   - 'view latest version'
+  - 'view news_article revisions'
   - 'view own unpublished content'
   - 'view page revisions'
   - 'view scheduled content'
