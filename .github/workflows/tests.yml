@@ -158,13 +158,6 @@ jobs:
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
-      #   Start a debug session.
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        env:
-          THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
-          DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
-
       - name: Run tests
         run: test-drupal-project run_tests
         env:

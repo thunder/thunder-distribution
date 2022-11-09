@@ -21,19 +21,20 @@ trait ThunderArticleTestTrait {
    *   The node type to create.
    */
   public function nodeFillNew(array $fieldValues, string $type = 'article'): void {
+    if (empty($fieldValues)) {
+      return;
+    }
+
     $this->drupalGet('node/add/' . $type);
     $this->assertWaitOnAjaxRequest();
 
-    print $this->getSession()->getPage()->getHtml();
-    if (!empty($fieldValues)) {
+    $this->expandAllTabs();
+    if ($this->getSession()->getPage()->hasButton('Customize meta tags')) {
+      $this->getSession()->getPage()->pressButton('Customize meta tags');
+      $this->assertWaitOnAjaxRequest();
       $this->expandAllTabs();
-      if ($this->getSession()->getPage()->hasButton('Customize meta tags')) {
-        $this->getSession()->getPage()->pressButton('Customize meta tags');
-        $this->assertWaitOnAjaxRequest();
-        $this->expandAllTabs();
-      }
-      $this->setFieldValues($fieldValues);
     }
+    $this->setFieldValues($fieldValues);
   }
 
   /**
