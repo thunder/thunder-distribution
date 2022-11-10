@@ -5,8 +5,6 @@
  * The install file.
  */
 
-use Drupal\Core\Config\ExtensionInstallStorage;
-
 /**
  * Implements hook_install().
  *
@@ -31,7 +29,7 @@ function thunder_news_article_install(): void {
 /**
  * Implements hook_modules_installed().
  */
-function thunder_news_article_modules_installed($modules): void {
+function thunder_news_article_modules_installed(array $modules): void {
   if (!in_array('thunder_workflow', $modules, TRUE)) {
     return;
   }
@@ -47,8 +45,6 @@ function thunder_news_article_modules_installed($modules): void {
 
 /**
  * Add news_article to editorial workflow.
- *
- * @return void
  */
 function thunder_news_article_add_to_workflow(): void {
   // Ignore, if editorial workflow is not available.
