@@ -85,6 +85,8 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
     $this->assertPageTitle('Massive gaining seo traffic text');
     $this->assertSession()->pageTextContains('Test ' . $type);
 
+    file_put_contents('/tmp/output.html', $this->getSession()->getPage()->getContent());
+
     // Check Image paragraph.
     $this->assertSession()
       ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][2]//img', 1);

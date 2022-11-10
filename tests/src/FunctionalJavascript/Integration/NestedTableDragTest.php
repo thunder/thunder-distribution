@@ -35,7 +35,7 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
    */
   public function testNestedTableSorting(): void {
     $this->nodeFillNew([]);
-    file_put_contents('/tmp/output.txt', $this->getSession()->getPage()->getOuterHtml());
+
     // Add text paragraph with two elements.
     $this->addTextParagraph(static::$paragraphsField, '<p>Some random text paragraph.</p>');
     $this->addLinkParagraph(static::$paragraphsField, 'Example 11', 'https://example.com/11');
