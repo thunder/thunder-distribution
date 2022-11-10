@@ -35,7 +35,6 @@ function thunder_update_dependencies(): array {
   $thunder_module_list = [
     'thunder',
     'thunder_article',
-    'thunder_news_article',
     'thunder_liveblog',
     'thunder_media',
     'thunder_paragraphs',

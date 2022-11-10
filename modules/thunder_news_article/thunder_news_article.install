@@ -5,8 +5,13 @@
  * The install file.
  */
 
+use Drupal\Core\Config\ExtensionInstallStorage;
+
 /**
  * Implements hook_install().
+ *
+ * If workflow module is enabled, we try to add the news article to the
+ * editorial workflow.
  */
 function thunder_news_article_install(): void {
   try {
@@ -15,27 +20,51 @@ function thunder_news_article_install(): void {
     if (!\Drupal::entityTypeManager()->getDefinition($handlerClass, FALSE)) {
       return;
     }
-
-    // Ignore, if editorial workflow is not available.
-    $workflowId = 'editorial';
-    if (!$editorialWorkflow = \Drupal::entityTypeManager()->getStorage($handlerClass)->load($workflowId)) {
-      return;
-    }
-
-    // Ignore, if news_article is already configured.
-    $config = $editorialWorkflow->getTypePlugin()->getConfiguration();
-    if (isset($config['entity_types']['node']['news_article'])) {
-      return;
-    }
-
-    $config['entity_types']['node'][] = 'news_article';
-    $editorialWorkflow->getTypePlugin()->setConfiguration($config);
-    $editorialWorkflow->save();
+    thunder_news_article_add_to_workflow();
   }
   catch (\Exception $e) {
     \Drupal::logger('thunder')->info(t('Could not add news_article content type to editorial workflow: "@message"', ['@message' => $e->getMessage()]));
     return;
   }
+}
+
+/**
+ * Implements hook_modules_installed().
+ */
+function thunder_news_article_modules_installed($modules): void {
+  if (!in_array('thunder_workflow', $modules, TRUE)) {
+    return;
+  }
+
+  try {
+    thunder_news_article_add_to_workflow();
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('thunder')->info(t('Could not add news_article content type to editorial workflow: "@message"', ['@message' => $e->getMessage()]));
+    return;
+  }
+}
+
+/**
+ * Add news_article to editorial workflow.
+ *
+ * @return void
+ */
+function thunder_news_article_add_to_workflow(): void {
+  // Ignore, if editorial workflow is not available.
+  if (!$editorialWorkflow = \Drupal::entityTypeManager()->getStorage('workflow')->load('editorial')) {
+    return;
+  }
+
+  // Ignore, if news_article is already configured.
+  $config = $editorialWorkflow->getTypePlugin()->getConfiguration();
+  if (isset($config['entity_types']['node']['news_article'])) {
+    return;
+  }
+
+  $config['entity_types']['node'][] = 'news_article';
+  $editorialWorkflow->getTypePlugin()->setConfiguration($config);
+  $editorialWorkflow->save();
 }
 
 /* hook_update_n implementations should be in the profile instead of this
