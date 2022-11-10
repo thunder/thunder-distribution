@@ -150,7 +150,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @param array $fieldValues
    *   Custom meta tag configuration for article.
    */
-  protected function createArticleWithFields(array $fieldValues = []): void {
+  protected function createArticleWithFields(array $fieldValues = [], string $contentType): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $fieldValues += [
       'field_channel' => $term->id(),
@@ -159,7 +159,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       'field_teaser_text[0][value]' => static::$tokens['[node:field_teaser_text]'],
     ];
 
-    $this->nodeFillNew($fieldValues);
+    $this->nodeFillNew($fieldValues, $contentType);
 
     $media = $this->loadMediaByUuid('17965877-27b2-428f-8b8c-7dccba9786e5');
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $media->id()]);
@@ -197,8 +197,10 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
   /**
    * Test Meta Tag default configuration and custom configuration for article.
+   *
+   * @dataProvider providerContentTypes
    */
-  public function testArticleMetaTags(): void {
+  public function testArticleMetaTags(string $contentType, string $contentTypeDisplayName): void {
     $globalConfigs = $this->generateMetaTagConfiguration([static::$globalMetaTags]);
     $contentConfigs = $this->generateMetaTagConfiguration([static::$contentMetaTags]);
     $articleConfigs = $this->generateMetaTagConfiguration([static::$articleMetaTags]);
@@ -235,18 +237,20 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->checkSavedConfiguration($configurationUrl, $articleConfigs);
 
     // Create Article with default meta tags and check it.
-    $this->createArticleWithFields();
+    $this->createArticleWithFields([], $contentType);
     $this->checkMetaTags($checkArticleMetaTags);
 
     // Create Article with custom meta tags and check it.
-    $this->createArticleWithFields($this->generateMetaTagFieldValues($checkCustomConfigs, 'field_meta_tags[0]'));
+    $this->createArticleWithFields($this->generateMetaTagFieldValues($checkCustomConfigs, 'field_meta_tags[0]'), $contentType);
     $this->checkMetaTags($checkCustomMetaTags);
   }
 
   /**
    * Test Scheduling of Article.
+   *
+   * @dataProvider providerContentTypes
    */
-  public function testArticleScheduling(): void {
+  public function testArticleScheduling(string $contentType, string $contentTypeDisplayName): void {
     $articleId = 10;
 
     // Create article with published 2 days ago, unpublish tomorrow.
@@ -262,7 +266,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       'unpublish_state[0]' => 'unpublished',
     ];
 
-    $this->createArticleWithFields($fieldValues);
+    $this->createArticleWithFields($fieldValues, $contentType);
 
     // Check that Article is unpublished.
     $this->drupalGet('node/' . $articleId);
@@ -333,9 +337,10 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   /**
    * Test Site Map for Article.
    *
+   * @dataProvider providerContentTypes
    * @group NoUpdate
    */
-  public function testSiteMap(): void {
+  public function testSiteMap(string $contentType, string $contentTypeDisplayName): void {
     $articleId = 10;
     $articleUrl = 'test-sitemap-seo-title';
 
@@ -343,7 +348,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       'field_seo_title[0][value]' => $articleUrl,
     ];
 
-    $this->createArticleWithFields($customFields);
+    $this->createArticleWithFields($customFields, $contentType);
 
     $this->drupalGet('node/' . $articleId . '/edit');
 
