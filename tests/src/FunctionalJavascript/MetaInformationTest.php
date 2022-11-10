@@ -150,7 +150,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @param array $fieldValues
    *   Custom meta tag configuration for article.
    */
-  protected function createArticleWithFields(array $fieldValues = [], string $contentType): void {
+  protected function createArticleWithFields(string $contentType, array $fieldValues = []): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $fieldValues += [
       'field_channel' => $term->id(),
@@ -237,11 +237,11 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->checkSavedConfiguration($configurationUrl, $articleConfigs);
 
     // Create Article with default meta tags and check it.
-    $this->createArticleWithFields([], $contentType);
+    $this->createArticleWithFields($contentType);
     $this->checkMetaTags($checkArticleMetaTags);
 
     // Create Article with custom meta tags and check it.
-    $this->createArticleWithFields($this->generateMetaTagFieldValues($checkCustomConfigs, 'field_meta_tags[0]'), $contentType);
+    $this->createArticleWithFields($contentType, $this->generateMetaTagFieldValues($checkCustomConfigs, 'field_meta_tags[0]'));
     $this->checkMetaTags($checkCustomMetaTags);
   }
 
@@ -266,7 +266,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       'unpublish_state[0]' => 'unpublished',
     ];
 
-    $this->createArticleWithFields($fieldValues, $contentType);
+    $this->createArticleWithFields($contentType, $fieldValues);
 
     // Check that Article is unpublished.
     $this->drupalGet('node/' . $articleId);
@@ -348,7 +348,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       'field_seo_title[0][value]' => $articleUrl,
     ];
 
-    $this->createArticleWithFields($customFields, $contentType);
+    $this->createArticleWithFields($contentType, $customFields);
 
     $this->drupalGet('node/' . $articleId . '/edit');
 
