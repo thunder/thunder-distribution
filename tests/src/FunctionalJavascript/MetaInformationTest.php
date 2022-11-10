@@ -147,10 +147,14 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   /**
    * Create simple article for meta tag testing.
    *
+   * @param string $contentType
+   *   The node content type.
    * @param array $fieldValues
    *   Custom meta tag configuration for article.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  protected function createArticleWithFields(string $contentType, array $fieldValues = []): void {
+  protected function createNodeWithFields(string $contentType, array $fieldValues = []): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $fieldValues += [
       'field_channel' => $term->id(),
@@ -237,11 +241,11 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->checkSavedConfiguration($configurationUrl, $articleConfigs);
 
     // Create Article with default meta tags and check it.
-    $this->createArticleWithFields($contentType);
+    $this->createNodeWithFields($contentType);
     $this->checkMetaTags($checkArticleMetaTags);
 
     // Create Article with custom meta tags and check it.
-    $this->createArticleWithFields($contentType, $this->generateMetaTagFieldValues($checkCustomConfigs, 'field_meta_tags[0]'));
+    $this->createNodeWithFields($contentType, $this->generateMetaTagFieldValues($checkCustomConfigs, 'field_meta_tags[0]'));
     $this->checkMetaTags($checkCustomMetaTags);
   }
 
@@ -266,7 +270,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       'unpublish_state[0]' => 'unpublished',
     ];
 
-    $this->createArticleWithFields($contentType, $fieldValues);
+    $this->createNodeWithFields($contentType, $fieldValues);
 
     // Check that Article is unpublished.
     $this->drupalGet('node/' . $articleId);
@@ -348,7 +352,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       'field_seo_title[0][value]' => $articleUrl,
     ];
 
-    $this->createArticleWithFields($contentType, $customFields);
+    $this->createNodeWithFields($contentType, $customFields);
 
     $this->drupalGet('node/' . $articleId . '/edit');
 
