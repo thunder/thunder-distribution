@@ -27,7 +27,7 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
    *
    * @dataProvider providerContentTypes
    */
-  public function testCreateNode(string $type): void {
+  public function testCreateNode(string $contentType, string $contentTypeDisplayName): void {
     // Create a video media item.
     $this->drupalGet("media/add/video");
     $this->assertSession()->fieldExists('Video URL')->setValue('https://www.youtube.com/watch?v=PWjcqE3QKBg');
@@ -37,9 +37,9 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->nodeFillNew([
       'field_channel' => $term->id(),
-      'title[0][value]' => 'Test ' . $type,
+      'title[0][value]' => 'Test ' . $contentTypeDisplayName,
       'field_seo_title[0][value]' => 'Massive gaining seo traffic text',
-    ], $type);
+    ], $contentType);
 
     $image1 = $this->loadMediaByUuid('23f6d444-ece1-465d-a667-b1fb80e641d3');
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $image1->id()]);
@@ -76,14 +76,14 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
     // Add Pinterest Paragraph.
     $this->addSocialParagraph(static::$paragraphsField, 'https://www.pinterest.de/pin/478085316687452268/', 'pinterest');
 
-    $this->createScreenshot($this->getScreenshotFolder() . '/' . ucfirst($type) . 'CreationTest_BeforeSave_' . date('Ymd_His') . '.png');
+    $this->createScreenshot($this->getScreenshotFolder() . '/' . ucfirst($contentType) . 'CreationTest_BeforeSave_' . date('Ymd_His') . '.png');
 
     $this->clickSave();
 
-    $this->createScreenshot($this->getScreenshotFolder() . '/' . ucfirst($type) . 'CreationTest_AfterSave_' . date('Ymd_His') . '.png');
+    $this->createScreenshot($this->getScreenshotFolder() . '/' . ucfirst($contentType) . 'CreationTest_AfterSave_' . date('Ymd_His') . '.png');
 
     $this->assertPageTitle('Massive gaining seo traffic text');
-    $this->assertSession()->pageTextContains('Test ' . $type);
+    $this->assertSession()->pageTextContains('Test ' . $contentTypeDisplayName);
 
     // Check Image paragraph.
     $this->assertSession()
@@ -128,16 +128,6 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
     // Check that one Pinterest widget is on page.
     $this->assertSession()
       ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][9]//span[contains(@data-pin-id, "478085316687452268")]', 2);
-  }
-
-  /**
-   * Content type provider for node tests.
-   */
-  public function providerContentTypes(): array {
-    return [
-      'Article' => ['article'],
-      'News Article' => ['news_article'],
-    ];
   }
 
 }

@@ -24,6 +24,10 @@ trait ThunderArticleTestTrait {
     $this->drupalGet('node/add/' . $type);
     $this->assertWaitOnAjaxRequest();
 
+    if (empty($fieldValues)) {
+      return;
+    }
+
     $this->expandAllTabs();
     if ($this->getSession()->getPage()->hasButton('Customize meta tags')) {
       $this->getSession()->getPage()->pressButton('Customize meta tags');
@@ -31,9 +35,6 @@ trait ThunderArticleTestTrait {
       $this->expandAllTabs();
     }
 
-    if (empty($fieldValues)) {
-      return;
-    }
     $this->setFieldValues($fieldValues);
   }
 
