@@ -21,10 +21,6 @@ trait ThunderArticleTestTrait {
    *   The node type to create.
    */
   public function nodeFillNew(array $fieldValues, string $type = 'article'): void {
-    if (empty($fieldValues)) {
-      return;
-    }
-
     $this->drupalGet('node/add/' . $type);
     $this->assertWaitOnAjaxRequest();
 
@@ -33,6 +29,10 @@ trait ThunderArticleTestTrait {
       $this->getSession()->getPage()->pressButton('Customize meta tags');
       $this->assertWaitOnAjaxRequest();
       $this->expandAllTabs();
+    }
+
+    if (empty($fieldValues)) {
+      return;
     }
     $this->setFieldValues($fieldValues);
   }
