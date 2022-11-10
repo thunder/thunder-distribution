@@ -77,7 +77,6 @@ trait ThunderParagraphsTestTrait {
       $addButtonPosition = $position * 2 + 1;
       $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child({$addButtonPosition}) li:nth-child({$index}) button.paragraphs-features__add-in-between__button";
     }
-    file_put_contents('/tmp/output.txt', $this->getSession()->getPage()->getOuterHtml(), FILE_APPEND);
 
     $this->clickCssSelector($addButtonCssSelector);
     if ($index > 3) {
