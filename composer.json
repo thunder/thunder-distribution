@@ -43,9 +43,6 @@
                 "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2020-06-05/2851580-88.patch",
                 "Trying to access array offset on value of type null in EntityBrowserElement valueCallback": "https://www.drupal.org/files/issues/2021-02-19/3199269-array-value-null.patch"
             },
-            "drupal/password_policy": {
-                "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2020-04-14/2918974-7-11.patch"
-            },
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
             },
@@ -101,7 +98,7 @@
         "drupal/paragraphs": "^1.12",
         "drupal/paragraphs_features": "^1.15",
         "drupal/paragraphs_paste": "^2.0-beta3",
-        "drupal/password_policy": "3.1",
+        "drupal/password_policy": "^3.2",
         "drupal/pathauto": "^1.9",
         "drupal/responsive_preview": "^1.0-alpha7",
         "drupal/redirect": "^1.7",
