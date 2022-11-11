@@ -35,8 +35,7 @@
         "installer-name": "thunder",
         "patches": {
             "drupal/diff": {
-                "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch",
-                "Deprecated function: strlen(): Passing null to parameter #1 ($string) of type string is deprecated": "https://git.drupalcode.org/project/diff/-/merge_requests/10.diff"
+                "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
             "drupal/entity_browser": {
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2019-07-04/2858438_19.patch",
