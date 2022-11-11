@@ -236,7 +236,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->checkSavedConfiguration($configurationUrl, $contentConfigs);
 
     // Edit Article configuration.
-    $configurationUrl = 'admin/config/search/metatag/node__article';
+    $configurationUrl = 'admin/config/search/metatag/node__' . $contentType;
     $this->setMetaTagConfigurationForUrl($configurationUrl, $articleConfigs);
     $this->checkSavedConfiguration($configurationUrl, $articleConfigs);
 
