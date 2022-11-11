@@ -240,6 +240,7 @@ jobs:
 
           composer update
           composer exec -- drush updb -y
+          composer exec -- drush pm:enable thunder_news_article --yes
 
           cd docroot
           php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
