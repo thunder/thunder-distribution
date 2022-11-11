@@ -204,7 +204,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    *
    * @dataProvider providerContentTypes
    */
-  public function testArticleMetaTags(string $contentType, string $contentTypeDisplayName): void {
+  public function testArticleMetaTags(string $contentType): void {
     $globalConfigs = $this->generateMetaTagConfiguration([static::$globalMetaTags]);
     $contentConfigs = $this->generateMetaTagConfiguration([static::$contentMetaTags]);
     $articleConfigs = $this->generateMetaTagConfiguration([static::$articleMetaTags]);
@@ -254,7 +254,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    *
    * @dataProvider providerContentTypes
    */
-  public function testArticleScheduling(string $contentType, string $contentTypeDisplayName): void {
+  public function testArticleScheduling(string $contentType): void {
     $articleId = 10;
 
     // Create article with published 2 days ago, unpublish tomorrow.
@@ -344,7 +344,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * @dataProvider providerContentTypes
    * @group NoUpdate
    */
-  public function testSiteMap(string $contentType, string $contentTypeDisplayName): void {
+  public function testSiteMap(string $contentType): void {
     $articleId = 10;
     $articleUrl = 'test-sitemap-seo-title';
 
