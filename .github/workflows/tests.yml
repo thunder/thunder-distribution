@@ -20,6 +20,7 @@ env:
   DRUPAL_TESTING_HTTP_PORT: 8888
   DRUPAL_TESTING_VERBOSE: false
   DRUPAL_TESTING_VERSION: "^1.0.36"
+  DRUPAL_TESTING_TEST_FILTER: ""
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
@@ -112,7 +113,7 @@ jobs:
         ports:
           - 3306:3306
       selenium:
-        image: selenium/standalone-chrome:102.0
+        image: selenium/standalone-chrome:105.0
         options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
         ports:
           - 4444:4444
@@ -176,7 +177,7 @@ jobs:
         ports:
           - 3306:3306
       selenium:
-        image: selenium/standalone-chrome
+        image: selenium/standalone-chrome:105.0
         options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
         ports:
           - 4444:4444
@@ -266,7 +267,7 @@ jobs:
         ports:
           - 3306:3306
       selenium:
-        image: selenium/standalone-chrome
+        image: selenium/standalone-chrome:105.0
         options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
         ports:
           - 4444:4444
