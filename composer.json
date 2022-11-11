@@ -72,7 +72,7 @@
         "drupal/crop": "^2.2",
         "drupal/ctools": "^3.6",
         "drupal/default_content": "^1.0-alpha7||^2.0-alpha2",
-        "drupal/diff": "1.0",
+        "drupal/diff": "1.1",
         "drupal/dropzonejs": "^2.1",
         "drupal/empty_fields": "^1.0-alpha1",
         "drupal/entity_browser": "2.6",
