@@ -23,11 +23,11 @@ trait ThunderArticleTestTrait {
   public function nodeFillNew(array $fieldValues, string $type = 'article'): void {
     $this->drupalGet('node/add/' . $type);
     $this->assertWaitOnAjaxRequest();
-
     if (empty($fieldValues)) {
       return;
     }
 
+    file_put_contents('/tmp/output.html', $this->getSession()->getPage()->getContent());
     $this->expandAllTabs();
     if ($this->getSession()->getPage()->hasButton('Customize meta tags')) {
       $this->getSession()->getPage()->pressButton('Customize meta tags');
