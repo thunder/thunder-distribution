@@ -13,6 +13,11 @@
  */
 function thunder_news_article_install(): void {
   try {
+    $config_path = Drupal::service('extension.list.profile')->getPath('thunder') . '/config/install';
+    $source = new FileStorage($config_path);
+    $config_storage = \Drupal::service('config.storage');
+    $config_storage->write('simple_sitemap.bundle_settings.article.node.news_article', $source->read('simple_sitemap.bundle_settings.article.node.news_article'));
+
     // Ignore, if workflow entity is not available.
     if (!\Drupal::entityTypeManager()->getDefinition('workflow', FALSE)) {
       return;
