@@ -17,7 +17,7 @@ use GraphQL\Type\Definition\ResolveInfo;
  * @SchemaExtension(
  *   id = "thunder_pages",
  *   name = "Content pages",
- *   description = "Adds page types and their fields.",
+ *   description = "Adds page types and their fields (required).",
  *   schema = "thunder"
  * )
  */
