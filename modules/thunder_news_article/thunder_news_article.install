@@ -19,7 +19,7 @@ function thunder_news_article_install(): void {
     $config_storage->write('simple_sitemap.bundle_settings.article.node.news_article', $source->read('simple_sitemap.bundle_settings.article.node.news_article'));
 
     foreach (['editor', 'seo'] as $role) {
-      if ($role = Role::load($role)) {
+      if ($role = \Drupal\user\Entity\Role::load($role)) {
         $role->grantPermission('create news_article content')
           ->grantPermission('delete any news_article content')
           ->grantPermission('delete news_article revisions')
@@ -31,7 +31,7 @@ function thunder_news_article_install(): void {
           ->save();
       }
     }
-    if ($role = Role::load('restricted_editor')) {
+    if ($role = \Drupal\user\Entity\Role::load('restricted_editor')) {
       $role->grantPermission('create news_article content')
         ->grantPermission('delete any news_article content')
         ->grantPermission('delete news_article revisions')
