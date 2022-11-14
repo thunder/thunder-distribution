@@ -21,20 +21,11 @@ function thunder_news_article_install(): void {
     $config_storage = \Drupal::service('config.storage');
     $config_storage->write('simple_sitemap.bundle_settings.article.node.news_article', $source->read('simple_sitemap.bundle_settings.article.node.news_article'));
 
-    foreach (['editor', 'seo'] as $role) {
-      if ($role = Role::load($role)) {
-        $role->grantPermission('create news_article content')
-          ->grantPermission('delete any news_article content')
-          ->grantPermission('delete news_article revisions')
-          ->grantPermission('delete own news_article content')
-          ->grantPermission('edit any news_article content')
-          ->grantPermission('edit own news_article content')
-          ->grantPermission('revert news_article revisions')
-          ->grantPermission('view news_article revisions')
-          ->save();
+    foreach (['editor', 'seo', 'restricted_editor'] as $roleName) {
+      if (!$role = Role::load($roleName)) {
+        continue;
       }
-    }
-    if ($role = Role::load('restricted_editor')) {
+
       $role->grantPermission('create news_article content')
         ->grantPermission('delete any news_article content')
         ->grantPermission('delete news_article revisions')
@@ -42,6 +33,13 @@ function thunder_news_article_install(): void {
         ->grantPermission('edit any news_article content')
         ->grantPermission('edit own news_article content')
         ->grantPermission('view news_article revisions')
+        ->save();
+
+      if ($roleName === 'restricted_editor') {
+        continue;
+      }
+
+      $role->grantPermission('revert news_article revisions')
         ->save();
     }
 
