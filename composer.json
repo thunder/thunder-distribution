@@ -40,11 +40,7 @@
                 "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch"
             },
             "drupal/diff": {
-                "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch",
-                "Deprecated function: strlen(): Passing null to parameter #1 ($string) of type string is deprecated": "https://git.drupalcode.org/project/diff/-/merge_requests/10.diff"
-            },
-            "drupal/password_policy": {
-                "Policies should declare a config dependency on the plugin modules": "https://www.drupal.org/files/issues/2020-04-14/2918974-7-11.patch"
+                "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
@@ -57,9 +53,6 @@
             },
             "drupal/media_library_media_modify": {
                 "Add field diff builder": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/29.diff"
-            },
-            "drupal/gin": {
-                "Error in dialog.position.js on media library selection": "https://git.drupalcode.org/project/gin/-/merge_requests/188.diff"
             }
         }
     },
@@ -79,7 +72,7 @@
         "drupal/crop": "^2.2",
         "drupal/ctools": "^3.6",
         "drupal/default_content": "^1.0-alpha7||^2.0-alpha2",
-        "drupal/diff": "1.0",
+        "drupal/diff": "1.1",
         "drupal/dropzonejs": "^2.6",
         "drupal/empty_fields": "^1.0-alpha1",
         "drupal/entity_reference_actions": "^1.0-beta9",
@@ -105,7 +98,7 @@
         "drupal/paragraphs": "^1.12",
         "drupal/paragraphs_features": "dev-2.x",
         "drupal/paragraphs_paste": "^2.0-beta3",
-        "drupal/password_policy": "3.1",
+        "drupal/password_policy": "^3.2",
         "drupal/pathauto": "^1.9",
         "drupal/responsive_preview": "^1.0-alpha7",
         "drupal/redirect": "^1.7",

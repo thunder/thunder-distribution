@@ -13,7 +13,7 @@ use GraphQL\Type\Definition\ResolveInfo;
  * @SchemaExtension(
  *   id = "thunder_paragraphs",
  *   name = "Paragraph extension",
- *   description = "Adds paragraphs and their fields.",
+ *   description = "Adds paragraphs and their fields (required).",
  *   schema = "thunder"
  * )
  */
@@ -67,7 +67,7 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
       $this->builder->fromPath('entity', 'field_media.entity.field_url.value'),
     );
     $this->addFieldResolverIfNotExists('ParagraphInstagram', 'provider',
-      $this->builder->fromValue('pinterest')
+      $this->builder->fromValue('instagram')
     );
 
     // Pinterest.
