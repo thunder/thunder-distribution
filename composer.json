@@ -95,7 +95,7 @@
         "drupal/paragraphs_paste": "^2.0-beta3",
         "drupal/password_policy": "^3.2",
         "drupal/pathauto": "^1.9",
-        "drupal/responsive_preview": "^1.0-alpha7",
+        "drupal/responsive_preview": "^2.0",
         "drupal/redirect": "^1.7",
         "drupal/scheduler": "^1.4",
         "drupal/scheduler_content_moderation_integration": "^1.3",
