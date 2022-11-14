@@ -42,5 +42,5 @@ function _thunder_mark_update_checklist(string $update_id, bool $successful, Upd
  * Implements hook_update_last_removed().
  */
 function thunder_update_last_removed(): int {
-  return 8324;
+  return 8325;
 }
