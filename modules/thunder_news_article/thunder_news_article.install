@@ -5,6 +5,9 @@
  * The install file.
  */
 
+use Drupal\user\Entity\Role;
+use Drupal\Core\Config\FileStorage;
+
 /**
  * Implements hook_install().
  *
@@ -14,12 +17,12 @@
 function thunder_news_article_install(): void {
   try {
     $config_path = Drupal::service('extension.list.profile')->getPath('thunder') . '/config/install';
-    $source = new \Drupal\Core\Config\FileStorage($config_path);
+    $source = new FileStorage($config_path);
     $config_storage = \Drupal::service('config.storage');
     $config_storage->write('simple_sitemap.bundle_settings.article.node.news_article', $source->read('simple_sitemap.bundle_settings.article.node.news_article'));
 
     foreach (['editor', 'seo'] as $role) {
-      if ($role = \Drupal\user\Entity\Role::load($role)) {
+      if ($role = Role::load($role)) {
         $role->grantPermission('create news_article content')
           ->grantPermission('delete any news_article content')
           ->grantPermission('delete news_article revisions')
@@ -31,7 +34,7 @@ function thunder_news_article_install(): void {
           ->save();
       }
     }
-    if ($role = \Drupal\user\Entity\Role::load('restricted_editor')) {
+    if ($role = Role::load('restricted_editor')) {
       $role->grantPermission('create news_article content')
         ->grantPermission('delete any news_article content')
         ->grantPermission('delete news_article revisions')
@@ -41,7 +44,6 @@ function thunder_news_article_install(): void {
         ->grantPermission('view news_article revisions')
         ->save();
     }
-
 
     // Ignore, if workflow entity is not available.
     if (!\Drupal::entityTypeManager()->getDefinition('workflow', FALSE)) {
