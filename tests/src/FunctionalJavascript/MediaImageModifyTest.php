@@ -100,8 +100,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     // Go to the media view and try deleting the image media.
     $this->drupalGet('admin/content/media');
     $this->getSession()->getPage()->find('css', 'div.view-media')->clickLink('Thunder City');
-    /** @var \Drupal\media\Entity\Media $media */
-    $media = \Drupal::service('entity.repository')->loadEntityByUuid('media', '5d719c64-7f32-4062-9967-9874f5ca3eba');
+    $media = $this->loadMediaByUuid('5d719c64-7f32-4062-9967-9874f5ca3eba');
     $this->assertSession()->addressMatches('#media/' . $media->id() . '/edit$#');
     /** @var \Drupal\file\FileInterface $file */
     $file = $media->get($media->getSource()->getConfiguration()['source_field'])->entity;
