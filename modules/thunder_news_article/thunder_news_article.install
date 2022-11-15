@@ -43,7 +43,7 @@ function thunder_news_article_install(): void {
         $role->grantPermission('revert news_article revisions');
       }
 
-      if (in_array(['anonymous', 'authenticated'], $role->bundle(), TRUE)) {
+      if (in_array($role->bundle(), ['anonymous', 'authenticated'],TRUE)) {
         if ($role->hasPermission('view any article content')) {
           $role->grantPermission('view any news_article content');
         }
