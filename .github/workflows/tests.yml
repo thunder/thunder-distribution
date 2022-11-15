@@ -254,8 +254,7 @@ jobs:
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Run tests suite
-        run: |
-          test-drupal-project run_tests
+        run: test-drupal-project run_tests
 
   test-min:
 
