@@ -45,9 +45,6 @@ function thunder_news_article_install(): void {
       if ($role->hasPermission('view article revisions')) {
         $role->grantPermission('view news_article revisions');
       }
-      if ($role->hasPermission('view any article content')) {
-        $role->grantPermission('view any news_article content');
-      }
       if ($role->hasPermission('access_unpublished node article')) {
         $role->grantPermission('access_unpublished node news_article');
       }
