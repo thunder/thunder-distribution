@@ -5,6 +5,6 @@ dependencies:
     - simple_sitemap.type.default_hreflang
 id: article
 label: Article
-description: null
+description: ''
 type: default_hreflang
 weight: 0

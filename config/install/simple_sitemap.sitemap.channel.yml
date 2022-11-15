@@ -5,6 +5,6 @@ dependencies:
     - simple_sitemap.type.default_hreflang
 id: channel
 label: Channel
-description: null
+description: ''
 type: default_hreflang
 weight: 2
