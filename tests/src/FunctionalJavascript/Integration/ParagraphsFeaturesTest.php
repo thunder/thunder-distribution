@@ -33,7 +33,7 @@ class ParagraphsFeaturesTest extends ThunderJavascriptTestBase {
       'field_channel' => $term->id(),
       'title[0][value]' => 'Article 1',
       'field_seo_title[0][value]' => 'Article 1',
-    ]);
+    ], 'article');
 
     // Add text paragraph with two elements.
     $this->addTextParagraph(static::$paragraphsField, 'Test Delete Confirmation to delete text');

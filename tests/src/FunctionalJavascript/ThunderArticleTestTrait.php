@@ -20,7 +20,7 @@ trait ThunderArticleTestTrait {
    * @param string $type
    *   The node type to create.
    */
-  public function nodeFillNew(array $fieldValues, string $type = 'article'): void {
+  public function nodeFillNew(array $fieldValues, string $type): void {
     $this->drupalGet('node/add/' . $type);
     $this->assertWaitOnAjaxRequest();
     if (empty($fieldValues)) {
