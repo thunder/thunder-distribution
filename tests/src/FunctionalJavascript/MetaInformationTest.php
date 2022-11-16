@@ -369,7 +369,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->expandAllTabs();
     $this->setFieldValues([
-      'priority_article_node_settings' => '0.9',
+      'simple_sitemap[article][priority]' => '0.9',
     ]);
 
     $this->clickSave();
@@ -410,7 +410,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->expandAllTabs();
     $this->setFieldValues([
-      'index_article_node_settings' => '0',
+      'simple_sitemap[article][index]' => '0',
     ]);
 
     $this->clickSave();
