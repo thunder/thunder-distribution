@@ -7,4 +7,4 @@ id: article
 label: Article
 description: ''
 type: default_hreflang
-weight: 0
+weight: -10

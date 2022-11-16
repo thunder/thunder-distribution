@@ -7,4 +7,4 @@ id: basic
 label: Basic
 description: ''
 type: default_hreflang
-weight: 1
+weight: -9

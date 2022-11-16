@@ -23,7 +23,7 @@ third_party_settings:
       label: Paragraphs
       region: content
       parent_name: ''
-      weight: 3
+      weight: 1
       format_type: fieldset
       format_settings:
         classes: 'content-form__form-section paragraphs-container'
@@ -38,7 +38,7 @@ third_party_settings:
       label: Basis
       region: content
       parent_name: ''
-      weight: 2
+      weight: 0
       format_type: fieldset
       format_settings:
         classes: content-form__form-section
@@ -53,13 +53,13 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 5
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   field_meta_tags:
     type: metatag_async_widget_firehose
-    weight: 7
+    weight: 5
     region: content
     settings:
       sidebar: true
@@ -105,36 +105,36 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 14
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 6
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 8
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: options_select
-    weight: 10
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   simple_sitemap:
-    weight: 10
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 15
+    weight: 12
     region: content
     settings:
       display_label: true
@@ -149,7 +149,7 @@ content:
     third_party_settings: {  }
   uid:
     type: select2_entity_reference
-    weight: 4
+    weight: 2
     region: content
     settings:
       width: 100%
@@ -159,18 +159,18 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 9
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: options_select
-    weight: 11
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 13
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
