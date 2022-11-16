@@ -16,38 +16,27 @@ use Drupal\Core\Config\FileStorage;
  */
 function thunder_news_article_install(): void {
   try {
-
     // Copy existing permissions for articles to news article.
     $roles = Role::loadMultiple();
+    $permissionsMap = [
+      'create article content' => 'create news_article content',
+      'edit any article content' => 'edit any news_article content',
+      'edit own article content' => 'edit own news_article content',
+      'delete any article content' => 'delete any news_article content',
+      'delete own article content' => 'delete own news_article content',
+      'delete article revisions' => 'view any news_article content',
+      'delete article revisions' => 'delete news_article revisions',
+      'revert article revisions' => 'revert news_article revisions',
+      'access_unpublished node article' => 'access_unpublished node news_article',
+    ];
+
     foreach ($roles as $role) {
-      if ($role->hasPermission('create article content')) {
-        $role->grantPermission('create news_article content');
-      }
-      if ($role->hasPermission('edit any article content')) {
-        $role->grantPermission('edit any news_article content');
-      }
-      if ($role->hasPermission('edit own article content')) {
-        $role->grantPermission('edit own news_article content');
-      }
-      if ($role->hasPermission('delete any article content')) {
-        $role->grantPermission('delete any news_article content');
-      }
-      if ($role->hasPermission('delete own article content')) {
-        $role->grantPermission('delete own news_article content');
+      foreach ($permissionsMap as $articlePermission => $newsArticlePermission) {
+        if ($role->hasPermission($articlePermission)) {
+          $role->grantPermission($newsArticlePermission);
+        }
       }
 
-      if ($role->hasPermission('delete article revisions')) {
-        $role->grantPermission('delete news_article revisions');
-      }
-      if ($role->hasPermission('revert article revisions')) {
-        $role->grantPermission('revert news_article revisions');
-      }
-      if ($role->hasPermission('view article revisions')) {
-        $role->grantPermission('view news_article revisions');
-      }
-      if ($role->hasPermission('access_unpublished node article')) {
-        $role->grantPermission('access_unpublished node news_article');
-      }
       $role->save();
     }
 
