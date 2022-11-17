@@ -24,7 +24,7 @@ function thunder_news_article_install(): void {
       'edit own article content' => 'edit own news_article content',
       'delete any article content' => 'delete any news_article content',
       'delete own article content' => 'delete own news_article content',
-      'delete article revisions' => 'view any news_article content',
+      'view any article content' => 'view any news_article content',
       'delete article revisions' => 'delete news_article revisions',
       'revert article revisions' => 'revert news_article revisions',
       'access_unpublished node article' => 'access_unpublished node news_article',
