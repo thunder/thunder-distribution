@@ -27,7 +27,6 @@ trait ThunderArticleTestTrait {
       return;
     }
 
-    file_put_contents('/tmp/output.html', $this->getSession()->getPage()->getContent());
     $this->expandAllTabs();
     if ($this->getSession()->getPage()->hasButton('Customize meta tags')) {
       $this->getSession()->getPage()->pressButton('Customize meta tags');
