@@ -97,9 +97,9 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     /** @var \Drupal\file\FileInterface $file */
     $file = $media->get($media->getSource()->getConfiguration()['source_field'])->entity;
     $this->assertFileExists($file->getFileUri());
-    $this->getSession()->getPage()->find('css', 'div.block-local-tasks-block')->clickLink('Delete');
+    $this->getSession()->getPage()->find('css', 'div.gin-sidebar')->clickLink('Delete');
     $this->assertSession()->fieldNotExists('also_delete_file');
-    $this->assertSession()->pageTextContains('This action cannot be undone. The file attached to this media is owned by admin so will be retained.');
+    $this->assertSession()->pageTextContains('This action cannot be undone.The file attached to this media is owned by admin so will be retained.');
     Role::load(static::$defaultUserRole)->grantPermission('delete any file')->save();
     $this->getSession()->reload();
     $this->assertSession()->fieldExists('also_delete_file')->check();
