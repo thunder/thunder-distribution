@@ -11,7 +11,6 @@ dependencies:
     - paragraphs
     - paragraphs_features
     - path
-    - scheduler_content_moderation_integration
 id: taxonomy_term.channel.default
 targetEntityType: taxonomy_term
 bundle: channel
@@ -23,6 +22,7 @@ content:
     region: content
     settings:
       sidebar: true
+      use_details: true
     third_party_settings: {  }
   field_paragraphs:
     type: paragraphs
@@ -76,12 +76,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  publish_state:
-    type: scheduler_moderation
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 5
@@ -89,13 +83,9 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  unpublish_state:
-    type: scheduler_moderation
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   description: true
   publish_on: true
+  publish_state: true
   unpublish_on: true
+  unpublish_state: true
