@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - simple_sitemap.type.default_hreflang
+id: article
+label: Article
+description: ''
+type: default_hreflang
+weight: -10

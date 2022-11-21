@@ -3,6 +3,7 @@
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Drupal\Tests\Traits\Core\CronRunTrait;
+use Drupal\simple_sitemap\Queue\QueueWorker;
 
 /**
  * Testing of Meta Information.
@@ -112,7 +113,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   /**
    * Simple sitemap generator.
    *
-   * @var \Drupal\simple_sitemap\Simplesitemap
+   * @var \Drupal\simple_sitemap\Manager\Generator
    */
   protected $sitemapGenerator;
 
@@ -354,7 +355,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     // Do not add html transformation information to prevent rendering of the
     // sitemap in html.
     $this->sitemapGenerator->saveSetting('xsl', FALSE);
-    $this->sitemapGenerator->generateSitemap('backend');
+    $this->sitemapGenerator->generate(QueueWorker::GENERATE_TYPE_BACKEND);
 
     $this->drupalGet('article/sitemap.xml');
 
@@ -368,12 +369,12 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->expandAllTabs();
     $this->setFieldValues([
-      'priority_article_node_settings' => '0.9',
+      'simple_sitemap[article][priority]' => '0.9',
     ]);
 
     $this->clickSave();
 
-    $this->sitemapGenerator->generateSitemap('backend');
+    $this->sitemapGenerator->generate(QueueWorker::GENERATE_TYPE_BACKEND);
     $this->drupalGet('article/sitemap.xml');
 
     $content = $this->getSession()->getPage()->getContent();
@@ -386,7 +387,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       ->getEditable('simple_sitemap.settings')
       ->set('max_links', 2)
       ->save();
-    $this->sitemapGenerator->generateSitemap('backend');
+    $this->sitemapGenerator->generate(QueueWorker::GENERATE_TYPE_BACKEND);
 
     // Check loc, that it's pointing to sitemap.xml file.
     $this->drupalGet('article/sitemap.xml');
@@ -409,12 +410,12 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->expandAllTabs();
     $this->setFieldValues([
-      'index_article_node_settings' => '0',
+      'simple_sitemap[article][index]' => '0',
     ]);
 
     $this->clickSave();
 
-    $this->sitemapGenerator->generateSitemap('backend');
+    $this->sitemapGenerator->generate(QueueWorker::GENERATE_TYPE_BACKEND);
     $this->drupalGet('article/sitemap.xml', $urlOptions);
 
     $content = $this->getSession()->getPage()->getContent();

@@ -56,6 +56,9 @@ Thunder's new default frontend theme is Olivero, and we removed Thunder Base whi
 was removed from Drupal 10 as well. In case you use Thunder Base as your theme, you have to switch to a different one
 before updating. We recommend to switch to Olivero as well.
 
+In Thunder 7 we also upgraded the simple_sitemap module from version 3 to version 4. If your project has custom plugins,
+you have to update them to the new version. See the [simple_sitemap documentation](https://gbyte.dev/blog/simple-xml-sitemap-4-0-has-been-released?language_content_entity=und).
+
 ## Execute the update
 
 All you need to do now is:
