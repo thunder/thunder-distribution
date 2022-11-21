@@ -44,3 +44,12 @@ function _thunder_mark_update_checklist(string $update_id, bool $successful, Upd
 function thunder_update_last_removed(): int {
   return 8325;
 }
+
+/**
+ * Install media_file_delete.
+ */
+function thunder_update_8326(): void {
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
+  $moduleInstaller = \Drupal::service('module_installer');
+  $moduleInstaller->install(['media_file_delete']);
+}

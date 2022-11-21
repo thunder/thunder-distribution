@@ -4,6 +4,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\user\Entity\Role;
 
 /**
  * Tests the Image media modification.
@@ -87,6 +88,23 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     /** @var \Drupal\file\FileInterface $file */
     $file = $image2->field_image->entity;
     $this->assertEquals([$file->getFilename()], $this->getSession()->evaluateScript('jQuery(\'[data-drupal-selector="edit-field-paragraphs-0-preview"] article.media--view-mode-paragraph-preview img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1)'), 'Image file should be identical to previously selected.');
+
+    // Go to the media view and try deleting the image media.
+    $this->drupalGet('admin/content/media');
+    $this->getSession()->getPage()->find('css', 'div.view-media')->clickLink('Thunder City');
+    $media = $this->loadMediaByUuid('5d719c64-7f32-4062-9967-9874f5ca3eba');
+    $this->assertSession()->addressMatches('#media/' . $media->id() . '/edit$#');
+    /** @var \Drupal\file\FileInterface $file */
+    $file = $media->get($media->getSource()->getConfiguration()['source_field'])->entity;
+    $this->assertFileExists($file->getFileUri());
+    $this->getSession()->getPage()->find('css', 'div.gin-sidebar')->clickLink('Delete');
+    $this->assertSession()->fieldNotExists('also_delete_file');
+    $this->assertSession()->pageTextContains('This action cannot be undone.The file attached to this media is owned by admin so will be retained.');
+    Role::load(static::$defaultUserRole)->grantPermission('delete any file')->save();
+    $this->getSession()->reload();
+    $this->assertSession()->fieldExists('also_delete_file')->check();
+    $this->getSession()->getPage()->pressButton('Delete');
+    $this->assertFileDoesNotExist($file->getFileUri());
   }
 
 }
