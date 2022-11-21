@@ -45,9 +45,6 @@
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
             },
-            "drupal/simple_sitemap": {
-                "Sitemap variant index functionality": "https://www.drupal.org/files/issues/2021-03-03/simple_sitemap-sitemap_variant_index-3109090-16.patch"
-            },
             "drupal/schema_metatag": {
                 "Metatags have encoded HTML entities instead of plain text content": "https://www.drupal.org/files/issues/2022-02-01/3192117-21.patch"
             },
@@ -75,7 +72,7 @@
         "drupal/diff": "1.1",
         "drupal/dropzonejs": "^2.6",
         "drupal/empty_fields": "^1.0-alpha1",
-        "drupal/entity_reference_actions": "^1.0-beta9",
+        "drupal/entity_reference_actions": "^1.0-beta10",
         "drupal/entity_reference_revisions": "^1.3",
         "drupal/field_group": "3.2",
         "drupal/focal_point": "^1.3",
@@ -83,7 +80,7 @@
         "drupal/gin": "3.x-dev",
         "drupal/gin_toolbar": "1.x-dev",
         "drupal/graphql": "^4.3",
-        "drupal/inline_entity_form": "^1.0-rc7",
+        "drupal/inline_entity_form": "^1.0-rc14",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.1",
         "drupal/linkit": "^6.0.0-beta1",
@@ -92,7 +89,7 @@
         "drupal/media_entity_slideshow": "^2.0-alpha1",
         "drupal/media_entity_twitter": "^2.5",
         "drupal/media_expire": "^2.4",
-        "drupal/media_library_media_modify": "^1.0.0-beta6",
+        "drupal/media_library_media_modify": "^1.0.0-beta8",
         "drupal/metatag": "^1.19",
         "drupal/metatag_async_widget": "^1.0-alpha2",
         "drupal/paragraphs": "^1.12",
@@ -107,7 +104,7 @@
         "drupal/schema_metatag": "2.3",
         "drupal/select2": "^1.7",
         "drupal/search_api_mark_outdated": "^1.0",
-        "drupal/simple_sitemap": "3.11",
+        "drupal/simple_sitemap": "^4.1.3",
         "drupal/slick": "^2.6",
         "drupal/token": "^1.7",
         "drupal/update_helper": "^2.0||^3.0.3",
