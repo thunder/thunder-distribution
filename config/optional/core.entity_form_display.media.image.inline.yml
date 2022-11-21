@@ -15,7 +15,6 @@ dependencies:
     - datetime
     - field_group
     - focal_point
-    - scheduler_content_moderation_integration
     - text
 third_party_settings:
   field_group:
@@ -64,10 +63,9 @@ third_party_settings:
       label: Bottom
       region: content
       parent_name: ''
-      weight: 3
+      weight: 1
       format_type: html_element
       format_settings:
-        label: Bottom
         classes: bottom
         id: ''
         element: div
@@ -149,18 +147,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  publish_state:
-    type: scheduler_moderation
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  unpublish_state:
-    type: scheduler_moderation
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   created: true
   field_tags: true
@@ -168,7 +154,9 @@ hidden:
   moderation_state: true
   path: true
   publish_on: true
+  publish_state: true
   scheduler_settings: true
   status: true
   uid: true
   unpublish_on: true
+  unpublish_state: true
