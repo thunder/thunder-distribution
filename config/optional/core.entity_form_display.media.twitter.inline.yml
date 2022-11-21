@@ -9,6 +9,7 @@ dependencies:
     - media.type.twitter
   module:
     - link
+    - scheduler_content_moderation_integration
 id: media.twitter.inline
 targetEntityType: media
 bundle: twitter
@@ -22,6 +23,18 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
+  publish_state:
+    type: scheduler_moderation
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  unpublish_state:
+    type: scheduler_moderation
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   created: true
   field_author: true
@@ -30,5 +43,8 @@ hidden:
   moderation_state: true
   name: true
   path: true
+  publish_on: true
+  scheduler_settings: true
   status: true
   uid: true
+  unpublish_on: true

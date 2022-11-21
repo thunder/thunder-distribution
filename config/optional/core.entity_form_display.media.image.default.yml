@@ -14,6 +14,7 @@ dependencies:
     - datetime
     - field_group
     - focal_point
+    - scheduler_content_moderation_integration
     - select2
     - text
 third_party_settings:
@@ -116,6 +117,12 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  publish_state:
+    type: scheduler_moderation
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 6
@@ -132,7 +139,15 @@ content:
       autocomplete: true
       match_operator: CONTAINS
     third_party_settings: {  }
+  unpublish_state:
+    type: scheduler_moderation
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   langcode: true
   moderation_state: true
   path: true
+  publish_on: true
+  unpublish_on: true

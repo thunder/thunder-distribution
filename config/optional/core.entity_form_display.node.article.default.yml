@@ -202,7 +202,7 @@ content:
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 12
+    weight: 52
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -213,7 +213,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 11
+    weight: 50
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -251,7 +251,7 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 13
+    weight: 54
     region: content
     settings: {  }
     third_party_settings: {  }

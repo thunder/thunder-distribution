@@ -12,6 +12,7 @@ dependencies:
     - media.type.image
   module:
     - datetime
+    - scheduler_content_moderation_integration
     - select2
     - text
 id: media.image.bulk_edit
@@ -59,6 +60,18 @@ content:
       match_operator: CONTAINS
       match_limit: 10
     third_party_settings: {  }
+  publish_state:
+    type: scheduler_moderation
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  unpublish_state:
+    type: scheduler_moderation
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   created: true
   field_image: true
@@ -66,5 +79,8 @@ hidden:
   moderation_state: true
   name: true
   path: true
+  publish_on: true
+  scheduler_settings: true
   status: true
   uid: true
+  unpublish_on: true
