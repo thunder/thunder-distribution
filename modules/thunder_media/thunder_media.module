@@ -5,7 +5,10 @@
  * Contains media related functions.
  */
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\file\FileInterface;
 
 /**
  * Implements hook_preprocess_media().
@@ -176,4 +179,23 @@ function _thunder_media_media_field_widget_form_alter_helper(array &$widget, str
       }
     }
   }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_access().
+ *
+ * @todo Remove when https://www.drupal.org/project/drupal/issues/2949017 lands
+ *   in Drupal core and the version it lands in is the minimum supported
+ *   version.
+ */
+function thunder_media_file_access(FileInterface $file, string $op, AccountInterface $account): AccessResult {
+  switch ($op) {
+    case 'delete':
+      $access = AccessResult::allowedIfHasPermission($account, 'delete any file');
+      break;
+
+    default:
+      $access = AccessResult::neutral();
+  }
+  return $access;
 }
