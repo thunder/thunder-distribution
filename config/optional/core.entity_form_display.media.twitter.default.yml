@@ -8,8 +8,7 @@ dependencies:
     - media.type.twitter
   module:
     - field_group
-    - link
-    - scheduler_content_moderation_integration
+    - media
     - select2
 third_party_settings:
   field_group:
@@ -35,7 +34,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 1
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -56,18 +55,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_url:
-    type: link_default
+    type: oembed_textfield
     weight: 0
     region: content
     settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-  publish_state:
-    type: scheduler_moderation
-    weight: 30
-    region: content
-    settings: {  }
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   status:
     type: boolean_checkbox
@@ -78,18 +71,13 @@ content:
     third_party_settings: {  }
   uid:
     type: select2_entity_reference
-    weight: 2
+    weight: 3
     region: content
     settings:
       width: 100%
       autocomplete: true
       match_operator: CONTAINS
-    third_party_settings: {  }
-  unpublish_state:
-    type: scheduler_moderation
-    weight: 30
-    region: content
-    settings: {  }
+      match_limit: 10
     third_party_settings: {  }
 hidden:
   langcode: true
@@ -97,4 +85,6 @@ hidden:
   name: true
   path: true
   publish_on: true
+  publish_state: true
   unpublish_on: true
+  unpublish_state: true

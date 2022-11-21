@@ -12,7 +12,6 @@ dependencies:
   module:
     - field_group
     - media
-    - scheduler_content_moderation_integration
     - select2
     - text
 third_party_settings:
@@ -115,12 +114,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  publish_state:
-    type: scheduler_moderation
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 4
@@ -136,16 +129,13 @@ content:
       width: 100%
       autocomplete: true
       match_operator: CONTAINS
-    third_party_settings: {  }
-  unpublish_state:
-    type: scheduler_moderation
-    weight: 30
-    region: content
-    settings: {  }
+      match_limit: 10
     third_party_settings: {  }
 hidden:
   langcode: true
   moderation_state: true
   path: true
   publish_on: true
+  publish_state: true
   unpublish_on: true
+  unpublish_state: true

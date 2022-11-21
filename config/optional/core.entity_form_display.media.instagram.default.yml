@@ -9,7 +9,6 @@ dependencies:
   module:
     - field_group
     - media
-    - scheduler_content_moderation_integration
     - select2
 third_party_settings:
   field_group:
@@ -35,7 +34,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 4
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -63,12 +62,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  publish_state:
-    type: scheduler_moderation
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 1
@@ -78,7 +71,7 @@ content:
     third_party_settings: {  }
   uid:
     type: select2_entity_reference
-    weight: 5
+    weight: 3
     region: content
     settings:
       width: 100%
@@ -86,16 +79,12 @@ content:
       match_operator: CONTAINS
       match_limit: 10
     third_party_settings: {  }
-  unpublish_state:
-    type: scheduler_moderation
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   langcode: true
   moderation_state: true
   name: true
   path: true
   publish_on: true
+  publish_state: true
   unpublish_on: true
+  unpublish_state: true
