@@ -44,7 +44,14 @@ function thunder_news_article_install(): void {
       $config_path = Drupal::service('extension.list.profile')->getPath('thunder') . '/config/install';
       $source = new FileStorage($config_path);
       $config_storage = \Drupal::service('config.storage');
-      $config_storage->write('simple_sitemap.bundle_settings.article.node.news_article', $source->read('simple_sitemap.bundle_settings.article.node.news_article'));
+
+      if (($sitemapVariantsSettings = $config_storage->read(
+          'simple_sitemap.variants.default_hreflang'
+        )) && empty($sitemapVariantsSettings['variants']['news_article'])) {
+        $sitemapVariantsSettings['variants']['news_article'] = $source->read('simple_sitemap.variants.default_hreflang')['variants']['news_article'];
+        $config_storage->write('simple_sitemap.variants.default_hreflang', $sitemapVariantsSettings);
+        $config_storage->write('simple_sitemap.bundle_settings.news_article.node.news_article', $source->read('simple_sitemap.bundle_settings.news_article.node.news_article'));
+      }
     }
 
     // Ignore, if workflow entity is not available.
