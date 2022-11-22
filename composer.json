@@ -47,6 +47,9 @@
             },
             "drupal/schema_metatag": {
                 "Metatags have encoded HTML entities instead of plain text content": "https://www.drupal.org/files/issues/2022-02-01/3192117-21.patch"
+            },
+            "drupal/scheduler_content_moderation_integration": {
+                "Cannot uninstall module due to missing publish_state and unpublish_state fields": "https://www.drupal.org/files/issues/2022-11-22/3243205-8.patch"
             }
         }
     },
@@ -100,7 +103,7 @@
         "drupal/responsive_preview": "^1.0-alpha7",
         "drupal/redirect": "^1.7",
         "drupal/scheduler": "^2.0",
-        "drupal/scheduler_content_moderation_integration": "^2.0",
+        "drupal/scheduler_content_moderation_integration": "2.0.0-alpha1",
         "drupal/schema_metatag": "2.3",
         "drupal/select2": "^1.7",
         "drupal/search_api_mark_outdated": "^1.0",
