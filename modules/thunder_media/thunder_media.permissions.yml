@@ -1,0 +1,4 @@
+# Match permission with https://www.drupal.org/project/drupal/issues/2949017
+delete any file:
+  title: 'Delete any file'
+  restrict access: true

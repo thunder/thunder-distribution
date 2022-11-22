@@ -19,7 +19,7 @@ base_field: mid
 display:
   default:
     id: default
-    display_title: Master
+    display_title: Default
     display_plugin: default
     position: 0
     display_options:
@@ -203,7 +203,7 @@ display:
           entity_type: media
           entity_field: bundle
           plugin_id: field
-          label: Source
+          label: Type
           exclude: false
           alter:
             alter_text: false
@@ -699,13 +699,13 @@ display:
           exposed: true
           expose:
             operator_id: bundle_op
-            label: Source
+            label: Type
             description: ''
             use_operator: false
             operator: bundle_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: source
+            identifier: type
             required: false
             remember: false
             multiple: false
@@ -952,7 +952,16 @@ display:
     display_options:
       display_description: ''
       display_extenders: {  }
-      path: admin/content/media-table
+      path: admin/content/media
+      menu:
+        type: tab
+        title: Media
+        description: ''
+        weight: 0
+        expanded: false
+        menu_name: main
+        parent: ''
+        context: '0'
     cache_metadata:
       max-age: 0
       contexts:

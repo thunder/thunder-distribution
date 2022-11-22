@@ -91,6 +91,7 @@ content:
     region: content
     settings:
       sidebar: true
+      use_details: true
     third_party_settings: {  }
   field_paragraphs:
     type: paragraphs
@@ -158,6 +159,9 @@ content:
       media_types: {  }
       add_button_text: 'Select image'
       form_mode: override
+      check_selected: false
+      replace_checkbox_by_order_indicator: false
+      multi_edit_on_create: false
     third_party_settings:
       entity_reference_actions:
         enabled: false
@@ -218,6 +222,11 @@ content:
     third_party_settings: {  }
   scheduler_settings:
     weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
