@@ -242,6 +242,7 @@ jobs:
           composer require "drupal/entity_browser" --no-update
           composer require "drupal/thunder_admin" --no-update
           composer require "drupal/shariff" --no-update
+          composer require "drupal/empty_fields" --no-update
 
           rm vendor/composer/installed.json
           composer update
