@@ -383,7 +383,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->clickSave();
 
     $this->sitemapGenerator->generateSitemap('backend');
-    $this->drupalGet('article/sitemap.xml');
+    $this->drupalGet($contentType . '/sitemap.xml');
 
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
@@ -398,16 +398,16 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->sitemapGenerator->generateSitemap('backend');
 
     // Check loc, that it's pointing to sitemap.xml file.
-    $this->drupalGet('article/sitemap.xml');
+    $this->drupalGet($contentType . '/sitemap.xml');
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '(//sm:loc)[last()]');
     $lastSiteMapUrl = $domElements->item(0)->nodeValue;
-    $this->assertStringEndsWith('article/sitemap.xml?page=3', $lastSiteMapUrl);
+    $this->assertStringEndsWith($contentType . '/sitemap.xml?page=3', $lastSiteMapUrl);
 
     // Get 3rd sitemap.xml file and check that link exits there.
     $urlOptions = ['query' => ['page' => 3]];
     $this->getSession()
-      ->visit($this->buildUrl('article/sitemap.xml', $urlOptions));
+      ->visit($this->buildUrl($contentType . '/sitemap.xml', $urlOptions));
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
     $this->assertEquals(1, $domElements->length);
@@ -424,7 +424,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->clickSave();
 
     $this->sitemapGenerator->generateSitemap('backend');
-    $this->drupalGet('article/sitemap.xml', $urlOptions);
+    $this->drupalGet($contentType . '/sitemap.xml', $urlOptions);
 
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]');
