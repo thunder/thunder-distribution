@@ -71,6 +71,12 @@
         },
         {
           "__typename": "ParagraphQuote"
+        },
+        {
+          "__typename": "ParagraphVideo"
+        },
+        {
+          "__typename": "ParagraphPinterest"
         }
       ],
       "teaser": {

@@ -29,20 +29,17 @@ class BreadcrumbTest extends ThunderTestBase {
    */
   public function testBreadCrumbs(): void {
 
-    $home = [Url::fromRoute('<front>')->toString() => 'Home'];
+    $home = [Url::fromRoute('<front>')->toString() => 'Back to site'];
     $overview = [
       Url::fromRoute('system.admin_content')
         ->toString() => 'Overview',
     ];
     $node_add = [Url::fromRoute('node.add_page')->toString() => 'Add content'];
 
-    // Page content.
+    // Basic Page.
     $node1 = $this->loadNodeByUuid('f3f1e924-d404-425e-8130-eeb554e36f7a');
-    // @todo Failing since https://www.drupal.org/node/2716019 was committed.
-    // $this->assertBreadcrumb($node1->toUrl(), $home + ['/node' => 'Node']);
-    // Article content.
+    // Article.
     $node2 = $this->loadNodeByUuid('bbb1ee17-15f8-46bd-9df5-21c58040d741');
-    $this->assertBreadcrumb($node2->toUrl(), $home + ['/events' => 'Events']);
 
     $this->logWithRole('administrator');
 
@@ -50,28 +47,13 @@ class BreadcrumbTest extends ThunderTestBase {
     $this->assertBreadcrumb('node/add/article', $home + $overview + $node_add);
     $this->assertBreadcrumb('node/add/page', $home + $overview + $node_add);
 
+    // Removed overview breadrumb due to https://drupal.org/i/3315662
+    // @todo gin removes custom breadcrumb links from edit pages
+    // $node1->toUrl()->toString() => 'Back to site'] + $overview);
     // Page content.
-    $this->assertBreadcrumb($node1->toUrl('edit-form'), $home + $overview);
+    $this->assertBreadcrumb($node1->toUrl('edit-form'), [$node1->toUrl()->toString() => 'Back to site']);
     // Article content.
-    $this->assertBreadcrumb($node2->toUrl('edit-form'), $home + $overview);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  protected function getBreadcrumbParts(): array {
-    $parts = [];
-    $elements = $this->xpath('//nav[@aria-labelledby="system-breadcrumb"]//ol/li/a');
-    if (!empty($elements)) {
-      foreach ($elements as $element) {
-        $parts[] = [
-          'text' => $element->getText(),
-          'href' => $element->getAttribute('href'),
-          'title' => $element->getAttribute('title'),
-        ];
-      }
-    }
-    return $parts;
+    $this->assertBreadcrumb($node2->toUrl('edit-form'), [$node2->toUrl()->toString() => 'Back to site']);
   }
 
 }

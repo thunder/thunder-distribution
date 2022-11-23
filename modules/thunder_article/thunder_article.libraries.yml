@@ -1,0 +1,4 @@
+article-form:
+  css:
+    theme:
+      css/article-form.css: {}

@@ -2,13 +2,12 @@ name: Thunder
 type: profile
 description: 'The Drupal based CMS for professional publishing.'
 project: thunder
-core_version_requirement: ^9.3.0
-version: '6.3.7'
+core_version_requirement: ~9.4.0
+version: '6.4.3'
 
 distribution:
   name: Thunder
   install:
-    theme: thunder_admin
     finish_url: ?tour=1
 
 # Required modules
@@ -68,6 +67,7 @@ install:
   - media_entity_slideshow:media_entity_slideshow
   - media_entity_twitter:media_entity_twitter
   - media_expire:media_expire
+  - media_file_delete:media_file_delete
   - metatag:metatag
   - metatag:metatag_open_graph
   - metatag:metatag_facebook

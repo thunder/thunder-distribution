@@ -7,7 +7,48 @@ dependencies:
     - image.style.paragraph_preview_thumbnail
     - media.type.gallery
   module:
+    - field_group
     - media
+third_party_settings:
+  field_group:
+    group_left:
+      children:
+        - field_media_images
+      label: Left
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: group-left
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_right:
+      children:
+        - name
+      label: Right
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: group-right
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: media.gallery.paragraph_preview
 targetEntityType: media
 bundle: gallery
@@ -20,7 +61,7 @@ content:
       image_link: ''
       image_style: paragraph_preview_thumbnail
     third_party_settings: {  }
-    weight: 0
+    weight: 2
     region: content
   name:
     type: string
@@ -28,7 +69,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
 hidden:
   created: true

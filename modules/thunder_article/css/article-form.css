@@ -1,0 +1,72 @@
+/* Basis group */
+
+/* Same length for input fields */
+.content-form__form-section.base-info .field--name-title .form-element,
+.content-form__form-section.base-info .field--name-field-seo-title .form-element,
+.content-form__form-section.base-info .field--name-field-tags .form-element {
+  width: 100%;
+}
+
+/* Article teaser group */
+
+/*
+ * Render fields inline.
+ * Media query as found in gin theme.
+ */
+@media only screen and (min-width: 36em) {
+  .content-form__form-section.article-teaser > .fieldset__wrapper {
+    display: flex;
+  }
+}
+/* Fix throbber position */
+.content-form__form-section.article-teaser .fieldset__suffix {
+  display: flex;
+  flex-direction: column;
+}
+/* Reset media widget fieldset */
+.content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-widget-empty-text {
+  display: none;
+}
+.content-form__form-section.article-teaser .field--name-field-teaser-media fieldset {
+  border: none;
+  padding: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.content-form__form-section.article-teaser .field--name-field-teaser-media .fieldset__label {
+  font-size: 0.889rem;
+  line-height: 1.125rem;
+  padding-bottom: 4px;
+  padding-left: 0;
+  padding-top: 0;
+}
+.content-form__form-section.article-teaser .field--name-field-teaser-media .help-icon > .help-icon__description-toggle {
+  margin-top: 0.3em;
+}
+.content-form__form-section.article-teaser .field--name-field-teaser-media .fieldset__wrapper {
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-top: 0;
+}
+/* Add space for throbber */
+.content-form__form-section.article-teaser .field--name-field-teaser-media .fieldset__suffix {
+  margin-top: 0.5em;
+  width: 200px;
+}
+.content-form__form-section.article-teaser .field--name-field-teaser-media .fieldset__description {
+  max-width: 200px;
+  padding-left: 0;
+}
+/* Remove margins for single item. */
+.content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-selection {
+  margin: 0;
+}
+/* Full width for single item. */
+.content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-selection .media-library-item--grid {
+  width: 100%;
+}
+/* Remove margin on teaser text. */
+.content-form__form-section.article-teaser .field--name-field-teaser-text .form-type--textarea {
+  margin-bottom: 0;
+  margin-top: 0;
+}

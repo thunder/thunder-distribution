@@ -12,7 +12,49 @@ dependencies:
     - image.style.paragraph_preview_thumbnail
     - media.type.image
   module:
+    - field_group
     - image
+third_party_settings:
+  field_group:
+    group_left:
+      children:
+        - field_image
+      label: Left
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: group-left
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_right:
+      children:
+        - name
+        - field_copyright
+      label: Right
+      parent_name: ''
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: group-right
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: media.image.paragraph_preview
 targetEntityType: media
 bundle: image
@@ -32,16 +74,18 @@ content:
     settings:
       image_link: ''
       image_style: paragraph_preview_thumbnail
-    third_party_settings: { }
-    weight: 0
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
     region: content
   name:
     type: string
     label: inline
     settings:
       link_to_entity: false
-    third_party_settings: { }
-    weight: 1
+    third_party_settings: {  }
+    weight: 3
     region: content
 hidden:
   created: true
