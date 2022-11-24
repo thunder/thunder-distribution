@@ -419,7 +419,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->expandAllTabs();
     $this->setFieldValues([
-      'index_article_node_settings' => '0',
+      'index_' . $contentType . '_node_settings' => '0',
     ]);
 
     $this->clickSave();
