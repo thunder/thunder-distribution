@@ -52,7 +52,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
     // Teaser.
     $this->addSimpleCallbackFields('Teaser', ['image', 'text']);
 
-    // Article and NewsArticle
+    // Article and NewsArticle.
     $articleTypes = ['article' => 'Article', 'newsArticle' => 'NewsArticle'];
     foreach ($articleTypes as $bundle => $type) {
       $this->resolvePageInterfaceFields($type, 'node');
