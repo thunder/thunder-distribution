@@ -377,7 +377,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->expandAllTabs();
     $this->setFieldValues([
-      'priority_article_node_settings' => '0.9',
+      'priority_' . $contentType . '_node_settings' => '0.9',
     ]);
 
     $this->clickSave();
