@@ -42,6 +42,27 @@ type Article implements Page & Entity {
   teaser: Teaser
 }
 
+type NewsArticle implements Page & Entity {
+  id: Int!
+  uuid: String!
+  name: String!
+  entity: String!
+  url: String!
+  language: String
+  entityLinks: EntityLinks
+
+  published: Boolean!
+  changed: String!
+
+  created: String!
+  author: User
+  channel: Channel
+  tags: [Tags]
+  seoTitle: String!
+  content: [Paragraph]
+  teaser: Teaser
+}
+
 type BasicPage implements Page & Entity {
   id: Int!
   uuid: String!

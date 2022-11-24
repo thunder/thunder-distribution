@@ -40,7 +40,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
   }
 
   /**
-   * Add article field resolvers.
+   * Add page field resolvers.
    */
   protected function resolveFields(): void {
 
@@ -52,32 +52,35 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
     // Teaser.
     $this->addSimpleCallbackFields('Teaser', ['image', 'text']);
 
-    // Article.
-    $this->resolvePageInterfaceFields('Article', 'node');
-    $this->resolvePageInterfaceQueryFields('article', 'node');
+    // Article and NewsArticle
+    $articleTypes = ['article' => 'Article', 'news_article' => 'NewsArticle'];
+    foreach ($articleTypes as $bundle => $type) {
+      $this->resolvePageInterfaceFields($type, 'node');
+      $this->resolvePageInterfaceQueryFields($bundle, 'node');
 
-    $this->addFieldResolverIfNotExists('Article', 'seoTitle',
-      $this->builder->fromPath('entity', 'field_seo_title.value')
-    );
+      $this->addFieldResolverIfNotExists($type, 'seoTitle',
+        $this->builder->fromPath('entity', 'field_seo_title.value')
+      );
 
-    $this->addFieldResolverIfNotExists('Article', 'channel',
-      $this->builder->fromPath('entity', 'field_channel.entity')
-    );
+      $this->addFieldResolverIfNotExists($type, 'channel',
+        $this->builder->fromPath('entity', 'field_channel.entity')
+      );
 
-    $this->addFieldResolverIfNotExists('Article', 'tags',
-      $this->fromEntityReference('field_tags')
-    );
+      $this->addFieldResolverIfNotExists($type, 'tags',
+        $this->fromEntityReference('field_tags')
+      );
 
-    $this->addFieldResolverIfNotExists('Article', 'content',
-      $this->fromEntityReferenceRevisions('field_paragraphs')
-    );
+      $this->addFieldResolverIfNotExists($type, 'content',
+        $this->fromEntityReferenceRevisions('field_paragraphs')
+      );
 
-    $this->addFieldResolverIfNotExists('Article', 'teaser',
-     $this->builder->callback(fn(ContentEntityInterface $entity): array => [
-       'image' => $entity->field_teaser_media->entity,
-       'text' => $entity->field_teaser_text->value,
-     ])
-    );
+      $this->addFieldResolverIfNotExists($type, 'teaser',
+        $this->builder->callback(fn(ContentEntityInterface $entity): array => [
+          'image' => $entity->field_teaser_media->entity,
+          'text' => $entity->field_teaser_text->value,
+        ])
+      );
+    }
 
     // Basic page.
     $this->resolvePageInterfaceFields('BasicPage', 'node');
@@ -98,7 +101,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
       $this->builder->produce('entities_with_term')
         ->map('term', $this->builder->fromParent())
         ->map('type', $this->builder->fromValue('node'))
-        ->map('bundles', $this->builder->fromValue(['article']))
+        ->map('bundles', $this->builder->fromValue(['article', 'news_article']))
         ->map('field', $this->builder->fromValue('field_tags'))
         ->map('offset', $this->builder->fromArgument('offset'))
         ->map('limit', $this->builder->fromArgument('limit'))
@@ -127,7 +130,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
       $this->builder->produce('entities_with_term')
         ->map('term', $this->builder->fromParent())
         ->map('type', $this->builder->fromValue('node'))
-        ->map('bundles', $this->builder->fromValue(['article']))
+        ->map('bundles', $this->builder->fromValue(['article', 'news_article']))
         ->map('field', $this->builder->fromValue('field_channel'))
         ->map('offset', $this->builder->fromArgument('offset'))
         ->map('limit', $this->builder->fromArgument('limit'))
