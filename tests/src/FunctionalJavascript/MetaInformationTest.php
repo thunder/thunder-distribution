@@ -398,7 +398,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->sitemapGenerator->generateSitemap('backend');
 
     // Check loc, that it's pointing to sitemap.xml file.
-    $this->drupalGet($contentType . '/sitemap.xml');
+    $this->drupalGet('sitemap.xml');
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '(//sm:loc)[last()]');
     $lastSiteMapUrl = $domElements->item(0)->nodeValue;
