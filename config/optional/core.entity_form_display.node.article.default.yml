@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.article.field_teaser_media
     - field.field.node.article.field_teaser_text
     - node.type.article
-    - workflows.workflow.editorial
   module:
     - entity_browser
     - entity_reference_actions
