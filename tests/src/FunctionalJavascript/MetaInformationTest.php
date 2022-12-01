@@ -427,10 +427,16 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->sitemapGenerator->generateSitemap('backend');
     $this->drupalGet($contentType . '/sitemap.xml', $urlOptions);
 
-    $content = $this->getSession()->getPage()->getContent();
-    $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]');
-
-    $this->assertEquals(0, $domElements->length);
+    // Either the sitemap should not exist anymore or it should not contain
+    // the node.
+    if ($this->getSession()->getStatusCode() === 200) {
+      $content = $this->getSession()->getPage()->getContent();
+      $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]');
+      $this->assertEquals(0, $domElements->length);
+    }
+    else {
+      $this->assertSession()->statusCodeEquals(404);
+    }
 
     $this->getSession()->visit($this->buildUrl('node/' . $articleId . '/edit'));
   }
