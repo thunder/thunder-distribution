@@ -145,7 +145,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   }
 
   /**
-   * Create simple article for meta tag testing.
+   * Create simple node for meta tag testing.
    *
    * @param string $contentType
    *   The node content type.
@@ -339,7 +339,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   }
 
   /**
-   * Test Site Map for Article.
+   * Test Site Map for node types.
    *
    * @dataProvider providerContentTypes
    * @group NoUpdate
