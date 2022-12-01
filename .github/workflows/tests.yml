@@ -43,7 +43,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4', '8.1' ]
+        PHP_VERSION: [ '8.1' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
@@ -121,7 +121,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        PHP_VERSION: [ '7.4', '8.1' ]
+        PHP_VERSION: [ '8.1' ]
         CHUNK: [ 1, 2, 3 ]
 
     steps:
