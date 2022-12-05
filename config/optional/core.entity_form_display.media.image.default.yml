@@ -107,6 +107,7 @@ content:
       width: 100%
       autocomplete: true
       match_operator: CONTAINS
+      match_limit: 10
     third_party_settings: {  }
   name:
     type: string_textfield
@@ -118,7 +119,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 6
+    weight: 5
     region: content
     settings:
       display_label: true
@@ -131,8 +132,13 @@ content:
       width: 100%
       autocomplete: true
       match_operator: CONTAINS
+      match_limit: 10
     third_party_settings: {  }
 hidden:
   langcode: true
   moderation_state: true
   path: true
+  publish_on: true
+  publish_state: true
+  unpublish_on: true
+  unpublish_state: true

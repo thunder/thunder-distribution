@@ -1,0 +1,523 @@
+core.entity_form_display.node.page.default:
+  expected_config:
+    hidden:
+      publish_on: true
+      unpublish_on: true
+  update_actions:
+    delete:
+      hidden:
+        publish_on: true
+        unpublish_on: true
+    add:
+      content:
+        publish_on:
+          region: content
+          settings: {  }
+          third_party_settings: {  }
+          type: datetime_timestamp_no_default
+          weight: 8
+        unpublish_on:
+          region: content
+          settings: {  }
+          third_party_settings: {  }
+          type: datetime_timestamp_no_default
+          weight: 9
+core.entity_form_display.media.gallery.default:
+  expected_config:
+    content:
+      publish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+      unpublish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+  update_actions:
+    delete:
+      content:
+        publish_state: true
+        unpublish_state: true
+    add:
+      hidden:
+        publish_state: true
+        unpublish_state: true
+core.entity_form_display.media.gallery.inline:
+  expected_config:
+    content:
+      publish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+      unpublish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+  update_actions:
+    delete:
+      content:
+        publish_state: true
+        unpublish_state: true
+    add:
+      hidden:
+        publish_state: true
+        unpublish_state: true
+core.entity_form_display.media.image.bulk_edit:
+  expected_config:
+    content:
+      publish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+      unpublish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+  update_actions:
+    delete:
+      content:
+        publish_state: true
+        unpublish_state: true
+    add:
+      hidden:
+        publish_state: true
+        unpublish_state: true
+core.entity_form_display.media.image.default:
+  expected_config:
+    content:
+      publish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+      status:
+        weight: 6
+      unpublish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+  update_actions:
+    delete:
+      content:
+        publish_state: true
+        unpublish_state: true
+    add:
+      content:
+        field_tags:
+          settings:
+            match_limit: 10
+        uid:
+          settings:
+            match_limit: 10
+      hidden:
+        publish_state: true
+        unpublish_state: true
+    change:
+      content:
+        status:
+          weight: 5
+core.entity_form_display.media.image.inline:
+  expected_config:
+    content:
+      publish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+      unpublish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+    third_party_settings:
+      field_group:
+        group_bottom:
+          format_settings:
+            label: Bottom
+          weight: 3
+  update_actions:
+    delete:
+      content:
+        publish_state: true
+        unpublish_state: true
+      third_party_settings:
+        field_group:
+          group_bottom:
+            format_settings:
+              label: Bottom
+    add:
+      hidden:
+        publish_state: true
+        unpublish_state: true
+    change:
+      third_party_settings:
+        field_group:
+          group_bottom:
+            weight: 1
+core.entity_form_display.media.instagram.default:
+  expected_config:
+    content:
+      created:
+        weight: 4
+      publish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+      uid:
+        weight: 5
+      unpublish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+  update_actions:
+    delete:
+      content:
+        publish_state: true
+        unpublish_state: true
+    add:
+      hidden:
+        publish_state: true
+        unpublish_state: true
+    change:
+      content:
+        created:
+          weight: 2
+        uid:
+          weight: 3
+core.entity_form_display.media.instagram.inline:
+  expected_config:
+    content:
+      publish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+      unpublish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+  update_actions:
+    delete:
+      content:
+        publish_state: true
+        unpublish_state: true
+    add:
+      hidden:
+        publish_state: true
+        unpublish_state: true
+core.entity_form_display.media.pinterest.default:
+  expected_config:
+    content:
+      created:
+        weight: 1
+      field_url:
+        settings:
+          placeholder_title: ''
+          placeholder_url: ''
+        type: link_default
+      publish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+      uid:
+        weight: 2
+      unpublish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+  update_actions:
+    delete:
+      content:
+        field_url:
+          settings:
+            placeholder_title: ''
+            placeholder_url: ''
+        publish_state: true
+        unpublish_state: true
+    add:
+      content:
+        uid:
+          settings:
+            match_limit: 10
+      hidden:
+        publish_state: true
+        unpublish_state: true
+    change:
+      content:
+        created:
+          weight: 2
+        field_url:
+          settings:
+            placeholder: ''
+            size: 60
+          type: string_textfield
+        uid:
+          weight: 3
+core.entity_form_display.media.pinterest.inline:
+  expected_config:
+    content:
+      field_url:
+        settings:
+          placeholder_title: ''
+          placeholder_url: ''
+        type: link_default
+      publish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+      unpublish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+  update_actions:
+    delete:
+      content:
+        field_url:
+          settings:
+            placeholder_title: ''
+            placeholder_url: ''
+        publish_state: true
+        unpublish_state: true
+    add:
+      hidden:
+        publish_state: true
+        unpublish_state: true
+    change:
+      content:
+        field_url:
+          settings:
+            placeholder: ''
+            size: 60
+          type: string_textfield
+core.entity_form_display.media.twitter.default:
+  expected_config:
+    content:
+      created:
+        weight: 1
+      field_url:
+        settings:
+          placeholder_title: ''
+          placeholder_url: ''
+        type: link_default
+      publish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+      uid:
+        weight: 2
+      unpublish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+  update_actions:
+    delete:
+      content:
+        field_url:
+          settings:
+            placeholder_title: ''
+            placeholder_url: ''
+        publish_state: true
+        unpublish_state: true
+    add:
+      content:
+        uid:
+          settings:
+            match_limit: 10
+      hidden:
+        publish_state: true
+        unpublish_state: true
+    change:
+      content:
+        created:
+          weight: 2
+        field_url:
+          settings:
+            placeholder: ''
+            size: 60
+          type: oembed_textfield
+        uid:
+          weight: 3
+core.entity_form_display.media.twitter.inline:
+  expected_config:
+    content:
+      field_url:
+        settings:
+          placeholder_title: ''
+          placeholder_url: ''
+        type: link_default
+      publish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+      unpublish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+  update_actions:
+    delete:
+      content:
+        field_url:
+          settings:
+            placeholder_title: ''
+            placeholder_url: ''
+        publish_state: true
+        unpublish_state: true
+    add:
+      hidden:
+        publish_state: true
+        unpublish_state: true
+    change:
+      content:
+        field_url:
+          settings:
+            placeholder: ''
+            size: 60
+          type: oembed_textfield
+core.entity_form_display.media.video.default:
+  expected_config:
+    content:
+      publish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+      unpublish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+  update_actions:
+    delete:
+      content:
+        publish_state: true
+        unpublish_state: true
+    add:
+      content:
+        uid:
+          settings:
+            match_limit: 10
+      hidden:
+        publish_state: true
+        unpublish_state: true
+core.entity_form_display.media.video.inline:
+  expected_config:
+    content:
+      publish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+      unpublish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+  update_actions:
+    delete:
+      content:
+        publish_state: true
+        unpublish_state: true
+    add:
+      hidden:
+        publish_state: true
+        unpublish_state: true
+core.entity_form_display.taxonomy_term.channel.default:
+  expected_config:
+    content:
+      publish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+      unpublish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+  update_actions:
+    delete:
+      content:
+        publish_state: true
+        unpublish_state: true
+    add:
+      content:
+        field_meta_tags:
+          settings:
+            use_details: true
+      hidden:
+        publish_state: true
+        unpublish_state: true
+core.entity_form_display.taxonomy_term.tags.default:
+  expected_config:
+    content:
+      publish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+      unpublish_state:
+        region: content
+        settings: {  }
+        third_party_settings: {  }
+        type: scheduler_moderation
+        weight: 30
+  update_actions:
+    delete:
+      content:
+        publish_state: true
+        unpublish_state: true
+    add:
+      content:
+        field_meta_tags:
+          settings:
+            use_details: true
+      hidden:
+        publish_state: true
+        unpublish_state: true

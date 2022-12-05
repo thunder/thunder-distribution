@@ -129,8 +129,13 @@ content:
       width: 100%
       autocomplete: true
       match_operator: CONTAINS
+      match_limit: 10
     third_party_settings: {  }
 hidden:
   langcode: true
   moderation_state: true
   path: true
+  publish_on: true
+  publish_state: true
+  unpublish_on: true
+  unpublish_state: true

@@ -63,10 +63,9 @@ third_party_settings:
       label: Bottom
       region: content
       parent_name: ''
-      weight: 3
+      weight: 1
       format_type: html_element
       format_settings:
-        label: Bottom
         classes: bottom
         id: ''
         element: div
@@ -154,5 +153,10 @@ hidden:
   langcode: true
   moderation_state: true
   path: true
+  publish_on: true
+  publish_state: true
+  scheduler_settings: true
   status: true
   uid: true
+  unpublish_on: true
+  unpublish_state: true
