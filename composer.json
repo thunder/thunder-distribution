@@ -93,7 +93,7 @@
         "drupal/paragraphs": "^1.12",
         "drupal/paragraphs_features": "dev-2.x",
         "drupal/paragraphs_paste": "^2.0-beta3",
-        "drupal/password_policy": "^3.2",
+        "drupal/password_policy": "^4.0",
         "drupal/pathauto": "1.x-dev",
         "drupal/responsive_preview": "^2.0",
         "drupal/redirect": "^1.7",
