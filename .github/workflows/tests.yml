@@ -46,7 +46,7 @@ jobs:
         PHP_VERSION: [ '8.1' ]
 
     env:
-      DRUPAL_TESTING_TEST_DEPRECATION: true
+      DRUPAL_TESTING_TEST_DEPRECATION: false
 
     steps:
       - uses: actions/checkout@v1
@@ -79,9 +79,7 @@ jobs:
         run: test-drupal-project build
 
       - name: Test for deprecations
-        run: |
-          composer show | grep stan
-          test-drupal-project deprecation
+        run: test-drupal-project deprecation
         continue-on-error: true
 
       - name: Install drupal
