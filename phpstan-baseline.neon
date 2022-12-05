@@ -89,11 +89,6 @@ parameters:
 			path: modules/thunder_taxonomy/src/ThunderTermAccessControlHandler.php
 
 		-
-			message: "#^Access to an undefined property Drupal\\\\Core\\\\Extension\\\\Extension\\:\\:\\$info\\.$#"
-			count: 5
-			path: src/Installer/Form/ModuleConfigureForm.php
-
-		-
 			message: "#^Access to an undefined property Drupal\\\\Core\\\\Extension\\\\Extension\\:\\:\\$requires\\.$#"
 			count: 1
 			path: src/Installer/Form/ModuleConfigureForm.php
@@ -212,8 +207,3 @@ parameters:
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"
 			count: 1
 			path: tests/src/TestSuites/ThunderTestSuite.php
-
-		-
-			message: "#^Access to an undefined property Drupal\\\\Core\\\\Extension\\\\Extension\\:\\:\\$info\\.$#"
-			count: 4
-			path: thunder.profile
