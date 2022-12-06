@@ -6,12 +6,16 @@
  */
 
 use Drupal\Core\Entity\EntityStorageException;
+use Drupal\Core\Installer\InstallerKernel;
 use Drupal\user\Entity\Role;
 
 /**
  * Implements hook_install().
  */
-function thunder_workflow_install(): void {
+function thunder_workflow_install(bool $is_syncing): void {
+  if ($is_syncing || InstallerKernel::installationAttempted()) {
+    return;
+  }
 
   if (!Role::load('restricted_editor')) {
     /** @var Drupal\config_update\ConfigRevertInterface $configReverter */
