@@ -47,6 +47,9 @@
             },
             "drupal/media_library_media_modify": {
                 "Add field diff builder": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/29.diff"
+            },
+            "drupal/checklistapi": {
+                "Issue #3310067 by Lal_, jcnventura, TravisCarden, nkoporec: Use...": "https://git.drupalcode.org/project/checklistapi/-/commit/4b02386aac7fbc6bee2a8a37f75508714baa7f60.diff"
             }
         }
     },
@@ -58,7 +61,7 @@
         "drupal/autofill": "^1.1",
         "drupal/autosave_form": "^1.2",
         "drupal/blazy": "^2.10",
-        "drupal/checklistapi": "^1.9||^2.0",
+        "drupal/checklistapi": "^2.1",
         "drupal/core": "~10.0.0-beta2",
         "drupal/config_selector": "^2.1",
         "drupal/config_update": "^1.7 || ^2.0",
