@@ -46,7 +46,7 @@ jobs:
         PHP_VERSION: [ '8.1' ]
 
     env:
-      DRUPAL_TESTING_TEST_DEPRECATION: true
+      DRUPAL_TESTING_TEST_DEPRECATION: false
 
     steps:
       - uses: actions/checkout@v1

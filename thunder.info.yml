@@ -21,7 +21,7 @@ install:
   # core
   - drupal:block
   - drupal:breakpoint
-  - drupal:ckeditor
+  - drupal:ckeditor5
   - drupal:contextual
   - drupal:menu_link_content
   - drupal:datetime
