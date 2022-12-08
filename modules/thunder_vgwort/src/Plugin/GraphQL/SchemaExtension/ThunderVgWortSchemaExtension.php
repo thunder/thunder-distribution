@@ -1,6 +1,8 @@
 <?php
 
-namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
+namespace Drupal\thunder_vgwort\Plugin\GraphQL\SchemaExtension;
+
+use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 
 /**
  * The Thunder VG Wort schema extension.
