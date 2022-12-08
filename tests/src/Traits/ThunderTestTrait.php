@@ -112,17 +112,22 @@ trait ThunderTestTrait {
    * {@inheritdoc}
    */
   protected function doInstall(): void {
+    if (empty($_SERVER['thunderDumpFile'])) {
+      parent::doInstall();
+      return;
+    }
 
-    if (!empty($_SERVER['thunderDumpFile']) && file_exists($_SERVER['thunderDumpFile'])) {
-      $file = $_SERVER['thunderDumpFile'];
-      // Load the database.
-      if (substr($file, -3) == '.gz') {
-        $file = "compress.zlib://$file";
-      }
+    if (file_exists($_SERVER['thunderDumpFile'] . '.database.php')) {
+      $file = $_SERVER['thunderDumpFile'] . '.database.php';
       require $file;
     }
-    else {
-      parent::doInstall();
+
+    if (file_exists($_SERVER['thunderDumpFile'] . '.files.tar.gz')) {
+      $file = $_SERVER['thunderDumpFile'] . '.files.tar.gz';
+      // Extract tar.gz file to public files' directory.
+      $command = sprintf('tar -xzf %s -C %s', $file, $this->publicFilesDirectory);
+      exec($command);
+      require $file;
     }
   }
 
