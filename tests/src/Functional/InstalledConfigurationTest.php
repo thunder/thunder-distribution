@@ -39,7 +39,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *
    * @var string
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'stable9';
 
   /**
    * Ignore list of Core related configurations.
