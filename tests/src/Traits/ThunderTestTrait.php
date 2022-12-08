@@ -125,9 +125,8 @@ trait ThunderTestTrait {
     if (file_exists($_SERVER['thunderDumpFile'] . '.files.tar.gz')) {
       $file = $_SERVER['thunderDumpFile'] . '.files.tar.gz';
       // Extract tar.gz file to public files' directory.
-      $command = sprintf('tar -xzf %s -C %s', $file, $this->publicFilesDirectory);
+      $command = sprintf('tar -xzf %s -C %s', $file, $this->siteDirectory);
       exec($command);
-      require $file;
     }
   }
 
