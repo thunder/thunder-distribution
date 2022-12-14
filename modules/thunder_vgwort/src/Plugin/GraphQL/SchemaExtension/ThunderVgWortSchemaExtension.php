@@ -11,7 +11,7 @@ use Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension\ThunderSchemaExtensionPlu
  * @SchemaExtension(
  *   id = "thunder_vgwort",
  *   name = "Thunder VG Wort extension",
- *   description = "Adds vgWort field to article, depends on VG Wort extension.",
+ *   description = "Adds vgWort field to article, depends on VG Wort schema.",
  *   schema = "thunder"
  * )
  */
