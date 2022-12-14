@@ -21,7 +21,7 @@ class VgWortSchemaTest extends ThunderGqlsTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
 
     $graphQlServerSettings = $this->config('graphql.graphql_servers.thunder_graphql');
