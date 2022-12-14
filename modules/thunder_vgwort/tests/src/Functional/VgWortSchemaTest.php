@@ -24,6 +24,7 @@ class VgWortSchemaTest extends ThunderGqlsTestBase {
   public function setUp(): void {
     parent::setUp();
 
+    // Add schema extensions for VG Wort.
     $graphQlServerSettings = $this->config('graphql.graphql_servers.thunder_graphql');
     $extensions = array_merge($graphQlServerSettings->get('schema_configuration.thunder.extensions'),
       [
@@ -33,6 +34,12 @@ class VgWortSchemaTest extends ThunderGqlsTestBase {
     );
 
     $graphQlServerSettings->set('schema_configuration.thunder.extensions', $extensions)->save();
+
+    // Add publisher_id and image_domain to VG Wort settings.
+    $this->config('vgwort.settings')
+      ->set('publisher_id', '123456789')
+      ->set('image_domain', 'www.example.com')
+      ->save();
   }
 
   /**
