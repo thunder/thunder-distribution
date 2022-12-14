@@ -35,7 +35,6 @@ class VgWortSchemaTest extends ThunderGqlsTestBase {
     $graphQlServerSettings->set('schema_configuration.thunder.extensions', $extensions)->save();
   }
 
-
   /**
    * Tests the article schema.
    *
