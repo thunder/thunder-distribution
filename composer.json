@@ -59,7 +59,7 @@
         "drupal/autofill": "^1.0",
         "drupal/autosave_form": "^1.2",
         "drupal/better_normalizers": "^1.0-beta3",
-        "drupal/blazy": "^2.10",
+        "drupal/blazy": "^2.130",
         "drupal/checklistapi": "^1.9||^2.0",
         "drupal/core": "~9.4.0@STABLE",
         "drupal/config_selector": "^2.1",
