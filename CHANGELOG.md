@@ -17,7 +17,7 @@ This release also updates some modules, that have fixed versions because of appl
 
 * drupal/diff
 * drupal/password_policy
-* drupal/field_group
+* drupal/field_group (no fixed version anymore)
 
 ## [6.4.3](https://github.com/thunder/thunder-distribution/tree/6.4.3) 2022-09-22
 
