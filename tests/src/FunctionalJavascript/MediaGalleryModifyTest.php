@@ -71,7 +71,6 @@ END;
     $gallery = $this->loadMediaByUuid('df67621b-518f-4159-a59e-1bad0700800c');
     $this->clickCssSelector('#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
 
-    //sleep(180);
     // Check that, 2nd image is file: 26357237683_0891e46ba5_k.jpg.
     $fileNamePosition = $this->getSession()
       ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("26357237683_0891e46ba5_k.jpg")');
