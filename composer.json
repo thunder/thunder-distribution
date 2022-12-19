@@ -42,9 +42,6 @@
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
-            "drupal/schema_metatag": {
-                "#3192117: Metatags have encoded HTML entities instead of plain text content": "https://git.drupalcode.org/project/schema_metatag/-/merge_requests/2.diff"
-            },
             "drupal/media_library_media_modify": {
                 "Add field diff builder": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/29.diff"
             },
