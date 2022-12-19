@@ -1,0 +1,10 @@
+query ($path: String!) {
+  page(path: $path) {
+    ... on Article {
+      vgWort {
+        url
+        counterId
+      }
+    }
+  }
+}
