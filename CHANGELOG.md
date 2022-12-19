@@ -4,8 +4,19 @@
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.4.3...6.4.4)
 
+### New Features
 We added support for the METIS VG Wort counter. This counter is used by many german publishers to track the usage of
-their content. This release also updates some modules, that are fixed versions because of applied patches.
+their content.
+See: https://www.drupal.org/project/vgwort
+
+The media_file_delete module was added to be able to quickly remove image files.
+See: [Add Media File Delete integration and new permission to delete any file](https://www.drupal.org/project/thunder/issues/3319701)
+
+This release also updates some modules, that have fixed versions because of applied patches.
+
+* drupal/diff
+* drupal/password_policy
+* drupal/field_group
 
 ## [6.4.3](https://github.com/thunder/thunder-distribution/tree/6.4.3) 2022-09-22
 
