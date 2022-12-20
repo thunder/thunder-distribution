@@ -13,7 +13,6 @@ dependencies:
     - paragraphs
     - paragraphs_features
     - path
-    - scheduler
     - select2
 third_party_settings:
   field_group:
@@ -115,18 +114,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  publish_on:
-    type: datetime_timestamp_no_default
-    weight: 8
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  publish_state:
-    type: options_select
-    weight: 10
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 15
@@ -152,18 +139,6 @@ content:
       match_operator: CONTAINS
       match_limit: 10
     third_party_settings: {  }
-  unpublish_on:
-    type: datetime_timestamp_no_default
-    weight: 9
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  unpublish_state:
-    type: options_select
-    weight: 11
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   url_redirects:
     weight: 13
     region: content
@@ -171,4 +146,8 @@ content:
     third_party_settings: {  }
 hidden:
   promote: true
+  publish_on: true
+  publish_state: true
   sticky: true
+  unpublish_on: true
+  unpublish_state: true
