@@ -46,7 +46,7 @@
                 "Add field diff builder": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/29.diff"
             },
             "drupal/checklistapi": {
-                "Issue #3310067 by Lal_, jcnventura, TravisCarden, nkoporec: Use...": "https://git.drupalcode.org/project/checklistapi/-/commit/4b02386aac7fbc6bee2a8a37f75508714baa7f60.diff",
+                "Issue #3310067 by Lal_, jcnventura, TravisCarden, nkoporec: Use...": "https://git.drupalcode.org/project/checklistapi/-/commit/4b02386aac7fbc6bee2a8a37f75508714baa7f60.diff"
             },
             "drupal/entity_reference_actions": {
                 "Not working with Drupal 9.5 and 10": "https://git.drupalcode.org/project/entity_reference_actions/-/merge_requests/9.diff"
