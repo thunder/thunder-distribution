@@ -33,6 +33,7 @@ hidden:
   promote: true
   publish_on: true
   publish_state: true
+  scheduler_settings: true
   status: true
   sticky: true
   title: true
