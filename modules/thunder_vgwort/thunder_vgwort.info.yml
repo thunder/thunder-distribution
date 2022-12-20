@@ -1,0 +1,7 @@
+name: Thunder VG Wort integration
+type: module
+description: 'VG Wort integration for the Thunder distribution.'
+core_version_requirement: ^9
+package: Thunder Optional
+dependencies:
+  - vgwort:vgwort
