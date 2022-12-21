@@ -47,6 +47,9 @@
             },
             "drupal/checklistapi": {
                 "Issue #3310067 by Lal_, jcnventura, TravisCarden, nkoporec: Use...": "https://git.drupalcode.org/project/checklistapi/-/commit/4b02386aac7fbc6bee2a8a37f75508714baa7f60.diff"
+            },
+            "drupal/search_api": {
+                "Second parameter of request->query->get is not allowed to be an array anymore": "https://www.drupal.org/files/issues/2022-12-21/3328702-second-parameter-of.patch"
             }
         }
     },
