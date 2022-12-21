@@ -226,7 +226,7 @@ jobs:
         run: |
           touch /tmp/test/thunder/finished-stages/build
           cp ${GITHUB_WORKSPACE}/tests/fixtures/thunder6.composer.lock composer.lock
-          composer install
+          composer install --no-dev
         working-directory: /tmp/test/thunder/install
 
       - name: Install drupal
