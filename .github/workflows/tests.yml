@@ -72,7 +72,7 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Add needed dependencies
-        run: composer require "drupal/core-dev:~10.0.0" "phpspec/prophecy-phpunit:^2" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: composer require "drupal/core-dev:~10.0.0" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build
@@ -278,12 +278,12 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4' ]
+        PHP_VERSION: [ '8.1' ]
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
 
     env:
-      DRUPAL_TESTING_DRUPAL_VERSION: '~9.3.0'
+      DRUPAL_TESTING_DRUPAL_VERSION: '~10.0.0'
       DRUPAL_TESTING_TEST_GROUP: Thunder
 
     steps:
@@ -317,7 +317,7 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Install suggested dependencies
-        run: composer require "drupal/core-dev:~9.3.0" "consolidation/robo:^2.0" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: composer require "drupal/core-dev:~10.0.0" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build
