@@ -45,7 +45,7 @@ jobs:
         PHP_VERSION: [ '8.1' ]
 
     env:
-      DRUPAL_TESTING_TEST_DEPRECATION: true
+      DRUPAL_TESTING_TEST_DEPRECATION: false
 
     steps:
       - uses: actions/checkout@v1
@@ -77,23 +77,14 @@ jobs:
       - name: Build the docroot
         run: test-drupal-project build
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      - name: generate-baseline
+        run: |
+          cd /tmp/test/thunder/install
+          composer exec phpstan -- analyse --memory-limit "${PHPSTAN_MEMORY_LIMIT}" "docroot/profiles/contrib/thunder" --configuration="docroot/profiles/contrib/thunder/phpstan.neon" --generate-baseline=baseline.neon
+          cat baseline.neon
 
-      - name: Test for deprecations
-        run: test-drupal-project deprecation
 
-      - name: Install drupal
-        run: test-drupal-project install
 
-      - name: Zip build
-        run: cd /tmp/test; tar cfz build-${{ matrix.PHP_VERSION }}.tgz thunder; mv build-${{ matrix.PHP_VERSION }}.tgz ${GITHUB_WORKSPACE}
-
-      - name: Upload build
-        uses: actions/upload-artifact@v2
-        with:
-          name: build-${{ matrix.PHP_VERSION }}
-          path: build-${{ matrix.PHP_VERSION }}.tgz
 
   test-max:
     needs: build
