@@ -117,7 +117,8 @@
         "npm-asset/exif-js": "^2.3.0",
         "npm-asset/blazy": "^1.8",
         "npm-asset/slick-carousel": "^1.8",
-        "npm-asset/select2": "^4.0.7"
+        "npm-asset/select2": "^4.0.7",
+        "caxy/php-htmldiff": "^0.1.14"
     },
     "suggest": {
         "drupal/search_api_solr": "Provides a Apache Solr backend for the Search API module"
