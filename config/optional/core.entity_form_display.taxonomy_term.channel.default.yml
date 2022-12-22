@@ -84,3 +84,7 @@ content:
     third_party_settings: {  }
 hidden:
   description: true
+  publish_on: true
+  publish_state: true
+  unpublish_on: true
+  unpublish_state: true
