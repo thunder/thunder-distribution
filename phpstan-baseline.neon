@@ -202,3 +202,23 @@ parameters:
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"
 			count: 1
 			path: tests/src/TestSuites/ThunderTestSuite.php
+
+ 		-
+			message: "#^\\\\Drupal calls should be avoided in classes, use dependency injection instead$#"
+			count: 1
+			path: modules/thunder_gqls/src/Wrappers/EntityListResponse.php
+
+		-
+			message: "#^Drupal\\\\Tests\\\\BrowserTestBase\\:\\:\\$defaultTheme is required\\. See https\\://www\\.drupal\\.org/node/3083055, which includes recommendations on which theme to use\\.$#"
+			count: 1
+			path: tests/src/Functional/Installer/ThunderInstallerGermanTest.php
+
+		-
+			message: "#^Drupal\\\\Tests\\\\BrowserTestBase\\:\\:\\$defaultTheme is required\\. See https\\://www\\.drupal\\.org/node/3083055, which includes recommendations on which theme to use\\.$#"
+			count: 1
+			path: tests/src/Functional/Installer/ThunderInstallerTest.php
+
+		-
+			message: "#^Class Drupal\\\\Tests\\\\TestSuites\\\\ThunderTestSuite extends @internal class PHPUnit\\\\Framework\\\\TestSuite\\.$#"
+			count: 1
+			path: tests/src/TestSuites/ThunderTestSuite.php
