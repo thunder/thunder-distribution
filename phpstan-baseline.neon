@@ -203,7 +203,7 @@ parameters:
 			count: 1
 			path: tests/src/TestSuites/ThunderTestSuite.php
 
- 		-
+		-
 			message: "#^\\\\Drupal calls should be avoided in classes, use dependency injection instead$#"
 			count: 1
 			path: modules/thunder_gqls/src/Wrappers/EntityListResponse.php
