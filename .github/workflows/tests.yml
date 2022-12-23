@@ -314,7 +314,7 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Install suggested dependencies
-        run: composer require "drupal/core-dev:~9.3.0" "consolidation/robo:^2.0" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: composer require "drupal/core-dev:~9.3.0" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build
