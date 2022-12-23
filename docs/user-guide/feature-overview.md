@@ -110,11 +110,9 @@ galleries.\
 **Paragraphs Features**: This module adds additional features to the paragraphs module.
 
 1. Provides additional buttons between paragraphs to allow easier adding of a new paragraph to as specific position.
-2. Split Text feature for paragraphs is available for text fields of a paragraph where CKEditor is used. Splits a
-   paragraph into two.
-3. When there is only one option in the actions drop-down, this will be display that as a single button instead of a
+2. When there is only one option in the actions drop-down, this will be display that as a single button instead of a
    drop down with only one value.
-4. Provide a delete confirmation form.
+3. Provide a delete confirmation form.
 
 [https://www.drupal.org/project/paragraphs_features](https://www.drupal.org/project/paragraphs_features)
 

@@ -1,20 +1,20 @@
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - system.menu.admin
   module:
-    - node
+    - media
     - user
   enforced:
     module:
       - scheduler
-id: scheduler_scheduled_content
-label: 'Scheduled Content'
+id: scheduler_scheduled_media
+label: 'Scheduled Media'
 module: views
-description: 'Find and manage scheduled content.'
+description: 'Find and manage scheduled media.'
 tag: ''
-base_table: node_field_revision
+base_table: media_field_revision
 base_field: vid
 display:
   default:
@@ -23,18 +23,18 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Scheduled Content'
+      title: 'Scheduled Media'
       fields:
-        node_bulk_form:
-          id: node_bulk_form
-          table: node
-          field: node_bulk_form
-          relationship: nid
+        media_bulk_form:
+          id: media_bulk_form
+          table: media
+          field: media_bulk_form
+          relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          plugin_id: node_bulk_form
-          label: ''
+          entity_type: media
+          plugin_id: bulk_form
+          label: 'Bulk update'
           exclude: false
           alter:
             alter_text: false
@@ -78,26 +78,44 @@ display:
           action_title: Action
           include_exclude: exclude
           selected_actions: {  }
-        title:
-          id: title
-          table: node_field_revision
-          field: title
+        name:
+          id: name
+          table: media_field_revision
+          field: name
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: title
+          entity_type: media
+          entity_field: name
           plugin_id: field
-          label: Title
+          label: 'Media Name'
           exclude: false
           alter:
             alter_text: false
+            text: ''
             make_link: false
+            path: ''
             absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
             word_boundary: false
             ellipsis: false
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
             strip_tags: false
             trim: false
+            preserve_tags: ''
             html: false
           element_type: ''
           element_class: ''
@@ -125,17 +143,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          relationship: nid
+        bundle:
+          id: bundle
+          table: media_field_data
+          field: bundle
+          relationship: mid
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: type
+          entity_type: media
+          entity_field: bundle
           plugin_id: field
-          label: 'Content Type'
+          label: 'Media type'
           exclude: false
           alter:
             alter_text: false
@@ -179,7 +197,7 @@ display:
           click_sort_column: target_id
           type: entity_reference_label
           settings:
-            link: false
+            link: true
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -190,15 +208,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        name:
-          id: name
-          table: users_field_data
-          field: name
-          relationship: revision_uid
+        uid:
+          id: uid
+          table: media_field_revision
+          field: uid
+          relationship: none
           group_type: group
           admin_label: ''
-          entity_type: user
-          entity_field: name
+          entity_type: media
+          entity_field: uid
           plugin_id: field
           label: Author
           exclude: false
@@ -241,11 +259,11 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: user_name
+          click_sort_column: target_id
+          type: entity_reference_label
           settings:
-            link_to_entity: true
-          group_column: value
+            link: true
+          group_column: target_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -257,12 +275,12 @@ display:
           field_api_classes: false
         status:
           id: status
-          table: node_field_revision
+          table: media_field_revision
           field: status
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
+          entity_type: media
           entity_field: status
           plugin_id: field
           label: Status
@@ -324,12 +342,12 @@ display:
           field_api_classes: false
         publish_on:
           id: publish_on
-          table: node_field_revision
+          table: media_field_revision
           field: publish_on
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
+          entity_type: media
           entity_field: publish_on
           plugin_id: field
           label: 'Publish on'
@@ -391,12 +409,12 @@ display:
           field_api_classes: false
         unpublish_on:
           id: unpublish_on
-          table: node_field_revision
+          table: media_field_revision
           field: unpublish_on
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
+          entity_type: media
           entity_field: unpublish_on
           plugin_id: field
           label: 'Unpublish on'
@@ -458,12 +476,12 @@ display:
           field_api_classes: false
         operations:
           id: operations
-          table: node_revision
+          table: media_revision
           field: operations
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
+          entity_type: media
           plugin_id: entity_operations
           label: Operations
           exclude: false
@@ -506,7 +524,7 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          destination: true
+          destination: false
       pager:
         type: full
         options:
@@ -519,6 +537,14 @@ display:
             previous: '‹ previous'
             first: '« first'
             last: 'last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
       exposed_form:
         type: basic
         options:
@@ -532,7 +558,7 @@ display:
       access:
         type: perm
         options:
-          perm: 'view scheduled content'
+          perm: 'view scheduled media'
       cache:
         type: tag
         options: {  }
@@ -546,19 +572,19 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: true
-          content: 'No scheduled content.'
+          content: 'No scheduled media.'
           tokenize: false
       sorts: {  }
       arguments: {  }
       filters:
         latest_revision:
           id: latest_revision
-          table: node_revision
+          table: media_revision
           field: latest_revision
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
+          entity_type: media
           plugin_id: latest_revision
           operator: '='
           value: ''
@@ -577,9 +603,7 @@ display:
             remember: false
             multiple: false
             remember_roles:
-              anonymous: '0'
-              authenticated: '0'
-              administrator: '0'
+              authenticated: authenticated
           is_grouped: false
           group_info:
             label: ''
@@ -592,35 +616,35 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        title:
-          id: title
-          table: node_field_revision
-          field: title
+        name:
+          id: name
+          table: media_field_revision
+          field: name
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: title
+          entity_type: media
+          entity_field: name
           plugin_id: string
           operator: contains
           value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: title_op
-            label: Title
+            operator_id: name_op
+            label: 'Media name'
             description: ''
             use_operator: false
-            operator: title_op
+            operator: name_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: title
+            identifier: name
             required: false
             remember: false
             multiple: false
             remember_roles:
+              authenticated: authenticated
               anonymous: '0'
-              authenticated: '0'
               administrator: '0'
             placeholder: ''
           is_grouped: false
@@ -635,35 +659,35 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          relationship: nid
+        bundle:
+          id: bundle
+          table: media_field_data
+          field: bundle
+          relationship: mid
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: type
+          entity_type: media
+          entity_field: bundle
           plugin_id: bundle
           operator: in
           value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: type_op
-            label: 'Content type'
+            operator_id: bundle_op
+            label: Type
             description: ''
             use_operator: false
-            operator: type_op
+            operator: bundle_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: type
+            identifier: bundle
             required: false
             remember: false
             multiple: false
             remember_roles:
+              authenticated: authenticated
               anonymous: '0'
-              authenticated: '0'
               administrator: '0'
             reduce: false
           is_grouped: false
@@ -680,12 +704,12 @@ display:
             group_items: {  }
         status:
           id: status
-          table: node_field_revision
+          table: media_field_revision
           field: status
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
+          entity_type: media
           entity_field: status
           plugin_id: boolean
           operator: '='
@@ -705,8 +729,8 @@ display:
             remember: false
             multiple: false
             remember_roles:
+              authenticated: authenticated
               anonymous: '0'
-              authenticated: '0'
               administrator: '0'
           is_grouped: true
           group_info:
@@ -730,12 +754,12 @@ display:
                 value: '0'
         langcode:
           id: langcode
-          table: node_field_revision
+          table: media_field_revision
           field: langcode
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
+          entity_type: media
           entity_field: langcode
           plugin_id: language
           operator: in
@@ -755,8 +779,8 @@ display:
             remember: false
             multiple: false
             remember_roles:
+              authenticated: authenticated
               anonymous: '0'
-              authenticated: '0'
               administrator: '0'
             reduce: false
           is_grouped: false
@@ -773,12 +797,12 @@ display:
             group_items: {  }
         publish_on:
           id: publish_on
-          table: node_field_revision
+          table: media_field_revision
           field: publish_on
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
+          entity_type: media
           entity_field: publish_on
           plugin_id: date
           operator: 'not empty'
@@ -802,9 +826,7 @@ display:
             remember: false
             multiple: false
             remember_roles:
-              anonymous: '0'
-              authenticated: '0'
-              administrator: '0'
+              authenticated: authenticated
             min_placeholder: ''
             max_placeholder: ''
             placeholder: ''
@@ -822,12 +844,12 @@ display:
             group_items: {  }
         unpublish_on:
           id: unpublish_on
-          table: node_field_revision
+          table: media_field_revision
           field: unpublish_on
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
+          entity_type: media
           entity_field: unpublish_on
           plugin_id: date
           operator: 'not empty'
@@ -851,12 +873,10 @@ display:
             remember: false
             multiple: false
             remember_roles:
-              anonymous: '0'
-              authenticated: '0'
-              administrator: '0'
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
+              authenticated: authenticated
+            min_placeholder: null
+            max_placeholder: null
+            placeholder: null
           is_grouped: false
           group_info:
             label: ''
@@ -881,36 +901,36 @@ display:
           row_class: ''
           default_row_class: true
           columns:
-            node_bulk_form: node_bulk_form
-            title: title
-            type: type
+            media_bulk_form: media_bulk_form
             name: name
+            bundle: bundle
+            uid: uid
             status: status
             publish_on: publish_on
             unpublish_on: unpublish_on
             operations: operations
-          default: '-1'
+          default: publish_on
           info:
-            node_bulk_form:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            title:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            type:
-              sortable: true
-              default_sort_order: asc
+            media_bulk_form:
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             name:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            bundle:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            uid:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -960,26 +980,15 @@ display:
           replica: false
           query_tags: {  }
       relationships:
-        nid:
-          id: nid
-          table: node_field_revision
-          field: nid
+        mid:
+          id: mid
+          table: media_field_revision
+          field: mid
           relationship: none
           group_type: group
-          admin_label: 'node id'
-          entity_type: node
-          entity_field: nid
-          plugin_id: standard
-          required: false
-        revision_uid:
-          id: revision_uid
-          table: node_revision
-          field: revision_uid
-          relationship: none
-          group_type: group
-          admin_label: 'revision user id'
-          entity_type: node
-          entity_field: revision_uid
+          admin_label: 'Media Field'
+          entity_type: media
+          entity_field: mid
           plugin_id: standard
           required: false
       header: {  }
@@ -992,34 +1001,26 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - 'user.node_grants:view'
         - user.permissions
       tags: {  }
   overview:
     id: overview
-    display_title: 'Content Overview'
+    display_title: 'Media Overview'
     display_plugin: page
     position: 1
     display_options:
-      display_description: 'Overview of all scheduled content, as a tab on main ''content admin'' page'
-      display_comment: 'Revision nid relationship is required because the content type is only stored at ''content'' level, not ''content revision'' level.'
+      display_description: 'Overview of all scheduled media, via main admin content page'
       display_extenders: {  }
-      path: admin/content/scheduled
+      path: admin/content/media/scheduled
       menu:
         type: normal
-        title: 'Scheduled Content'
-        description: 'Content that is scheduled for publishing or unpublishing'
-        weight: -10
+        title: 'Scheduled Media'
+        description: 'Media items that are scheduled for publishing or unpublishing'
+        weight: 0
         expanded: false
         menu_name: admin
         parent: system.admin_content
         context: '0'
-      tab_options:
-        type: normal
-        title: Content
-        description: 'Find and manage scheduled content'
-        weight: -10
-        menu_name: admin
     cache_metadata:
       max-age: 0
       contexts:
@@ -1027,7 +1028,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - 'user.node_grants:view'
         - user.permissions
       tags: {  }
   user_page:
@@ -1039,7 +1039,7 @@ display:
       access:
         type: perm
         options:
-          perm: 'access content'
+          perm: 'view media'
       empty:
         area_text_custom:
           id: area_text_custom
@@ -1050,75 +1050,33 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: true
-          content: 'No scheduled content for user {{ arguments.uid }}'
+          content: 'No scheduled media for user {{ arguments.uid }}'
           tokenize: true
       arguments:
         uid:
           id: uid
-          table: node_field_revision
+          table: media_field_revision
           field: uid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
+          entity_type: media
           entity_field: uid
           plugin_id: numeric
-          default_action: empty
-          exception:
-            value: all
-            title_enable: false
-            title: All
-          title_enable: false
-          title: ''
-          default_argument_type: fixed
-          default_argument_options:
-            argument: ''
-          default_argument_skip_url: false
-          summary_options:
-            base_path: ''
-            count: true
-            override: false
-            items_per_page: 25
-          summary:
-            sort_order: asc
-            number_of_records: 0
-            format: default_summary
-          specify_validation: true
-          validate:
-            type: 'entity:user'
-            fail: 'not found'
-          validate_options:
-            access: false
-            operation: view
-            multiple: 0
-            restrict_roles: false
-            roles: {  }
-          break_phrase: false
-          not: false
       defaults:
         empty: false
         access: false
         arguments: false
-        filters: true
-        filter_groups: true
-      display_description: 'Scheduled content tab on user profile, showing just that user''s scheduled content'
-      display_comment: 'Access to the user view is controlled via a custom RouteSubscriber. The high-level "view published content" permission is added to satisfy the security_review module'
+      display_description: 'Scheduled media on user profile, showing just that user''s scheduled media'
+      display_comment: 'Access to the user view is controlled via a custom RouteSubscriber. The high-level "view media" permission is added to satisfy the security_review module'
       display_extenders: {  }
-      path: user/%user/scheduled
+      path: user/%user/scheduled_media
       menu:
         type: tab
-        title: Scheduled
-        description: ''
-        weight: -10
-        menu_name: admin
+        title: 'Scheduled Media'
+        description: 'Scheduled Media by this user'
+        weight: -1
+        expanded: false
+        menu_name: account
         parent: user.page
         context: '0'
-      tab_options:
-        type: normal
-        title: Content
-        description: 'Find and manage scheduled content'
-        weight: -10
-        menu_name: admin
     cache_metadata:
       max-age: 0
       contexts:
@@ -1126,6 +1084,5 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - 'user.node_grants:view'
         - user.permissions
       tags: {  }

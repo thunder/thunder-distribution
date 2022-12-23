@@ -154,5 +154,10 @@ hidden:
   langcode: true
   moderation_state: true
   path: true
+  publish_on: true
+  publish_state: true
+  scheduler_settings: true
   status: true
   uid: true
+  unpublish_on: true
+  unpublish_state: true
