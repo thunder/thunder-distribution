@@ -76,7 +76,7 @@
         "drupal/facets": "^2.0",
         "drupal/google_analytics": "^2.0",
         "drupal/graphql": "^4.3",
-        "drupal/inline_entity_form": "^1.0-rc7",
+        "drupal/inline_entity_form": "^1.0-rc14",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.1",
         "drupal/linkit": "^6.0.0-beta1",
