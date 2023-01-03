@@ -53,6 +53,9 @@
             },
             "drupal/responsive_preview": {
                 "Drupal 10: Uncaught ReferenceError: Popper is not defined": "https://www.drupal.org/files/issues/2022-12-12/3326050-2.patch"
+            },
+            "drupal/linkit": {
+                "CKEditor 5 readiness": "https://www.drupal.org/files/issues/2022-12-14/3232190-113.patch"
             }
         }
     },
@@ -86,7 +89,7 @@
         "drupal/inline_entity_form": "^1.0-rc14",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.2",
-        "drupal/linkit": "^6.0.0-beta1",
+        "drupal/linkit": "6.0.x-dev",
         "drupal/media_entity_instagram": "^3.0.3",
         "drupal/media_entity_pinterest": "^2.0",
         "drupal/media_entity_slideshow": "^2.0-alpha1",
@@ -100,7 +103,7 @@
         "drupal/paragraphs_features": "dev-2.x",
         "drupal/paragraphs_paste": "^2.0-beta3",
         "drupal/password_policy": "^4.0",
-        "drupal/pathauto": "1.x-dev",
+        "drupal/pathauto": "^1.11",
         "drupal/responsive_preview": "^2.0",
         "drupal/redirect": "^1.7",
         "drupal/scheduler": "^2.0",
