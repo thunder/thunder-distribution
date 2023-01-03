@@ -19,16 +19,12 @@ trait ThunderCkEditorTestTrait {
    *   CKEditor ID.
    */
   protected function getCkEditorId(string $ckEditorCssSelector) {
-    // Since CKEditor requires some time to initialize, we are going to wait for
-    // CKEditor instance to be ready before we continue and return ID.
-    $this->getSession()->wait(10000, "(waitForCk = CKEDITOR.instances[jQuery(\"{$ckEditorCssSelector}\").attr('id')]) && waitForCk.instanceReady");
-
     $ckEditor = $this->getSession()->getPage()->find(
       'css',
       $ckEditorCssSelector
     );
 
-    return $ckEditor->getAttribute('id');
+    return $ckEditor->getAttribute('data-ckeditor5-id');
   }
 
   /**
@@ -44,40 +40,7 @@ trait ThunderCkEditorTestTrait {
 
     $this->getSession()
       ->getDriver()
-      ->executeScript("CKEDITOR.instances[\"$ckEditorId\"].insertHtml(\"$text\");");
-  }
-
-  /**
-   * Select CKEditor element.
-   *
-   * @param string $ckEditorCssSelector
-   *   CSS selector for CKEditor.
-   * @param int $childIndex
-   *   The child index under the node.
-   */
-  public function selectCkEditorElement(string $ckEditorCssSelector, int $childIndex): void {
-    $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
-
-    $this->getSession()
-      ->getDriver()
-      ->executeScript("let selection = CKEDITOR.instances[\"$ckEditorId\"].getSelection(); selection.selectElement(selection.root.getChild($childIndex)); var ranges = selection.getRanges(); ranges[0].setEndBefore(ranges[0].getBoundaryNodes().endNode); selection.selectRanges(ranges);");
-  }
-
-  /**
-   * Assert that CKEditor instance contains correct data.
-   *
-   * @param string $ckEditorCssSelector
-   *   CSS selector for CKEditor.
-   * @param string $expectedContent
-   *   The expected content.
-   */
-  public function assertCkEditorContent(string $ckEditorCssSelector, string $expectedContent): void {
-    $ckEditorId = $this->getCkEditorId($ckEditorCssSelector);
-    $ckEditorContent = $this->getSession()
-      ->getDriver()
-      ->evaluateScript("return CKEDITOR.instances[\"$ckEditorId\"].getData();");
-
-    static::assertEquals($expectedContent, $ckEditorContent);
+      ->executeScript("Drupal.CKEditor5Instances.get(\"$ckEditorId\").setData(\"$text\");");
   }
 
 }
