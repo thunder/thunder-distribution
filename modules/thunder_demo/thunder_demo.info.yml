@@ -2,7 +2,7 @@ name: Thunder Demo
 type: module
 description: Provide demo content.
 package: Thunder Optional
-core_version_requirement: ^9
+core_version_requirement: ^10
 dependencies:
   - default_content:default_content
   - drupal:tour
