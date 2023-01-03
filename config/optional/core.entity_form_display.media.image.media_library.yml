@@ -13,7 +13,9 @@ dependencies:
     - media.type.image
   module:
     - datetime
+    - entity_reference_actions
     - image
+    - select2
 id: media.image.media_library
 targetEntityType: media
 bundle: image
@@ -50,15 +52,24 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_tags:
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     weight: 5
     region: content
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
+    third_party_settings:
+      entity_reference_actions:
+        enabled: false
+        options:
+          action_title: Action
+          include_exclude: exclude
+          selected_actions:
+            taxonomy_term_edit_action: '0'
+            taxonomy_term_publish_action: '0'
+            taxonomy_term_unpublish_action: '0'
   name:
     type: string_textfield
     weight: 0
