@@ -33,12 +33,12 @@ function thunder_media_page_attachments(array &$page): void {
 }
 
 /**
- * Implements hook_field_widget_WIDGET_ID_form_alter().
+ * Implements hook_field_widget_single_element_WIDGET_ID_form_alter().
  *
  * Add process function to hide 'remove' button of image field widget on inline
  * entity forms.
  */
-function thunder_media_field_widget_image_focal_point_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
+function thunder_media_field_widget_single_element_image_focal_point_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
   $config = \Drupal::config('thunder_media.settings');
 
   if (!$config->get('enable_filefield_remove_button')) {

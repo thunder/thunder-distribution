@@ -89,11 +89,6 @@ parameters:
 			path: modules/thunder_taxonomy/src/ThunderTermAccessControlHandler.php
 
 		-
-			message: "#^Access to an undefined property Drupal\\\\Core\\\\Extension\\\\Extension\\:\\:\\$info\\.$#"
-			count: 5
-			path: src/Installer/Form/ModuleConfigureForm.php
-
-		-
 			message: "#^Access to an undefined property Drupal\\\\Core\\\\Extension\\\\Extension\\:\\:\\$requires\\.$#"
 			count: 1
 			path: src/Installer/Form/ModuleConfigureForm.php
@@ -163,7 +158,6 @@ parameters:
 			count: 1
 			path: tests/src/FunctionalJavascript/Integration/InlineEntityFormTest.php
 
-
 		-
 			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
 			count: 6
@@ -210,6 +204,21 @@ parameters:
 			path: tests/src/TestSuites/ThunderTestSuite.php
 
 		-
-			message: "#^Access to an undefined property Drupal\\\\Core\\\\Extension\\\\Extension\\:\\:\\$info\\.$#"
-			count: 4
-			path: thunder.profile
+			message: "#^\\\\Drupal calls should be avoided in classes, use dependency injection instead$#"
+			count: 1
+			path: modules/thunder_gqls/src/Wrappers/EntityListResponse.php
+
+		-
+			message: "#^Drupal\\\\Tests\\\\BrowserTestBase\\:\\:\\$defaultTheme is required\\. See https\\://www\\.drupal\\.org/node/3083055, which includes recommendations on which theme to use\\.$#"
+			count: 1
+			path: tests/src/Functional/Installer/ThunderInstallerGermanTest.php
+
+		-
+			message: "#^Drupal\\\\Tests\\\\BrowserTestBase\\:\\:\\$defaultTheme is required\\. See https\\://www\\.drupal\\.org/node/3083055, which includes recommendations on which theme to use\\.$#"
+			count: 1
+			path: tests/src/Functional/Installer/ThunderInstallerTest.php
+
+		-
+			message: "#^Class Drupal\\\\Tests\\\\TestSuites\\\\ThunderTestSuite extends @internal class PHPUnit\\\\Framework\\\\TestSuite\\.$#"
+			count: 1
+			path: tests/src/TestSuites/ThunderTestSuite.php
