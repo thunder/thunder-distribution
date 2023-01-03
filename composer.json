@@ -144,7 +144,7 @@
     },
     "require-dev": {
         "burdamagazinorg/thunder-dev-tools": "dev-master",
-        "thunder/thunder_testing_demo": "new-schema-dev",
+        "thunder/thunder_testing_demo": "4.x-dev",
         "mglaman/phpstan-drupal": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0"
     }
