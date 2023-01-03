@@ -125,6 +125,24 @@ class ThunderNodeForm implements ContainerInjectionInterface {
 
     $form['actions'] = array_merge($form['actions'], $this->actions($entity));
 
+    if ($field = $form_state->get('form_display')->getComponent('article_teaser_preview')) {
+      $form['article_teaser_preview'] = [
+        '#type' => 'container',
+        '#weight' => $field['weight'],
+
+      ];
+      $form['article_teaser_preview']['article'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'article',
+        '#attributes' => [
+          'class' => ['teaser-preview'],
+        ],
+        '#attached' => [
+          'library' => ['thunder_article/teaser_preview'],
+        ],
+      ];
+    }
+
     return $form;
   }
 
