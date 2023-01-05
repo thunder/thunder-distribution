@@ -36,15 +36,12 @@
         "patches": {
             "drupal/core": {
                 "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2020-07-30/3133639-8.patch",
-                "It is possible to overflow the number of items allowed in Media Library": "https://git.drupalcode.org/project/drupal/-/merge_requests/760.diff",
+                "It is possible to overflow the number of items allowed in Media Library": "https://www.drupal.org/files/issues/2022-12-27/3059955-159.patch",
                 "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch",
                 "\"Add another item\" field button is displayed as a modal action": "https://www.drupal.org/files/issues/2022-11-04/3151534-42-d10-1.patch"
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
-            },
-            "drupal/media_library_media_modify": {
-                "Add field diff builder": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/29.diff"
             },
             "drupal/checklistapi": {
                 "Issue #3310067 by Lal_, jcnventura, TravisCarden, nkoporec: Use...": "https://git.drupalcode.org/project/checklistapi/-/commit/4b02386aac7fbc6bee2a8a37f75508714baa7f60.diff"
