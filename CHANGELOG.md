@@ -1,5 +1,10 @@
 # Changelog
 
+## [6.4.5](https://github.com/thunder/thunder-distribution/tree/6.4.5) 2023-01-19
+
+Adding Entity Browser patch for SA-CONTRIB-2023-002. We cannot update entity browser, so we have to backport the patch.
+Our Entity Browser will still be shown as vulnerable, but it is fixed with this patch.
+
 ## [6.4.4](https://github.com/thunder/thunder-distribution/tree/6.4.4) 2022-12-19
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.4.3...6.4.4)
