@@ -185,7 +185,7 @@ jobs:
       DRUPAL_TESTING_TEST_GROUP: Thunder
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
 
       - uses: shivammathur/setup-php@v2
         with:
