@@ -235,7 +235,6 @@ jobs:
           composer require "drupal/thunder_admin" --no-update
           composer require "drupal/shariff" --no-update
 
-#          rm vendor/composer/installed.json
           composer update
           composer exec -- drush updb -y
 
