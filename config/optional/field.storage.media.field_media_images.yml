@@ -7,7 +7,7 @@ dependencies:
 id: media.field_media_images
 field_name: field_media_images
 entity_type: media
-type: entity_reference_entity_modify
+type: entity_reference
 settings:
   target_type: media
 module: media_library_media_modify
