@@ -24,4 +24,4 @@ settings:
       image: image
     sort:
       field: _none
-field_type: entity_reference_entity_modify
+field_type: entity_reference

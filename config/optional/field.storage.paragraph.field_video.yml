@@ -8,7 +8,7 @@ dependencies:
 id: paragraph.field_video
 field_name: field_video
 entity_type: paragraph
-type: entity_reference_entity_modify
+type: entity_reference
 settings:
   target_type: media
 module: media_library_media_modify
