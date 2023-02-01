@@ -17,9 +17,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
       jsonld(path: $path)
     }';
 
-    $variables = '{
-      "path": "/come-drupalcon-new-orleans"
-    }';
+    $variables = '{"path": "/come-drupalcon-new-orleans"}';
 
     $response = $this->getJsonLdFromQuery($query, $variables);
     $this->assertEquals('Come to DrupalCon New Orleans', $response['@graph'][0]['name']);
@@ -44,9 +42,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
       }
     }';
 
-    $variables = '{
-      "path": "/come-drupalcon-new-orleans"
-    }';
+    $variables = '{"path": "/come-drupalcon-new-orleans"}';
 
     $responseData = $this->getResponseValueForKey('metatags', $query, $variables);
     $descriptionData = json_decode($responseData[6]['attributes'], TRUE, 512, JSON_THROW_ON_ERROR);
@@ -82,9 +78,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
       }
     }';
 
-    $variables = '{
-      "path": "/news"
-    }';
+    $variables = '{"path": "/news"}';
 
     $responseData = $this->getResponseValueForKey('page', $query, $variables);
     $this->assertEquals('Burda Launches Open-Source CMS Thunder', $responseData['articles']['items'][0]['name']);
@@ -96,6 +90,38 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
 
     $responseData = $this->getResponseValueForKey('page', $query, $variables);
     $this->assertEquals('Burda Launches Open-Source CMS Thunder 2020', $responseData['articles']['items'][0]['name']);
+  }
+
+  /**
+   * Test the cache invalidation of the breadcrumb data producer.
+   */
+  public function testBreadcrumbCacheInvalidation(): void {
+    $query = 'query ($path: String!) {
+      breadcrumb(path: $path) {
+        title
+      }
+    }';
+
+    $variables = '{"path": "/news"}';
+
+    $responseData = $this->getResponseValueForKey('breadcrumb', $query, $variables);
+    $this->assertEquals('Home', $responseData[0]['title']);
+
+    // Change the title of the term, this changes the url, so the breadcrumb
+    // for the same path should be gone.
+    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['name' => 'News', 'vid' => 'channel']);
+    $term = reset($terms);
+    $term->setName('New');
+    $term->save();
+
+    $responseData = $this->getResponseValueForKey('breadcrumb', $query, $variables);
+    $this->assertEmpty($responseData, 'The breadcrumb should be empty, because the url changed.');
+
+    // Change the variables to the new path, the breadcrumb should be there.
+    $variables = '{"path": "/new"}';
+
+    $responseData = $this->getResponseValueForKey('breadcrumb', $query, $variables);
+    $this->assertEquals('Home', $responseData[0]['title']);
   }
 
   /**
@@ -130,25 +156,19 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
    * @param string $variables
    *   The variables for the query.
    *
-   * @return mixed
-   *   The response value of the key.
-   *
    * @throws \GuzzleHttp\Exception\GuzzleException|\JsonException
    *   If the json is invalid or the request failed.
    */
-  protected function getResponseValueForKey(string $key, string $query, string $variables): mixed {
+  protected function getResponseValueForKey(string $key, string $query, string $variables) {
     $response = $this->query($query, $variables);
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
 
-    $responseData = json_decode(
+    return json_decode(
       $response->getBody(),
       TRUE,
       512,
       JSON_THROW_ON_ERROR
     )['data'][$key];
-    $this->assertNotEmpty($responseData, 'Response data is empty');
-
-    return $responseData;
   }
 
 }
