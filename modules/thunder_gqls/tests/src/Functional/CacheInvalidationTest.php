@@ -109,7 +109,9 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
 
     // Change the title of the term, this changes the url, so the breadcrumb
     // for the same path should be gone.
-    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['name' => 'News', 'vid' => 'channel']);
+    $terms = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadByProperties(['name' => 'News', 'vid' => 'channel']);
     $term = reset($terms);
     $term->setName('New');
     $term->save();
