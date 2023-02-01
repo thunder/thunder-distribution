@@ -115,8 +115,9 @@ class ThunderJsonLd extends ThunderEntitySubRequestBase {
     $context = ['entity' => $entity];
     $this->moduleHandler->alter('metatags', $metatags, $context);
     $elements = $this->metatagManager->generateElements($metatags, $entity);
-    // Parse the Schema.org metatags out of the array.
-    // Encode the Schema.org metatags as JSON LD.
+
+    // Parse the Schema.org metatags out of the array and encode the Schema.org
+    // metatags as JSON LD.
     if (($items = SchemaMetatagManager::parseJsonld($elements['#attached']['html_head']))
       && $jsonld = SchemaMetatagManager::encodeJsonld($items)) {
       $fieldContext->addCacheableDependency($entity);
@@ -125,6 +126,7 @@ class ThunderJsonLd extends ThunderEntitySubRequestBase {
       $html = SchemaMetatagManager::renderArrayJsonLd($jsonld);
       return $this->renderer->render($html);
     }
+
     return '';
   }
 

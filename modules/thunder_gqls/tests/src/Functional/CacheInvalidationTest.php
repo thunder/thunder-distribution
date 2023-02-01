@@ -130,13 +130,13 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
    * @param string $variables
    *   The variables for the query.
    *
-   * @return array|string
+   * @return mixed
    *   The response value of the key.
    *
    * @throws \GuzzleHttp\Exception\GuzzleException|\JsonException
    *   If the json is invalid or the request failed.
    */
-  protected function getResponseValueForKey(string $key, string $query, string $variables): array|string {
+  protected function getResponseValueForKey(string $key, string $query, string $variables): mixed {
     $response = $this->query($query, $variables);
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
 
