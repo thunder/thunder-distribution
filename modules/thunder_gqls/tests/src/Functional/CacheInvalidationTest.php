@@ -160,6 +160,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
    *
    * @throws \GuzzleHttp\Exception\GuzzleException|\JsonException
    *   If the json is invalid or the request failed.
+   *  @phpstan-ignore-next-line
    */
   protected function getResponseValueForKey(string $key, string $query, string $variables) {
     $response = $this->query($query, $variables);
