@@ -154,9 +154,6 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
         return $data;
       });
 
-      if (!$context->isEmpty()) {
-        $metadata->addCacheableDependency($context->pop());
-      }
     }
 
     return $result ?? [];

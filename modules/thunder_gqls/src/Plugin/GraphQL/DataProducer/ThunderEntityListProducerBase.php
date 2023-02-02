@@ -162,11 +162,6 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
 
     $query->range($offset, $limit);
 
-    $storage = $this->entityTypeManager->getStorage($type);
-    $entityType = $storage->getEntityType();
-
-    $cacheContext->addCacheTags($entityType->getListCacheTags());
-    $cacheContext->addCacheContexts($entityType->getListCacheContexts());
     return $query;
   }
 
