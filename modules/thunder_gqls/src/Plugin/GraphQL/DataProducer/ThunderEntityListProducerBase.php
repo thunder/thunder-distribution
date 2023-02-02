@@ -149,7 +149,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
         if (!empty($sort['field'])) {
           if (!empty($sort['direction']) && strtolower(
               $sort['direction']
-            ) == 'desc') {
+            ) === 'desc') {
             $direction = 'DESC';
           }
           else {
@@ -162,6 +162,11 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
 
     $query->range($offset, $limit);
 
+    $storage = $this->entityTypeManager->getStorage($type);
+    $entityType = $storage->getEntityType();
+
+    $cacheContext->addCacheTags($entityType->getListCacheTags());
+    $cacheContext->addCacheContexts($entityType->getListCacheContexts());
     return $query;
   }
 

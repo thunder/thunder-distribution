@@ -10,6 +10,30 @@ namespace Drupal\Tests\thunder_gqls\Functional;
 class CacheInvalidationTest extends ThunderGqlsTestBase {
 
   /**
+   * The config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp() {
+    parent::setUp();
+
+    $this->configFactory = \Drupal::service('config.factory');
+    $this->entityTypeManager = \Drupal::service('entity_type.manager');
+  }
+
+  /**
    * Test the cache invalidation of the JsonLD data producer.
    */
   public function testJsonLdCacheInvalidation(): void {
@@ -45,12 +69,12 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
     $variables = '{"path": "/come-drupalcon-new-orleans"}';
 
     $responseData = $this->getResponseValueForKey('metatags', $query, $variables);
-    $descriptionData = json_decode($responseData[6]['attributes'], TRUE, 512, JSON_THROW_ON_ERROR);
 
+    // Assert that changing the entity invalidates the cache.
+    $descriptionData = json_decode($responseData[6]['attributes'], TRUE, 512, JSON_THROW_ON_ERROR);
     $this->assertEquals('description', $descriptionData['name'], 'The meta tag for description is not the sixth tag in the response.');
     $this->assertStringStartsWith('The Drupal community is one of the largest open source communities in the world', $descriptionData['content'], 'The meta tag has the wrong content.');
 
-    // Change the title of the node.
     $node = $this->getNodeByTitle('Come to DrupalCon New Orleans');
     $node->set('field_teaser_text', 'New teaser text');
     $node->save();
@@ -60,6 +84,21 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
 
     $this->assertEquals('description', $descriptionData['name'], 'The meta tag for description is not the sixth tag in the response.');
     $this->assertEquals('New teaser text', $descriptionData['content'], 'The meta tag has the wrong content.');
+
+    // Assert that changing the site config invalidates the cache.
+    $descriptionData = json_decode($responseData[7]['attributes'], TRUE, 512, JSON_THROW_ON_ERROR);
+    $this->assertEquals('og:site_name', $descriptionData['property'], 'The meta tag for og:site_name is not the seventh tag in the response.');
+    $this->assertEquals('Drush Site-Install', $descriptionData['content'], 'The meta tag has the wrong content.');
+
+    $config = $this->configFactory->getEditable('system.site');
+    $config->set('name', 'Drupal Test Installation');
+    $config->save();
+
+    $responseData = $this->getResponseValueForKey('metatags', $query, $variables);
+    $descriptionData = json_decode($responseData[7]['attributes'], TRUE, 512, JSON_THROW_ON_ERROR);
+
+    $this->assertEquals('og:site_name', $descriptionData['property'], 'The meta tag for og:site_name is not the seventh tag in the response.');
+    $this->assertEquals('Drupal Test Installation', $descriptionData['content'], 'The meta tag has the wrong content.');
   }
 
   /**
@@ -109,7 +148,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
 
     // Change the title of the term, this changes the url, so the breadcrumb
     // for the same path should be gone.
-    $terms = \Drupal::entityTypeManager()
+    $terms = $this->entityTypeManager
       ->getStorage('taxonomy_term')
       ->loadByProperties(['name' => 'News', 'vid' => 'channel']);
     $term = reset($terms);
