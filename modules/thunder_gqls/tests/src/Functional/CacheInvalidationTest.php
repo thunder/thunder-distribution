@@ -183,7 +183,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
    * @throws \JsonException|\GuzzleHttp\Exception\GuzzleException
    *   If the json is invalid or the request failed.
    */
-  protected function getJsonLdFromQuery(string $query, string $variables): array {
+  protected function getJsonLdFromQuery(string $query, string $variables): string {
     $responseData = $this->getResponseData($query, $variables)['jsonld'];
 
     // Remove surrounding ld+json script tag.
