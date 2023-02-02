@@ -53,6 +53,12 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
 
     $response = $this->getJsonLdFromQuery($query, $variables);
     $this->assertEquals('Come to DrupalCon New Orleans 2020', $response['@graph'][0]['name']);
+
+    $this->assertEquals('Drush Site-Install', $response['@graph'][0]['publisher']['name']);
+    $this->setSiteName('Drupal Test Installation');
+
+    $response = $this->getJsonLdFromQuery($query, $variables);
+    $this->assertEquals('Drupal Test Installation', $response['@graph'][0]['publisher']['name']);
   }
 
   /**
@@ -68,7 +74,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
 
     $variables = '{"path": "/come-drupalcon-new-orleans"}';
 
-    $responseData = $this->getResponseValueForKey('metatags', $query, $variables);
+    $responseData = $this->getResponseData($query, $variables)['metatags'];
 
     // Assert that changing the entity invalidates the cache.
     $descriptionData = json_decode($responseData[6]['attributes'], TRUE, 512, JSON_THROW_ON_ERROR);
@@ -79,7 +85,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
     $node->set('field_teaser_text', 'New teaser text');
     $node->save();
 
-    $responseData = $this->getResponseValueForKey('metatags', $query, $variables);
+    $responseData = $this->getResponseData($query, $variables)['metatags'];
     $descriptionData = json_decode($responseData[6]['attributes'], TRUE, 512, JSON_THROW_ON_ERROR);
 
     $this->assertEquals('description', $descriptionData['name'], 'The meta tag for description is not the sixth tag in the response.');
@@ -90,11 +96,9 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
     $this->assertEquals('og:site_name', $descriptionData['property'], 'The meta tag for og:site_name is not the seventh tag in the response.');
     $this->assertEquals('Drush Site-Install', $descriptionData['content'], 'The meta tag has the wrong content.');
 
-    $config = $this->configFactory->getEditable('system.site');
-    $config->set('name', 'Drupal Test Installation');
-    $config->save();
+    $this->setSiteName('Drupal Test Installation');
 
-    $responseData = $this->getResponseValueForKey('metatags', $query, $variables);
+    $responseData = $this->getResponseData($query, $variables)['metatags'];
     $descriptionData = json_decode($responseData[7]['attributes'], TRUE, 512, JSON_THROW_ON_ERROR);
 
     $this->assertEquals('og:site_name', $descriptionData['property'], 'The meta tag for og:site_name is not the seventh tag in the response.');
@@ -119,7 +123,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
 
     $variables = '{"path": "/news"}';
 
-    $responseData = $this->getResponseValueForKey('page', $query, $variables);
+    $responseData = $this->getResponseData($query, $variables)['page'];
     $this->assertEquals('Burda Launches Open-Source CMS Thunder', $responseData['articles']['items'][0]['name']);
 
     // Change the title of the node.
@@ -127,7 +131,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
     $node->setTitle('Burda Launches Open-Source CMS Thunder 2020');
     $node->save();
 
-    $responseData = $this->getResponseValueForKey('page', $query, $variables);
+    $responseData = $this->getResponseData($query, $variables)['page'];
     $this->assertEquals('Burda Launches Open-Source CMS Thunder 2020', $responseData['articles']['items'][0]['name']);
   }
 
@@ -143,7 +147,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
 
     $variables = '{"path": "/news"}';
 
-    $responseData = $this->getResponseValueForKey('breadcrumb', $query, $variables);
+    $responseData = $this->getResponseData($query, $variables)['breadcrumb'];
     $this->assertEquals('Home', $responseData[0]['title']);
 
     // Change the title of the term, this changes the url, so the breadcrumb
@@ -155,13 +159,13 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
     $term->setName('New');
     $term->save();
 
-    $responseData = $this->getResponseValueForKey('breadcrumb', $query, $variables);
+    $responseData = $this->getResponseData($query, $variables)['breadcrumb'];
     $this->assertEmpty($responseData, 'The breadcrumb should be empty, because the url changed.');
 
     // Change the variables to the new path, the breadcrumb should be there.
     $variables = '{"path": "/new"}';
 
-    $responseData = $this->getResponseValueForKey('breadcrumb', $query, $variables);
+    $responseData = $this->getResponseData($query, $variables)['breadcrumb'];
     $this->assertEquals('Home', $responseData[0]['title']);
   }
 
@@ -180,7 +184,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
    *   If the json is invalid or the request failed.
    */
   protected function getJsonLdFromQuery(string $query, string $variables): array {
-    $responseData = $this->getResponseValueForKey('jsonld', $query, $variables);
+    $responseData = $this->getResponseData($query, $variables)['jsonld'];
 
     // Remove surrounding ld+json script tag.
     $responseData = substr($responseData, 35, -10);
@@ -188,10 +192,8 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
   }
 
   /**
-   * Get value for a specific key from response.
+   * Get response data.
    *
-   * @param string $key
-   *   The key to get.
    * @param string $query
    *   The graphql jsonld query.
    * @param string $variables
@@ -201,7 +203,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
    *   If the json is invalid or the request failed.
    *  @phpstan-ignore-next-line
    */
-  protected function getResponseValueForKey(string $key, string $query, string $variables) {
+  protected function getResponseData(string $query, string $variables) {
     $response = $this->query($query, $variables);
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
 
@@ -210,7 +212,15 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
       TRUE,
       512,
       JSON_THROW_ON_ERROR
-    )['data'][$key];
+    )['data'];
   }
 
+  /**
+   * @return void
+   */
+  protected function setSiteName($name): void {
+    $config = $this->configFactory->getEditable('system.site');
+    $config->set('name', $name);
+    $config->save();
+  }
 }
