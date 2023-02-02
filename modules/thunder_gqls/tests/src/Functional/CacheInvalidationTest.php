@@ -77,7 +77,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
     $responseData = $this->getResponseData($query, $variables)['metatags'];
 
     // Assert that changing the entity invalidates the cache.
-    $descriptionData = json_decode($responseData[6]['attributes'], TRUE, 512, JSON_THROW_ON_ERROR);
+    $descriptionData = $this->jsonDecode($responseData[6]['attributes']);
     $this->assertEquals('description', $descriptionData['name'], 'The meta tag for description is not the sixth tag in the response.');
     $this->assertStringStartsWith('The Drupal community is one of the largest open source communities in the world', $descriptionData['content'], 'The meta tag has the wrong content.');
 
@@ -86,20 +86,20 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
     $node->save();
 
     $responseData = $this->getResponseData($query, $variables)['metatags'];
-    $descriptionData = json_decode($responseData[6]['attributes'], TRUE, 512, JSON_THROW_ON_ERROR);
+    $descriptionData = $this->jsonDecode($responseData[6]['attributes']);
 
     $this->assertEquals('description', $descriptionData['name'], 'The meta tag for description is not the sixth tag in the response.');
     $this->assertEquals('New teaser text', $descriptionData['content'], 'The meta tag has the wrong content.');
 
     // Assert that changing the site config invalidates the cache.
-    $descriptionData = json_decode($responseData[7]['attributes'], TRUE, 512, JSON_THROW_ON_ERROR);
+    $descriptionData = $this->jsonDecode($responseData[7]['attributes']);
     $this->assertEquals('og:site_name', $descriptionData['property'], 'The meta tag for og:site_name is not the seventh tag in the response.');
     $this->assertEquals('Drush Site-Install', $descriptionData['content'], 'The meta tag has the wrong content.');
 
     $this->setSiteName('Drupal Test Installation');
 
     $responseData = $this->getResponseData($query, $variables)['metatags'];
-    $descriptionData = json_decode($responseData[7]['attributes'], TRUE, 512, JSON_THROW_ON_ERROR);
+    $descriptionData = $this->jsonDecode($responseData[7]['attributes']);
 
     $this->assertEquals('og:site_name', $descriptionData['property'], 'The meta tag for og:site_name is not the seventh tag in the response.');
     $this->assertEquals('Drupal Test Installation', $descriptionData['content'], 'The meta tag has the wrong content.');
@@ -188,31 +188,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
 
     // Remove surrounding ld+json script tag.
     $responseData = substr($responseData, 35, -10);
-    return json_decode($responseData, TRUE, 512, JSON_THROW_ON_ERROR);
-  }
-
-  /**
-   * Get response data.
-   *
-   * @param string $query
-   *   The graphql jsonld query.
-   * @param string $variables
-   *   The variables for the query.
-   *
-   * @throws \GuzzleHttp\Exception\GuzzleException|\JsonException
-   *   If the json is invalid or the request failed.
-   *  @phpstan-ignore-next-line
-   */
-  protected function getResponseData(string $query, string $variables) {
-    $response = $this->query($query, $variables);
-    $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
-
-    return json_decode(
-      $response->getBody(),
-      TRUE,
-      512,
-      JSON_THROW_ON_ERROR
-    )['data'];
+    return $this->jsonDecode($responseData);
   }
 
   /**
