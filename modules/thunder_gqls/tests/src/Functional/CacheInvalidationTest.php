@@ -26,7 +26,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->configFactory = \Drupal::service('config.factory');
@@ -197,7 +197,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
    * @param string $name
    *   The new site name.
    */
-  protected function setSiteName(string $name) {
+  protected function setSiteName(string $name): void {
     $config = $this->configFactory->getEditable('system.site');
     $config->set('name', $name);
     $config->save();

@@ -143,8 +143,11 @@ trait ThunderGqlsTestTrait {
    *
    * @param string $json
    *   The json string.
+   *
+   * @return string
+   *   The decoded json string.
    */
-  protected function jsonDecode(string $json) {
+  protected function jsonDecode(string $json): string {
     return json_decode($json, TRUE, 512, JSON_THROW_ON_ERROR);
   }
 
