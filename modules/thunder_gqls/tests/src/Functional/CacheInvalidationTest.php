@@ -192,11 +192,15 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
   }
 
   /**
-   * @return void
+   * Set the site name system configuration.
+   *
+   * @param string $name
+   *   The new site name.
    */
-  protected function setSiteName($name): void {
+  protected function setSiteName(string $name) {
     $config = $this->configFactory->getEditable('system.site');
     $config->set('name', $name);
     $config->save();
   }
+
 }

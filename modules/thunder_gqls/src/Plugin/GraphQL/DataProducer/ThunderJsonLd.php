@@ -113,14 +113,14 @@ class ThunderJsonLd extends ThunderEntitySubRequestBase {
         $metatags[$tag] = $data;
       }
 
-      // Trigger hook_metatags_alter().
-      // Allow modules to override tags or the entity used for token replacements.
+      // Trigger hook_metatags_alter(). Allow modules to override tags or the
+      // entity used for token replacements.
       $context = ['entity' => $entity];
       $this->moduleHandler->alter('metatags', $metatags, $context);
       $elements = $this->metatagManager->generateElements($metatags, $entity);
 
-      // Parse the Schema.org metatags out of the array and encode the Schema.org
-      // metatags as JSON LD.
+      // Parse the Schema.org metatags out of the array and encode the
+      // Schema.org metatags as JSON LD.
       if (($items = SchemaMetatagManager::parseJsonld($elements['#attached']['html_head']))
         && $jsonld = SchemaMetatagManager::encodeJsonld($items)) {
         // Pass back the rendered result.

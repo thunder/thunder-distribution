@@ -87,10 +87,10 @@ class ThunderBreadcrumb extends ThunderEntitySubRequestBase {
    *   The breadcrumb entries.
    */
   protected function resolve(string $path, CacheableMetadata $cacheableMetadata, FieldContext $fieldContext) : array {
-    $build = $this->breadcrumbManager->build($this->currentRouteMatch->getCurrentRouteMatch());
-
     $breadCrumb = [];
-    foreach ($build->getLinks() as $link) {
+    foreach ($this->breadcrumbManager->build(
+      $this->currentRouteMatch->getCurrentRouteMatch()
+    )->getLinks() as $link) {
       $text = $link->getText();
       if ($text instanceof TranslatableMarkup) {
         $text = $text->render();

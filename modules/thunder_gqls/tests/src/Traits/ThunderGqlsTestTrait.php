@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\thunder_gqls\Traits;
 
-use Drupal\Component\Serialization\Json;
 use Drupal\Tests\BrowserHtmlDebugTrait;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
@@ -139,7 +138,14 @@ trait ThunderGqlsTestTrait {
     return file_get_contents($this->getQueriesDirectory() . '/' . $name . '.response.json');
   }
 
+  /**
+   * Decodes a json string.
+   *
+   * @param string $json
+   *   The json string.
+   */
   protected function jsonDecode(string $json) {
     return json_decode($json, TRUE, 512, JSON_THROW_ON_ERROR);
   }
+
 }
