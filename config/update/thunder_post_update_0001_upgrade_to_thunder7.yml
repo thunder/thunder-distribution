@@ -1,22 +1,6 @@
 __global_actions:
   install_themes:
     - gin
-core.entity_view_display.node.page.default:
-  expected_config:
-    hidden:
-      shariff_field: true
-  update_actions:
-    delete:
-      hidden:
-        shariff_field: true
-core.entity_view_display.node.page.teaser:
-  expected_config:
-    hidden:
-      shariff_field: true
-  update_actions:
-    delete:
-      hidden:
-        shariff_field: true
 editor.editor.basic_html:
   expected_config:
     editor: ckeditor
@@ -1034,38 +1018,6 @@ core.entity_view_display.media.video.paragraph_preview:
           weight: 3
         thumbnail:
           weight: 1
-core.entity_view_display.node.article.default:
-  expected_config:
-    content:
-      shariff_field:
-        region: content
-        settings: {  }
-        third_party_settings: {  }
-        weight: 3
-  update_actions:
-    delete:
-      content:
-        shariff_field:
-          region: content
-          settings: {  }
-          third_party_settings: {  }
-          weight: 3
-core.entity_view_display.node.article.rss:
-  expected_config:
-    hidden:
-      shariff_field: true
-  update_actions:
-    delete:
-      hidden:
-        shariff_field: true
-core.entity_view_display.node.article.teaser:
-  expected_config:
-    hidden:
-      shariff_field: true
-  update_actions:
-    delete:
-      hidden:
-        shariff_field: true
 field.field.media.gallery.field_media_images:
   expected_config:
     translatable: false
