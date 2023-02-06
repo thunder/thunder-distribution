@@ -241,9 +241,14 @@ jobs:
           composer update
           composer exec -- drush updb -y
 
+
           cd docroot
+          ls -al
+          ls -al sites/default
           php core/scripts/db-tools.php dump-database-d8-mysql --database-url "${SIMPLETEST_DB}" >"sites/default/database-dump.php"
+          ls -al sites/default
           tar -czf "${DRUPAL_TESTING_TEST_DUMP_FILE}" --exclude='config_*' --exclude='php' --exclude='styles' --directory='sites/default' files database-dump.php
+          ls -al
         working-directory: /tmp/test/thunder/install
 
       - name: Setup Apache
