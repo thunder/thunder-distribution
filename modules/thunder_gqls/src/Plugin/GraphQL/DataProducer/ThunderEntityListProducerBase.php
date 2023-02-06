@@ -149,7 +149,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
         if (!empty($sort['field'])) {
           if (!empty($sort['direction']) && strtolower(
               $sort['direction']
-            ) === 'desc') {
+            ) == 'desc') {
             $direction = 'DESC';
           }
           else {
