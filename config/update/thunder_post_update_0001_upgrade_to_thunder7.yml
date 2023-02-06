@@ -1018,30 +1018,6 @@ core.entity_view_display.media.video.paragraph_preview:
           weight: 3
         thumbnail:
           weight: 1
-field.field.media.gallery.field_media_images:
-  expected_config:
-    translatable: false
-  update_actions:
-    change:
-      translatable: true
-field.field.node.article.field_teaser_media:
-  expected_config:
-    translatable: false
-  update_actions:
-    change:
-      translatable: true
-field.field.paragraph.image.field_image:
-  expected_config:
-    translatable: false
-  update_actions:
-    change:
-      translatable: true
-field.field.paragraph.video.field_video:
-  expected_config:
-    translatable: false
-  update_actions:
-    change:
-      translatable: true
 field.storage.media.field_media_images:
   expected_config:
     module: core
