@@ -1,10 +1,6 @@
 __global_actions:
   install_themes:
     - gin
-  install_modules:
-    - ckeditor5
-    - jquery_ui
-    - jquery_ui_draggable
 core.entity_view_display.node.page.default:
   expected_config:
     hidden:

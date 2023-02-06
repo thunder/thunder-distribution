@@ -13,7 +13,7 @@ use Drupal\user\Entity\Role;
 function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
   $moduleInstaller = \Drupal::service('module_installer');
-  $moduleInstaller->install(['media_library_media_modify', 'gin_toolbar']);
+  $moduleInstaller->install(['media_library_media_modify', 'gin_toolbar', 'jquery_ui', 'jquery_ui_draggable', 'ckeditor5']);
 
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
