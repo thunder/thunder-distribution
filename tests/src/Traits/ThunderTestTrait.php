@@ -113,16 +113,19 @@ trait ThunderTestTrait {
    */
   protected function doInstall(): void {
     if (empty($_SERVER['thunderDumpFile']) || !file_exists($_SERVER['thunderDumpFile'])) {
+      var_dump('No dump file found. Install Drupal normally.');
       parent::doInstall();
       return;
     }
 
     if (str_ends_with($_SERVER['thunderDumpFile'], '.php')) {
+      var_dump('Install Drupal from database dump file.');
       require $_SERVER['thunderDumpFile'];
     }
 
     if (str_ends_with($_SERVER['thunderDumpFile'], '.tar.gz')) {
       // Extract tar.gz file to public files' directory.
+      var_dump('Install Drupal from tar.gz file.');
       $command = sprintf('LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 tar -xzf %s -C %s', $_SERVER['thunderDumpFile'], $this->siteDirectory);
       exec($command);
       require $this->siteDirectory . '/database-dump.php';
