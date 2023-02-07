@@ -194,38 +194,23 @@ display:
           expose:
             label: 'Newest first'
             field_identifier: created
-          exposed: true
+          exposed: false
           granularity: second
-        name:
-          id: name
+        mid:
+          id: mid
           table: media_field_data
-          field: name
+          field: mid
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: media
-          entity_field: name
-          plugin_id: standard
-          order: ASC
-          expose:
-            label: 'Name (A-Z)'
-            field_identifier: name
-          exposed: true
-        name_1:
-          id: name_1
-          table: media_field_data
-          field: name
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: media
-          entity_field: name
+          entity_field: mid
           plugin_id: standard
           order: DESC
           expose:
-            label: 'Name (Z-A)'
-            field_identifier: name_1
-          exposed: true
+            label: ''
+            field_identifier: ''
+          exposed: false
       filters:
         status:
           id: status
@@ -478,7 +463,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - 'url.query_args:sort_by'
         - user
         - user.permissions
       tags:
@@ -797,7 +781,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - 'url.query_args:sort_by'
         - user
         - user.permissions
       tags:
@@ -1148,7 +1131,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - 'url.query_args:sort_by'
         - user.permissions
       tags:
         - 'config:core.entity_view_display.media.gallery.default'
@@ -1465,6 +1447,5 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - 'url.query_args:sort_by'
         - user.permissions
       tags: {  }
