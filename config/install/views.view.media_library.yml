@@ -242,14 +242,14 @@ display:
               authenticated: authenticated
           is_grouped: true
           group_info:
-            label: Published
-            description: ''
+            label: 'Publishing status'
+            description: 'Filter by status'
             identifier: status
             optional: true
             widget: select
             multiple: false
             remember: false
-            default_group: All
+            default_group: '1'
             default_group_multiple: {  }
             group_items:
               1:
@@ -994,21 +994,26 @@ display:
               editor: '0'
               seo: '0'
               administrator: '0'
-          is_grouped: false
+          is_grouped: true
           group_info:
-            label: Published
-            description: null
+            label: 'Publishing status'
+            description: ''
             identifier: status
             optional: true
             widget: select
             multiple: false
             remember: false
-            default_group: All
+            default_group: '1'
             default_group_multiple: {  }
             group_items:
-              1: {  }
-              2: {  }
-              3: {  }
+              1:
+                title: Published
+                operator: '='
+                value: '1'
+              2:
+                title: Unpublished
+                operator: '='
+                value: '0'
         name:
           id: name
           table: media_field_data
@@ -1305,18 +1310,26 @@ display:
               editor: '0'
               seo: '0'
               administrator: '0'
-          is_grouped: false
+          is_grouped: true
           group_info:
-            label: ''
+            label: 'Publishing status'
             description: ''
-            identifier: ''
+            identifier: status
             optional: true
             widget: select
             multiple: false
             remember: false
-            default_group: All
+            default_group: '1'
             default_group_multiple: {  }
-            group_items: {  }
+            group_items:
+              1:
+                title: Published
+                operator: '='
+                value: '1'
+              2:
+                title: Unpublished
+                operator: '='
+                value: '0'
         name:
           id: name
           table: media_field_data
