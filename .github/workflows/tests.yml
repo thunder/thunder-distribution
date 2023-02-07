@@ -48,7 +48,7 @@ jobs:
       DRUPAL_TESTING_TEST_DEPRECATION: true
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
 
       - uses: shivammathur/setup-php@v2
         with:
@@ -117,7 +117,7 @@ jobs:
         CHUNK: [ 1, 2, 3 ]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
 
       - uses: shivammathur/setup-php@v2
         with:
@@ -176,7 +176,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '7.4' ]
+        PHP_VERSION: [ '8.1' ]
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-upgrade') || github.event_name == 'schedule' }}
 
@@ -185,7 +185,7 @@ jobs:
       DRUPAL_TESTING_TEST_GROUP: Thunder
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
 
       - uses: shivammathur/setup-php@v2
         with:
@@ -227,28 +227,23 @@ jobs:
 
       - name: Update the docroot
         run: |
-          composer config --unset repositories.0
-          composer require "thunder/thunder-distribution:6.3.x-dev" --no-update
-          composer update
-          composer exec -- drush updb -y
-          composer exec -- drush theme:enable olivero --yes
-          composer exec -- drush config:set system.theme default olivero --yes
-          composer exec -- drush theme:uninstall thunder_base --yes
-
           composer config repositories.0 path "${GITHUB_WORKSPACE}"
           composer remove thunder/thunder-distribution --no-update
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
+          composer require "drupal/ckeditor" --no-update
+          composer require "drupal/seven" --no-update
           composer require "drupal/entity_browser" --no-update
           composer require "drupal/thunder_admin" --no-update
           composer require "drupal/shariff" --no-update
+          composer require "drupal/core-dev:~10.0.0" --no-update
 
-          rm vendor/composer/installed.json
           composer update
           composer exec -- drush updb -y
 
           cd docroot
-          php core/scripts/db-tools.php dump-database-d8-mysql > db-dump.php
+          php core/scripts/db-tools.php dump-database-d8-mysql --database-url "${SIMPLETEST_DB}" >"sites/default/database-dump.php"
+          tar -czf "${DRUPAL_TESTING_TEST_DUMP_FILE}" --exclude='config_*' --exclude='php' --exclude='styles' --directory='sites/default' files database-dump.php
         working-directory: /tmp/test/thunder/install
 
       - name: Setup Apache
@@ -257,6 +252,7 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
+
       - name: Run tests suite
         run: test-drupal-project run_tests
 
@@ -288,7 +284,7 @@ jobs:
       DRUPAL_TESTING_TEST_GROUP: Thunder
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
 
       - uses: shivammathur/setup-php@v2
         with:

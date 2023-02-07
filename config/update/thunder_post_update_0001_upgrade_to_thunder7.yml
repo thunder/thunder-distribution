@@ -1,9 +1,276 @@
 __global_actions:
-  import_configs:
-    - core.entity_form_mode.media.override
-    - core.entity_form_display.media.image.override
   install_themes:
     - gin
+editor.editor.basic_html:
+  expected_config:
+    editor: ckeditor
+    image_upload:
+      max_dimensions:
+        height: null
+        width: null
+    settings:
+      plugins:
+        drupallink:
+          linkit_enabled: true
+          linkit_profile: default
+      toolbar:
+        rows:
+          -
+            -
+              items:
+                - Bold
+                - Italic
+              name: Formatting
+            -
+              items:
+                - DrupalLink
+                - DrupalUnlink
+              name: Linking
+            -
+              items:
+                - BulletedList
+                - NumberedList
+              name: Lists
+            -
+              items:
+                - Blockquote
+              name: Media
+            -
+              items:
+                - Format
+              name: 'Block Formatting'
+            -
+              items:
+                - Source
+              name: Tools
+  update_actions:
+    delete:
+      settings:
+        plugins:
+          drupallink:
+            linkit_enabled: true
+            linkit_profile: default
+        toolbar:
+          rows:
+            -
+              -
+                items:
+                  - Bold
+                  - Italic
+                name: Formatting
+              -
+                items:
+                  - DrupalLink
+                  - DrupalUnlink
+                name: Linking
+              -
+                items:
+                  - BulletedList
+                  - NumberedList
+                name: Lists
+              -
+                items:
+                  - Blockquote
+                name: Media
+              -
+                items:
+                  - Format
+                name: 'Block Formatting'
+              -
+                items:
+                  - Source
+                name: Tools
+    change:
+      editor: ckeditor5
+      image_upload:
+        max_dimensions:
+          height: 0
+          width: 0
+      settings:
+        plugins:
+          ckeditor5_heading:
+            enabled_headings:
+              - heading2
+              - heading3
+              - heading4
+              - heading5
+              - heading6
+          ckeditor5_list:
+            reversed: false
+            startIndex: true
+          ckeditor5_sourceEditing:
+            allowed_tags:
+              - '<cite>'
+              - '<dl>'
+              - '<dt>'
+              - '<dd>'
+              - '<a hreflang>'
+              - '<blockquote cite>'
+              - '<ul type>'
+              - '<ol start type>'
+              - '<h2 id>'
+              - '<h3 id>'
+              - '<h4 id>'
+              - '<h5 id>'
+              - '<h6 id>'
+          linkit_extension:
+            linkit_enabled: true
+            linkit_profile: default
+        toolbar:
+          items:
+            - bold
+            - italic
+            - '|'
+            - link
+            - '|'
+            - bulletedList
+            - numberedList
+            - '|'
+            - blockQuote
+            - '|'
+            - heading
+            - '|'
+            - sourceEditing
+editor.editor.full_html:
+  expected_config:
+    editor: ckeditor
+    image_upload:
+      max_dimensions:
+        height: null
+        width: null
+    settings:
+      plugins:
+        drupallink:
+          linkit_enabled: true
+          linkit_profile: default
+      toolbar:
+        rows:
+          -
+            -
+              items:
+                - Bold
+                - Italic
+                - Strike
+                - Superscript
+                - Subscript
+                - '-'
+                - RemoveFormat
+              name: Formatting
+            -
+              items:
+                - DrupalLink
+                - DrupalUnlink
+              name: Linking
+            -
+              items:
+                - BulletedList
+                - NumberedList
+              name: Lists
+            -
+              items:
+                - Blockquote
+                - Table
+                - HorizontalRule
+              name: Media
+            -
+              items:
+                - Format
+              name: 'Block Formatting'
+            -
+              items:
+                - ShowBlocks
+                - Source
+              name: Tools
+  update_actions:
+    delete:
+      settings:
+        plugins:
+          drupallink:
+            linkit_enabled: true
+            linkit_profile: default
+        toolbar:
+          rows:
+            -
+              -
+                items:
+                  - Bold
+                  - Italic
+                  - Strike
+                  - Superscript
+                  - Subscript
+                  - '-'
+                  - RemoveFormat
+                name: Formatting
+              -
+                items:
+                  - DrupalLink
+                  - DrupalUnlink
+                name: Linking
+              -
+                items:
+                  - BulletedList
+                  - NumberedList
+                name: Lists
+              -
+                items:
+                  - Blockquote
+                  - Table
+                  - HorizontalRule
+                name: Media
+              -
+                items:
+                  - Format
+                name: 'Block Formatting'
+              -
+                items:
+                  - ShowBlocks
+                  - Source
+                name: Tools
+    change:
+      editor: ckeditor5
+      image_upload:
+        max_dimensions:
+          height: 0
+          width: 0
+      settings:
+        plugins:
+          ckeditor5_heading:
+            enabled_headings:
+              - heading2
+              - heading3
+              - heading4
+              - heading5
+              - heading6
+          ckeditor5_list:
+            reversed: true
+            startIndex: true
+          ckeditor5_sourceEditing:
+            allowed_tags: {  }
+          linkit_extension:
+            linkit_enabled: true
+            linkit_profile: default
+        toolbar:
+          items:
+            - bold
+            - italic
+            - strikethrough
+            - superscript
+            - subscript
+            - removeFormat
+            - '|'
+            - link
+            - '|'
+            - bulletedList
+            - numberedList
+            - '|'
+            - blockQuote
+            - insertTable
+            - horizontalLine
+            - '|'
+            - heading
+            - codeBlock
+            - '|'
+            - sourceEditing
 system.theme:
   expected_config:
     admin: thunder_admin
@@ -15,14 +282,29 @@ core.entity_form_display.media.gallery.default:
     content:
       field_media_images:
         settings:
-          add_button_text: 'Add media'
-          check_selected: false
-          form_mode: default
-          multi_edit_on_create: false
-          replace_checkbox_by_order_indicator: false
-        third_party_settings: { }
-        weight: 26
+          entity_browser: multiple_image_browser
+          field_widget_display: rendered_entity
+          field_widget_display_settings:
+            view_mode: thumbnail
+          field_widget_edit: true
+          field_widget_remove: true
+          field_widget_replace: false
+          open: true
+          selection_mode: selection_edit
+        type: entity_browser_entity_reference
   update_actions:
+    delete:
+      content:
+        field_media_images:
+          settings:
+            entity_browser: multiple_image_browser
+            field_widget_display: rendered_entity
+            field_widget_display_settings: true
+            field_widget_edit: true
+            field_widget_remove: true
+            field_widget_replace: false
+            open: true
+            selection_mode: selection_edit
     change:
       content:
         field_media_images:
@@ -30,34 +312,38 @@ core.entity_form_display.media.gallery.default:
             add_button_text: 'Select images'
             check_selected: true
             form_mode: override
+            media_types: {  }
             multi_edit_on_create: true
             replace_checkbox_by_order_indicator: true
-          third_party_settings:
-            entity_reference_actions:
-              enabled: true
-              options:
-                action_title: Action
-                include_exclude: include
-                selected_actions:
-                  media_delete_action: '0'
-                  media_edit_action: media_edit_action
-                  media_publish_action: '0'
-                  media_save_action: '0'
-                  media_unpublish_action: '0'
-          weight: 2
+          type: media_library_media_modify_widget
 core.entity_form_display.media.gallery.inline:
   expected_config:
     content:
       field_media_images:
         settings:
-          add_button_text: 'Add media'
-          check_selected: false
-          form_mode: default
-          multi_edit_on_create: false
-          replace_checkbox_by_order_indicator: false
-        third_party_settings: { }
-        weight: 26
+          entity_browser: multiple_image_browser
+          field_widget_display: rendered_entity
+          field_widget_display_settings:
+            view_mode: thumbnail
+          field_widget_edit: true
+          field_widget_remove: true
+          field_widget_replace: false
+          open: true
+          selection_mode: selection_edit
+        type: entity_browser_entity_reference
   update_actions:
+    delete:
+      content:
+        field_media_images:
+          settings:
+            entity_browser: multiple_image_browser
+            field_widget_display: rendered_entity
+            field_widget_display_settings: true
+            field_widget_edit: true
+            field_widget_remove: true
+            field_widget_replace: false
+            open: true
+            selection_mode: selection_edit
     change:
       content:
         field_media_images:
@@ -65,57 +351,59 @@ core.entity_form_display.media.gallery.inline:
             add_button_text: 'Select images'
             check_selected: true
             form_mode: override
+            media_types: {  }
             multi_edit_on_create: true
             replace_checkbox_by_order_indicator: true
-          third_party_settings:
-            entity_reference_actions:
-              enabled: true
-              options:
-                action_title: Action
-                include_exclude: include
-                selected_actions:
-                  media_delete_action: '0'
-                  media_edit_action: media_edit_action
-                  media_publish_action: '0'
-                  media_save_action: '0'
-                  media_unpublish_action: '0'
-          weight: 1
+          type: media_library_media_modify_widget
+core.entity_form_display.node.article.bulk_edit:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        simple_sitemap:
+          region: content
+          settings: {  }
+          third_party_settings: {  }
+          weight: 10
 core.entity_form_display.node.article.default:
   expected_config:
-    third_party_settings:
-      field_group:
-        group_basis:
-          format_settings:
-            classes: content-form__form-section
     content:
       field_teaser_media:
         settings:
-          add_button_text: 'Add media'
-          check_selected: false
-          form_mode: default
-          multi_edit_on_create: false
-          replace_checkbox_by_order_indicator: false
-        third_party_settings: { }
-        weight: 121
+          entity_browser: image_browser
+          field_widget_display: rendered_entity
+          field_widget_display_settings:
+            view_mode: thumbnail
+          field_widget_edit: true
+          field_widget_remove: true
+          field_widget_replace: false
+          open: true
+          selection_mode: selection_append
+        third_party_settings: {  }
+        type: entity_browser_entity_reference
   update_actions:
     delete:
       content:
         field_teaser_media:
           settings:
-            check_selected: false
-            multi_edit_on_create: false
-            replace_checkbox_by_order_indicator: false
+            entity_browser: image_browser
+            field_widget_display: rendered_entity
+            field_widget_display_settings: true
+            field_widget_edit: true
+            field_widget_remove: true
+            field_widget_replace: false
+            open: true
+            selection_mode: selection_append
     change:
-      third_party_settings:
-        field_group:
-          group_basis:
-            format_settings:
-              classes: 'content-form__form-section base-info'
       content:
         field_teaser_media:
           settings:
             add_button_text: 'Select image'
+            check_selected: false
             form_mode: override
+            media_types: {  }
+            multi_edit_on_create: true
+            replace_checkbox_by_order_indicator: false
           third_party_settings:
             entity_reference_actions:
               enabled: false
@@ -128,59 +416,126 @@ core.entity_form_display.node.article.default:
                   media_publish_action: '0'
                   media_save_action: '0'
                   media_unpublish_action: '0'
-          weight: 4
+          type: media_library_media_modify_widget
+      third_party_settings:
+        field_group:
+          group_basis:
+            format_settings:
+              classes: 'content-form__form-section base-info'
+core.entity_form_display.node.page.bulk_edit:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        simple_sitemap:
+          region: content
+          settings: {  }
+          third_party_settings: {  }
+          weight: 10
 core.entity_form_display.paragraph.image.default:
   expected_config:
     content:
       field_image:
         settings:
-          add_button_text: 'Add media'
-          check_selected: false
-          form_mode: default
-          multi_edit_on_create: false
-          replace_checkbox_by_order_indicator: false
-        weight: 1
+          entity_browser: image_browser
+          field_widget_display: rendered_entity
+          field_widget_display_settings:
+            view_mode: thumbnail
+          field_widget_edit: true
+          field_widget_remove: true
+          field_widget_replace: false
+          open: true
+          selection_mode: selection_append
+        third_party_settings: {  }
+        type: entity_browser_entity_reference
   update_actions:
     delete:
       content:
         field_image:
           settings:
-            add_button_text: 'Add media'
-            check_selected: false
-            multi_edit_on_create: false
-            replace_checkbox_by_order_indicator: false
+            entity_browser: image_browser
+            field_widget_display: rendered_entity
+            field_widget_display_settings: true
+            field_widget_edit: true
+            field_widget_remove: true
+            field_widget_replace: false
+            open: true
+            selection_mode: selection_append
     change:
       content:
         field_image:
           settings:
+            add_button_text: 'Select image'
+            check_selected: false
             form_mode: override
-          weight: 0
+            media_types: {  }
+            multi_edit_on_create: true
+            replace_checkbox_by_order_indicator: false
+          third_party_settings:
+            entity_reference_actions:
+              enabled: false
+              options:
+                action_title: Action
+                include_exclude: exclude
+                selected_actions:
+                  media_delete_action: '0'
+                  media_edit_action: '0'
+                  media_publish_action: '0'
+                  media_save_action: '0'
+                  media_unpublish_action: '0'
+          type: media_library_media_modify_widget
 core.entity_form_display.paragraph.video.default:
   expected_config:
     content:
       field_video:
         settings:
-          add_button_text: 'Add media'
-          check_selected: false
-          form_mode: default
-          multi_edit_on_create: false
-          replace_checkbox_by_order_indicator: false
-        weight: 1
+          entity_browser: video_browser
+          field_widget_display: rendered_entity
+          field_widget_display_settings:
+            view_mode: thumbnail
+          field_widget_edit: true
+          field_widget_remove: true
+          field_widget_replace: false
+          open: true
+          selection_mode: selection_append
+        third_party_settings: {  }
+        type: entity_browser_entity_reference
   update_actions:
     delete:
       content:
         field_video:
           settings:
-            add_button_text: 'Add media'
-            check_selected: false
-            multi_edit_on_create: false
-            replace_checkbox_by_order_indicator: false
+            entity_browser: video_browser
+            field_widget_display: rendered_entity
+            field_widget_display_settings: true
+            field_widget_edit: true
+            field_widget_remove: true
+            field_widget_replace: false
+            open: true
+            selection_mode: selection_append
     change:
       content:
         field_video:
           settings:
+            add_button_text: 'Select video'
+            check_selected: false
             form_mode: override
-          weight: 0
+            media_types: {  }
+            multi_edit_on_create: false
+            replace_checkbox_by_order_indicator: false
+          third_party_settings:
+            entity_reference_actions:
+              enabled: false
+              options:
+                action_title: Action
+                include_exclude: exclude
+                selected_actions:
+                  media_delete_action: '0'
+                  media_edit_action: '0'
+                  media_publish_action: '0'
+                  media_save_action: '0'
+                  media_unpublish_action: '0'
+          type: media_library_media_modify_widget
 core.entity_view_display.media.gallery.paragraph_preview:
   expected_config:
     content:
@@ -472,61 +827,55 @@ core.entity_view_display.media.video.paragraph_preview:
           weight: 3
         thumbnail:
           weight: 1
-field.field.media.gallery.field_media_images:
+field.storage.media.field_media_images:
   expected_config:
-    translatable: false
+    module: core
   update_actions:
     change:
-      translatable: true
-field.field.node.article.field_teaser_media:
+      module: media_library_media_modify
+field.storage.node.field_teaser_media:
   expected_config:
-    translatable: false
+    module: core
   update_actions:
     change:
-      translatable: true
-field.field.paragraph.image.field_image:
+      module: media_library_media_modify
+field.storage.paragraph.field_image:
   expected_config:
-    translatable: false
+    module: core
   update_actions:
     change:
-      translatable: true
-field.field.paragraph.video.field_video:
+      module: media_library_media_modify
+field.storage.paragraph.field_video:
   expected_config:
-    translatable: false
+    module: core
   update_actions:
     change:
-      translatable: true
+      module: media_library_media_modify
 views.view.media:
   expected_config:
     display:
-      media_page_list:
+      default:
         display_options:
-          menu:
-            context: '0'
-            description: ''
-            expanded: false
-            menu_name: main
-            parent: ''
-            title: Media
-            type: tab
-            weight: 0
-          path: admin/content/media
+          fields:
+            bundle:
+              label: Source
+          filters:
+            bundle:
+              expose:
+                identifier: source
+                label: Source
+        display_title: Master
   update_actions:
-    delete:
-      display:
-        media_page_list:
-          display_options:
-            menu:
-              context: '0'
-              description: ''
-              expanded: false
-              menu_name: main
-              parent: ''
-              title: Media
-              type: tab
-              weight: 0
     change:
       display:
-        media_page_list:
+        default:
           display_options:
-            path: admin/content/media-table
+            fields:
+              bundle:
+                label: Type
+            filters:
+              bundle:
+                expose:
+                  identifier: type
+                  label: Type
+          display_title: Default
