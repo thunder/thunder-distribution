@@ -37,7 +37,7 @@ is installed, and that `drush updb` did not throw any errors.
 Before you start with the code and database update please add the Entity Browser module, the Shariff module, and the
 Thunder Admin theme to your own composer.json. Both are no longer part of Thunder and can be removed after the update
 was successfully executed.
-Alse the ckeditor module and the seven theme are needed for the update process.
+Also the ckeditor module and the seven theme are needed for the update process.
 
 ```bash
 composer require drupal/entity_browser drupal/thunder_admin drupal/shariff drupal/ckeditor drupal/seven
