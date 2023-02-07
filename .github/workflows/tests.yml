@@ -238,7 +238,6 @@ jobs:
           composer require "drupal/shariff" --no-update
           composer require "drupal/core-dev:~10.0.0" --no-update
 
-          rm vendor/composer/installed.json
           composer update
           composer exec -- drush updb -y
 
