@@ -8,7 +8,6 @@ dependencies:
     - image
     - media
     - media_library
-    - media_library_media_modify
     - user
   enforced:
     module:
