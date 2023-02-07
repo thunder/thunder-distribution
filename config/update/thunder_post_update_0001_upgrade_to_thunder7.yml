@@ -370,10 +370,6 @@ core.entity_form_display.node.article.bulk_edit:
 core.entity_form_display.node.article.default:
   expected_config:
     content:
-      field_paragraphs:
-        third_party_settings:
-          paragraphs_features:
-            split_text: true
       field_teaser_media:
         settings:
           entity_browser: image_browser
@@ -387,18 +383,9 @@ core.entity_form_display.node.article.default:
           selection_mode: selection_append
         third_party_settings: {  }
         type: entity_browser_entity_reference
-    third_party_settings:
-      field_group:
-        group_basis:
-          format_settings:
-            classes: content-form__form-section
   update_actions:
     delete:
       content:
-        field_paragraphs:
-          third_party_settings:
-            paragraphs_features:
-              split_text: true
         field_teaser_media:
           settings:
             entity_browser: image_browser
@@ -410,16 +397,6 @@ core.entity_form_display.node.article.default:
             field_widget_replace: false
             open: true
             selection_mode: selection_append
-    add:
-      content:
-        field_meta_tags:
-          settings:
-            use_details: true
-        simple_sitemap:
-          region: content
-          settings: {  }
-          third_party_settings: {  }
-          weight: 10
     change:
       content:
         field_teaser_media:
@@ -458,121 +435,6 @@ core.entity_form_display.node.page.bulk_edit:
           settings: {  }
           third_party_settings: {  }
           weight: 10
-core.entity_form_display.node.page.default:
-  expected_config:
-    content:
-      created:
-        weight: 5
-      field_meta_tags:
-        weight: 7
-      field_paragraphs:
-        third_party_settings:
-          paragraphs_features:
-            split_text: true
-      moderation_state:
-        weight: 14
-      path:
-        weight: 6
-      publish_on:
-        region: content
-        settings: {  }
-        third_party_settings: {  }
-        type: datetime_timestamp_no_default
-        weight: 8
-      publish_state:
-        region: content
-        settings: {  }
-        third_party_settings: {  }
-        type: options_select
-        weight: 10
-      status:
-        weight: 15
-      uid:
-        weight: 4
-      unpublish_on:
-        region: content
-        settings: {  }
-        third_party_settings: {  }
-        type: datetime_timestamp_no_default
-        weight: 9
-      unpublish_state:
-        region: content
-        settings: {  }
-        third_party_settings: {  }
-        type: options_select
-        weight: 11
-      url_redirects:
-        weight: 13
-    third_party_settings:
-      field_group:
-        group_basis:
-          weight: 2
-        group_paragraphs:
-          weight: 3
-  update_actions:
-    delete:
-      content:
-        field_paragraphs:
-          third_party_settings:
-            paragraphs_features:
-              split_text: true
-        publish_on:
-          region: content
-          settings: {  }
-          third_party_settings: {  }
-          type: datetime_timestamp_no_default
-          weight: 8
-        publish_state:
-          region: content
-          settings: {  }
-          third_party_settings: {  }
-          type: options_select
-          weight: 10
-        unpublish_on:
-          region: content
-          settings: {  }
-          third_party_settings: {  }
-          type: datetime_timestamp_no_default
-          weight: 9
-        unpublish_state:
-          region: content
-          settings: {  }
-          third_party_settings: {  }
-          type: options_select
-          weight: 11
-    add:
-      hidden:
-        publish_on: true
-        publish_state: true
-        unpublish_on: true
-        unpublish_state: true
-    change:
-      content:
-        created:
-          weight: 3
-        field_meta_tags:
-          weight: 5
-        moderation_state:
-          weight: 11
-        path:
-          weight: 4
-        simple_sitemap:
-          region: content
-          settings: {  }
-          third_party_settings: {  }
-          weight: 13
-        status:
-          weight: 12
-        uid:
-          weight: 2
-        url_redirects:
-          weight: 10
-      third_party_settings:
-        field_group:
-          group_basis:
-            weight: 0
-          group_paragraphs:
-            weight: 1
 core.entity_form_display.paragraph.image.default:
   expected_config:
     content:
@@ -679,54 +541,6 @@ core.entity_form_display.paragraph.video.default:
                   media_save_action: '0'
                   media_unpublish_action: '0'
           type: media_library_media_modify_widget
-core.entity_form_display.taxonomy_term.channel.default:
-  expected_config:
-    content:
-      field_paragraphs:
-        third_party_settings:
-          paragraphs_features:
-            split_text: true
-  update_actions:
-    delete:
-      content:
-        field_paragraphs:
-          third_party_settings:
-            paragraphs_features:
-              split_text: true
-    add:
-      content:
-        field_meta_tags:
-          settings:
-            use_details: true
-        simple_sitemap:
-          region: content
-          settings: {  }
-          third_party_settings: {  }
-          weight: 10
-core.entity_form_display.taxonomy_term.tags.default:
-  expected_config:
-    content:
-      field_paragraphs:
-        third_party_settings:
-          paragraphs_features:
-            split_text: true
-  update_actions:
-    delete:
-      content:
-        field_paragraphs:
-          third_party_settings:
-            paragraphs_features:
-              split_text: true
-    add:
-      content:
-        field_meta_tags:
-          settings:
-            use_details: true
-        simple_sitemap:
-          region: content
-          settings: {  }
-          third_party_settings: {  }
-          weight: 10
 core.entity_view_display.media.gallery.paragraph_preview:
   expected_config:
     content:
