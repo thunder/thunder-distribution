@@ -299,8 +299,7 @@ core.entity_form_display.media.gallery.default:
           settings:
             entity_browser: multiple_image_browser
             field_widget_display: rendered_entity
-            field_widget_display_settings:
-              view_mode: thumbnail
+            field_widget_display_settings: true
             field_widget_edit: true
             field_widget_remove: true
             field_widget_replace: false
@@ -339,8 +338,7 @@ core.entity_form_display.media.gallery.inline:
           settings:
             entity_browser: multiple_image_browser
             field_widget_display: rendered_entity
-            field_widget_display_settings:
-              view_mode: thumbnail
+            field_widget_display_settings: true
             field_widget_edit: true
             field_widget_remove: true
             field_widget_replace: false
@@ -390,8 +388,7 @@ core.entity_form_display.node.article.default:
           settings:
             entity_browser: image_browser
             field_widget_display: rendered_entity
-            field_widget_display_settings:
-              view_mode: thumbnail
+            field_widget_display_settings: true
             field_widget_edit: true
             field_widget_remove: true
             field_widget_replace: false
@@ -458,8 +455,7 @@ core.entity_form_display.paragraph.image.default:
           settings:
             entity_browser: image_browser
             field_widget_display: rendered_entity
-            field_widget_display_settings:
-              view_mode: thumbnail
+            field_widget_display_settings: true
             field_widget_edit: true
             field_widget_remove: true
             field_widget_replace: false
@@ -511,8 +507,7 @@ core.entity_form_display.paragraph.video.default:
           settings:
             entity_browser: video_browser
             field_widget_display: rendered_entity
-            field_widget_display_settings:
-              view_mode: thumbnail
+            field_widget_display_settings: true
             field_widget_edit: true
             field_widget_remove: true
             field_widget_replace: false
