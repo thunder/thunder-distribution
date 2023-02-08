@@ -19,7 +19,7 @@ third_party_settings:
     group_paragraphs:
       children:
         - field_paragraphs
-      label: Paragraphs
+      label: ''
       region: content
       parent_name: ''
       weight: 1
@@ -34,7 +34,7 @@ third_party_settings:
       children:
         - langcode
         - title
-      label: Basis
+      label: ''
       region: content
       parent_name: ''
       weight: 0

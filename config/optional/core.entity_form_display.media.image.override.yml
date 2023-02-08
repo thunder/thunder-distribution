@@ -22,7 +22,7 @@ third_party_settings:
         - name
         - field_image
         - field_description
-      label: Basis
+      label: ''
       region: content
       parent_name: ''
       weight: 0
@@ -40,7 +40,7 @@ third_party_settings:
         - field_copyright
         - field_expires
         - field_source
-      label: Credits
+      label: ''
       region: hidden
       parent_name: ''
       weight: 4
