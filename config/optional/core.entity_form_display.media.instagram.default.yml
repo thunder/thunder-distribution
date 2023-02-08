@@ -17,7 +17,7 @@ third_party_settings:
         - field_url
         - field_author
         - field_content
-      label: Basis
+      label: ''
       region: content
       parent_name: ''
       weight: 0

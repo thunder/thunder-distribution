@@ -29,26 +29,28 @@ third_party_settings:
       children:
         - field_teaser_media
         - field_teaser_text
-      label: Teaser
+      label: ''
       region: content
       parent_name: ''
       weight: 4
       format_type: fieldset
       format_settings:
         classes: 'content-form__form-section article-teaser'
+        show_empty_fields: false
         id: ''
         description: ''
         required_fields: true
     group_paragraphs:
       children:
         - field_paragraphs
-      label: Paragraphs
+      label: ''
       region: content
       parent_name: ''
       weight: 6
       format_type: fieldset
       format_settings:
         classes: 'content-form__form-section paragraphs-container'
+        show_empty_fields: false
         id: ''
         description: ''
         required_fields: true
@@ -58,13 +60,14 @@ third_party_settings:
         - title
         - field_seo_title
         - field_tags
-      label: Basis
+      label: ''
       region: content
       parent_name: ''
       weight: 3
       format_type: fieldset
       format_settings:
         classes: 'content-form__form-section base-info'
+        show_empty_fields: false
         id: ''
         description: ''
         required_fields: true

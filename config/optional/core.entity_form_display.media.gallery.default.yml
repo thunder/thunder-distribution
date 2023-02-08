@@ -15,7 +15,7 @@ third_party_settings:
       children:
         - name
         - field_media_images
-      label: Basis
+      label: ''
       region: content
       parent_name: ''
       weight: 0

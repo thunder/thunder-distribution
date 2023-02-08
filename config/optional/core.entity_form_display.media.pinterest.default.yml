@@ -13,7 +13,7 @@ third_party_settings:
     group_basis:
       children:
         - field_url
-      label: Basis
+      label: ''
       region: content
       parent_name: ''
       weight: 0
