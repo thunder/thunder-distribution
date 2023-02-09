@@ -141,7 +141,43 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
       ]));
     }
 
+    if (!isset($form['moderation_state']['widget'][0]['current']) && $this->moderationInfo->isModeratedEntity($entity)) {
+      $transitions = $this->stateTransitionValidation->getValidTransitions($entity, $this->currentUser);
+
+      if (count($transitions) > 1) {
+        $form['actions']['submit']['#value'] = $this->t('Save as');
+      }
+      elseif (count($transitions) === 1) {
+        $form['moderation_state']['#attributes']['style'] = 'display: none';
+        /** @var \Drupal\workflows\TransitionInterface $transition */
+        $transition = reset($transitions);
+        $form['actions']['submit']['#value'] = $this->t('Save as @state', ['@state' => $transition->to()->label()]);
+      }
+
+      unset($form['moderation_state']['#group']);
+      $form['moderation_state']['#weight'] = 90;
+
+      $form['actions']['moderation_state'] = $form['moderation_state'];
+      unset($form['moderation_state']);
+    }
+
     $form['actions'] = array_merge($form['actions'], $this->actions($entity, $form));
+
+    if (isset($form['meta']['published'])) {
+      if ($latest_revision_id && $this->moderationInfo && $this->moderationInfo->isModeratedEntity($entity)) {
+        /** @var \Drupal\content_moderation\ContentModerationState $state */
+        $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
+        if (!$state->isDefaultRevisionState()) {
+          $args = [
+            '@state' => $state->label(),
+            '@entity_type' => strtolower($entity->type->entity->label()),
+          ];
+          $form['meta']['published']['#markup'] = $entity->isNew() || !$this->moderationInfo->isDefaultRevisionPublished($entity) ?
+            $this->t('@state of unpublished @entity_type', $args) :
+            $this->t('@state of published @entity_type', $args);
+        }
+      }
+    }
 
     return $form;
   }
@@ -149,7 +185,7 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
   /**
    * {@inheritdoc}
    */
-  protected function actions(NodeInterface $entity, array &$form): array {
+  protected function actions(NodeInterface $entity): array {
     /** @var \Drupal\Core\Entity\ContentEntityStorageInterface $storage */
     $storage = $this->entityTypeManager->getStorage($entity->getEntityTypeId());
     $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()
@@ -160,31 +196,6 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
     }
 
     $element = [];
-    // @todo Remove after seven / thunder_admin support is dropped.
-    if (isset($this->getActiveThemes()['gin'])) {
-      /** @var \Drupal\content_moderation\ContentModerationState $state */
-      $state = $this->moderationInfo->getWorkflowForEntity($entity)
-        ->getTypePlugin()
-        ->getState($entity->moderation_state->value);
-      $element['status'] = [
-        '#type' => 'item',
-        '#markup' => $entity->isNew() || !$this->moderationInfo->isDefaultRevisionPublished($entity) ? $this->t('of unpublished @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]) : $this->t('of published @entity_type', ['@entity_type' => strtolower($entity->type->entity->label())]),
-        '#weight' => 200,
-        '#wrapper_attributes' => [
-          'class' => ['status'],
-        ],
-        '#access' => !$state->isDefaultRevisionState(),
-      ];
-
-      $element['moderation_state_current'] = [
-        '#type' => 'item',
-        '#markup' => $state->label(),
-        '#weight' => 210,
-        '#wrapper_attributes' => [
-          'class' => ['status', $state->id()],
-        ],
-      ];
-    }
 
     if ($this->moderationInfo->hasPendingRevision($entity)) {
       $route_info = Url::fromRoute('node.revision_revert_default_confirm', [
@@ -207,26 +218,6 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
         ],
       ];
       $element['revert_to_default']['#url'] = $route_info;
-    }
-
-    if (!isset($form['moderation_state']['widget'][0]['current']) && $this->moderationInfo->isModeratedEntity($entity)) {
-      $transitions = $this->stateTransitionValidation->getValidTransitions($entity, $this->currentUser);
-
-      if (count($transitions) > 1) {
-        $form['actions']['submit']['#value'] = $this->t('Save as');
-      }
-      elseif (count($transitions) === 1) {
-        $form['moderation_state']['#attributes']['style'] = 'display: none';
-        /** @var \Drupal\workflows\TransitionInterface $transition */
-        $transition = reset($transitions);
-        $form['actions']['submit']['#value'] = $this->t('Save as @state', ['@state' => $transition->to()->label()]);
-      }
-
-      unset($form['moderation_state']['#group']);
-      $form['moderation_state']['#weight'] = 90;
-
-      $form['actions']['moderation_state'] = $form['moderation_state'];
-      unset($form['moderation_state']);
     }
 
     return $element;
