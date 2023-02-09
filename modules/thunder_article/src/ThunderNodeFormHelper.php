@@ -3,6 +3,7 @@
 namespace Drupal\thunder_article;
 
 use Drupal\content_moderation\ModerationInformationInterface;
+use Drupal\content_moderation\StateTransitionValidationInterface;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -11,6 +12,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Theme\ThemeManagerInterface;
 use Drupal\node\NodeInterface;
@@ -27,42 +29,49 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
    *
    * @var \Drupal\Core\Session\AccountInterface
    */
-  protected $currentUser;
+  protected AccountInterface $currentUser;
 
   /**
    * The messenger service.
    *
    * @var \Drupal\Core\Messenger\MessengerInterface
    */
-  protected $messenger;
+  protected MessengerInterface $messenger;
 
   /**
    * The request object.
    *
    * @var \Symfony\Component\HttpFoundation\Request
    */
-  protected $request;
+  protected Request $request;
 
   /**
    * The moderation information service.
    *
    * @var \Drupal\content_moderation\ModerationInformationInterface|null
    */
-  protected $moderationInfo;
+  protected ?ModerationInformationInterface $moderationInfo;
 
   /**
    * The entity type manager.
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
    * The theme manager.
    *
    * @var \Drupal\Core\Theme\ThemeManagerInterface
    */
-  protected $themeManager;
+  protected ThemeManagerInterface $themeManager;
+
+  /**
+   * The state transition validation service.
+   *
+   * @var \Drupal\content_moderation\StateTransitionValidationInterface|null
+   */
+  protected ?StateTransitionValidationInterface $stateTransitionValidation;
 
   /**
    * Constructs a NodeForm object.
@@ -77,17 +86,20 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
    *   The entity type manager.
    * @param \Drupal\Core\Theme\ThemeManagerInterface $theme_manager
    *   The theme manager.
-   * @param \Drupal\content_moderation\ModerationInformationInterface $moderationInfo
+   * @param \Drupal\content_moderation\ModerationInformationInterface|null $moderationInfo
    *   (optional) The moderation info service. The optionality is important
    *   otherwise this form becomes dependent on the content_moderation module.
+   * @param \Drupal\content_moderation\StateTransitionValidationInterface|null $stateTransitionValidation
+   *   (optional) The state transition validation service.
    */
-  public function __construct(AccountInterface $current_user, MessengerInterface $messenger, RequestStack $requestStack, EntityTypeManagerInterface $entity_type_manager, ThemeManagerInterface $theme_manager, ModerationInformationInterface $moderationInfo = NULL) {
+  public function __construct(AccountInterface $current_user, MessengerInterface $messenger, RequestStack $requestStack, EntityTypeManagerInterface $entity_type_manager, ThemeManagerInterface $theme_manager, ModerationInformationInterface $moderationInfo = NULL, StateTransitionValidationInterface $stateTransitionValidation = NULL) {
     $this->currentUser = $current_user;
     $this->messenger = $messenger;
     $this->request = $requestStack->getCurrentRequest();
     $this->entityTypeManager = $entity_type_manager;
     $this->themeManager = $theme_manager;
     $this->moderationInfo = $moderationInfo;
+    $this->stateTransitionValidation = $stateTransitionValidation;
   }
 
   /**
@@ -100,7 +112,8 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
       $container->get('request_stack'),
       $container->get('entity_type.manager'),
       $container->get('theme.manager'),
-      $container->get('content_moderation.moderation_information', ContainerInterface::NULL_ON_INVALID_REFERENCE)
+      $container->get('content_moderation.moderation_information', ContainerInterface::NULL_ON_INVALID_REFERENCE),
+      $container->get('content_moderation.state_transition_validation', ContainerInterface::NULL_ON_INVALID_REFERENCE)
     );
   }
 
@@ -128,37 +141,7 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
       ]));
     }
 
-    $form['actions'] = array_merge($form['actions'], $this->actions($entity));
-
-    if (\Drupal::hasService('content_moderation.moderation_information')) {
-
-      /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_info */
-      $moderation_info = \Drupal::service('content_moderation.moderation_information');
-      if ($moderation_info->isModeratedEntity($entity) && !isset($form['moderation_state']['widget'][0]['current'])) {
-
-        /** @var \Drupal\content_moderation\StateTransitionValidationInterface $validator */
-        $validator = \Drupal::service('content_moderation.state_transition_validation');
-
-        /** @var \Drupal\workflows\Transition[] $transitions */
-        $transitions = $validator->getValidTransitions($entity, \Drupal::currentUser());
-
-        if (count($transitions) > 1) {
-          $form['actions']['submit']['#value'] = t('Save as');
-        }
-        elseif (count($transitions) == 1) {
-          $form['moderation_state']['#attributes']['style'] = 'display: none';
-          /** @var \Drupal\workflows\TransitionInterface $transition */
-          $transition = reset($transitions);
-          $form['actions']['submit']['#value'] = t('Save as @state', ['@state' => $transition->to()->label()]);
-        }
-
-        unset($form['moderation_state']['#group']);
-        $form['moderation_state']['#weight'] = 90;
-
-        $form['actions']['moderation_state'] = $form['moderation_state'];
-        unset($form['moderation_state']);
-      }
-    }
+    $form['actions'] = array_merge($form['actions'], $this->actions($entity, $form));
 
     return $form;
   }
@@ -166,7 +149,7 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
   /**
    * {@inheritdoc}
    */
-  protected function actions(NodeInterface $entity): array {
+  protected function actions(NodeInterface $entity, array &$form): array {
     /** @var \Drupal\Core\Entity\ContentEntityStorageInterface $storage */
     $storage = $this->entityTypeManager->getStorage($entity->getEntityTypeId());
     $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()
@@ -178,7 +161,7 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
 
     $element = [];
     // @todo Remove after seven / thunder_admin support is dropped.
-    if (isset($this->getActiveThemes()['seven'])) {
+    if (isset($this->getActiveThemes()['gin'])) {
       /** @var \Drupal\content_moderation\ContentModerationState $state */
       $state = $this->moderationInfo->getWorkflowForEntity($entity)
         ->getTypePlugin()
@@ -224,6 +207,26 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
         ],
       ];
       $element['revert_to_default']['#url'] = $route_info;
+    }
+
+    if (!isset($form['moderation_state']['widget'][0]['current']) && $this->moderationInfo->isModeratedEntity($entity)) {
+      $transitions = $this->stateTransitionValidation->getValidTransitions($entity, $this->currentUser);
+
+      if (count($transitions) > 1) {
+        $form['actions']['submit']['#value'] = $this->t('Save as');
+      }
+      elseif (count($transitions) === 1) {
+        $form['moderation_state']['#attributes']['style'] = 'display: none';
+        /** @var \Drupal\workflows\TransitionInterface $transition */
+        $transition = reset($transitions);
+        $form['actions']['submit']['#value'] = $this->t('Save as @state', ['@state' => $transition->to()->label()]);
+      }
+
+      unset($form['moderation_state']['#group']);
+      $form['moderation_state']['#weight'] = 90;
+
+      $form['actions']['moderation_state'] = $form['moderation_state'];
+      unset($form['moderation_state']);
     }
 
     return $element;
