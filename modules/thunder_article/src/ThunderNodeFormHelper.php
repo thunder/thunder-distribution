@@ -130,6 +130,36 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
 
     $form['actions'] = array_merge($form['actions'], $this->actions($entity));
 
+    if (\Drupal::hasService('content_moderation.moderation_information')) {
+
+      /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_info */
+      $moderation_info = \Drupal::service('content_moderation.moderation_information');
+      if ($moderation_info->isModeratedEntity($entity) && !isset($form['moderation_state']['widget'][0]['current'])) {
+
+        /** @var \Drupal\content_moderation\StateTransitionValidationInterface $validator */
+        $validator = \Drupal::service('content_moderation.state_transition_validation');
+
+        /** @var \Drupal\workflows\Transition[] $transitions */
+        $transitions = $validator->getValidTransitions($entity, \Drupal::currentUser());
+
+        if (count($transitions) > 1) {
+          $form['actions']['submit']['#value'] = t('Save as');
+        }
+        elseif (count($transitions) == 1) {
+          $form['moderation_state']['#attributes']['style'] = 'display: none';
+          /** @var \Drupal\workflows\TransitionInterface $transition */
+          $transition = reset($transitions);
+          $form['actions']['submit']['#value'] = t('Save as @state', ['@state' => $transition->to()->label()]);
+        }
+
+        unset($form['moderation_state']['#group']);
+        $form['moderation_state']['#weight'] = 90;
+
+        $form['actions']['moderation_state'] = $form['moderation_state'];
+        unset($form['moderation_state']);
+      }
+    }
+
     return $form;
   }
 
