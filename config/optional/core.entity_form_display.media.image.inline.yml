@@ -9,10 +9,11 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
-    - image.style.medium
+    - image.style.media_library
     - media.type.image
   module:
     - datetime
+    - entity_reference_actions
     - field_group
     - focal_point
     - text
@@ -66,7 +67,6 @@ third_party_settings:
       weight: 3
       format_type: html_element
       format_settings:
-        label: Bottom
         classes: bottom
         id: ''
         element: div
@@ -128,10 +128,16 @@ content:
     region: content
     settings:
       progress_indicator: throbber
-      preview_image_style: medium
+      preview_image_style: media_library
       preview_link: true
       offsets: '50,50'
-    third_party_settings: {  }
+    third_party_settings:
+      entity_reference_actions:
+        enabled: false
+        options:
+          action_title: Action
+          include_exclude: exclude
+          selected_actions: {  }
   field_source:
     type: string_textfield
     weight: 3

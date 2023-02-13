@@ -139,7 +139,7 @@ display:
           type: media_thumbnail
           settings:
             image_link: ''
-            image_style: thumbnail
+            image_style: media_library
           group_column: target_id
           group_columns: {  }
           group_rows: true

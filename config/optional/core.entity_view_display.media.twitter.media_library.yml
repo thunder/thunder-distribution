@@ -20,7 +20,7 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: medium
+      image_style: media_library
       image_loading:
         attribute: lazy
     third_party_settings: {  }

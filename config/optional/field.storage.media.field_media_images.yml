@@ -3,14 +3,13 @@ status: true
 dependencies:
   module:
     - media
-    - media_library_media_modify
 id: media.field_media_images
 field_name: field_media_images
 entity_type: media
 type: entity_reference
 settings:
   target_type: media
-module: media_library_media_modify
+module: core
 locked: false
 cardinality: -1
 translatable: true

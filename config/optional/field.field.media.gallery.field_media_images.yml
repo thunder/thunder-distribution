@@ -5,8 +5,6 @@ dependencies:
     - field.storage.media.field_media_images
     - media.type.gallery
     - media.type.image
-  module:
-    - media_library_media_modify
 id: media.gallery.field_media_images
 field_name: field_media_images
 entity_type: media

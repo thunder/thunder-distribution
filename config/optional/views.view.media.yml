@@ -133,7 +133,7 @@ display:
           type: image
           settings:
             image_link: ''
-            image_style: thumbnail
+            image_style: media_library
             image_loading:
               attribute: lazy
           group_column: ''

@@ -9,9 +9,10 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
-    - image.style.media_thumbnail
+    - image.style.media_library
     - media.type.image
   module:
+    - empty_fields
     - image
 id: media.image.thumbnail
 targetEntityType: media
@@ -23,10 +24,12 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: media_thumbnail
+      image_style: media_library
       image_loading:
         attribute: lazy
-    third_party_settings: {  }
+    third_party_settings:
+      empty_fields:
+        handler: ''
     weight: 0
     region: content
 hidden:
