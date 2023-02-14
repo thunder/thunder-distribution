@@ -9,7 +9,7 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
-    - image.style.media_library
+    - image.style.thumbnail
     - media.type.image
   module:
     - empty_fields
@@ -76,7 +76,7 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: media_library
+      image_style: thumbnail
       image_loading:
         attribute: lazy
     third_party_settings:

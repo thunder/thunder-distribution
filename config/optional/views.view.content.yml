@@ -139,7 +139,9 @@ display:
           type: media_thumbnail
           settings:
             image_link: ''
-            image_style: media_library
+            image_style: thumbnail
+            image_loading:
+              attribute: lazy
           group_column: target_id
           group_columns: {  }
           group_rows: true

@@ -9,7 +9,7 @@ dependencies:
     - field.field.media.video.field_description
     - field.field.media.video.field_media_video_embed_field
     - field.field.media.video.field_source
-    - image.style.media_library
+    - image.style.thumbnail
     - media.type.video
   module:
     - empty_fields
@@ -84,7 +84,7 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: media_library
+      image_style: thumbnail
       image_loading:
         attribute: lazy
     third_party_settings:
