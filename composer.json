@@ -52,6 +52,12 @@
             "drupal/linkit": {
                 "CKEditor 5 readiness": "https://www.drupal.org/files/issues/2022-12-14/3232190-113.patch"
             },
+            "drupal/media_library_media_modify": {
+                "Add option to show no edit form after upload": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/40.diff"
+            },
+            "drupal/dropzonejs": {
+                "Set custom form id for media library form": "https://git.drupalcode.org/project/dropzonejs/-/merge_requests/6.diff"
+            },
             "drupal/gin": {
                 "Fix dialog close icon pos": "https://git.drupalcode.org/project/gin/-/merge_requests/221.diff",
                 "Support length indicator": "https://git.drupalcode.org/project/gin/-/merge_requests/219.diff",
