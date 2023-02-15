@@ -271,6 +271,28 @@ editor.editor.full_html:
             - codeBlock
             - '|'
             - sourceEditing
+image.style.thumbnail:
+  expected_config:
+    effects:
+      1cfec298-8620-4749-b100-ccb6c4500779:
+        data:
+          height: 100
+          upscale: false
+          width: 100
+        id: image_scale
+        uuid: 1cfec298-8620-4749-b100-ccb6c4500779
+        weight: 0
+  update_actions:
+    change:
+      effects:
+        1cfec298-8620-4749-b100-ccb6c4500779:
+          data:
+            crop_type: focal_point
+            height: 100
+            width: 100
+          id: focal_point_scale_and_crop
+          uuid: 1cfec298-8620-4749-b100-ccb6c4500779
+          weight: 0
 system.theme:
   expected_config:
     admin: thunder_admin
@@ -292,6 +314,10 @@ core.entity_form_display.media.gallery.default:
           open: true
           selection_mode: selection_edit
         type: entity_browser_entity_reference
+    third_party_settings:
+      field_group:
+        group_basis:
+          label: Basis
   update_actions:
     delete:
       content:
@@ -316,6 +342,10 @@ core.entity_form_display.media.gallery.default:
             multi_edit_on_create: true
             replace_checkbox_by_order_indicator: true
           type: media_library_media_modify_widget
+      third_party_settings:
+        field_group:
+          group_basis:
+            label: ''
 core.entity_form_display.media.gallery.inline:
   expected_config:
     content:
@@ -355,6 +385,113 @@ core.entity_form_display.media.gallery.inline:
             multi_edit_on_create: true
             replace_checkbox_by_order_indicator: true
           type: media_library_media_modify_widget
+core.entity_form_display.media.image.default:
+  expected_config:
+    content:
+      field_image:
+        settings:
+          preview_image_style: medium
+    third_party_settings:
+      field_group:
+        group_basis:
+          label: Basis
+        group_credits:
+          label: Credits
+  update_actions:
+    change:
+      content:
+        field_image:
+          settings:
+            preview_image_style: media_library
+      third_party_settings:
+        field_group:
+          group_basis:
+            label: ''
+          group_credits:
+            label: ''
+core.entity_form_display.media.image.inline:
+  expected_config:
+    content:
+      field_image:
+        settings:
+          preview_image_style: medium
+        third_party_settings: {  }
+    third_party_settings:
+      field_group:
+        group_bottom:
+          format_settings:
+            label: Bottom
+  update_actions:
+    delete:
+      third_party_settings:
+        field_group:
+          group_bottom:
+            format_settings:
+              label: Bottom
+    change:
+      content:
+        field_image:
+          settings:
+            preview_image_style: media_library
+          third_party_settings:
+            entity_reference_actions:
+              enabled: false
+              options:
+                action_title: Action
+                include_exclude: exclude
+                selected_actions: {  }
+core.entity_form_display.media.instagram.default:
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          label: Basis
+  update_actions:
+    change:
+      third_party_settings:
+        field_group:
+          group_basis:
+            label: ''
+core.entity_form_display.media.pinterest.default:
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          label: Basis
+  update_actions:
+    change:
+      third_party_settings:
+        field_group:
+          group_basis:
+            label: ''
+core.entity_form_display.media.twitter.default:
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          label: Basis
+  update_actions:
+    change:
+      third_party_settings:
+        field_group:
+          group_basis:
+            label: ''
+core.entity_form_display.media.video.default:
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          label: Basis
+        group_credits:
+          label: Credits
+  update_actions:
+    change:
+      third_party_settings:
+        field_group:
+          group_basis:
+            label: ''
+          group_credits:
+            label: ''
 core.entity_form_display.node.article.bulk_edit:
   expected_config: {  }
   update_actions:
@@ -381,6 +518,16 @@ core.entity_form_display.node.article.default:
           selection_mode: selection_append
         third_party_settings: {  }
         type: entity_browser_entity_reference
+    third_party_settings:
+      field_group:
+        group_basis:
+          format_settings:
+            classes: content-form__form-section
+          label: Basis
+        group_paragraphs:
+          label: Paragraphs
+        group_teaser:
+          label: Teaser
   update_actions:
     delete:
       content:
@@ -394,6 +541,18 @@ core.entity_form_display.node.article.default:
             field_widget_replace: false
             open: true
             selection_mode: selection_append
+    add:
+      third_party_settings:
+        field_group:
+          group_basis:
+            format_settings:
+              show_empty_fields: false
+          group_paragraphs:
+            format_settings:
+              show_empty_fields: false
+          group_teaser:
+            format_settings:
+              show_empty_fields: false
     change:
       content:
         field_teaser_media:
@@ -422,6 +581,11 @@ core.entity_form_display.node.article.default:
           group_basis:
             format_settings:
               classes: 'content-form__form-section base-info'
+            label: ''
+          group_paragraphs:
+            label: ''
+          group_teaser:
+            label: ''
 core.entity_form_display.node.page.bulk_edit:
   expected_config: {  }
   update_actions:
@@ -432,6 +596,25 @@ core.entity_form_display.node.page.bulk_edit:
           settings: {  }
           third_party_settings: {  }
           weight: 10
+core.entity_form_display.node.page.default:
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          label: Basis
+          weight: 2
+        group_paragraphs:
+          label: Paragraphs
+          weight: 3
+  update_actions:
+      third_party_settings:
+        field_group:
+          group_basis:
+            label: ''
+            weight: 0
+          group_paragraphs:
+            label: ''
+            weight: 1
 core.entity_form_display.paragraph.image.default:
   expected_config:
     content:
@@ -507,7 +690,8 @@ core.entity_form_display.paragraph.video.default:
           settings:
             entity_browser: video_browser
             field_widget_display: rendered_entity
-            field_widget_display_settings: true
+            field_widget_display_settings:
+              view_mode: thumbnail
             field_widget_edit: true
             field_widget_remove: true
             field_widget_replace: false
@@ -540,6 +724,9 @@ core.entity_view_display.media.gallery.paragraph_preview:
   expected_config:
     content:
       field_media_images:
+        settings:
+          image_style: paragraph_preview_thumbnail
+        third_party_settings: {  }
         weight: 0
       name:
         weight: 1
@@ -588,6 +775,13 @@ core.entity_view_display.media.gallery.paragraph_preview:
     change:
       content:
         field_media_images:
+          settings:
+            image_loading:
+              attribute: lazy
+            image_style: thumbnail
+          third_party_settings:
+            empty_fields:
+              handler: ''
           weight: 2
         name:
           weight: 3
@@ -597,6 +791,9 @@ core.entity_view_display.media.image.paragraph_preview:
       field_copyright:
         weight: 2
       field_image:
+        settings:
+          image_style: paragraph_preview_thumbnail
+        third_party_settings: {  }
         weight: 0
       name:
         weight: 1
@@ -648,9 +845,30 @@ core.entity_view_display.media.image.paragraph_preview:
         field_copyright:
           weight: 4
         field_image:
+          settings:
+            image_style: thumbnail
+          third_party_settings:
+            empty_fields:
+              handler: ''
           weight: 1
         name:
           weight: 3
+core.entity_view_display.media.image.thumbnail:
+  expected_config:
+    content:
+      field_image:
+        settings:
+          image_style: media_thumbnail
+        third_party_settings: {  }
+  update_actions:
+    change:
+      content:
+        field_image:
+          settings:
+            image_style: thumbnail
+          third_party_settings:
+            empty_fields:
+              handler: ''
 core.entity_view_display.media.instagram.paragraph_preview:
   expected_config:
     content:
@@ -658,6 +876,9 @@ core.entity_view_display.media.instagram.paragraph_preview:
         weight: 1
       field_content:
         weight: 2
+      thumbnail:
+        settings:
+          image_style: paragraph_preview_thumbnail
   update_actions:
     add:
       third_party_settings:
@@ -707,6 +928,33 @@ core.entity_view_display.media.instagram.paragraph_preview:
           weight: 0
         field_content:
           weight: 1
+        thumbnail:
+          settings:
+            image_style: thumbnail
+core.entity_view_display.media.instagram.thumbnail:
+  expected_config:
+    content:
+      thumbnail:
+        settings:
+          image_style: media_thumbnail
+  update_actions:
+    change:
+      content:
+        thumbnail:
+          settings:
+            image_style: media_library
+core.entity_view_display.media.pinterest.paragraph_preview:
+  expected_config:
+    content:
+      thumbnail:
+        settings:
+          image_style: paragraph_preview_thumbnail
+  update_actions:
+    change:
+      content:
+        thumbnail:
+          settings:
+            image_style: thumbnail
 core.entity_view_display.media.twitter.paragraph_preview:
   expected_config:
     content:
@@ -715,6 +963,9 @@ core.entity_view_display.media.twitter.paragraph_preview:
       field_content:
         weight: 2
       thumbnail:
+        settings:
+          image_style: paragraph_preview_thumbnail
+        third_party_settings: {  }
         weight: 0
   update_actions:
     add:
@@ -766,6 +1017,11 @@ core.entity_view_display.media.twitter.paragraph_preview:
         field_content:
           weight: 4
         thumbnail:
+          settings:
+            image_style: thumbnail
+          third_party_settings:
+            empty_fields:
+              handler: ''
           weight: 1
 core.entity_view_display.media.video.paragraph_preview:
   expected_config:
@@ -775,6 +1031,9 @@ core.entity_view_display.media.video.paragraph_preview:
       name:
         weight: 1
       thumbnail:
+        settings:
+          image_style: paragraph_preview_thumbnail
+        third_party_settings: {  }
         weight: 0
   update_actions:
     add:
@@ -826,31 +1085,12 @@ core.entity_view_display.media.video.paragraph_preview:
         name:
           weight: 3
         thumbnail:
+          settings:
+            image_style: thumbnail
+          third_party_settings:
+            empty_fields:
+              handler: ''
           weight: 1
-field.storage.media.field_media_images:
-  expected_config:
-    module: core
-  update_actions:
-    change:
-      module: media_library_media_modify
-field.storage.node.field_teaser_media:
-  expected_config:
-    module: core
-  update_actions:
-    change:
-      module: media_library_media_modify
-field.storage.paragraph.field_image:
-  expected_config:
-    module: core
-  update_actions:
-    change:
-      module: media_library_media_modify
-field.storage.paragraph.field_video:
-  expected_config:
-    module: core
-  update_actions:
-    change:
-      module: media_library_media_modify
 views.view.media:
   expected_config:
     display:
