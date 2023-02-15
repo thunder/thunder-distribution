@@ -14,6 +14,14 @@ targetEntityType: media
 bundle: pinterest
 mode: paragraph_preview
 content:
+  field_url:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
   thumbnail:
     type: image
     label: hidden
@@ -29,7 +37,6 @@ content:
     region: content
 hidden:
   created: true
-  field_url: true
   langcode: true
   name: true
   uid: true
