@@ -51,7 +51,6 @@ install:
   - autofill:autofill
   - blazy:blazy
   - content_lock:content_lock
-  - ctools:ctools
   - diff:diff
   - dropzonejs:dropzonejs
   - empty_fields:empty_fields
