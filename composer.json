@@ -42,9 +42,6 @@
                 "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2020-06-05/2851580-88.patch",
                 "Trying to access array offset on value of type null in EntityBrowserElement valueCallback": "https://www.drupal.org/files/issues/2021-02-19/3199269-array-value-null.patch",
                 "Moderately critical - Information Disclosure - SA-CONTRIB-2023-002": "https://www.drupal.org/files/issues/2023-01-19/SA-CONTRIB-2023-002.diff"
-            },
-            "drupal/simple_sitemap": {
-                "Sitemap variant index functionality": "https://www.drupal.org/files/issues/2021-03-03/simple_sitemap-sitemap_variant_index-3109090-16.patch"
             }
         }
     },
@@ -102,7 +99,7 @@
         "drupal/schema_metatag": "^2.4",
         "drupal/select2": "^1.7",
         "drupal/search_api_mark_outdated": "^1.0",
-        "drupal/simple_sitemap": "3.11",
+        "drupal/simple_sitemap": "^4.0",
         "drupal/shariff": "^1.5",
         "drupal/slick": "^2.7",
         "drupal/thunder_admin": "^4.0.2",
