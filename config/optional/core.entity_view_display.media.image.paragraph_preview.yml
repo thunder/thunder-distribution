@@ -9,9 +9,10 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
-    - image.style.paragraph_preview_thumbnail
+    - image.style.thumbnail
     - media.type.image
   module:
+    - empty_fields
     - field_group
     - image
 third_party_settings:
@@ -75,10 +76,12 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: paragraph_preview_thumbnail
+      image_style: thumbnail
       image_loading:
         attribute: lazy
-    third_party_settings: {  }
+    third_party_settings:
+      empty_fields:
+        handler: ''
     weight: 1
     region: content
   name:
