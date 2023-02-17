@@ -5,8 +5,6 @@ dependencies:
     - field.storage.paragraph.field_image
     - media.type.image
     - paragraphs.paragraphs_type.image
-  module:
-    - media_library_media_modify
 id: paragraph.image.field_image
 field_name: field_image
 entity_type: paragraph

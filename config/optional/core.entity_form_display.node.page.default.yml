@@ -6,7 +6,6 @@ dependencies:
     - field.field.node.page.field_paragraphs
     - node.type.page
   module:
-    - content_moderation
     - entity_reference_actions
     - field_group
     - metatag_async_widget

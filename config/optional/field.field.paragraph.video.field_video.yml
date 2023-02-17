@@ -5,8 +5,6 @@ dependencies:
     - field.storage.paragraph.field_video
     - media.type.video
     - paragraphs.paragraphs_type.video
-  module:
-    - media_library_media_modify
 id: paragraph.video.field_video
 field_name: field_video
 entity_type: paragraph
