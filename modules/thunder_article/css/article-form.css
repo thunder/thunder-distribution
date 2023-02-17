@@ -4,13 +4,6 @@
   width: 100%;
 }
 
-@media screen and (min-width: 48em) {
-  .content-form__form-section > .fieldset__wrapper {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-}
-
 /*
  * Render fields inline.
  * Media query as found in gin theme.
