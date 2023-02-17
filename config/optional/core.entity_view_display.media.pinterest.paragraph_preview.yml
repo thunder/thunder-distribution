@@ -4,7 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.media.paragraph_preview
     - field.field.media.pinterest.field_url
-    - image.style.paragraph_preview_thumbnail
+    - image.style.thumbnail
     - media.type.pinterest
   module:
     - empty_fields
@@ -19,7 +19,7 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: paragraph_preview_thumbnail
+      image_style: thumbnail
       image_loading:
         attribute: lazy
     third_party_settings:
