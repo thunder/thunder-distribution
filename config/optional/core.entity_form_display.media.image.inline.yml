@@ -9,11 +9,10 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
-    - image.style.media_library
+    - image.style.medium
     - media.type.image
   module:
     - datetime
-    - entity_reference_actions
     - field_group
     - focal_point
     - text
@@ -128,16 +127,10 @@ content:
     region: content
     settings:
       progress_indicator: throbber
-      preview_image_style: media_library
+      preview_image_style: medium
       preview_link: true
       offsets: '50,50'
-    third_party_settings:
-      entity_reference_actions:
-        enabled: false
-        options:
-          action_title: Action
-          include_exclude: exclude
-          selected_actions: {  }
+    third_party_settings: {  }
   field_source:
     type: string_textfield
     weight: 3

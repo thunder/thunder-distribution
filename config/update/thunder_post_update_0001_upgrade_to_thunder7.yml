@@ -387,10 +387,6 @@ core.entity_form_display.media.gallery.inline:
           type: media_library_media_modify_widget
 core.entity_form_display.media.image.default:
   expected_config:
-    content:
-      field_image:
-        settings:
-          preview_image_style: medium
     third_party_settings:
       field_group:
         group_basis:
@@ -399,10 +395,6 @@ core.entity_form_display.media.image.default:
           label: Credits
   update_actions:
     change:
-      content:
-        field_image:
-          settings:
-            preview_image_style: media_library
       third_party_settings:
         field_group:
           group_basis:
@@ -411,11 +403,6 @@ core.entity_form_display.media.image.default:
             label: ''
 core.entity_form_display.media.image.inline:
   expected_config:
-    content:
-      field_image:
-        settings:
-          preview_image_style: medium
-        third_party_settings: {  }
     third_party_settings:
       field_group:
         group_bottom:
@@ -428,18 +415,6 @@ core.entity_form_display.media.image.inline:
           group_bottom:
             format_settings:
               label: Bottom
-    change:
-      content:
-        field_image:
-          settings:
-            preview_image_style: media_library
-          third_party_settings:
-            entity_reference_actions:
-              enabled: false
-              options:
-                action_title: Action
-                include_exclude: exclude
-                selected_actions: {  }
 core.entity_form_display.media.instagram.default:
   expected_config:
     third_party_settings:
