@@ -2,7 +2,6 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
-use Drupal\Core\Render\RenderContext;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\Core\Entity\ContentEntityInterface;
@@ -105,36 +104,29 @@ class ThunderJsonLd extends ThunderEntitySubRequestBase {
       return '';
     }
 
-    $context = new RenderContext();
-    $result = $this->renderer->executeInRenderContext($context, function () use ($entity): string {
-      // Get all the metatags for this entity.
-      $metatags = [];
-      foreach ($this->metatagManager->tagsFromEntityWithDefaults($entity) as $tag => $data) {
-        $metatags[$tag] = $data;
-      }
+    // Get all the metatags for this entity.
+    $metatags = [];
+    foreach ($this->metatagManager->tagsFromEntityWithDefaults($entity) as $tag => $data) {
+      $metatags[$tag] = $data;
+    }
 
-      // Trigger hook_metatags_alter(). Allow modules to override tags or the
-      // entity used for token replacements.
-      $context = ['entity' => $entity];
-      $this->moduleHandler->alter('metatags', $metatags, $context);
-      $elements = $this->metatagManager->generateElements($metatags, $entity);
-
-      // Parse the Schema.org metatags out of the array and encode the
-      // Schema.org metatags as JSON LD.
-      if (($items = SchemaMetatagManager::parseJsonld($elements['#attached']['html_head']))
-        && $jsonld = SchemaMetatagManager::encodeJsonld($items)) {
+    // Trigger hook_metatags_alter().
+    // Allow modules to override tags or the entity used for token replacements.
+    $context = ['entity' => $entity];
+    $this->moduleHandler->alter('metatags', $metatags, $context);
+    $elements = $this->metatagManager->generateElements($metatags, $entity);
+    // Parse the Schema.org metatags out of the array.
+    if ($items = SchemaMetatagManager::parseJsonld(
+      $elements['#attached']['html_head']
+    )) {
+      // Encode the Schema.org metatags as JSON LD.
+      if ($jsonld = SchemaMetatagManager::encodeJsonld($items)) {
         // Pass back the rendered result.
         $html = SchemaMetatagManager::renderArrayJsonLd($jsonld);
         return $this->renderer->render($html);
       }
-      return '';
-    });
-
-    if (!$context->isEmpty()) {
-      $fieldContext->addCacheableDependency($context->pop());
     }
-
-    return $result ?? '';
+    return '';
   }
 
 }
