@@ -139,13 +139,19 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
 
       $context = new RenderContext();
       $contextValues = $this->getContextValues();
-      return $this->renderer->executeInRenderContext($context, fn() => call_user_func_array(
+      $result = $this->renderer->executeInRenderContext($context, fn() => call_user_func_array(
         [$this, 'resolve'],
         array_values(array_merge($contextValues, [
           $cacheableMetadata,
           $fieldContext,
         ]))
       ));
+
+      if (!$context->isEmpty()) {
+        $fieldContext->addCacheableDependency($context->pop());
+      }
+
+      return $result ?? '';
     });
 
     if ($current->hasSession()) {

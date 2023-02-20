@@ -25,19 +25,30 @@ trait ThunderGqlsTestTrait {
     $query = $this->getQueryFromFile($schema);
     $variables = $this->getVariablesFromFile($schema);
 
-    $response = $this->query($query, $variables);
+    $responseData = $this->getResponseData($query, $variables);
 
-    $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
-
-    $responseData = json_decode($response->getBody(), TRUE, 512, JSON_THROW_ON_ERROR)['data'];
-    $expectedData = json_decode(
-      $this->getExpectedResponseFromFile($schema),
-      TRUE,
-      512,
-      JSON_THROW_ON_ERROR
-    )['data'];
+    $expectedData = $this->jsonDecode($this->getExpectedResponseFromFile($schema))['data'];
 
     $this->assertEqualsCanonicalizing($expectedData, $responseData);
+  }
+
+  /**
+   * Get response data.
+   *
+   * @param string $query
+   *   The graphql jsonld query.
+   * @param string $variables
+   *   The variables for the query.
+   *
+   * @throws \GuzzleHttp\Exception\GuzzleException|\JsonException
+   *   If the json is invalid or the request failed.
+   *  @phpstan-ignore-next-line
+   */
+  protected function getResponseData(string $query, string $variables) {
+    $response = $this->query($query, $variables);
+    $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
+
+    return $this->jsonDecode($response->getBody())['data'];
   }
 
   /**
@@ -125,6 +136,19 @@ trait ThunderGqlsTestTrait {
    */
   protected function getExpectedResponseFromFile(string $name): string {
     return file_get_contents($this->getQueriesDirectory() . '/' . $name . '.response.json');
+  }
+
+  /**
+   * Decodes a json string.
+   *
+   * @param string $json
+   *   The json string.
+   *
+   * @return mixed
+   *   The decoded json.
+   */
+  protected function jsonDecode(string $json) {
+    return json_decode($json, TRUE, 512, JSON_THROW_ON_ERROR);
   }
 
 }
