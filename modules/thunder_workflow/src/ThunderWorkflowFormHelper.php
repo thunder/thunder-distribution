@@ -129,8 +129,10 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
       $form['#attached']['library'][] = 'thunder_workflow/edit-form';
     }
 
+    /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
+    $form_object = $form_state->getFormObject();
     /** @var \Drupal\node\NodeInterface $entity */
-    $entity = $form_state->getFormObject()->getEntity();
+    $entity = $form_object->getEntity();
 
     if ($this->moderationInfo->hasPendingRevision($entity)) {
       $this->messenger->addWarning($this->t('This %entity_type has unpublished changes from user %user.', [
