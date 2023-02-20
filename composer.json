@@ -57,6 +57,9 @@
                 "Support length indicator": "https://git.drupalcode.org/project/gin/-/merge_requests/219.diff",
                 "Fix help icon positioning": "https://git.drupalcode.org/project/gin/-/merge_requests/218.diff",
                 "ckeditor5 balloon area not shown in modal": "https://git.drupalcode.org/project/gin/-/merge_requests/210.diff"
+            },
+            "drupal/media_entity_pinterest": {
+                "to a member function mainPropertyName() on null in media_entity_pinterest/src/Plugin/media/Source/Pinterest.php on line 155": "https://git.drupalcode.org/project/media_entity_pinterest/-/merge_requests/2.diff"
             }
         }
     },
