@@ -204,12 +204,15 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
   }
 
   /**
-   * Move state select to actions
+   * Move state select to actions.
    *
    * @param \Drupal\node\NodeInterface $entity
+   *   The node entity.
    * @param array $form
+   *   The form array.
    *
    * @return array
+   *   The altered form array.
    */
   public function moveStateToActions(NodeInterface $entity, array $form): array {
     $transitions = $this->stateTransitionValidation->getValidTransitions($entity,

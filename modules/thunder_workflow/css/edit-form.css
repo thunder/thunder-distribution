@@ -8,7 +8,7 @@
   margin-right: var(--gin-spacing-xs);
 }
 
-.form-actions div .form-item select{
+.form-actions div .form-item select {
   font-weight: var(--gin-font-weight-semibold);
   color: var(--gin-color-primary);
   background-color: transparent;
