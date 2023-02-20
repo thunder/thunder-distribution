@@ -92,7 +92,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
    * @param \Drupal\content_moderation\StateTransitionValidationInterface|null $stateTransitionValidation
    *   (optional) The state transition validation service.
    */
-  public function __construct(AccountInterface $current_user, MessengerInterface $messenger, RequestStack $requestStack, EntityTypeManagerInterface $entity_type_manager, ThemeManagerInterface $theme_manager, ModerationInformationInterface $moderationInfo = NULL, StateTransitionValidationInterface $stateTransitionValidation = NULL) {
+  final public function __construct(AccountInterface $current_user, MessengerInterface $messenger, RequestStack $requestStack, EntityTypeManagerInterface $entity_type_manager, ThemeManagerInterface $theme_manager, ModerationInformationInterface $moderationInfo = NULL, StateTransitionValidationInterface $stateTransitionValidation = NULL) {
     $this->currentUser = $current_user;
     $this->messenger = $messenger;
     $this->request = $requestStack->getCurrentRequest();
