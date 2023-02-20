@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+  enforced:
+    module:
+      - media_library
+name: media_library
+label: 'Media Library thumbnail (320×320)'
+effects:
+  0271a334-afd9-4115-8048-5b06380c7895:
+    uuid: 0271a334-afd9-4115-8048-5b06380c7895
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 320
+      height: 320
+      crop_type: focal_point

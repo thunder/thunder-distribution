@@ -1,13 +1,8 @@
-/* Basis group */
-
-/* Same length for input fields */
 .content-form__form-section.base-info .field--name-title .form-element,
 .content-form__form-section.base-info .field--name-field-seo-title .form-element,
 .content-form__form-section.base-info .field--name-field-tags .form-element {
   width: 100%;
 }
-
-/* Article teaser group */
 
 /*
  * Render fields inline.
@@ -23,48 +18,63 @@
   display: flex;
   flex-direction: column;
 }
-/* Reset media widget fieldset */
-.content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-widget-empty-text {
+
+.content-form__form-section.article-teaser .field--name-field-teaser-media {
+  width: 20%;
+}
+
+.content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-widget {
+  margin-top: var(--space-l);
+  margin-right: var(--space-l);
+  padding-top: 0;
+}
+
+.content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-selection .media-library-item--grid {
+  width: 100%;
+}
+
+/* Paragraphs section */
+
+.field--name-field-paragraphs .paragraphs-tabs-wrapper table.field-multiple-table:first-of-type thead {
   display: none;
 }
-.content-form__form-section.article-teaser .field--name-field-teaser-media fieldset {
+
+.paragraph-type--link .paragraphs-subform .field--name-field-link table.field-multiple-table:first-of-type thead {
+  display: none;
+}
+
+.paragraph-type--text .paragraphs-subform .field--name-field-text label,
+.paragraph-type--quote .paragraphs-subform .field--name-field-text label {
+  display: none;
+}
+.paragraph-type--link .paragraphs-subform .field--name-field-link,
+.paragraph-type--text .paragraphs-subform .field--name-field-text,
+.paragraph-type--quote .paragraphs-subform .field--name-field-text {
+  margin-top: var(--space-l);
+}
+
+/* Reset media and ief widget fieldsets. */
+
+.field--widget-inline-entity-form-simple > fieldset .fieldset__legend,
+fieldset.media-library-widget .fieldset__legend,
+fieldset.media-library-widget .help-icon__description-toggle {
+  display: none;
+}
+
+.field--widget-inline-entity-form-simple > fieldset .fieldset__wrapper,
+fieldset.media-library-widget .fieldset__wrapper {
+  margin: 0;
+}
+
+.field--widget-inline-entity-form-simple > fieldset,
+fieldset.media-library-widget {
   border: none;
   padding: 0;
   margin-bottom: 0;
   margin-top: 0;
 }
-.content-form__form-section.article-teaser .field--name-field-teaser-media .fieldset__label {
-  font-size: 0.889rem;
-  line-height: 1.125rem;
-  padding-bottom: 4px;
-  padding-left: 0;
-  padding-top: 0;
-}
 
-.content-form__form-section.article-teaser .field--name-field-teaser-media .fieldset__wrapper {
-  margin-bottom: 0;
-  margin-left: 0;
-  margin-top: 0;
-}
-/* Add space for throbber */
-.content-form__form-section.article-teaser .field--name-field-teaser-media .fieldset__suffix {
-  margin-top: 0.5em;
-  width: 200px;
-}
-.content-form__form-section.article-teaser .field--name-field-teaser-media .fieldset__description {
-  max-width: 200px;
-  padding-left: 0;
-}
-/* Remove margins for single item. */
-.content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-selection {
-  margin: 0;
-}
-/* Full width for single item. */
-.content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-selection .media-library-item--grid {
-  width: 100%;
-}
-/* Remove margin on teaser text. */
-.content-form__form-section.article-teaser .field--name-field-teaser-text .form-type--textarea {
-  margin-bottom: 0;
-  margin-top: 0;
+/* Hide empty text */
+fieldset.media-library-widget .media-library-widget-empty-text {
+  display: none;
 }

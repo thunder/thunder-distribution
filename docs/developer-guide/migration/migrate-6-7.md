@@ -43,7 +43,7 @@ Also the ckeditor module and the seven theme are needed for the update process.
 composer require drupal/entity_browser drupal/thunder_admin drupal/shariff drupal/ckeditor drupal/seven
 ```
 
-Also, if you have the liveblog, better_normalizers, google_analytics, or adsense module enabled, you have to
+Also, if you have the liveblog, better_normalizers, google_analytics, ctools or adsense module enabled, you have to
 require them own your own, since Thunder removed them from the distribution.
 
 ```bash
@@ -51,6 +51,7 @@ composer require drupal/liveblog
 composer require drupal/better_normalizers
 composer require drupal/adsense
 composer require drupal/google_analytics
+composer require drupal/ctools
 ```
 
 Thunder's new default frontend theme is Olivero, and we removed Thunder Base which was based on the Bartik theme, which
