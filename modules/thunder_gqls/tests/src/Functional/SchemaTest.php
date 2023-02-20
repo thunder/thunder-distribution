@@ -71,7 +71,7 @@ GQL;
     $variables = ['path' => $node->toUrl()->toString()];
     $response = $this->query($query, Json::encode($variables));
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
-    $this->assertEmpty(json_decode($response->getBody(), TRUE, 512, JSON_THROW_ON_ERROR)['data']['page']);
+    $this->assertEmpty($this->jsonDecode($response->getBody())['data']['page']);
 
     $query = <<<GQL
       query (\$path: String!, \$token: String!) {
@@ -86,7 +86,7 @@ GQL;
     $response = $this->query($query, Json::encode($variables));
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
 
-    $this->assertEqualsCanonicalizing(['name' => 'Test node'], json_decode($response->getBody(), TRUE, 512, JSON_THROW_ON_ERROR)['data']['page']);
+    $this->assertEqualsCanonicalizing(['name' => 'Test node'], $this->jsonDecode($response->getBody())['data']['page']);
   }
 
   /**
@@ -138,7 +138,7 @@ GQL;
           ],
         ],
       ],
-    ], json_decode($response->getBody(), TRUE, 512, JSON_THROW_ON_ERROR)['data']['page']);
+    ], $this->jsonDecode($response->getBody())['data']['page']);
   }
 
   /**
