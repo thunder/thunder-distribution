@@ -3,7 +3,6 @@ status: true
 dependencies:
   module:
     - media
-    - media_library_media_modify
     - paragraphs
 id: paragraph.field_image
 field_name: field_image
@@ -11,7 +10,7 @@ entity_type: paragraph
 type: entity_reference
 settings:
   target_type: media
-module: media_library_media_modify
+module: core
 locked: false
 cardinality: 1
 translatable: true

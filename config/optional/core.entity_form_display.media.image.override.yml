@@ -9,7 +9,7 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
-    - image.style.medium
+    - image.style.media_library
     - media.type.image
   module:
     - field_group
@@ -69,7 +69,7 @@ content:
     region: content
     settings:
       progress_indicator: throbber
-      preview_image_style: medium
+      preview_image_style: media_library
     third_party_settings: {  }
   name:
     type: string_textfield

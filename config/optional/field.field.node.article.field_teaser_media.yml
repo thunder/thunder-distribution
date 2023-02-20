@@ -5,8 +5,6 @@ dependencies:
     - field.storage.node.field_teaser_media
     - media.type.image
     - node.type.article
-  module:
-    - media_library_media_modify
 id: node.article.field_teaser_media
 field_name: field_teaser_media
 entity_type: node

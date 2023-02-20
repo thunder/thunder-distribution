@@ -6,7 +6,7 @@ dependencies:
     - field.field.media.instagram.field_author
     - field.field.media.instagram.field_content
     - field.field.media.instagram.field_url
-    - image.style.paragraph_preview_thumbnail
+    - image.style.thumbnail
     - media.type.instagram
   module:
     - empty_fields
@@ -89,7 +89,7 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: paragraph_preview_thumbnail
+      image_style: thumbnail
       image_loading:
         attribute: lazy
     third_party_settings:
