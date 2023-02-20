@@ -15,7 +15,3 @@
   border: 2px solid var(--gin-color-primary) !important;
   border-radius: var(--gin-border-m);
 }
-
-.form-actions div .form-item select option{
-  color: var(--gin-color-primary);
-}
