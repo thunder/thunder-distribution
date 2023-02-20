@@ -11,6 +11,7 @@ use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -120,33 +121,26 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
    * {@inheritdoc}
    */
   public function formAlter(array &$form, FormStateInterface $form_state): array {
+    if (!$this->moderationInfo) {
+      return [];
+    }
+
     if (isset($this->getActiveThemes()['gin'])) {
       $form['#attached']['library'][] = 'thunder_workflow/edit-form';
     }
 
-    /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
-    $form_object = $form_state->getFormObject();
     /** @var \Drupal\node\NodeInterface $entity */
-    $entity = $form_object->getEntity();
+    $entity = $form_state->getFormObject()->getEntity();
+
+    if ($this->moderationInfo->hasPendingRevision($entity)) {
+      $this->messenger->addWarning($this->t('This %entity_type has unpublished changes from user %user.', [
+        '%entity_type' => $entity->get('type')->entity->label(),
+        '%user' => $entity->getRevisionUser()->label(),
+      ]));
+    }
 
     if (!isset($form['moderation_state']['widget'][0]['current']) && $this->moderationInfo->isModeratedEntity($entity)) {
-      $transitions = $this->stateTransitionValidation->getValidTransitions($entity, $this->currentUser);
-
-      if (count($transitions) > 1) {
-        $form['actions']['submit']['#value'] = $this->t('Save as');
-      }
-      elseif (count($transitions) === 1) {
-        $form['moderation_state']['#attributes']['style'] = 'display: none';
-        /** @var \Drupal\workflows\TransitionInterface $transition */
-        $transition = reset($transitions);
-        $form['actions']['submit']['#value'] = $this->t('Save as @state', ['@state' => $transition->to()->label()]);
-      }
-
-      unset($form['moderation_state']['#group']);
-      $form['moderation_state']['#weight'] = 90;
-
-      $form['actions']['moderation_state'] = $form['moderation_state'];
-      unset($form['moderation_state']);
+      $form = $this->moveStateToActions($entity, $form);
     }
 
     /** @var \Drupal\Core\Entity\ContentEntityStorageInterface $storage */
@@ -154,11 +148,11 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
     $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()
       ->getId());
 
-    if ($latest_revision_id === NULL || !$this->moderationInfo || !$this->moderationInfo->isModeratedEntity($entity)) {
+    if ($latest_revision_id === NULL) {
       return [];
     }
 
-    if (isset($form['meta']['published'])) {
+    if (isset($form['meta']['published']) && $this->moderationInfo->isModeratedEntity($entity)) {
       /** @var \Drupal\content_moderation\ContentModerationState $state */
       $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
       if (!$state->isDefaultRevisionState()) {
@@ -207,6 +201,38 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
     $activeThemes[$activeTheme->getName()] = $activeTheme;
 
     return $activeThemes;
+  }
+
+  /**
+   * Move state select to actions
+   *
+   * @param \Drupal\node\NodeInterface $entity
+   * @param array $form
+   *
+   * @return array
+   */
+  public function moveStateToActions(NodeInterface $entity, array $form): array {
+    $transitions = $this->stateTransitionValidation->getValidTransitions($entity,
+      $this->currentUser);
+
+    if (count($transitions) > 1) {
+      $form['actions']['submit']['#value'] = $this->t('Save as');
+    }
+    elseif (count($transitions) === 1) {
+      $form['moderation_state']['#attributes']['style'] = 'display: none';
+      /** @var \Drupal\workflows\TransitionInterface $transition */
+      $transition = reset($transitions);
+      $form['actions']['submit']['#value'] = $this->t('Save as @state',
+        ['@state' => $transition->to()->label()]);
+    }
+
+    unset($form['moderation_state']['#group']);
+    $form['moderation_state']['#weight'] = 90;
+
+    $form['actions']['moderation_state'] = $form['moderation_state'];
+    unset($form['moderation_state']);
+
+    return $form;
   }
 
 }
