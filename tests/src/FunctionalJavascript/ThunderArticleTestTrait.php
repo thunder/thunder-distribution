@@ -63,7 +63,7 @@ trait ThunderArticleTestTrait {
   protected function setModerationState(string $state): void {
     $this->getSession()
       ->getDriver()
-      ->selectOption('//*[@id="edit-moderation-state-0"]', $state);
+      ->selectOption('//*[@data-drupal-selector="edit-moderation-state-0"]', $state);
   }
 
 }
