@@ -2,6 +2,7 @@
 
 namespace Drupal\thunder_workflow;
 
+use Drupal\content_moderation\ContentModerationState;
 use Drupal\content_moderation\ModerationInformationInterface;
 use Drupal\content_moderation\StateTransitionValidationInterface;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
@@ -118,11 +119,11 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Alter content moderation widgets.
    */
-  public function formAlter(array &$form, FormStateInterface $form_state): array {
+  public function formAlter(array &$form, FormStateInterface $form_state) {
     if (!$this->moderationInfo) {
-      return [];
+      return;
     }
 
     if (isset($this->getActiveThemes()['gin'])) {
@@ -150,48 +151,11 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
     $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()
       ->getId());
 
-    if ($latest_revision_id === NULL) {
-      return [];
+    if ($latest_revision_id !== NULL && isset($form['meta']['published']) && $this->moderationInfo->isModeratedEntity($entity)) {
+      $this->displayPublishedinformation($form, $entity);
+      $this->moveRevisionRevertToSidebar($form, $entity);
     }
 
-    if (isset($form['meta']['published']) && $this->moderationInfo->isModeratedEntity($entity)) {
-      /** @var \Drupal\content_moderation\ContentModerationState $state */
-      $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
-      if (!$state->isDefaultRevisionState()) {
-        $args = [
-          '@state' => $state->label(),
-          '@entity_type' => strtolower($entity->type->entity->label()),
-        ];
-        $form['meta']['published']['#markup'] = $entity->isNew() || !$this->moderationInfo->isDefaultRevisionPublished($entity) ?
-          $this->t('@state of unpublished @entity_type', $args) :
-          $this->t('@state of published @entity_type', $args);
-      }
-
-      if ($this->moderationInfo->hasPendingRevision($entity)) {
-        $route_info = Url::fromRoute('node.revision_revert_default_confirm', [
-          'node' => $entity->id(),
-          'node_revision' => $entity->getRevisionId(),
-        ]);
-        if ($this->request->query->has('destination')) {
-          $query = $route_info->getOption('query');
-          $query['destination'] = $this->request->query->get('destination');
-          $route_info->setOption('query', $query);
-        }
-
-        $form['meta']['revert_to_default'] = [
-          '#type' => 'link',
-          '#title' => $this->t('Revert unpublished changes'),
-          '#access' => $entity->access('revert revision', $this->currentUser),
-          '#weight' => 101,
-          '#url' => $route_info,
-          '#attributes' => [
-            'class' => ['button', 'button--danger'],
-          ],
-        ];
-      }
-    }
-
-    return $form;
   }
 
   /**
@@ -238,6 +202,68 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
     unset($form['moderation_state']);
 
     return $form;
+  }
+
+  /**
+   * Display published information next to state in meta section.
+   *
+   * @param array $form
+   *   The form array.
+   * @param \Drupal\node\NodeInterface $entity
+   *   The node entity.
+   */
+  public function displayPublishedinformation(array &$form, NodeInterface $entity) {
+    /** @var \Drupal\content_moderation\ContentModerationState $state */
+    $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
+
+    if ($state->isDefaultRevisionState()) {
+      return;
+    }
+
+    $args = [
+      '@state' => $state->label(),
+      '@entity_type' => strtolower($entity->type->entity->label()),
+    ];
+
+    $form['meta']['published']['#markup'] = $entity->isNew() || !$this->moderationInfo->isDefaultRevisionPublished($entity) ?
+      $this->t('@state of unpublished @entity_type', $args) :
+      $this->t('@state of published @entity_type', $args);
+  }
+
+  /**
+   * Move revision revert Button to sidebar.
+   *
+   * @param array $form
+   *   The form array.
+   * @param \Drupal\node\NodeInterface $entity
+   *   The node entity.
+   */
+  public function moveRevisionRevertToSidebar(array &$form, NodeInterface $entity) {
+    if (!$this->moderationInfo->hasPendingRevision($entity)) {
+      return;
+    }
+
+    $route_info = Url::fromRoute('node.revision_revert_default_confirm', [
+      'node' => $entity->id(),
+      'node_revision' => $entity->getRevisionId(),
+    ]);
+
+    if ($this->request->query->has('destination')) {
+      $query = $route_info->getOption('query');
+      $query['destination'] = $this->request->query->get('destination');
+      $route_info->setOption('query', $query);
+    }
+
+    $form['meta']['revert_to_default'] = [
+      '#type' => 'link',
+      '#title' => $this->t('Revert unpublished changes'),
+      '#access' => $entity->access('revert revision', $this->currentUser),
+      '#weight' => 101,
+      '#url' => $route_info,
+      '#attributes' => [
+        'class' => ['button', 'button--danger'],
+      ],
+    ];
   }
 
 }
