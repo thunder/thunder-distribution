@@ -1,5 +1,7 @@
 __global_actions:
   import_configs:
+    - field.storage.node.field_meta_tags
+    - field.storage.node.field_paragraphs
     - field.field.node.page.field_meta_tags
     - field.field.node.page.field_paragraphs
 core.entity_form_display.node.page.default:
