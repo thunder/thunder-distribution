@@ -210,7 +210,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
    * @param \Drupal\node\NodeInterface $entity
    *   The node entity.
    */
-  public function displayPublishedinformation(array &$form, NodeInterface $entity) {
+  public function displayPublishedinformation(array &$form, NodeInterface $entity): void {
     /** @var \Drupal\content_moderation\ContentModerationState $state */
     $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
 
@@ -236,7 +236,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
    * @param \Drupal\node\NodeInterface $entity
    *   The node entity.
    */
-  public function moveRevisionRevertToSidebar(array &$form, NodeInterface $entity) {
+  public function moveRevisionRevertToSidebar(array &$form, NodeInterface $entity): void {
     if (!$this->moderationInfo->hasPendingRevision($entity)) {
       return;
     }

@@ -41,7 +41,7 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
   /**
    * Add library to node form.
    */
-  public function formAlter(array &$form, FormStateInterface $form_state) {
+  public function formAlter(array &$form, FormStateInterface $form_state): void {
     if (isset($this->getActiveThemes()['gin'])) {
       $form['#attached']['library'][] = 'thunder_article/article-form';
     }
