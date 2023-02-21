@@ -2,7 +2,6 @@
 
 namespace Drupal\thunder_workflow;
 
-use Drupal\content_moderation\ContentModerationState;
 use Drupal\content_moderation\ModerationInformationInterface;
 use Drupal\content_moderation\StateTransitionValidationInterface;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
@@ -181,8 +180,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
    *   The altered form array.
    */
   public function moveStateToActions(NodeInterface $entity, array $form): array {
-    $transitions = $this->stateTransitionValidation->getValidTransitions($entity,
-      $this->currentUser);
+    $transitions = $this->stateTransitionValidation->getValidTransitions($entity, $this->currentUser);
 
     if (count($transitions) > 1) {
       $form['actions']['submit']['#value'] = $this->t('Save as');
