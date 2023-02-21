@@ -49,7 +49,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $image1 = new \Imagick($derivativeUri);
     $image2 = new \Imagick(realpath(__DIR__ . '/../../fixtures/reference.jpg'));
 
-    $result = $image1->compareImages($image2, \Imagick::METRIC_MEANSQUAREERROR);
+    $result = $image1->compareImages($image2, \Imagick::METRIC_MEANABSOLUTEERROR);
 
     $this->assertTrue($result[1] < 0.01, 'Images are identical');
 
