@@ -42,9 +42,9 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $file = File::load($img);
     $path = $file->getFileUri();
 
-    $derivativeUri = ImageStyle::load('teaser')->buildUri($path);
+    $derivativeUri = ImageStyle::load('media_library')->buildUri($path);
 
-    ImageStyle::load('teaser')->createDerivative($path, $derivativeUri);
+    ImageStyle::load('media_library')->createDerivative($path, $derivativeUri);
 
     $image1 = new \Imagick($derivativeUri);
     $image2 = new \Imagick(realpath(__DIR__ . '/../../fixtures/reference.jpg'));
