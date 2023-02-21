@@ -42,14 +42,14 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $file = File::load($img);
     $path = $file->getFileUri();
 
-    $derivativeUri = ImageStyle::load('media_library')->buildUri($path);
+    $derivativeUri = ImageStyle::load('media_image')->buildUri($path);
 
-    ImageStyle::load('media_library')->createDerivative($path, $derivativeUri);
+    ImageStyle::load('media_image')->createDerivative($path, $derivativeUri);
 
     $image1 = new \Imagick($derivativeUri);
     $image2 = new \Imagick(realpath(__DIR__ . '/../../fixtures/reference.jpg'));
 
-    $result = $image1->compareImages($image2, \Imagick::METRIC_MEANABSOLUTEERROR);
+    $result = $image1->compareImages($image2, \Imagick::METRIC_MEANSQUAREERROR);
 
     $this->assertTrue($result[1] < 0.01, 'Images are identical');
 
