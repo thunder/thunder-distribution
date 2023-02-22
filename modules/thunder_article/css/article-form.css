@@ -78,3 +78,7 @@ fieldset.media-library-widget {
 fieldset.media-library-widget .media-library-widget-empty-text {
   display: none;
 }
+
+fieldset.media-library-widget .fieldset__wrapper .fieldset__suffix{
+  display: flex;
+}
