@@ -339,7 +339,8 @@ core.entity_form_display.media.gallery.default:
             check_selected: true
             form_mode: override
             media_types: {  }
-            multi_edit_on_create: true
+            no_edit_on_create: false
+            multi_edit_on_create: false
             replace_checkbox_by_order_indicator: true
           type: media_library_media_modify_widget
       third_party_settings:
@@ -382,7 +383,8 @@ core.entity_form_display.media.gallery.inline:
             check_selected: true
             form_mode: override
             media_types: {  }
-            multi_edit_on_create: true
+            no_edit_on_create: false
+            multi_edit_on_create: false
             replace_checkbox_by_order_indicator: true
           type: media_library_media_modify_widget
 core.entity_form_display.media.image.default:
@@ -536,7 +538,8 @@ core.entity_form_display.node.article.default:
             check_selected: false
             form_mode: override
             media_types: {  }
-            multi_edit_on_create: true
+            no_edit_on_create: false
+            multi_edit_on_create: false
             replace_checkbox_by_order_indicator: false
           third_party_settings:
             entity_reference_actions:
@@ -627,7 +630,8 @@ core.entity_form_display.paragraph.image.default:
             check_selected: false
             form_mode: override
             media_types: {  }
-            multi_edit_on_create: true
+            no_edit_on_create: false
+            multi_edit_on_create: false
             replace_checkbox_by_order_indicator: false
           third_party_settings:
             entity_reference_actions:
@@ -680,6 +684,7 @@ core.entity_form_display.paragraph.video.default:
             check_selected: false
             form_mode: override
             media_types: {  }
+            no_edit_on_create: false
             multi_edit_on_create: false
             replace_checkbox_by_order_indicator: false
           third_party_settings:

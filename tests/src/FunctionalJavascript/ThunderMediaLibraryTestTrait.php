@@ -40,10 +40,12 @@ trait ThunderMediaLibraryTestTrait {
    *
    * @param string $filePath
    *   Path to file that should be uploaded.
+   * @param bool $skipEditForm
+   *   If set to TRUE, it will skip edit form will just select uploaded files.
    *
    * @throws \Exception
    */
-  public function uploadFile(string $filePath): void {
+  public function uploadFile(string $filePath, bool $skipEditForm = FALSE): void {
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
@@ -74,10 +76,10 @@ trait ThunderMediaLibraryTestTrait {
     );
 
     $this->assertWaitOnAjaxRequest();
-
-    $this->assertSession()->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Save and select');
-
-    $this->assertWaitOnAjaxRequest();
+    if (!$skipEditForm) {
+      $this->assertSession()->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Save and select');
+      $this->assertWaitOnAjaxRequest();
+    }
   }
 
 }
