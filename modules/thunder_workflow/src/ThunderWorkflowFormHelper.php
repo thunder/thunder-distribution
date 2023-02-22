@@ -120,7 +120,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
   /**
    * Alter content moderation widgets.
    */
-  public function formAlter(array &$form, FormStateInterface $form_state) {
+  public function formAlter(array &$form, FormStateInterface $form_state): void {
     if (!$this->moderationInfo) {
       return;
     }
