@@ -22,7 +22,8 @@ content:
       form_mode: override
       check_selected: false
       replace_checkbox_by_order_indicator: false
-      multi_edit_on_create: true
+      no_edit_on_create: false
+      multi_edit_on_create: false
     third_party_settings:
       entity_reference_actions:
         enabled: false
