@@ -146,7 +146,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
     $widget = $form_display->getRenderer('moderation_state');
 
     // Move the custom thunder widget to actions.
-    if ($widget->getPluginId() === 'thunder_moderation_state_default_quatsch') {
+    if ($widget->getPluginId() === 'thunder_moderation_state_default') {
       $form = $this->moveStateToActions($entity, $form);
     }
 
@@ -157,7 +157,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
 
     if ($latest_revision_id !== NULL && isset($form['meta']['published'])) {
       $this->displayPublishedinformation($form, $entity);
-      $this->moveRevisionRevertToSidebar($form, $entity);
+      $this->createRevisionRevertButton($form, $entity);
     }
 
   }
@@ -241,7 +241,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
    * @param \Drupal\node\NodeInterface $entity
    *   The node entity.
    */
-  public function moveRevisionRevertToSidebar(array &$form, NodeInterface $entity): void {
+  public function createRevisionRevertButton(array &$form, NodeInterface $entity): void {
     if (!$this->moderationInfo->hasPendingRevision($entity)) {
       return;
     }
