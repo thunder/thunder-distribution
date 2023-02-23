@@ -79,6 +79,12 @@ fieldset.media-library-widget .media-library-widget-empty-text {
   display: none;
 }
 
-fieldset.media-library-widget .fieldset__wrapper .fieldset__suffix{
+fieldset.media-library-widget .fieldset__suffix {
   display: flex;
+}
+
+fieldset.media-library-widget .fieldset__suffix input,
+fieldset.media-library-widget .fieldset__suffix .dropbutton-wrapper {
+  margin-bottom: 0;
+  margin-top: 0;
 }
