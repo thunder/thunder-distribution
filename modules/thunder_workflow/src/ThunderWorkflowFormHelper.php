@@ -121,7 +121,12 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
    * Alter content moderation widgets.
    */
   public function formAlter(array &$form, FormStateInterface $form_state): void {
-    if (!$this->moderationInfo) {
+    /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
+    $form_object = $form_state->getFormObject();
+    /** @var \Drupal\node\NodeInterface $entity */
+    $entity = $form_object->getEntity();
+
+    if (!$this->moderationInfo->isModeratedEntity($entity)) {
       return;
     }
 
@@ -129,21 +134,11 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
       $form['#attached']['library'][] = 'thunder_workflow/edit-form';
     }
 
-    /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
-    $form_object = $form_state->getFormObject();
-    /** @var \Drupal\node\NodeInterface $entity */
-    $entity = $form_object->getEntity();
-
     if ($this->moderationInfo->hasPendingRevision($entity)) {
       $this->messenger->addWarning($this->t('This %entity_type has unpublished changes from user %user.', [
         '%entity_type' => $entity->get('type')->entity->label(),
         '%user' => $entity->getRevisionUser()->label(),
       ]));
-    }
-
-    // Alter moderation widgets.
-    if (!$this->moderationInfo->isModeratedEntity($entity)) {
-      return;
     }
 
     // Get the field widget for the current form mode.
