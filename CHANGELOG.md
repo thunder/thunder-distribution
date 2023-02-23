@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.5.2](https://github.com/thunder/thunder-distribution/tree/6.5.2) 2023-02-23
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.1...6.5.2)
+
+- [Fix Attempted to create an instance of field with name field_meta_tags on entity type node when the field storage does not exist](https://www.drupal.org/node/3340586)
+- [Patch too fix "Call to a member function mainPropertyName() on null"](https://www.drupal.org/issues/3179172)
+- Fix caching of GraphQl sub request data producers.
+
 ## [6.5.1](https://github.com/thunder/thunder-distribution/tree/6.5.1) 2023-01-19
 
 Adding Entity Browser patch for SA-CONTRIB-2023-002. We cannot update entity browser, so we have to backport the patch.
