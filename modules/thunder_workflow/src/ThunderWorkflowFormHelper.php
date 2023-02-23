@@ -141,7 +141,17 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
       ]));
     }
 
-    if (!isset($form['moderation_state']['widget'][0]['current']) && $this->moderationInfo->isModeratedEntity($entity)) {
+    // Alter moderation widgets.
+    if (!$this->moderationInfo->isModeratedEntity($entity)) {
+      return;
+    }
+
+    // Get the field widget for the current form mode.
+    $form_display = $form_object->getFormDisplay($form_state);
+    $widget = $form_display->getRenderer('moderation_state');
+
+    // Move the custom thunder widget to actions.
+    if ($widget->getPluginId() === 'thunder_moderation_state_default') {
       $form = $this->moveStateToActions($entity, $form);
     }
 
@@ -150,7 +160,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
     $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()
       ->getId());
 
-    if ($latest_revision_id !== NULL && isset($form['meta']['published']) && $this->moderationInfo->isModeratedEntity($entity)) {
+    if ($latest_revision_id !== NULL && isset($form['meta']['published'])) {
       $this->displayPublishedinformation($form, $entity);
       $this->moveRevisionRevertToSidebar($form, $entity);
     }

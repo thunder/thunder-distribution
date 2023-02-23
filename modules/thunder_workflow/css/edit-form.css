@@ -7,10 +7,3 @@
   margin-bottom: var(--space-m);
   margin-right: var(--gin-spacing-xs);
 }
-
-.form-actions select {
-  font-weight: var(--gin-font-weight-semibold);
-  color: var(--gin-color-primary);
-  border: 2px solid var(--gin-color-primary) !important;
-  border-radius: var(--gin-border-m);
-}
