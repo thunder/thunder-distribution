@@ -146,7 +146,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
     $widget = $form_display->getRenderer('moderation_state');
 
     // Move the custom thunder widget to actions.
-    if ($widget->getPluginId() === 'thunder_moderation_state_default') {
+    if ($widget->getPluginId() === 'thunder_moderation_state_default_quatsch') {
       $form = $this->moveStateToActions($entity, $form);
     }
 
