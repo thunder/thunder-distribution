@@ -145,16 +145,31 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
     $this->resolvePageInterfaceFields('User', 'user');
     $this->resolvePageInterfaceQueryFields('user', 'user');
 
-    $this->addFieldResolverIfNotExists('User', 'mail',
-      $this->builder->fromPath('entity', 'mail.value')
+    $this->registry->addFieldResolver('User', 'mail',
+      $this->builder->compose(
+        $this->builder->produce('field')
+          ->map('entity', $this->builder->fromParent())
+          ->map('field', $this->builder->fromValue('mail')),
+        $this->builder->fromPath('field:string', '0.value')
+      )
     );
 
     $this->addFieldResolverIfNotExists('User', 'access',
-      $this->builder->fromPath('entity', 'access.value')
+      $this->builder->compose(
+        $this->builder->produce('field')
+          ->map('entity', $this->builder->fromParent())
+          ->map('field', $this->builder->fromValue('access')),
+        $this->builder->fromPath('field:string', '0.value')
+      )
     );
 
     $this->addFieldResolverIfNotExists('User', 'published',
-      $this->builder->fromPath('entity', 'status.value')
+      $this->builder->compose(
+        $this->builder->produce('field')
+          ->map('entity', $this->builder->fromParent())
+          ->map('field', $this->builder->fromValue('status')),
+        $this->builder->fromPath('field:string', '0.value')
+      )
     );
 
     $this->addFieldResolverIfNotExists('User', 'picture',
