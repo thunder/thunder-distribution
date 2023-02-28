@@ -2,10 +2,7 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 
-use Drupal\Tests\paragraphs\FunctionalJavascript\LoginAdminTrait;
-use Drupal\Tests\thunder\FunctionalJavascript\ThunderArticleTestTrait;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
-use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
 
 /**
  * Tests the config warning for ief inside paragraphs.
@@ -14,12 +11,15 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
  */
 class ParagraphsIEFConfigWarningTest extends ThunderJavascriptTestBase {
 
+  /**
+   * Find warnings and check content.
+   */
   public function testConfigWarning(): void {
 
     $this->logWithRole('administrator');
     $this->drupalGet('admin/structure/types/manage/article/form-display');
     $page = $this->getSession()->getPage();
-    $page->find('css','[data-drupal-selector="edit-fields-field-paragraphs-settings-edit"]')->click();
+    $page->find('css', '[data-drupal-selector="edit-fields-field-paragraphs-settings-edit"]')->click();
     $this->assertWaitOnAjaxRequest();
 
     $this->assertEquals(
@@ -34,4 +34,5 @@ class ParagraphsIEFConfigWarningTest extends ThunderJavascriptTestBase {
       "Warning message not equal."
     );
   }
+
 }
