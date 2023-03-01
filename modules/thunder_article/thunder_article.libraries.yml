@@ -1,4 +1,6 @@
-article-form:
+node-form:
   css:
     theme:
-      css/article-form.css: {}
+      css/node-form.css: {}
+  js:
+    js/node-form.js: {}
