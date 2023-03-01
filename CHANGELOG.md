@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.4.6](https://github.com/thunder/thunder-distribution/tree/6.4.6) 2023-03-01
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.4.5...6.4.6)
+
+This is a security release of Thunder.
+
 ## [6.4.5](https://github.com/thunder/thunder-distribution/tree/6.4.5) 2023-01-19
 
 Adding Entity Browser patch for SA-CONTRIB-2023-002. We cannot update entity browser, so we have to backport the patch.
