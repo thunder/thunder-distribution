@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.5.3](https://github.com/thunder/thunder-distribution/tree/6.5.3) 2023-03-01
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.2...6.5.3)
+
+This is a security release of Thunder.
+
 ## [6.5.2](https://github.com/thunder/thunder-distribution/tree/6.5.2) 2023-02-23
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.1...6.5.2)
