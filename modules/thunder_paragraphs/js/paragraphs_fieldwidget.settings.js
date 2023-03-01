@@ -6,7 +6,9 @@
   /**
    * Theme function displaying a warning.
    *
-   * @param {object} options.name
+   * @param {object} options
+   *   Additional data
+   @param {string} [options.name]
    *   The name of the setting.
    *
    * @return {string}
@@ -24,7 +26,7 @@
    * Display warning message for certain paragraphs field widget settings.
    */
   Drupal.behaviors.thunderParagraphsFieldWidgetSettings = {
-    attach: function (context) {
+    attach: function attach(context) {
       const form = once(
         'paragraphsFieldWidgetSettings',
         '[data-drupal-selector="edit-fields-field-paragraphs-settings-edit-form"]',
@@ -48,10 +50,9 @@
       elem = form.querySelector(
         '[data-drupal-selector="edit-fields-field-paragraphs-settings-edit-form-settings-features-collapse-edit-all"]',
       );
-      message = Drupal.theme(
-        'thunderParagraphsFieldWidgetSettingsWarning',
-        { name: Drupal.t('Collapse / Edit all') },
-      );
+      message = Drupal.theme('thunderParagraphsFieldWidgetSettingsWarning', {
+        name: Drupal.t('Collapse / Edit all'),
+      });
       elem.closest('.fieldset__wrapper').appendChild(message);
     },
   };
