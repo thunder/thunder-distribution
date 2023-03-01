@@ -109,7 +109,7 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
    */
   public function formAlter(array &$form, FormStateInterface $form_state): array {
     if (isset($this->getActiveThemes()['gin'])) {
-      $form['#attached']['library'][] = 'thunder_article/node-form';
+      $form['#attached']['library'][] = 'thunder_article/article-form';
     }
 
     /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
