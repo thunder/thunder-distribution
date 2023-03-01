@@ -48,9 +48,9 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
   /**
    * The moderation information service.
    *
-   * @var \Drupal\content_moderation\ModerationInformationInterface|null
+   * @var \Drupal\content_moderation\ModerationInformationInterface
    */
-  protected ?ModerationInformationInterface $moderationInfo;
+  protected ModerationInformationInterface $moderationInfo;
 
   /**
    * The entity type manager.
@@ -69,9 +69,9 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
   /**
    * The state transition validation service.
    *
-   * @var \Drupal\content_moderation\StateTransitionValidationInterface|null
+   * @var \Drupal\content_moderation\StateTransitionValidationInterface
    */
-  protected ?StateTransitionValidationInterface $stateTransitionValidation;
+  protected StateTransitionValidationInterface $stateTransitionValidation;
 
   /**
    * Constructs a NodeForm object.
@@ -87,10 +87,10 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
    * @param \Drupal\Core\Theme\ThemeManagerInterface $theme_manager
    *   The theme manager.
    * @param \Drupal\content_moderation\ModerationInformationInterface $moderationInfo
-   *   (optional) The moderation info service. The optionality is important
+   *   The moderation info service. The optionality is important
    *   otherwise this form becomes dependent on the content_moderation module.
    * @param \Drupal\content_moderation\StateTransitionValidationInterface $stateTransitionValidation
-   *   (optional) The state transition validation service.
+   *   The state transition validation service.
    */
   final public function __construct(AccountInterface $current_user, MessengerInterface $messenger, RequestStack $requestStack, EntityTypeManagerInterface $entity_type_manager, ThemeManagerInterface $theme_manager, ModerationInformationInterface $moderationInfo, StateTransitionValidationInterface $stateTransitionValidation) {
     $this->currentUser = $current_user;
