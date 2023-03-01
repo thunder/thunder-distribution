@@ -2,7 +2,7 @@
 
 ## [6.5.3](https://github.com/thunder/thunder-distribution/tree/6.5.3) 2023-03-01
 
-This is a security release of Thunder. Sites are urged to update immediately.
+This is a security release of Thunder.
 
 ## [6.5.2](https://github.com/thunder/thunder-distribution/tree/6.5.2) 2023-02-23
 
