@@ -60,7 +60,14 @@
             },
             "drupal/media_entity_pinterest": {
                 "to a member function mainPropertyName() on null in media_entity_pinterest/src/Plugin/media/Source/Pinterest.php on line 155": "https://git.drupalcode.org/project/media_entity_pinterest/-/merge_requests/2.diff"
+            },
+            "drupal/focal_point": {
+                "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-06/3162210-17.patch"
+            },
+            "drupal/media_library_media_modify": {
+                "Focal point preview link accidentally closes the media edit form": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/41.diff"
             }
+
         }
     },
     "require": {
