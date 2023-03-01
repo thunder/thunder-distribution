@@ -27,11 +27,11 @@ function thunder_paragraphs_field_widget_third_party_settings_form(WidgetInterfa
 }
 
 /**
- * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ * Implements hook_field_widget_single_element_WIDGET_TYPE_form_alter();
  *
  * Used for Classic Paragraphs widget.
  */
-function thunder_paragraphs_field_widget_entity_reference_paragraphs_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
+function thunder_paragraphs_field_widgett_single_element_entity_reference_paragraphs_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
   thunder_paragraphs__attach_ief_submit(
     $element,
     [
@@ -43,11 +43,11 @@ function thunder_paragraphs_field_widget_entity_reference_paragraphs_form_alter(
 }
 
 /**
- * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ * Implements hook_field_widget_single_element_WIDGET_TYPE_form_alter();
  *
  * Used for Experimental Paragraphs widget.
  */
-function thunder_paragraphs_field_widget_paragraphs_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
+function thunder_paragraphs_field_widget_single_element_paragraphs_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
   // Based on logic in ParagraphsWidget::formMultipleElements - execution of
   // alter hook for existing paragraphs will be executed first and only with
   // list of editable paragraphs. Since all editable paragraphs are processed
