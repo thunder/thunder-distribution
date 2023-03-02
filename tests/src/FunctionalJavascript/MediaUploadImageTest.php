@@ -28,4 +28,5 @@ class MediaUploadImageTest extends ThunderJavascriptTestBase {
     $this->submitMediaLibrary();
 
   }
+
 }
