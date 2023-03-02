@@ -171,4 +171,18 @@ JS;
     $this->assertEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should not be "reference.jpg".');
   }
 
+
+  /**
+   * Test upload of Images in Media library.
+   *
+   * Media library is open from within and node edit form.
+   */
+  public function testImageUpload(): void {
+    $this->drupalGet('node/add/article');
+    $this->assertWaitOnAjaxRequest();
+
+    $this->openMediaLibrary('field-teaser-media-selection');
+    $this->uploadFile('/fixtures/reference.webp', TRUE);
+    $this->submitMediaLibrary();
+  }
 }
