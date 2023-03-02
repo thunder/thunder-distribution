@@ -25,4 +25,5 @@ class MediaUploadImageTest extends ThunderJavascriptTestBase {
     $this->uploadFile('/fixtures/reference.webp', TRUE);
     $this->submitMediaLibrary();
   }
+
 }
