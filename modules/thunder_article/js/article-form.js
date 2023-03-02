@@ -8,7 +8,7 @@
       ).forEach((element) => {
         element.addEventListener('keydown', (event) => {
           if (event.key === 'Enter') {
-            event.preventDefault();
+            //event.preventDefault();
           }
         });
       });
