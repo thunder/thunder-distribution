@@ -180,7 +180,7 @@ JS;
     $this->drupalGet('node/add/article');
     $this->assertWaitOnAjaxRequest();
 
-    $this->openMediaLibrary('field-teaser-media-selection');
+    $this->openMediaLibrary('field-teaser-media');
     $this->uploadFile('/fixtures/reference.jpg', TRUE);
     $this->submitMediaLibrary();
   }
