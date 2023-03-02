@@ -81,6 +81,9 @@ class ModeratedContentTest extends ThunderTestBase {
 
     $this->drupalGet($node->toUrl('edit-form'));
 
+    // Test, that hook_form_alter successfully moved moderation_state field.
+    $this->assertSession()->elementExists('css', '[data-drupal-selector="edit-actions"] > [data-drupal-selector="edit-moderation-state-wrapper"]');
+
     $this->submitForm([
       'title[0][value]' => 'Test workflow article in draft 2',
       'field_seo_title[0][value]' => 'Massive gaining even more and more seo traffic text',
@@ -88,6 +91,16 @@ class ModeratedContentTest extends ThunderTestBase {
     ], 'Save');
 
     $this->assertSession()->titleEquals('Massive gaining even more and more seo traffic text');
+
+    $this->drupalGet($node->toUrl('edit-form'));
+
+    // Test that info texts from hook_form_alter are shown.
+    $this->assertSession()->elementTextContains('css', '.messages--warning > .messages__content', 'has unpublished changes from user');
+    $this->assertSession()->elementTextContains('css', '#edit-meta-published', 'Draft of published article');
+
+    // Test that the revert link from hook_form_alter is shown in edit-meta
+    // section.
+    $this->assertSession()->elementTextContains('css', '[data-drupal-selector="edit-meta"] > [data-drupal-selector="edit-meta-revert-to-default"]', 'Revert unpublished changes');
 
     /** @var \Drupal\node\NodeStorageInterface $node_storage */
     $node_storage = \Drupal::entityTypeManager()->getStorage('node');

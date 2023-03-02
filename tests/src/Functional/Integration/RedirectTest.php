@@ -31,7 +31,7 @@ class RedirectTest extends ThunderTestBase {
     $node = $this->loadNodeByUuid('0bd5c257-2231-450f-b4c2-ab156af7b78d');
     $this->drupalGet($node->toUrl('edit-form'));
     $page->fillField('SEO Title', 'Burda Launches Worldwide Coalition');
-    $page->find('xpath', '//*[@id="edit-moderation-state-0"]')
+    $page->find('xpath', '//*[@data-drupal-selector="edit-moderation-state-0"]')
       ->selectOption('published');
     $page->pressButton('Save');
 

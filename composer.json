@@ -56,7 +56,8 @@
                 "Fix dialog close icon pos": "https://git.drupalcode.org/project/gin/-/merge_requests/221.diff",
                 "Support length indicator": "https://git.drupalcode.org/project/gin/-/merge_requests/219.diff",
                 "Fix help icon positioning": "https://git.drupalcode.org/project/gin/-/merge_requests/218.diff",
-                "ckeditor5 balloon area not shown in modal": "https://git.drupalcode.org/project/gin/-/merge_requests/210.diff"
+                "ckeditor5 balloon area not shown in modal": "https://git.drupalcode.org/project/gin/-/merge_requests/210.diff",
+                "Fix paragraphs warning icon position and size": "https://git.drupalcode.org/project/gin/-/merge_requests/230.diff"
             },
             "drupal/media_entity_pinterest": {
                 "to a member function mainPropertyName() on null in media_entity_pinterest/src/Plugin/media/Source/Pinterest.php on line 155": "https://git.drupalcode.org/project/media_entity_pinterest/-/merge_requests/2.diff"
@@ -75,7 +76,7 @@
         "drupal/autosave_form": "^1.2",
         "drupal/blazy": "^2.14",
         "drupal/checklistapi": "^2.1",
-        "drupal/core": "~10.0.0",
+        "drupal/core": "~10.0.3",
         "drupal/config_selector": "^2.1",
         "drupal/config_update": "^1.7 || ^2.0",
         "drupal/content_lock": "^2.1",
