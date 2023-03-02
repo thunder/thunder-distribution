@@ -64,7 +64,6 @@
             "drupal/focal_point": {
                 "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-06/3162210-17.patch"
             }
-
         }
     },
     "require": {
