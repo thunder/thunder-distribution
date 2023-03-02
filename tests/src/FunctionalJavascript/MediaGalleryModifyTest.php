@@ -171,7 +171,6 @@ JS;
     $this->assertEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should not be "reference.jpg".');
   }
 
-
   /**
    * Test upload of Images in Media library.
    *
@@ -185,4 +184,5 @@ JS;
     $this->uploadFile('/fixtures/reference.webp', TRUE);
     $this->submitMediaLibrary();
   }
+
 }
