@@ -24,13 +24,13 @@ class ParagraphsIEFConfigWarningTest extends ThunderJavascriptTestBase {
 
     $this->assertEquals(
       'The Autocollapse option is not supported for the Thunder distribution because of potential data loss in combination with the inline_entity_form module. If you want to use it, make sure to remove all inline entity forms from your paragraph types.',
-      $page->find('xpath', "//*[@data-drupal-selector='edit-fields-field-paragraphs-settings-edit-form-settings-autocollapse']/parent::div/following-sibling::div[contains(@class,'messages--warning')]")->getText(),
+      $page->find('xpath', "//*[@data-drupal-selector='edit-fields-field-paragraphs-settings-edit-form-settings-autocollapse']/following-sibling::div[contains(@class,'messages--warning')]/div[@class='messages__content']")->getText(),
       "Warning message not equal."
     );
 
     $this->assertEquals(
       'The Collapse / Edit all option is not supported for the Thunder distribution because of potential data loss in combination with the inline_entity_form module. If you want to use it, make sure to remove all inline entity forms from your paragraph types.',
-      $page->find('xpath', "//*[@data-drupal-selector='edit-fields-field-paragraphs-settings-edit-form-settings-features-collapse-edit-all']/parent::div/parent::div/following-sibling::div[contains(@class,'messages--warning')]")->getText(),
+      $page->find('xpath', "//*[@data-drupal-selector='edit-fields-field-paragraphs-settings-edit-form-settings-features-collapse-edit-all']/parent::div/parent::div/following-sibling::div[contains(@class,'messages--warning')]/div[@class='messages__content']")->getText(),
       "Warning message not equal."
     );
   }
