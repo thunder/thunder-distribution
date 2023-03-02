@@ -21,12 +21,8 @@ class MediaUploadImageTest extends ThunderJavascriptTestBase {
     $this->drupalGet('node/add/article');
     $this->assertWaitOnAjaxRequest();
 
-    $button_selector = '[data-drupal-selector="edit-field-teaser-media-selection"] .media-library-open-button';
-    $this->clickCssSelector($button_selector);
-
+    $this->openMediaLibrary('field-teaser-media-selection');
     $this->uploadFile('/fixtures/reference.webp', TRUE);
     $this->submitMediaLibrary();
-
   }
-
 }
