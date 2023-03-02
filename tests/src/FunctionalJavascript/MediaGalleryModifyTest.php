@@ -181,7 +181,7 @@ JS;
     $this->assertWaitOnAjaxRequest();
 
     $this->openMediaLibrary('field-teaser-media');
-    $this->uploadFile('/fixtures/reference.jpg', TRUE);
+    $this->uploadFile('/fixtures/reference.webp', TRUE);
     $this->submitMediaLibrary();
   }
 
