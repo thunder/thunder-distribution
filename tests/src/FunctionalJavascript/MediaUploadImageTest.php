@@ -2,6 +2,11 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+/**
+ * Tests image upload.
+ *
+ * @group Thunder
+ */
 class MediaUploadImageTest extends ThunderJavascriptTestBase {
 
   use ThunderMediaLibraryTestTrait;
@@ -10,7 +15,7 @@ class MediaUploadImageTest extends ThunderJavascriptTestBase {
   /**
    * Test upload of Images in Media library.
    *
-   * Media library is open from within an node edit form.
+   * Media library is open from within and node edit form.
    */
   public function testAddRemove(): void {
     $this->drupalGet('node/add/article');
