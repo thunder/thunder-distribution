@@ -13,11 +13,6 @@ parameters:
 		-
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"
 			count: 1
-			path: modules/thunder_article/src/ThunderNodeFormHelper.php
-
-		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
-			count: 1
 			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/EntityLinks.php
 
 		-

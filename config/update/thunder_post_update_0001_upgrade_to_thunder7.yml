@@ -339,7 +339,7 @@ core.entity_form_display.media.gallery.default:
             check_selected: true
             form_mode: override
             media_types: {  }
-            no_edit_on_create: false
+            no_edit_on_create: true
             multi_edit_on_create: false
             replace_checkbox_by_order_indicator: true
           type: media_library_media_modify_widget
@@ -383,7 +383,7 @@ core.entity_form_display.media.gallery.inline:
             check_selected: true
             form_mode: override
             media_types: {  }
-            no_edit_on_create: false
+            no_edit_on_create: true
             multi_edit_on_create: false
             replace_checkbox_by_order_indicator: true
           type: media_library_media_modify_widget
