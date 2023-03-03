@@ -1,0 +1,4 @@
+edit-form:
+  css:
+    theme:
+      css/edit-form.css: {}

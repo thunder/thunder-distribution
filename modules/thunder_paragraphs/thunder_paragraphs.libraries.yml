@@ -5,3 +5,8 @@ fieldwidget_settings:
     - core/drupal
     - core/drupal.message
     - core/once
+
+paragraphs.widget:
+  css:
+    theme:
+      css/paragraphs.widget.css: {}
