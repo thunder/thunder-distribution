@@ -49,9 +49,6 @@
             "drupal/search_api": {
                 "Second parameter of request->query->get is not allowed to be an array anymore": "https://www.drupal.org/files/issues/2022-12-21/3328702-second-parameter-of.patch"
             },
-            "drupal/linkit": {
-                "CKEditor 5 readiness": "https://www.drupal.org/files/issues/2022-12-14/3232190-113.patch"
-            },
             "drupal/gin": {
                 "Fix dialog close icon pos": "https://git.drupalcode.org/project/gin/-/merge_requests/221.diff",
                 "Support length indicator": "https://git.drupalcode.org/project/gin/-/merge_requests/219.diff",
@@ -96,7 +93,7 @@
         "drupal/inline_entity_form": "^1.0-rc14",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.2",
-        "drupal/linkit": "6.0.x-dev",
+        "drupal/linkit": "^6.0@beta",
         "drupal/media_entity_instagram": "^3.0.3",
         "drupal/media_entity_pinterest": "2.6",
         "drupal/media_entity_slideshow": "^2.0-alpha1",
