@@ -23,6 +23,10 @@ fieldset.media-library-widget .media-library-widget-empty-text {
   display: none;
 }
 
+fieldset.media-library-widget .fieldset__prefix {
+  display: inline-block;
+}
+
 fieldset.media-library-widget .fieldset__suffix {
   display: flex;
 }
