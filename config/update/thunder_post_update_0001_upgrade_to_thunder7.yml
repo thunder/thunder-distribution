@@ -918,7 +918,47 @@ core.entity_view_display.media.pinterest.paragraph_preview:
             link_to_entity: false
           third_party_settings: {  }
           type: string
-          weight: 1
+          weight: 2
+      third_party_settings:
+        field_group:
+          group_left:
+            children:
+              - thumbnail
+            format_settings:
+              attributes: ''
+              classes: group-left
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Left
+            parent_name: ''
+            region: content
+            weight: 0
+          group_right:
+            children:
+              - field_url
+            format_settings:
+              attributes: ''
+              classes: group-right
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Right
+            parent_name: ''
+            region: content
+            weight: 3
     change:
       content:
         thumbnail:
