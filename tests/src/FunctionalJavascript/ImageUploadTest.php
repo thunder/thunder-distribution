@@ -3,7 +3,7 @@
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
 /**
- * Tests the Gallery media modification.
+ * Tests the image upload.
  *
  * @group Thunder
  */
