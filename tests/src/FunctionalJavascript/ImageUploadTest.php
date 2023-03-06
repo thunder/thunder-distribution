@@ -10,7 +10,6 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 class ImageUploadTest extends ThunderJavascriptTestBase {
 
   use ThunderMediaLibraryTestTrait;
-  use ThunderParagraphsTestTrait;
 
   /**
    * Test upload of Images in Media library.
