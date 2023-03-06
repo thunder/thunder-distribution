@@ -2,3 +2,8 @@ gallery.paragraph_preview:
   css:
     theme:
       css/gallery.paragraph_preview.css: {}
+
+media_library.widget:
+  css:
+    theme:
+      css/media_library.widget.css: {}
