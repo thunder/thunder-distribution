@@ -33,7 +33,7 @@ function thunder_media_page_attachments(array &$page): void {
 }
 
 /**
- * Implements hook_field_widget_single_element_WIDGET_ID_form_alter().
+ * Implements hook_field_widget_single_element_WIDGET_TYPE_form_alter().
  *
  * Add process function to hide 'remove' button of image field widget on inline
  * entity forms.
@@ -59,6 +59,14 @@ function thunder_media_field_widget_single_element_image_focal_point_form_alter(
       }
     }
   }
+}
+
+/**
+ * Implements hook_field_widget_complete_WIDGET_TYPE_form_alter().
+ */
+function thunder_media_field_widget_complete_media_library_media_modify_widget_form_alter(array &$field_widget_complete_form, FormStateInterface $form_state, array $context): void {
+  // Add custom styling.
+  $field_widget_complete_form['#attached']['library'][] = 'thunder_media/media_library.widget';
 }
 
 /**
