@@ -115,6 +115,11 @@ parameters:
 
 		-
 			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 1
+			path: tests/src/FunctionalJavascript/ImageUploadTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
 			count: 7
 			path: tests/src/FunctionalJavascript/Integration/AccessUnpublishedTest.php
 
