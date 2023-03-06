@@ -1,6 +1,22 @@
 /* Subform */
 
-/* Remove details summary and type info, */
+/* Remove paragraphs table header. */
+.field--name-field-paragraphs .paragraphs-tabs-wrapper table.field-multiple-table:first-of-type thead {
+  display: none;
+}
+.paragraph-type--link .paragraphs-subform .field--name-field-link table.field-multiple-table:first-of-type thead {
+  display: none;
+}
+.paragraph-type--text .paragraphs-subform .field--name-field-text label,
+.paragraph-type--quote .paragraphs-subform .field--name-field-text label {
+  display: none;
+}
+.paragraph-type--link .paragraphs-subform .field--name-field-link,
+.paragraph-type--text .paragraphs-subform .field--name-field-text,
+.paragraph-type--quote .paragraphs-subform .field--name-field-text {
+  margin-top: var(--space-l);
+}
+/* Remove details summary and type info. */
 .paragraph-form-item--has-subform .field--name-field-video > details[open] > summary,
 .paragraph-form-item--has-subform .field--name-field-image > details[open] > summary,
 .paragraph-form-item--has-subform .field--name-field-media-images > details[open] > summary,
@@ -27,3 +43,4 @@
 .media--view-mode-paragraph-preview .group-right {
   flex: 1 1 auto;
 }
+

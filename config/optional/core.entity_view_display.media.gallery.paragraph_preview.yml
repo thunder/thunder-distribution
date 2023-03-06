@@ -8,48 +8,7 @@ dependencies:
     - media.type.gallery
   module:
     - empty_fields
-    - field_group
     - media
-third_party_settings:
-  field_group:
-    group_left:
-      children:
-        - field_media_images
-      label: Left
-      parent_name: ''
-      region: content
-      weight: 0
-      format_type: html_element
-      format_settings:
-        classes: group-left
-        show_empty_fields: false
-        id: ''
-        element: div
-        show_label: false
-        label_element: h3
-        label_element_classes: ''
-        attributes: ''
-        effect: none
-        speed: fast
-    group_right:
-      children:
-        - name
-      label: Right
-      parent_name: ''
-      region: content
-      weight: 1
-      format_type: html_element
-      format_settings:
-        classes: group-right
-        show_empty_fields: false
-        id: ''
-        element: div
-        show_label: false
-        label_element: h3
-        label_element_classes: ''
-        attributes: ''
-        effect: none
-        speed: fast
 id: media.gallery.paragraph_preview
 targetEntityType: media
 bundle: gallery
