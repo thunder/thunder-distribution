@@ -818,8 +818,22 @@ core.entity_view_display.media.instagram.paragraph_preview:
       thumbnail:
         settings:
           image_style: paragraph_preview_thumbnail
+    hidden:
+      field_url: true
   update_actions:
+    delete:
+      hidden:
+        field_url: true
     add:
+      content:
+        field_url:
+          label: inline
+          region: content
+          settings:
+            link_to_entity: false
+          third_party_settings: {  }
+          type: string
+          weight: 0
       third_party_settings:
         field_group:
           group_left:
@@ -843,6 +857,7 @@ core.entity_view_display.media.instagram.paragraph_preview:
             weight: 1
           group_right:
             children:
+              - field_url
               - field_author
               - field_content
             format_settings:
@@ -888,7 +903,22 @@ core.entity_view_display.media.pinterest.paragraph_preview:
       thumbnail:
         settings:
           image_style: paragraph_preview_thumbnail
+    hidden:
+      field_url: true
   update_actions:
+    delete:
+      hidden:
+        field_url: true
+    add:
+      content:
+        field_url:
+          label: inline
+          region: content
+          settings:
+            link_to_entity: false
+          third_party_settings: {  }
+          type: string
+          weight: 1
     change:
       content:
         thumbnail:
@@ -906,8 +936,22 @@ core.entity_view_display.media.twitter.paragraph_preview:
           image_style: paragraph_preview_thumbnail
         third_party_settings: {  }
         weight: 0
+    hidden:
+      field_url: true
   update_actions:
+    delete:
+      hidden:
+        field_url: true
     add:
+      content:
+        field_url:
+          label: inline
+          region: content
+          settings:
+            link_to_entity: false
+          third_party_settings: {  }
+          type: string
+          weight: 0
       third_party_settings:
         field_group:
           group_left:
@@ -931,6 +975,7 @@ core.entity_view_display.media.twitter.paragraph_preview:
             weight: 0
           group_right:
             children:
+              - field_url
               - field_author
               - field_content
             format_settings:
