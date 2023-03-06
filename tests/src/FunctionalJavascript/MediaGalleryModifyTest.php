@@ -183,6 +183,7 @@ JS;
     $this->openMediaLibrary('field-teaser-media');
     $this->uploadFile('/fixtures/reference.webp', TRUE);
     $this->submitMediaLibrary();
+    $this->assertSession()->elementNotExists('css', '.media-library-widget-modal');
   }
 
 }
