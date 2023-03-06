@@ -7,7 +7,7 @@ interface Page implements Entity {
   url: String!
   entityLinks: EntityLinks
 
-  published: Boolean!
+  published: Boolean
   changed: String!
 }
 
@@ -101,11 +101,11 @@ type User implements Page & Entity {
   language: String
   entityLinks: EntityLinks
 
-  published: Boolean!
+  published: Boolean
   changed: String!
 
   created: String!
   mail: String
-  access: String!
+  access: String
   picture: Thumbnail
 }
