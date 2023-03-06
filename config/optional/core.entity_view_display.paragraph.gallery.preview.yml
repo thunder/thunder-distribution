@@ -1,3 +1,4 @@
+uuid: aad985af-2ddd-41fc-97fa-f4c540ac6be1
 langcode: en
 status: true
 dependencies:
@@ -5,6 +6,8 @@ dependencies:
     - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.gallery.field_media
     - paragraphs.paragraphs_type.gallery
+_core:
+  default_config_hash: xYqJokLZQqVNAD5mDsWXc6wnytdTJoyR3Gzr9UByOGM
 id: paragraph.gallery.preview
 targetEntityType: paragraph
 bundle: gallery
