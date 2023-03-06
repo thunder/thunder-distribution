@@ -8,7 +8,48 @@ dependencies:
     - media.type.pinterest
   module:
     - empty_fields
+    - field_group
     - image
+third_party_settings:
+  field_group:
+    group_left:
+      children:
+        - thumbnail
+      label: Left
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: group-left
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_right:
+      children:
+        - field_url
+      label: Right
+      parent_name: ''
+      region: content
+      weight: 3
+      format_type: html_element
+      format_settings:
+        classes: group-right
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: media.pinterest.paragraph_preview
 targetEntityType: media
 bundle: pinterest
@@ -20,7 +61,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   thumbnail:
     type: image
@@ -33,7 +74,7 @@ content:
     third_party_settings:
       empty_fields:
         handler: ''
-    weight: 0
+    weight: 1
     region: content
 hidden:
   created: true
