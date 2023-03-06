@@ -13,8 +13,6 @@ class ImageUploadTest extends ThunderJavascriptTestBase {
 
   /**
    * Test upload of Images in Media library.
-   *
-   * Media library is open from within and node edit form.
    */
   public function testImageUpload(): void {
     $this->drupalGet('node/add/article');
