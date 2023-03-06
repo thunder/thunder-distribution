@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-
 /**
  * Tests the Gallery media modification.
  *
