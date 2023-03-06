@@ -5,7 +5,9 @@
  * The module file.
  */
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\thunder_workflow\ThunderWorkflowFormHelper;
 
 /**
  * Implements hook_entity_base_field_info_alter().
@@ -22,4 +24,13 @@ function thunder_workflow_entity_base_field_info_alter(array &$fields, EntityTyp
       ]);
     }
   }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function thunder_workflow_form_node_form_alter(array &$form, FormStateInterface $form_state): void {
+  \Drupal::service('class_resolver')
+    ->getInstanceFromDefinition(ThunderWorkflowFormHelper::class)
+    ->formAlter($form, $form_state);
 }

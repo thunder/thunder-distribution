@@ -49,17 +49,18 @@
             "drupal/search_api": {
                 "Second parameter of request->query->get is not allowed to be an array anymore": "https://www.drupal.org/files/issues/2022-12-21/3328702-second-parameter-of.patch"
             },
-            "drupal/linkit": {
-                "CKEditor 5 readiness": "https://www.drupal.org/files/issues/2022-12-14/3232190-113.patch"
-            },
             "drupal/gin": {
                 "Fix dialog close icon pos": "https://git.drupalcode.org/project/gin/-/merge_requests/221.diff",
                 "Support length indicator": "https://git.drupalcode.org/project/gin/-/merge_requests/219.diff",
                 "Fix help icon positioning": "https://git.drupalcode.org/project/gin/-/merge_requests/218.diff",
-                "ckeditor5 balloon area not shown in modal": "https://git.drupalcode.org/project/gin/-/merge_requests/210.diff"
+                "ckeditor5 balloon area not shown in modal": "https://git.drupalcode.org/project/gin/-/merge_requests/210.diff",
+                "Fix paragraphs warning icon position and size": "https://git.drupalcode.org/project/gin/-/merge_requests/230.diff"
             },
             "drupal/media_entity_pinterest": {
                 "to a member function mainPropertyName() on null in media_entity_pinterest/src/Plugin/media/Source/Pinterest.php on line 155": "https://git.drupalcode.org/project/media_entity_pinterest/-/merge_requests/2.diff"
+            },
+            "drupal/focal_point": {
+                "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-06/3162210-17.patch"
             }
         }
     },
@@ -72,19 +73,19 @@
         "drupal/autosave_form": "^1.2",
         "drupal/blazy": "^2.14",
         "drupal/checklistapi": "^2.1",
-        "drupal/core": "~10.0.0",
+        "drupal/core": "~10.0.4",
         "drupal/config_selector": "^2.1",
         "drupal/config_update": "^1.7 || ^2.0",
         "drupal/content_lock": "^2.1",
         "drupal/crop": "^2.2",
         "drupal/default_content": "^1.0-alpha7||^2.0@ALPHA",
         "drupal/diff": "1.1",
-        "drupal/dropzonejs": "^2.6",
+        "drupal/dropzonejs": "^2.8",
         "drupal/empty_fields": "^1.0-alpha1",
-        "drupal/entity_reference_actions": "^1.0-beta11",
+        "drupal/entity_reference_actions": "^1.0",
         "drupal/entity_reference_revisions": "^1.3",
         "drupal/field_group": "^3.4",
-        "drupal/focal_point": "^2.0.0-alpha2",
+        "drupal/focal_point": "2.0.0-alpha2",
         "drupal/facets": "^2.0.6",
         "drupal/gin": "3.x-dev",
         "drupal/gin_toolbar": "1.x-dev",
@@ -92,13 +93,13 @@
         "drupal/inline_entity_form": "^1.0-rc14",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.2",
-        "drupal/linkit": "6.0.x-dev",
+        "drupal/linkit": "^6.0-beta4",
         "drupal/media_entity_instagram": "^3.0.3",
         "drupal/media_entity_pinterest": "2.6",
         "drupal/media_entity_slideshow": "^2.0-alpha1",
         "drupal/media_entity_twitter": "^2.5",
         "drupal/media_expire": "^2.6",
-        "drupal/media_library_media_modify": "^1.0.0-beta12",
+        "drupal/media_library_media_modify": "^1.0.0-beta14",
         "drupal/media_file_delete": "^1.2",
         "drupal/metatag": "^1.19",
         "drupal/metatag_async_widget": "^1.0-alpha2",
