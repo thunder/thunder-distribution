@@ -818,8 +818,22 @@ core.entity_view_display.media.instagram.paragraph_preview:
       thumbnail:
         settings:
           image_style: paragraph_preview_thumbnail
+    hidden:
+      field_url: true
   update_actions:
+    delete:
+      hidden:
+        field_url: true
     add:
+      content:
+        field_url:
+          label: inline
+          region: content
+          settings:
+            link_to_entity: false
+          third_party_settings: {  }
+          type: string
+          weight: 0
       third_party_settings:
         field_group:
           group_left:
@@ -843,6 +857,7 @@ core.entity_view_display.media.instagram.paragraph_preview:
             weight: 1
           group_right:
             children:
+              - field_url
               - field_author
               - field_content
             format_settings:
@@ -888,26 +903,22 @@ core.entity_view_display.media.pinterest.paragraph_preview:
       thumbnail:
         settings:
           image_style: paragraph_preview_thumbnail
+    hidden:
+      field_url: true
   update_actions:
-    change:
-      content:
-        thumbnail:
-          settings:
-            image_style: thumbnail
-core.entity_view_display.media.twitter.paragraph_preview:
-  expected_config:
-    content:
-      field_author:
-        weight: 1
-      field_content:
-        weight: 2
-      thumbnail:
-        settings:
-          image_style: paragraph_preview_thumbnail
-        third_party_settings: {  }
-        weight: 0
-  update_actions:
+    delete:
+      hidden:
+        field_url: true
     add:
+      content:
+        field_url:
+          label: inline
+          region: content
+          settings:
+            link_to_entity: false
+          third_party_settings: {  }
+          type: string
+          weight: 2
       third_party_settings:
         field_group:
           group_left:
@@ -931,6 +942,80 @@ core.entity_view_display.media.twitter.paragraph_preview:
             weight: 0
           group_right:
             children:
+              - field_url
+            format_settings:
+              attributes: ''
+              classes: group-right
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Right
+            parent_name: ''
+            region: content
+            weight: 3
+    change:
+      content:
+        thumbnail:
+          settings:
+            image_style: thumbnail
+core.entity_view_display.media.twitter.paragraph_preview:
+  expected_config:
+    content:
+      field_author:
+        weight: 1
+      field_content:
+        weight: 2
+      thumbnail:
+        settings:
+          image_style: paragraph_preview_thumbnail
+        third_party_settings: {  }
+        weight: 0
+    hidden:
+      field_url: true
+  update_actions:
+    delete:
+      hidden:
+        field_url: true
+    add:
+      content:
+        field_url:
+          label: inline
+          region: content
+          settings:
+            link_to_entity: false
+          third_party_settings: {  }
+          type: string
+          weight: 0
+      third_party_settings:
+        field_group:
+          group_left:
+            children:
+              - thumbnail
+            format_settings:
+              attributes: ''
+              classes: group-left
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Left
+            parent_name: ''
+            region: content
+            weight: 0
+          group_right:
+            children:
+              - field_url
               - field_author
               - field_content
             format_settings:
