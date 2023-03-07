@@ -20,11 +20,11 @@
 }
 
 .content-form__form-section.article-teaser .field--name-field-teaser-media {
+  min-width: 220px;
   width: 20%;
 }
 
 .content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-widget {
-  margin-top: var(--space-l);
   margin-right: var(--space-l);
   padding-top: 0;
 }
