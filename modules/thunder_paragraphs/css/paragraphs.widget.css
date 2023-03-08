@@ -16,6 +16,9 @@
 .paragraph-type--quote .paragraphs-subform .field--name-field-text {
   margin-top: var(--space-l);
 }
+.paragraph-type--gallery .paragraphs-subform .field--name-name .form-item {
+  margin-bottom: 0;
+}
 /* Remove details summary and type info. */
 .paragraph-form-item--has-subform .field--name-field-video > details[open] > summary,
 .paragraph-form-item--has-subform .field--name-field-image > details[open] > summary,
