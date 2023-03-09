@@ -9,4 +9,4 @@ of the community driven Gin theme and the switch from Entity Browser to Drupal c
 
 Manual update steps from Thunder 6 are required and can be found here:
 
-https://thunder.github.io/developer-guide/setup.html#install-thunder
+[Migrate Thunder 6 to Thunder 7](https://thunder.github.io/developer-guide/migration/migrate-6-7.html)
