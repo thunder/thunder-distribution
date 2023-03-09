@@ -84,9 +84,9 @@ module.exports = {
       {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.1.x/CHANGELOG.md', title: 'Changelog 6.1.x', path: '/changelog/6.1.x'},
       {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.2.x/CHANGELOG.md', title: 'Changelog 6.2.x', path: '/changelog/6.2.x'},
       {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.3.x/CHANGELOG.md', title: 'Changelog 6.3.x', path: '/changelog/6.3.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.4.x/CHANGELOG.md', title: 'Changelog 6.3.x', path: '/changelog/6.4.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.5.x/CHANGELOG.md', title: 'Changelog 6.3.x', path: '/changelog/6.5.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/7.0.x/CHANGELOG.md', title: 'Changelog 6.3.x', path: '/changelog/7.0.x'},
+      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.4.x/CHANGELOG.md', title: 'Changelog 6.4.x', path: '/changelog/6.4.x'},
+      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.5.x/CHANGELOG.md', title: 'Changelog 6.5.x', path: '/changelog/6.5.x'},
+      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/7.0.x/CHANGELOG.md', title: 'Changelog 7.0.x', path: '/changelog/7.0.x'},
     ]
     await Promise.all(logs.map(async (log) => {
       const content = await rp(log.url);
