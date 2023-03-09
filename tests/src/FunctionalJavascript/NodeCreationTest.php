@@ -108,7 +108,7 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
     // Check that one Twitter widget is on page.
     $this->getSession()
       ->wait(5000, "jQuery('iframe').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length === 1");
-    $numOfElements = $this->getSession()->evaluateScript("Array.from(document.querySelectorAll('iframe')).filter(iframe => iframe.id.indexOf('twitter-widget-0') !== -1).length");
+    $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length");
     $this->assertEquals(1, $numOfElements, "Number of twitter on page should be one.");
 
     // Check Link Paragraph.
