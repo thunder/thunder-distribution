@@ -50,12 +50,8 @@
                 "Second parameter of request->query->get is not allowed to be an array anymore": "https://www.drupal.org/files/issues/2022-12-21/3328702-second-parameter-of.patch"
             },
             "drupal/gin": {
-                "Fix dialog close icon pos": "https://www.drupal.org/files/issues/2023-03-09/3340160.diff",
                 "Support length indicator": "https://www.drupal.org/files/issues/2023-03-09/3339868.diff",
-                "Fix help icon positioning": "https://www.drupal.org/files/issues/2023-03-09/3339856.diff",
-                "ckeditor5 balloon area not shown in modal": "https://www.drupal.org/files/issues/2023-03-09/3331304.diff",
-                "Fix paragraphs warning icon position and size": "https://www.drupal.org/files/issues/2023-03-09/3345467.diff",
-                "Bulk ops missing background in firefox esr": "https://www.drupal.org/files/issues/2023-03-09/3346480.diff"
+                "Fix help icon positioning": "https://www.drupal.org/files/issues/2023-03-09/3339856.diff"
             },
             "drupal/media_entity_pinterest": {
                 "to a member function mainPropertyName() on null in media_entity_pinterest/src/Plugin/media/Source/Pinterest.php on line 155": "https://www.drupal.org/files/issues/2023-03-09/3179172.diff"
@@ -88,7 +84,7 @@
         "drupal/field_group": "^3.4",
         "drupal/focal_point": "2.0.0-alpha2",
         "drupal/facets": "^2.0.6",
-        "drupal/gin": "3.x-dev",
+        "drupal/gin": "3.0-rc2",
         "drupal/gin_toolbar": "1.x-dev",
         "drupal/graphql": "^4.3",
         "drupal/inline_entity_form": "^1.0-rc14",
