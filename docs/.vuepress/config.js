@@ -46,6 +46,7 @@ module.exports = {
         {
           text: 'Migration',
           children: [
+            '/developer-guide/migration/migrate-6-7.md',
             '/developer-guide/migration/migrate-3-6.md',
             '/developer-guide/migration/migrate-2-3.md',
           ],
