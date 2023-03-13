@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.0.0-beta2](https://github.com/thunder/thunder-distribution/tree/7.0.0-beta2) 2023-03-13
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.0.0-beta1...7.0.0-beta2)
+
+Remove merged Gin patches and update to latest Gin release candidate.
+
 ## [7.0.0-beta1](https://github.com/thunder/thunder-distribution/tree/7.0.0-beta1) 2023-03-09
 
 First beta of Thunder 7.0.0 with Drupal 10 support.
