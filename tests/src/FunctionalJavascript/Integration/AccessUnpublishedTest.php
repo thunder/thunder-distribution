@@ -20,20 +20,24 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
 
   /**
    * Testing integration of "access_unpublished" module.
+   *
+   * @dataProvider providerContentTypes
    */
-  public function testAccessUnpublished(): void {
+  public function testAccessUnpublished(string $contentType, string $contentTypeDisplayName): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
+
+    $nodeTitle = $contentTypeDisplayName;
     // Create article and save it as unpublished.
-    $this->articleFillNew([
+    $this->nodeFillNew([
       'field_channel' => $term->id(),
-      'title[0][value]' => 'Article 1',
-      'field_seo_title[0][value]' => 'Article 1',
-    ]);
+      'title[0][value]' => $nodeTitle,
+      'field_seo_title[0][value]' => $nodeTitle,
+    ], $contentType);
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
     $this->setModerationState('draft');
     $this->clickSave();
     // Edit article and generate access unpublished token.
-    $node = $this->drupalGetNodeByTitle('Article 1');
+    $node = $this->drupalGetNodeByTitle($nodeTitle);
     $this->drupalGet($node->toUrl('edit-form'));
     $this->expandAllTabs();
     $page = $this->getSession()->getPage();
@@ -67,7 +71,7 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
     $this->drupalLogout();
     $this->drupalGet($tokenUrl);
     $noAccess = $this->xpath('//h1[contains(@class, "page-title")]//span[text() = "403"]');
-    $this->assertEquals(1, count($noAccess));
+    $this->assertCount(1, $noAccess);
 
     // Log-In and publish article.
     $this->drupalLogin($loggedInUser);

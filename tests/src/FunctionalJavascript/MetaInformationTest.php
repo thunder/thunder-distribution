@@ -146,12 +146,16 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   }
 
   /**
-   * Create simple article for meta tag testing.
+   * Create simple node for meta tag testing.
    *
+   * @param string $contentType
+   *   The node content type.
    * @param array $fieldValues
    *   Custom meta tag configuration for article.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  protected function createArticleWithFields(array $fieldValues = []): void {
+  protected function createNodeWithFields(string $contentType, array $fieldValues = []): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $fieldValues += [
       'field_channel' => $term->id(),
@@ -160,7 +164,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       'field_teaser_text[0][value]' => static::$tokens['[node:field_teaser_text]'],
     ];
 
-    $this->articleFillNew($fieldValues);
+    $this->nodeFillNew($fieldValues, $contentType);
 
     $media = $this->loadMediaByUuid('17965877-27b2-428f-8b8c-7dccba9786e5');
     $this->selectMedia('field_teaser_media', [$media->id()]);
@@ -198,8 +202,10 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
   /**
    * Test Meta Tag default configuration and custom configuration for article.
+   *
+   * @dataProvider providerContentTypes
    */
-  public function testArticleMetaTags(): void {
+  public function testArticleMetaTags(string $contentType): void {
     $globalConfigs = $this->generateMetaTagConfiguration([static::$globalMetaTags]);
     $contentConfigs = $this->generateMetaTagConfiguration([static::$contentMetaTags]);
     $articleConfigs = $this->generateMetaTagConfiguration([static::$articleMetaTags]);
@@ -231,23 +237,25 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->checkSavedConfiguration($configurationUrl, $contentConfigs);
 
     // Edit Article configuration.
-    $configurationUrl = 'admin/config/search/metatag/node__article';
+    $configurationUrl = 'admin/config/search/metatag/node__' . $contentType;
     $this->setMetaTagConfigurationForUrl($configurationUrl, $articleConfigs);
     $this->checkSavedConfiguration($configurationUrl, $articleConfigs);
 
     // Create Article with default meta tags and check it.
-    $this->createArticleWithFields();
+    $this->createNodeWithFields($contentType);
     $this->checkMetaTags($checkArticleMetaTags);
 
     // Create Article with custom meta tags and check it.
-    $this->createArticleWithFields($this->generateMetaTagFieldValues($checkCustomConfigs, 'field_meta_tags[0]'));
+    $this->createNodeWithFields($contentType, $this->generateMetaTagFieldValues($checkCustomConfigs, 'field_meta_tags[0]'));
     $this->checkMetaTags($checkCustomMetaTags);
   }
 
   /**
    * Test Scheduling of Article.
+   *
+   * @dataProvider providerContentTypes
    */
-  public function testArticleScheduling(): void {
+  public function testArticleScheduling(string $contentType): void {
     $articleId = 10;
 
     // Create article with published 2 days ago, unpublish tomorrow.
@@ -263,7 +271,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       'unpublish_state[0]' => 'unpublished',
     ];
 
-    $this->createArticleWithFields($fieldValues);
+    $this->createNodeWithFields($contentType, $fieldValues);
 
     // Check that Article is unpublished.
     $this->drupalGet('node/' . $articleId);
@@ -332,11 +340,12 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   }
 
   /**
-   * Test Site Map for Article.
+   * Test Site Map for node types.
    *
+   * @dataProvider providerContentTypes
    * @group NoUpdate
    */
-  public function testSiteMap(): void {
+  public function testSiteMap(string $contentType): void {
     $articleId = 10;
     $articleUrl = 'test-sitemap-seo-title';
 
@@ -344,7 +353,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
       'field_seo_title[0][value]' => $articleUrl,
     ];
 
-    $this->createArticleWithFields($customFields);
+    $this->createNodeWithFields($contentType, $customFields);
 
     $this->drupalGet('node/' . $articleId . '/edit');
 
@@ -357,7 +366,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->sitemapGenerator->saveSetting('xsl', FALSE);
     $this->sitemapGenerator->generate(QueueWorker::GENERATE_TYPE_BACKEND);
 
-    $this->drupalGet('article/sitemap.xml');
+    $this->drupalGet($contentType . '/sitemap.xml');
 
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
@@ -369,13 +378,13 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->expandAllTabs();
     $this->setFieldValues([
-      'simple_sitemap[article][priority]' => '0.9',
+      'simple_sitemap[' . $contentType . '][priority]' => '0.9',
     ]);
 
     $this->clickSave();
 
     $this->sitemapGenerator->generate(QueueWorker::GENERATE_TYPE_BACKEND);
-    $this->drupalGet('article/sitemap.xml');
+    $this->drupalGet($contentType . '/sitemap.xml');
 
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
@@ -390,16 +399,17 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->sitemapGenerator->generate(QueueWorker::GENERATE_TYPE_BACKEND);
 
     // Check loc, that it's pointing to sitemap.xml file.
-    $this->drupalGet('article/sitemap.xml');
+    $this->drupalGet('sitemap.xml');
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '(//sm:loc)[last()]');
     $lastSiteMapUrl = $domElements->item(0)->nodeValue;
-    $this->assertStringEndsWith('article/sitemap.xml?page=3', $lastSiteMapUrl);
+    $page = ($contentType === 'article') ? 2 : 3;
+    $this->assertStringEndsWith('sitemap.xml?page=' . $page, $lastSiteMapUrl);
 
     // Get 3rd sitemap.xml file and check that link exits there.
     $urlOptions = ['query' => ['page' => 3]];
     $this->getSession()
-      ->visit($this->buildUrl('article/sitemap.xml', $urlOptions));
+      ->visit($this->buildUrl($contentType . '/sitemap.xml', $urlOptions));
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
     $this->assertEquals(1, $domElements->length);
@@ -410,18 +420,24 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->expandAllTabs();
     $this->setFieldValues([
-      'simple_sitemap[article][index]' => '0',
+      'simple_sitemap[' . $contentType . '][index]' => '0',
     ]);
 
     $this->clickSave();
 
     $this->sitemapGenerator->generate(QueueWorker::GENERATE_TYPE_BACKEND);
-    $this->drupalGet('article/sitemap.xml', $urlOptions);
+    $this->drupalGet($contentType . '/sitemap.xml', $urlOptions);
 
+    // Depending on how many nodes are now in the sitemap, it should not exist
+    // anymore, or it should not contain removed the node.
     $content = $this->getSession()->getPage()->getContent();
-    $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]');
-
-    $this->assertEquals(0, $domElements->length);
+    if (str_contains($content, 'Generated by the Simple XML Sitemap Drupal module')) {
+      $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]');
+      $this->assertEquals(0, $domElements->length);
+    }
+    else {
+      $this->assertSession()->responseContains('<title>404');
+    }
 
     $this->getSession()->visit($this->buildUrl('node/' . $articleId . '/edit'));
   }

@@ -1,0 +1,16 @@
+variants:
+  article:
+    label: Article
+    weight: 0
+  news_article:
+    label: 'News Article'
+    weight: 1
+  basic:
+    label: Basic
+    weight: 2
+  channel:
+    label: Channel
+    weight: 3
+  tags:
+    label: Tags
+    weight: 4
