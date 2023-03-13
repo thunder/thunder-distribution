@@ -38,6 +38,7 @@
                 "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2020-07-30/3133639-8.patch",
                 "It is possible to overflow the number of items allowed in Media Library": "https://www.drupal.org/files/issues/2022-12-27/3059955-159.patch",
                 "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch",
+                "Dragging single media thumbnail on edit page causes JavaScript error": "https://www.drupal.org/files/issues/2022-12-15/3327234-13.drag-single-media-item.patch",
                 "\"Add another item\" field button is displayed as a modal action": "https://www.drupal.org/files/issues/2022-11-04/3151534-42-d10-1.patch"
             },
             "drupal/diff": {
