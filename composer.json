@@ -51,6 +51,7 @@
             },
             "drupal/gin": {
                 "Support length indicator": "https://www.drupal.org/files/issues/2023-03-09/3339868.diff",
+                "Fix dialog content spacing": "https://git.drupalcode.org/project/gin/-/merge_requests/233.diff",
                 "Fix help icon positioning": "https://www.drupal.org/files/issues/2023-03-09/3339856.diff"
             },
             "drupal/media_entity_pinterest": {
