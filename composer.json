@@ -57,6 +57,9 @@
             "drupal/media_entity_pinterest": {
                 "to a member function mainPropertyName() on null in media_entity_pinterest/src/Plugin/media/Source/Pinterest.php on line 155": "https://www.drupal.org/files/issues/2023-03-09/3179172.diff"
             },
+            "drupal/media_library_media_modify": {
+                "Do not show grab cursor for single item": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/42.diff"
+            },
             "drupal/focal_point": {
                 "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-06/3162210-17.patch"
             }
