@@ -34,7 +34,7 @@ class NestedTableDragTest extends ThunderJavascriptTestBase {
    * Test tabledrag sorting in nested table.
    */
   public function testNestedTableSorting(): void {
-    $this->articleFillNew([]);
+    $this->nodeFillNew([], 'article');
 
     // Add text paragraph with two elements.
     $this->addTextParagraph(static::$paragraphsField, '<p>Some random text paragraph.</p>');

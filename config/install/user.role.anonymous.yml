@@ -17,6 +17,7 @@ permissions:
   - 'access content'
   - 'access user profiles'
   - 'access_unpublished node article'
+  - 'access_unpublished node news_article'
   - 'use text format restricted_html'
   - 'view media'
   - 'view published terms in channel'

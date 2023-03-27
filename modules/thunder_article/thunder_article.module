@@ -6,13 +6,13 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\thunder_article\Form\ThunderNodeForm;
+use Drupal\thunder_article\Form\ThunderNodeFormHelper;
 
 /**
  * Implements hook_form_FORM_ID_alter().
  */
 function thunder_article_form_node_form_alter(array &$form, FormStateInterface $form_state): void {
   \Drupal::service('class_resolver')
-    ->getInstanceFromDefinition(ThunderNodeForm::class)
+    ->getInstanceFromDefinition(ThunderNodeFormHelper::class)
     ->formAlter($form, $form_state);
 }

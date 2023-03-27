@@ -204,6 +204,20 @@ class InstalledConfigurationTest extends ThunderTestBase {
         'field_ivw' => TRUE,
       ],
     ],
+    'core.entity_form_display.node.news_article.default' => [
+      'content' => [
+        'field_ivw' => TRUE,
+      ],
+      'dependencies' => [
+        'config' => TRUE,
+        'module' => TRUE,
+      ],
+    ],
+    'core.entity_form_display.node.news_article.bulk_edit' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
     'core.entity_form_display.taxonomy_term.channel.default' => [
       'content' => [
         'field_ivw' => TRUE,
@@ -234,6 +248,26 @@ class InstalledConfigurationTest extends ThunderTestBase {
       ],
     ],
     'core.entity_view_display.node.article.teaser' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
+    'core.entity_view_display.node.news_article.default' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
+    'core.entity_view_display.node.news_article.rss' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
+    'core.entity_view_display.node.news_article.search_index' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
+    'core.entity_view_display.node.news_article.teaser' => [
       'hidden' => [
         'field_ivw' => TRUE,
       ],

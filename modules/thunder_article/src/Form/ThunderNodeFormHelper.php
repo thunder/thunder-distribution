@@ -18,7 +18,7 @@ use Drupal\node\NodeInterface;
 /**
  * Base for handler for node add/edit forms.
  */
-class ThunderNodeForm implements ContainerInjectionInterface {
+class ThunderNodeFormHelper implements ContainerInjectionInterface {
 
   use StringTranslationTrait;
 

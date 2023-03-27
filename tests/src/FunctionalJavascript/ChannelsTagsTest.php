@@ -35,13 +35,13 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->clickSave();
 
     // Create 1. Article.
-    $this->articleFillNew([
+    $this->nodeFillNew([
       'field_channel' => 6,
       'title[0][value]' => 'Article 1',
       'field_seo_title[0][value]' => 'Article 1',
       'field_tags[]' => ['New Section', 'Tag1'],
       'field_teaser_text[0][value]' => 'Teaser 1',
-    ]);
+    ], 'article');
     $image2 = $this->loadMediaByUuid('a4b2fa51-8340-4982-b792-92e060b71eb9');
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $image2->id()]);
 
@@ -49,14 +49,14 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->setModerationState('published');
     $this->clickSave();
 
-    // Create 2. Article.
-    $this->articleFillNew([
+    // Create 2. News Article.
+    $this->nodeFillNew([
       'field_channel' => 6,
       'title[0][value]' => 'Article 2',
       'field_seo_title[0][value]' => 'Article 2',
       'field_tags[]' => [[7, 'New Section'], 'Tag2'],
       'field_teaser_text[0][value]' => 'Teaser 2',
-    ]);
+    ], 'news_article');
     $image3 = $this->loadMediaByUuid('5bd93c54-469b-4ac7-927b-cf6bb1dcf3dd');
     $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $image3->id()]);
 

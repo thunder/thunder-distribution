@@ -17,6 +17,7 @@ permissions:
   - 'access content'
   - 'access user profiles'
   - 'access_unpublished node article'
+  - 'access_unpublished node news_article'
   - 'cancel account'
   - 'change own username'
   - 'use text format basic_html'

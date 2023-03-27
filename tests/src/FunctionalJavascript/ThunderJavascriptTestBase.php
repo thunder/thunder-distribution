@@ -38,6 +38,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
   protected static $modules = [
     'thunder_testing_demo',
     'thunder_workflow',
+    'thunder_news_article',
     'thunder_test_mock_request',
   ];
 
@@ -120,6 +121,20 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
     }
 
     return realpath($dir);
+  }
+
+  /**
+   * Content type provider for node tests.
+   *
+   * @return array
+   *   Return array of content types arrays. The first element is the content
+   *   type, the second argument is the display name of the content type.
+   */
+  public function providerContentTypes(): array {
+    return [
+      'Content type "Article"' => ['article', 'Article'],
+      'Content type "News Article"' => ['news_article', 'News Article'],
+    ];
   }
 
 }

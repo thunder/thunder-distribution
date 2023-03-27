@@ -17,20 +17,24 @@ trait ThunderArticleTestTrait {
    *
    * @param array $fieldValues
    *   Field values for new article.
+   * @param string $type
+   *   The node type to create.
    */
-  public function articleFillNew(array $fieldValues): void {
-    $this->drupalGet('node/add/article');
+  public function nodeFillNew(array $fieldValues, string $type): void {
+    $this->drupalGet('node/add/' . $type);
     $this->assertWaitOnAjaxRequest();
-
-    if (!empty($fieldValues)) {
-      $this->expandAllTabs();
-      if ($this->getSession()->getPage()->hasButton('Customize meta tags')) {
-        $this->getSession()->getPage()->pressButton('Customize meta tags');
-        $this->assertWaitOnAjaxRequest();
-        $this->expandAllTabs();
-      }
-      $this->setFieldValues($fieldValues);
+    if (empty($fieldValues)) {
+      return;
     }
+
+    $this->expandAllTabs();
+    if ($this->getSession()->getPage()->hasButton('Customize meta tags')) {
+      $this->getSession()->getPage()->pressButton('Customize meta tags');
+      $this->assertWaitOnAjaxRequest();
+      $this->expandAllTabs();
+    }
+
+    $this->setFieldValues($fieldValues);
   }
 
   /**

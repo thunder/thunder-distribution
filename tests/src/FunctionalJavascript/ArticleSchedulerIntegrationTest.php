@@ -16,15 +16,17 @@ class ArticleSchedulerIntegrationTest extends ThunderJavascriptTestBase {
 
   /**
    * Test that restricted editors are not allowed to edit scheduled articles.
+   *
+   * @dataProvider providerContentTypes
    */
-  public function testRestrictedEditorSchedulerAccess(): void {
+  public function testRestrictedEditorSchedulerAccess(string $contentType, string $contentTypeDisplayName): void {
     $this->logWithRole('restricted_editor');
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
-    $this->articleFillNew([
+    $this->nodeFillNew([
       'field_channel' => $term->id(),
       'title[0][value]' => 'Scheduler integration testing',
       'field_seo_title[0][value]' => 'Scheduler integration testing seo title',
-    ]);
+    ], $contentType);
     $this->assertSession()->elementNotExists('xpath', '//*[@data-drupal-selector="edit-publish-on-wrapper"]');
 
     $this->clickSave();
@@ -53,7 +55,7 @@ class ArticleSchedulerIntegrationTest extends ThunderJavascriptTestBase {
     $this->cronRun();
 
     $this->drupalGet($edit_url);
-    $this->assertCount(1, $this->xpath('//h1[contains(@class, "page-title")]//em[text() = "Edit Article"]'));
+    $this->assertCount(1, $this->xpath('//h1[contains(@class, "page-title")]//em[text() = "Edit ' . $contentTypeDisplayName . '"]'));
 
   }
 

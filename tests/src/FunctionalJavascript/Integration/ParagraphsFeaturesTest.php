@@ -29,11 +29,11 @@ class ParagraphsFeaturesTest extends ThunderJavascriptTestBase {
   public function testDeleteConfirmation(): void {
     $page = $this->getSession()->getPage();
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
-    $this->articleFillNew([
+    $this->nodeFillNew([
       'field_channel' => $term->id(),
       'title[0][value]' => 'Article 1',
       'field_seo_title[0][value]' => 'Article 1',
-    ]);
+    ], 'article');
 
     // Add text paragraph with two elements.
     $this->addTextParagraph(static::$paragraphsField, 'Test Delete Confirmation to delete text');
