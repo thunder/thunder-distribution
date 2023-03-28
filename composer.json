@@ -46,9 +46,6 @@
             "drupal/checklistapi": {
                 "Issue #3310067 by Lal_, jcnventura, TravisCarden, nkoporec: Use...": "https://git.drupalcode.org/project/checklistapi/-/commit/4b02386aac7fbc6bee2a8a37f75508714baa7f60.diff"
             },
-            "drupal/search_api": {
-                "Second parameter of request->query->get is not allowed to be an array anymore": "https://www.drupal.org/files/issues/2022-12-21/3328702-second-parameter-of.patch"
-            },
             "drupal/gin": {
                 "Support length indicator": "https://www.drupal.org/files/issues/2023-03-09/3339868.diff",
                 "Fix help icon positioning": "https://www.drupal.org/files/issues/2023-03-09/3339856.diff"
@@ -116,7 +113,7 @@
         "drupal/slick": "^2.7",
         "drupal/token": "^1.7",
         "drupal/update_helper": "^2.0||^3.0.3",
-        "drupal/search_api": "^1.28",
+        "drupal/search_api": "^1.29",
         "drupal/views_bulk_edit": "^2.5",
         "drupal/views_bulk_operations": "^4.0",
         "drupal/vgwort": "^2.0@beta",
