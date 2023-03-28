@@ -1,0 +1,7 @@
+name: Thunder Xymatic integration
+type: module
+description: 'Xymatic integration for the Thunder distribution.'
+core_version_requirement: ^9
+package: Thunder Optional
+dependencies:
+  - xymatic:xymatic
