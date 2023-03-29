@@ -385,7 +385,7 @@ display:
           case: none
           path_case: none
           transform_dash: false
-          break_phrase: false
+          break_phrase: true
       filters:
         status:
           id: status
