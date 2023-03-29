@@ -34,7 +34,7 @@ class MediaSourceField extends DataProducerPluginBase {
    *   The source field value.
    */
   public function resolve(MediaInterface $media): string {
-    return strtolower($media->getSource()->getSourceFieldValue($media)) ?: '';
+    return $media->getSource()->getSourceFieldValue($media) ?: '';
   }
 
 }
