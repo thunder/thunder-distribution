@@ -61,7 +61,7 @@
           "__typename": "ParagraphVideo",
           "url": "https://www.youtube.com/watch?v=Hu5hC46z5LI",
           "provider": "youtube",
-          "src": "https://www.youtube.com/watch?v=Hu5hC46z5LI"
+          "src": "https://www.youtube.com/watch?v=hu5hc46z5li"
         },
         {
           "__typename": "ParagraphPinterest",
