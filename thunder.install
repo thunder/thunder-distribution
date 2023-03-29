@@ -346,9 +346,9 @@ function thunder_update_8326(): void {
 }
 
 /**
- * Allow multiple media types to be shown in entity browser view
+ * Allow multiple media types to be shown in entity browser view.
  */
-function thunder_update_8327() {
+function thunder_update_8327(): string {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
 
