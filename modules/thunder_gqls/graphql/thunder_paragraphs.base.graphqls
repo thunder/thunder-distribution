@@ -54,6 +54,7 @@ type ParagraphVideo implements Paragraph {
   provider: String
   url: String
   video: MediaVideo
+  src: String
 }
 
 type ParagraphQuote implements Paragraph {
