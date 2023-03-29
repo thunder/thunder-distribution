@@ -112,4 +112,5 @@ v6.5.4:
       '#title': 'Allow multiple media types to be shown in entity browser view'
       '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
       '#description_successful': '<p>Configuration is successfully updated.</p>'
-      '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+      '#description_failed': '<p><strong>We need to allow multiple values for the media type contextual filter. This can be done in the "More" section at the bottom of the modal.</strong><p>'
+      configuration_page: { '#text': 'Change Entity Browser view', '#url': 'internal:/admin/structure/views/view/entity_browser' }
