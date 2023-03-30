@@ -1,0 +1,16 @@
+views.view.entity_browser:
+  expected_config:
+    display:
+      default:
+        display_options:
+          arguments:
+            bundle:
+              break_phrase: false
+  update_actions:
+    change:
+      display:
+        default:
+          display_options:
+            arguments:
+              bundle:
+                break_phrase: true

@@ -105,3 +105,12 @@ v6.4.2:
         '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
         '#description_successful': '<p>Configuration is successfully updated.</p>'
         '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
+v6.5.4:
+  '#title': 'Update to version v6.4.2'
+  '#description': '<h3>These are the new features for this release:</h3>'
+  thunder_update_8327:
+      '#title': 'Allow multiple media types to be shown in entity browser view'
+      '#description': '<p>This configuration update will update site configuration to newly provided configuration</p>'
+      '#description_successful': '<p>Configuration is successfully updated.</p>'
+      '#description_failed': '<p><strong>We need to allow multiple values for the media type contextual filter. This can be done in the "More" section at the bottom of the modal.</strong><p>'
+      configuration_page: { '#text': 'Change Entity Browser view', '#url': 'internal:/admin/structure/views/view/entity_browser' }
