@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.5.4](https://github.com/thunder/thunder-distribution/tree/6.5.4) 2023-03-30
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.3...6.5.4)
+
+* This release adds an integration for the [Xymatic](https://www.drupal.org/project/xymatic/) module.
+
 ## [6.5.3](https://github.com/thunder/thunder-distribution/tree/6.5.3) 2023-03-01
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.2...6.5.3)
