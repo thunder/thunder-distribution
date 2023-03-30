@@ -28,7 +28,7 @@ query ($path: String!) {
         ... on ParagraphVideo {
           url
           provider
-          src
+          reference
         }
         ... on ParagraphPinterest {
           url

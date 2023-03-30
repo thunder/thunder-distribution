@@ -117,7 +117,7 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
     $this->addFieldResolverIfNotExists('ParagraphVideo', 'url',
       $this->builder->fromPath('entity', 'field_video.entity.field_media_video_embed_field.value'),
     );
-    $this->addFieldResolverIfNotExists('ParagraphVideo', 'src',
+    $this->addFieldResolverIfNotExists('ParagraphVideo', 'reference',
       $this->builder->compose(
         $this->builder->fromPath('entity', 'field_video.entity'),
         $this->builder->produce('media_source_field')
