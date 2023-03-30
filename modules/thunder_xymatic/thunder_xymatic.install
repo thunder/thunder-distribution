@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * The install file.
+ */
+
+/**
  * Implements hook_install().
  */
 function thunder_xymatic_install(bool $is_syncing): void {
@@ -9,7 +14,8 @@ function thunder_xymatic_install(bool $is_syncing): void {
     return;
   }
 
-  // Load field.field.paragraph.video.field_video field config and add xymatic to the target_bundles.
+  // Load field.field.paragraph.video.field_video field config and add xymatic
+  // to the target_bundles.
   /** @var \Drupal\field\Entity\FieldConfig $field_config */
   if ($field_config = \Drupal::entityTypeManager()->getStorage('field_config')->load('paragraph.video.field_video')) {
     $handler_settings = $field_config->getSetting('handler_settings');
