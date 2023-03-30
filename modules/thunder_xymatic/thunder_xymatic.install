@@ -16,7 +16,6 @@ function thunder_xymatic_install(bool $is_syncing): void {
 
   // Load field.field.paragraph.video.field_video field config and add xymatic
   // to the target_bundles.
-  /** @var \Drupal\field\Entity\FieldConfig $field_config */
   if ($field_config = \Drupal::entityTypeManager()->getStorage('field_config')->load('paragraph.video.field_video')) {
     $handler_settings = $field_config->getSetting('handler_settings');
     $handler_settings['target_bundles']['xymatic'] = 'xymatic';
