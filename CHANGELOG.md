@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.5.4](https://github.com/thunder/thunder-distribution/tree/6.5.4) 2023-03-30
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.3...6.5.4)
+
+* This release adds an integration for the [Xymatic](https://www.drupal.org/project/xymatic/) module.
+* A new content type "News Article", that is similar to the "Article" content type, but has different metadata.
+
 ## [6.5.3](https://github.com/thunder/thunder-distribution/tree/6.5.3) 2023-03-01
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.2...6.5.3)
@@ -10,9 +17,9 @@ This is a security release of Thunder.
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.1...6.5.2)
 
-- [Fix Attempted to create an instance of field with name field_meta_tags on entity type node when the field storage does not exist](https://www.drupal.org/node/3340586)
-- [Patch too fix "Call to a member function mainPropertyName() on null"](https://www.drupal.org/issues/3179172)
-- Fix caching of GraphQl sub request data producers.
+* [Fix Attempted to create an instance of field with name field_meta_tags on entity type node when the field storage does not exist](https://www.drupal.org/node/3340586)
+* [Patch too fix "Call to a member function mainPropertyName() on null"](https://www.drupal.org/issues/3179172)
+* Fix caching of GraphQl sub request data producers.
 
 ## [6.5.1](https://github.com/thunder/thunder-distribution/tree/6.5.1) 2023-01-19
 
