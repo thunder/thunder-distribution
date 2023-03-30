@@ -5,6 +5,7 @@
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.3...6.5.4)
 
 * This release adds an integration for the [Xymatic](https://www.drupal.org/project/xymatic/) module.
+* A new content type "News Article", that is similar to the "Article" content type, but has different metadata.
 
 ## [6.5.3](https://github.com/thunder/thunder-distribution/tree/6.5.3) 2023-03-01
 
