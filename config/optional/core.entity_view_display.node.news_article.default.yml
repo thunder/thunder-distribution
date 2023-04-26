@@ -45,11 +45,6 @@ content:
     third_party_settings: {  }
     weight: 3
     region: content
-  shariff_field:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 10
-    region: content
 hidden:
   field_channel: true
   field_meta_tags: true
