@@ -366,7 +366,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->sitemapGenerator->saveSetting('xsl', FALSE);
     $this->sitemapGenerator->generate(QueueWorker::GENERATE_TYPE_BACKEND);
 
-    $this->drupalGet($contentType . '/sitemap.xml');
+    $this->drupalGet(str_replace('_', '-', $contentType) . '/sitemap.xml');
 
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');

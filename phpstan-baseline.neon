@@ -130,11 +130,6 @@ parameters:
 
 		-
 			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
-			count: 6
-			path: tests/src/FunctionalJavascript/Integration/NestedTableDragTest.php
-
-		-
-			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
 			count: 7
 			path: tests/src/FunctionalJavascript/Integration/AutosaveFormTest.php
 

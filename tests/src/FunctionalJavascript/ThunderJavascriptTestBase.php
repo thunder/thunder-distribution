@@ -137,7 +137,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
   public function providerContentTypes(): array {
     return [
       'Content type "Article"' => ['article', 'Article'],
-      'Content type "News Article"' => ['news-article', 'News Article'],
+      'Content type "News Article"' => ['news_article', 'News Article'],
     ];
   }
 
