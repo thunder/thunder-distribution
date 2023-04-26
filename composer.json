@@ -39,7 +39,7 @@
             },
             "drupal/entity_browser": {
                 "Provide inline entity form FieldWidgetDisplay": "https://www.drupal.org/files/issues/2019-07-04/2858438_19.patch",
-                "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2023-03-28/entity_browser-remove_button_2851580-104.patch"
+                "Re-order + remove broken with the Entity Reference (and File) widget": "https://www.drupal.org/files/issues/2023-04-04/2851580-109.patch"
             },
             "drupal/simple_sitemap": {
                 "Sitemap variant index functionality": "https://www.drupal.org/files/issues/2021-03-03/simple_sitemap-sitemap_variant_index-3109090-16.patch"
