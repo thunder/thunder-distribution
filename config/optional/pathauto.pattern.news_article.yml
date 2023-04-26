@@ -1,8 +1,6 @@
 langcode: en
 status: true
 dependencies:
-  config:
-    - node.type.news_article
   module:
     - node
 id: news_article
