@@ -354,6 +354,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     ];
 
     $this->createNodeWithFields($contentType, $customFields);
+    $siteMapId = str_replace('_', '-', $contentType);
 
     $this->drupalGet('node/' . $articleId . '/edit');
 
@@ -366,7 +367,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->sitemapGenerator->saveSetting('xsl', FALSE);
     $this->sitemapGenerator->generate(QueueWorker::GENERATE_TYPE_BACKEND);
 
-    $this->drupalGet(str_replace('_', '-', $contentType) . '/sitemap.xml');
+    $this->drupalGet($siteMapId . '/sitemap.xml');
 
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
@@ -378,13 +379,13 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->expandAllTabs();
     $this->setFieldValues([
-      'simple_sitemap[' . $contentType . '][priority]' => '0.9',
+      'simple_sitemap[' . $siteMapId . '][priority]' => '0.9',
     ]);
 
     $this->clickSave();
 
     $this->sitemapGenerator->generate(QueueWorker::GENERATE_TYPE_BACKEND);
-    $this->drupalGet($contentType . '/sitemap.xml');
+    $this->drupalGet($siteMapId . '/sitemap.xml');
 
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
@@ -399,12 +400,12 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->sitemapGenerator->generate(QueueWorker::GENERATE_TYPE_BACKEND);
 
     // Check loc, that it's pointing to sitemap.xml file.
-    $this->drupalGet('sitemap.xml');
+    $this->drupalGet($siteMapId . '/sitemap.xml');
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '(//sm:loc)[last()]');
     $lastSiteMapUrl = $domElements->item(0)->nodeValue;
     $page = ($contentType === 'article') ? 2 : 3;
-    $this->assertStringEndsWith('sitemap.xml?page=' . $page, $lastSiteMapUrl);
+    $this->assertStringEndsWith($siteMapId . '/sitemap.xml?page=' . $page, $lastSiteMapUrl);
 
     // Get 3rd sitemap.xml file and check that link exits there.
     $urlOptions = ['query' => ['page' => 3]];
@@ -420,13 +421,13 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
 
     $this->expandAllTabs();
     $this->setFieldValues([
-      'simple_sitemap[' . $contentType . '][index]' => '0',
+      'simple_sitemap[' . $siteMapId . '][index]' => '0',
     ]);
 
     $this->clickSave();
 
     $this->sitemapGenerator->generate(QueueWorker::GENERATE_TYPE_BACKEND);
-    $this->drupalGet($contentType . '/sitemap.xml', $urlOptions);
+    $this->drupalGet($siteMapId . '/sitemap.xml', $urlOptions);
 
     // Depending on how many nodes are now in the sitemap, it should not exist
     // anymore, or it should not contain removed the node.
