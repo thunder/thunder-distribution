@@ -412,7 +412,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $page = ($contentType === 'article') ? 3 : 1;
     $urlOptions = ['query' => ['page' => $page]];
     $this->getSession()
-      ->visit($this->buildUrl($contentType . '/sitemap.xml', $urlOptions));
+      ->visit($this->buildUrl($siteMapId . '/sitemap.xml', $urlOptions));
     $content = $this->getSession()->getPage()->getContent();
     $domElements = $this->getSiteMapDomElements($content, '//sm:loc[contains(text(),"/' . $articleUrl . '")]/parent::sm:url/sm:priority');
     $this->assertEquals(1, $domElements->length);
