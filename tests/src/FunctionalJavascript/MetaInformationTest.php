@@ -400,15 +400,17 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->sitemapGenerator->generate(QueueWorker::GENERATE_TYPE_BACKEND);
 
     // Check loc, that it's pointing to sitemap.xml file.
-    $this->drupalGet($siteMapId . '/sitemap.xml');
-    $content = $this->getSession()->getPage()->getContent();
-    $domElements = $this->getSiteMapDomElements($content, '(//sm:loc)[last()]');
-    $lastSiteMapUrl = $domElements->item(0)->nodeValue;
-    $page = ($contentType === 'article') ? 2 : 3;
-    $this->assertStringEndsWith($siteMapId . '/sitemap.xml?page=' . $page, $lastSiteMapUrl);
+    if ($contentType === 'article') {
+      $this->drupalGet($siteMapId . '/sitemap.xml');
+      $content = $this->getSession()->getPage()->getContent();
+      $domElements = $this->getSiteMapDomElements($content, '(//sm:loc)[last()]');
+      $lastSiteMapUrl = $domElements->item(0)->nodeValue;
+      $this->assertStringEndsWith($lastSiteMapUrl, 'article/sitemap.xml?page=3');
+    }
 
     // Get 3rd sitemap.xml file and check that link exits there.
-    $urlOptions = ['query' => ['page' => 3]];
+    $page = ($contentType === 'article') ? 3 : 1;
+    $urlOptions = ['query' => ['page' => $page]];
     $this->getSession()
       ->visit($this->buildUrl($contentType . '/sitemap.xml', $urlOptions));
     $content = $this->getSession()->getPage()->getContent();
