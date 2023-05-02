@@ -429,7 +429,12 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->clickSave();
 
     $this->sitemapGenerator->generate(QueueWorker::GENERATE_TYPE_BACKEND);
-    $this->drupalGet($siteMapId . '/sitemap.xml', $urlOptions);
+    if ($page > 1) {
+      $this->drupalGet($siteMapId . '/sitemap.xml', $urlOptions);
+    }
+    else {
+      $this->drupalGet($siteMapId . '/sitemap.xml');
+    }
 
     // Depending on how many nodes are now in the sitemap, it should not exist
     // anymore, or it should not contain removed the node.
