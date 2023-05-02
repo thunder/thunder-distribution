@@ -52,8 +52,9 @@ type ParagraphVideo implements Paragraph {
   summary: [String]
 
   provider: String
-  url: String
-  video: MediaVideo
+  url: String @deprecated(reason: "Use reference instead")
+  video: MediaVideo @deprecated(reason: "Use entity instead")
+  entity: Video
   reference: String
 }
 
