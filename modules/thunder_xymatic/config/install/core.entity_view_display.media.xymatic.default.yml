@@ -2,17 +2,34 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.xymatic.field_caption
+    - field.field.media.xymatic.field_description
     - field.field.media.xymatic.field_media_xymatic
     - image.style.large
     - media.type.xymatic
   module:
     - empty_fields
     - image
+    - text
 id: media.xymatic.default
 targetEntityType: media
 bundle: xymatic
 mode: default
 content:
+  field_caption:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_description:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
   thumbnail:
     type: image
     label: hidden

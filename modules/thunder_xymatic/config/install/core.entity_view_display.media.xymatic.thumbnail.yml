@@ -3,6 +3,8 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.thumbnail
+    - field.field.media.xymatic.field_caption
+    - field.field.media.xymatic.field_description
     - field.field.media.xymatic.field_media_xymatic
     - image.style.media_thumbnail
     - media.type.xymatic
@@ -29,6 +31,8 @@ content:
     region: content
 hidden:
   created: true
+  field_caption: true
+  field_description: true
   field_media_xymatic: true
   langcode: true
   name: true

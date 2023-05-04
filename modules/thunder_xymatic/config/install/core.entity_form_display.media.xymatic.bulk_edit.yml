@@ -3,6 +3,8 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.media.bulk_edit
+    - field.field.media.xymatic.field_caption
+    - field.field.media.xymatic.field_description
     - field.field.media.xymatic.field_media_xymatic
     - media.type.xymatic
   module:
@@ -57,6 +59,8 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  field_caption: true
+  field_description: true
   field_media_xymatic: true
   publish_on: true
   publish_state: true
