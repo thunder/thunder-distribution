@@ -59,8 +59,6 @@ class ThunderRouteEntity extends DataProducerPluginBase implements ContainerFact
 
   /**
    * {@inheritdoc}
-   *
-   * @codeCoverageIgnore
    */
   public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
     return new static(
