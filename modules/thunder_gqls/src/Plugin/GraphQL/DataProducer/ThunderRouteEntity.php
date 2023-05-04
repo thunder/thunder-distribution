@@ -3,6 +3,7 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Entity\RevisionableStorageInterface;
 use Drupal\Core\Entity\TranslatableInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Url;
@@ -120,11 +121,10 @@ class ThunderRouteEntity extends DataProducerPluginBase implements ContainerFact
 
     [, $type, $subType] = explode('.', $url->getRouteName());
     $parameters = $url->getRouteParameters();
+    $storage = $this->entityTypeManager->getStorage($type);
 
-    if ($subType === 'latest_version') {
-      $id = $this->entityTypeManager
-        ->getStorage($type)
-        ->getLatestRevisionId($parameters[$type]);
+    if ($subType === 'latest_version' && $storage instanceof RevisionableStorageInterface) {
+      $id = $storage->getLatestRevisionId($parameters[$type]);
       $resolver = $this->entityRevisionBuffer->add($type, $id);
     }
     elseif ($subType === 'revision') {
