@@ -164,6 +164,33 @@ Then we add the $path variable with a json string like this:
 This variable can be added in the GraphQL explorer in the corresponding input field. All following examples will assume
 a variable definition like this.
 
+#### Requesting revisions
+
+Given a user has the permission to access revisions of content, the $path can contain revision routes as well.
+Revision routes are always internal drupal routes.
+If /example-page is Node 6 in Drupal, the following variables are valid:
+
+Get the current revision, which is the default query to the currently published page.
+```json
+{
+  "path": "/example-page"
+}
+```
+
+Get a specific revision, can be an old revision, or a not yet published draft
+```json
+{
+  "path": "/node/6/revision/11/view"
+}
+```
+
+Get the latest revision, which might be an unpublished draft. The latest revision might not be available for a given node.
+```json
+{
+  "path": "/node/6/latest"
+}
+```
+
 #### Paragraphs example
 
 Articles and taxonomy terms contain paragraph fields in Thunder, the following example shows how to request paragraphs'
