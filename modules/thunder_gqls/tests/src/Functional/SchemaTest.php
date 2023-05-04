@@ -39,7 +39,7 @@ class SchemaTest extends ThunderGqlsTestBase {
   }
 
   /**
-   * Tests the article schema.
+   * Tests unpublished access.
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
@@ -156,4 +156,32 @@ GQL;
     $this->assertEmpty($validator->getMissingResolvers($server), "The schema 'thunder_graphql' contains types without a resolver.");
   }
 
+  /**
+   * Test the latest revision query.
+   */
+  public function testLatestRevision(): void {
+    $node = Node::create([
+      'title' => 'Test node',
+      'field_seo_title' => 'SEO title',
+      'type' => 'article',
+      'status' => Node::NOT_PUBLISHED,
+    ]);
+    $node->save();
+
+    $query = <<<GQL
+      query (\$path: String!) {
+        page(path: \$path) {
+          seoTitle
+        }
+      }
+GQL;
+
+    // Create new unpublished revision.
+    
+
+    $variables = ['path' => $node->toUrl()->toString()];
+    $response = $this->query($query, Json::encode($variables));
+    $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
+    $this->assertEquals(['seoTitle' => 'SEO title'], $this->jsonDecode($response->getBody())['data']['page']);
+  }
 }
