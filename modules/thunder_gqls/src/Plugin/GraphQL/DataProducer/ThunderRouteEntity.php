@@ -86,6 +86,7 @@ class ThunderRouteEntity extends DataProducerPluginBase implements ContainerFact
    *   The entity buffer service.
    * @param \Drupal\graphql\GraphQL\Buffers\EntityRevisionBuffer $entityRevisionBuffer
    *   The entity revision buffer service.
+   *
    * @codeCoverageIgnore
    */
   public function __construct(

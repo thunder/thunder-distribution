@@ -177,11 +177,10 @@ GQL;
 GQL;
 
     // Create new unpublished revision.
-    
-
     $variables = ['path' => $node->toUrl()->toString()];
     $response = $this->query($query, Json::encode($variables));
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
     $this->assertEquals(['seoTitle' => 'SEO title'], $this->jsonDecode($response->getBody())['data']['page']);
   }
+
 }
