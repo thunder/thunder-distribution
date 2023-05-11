@@ -53,7 +53,7 @@ type ParagraphVideo implements Paragraph {
 
   provider: String
   url: String @deprecated(reason: "Use metaData instead")
-  video: MediaVideo @deprecated(reason: "Use entity instead")
+  video: MediaVideo @deprecated(reason: "Use metaData instead")
   metaData: Video
 }
 
