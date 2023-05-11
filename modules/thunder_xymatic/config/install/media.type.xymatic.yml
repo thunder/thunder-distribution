@@ -37,6 +37,5 @@ source_configuration:
 field_map:
   default_name: name
   enabled: status
-  shortTitle: field_caption
   summary: field_description
   thumbnail_uri: thumbnail
