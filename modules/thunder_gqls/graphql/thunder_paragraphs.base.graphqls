@@ -52,10 +52,9 @@ type ParagraphVideo implements Paragraph {
   summary: [String]
 
   provider: String
-  url: String @deprecated(reason: "Use reference instead")
+  url: String @deprecated(reason: "Use metaData instead")
   video: MediaVideo @deprecated(reason: "Use entity instead")
-  entity: Video
-  reference: String
+  metaData: Video
 }
 
 type ParagraphQuote implements Paragraph {
