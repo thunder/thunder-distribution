@@ -1,0 +1,5 @@
+name: Provide uuid routes for testing.
+description: 'The default content module used for testing content does not create entity ids that are the same in multiple installations. This module provides routes that use uuids instead of entity ids.'
+type: module
+package: Testing
+version: VERSION
