@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder_test_route_uuid\PathProcessor;
+namespace Drupal\uuid_router\PathProcessor;
 
 use Drupal\Component\Uuid\Uuid;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @see https://drupal.org/i/2353611
  */
-class PathProcessorEntityUuid implements InboundPathProcessorInterface {
+class EntityUuidPathProcessor implements InboundPathProcessorInterface {
 
   /**
    * Entity type manager service.

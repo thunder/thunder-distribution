@@ -1,0 +1,7 @@
+services:
+  uuid_router.path_processor_entity_uuid:
+    class: Drupal\uuid_router\PathProcessor\PathProcessorEntityUuid
+    tags:
+      - { name: path_processor_inbound, priority: 50 }
+    arguments: ['@entity_type.manager']
+

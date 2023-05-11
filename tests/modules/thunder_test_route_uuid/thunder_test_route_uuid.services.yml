@@ -1,7 +1,0 @@
-services:
-  thunder_test_route_uuid.path_processor_entity_uuid:
-    class: Drupal\thunder_test_route_uuid\PathProcessor\PathProcessorEntityUuid
-    tags:
-      - { name: path_processor_inbound, priority: 50 }
-    arguments: ['@entity_type.manager']
-
