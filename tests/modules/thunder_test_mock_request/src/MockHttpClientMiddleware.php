@@ -55,7 +55,6 @@ class MockHttpClientMiddleware {
   public static function addUrlResponse(string $url, string $body, array $headers = [], int $status = 200): void {
 
     $items = \Drupal::state()->get(static::class, []);
-
     $items[$url] = ['body' => $body, 'headers' => $headers, 'status' => $status];
 
     \Drupal::state()->set(static::class, $items);
