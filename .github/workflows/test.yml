@@ -24,6 +24,7 @@ env:
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: false
+  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", { "chromeOptions": { "w3c": false, "args": [ "--ignore-certificate-errors", "--disable-gpu", "--disable-dev-shm-usage", "--headless" ] } }, "http://localhost:4444/wd/hub"]'
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
 
