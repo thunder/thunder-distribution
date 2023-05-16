@@ -1,0 +1,18 @@
+type MediaXymatic implements Video & Media & Entity{
+  id: Int!
+  uuid: String!
+  entity: String!
+  language: String
+  name: String!
+  url: String!
+  entityLinks: EntityLinks
+
+  created: String!
+  changed: String!
+  author: User
+  thumbnail: Thumbnail
+  published: Boolean
+  fallbackMedia: Media
+
+  src: String
+}
