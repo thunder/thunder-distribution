@@ -48,7 +48,8 @@
             },
             "drupal/gin": {
                 "Support length indicator": "https://www.drupal.org/files/issues/2023-03-09/3339868.diff",
-                "Fix help icon positioning": "https://www.drupal.org/files/issues/2023-03-09/3339856.diff"
+                "Fix help icon positioning": "https://www.drupal.org/files/issues/2023-03-09/3339856.diff",
+                "Fix Custom wide or square logo in toolbar floated on left": "https://www.drupal.org/files/issues/2023-05-16/3357587.diff"
             },
             "drupal/media_entity_pinterest": {
                 "to a member function mainPropertyName() on null in media_entity_pinterest/src/Plugin/media/Source/Pinterest.php on line 155": "https://www.drupal.org/files/issues/2023-03-09/3179172.diff"
@@ -62,7 +63,7 @@
         "php": ">=8.1",
         "cweagans/composer-patches": "^1.6.5",
         "drupal/access_unpublished": "^1.5",
-        "drupal/admin_toolbar": "3.3.0",
+        "drupal/admin_toolbar": "^3.4",
         "drupal/autofill": "^1.1",
         "drupal/autosave_form": "^1.2",
         "drupal/blazy": "^2.14",
@@ -82,7 +83,7 @@
         "drupal/focal_point": "2.0.0-alpha2",
         "drupal/facets": "^2.0.6",
         "drupal/gin": "3.0-rc3",
-        "drupal/gin_toolbar": "1.x-dev",
+        "drupal/gin_toolbar": "^1.0-rc1",
         "drupal/graphql": "^4.3",
         "drupal/inline_entity_form": "^1.0-rc14",
         "drupal/ivw_integration": "^2.0",
