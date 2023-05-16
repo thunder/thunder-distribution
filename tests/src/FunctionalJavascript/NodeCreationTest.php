@@ -107,14 +107,14 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
     $this->getSession()
       ->wait(5000, "jQuery('iframe').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length === 1");
     $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length");
-    $this->assertEquals(1, $numOfElements, "Number of twitter on page should be one.");
+    $this->assertEquals(2, $numOfElements, "Number of twitter on page should be one.");
 
     // Check Link Paragraph.
     $this->assertSession()->linkExists('Link to Thunder');
     $this->assertSession()->linkByHrefExists('http://www.thunder.org');
 
     // Check for sharing buttons.
-    $this->assertSession()->elementExists('css', '.shariff-button.twitter');
+    $this->assertSession()->elementExists('css', '.shariff-button.twitter1');
     $this->assertSession()->elementExists('css', '.shariff-button.facebook');
 
     // Check Video paragraph.
