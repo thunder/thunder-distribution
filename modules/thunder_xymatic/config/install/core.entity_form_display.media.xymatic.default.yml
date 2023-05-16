@@ -2,10 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.xymatic.field_description
     - field.field.media.xymatic.field_media_xymatic
     - media.type.xymatic
   module:
     - path
+    - text
 id: media.xymatic.default
 targetEntityType: media
 bundle: xymatic
@@ -16,6 +18,14 @@ content:
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_description:
+    type: text_textarea
+    weight: 102
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
     third_party_settings: {  }
   field_media_xymatic:
     type: string_textfield
