@@ -23,6 +23,7 @@ env:
   DRUPAL_TESTING_TEST_FILTER: ""
   DRUPAL_TESTING_PARALLEL_TESTING: false
   PHPSTAN_MEMORY_LIMIT: 4G
+  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", { "chromeOptions": { "w3c": false, "args": [ "--disable-gpu", "--disable-dev-shm-usage" ] } }, "http://${DRUPAL_TESTING_SELENIUM_HOST}:${DRUPAL_TESTING_SELENIUM_PORT}/wd/hub"]'
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
 
@@ -106,7 +107,7 @@ jobs:
           - 3306:3306
       selenium:
         image: selenium/standalone-chrome:105.0
-        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
+        options: --add-host=thunder-testing:host-gateway --name selenium
         ports:
           - 4444:4444
 
@@ -170,7 +171,7 @@ jobs:
           - 3306:3306
       selenium:
         image: selenium/standalone-chrome:105.0
-        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
+        options: --add-host=thunder-testing:host-gateway --name selenium
         ports:
           - 4444:4444
 
@@ -270,7 +271,7 @@ jobs:
           - 3306:3306
       selenium:
         image: selenium/standalone-chrome:105.0
-        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
+        options: --add-host=thunder-testing:host-gateway --name selenium
         ports:
           - 4444:4444
 
