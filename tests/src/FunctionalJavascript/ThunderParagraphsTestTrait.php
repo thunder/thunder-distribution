@@ -16,6 +16,8 @@ trait ThunderParagraphsTestTrait {
   use ThunderCkEditorTestTrait;
 
   /**
+   * The paragraphs in the quick links.
+   *
    * @var int[]
    */
   protected array $thunderQuickLinksAddParagraphTypes = [
@@ -25,16 +27,20 @@ trait ThunderParagraphsTestTrait {
   ];
 
   /**
+   * Get the paragraphs in the quick links.
+   *
    * @return int[]
+   *   The paragraphs in the quick links.
    */
   public function getThunderQuickLinksAddParagraphTypes(): array {
     return $this->thunderQuickLinksAddParagraphTypes;
   }
 
   /**
-   * @param array $types
+   * Set the paragraphs in the quick links.
    *
-   * @return self
+   * @param array $types
+   *   The paragraphs in the quick links.
    */
   public function setThunderQuickLinksAddParagraphTypes(array $types): self {
     $this->thunderQuickLinksAddParagraphTypes = $types;
