@@ -25,7 +25,7 @@ env:
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: false
-  MINK_DRIVER_ARGS_WEBDRIVER: "[\"chrome\", {\"chromeOptions\": {\"w3c\": false, \"args\": [ \"--disable-gpu\", \"--disable-dev-shm-usage\", \"--headless\", \"--no-sandbox\" ] } }, \"http://${DRUPAL_TESTING_SELENIUM_HOST}:${DRUPAL_TESTING_SELENIUM_PORT}/wd/hub\"]"}
+  MINK_DRIVER_ARGS_WEBDRIVER: "[\"chrome\", {\"chromeOptions\": {\"w3c\": false, \"args\": [ \"--disable-gpu\", \"--disable-dev-shm-usage\", \"--headless\", \"--no-sandbox\" ] } }, \"http://${DRUPAL_TESTING_SELENIUM_HOST}:${DRUPAL_TESTING_SELENIUM_PORT}/wd/hub\"}]"
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
 
@@ -255,6 +255,9 @@ jobs:
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
+      - name: Show env
+        run: env
+
       - name: Run tests suite
         run: test-drupal-project run_tests
 
@@ -329,9 +332,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-
-      - name: Show env
-        run: env
 
       - name: Run the tests
         run: test-drupal-project run_tests
