@@ -24,7 +24,7 @@ env:
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
-  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", { "chromeOptions": { "w3c": false, "args": [ "--disable-gpu", "--disable-dev-shm-usage" ] } }, "http://${DRUPAL_TESTING_SELENIUM_HOST}:${DRUPAL_TESTING_SELENIUM_PORT}/wd/hub"]'
+  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"chromeOptions": {"w3c": false, "args": [ "--disable-gpu", "--disable-dev-shm-usage", "--headless", "--no-sandbox" ] } }, "http://127.0.0.1:4444/wd/hub"]'
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
 
