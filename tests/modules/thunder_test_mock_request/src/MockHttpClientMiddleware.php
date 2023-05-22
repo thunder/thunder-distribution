@@ -71,7 +71,6 @@ class MockHttpClientMiddleware {
       $url = (string) $request->getUri();
       if (!empty($items[$url])) {
         $response = new Response($items[$url]['status'], $items[$url]['headers'], $items[$url]['body']);
-        // @phpstan-ignore-next-line
         return Create::promiseFor($response);
       }
       if (strpos($this->request->getHttpHost(), $request->getUri()->getHost()) === FALSE) {
