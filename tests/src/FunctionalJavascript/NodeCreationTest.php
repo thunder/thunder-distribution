@@ -98,7 +98,7 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
 
     // Check Quote paragraph.
     $this->assertSession()->pageTextContains('Awesome quote');
-sleep(100);
+
     // Check that one Instagram widget is on page.
     $numOfElements = $this->getSession()->wait(5000, 'document.querySelectorAll("iframe[src*=\'instagram.com/p/B2huuS8AQVq\']").length');
     $this->assertEquals(1, $numOfElements, "Number of instagrams on page should be one.");
