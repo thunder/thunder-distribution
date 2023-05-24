@@ -145,6 +145,6 @@
         "thunder/thunder_testing_demo": "4.x-dev",
         "mglaman/phpstan-drupal": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
-        "guzzlehttp/guzzle":"^7.7"
+        "guzzlehttp/promises":"^2.0"
     }
 }
