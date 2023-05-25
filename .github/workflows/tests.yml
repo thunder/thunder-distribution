@@ -21,11 +21,12 @@ env:
   DRUPAL_TESTING_VERBOSE: false
   DRUPAL_TESTING_VERSION: "^1.0.36"
   DRUPAL_TESTING_TEST_FILTER: "testCreateNode"
+  DRUPAL_TESTING_SELENIUM_HOST: 127.0.0.1
   DRUPAL_TESTING_SELENIUM_PORT: 9515
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: false
-  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://127.0.0.1:4444"]'
+  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://127.0.0.1:9515"]'
 
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
@@ -119,7 +120,7 @@ jobs:
         image: drupalci/chromedriver:production
         options: --add-host=thunder-testing:host-gateway --name chrome
         ports:
-          - 9515:4444
+          - 9515:9515
 
     strategy:
       fail-fast: false
