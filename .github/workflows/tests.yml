@@ -119,7 +119,7 @@ jobs:
         image: drupalci/chromedriver:production
         options: --add-host=thunder-testing:host-gateway --name chrome
         ports:
-          - 4444:9515
+          - 9515:4444
 
     strategy:
       fail-fast: false
