@@ -115,7 +115,7 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
     $this->assertSession()->linkByHrefExists('http://www.thunder.org');
 
     // Check for sharing buttons.
-    $this->assertSession()->elementExists('css', '.shariff-button.twitter1');
+    $this->assertSession()->elementExists('css', '.shariff-button.twitter');
     $this->assertSession()->elementExists('css', '.shariff-button.facebook');
 
     // Check Video paragraph.
