@@ -25,7 +25,8 @@ env:
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: false
-  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"chromeOptions": {"w3c": false, "args": [ "--disable-gpu", "--disable-dev-shm-usage", "--headless", "--no-sandbox" ] } }, "http://127.0.0.1:9515/wd/hub"]'
+  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://127.0.0.1:4444"]'
+
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
 
@@ -118,7 +119,7 @@ jobs:
         image: drupalci/chromedriver:production
         options: --add-host=thunder-testing:host-gateway --name chrome
         ports:
-          - 9515:9515
+          - 4444:9515
 
     strategy:
       fail-fast: false
