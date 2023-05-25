@@ -3,8 +3,8 @@
 namespace Drupal\thunder_test_mock_request;
 
 use Drupal\Core\State\StateInterface;
+use GuzzleHttp\Promise\Create;
 use GuzzleHttp\Psr7\Response;
-use function GuzzleHttp\Promise\promise_for;
 use Psr\Http\Message\RequestInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -71,8 +71,7 @@ class MockHttpClientMiddleware {
       $url = (string) $request->getUri();
       if (!empty($items[$url])) {
         $response = new Response($items[$url]['status'], $items[$url]['headers'], $items[$url]['body']);
-        // @phpstan-ignore-next-line
-        return promise_for($response);
+        return Create::promiseFor($response);
       }
       if (strpos($this->request->getHttpHost(), $request->getUri()->getHost()) === FALSE) {
         throw new \Exception(sprintf("No response for %s defined. See MockHttpClientMiddleware::addUrlResponse().", $url));
