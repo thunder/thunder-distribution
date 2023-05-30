@@ -55,7 +55,7 @@ class ArticleSchedulerIntegrationTest extends ThunderJavascriptTestBase {
     $this->cronRun();
 
     $this->drupalGet($edit_url);
-    $this->assertCount(1, $this->xpath('//h1[contains(@class, "page-title") and text() = "Scheduler integration testing"]'));
+    $this->assertCount(1, $this->xpath('//h1[contains(@class, "page-title")]//em[text() = "Edit ' . $contentTypeDisplayName . '"]'));
 
   }
 

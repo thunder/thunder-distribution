@@ -16,6 +16,38 @@ trait ThunderParagraphsTestTrait {
   use ThunderCkEditorTestTrait;
 
   /**
+   * The paragraphs in the quick links.
+   *
+   * @var int[]
+   */
+  protected array $thunderQuickLinksAddParagraphTypes = [
+    'text' => 1,
+    'image' => 2,
+    'gallery' => 3,
+  ];
+
+  /**
+   * Get the paragraphs in the quick links.
+   *
+   * @return int[]
+   *   The paragraphs in the quick links.
+   */
+  public function getThunderQuickLinksAddParagraphTypes(): array {
+    return $this->thunderQuickLinksAddParagraphTypes;
+  }
+
+  /**
+   * Set the paragraphs in the quick links.
+   *
+   * @param array $types
+   *   The paragraphs in the quick links.
+   */
+  public function setThunderQuickLinksAddParagraphTypes(array $types): self {
+    $this->thunderQuickLinksAddParagraphTypes = $types;
+    return $this;
+  }
+
+  /**
    * Get number of paragraphs for defined field on current page.
    *
    * @param string $fieldName
@@ -54,21 +86,24 @@ trait ThunderParagraphsTestTrait {
    *   Field name.
    * @param string $type
    *   Type of the paragraph.
-   * @param int $position
-   *   Position of the paragraph.
+   * @param int|null $position
+   *   Position of the paragraph (default: null).
    *
    * @return int
    *   Returns index for added paragraph.
    *
    * @throws \Exception
+   * @throws \Behat\Mink\Exception\DriverException
+   * @throws \Behat\Mink\Exception\UnsupportedDriverActionException
    */
-  public function addParagraph(string $fieldName, string $type, $position = NULL) {
+  public function addParagraph(string $fieldName, string $type, ?int $position = NULL): int {
     $numberOfParagraphs = $this->getNumberOfParagraphs($fieldName);
 
-    $types = ['text' => 1, 'image' => 2, 'gallery' => 3];
-    $index = $types[$type] ?? 4;
+    $types = $this->getThunderQuickLinksAddParagraphTypes();
+    $index = $types[$type] ?? count($types) + 1;
 
     $fieldSelector = HTML::cleanCssIdentifier($fieldName);
+
     if ($position === NULL || $position > $numberOfParagraphs) {
       $position = $numberOfParagraphs;
       $addButtonCssSelector = "#edit-{$fieldSelector}-wrapper table > tbody > tr:last-child li:nth-child({$index}) button.paragraphs-features__add-in-between__button";

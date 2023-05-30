@@ -44,3 +44,17 @@ function _thunder_mark_update_checklist(string $update_id, bool $successful, Upd
 function thunder_update_last_removed(): int {
   return 8326;
 }
+
+/**
+ * Allow multiple media types to be shown in entity browser view.
+ */
+function thunder_update_8327(): string {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_update_8327');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}

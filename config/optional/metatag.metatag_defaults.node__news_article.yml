@@ -1,6 +1,8 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - node.type.news_article
 id: node__news_article
 label: 'Content: News Article'
 tags:

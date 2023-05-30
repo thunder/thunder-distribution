@@ -8,6 +8,11 @@ parameters:
 		-
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"
 			count: 1
+			path: modules/thunder_article/src/Form/ThunderNodeFormHelper.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
 			path: modules/thunder_article/src/Plugin/Derivative/DynamicLocalTasks.php
 
 		-
