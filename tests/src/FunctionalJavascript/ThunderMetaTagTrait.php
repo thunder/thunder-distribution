@@ -126,7 +126,7 @@ trait ThunderMetaTagTrait {
 
       if (!empty($fieldNamePrefix)) {
         // Workaround for robots duplicate field group on node edit form.
-        $metaTag[1] = $metaTag[1] === 'robots' ? $metaTag[1] .']['. $metaTag[1] : $metaTag[1];
+        $metaTag[1] = $metaTag[1] === 'robots' ? $metaTag[1] . '][' . $metaTag[1] : $metaTag[1];
         $fieldValues[$this->getMetaTagFieldName($metaTag[1], $metaTag[0], $fieldNamePrefix)] = $metaTagValue;
       }
       else {
