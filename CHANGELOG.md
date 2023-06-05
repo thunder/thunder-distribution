@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.5.5](https://github.com/thunder/thunder-distribution/tree/6.5.5) 2023-05-22
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.4...6.5.5)
+
+Several improvements to xymatic integration. GraphQl schema additions and entity view displays.
+
 ## [6.5.4](https://github.com/thunder/thunder-distribution/tree/6.5.4) 2023-03-30
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.3...6.5.4)
