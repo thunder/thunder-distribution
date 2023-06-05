@@ -114,7 +114,7 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
 
     // Check that one Pinterest widget is on page.
     $this->assertSession()
-      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][9]//span[contains(@data-pin-id, "478085316687452268")]', 2);
+      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][8]//span[contains(@data-pin-id, "478085316687452268")]', 2);
   }
 
 }
