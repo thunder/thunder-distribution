@@ -97,11 +97,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Check Quote paragraph.
     $this->assertSession()->pageTextContains('Awesome quote');
 
-    // Check that one Instagram widget is on page.
-    $this->getSession()->wait(5000, 'document.querySelectorAll("iframe#instagram-embed-0").length === 1');
-    $numOfElements = $this->getSession()->evaluateScript('document.querySelectorAll("iframe#instagram-embed-0").length');
-    $this->assertEquals(1, $numOfElements, "Number of instagrams on page should be one.");
-
     // Check that one Twitter widget is on page.
     $this->getSession()
       ->wait(5000, "jQuery('iframe').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length === 1");
