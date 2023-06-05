@@ -57,7 +57,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
   protected static $articleMetaTags = [
     'basic title' => 'Test [node:field_teaser_text]',
     'basic description' => '[random]',
-    'advanced robots' => 'index, follow, noydir',
+    'advanced robots' => 'index, follow',
     'advanced referrer' => 'no-referrer-when-downgrade',
 
     // OpenGraph Meta Tags.
