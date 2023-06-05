@@ -1,0 +1,43 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.xymatic.field_description
+    - field.field.media.xymatic.field_media_xymatic
+    - image.style.large
+    - media.type.xymatic
+  module:
+    - empty_fields
+    - image
+    - text
+id: media.xymatic.default
+targetEntityType: media
+bundle: xymatic
+mode: default
+content:
+  field_description:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: large
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      empty_fields:
+        handler: ''
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_media_xymatic: true
+  langcode: true
+  name: true
+  uid: true
