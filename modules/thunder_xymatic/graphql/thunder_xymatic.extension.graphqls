@@ -1,4 +1,4 @@
-type MediaXymatic implements Video & Media & Entity{
+type MediaXymatic implements InterfaceVideo & Media & Entity{
   id: Int!
   uuid: String!
   entity: String!
