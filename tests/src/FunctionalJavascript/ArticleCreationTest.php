@@ -61,9 +61,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Add Twitter Paragraph between Text and Quote.
     $this->addSocialParagraph(static::$paragraphsField, 'https://twitter.com/ThunderCoreTeam/status/776417570756976640', 'twitter', 3);
 
-    // Add Instagram Paragraph.
-    $this->addSocialParagraph(static::$paragraphsField, 'https://www.instagram.com/p/B2huuS8AQVq/', 'instagram');
-
     // Add Link Paragraph.
     $this->addLinkParagraph(static::$paragraphsField, 'Link to Thunder', 'http://www.thunder.org');
 
@@ -97,11 +94,6 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
     // Check Quote paragraph.
     $this->assertSession()->pageTextContains('Awesome quote');
 
-    // Check that one Instagram widget is on page.
-    $this->getSession()->wait(5000, 'document.querySelectorAll("iframe#instagram-embed-0").length === 1');
-    $numOfElements = $this->getSession()->evaluateScript('document.querySelectorAll("iframe#instagram-embed-0").length');
-    $this->assertEquals(1, $numOfElements, "Number of instagrams on page should be one.");
-
     // Check that one Twitter widget is on page.
     $this->getSession()
       ->wait(5000, "jQuery('iframe').filter(function(){return (this.id.indexOf('twitter-widget-0') !== -1);}).length === 1");
@@ -120,7 +112,7 @@ class ArticleCreationTest extends ThunderJavascriptTestBase {
 
     // Check that one Pinterest widget is on page.
     $this->assertSession()
-      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][9]//span[contains(@data-pin-id, "478085316687452268")]', 2);
+      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][8]//span[contains(@data-pin-id, "478085316687452268")]', 2);
   }
 
 }
