@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+    - media_expire
+    - scheduler
+    - xymatic
+third_party_settings:
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: vertical_tab
+    publish_enable: false
+    publish_past_date: error
+    publish_past_date_created: false
+    publish_required: false
+    publish_revision: false
+    publish_touch: false
+    show_message_after_update: true
+    unpublish_enable: false
+    unpublish_required: false
+    unpublish_revision: false
+  crop:
+    image_field: null
+  media_expire:
+    expire_field: null
+    enable_expiring: null
+id: xymatic
+label: Xymatic
+description: ''
+source: xymatic
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_xymatic
+  thumbnails_directory: 'public://xymatic_thumbnails/[date:custom:Y-m]'
+field_map:
+  default_name: name
+  enabled: status
+  summary: field_description
+  thumbnail_uri: thumbnail
