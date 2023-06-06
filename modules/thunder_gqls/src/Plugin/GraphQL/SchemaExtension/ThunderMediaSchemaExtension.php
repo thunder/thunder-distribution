@@ -32,7 +32,7 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
       ])
     );
 
-    $this->registry->addTypeResolver('Video',
+    $this->registry->addTypeResolver('InterfaceVideo',
       \Closure::fromCallable([
         self::class,
         'resolveMediaTypes',
