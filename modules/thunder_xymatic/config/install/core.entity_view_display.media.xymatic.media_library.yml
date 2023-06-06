@@ -2,33 +2,25 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.media.paragraph_preview
+    - core.entity_view_mode.media.media_library
     - field.field.media.xymatic.field_description
     - field.field.media.xymatic.field_media_xymatic
-    - image.style.thumbnail
+    - image.style.media_library
     - media.type.xymatic
   module:
     - empty_fields
     - image
-id: media.xymatic.paragraph_preview
+id: media.xymatic.media_library
 targetEntityType: media
 bundle: xymatic
-mode: paragraph_preview
+mode: media_library
 content:
-  name:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 1
-    region: content
   thumbnail:
     type: image
     label: hidden
     settings:
       image_link: ''
-      image_style: thumbnail
+      image_style: media_library
       image_loading:
         attribute: lazy
     third_party_settings:
@@ -41,4 +33,5 @@ hidden:
   field_description: true
   field_media_xymatic: true
   langcode: true
+  name: true
   uid: true
