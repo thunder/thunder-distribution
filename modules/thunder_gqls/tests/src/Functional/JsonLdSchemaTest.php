@@ -12,7 +12,7 @@ class JsonLdSchemaTest extends ThunderGqlsTestBase {
   /**
    * Tests the jsonld extension.
    *
-   * NoUpdate
+   * @group NoUpdate
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
