@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.rss
+    - field.field.node.news_article.field_channel
+    - field.field.node.news_article.field_meta_tags
+    - field.field.node.news_article.field_paragraphs
+    - field.field.node.news_article.field_seo_title
+    - field.field.node.news_article.field_tags
+    - field.field.node.news_article.field_teaser_media
+    - field.field.node.news_article.field_teaser_text
+    - node.type.news_article
+  module:
+    - user
+id: node.news_article.rss
+targetEntityType: node
+bundle: news_article
+mode: rss
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_channel:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_teaser_media:
+    type: entity_reference_entity_view
+    label: inline
+    settings:
+      view_mode: square_m
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  field_meta_tags: true
+  field_paragraphs: true
+  field_seo_title: true
+  field_tags: true
+  field_teaser_text: true
+  langcode: true

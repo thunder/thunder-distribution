@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - node.type.article
+    - node.type.news_article
   module:
     - content_moderation
 id: editorial
@@ -62,3 +63,5 @@ type_settings:
   entity_types:
     node:
       - article
+      - news_article
+  default_moderation_state: draft

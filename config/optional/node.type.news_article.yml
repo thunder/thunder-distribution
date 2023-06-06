@@ -4,6 +4,7 @@ dependencies:
   module:
     - menu_ui
     - scheduler
+    - thunder_news_article
 third_party_settings:
   menu_ui:
     available_menus: {  }
@@ -13,15 +14,17 @@ third_party_settings:
     fields_display_mode: vertical_tab
     publish_enable: true
     publish_past_date: schedule
+    publish_past_date_created: false
     publish_required: false
     publish_revision: false
     publish_touch: true
+    show_message_after_update: true
     unpublish_enable: true
     unpublish_required: false
     unpublish_revision: false
-name: Article
-type: article
-description: 'Use <em>articles</em> for evergreen content.'
+name: 'News Article'
+type: news_article
+description: 'Use <em>news articles</em> for time-sensitive content like news, press releases or blog posts.'
 help: ''
 new_revision: true
 preview_mode: 1

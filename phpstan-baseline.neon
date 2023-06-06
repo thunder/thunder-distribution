@@ -101,7 +101,7 @@ parameters:
 		-
 			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
 			count: 6
-			path: tests/src/FunctionalJavascript/ArticleCreationTest.php
+			path: tests/src/FunctionalJavascript/NodeCreationTest.php
 
 		-
 			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
@@ -197,6 +197,11 @@ parameters:
 			message: "#^Function drupal_phpunit_find_extension_directories not found\\.$#"
 			count: 1
 			path: tests/src/TestSuites/ThunderTestSuite.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: modules/thunder_article/src/Form/ThunderNodeFormHelper.php
 
 		-
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"

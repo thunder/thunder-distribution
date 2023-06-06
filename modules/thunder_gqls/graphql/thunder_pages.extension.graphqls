@@ -1,5 +1,6 @@
 extend type Query {
   article(uuid: String!): Article
+  newsArticle(uuid: String!): NewsArticle
   tags(uuid: String!): Tags
   channel(uuid: String!): Channel
   user(uuid: String!): User
