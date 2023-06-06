@@ -144,7 +144,18 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
    *
    * @throws \Exception
    */
-  protected function resolveParagraphTypes($value, ResolveContext $context, ResolveInfo $info): string {
+  protected function resolveParagraphTypes(mixed $value, ResolveContext $context, ResolveInfo $info): string {
+    $type = NULL;
+    \Drupal::moduleHandler()->invokeAllWith('thunder_gqls_type_resolver', function (callable $hook) use ($value, $context, $info, &$type) {
+      // Once an implementation has returned a value do not call any other
+      // implementation.
+      if ($type === NULL) {
+        $type = $hook('Paragraph', $value, $context, $info);
+      }
+    });
+    if ($type !== NULL) {
+      return $type;
+    }
     if ($value instanceof ParagraphInterface) {
       return 'Paragraph' . $this->mapBundleToSchemaName($value->bundle());
     }

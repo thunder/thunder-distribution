@@ -206,7 +206,18 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
    *
    * @throws \Exception
    */
-  protected function resolvePageTypes($value, ResolveContext $context, ResolveInfo $info): string {
+  protected function resolvePageTypes(mixed $value, ResolveContext $context, ResolveInfo $info): string {
+    $type = NULL;
+    \Drupal::moduleHandler()->invokeAllWith('thunder_gqls_type_resolver', function (callable $hook) use ($value, $context, $info, &$type) {
+      // Once an implementation has returned a value do not call any other
+      // implementation.
+      if ($type === NULL) {
+        $type = $hook('Page', $value, $context, $info);
+      }
+    });
+    if ($type !== NULL) {
+      return $type;
+    }
     if ($value instanceof NodeInterface || $value instanceof TermInterface || $value instanceof UserInterface) {
       if ($value->bundle() === 'page') {
         return 'BasicPage';

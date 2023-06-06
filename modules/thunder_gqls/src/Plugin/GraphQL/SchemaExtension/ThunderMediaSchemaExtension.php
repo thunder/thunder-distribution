@@ -156,6 +156,17 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
    * @throws \Exception
    */
   protected function resolveMediaTypes($value, ResolveContext $context, ResolveInfo $info): string {
+    $type = NULL;
+    \Drupal::moduleHandler()->invokeAllWith('thunder_gqls_type_resolver', function (callable $hook) use ($value, $context, $info, &$type) {
+      // Once an implementation has returned a value do not call any other
+      // implementation.
+      if ($type === NULL) {
+        $type = $hook('Media', $value, $context, $info);
+      }
+    });
+    if ($type !== NULL) {
+      return $type;
+    }
     if ($value instanceof MediaInterface) {
       return 'Media' . $this->mapBundleToSchemaName($value->bundle());
     }
