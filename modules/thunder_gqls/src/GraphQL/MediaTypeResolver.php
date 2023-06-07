@@ -19,6 +19,7 @@ class MediaTypeResolver extends DecoratableTypeResolver {
     if ($object instanceof MediaInterface) {
       return 'Media' . $this->mapBundleToSchemaName($object->bundle());
     }
+    return NULL;
   }
 
 }

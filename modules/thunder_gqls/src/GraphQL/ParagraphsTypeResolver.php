@@ -19,6 +19,7 @@ class ParagraphsTypeResolver extends DecoratableTypeResolver {
     if ($object instanceof ParagraphInterface) {
       return 'Paragraph' . $this->mapBundleToSchemaName($object->bundle());
     }
+    return NULL;
   }
 
 }

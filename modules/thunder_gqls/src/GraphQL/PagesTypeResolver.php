@@ -24,6 +24,7 @@ class PagesTypeResolver extends DecoratableTypeResolver {
       }
       $this->mapBundleToSchemaName($object->bundle());
     }
+    return NULL;
   }
 
 }
