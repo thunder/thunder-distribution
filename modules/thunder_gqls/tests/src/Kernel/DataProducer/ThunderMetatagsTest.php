@@ -63,8 +63,8 @@ class ThunderMetatagsTest extends GraphQLTestBase {
 
     $this->assertNotEmpty($results);
 
-    $this->assertStringEndsWith('\/node\/1"}', $results[0]['attributes']);
-    $this->assertEquals('{"name":"title","content":"Title | Test Site"}', $results[1]['attributes']);
+    $this->assertStringEndsWith('\/node\/1"}', $results[1]['attributes']);
+    $this->assertEquals('{"name":"title","content":"Title | Test Site"}', $results[0]['attributes']);
   }
 
 }
