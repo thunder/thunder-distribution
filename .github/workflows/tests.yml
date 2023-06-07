@@ -140,11 +140,6 @@ jobs:
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
 
-      #   Start a debug session.
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
-
       - name: Set mysql isolation level to read committed to prevent deadlocks
         run: |
           mysql --host="127.0.0.1" --user=root --password=root -e "SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;"
