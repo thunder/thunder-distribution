@@ -147,7 +147,7 @@ jobs:
 
       - name: Set mysql isolation level to read committed to prevent deadlocks
         run: |
-          mysql -e "SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;" 2>/dev/null
+          mysql --host="127.0.0.1" --user=root --password=root -e "SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;"
 
       - name: Prepare fixtures
         run: docker cp ./tests/fixtures chrome:/fixtures
@@ -224,7 +224,7 @@ jobs:
 
       - name: Set mysql isolation level to read committed to prevent deadlocks
         run: |
-          mysql -e "SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;" 2>/dev/null
+          mysql --host="127.0.0.1" --user=root --password=root -e "SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;"
 
       - name: Prepare fixtures
         run: docker cp ./tests/fixtures chrome:/fixtures
@@ -318,7 +318,7 @@ jobs:
 
       - name: Set mysql isolation level to read committed to prevent deadlocks
         run: |
-          mysql -e "SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;" 2>/dev/null
+          mysql --host="127.0.0.1" --user=root --password=root -e "SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;"
 
       - name: Prepare fixtures
         run: docker cp ./tests/fixtures chrome:/fixtures
