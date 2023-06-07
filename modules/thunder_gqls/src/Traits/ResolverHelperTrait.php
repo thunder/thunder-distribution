@@ -131,4 +131,5 @@ trait ResolverHelperTrait {
   protected function mapBundleToSchemaName(string $bundleName) {
     return str_replace('_', '', ucwords($bundleName, '_'));
   }
+
 }

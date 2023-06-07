@@ -2,12 +2,8 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
-use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
-use Drupal\media\MediaInterface;
 use Drupal\thunder_gqls\GraphQL\MediaTypeResolver;
-use Drupal\thunder_gqls\GraphQL\PagesTypeResolver;
-use GraphQL\Type\Definition\ResolveInfo;
 
 /**
  * The media schema extension.
