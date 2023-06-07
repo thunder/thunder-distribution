@@ -5,6 +5,8 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\media\MediaInterface;
+use Drupal\thunder_gqls\GraphQL\MediaTypeResolver;
+use Drupal\thunder_gqls\GraphQL\PagesTypeResolver;
 use GraphQL\Type\Definition\ResolveInfo;
 
 /**
@@ -25,18 +27,14 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
   public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 
-    $this->registry->addTypeResolver('Media',
-      \Closure::fromCallable([
-        self::class,
-        'resolveMediaTypes',
-      ])
+    $this->registry->addTypeResolver(
+      'Media',
+      new MediaTypeResolver($registry->getTypeResolver('Media'))
     );
 
-    $this->registry->addTypeResolver('Video',
-      \Closure::fromCallable([
-        self::class,
-        'resolveMediaTypes',
-      ])
+    $this->registry->addTypeResolver(
+      'Video',
+      new MediaTypeResolver($registry->getTypeResolver('Video'))
     );
 
     $this->resolveFields();
@@ -138,39 +136,6 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
       $this->builder->fromPath('entity', 'field_source.value')
     );
 
-  }
-
-  /**
-   * Resolves media types.
-   *
-   * @param mixed $value
-   *   The current value.
-   * @param \Drupal\graphql\GraphQL\Execution\ResolveContext $context
-   *   The resolve context.
-   * @param \GraphQL\Type\Definition\ResolveInfo $info
-   *   The resolve information.
-   *
-   * @return string
-   *   Response type.
-   *
-   * @throws \Exception
-   */
-  protected function resolveMediaTypes($value, ResolveContext $context, ResolveInfo $info): string {
-    $type = NULL;
-    \Drupal::moduleHandler()->invokeAllWith('thunder_gqls_type_resolver', function (callable $hook) use ($value, $context, $info, &$type) {
-      // Once an implementation has returned a value do not call any other
-      // implementation.
-      if ($type === NULL) {
-        $type = $hook('Media', $value, $context, $info);
-      }
-    });
-    if ($type !== NULL) {
-      return $type;
-    }
-    if ($value instanceof MediaInterface) {
-      return 'Media' . $this->mapBundleToSchemaName($value->bundle());
-    }
-    throw new \Exception('Invalid media type.');
   }
 
 }
