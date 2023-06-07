@@ -89,12 +89,9 @@ jobs:
         working-directory: /tmp/test/thunder/install/docroot/themes/contrib
 
       - name: Set database isolation level to read commited
+        working-directory: /tmp/test/thunder/install/docroot/sites/default
         run: |
-          cat << 'EOF' >> docroot/sites/default/settings.php
-            $databases['default']['default']['init_commands'] = [
-            'isolation_level' => 'SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED',
-          ];
-          EOF
+          echo "\$databases['default']['default']['init_commands'] = ['isolation_level' => 'SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED'];" >> settings.php
 
       # Debug session
       - name: Setup tmate session
