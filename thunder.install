@@ -5,8 +5,8 @@
  * Install, update and uninstall functions for the thunder installation profile.
  */
 
-use Drupal\update_helper\UpdateLogger;
 use Drupal\Core\Entity\EntityStorageException;
+use Drupal\update_helper\UpdateLogger;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**

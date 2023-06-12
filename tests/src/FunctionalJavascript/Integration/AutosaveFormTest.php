@@ -2,10 +2,10 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 
+use Drupal\Tests\thunder\FunctionalJavascript\ThunderArticleTestTrait;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderFormFieldTestTrait;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
-use Drupal\Tests\thunder\FunctionalJavascript\ThunderArticleTestTrait;
 
 /**
  * Tests the autosave support for nodes in Thunder.
