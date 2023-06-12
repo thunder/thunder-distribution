@@ -60,8 +60,7 @@
         {
           "__typename": "ParagraphVideo",
           "url": "https://www.youtube.com/watch?v=Hu5hC46z5LI",
-          "provider": "youtube",
-          "reference": "https://www.youtube.com/watch?v=Hu5hC46z5LI"
+          "provider": "youtube"
         },
         {
           "__typename": "ParagraphPinterest",
