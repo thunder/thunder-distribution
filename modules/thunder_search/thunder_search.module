@@ -5,8 +5,8 @@
  * Thunder Search integration hooks.
  */
 
-use Drupal\views\ViewExecutable;
 use Drupal\search_api\Plugin\views\query\SearchApiQuery;
+use Drupal\views\ViewExecutable;
 
 /**
  * Implements hook_views_pre_render().

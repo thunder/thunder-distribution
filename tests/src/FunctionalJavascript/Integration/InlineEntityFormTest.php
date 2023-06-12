@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 
-use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderFormFieldTestTrait;
+use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 
 /**
  * Test for update hook changes.
