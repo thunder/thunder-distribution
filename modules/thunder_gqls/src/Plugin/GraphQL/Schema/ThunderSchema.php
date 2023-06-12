@@ -85,7 +85,22 @@ class ThunderSchema extends ComposableSchema {
    * {@inheritdoc}
    */
   protected function getExtensions(): array {
-    return array_map(fn($id): object => $this->extensionManager->createInstance($id), array_unique(array_merge(array_filter($this->getConfiguration()['extensions']), static::REQUIRED_EXTENSIONS)));
+    $array = array_unique(
+      array_merge(
+        array_filter($this->getConfiguration()['extensions']),
+        static::REQUIRED_EXTENSIONS)
+    );
+    usort(
+      $array, static function($a, $b){
+      if (str_starts_with($a, 'thunder_')) {
+        return -1;
+      }
+      return 1;
+    });
+
+    return array_map(
+      fn($id): object => $this->extensionManager->createInstance($id), $array
+    );
   }
 
   /**

@@ -82,10 +82,7 @@ abstract class DecoratableTypeResolver {
     }
 
     if ($this->decorated !== NULL) {
-      $type = $this->decorated->__invoke($object);
-      if ($type !== NULL) {
-        return $type;
-      }
+      return $this->decorated->__invoke($object);
     }
 
     throw new \RuntimeException(sprintf("Can not map instance of '%s' to concrete GraphQL Type.", get_class($object)));
