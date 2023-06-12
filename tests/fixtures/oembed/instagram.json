@@ -5,7 +5,7 @@
   "provider_url": "https://www.instagram.com/",
   "type": "rich",
   "width": 658,
-  "html": "\u003Cp>It works\u003C/p>",
+  "html": "\u003Cdiv class=\"instagram-test-embed\">It works\u003C/div>",
   "thumbnail_url": "internal:/core/misc/druplicon.png",
   "thumbnail_width": 640,
   "thumbnail_height": 640
