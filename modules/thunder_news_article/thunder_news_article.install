@@ -5,8 +5,8 @@
  * The install file.
  */
 
-use Drupal\user\Entity\Role;
 use Drupal\Core\Config\FileStorage;
+use Drupal\user\Entity\Role;
 
 /**
  * Implements hook_install().

@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 
+use Drupal\media\Entity\Media;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
-use Drupal\media\Entity\Media;
 
 /**
  * Tests integration with the entity_reference_actions and views_bulk_edit.
