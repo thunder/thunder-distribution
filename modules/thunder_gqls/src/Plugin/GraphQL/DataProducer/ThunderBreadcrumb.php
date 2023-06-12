@@ -2,12 +2,12 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\Core\Breadcrumb\BreadcrumbManager;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Routing\CurrentRouteMatch;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\graphql\GraphQL\Execution\FieldContext;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Gets the breadcrumb of the current path.
