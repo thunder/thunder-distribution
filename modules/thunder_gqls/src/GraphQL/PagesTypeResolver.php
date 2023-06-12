@@ -22,7 +22,7 @@ class PagesTypeResolver extends DecoratableTypeResolver {
       if ($object->bundle() === 'page') {
         return 'BasicPage';
       }
-      $this->mapBundleToSchemaName($object->bundle());
+      return $this->mapBundleToSchemaName($object->bundle());
     }
     return NULL;
   }
