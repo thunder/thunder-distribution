@@ -2,17 +2,17 @@
 
 namespace Drupal\Tests\thunder\Functional\Installer;
 
-use Drupal\Core\Language\LanguageDefault;
-use Drupal\Core\StringTranslation\TranslationManager;
-use GuzzleHttp\Client;
-use Drupal\Core\Http\ClientFactory;
 use Drupal\Core\DrupalKernel;
+use Drupal\Core\Http\ClientFactory;
 use Drupal\Core\Language\Language;
+use Drupal\Core\Language\LanguageDefault;
 use Drupal\Core\Session\UserSession;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\StringTranslation\TranslationManager;
 use Drupal\Core\Test\HttpClientMiddleware\TestHttpClientMiddleware;
 use Drupal\FunctionalTests\Installer\InstallerTestBase;
+use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
