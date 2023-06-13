@@ -12,13 +12,6 @@ use Drupal\thunder_gqls\GraphQL\DecoratableTypeResolver;
 class DecoratableTypeResolverTest extends GraphQLTestBase {
 
   /**
-   * {@inheritdoc}
-   */
-  protected static $modules = [
-    'thunder_gqls',
-  ];
-
-  /**
    * The type resolver.
    *
    * @var \Drupal\thunder_gqls\GraphQL\DecoratableTypeResolver
@@ -56,9 +49,9 @@ class DecoratableTypeResolverTest extends GraphQLTestBase {
   }
 
   /**
-   * Test the resolve method.
+   * Test the decoration.
    */
-  public function testResolve(): void {
+  public function testDecoration(): void {
     $newsNode = $this->createMock(NodeInterface::class);
     $newsNode->method('bundle')
       ->willReturn('news');
