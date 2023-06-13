@@ -19,6 +19,20 @@ class DecoratableTypeResolverTest extends GraphQLTestBase {
   ];
 
   /**
+   * The type resolver.
+   *
+   * @var \Drupal\thunder_gqls\GraphQL\DecoratableTypeResolver
+   */
+  protected DecoratableTypeResolver $resolver;
+
+  /**
+   * The decorated type resolver.
+   *
+   * @var \Drupal\thunder_gqls\GraphQL\DecoratableTypeResolver
+   */
+  protected DecoratableTypeResolver $decoratedResolver;
+
+  /**
    * {@inheritdoc}
    */
   public function setUp(): void {
