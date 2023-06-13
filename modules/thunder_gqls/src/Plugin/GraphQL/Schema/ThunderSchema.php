@@ -96,7 +96,7 @@ class ThunderSchema extends ComposableSchema {
 
     // Sort extensions, so that thunder extensions are loaded first.
     usort($allExtensions, static function ($a, $b) use ($thunderExtensions): int {
-      return in_array($a, $thunderExtensions, true) ? -1 : 1;
+      return in_array($a, $thunderExtensions, TRUE) ? -1 : 1;
     });
 
     return array_map(
@@ -158,11 +158,11 @@ class ThunderSchema extends ComposableSchema {
    * Get all extensions, that are defined by this module.
    *
    * @return string[]
-   *  The extension names.
+   *   The extension names.
    */
   private function getThunderExtensions(): array {
     $thunderExtensionPath = $this->moduleHandler->getModule('thunder_gqls')
-        ->getPath() . '/graphql';
+      ->getPath() . '/graphql';
 
     return array_map(
       fn($file) => explode('.', $file)[0],
