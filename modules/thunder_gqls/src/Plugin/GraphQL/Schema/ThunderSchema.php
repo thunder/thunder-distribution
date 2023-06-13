@@ -83,6 +83,7 @@ class ThunderSchema extends ComposableSchema {
 
   /**
    * {@inheritdoc}
+   *
    * @throws \Drupal\Component\Plugin\Exception\PluginException
    */
   protected function getExtensions(): array {
