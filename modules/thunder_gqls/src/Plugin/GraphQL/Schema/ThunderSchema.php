@@ -87,7 +87,7 @@ class ThunderSchema extends ComposableSchema {
    * @throws \Drupal\Component\Plugin\Exception\PluginException
    */
   protected function getExtensions(): array {
-    // Extensions defined by this module.
+    // Extensions defined by Thunder.
     $thunderExtensions = $this->getThunderExtensions();
 
     // Extension that are saved in config.
@@ -96,7 +96,7 @@ class ThunderSchema extends ComposableSchema {
     // Add required extensions, if they are missing in the config.
     $allExtensions = array_unique(array_merge($configuredExtensions, static::REQUIRED_EXTENSIONS));
 
-    // Sort extensions, so that thunder extensions are loaded first.
+    // Sort extensions, so that Thunder extensions are loaded first.
     usort($allExtensions, static function ($a, $b) use ($thunderExtensions): int {
       return in_array($a, $thunderExtensions, TRUE) ? -1 : 1;
     });
