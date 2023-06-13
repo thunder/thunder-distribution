@@ -90,7 +90,7 @@ class ThunderSchema extends ComposableSchema {
     // Extensions defined by this module.
     $thunderExtensions = $this->getThunderExtensions();
 
-    // Extension that are saved in config, this might include thunder extensions.
+    // Extension that are saved in config.
     $configuredExtensions = array_filter($this->getConfiguration()['extensions']);
 
     // Add required extensions, if they are missing in the config.
