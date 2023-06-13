@@ -20,13 +20,6 @@ class PagesTypeResolverTest extends GraphQLTestBase {
   ];
 
   /**
-   * {@inheritdoc}
-   */
-  public function setUp(): void {
-    parent::setUp();
-  }
-
-  /**
    * Test the resolve method.
    */
   public function testResolve(): void {
