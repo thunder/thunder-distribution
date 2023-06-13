@@ -85,21 +85,23 @@ class ThunderSchema extends ComposableSchema {
    * {@inheritdoc}
    */
   protected function getExtensions(): array {
-    $array = array_unique(
-      array_merge(
-        array_filter($this->getConfiguration()['extensions']),
-        static::REQUIRED_EXTENSIONS)
-    );
-    usort(
-      $array, static function ($a, $b) {
-        if (str_starts_with($a, 'thunder_')) {
-          return -1;
-        }
-        return 1;
-      });
+    // Extensions defined by this module.
+    $thunderExtensions = $this->getThunderExtensions();
+
+    // Extension that are saved in config, this might include thunder extensions.
+    $configuredExtensions = array_filter($this->getConfiguration()['extensions']);
+
+    // Add required extensions, if they are missing in the config.
+    $allExtensions = array_unique(array_merge($configuredExtensions, static::REQUIRED_EXTENSIONS));
+
+    // Sort extensions, so that thunder extensions are loaded first.
+    usort($allExtensions, static function ($a, $b) use ($thunderExtensions): int {
+      return in_array($a, $thunderExtensions, true) ? -1 : 1;
+    });
 
     return array_map(
-      fn($id): object => $this->extensionManager->createInstance($id), $array
+      fn($id) => $this->extensionManager->createInstance($id),
+      $allExtensions
     );
   }
 
@@ -150,6 +152,25 @@ class ThunderSchema extends ComposableSchema {
     ]);
     $this->addSimpleCallbackFields('ImageDerivative', ['src', 'width', 'height']);
     $this->addSimpleCallbackFields('Schema', ['query']);
+  }
+
+  /**
+   * Get all extensions, that are defined by this module.
+   *
+   * @return string[]
+   *  The extension names.
+   */
+  private function getThunderExtensions(): array {
+    $thunderExtensionPath = $this->moduleHandler->getModule('thunder_gqls')
+        ->getPath() . '/graphql';
+
+    return array_map(
+      fn($file) => explode('.', $file)[0],
+      array_filter(
+        scandir($thunderExtensionPath),
+        fn($file) => str_ends_with($file, 'base.graphqls')
+      )
+    );
   }
 
 }
