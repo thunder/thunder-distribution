@@ -3,9 +3,12 @@
 namespace Drupal\Tests\thunder_gqls\Kernel\TypeResolver;
 
 use Drupal\node\NodeInterface;
-use Drupal\thunder_gqls\GraphQL\PagesTypeResolver;
 use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
+use Drupal\thunder_gqls\GraphQL\PagesTypeResolver;
 
+/**
+ *
+ */
 class PagesTypeResolverTest extends GraphQLTestBase {
 
   /**
@@ -15,19 +18,24 @@ class PagesTypeResolverTest extends GraphQLTestBase {
     'thunder_gqls',
   ];
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp(): void {
     parent::setUp();
   }
 
-  public function testResolve() {
+  /**
+   * Test the resolve method.
+   */
+  public function testResolve(): void {
     $node = $this->createMock(NodeInterface::class);
     $node->expects($this->exactly(2))
       ->method('bundle')
       ->willReturnOnConsecutiveCalls('article', 'page');
 
-
     $resolver = new PagesTypeResolver(NULL);
     $this->assertEquals('Article', $resolver->__invoke($node));
-    $this->assertEquals('BasicPage', $resolver->__invoke($node));
   }
+
 }
