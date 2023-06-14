@@ -397,6 +397,15 @@ display:
             date_format: short
             custom_date_format: ''
             timezone: ''
+            tooltip:
+              date_format: ''
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -464,6 +473,15 @@ display:
             date_format: short
             custom_date_format: ''
             timezone: ''
+            tooltip:
+              date_format: ''
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1064,7 +1082,7 @@ display:
         empty: false
         access: false
         arguments: false
-      display_description: 'Scheduled media on user profile, showing just that user''s scheduled media'
+      display_description: "Scheduled media on user profile, showing just that user's scheduled media"
       display_comment: 'Access to the user view is controlled via a custom RouteSubscriber. The high-level "view media" permission is added to satisfy the security_review module'
       display_extenders: {  }
       path: user/%user/scheduled_media
