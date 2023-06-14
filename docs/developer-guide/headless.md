@@ -516,7 +516,7 @@ class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
 
 ### Extend existing type resolver
 
-We provide type resolvers for our interfaces. FOr example a page type resolver, that resolves entities to their bundle
+We provide type resolvers for our interfaces. For example a page type resolver, that resolves entities to their bundle
 names. E.g. article nodes resolve to Article page type and tha channel taxonomy to Channel page type.
 If that automatic type resolver is not working for you, you can add your own type resolver and decorate it with
 our resolver as a fallback.
