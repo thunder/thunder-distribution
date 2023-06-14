@@ -581,7 +581,7 @@ class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function registerResolvers(ResolverRegistryInterface $registry) {
+  public function registerResolvers(ResolverRegistryInterface $registry): void {
     // Call the parent resolver first.
     parent::registerResolvers($registry);
 
