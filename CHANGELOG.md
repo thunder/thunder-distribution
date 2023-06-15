@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.0.0](https://github.com/thunder/thunder-distribution/tree/7.0.0) 2023-06-15
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.0.0-beta2...7.0.0)
+
+Adds decoratable type resolver for GraphQL.
+
 ## [7.0.0-beta2](https://github.com/thunder/thunder-distribution/tree/7.0.0-beta2) 2023-03-13
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.0.0-beta1...7.0.0-beta2)
