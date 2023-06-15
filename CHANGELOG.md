@@ -4,9 +4,9 @@
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.0.0-beta2...7.0.0)
 
-  * Add decoratable type resolver for GraphQL.
-  * Add integration for the Xymatic module.
-  * A new content type "News Article", that is similar to the "Article" content type, but has different metadata.
+* Add decoratable type resolver for GraphQL.
+* Add integration for the Xymatic module.
+* A new content type "News Article", that is similar to the "Article" content type, but has different metadata.
 
 ## [7.0.0-beta2](https://github.com/thunder/thunder-distribution/tree/7.0.0-beta2) 2023-03-13
 
