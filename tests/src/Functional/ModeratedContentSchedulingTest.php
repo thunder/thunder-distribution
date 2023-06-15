@@ -38,7 +38,7 @@ class ModeratedContentSchedulingTest extends ThunderTestBase {
    */
   public function testPublishStateSchedule(): void {
     $publish_timestamp = strtotime('yesterday');
-    /** @var \Drupal\node\NodeStorageInterface $node_storage */
+    /** @var \Drupal\Core\Entity\RevisionableStorageInterface $node_storage */
     $node_storage = \Drupal::entityTypeManager()->getStorage('node');
 
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
