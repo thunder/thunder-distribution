@@ -227,20 +227,3 @@ parameters:
 			message: "#^Class Drupal\\\\Tests\\\\TestSuites\\\\ThunderTestSuite extends @internal class PHPUnit\\\\Framework\\\\TestSuite\\.$#"
 			count: 1
 			path: tests/src/TestSuites/ThunderTestSuite.php
-		-
-			message: """
-				#^Call to deprecated method loadRevision\\(\\) of class Drupal\\\\Core\\\\Entity\\\\EntityStorageInterface\\:
-				in drupal\\:10\\.1\\.0 and is removed from drupal\\:11\\.0\\.0\\. Use
-				\\\\Drupal\\\\Core\\\\Entity\\\\RevisionableStorageInterface\\:\\:loadRevision instead\\.$#
-			"""
-			count: 1
-			path: modules/thunder_workflow/src/Plugin/Field/FieldWidget/ModerationStateWidget.php
-
-		-
-			message: """
-				#^Call to deprecated method loadRevision\\(\\) of class Drupal\\\\Core\\\\Entity\\\\EntityStorageInterface\\:
-				in drupal\\:10\\.1\\.0 and is removed from drupal\\:11\\.0\\.0\\. Use
-				\\\\Drupal\\\\Core\\\\Entity\\\\RevisionableStorageInterface\\:\\:loadRevision instead\\.$#
-			"""
-			count: 3
-			path: tests/src/Functional/ModeratedContentSchedulingTest.php
