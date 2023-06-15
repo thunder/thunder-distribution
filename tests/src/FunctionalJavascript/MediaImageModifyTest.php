@@ -90,6 +90,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $this->assertEquals([$file->getFilename()], $this->getSession()->evaluateScript('jQuery(\'[data-drupal-selector="edit-field-paragraphs-0-preview"] article.media--view-mode-paragraph-preview img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1)'), 'Image file should be identical to previously selected.');
 
     // Go to the media view and try deleting the image media.
+    Role::load(static::$defaultUserRole)->revokePermission('delete own files')->save();
     $this->drupalGet('admin/content/media');
     $this->getSession()->getPage()->find('css', 'div.view-media')->clickLink('Thunder City');
     $media = $this->loadMediaByUuid('5d719c64-7f32-4062-9967-9874f5ca3eba');
