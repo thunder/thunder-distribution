@@ -72,19 +72,6 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
   }
 
   /**
-   * Takes the bundle name and returns the schema name.
-   *
-   * @param string $bundleName
-   *   The bundle name.
-   *
-   * @return string
-   *   Returns the mapped bundle name.
-   */
-  protected function mapBundleToSchemaName(string $bundleName) {
-    return str_replace('_', '', ucwords($bundleName, '_'));
-  }
-
-  /**
    * Add fields common to all entities.
    *
    * @param string $type
