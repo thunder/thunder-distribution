@@ -282,7 +282,6 @@ jobs:
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
 
     env:
-      DRUPAL_TESTING_DRUPAL_VERSION: '~10.0.0'
       DRUPAL_TESTING_TEST_GROUP: Thunder
 
     steps:
@@ -316,7 +315,7 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Install suggested dependencies
-        run: composer require "league/container:^4.2" "consolidation/config:^2.1.2" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: composer require "league/container:^4.2" --no-update --no-progress --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build
