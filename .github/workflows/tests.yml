@@ -10,7 +10,7 @@ on:
     - cron: '0 6 * * *'
 
 env:
-  DRUPAL_TESTING_COMPOSER_PROJECT: "thunder/thunder-project"
+  DRUPAL_TESTING_COMPOSER_PROJECT: thunder/thunder-project
   DRUPAL_TESTING_DATABASE_USER: root
   DRUPAL_TESTING_DATABASE_PASSWORD: root
   DRUPAL_TESTING_TEST_DUMP_FILE: site-dump.tar.gz
