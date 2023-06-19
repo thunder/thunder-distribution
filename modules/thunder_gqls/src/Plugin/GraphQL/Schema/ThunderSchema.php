@@ -2,11 +2,11 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\Schema;
 
-use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Url;
 use Drupal\graphql\GraphQL\ResolverRegistry;
+use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\graphql\Plugin\DataProducerPluginManager;
 use Drupal\graphql\Plugin\GraphQL\Schema\ComposableSchema;
 use Drupal\graphql\Plugin\GraphQL\Schema\SdlSchemaPluginBase;
@@ -83,9 +83,28 @@ class ThunderSchema extends ComposableSchema {
 
   /**
    * {@inheritdoc}
+   *
+   * @throws \Drupal\Component\Plugin\Exception\PluginException
    */
   protected function getExtensions(): array {
-    return array_map(fn($id): object => $this->extensionManager->createInstance($id), array_unique(array_merge(array_filter($this->getConfiguration()['extensions']), static::REQUIRED_EXTENSIONS)));
+    // Extensions defined by Thunder.
+    $thunderExtensions = $this->getThunderExtensions();
+
+    // Extension that are saved in config.
+    $configuredExtensions = array_filter($this->getConfiguration()['extensions']);
+
+    // Add required extensions, if they are missing in the config.
+    $allExtensions = array_unique(array_merge($configuredExtensions, static::REQUIRED_EXTENSIONS));
+
+    // Sort extensions, so that Thunder extensions are loaded first.
+    usort($allExtensions, static function ($a, $b) use ($thunderExtensions): int {
+      return in_array($a, $thunderExtensions, TRUE) ? -1 : 1;
+    });
+
+    return array_map(
+      fn($id) => $this->extensionManager->createInstance($id),
+      $allExtensions
+    );
   }
 
   /**
@@ -135,6 +154,25 @@ class ThunderSchema extends ComposableSchema {
     ]);
     $this->addSimpleCallbackFields('ImageDerivative', ['src', 'width', 'height']);
     $this->addSimpleCallbackFields('Schema', ['query']);
+  }
+
+  /**
+   * Get all extensions, that are defined by this module.
+   *
+   * @return string[]
+   *   The extension names.
+   */
+  private function getThunderExtensions(): array {
+    $thunderExtensionPath = $this->moduleHandler->getModule('thunder_gqls')
+      ->getPath() . '/graphql';
+
+    return array_map(
+      fn($file) => explode('.', $file)[0],
+      array_filter(
+        scandir($thunderExtensionPath),
+        fn($file) => str_ends_with($file, 'base.graphqls')
+      )
+    );
   }
 
 }

@@ -140,6 +140,10 @@ jobs:
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
 
+      - name: Set mysql isolation level to read committed to prevent deadlocks
+        run: |
+          mysql --host="127.0.0.1" --user=root --password=root -e "SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;"
+
       - name: Prepare fixtures
         run: docker cp ./tests/fixtures chrome:/fixtures
 
@@ -212,6 +216,10 @@ jobs:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-cache-
+
+      - name: Set mysql isolation level to read committed to prevent deadlocks
+        run: |
+          mysql --host="127.0.0.1" --user=root --password=root -e "SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;"
 
       - name: Prepare fixtures
         run: docker cp ./tests/fixtures chrome:/fixtures
@@ -302,6 +310,10 @@ jobs:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-cache-
+
+      - name: Set mysql isolation level to read committed to prevent deadlocks
+        run: |
+          mysql --host="127.0.0.1" --user=root --password=root -e "SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;"
 
       - name: Prepare fixtures
         run: docker cp ./tests/fixtures chrome:/fixtures

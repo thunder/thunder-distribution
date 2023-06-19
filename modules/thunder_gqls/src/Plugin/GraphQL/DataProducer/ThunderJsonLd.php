@@ -2,13 +2,13 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\graphql\GraphQL\Execution\FieldContext;
-use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\schema_metatag\SchemaMetatagManager;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\metatag\MetatagManager;
+use Drupal\schema_metatag\SchemaMetatagManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Gets the JSON-LD script of the current path.
