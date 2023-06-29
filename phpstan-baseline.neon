@@ -227,3 +227,7 @@ parameters:
 			message: "#^Class Drupal\\\\Tests\\\\TestSuites\\\\ThunderTestSuite extends @internal class PHPUnit\\\\Framework\\\\TestSuite\\.$#"
 			count: 1
 			path: tests/src/TestSuites/ThunderTestSuite.php
+		-
+			message: "#^Missing call to parent\\:\\:setUp\\(\\) method.$#"
+			count: 1
+			path: tests/src/Functional/Installer/ThunderInstallerTest.php
