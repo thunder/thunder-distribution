@@ -90,7 +90,6 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $this->assertEquals([$file->getFilename()], $this->getSession()->evaluateScript('jQuery(\'[data-drupal-selector="edit-field-paragraphs-0-preview"] article.media--view-mode-paragraph-preview img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1)'), 'Image file should be identical to previously selected.');
 
     // Go to the media view and try deleting the image media.
-    Role::load(static::$defaultUserRole)->revokePermission('delete own files')->save();
     $this->drupalGet('admin/content/media');
     $this->getSession()->getPage()->find('css', 'div.view-media')->clickLink('Thunder City');
     $media = $this->loadMediaByUuid('5d719c64-7f32-4062-9967-9874f5ca3eba');
@@ -99,12 +98,17 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $file = $media->get($media->getSource()->getConfiguration()['source_field'])->entity;
     $this->assertFileExists($file->getFileUri());
     $this->getSession()->getPage()->find('css', 'div.gin-sidebar')->clickLink('Delete');
+    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', '#drupal-modal'));
     $this->assertSession()->fieldNotExists('also_delete_file');
     $this->assertSession()->pageTextContains('This action cannot be undone.The file attached to this media is owned by admin so will be retained.');
     Role::load(static::$defaultUserRole)->grantPermission('delete any file')->save();
     $this->getSession()->reload();
+    $this->getSession()->getPage()->find('css', 'div.gin-sidebar')->clickLink('Delete');
+    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', '#drupal-modal'));
     $this->assertSession()->fieldExists('also_delete_file')->check();
-    $this->getSession()->getPage()->pressButton('Delete');
+    $this->click('.ui-dialog button:contains("Delete")');
     $this->assertFileDoesNotExist($file->getFileUri());
   }
 
