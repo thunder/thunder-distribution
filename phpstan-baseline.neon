@@ -8,6 +8,11 @@ parameters:
 		-
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"
 			count: 1
+			path: modules/thunder_article/src/Form/ThunderNodeFormHelper.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
 			path: modules/thunder_article/src/Plugin/Derivative/DynamicLocalTasks.php
 
 		-
@@ -100,11 +105,6 @@ parameters:
 
 		-
 			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
-			count: 6
-			path: tests/src/FunctionalJavascript/NodeCreationTest.php
-
-		-
-			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
 			count: 2
 			path: tests/src/FunctionalJavascript/ArticleSchedulerIntegrationTest.php
 
@@ -174,14 +174,24 @@ parameters:
 			path: tests/src/FunctionalJavascript/MediaGalleryModifyTest.php
 
 		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:assertWaitOnAjaxRequest\\(\\)\\.$#"
+			count: 2
+			path: tests/src/FunctionalJavascript/MediaImageModifyTest.php
+
+		-
 			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
-			count: 6
+			count: 8
 			path: tests/src/FunctionalJavascript/MediaImageModifyTest.php
 
 		-
 			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
 			count: 4
 			path: tests/src/FunctionalJavascript/MetaInformationTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 6
+			path: tests/src/FunctionalJavascript/NodeCreationTest.php
 
 		-
 			message: "#^Access to an undefined property Drupal\\\\Core\\\\Session\\\\AccountInterface\\:\\:\\$pass_raw\\.$#"
