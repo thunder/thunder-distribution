@@ -48,6 +48,7 @@ permissions:
   - 'delete media'
   - 'delete news_article revisions'
   - 'delete own article content'
+  - 'delete own files'
   - 'delete own news_article content'
   - 'delete own page content'
   - 'delete page revisions'

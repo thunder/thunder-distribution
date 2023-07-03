@@ -379,6 +379,15 @@ display:
             date_format: short
             custom_date_format: ''
             timezone: ''
+            tooltip:
+              date_format: ''
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -446,6 +455,15 @@ display:
             date_format: short
             custom_date_format: ''
             timezone: ''
+            tooltip:
+              date_format: ''
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1001,8 +1019,8 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      display_description: 'Overview of all scheduled content, as a tab on main ''content admin'' page'
-      display_comment: 'Revision nid relationship is required because the content type is only stored at ''content'' level, not ''content revision'' level.'
+      display_description: "Overview of all scheduled content, as a tab on main 'content admin' page"
+      display_comment: "Revision nid relationship is required because the content type is only stored at 'content' level, not 'content revision' level."
       display_extenders: {  }
       path: admin/content/scheduled
       menu:
@@ -1101,7 +1119,7 @@ display:
         arguments: false
         filters: true
         filter_groups: true
-      display_description: 'Scheduled content tab on user profile, showing just that user''s scheduled content'
+      display_description: "Scheduled content tab on user profile, showing just that user's scheduled content"
       display_comment: 'Access to the user view is controlled via a custom RouteSubscriber. The high-level "view published content" permission is added to satisfy the security_review module'
       display_extenders: {  }
       path: user/%user/scheduled

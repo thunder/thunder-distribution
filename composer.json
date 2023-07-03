@@ -36,9 +36,8 @@
         "patches": {
             "drupal/core": {
                 "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2021-05-31/3133639.19.patch",
-                "It is possible to overflow the number of items allowed in Media Library": "https://www.drupal.org/files/issues/2022-12-27/3059955-159.patch",
                 "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch",
-                "\"Add another item\" field button is displayed as a modal action": "https://www.drupal.org/files/issues/2023-06-15/3151534-10.0-64.patch"
+                "\"Add another item\" field button is displayed as a modal action": "https://www.drupal.org/files/issues/2023-06-15/3151534-10.1-65.patch"
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
@@ -65,7 +64,7 @@
         "drupal/autosave_form": "^1.2",
         "drupal/blazy": "^2.14",
         "drupal/checklistapi": "^2.1",
-        "drupal/core-recommended": "~10.0.8",
+        "drupal/core-recommended": "~10.1.0@STABLE",
         "drupal/config_selector": "^2.1",
         "drupal/config_update": "^1.7 || ^2.0",
         "drupal/content_lock": "^2.1",
@@ -96,7 +95,7 @@
         "drupal/metatag": "^1.26",
         "drupal/metatag_async_widget": "^1.0-alpha2",
         "drupal/paragraphs": "^1.12",
-        "drupal/paragraphs_features": "dev-2.x",
+        "drupal/paragraphs_features": "^2.0",
         "drupal/paragraphs_paste": "^2.0-beta3",
         "drupal/password_policy": "^4.0",
         "drupal/pathauto": "^1.11",
