@@ -322,6 +322,9 @@ jobs:
         env:
           DRUPAL_TESTING_MIN_BUILD: true
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - name: Setup Apache
         uses: thunder/apache-shiva-php-action@v1
         with:
