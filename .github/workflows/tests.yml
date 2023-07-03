@@ -311,9 +311,6 @@ jobs:
           composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true --no-plugins
           composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
