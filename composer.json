@@ -47,9 +47,6 @@
                 "Fix help icon positioning": "https://www.drupal.org/files/issues/2023-03-09/3339856.diff",
                 "Fix Custom wide or square logo in toolbar floated on left": "https://www.drupal.org/files/issues/2023-05-16/3357587.diff"
             },
-            "drupal/media_entity_pinterest": {
-                "to a member function mainPropertyName() on null in media_entity_pinterest/src/Plugin/media/Source/Pinterest.php on line 155": "https://www.drupal.org/files/issues/2023-03-09/3179172.diff"
-            },
             "drupal/focal_point": {
                 "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-06/3162210-17.patch"
             }
@@ -86,7 +83,7 @@
         "drupal/length_indicator": "^1.2",
         "drupal/linkit": "^6.0-beta4",
         "drupal/media_entity_instagram": "^3.0.3",
-        "drupal/media_entity_pinterest": "2.6",
+        "drupal/media_entity_pinterest": "^2.7",
         "drupal/media_entity_slideshow": "^2.0-alpha1",
         "drupal/media_entity_twitter": "^2.5",
         "drupal/media_expire": "^2.6",
