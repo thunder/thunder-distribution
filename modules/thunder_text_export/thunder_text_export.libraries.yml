@@ -1,0 +1,5 @@
+copyToClipboard:
+  js:
+    js/copyToClipboard.js: { }
+  dependencies:
+    - core/drupal.ajax
