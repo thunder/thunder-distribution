@@ -29,7 +29,7 @@ class CopyToClipboardCommand implements CommandInterface {
   /**
    * Implements Drupal\Core\Ajax\CommandInterface:render().
    */
-  public function render() {
+  public function render(): array {
     return [
       'command' => 'copyToClipboard',
       'message' => $this->text,

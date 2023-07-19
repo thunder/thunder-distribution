@@ -14,7 +14,7 @@ use Drupal\thunder_text_export\Ajax\CopyToClipboardCommand;
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function thunder_text_export_form_node_type_edit_form_alter(array &$form, FormStateInterface $form_state) {
+function thunder_text_export_form_node_type_edit_form_alter(array &$form, FormStateInterface $form_state): void {
 
   /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $entity_type */
   $entity_type = $form_state->getFormObject()->getEntity();
@@ -55,7 +55,7 @@ function thunder_text_export_form_node_type_edit_form_alter(array &$form, FormSt
 /**
  * Entity builder for the node type form.
  */
-function _thunder_text_export_form_entity_type_form_builder(string $entity_type, ConfigEntityInterface $type, array &$form, FormStateInterface $form_state) {
+function _thunder_text_export_form_entity_type_form_builder(string $entity_type, ConfigEntityInterface $type, array &$form, FormStateInterface $form_state): void {
 
   // Save the values from the form into the config entity.
   $type->setThirdPartySetting('thunder_text_export', 'enabled', $form_state->getValue('thunder_text_export_enabled'));
@@ -65,15 +65,16 @@ function _thunder_text_export_form_entity_type_form_builder(string $entity_type,
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function thunder_text_export_form_node_form_alter(array &$form, FormStateInterface $form_state) {
+function thunder_text_export_form_node_form_alter(array &$form, FormStateInterface $form_state): void {
+
+  /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
+  $form_object = $form_state->getFormObject();
 
   // Check if the node is already saved.
-  if ($form_state->getFormObject()->getEntity()->isNew()) {
+  $entity = $form_object->getEntity();
+  if ($entity->isNew()) {
     return;
   }
-
-  /** @var \Drupal\Core\Entity\EntityInterface $entity */
-  $entity = $form_state->getFormObject()->getEntity();
 
   /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $entity_type */
   $entity_type = \Drupal::entityTypeManager()->getStorage($entity->getEntityType()->getBundleEntityType())->load($entity->bundle());
@@ -98,13 +99,13 @@ function thunder_text_export_form_node_form_alter(array &$form, FormStateInterfa
 /**
  * AJAX callback for the clipboard button.
  */
-function thunder_text_export_button_ajax_callback(array &$form, FormStateInterface $form_state) {
-  $response = new AjaxResponse();
+function thunder_text_export_button_ajax_callback(array &$form, FormStateInterface $form_state): AjaxResponse {
+  /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
+  $form_object = $form_state->getFormObject();
 
-  /** @var \Drupal\Core\Entity\EntityInterface $entity */
-  $entity = $form_state->getFormObject()->getEntity();
+  $entity = $form_object->getEntity();
 
-  // Get config entity based on the node type.
+  /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $entity_type */
   $entity_type = \Drupal::entityTypeManager()->getStorage($entity->getEntityType()->getBundleEntityType())->load($entity->bundle());
 
   // Get the view mode from the config entity.
@@ -115,6 +116,8 @@ function thunder_text_export_button_ajax_callback(array &$form, FormStateInterfa
     ->view($entity, $view_mode ?? 'full');
 
   $output = PlainTextOutput::renderFromHtml((string) \Drupal::service('renderer')->renderPlain($build));
+
+  $response = new AjaxResponse();
 
   // Use the ClipboardCommand to copy the text to the user's clipboard.
   $response->addCommand(new CopyToClipboardCommand($output));
