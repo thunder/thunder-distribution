@@ -1,10 +1,13 @@
-(function ($, Drupal) {
-
+((Drupal) => {
   /**
-   * Add new custom command.
+   * Command to copy text to clipboard.
+   *
+   * @param {object} ajax
+   *  The ajax object.
+   * @param {object} response
+   *  The ajax response.
    */
-  Drupal.AjaxCommands.prototype.copyToClipboard = function (ajax, response, status) {
+  Drupal.AjaxCommands.prototype.copyToClipboard = (ajax, response) => {
     navigator.clipboard.writeText(response.message);
-  }
-
-})(jQuery, Drupal);
+  };
+})(Drupal);

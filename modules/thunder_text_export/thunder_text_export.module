@@ -5,11 +5,11 @@
  * Contains thunder_text_export.module.
  */
 
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Config\Entity\ConfigEntityInterface;
-use Drupal\thunder_text_export\Ajax\CopyToClipboardCommand;
-use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Component\Render\PlainTextOutput;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Config\Entity\ConfigEntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\thunder_text_export\Ajax\CopyToClipboardCommand;
 
 /**
  * Implements hook_form_FORM_ID_alter().
