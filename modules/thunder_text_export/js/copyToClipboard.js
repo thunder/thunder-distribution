@@ -10,9 +10,11 @@
   Drupal.AjaxCommands.prototype.copyToClipboard = (ajax, response) => {
     if (window.isSecureContext && navigator.clipboard) {
       navigator.clipboard.writeText(response.message);
-    }
-    else {
-      alert('Copied to clipboard requires a secure context (HTTPS served website) and navigator.clipboard support.')
+    } else {
+      // eslint-disable-next-line no-alert
+      alert(
+        'Copied to clipboard requires a secure context (HTTPS served website) and navigator.clipboard support.',
+      );
     }
   };
 })(Drupal);
