@@ -25,13 +25,28 @@ function thunder_text_export_form_node_type_edit_form_alter(array &$form, FormSt
     '#type' => 'details',
     '#title' => t('Text export'),
     '#group' => 'additional_settings',
+    '#description' => t('Configure the text export for this content type.'),
+  ];
+
+  // Create a checkbox to enable/disable the text export.
+  $form['thunder_text_export']['thunder_text_export_enabled'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Enable text export'),
+    '#default_value' => $entity_type->getThirdPartySetting('thunder_text_export', 'enabled', FALSE),
   ];
 
   // Create a dropdown list of view modes.
   $form['thunder_text_export']['thunder_text_export_view_mode'] = [
     '#type' => 'select',
     '#options' => $view_modes,
-    '#title' => t('Select View Mode'),
+    '#default_value' => $entity_type->getThirdPartySetting('thunder_text_export', 'view_mode', 'default'),
+    '#title' => t('View Mode'),
+    '#description' => t('Select the view mode to be used for the text export.'),
+    '#states' => [
+      'visible' => [
+        ':input[name="thunder_text_export_enabled"]' => ['checked' => TRUE],
+      ],
+    ],
   ];
 
   $form['#entity_builders'][] = '_thunder_text_export_form_entity_type_form_builder';
@@ -42,6 +57,8 @@ function thunder_text_export_form_node_type_edit_form_alter(array &$form, FormSt
  */
 function _thunder_text_export_form_entity_type_form_builder(string $entity_type, ConfigEntityInterface $type, array &$form, FormStateInterface $form_state) {
 
+  // Save the values from the form into the config entity.
+  $type->setThirdPartySetting('thunder_text_export', 'enabled', $form_state->getValue('thunder_text_export_enabled'));
   $type->setThirdPartySetting('thunder_text_export', 'view_mode', $form_state->getValue('thunder_text_export_view_mode'));
 }
 
@@ -50,7 +67,19 @@ function _thunder_text_export_form_entity_type_form_builder(string $entity_type,
  */
 function thunder_text_export_form_node_form_alter(array &$form, FormStateInterface $form_state) {
 
+  // Check if the node is already saved.
   if ($form_state->getFormObject()->getEntity()->isNew()) {
+    return;
+  }
+
+  /** @var \Drupal\Core\Entity\EntityInterface $entity */
+  $entity = $form_state->getFormObject()->getEntity();
+
+  /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $entity_type */
+  $entity_type = \Drupal::entityTypeManager()->getStorage($entity->getEntityType()->getBundleEntityType())->load($entity->bundle());
+
+  // Check if the text export is enabled for this content type.
+  if (!$entity_type->getThirdPartySetting('thunder_text_export', 'enabled')) {
     return;
   }
 
@@ -76,7 +105,7 @@ function thunder_text_export_button_ajax_callback(array &$form, FormStateInterfa
   $entity = $form_state->getFormObject()->getEntity();
 
   // Get config entity based on the node type.
-  $entity_type = \Drupal::entityTypeManager()->getStorage('node_type')->load($entity->bundle());
+  $entity_type = \Drupal::entityTypeManager()->getStorage($entity->getEntityType()->getBundleEntityType())->load($entity->bundle());
 
   // Get the view mode from the config entity.
   $view_mode = $entity_type->getThirdPartySetting('thunder_text_export', 'view_mode');
