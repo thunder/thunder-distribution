@@ -8,15 +8,37 @@ use Drupal\Component\Render\PlainTextOutput;
 
 function thunder_text_export_form_node_type_edit_form_alter(array &$form, FormStateInterface $form_state) {
 
+  /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $entity_type */
+  $entity_type = $form_state->getFormObject()->getEntity();
+
+  $view_modes = \Drupal::service('entity_display.repository')->getViewModeOptionsByBundle($entity_type->getEntityType()->getBundleOf(), $entity_type->id());
+
+  $form['thunder_text_export'] = [
+    '#type' => 'details',
+    '#title' => t('Text export'),
+    '#group' => 'additional_settings',
+  ];
+
+  // Create a dropdown list of view modes.
+  $form['thunder_text_export']['thunder_text_export_view_mode'] = array(
+    '#type' => 'select',
+    '#options' => $view_modes,
+    '#title' => t('Select View Mode'),
+  );
+
   $form['#entity_builders'][] = '_thunder_text_export_form_entity_type_form_builder';
 }
 
 function _thunder_text_export_form_entity_type_form_builder(string $entity_type, ConfigEntityInterface $type, array &$form, FormStateInterface $form_state) {
 
-  $type->setThirdPartySetting('thunder_text_export', 'view_mode', 'd');
+  $type->setThirdPartySetting('thunder_text_export', 'view_mode', $form_state->getValue('thunder_text_export_view_mode'));
 }
 
 function thunder_text_export_form_node_form_alter(array &$form, FormStateInterface $form_state) {
+
+  if ($form_state->getFormObject()->getEntity()->isNew()) {
+    return;
+  }
 
   // Add the custom button to the node form actions.
   $form['actions']['copyToClipboard'] = [
@@ -36,11 +58,18 @@ function thunder_text_export_form_node_form_alter(array &$form, FormStateInterfa
 function thunder_text_export_button_ajax_callback(array &$form, FormStateInterface $form_state) {
   $response = new AjaxResponse();
 
-  $entity = $form_state->getformObject()->getEntity();
+  /** @var \Drupal\Core\Entity\EntityInterface $entity */
+  $entity = $form_state->getFormObject()->getEntity();
+
+  // Get config entity based on the node type.
+  $entity_type = \Drupal::entityTypeManager()->getStorage('node_type')->load($entity->bundle());
+
+  // Get the view mode from the config entity.
+  $view_mode = $entity_type->getThirdPartySetting('thunder_text_export', 'view_mode');
 
   $build = \Drupal::entityTypeManager()
     ->getViewBuilder($entity->getEntityTypeId())
-    ->view($entity, 'full');
+    ->view($entity, $view_mode ?? 'full');
 
   $output = PlainTextOutput::renderFromHtml((string) \Drupal::service('renderer')->renderPlain($build));
 
