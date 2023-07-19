@@ -4,6 +4,9 @@ namespace Drupal\thunder_text_export\Ajax;
 
 use Drupal\Core\Ajax\CommandInterface;
 
+/**
+ * Defines an AJAX command that copies text to the clipboard.
+ */
 class CopyToClipboardCommand implements CommandInterface {
 
   /**

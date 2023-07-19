@@ -1,11 +1,19 @@
 <?php
 
+/**
+ * @file
+ * Contains thunder_text_export.module.
+ */
+
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\thunder_text_export\Ajax\CopyToClipboardCommand;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Component\Render\PlainTextOutput;
 
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
 function thunder_text_export_form_node_type_edit_form_alter(array &$form, FormStateInterface $form_state) {
 
   /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $entity_type */
@@ -20,20 +28,26 @@ function thunder_text_export_form_node_type_edit_form_alter(array &$form, FormSt
   ];
 
   // Create a dropdown list of view modes.
-  $form['thunder_text_export']['thunder_text_export_view_mode'] = array(
+  $form['thunder_text_export']['thunder_text_export_view_mode'] = [
     '#type' => 'select',
     '#options' => $view_modes,
     '#title' => t('Select View Mode'),
-  );
+  ];
 
   $form['#entity_builders'][] = '_thunder_text_export_form_entity_type_form_builder';
 }
 
+/**
+ * Entity builder for the node type form.
+ */
 function _thunder_text_export_form_entity_type_form_builder(string $entity_type, ConfigEntityInterface $type, array &$form, FormStateInterface $form_state) {
 
   $type->setThirdPartySetting('thunder_text_export', 'view_mode', $form_state->getValue('thunder_text_export_view_mode'));
 }
 
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
 function thunder_text_export_form_node_form_alter(array &$form, FormStateInterface $form_state) {
 
   if ($form_state->getFormObject()->getEntity()->isNew()) {
