@@ -89,9 +89,12 @@ function thunder_text_export_form_node_form_alter(array &$form, FormStateInterfa
   // Add the custom button to the node form actions.
   $form['actions']['copyToClipboard'] = [
     '#type' => 'submit',
-    '#value' => t('AI Text Export'),
+    '#value' => t('Text Export'),
     '#ajax' => [
       'callback' => 'thunder_text_export_button_ajax_callback',
+      'progress' => [
+        'type' => 'none',
+      ],
     ],
   ];
 
