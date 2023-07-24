@@ -9,9 +9,11 @@
    */
   Drupal.AjaxCommands.prototype.copyToClipboard = (ajax, response) => {
     if (window.isSecureContext && navigator.clipboard) {
-      navigator.clipboard.writeText(response.message);
-      // Change a button value to "Copied" for 2 seconds.
-      const button = document.getElementById('edit-copytoclipboard--2--gin-edit-form');
+      navigator.clipboard.writeText(response.text);
+      // Change a button value to "Copied" for 1.5 seconds.
+      const button = document.querySelector(
+        '[data-drupal-selector="copy-to-clipboard"]',
+      );
 
       // Get button width and set it to the button.
       const buttonWidth = button.offsetWidth;
@@ -23,11 +25,10 @@
         button.value = Drupal.t('Text Export');
         button.disabled = false;
       }, 1500);
-
     } else {
       // eslint-disable-next-line no-alert
       alert(
-        'Copied to clipboard requires a secure context (HTTPS served website) and navigator.clipboard support.',
+        'Copy to clipboard requires a secure context (HTTPS served website) and navigator.clipboard support.',
       );
     }
   };

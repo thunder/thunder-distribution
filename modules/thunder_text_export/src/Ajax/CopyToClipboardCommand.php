@@ -32,7 +32,7 @@ class CopyToClipboardCommand implements CommandInterface {
   public function render(): array {
     return [
       'command' => 'copyToClipboard',
-      'message' => $this->text,
+      'text' => $this->text,
     ];
   }
 
