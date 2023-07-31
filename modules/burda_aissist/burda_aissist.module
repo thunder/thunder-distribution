@@ -2,19 +2,19 @@
 
 /**
  * @file
- * Contains thunder_text_export.module.
+ * Contains burda_aissist.module.
  */
 
 use Drupal\Component\Render\PlainTextOutput;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\thunder_text_export\Ajax\CopyToClipboardCommand;
+use Drupal\burda_aissist\Ajax\CopyToClipboardCommand;
 
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function thunder_text_export_form_node_type_edit_form_alter(array &$form, FormStateInterface $form_state): void {
+function burda_aissist_form_node_type_edit_form_alter(array &$form, FormStateInterface $form_state): void {
   /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
   $form_object = $form_state->getFormObject();
 
@@ -23,7 +23,7 @@ function thunder_text_export_form_node_type_edit_form_alter(array &$form, FormSt
 
   $view_modes = \Drupal::service('entity_display.repository')->getViewModeOptionsByBundle($entity_type->getEntityType()->getBundleOf(), $entity_type->id());
 
-  $form['thunder_text_export'] = [
+  $form['burda_aissist'] = [
     '#type' => 'details',
     '#title' => t('Text export'),
     '#group' => 'additional_settings',
@@ -31,43 +31,43 @@ function thunder_text_export_form_node_type_edit_form_alter(array &$form, FormSt
   ];
 
   // Create a checkbox to enable/disable the text export.
-  $form['thunder_text_export']['thunder_text_export_enabled'] = [
+  $form['burda_aissist']['burda_aissist_enabled'] = [
     '#type' => 'checkbox',
     '#title' => t('Enable text export'),
-    '#default_value' => $entity_type->getThirdPartySetting('thunder_text_export', 'enabled', FALSE),
+    '#default_value' => $entity_type->getThirdPartySetting('burda_aissist', 'enabled', FALSE),
   ];
 
   // Create a dropdown list of view modes.
-  $form['thunder_text_export']['thunder_text_export_view_mode'] = [
+  $form['burda_aissist']['burda_aissist_view_mode'] = [
     '#type' => 'select',
     '#options' => $view_modes,
-    '#default_value' => $entity_type->getThirdPartySetting('thunder_text_export', 'view_mode', 'default'),
+    '#default_value' => $entity_type->getThirdPartySetting('burda_aissist', 'view_mode', 'default'),
     '#title' => t('View Mode'),
     '#description' => t('Select the view mode to be used for the text export.'),
     '#states' => [
       'visible' => [
-        ':input[name="thunder_text_export_enabled"]' => ['checked' => TRUE],
+        ':input[name="burda_aissist_enabled"]' => ['checked' => TRUE],
       ],
     ],
   ];
 
-  $form['#entity_builders'][] = '_thunder_text_export_form_entity_type_form_builder';
+  $form['#entity_builders'][] = '_burda_aissist_form_entity_type_form_builder';
 }
 
 /**
  * Entity builder for the node type form.
  */
-function _thunder_text_export_form_entity_type_form_builder(string $entity_type, ConfigEntityInterface $type, array &$form, FormStateInterface $form_state): void {
+function _burda_aissist_form_entity_type_form_builder(string $entity_type, ConfigEntityInterface $type, array &$form, FormStateInterface $form_state): void {
 
   // Save the values from the form into the config entity.
-  $type->setThirdPartySetting('thunder_text_export', 'enabled', $form_state->getValue('thunder_text_export_enabled'));
-  $type->setThirdPartySetting('thunder_text_export', 'view_mode', $form_state->getValue('thunder_text_export_view_mode'));
+  $type->setThirdPartySetting('burda_aissist', 'enabled', $form_state->getValue('burda_aissist_enabled'));
+  $type->setThirdPartySetting('burda_aissist', 'view_mode', $form_state->getValue('burda_aissist_view_mode'));
 }
 
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function thunder_text_export_form_node_form_alter(array &$form, FormStateInterface $form_state): void {
+function burda_aissist_form_node_form_alter(array &$form, FormStateInterface $form_state): void {
 
   /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
   $form_object = $form_state->getFormObject();
@@ -82,7 +82,7 @@ function thunder_text_export_form_node_form_alter(array &$form, FormStateInterfa
   $entity_type = \Drupal::entityTypeManager()->getStorage($entity->getEntityType()->getBundleEntityType())->load($entity->bundle());
 
   // Check if the text export is enabled for this content type.
-  if (!$entity_type->getThirdPartySetting('thunder_text_export', 'enabled')) {
+  if (!$entity_type->getThirdPartySetting('burda_aissist', 'enabled')) {
     return;
   }
 
@@ -91,7 +91,7 @@ function thunder_text_export_form_node_form_alter(array &$form, FormStateInterfa
     '#type' => 'submit',
     '#value' => t('Text Export'),
     '#ajax' => [
-      'callback' => 'thunder_text_export_button_ajax_callback',
+      'callback' => 'burda_aissist_button_ajax_callback',
       'progress' => [
         'type' => 'none',
       ],
@@ -99,13 +99,13 @@ function thunder_text_export_form_node_form_alter(array &$form, FormStateInterfa
     '#id' => 'copy-to-clipboard',
   ];
 
-  $form['#attached']['library'][] = "thunder_text_export/copyToClipboard";
+  $form['#attached']['library'][] = "burda_aissist/copyToClipboard";
 }
 
 /**
  * AJAX callback for the clipboard button.
  */
-function thunder_text_export_button_ajax_callback(array &$form, FormStateInterface $form_state): AjaxResponse {
+function burda_aissist_button_ajax_callback(array &$form, FormStateInterface $form_state): AjaxResponse {
   /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
   $form_object = $form_state->getFormObject();
 
@@ -115,7 +115,7 @@ function thunder_text_export_button_ajax_callback(array &$form, FormStateInterfa
   $entity_type = \Drupal::entityTypeManager()->getStorage($entity->getEntityType()->getBundleEntityType())->load($entity->bundle());
 
   // Get the view mode from the config entity.
-  $view_mode = $entity_type->getThirdPartySetting('thunder_text_export', 'view_mode');
+  $view_mode = $entity_type->getThirdPartySetting('burda_aissist', 'view_mode');
 
   $build = \Drupal::entityTypeManager()
     ->getViewBuilder($entity->getEntityTypeId())

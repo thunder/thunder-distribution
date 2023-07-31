@@ -1,0 +1,4 @@
+name: 'Burda AIssist integration'
+description: 'Integration module for AIssist.'
+type: module
+core_version_requirement: ^9 || ^10

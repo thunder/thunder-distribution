@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder_text_export\Ajax;
+namespace Drupal\burda_aissist\Ajax;
 
 use Drupal\Core\Ajax\CommandInterface;
 

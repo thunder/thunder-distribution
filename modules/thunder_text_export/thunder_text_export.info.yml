@@ -1,5 +1,0 @@
-name: 'Thunder Text Export'
-description: 'Enable your editors to translate your content in multiple languages.'
-type: module
-core_version_requirement: ^10
-package: Thunder Optional
