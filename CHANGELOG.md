@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.5.7](https://github.com/thunder/thunder-distribution/tree/6.5.7) 2023-08-03
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.6...6.5.7)
+
+Remove patch and unpin media_entity_pinterest.
+
 ## [6.5.6](https://github.com/thunder/thunder-distribution/tree/6.5.6) 2023-06-15
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.5...6.5.6)
