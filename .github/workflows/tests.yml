@@ -75,6 +75,11 @@ jobs:
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
+      - name: Update the docroot
+        run: |
+          composer require "drupal/entity_browser" --no-update
+        working-directory: /tmp/test/thunder/install
+
       - name: Build the docroot
         run: test-drupal-project build
 
