@@ -30,7 +30,9 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
     /** @var \Drupal\entity_browser\Entity\EntityBrowser $entity_browser */
     foreach (EntityBrowser::loadMultiple() as $entity_browser) {
       $permission = 'access ' . $entity_browser->id() . ' entity browser pages';
-      $role->revokePermission($permission);
+      if ($role->hasPermission($permission)) {
+        $role->revokePermission($permission);
+      }
     }
     $role->save();
   }
