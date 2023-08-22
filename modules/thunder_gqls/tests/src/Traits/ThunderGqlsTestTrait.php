@@ -29,7 +29,11 @@ trait ThunderGqlsTestTrait {
 
     $expectedData = $this->jsonDecode($this->getExpectedResponseFromFile($schema))['data'];
 
-    $this->assertEqualsCanonicalizing($expectedData, $responseData);
+    $this->assertEqualsCanonicalizing(
+      $expectedData,
+      $responseData,
+      'The expected schema for "' . $schema . '" did not match the result.'
+    );
   }
 
   /**
