@@ -45,9 +45,6 @@
             "drupal/gin": {
                 "Issue #3375350: gin-table-scroll-wrapper prevents nested paragraph buttons from being clickable": "https://git.drupalcode.org/project/gin/-/merge_requests/281.diff"
             },
-            "drupal/paragraphs_features": {
-                "Issue #3380569: In between buttons break in Gin 3.0.0-rc5 update\n": "https://www.drupal.org/files/issues/2023-08-11/fix-add-modal-block_gin.patch"
-            },
             "drupal/focal_point": {
                 "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-06/3162210-17.patch"
             }
@@ -93,7 +90,7 @@
         "drupal/metatag": "^1.26",
         "drupal/metatag_async_widget": "^1.0-alpha2",
         "drupal/paragraphs": "^1.12",
-        "drupal/paragraphs_features": "2.0.0-beta2",
+        "drupal/paragraphs_features": "^2.0.0-beta3",
         "drupal/paragraphs_paste": "^2.0-beta3",
         "drupal/password_policy": "^4.0",
         "drupal/pathauto": "^1.11",
