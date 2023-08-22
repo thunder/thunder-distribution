@@ -43,9 +43,7 @@
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
             "drupal/gin": {
-                "Support length indicator": "https://www.drupal.org/files/issues/2023-03-09/3339868.diff",
-                "Fix help icon positioning": "https://www.drupal.org/files/issues/2023-03-09/3339856.diff",
-                "Fix Custom wide or square logo in toolbar floated on left": "https://www.drupal.org/files/issues/2023-05-16/3357587.diff"
+                "Issue #3375350: gin-table-scroll-wrapper prevents nested paragraph buttons from being clickable": "https://git.drupalcode.org/project/gin/-/merge_requests/281.diff"
             },
             "drupal/focal_point": {
                 "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-06/3162210-17.patch"
@@ -75,7 +73,7 @@
         "drupal/field_group": "^3.4",
         "drupal/focal_point": "2.0.0",
         "drupal/facets": "^2.0.6",
-        "drupal/gin": "3.0-rc3",
+        "drupal/gin": "3.0-rc5",
         "drupal/gin_toolbar": "^1.0-rc1",
         "drupal/graphql": "^4.3",
         "drupal/inline_entity_form": "^1.0-rc14",
@@ -92,7 +90,7 @@
         "drupal/metatag": "^1.26",
         "drupal/metatag_async_widget": "^1.0-alpha2",
         "drupal/paragraphs": "^1.12",
-        "drupal/paragraphs_features": "^2.0",
+        "drupal/paragraphs_features": "^2.0.0-beta3",
         "drupal/paragraphs_paste": "^2.0-beta3",
         "drupal/password_policy": "^4.0",
         "drupal/pathauto": "^1.11",
