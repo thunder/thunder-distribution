@@ -93,6 +93,7 @@ install:
   - thunder:thunder_paragraphs
   - thunder:thunder_taxonomy
   - thunder:thunder_workflow
+  - burda_aissist:burda_aissist
 themes:
   - seven
   - olivero
