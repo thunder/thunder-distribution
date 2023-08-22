@@ -238,3 +238,18 @@ parameters:
 			message: "#^Missing call to parent\\:\\:setUp\\(\\) method.$#"
 			count: 1
 			path: tests/src/Functional/Installer/ThunderInstallerTest.php
+
+		-
+			message: "#^Call to method id\\(\\) on an unknown class Drupal\\\\entity_browser\\\\Entity\\\\EntityBrowser\\.$#"
+			count: 1
+			path: thunder.post_update.php
+
+		-
+			message: "#^Call to static method loadMultiple\\(\\) on an unknown class Drupal\\\\entity_browser\\\\Entity\\\\EntityBrowser\\.$#"
+			count: 1
+			path: thunder.post_update.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$entity_browser contains unknown class Drupal\\\\entity_browser\\\\Entity\\\\EntityBrowser\\.$#"
+			count: 1
+			path: thunder.post_update.php
