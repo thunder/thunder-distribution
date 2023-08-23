@@ -26,10 +26,14 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
   $updater = \Drupal::service('update_helper.updater');
   $updater->executeUpdate('thunder', 'thunder_post_update_0001_upgrade_to_thunder7');
 
+  $permissions = [];
+  /** @var \Drupal\entity_browser\Entity\EntityBrowser $entity_browser */
+  foreach (EntityBrowser::loadMultiple() as $entity_browser) {
+    $permissions[] = 'access ' . $entity_browser->id() . ' entity browser pages';
+  }
   foreach (Role::loadMultiple() as $role) {
     /** @var \Drupal\entity_browser\Entity\EntityBrowser $entity_browser */
-    foreach (EntityBrowser::loadMultiple() as $entity_browser) {
-      $permission = 'access ' . $entity_browser->id() . ' entity browser pages';
+    foreach ($permissions as $permission) {
       if ($role->hasPermission($permission)) {
         $role->revokePermission($permission);
       }
