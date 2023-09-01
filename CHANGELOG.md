@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.1.2](https://github.com/thunder/thunder-distribution/tree/7.1.2) 2023-09-01
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.1...7.1.2)
+
+* Fix yaml error in xymatic config.
+
 ## [7.1.1](https://github.com/thunder/thunder-distribution/tree/7.1.1) 2023-08-28
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.0...7.1.1)
