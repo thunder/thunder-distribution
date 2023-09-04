@@ -56,6 +56,11 @@ parameters:
 			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/ThunderRedirect.php
 
 		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/ThunderRouteEntity.php
+
+		-
 			message: "#^Access to an undefined property Drupal\\\\Core\\\\Entity\\\\ContentEntityInterface\\:\\:\\$field_teaser_media\\.$#"
 			count: 1
 			path: modules/thunder_gqls/src/Plugin/GraphQL/SchemaExtension/ThunderPagesSchemaExtension.php
