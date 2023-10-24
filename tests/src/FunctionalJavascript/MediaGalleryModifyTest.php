@@ -67,12 +67,11 @@ JS;
 
     $this->clickSave();
 
-    $gallery = $this->loadMediaByUuid('df67621b-518f-4159-a59e-1bad0700800c');
-    $this->clickCssSelector('#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 button.slick-next');
+    $this->clickCssSelector('div.slick--initialized button.slick-next');
 
     // Check that, 2nd image is file: 26357237683_0891e46ba5_k.jpg.
     $fileNamePosition = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("26357237683_0891e46ba5_k.jpg")');
+      ->evaluateScript('jQuery(\'div.slick--initialized div.slick-slide:not(.slick-cloned):nth(1) img\').attr(\'src\').indexOf("26357237683_0891e46ba5_k.jpg")');
     $this->assertNotEquals(-1, $fileNamePosition, 'For 2nd image in gallery, used file should be "26357237683_0891e46ba5_k.jpg".');
   }
 
