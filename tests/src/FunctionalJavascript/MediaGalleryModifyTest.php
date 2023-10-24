@@ -98,7 +98,6 @@ JS;
 
     $this->clickSave();
 
-    $gallery = $this->loadMediaByUuid('df67621b-518f-4159-a59e-1bad0700800c');
     $this->clickCssSelector('div.slick--initialized button.slick-next');
 
     // Check that, there are 4 images in gallery.
