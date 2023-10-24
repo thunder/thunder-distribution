@@ -22,7 +22,17 @@ class JsonLdSchemaTest extends ThunderGqlsTestBase {
     $this->config('metatag.metatag_defaults.node__article')->set('tags', $tags)
       ->save();
 
-    $this->runAndTestQuery('jsonld');
+    $schema = 'jsonld';
+
+    $query = $this->getQueryFromFile($schema);
+    $variables = $this->getVariablesFromFile($schema);
+
+    $responseData = $this->jsonDecode(strip_tags($this->getResponseData($query, $variables)['jsonld']));
+    $expectedData = $this->jsonDecode(strip_tags($this->jsonDecode($this->getExpectedResponseFromFile($schema))['data']['jsonld']));
+
+
+    $this->assertEqualsCanonicalizing($expectedData, $responseData);
+
   }
 
 }
