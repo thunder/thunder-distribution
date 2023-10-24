@@ -46,7 +46,7 @@
                 "Issue #3375350: gin-table-scroll-wrapper prevents nested paragraph buttons from being clickable": "https://git.drupalcode.org/project/gin/-/merge_requests/281.diff"
             },
             "drupal/focal_point": {
-                "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-06/3162210-17.patch"
+                "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-11/preview_link_accidentally_closes_the_media_library-3162210-19.patch"
             }
         }
     },
