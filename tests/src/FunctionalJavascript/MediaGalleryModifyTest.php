@@ -130,7 +130,7 @@ JS;
 
     // Check that, there are 5 images in gallery.
     $numberOfImages = $this->getSession()
-      ->evaluateScript('jQuery(\'#slick-media-gallery-media-images-default-' . $gallery->id() . '-1 div.slick-slide:not(.slick-cloned)\').length;');
+      ->evaluateScript('jQuery(\'div.slick--initialized div.slick-slide:not(.slick-cloned)\').length;');
     $this->assertEquals(5, $numberOfImages, 'There should be 5 images in Gallery.');
 
     $this->clickCssSelector('div.slick--initialized button.slick-next');
