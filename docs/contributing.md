@@ -23,26 +23,8 @@ Please also note the pull request template to create better quality pull request
 
 ## Setup Thunder for development
 
-To install the Thunder Distribution for development create the thunder-develop project:
-
-```bash
-composer create-project thunder/thunder-develop -s dev
-cd thunder-develop
-```
-
-This will install thunder into the docroot folder. The actual distribution repository will be cloned into
-docroot/profiles/contrib/thunder.
-
-Now you can install thunder. Point the web server to the docroot directory and do a normal site install.
-
-To work on the distribution, work inside the docroot/profiles/contrib/thunder folder.
-
-```bash
-cd docroot/profiles/contrib/thunder
-git checkout -b feature/new-thunder-feature # <-- this will be a branch in the distribution not the project
-<make changes>
-git commit .
-```
+To install the Thunder Distribution for development take a look at the
+[Thunder Develop Project](https://github.com/thunder/thunder-develop).
 
 ## Automated code checks
 
