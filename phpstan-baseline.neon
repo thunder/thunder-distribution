@@ -8,6 +8,11 @@ parameters:
 		-
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"
 			count: 1
+			path: modules/thunder_article/src/Form/ThunderNodeFormHelper.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
 			path: modules/thunder_article/src/Plugin/Derivative/DynamicLocalTasks.php
 
 		-
@@ -100,11 +105,6 @@ parameters:
 
 		-
 			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
-			count: 6
-			path: tests/src/FunctionalJavascript/NodeCreationTest.php
-
-		-
-			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
 			count: 2
 			path: tests/src/FunctionalJavascript/ArticleSchedulerIntegrationTest.php
 
@@ -174,14 +174,24 @@ parameters:
 			path: tests/src/FunctionalJavascript/MediaGalleryModifyTest.php
 
 		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:assertWaitOnAjaxRequest\\(\\)\\.$#"
+			count: 2
+			path: tests/src/FunctionalJavascript/MediaImageModifyTest.php
+
+		-
 			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
-			count: 6
+			count: 8
 			path: tests/src/FunctionalJavascript/MediaImageModifyTest.php
 
 		-
 			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
 			count: 4
 			path: tests/src/FunctionalJavascript/MetaInformationTest.php
+
+		-
+			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
+			count: 6
+			path: tests/src/FunctionalJavascript/NodeCreationTest.php
 
 		-
 			message: "#^Access to an undefined property Drupal\\\\Core\\\\Session\\\\AccountInterface\\:\\:\\$pass_raw\\.$#"
@@ -198,10 +208,6 @@ parameters:
 			count: 1
 			path: tests/src/TestSuites/ThunderTestSuite.php
 
-		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
-			count: 1
-			path: modules/thunder_article/src/Form/ThunderNodeFormHelper.php
 
 		-
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"
@@ -227,3 +233,23 @@ parameters:
 			message: "#^Class Drupal\\\\Tests\\\\TestSuites\\\\ThunderTestSuite extends @internal class PHPUnit\\\\Framework\\\\TestSuite\\.$#"
 			count: 1
 			path: tests/src/TestSuites/ThunderTestSuite.php
+
+		-
+			message: "#^Missing call to parent\\:\\:setUp\\(\\) method.$#"
+			count: 1
+			path: tests/src/Functional/Installer/ThunderInstallerTest.php
+
+		-
+			message: "#^Call to method id\\(\\) on an unknown class Drupal\\\\entity_browser\\\\Entity\\\\EntityBrowser\\.$#"
+			count: 1
+			path: thunder.post_update.php
+
+		-
+			message: "#^Call to static method loadMultiple\\(\\) on an unknown class Drupal\\\\entity_browser\\\\Entity\\\\EntityBrowser\\.$#"
+			count: 1
+			path: thunder.post_update.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$entity_browser contains unknown class Drupal\\\\entity_browser\\\\Entity\\\\EntityBrowser\\.$#"
+			count: 1
+			path: thunder.post_update.php

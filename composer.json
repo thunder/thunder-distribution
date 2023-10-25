@@ -36,23 +36,17 @@
         "patches": {
             "drupal/core": {
                 "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2021-05-31/3133639.19.patch",
-                "It is possible to overflow the number of items allowed in Media Library": "https://www.drupal.org/files/issues/2022-12-27/3059955-159.patch",
                 "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch",
-                "\"Add another item\" field button is displayed as a modal action": "https://www.drupal.org/files/issues/2023-06-15/3151534-10.0-64.patch"
+                "\"Add another item\" field button is displayed as a modal action": "https://www.drupal.org/files/issues/2023-06-15/3151534-10.1-65.patch"
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
             "drupal/gin": {
-                "Support length indicator": "https://www.drupal.org/files/issues/2023-03-09/3339868.diff",
-                "Fix help icon positioning": "https://www.drupal.org/files/issues/2023-03-09/3339856.diff",
-                "Fix Custom wide or square logo in toolbar floated on left": "https://www.drupal.org/files/issues/2023-05-16/3357587.diff"
-            },
-            "drupal/media_entity_pinterest": {
-                "to a member function mainPropertyName() on null in media_entity_pinterest/src/Plugin/media/Source/Pinterest.php on line 155": "https://www.drupal.org/files/issues/2023-03-09/3179172.diff"
+                "Issue #3375350: gin-table-scroll-wrapper prevents nested paragraph buttons from being clickable": "https://git.drupalcode.org/project/gin/-/merge_requests/281.diff"
             },
             "drupal/focal_point": {
-                "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-06/3162210-17.patch"
+                "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-11/preview_link_accidentally_closes_the_media_library-3162210-19.patch"
             }
         }
     },
@@ -65,7 +59,7 @@
         "drupal/autosave_form": "^1.2",
         "drupal/blazy": "^2.14",
         "drupal/checklistapi": "^2.1",
-        "drupal/core-recommended": "~10.0.8",
+        "drupal/core-recommended": "~10.1.1",
         "drupal/config_selector": "^2.1",
         "drupal/config_update": "^1.7 || ^2.0",
         "drupal/content_lock": "^2.1",
@@ -79,7 +73,7 @@
         "drupal/field_group": "^3.4",
         "drupal/focal_point": "2.0.0",
         "drupal/facets": "^2.0.6",
-        "drupal/gin": "3.0-rc3",
+        "drupal/gin": "3.0-rc5",
         "drupal/gin_toolbar": "^1.0-rc1",
         "drupal/graphql": "^4.3",
         "drupal/inline_entity_form": "^1.0-rc14",
@@ -87,7 +81,7 @@
         "drupal/length_indicator": "^1.2",
         "drupal/linkit": "^6.0-beta4",
         "drupal/media_entity_instagram": "^3.0.3",
-        "drupal/media_entity_pinterest": "2.6",
+        "drupal/media_entity_pinterest": "^2.7",
         "drupal/media_entity_slideshow": "^2.0-alpha1",
         "drupal/media_entity_twitter": "^2.5",
         "drupal/media_expire": "^2.6",
@@ -96,7 +90,7 @@
         "drupal/metatag": "^1.26",
         "drupal/metatag_async_widget": "^1.0-alpha2",
         "drupal/paragraphs": "^1.12",
-        "drupal/paragraphs_features": "dev-2.x",
+        "drupal/paragraphs_features": "^2.0.0-beta3",
         "drupal/paragraphs_paste": "^2.0-beta3",
         "drupal/password_policy": "^4.0",
         "drupal/pathauto": "^1.11",

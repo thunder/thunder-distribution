@@ -21,7 +21,7 @@ content:
     settings:
       image_link: ''
       image_style: thumbnail
-     image_loading:
+      image_loading:
         attribute: lazy
     third_party_settings:
       empty_fields:

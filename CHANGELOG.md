@@ -1,5 +1,25 @@
 # Changelog
 
+## [7.1.2](https://github.com/thunder/thunder-distribution/tree/7.1.2) 2023-09-01
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.1...7.1.2)
+
+* Fix yaml error in xymatic config.
+
+## [7.1.1](https://github.com/thunder/thunder-distribution/tree/7.1.1) 2023-08-28
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.0...7.1.1)
+
+* Update Gin to RC5.
+* Change paragraphs_feature requirement to ^2.0.0-beta3.
+* Remove all entity browser permissions in all roles during the Thunder 6 to 7 migration.
+
+## [7.1.0](https://github.com/thunder/thunder-distribution/tree/7.1.0) 2023-07-03
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.0.0...7.1.0)
+
+* Drupal 10.1 compatibility.
+
 ## [7.0.0](https://github.com/thunder/thunder-distribution/tree/7.0.0) 2023-06-15
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.0.0-beta2...7.0.0)
