@@ -184,6 +184,10 @@ function thunder_action_info_alter(array &$definitions): void {
  * Implements hook_gin_content_form_routes().
  */
 function thunder_gin_content_form_routes(): array {
+  // Do not use gin content edit form layout in ajax context (overlays).
+  if (\Drupal::request()->isXmlHttpRequest()) {
+    return [];
+  }
   $routes = [
     'entity.taxonomy_term.edit_form',
     'entity.taxonomy_term.add_form',
