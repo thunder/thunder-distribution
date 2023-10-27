@@ -182,6 +182,8 @@ function thunder_action_info_alter(array &$definitions): void {
 
 /**
  * Implements hook_gin_content_form_routes().
+ *
+ * Revisit after https://www.drupal.org/i/3281343 et al are merged.
  */
 function thunder_gin_content_form_routes(): array {
   // Do not use gin content edit form layout in ajax context (overlays).
