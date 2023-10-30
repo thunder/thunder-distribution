@@ -42,9 +42,6 @@
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
-            "drupal/gin": {
-                "Issue #3375350: gin-table-scroll-wrapper prevents nested paragraph buttons from being clickable": "https://git.drupalcode.org/project/gin/-/merge_requests/281.diff"
-            },
             "drupal/focal_point": {
                 "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-11/preview_link_accidentally_closes_the_media_library-3162210-19.patch"
             }
@@ -73,7 +70,7 @@
         "drupal/field_group": "^3.4",
         "drupal/focal_point": "2.0.0",
         "drupal/facets": "^2.0.6",
-        "drupal/gin": "3.0-rc5",
+        "drupal/gin": "3.0-rc7",
         "drupal/gin_toolbar": "^1.0-rc1",
         "drupal/graphql": "^4.3",
         "drupal/inline_entity_form": "^1.0-rc14",
