@@ -1,7 +1,10 @@
 /* Subform */
 
 /* Remove paragraphs table header. */
-.field--name-field-paragraphs .paragraphs-tabs-wrapper [data-drupal-selector="edit-field-paragraphs"] > table.field-multiple-table > thead {
+/*.field--name-field-paragraphs .paragraphs-tabs-wrapper [data-drupal-selector="edit-field-paragraphs"] > table.field-multiple-table > thead {*/
+/*  display: none;*/
+/*}*/
+.field--widget-paragraphs .paragraphs-tabs-wrapper > .form-item--multiple > table.field-multiple-table > thead  {
   display: none;
 }
 .paragraph-type--link .paragraphs-subform .field--name-field-link table.field-multiple-table:first-of-type thead {
