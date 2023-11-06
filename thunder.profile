@@ -146,7 +146,7 @@ function thunder_page_attachments(array &$attachments): void {
 
     if ($name == 'system_meta_generator') {
       $tag = &$html_head[0];
-      $tag['#attributes']['content'] = 'Drupal 9 (Thunder | https://www.thunder.org)';
+      $tag['#attributes']['content'] = 'Drupal 10 (Thunder | https://www.thunder.org)';
     }
   }
 }
@@ -182,8 +182,14 @@ function thunder_action_info_alter(array &$definitions): void {
 
 /**
  * Implements hook_gin_content_form_routes().
+ *
+ * Revisit after https://www.drupal.org/i/3281343 et al are merged.
  */
 function thunder_gin_content_form_routes(): array {
+  // Do not use gin content edit form layout in ajax context (overlays).
+  if (\Drupal::request()->isXmlHttpRequest()) {
+    return [];
+  }
   $routes = [
     'entity.taxonomy_term.edit_form',
     'entity.taxonomy_term.add_form',
