@@ -1,5 +1,14 @@
 # Changelog
 
+## [7.1.3](https://github.com/thunder/thunder-distribution/tree/7.1.3) 2023-11-07
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.2...7.1.3)
+
+* Update to gin rc7
+* Fix issue with form fields for media
+* Bump Drupal version number in thunder.profile
+* Update focal point patch
+
 ## [7.1.2](https://github.com/thunder/thunder-distribution/tree/7.1.2) 2023-09-01
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.1...7.1.2)
