@@ -142,6 +142,28 @@ GQL;
   }
 
   /**
+   * Validates that non-existing entity links do not generate a warning.
+   */
+  public function testNonExistingEntityLinks(): void {
+    $query = <<<GQL
+      query (\$path: String!) {
+        page(path: \$path) {
+          entityLinks {
+            versionHistory
+          }
+        }
+      }
+GQL;
+
+    $variables = ['path' => 'news'];
+    $response = $this->query($query, Json::encode($variables));
+    $page = $this->jsonDecode($response->getBody());
+    $this->assertArrayNotHasKey('errors', $page);
+    $this->assertNull($page['data']['page']['entityLinks']['versionHistory']);
+
+  }
+
+  /**
    * Validates the thunder schema.
    */
   public function testValidSchema(): void {
