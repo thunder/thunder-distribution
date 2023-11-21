@@ -181,8 +181,12 @@ GQL;
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
 
     $page = $this->jsonDecode($response->getBody());
-    file_put_contents('test-output.txt', print_r($page, TRUE));
-
+    $this->assertArrayNotHasKey('errors', $page);
+    $this->assertArrayHasKey('data', $page);
+    $this->assertArrayHasKey('page', $page['data']);
+    $this->assertArrayHasKey('channel', $page['data']['page']);
+    $this->assertArrayHasKey('name', $page['data']['page']['channel']);
+    $this->assertEmpty($page['data']['page']['channel']['name']);
   }
 
 }
