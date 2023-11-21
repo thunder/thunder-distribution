@@ -185,8 +185,7 @@ GQL;
     $this->assertArrayHasKey('data', $page);
     $this->assertArrayHasKey('page', $page['data']);
     $this->assertArrayHasKey('channel', $page['data']['page']);
-    $this->assertArrayHasKey('name', $page['data']['page']['channel']);
-    $this->assertEmpty($page['data']['page']['channel']['name']);
+    $this->assertNull($page['data']['page']['channel']);
   }
 
 }
