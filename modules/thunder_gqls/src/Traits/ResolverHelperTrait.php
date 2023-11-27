@@ -69,10 +69,7 @@ trait ResolverHelperTrait {
         if ($multiValue) {
           return $parent;
         }
-        if (!empty($parent[0])) {
-          return $parent[0];
-        }
-        return NULL;
+        return $parent[0] ?? NULL;
       })
     );
   }
