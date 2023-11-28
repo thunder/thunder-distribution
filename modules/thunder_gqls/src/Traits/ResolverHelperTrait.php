@@ -103,7 +103,7 @@ trait ResolverHelperTrait {
   public function addSimpleCallbackFields(string $type, array $fields): void {
     foreach ($fields as $field) {
       $this->addFieldResolverIfNotExists($type, $field,
-        $this->builder->callback(fn($arr) => $arr[$field])
+        $this->builder->callback(fn($arr) => $arr[$field] ?? NULL)
       );
     }
   }
