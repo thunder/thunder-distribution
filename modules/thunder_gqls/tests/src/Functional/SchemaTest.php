@@ -178,4 +178,36 @@ GQL;
     $this->assertEmpty($validator->getMissingResolvers($server), "The schema 'thunder_graphql' contains types without a resolver.");
   }
 
+  /**
+   * Tests query of an unpublished channel.
+   */
+  public function testLabelAccess(): void {
+    $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845')
+      ->setUnpublished()
+      ->save();
+
+    $query = <<<GQL
+      query (\$path: String!) {
+        page(path: \$path) {
+          ... on Article {
+            channel {
+              name
+            }
+          }
+        }
+      }
+GQL;
+
+    $variables = ['path' => 'duis-autem-vel-eum-iriure'];
+    $response = $this->query($query, Json::encode($variables));
+    $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
+
+    $page = $this->jsonDecode($response->getBody());
+    $this->assertArrayNotHasKey('errors', $page);
+    $this->assertArrayHasKey('data', $page);
+    $this->assertArrayHasKey('page', $page['data']);
+    $this->assertArrayHasKey('channel', $page['data']['page']);
+    $this->assertNull($page['data']['page']['channel']);
+  }
+
 }

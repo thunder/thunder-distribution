@@ -57,7 +57,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
       );
 
       $this->addFieldResolverIfNotExists($type, 'channel',
-        $this->builder->fromPath('entity', 'field_channel.entity')
+        $this->fromEntityReference('field_channel', NULL, FALSE)
       );
 
       $this->addFieldResolverIfNotExists($type, 'tags',
