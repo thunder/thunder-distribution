@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.1.4](https://github.com/thunder/thunder-distribution/tree/7.1.4) 2023-12-04
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.3...7.1.4)
+
+* Fix possible break of Thunder GraphQL schema with drupal/graphql:4.6.0
+* Fix warning on missing entityLinks keys in GraphQL
+
 ## [7.1.3](https://github.com/thunder/thunder-distribution/tree/7.1.3) 2023-11-07
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.2...7.1.3)
