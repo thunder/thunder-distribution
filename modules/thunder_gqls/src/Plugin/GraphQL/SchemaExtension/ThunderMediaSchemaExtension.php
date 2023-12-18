@@ -68,7 +68,7 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
           if (!empty($values['url'])) {
             return $values + ['src' => $values['url']];
           }
-          return;
+          return $values;
         })
       )
     );
