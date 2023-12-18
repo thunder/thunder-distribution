@@ -60,7 +60,7 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
         }
         $component['type'] = 'media_library_media_modify_widget';
         $component['settings'] = [
-          'add_button_text' => $field_definition->getFieldStorageDefinition()->getCardinality() !== 1 ? 'Add ' . $label . 's' : 'Add ' . $label,
+          'add_button_text' => $field_definition->getFieldStorageDefinition()->getCardinality() !== 1 ? 'Select ' . $label . 's' : 'Select ' . $label,
           'check_selected' => $field_definition->getFieldStorageDefinition()->getCardinality() !== 1,
           'form_mode' => 'override',
           'no_edit_on_create' => $field_definition->getFieldStorageDefinition()->getCardinality() !== 1,
