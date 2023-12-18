@@ -49,14 +49,13 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
       }
       /** @var \Drupal\Core\Field\FieldDefinitionInterface $field_definition */
       $field_definition = $field_definitions[$component_name];
-      if ($component['type'] === 'entity_browser_entity_reference') {
+      if ($component['type'] === 'entity_browser_entity_reference' && $field_definition->getFieldStorageDefinition()->getSetting('target_type') === 'media') {
         $multiple = $field_definition->getFieldStorageDefinition()->getCardinality() !== 1;
-        $entity_type = \Drupal::entityTypeManager()->getDefinition($entity_form_display->getTargetEntityTypeId());
         $component['type'] = 'media_library_media_modify_widget';
         $component['settings'] = [
           'add_button_text' => Drupal::translation()->formatPlural($multiple ? 2 : 1, 'Select @label', 'Select @labels', [
-            '@label' => $entity_type->getSingularLabel(),
-            '@labels' => $entity_type->getPluralLabel(),
+            '@label' => 'media item',
+            '@labels' => 'media items',
           ]),
           'check_selected' => $multiple,
           'form_mode' => 'override',
