@@ -301,92 +301,16 @@ system.theme:
       admin: gin
 core.entity_form_display.media.gallery.default:
   expected_config:
-    content:
-      field_media_images:
-        settings:
-          entity_browser: multiple_image_browser
-          field_widget_display: rendered_entity
-          field_widget_display_settings:
-            view_mode: thumbnail
-          field_widget_edit: true
-          field_widget_remove: true
-          field_widget_replace: false
-          open: true
-          selection_mode: selection_edit
-        type: entity_browser_entity_reference
     third_party_settings:
       field_group:
         group_basis:
           label: Basis
   update_actions:
-    delete:
-      content:
-        field_media_images:
-          settings:
-            entity_browser: multiple_image_browser
-            field_widget_display: rendered_entity
-            field_widget_display_settings: true
-            field_widget_edit: true
-            field_widget_remove: true
-            field_widget_replace: false
-            open: true
-            selection_mode: selection_edit
     change:
-      content:
-        field_media_images:
-          settings:
-            add_button_text: 'Select images'
-            check_selected: true
-            form_mode: override
-            media_types: {  }
-            no_edit_on_create: true
-            multi_edit_on_create: false
-            replace_checkbox_by_order_indicator: true
-          type: media_library_media_modify_widget
       third_party_settings:
         field_group:
           group_basis:
             label: ''
-core.entity_form_display.media.gallery.inline:
-  expected_config:
-    content:
-      field_media_images:
-        settings:
-          entity_browser: multiple_image_browser
-          field_widget_display: rendered_entity
-          field_widget_display_settings:
-            view_mode: thumbnail
-          field_widget_edit: true
-          field_widget_remove: true
-          field_widget_replace: false
-          open: true
-          selection_mode: selection_edit
-        type: entity_browser_entity_reference
-  update_actions:
-    delete:
-      content:
-        field_media_images:
-          settings:
-            entity_browser: multiple_image_browser
-            field_widget_display: rendered_entity
-            field_widget_display_settings: true
-            field_widget_edit: true
-            field_widget_remove: true
-            field_widget_replace: false
-            open: true
-            selection_mode: selection_edit
-    change:
-      content:
-        field_media_images:
-          settings:
-            add_button_text: 'Select images'
-            check_selected: true
-            form_mode: override
-            media_types: {  }
-            no_edit_on_create: true
-            multi_edit_on_create: false
-            replace_checkbox_by_order_indicator: true
-          type: media_library_media_modify_widget
 core.entity_form_display.media.image.default:
   expected_config:
     third_party_settings:
@@ -481,20 +405,6 @@ core.entity_form_display.node.article.bulk_edit:
           weight: 10
 core.entity_form_display.node.article.default:
   expected_config:
-    content:
-      field_teaser_media:
-        settings:
-          entity_browser: image_browser
-          field_widget_display: rendered_entity
-          field_widget_display_settings:
-            view_mode: thumbnail
-          field_widget_edit: true
-          field_widget_remove: true
-          field_widget_replace: false
-          open: true
-          selection_mode: selection_append
-        third_party_settings: {  }
-        type: entity_browser_entity_reference
     third_party_settings:
       field_group:
         group_basis:
@@ -506,18 +416,6 @@ core.entity_form_display.node.article.default:
         group_teaser:
           label: Teaser
   update_actions:
-    delete:
-      content:
-        field_teaser_media:
-          settings:
-            entity_browser: image_browser
-            field_widget_display: rendered_entity
-            field_widget_display_settings: true
-            field_widget_edit: true
-            field_widget_remove: true
-            field_widget_replace: false
-            open: true
-            selection_mode: selection_append
     add:
       third_party_settings:
         field_group:
@@ -531,29 +429,6 @@ core.entity_form_display.node.article.default:
             format_settings:
               show_empty_fields: false
     change:
-      content:
-        field_teaser_media:
-          settings:
-            add_button_text: 'Select image'
-            check_selected: false
-            form_mode: override
-            media_types: {  }
-            no_edit_on_create: false
-            multi_edit_on_create: false
-            replace_checkbox_by_order_indicator: false
-          third_party_settings:
-            entity_reference_actions:
-              enabled: false
-              options:
-                action_title: Action
-                include_exclude: exclude
-                selected_actions:
-                  media_delete_action: '0'
-                  media_edit_action: '0'
-                  media_publish_action: '0'
-                  media_save_action: '0'
-                  media_unpublish_action: '0'
-          type: media_library_media_modify_widget
       third_party_settings:
         field_group:
           group_basis:
@@ -593,113 +468,6 @@ core.entity_form_display.node.page.default:
           group_paragraphs:
             label: ''
             weight: 1
-core.entity_form_display.paragraph.image.default:
-  expected_config:
-    content:
-      field_image:
-        settings:
-          entity_browser: image_browser
-          field_widget_display: rendered_entity
-          field_widget_display_settings:
-            view_mode: thumbnail
-          field_widget_edit: true
-          field_widget_remove: true
-          field_widget_replace: false
-          open: true
-          selection_mode: selection_append
-        third_party_settings: {  }
-        type: entity_browser_entity_reference
-  update_actions:
-    delete:
-      content:
-        field_image:
-          settings:
-            entity_browser: image_browser
-            field_widget_display: rendered_entity
-            field_widget_display_settings: true
-            field_widget_edit: true
-            field_widget_remove: true
-            field_widget_replace: false
-            open: true
-            selection_mode: selection_append
-    change:
-      content:
-        field_image:
-          settings:
-            add_button_text: 'Select image'
-            check_selected: false
-            form_mode: override
-            media_types: {  }
-            no_edit_on_create: false
-            multi_edit_on_create: false
-            replace_checkbox_by_order_indicator: false
-          third_party_settings:
-            entity_reference_actions:
-              enabled: false
-              options:
-                action_title: Action
-                include_exclude: exclude
-                selected_actions:
-                  media_delete_action: '0'
-                  media_edit_action: '0'
-                  media_publish_action: '0'
-                  media_save_action: '0'
-                  media_unpublish_action: '0'
-          type: media_library_media_modify_widget
-core.entity_form_display.paragraph.video.default:
-  expected_config:
-    content:
-      field_video:
-        settings:
-          entity_browser: video_browser
-          field_widget_display: rendered_entity
-          field_widget_display_settings:
-            view_mode: thumbnail
-          field_widget_edit: true
-          field_widget_remove: true
-          field_widget_replace: false
-          open: true
-          selection_mode: selection_append
-        third_party_settings: {  }
-        type: entity_browser_entity_reference
-  update_actions:
-    delete:
-      content:
-        field_video:
-          settings:
-            entity_browser: video_browser
-            field_widget_display: rendered_entity
-            field_widget_display_settings:
-              view_mode: thumbnail
-            field_widget_edit: true
-            field_widget_remove: true
-            field_widget_replace: false
-            open: true
-            selection_mode: selection_append
-    change:
-      content:
-        field_video:
-          settings:
-            add_button_text: 'Select video'
-            check_selected: false
-            form_mode: override
-            media_types: {  }
-            no_edit_on_create: false
-            multi_edit_on_create: false
-            replace_checkbox_by_order_indicator: false
-          third_party_settings:
-            entity_reference_actions:
-              enabled: false
-              options:
-                action_title: Action
-                include_exclude: exclude
-                selected_actions:
-                  media_delete_action: '0'
-                  media_edit_action: '0'
-                  media_publish_action: '0'
-                  media_save_action: '0'
-                  media_unpublish_action: '0'
-          type: media_library_media_modify_widget
 core.entity_view_display.media.gallery.paragraph_preview:
   expected_config:
     content:
