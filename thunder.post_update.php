@@ -50,22 +50,19 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
       /** @var \Drupal\Core\Field\FieldDefinitionInterface $field_definition */
       $field_definition = $field_definitions[$component_name];
       if ($component['type'] === 'entity_browser_entity_reference') {
-        $target_bundles = $field_definition->getSetting('handler_settings')['target_bundles'];
-        $label = 'media';
-        if (count($target_bundles) === 1) {
-          $target_type = $field_definition->getFieldStorageDefinition()->getSetting('target_type');
-          $bundle_entity_type = \Drupal::entityTypeManager()->getDefinition($target_type)->getBundleEntityType();
-          $bundle_entity = \Drupal::entityTypeManager()->getStorage($bundle_entity_type)->load(reset($target_bundles));
-          $label = strtolower($bundle_entity->label());
-        }
+        $multiple = $field_definition->getFieldStorageDefinition()->getCardinality() !== 1;
+        $entity_type = \Drupal::entityTypeManager()->getDefinition($entity_form_display->getTargetEntityTypeId());
         $component['type'] = 'media_library_media_modify_widget';
         $component['settings'] = [
-          'add_button_text' => $field_definition->getFieldStorageDefinition()->getCardinality() !== 1 ? 'Select ' . $label . 's' : 'Select ' . $label,
-          'check_selected' => $field_definition->getFieldStorageDefinition()->getCardinality() !== 1,
+          'add_button_text' => Drupal::translation()->formatPlural($multiple ? 2 : 1, 'Select @label', 'Select @labels', [
+            '@label' => $entity_type->getSingularLabel(),
+            '@labels' => $entity_type->getPluralLabel(),
+          ]),
+          'check_selected' => $multiple,
           'form_mode' => 'override',
-          'no_edit_on_create' => $field_definition->getFieldStorageDefinition()->getCardinality() !== 1,
+          'no_edit_on_create' => $multiple,
           'multi_edit_on_create' => FALSE,
-          'replace_checkbox_by_order_indicator' => $field_definition->getFieldStorageDefinition()->getCardinality() !== 1,
+          'replace_checkbox_by_order_indicator' => $multiple,
         ];
         $entity_form_display->setComponent($component_name, $component);
       }
