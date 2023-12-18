@@ -5,6 +5,7 @@
  * Update functions for the thunder installation profile.
  */
 
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\entity_browser\Entity\EntityBrowser;
 use Drupal\user\Entity\Role;
 
@@ -38,6 +39,32 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
       }
     }
     $role->save();
+  }
+
+  foreach (EntityFormDisplay::loadMultiple() as $entity_form_display) {
+    $field_definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions($entity_form_display->getTargetEntityTypeId(), $entity_form_display->getTargetBundle());
+    foreach ($entity_form_display->getComponents() as $component_name => $component) {
+      if (!isset($field_definitions[$component_name])) {
+        continue;
+      }
+      /** @var \Drupal\Core\Field\FieldDefinitionInterface $field_definition */
+      $field_definition = $field_definitions[$component_name];
+      if ($component['type'] === 'entity_browser_entity_reference') {
+        $entity_form_display->setComponent($component_name, [
+          'type' => 'media_library_media_modify_widget',
+          'weight' => $component['weight'],
+          'settings' => [
+            'add_button_text' => 'Add media',
+            'check_selected' => $field_definition->getFieldStorageDefinition()->getCardinality() !== 1,
+            'form_mode' => 'override',
+            'no_edit_on_create' => $field_definition->getFieldStorageDefinition()->getCardinality() !== 1,
+            'multi_edit_on_create' => FALSE,
+            'replace_checkbox_by_order_indicator' => $field_definition->getFieldStorageDefinition()->getCardinality() !== 1,
+          ],
+        ]);
+      }
+      $entity_form_display->save();
+    }
   }
 
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
