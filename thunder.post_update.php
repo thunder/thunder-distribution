@@ -5,7 +5,9 @@
  * Update functions for the thunder installation profile.
  */
 
+use Drupal\ckeditor5\SmartDefaultSettings;
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\editor\Entity\Editor;
 use Drupal\entity_browser\Entity\EntityBrowser;
 use Drupal\user\Entity\Role;
 
@@ -67,6 +69,20 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
       }
       $entity_form_display->save();
     }
+  }
+
+  /** @var \Drupal\ckeditor5\SmartDefaultSettings $ckEditorMigration */
+  $ckEditorMigration = new SmartDefaultSettings(
+    \Drupal::service('plugin.manager.ckeditor5.plugin'),
+    \Drupal::service('plugin.manager.public_ckeditor4to5upgrade.plugin'),
+    $updater->logger(),
+    \Drupal::service('module_handler'),
+    \Drupal::service('current_user'));
+
+  foreach (Editor::loadMultiple() as $editor) {
+    $format = $editor->getFilterFormat();
+    [$updated_text_editor] = $ckEditorMigration->computeSmartDefaultSettings($editor, $format);
+    $updated_text_editor->save();
   }
 
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
