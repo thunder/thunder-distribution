@@ -1,6 +1,6 @@
 # Changelog
 
-## [7.1.5](https://github.com/thunder/thunder-distribution/tree/7.1.4) 2023-12-21
+## [7.1.5](https://github.com/thunder/thunder-distribution/tree/7.1.5) 2023-12-21
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.4...7.1.5)
 
