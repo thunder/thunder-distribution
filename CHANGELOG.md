@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.1.5](https://github.com/thunder/thunder-distribution/tree/7.1.4) 2023-12-21
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.4...7.1.5)
+
+* Improved update path from Thunder 6 to 7
+
 ## [7.1.4](https://github.com/thunder/thunder-distribution/tree/7.1.4) 2023-12-04
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.3...7.1.4)
