@@ -2,12 +2,8 @@
 
 namespace Drupal\Tests\thunder\Functional\Installer;
 
-use Drupal\Core\DrupalKernel;
-use Drupal\Core\Site\Settings;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\FunctionalTests\Installer\InstallerTestBase;
-use Drupal\Tests\BrowserTestBase;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Tests the interactive installer installing the standard profile.
@@ -22,69 +18,6 @@ class ThunderInstallerTest extends InstallerTestBase {
    * @var int
    */
   protected $knownWarnings = 0;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function setUp(): void {
-    BrowserTestBase::setUp();
-
-    $this->visitInstaller();
-
-    // Select language.
-    $this->setUpLanguage();
-
-    // Select profile.
-    $this->setUpProfile();
-
-    // Address the requirements problem screen, if any.
-    $this->setUpRequirementsProblem();
-
-    // Configure settings.
-    $this->setUpSettings();
-
-    // Configure site.
-    $this->setUpSite();
-
-    // Configure modules.
-    $this->setUpModules();
-
-    if ($this->isInstalled) {
-      // Import new settings.php written by the installer.
-      $request = Request::createFromGlobals();
-      $class_loader = require $this->container->getParameter('app.root') . '/autoload.php';
-      Settings::initialize($this->container->getParameter('app.root'), DrupalKernel::findSitePath($request), $class_loader);
-
-      // After writing settings.php, the installer removes write permissions
-      // from the site directory. To allow drupal_generate_test_ua() to write
-      // a file containing the private key for drupal_valid_test_ua(), the site
-      // directory has to be writable.
-      // BrowserTestBase::tearDown() will delete the entire test site directory.
-      // Not using File API; a potential error must trigger a PHP warning.
-      chmod($this->container->getParameter('app.root') . '/' . $this->siteDirectory, 0777);
-      $this->kernel = DrupalKernel::createFromRequest($request, $class_loader, 'prod', FALSE);
-      $this->kernel->boot();
-      $this->kernel->preHandle($request);
-      $this->container = $this->kernel->getContainer();
-
-      // Manually configure the test mail collector implementation to prevent
-      // tests from sending out emails and collect them in state instead.
-      $this->container->get('config.factory')
-        ->getEditable('system.mail')
-        ->set('interface.default', 'test_mail_collector')
-        ->set('mailer_dsn', [
-          'scheme' => 'null',
-          'host' => 'null',
-          'user' => NULL,
-          'password' => NULL,
-          'port' => NULL,
-          'options' => [],
-        ])
-        ->save();
-
-      $this->installDefaultThemeFromClassProperty($this->container);
-    }
-  }
 
   /**
    * {@inheritdoc}
@@ -115,6 +48,7 @@ class ThunderInstallerTest extends InstallerTestBase {
     $this->submitForm($edit, $this->translations['Save and continue']);
     // If we've got to this point the site is installed using the regular
     // installation workflow.
+    $this->setUpModules();
   }
 
   /**
