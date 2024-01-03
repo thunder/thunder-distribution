@@ -208,7 +208,6 @@ parameters:
 			count: 1
 			path: tests/src/TestSuites/ThunderTestSuite.php
 
-
 		-
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"
 			count: 1
@@ -233,11 +232,6 @@ parameters:
 			message: "#^Class Drupal\\\\Tests\\\\TestSuites\\\\ThunderTestSuite extends @internal class PHPUnit\\\\Framework\\\\TestSuite\\.$#"
 			count: 1
 			path: tests/src/TestSuites/ThunderTestSuite.php
-
-		-
-			message: "#^Missing call to parent\\:\\:setUp\\(\\) method.$#"
-			count: 1
-			path: tests/src/Functional/Installer/ThunderInstallerTest.php
 
 		-
 			message: "#^Call to method id\\(\\) on an unknown class Drupal\\\\entity_browser\\\\Entity\\\\EntityBrowser\\.$#"
