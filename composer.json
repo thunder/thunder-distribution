@@ -23,6 +23,10 @@
     "license": "GPL-2.0-or-later",
     "repositories": [
         {
+            "type": "vcs",
+            "url": "https://github.com/thunder/paragraphs_features"
+        },
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
