@@ -43,6 +43,9 @@
             },
             "drupal/focal_point": {
                 "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-11/preview_link_accidentally_closes_the_media_library-3162210-19.patch"
+            },
+            "drupal/graphql": {
+                "Ensure languages in tests have a label set": "https://github.com/drupal-graphql/graphql/commit/1f72a46637eec9062fdca6349d2652575c93497c.diff"
             }
         }
     },
@@ -71,7 +74,7 @@
         "drupal/facets": "^2.0.6",
         "drupal/gin": "3.0-rc7",
         "drupal/gin_toolbar": "^1.0-rc1",
-        "drupal/graphql": "^4.3",
+        "drupal/graphql": "4.6.0",
         "drupal/inline_entity_form": "^1.0-rc14",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.2",
