@@ -1,7 +1,10 @@
 /* Subform */
 
-/* Remove paragraphs table header. */
-.field--name-field-paragraphs .paragraphs-tabs-wrapper table.field-multiple-table:first-of-type thead {
+/* Hide paragraphs field label in table header. */
+.field--name-field-paragraphs .paragraphs-tabs-wrapper table.field-multiple-table:first-of-type th {
+  background: var(--gin-bg-layer);
+}
+.field--name-field-paragraphs .paragraphs-tabs-wrapper table.field-multiple-table:first-of-type thead th.field-label h4 {
   display: none;
 }
 .paragraph-type--link .paragraphs-subform .field--name-field-link table.field-multiple-table:first-of-type thead {
