@@ -119,7 +119,7 @@
         "drupal/simple_sitemap": "4.1.6",
         "drupal/slick": "^2.7",
         "drupal/token": "^1.7",
-        "drupal/update_helper": "^2.0||^3.0.3",
+        "drupal/update_helper": "^3.0.3||^4.0",
         "drupal/search_api": "^1.29",
         "drupal/views_bulk_edit": "^2.5",
         "drupal/views_bulk_operations": "^4.0",
