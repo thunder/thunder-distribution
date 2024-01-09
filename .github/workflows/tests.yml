@@ -29,7 +29,7 @@ env:
   MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://127.0.0.1:9515"]'
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
-  SYMFONY_DEPRECATIONS_HELPER: disabled
+  SYMFONY_DEPRECATIONS_HELPER: strict
 
 jobs:
 
