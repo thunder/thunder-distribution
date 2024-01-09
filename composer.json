@@ -47,9 +47,6 @@
             "drupal/graphql": {
                 "Ensure languages in tests have a label set": "https://github.com/drupal-graphql/graphql/commit/1f72a46637eec9062fdca6349d2652575c93497c.diff"
             },
-            "drupal/media_library_media_modify": {
-                "Fix \"Using a translatable string as a category for field type\" deprecation in Drupal core 10.2": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/47.diff"
-            },
             "drupal/field_group": {
                 "[Drupal 10.2] Deprecated sequence type schema definition": "https://git.drupalcode.org/project/field_group/-/merge_requests/43.diff"
             },
