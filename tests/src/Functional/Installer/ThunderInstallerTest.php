@@ -65,6 +65,8 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Confirms that the installation succeeded.
    */
   public function testInstalled(): void {
+    dump($this->session->getResponseHeaders());
+    dump($this->getSession()->getPage()->getContent());
     $this->assertSession()->addressEquals('user/1');
     $this->assertSession()->statusCodeEquals(200);
     // Confirm that we are logged-in after installation.
