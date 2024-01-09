@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.1.6](https://github.com/thunder/thunder-distribution/tree/7.1.6) 2024-01-09
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.5...7.1.6)
+
+* Allow update_helper version "^4.0" in composer.json
+
 ## [7.1.5](https://github.com/thunder/thunder-distribution/tree/7.1.5) 2023-12-21
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.4...7.1.5)
