@@ -55,9 +55,11 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Setup modules -> subroutine of test setUp process.
    */
   protected function setUpModules(): void {
+    dump($this->getSession()->getCurrentUrl());
     // @todo Add another test that tests interactive install of all optional
     //   Thunder modules.
     $this->submitForm([], $this->translations['Save and continue']);
+    dump($this->getSession()->getCurrentUrl());
     $this->isInstalled = TRUE;
   }
 
@@ -67,8 +69,8 @@ class ThunderInstallerTest extends InstallerTestBase {
   public function testInstalled(): void {
     dump($this->getSession()->getResponseHeaders());
     dump($this->getSession()->getPage()->getContent());
-    $this->assertSession()->addressEquals('user/1');
     $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->addressEquals('user/1');
     // Confirm that we are logged-in after installation.
     $this->assertSession()->pageTextContains($this->rootUser->getAccountName());
 
