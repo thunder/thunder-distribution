@@ -41,30 +41,31 @@ class ThunderInstallerTest extends InstallerTestBase {
     // This step is skipped, because there is a distribution profile.
   }
 
-  /**
-   * Final installer step: Configure site.
-   */
-  protected function setUpSite(): void {
-    $edit = $this->translatePostValues($this->parameters['forms']['install_configure_form']);
-    $edit['enable_update_status_module'] = FALSE;
-    $edit['enable_update_status_emails'] = FALSE;
-    $this->submitForm($edit, $this->translations['Save and continue']);
-    dump($this->getSession()->getPage()->getContent());
-    // If we've got to this point the site is installed using the regular
-    // installation workflow.
-    $this->setUpModules();
-  }
-
-  /**
-   * Setup modules -> subroutine of test setUp process.
-   */
-  protected function setUpModules(): void {
-    // @todo Add another test that tests interactive install of all optional
-    //   Thunder modules.
-    $this->submitForm([], $this->translations['Save and continue']);
-    dump($this->getSession()->getPage()->getContent());
-    $this->isInstalled = TRUE;
-  }
+//  /**
+//   * Final installer step: Configure site.
+//   */
+//  protected function setUpSite(): void {
+//    $edit = $this->translatePostValues($this->parameters['forms']['install_configure_form']);
+//    $edit['enable_update_status_module'] = FALSE;
+//    $edit['enable_update_status_emails'] = FALSE;
+//    $this->submitForm($edit, $this->translations['Save and continue']);
+//    dump($this->getSession()->getPage()->getContent());
+//    // If we've got to this point the site is installed using the regular
+//    // installation workflow.
+//    //$this->setUpModules();
+//    $this->isInstalled = TRUE;
+//  }
+//
+//  /**
+//   * Setup modules -> subroutine of test setUp process.
+//   */
+//  protected function setUpModules(): void {
+//    // @todo Add another test that tests interactive install of all optional
+//    //   Thunder modules.
+//    $this->submitForm([], $this->translations['Save and continue']);
+//    dump($this->getSession()->getPage()->getContent());
+//    $this->isInstalled = TRUE;
+//  }
 
   /**
    * Confirms that the installation succeeded.
