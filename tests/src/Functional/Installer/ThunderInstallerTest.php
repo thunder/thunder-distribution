@@ -48,7 +48,6 @@ class ThunderInstallerTest extends InstallerTestBase {
     $edit = $this->translatePostValues($this->parameters['forms']['install_configure_form']);
     $edit['enable_update_status_module'] = FALSE;
     $edit['enable_update_status_emails'] = FALSE;
-    dump($this->getSession()->getPage()->getContent());
     $this->submitForm($edit, $this->translations['Save and continue']);
     dump($this->getSession()->getPage()->getContent());
     // If we've got to this point the site is installed using the regular
@@ -63,6 +62,7 @@ class ThunderInstallerTest extends InstallerTestBase {
     // @todo Add another test that tests interactive install of all optional
     //   Thunder modules.
     $this->submitForm([], $this->translations['Save and continue']);
+    dump($this->getSession()->getPage()->getContent());
     $this->isInstalled = TRUE;
   }
 
@@ -70,7 +70,6 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Confirms that the installation succeeded.
    */
   public function testInstalled(): void {
-    $this->outputLogMessages();
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->addressEquals('user/1');
     // Confirm that we are logged-in after installation.
