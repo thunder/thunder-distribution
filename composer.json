@@ -48,23 +48,8 @@
             "drupal/graphql": {
                 "Ensure languages in tests have a label set": "https://github.com/drupal-graphql/graphql/commit/1f72a46637eec9062fdca6349d2652575c93497c.diff"
             },
-            "drupal/field_group": {
-                "[Drupal 10.2] Deprecated sequence type schema definition": "https://git.drupalcode.org/project/field_group/-/merge_requests/43.diff"
-            },
             "drupal/entity_reference_revisions": {
                 "Fix \"Using a translatable string as a category for field type\" deprecation in Drupal core 10.2": "https://git.drupalcode.org/project/entity_reference_revisions/-/merge_requests/35.diff"
-            },
-            "drupal/search_api": {
-                "Increase Drupal core version requirement to 10.1": "https://www.drupal.org/files/issues/2023-12-25/3394192-3--require_drupal_10_1.patch"
-            },
-            "drupal/slick": {
-                "The definition for the sequence declares the type of its items in a way that is deprecated in drupal:8.0.0": "https://git.drupalcode.org/project/slick/-/merge_requests/8.diff"
-            },
-            "drupal/blazy": {
-                "The definition for the sequence declares the type of its items in a way that is deprecated in drupal:8.0.0": "https://git.drupalcode.org/project/blazy/-/merge_requests/23.diff"
-            },
-            "symfony/dependency-injection": {
-                "Remove deprecation": "https://www.drupal.org/files/issues/2024-01-10/3397522-remove-deprecation.do-not-test.patch"
             }
         }
     },
