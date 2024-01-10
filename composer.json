@@ -61,6 +61,9 @@
             },
             "drupal/blazy": {
                 "The definition for the sequence declares the type of its items in a way that is deprecated in drupal:8.0.0": "https://git.drupalcode.org/project/blazy/-/merge_requests/23.diff"
+            },
+            "symfony/dependency-injection": {
+                "Remove deprecation": "https://www.drupal.org/files/issues/2024-01-10/3397522-remove-deprecation.do-not-test.patch"
             }
         }
     },
