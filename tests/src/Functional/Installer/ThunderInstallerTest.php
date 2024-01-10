@@ -43,8 +43,6 @@ class ThunderInstallerTest extends InstallerTestBase {
    */
   protected function setUpSite(): void {
     $edit = $this->translatePostValues($this->parameters['forms']['install_configure_form']);
-    $edit['enable_update_status_module'] = FALSE;
-    $edit['enable_update_status_emails'] = FALSE;
     $this->submitForm($edit, $this->translations['Save and continue']);
     // If we've got to this point the site is installed using the regular
     // installation workflow.
@@ -65,8 +63,8 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Confirms that the installation succeeded.
    */
   public function testInstalled(): void {
-    $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->addressEquals('user/1');
+    $this->assertSession()->statusCodeEquals(200);
     // Confirm that we are logged-in after installation.
     $this->assertSession()->pageTextContains($this->rootUser->getAccountName());
 
