@@ -68,6 +68,7 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Confirms that the installation succeeded.
    */
   public function testInstalled(): void {
+    $this->outputLogMessages();
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->addressEquals('user/1');
     // Confirm that we are logged-in after installation.
@@ -87,7 +88,7 @@ class ThunderInstallerTest extends InstallerTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function tearDown(): void {
+  protected function outputLogMessages(): void {
     /** @var \Drupal\Core\Database\Query\SelectInterface $query */
     $query = \Drupal::database()->select('watchdog', 'w')
       ->fields('w', ['message', 'variables']);
@@ -113,8 +114,6 @@ class ThunderInstallerTest extends InstallerTestBase {
       }
       throw new \Exception(print_r($errors, TRUE));
     }
-
-    parent::tearDown();
   }
 
 }
