@@ -111,10 +111,10 @@ jobs:
         ports:
           - 9515:9515
 
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        PHP_VERSION: [ '8.1' ]
+    strategy:
+      fail-fast: false
+      matrix:
+        PHP_VERSION: [ '8.1' ]
 #        CHUNK: [ 1, 2, 3 ]
 
     steps:
