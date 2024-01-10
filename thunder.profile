@@ -22,28 +22,28 @@ function thunder_form_install_configure_form_alter(array &$form, FormStateInterf
   $form['site_information']['site_name']['#placeholder'] = t('Thunder');
 }
 
-///**
-// * Implements hook_install_tasks().
-// */
-//function thunder_install_tasks(array &$install_state): array {
-//  $tasks = [];
-//  if (empty($install_state['config_install_path'])) {
-//    $tasks['thunder_module_configure_form'] = [
-//      'display_name' => t('Configure additional modules'),
-//      'type' => 'form',
-//      'function' => ModuleConfigureForm::class,
-//    ];
-//    $tasks['thunder_module_install'] = [
-//      'display_name' => t('Install additional modules'),
-//      'type' => 'batch',
-//      'run' => empty($install_state['thunder_install_batch']) ? INSTALL_TASK_SKIP : INSTALL_TASK_RUN_IF_NOT_COMPLETED,
-//    ];
-//  }
-//  $tasks['thunder_finish_installation'] = [
-//    'display_name' => t('Finish installation'),
-//  ];
-//  return $tasks;
-//}
+/**
+ * Implements hook_install_tasks().
+ */
+function thunder_install_tasks(array &$install_state): array {
+  $tasks = [];
+  if (empty($install_state['config_install_path'])) {
+    $tasks['thunder_module_configure_form'] = [
+      'display_name' => t('Configure additional modules'),
+      'type' => 'form',
+      'function' => ModuleConfigureForm::class,
+    ];
+    $tasks['thunder_module_install'] = [
+      'display_name' => t('Install additional modules'),
+      'type' => 'batch',
+      'run' => empty($install_state['thunder_install_batch']) ? INSTALL_TASK_SKIP : INSTALL_TASK_RUN_IF_NOT_COMPLETED,
+    ];
+  }
+  $tasks['thunder_finish_installation'] = [
+    'display_name' => t('Finish installation'),
+  ];
+  return $tasks;
+}
 
 /**
  * Installs the thunder modules in a batch.
