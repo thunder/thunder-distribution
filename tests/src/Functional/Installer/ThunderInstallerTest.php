@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder\Functional\Installer;
 
+use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\Unicode;
 use Drupal\Core\DrupalKernel;
 use Drupal\Core\Http\ClientFactory;
 use Drupal\Core\Language\Language;

@@ -234,6 +234,11 @@ parameters:
 			path: tests/src/TestSuites/ThunderTestSuite.php
 
 		-
+			message: "#^Missing call to parent\\:\\:setUp\\(\\) method.$#"
+			count: 1
+			path: tests/src/Functional/Installer/ThunderInstallerTest.php
+
+		-
 			message: "#^Call to method id\\(\\) on an unknown class Drupal\\\\entity_browser\\\\Entity\\\\EntityBrowser\\.$#"
 			count: 1
 			path: thunder.post_update.php
