@@ -310,7 +310,9 @@ class ModuleConfigureForm extends FormBase {
       ];
 
       if (InstallerKernel::installationAttempted()) {
-        $GLOBALS['install_state']['thunder_install_batch'] = $batch;
+        $buildInfo = $form_state->getBuildInfo();
+        $buildInfo['args'][0]['thunder_install_batch'] = $batch;
+        $form_state->setBuildInfo($buildInfo);
       }
       else {
         batch_set($batch);

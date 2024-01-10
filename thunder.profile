@@ -36,6 +36,7 @@ function thunder_install_tasks(array &$install_state): array {
     $tasks['thunder_module_install'] = [
       'display_name' => t('Install additional modules'),
       'type' => 'batch',
+      'run' => empty($install_state['thunder_install_batch']) ? INSTALL_TASK_SKIP : INSTALL_TASK_RUN_IF_NOT_COMPLETED,
     ];
   }
   $tasks['thunder_finish_installation'] = [
