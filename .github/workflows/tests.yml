@@ -115,7 +115,7 @@ jobs:
       fail-fast: false
       matrix:
         PHP_VERSION: [ '8.1' ]
-#        CHUNK: [ 1, 2, 3 ]
+        CHUNK: [ 1, 2, 3 ]
 
     steps:
       - uses: actions/checkout@v3
@@ -153,13 +153,10 @@ jobs:
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Run tests
-        run: test-drupal-project
-        continue-on-error: true
+        run: test-drupal-project run_tests
         env:
-          DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/Functional/Installer/ThunderInstallerTest.php
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+          THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
+          DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
 
   test-upgrade:
 

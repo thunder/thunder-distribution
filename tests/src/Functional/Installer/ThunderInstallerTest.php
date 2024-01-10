@@ -2,10 +2,7 @@
 
 namespace Drupal\Tests\thunder\Functional\Installer;
 
-use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\dblog\Controller\DbLogController;
 use Drupal\FunctionalTests\Installer\InstallerTestBase;
 
 /**
@@ -49,7 +46,6 @@ class ThunderInstallerTest extends InstallerTestBase {
     $edit['enable_update_status_module'] = FALSE;
     $edit['enable_update_status_emails'] = FALSE;
     $this->submitForm($edit, $this->translations['Save and continue']);
-    dump($this->getSession()->getPage()->getContent());
     // If we've got to this point the site is installed using the regular
     // installation workflow.
     $this->setUpModules();
@@ -62,7 +58,6 @@ class ThunderInstallerTest extends InstallerTestBase {
     // @todo Add another test that tests interactive install of all optional
     //   Thunder modules.
     $this->submitForm([], $this->translations['Save and continue']);
-    dump($this->getSession()->getPage()->getContent());
     $this->isInstalled = TRUE;
   }
 
@@ -84,37 +79,6 @@ class ThunderInstallerTest extends InstallerTestBase {
     // Check that there are no warnings in the log after installation.
     $this->assertEquals($this->knownWarnings, $query->countQuery()->execute()->fetchField());
 
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function outputLogMessages(): void {
-    /** @var \Drupal\Core\Database\Query\SelectInterface $query */
-    $query = \Drupal::database()->select('watchdog', 'w')
-      ->fields('w', ['message', 'variables']);
-    $andGroup = $query->andConditionGroup()
-      ->condition('severity', '5', '<')
-      ->condition('type', 'php');
-    $group = $query->orConditionGroup()
-      ->condition('severity', '10', '<')
-      ->condition($andGroup);
-    $query->condition($group);
-    $query->groupBy('w.message');
-    $query->groupBy('w.variables');
-
-    $controller = DbLogController::create($this->container);
-
-    // Check that there are no warnings in the log after installation.
-    // $this->assertEqual($query->countQuery()->execute()->fetchField(), 0);.
-    if ($query->countQuery()->execute()->fetchField()) {
-      // Output all errors for modules tested.
-      $errors = [];
-      foreach ($query->execute()->fetchAll() as $row) {
-        $errors[] = Unicode::truncate(Html::decodeEntities(strip_tags($controller->formatMessage($row))), 256, TRUE, TRUE);
-      }
-      throw new \Exception(print_r($errors, TRUE));
-    }
   }
 
 }
