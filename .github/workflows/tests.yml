@@ -155,8 +155,7 @@ jobs:
       - name: Run tests
         run: test-drupal-project run_tests
         env:
-          DRUPAL_TESTING_TEST_FILTER: \Drupal\Tests\thunder\Functional\Installer\ThunderInstallerTest
-          DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
+          DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/Functional/Installer/ThunderInstallerTest.php
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
