@@ -20,7 +20,7 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
   DRUPAL_TESTING_VERBOSE: false
-  DRUPAL_TESTING_VERSION: "^1.0.36"
+  DRUPAL_TESTING_VERSION: "dev-fix-thunder-distribution-test-pipeline"
   DRUPAL_TESTING_TEST_FILTER: ""
   DRUPAL_TESTING_SELENIUM_HOST: 127.0.0.1
   DRUPAL_TESTING_SELENIUM_PORT: 9515
@@ -71,10 +71,6 @@ jobs:
         run: |
           composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true --no-plugins
           composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
-
-      #   Start a debug session.
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
