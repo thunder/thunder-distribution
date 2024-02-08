@@ -37,7 +37,8 @@
             "drupal/core": {
                 "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2021-05-31/3133639.19.patch",
                 "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch",
-                "\"Add another item\" field button is displayed as a modal action": "https://www.drupal.org/files/issues/2023-06-15/3151534-10.1-65.patch"
+                "\"Add another item\" field button is displayed as a modal action": "https://www.drupal.org/files/issues/2023-06-15/3151534-10.1-65.patch",
+                "#3416522 Alexs installer idea": "https://www.drupal.org/files/issues/2024-02-08/3416522-10.1.x-2-14.patch"
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
