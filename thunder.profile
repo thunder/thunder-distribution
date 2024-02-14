@@ -37,11 +37,11 @@ function thunder_install_tasks_alter(array &$tasks, array $install_state): void 
       'display_name' => t('Install additional modules'),
       'type' => 'batch',
     ];
-    // Ensure our tasks come before the install_configure_form task.
+    // Ensure our tasks come before the install_finished task.
     $key = array_search('install_configure_form', array_keys($tasks), TRUE);
     $tasks = array_slice($tasks, 0, $key, TRUE) +
       $thunder_tasks +
-      array_slice($tasks, $key, NULL, TRUE);
+      array_slice($tasks, $key, NULL , TRUE);
   }
 }
 
