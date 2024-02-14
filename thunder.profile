@@ -23,22 +23,26 @@ function thunder_form_install_configure_form_alter(array &$form, FormStateInterf
 }
 
 /**
- * Implements hook_install_tasks().
+ * Implements hook_install_tasks_alter().
  */
-function thunder_install_tasks(array &$install_state): array {
-  $tasks = [];
+function thunder_install_tasks_alter(array &$tasks, array $install_state) {
   if (empty($install_state['config_install_path'])) {
-    $tasks['thunder_module_configure_form'] = [
+    $thunder_tasks = [];
+    $thunder_tasks['thunder_module_configure_form'] = [
       'display_name' => t('Configure additional modules'),
       'type' => 'form',
       'function' => ModuleConfigureForm::class,
     ];
-    $tasks['thunder_module_install'] = [
+    $thunder_tasks['thunder_module_install'] = [
       'display_name' => t('Install additional modules'),
       'type' => 'batch',
     ];
+    // Ensure our tasks come before the install_finished task.
+    $key = array_search('install_finished', array_keys($tasks), TRUE);
+    $tasks = array_slice($tasks, 0, $key, TRUE) +
+      $thunder_tasks +
+      array_slice($tasks, $key, NULL , TRUE);
   }
-  return $tasks;
 }
 
 /**
