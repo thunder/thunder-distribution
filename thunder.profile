@@ -5,7 +5,6 @@
  * Enables modules and site configuration for a thunder site installation.
  */
 
-use Drupal\Core\Database\Database;
 use Drupal\Core\Extension\Dependency;
 use Drupal\Core\Extension\Extension;
 use Drupal\Core\Form\FormStateInterface;
@@ -225,12 +224,6 @@ function thunder_media_source_info_alter(array &$sources): void {
  *   fixed.
  */
 function _thunder_transaction(array &$install_state): void {
-  $manager = Database::getConnection()->transactionManager();
-  $reflection = new \ReflectionClass($manager);
-
-  /** @var array<string,\Drupal\Core\Database\Transaction\StackItem> $stack */
-  $stack = $reflection->getMethod('stack')->invoke($manager);
-  foreach (array_reverse($stack) as $id => $stackItem) {
-    $manager->unpile($stackItem->name, $id);
-  }
+  // Force a redirect.
+  $install_state['parameters_changed'] = TRUE;
 }
