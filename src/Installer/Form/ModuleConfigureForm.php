@@ -3,13 +3,19 @@
 namespace Drupal\thunder\Installer\Form;
 
 use Drupal\Component\Utility\Environment;
+use Drupal\Core\Access\AccessManagerInterface;
 use Drupal\Core\Extension\Extension;
 use Drupal\Core\Extension\ExtensionLifecycle;
 use Drupal\Core\Extension\ModuleDependencyMessageTrait;
+use Drupal\Core\Extension\ModuleExtensionList;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Installer\InstallerKernel;
+use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Url;
+use Drupal\user\PermissionHandlerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides the site configuration form.
@@ -17,6 +23,105 @@ use Drupal\Core\Url;
 class ModuleConfigureForm extends FormBase {
 
   use ModuleDependencyMessageTrait;
+
+  /**
+   * The module extension list.
+   *
+   * @var \Drupal\Core\Extension\ModuleExtensionList
+   */
+  protected $moduleExtensionList;
+
+  /**
+   * The access manager service.
+   *
+   * @var \Drupal\Core\Access\AccessManagerInterface
+   */
+  protected $accessManager;
+
+  /**
+   * The module handler service.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
+   * The current user.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  protected $currentUser;
+
+  /**
+   * The permission handler service.
+   *
+   * @var \Drupal\user\PermissionHandlerInterface
+   */
+  protected $permissionHandler;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container): self {
+    $form = parent::create($container);
+    $form->setModuleExtensionList($container->get('extension.list.module'));
+    $form->setAccessManager($container->get('access_manager'));
+    $form->setCurrentUser($container->get('current_user'));
+    $form->setModuleHandler($container->get('module_handler'));
+    $form->setPermissionHandler($container->get('user.permissions'));
+    $form->setConfigFactory($container->get('config.factory'));
+    return $form;
+  }
+
+  /**
+   * Set the module extension list.
+   *
+   * @param \Drupal\Core\Extension\ModuleExtensionList $moduleExtensionList
+   *   The module extension list.
+   */
+  protected function setModuleExtensionList(ModuleExtensionList $moduleExtensionList): void {
+    $this->moduleExtensionList = $moduleExtensionList;
+  }
+
+  /**
+   * Set the access manager.
+   *
+   * @param \Drupal\Core\Access\AccessManagerInterface $accessManager
+   *   The access manager service.
+   */
+  protected function setAccessManager(AccessManagerInterface $accessManager): void {
+    $this->accessManager = $accessManager;
+  }
+
+  /**
+   * Set the current user.
+   *
+   * @param \Drupal\Core\Session\AccountProxyInterface $accountProxy
+   *   The current user.
+   */
+  protected function setCurrentUser(AccountProxyInterface $accountProxy): void {
+    $this->currentUser = $accountProxy;
+  }
+
+  /**
+   * Set the module handler service.
+   *
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   *   The module handler service.
+   */
+  protected function setModuleHandler(ModuleHandlerInterface $moduleHandler): void {
+    $this->moduleHandler = $moduleHandler;
+  }
+
+  /**
+   * Set the permissions handler service.
+   *
+   * @param \Drupal\user\PermissionHandlerInterface $handler
+   *   The permissions handler service.
+   */
+  protected function setPermissionHandler(PermissionHandlerInterface $handler): void {
+    $this->permissionHandler = $handler;
+  }
 
   /**
    * {@inheritdoc}
@@ -39,7 +144,7 @@ class ModuleConfigureForm extends FormBase {
       '#tree' => TRUE,
     ];
 
-    $modules = \Drupal::service('extension.list.module')->getList();
+    $modules = $this->moduleExtensionList->getList();
     $thunder_features = array_filter($modules, fn(Extension $module): bool => $module->info['package'] === 'Thunder Optional' && (!isset($module->info['hidden']) || !$module->info['hidden']));
 
     foreach ($thunder_features as $id => $module) {
@@ -100,7 +205,7 @@ class ModuleConfigureForm extends FormBase {
         // Generate link for module's help page. Assume that if a hook_help()
         // implementation exists then the module provides an overview page,
         // rather than checking to see if the page exists, which is costly.
-        if (\Drupal::moduleHandler()->moduleExists('help') && \Drupal::moduleHandler()->hasImplementations('help', $module->getName())) {
+        if ($this->moduleHandler->moduleExists('help') && $this->moduleHandler->hasImplementations('help', $module->getName())) {
           $form['install_modules'][$id]['info']['links']['help'] = [
             '#type' => 'link',
             '#title' => $this->t('Help'),
@@ -115,7 +220,7 @@ class ModuleConfigureForm extends FormBase {
         }
 
         // Generate link for module's permission, if the user has access to it.
-        if ($this->currentUser()->hasPermission('administer permissions') && \Drupal::service('user.permissions')->moduleProvidesPermissions($module->getName())) {
+        if ($this->currentUser->hasPermission('administer permissions') && $this->permissionHandler->moduleProvidesPermissions($module->getName())) {
           $form['install_modules'][$id]['info']['links']['permissions'] = [
             '#type' => 'link',
             '#title' => $this->t('Permissions'),
@@ -133,7 +238,7 @@ class ModuleConfigureForm extends FormBase {
         // Generate link for module's configuration page, if it has one.
         if (isset($module->info['configure'])) {
           $route_parameters = $module->info['configure_parameters'] ?? [];
-          if (\Drupal::service('access_manager')->checkNamedRoute($module->info['configure'], $route_parameters, $this->currentUser())) {
+          if ($this->accessManager->checkNamedRoute($module->info['configure'], $route_parameters, $this->currentUser)) {
             $form['install_modules'][$id]['info']['links']['configure'] = [
               '#type' => 'link',
               '#title' => $this->t('Configure <span class="visually-hidden">the @module module</span>', ['@module' => $module->info['name']]),
@@ -169,7 +274,7 @@ class ModuleConfigureForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $operations = [];
     foreach ($form_state->getValue('install_modules') as $module => $values) {
-      $extension = \Drupal::service('extension.list.module')->get($module);
+      $extension = $this->moduleExtensionList->get($module);
       if (!$extension->status && $values['enable']) {
         $operations[] = [
           [__CLASS__, 'batchOperation'],
