@@ -228,14 +228,18 @@ function thunder_media_source_info_alter(array &$sources): void {
 function _thunder_transaction(array &$install_state): void {
   $manager = Database::getConnection()->transactionManager();
   $reflection = new \ReflectionClass($manager);
+  if (!$reflection->hasMethod('stack')) {
+    return;
+  }
 
-  if ($reflection->hasMethod('stack')) {
-    $stack = $reflection->getMethod('stack')->invoke($manager);
-    if (is_array($stack)) {
-      foreach (array_reverse($stack) as $id => $stackItem) {
-        if ($stackItem instanceof StackItem)
-        $manager->unpile($stackItem->name, $id);
-      }
+  $stack = $reflection->getMethod('stack')->invoke($manager);
+  if (!is_array($stack)) {
+    return;
+  }
+
+  foreach (array_reverse($stack) as $id => $stackItem) {
+    if ($stackItem instanceof StackItem) {
+      $manager->unpile($stackItem->name, $id);
     }
   }
 }
