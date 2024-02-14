@@ -9,7 +9,6 @@ use Drupal\Core\Extension\ExtensionLifecycle;
 use Drupal\Core\Extension\ModuleDependencyMessageTrait;
 use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Installer\InstallerKernel;
@@ -31,13 +30,6 @@ class ModuleConfigureForm extends FormBase {
    * @var \Drupal\Core\Extension\ModuleExtensionList
    */
   protected $moduleExtensionList;
-
-  /**
-   * The module installer.
-   *
-   * @var \Drupal\Core\Extension\ModuleInstallerInterface
-   */
-  protected $moduleInstaller;
 
   /**
    * The access manager service.
@@ -73,7 +65,6 @@ class ModuleConfigureForm extends FormBase {
   public static function create(ContainerInterface $container): self {
     $form = parent::create($container);
     $form->setModuleExtensionList($container->get('extension.list.module'));
-    $form->setModuleInstaller($container->get('module_installer'));
     $form->setAccessManager($container->get('access_manager'));
     $form->setCurrentUser($container->get('current_user'));
     $form->setModuleHandler($container->get('module_handler'));
@@ -90,16 +81,6 @@ class ModuleConfigureForm extends FormBase {
    */
   protected function setModuleExtensionList(ModuleExtensionList $moduleExtensionList): void {
     $this->moduleExtensionList = $moduleExtensionList;
-  }
-
-  /**
-   * Set the modules installer.
-   *
-   * @param \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller
-   *   The module installer.
-   */
-  protected function setModuleInstaller(ModuleInstallerInterface $moduleInstaller): void {
-    $this->moduleInstaller = $moduleInstaller;
   }
 
   /**
@@ -296,7 +277,7 @@ class ModuleConfigureForm extends FormBase {
       $extension = $this->moduleExtensionList->get($module);
       if (!$extension->status && $values['enable']) {
         $operations[] = [
-          [$this, 'batchOperation'],
+          [__CLASS__, 'batchOperation'],
           [$module],
         ];
       }
@@ -330,9 +311,9 @@ class ModuleConfigureForm extends FormBase {
    *
    * @throws \Drupal\Core\Extension\MissingDependencyException
    */
-  public function batchOperation(string $module, array &$context): void {
+  public static function batchOperation(string $module, array &$context): void {
     Environment::setTimeLimit(0);
-    $this->moduleInstaller->install([$module]);
+    \Drupal::service('module_installer')->install([$module]);
   }
 
 }
