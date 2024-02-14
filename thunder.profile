@@ -38,7 +38,7 @@ function thunder_install_tasks_alter(array &$tasks, array $install_state): void 
       'type' => 'batch',
     ];
     // Ensure our tasks come before the install_finished task.
-    $key = array_search('install_finished', array_keys($tasks), TRUE);
+    $key = array_search('install_configure_form', array_keys($tasks), TRUE);
     $tasks = array_slice($tasks, 0, $key, TRUE) +
       $thunder_tasks +
       array_slice($tasks, $key, NULL , TRUE);

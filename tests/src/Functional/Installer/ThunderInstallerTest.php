@@ -42,21 +42,12 @@ class ThunderInstallerTest extends InstallerTestBase {
    * Final installer step: Configure site.
    */
   protected function setUpSite(): void {
-    $edit = $this->translatePostValues($this->parameters['forms']['install_configure_form']);
-    $this->submitForm($edit, $this->translations['Save and continue']);
-    // If we've got to this point the site is installed using the regular
-    // installation workflow.
-    $this->setUpModules();
-  }
-
-  /**
-   * Setup modules -> subroutine of test setUp process.
-   */
-  protected function setUpModules(): void {
     // @todo Add another test that tests interactive install of all optional
     //   Thunder modules.
     $this->submitForm([], $this->translations['Save and continue']);
-    $this->isInstalled = TRUE;
+
+    // Do the regular site configure form.
+    parent::setUpSite();
   }
 
   /**
