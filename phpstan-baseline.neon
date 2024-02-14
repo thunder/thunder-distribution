@@ -247,3 +247,13 @@ parameters:
 			message: "#^PHPDoc tag @var for variable \\$entity_browser contains unknown class Drupal\\\\entity_browser\\\\Entity\\\\EntityBrowser\\.$#"
 			count: 1
 			path: thunder.post_update.php
+
+                -
+                        message: "#^Result of && is always false\\.$#"
+                        count: 1
+                        path: thunder.profile
+
+                -
+                        message: "#^Strict comparison using \\=\\=\\= between false and true will always evaluate to false\\.$#"
+                        count: 1
+                        path: thunder.profile
