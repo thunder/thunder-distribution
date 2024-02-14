@@ -37,8 +37,6 @@
             "drupal/core": {
                 "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2021-05-31/3133639.19.patch",
                 "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch",
-                "Transction destruction 3405976": "https://git.drupalcode.org/project/drupal/-/merge_requests/5774.diff",
-                "\"Add another item\" field button is displayed as a modal action": "https://www.drupal.org/files/issues/2023-06-15/3151534-10.1-65.patch",
                 "Issue #3388913: Checkbox for Media library modal missing after search": "https://www.drupal.org/files/issues/2024-01-30/3388913-48-d10.1.patch"
             },
             "drupal/diff": {
@@ -49,9 +47,6 @@
             },
             "drupal/graphql": {
                 "Ensure languages in tests have a label set": "https://github.com/drupal-graphql/graphql/commit/1f72a46637eec9062fdca6349d2652575c93497c.diff"
-            },
-            "drupal/entity_reference_revisions": {
-                "Fix \"Using a translatable string as a category for field type\" deprecation in Drupal core 10.2": "https://git.drupalcode.org/project/entity_reference_revisions/-/merge_requests/35.diff"
             }
         }
     },
