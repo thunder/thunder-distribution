@@ -42,6 +42,12 @@ function thunder_install_tasks_alter(array &$tasks, array $install_state): void 
     $tasks = array_slice($tasks, 0, $key, TRUE) +
       $thunder_tasks +
       array_slice($tasks, $key, NULL, TRUE);
+
+    if (defined('DRUPAL_TEST_IN_CHILD_SITE') && DRUPAL_TEST_IN_CHILD_SITE === TRUE) {
+      // @todo remove this work-around for transaction destruction bug.
+      //   See https://www.drupal.org/project/drupal/issues/3405976.
+      unset($tasks['finish_translations']);
+    }
   }
 }
 
