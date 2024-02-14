@@ -38,9 +38,6 @@ function thunder_install_tasks(array &$install_state): array {
       'type' => 'batch',
     ];
   }
-  $tasks['thunder_finish_installation'] = [
-    'display_name' => t('Finish installation'),
-  ];
   return $tasks;
 }
 
