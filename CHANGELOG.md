@@ -2,7 +2,7 @@
 
 ## [7.1.7](https://github.com/thunder/thunder-distribution/tree/7.1.7) 2024-02-14
 
-[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.5...7.1.6)
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.6...7.1.7)
 
 * Add patch to fix [Checkbox for Media library modal missing after search](https://www.drupal.org/project/drupal/issues/3388913)
 
