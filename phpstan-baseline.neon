@@ -66,6 +66,11 @@ parameters:
 			path: modules/thunder_gqls/src/Plugin/GraphQL/SchemaExtension/ThunderPagesSchemaExtension.php
 
 		-
+			message: "#^\\\\Drupal calls should be avoided in classes, use dependency injection instead$#"
+			count: 1
+			path: modules/thunder_gqls/src/Wrappers/EntityListResponse.php
+
+		-
 			message: """
 				#^Call to deprecated method getConfig\\(\\) of class GuzzleHttp\\\\Client\\:
 				Client\\:\\:getConfig will be removed in guzzlehttp/guzzle\\:8\\.0\\.$#
@@ -97,6 +102,21 @@ parameters:
 			message: "#^Access to an undefined property Drupal\\\\Core\\\\Extension\\\\Extension\\:\\:\\$status\\.$#"
 			count: 5
 			path: src/Installer/Form/ModuleConfigureForm.php
+
+		-
+			message: "#^\\\\Drupal calls should be avoided in classes, use dependency injection instead$#"
+			count: 6
+			path: src/Installer/Form/ModuleConfigureForm.php
+
+		-
+			message: "#^Drupal\\\\Tests\\\\BrowserTestBase\\:\\:\\$defaultTheme is required\\. See https\\://www\\.drupal\\.org/node/3083055, which includes recommendations on which theme to use\\.$#"
+			count: 1
+			path: tests/src/Functional/Installer/ThunderInstallerGermanTest.php
+
+		-
+			message: "#^Drupal\\\\Tests\\\\BrowserTestBase\\:\\:\\$defaultTheme is required\\. See https\\://www\\.drupal\\.org/node/3083055, which includes recommendations on which theme to use\\.$#"
+			count: 1
+			path: tests/src/Functional/Installer/ThunderInstallerTest.php
 
 		-
 			message: "#^Access to an undefined property Drupal\\\\Core\\\\Session\\\\AccountInterface\\:\\:\\$pass_raw\\.$#"
@@ -204,32 +224,17 @@ parameters:
 			path: tests/src/FunctionalJavascript/ThunderJavascriptTestBase.php
 
 		-
+			message: "#^Class Drupal\\\\Tests\\\\TestSuites\\\\ThunderTestSuite extends @internal class PHPUnit\\\\Framework\\\\TestSuite\\.$#"
+			count: 1
+			path: tests/src/TestSuites/ThunderTestSuite.php
+
+		-
 			message: "#^Function drupal_phpunit_find_extension_directories not found\\.$#"
 			count: 1
 			path: tests/src/TestSuites/ThunderTestSuite.php
 
 		-
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"
-			count: 1
-			path: tests/src/TestSuites/ThunderTestSuite.php
-
-		-
-			message: "#^\\\\Drupal calls should be avoided in classes, use dependency injection instead$#"
-			count: 1
-			path: modules/thunder_gqls/src/Wrappers/EntityListResponse.php
-
-		-
-			message: "#^Drupal\\\\Tests\\\\BrowserTestBase\\:\\:\\$defaultTheme is required\\. See https\\://www\\.drupal\\.org/node/3083055, which includes recommendations on which theme to use\\.$#"
-			count: 1
-			path: tests/src/Functional/Installer/ThunderInstallerGermanTest.php
-
-		-
-			message: "#^Drupal\\\\Tests\\\\BrowserTestBase\\:\\:\\$defaultTheme is required\\. See https\\://www\\.drupal\\.org/node/3083055, which includes recommendations on which theme to use\\.$#"
-			count: 1
-			path: tests/src/Functional/Installer/ThunderInstallerTest.php
-
-		-
-			message: "#^Class Drupal\\\\Tests\\\\TestSuites\\\\ThunderTestSuite extends @internal class PHPUnit\\\\Framework\\\\TestSuite\\.$#"
 			count: 1
 			path: tests/src/TestSuites/ThunderTestSuite.php
 
