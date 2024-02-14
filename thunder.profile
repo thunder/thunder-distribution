@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Database\Database;
+use Drupal\Core\Database\Transaction\StackItem;
 use Drupal\Core\Extension\Dependency;
 use Drupal\Core\Extension\Extension;
 use Drupal\Core\Form\FormStateInterface;
@@ -228,9 +229,13 @@ function _thunder_transaction(array &$install_state): void {
   $manager = Database::getConnection()->transactionManager();
   $reflection = new \ReflectionClass($manager);
 
-  /** @var array<string,\Drupal\Core\Database\Transaction\StackItem> $stack */
-  $stack = $reflection->getMethod('stack')->invoke($manager);
-  foreach (array_reverse($stack) as $id => $stackItem) {
-    $manager->unpile($stackItem->name, $id);
+  if ($reflection->hasMethod('stack')) {
+    $stack = $reflection->getMethod('stack')->invoke($manager);
+    if (is_array($stack)) {
+      foreach (array_reverse($stack) as $id => $stackItem) {
+        if ($stackItem instanceof StackItem)
+        $manager->unpile($stackItem->name, $id);
+      }
+    }
   }
 }
