@@ -25,7 +25,7 @@ function thunder_form_install_configure_form_alter(array &$form, FormStateInterf
 /**
  * Implements hook_install_tasks_alter().
  */
-function thunder_install_tasks_alter(array &$tasks, array $install_state) {
+function thunder_install_tasks_alter(array &$tasks, array $install_state): void {
   if (empty($install_state['config_install_path'])) {
     $thunder_tasks = [];
     $thunder_tasks['thunder_module_configure_form'] = [
