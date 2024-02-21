@@ -38,7 +38,7 @@ jobs:
 
     services:
       mysql:
-        image: mariadb:latest
+        image: mariadb:lts
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
@@ -100,7 +100,7 @@ jobs:
 
     services:
       mysql:
-        image: mariadb:latest
+        image: mariadb:lts
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
@@ -164,7 +164,7 @@ jobs:
 
     services:
       mysql:
-        image: mariadb:latest
+        image: mariadb:lts
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
@@ -264,7 +264,7 @@ jobs:
 
     services:
       mysql:
-        image: mariadb:latest
+        image: mariadb:lts
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
