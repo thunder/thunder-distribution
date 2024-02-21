@@ -29,7 +29,6 @@ env:
   MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://127.0.0.1:9515"]'
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
-  MARIA_DB_IMAGE: "mariadb:11.3.2"
 
 jobs:
 
@@ -39,7 +38,7 @@ jobs:
 
     services:
       mysql:
-        image: ${{ MARIA_DB_IMAGE }}
+        image: mariadb:11.3.2
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
@@ -101,7 +100,7 @@ jobs:
 
     services:
       mysql:
-        image: ${{ MARIA_DB_IMAGE }}
+        image: mariadb:11.3.2
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
@@ -165,7 +164,7 @@ jobs:
 
     services:
       mysql:
-        image: ${{ MARIA_DB_IMAGE }}
+        image: mariadb:11.3.2
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
@@ -265,7 +264,7 @@ jobs:
 
     services:
       mysql:
-        image: ${{ MARIA_DB_IMAGE }}
+        image: mariadb:11.3.2
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
