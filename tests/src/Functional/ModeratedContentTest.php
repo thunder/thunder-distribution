@@ -110,7 +110,7 @@ class ModeratedContentTest extends ThunderTestBase {
       'node_revision' => $node_storage->getLatestRevisionId($node->id()),
     ]);
     $this->drupalGet($revert_url);
-    $this->submitForm([], $this->t('Revert'));
+    $this->submitForm([], 'Revert');
 
     $this->drupalGet($node->toUrl());
     $this->assertSession()->titleEquals('Massive gaining seo traffic text');

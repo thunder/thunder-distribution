@@ -37,7 +37,6 @@
             "drupal/core": {
                 "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2021-05-31/3133639.19.patch",
                 "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch",
-                "\"Add another item\" field button is displayed as a modal action": "https://www.drupal.org/files/issues/2023-06-15/3151534-10.1-65.patch",
                 "Issue #3388913: Checkbox for Media library modal missing after search": "https://www.drupal.org/files/issues/2024-01-30/3388913-48-d10.1.patch"
             },
             "drupal/diff": {
@@ -45,6 +44,9 @@
             },
             "drupal/focal_point": {
                 "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-11/preview_link_accidentally_closes_the_media_library-3162210-19.patch"
+            },
+            "drupal/graphql": {
+                "Ensure languages in tests have a label set": "https://github.com/drupal-graphql/graphql/commit/1f72a46637eec9062fdca6349d2652575c93497c.diff"
             }
         }
     },
@@ -57,7 +59,7 @@
         "drupal/autosave_form": "^1.2",
         "drupal/blazy": "^2.14",
         "drupal/checklistapi": "^2.1",
-        "drupal/core-recommended": "~10.1.1",
+        "drupal/core-recommended": "~10.2.0@stable",
         "drupal/config_selector": "^2.1",
         "drupal/config_update": "^1.7 || ^2.0",
         "drupal/content_lock": "^2.1",
@@ -73,7 +75,7 @@
         "drupal/facets": "^2.0.6",
         "drupal/gin": "3.0-rc7",
         "drupal/gin_toolbar": "^1.0-rc1",
-        "drupal/graphql": "^4.3",
+        "drupal/graphql": "4.6.0",
         "drupal/inline_entity_form": "^1.0-rc14",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.2",
