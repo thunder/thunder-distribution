@@ -56,7 +56,8 @@ composer require drupal/ctools
 
 Thunder's new default frontend theme is Olivero, and we removed Thunder Base which was based on the Bartik theme, which
 was removed from Drupal 10 as well. In case you use Thunder Base as your theme, you have to switch to a different one
-before updating. We recommend to switch to Olivero as well. After switching to the new theme, you have to disable the
+before updating. We recommend to switch to Olivero as well. Thunder Base Theme provides breakpoint settings, that you
+have to configure in your new theme as well. After switching to the new theme, you have to disable the
 Thunder Base theme.
 
 ```bash
