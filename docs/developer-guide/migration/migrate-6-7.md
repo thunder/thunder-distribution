@@ -58,7 +58,7 @@ Thunder's new default frontend theme is Olivero, and we removed Thunder Base whi
 was removed from Drupal 10 as well. In case you use Thunder Base as your theme, you have to switch to a different one
 before updating. We recommend switching to Olivero as well. If you use the breakpoint settings, that the Thunder Base
 Theme provided, you have to configure them in another theme under your control and adjust your configuration
-accordingly. After switching to the new theme, you have to disable theThunder Base theme.
+accordingly. After switching to the new theme, you have to disable the Thunder Base theme.
 
 ```bash
 drush config-set system.theme default olivero
