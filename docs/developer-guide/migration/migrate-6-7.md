@@ -56,7 +56,13 @@ composer require drupal/ctools
 
 Thunder's new default frontend theme is Olivero, and we removed Thunder Base which was based on the Bartik theme, which
 was removed from Drupal 10 as well. In case you use Thunder Base as your theme, you have to switch to a different one
-before updating. We recommend to switch to Olivero as well.
+before updating. We recommend to switch to Olivero as well. After switching to the new theme, you have to disable the
+Thunder Base theme.
+
+```bash
+drush config-set system.theme default olivero
+drush pm-uninstall thunder_base
+```
 
 In Thunder 7 we also upgraded the simple_sitemap module from version 3 to version 4. If your project has custom plugins,
 you have to update them to the new version. See the [simple_sitemap documentation](https://gbyte.dev/blog/simple-xml-sitemap-4-0-has-been-released?language_content_entity=und).
