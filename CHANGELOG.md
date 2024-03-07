@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.2.0](https://github.com/thunder/thunder-distribution/tree/7.2.0) 2024-03-07
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.7...7.2.0)
+
+Support Drupal 10.2
+
 ## [7.1.7](https://github.com/thunder/thunder-distribution/tree/7.1.7) 2024-02-14
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.6...7.1.7)
