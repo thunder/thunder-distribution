@@ -5,6 +5,8 @@
  * Enables modules and site configuration for a thunder site installation.
  */
 
+use Drupal\Core\Database\Database;
+use Drupal\Core\Database\Transaction\StackItem;
 use Drupal\Core\Extension\Dependency;
 use Drupal\Core\Extension\Extension;
 use Drupal\Core\Form\FormStateInterface;
@@ -28,6 +30,7 @@ function thunder_form_install_configure_form_alter(array &$form, FormStateInterf
 function thunder_install_tasks(array &$install_state): array {
   $tasks = [];
   if (empty($install_state['config_install_path'])) {
+    $tasks['_thunder_transaction'] = [];
     $tasks['thunder_module_configure_form'] = [
       'display_name' => t('Configure additional modules'),
       'type' => 'form',
@@ -210,5 +213,33 @@ function thunder_gin_content_form_routes(): array {
 function thunder_media_source_info_alter(array &$sources): void {
   if ($sources['oembed:video']) {
     $sources['oembed:video']['providers'][] = 'TikTok';
+  }
+}
+
+/**
+ * Works around bug caused by Drupal's transaction handling.
+ *
+ * @param array $install_state
+ *   The install state.
+ *
+ * @todo Remove once https://www.drupal.org/project/drupal/issues/3405976 is
+ *   fixed.
+ */
+function _thunder_transaction(array &$install_state): void {
+  $manager = Database::getConnection()->transactionManager();
+  $reflection = new \ReflectionClass($manager);
+  if (!$reflection->hasMethod('stack')) {
+    return;
+  }
+
+  $stack = $reflection->getMethod('stack')->invoke($manager);
+  if (!is_array($stack)) {
+    return;
+  }
+
+  foreach (array_reverse($stack) as $id => $stackItem) {
+    if ($stackItem instanceof StackItem) {
+      $manager->unpile($stackItem->name, $id);
+    }
   }
 }
