@@ -134,6 +134,7 @@
         "thunder/thunder_gqls": "*"
     },
     "require-dev": {
+        "drupal/core-dev": "~10.2.4@stable",
         "burdamagazinorg/thunder-dev-tools": "dev-master",
         "thunder/thunder_testing_demo": "4.x-dev",
         "mglaman/phpstan-drupal": "^1.1",
