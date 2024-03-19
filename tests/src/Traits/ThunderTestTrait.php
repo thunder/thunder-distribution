@@ -171,7 +171,7 @@ trait ThunderTestTrait {
       // Output all errors for modules tested.
       $errors = [];
       foreach ($query->execute()->fetchAll() as $row) {
-        $errors[] = Unicode::truncate(Html::decodeEntities(strip_tags($controller->formatMessage($row))), 256, TRUE, TRUE);
+        $errors[] = Unicode::truncate(Html::decodeEntities(strip_tags((string) $controller->formatMessage($row))), 256, TRUE, TRUE);
       }
       throw new \Exception(print_r($errors, TRUE));
     }
