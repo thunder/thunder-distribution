@@ -5,7 +5,6 @@ namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
-use Drupal\redirect\Entity\Redirect;
 use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 
 /**
