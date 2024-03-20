@@ -117,7 +117,7 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
 
     if ($this->redirectRepository) {
       $queryString = parse_url($path, PHP_URL_QUERY) ?: '';
-      $pathWithoutQuery = parse_url($path, PHP_URL_PATH) ?: NULL;
+      $pathWithoutQuery = parse_url($path, PHP_URL_PATH) ?: $path;
 
       $language = $this->languageManager->getCurrentLanguage()->getId();
       $queryParameters = [];
@@ -126,7 +126,7 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
 
       /** @var \Drupal\redirect\Entity\Redirect|null $redirect */
       $redirect = $this->redirectRepository->findMatchingRedirect(
-        $pathWithoutQuery ?? $path,
+        $pathWithoutQuery,
         $queryParameters,
         $language
       );
