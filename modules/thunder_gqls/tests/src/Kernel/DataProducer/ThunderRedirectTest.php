@@ -61,6 +61,8 @@ class ThunderRedirectTest extends GraphQLTestBase {
    */
   public function testRedirect(): void {
     $redirectPath = 'redirect-test-path';
+
+    /** @var \Drupal\redirect\Entity\Redirect $redirect */
     $redirect = $this->storage->create();
     $redirect->setSource($redirectPath);
     $redirect->setRedirect('node/' . $this->node->id());
