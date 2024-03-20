@@ -114,27 +114,37 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    */
   public function resolve(string $path, RefinableCacheableDependencyInterface $metadata): array {
     $metadata->addCacheTags(['redirect_list']);
+
     if ($this->redirectRepository) {
+      $queryString = parse_url($path, PHP_URL_QUERY) ?: '';
+      $pathWithoutQuery = parse_url($path, PHP_URL_PATH) ?: NULL;
+
       $language = $this->languageManager->getCurrentLanguage()->getId();
+      $queryParameters = [];
+
+      parse_str($queryString, $queryParameters);
 
       /** @var \Drupal\redirect\Entity\Redirect|null $redirect */
       $redirect = $this->redirectRepository->findMatchingRedirect(
-        $path,
-        [],
+        $pathWithoutQuery ?? $path,
+        $queryParameters,
         $language
       );
+
       if ($redirect instanceof Redirect) {
         $urlObject = $redirect->getRedirectUrl();
         $metadata->addCacheTags($redirect->getCacheTags());
 
+        $redirectUri = $urlObject->toString(TRUE)->getGeneratedUrl();
         return [
-          'url' => $urlObject->toString(TRUE)->getGeneratedUrl(),
+          'url' => $redirectUri . (!empty($queryString) ? '?' . $queryString : ''),
           'status' => $redirect->getStatusCode(),
         ];
       }
     }
 
     if (($url = $this->pathValidator->getUrlIfValidWithoutAccessCheck($path)) && $url->isRouted()) {
+
       if ($url->access()) {
         return [
           'url' => $path,
