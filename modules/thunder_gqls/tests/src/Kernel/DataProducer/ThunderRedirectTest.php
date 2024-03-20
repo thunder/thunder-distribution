@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
-use Drupal\redirect\Entity\Redirect;
 use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 
 /**
@@ -24,9 +24,9 @@ class ThunderRedirectTest extends GraphQLTestBase {
   /**
    * The redirect entity.
    *
-   * @var \Drupal\redirect\Entity\Redirect
+   * @var \Drupal\Core\Entity\EntityInterface
    */
-  protected Redirect $redirect;
+  protected EntityInterface $redirect;
 
   /**
    * {@inheritdoc}
