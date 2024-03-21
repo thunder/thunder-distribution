@@ -44,7 +44,7 @@ class FilterExtension extends AbstractExtension {
    */
   public static function plainText($value): string {
     $element = self::render($value);
-    $element = strip_tags($element);
+    $element = strip_tags((string) $element);
     return html_entity_decode($element, ENT_QUOTES);
   }
 
@@ -59,7 +59,7 @@ class FilterExtension extends AbstractExtension {
    */
   public static function basicFormat($value): string {
     $element = self::render($value);
-    return strip_tags($element, '<a><em><strong><b><i>');
+    return strip_tags((string) $element, '<a><em><strong><b><i>');
   }
 
   /**
