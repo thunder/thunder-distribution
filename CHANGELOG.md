@@ -7,7 +7,6 @@
 * Fix thunder redirect data producer with query strings.
 * Move xymatic GraphQL schema to base.
 * Update to gin rc9.
-* Update focal_point 2.0.3.
 * Update graphql module to 4.7.0 and remove patch.
 
 ## [7.2.0](https://github.com/thunder/thunder-distribution/tree/7.2.0) 2024-03-07
