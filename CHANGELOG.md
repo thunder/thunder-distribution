@@ -1,5 +1,14 @@
 # Changelog
 
+## [7.2.1](https://github.com/thunder/thunder-distribution/tree/7.2.1) 2024-04-10
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.2.0...7.2.1)
+
+* Fix thunder redirect data producer with query strings.
+* Move xymatic GraphQL schema to base.
+* Update to gin rc9.
+* Update graphql module to 4.7.0 and remove patch.
+
 ## [7.2.0](https://github.com/thunder/thunder-distribution/tree/7.2.0) 2024-03-07
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.7...7.2.0)
