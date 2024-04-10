@@ -29,12 +29,10 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
    */
   public function testCreateNode(string $contentType, string $contentTypeDisplayName): void {
     // Create a video media item.
-    $video = \Drupal::entityTypeManager()->getStorage('media')->create([
-      'bundle' => 'video',
-      'name' => 'Youtube',
-      'field_media_oembed_video' => 'https://www.youtube.com/watch?v=PWjcqE3QKBg',
-    ]);
-    $video->save();
+    $this->drupalGet("media/add/video");
+    $this->assertSession()->fieldExists('Video URL')->setValue('https://www.youtube.com/watch?v=PWjcqE3QKBg');
+    $this->assertSession()->fieldExists('Name')->setValue('Youtube');
+    $this->assertSession()->buttonExists('Save')->press();
 
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
     $this->nodeFillNew([
