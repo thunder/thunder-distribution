@@ -67,6 +67,7 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
     $this->addLinkParagraph(static::$paragraphsField, 'Link to Thunder', 'http://www.thunder.org');
 
     // Add Video paragraph at the beginning.
+    $video = $this->getMediaByName('Youtube');
     $this->addVideoParagraph(static::$paragraphsField, [$video->id()], 0);
 
     // Add Pinterest Paragraph.
