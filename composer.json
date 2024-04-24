@@ -98,7 +98,7 @@
         "drupal/schema_metatag": "^2.4",
         "drupal/select2": "^1.7",
         "drupal/search_api_mark_outdated": "^1.0",
-        "drupal/simple_sitemap": "4.1.6",
+        "drupal/simple_sitemap": "^4.1.6",
         "drupal/slick": "^2.7",
         "drupal/token": "^1.7",
         "drupal/update_helper": "^2.0||^3.0.3||^4.0",
