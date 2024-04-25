@@ -5,7 +5,6 @@ namespace Drupal\thunder_article\Breadcrumb;
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\taxonomy\TermInterface;
-use Drupal\thunder\Breadcrumb\ThunderTaxonomyTermBreadcrumbBuilderBase;
 
 /**
  * Class to define the menu_link breadcrumb builder.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\thunder\Breadcrumb;
+namespace Drupal\thunder_article\Breadcrumb;
 
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
