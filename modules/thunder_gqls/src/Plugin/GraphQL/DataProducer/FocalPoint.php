@@ -88,7 +88,7 @@ class FocalPoint extends DataProducerPluginBase implements ContainerFactoryPlugi
     $pluginDefinition,
     ConfigFactoryInterface $configFactory,
     FocalPointManagerInterface $focalPointManager,
-    ModuleHandlerInterface $moduleHandler
+    ModuleHandlerInterface $moduleHandler,
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
     $this->config = $configFactory->get('focal_point.settings');
