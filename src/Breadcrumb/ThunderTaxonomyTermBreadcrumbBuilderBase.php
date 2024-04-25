@@ -59,10 +59,15 @@ abstract class ThunderTaxonomyTermBreadcrumbBuilderBase implements BreadcrumbBui
   }
 
   /**
+   * Get the term to produce the breadcrumb for.
+   *
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
+   *   The route match.
    * @param \Drupal\Core\Breadcrumb\Breadcrumb $breadcrumb
+   *   The breadcrumb.
    *
    * @return \Drupal\taxonomy\TermInterface|null
+   *   The current term.
    */
   abstract protected function getCurrentTerm(RouteMatchInterface $route_match, Breadcrumb $breadcrumb): ?TermInterface;
 
