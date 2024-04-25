@@ -93,7 +93,7 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
     $pluginDefinition,
     LanguageManagerInterface $languageManager,
     PathValidatorInterface $pathValidator,
-    ?RedirectRepository $redirectRepository = NULL
+    ?RedirectRepository $redirectRepository = NULL,
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
     $this->languageManager = $languageManager;
