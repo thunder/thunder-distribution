@@ -64,7 +64,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
     string $pluginId,
     array $pluginDefinition,
     EntityTypeManager $entityTypeManager,
-    AccountInterface $current_user
+    AccountInterface $current_user,
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
     $this->entityTypeManager = $entityTypeManager;
@@ -105,7 +105,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
     array $conditions,
     array $languages,
     array $sortBy,
-    FieldContext $cacheContext
+    FieldContext $cacheContext,
   ): QueryInterface {
     if ($limit > static::MAX_ITEMS) {
       throw new UserError(
