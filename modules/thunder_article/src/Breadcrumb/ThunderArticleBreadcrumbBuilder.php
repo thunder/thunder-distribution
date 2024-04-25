@@ -32,7 +32,9 @@ class ThunderArticleBreadcrumbBuilder extends ThunderTaxonomyTermBreadcrumbBuild
     $node = $route_match->getParameter('node');
     $breadcrumb->addCacheableDependency($node);
 
-    return $node->field_channel->entity ?? NULL;
+    /** @var \Drupal\taxonomy\Entity\Term|NULL $term */
+    $term = $node->field_channel->entity ?? NULL;
+    return $term;
   }
 
 }
