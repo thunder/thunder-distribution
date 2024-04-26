@@ -79,20 +79,18 @@ abstract class ThunderTaxonomyTermBreadcrumbBuilderBase implements BreadcrumbBui
     $breadcrumb->addCacheContexts(['route']);
 
     $term = $this->getCurrentTerm($route_match, $breadcrumb);
+    $breadcrumb->addCacheableDependency($term);
 
     $links = [];
-    if ($term) {
+    $parents = $this->termStorage->loadAllParents($term->id());
+    foreach (array_reverse($parents) as $term) {
+      /** @var \Drupal\taxonomy\TermInterface $term */
+      $term = $this->entityRepository->getTranslationFromContext($term);
       $breadcrumb->addCacheableDependency($term);
-
-      $channels = $this->termStorage->loadAllParents($term->id());
-      foreach (array_reverse($channels) as $term) {
-        /** @var \Drupal\taxonomy\TermInterface $term */
-        $term = $this->entityRepository->getTranslationFromContext($term);
-        $breadcrumb->addCacheableDependency($term);
-        $links[] = Link::createFromRoute($term->getName(), 'entity.taxonomy_term.canonical', ['taxonomy_term' => $term->id()]);
-      }
+      $links[] = Link::createFromRoute($term->getName(), 'entity.taxonomy_term.canonical', ['taxonomy_term' => $term->id()]);
     }
-    if (!$links || '/' . $links[0]->getUrl()->getInternalPath() != $this->configFactory->get('system.site')->get('page.front')) {
+
+    if (!$links || '/' . $links[0]->getUrl()->getInternalPath() !== $this->configFactory->get('system.site')->get('page.front')) {
       array_unshift($links, Link::createFromRoute($this->t('Home'), '<front>'));
     }
 
