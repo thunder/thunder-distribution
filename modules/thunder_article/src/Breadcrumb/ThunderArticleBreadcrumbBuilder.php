@@ -17,22 +17,19 @@ class ThunderArticleBreadcrumbBuilder extends ThunderTaxonomyTermBreadcrumbBuild
   public function applies(RouteMatchInterface $route_match): bool {
     // This breadcrumb apply only for all articles.
     $parameters = $route_match->getParameters()->all();
-    if (($route_match->getRouteName() === 'entity.node.canonical') && is_object($parameters['node'])) {
-      return $parameters['node']->getType() === 'article';
-    }
-    return FALSE;
+    return ($route_match->getRouteName() === 'entity.node.canonical') && is_object($parameters['node']) && $parameters['node']->getType() === 'article' && !empty($parameters['node']->field_channel->entity);
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getCurrentTerm(RouteMatchInterface $route_match, Breadcrumb $breadcrumb): ?TermInterface {
+  protected function getCurrentTerm(RouteMatchInterface $route_match, Breadcrumb $breadcrumb): TermInterface {
     /** @var \Drupal\node\Entity\Node $node */
     $node = $route_match->getParameter('node');
     $breadcrumb->addCacheableDependency($node);
 
-    /** @var \Drupal\taxonomy\Entity\Term|NULL $term */
-    $term = $node->field_channel->entity ?? NULL;
+    /** @var \Drupal\taxonomy\Entity\Term $term */
+    $term = $node->field_channel->entity;
     return $term;
   }
 
