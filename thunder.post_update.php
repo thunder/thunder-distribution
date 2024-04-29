@@ -105,7 +105,7 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
 /**
  * Configure input formats to enable paragraphs split.
  */
-function thunder_post_update_0002_thunder_post_update_0002_enable_paragraphs_split() {
+function thunder_post_update_0002_thunder_post_update_0002_enable_paragraphs_split(array &$sandbox): string {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
 
