@@ -101,3 +101,17 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
 }
+
+/**
+ * Configure input formats to enable paragraphs split.
+ */
+function thunder_post_update_0002_thunder_post_update_0002_enable_paragraphs_split() {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_post_update_0002_thunder_post_update_0002_enable_paragraphs_split');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}

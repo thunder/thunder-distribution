@@ -1,0 +1,164 @@
+diff.settings:
+  expected_config:
+    general_settings:
+      layout_plugins:
+        visual_inline:
+          enabled: true
+  update_actions:
+    change:
+      general_settings:
+        layout_plugins:
+          visual_inline:
+            enabled: false
+editor.editor.basic_html:
+  expected_config: {  }
+  update_actions:
+    add:
+      settings:
+        toolbar:
+          items:
+            - splitParagraph
+            - '|'
+editor.editor.full_html:
+  expected_config: {  }
+  update_actions:
+    add:
+      settings:
+        toolbar:
+          items:
+            - splitParagraph
+            - '|'
+filter.format.basic_html:
+  expected_config:
+    filters:
+      filter_html:
+        settings:
+          allowed_html: '<em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <p> <br> <span> <img src alt height width data-entity-type data-entity-uuid data-align data-caption> <a href hreflang !href accesskey id rel target title data-entity-substitution data-entity-type data-entity-uuid>'
+  update_actions:
+    add:
+      filters:
+        blazy_filter:
+          id: blazy_filter
+          provider: blazy
+          settings:
+            box_caption: ''
+            box_media_style: ''
+            box_style: ''
+            filter_tags:
+              iframe: iframe
+              img: img
+            hybrid_style: ''
+            media_switch: ''
+            use_data_uri: '0'
+          status: false
+          weight: 3
+        slick_filter:
+          settings:
+            background: false
+            box_caption: ''
+            box_caption_custom: ''
+            box_media_style: ''
+            box_style: ''
+            caption:
+              alt: '0'
+              title: '0'
+            grid: ''
+            grid_medium: ''
+            grid_small: ''
+            image_style: ''
+            layout: ''
+            loading: ''
+            optionset_thumbnail: ''
+            overridables:
+              arrows: '0'
+              autoplay: '0'
+              dots: '0'
+              draggable: '0'
+              infinite: '0'
+              mouseWheel: '0'
+              randomize: '0'
+              variableWidth: '0'
+            override: false
+            preserve_keys: false
+            ratio: ''
+            responsive_image_style: ''
+            skin: ''
+            skin_thumbnail: ''
+            style: ''
+            thumbnail_caption: ''
+            thumbnail_effect: ''
+            thumbnail_position: ''
+            thumbnail_style: ''
+            visible_items: null
+    change:
+      filters:
+        filter_html:
+          settings:
+            allowed_html: '<br> <p> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <cite> <dl> <dt> <dd> <a hreflang href data-entity-type data-entity-uuid data-entity-substitution> <blockquote cite> <ul type> <ol type start> <strong> <em> <li> <div>'
+filter.format.full_html:
+  expected_config: {  }
+  update_actions:
+    add:
+      filters:
+        blazy_filter:
+          id: blazy_filter
+          provider: blazy
+          settings:
+            box_caption: ''
+            box_media_style: ''
+            box_style: ''
+            filter_tags:
+              iframe: iframe
+              img: img
+            hybrid_style: ''
+            media_switch: ''
+            use_data_uri: '0'
+          status: false
+          weight: 3
+        filter_html:
+          id: filter_html
+          provider: filter
+          settings:
+            allowed_html: ''
+            filter_html_help: true
+            filter_html_nofollow: false
+          status: false
+          weight: -10
+        slick_filter:
+          settings:
+            background: false
+            box_caption: ''
+            box_caption_custom: ''
+            box_media_style: ''
+            box_style: ''
+            caption:
+              alt: '0'
+              title: '0'
+            grid: ''
+            grid_medium: ''
+            grid_small: ''
+            image_style: ''
+            layout: ''
+            loading: ''
+            optionset_thumbnail: ''
+            overridables:
+              arrows: '0'
+              autoplay: '0'
+              dots: '0'
+              draggable: '0'
+              infinite: '0'
+              mouseWheel: '0'
+              randomize: '0'
+              variableWidth: '0'
+            override: false
+            preserve_keys: false
+            ratio: ''
+            responsive_image_style: ''
+            skin: ''
+            skin_thumbnail: ''
+            style: ''
+            thumbnail_caption: ''
+            thumbnail_effect: ''
+            thumbnail_position: ''
+            thumbnail_style: ''
+            visible_items: null
