@@ -29,11 +29,9 @@ class InstalledConfigurationTest extends ThunderTestBase {
    */
   protected static $modules = [
     'thunder_testing_demo',
-    'thunder_google_analytics',
     'thunder_ivw',
     // Because of https://github.com/drupal-graphql/graphql/issues/1177
     // 'thunder_gqls',
-    'adsense',
   ];
 
   /**
@@ -41,7 +39,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *
    * @var string
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'stable9';
 
   /**
    * Ignore list of Core related configurations.
@@ -54,6 +52,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.extension',
     'system.performance',
     'system.theme',
+    'system.mail',
 
     // Configs created by User module.
     'system.action.user_add_role_action.administrator',
@@ -80,6 +79,11 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_view_mode.user.token',
     'core.entity_view_mode.path_alias.token',
     'core.entity_view_mode.search_api_task.token',
+
+    // Configs are missing the 'description' key.
+    'core.entity_view_mode.media.slick',
+    'core.entity_view_mode.node.diff',
+    'core.entity_view_mode.paragraph.preview',
 
     // SearchAPI tour.
     'tour.tour.search-api-index',
@@ -302,15 +306,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
    * @todo use this functionality for more strict "dependencies" checking.
    */
   protected static $ignoreConfigListValues = [
-    // Google analytics adds one permission dynamically in the install hook.
-    'user.role.authenticated' => [
-      'permissions' => [
-        'opt-in or out of google analytics tracking',
-      ],
-      'dependencies::module' => [
-        'google_analytics',
-      ],
-    ],
     'user.role.editor' => [
       'permissions' => [
         'access tour',

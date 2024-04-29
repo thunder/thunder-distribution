@@ -13,6 +13,11 @@ targetEntityType: node
 bundle: page
 mode: bulk_edit
 content:
+  simple_sitemap:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   uid:
     type: select2_entity_reference
     weight: 0

@@ -5,6 +5,7 @@ dependencies:
     - filter.format.basic_html
   module:
     - access_unpublished
+    - file
     - filter
     - media
     - system
@@ -20,6 +21,7 @@ permissions:
   - 'access_unpublished node news_article'
   - 'cancel account'
   - 'change own username'
+  - 'delete own files'
   - 'use text format basic_html'
   - 'view media'
   - 'view published terms in channel'

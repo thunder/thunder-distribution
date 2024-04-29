@@ -15,7 +15,6 @@ dependencies:
     - content_moderation
     - contextual
     - dropzonejs
-    - entity_browser
     - file
     - filter
     - media
@@ -40,13 +39,10 @@ permissions:
   - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
-  - 'access image_browser entity browser pages'
   - 'access media overview'
-  - 'access multiple_image_browser entity browser pages'
   - 'access responsive preview'
   - 'access tokens overview'
   - 'access toolbar'
-  - 'access video_browser entity browser pages'
   - 'administer menu'
   - 'administer meta tags'
   - 'administer nodes'
@@ -55,6 +51,7 @@ permissions:
   - 'break content lock'
   - 'create article content'
   - 'create media'
+  - 'create news_article content'
   - 'create page content'
   - 'create url aliases'
   - 'delete any article content'
@@ -63,9 +60,9 @@ permissions:
   - 'delete any page content'
   - 'delete article revisions'
   - 'delete media'
-  - 'create news_article content'
   - 'delete news_article revisions'
   - 'delete own article content'
+  - 'delete own files'
   - 'delete own news_article content'
   - 'delete own page content'
   - 'delete page revisions'

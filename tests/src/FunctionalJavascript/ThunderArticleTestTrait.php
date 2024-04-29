@@ -29,6 +29,7 @@ trait ThunderArticleTestTrait {
 
     $this->expandAllTabs();
     if ($this->getSession()->getPage()->hasButton('Customize meta tags')) {
+      $this->scrollElementInView('#metatag-async-widget-wrapper');
       $this->getSession()->getPage()->pressButton('Customize meta tags');
       $this->assertWaitOnAjaxRequest();
       $this->expandAllTabs();
@@ -66,7 +67,7 @@ trait ThunderArticleTestTrait {
   protected function setModerationState(string $state): void {
     $this->getSession()
       ->getDriver()
-      ->selectOption('//*[@id="edit-moderation-state-0"]', $state);
+      ->selectOption('//*[@data-drupal-selector="edit-moderation-state-0"]', $state);
   }
 
 }

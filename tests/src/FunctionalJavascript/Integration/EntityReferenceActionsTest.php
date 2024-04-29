@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 
+use Drupal\media\Entity\Media;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
 
@@ -41,10 +42,9 @@ class EntityReferenceActionsTest extends ThunderJavascriptTestBase {
 
     $this->assertSession()->pageTextContains('Action was successfully applied');
 
-    for ($i = 0; $i < 4; $i++) {
-      $this->clickAjaxButtonCssSelector('[data-drupal-selector="edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-current-items-' . $i . '-edit-button"]');
-      $this->assertSession()->fieldValueEquals('field_copyright[0][value]', 'Test copyright');
-      $this->assertSession()->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Save');
+    foreach (array_column($node->field_paragraphs->entity->field_media->entity->field_media_images->getValue(), 'target_id') as $media_id) {
+      $media = Media::load($media_id);
+      $this->assertSame('Test copyright', $media->field_copyright->value);
     }
   }
 

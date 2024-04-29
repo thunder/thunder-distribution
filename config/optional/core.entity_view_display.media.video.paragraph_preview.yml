@@ -9,10 +9,53 @@ dependencies:
     - field.field.media.video.field_description
     - field.field.media.video.field_media_video_embed_field
     - field.field.media.video.field_source
-    - image.style.paragraph_preview_thumbnail
+    - image.style.thumbnail
     - media.type.video
   module:
+    - empty_fields
+    - field_group
     - image
+third_party_settings:
+  field_group:
+    group_left:
+      children:
+        - thumbnail
+      label: Left
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: group-left
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_right:
+      children:
+        - name
+        - field_copyright
+      label: Right
+      parent_name: ''
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: group-right
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: media.video.paragraph_preview
 targetEntityType: media
 bundle: video
@@ -26,7 +69,7 @@ content:
     third_party_settings:
       empty_fields:
         handler: nbsp
-    weight: 2
+    weight: 4
     region: content
   name:
     type: string
@@ -34,18 +77,20 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
   thumbnail:
     type: image
     label: hidden
     settings:
       image_link: ''
-      image_style: paragraph_preview_thumbnail
+      image_style: thumbnail
       image_loading:
         attribute: lazy
-    third_party_settings: {  }
-    weight: 0
+    third_party_settings:
+      empty_fields:
+        handler: ''
+    weight: 1
     region: content
 hidden:
   created: true

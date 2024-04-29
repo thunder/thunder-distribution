@@ -78,7 +78,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
 
     // Assert that changing the entity invalidates the cache.
     $descriptionData = $this->jsonDecode($responseData[1]['attributes']);
-    $this->assertEquals('description', $descriptionData['name'], 'The meta tag for description is not the second tag in the response.');
+    $this->assertEquals('description', $descriptionData['name'], 'The meta tag for description is not the sixth tag in the response.');
     $this->assertStringStartsWith('The Drupal community is one of the largest open source communities in the world', $descriptionData['content'], 'The meta tag has the wrong content.');
 
     $node = $this->getNodeByTitle('Come to DrupalCon New Orleans');
@@ -88,7 +88,7 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
     $responseData = $this->getResponseData($query, $variables)['metatags'];
     $descriptionData = $this->jsonDecode($responseData[1]['attributes']);
 
-    $this->assertEquals('description', $descriptionData['name'], 'The meta tag for description is not the second tag in the response.');
+    $this->assertEquals('description', $descriptionData['name'], 'The meta tag for description is not the sixth tag in the response.');
     $this->assertEquals('New teaser text', $descriptionData['content'], 'The meta tag has the wrong content.');
 
     // Assert that changing the site config invalidates the cache.

@@ -4,9 +4,10 @@ dependencies:
   config:
     - core.entity_view_mode.media.paragraph_preview
     - field.field.media.gallery.field_media_images
-    - image.style.paragraph_preview_thumbnail
+    - image.style.thumbnail
     - media.type.gallery
   module:
+    - empty_fields
     - media
 id: media.gallery.paragraph_preview
 targetEntityType: media
@@ -18,9 +19,13 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: paragraph_preview_thumbnail
-    third_party_settings: {  }
-    weight: 0
+      image_style: thumbnail
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      empty_fields:
+        handler: ''
+    weight: 2
     region: content
   name:
     type: string
@@ -28,7 +33,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
 hidden:
   created: true

@@ -12,7 +12,6 @@ dependencies:
     - field.field.node.news_article.field_teaser_text
     - node.type.news_article
   module:
-    - empty_fields
     - user
 id: node.news_article.teaser
 targetEntityType: node
@@ -22,7 +21,7 @@ content:
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: -20
     region: content
   field_teaser_media:
     type: entity_reference_entity_view
@@ -30,22 +29,20 @@ content:
     settings:
       view_mode: thumbnail
       link: false
-    third_party_settings:
-      empty_fields:
-        handler: ''
-    weight: 1
+    third_party_settings: {  }
+    weight: 0
     region: content
   field_teaser_text:
     type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 3
+    weight: 2
     region: content
 hidden:
   field_channel: true
@@ -54,4 +51,3 @@ hidden:
   field_seo_title: true
   field_tags: true
   langcode: true
-  shariff_field: true

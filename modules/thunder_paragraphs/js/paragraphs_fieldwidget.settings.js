@@ -53,7 +53,7 @@
       message = Drupal.theme('thunderParagraphsFieldWidgetSettingsWarning', {
         name: Drupal.t('Collapse / Edit all'),
       });
-      elem.closest('.fieldset-wrapper').appendChild(message);
+      elem.closest('.fieldset__wrapper').appendChild(message);
     },
   };
 })(Drupal, once);

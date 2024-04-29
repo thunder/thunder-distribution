@@ -1,0 +1,643 @@
+__global_actions:
+  install_themes:
+    - gin
+image.style.thumbnail:
+  expected_config:
+    effects:
+      1cfec298-8620-4749-b100-ccb6c4500779:
+        data:
+          height: 100
+          upscale: false
+          width: 100
+        id: image_scale
+        uuid: 1cfec298-8620-4749-b100-ccb6c4500779
+        weight: 0
+  update_actions:
+    change:
+      effects:
+        1cfec298-8620-4749-b100-ccb6c4500779:
+          data:
+            crop_type: focal_point
+            height: 100
+            width: 100
+          id: focal_point_scale_and_crop
+          uuid: 1cfec298-8620-4749-b100-ccb6c4500779
+          weight: 0
+system.theme:
+  expected_config:
+    admin: thunder_admin
+  update_actions:
+    change:
+      admin: gin
+core.entity_form_display.media.gallery.default:
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          label: Basis
+  update_actions:
+    change:
+      third_party_settings:
+        field_group:
+          group_basis:
+            label: ''
+core.entity_form_display.media.image.default:
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          label: Basis
+        group_credits:
+          label: Credits
+  update_actions:
+    change:
+      third_party_settings:
+        field_group:
+          group_basis:
+            label: ''
+          group_credits:
+            label: ''
+core.entity_form_display.media.image.inline:
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_bottom:
+          format_settings:
+            label: Bottom
+  update_actions:
+    delete:
+      third_party_settings:
+        field_group:
+          group_bottom:
+            format_settings:
+              label: Bottom
+core.entity_form_display.media.instagram.default:
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          label: Basis
+  update_actions:
+    change:
+      third_party_settings:
+        field_group:
+          group_basis:
+            label: ''
+core.entity_form_display.media.pinterest.default:
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          label: Basis
+  update_actions:
+    change:
+      third_party_settings:
+        field_group:
+          group_basis:
+            label: ''
+core.entity_form_display.media.twitter.default:
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          label: Basis
+  update_actions:
+    change:
+      third_party_settings:
+        field_group:
+          group_basis:
+            label: ''
+core.entity_form_display.media.video.default:
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          label: Basis
+        group_credits:
+          label: Credits
+  update_actions:
+    change:
+      third_party_settings:
+        field_group:
+          group_basis:
+            label: ''
+          group_credits:
+            label: ''
+core.entity_form_display.node.article.bulk_edit:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        simple_sitemap:
+          region: content
+          settings: {  }
+          third_party_settings: {  }
+          weight: 10
+core.entity_form_display.node.article.default:
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          format_settings:
+            classes: content-form__form-section
+          label: Basis
+        group_paragraphs:
+          label: Paragraphs
+        group_teaser:
+          label: Teaser
+  update_actions:
+    add:
+      third_party_settings:
+        field_group:
+          group_basis:
+            format_settings:
+              show_empty_fields: false
+          group_paragraphs:
+            format_settings:
+              show_empty_fields: false
+          group_teaser:
+            format_settings:
+              show_empty_fields: false
+    change:
+      third_party_settings:
+        field_group:
+          group_basis:
+            format_settings:
+              classes: 'content-form__form-section base-info'
+            label: ''
+          group_paragraphs:
+            label: ''
+          group_teaser:
+            label: ''
+core.entity_form_display.node.page.bulk_edit:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        simple_sitemap:
+          region: content
+          settings: {  }
+          third_party_settings: {  }
+          weight: 10
+core.entity_form_display.node.page.default:
+  expected_config:
+    third_party_settings:
+      field_group:
+        group_basis:
+          label: Basis
+          weight: 2
+        group_paragraphs:
+          label: Paragraphs
+          weight: 3
+  update_actions:
+      third_party_settings:
+        field_group:
+          group_basis:
+            label: ''
+            weight: 0
+          group_paragraphs:
+            label: ''
+            weight: 1
+core.entity_view_display.media.gallery.paragraph_preview:
+  expected_config:
+    content:
+      field_media_images:
+        settings:
+          image_style: paragraph_preview_thumbnail
+        third_party_settings: {  }
+        weight: 0
+      name:
+        weight: 1
+  update_actions:
+    change:
+      content:
+        field_media_images:
+          settings:
+            image_loading:
+              attribute: lazy
+            image_style: thumbnail
+          third_party_settings:
+            empty_fields:
+              handler: ''
+          weight: 2
+        name:
+          weight: 3
+core.entity_view_display.media.image.paragraph_preview:
+  expected_config:
+    content:
+      field_copyright:
+        weight: 2
+      field_image:
+        settings:
+          image_style: paragraph_preview_thumbnail
+        third_party_settings: {  }
+        weight: 0
+      name:
+        weight: 1
+  update_actions:
+    add:
+      third_party_settings:
+        field_group:
+          group_left:
+            children:
+              - field_image
+            format_settings:
+              attributes: ''
+              classes: group-left
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Left
+            parent_name: ''
+            region: content
+            weight: 0
+          group_right:
+            children:
+              - name
+              - field_copyright
+            format_settings:
+              attributes: ''
+              classes: group-right
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Right
+            parent_name: ''
+            region: content
+            weight: 2
+    change:
+      content:
+        field_copyright:
+          weight: 4
+        field_image:
+          settings:
+            image_style: thumbnail
+          third_party_settings:
+            empty_fields:
+              handler: ''
+          weight: 1
+        name:
+          weight: 3
+core.entity_view_display.media.image.thumbnail:
+  expected_config:
+    content:
+      field_image:
+        settings:
+          image_style: media_thumbnail
+        third_party_settings: {  }
+  update_actions:
+    change:
+      content:
+        field_image:
+          settings:
+            image_style: thumbnail
+          third_party_settings:
+            empty_fields:
+              handler: ''
+core.entity_view_display.media.instagram.paragraph_preview:
+  expected_config:
+    content:
+      field_author:
+        weight: 1
+      field_content:
+        weight: 2
+      thumbnail:
+        settings:
+          image_style: paragraph_preview_thumbnail
+    hidden:
+      field_url: true
+  update_actions:
+    delete:
+      hidden:
+        field_url: true
+    add:
+      content:
+        field_url:
+          label: inline
+          region: content
+          settings:
+            link_to_entity: false
+          third_party_settings: {  }
+          type: string
+          weight: 0
+      third_party_settings:
+        field_group:
+          group_left:
+            children:
+              - thumbnail
+            format_settings:
+              attributes: ''
+              classes: group-left
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Left
+            parent_name: ''
+            region: content
+            weight: 1
+          group_right:
+            children:
+              - field_url
+              - field_author
+              - field_content
+            format_settings:
+              attributes: ''
+              classes: group-right
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Right
+            parent_name: ''
+            region: content
+            weight: 2
+    change:
+      content:
+        field_author:
+          weight: 0
+        field_content:
+          weight: 1
+        thumbnail:
+          settings:
+            image_style: thumbnail
+core.entity_view_display.media.instagram.thumbnail:
+  expected_config:
+    content:
+      thumbnail:
+        settings:
+          image_style: media_thumbnail
+  update_actions:
+    change:
+      content:
+        thumbnail:
+          settings:
+            image_style: media_library
+core.entity_view_display.media.pinterest.paragraph_preview:
+  expected_config:
+    content:
+      thumbnail:
+        settings:
+          image_style: paragraph_preview_thumbnail
+    hidden:
+      field_url: true
+  update_actions:
+    delete:
+      hidden:
+        field_url: true
+    add:
+      content:
+        field_url:
+          label: inline
+          region: content
+          settings:
+            link_to_entity: false
+          third_party_settings: {  }
+          type: string
+          weight: 2
+      third_party_settings:
+        field_group:
+          group_left:
+            children:
+              - thumbnail
+            format_settings:
+              attributes: ''
+              classes: group-left
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Left
+            parent_name: ''
+            region: content
+            weight: 0
+          group_right:
+            children:
+              - field_url
+            format_settings:
+              attributes: ''
+              classes: group-right
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Right
+            parent_name: ''
+            region: content
+            weight: 3
+    change:
+      content:
+        thumbnail:
+          settings:
+            image_style: thumbnail
+core.entity_view_display.media.twitter.paragraph_preview:
+  expected_config:
+    content:
+      field_author:
+        weight: 1
+      field_content:
+        weight: 2
+      thumbnail:
+        settings:
+          image_style: paragraph_preview_thumbnail
+        third_party_settings: {  }
+        weight: 0
+    hidden:
+      field_url: true
+  update_actions:
+    delete:
+      hidden:
+        field_url: true
+    add:
+      content:
+        field_url:
+          label: inline
+          region: content
+          settings:
+            link_to_entity: false
+          third_party_settings: {  }
+          type: string
+          weight: 0
+      third_party_settings:
+        field_group:
+          group_left:
+            children:
+              - thumbnail
+            format_settings:
+              attributes: ''
+              classes: group-left
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Left
+            parent_name: ''
+            region: content
+            weight: 0
+          group_right:
+            children:
+              - field_url
+              - field_author
+              - field_content
+            format_settings:
+              attributes: ''
+              classes: group-right
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Right
+            parent_name: ''
+            region: content
+            weight: 2
+    change:
+      content:
+        field_author:
+          weight: 3
+        field_content:
+          weight: 4
+        thumbnail:
+          settings:
+            image_style: thumbnail
+          third_party_settings:
+            empty_fields:
+              handler: ''
+          weight: 1
+core.entity_view_display.media.video.paragraph_preview:
+  expected_config:
+    content:
+      field_copyright:
+        weight: 2
+      name:
+        weight: 1
+      thumbnail:
+        settings:
+          image_style: paragraph_preview_thumbnail
+        third_party_settings: {  }
+        weight: 0
+  update_actions:
+    add:
+      third_party_settings:
+        field_group:
+          group_left:
+            children:
+              - thumbnail
+            format_settings:
+              attributes: ''
+              classes: group-left
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Left
+            parent_name: ''
+            region: content
+            weight: 0
+          group_right:
+            children:
+              - name
+              - field_copyright
+            format_settings:
+              attributes: ''
+              classes: group-right
+              effect: none
+              element: div
+              id: ''
+              label_element: h3
+              label_element_classes: ''
+              show_empty_fields: false
+              show_label: false
+              speed: fast
+            format_type: html_element
+            label: Right
+            parent_name: ''
+            region: content
+            weight: 2
+    change:
+      content:
+        field_copyright:
+          weight: 4
+        name:
+          weight: 3
+        thumbnail:
+          settings:
+            image_style: thumbnail
+          third_party_settings:
+            empty_fields:
+              handler: ''
+          weight: 1
+views.view.media:
+  expected_config:
+    display:
+      default:
+        display_options:
+          fields:
+            bundle:
+              label: Source
+          filters:
+            bundle:
+              expose:
+                identifier: source
+                label: Source
+        display_title: Master
+  update_actions:
+    change:
+      display:
+        default:
+          display_options:
+            fields:
+              bundle:
+                label: Type
+            filters:
+              bundle:
+                expose:
+                  identifier: type
+                  label: Type
+          display_title: Default

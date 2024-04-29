@@ -24,7 +24,7 @@ third_party_settings:
         - field_tags
         - field_image
         - field_description
-      label: Basis
+      label: ''
       region: content
       parent_name: ''
       weight: 0
@@ -38,7 +38,7 @@ third_party_settings:
       children:
         - field_copyright
         - field_source
-      label: Credits
+      label: ''
       region: content
       parent_name: ''
       weight: 1

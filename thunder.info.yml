@@ -2,13 +2,12 @@ name: Thunder
 type: profile
 description: 'The Drupal based CMS for professional publishing.'
 project: thunder
-core_version_requirement: ~9.5.2
-version: '6.5.7'
+core_version_requirement: ~10.2.4
+version: '7.2.1'
 
 distribution:
   name: Thunder
   install:
-    theme: thunder_admin
     finish_url: ?tour=1
 
 # Required modules
@@ -23,13 +22,14 @@ install:
   # core
   - drupal:block
   - drupal:breakpoint
-  - drupal:ckeditor
+  - drupal:ckeditor5
   - drupal:contextual
   - drupal:menu_link_content
   - drupal:datetime
   - drupal:editor
   - drupal:image
   - drupal:inline_form_errors
+  - drupal:media_library
   - drupal:menu_ui
   - drupal:language
   - drupal:options
@@ -51,14 +51,15 @@ install:
   - autofill:autofill
   - blazy:blazy
   - content_lock:content_lock
-  - ctools:ctools
   - diff:diff
-  - dropzonejs:dropzonejs_eb_widget
+  - dropzonejs:dropzonejs
   - empty_fields:empty_fields
   - entity_reference_actions:entity_reference_actions
-  - entity_browser:entity_browser_entity_form
+  - media_library_media_modify:media_library_media_modify
   - field_group:field_group
   - focal_point:focal_point
+  - gin_toolbar:gin_toolbar
+  - inline_entity_form:inline_entity_form
   - length_indicator:length_indicator
   - linkit:linkit
   - media_entity_instagram:media_entity_instagram
@@ -79,7 +80,6 @@ install:
   - scheduler:scheduler
   - scheduler:scheduler_content_moderation_integration
   - schema_metatag:schema_article
-  - shariff:shariff
   - select2:select2
   - simple_sitemap:simple_sitemap
   - slick:slick
@@ -94,6 +94,5 @@ install:
   - thunder:thunder_taxonomy
   - thunder:thunder_workflow
 themes:
-  - seven
+  - gin
   - olivero
-  - thunder_admin

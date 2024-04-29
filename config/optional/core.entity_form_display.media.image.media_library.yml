@@ -1,0 +1,97 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.image.field_copyright
+    - field.field.media.image.field_description
+    - field.field.media.image.field_expires
+    - field.field.media.image.field_image
+    - field.field.media.image.field_source
+    - field.field.media.image.field_tags
+    - image.style.media_library
+    - media.type.image
+  module:
+    - datetime
+    - entity_reference_actions
+    - image
+    - select2
+id: media.image.media_library
+targetEntityType: media
+bundle: image
+mode: media_library
+content:
+  field_copyright:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_expires:
+    type: datetime_default
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_image:
+    type: image_image
+    weight: 1
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: media_library
+    third_party_settings:
+      entity_reference_actions:
+        enabled: false
+        options:
+          action_title: Action
+          include_exclude: exclude
+          selected_actions: {  }
+  field_source:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_tags:
+    type: select2_entity_reference
+    weight: 5
+    region: content
+    settings:
+      width: 100%
+      autocomplete: true
+      match_operator: CONTAINS
+      match_limit: 10
+    third_party_settings:
+      entity_reference_actions:
+        enabled: false
+        options:
+          action_title: Action
+          include_exclude: exclude
+          selected_actions:
+            taxonomy_term_edit_action: '0'
+            taxonomy_term_publish_action: '0'
+            taxonomy_term_unpublish_action: '0'
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_description: true
+  langcode: true
+  path: true
+  publish_on: true
+  publish_state: true
+  status: true
+  uid: true
+  unpublish_on: true
+  unpublish_state: true

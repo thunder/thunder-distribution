@@ -27,24 +27,11 @@ function thunder_paragraphs_field_widget_third_party_settings_form(WidgetInterfa
 }
 
 /**
- * Implements hook_field_widget_WIDGET_TYPE_form_alter().
- *
- * @todo Remove in Thunder 4, or when the inline entity form FieldWidgetDisplay
- *       was removed.
- */
-function thunder_paragraphs_field_widget_entity_browser_entity_reference_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
-  if (isset($context['widget']) && ($context['widget']->getSetting('field_widget_display') === 'inline_entity_form')) {
-    \Drupal::messenger()->addWarning(t('The inline_entity_form field widget display is broken and will be removed in Thunder 4.0.0. Please use a different display for your %title field.', ['%title' => $element['#title']]));
-    $element['#attach_ief_submit'] = TRUE;
-  }
-}
-
-/**
- * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ * Implements hook_field_widget_single_element_WIDGET_TYPE_form_alter().
  *
  * Used for Classic Paragraphs widget.
  */
-function thunder_paragraphs_field_widget_entity_reference_paragraphs_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
+function thunder_paragraphs_field_widgett_single_element_entity_reference_paragraphs_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
   thunder_paragraphs__attach_ief_submit(
     $element,
     [
@@ -56,11 +43,11 @@ function thunder_paragraphs_field_widget_entity_reference_paragraphs_form_alter(
 }
 
 /**
- * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ * Implements hook_field_widget_single_element_WIDGET_TYPE_form_alter().
  *
  * Used for Experimental Paragraphs widget.
  */
-function thunder_paragraphs_field_widget_paragraphs_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
+function thunder_paragraphs_field_widget_single_element_paragraphs_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
   // Based on logic in ParagraphsWidget::formMultipleElements - execution of
   // alter hook for existing paragraphs will be executed first and only with
   // list of editable paragraphs. Since all editable paragraphs are processed
@@ -87,6 +74,16 @@ function thunder_paragraphs_field_widget_paragraphs_form_alter(array &$element, 
     ],
     !$processing_new_paragraphs
   );
+
+  if (isset($element['preview'])) {
+    $element['#attributes']['class'][] = 'paragraph-form-item--has-preview';
+  }
+  elseif (isset($element['subform'])) {
+    $element['#attributes']['class'][] = 'paragraph-form-item--has-subform';
+  }
+
+  // Add custom styling.
+  $element['#attached']['library'][] = 'thunder_paragraphs/paragraphs.widget';
 }
 
 /**

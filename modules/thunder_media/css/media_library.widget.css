@@ -1,0 +1,43 @@
+/* Reset media and ief widget fieldsets. */
+.field--widget-inline-entity-form-simple > fieldset .fieldset__legend,
+fieldset.media-library-widget .fieldset__legend,
+fieldset.media-library-widget .help-icon__description-toggle {
+  display: none;
+}
+
+.field--widget-inline-entity-form-simple > fieldset .fieldset__wrapper,
+fieldset.media-library-widget .fieldset__wrapper {
+  margin: 0;
+}
+
+.field--widget-inline-entity-form-simple > fieldset,
+fieldset.media-library-widget {
+  border: none;
+  padding: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+/* Hide empty text */
+fieldset.media-library-widget .media-library-widget-empty-text {
+  display: none;
+}
+
+fieldset.media-library-widget .fieldset__prefix {
+  display: inline-block;
+}
+
+fieldset.media-library-widget .fieldset__suffix {
+  display: flex;
+}
+
+fieldset.media-library-widget .fieldset__suffix input,
+fieldset.media-library-widget .fieldset__suffix .dropbutton-wrapper {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+/* Show upload errors without hovering. */
+.dropzone .dz-preview .dz-error-message {
+  opacity: 1;
+}

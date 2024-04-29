@@ -1,49 +1,95 @@
 # Changelog
 
-## [6.5.7](https://github.com/thunder/thunder-distribution/tree/6.5.7) 2023-08-03
+## [7.2.1](https://github.com/thunder/thunder-distribution/tree/7.2.1) 2024-04-10
 
-[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.6...6.5.7)
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.2.0...7.2.1)
 
-Remove patch and unpin media_entity_pinterest.
+* Fix thunder redirect data producer with query strings.
+* Move xymatic GraphQL schema to base.
+* Update to gin rc9.
+* Update graphql module to 4.7.0 and remove patch.
 
-## [6.5.6](https://github.com/thunder/thunder-distribution/tree/6.5.6) 2023-06-15
+## [7.2.0](https://github.com/thunder/thunder-distribution/tree/7.2.0) 2024-03-07
 
-[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.5...6.5.6)
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.7...7.2.0)
 
-Adds decoratable type resolver for GraphQL.
+Support Drupal 10.2
 
-## [6.5.5](https://github.com/thunder/thunder-distribution/tree/6.5.5) 2023-05-22
+## [7.1.7](https://github.com/thunder/thunder-distribution/tree/7.1.7) 2024-02-14
 
-[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.4...6.5.5)
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.6...7.1.7)
 
-Several improvements to xymatic integration. GraphQl schema additions and entity view displays.
+* Add patch to fix [Checkbox for Media library modal missing after search](https://www.drupal.org/project/drupal/issues/3388913)
 
-## [6.5.4](https://github.com/thunder/thunder-distribution/tree/6.5.4) 2023-03-30
+## [7.1.6](https://github.com/thunder/thunder-distribution/tree/7.1.6) 2024-01-09
 
-[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.3...6.5.4)
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.5...7.1.6)
 
-* This release adds an integration for the [Xymatic](https://www.drupal.org/project/xymatic/) module.
+* Allow update_helper version "^4.0" in composer.json
+
+## [7.1.5](https://github.com/thunder/thunder-distribution/tree/7.1.5) 2023-12-21
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.4...7.1.5)
+
+* Improved update path from Thunder 6 to 7
+
+## [7.1.4](https://github.com/thunder/thunder-distribution/tree/7.1.4) 2023-12-04
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.3...7.1.4)
+
+* Fix possible break of Thunder GraphQL schema with drupal/graphql:4.6.0
+* Fix warning on missing entityLinks keys in GraphQL
+
+## [7.1.3](https://github.com/thunder/thunder-distribution/tree/7.1.3) 2023-11-07
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.2...7.1.3)
+
+* Update to gin rc7
+* Fix issue with form fields for media
+* Bump Drupal version number in thunder.profile
+* Update focal point patch
+
+## [7.1.2](https://github.com/thunder/thunder-distribution/tree/7.1.2) 2023-09-01
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.1...7.1.2)
+
+* Fix yaml error in xymatic config.
+
+## [7.1.1](https://github.com/thunder/thunder-distribution/tree/7.1.1) 2023-08-28
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.0...7.1.1)
+
+* Update Gin to RC5.
+* Change paragraphs_feature requirement to ^2.0.0-beta3.
+* Remove all entity browser permissions in all roles during the Thunder 6 to 7 migration.
+
+## [7.1.0](https://github.com/thunder/thunder-distribution/tree/7.1.0) 2023-07-03
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.0.0...7.1.0)
+
+* Drupal 10.1 compatibility.
+
+## [7.0.0](https://github.com/thunder/thunder-distribution/tree/7.0.0) 2023-06-15
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.0.0-beta2...7.0.0)
+
+* Add decoratable type resolver for GraphQL.
+* Add integration for the Xymatic module.
 * A new content type "News Article", that is similar to the "Article" content type, but has different metadata.
 
-## [6.5.3](https://github.com/thunder/thunder-distribution/tree/6.5.3) 2023-03-01
+## [7.0.0-beta2](https://github.com/thunder/thunder-distribution/tree/7.0.0-beta2) 2023-03-13
 
-[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.2...6.5.3)
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.0.0-beta1...7.0.0-beta2)
 
-This is a security release of Thunder.
+Remove merged Gin patches and update to latest Gin release candidate.
 
-## [6.5.2](https://github.com/thunder/thunder-distribution/tree/6.5.2) 2023-02-23
+## [7.0.0-beta1](https://github.com/thunder/thunder-distribution/tree/7.0.0-beta1) 2023-03-09
 
-[Full Changelog](https://github.com/thunder/thunder-distribution/compare/6.5.1...6.5.2)
+First beta of Thunder 7.0.0 with Drupal 10 support.
 
-* [Fix Attempted to create an instance of field with name field_meta_tags on entity type node when the field storage does not exist](https://www.drupal.org/node/3340586)
-* [Patch too fix "Call to a member function mainPropertyName() on null"](https://www.drupal.org/issues/3179172)
-* Fix caching of GraphQl sub request data producers.
+Besides being Drupal 10 compatible the most notable changes are the retirement of the Thunder admin theme in favor
+of the community driven Gin theme and the switch from Entity Browser to Drupal core Media Library.
 
-## [6.5.1](https://github.com/thunder/thunder-distribution/tree/6.5.1) 2023-01-19
+Manual update steps from Thunder 6 are required and can be found here:
 
-Adding Entity Browser patch for SA-CONTRIB-2023-002. We cannot update entity browser, so we have to backport the patch.
-Our Entity Browser will still be shown as vulnerable, but it is fixed with this patch.
-
-## [6.5.0](https://github.com/thunder/thunder-distribution/tree/6.5.0) 2023-01-05
-
-Minor release, that bumps the Drupal core dependency to 9.5.x.
+[Migrate Thunder 6 to Thunder 7](https://thunder.github.io/developer-guide/migration/migrate-6-7.html)

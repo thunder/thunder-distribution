@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - entity_browser.browser.image_browser
     - field.field.node.news_article.field_channel
     - field.field.node.news_article.field_meta_tags
     - field.field.node.news_article.field_paragraphs
@@ -13,9 +12,9 @@ dependencies:
     - node.type.news_article
     - workflows.workflow.editorial
   module:
-    - entity_browser
     - entity_reference_actions
     - field_group
+    - media_library_media_modify
     - metatag_async_widget
     - paragraphs
     - paragraphs_features
@@ -30,26 +29,28 @@ third_party_settings:
       children:
         - field_teaser_media
         - field_teaser_text
-      label: Teaser
+      label: ''
       region: content
       parent_name: ''
       weight: 4
       format_type: fieldset
       format_settings:
         classes: 'content-form__form-section article-teaser'
+        show_empty_fields: false
         id: ''
         description: ''
         required_fields: true
     group_paragraphs:
       children:
         - field_paragraphs
-      label: Paragraphs
+      label: ''
       region: content
       parent_name: ''
       weight: 6
       format_type: fieldset
       format_settings:
         classes: 'content-form__form-section paragraphs-container'
+        show_empty_fields: false
         id: ''
         description: ''
         required_fields: true
@@ -59,13 +60,14 @@ third_party_settings:
         - title
         - field_seo_title
         - field_tags
-      label: Basis
+      label: ''
       region: content
       parent_name: ''
       weight: 3
       format_type: fieldset
       format_settings:
-        classes: content-form__form-section
+        classes: 'content-form__form-section base-info'
+        show_empty_fields: false
         id: ''
         description: ''
         required_fields: true
@@ -92,6 +94,7 @@ content:
     region: content
     settings:
       sidebar: true
+      use_details: true
     third_party_settings: {  }
   field_paragraphs:
     type: paragraphs
@@ -122,7 +125,6 @@ content:
         add_in_between: true
         add_in_between_link_count: 3
         delete_confirmation: true
-        split_text: true
         show_drag_and_drop: false
   field_seo_title:
     type: string_textfield
@@ -152,20 +154,29 @@ content:
       match_limit: 10
     third_party_settings: {  }
   field_teaser_media:
-    type: entity_browser_entity_reference
+    type: media_library_media_modify_widget
     weight: 4
     region: content
     settings:
-      entity_browser: image_browser
-      field_widget_display: rendered_entity
-      field_widget_edit: true
-      field_widget_remove: true
-      field_widget_replace: false
-      open: true
-      field_widget_display_settings:
-        view_mode: thumbnail
-      selection_mode: selection_append
-    third_party_settings: {  }
+      media_types: {  }
+      add_button_text: 'Select image'
+      form_mode: override
+      check_selected: false
+      replace_checkbox_by_order_indicator: false
+      multi_edit_on_create: false
+      no_edit_on_create: false
+    third_party_settings:
+      entity_reference_actions:
+        enabled: false
+        options:
+          action_title: Action
+          include_exclude: exclude
+          selected_actions:
+            media_delete_action: '0'
+            media_edit_action: '0'
+            media_publish_action: '0'
+            media_save_action: '0'
+            media_unpublish_action: '0'
   field_teaser_text:
     type: string_textarea
     weight: 6
@@ -202,18 +213,23 @@ content:
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 12
+    weight: 52
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 30
+    weight: 53
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 11
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -251,13 +267,13 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 13
+    weight: 54
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 30
+    weight: 55
     region: content
     settings: {  }
     third_party_settings: {  }

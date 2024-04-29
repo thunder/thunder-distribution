@@ -2,31 +2,40 @@ langcode: en
 status: true
 dependencies:
   config:
-    - entity_browser.browser.image_browser
     - field.field.paragraph.image.field_image
     - paragraphs.paragraphs_type.image
   module:
-    - entity_browser
+    - entity_reference_actions
+    - media_library_media_modify
 id: paragraph.image.default
 targetEntityType: paragraph
 bundle: image
 mode: default
 content:
   field_image:
-    type: entity_browser_entity_reference
+    type: media_library_media_modify_widget
     weight: 0
     region: content
     settings:
-      entity_browser: image_browser
-      field_widget_display: rendered_entity
-      field_widget_edit: true
-      field_widget_remove: true
-      field_widget_replace: false
-      open: true
-      field_widget_display_settings:
-        view_mode: thumbnail
-      selection_mode: selection_append
-    third_party_settings: {  }
+      media_types: {  }
+      add_button_text: 'Select image'
+      form_mode: override
+      check_selected: false
+      replace_checkbox_by_order_indicator: false
+      no_edit_on_create: false
+      multi_edit_on_create: false
+    third_party_settings:
+      entity_reference_actions:
+        enabled: false
+        options:
+          action_title: Action
+          include_exclude: exclude
+          selected_actions:
+            media_delete_action: '0'
+            media_edit_action: '0'
+            media_publish_action: '0'
+            media_save_action: '0'
+            media_unpublish_action: '0'
 hidden:
   created: true
   moderation_state: true

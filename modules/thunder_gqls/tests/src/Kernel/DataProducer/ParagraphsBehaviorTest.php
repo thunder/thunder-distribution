@@ -14,9 +14,7 @@ use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 class ParagraphsBehaviorTest extends GraphQLTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = [
     'thunder_gqls',

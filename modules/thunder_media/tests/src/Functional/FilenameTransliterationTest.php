@@ -56,7 +56,7 @@ class FilenameTransliterationTest extends ThunderTestBase {
       'files[file_test_upload]' => \Drupal::service('file_system')->realpath('public://foo°.png'),
     ];
     $this->drupalGet('file-test/upload');
-    $this->submitForm($edit, $this->t('Submit'));
+    $this->submitForm($edit, 'Submit');
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->responseContains('You WIN!');
 

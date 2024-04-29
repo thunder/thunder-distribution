@@ -19,7 +19,7 @@ base_field: mid
 display:
   default:
     id: default
-    display_title: Master
+    display_title: Default
     display_plugin: default
     position: 0
     display_options:
@@ -203,7 +203,7 @@ display:
           entity_type: media
           entity_field: bundle
           plugin_id: field
-          label: Source
+          label: Type
           exclude: false
           alter:
             alter_text: false
@@ -511,6 +511,15 @@ display:
             date_format: short
             custom_date_format: ''
             timezone: ''
+            tooltip:
+              date_format: ''
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -699,13 +708,13 @@ display:
           exposed: true
           expose:
             operator_id: bundle_op
-            label: Source
+            label: Type
             description: ''
             use_operator: false
             operator: bundle_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: source
+            identifier: type
             required: false
             remember: false
             multiple: false

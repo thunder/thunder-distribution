@@ -5,6 +5,8 @@
  * Enables modules and site configuration for a thunder site installation.
  */
 
+use Drupal\Core\Database\Database;
+use Drupal\Core\Database\Transaction\StackItem;
 use Drupal\Core\Extension\Dependency;
 use Drupal\Core\Extension\Extension;
 use Drupal\Core\Form\FormStateInterface;
@@ -28,6 +30,7 @@ function thunder_form_install_configure_form_alter(array &$form, FormStateInterf
 function thunder_install_tasks(array &$install_state): array {
   $tasks = [];
   if (empty($install_state['config_install_path'])) {
+    $tasks['_thunder_transaction'] = [];
     $tasks['thunder_module_configure_form'] = [
       'display_name' => t('Configure additional modules'),
       'type' => 'form',
@@ -102,6 +105,15 @@ function thunder_preprocess_html(array &$variables): void {
 }
 
 /**
+ * Implements template_preprocess_status_report().
+ */
+function thunder_preprocess_status_report_general_info(array &$variables): void {
+  if (!empty($thunder_version = \Drupal::service('extension.list.module')->get('thunder')->info['version'])) {
+    $variables['drupal']['value'] .= ' (Thunder ' . $thunder_version . ')';
+  }
+}
+
+/**
  * Implements hook_modules_uninstalled().
  */
 function thunder_modules_uninstalled(array $modules): void {
@@ -137,7 +149,7 @@ function thunder_page_attachments(array &$attachments): void {
 
     if ($name == 'system_meta_generator') {
       $tag = &$html_head[0];
-      $tag['#attributes']['content'] = 'Drupal 9 (Thunder | https://www.thunder.org)';
+      $tag['#attributes']['content'] = 'Drupal 10 (Thunder | https://www.thunder.org)';
     }
   }
 }
@@ -161,16 +173,6 @@ function thunder_field_widget_info_alter(array &$info): void {
 }
 
 /**
- * Implements hook_field_widget_multivalue_WIDGET_TYPE_form_alter().
- *
- * Removes the cardinality information from the #prefix element of the current
- * selection.
- */
-function thunder_field_widget_multivalue_entity_browser_entity_reference_form_alter(array &$elements, FormStateInterface $form_state, array $context): void {
-  unset($elements['current']['#prefix']);
-}
-
-/**
  * Implements hook_action_info_alter().
  */
 function thunder_action_info_alter(array &$definitions): void {
@@ -182,10 +184,62 @@ function thunder_action_info_alter(array &$definitions): void {
 }
 
 /**
+ * Implements hook_gin_content_form_routes().
+ *
+ * Revisit after https://www.drupal.org/i/3281343 et al are merged.
+ */
+function thunder_gin_content_form_routes(): array {
+  // Do not use gin content edit form layout in ajax context (overlays).
+  if (\Drupal::request()->isXmlHttpRequest()) {
+    return [];
+  }
+  $routes = [
+    'entity.taxonomy_term.edit_form',
+    'entity.taxonomy_term.add_form',
+    'entity.media.add_form',
+  ];
+  if (\Drupal::config('media.settings')->get('standalone_url')) {
+    $routes[] = 'entity.media.edit_form';
+  }
+  else {
+    $routes[] = 'entity.media.canonical';
+  }
+  return $routes;
+}
+
+/**
  * Implements hook_media_source_info_alter().
  */
 function thunder_media_source_info_alter(array &$sources): void {
   if ($sources['oembed:video']) {
     $sources['oembed:video']['providers'][] = 'TikTok';
+  }
+}
+
+/**
+ * Works around bug caused by Drupal's transaction handling.
+ *
+ * @param array $install_state
+ *   The install state.
+ *
+ * @todo Remove once https://www.drupal.org/project/drupal/issues/3405976 is
+ *   fixed.
+ */
+function _thunder_transaction(array &$install_state): void {
+  $manager = Database::getConnection()->transactionManager();
+  $reflection = new \ReflectionClass($manager);
+  if (!$reflection->hasMethod('stack')) {
+    return;
+  }
+
+  $stack = $reflection->getMethod('stack')->invoke($manager);
+  if (!is_array($stack)) {
+    return;
+  }
+
+  foreach (array_reverse($stack) as $id => $stackItem) {
+    if ($stackItem instanceof StackItem) {
+      $manager->unpile($stackItem->name, $id);
+    }
   }
 }

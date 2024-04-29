@@ -6,11 +6,54 @@ dependencies:
     - field.field.media.instagram.field_author
     - field.field.media.instagram.field_content
     - field.field.media.instagram.field_url
-    - image.style.paragraph_preview_thumbnail
+    - image.style.thumbnail
     - media.type.instagram
   module:
     - empty_fields
+    - field_group
     - image
+third_party_settings:
+  field_group:
+    group_left:
+      children:
+        - thumbnail
+      label: Left
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: group-left
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_right:
+      children:
+        - field_url
+        - field_author
+        - field_content
+      label: Right
+      parent_name: ''
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: group-right
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: media.instagram.paragraph_preview
 targetEntityType: media
 bundle: instagram
@@ -33,12 +76,20 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
+  field_url:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
   thumbnail:
     type: image
     label: hidden
     settings:
       image_link: ''
-      image_style: paragraph_preview_thumbnail
+      image_style: thumbnail
       image_loading:
         attribute: lazy
     third_party_settings:
@@ -48,7 +99,6 @@ content:
     region: content
 hidden:
   created: true
-  field_url: true
   langcode: true
   name: true
   uid: true

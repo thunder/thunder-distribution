@@ -14,7 +14,7 @@ There are also some traits, that provides useful functionalities:
 - `ThunderJavascriptTrait.php`
 - `ThunderArticleTestTrait.php`
 - `ThunderCkEditorTestTrait.php`
-- `ThunderEntityBrowserTestTrait.php`
+- `ThunderMediaLibraryTestTrait.php`
 - `ThunderFormFieldTestTrait.php`
 - `ThunderMediaTestTrait.php`
 - `ThunderMetaTagTrait.php`

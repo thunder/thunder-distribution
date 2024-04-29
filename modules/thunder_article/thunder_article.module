@@ -6,7 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\thunder_article\Form\ThunderNodeFormHelper;
+use Drupal\thunder_article\ThunderNodeFormHelper;
 
 /**
  * Implements hook_form_FORM_ID_alter().

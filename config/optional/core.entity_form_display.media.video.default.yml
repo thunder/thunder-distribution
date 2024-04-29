@@ -22,7 +22,7 @@ third_party_settings:
         - field_media_video_embed_field
         - field_caption
         - field_description
-      label: Basis
+      label: ''
       region: content
       parent_name: ''
       weight: 0
@@ -37,7 +37,7 @@ third_party_settings:
         - field_author
         - field_copyright
         - field_source
-      label: Credits
+      label: ''
       region: content
       parent_name: ''
       weight: 1
