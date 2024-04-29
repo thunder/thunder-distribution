@@ -3,13 +3,9 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
 use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
-use Drupal\node\NodeInterface;
-use Drupal\taxonomy\TermInterface;
+use Drupal\thunder_gqls\GraphQL\PagesTypeResolver;
 use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
-use Drupal\user\UserInterface;
-use GraphQL\Type\Definition\ResolveInfo;
 
 /**
  * Schema extension for page types.
@@ -29,11 +25,9 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
   public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 
-    $this->registry->addTypeResolver('Page',
-      \Closure::fromCallable([
-        self::class,
-        'resolvePageTypes',
-      ])
+    $this->registry->addTypeResolver(
+      'Page',
+      new PagesTypeResolver($registry->getTypeResolver('Page'))
     );
 
     $this->resolveFields();
@@ -189,31 +183,6 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
     $this->addFieldResolverIfNotExists('EntityList', 'items',
       $this->builder->callback(fn(EntityListResponseInterface $entityList) => $entityList->items())
     );
-  }
-
-  /**
-   * Resolves page types.
-   *
-   * @param mixed $value
-   *   The current value.
-   * @param \Drupal\graphql\GraphQL\Execution\ResolveContext $context
-   *   The resolve context.
-   * @param \GraphQL\Type\Definition\ResolveInfo $info
-   *   The resolve information.
-   *
-   * @return string
-   *   Response type.
-   *
-   * @throws \Exception
-   */
-  protected function resolvePageTypes($value, ResolveContext $context, ResolveInfo $info): string {
-    if ($value instanceof NodeInterface || $value instanceof TermInterface || $value instanceof UserInterface) {
-      if ($value->bundle() === 'page') {
-        return 'BasicPage';
-      }
-      return $this->mapBundleToSchemaName($value->bundle());
-    }
-    throw new \Exception('Invalid page type.');
   }
 
 }

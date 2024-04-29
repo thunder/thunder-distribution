@@ -2,10 +2,8 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
-use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
-use Drupal\media\MediaInterface;
-use GraphQL\Type\Definition\ResolveInfo;
+use Drupal\thunder_gqls\GraphQL\MediaTypeResolver;
 
 /**
  * The media schema extension.
@@ -25,11 +23,14 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
   public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 
-    $this->registry->addTypeResolver('Media',
-      \Closure::fromCallable([
-        self::class,
-        'resolveMediaTypes',
-      ])
+    $this->registry->addTypeResolver(
+      'Media',
+      new MediaTypeResolver($registry->getTypeResolver('Media'))
+    );
+
+    $this->registry->addTypeResolver(
+      'Video',
+      new MediaTypeResolver($registry->getTypeResolver('Video'))
     );
 
     $this->resolveFields();
@@ -131,28 +132,6 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
       $this->builder->fromPath('entity', 'field_source.value')
     );
 
-  }
-
-  /**
-   * Resolves media types.
-   *
-   * @param mixed $value
-   *   The current value.
-   * @param \Drupal\graphql\GraphQL\Execution\ResolveContext $context
-   *   The resolve context.
-   * @param \GraphQL\Type\Definition\ResolveInfo $info
-   *   The resolve information.
-   *
-   * @return string
-   *   Response type.
-   *
-   * @throws \Exception
-   */
-  protected function resolveMediaTypes($value, ResolveContext $context, ResolveInfo $info): string {
-    if ($value instanceof MediaInterface) {
-      return 'Media' . $this->mapBundleToSchemaName($value->bundle());
-    }
-    throw new \Exception('Invalid media type.');
   }
 
 }

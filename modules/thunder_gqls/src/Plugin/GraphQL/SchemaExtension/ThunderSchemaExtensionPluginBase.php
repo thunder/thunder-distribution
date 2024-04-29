@@ -8,8 +8,8 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\graphql\Plugin\DataProducerPluginManager;
 use Drupal\graphql\Plugin\GraphQL\SchemaExtension\SdlSchemaExtensionPluginBase;
-use Drupal\user\EntityOwnerInterface;
 use Drupal\thunder_gqls\Traits\ResolverHelperTrait;
+use Drupal\user\EntityOwnerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -69,19 +69,6 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
    */
   protected function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager): void {
     $this->entityTypeManager = $entityTypeManager;
-  }
-
-  /**
-   * Takes the bundle name and returns the schema name.
-   *
-   * @param string $bundleName
-   *   The bundle name.
-   *
-   * @return string
-   *   Returns the mapped bundle name.
-   */
-  protected function mapBundleToSchemaName(string $bundleName) {
-    return str_replace('_', '', ucwords($bundleName, '_'));
   }
 
   /**

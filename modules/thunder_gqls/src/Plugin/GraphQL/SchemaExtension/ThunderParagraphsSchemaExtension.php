@@ -2,10 +2,8 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
-use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
-use Drupal\paragraphs\ParagraphInterface;
-use GraphQL\Type\Definition\ResolveInfo;
+use Drupal\thunder_gqls\GraphQL\ParagraphsTypeResolver;
 
 /**
  * The paragraph schema extension.
@@ -25,11 +23,9 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
   public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 
-    $this->registry->addTypeResolver('Paragraph',
-      \Closure::fromCallable([
-        self::class,
-        'resolveParagraphTypes',
-      ])
+    $this->registry->addTypeResolver(
+      'Paragraph',
+      new ParagraphsTypeResolver($registry->getTypeResolver('Paragraph'))
     );
 
     $this->resolveFields();
@@ -107,6 +103,9 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
     $this->addFieldResolverIfNotExists('ParagraphVideo', 'video',
       $this->builder->fromPath('entity', 'field_video.entity')
     );
+    $this->addFieldResolverIfNotExists('ParagraphVideo', 'metaData',
+      $this->builder->fromPath('entity', 'field_video.entity')
+    );
     $this->addFieldResolverIfNotExists('ParagraphVideo', 'provider',
       $this->builder->compose(
         $this->builder->fromPath('entity', 'field_video.entity'),
@@ -117,13 +116,6 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
     $this->addFieldResolverIfNotExists('ParagraphVideo', 'url',
       $this->builder->fromPath('entity', 'field_video.entity.field_media_video_embed_field.value'),
     );
-    $this->addFieldResolverIfNotExists('ParagraphVideo', 'reference',
-      $this->builder->compose(
-        $this->builder->fromPath('entity', 'field_video.entity'),
-        $this->builder->produce('media_source_field')
-          ->map('media', $this->builder->fromParent())
-      )
-    );
 
     // Quote.
     $this->resolveParagraphInterfaceFields('ParagraphQuote');
@@ -131,28 +123,6 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
       $this->builder->fromPath('entity', 'field_text.processed')
     );
 
-  }
-
-  /**
-   * Resolves page types.
-   *
-   * @param mixed $value
-   *   The current value.
-   * @param \Drupal\graphql\GraphQL\Execution\ResolveContext $context
-   *   The resolve context.
-   * @param \GraphQL\Type\Definition\ResolveInfo $info
-   *   The resolve information.
-   *
-   * @return string
-   *   Response type.
-   *
-   * @throws \Exception
-   */
-  protected function resolveParagraphTypes($value, ResolveContext $context, ResolveInfo $info): string {
-    if ($value instanceof ParagraphInterface) {
-      return 'Paragraph' . $this->mapBundleToSchemaName($value->bundle());
-    }
-    throw new \Exception('Invalid paragraph type.');
   }
 
 }

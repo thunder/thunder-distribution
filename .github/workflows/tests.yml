@@ -11,6 +11,7 @@ on:
 
 env:
   DRUPAL_TESTING_COMPOSER_PROJECT: thunder/thunder-project
+  DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: "^3.0@stable"
   DRUPAL_TESTING_DATABASE_USER: root
   DRUPAL_TESTING_DATABASE_PASSWORD: root
   DRUPAL_TESTING_TEST_DUMP_FILE: db-dump.php
@@ -21,9 +22,13 @@ env:
   DRUPAL_TESTING_VERBOSE: false
   DRUPAL_TESTING_VERSION: "^1.0.36"
   DRUPAL_TESTING_TEST_FILTER: ""
+  DRUPAL_TESTING_SELENIUM_HOST: 127.0.0.1
+  DRUPAL_TESTING_SELENIUM_PORT: 9515
   THUNDER_ADMIN_BRANCH: 4.x
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: true
+  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://127.0.0.1:9515"]'
+
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
 
@@ -112,11 +117,11 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
-      selenium:
-        image: selenium/standalone-chrome:105.0
-        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
+      chrome:
+        image: drupalci/chromedriver:production
+        options: --add-host=thunder-testing:host-gateway --name chrome
         ports:
-          - 4444:4444
+          - 9515:9515
 
     strategy:
       fail-fast: false
@@ -136,8 +141,12 @@ jobs:
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
 
+      - name: Set mysql isolation level to read committed to prevent deadlocks
+        run: |
+          mysql --host="127.0.0.1" --user=root --password=root -e "SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;"
+
       - name: Prepare fixtures
-        run: docker cp ./tests/fixtures selenium:/fixtures
+        run: docker cp ./tests/fixtures chrome:/fixtures
 
       - name: Get build environment
         run: |
@@ -176,11 +185,11 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
-      selenium:
-        image: selenium/standalone-chrome:105.0
-        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
+      chrome:
+        image: drupalci/chromedriver:production
+        options: --add-host=thunder-testing:host-gateway --name chrome
         ports:
-          - 4444:4444
+          - 9515:9515
 
     strategy:
       matrix:
@@ -209,8 +218,12 @@ jobs:
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-cache-
 
+      - name: Set mysql isolation level to read committed to prevent deadlocks
+        run: |
+          mysql --host="127.0.0.1" --user=root --password=root -e "SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;"
+
       - name: Prepare fixtures
-        run: docker cp ./tests/fixtures selenium:/fixtures
+        run: docker cp ./tests/fixtures chrome:/fixtures
 
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
@@ -267,11 +280,11 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
-      selenium:
-        image: selenium/standalone-chrome:105.0
-        options: --shm-size 2g --add-host=thunder-testing:host-gateway --name selenium
+      chrome:
+        image: drupalci/chromedriver:production
+        options: --add-host=thunder-testing:host-gateway --name chrome
         ports:
-          - 4444:4444
+          - 9515:9515
 
     strategy:
       matrix:
@@ -299,8 +312,12 @@ jobs:
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-cache-
 
+      - name: Set mysql isolation level to read committed to prevent deadlocks
+        run: |
+          mysql --host="127.0.0.1" --user=root --password=root -e "SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;"
+
       - name: Prepare fixtures
-        run: docker cp ./tests/fixtures selenium:/fixtures
+        run: docker cp ./tests/fixtures chrome:/fixtures
 
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts

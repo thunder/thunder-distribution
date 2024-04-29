@@ -2,10 +2,10 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\graphql\GraphQL\Execution\FieldContext;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Gets the language of the current path.

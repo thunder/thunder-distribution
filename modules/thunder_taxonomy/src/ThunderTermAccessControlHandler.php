@@ -3,10 +3,10 @@
 namespace Drupal\thunder_taxonomy;
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Access\AccessResultInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\taxonomy\TermAccessControlHandler;
-use Drupal\Core\Access\AccessResultInterface;
 
 /**
  * Defines the access control handler for the taxonomy term entity type.
