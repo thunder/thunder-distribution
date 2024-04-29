@@ -1,15 +1,3 @@
-diff.settings:
-  expected_config:
-    general_settings:
-      layout_plugins:
-        visual_inline:
-          enabled: true
-  update_actions:
-    change:
-      general_settings:
-        layout_plugins:
-          visual_inline:
-            enabled: false
 editor.editor.basic_html:
   expected_config: {  }
   update_actions:
