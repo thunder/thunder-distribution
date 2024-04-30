@@ -5,7 +5,7 @@
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.2.1...7.2.2)
 
 * Fix menu links active trail data producer
-* Update simple_sitemap
+* Update simple_sitemap and diff modules
 * Bring back paragraphs split!
 * [Possible break of Thunder GraphQL schema with drupal/graphql:4.6.0](https://www.drupal.org/node/3401211)
 
