@@ -6,9 +6,9 @@
  */
 
 /**
- * Use file.settings:filename_sanitization.transliterate instead of thunder_media.settings:enable_filename_transliteration.
+ * Use Drupal core's filename transliteration instead of Thunder's.
  */
-function thunder_media_post_update_filename_transliteration() {
+function thunder_media_post_update_filename_transliteration(): void {
   $thunder_media_config = \Drupal::configFactory()->getEditable('thunder_media.settings');
 
   if ($thunder_media_config->get('enable_filename_transliteration')) {
