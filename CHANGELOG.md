@@ -1,5 +1,14 @@
 # Changelog
 
+## [7.2.2](https://github.com/thunder/thunder-distribution/tree/7.2.2) 2024-04-30
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.2.1...7.2.2)
+
+* Fix menu links active trail data producer
+* Update simple_sitemap
+* Bring back paragraphs split!
+* [Possible break of Thunder GraphQL schema with drupal/graphql:4.6.0](https://www.drupal.org/node/3401211)
+
 ## [7.2.1](https://github.com/thunder/thunder-distribution/tree/7.2.1) 2024-04-10
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.2.0...7.2.1)
