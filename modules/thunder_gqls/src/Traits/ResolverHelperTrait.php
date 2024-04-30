@@ -54,14 +54,24 @@ trait ResolverHelperTrait {
    *   Name of the filed.
    * @param \Drupal\graphql\GraphQL\Resolver\ResolverInterface|null $entity
    *   Entity to get the field property.
+   * @param bool $multiValue
+   *   Whether the field is returns multiple values.
    *
-   * @return \Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerProxy
+   * @return \Drupal\graphql\GraphQL\Resolver\Composite
    *   The field data producer.
    */
-  public function fromEntityReference(string $field, ResolverInterface $entity = NULL) {
-    return $this->builder->produce('entity_reference')
-      ->map('field', $this->builder->fromValue($field))
-      ->map('entity', $entity ?: $this->builder->fromParent());
+  public function fromEntityReference(string $field, ResolverInterface $entity = NULL, bool $multiValue = TRUE) {
+    return $this->builder->compose(
+      $this->builder->produce('entity_reference')
+        ->map('field', $this->builder->fromValue($field))
+        ->map('entity', $entity ?: $this->builder->fromParent()),
+      $this->builder->callback(function ($parent) use ($multiValue) {
+        if ($multiValue) {
+          return $parent;
+        }
+        return $parent[0] ?? NULL;
+      })
+    );
   }
 
   /**
@@ -93,7 +103,7 @@ trait ResolverHelperTrait {
   public function addSimpleCallbackFields(string $type, array $fields): void {
     foreach ($fields as $field) {
       $this->addFieldResolverIfNotExists($type, $field,
-        $this->builder->callback(fn($arr) => $arr[$field])
+        $this->builder->callback(fn($arr) => $arr[$field] ?? NULL)
       );
     }
   }

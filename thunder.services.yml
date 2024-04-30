@@ -3,3 +3,7 @@ services:
     class: Drupal\thunder\Breadcrumb\ThunderNodeEditBreadcrumbBuilder
     tags:
       - { name: breadcrumb_builder, priority: 100 }
+
+  plugin.manager.public_ckeditor4to5upgrade.plugin:
+    class: Drupal\ckeditor5\Plugin\CKEditor4To5UpgradePluginManager
+    parent: default_plugin_manager

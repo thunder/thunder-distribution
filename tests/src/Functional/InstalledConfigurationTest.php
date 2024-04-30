@@ -52,6 +52,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.extension',
     'system.performance',
     'system.theme',
+    'system.mail',
 
     // Configs created by User module.
     'system.action.user_add_role_action.administrator',
@@ -78,6 +79,11 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_view_mode.user.token',
     'core.entity_view_mode.path_alias.token',
     'core.entity_view_mode.search_api_task.token',
+
+    // Configs are missing the 'description' key.
+    'core.entity_view_mode.media.slick',
+    'core.entity_view_mode.node.diff',
+    'core.entity_view_mode.paragraph.preview',
 
     // SearchAPI tour.
     'tour.tour.search-api-index',

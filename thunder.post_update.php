@@ -5,6 +5,9 @@
  * Update functions for the thunder installation profile.
  */
 
+use Drupal\ckeditor5\SmartDefaultSettings;
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\editor\Entity\Editor;
 use Drupal\entity_browser\Entity\EntityBrowser;
 use Drupal\user\Entity\Role;
 
@@ -40,6 +43,48 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
     $role->save();
   }
 
+  foreach (EntityFormDisplay::loadMultiple() as $entity_form_display) {
+    $field_definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions($entity_form_display->getTargetEntityTypeId(), $entity_form_display->getTargetBundle());
+    foreach ($entity_form_display->getComponents() as $component_name => $component) {
+      if (!isset($field_definitions[$component_name])) {
+        continue;
+      }
+      /** @var \Drupal\Core\Field\FieldDefinitionInterface $field_definition */
+      $field_definition = $field_definitions[$component_name];
+      if ($component['type'] === 'entity_browser_entity_reference' && $field_definition->getFieldStorageDefinition()->getSetting('target_type') === 'media') {
+        $multiple = $field_definition->getFieldStorageDefinition()->getCardinality() !== 1;
+        $component['type'] = 'media_library_media_modify_widget';
+        $component['settings'] = [
+          'add_button_text' => Drupal::translation()->formatPlural($multiple ? 2 : 1, 'Select @label', 'Select @labels', [
+            '@label' => 'media item',
+            '@labels' => 'media items',
+          ]),
+          'check_selected' => $multiple,
+          'form_mode' => 'override',
+          'no_edit_on_create' => $multiple,
+          'multi_edit_on_create' => FALSE,
+          'replace_checkbox_by_order_indicator' => $multiple,
+        ];
+        $entity_form_display->setComponent($component_name, $component);
+      }
+      $entity_form_display->save();
+    }
+  }
+
+  /** @var \Drupal\ckeditor5\SmartDefaultSettings $ckEditorMigration */
+  $ckEditorMigration = new SmartDefaultSettings(
+    \Drupal::service('plugin.manager.ckeditor5.plugin'),
+    \Drupal::service('plugin.manager.public_ckeditor4to5upgrade.plugin'),
+    $updater->logger(),
+    \Drupal::service('module_handler'),
+    \Drupal::service('current_user'));
+
+  foreach (Editor::loadMultiple() as $editor) {
+    $format = $editor->getFilterFormat();
+    [$updated_text_editor] = $ckEditorMigration->computeSmartDefaultSettings($editor, $format);
+    $updated_text_editor->save();
+  }
+
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
   $moduleInstaller = \Drupal::service('module_installer');
   $moduleInstaller->uninstall([
@@ -52,6 +97,20 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
   /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */
   $themeInstaller = \Drupal::service('theme_installer');
   $themeInstaller->uninstall(['thunder_admin', 'seven']);
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
+
+/**
+ * Configure input formats to enable paragraphs split.
+ */
+function thunder_post_update_0002_enable_paragraphs_split(array &$sandbox): string {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_post_update_0002_enable_paragraphs_split');
 
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();

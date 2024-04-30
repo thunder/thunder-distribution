@@ -1,5 +1,45 @@
 # Changelog
 
+## [7.2.1](https://github.com/thunder/thunder-distribution/tree/7.2.1) 2024-04-10
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.2.0...7.2.1)
+
+* Fix thunder redirect data producer with query strings.
+* Move xymatic GraphQL schema to base.
+* Update to gin rc9.
+* Update graphql module to 4.7.0 and remove patch.
+
+## [7.2.0](https://github.com/thunder/thunder-distribution/tree/7.2.0) 2024-03-07
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.7...7.2.0)
+
+Support Drupal 10.2
+
+## [7.1.7](https://github.com/thunder/thunder-distribution/tree/7.1.7) 2024-02-14
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.6...7.1.7)
+
+* Add patch to fix [Checkbox for Media library modal missing after search](https://www.drupal.org/project/drupal/issues/3388913)
+
+## [7.1.6](https://github.com/thunder/thunder-distribution/tree/7.1.6) 2024-01-09
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.5...7.1.6)
+
+* Allow update_helper version "^4.0" in composer.json
+
+## [7.1.5](https://github.com/thunder/thunder-distribution/tree/7.1.5) 2023-12-21
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.4...7.1.5)
+
+* Improved update path from Thunder 6 to 7
+
+## [7.1.4](https://github.com/thunder/thunder-distribution/tree/7.1.4) 2023-12-04
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.3...7.1.4)
+
+* Fix possible break of Thunder GraphQL schema with drupal/graphql:4.6.0
+* Fix warning on missing entityLinks keys in GraphQL
+
 ## [7.1.3](https://github.com/thunder/thunder-distribution/tree/7.1.3) 2023-11-07
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.1.2...7.1.3)
