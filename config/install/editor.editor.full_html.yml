@@ -29,6 +29,8 @@ settings:
       - heading
       - codeBlock
       - '|'
+      - splitParagraph
+      - '|'
       - sourceEditing
   plugins:
     ckeditor5_codeBlock:
