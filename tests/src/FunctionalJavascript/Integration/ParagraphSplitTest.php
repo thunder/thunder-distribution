@@ -69,7 +69,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
 
     // Remove the paragraph.
     $driver = $this->getSession()->getDriver();
-    $driver->executeScript("jQuery('[name=\"field_paragraphs_0_remove\"]').trigger('mousedown')");
+    $driver->executeScript("document.querySelector('[name=\"field_paragraphs_0_remove\"]').dispatchEvent(new MouseEvent('mousedown'))");
     $this->assertSession()->assertWaitOnAjaxRequest();
 
     // Create second paragraph.
