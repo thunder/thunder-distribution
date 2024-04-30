@@ -98,7 +98,7 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
     $pluginDefinition,
     RendererInterface $renderer,
     MetatagManager $metatagManager,
-    ModuleHandlerInterface $moduleHandler
+    ModuleHandlerInterface $moduleHandler,
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
     $this->renderer = $renderer;
