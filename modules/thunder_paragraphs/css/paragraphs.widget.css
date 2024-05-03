@@ -7,6 +7,9 @@
 .field--widget-paragraphs .paragraphs-tabs-wrapper table.field-multiple-table:first-of-type thead th.field-label h4 {
   display: none;
 }
+.field--widget-paragraphs .paragraphs-tabs-wrapper table.field-multiple-table:first-of-type table thead th.field-label h4 {
+  display: block;
+}
 .paragraph-type--link .paragraphs-subform .field--name-field-link table.field-multiple-table:first-of-type thead {
   display: none;
 }
