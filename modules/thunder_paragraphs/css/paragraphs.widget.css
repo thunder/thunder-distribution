@@ -4,10 +4,10 @@
 .field--widget-paragraphs .paragraphs-tabs-wrapper table.field-multiple-table:first-of-type th {
   background: var(--gin-bg-layer);
 }
-.field--widget-paragraphs .paragraphs-tabs-wrapper table.field-multiple-table:first-of-type thead th.field-label h4 {
+.field--widget-paragraphs .paragraphs-tabs-wrapper table.field-multiple-table thead th.field-label h4 {
   display: none;
 }
-.field--widget-paragraphs .paragraphs-tabs-wrapper table.field-multiple-table:first-of-type table thead th.field-label h4 {
+.field--widget-paragraphs .paragraphs-tabs-wrapper table.field-multiple-table table thead th.field-label h4 {
   display: block;
 }
 .paragraph-type--link .paragraphs-subform .field--name-field-link table.field-multiple-table:first-of-type thead {
