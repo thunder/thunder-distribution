@@ -35,11 +35,10 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
    */
   public function testRedirect(): void {
     $testCases = $this->redirectTestCases();
+    $query = $this->getQueryFromFile('redirect');
 
     foreach ($testCases as $description => $testCase) {
       [$variables, $expectedResponse] = $testCase;
-
-      $query = $this->getQueryFromFile('redirect');
 
       $response = $this->query($query, Json::encode($variables));
       $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
@@ -63,6 +62,15 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
         ],
         [
           'url' => 'https://www.google.com',
+          'status' => 301,
+        ],
+      ],
+      'Redirect from canonical' => [
+        [
+          'path' => '/node/' . $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07')->id(),
+        ],
+        [
+          'url' => '/come-drupalcon-new-orleans',
           'status' => 301,
         ],
       ],
