@@ -26,8 +26,11 @@ class FilenameTransliterationTest extends ThunderTestBase {
 
     parent::setUp();
 
-    $this->config('thunder_media.settings')
-      ->set('enable_filename_transliteration', TRUE)
+    $this->config('file.settings')
+      ->set('filename_sanitization.transliterate', TRUE)
+      ->set('filename_sanitization.replace_whitespace', TRUE)
+      ->set('filename_sanitization.replace_non_alphanumeric', TRUE)
+      ->set('filename_sanitization.deduplicate_separators', TRUE)
       ->save();
   }
 
