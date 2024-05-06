@@ -127,7 +127,7 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
     $response = $this->httpKernel->handle($request);
     $status = $response->getStatusCode();
 
-    if ($response->isRedirect()){
+    if ($response->isRedirect()) {
       $url = $response->headers->get('location');
     }
 
