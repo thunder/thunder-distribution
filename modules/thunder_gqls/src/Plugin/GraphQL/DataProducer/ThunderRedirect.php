@@ -55,9 +55,9 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
   protected $pathValidator;
 
   /**
-   * The path validator.
+   * The alias manager.
    *
-   * @var \Drupal\path_alias\AliasManagerInterface
+   * @var \Drupal\path_alias\AliasManagerInterface|null
    */
   protected $aliasManager;
 
