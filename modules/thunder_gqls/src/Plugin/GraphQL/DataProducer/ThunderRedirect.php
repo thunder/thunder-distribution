@@ -3,14 +3,12 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
-use Drupal\Core\Language\LanguageManagerInterface;
-use Drupal\Core\Path\PathValidatorInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Render\RendererInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
-use Drupal\path_alias\AliasManagerInterface;
-use Drupal\redirect\Entity\Redirect;
-use Drupal\redirect\RedirectRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
  * Gets the ID of current user.
@@ -34,84 +32,70 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ThunderRedirect extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
   /**
-   * Optional redirect module repository.
+   * The HTTP kernel service.
    *
-   * @var \Drupal\redirect\RedirectRepository|null
+   * @var \Symfony\Component\HttpKernel\HttpKernelInterface
    */
-  protected $redirectRepository;
+  protected $httpKernel;
 
   /**
-   * The language manager.
+   * The current request.
    *
-   * @var \Drupal\Core\Language\LanguageManagerInterface
+   * @var \Symfony\Component\HttpFoundation\Request
    */
-  protected $languageManager;
+  protected $currentRequest;
 
   /**
-   * The path validator.
+   * The rendering service.
    *
-   * @var \Drupal\Core\Path\PathValidatorInterface
+   * @var \Drupal\Core\Render\RendererInterface
    */
-  protected $pathValidator;
-
-  /**
-   * The alias manager.
-   *
-   * @var \Drupal\path_alias\AliasManagerInterface|null
-   */
-  protected $aliasManager;
+  protected $renderer;
 
   /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
+  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
     return new static(
       $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('language_manager'),
-      $container->get('path.validator'),
-      $container->get('redirect.repository', ContainerInterface::NULL_ON_INVALID_REFERENCE),
-      $container->get('path_alias.manager', ContainerInterface::NULL_ON_INVALID_REFERENCE)
+      $pluginId,
+      $pluginDefinition,
+      $container->get('http_kernel'),
+      $container->get('request_stack')->getCurrentRequest(),
+      $container->get('renderer')
     );
   }
 
   /**
-   * Route constructor.
+   * ThunderEntitySubRequestBase constructor.
    *
    * @param array $configuration
-   *   The plugin configuration.
+   *   The plugin configuration array.
    * @param string $pluginId
    *   The plugin id.
    * @param mixed $pluginDefinition
    *   The plugin definition.
-   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
-   *   The language manager.
-   * @param \Drupal\Core\Path\PathValidatorInterface $pathValidator
-   *   The path validator.
-   * @param \Drupal\redirect\RedirectRepository|null $redirectRepository
-   *   The redirect repository.
-   * @param \Drupal\path_alias\AliasManagerInterface|null $aliasManager
-   *   The redirect repository.
-   *
-   * @codeCoverageIgnore
+   * @param \Symfony\Component\HttpKernel\HttpKernelInterface $httpKernel
+   *   The HTTP kernel service.
+   * @param \Symfony\Component\HttpFoundation\Request $currentRequest
+   *   The current request.
+   * @param \Drupal\Core\Render\RendererInterface $renderer
+   *   The renderer.
    */
   public function __construct(
     array $configuration,
-    $pluginId,
+    string $pluginId,
     $pluginDefinition,
-    LanguageManagerInterface $languageManager,
-    PathValidatorInterface $pathValidator,
-    ?RedirectRepository $redirectRepository = NULL,
-    ?AliasManagerInterface $aliasManager = NULL,
+    HttpKernelInterface $httpKernel,
+    Request $currentRequest,
+    RendererInterface $renderer,
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->languageManager = $languageManager;
-    $this->pathValidator = $pathValidator;
-    $this->redirectRepository = $redirectRepository;
-    $this->aliasManager = $aliasManager;
+    $this->httpKernel = $httpKernel;
+    $this->currentRequest = $currentRequest;
+    $this->renderer = $renderer;
   }
 
   /**
@@ -126,76 +110,35 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    *   The redirect data.
    */
   public function resolve(string $path, RefinableCacheableDependencyInterface $metadata): array {
-    $metadata->addCacheTags(['redirect_list']);
-
-    if ($this->redirectRepository) {
-      $queryString = parse_url($path, PHP_URL_QUERY) ?: '';
-      $pathWithoutQuery = parse_url($path, PHP_URL_PATH) ?: $path;
-
-      $language = $this->languageManager->getCurrentLanguage()->getId();
-      $queryParameters = [];
-
-      parse_str($queryString, $queryParameters);
-
-      /** @var \Drupal\redirect\Entity\Redirect|null $redirect */
-      $redirect = $this->redirectRepository->findMatchingRedirect(
-        $pathWithoutQuery,
-        $queryParameters,
-        $language
-      );
-
-      if ($redirect instanceof Redirect) {
-        $urlObject = $redirect->getRedirectUrl();
-        $metadata->addCacheTags($redirect->getCacheTags());
-
-        $redirectUri = $urlObject->toString(TRUE)->getGeneratedUrl();
-        return [
-          'url' => $redirectUri . (!empty($queryString) ? '?' . $queryString : ''),
-          'status' => $redirect->getStatusCode(),
-        ];
-      }
+    if (!str_starts_with($path, '/')) {
+      $path = '/' . $path;
     }
 
-    // Check if the path has an alias.
-    if ($this->aliasManager) {
-      // Ensure the path starts with a slash, getAliasByPath fails otherwise.
-      if (!str_starts_with($path, '/')) {
-        $aliasPath = '/' . $path;
-      }
-      else {
-        $aliasPath = $path;
-      }
+    $url = $this->currentRequest->getSchemeAndHttpHost() . $path;
+    $request = Request::create(
+      $url,
+      'GET',
+      $this->currentRequest->query->all(),
+      $this->currentRequest->cookies->all(),
+      $this->currentRequest->files->all(),
+      $this->currentRequest->server->all()
+    );
 
-      $alias = $this->aliasManager->getAliasByPath($aliasPath);
-      if ($alias !== $path) {
-        return [
-          'url' => $alias,
-          'status' => 301,
-        ];
-      }
+    $response = $this->httpKernel->handle($request);
+    $status = $response->getStatusCode();
+
+    if ($response->isRedirect()){
+      $url = $response->headers->get('location');
     }
 
-    if (($url = $this->pathValidator->getUrlIfValidWithoutAccessCheck($path)) && $url->isRouted()) {
-
-      if ($url->access()) {
-        return [
-          'url' => $path,
-          'status' => 200,
-        ];
-      }
-      else {
-        $metadata->addCacheTags(['4xx-response']);
-        return [
-          'url' => $path,
-          'status' => 403,
-        ];
-      }
+    // 4xx-response should get the 4xx-response cache tag.
+    if ($status >= 400 && $status < 500) {
+      $metadata->addCacheTags(['4xx-response']);
     }
 
-    $metadata->addCacheTags(['4xx-response']);
     return [
-      'url' => $path,
-      'status' => 404,
+      'url' => $url,
+      'status' => $response->getStatusCode(),
     ];
   }
 
