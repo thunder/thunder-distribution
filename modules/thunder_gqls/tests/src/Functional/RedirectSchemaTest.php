@@ -55,7 +55,7 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
       ->set('route_normalizer_enabled', FALSE)
       ->save();
 
-    // rebuild caches
+    // Rebuild caches.
     $this->container->get('cache.graphql.results')->deleteAll();
 
     $response = $this->query($query, $variables);
