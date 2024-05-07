@@ -29,14 +29,14 @@ function thunder_paragraphs_field_widget_third_party_settings_form(WidgetInterfa
 /**
  * Implements hook_preprocess_HOOK() for field_multiple_value_form.
  */
-function thunder_paragraphs_preprocess_field_multiple_value_form(&$variables)
-{
+function thunder_paragraphs_preprocess_field_multiple_value_form(&$variables) {
   if (isset($variables['element']['#paragraphs_widget'])
     && $variables['element']['#paragraphs_widget'] === TRUE
     && isset($variables['table']['#header'][0]['data']['#attributes'])) {
-      $variables['table']['#header'][0]['data']['#attributes']->addClass('paragraphs-table-header__label');
-    }
+    $variables['table']['#header'][0]['data']['#attributes']->addClass('paragraphs-table-header__label');
+  }
 }
+
 /**
  * Implements hook_field_widget_single_element_WIDGET_TYPE_form_alter().
  */
