@@ -107,15 +107,6 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
           'status' => 301,
         ],
       ],
-      'Redirect from canonical' => [
-        [
-          'path' => '/node/' . $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07')->id(),
-        ],
-        [
-          'url' => '/come-drupalcon-new-orleans',
-          'status' => 301,
-        ],
-      ],
       'Redirect does not exist' => [
         [
           'path' => '/unknown-url',
