@@ -19,6 +19,12 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
   protected $unpublishedEntity;
 
   /**
+   * The redirect query.
+   *
+   * @var string
+   */
+  protected $query;
+  /**
    * {@inheritdoc}
    */
   protected function setUp(): void {
@@ -26,13 +32,13 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
 
     $this->unpublishedEntity = $this->loadNodeByUuid('94ad928b-3ec8-4bcb-b617-ab1607bf69cb');
     $this->unpublishedEntity->set('moderation_state', 'unpublished')->save();
+    $this->query = $this->getQueryFromFile('redirect');
   }
 
   /**
    * Test redirect to alias, depending on redirect settings.
    */
   public function testAlias(): void {
-    $query = $this->getQueryFromFile('redirect');
     $path = '/node/' . $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07')->id();
     $variables = Json::encode(['path' => $path]);
 
@@ -40,7 +46,7 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
       ->set('route_normalizer_enabled', TRUE)
       ->save();
 
-    $response = $this->query($query, $variables);
+    $response = $this->query($this->query, $variables);
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
 
     $redirectResponseData = Json::decode($response->getBody())['data']['redirect'];
@@ -58,7 +64,7 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
     // Rebuild caches.
     $this->container->get('cache.graphql.results')->deleteAll();
 
-    $response = $this->query($query, $variables);
+    $response = $this->query($this->query, $variables);
     $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
 
     $redirectResponseData = Json::decode($response->getBody())['data']['redirect'];
@@ -77,12 +83,11 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
    */
   public function testRedirect(): void {
     $testCases = $this->redirectTestCases();
-    $query = $this->getQueryFromFile('redirect');
 
     foreach ($testCases as $description => $testCase) {
       [$variables, $expectedResponse] = $testCase;
 
-      $response = $this->query($query, Json::encode($variables));
+      $response = $this->query($this->query, Json::encode($variables));
       $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
 
       $redirectResponseData = Json::decode($response->getBody())['data']['redirect'];
