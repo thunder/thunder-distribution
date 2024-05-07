@@ -3,7 +3,6 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
-use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Path\PathValidatorInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -49,7 +48,6 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
       $container->get('language_manager'),
       $container->get('path.validator'),
       $container->get('renderer'),
-      $container->get('config.factory'),
       $container->get('redirect.repository', ContainerInterface::NULL_ON_INVALID_REFERENCE),
     );
   }
@@ -69,8 +67,6 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    *   The path validator.
    * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer service.
-   * @param \Drupal\Core\Config\ConfigFactory $config
-   *   The config.
    * @param \Drupal\redirect\RedirectRepository|null $redirectRepository
    *   The redirect repository.
    *
@@ -83,7 +79,6 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
     protected LanguageManagerInterface $languageManager,
     protected PathValidatorInterface $pathValidator,
     protected RendererInterface $renderer,
-    protected ConfigFactory $config,
     protected ?RedirectRepository $redirectRepository = NULL,
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
@@ -104,9 +99,6 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
     $metadata->addCacheTags(['redirect_list']);
 
     if ($this->redirectRepository) {
-      $redirectConfig = $this->config->get('redirect.settings');
-      $metadata->addCacheTags($redirectConfig->getCacheTags());
-
       $queryString = parse_url($path, PHP_URL_QUERY) ?: '';
       $pathWithoutQuery = parse_url($path, PHP_URL_PATH) ?: $path;
 
@@ -132,30 +124,26 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
           'status' => $redirect->getStatusCode(),
         ];
       }
+    }
 
-      if ($redirectConfig->get('route_normalizer_enabled')) {
-        // Ensure the path starts with a slash, fromUserInput fails otherwise.
-        if (!str_starts_with($path, '/')) {
-          $aliasPath = '/' . $path;
-        }
-        else {
-          $aliasPath = $path;
-        }
-        $context = new RenderContext();
-        $alias = $this->renderer->executeInRenderContext($context, function () use ($aliasPath): string {
-          return Url::fromUserInput($aliasPath)->toString();
-        });
-        if (!$context->isEmpty()) {
-          $metadata->addCacheableDependency($context->pop());
-        }
+    // Ensure the path starts with a slash, fromUserInput fails otherwise.
+    if (!str_starts_with($path, '/')) {
+      $aliasPath = '/' . $path;
+    }
+    else {
+      $aliasPath = $path;
+    }
 
-        if ($alias !== $path) {
-          return [
-            'url' => $alias,
-            'status' => $redirectConfig->get('default_status_code'),
-          ];
-        }
-      }
+    $context = new RenderContext();
+    $alias = $this->renderer->executeInRenderContext($context, function () use ($aliasPath): string {
+      return Url::fromUserInput($aliasPath)->toString();
+    });
+
+    if ($alias !== $path) {
+      return [
+        'url' => $alias,
+        'status' => 301,
+      ];
     }
 
     if (($url = $this->pathValidator->getUrlIfValidWithoutAccessCheck($path)) && $url->isRouted()) {
