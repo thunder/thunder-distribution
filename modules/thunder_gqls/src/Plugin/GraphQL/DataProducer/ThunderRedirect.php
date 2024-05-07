@@ -6,8 +6,10 @@ use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Path\PathValidatorInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Render\RenderContext;
+use Drupal\Core\Render\RendererInterface;
+use Drupal\Core\Url;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
-use Drupal\path_alias\AliasManagerInterface;
 use Drupal\redirect\Entity\Redirect;
 use Drupal\redirect\RedirectRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -55,11 +57,11 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
   protected $pathValidator;
 
   /**
-   * The alias manager.
+   * The rendering service.
    *
-   * @var \Drupal\path_alias\AliasManagerInterface|null
+   * @var \Drupal\Core\Render\RendererInterface
    */
-  protected $aliasManager;
+  protected $renderer;
 
   /**
    * {@inheritdoc}
@@ -73,8 +75,8 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
       $plugin_definition,
       $container->get('language_manager'),
       $container->get('path.validator'),
+      $container->get('renderer'),
       $container->get('redirect.repository', ContainerInterface::NULL_ON_INVALID_REFERENCE),
-      $container->get('path_alias.manager', ContainerInterface::NULL_ON_INVALID_REFERENCE)
     );
   }
 
@@ -93,8 +95,6 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    *   The path validator.
    * @param \Drupal\redirect\RedirectRepository|null $redirectRepository
    *   The redirect repository.
-   * @param \Drupal\path_alias\AliasManagerInterface|null $aliasManager
-   *   The redirect repository.
    *
    * @codeCoverageIgnore
    */
@@ -104,14 +104,14 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
     $pluginDefinition,
     LanguageManagerInterface $languageManager,
     PathValidatorInterface $pathValidator,
+    RendererInterface $renderer,
     ?RedirectRepository $redirectRepository = NULL,
-    ?AliasManagerInterface $aliasManager = NULL,
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
     $this->languageManager = $languageManager;
     $this->pathValidator = $pathValidator;
+    $this->renderer = $renderer;
     $this->redirectRepository = $redirectRepository;
-    $this->aliasManager = $aliasManager;
   }
 
   /**
@@ -156,23 +156,24 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
       }
     }
 
-    // Check if the path has an alias.
-    if ($this->aliasManager) {
-      // Ensure the path starts with a slash, getAliasByPath fails otherwise.
-      if (!str_starts_with($path, '/')) {
-        $aliasPath = '/' . $path;
-      }
-      else {
-        $aliasPath = $path;
-      }
+    // Ensure the path starts with a slash, getAliasByPath fails otherwise.
+    if (!str_starts_with($path, '/')) {
+      $aliasPath = '/' . $path;
+    }
+    else {
+      $aliasPath = $path;
+    }
 
-      $alias = $this->aliasManager->getAliasByPath($aliasPath);
-      if ($alias !== $path) {
-        return [
-          'url' => $alias,
-          'status' => 301,
-        ];
-      }
+    $context = new RenderContext();
+    $alias = $this->renderer->executeInRenderContext($context, function () use ($aliasPath): string {
+      return Url::fromUserInput($aliasPath)->toString();
+    });
+
+    if ($alias !== $path) {
+      return [
+        'url' => $alias,
+        'status' => 301,
+      ];
     }
 
     if (($url = $this->pathValidator->getUrlIfValidWithoutAccessCheck($path)) && $url->isRouted()) {
