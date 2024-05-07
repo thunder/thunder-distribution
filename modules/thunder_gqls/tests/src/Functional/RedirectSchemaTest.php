@@ -24,6 +24,7 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
    * @var string
    */
   protected $query;
+
   /**
    * {@inheritdoc}
    */
