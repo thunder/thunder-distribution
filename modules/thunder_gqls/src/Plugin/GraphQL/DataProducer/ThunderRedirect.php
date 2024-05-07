@@ -93,6 +93,8 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    *   The language manager.
    * @param \Drupal\Core\Path\PathValidatorInterface $pathValidator
    *   The path validator.
+   * @param \Drupal\Core\Render\RendererInterface $renderer
+   *   The renderer service.
    * @param \Drupal\redirect\RedirectRepository|null $redirectRepository
    *   The redirect repository.
    *
