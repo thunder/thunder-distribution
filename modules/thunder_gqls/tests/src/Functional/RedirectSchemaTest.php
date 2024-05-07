@@ -29,6 +29,48 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
   }
 
   /**
+   * Test redirect to alias, depending on redirect settings.
+   */
+  public function testAlias(): void {
+    $query = $this->getQueryFromFile('redirect');
+    $path = '/node/' . $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07')->id();
+    $variables = Json::encode(['path' => $path]);
+
+    $this->config('redirect.settings')
+      ->set('route_normalizer_enabled', TRUE)
+      ->save();
+
+    $response = $this->query($query, $variables);
+    $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
+
+    $redirectResponseData = Json::decode($response->getBody())['data']['redirect'];
+    $expectedResponse = [
+      'url' => '/come-drupalcon-new-orleans',
+      'status' => 301,
+    ];
+
+    $this->assertEqualsCanonicalizing($expectedResponse, $redirectResponseData, 'Not redirected to alias');
+
+    $this->config('redirect.settings')
+      ->set('route_normalizer_enabled', FALSE)
+      ->save();
+
+    // rebuild caches
+    $this->container->get('cache.graphql.results')->deleteAll();
+
+    $response = $this->query($query, $variables);
+    $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
+
+    $redirectResponseData = Json::decode($response->getBody())['data']['redirect'];
+    $expectedResponse = [
+      'url' => $path,
+      'status' => 200,
+    ];
+
+    $this->assertEqualsCanonicalizing($expectedResponse, $redirectResponseData, 'False redirect to alias');
+  }
+
+  /**
    * Tests the jsonld extension.
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
