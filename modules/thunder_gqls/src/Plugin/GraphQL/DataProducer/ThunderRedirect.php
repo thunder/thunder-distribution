@@ -36,34 +36,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ThunderRedirect extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
   /**
-   * Optional redirect module repository.
-   *
-   * @var \Drupal\redirect\RedirectRepository|null
-   */
-  protected $redirectRepository;
-
-  /**
-   * The language manager.
-   *
-   * @var \Drupal\Core\Language\LanguageManagerInterface
-   */
-  protected $languageManager;
-
-  /**
-   * The path validator.
-   *
-   * @var \Drupal\Core\Path\PathValidatorInterface
-   */
-  protected $pathValidator;
-
-  /**
-   * The rendering service.
-   *
-   * @var \Drupal\Core\Render\RendererInterface
-   */
-  protected $renderer;
-
-  /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
@@ -104,16 +76,12 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
     array $configuration,
     $pluginId,
     $pluginDefinition,
-    LanguageManagerInterface $languageManager,
-    PathValidatorInterface $pathValidator,
-    RendererInterface $renderer,
-    ?RedirectRepository $redirectRepository = NULL,
+    protected LanguageManagerInterface $languageManager,
+    protected PathValidatorInterface $pathValidator,
+    protected RendererInterface $renderer,
+    protected ?RedirectRepository $redirectRepository = NULL,
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->languageManager = $languageManager;
-    $this->pathValidator = $pathValidator;
-    $this->renderer = $renderer;
-    $this->redirectRepository = $redirectRepository;
   }
 
   /**
