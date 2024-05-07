@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\thunder_media\Functional;
 
+use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\StreamWrapper\PublicStream;
 use Drupal\file\Entity\File;
@@ -55,7 +56,7 @@ class FilenameTransliterationTest extends ThunderTestBase {
 
     // Upload with replace to guarantee there's something there.
     $edit = [
-      'file_test_replace' => FileSystemInterface::EXISTS_RENAME,
+      'file_test_replace' => FileExists::Rename->name,
       'files[file_test_upload]' => \Drupal::service('file_system')->realpath('public://foo°.png'),
     ];
     $this->drupalGet('file-test/upload');
