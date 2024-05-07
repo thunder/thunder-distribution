@@ -126,7 +126,7 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
       }
     }
 
-    // Ensure the path starts with a slash, getAliasByPath fails otherwise.
+    // Ensure the path starts with a slash, fromUserInput fails otherwise.
     if (!str_starts_with($path, '/')) {
       $aliasPath = '/' . $path;
     }
