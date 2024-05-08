@@ -159,7 +159,9 @@ GQL;
     $response = $this->query($query, Json::encode($variables));
     $page = $this->jsonDecode($response->getBody());
     $this->assertArrayNotHasKey('errors', $page);
-    $this->assertNull($page['data']['page']['entityLinks']['versionHistory']);
+    // @todo Don't know why this has changed from a NULL to an empty string in
+    //   Drupal 10.3.
+    $this->assertSame('', $page['data']['page']['entityLinks']['versionHistory']);
 
   }
 
