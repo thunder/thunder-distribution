@@ -537,6 +537,7 @@ display:
             previous: '‹ previous'
             first: '« first'
             last: 'last »'
+          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:
