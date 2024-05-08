@@ -37,6 +37,7 @@ class MetatagTest extends KernelTestBase {
     'views',
     'image',
     'file',
+    'filter',
     'focal_point',
     'crop',
     'media_expire',
