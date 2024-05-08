@@ -36,13 +36,17 @@
         "patches": {
             "drupal/core": {
                 "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2021-05-31/3133639.19.patch",
-                "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch"
+                "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch",
+                "#3445950 Fix DefaultLazyPluginCollection::setInstanceConfiguration()": "https://git.drupalcode.org/project/drupal/-/merge_requests/7961.diff"
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
             "drupal/focal_point": {
                 "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-11/preview_link_accidentally_closes_the_media_library-3162210-19.patch"
+            },
+            "drupal/media_library_media_modify": {
+                "#3445963 Use service decoration to replace media_library.opener.field_widget": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/54.diff"
             }
         }
     },
