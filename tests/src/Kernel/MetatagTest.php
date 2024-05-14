@@ -114,7 +114,7 @@ class MetatagTest extends KernelTestBase {
     $this->assertStringContainsString('/files/styles/facebook/public/image-test.png', $elements['og_image_0']['#attributes']['content']);
     $this->assertEquals('630', $elements['og_image_height']['#attributes']['content']);
     $this->assertEquals('1200', $elements['og_image_width']['#attributes']['content']);
-    $this->assertEquals('image/png', $elements['og_image_type']['#attributes']['content']);
+    $this->assertEquals('image/webp', $elements['og_image_type']['#attributes']['content']);
     $this->assertEquals('Test Site', $elements['og_site_name']['#attributes']['content']);
     $this->assertEquals($title, $elements['og_title']['#attributes']['content']);
     $this->assertNotEmpty($elements['og_updated_time']['#attributes']['content']);
