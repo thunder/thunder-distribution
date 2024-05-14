@@ -20,7 +20,7 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
   DRUPAL_TESTING_VERBOSE: false
-  DRUPAL_TESTING_VERSION: "^1.0.41"
+  DRUPAL_TESTING_VERSION: "dev-TASK-add-upgrade-commands"
   DRUPAL_TESTING_TEST_FILTER: ""
   DRUPAL_TESTING_SELENIUM_HOST: 127.0.0.1
   DRUPAL_TESTING_SELENIUM_PORT: 9515
@@ -184,6 +184,9 @@ jobs:
     env:
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
       DRUPAL_TESTING_TEST_GROUP: Thunder
+      DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION: 3.0.12
+      DRUPAL_TESTING_UPGRADE_DRUSH_VERSION: 10.3.6
+      DRUPAL_TESTING_UPGRADE_VERSION: 6.5.4
 
     steps:
       - uses: actions/checkout@v3
@@ -193,7 +196,6 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: Imagick, gd, pdo_mysql
-          tools: composer:2.4.4
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -213,26 +215,17 @@ jobs:
           composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true --no-plugins
           composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
-      - name: Prepare the build
-        run: test-drupal-project prepare_build
-
-      #   Start a debug session.
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
-      - name: Use Thunder 6 lockfile
-        run: |
-          touch /tmp/test/thunder/finished-stages/build
-          cp ${GITHUB_WORKSPACE}/tests/fixtures/thunder6.composer.lock composer.lock
-          composer install
-        working-directory: /tmp/test/thunder/install
+      - name: Prepare the old install
+        run: test-drupal-project prepare_old_install
 
       - name: Install drupal
         run: test-drupal-project install
 
+      - name: Prepare the upgrade
+        run: test-drupal-project prepare_upgrade
+
       - name: Update the docroot
         run: |
-          composer config repositories.0 path "${GITHUB_WORKSPACE}"
           composer remove thunder/thunder-distribution --no-update
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
