@@ -121,7 +121,7 @@ class MetatagTest extends KernelTestBase {
     $this->assertStringEndsWith('/node/1', $elements['og_url']['#attributes']['content']);
 
     $this->assertEquals($description, $elements['twitter_cards_description']['#attributes']['content']);
-    $this->assertStringContainsString('/files/styles/twitter/public/image-test.png', $elements['twitter_cards_image']['#attributes']['content']);
+    $this->assertStringContainsString('/files/styles/twitter/public/image-test.png.webp', $elements['twitter_cards_image']['#attributes']['content']);
     $this->assertEquals('512', $elements['twitter_cards_image_height']['#attributes']['content']);
     $this->assertEquals('1024', $elements['twitter_cards_image_width']['#attributes']['content']);
     $this->assertEquals('summary_large_image', $elements['twitter_cards_type']['#attributes']['content']);
@@ -130,7 +130,7 @@ class MetatagTest extends KernelTestBase {
     $this->assertEquals($title, $elements['schema_article_headline']['#attributes']['content']);
     $this->assertEquals('Title', $elements['schema_article_name']['#attributes']['content']);
     $this->assertEquals($description, $elements['schema_article_description']['#attributes']['content']);
-    $this->assertStringContainsString('/files/styles/facebook/public/image-test.png', $elements['schema_article_image']['#attributes']['content']['url']);
+    $this->assertStringContainsString('/files/styles/facebook/public/image-test.png.webp', $elements['schema_article_image']['#attributes']['content']['url']);
     $this->assertEquals('Test Site', $elements['schema_article_publisher']['#attributes']['content']['name']);
     $this->assertEquals('Organization', $elements['schema_article_publisher']['#attributes']['content']['@type']);
   }
