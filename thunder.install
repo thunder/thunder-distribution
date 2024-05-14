@@ -48,7 +48,7 @@ function thunder_update_last_removed(): int {
 /**
  * Add publish state and unpublish state fields to newly supported entity types.
  */
-function thunder_update_8328(): \Stringable|string  {
+function thunder_update_8328(): \Stringable|string {
   $output = _scheduler_content_moderation_integration_add_fields();
   return $output ? implode('</li><li>', $output) : t('No update required.');
 }
