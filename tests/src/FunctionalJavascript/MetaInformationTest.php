@@ -204,6 +204,8 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * Test Meta Tag default configuration and custom configuration for article.
    *
    * @dataProvider providerContentTypes
+   *
+   * @group NoUpdate
    */
   public function testArticleMetaTags(string $contentType): void {
     $globalConfigs = $this->generateMetaTagConfiguration([static::$globalMetaTags]);
