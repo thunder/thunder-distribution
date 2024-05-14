@@ -87,7 +87,9 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $this->clickAjaxButtonCssSelector('[name="field_paragraphs_0_collapse"]');
     /** @var \Drupal\file\FileInterface $file */
     $file = $image2->field_image->entity;
-    $this->assertEquals([$file->getFilename() . '.webp'], $this->getSession()->evaluateScript('jQuery(\'[data-drupal-selector="edit-field-paragraphs-0-preview"] article.media--view-mode-paragraph-preview img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1)'), 'Image file should be identical to previously selected.');
+    // On installs that use  Drupal 10.3 onwards, the image will be converted to
+    // a webp image.
+    $this->assertMatchesRegularExpression('/^' . preg_quote($file->getFilename()) . '(.webp)?$/', $this->getSession()->evaluateScript('jQuery(\'[data-drupal-selector="edit-field-paragraphs-0-preview"] article.media--view-mode-paragraph-preview img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1)')[0], 'Image file should be identical to previously selected.');
 
     // Go to the media view and try deleting the image media.
     $this->drupalGet('admin/content/media');
