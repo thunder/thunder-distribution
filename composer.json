@@ -43,9 +43,6 @@
             },
             "drupal/focal_point": {
                 "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-11/preview_link_accidentally_closes_the_media_library-3162210-19.patch"
-            },
-            "drupal/media_library_media_modify": {
-                "#3445963 Use service decoration to replace media_library.opener.field_widget": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/54.diff"
             }
         }
     },
@@ -84,7 +81,7 @@
         "drupal/media_entity_slideshow": "^2.0-alpha1",
         "drupal/media_entity_twitter": "^2.5",
         "drupal/media_expire": "^2.6",
-        "drupal/media_library_media_modify": "^1.0.0-beta15",
+        "drupal/media_library_media_modify": "^1.0.0-beta16",
         "drupal/media_file_delete": "^1.2",
         "drupal/metatag": "^1.26",
         "drupal/metatag_async_widget": "^1.0-alpha2",
