@@ -215,12 +215,13 @@ jobs:
           composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true --no-plugins
           composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
-      #   Start a debug session.
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Prepare the old install
         run: test-drupal-project prepare_old_install
+
+      - name: Fix the old install
+        run: |
+          composer upgrade caxy/php-htmldiff
+        working-directory: /tmp/test/thunder/install
 
       - name: Install drupal
         run: test-drupal-project install
