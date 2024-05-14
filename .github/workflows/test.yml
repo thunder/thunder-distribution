@@ -216,6 +216,10 @@ jobs:
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
+      #   Start a debug session.
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - name: Use Thunder 6 lockfile
         run: |
           touch /tmp/test/thunder/finished-stages/build
