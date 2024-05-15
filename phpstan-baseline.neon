@@ -71,14 +71,6 @@ parameters:
 			path: modules/thunder_gqls/src/Wrappers/EntityListResponse.php
 
 		-
-			message: """
-				#^Call to deprecated method getConfig\\(\\) of class GuzzleHttp\\\\Client\\:
-				Client\\:\\:getConfig will be removed in guzzlehttp/guzzle\\:8\\.0\\.$#
-			"""
-			count: 1
-			path: modules/thunder_gqls/tests/src/Functional/ThunderGqlsTestBase.php
-
-		-
 			message: "#^Access to an undefined property Drupal\\\\Tests\\\\thunder_gqls\\\\Kernel\\\\DataProducer\\\\EntityLinksTest\\:\\:\\$node\\.$#"
 			count: 4
 			path: modules/thunder_gqls/tests/src/Kernel/DataProducer/EntityLinksTest.php
