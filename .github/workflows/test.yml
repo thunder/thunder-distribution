@@ -239,7 +239,6 @@ jobs:
 
       - name: Update the docroot
         run: |
-          echo "Composer root version: $COMPOSER_ROOT_VERSION"
           composer remove thunder/thunder-distribution --no-update
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
@@ -270,6 +269,8 @@ jobs:
 
       - name: Run tests suite
         run: test-drupal-project run_tests
+        env:
+          COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
   test-min:
 
