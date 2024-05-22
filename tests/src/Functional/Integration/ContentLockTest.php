@@ -32,8 +32,9 @@ class ContentLockTest extends ThunderTestBase {
 
     $this->click('[data-drupal-selector="edit-unlock"]');
     $this->click('[data-drupal-selector="edit-submit"]');
+
     // The text changes in Content Lock 2.4.
-    $this->assertSession()->pageTextContains('Unlocked. Anyone can now edit this content.');
+    $this->assertSession()->pageTextMatches('/(?:Unlocked|Lock broken). Anyone can now edit this content./');
 
     $this->drupalGet($node->toUrl('edit-form'));
     $loggedInUser = $this->loggedInUser->label();
