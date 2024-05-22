@@ -80,7 +80,7 @@ jobs:
       - name: Lint
         run: |
           parallel-lint --version
-          parallel-lint .
+          parallel-lint --no-progress -e php,module,install,inc,profile,theme .
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
