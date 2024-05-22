@@ -29,6 +29,10 @@ env:
   MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://127.0.0.1:9515"]'
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
+  # The following variable set the version that the upgrade test starts with.
+  DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION: 3.0.12
+  DRUPAL_TESTING_UPGRADE_DRUSH_VERSION: 10.3.6
+  DRUPAL_TESTING_UPGRADE_VERSION: 6.5.4
 
 jobs:
 
@@ -184,9 +188,6 @@ jobs:
     env:
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
       DRUPAL_TESTING_TEST_GROUP: Thunder
-      DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION: 3.0.12
-      DRUPAL_TESTING_UPGRADE_DRUSH_VERSION: 10.3.6
-      DRUPAL_TESTING_UPGRADE_VERSION: 6.5.4
 
     steps:
       - uses: actions/checkout@v3
