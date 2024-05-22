@@ -132,6 +132,7 @@ class ThunderNodeFormHelper implements ContainerInjectionInterface {
    * {@inheritdoc}
    */
   protected function actions(NodeInterface $entity): array {
+    /** @var \Drupal\node\Entity\Node $entity */
     /** @var \Drupal\Core\Entity\ContentEntityStorageInterface $storage */
     $storage = $this->entityTypeManager->getStorage($entity->getEntityTypeId());
     $latest_revision_id = $storage->getLatestTranslationAffectedRevisionId($entity->id(), $entity->language()->getId());

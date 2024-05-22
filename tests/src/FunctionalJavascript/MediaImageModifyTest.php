@@ -80,6 +80,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $this->assertSession()
       ->elementNotExists('css', '[data-drupal-selector="edit-field-paragraphs-0-subform-field-image-wrapper"] div.messages--error');
 
+    /** @var \Drupal\media\Entity\Media $image2 */
     $image2 = $this->loadMediaByUuid('a4b2fa51-8340-4982-b792-92e060b71eb9');
     $this->selectMedia('field-paragraphs-0-subform-field-image', [$image2->id()]);
 
