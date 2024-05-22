@@ -20,6 +20,8 @@ use Drupal\user\Entity\User;
  * Allows the profile to alter the site configuration form.
  */
 function thunder_form_install_configure_form_alter(array &$form, FormStateInterface $form_state): void {
+  $foo ='bar'
+  echo $foo;
   // Add a value as example that one can choose an arbitrary site name.
   $form['site_information']['site_name']['#placeholder'] = t('Thunder');
 }
