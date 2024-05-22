@@ -187,7 +187,6 @@ jobs:
       DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION: 3.0.12
       DRUPAL_TESTING_UPGRADE_DRUSH_VERSION: 10.3.6
       DRUPAL_TESTING_UPGRADE_VERSION: 6.5.4
-      COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
     steps:
       - uses: actions/checkout@v3
@@ -218,20 +217,29 @@ jobs:
 
       - name: Prepare the old install
         run: test-drupal-project prepare_old_install
+        env:
+          COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
       - name: Fix the old install
         run: |
           composer upgrade caxy/php-htmldiff
         working-directory: /tmp/test/thunder/install
+        env:
+          COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
       - name: Install drupal
         run: test-drupal-project install
+        env:
+          COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
       - name: Prepare the upgrade
         run: test-drupal-project prepare_upgrade
+        env:
+          COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
       - name: Update the docroot
         run: |
+          echo "Composer root version: $COMPOSER_ROOT_VERSION"
           composer remove thunder/thunder-distribution --no-update
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
@@ -250,6 +258,8 @@ jobs:
           php core/scripts/db-tools.php dump-database-d8-mysql --database-url "${SIMPLETEST_DB}" >"sites/default/database-dump.php"
           tar -czf "${DRUPAL_TESTING_TEST_DUMP_FILE}" --exclude='config_*' --exclude='php' --exclude='styles' --directory='sites/default' files database-dump.php
         working-directory: /tmp/test/thunder/install
+        env:
+          COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
       - name: Setup Apache
         uses: thunder/apache-shiva-php-action@v1
