@@ -218,24 +218,24 @@ jobs:
       - name: Prepare the old install
         run: test-drupal-project prepare_old_install
         env:
-          COMPOSER_ROOT_VERSION: ${{ vars.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
+          COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
       - name: Fix the old install
         run: |
           composer upgrade caxy/php-htmldiff
         working-directory: /tmp/test/thunder/install
         env:
-          COMPOSER_ROOT_VERSION: ${{ vars.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
+          COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
       - name: Install drupal
         run: test-drupal-project install
         env:
-          COMPOSER_ROOT_VERSION: ${{ vars.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
+          COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
       - name: Prepare the upgrade
         run: test-drupal-project prepare_upgrade
         env:
-          COMPOSER_ROOT_VERSION: ${{ vars.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
+          COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
       - name: Update the docroot
         run: |
@@ -259,7 +259,7 @@ jobs:
           tar -czf "${DRUPAL_TESTING_TEST_DUMP_FILE}" --exclude='config_*' --exclude='php' --exclude='styles' --directory='sites/default' files database-dump.php
         working-directory: /tmp/test/thunder/install
         env:
-          COMPOSER_ROOT_VERSION: ${{ vars.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
+          COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
       - name: Setup Apache
         uses: thunder/apache-shiva-php-action@v1
