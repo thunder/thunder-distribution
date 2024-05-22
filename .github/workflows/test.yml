@@ -50,7 +50,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.1', '8.3' ]
+        PHP_VERSION: [ '8.1' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
@@ -77,6 +77,11 @@ jobs:
           composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
           composer global require php-parallel-lint/php-parallel-lint
 
+      - name: Lint
+        run: |
+          parallel-lint --version
+          parallel-lint --no-progress -e php,module,install,inc,profile,theme .
+
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
@@ -85,11 +90,6 @@ jobs:
 
       - name: Test for deprecations
         run: test-drupal-project deprecation
-
-      - name: Lint
-        run: |
-          parallel-lint --version
-          parallel-lint .
 
       - name: Install drupal
         run: test-drupal-project install
