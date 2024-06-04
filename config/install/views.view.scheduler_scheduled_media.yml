@@ -1078,7 +1078,8 @@ display:
           field: uid
           entity_type: media
           entity_field: uid
-          plugin_id: numeric
+          plugin_id: entity_target_id
+          target_entity_type_id: user
       defaults:
         empty: false
         access: false
