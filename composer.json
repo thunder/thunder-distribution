@@ -44,6 +44,9 @@
             },
             "drupal/focal_point": {
                 "Preview link accidentally closes the media library": "https://www.drupal.org/files/issues/2020-10-11/preview_link_accidentally_closes_the_media_library-3162210-19.patch"
+            },
+            "drupal/gin": {
+                "Issue #3356717: Move Action buttons to sticky header": "https://git.drupalcode.org/project/gin/-/merge_requests/420.diff"
             }
         }
     },
