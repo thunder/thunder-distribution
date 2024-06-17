@@ -22,7 +22,7 @@ third_party_settings:
 name: Article
 type: article
 description: 'Use <em>articles</em> for evergreen content.'
-help: ''
+help: null
 new_revision: true
 preview_mode: 1
 display_submitted: true

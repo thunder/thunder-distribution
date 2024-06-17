@@ -278,7 +278,17 @@ class InstalledConfigurationTest extends ThunderTestBase {
     ],
     'views.view.locked_content' => [
       'display' => [
-        'default' => ['display_options' => ['sorts' => ['created' => ['expose' => ['field_identifier' => TRUE]]]]],
+        'default' => [
+          'display_options' => [
+            'sorts' => ['created' => ['expose' => ['field_identifier' => TRUE]]],
+            'pager' => ['options' => ['pagination_heading_level' => TRUE]],
+          ],
+        ],
+      ],
+    ],
+    'views.view.redirect' => [
+      'display' => [
+        'default' => ['display_options' => ['pager' => ['options' => ['pagination_heading_level' => TRUE]]]],
       ],
     ],
   ];
