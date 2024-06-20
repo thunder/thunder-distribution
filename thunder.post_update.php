@@ -115,3 +115,17 @@ function thunder_post_update_0002_enable_paragraphs_split(array &$sandbox): stri
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
 }
+
+/**
+ * This update removes blazy and slick integration.
+ */
+function thunder_post_update_0003_remove_blazy_and_slick(): string {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_post_update_0003_remove_blazy_and_slick');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
