@@ -36,7 +36,7 @@ trait ThunderGinTestTrait {
    *   form, which is typically the same thing but with hyphens replacing the
    *   underscores.
    */
-  public function submitForm(array $edit, $submit, $form_html_id = NULL) {
+  public function submitForm(array $edit, $submit, $form_html_id = NULL): void {
     $assert_session = $this->assertSession();
     $submit_button = $assert_session->buttonExists($submit);
 
