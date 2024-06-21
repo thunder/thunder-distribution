@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder\Traits;
 
+use Behat\Mink\Exception\ElementNotFoundException;
+
 /**
  * This trait provides overriden functions for the gin theme.
  *
@@ -61,7 +63,12 @@ trait ThunderGinTestTrait {
 
     // Edit the form values.
     foreach ($edit as $name => $value) {
-      $field = $assert_session->fieldExists($name, $form);
+      try {
+        $field = $assert_session->fieldExists($name, $form);
+      }
+      catch (ElementNotFoundException $e) {
+        $field = $assert_session->fieldExists($name);
+      }
 
       // Provide support for the values '1' and '0' for checkboxes instead of
       // TRUE and FALSE.
@@ -71,7 +78,6 @@ trait ThunderGinTestTrait {
       if ($field_type === 'checkbox') {
         $value = (bool) $value;
       }
-
       $field->setValue($value);
     }
 
