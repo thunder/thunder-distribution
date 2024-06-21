@@ -204,6 +204,10 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
     $form['actions']['moderation_state'] = $form['moderation_state'];
     unset($form['moderation_state']);
 
+    // Promote moderation_state in gin theme to not end up in
+    // dropdown button.
+    $form['actions']['moderation_state']['#gin_action_item'] = TRUE;
+
     return $form;
   }
 
