@@ -171,7 +171,7 @@ trait ThunderTestTrait {
       // Output all errors for modules tested.
       $errors = [];
       foreach ($query->execute()->fetchAll() as $row) {
-        $errors[] = Unicode::truncate(Html::decodeEntities(strip_tags($controller->formatMessage($row))), 256, TRUE, TRUE);
+        $errors[] = Unicode::truncate(Html::decodeEntities(strip_tags((string) $controller->formatMessage($row))), 256, TRUE, TRUE);
       }
       throw new \Exception(print_r($errors, TRUE));
     }
@@ -185,12 +185,12 @@ trait ThunderTestTrait {
    * @param string $uuid
    *   The uuid.
    *
-   * @return \Drupal\media\MediaInterface|false|null
+   * @return \Drupal\media\MediaInterface
    *   The media entity.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  protected function loadMediaByUuid(string $uuid) {
+  protected function loadMediaByUuid(string $uuid): MediaInterface {
     $media = \Drupal::getContainer()->get('entity.repository')->loadEntityByUuid('media', $uuid);
     assert($media instanceof MediaInterface);
     return $media;
@@ -202,12 +202,12 @@ trait ThunderTestTrait {
    * @param string $uuid
    *   The uuid.
    *
-   * @return \Drupal\node\NodeInterface|false|null
+   * @return \Drupal\node\NodeInterface
    *   The node entity.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  protected function loadNodeByUuid(string $uuid) {
+  protected function loadNodeByUuid(string $uuid): NodeInterface {
     $node = \Drupal::getContainer()->get('entity.repository')->loadEntityByUuid('node', $uuid);
     assert($node instanceof NodeInterface);
     return $node;
@@ -219,12 +219,12 @@ trait ThunderTestTrait {
    * @param string $uuid
    *   The uuid.
    *
-   * @return \Drupal\taxonomy\TermInterface|false|null
+   * @return \Drupal\taxonomy\TermInterface
    *   The term entity.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  protected function loadTermByUuid(string $uuid) {
+  protected function loadTermByUuid(string $uuid): TermInterface {
     $term = \Drupal::getContainer()->get('entity.repository')->loadEntityByUuid('taxonomy_term', $uuid);
     assert($term instanceof TermInterface);
     return $term;
