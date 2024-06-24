@@ -63,12 +63,8 @@ trait ThunderGinTestTrait {
 
     // Edit the form values.
     foreach ($edit as $name => $value) {
-      try {
-        $field = $assert_session->fieldExists($name, $form);
-      }
-      catch (ElementNotFoundException $e) {
-        $field = $assert_session->fieldExists($name);
-      }
+      // Fields / buttons in static area are not in form context.
+      $field = $assert_session->fieldExists($name);
 
       // Provide support for the values '1' and '0' for checkboxes instead of
       // TRUE and FALSE.
