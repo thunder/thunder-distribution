@@ -21,7 +21,6 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
     'media_library_media_modify',
     'gin_toolbar',
     'jquery_ui',
-    'jquery_ui_draggable',
     'ckeditor5',
   ]);
 
