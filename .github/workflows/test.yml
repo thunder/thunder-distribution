@@ -338,7 +338,7 @@ jobs:
       - name: Install suggested dependencies
         run: |
           composer require "league/container:^4.2" "drupal/core-dev:^10.3" --no-update --no-progress --working-dir=/tmp/test/thunder/install
-          composer config allow-plugins.php-http/discovery true --no-plugins
+          composer config allow-plugins.php-http/discovery true --no-plugins --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build
