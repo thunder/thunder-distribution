@@ -1,5 +1,13 @@
 # Changelog
 
+## [7.3.0](https://github.com/thunder/thunder-distribution/tree/7.1.0) 2024-06-024
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.2.2...7.3.0)
+
+* Drupal 10.3 compatibility.
+* Updated Gin theme.
+* PHP8.3 compatibility.
+
 ## [7.2.2](https://github.com/thunder/thunder-distribution/tree/7.2.2) 2024-04-30
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.2.1...7.2.2)
