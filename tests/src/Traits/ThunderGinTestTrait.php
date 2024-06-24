@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\thunder\Traits;
 
-use Behat\Mink\Exception\ElementNotFoundException;
-
 /**
  * This trait provides overriden functions for the gin theme.
  *
