@@ -330,14 +330,15 @@ jobs:
       - name: Get build environment
         run: |
           composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true --no-plugins
-          composer global config allow-plugins.php-http/discovery true --no-plugins
           composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
       - name: Install suggested dependencies
-        run: composer require "league/container:^4.2" "drupal/core-dev:^10.3" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: |
+          composer require "league/container:^4.2" "drupal/core-dev:^10.3" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+          composer config allow-plugins.php-http/discovery true --no-plugins
 
       - name: Build the docroot
         run: test-drupal-project build
