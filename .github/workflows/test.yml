@@ -249,8 +249,8 @@ jobs:
           composer remove thunder/thunder-distribution --no-update
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
-          composer require "drupal/slick" --no-update
-          composer require "drupal/blazy" --no-update
+          composer require "drupal/slick:^2.7" --no-update
+          composer require "drupal/blazy:^2.14" --no-update
 
           composer update
           composer exec -- drush updb -y
