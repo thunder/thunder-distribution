@@ -81,7 +81,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_view_mode.search_api_task.token',
 
     // Configs are missing the 'description' key.
-    'core.entity_view_mode.media.slick',
     'core.entity_view_mode.node.diff',
     'core.entity_view_mode.paragraph.preview',
 
@@ -278,7 +277,17 @@ class InstalledConfigurationTest extends ThunderTestBase {
     ],
     'views.view.locked_content' => [
       'display' => [
-        'default' => ['display_options' => ['sorts' => ['created' => ['expose' => ['field_identifier' => TRUE]]]]],
+        'default' => [
+          'display_options' => [
+            'sorts' => ['created' => ['expose' => ['field_identifier' => TRUE]]],
+            'pager' => ['options' => ['pagination_heading_level' => TRUE]],
+          ],
+        ],
+      ],
+    ],
+    'views.view.redirect' => [
+      'display' => [
+        'default' => ['display_options' => ['pager' => ['options' => ['pagination_heading_level' => TRUE]]]],
       ],
     ],
   ];
