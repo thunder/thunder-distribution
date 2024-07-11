@@ -31,13 +31,16 @@ drush updb
 You should at least see the Thunder XXXX schema update. If not, double check that the correct version of Thunder
 is installed, and that `drush updb` did not throw any errors.
 
-In this release, we have removed a couple of modules from the Thunder distribution. If you use one or more of these
-modules you have to require them manually. The following modules have been removed:
+Before you start with the code and database update please add the Slick module and the
+Blazy module to your own composer.json. Both are no longer part of Thunder and can be removed after the update
+was successfully executed.
 
-- [jQuery UI Draggable](https://www.drupal.org/project/jquery_ui_draggable)
-- [Default content](https://www.drupal.org/project/default_content)
+```bash
+composer require drupal/blazy drupal/slick
+```
 
-To require these modules, run the following commands:
+Also, if you have the jquery_ui_draggable or default_content enabled, you have to
+require them own your own, since Thunder removed them from the distribution.
 
 ```bash
 composer require drupal/jquery_ui_draggable

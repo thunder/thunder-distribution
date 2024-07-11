@@ -3,98 +3,24 @@ status: true
 dependencies:
   config:
     - field.field.media.gallery.field_media_images
-    - image.style.gallery
     - media.type.gallery
   module:
     - empty_fields
-    - slick
 id: media.gallery.default
 targetEntityType: media
 bundle: gallery
 mode: default
 content:
   field_media_images:
-    type: slick_media
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      caption:
-        field_copyright: field_copyright
-        field_description: '0'
-        field_expires: '0'
-        field_image: '0'
-        field_tags: '0'
-      optionset: thunder_gallery
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: field_description
-      vanilla: true
-      layout: below
-      view_mode: slick
-      cache: 0
-      skin: classic
-      style: ''
-      background: false
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      responsive_image_style: ''
-      box_style: ''
-      image_style: gallery
-      media_switch: ''
-      ratio: ''
-      thumbnail_style: ''
-      grid: '0'
-      grid_medium: '0'
-      grid_small: '0'
-      breakpoints:
-        xs:
-          width: ''
-          image_style: ''
-        sm:
-          width: ''
-          image_style: ''
-        md:
-          width: ''
-          image_style: ''
-        lg:
-          width: ''
-          image_style: ''
-        xl:
-          width: ''
-          image_style: ''
-      current_view_mode: default
-      fx: ''
-      icon: ''
-      sizes: ''
-      grid_header: ''
-      overridables:
-        arrows: '0'
-        autoplay: '0'
-        dots: '0'
-        draggable: '0'
-        infinite: '0'
-        mouseWheel: '0'
-        randomize: '0'
-        variableWidth: '0'
-      thumbnail: ''
-      optionset_thumbnail: ''
-      skin_thumbnail: ''
-      thumbnail_caption: ''
-      thumbnail_effect: ''
-      thumbnail_position: ''
-      override: false
-      skin_arrows: ''
-      skin_dots: ''
-      use_theme_field: false
-      preserve_keys: false
-      visible_items: 0
+      view_mode: default
+      link: false
     third_party_settings:
       empty_fields:
         handler: ''
-    weight: 0
+    weight: 1
     region: content
 hidden:
   created: true
