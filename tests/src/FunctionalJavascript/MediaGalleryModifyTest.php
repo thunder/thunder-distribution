@@ -107,7 +107,6 @@ JS;
 
     $this->clickSave();
 
-
     // Check that there are 4 images in gallery.
     $this->assertEquals(
       4,
