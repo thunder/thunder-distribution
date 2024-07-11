@@ -18,6 +18,7 @@ dependencies:
     - file
     - filter
     - media
+    - navigation
     - node
     - path
     - responsive_preview

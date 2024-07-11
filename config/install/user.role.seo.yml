@@ -19,6 +19,7 @@ dependencies:
     - filter
     - media
     - metatag
+    - navigation
     - node
     - path
     - redirect
