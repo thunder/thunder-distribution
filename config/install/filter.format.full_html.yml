@@ -2,8 +2,8 @@ langcode: en
 status: true
 dependencies:
   module:
-    1: editor
-    2: linkit
+    - editor
+    - linkit
 name: 'Full HTML'
 format: full_html
 weight: 2
