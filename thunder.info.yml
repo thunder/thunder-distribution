@@ -2,8 +2,8 @@ name: Thunder
 type: profile
 description: 'The Drupal based CMS for professional publishing.'
 project: thunder
-core_version_requirement: ~10.2.4
-version: '7.2.2'
+core_version_requirement: ~10.3.0
+version: '7.3.0'
 
 distribution:
   name: Thunder

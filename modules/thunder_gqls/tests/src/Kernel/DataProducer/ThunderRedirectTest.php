@@ -43,6 +43,7 @@ class ThunderRedirectTest extends GraphQLTestBase {
    */
   public function setUp(): void {
     parent::setUp();
+    $this->installEntitySchema('path_alias');
     $this->installConfig(['redirect']);
     $this->installEntitySchema('redirect');
 
