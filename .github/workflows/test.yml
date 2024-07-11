@@ -11,7 +11,7 @@ on:
 
 env:
   DRUPAL_TESTING_COMPOSER_PROJECT: thunder/thunder-project
-  DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: "dev-TEST-update-to-10.3.x"
+  DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: "^4.0@stable"
   DRUPAL_TESTING_DATABASE_USER: root
   DRUPAL_TESTING_DATABASE_PASSWORD: root
   DRUPAL_TESTING_TEST_DUMP_FILE: site-dump.tar.gz
@@ -50,7 +50,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.1' ]
+        PHP_VERSION: [ '8.1', '8.3' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
@@ -124,7 +124,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        PHP_VERSION: [ '8.1' ]
+        PHP_VERSION: [ '8.3' ]
         CHUNK: [ 1, 2, 3 ]
 
     steps:
@@ -336,7 +336,9 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Install suggested dependencies
-        run: composer require "league/container:^4.2" "consolidation/config:^2.1.2" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: |
+          composer require "league/container:^4.2" "drupal/core-dev:^10.3" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+          composer config allow-plugins.php-http/discovery true --no-plugins --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build

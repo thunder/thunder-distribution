@@ -100,14 +100,16 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     /** @var \Drupal\file\FileInterface $file */
     $file = $media->get($media->getSource()->getConfiguration()['source_field'])->entity;
     $this->assertFileExists($file->getFileUri());
-    $this->getSession()->getPage()->find('css', 'div.gin-sidebar')->clickLink('Delete');
+    $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-actions"] .gin-more-actions__trigger')->click();
+    $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-actions"]')->clickLink('Delete');
     $this->assertSession()->assertWaitOnAjaxRequest();
     $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', '#drupal-modal'));
     $this->assertSession()->fieldNotExists('also_delete_file');
     $this->assertSession()->pageTextContains('This action cannot be undone.The file attached to this media is owned by admin so will be retained.');
     Role::load(static::$defaultUserRole)->grantPermission('delete any file')->save();
     $this->getSession()->reload();
-    $this->getSession()->getPage()->find('css', 'div.gin-sidebar')->clickLink('Delete');
+    $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-actions"] .gin-more-actions__trigger')->click();
+    $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-actions"]')->clickLink('Delete');
     $this->assertSession()->assertWaitOnAjaxRequest();
     $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', '#drupal-modal'));
     $this->assertSession()->fieldExists('also_delete_file')->check();
