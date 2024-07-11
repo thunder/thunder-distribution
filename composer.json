@@ -97,7 +97,7 @@
         "drupal/update_helper": "^2.0||^3.0.3||^4.0",
         "drupal/search_api": "^1.29",
         "drupal/views_bulk_edit": "^2.5",
-        "drupal/views_bulk_operations": "^4.0",
+        "drupal/views_bulk_operations": "^4.2.7",
         "drupal/vgwort": "^2.0@beta",
         "drupal/xymatic": "^1.0@beta",
         "npm-asset/dropzone": "^5.5.1",
