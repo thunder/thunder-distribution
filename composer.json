@@ -40,6 +40,12 @@
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
+            },
+            "drupal/gin_toolbar": {
+                "Secondary toolbar does not show on the front end when core navigation enabled": "https://www.drupal.org/files/issues/2024-07-10/3460333-gin-toolbar-2.patch"
+            },
+            "drupal/gin": {
+                "Secondary toolbar does not show on the front end when core navigation enabled": "https://git.drupalcode.org/project/gin/-/merge_requests/464.diff"
             }
         }
     },
@@ -65,7 +71,7 @@
         "drupal/field_group": "^3.4",
         "drupal/focal_point": "^2.1",
         "drupal/facets": "^2.0.6",
-        "drupal/gin": "3.0-rc11",
+        "drupal/gin": "3.0-rc13",
         "drupal/gin_toolbar": "^1.0-rc6",
         "drupal/graphql": "^4.7",
         "drupal/inline_entity_form": "^1.0-rc14",
