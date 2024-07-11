@@ -93,7 +93,7 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
     $this->assertEquals(
       2,
       $this->getSession()->evaluateScript('document.querySelectorAll("div.field--name-field-media-images div.field__item img").length'),
-      'There should be five images shown in frontend.'
+      'There should be two images shown in frontend.'
     );
 
     // Check Quote paragraph.
