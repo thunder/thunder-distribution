@@ -136,6 +136,7 @@ display:
         type: mini
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 24
           total_pages: null
           id: 0
@@ -150,7 +151,6 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:
@@ -466,29 +466,7 @@ display:
         - url.query_args
         - user
         - user.permissions
-      tags:
-        - 'config:core.entity_view_display.media.gallery.default'
-        - 'config:core.entity_view_display.media.gallery.media_library'
-        - 'config:core.entity_view_display.media.gallery.paragraph_preview'
-        - 'config:core.entity_view_display.media.image.default'
-        - 'config:core.entity_view_display.media.image.media_library'
-        - 'config:core.entity_view_display.media.image.paragraph_preview'
-        - 'config:core.entity_view_display.media.image.slick'
-        - 'config:core.entity_view_display.media.image.thumbnail'
-        - 'config:core.entity_view_display.media.instagram.default'
-        - 'config:core.entity_view_display.media.instagram.media_library'
-        - 'config:core.entity_view_display.media.instagram.paragraph_preview'
-        - 'config:core.entity_view_display.media.instagram.thumbnail'
-        - 'config:core.entity_view_display.media.pinterest.default'
-        - 'config:core.entity_view_display.media.pinterest.media_library'
-        - 'config:core.entity_view_display.media.pinterest.paragraph_preview'
-        - 'config:core.entity_view_display.media.twitter.default'
-        - 'config:core.entity_view_display.media.twitter.media_library'
-        - 'config:core.entity_view_display.media.twitter.paragraph_preview'
-        - 'config:core.entity_view_display.media.video.default'
-        - 'config:core.entity_view_display.media.video.media_library'
-        - 'config:core.entity_view_display.media.video.paragraph_preview'
-        - 'config:core.entity_view_display.media.video.thumbnail'
+      tags: {  }
   page:
     id: page
     display_title: Page
@@ -784,29 +762,7 @@ display:
         - url.query_args
         - user
         - user.permissions
-      tags:
-        - 'config:core.entity_view_display.media.gallery.default'
-        - 'config:core.entity_view_display.media.gallery.media_library'
-        - 'config:core.entity_view_display.media.gallery.paragraph_preview'
-        - 'config:core.entity_view_display.media.image.default'
-        - 'config:core.entity_view_display.media.image.media_library'
-        - 'config:core.entity_view_display.media.image.paragraph_preview'
-        - 'config:core.entity_view_display.media.image.slick'
-        - 'config:core.entity_view_display.media.image.thumbnail'
-        - 'config:core.entity_view_display.media.instagram.default'
-        - 'config:core.entity_view_display.media.instagram.media_library'
-        - 'config:core.entity_view_display.media.instagram.paragraph_preview'
-        - 'config:core.entity_view_display.media.instagram.thumbnail'
-        - 'config:core.entity_view_display.media.pinterest.default'
-        - 'config:core.entity_view_display.media.pinterest.media_library'
-        - 'config:core.entity_view_display.media.pinterest.paragraph_preview'
-        - 'config:core.entity_view_display.media.twitter.default'
-        - 'config:core.entity_view_display.media.twitter.media_library'
-        - 'config:core.entity_view_display.media.twitter.paragraph_preview'
-        - 'config:core.entity_view_display.media.video.default'
-        - 'config:core.entity_view_display.media.video.media_library'
-        - 'config:core.entity_view_display.media.video.paragraph_preview'
-        - 'config:core.entity_view_display.media.video.thumbnail'
+      tags: {  }
   widget:
     id: widget
     display_title: Widget
@@ -1137,29 +1093,7 @@ display:
         - url
         - url.query_args
         - user.permissions
-      tags:
-        - 'config:core.entity_view_display.media.gallery.default'
-        - 'config:core.entity_view_display.media.gallery.media_library'
-        - 'config:core.entity_view_display.media.gallery.paragraph_preview'
-        - 'config:core.entity_view_display.media.image.default'
-        - 'config:core.entity_view_display.media.image.media_library'
-        - 'config:core.entity_view_display.media.image.paragraph_preview'
-        - 'config:core.entity_view_display.media.image.slick'
-        - 'config:core.entity_view_display.media.image.thumbnail'
-        - 'config:core.entity_view_display.media.instagram.default'
-        - 'config:core.entity_view_display.media.instagram.media_library'
-        - 'config:core.entity_view_display.media.instagram.paragraph_preview'
-        - 'config:core.entity_view_display.media.instagram.thumbnail'
-        - 'config:core.entity_view_display.media.pinterest.default'
-        - 'config:core.entity_view_display.media.pinterest.media_library'
-        - 'config:core.entity_view_display.media.pinterest.paragraph_preview'
-        - 'config:core.entity_view_display.media.twitter.default'
-        - 'config:core.entity_view_display.media.twitter.media_library'
-        - 'config:core.entity_view_display.media.twitter.paragraph_preview'
-        - 'config:core.entity_view_display.media.video.default'
-        - 'config:core.entity_view_display.media.video.media_library'
-        - 'config:core.entity_view_display.media.video.paragraph_preview'
-        - 'config:core.entity_view_display.media.video.thumbnail'
+      tags: {  }
   widget_table:
     id: widget_table
     display_title: 'Widget (table)'
