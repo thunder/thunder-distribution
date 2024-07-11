@@ -229,7 +229,7 @@ jobs:
 
       - name: Fix the old install
         run: |
-          composer upgrade caxy/php-htmldiff
+          composer upgrade league/container
         working-directory: /tmp/test/thunder/install
         env:
           COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
