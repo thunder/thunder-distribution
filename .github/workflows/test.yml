@@ -31,7 +31,7 @@ env:
   SKIP_TEST_CLEANUP: true
   # The following variable set the version that the upgrade test starts with.
   DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION: 4.1.0
-  DRUPAL_TESTING_UPGRADE_DRUSH_VERSION: 12.1.0
+  DRUPAL_TESTING_UPGRADE_DRUSH_VERSION: 12.4.3
   DRUPAL_TESTING_UPGRADE_VERSION: 7.3.0
 
 jobs:
@@ -249,12 +249,6 @@ jobs:
           composer remove thunder/thunder-distribution --no-update
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
-          composer require "drupal/ckeditor" --no-update
-          composer require "drupal/seven" --no-update
-          composer require "drupal/entity_browser" --no-update
-          composer require "drupal/thunder_admin" --no-update
-          composer require "drupal/shariff" --no-update
-          composer require "drupal/ctools" --no-update
           composer require "drupal/core-dev:~10.0.0" --no-update
 
           composer update
