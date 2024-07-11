@@ -81,7 +81,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_view_mode.search_api_task.token',
 
     // Configs are missing the 'description' key.
-    'core.entity_view_mode.media.slick',
     'core.entity_view_mode.node.diff',
     'core.entity_view_mode.paragraph.preview',
 

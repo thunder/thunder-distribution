@@ -255,6 +255,8 @@ jobs:
           composer require "drupal/thunder_admin" --no-update
           composer require "drupal/shariff" --no-update
           composer require "drupal/ctools" --no-update
+          composer require "drupal/slick" --no-update
+          composer require "drupal/blazy" --no-update
           composer require "drupal/core-dev:~10.0.0" --no-update
 
           composer update
