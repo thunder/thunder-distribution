@@ -23,15 +23,6 @@ trait ThunderTestTrait {
   /**
    * {@inheritdoc}
    */
-  protected function installParameters(): array {
-    $parameters = parent::installParameters();
-    $parameters['forms']['thunder_module_configure_form'] = ['install_modules_thunder_demo' => NULL];
-    return $parameters;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function installDrupal(): void {
     $this->initUserSession();
     $this->prepareSettings();

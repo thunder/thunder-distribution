@@ -50,9 +50,6 @@ Public License to further enhance Thunder.
 * **Mobile Friendly**: With the Thunder installation, you get a responsive theme for frontend and backend. When writing
   an article, you can check how your text will look on different smartphones and tablets with the help of the device
   preview.
-* **Demo Content and Guided Tour**: We added demo content and a guided tour to make it easier for newcomers to
-  understand how Thunder works. Step by step, we explain how to add an article, how to edit an article, or how to add
-  and sort channels.
 * **Flexible System**: With Thunder, you get a system with a very high scalability. It's extendable with more than 2500
   modules to fit every need. Plus, it's themeable.
 * **Big Drupal community**: Benefit from an active community with more than 100.000 user actively contributing and more
