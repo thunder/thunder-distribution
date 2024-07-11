@@ -87,7 +87,6 @@
         "drupal/paragraphs_paste": "^2.0-beta3",
         "drupal/password_policy": "^4.0",
         "drupal/pathauto": "^1.11",
-        "drupal/responsive_preview": "^2.1",
         "drupal/redirect": "^1.7",
         "drupal/scheduler": "^2.0.2",
         "drupal/scheduler_content_moderation_integration": "^2.0",

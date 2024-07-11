@@ -20,7 +20,6 @@ class ModuleUninstallTest extends ThunderTestBase {
     ['diff'],
     ['content_lock'],
     ['access_unpublished'],
-    ['responsive_preview'],
     ['length_indicator'],
     ['redirect'],
     ['simple_sitemap'],

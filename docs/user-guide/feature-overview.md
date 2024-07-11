@@ -127,10 +127,6 @@ system that uses tokens which the administrator can change.\
 **Redirect**: The Redirect module automatically adds redirects if the URL of an article has been changed.\
 [https://www.drupal.org/project/redirect](https://www.drupal.org/project/redirect)
 
-**Responsive Preview**: The Responsive Preview module provides editors with a quick way to preview how their site's
-pages will appear at narrow and wide width dimensions on different devices.\
-[https://www.drupal.org/project/responsive_preview](https://www.drupal.org/project/responsive_preview)
-
 **Scheduler**: Scheduler gives content editors the ability to schedule nodes to be published and unpublished at
 specified dates and times in the future. Dates can be entered either as plain text or with calendar popups.\
 [https://www.drupal.org/project/scheduler](https://www.drupal.org/project/scheduler)
