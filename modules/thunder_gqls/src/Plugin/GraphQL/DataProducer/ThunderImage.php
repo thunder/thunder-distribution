@@ -35,36 +35,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The rendering service.
-   *
-   * @var \Drupal\Core\Render\RendererInterface
-   */
-  protected $renderer;
-
-  /**
-   * The image factory.
-   *
-   * @var \Drupal\Core\Image\ImageFactory
-   */
-  protected $imageFactory;
-
-  /**
-   * The file URL generator service.
-   *
-   * @var \Drupal\Core\File\FileUrlGeneratorInterface
-   */
-  protected $fileUrlGenerator;
-
-  /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition): self {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     return new static(
       $configuration,
-      $pluginId,
-      $pluginDefinition,
+      $plugin_id,
+      $plugin_definition,
       $container->get('renderer'),
       $container->get('image.factory'),
       $container->get('file_url_generator')
@@ -76,9 +55,9 @@ class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPlu
    *
    * @param array $configuration
    *   The plugin configuration array.
-   * @param string $pluginId
+   * @param string $plugin_id
    *   The plugin id.
-   * @param mixed $pluginDefinition
+   * @param mixed $plugin_definition
    *   The plugin definition.
    * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer service.
@@ -91,16 +70,13 @@ class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPlu
    */
   public function __construct(
     array $configuration,
-    $pluginId,
-    $pluginDefinition,
-    RendererInterface $renderer,
-    ImageFactory $imageFactory,
-    FileUrlGeneratorInterface $fileUrlGenerator,
+    $plugin_id,
+    $plugin_definition,
+    protected readonly RendererInterface $renderer,
+    protected readonly ImageFactory $imageFactory,
+    protected readonly FileUrlGeneratorInterface $fileUrlGenerator,
   ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->renderer = $renderer;
-    $this->imageFactory = $imageFactory;
-    $this->fileUrlGenerator = $fileUrlGenerator;
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
   /**

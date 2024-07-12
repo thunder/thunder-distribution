@@ -19,7 +19,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
    *
    * @var string
    */
-  protected static $defaultUserRole = 'administrator';
+  protected static string $defaultUserRole = 'administrator';
 
   /**
    * Test channel creation, tagging of articles and channel page with articles.

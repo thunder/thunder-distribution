@@ -40,7 +40,7 @@ class ParagraphsPasteTest extends ThunderJavascriptTestBase {
    *
    * @var string
    */
-  protected static $paragraphsField = 'field_paragraphs';
+  protected static string $paragraphsField = 'field_paragraphs';
 
   /**
    * Test paste functionality.

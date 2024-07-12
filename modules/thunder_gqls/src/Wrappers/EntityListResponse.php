@@ -59,7 +59,7 @@ class EntityListResponse implements EntityListResponseInterface, ContainerInject
    * @param \Drupal\Core\Entity\Query\QueryInterface $query
    *   The query.
    */
-  public function setQuery(QueryInterface $query): EntityListResponse {
+  public function setQuery(protected QueryInterface $query): EntityListResponse {
     $this->query = $query;
     return $this;
   }
@@ -82,7 +82,7 @@ class EntityListResponse implements EntityListResponseInterface, ContainerInject
    * @return array|\GraphQL\Deferred
    *   The entity list.
    */
-  public function items() {
+  public function items(): array|Deferred {
     $result = $this->query->execute();
     if (empty($result)) {
       return [];

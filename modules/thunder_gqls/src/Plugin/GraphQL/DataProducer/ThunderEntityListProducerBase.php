@@ -62,23 +62,23 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
    *
    * @param array $configuration
    *   The plugin configuration array.
-   * @param string $pluginId
+   * @param string $plugin_id
    *   The plugin id.
-   * @param array $pluginDefinition
+   * @param array $plugin_definition
    *   The plugin definition array.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager service.
-   * @param \Drupal\Core\Session\AccountInterface $currentUser
+   * @param \Drupal\Core\Session\AccountInterface $current_user
    *   The current user.
    */
   public function __construct(
     array $configuration,
-    string $pluginId,
-    array $pluginDefinition,
-    EntityTypeManagerInterface $entityTypeManager,
-    AccountInterface $currentUser,
+    string $plugin_id,
+    array $plugin_definition,
+    protected readonly EntityTypeManagerInterface $entityTypeManager,
+    protected readonly AccountInterface $currentUser,
   ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->setEntityTypeManager($entityTypeManager);
     $this->setCurrentUser($currentUser);
   }
@@ -191,7 +191,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
         if (!empty($sort['field'])) {
           if (!empty($sort['direction']) && strtolower(
               $sort['direction']
-            ) == 'desc') {
+            ) === 'desc') {
             $direction = 'DESC';
           }
           else {
