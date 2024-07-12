@@ -50,14 +50,12 @@
         "drupal/admin_toolbar": "^3.4",
         "drupal/autofill": "^1.1",
         "drupal/autosave_form": "^1.6",
-        "drupal/blazy": "^2.14",
         "drupal/checklistapi": "^2.1",
         "drupal/core-recommended": "~10.3.0@stable",
         "drupal/config_selector": "^2.1",
         "drupal/config_update": "^1.7 || ^2.0",
         "drupal/content_lock": "^2.1",
         "drupal/crop": "^2.2",
-        "drupal/default_content": "^1.0-alpha7||^2.0@ALPHA",
         "drupal/diff": "1.7",
         "drupal/dropzonejs": "^2.8",
         "drupal/empty_fields": "^1.0-alpha1",
@@ -94,7 +92,6 @@
         "drupal/select2": "^1.7",
         "drupal/search_api_mark_outdated": "^1.0",
         "drupal/simple_sitemap": "^4.1.6",
-        "drupal/slick": "^2.7",
         "drupal/token": "^1.7",
         "drupal/update_helper": "^2.0||^3.0.3||^4.0",
         "drupal/search_api": "^1.29",
@@ -108,9 +105,7 @@
         "npm-asset/slick-carousel": "^1.8",
         "npm-asset/select2": "^4.0.7",
         "caxy/php-htmldiff": "^0.1.14",
-        "webonyx/graphql-php": "^14.11.8",
-        "drupal/jquery_ui": "^1.6",
-        "drupal/jquery_ui_draggable": "^2.1"
+        "webonyx/graphql-php": "^14.11.8"
     },
     "suggest": {
         "drupal/search_api_solr": "Provides a Apache Solr backend for the Search API module"

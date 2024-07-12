@@ -49,7 +49,6 @@ install:
   - admin_toolbar:admin_toolbar_links_access_filter
   - autosave_form:autosave_form
   - autofill:autofill
-  - blazy:blazy
   - content_lock:content_lock
   - diff:diff
   - dropzonejs:dropzonejs
@@ -82,7 +81,6 @@ install:
   - schema_metatag:schema_article
   - select2:select2
   - simple_sitemap:simple_sitemap
-  - slick:slick
   - update_helper_checklist:update_helper_checklist
   - views_bulk_edit:views_bulk_edit
   # thunder
