@@ -92,13 +92,13 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
    *   The current main request.
    * @param string $url
    *   The url to run the subrequest on.
-   * @param \Drupal\graphql\GraphQL\Execution\FieldContext $fieldContext
+   * @param \Drupal\graphql\GraphQL\Execution\FieldContext $field
    *   The field context.
    *
    * @return \Symfony\Component\HttpFoundation\Request
    *   The request object.
    */
-  protected function createRequest(Request $current, string $url, FieldContext $fieldContext): Request {
+  protected function createRequest(Request $current, string $url, FieldContext $field): Request {
     $request = Request::create(
       $url,
       'GET',
@@ -108,7 +108,7 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
       $current->server->all()
     );
 
-    $request->attributes->set('_graphql_subrequest', function (CacheableMetadata $cacheableMetadata) use ($fieldContext) {
+    $request->attributes->set('_graphql_subrequest', function (CacheableMetadata $cacheableMetadata) use ($field) {
       if (!method_exists($this, 'resolve')) {
         throw new \LogicException('Missing data producer resolve method.');
       }
@@ -119,12 +119,12 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
         [$this, 'resolve'],
         array_values(array_merge($contextValues, [
           $cacheableMetadata,
-          $fieldContext,
+          $field,
         ]))
       ));
 
       if (!$context->isEmpty()) {
-        $fieldContext->addCacheableDependency($context->pop());
+        $field->addCacheableDependency($context->pop());
       }
 
       return $result ?? '';
