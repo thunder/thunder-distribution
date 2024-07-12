@@ -20,7 +20,6 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
   $moduleInstaller->install([
     'media_library_media_modify',
     'gin_toolbar',
-    'jquery_ui',
     'ckeditor5',
   ]);
 
