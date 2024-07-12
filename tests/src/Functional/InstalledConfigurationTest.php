@@ -46,7 +46,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *
    * @var array
    */
-  protected static $ignoreCoreConfigs = [
+  protected static array $ignoreCoreConfigs = [
     'checklistapi.progress.update_helper_checklist',
     'system.site',
     'core.extension',
@@ -81,7 +81,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_view_mode.search_api_task.token',
 
     // Configs are missing the 'description' key.
-    'core.entity_view_mode.media.slick',
     'core.entity_view_mode.node.diff',
     'core.entity_view_mode.paragraph.preview',
 
@@ -105,7 +104,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *
    * @var array
    */
-  protected static $ignoreConfigKeys = [
+  protected static array $ignoreConfigKeys = [
     // It's not exported in Yaml, so that new key is generated.
     'scheduler.settings' => [
       'lightweight_cron_access_key' => TRUE,
@@ -298,7 +297,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *
    * @var string
    */
-  public const CONFIG_PATH_SEPARATOR = '::';
+  public const string CONFIG_PATH_SEPARATOR = '::';
 
   /**
    * Ignore configuration list values. Path to key is separated by '::'.
@@ -315,7 +314,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *
    * @todo use this functionality for more strict "dependencies" checking.
    */
-  protected static $ignoreConfigListValues = [
+  protected static array $ignoreConfigListValues = [
     'user.role.editor' => [
       'permissions' => [
         'access tour',
@@ -350,7 +349,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *
    * @var array
    */
-  protected static $ignoreConfigs = [];
+  protected static array $ignoreConfigs = [];
 
   /**
    * Set default theme for test.

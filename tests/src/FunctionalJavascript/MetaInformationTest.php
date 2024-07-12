@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Drupal\simple_sitemap\Manager\Generator;
 use Drupal\simple_sitemap\Queue\QueueWorker;
 use Drupal\Tests\Traits\Core\CronRunTrait;
 
@@ -25,14 +26,14 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    *
    * @var string
    */
-  protected static $defaultUserRole = 'administrator';
+  protected static string $defaultUserRole = 'administrator';
 
   /**
    * Meta tag configuration that will be set for Global meta tags.
    *
    * @var array
    */
-  protected static $globalMetaTags = [
+  protected static array $globalMetaTags = [
     'basic title' => 'Global Title',
     'basic keywords' => 'Thunder,CMS,Burda',
     'basic abstract' => '[random]',
@@ -44,7 +45,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    *
    * @var array
    */
-  protected static $contentMetaTags = [
+  protected static array $contentMetaTags = [
     'basic title' => '[node:title]',
     'basic abstract' => '[random]',
   ];
@@ -54,7 +55,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    *
    * @var array
    */
-  protected static $articleMetaTags = [
+  protected static array $articleMetaTags = [
     'basic title' => 'Test [node:field_teaser_text]',
     'basic description' => '[random]',
     'advanced robots' => 'index, follow',
@@ -85,7 +86,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    *
    * @var array
    */
-  protected static $customMetaTags = [
+  protected static array $customMetaTags = [
     'basic title' => 'Custom [node:field_teaser_text]',
     'basic description' => '[random]',
     'advanced robots' => 'follow',
@@ -98,7 +99,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    *
    * @var array
    */
-  protected static $tokens = [
+  protected static array $tokens = [
     '[node:field_seo_title]' => 'Test SEO Title',
     '[node:field_teaser_text]' => 'Test Teaser Text',
     '[node:title]' => 'Test Note Title',
@@ -115,7 +116,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    *
    * @var \Drupal\simple_sitemap\Manager\Generator
    */
-  protected $sitemapGenerator;
+  protected Generator $sitemapGenerator;
 
   /**
    * {@inheritdoc}

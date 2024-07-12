@@ -2,6 +2,9 @@
 
 namespace Drupal\Tests\thunder_gqls\Functional;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+
 /**
  * Test cache invalidation of GraphQL requests.
  *
@@ -14,14 +17,14 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
    *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
-  protected $configFactory;
+  protected ConfigFactoryInterface $configFactory;
 
   /**
    * The entity type manager.
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
    * {@inheritdoc}

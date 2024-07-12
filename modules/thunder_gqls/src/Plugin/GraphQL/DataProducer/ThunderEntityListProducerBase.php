@@ -16,21 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class ThunderEntityListProducerBase extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
-  public const MAX_ITEMS = 100;
-
-  /**
-   * The entity type manager service.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManager
-   */
-  protected $entityTypeManager;
-
-  /**
-   * The current user.
-   *
-   * @var \Drupal\Core\Session\AccountInterface
-   */
-  protected $currentUser;
+  public const int MAX_ITEMS = 100;
 
   /**
    * {@inheritdoc}
@@ -50,25 +36,23 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
    *
    * @param array $configuration
    *   The plugin configuration array.
-   * @param string $pluginId
+   * @param string $plugin_id
    *   The plugin id.
-   * @param array $pluginDefinition
+   * @param array $plugin_definition
    *   The plugin definition array.
    * @param \Drupal\Core\Entity\EntityTypeManager $entityTypeManager
    *   The entity type manager service.
-   * @param \Drupal\Core\Session\AccountInterface $current_user
+   * @param \Drupal\Core\Session\AccountInterface $currentUser
    *   The current user.
    */
   public function __construct(
     array $configuration,
-    string $pluginId,
-    array $pluginDefinition,
-    EntityTypeManager $entityTypeManager,
-    AccountInterface $current_user,
+    string $plugin_id,
+    array $plugin_definition,
+    protected readonly EntityTypeManager $entityTypeManager,
+    protected readonly AccountInterface $currentUser,
   ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->entityTypeManager = $entityTypeManager;
-    $this->currentUser = $current_user;
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
   /**
@@ -149,7 +133,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
         if (!empty($sort['field'])) {
           if (!empty($sort['direction']) && strtolower(
               $sort['direction']
-            ) == 'desc') {
+            ) === 'desc') {
             $direction = 'DESC';
           }
           else {

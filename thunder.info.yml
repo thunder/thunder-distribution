@@ -48,7 +48,6 @@ install:
   - access_unpublished:access_unpublished
   - autosave_form:autosave_form
   - autofill:autofill
-  - blazy:blazy
   - content_lock:content_lock
   - diff:diff
   - dropzonejs:dropzonejs
@@ -81,7 +80,6 @@ install:
   - schema_metatag:schema_article
   - select2:select2
   - simple_sitemap:simple_sitemap
-  - slick:slick
   - responsive_preview:responsive_preview
   - update_helper_checklist:update_helper_checklist
   - views_bulk_edit:views_bulk_edit
