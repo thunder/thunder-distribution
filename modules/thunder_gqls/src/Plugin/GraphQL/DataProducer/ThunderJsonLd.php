@@ -35,22 +35,22 @@ class ThunderJsonLd extends ThunderEntitySubRequestBase {
    *
    * @var \Drupal\metatag\MetatagManager|null
    */
-  protected $metatagManager;
+  protected ?MetatagManager $metatagManager;
 
   /**
    * The module handler.
    *
    * @var \Drupal\Core\Extension\ModuleHandlerInterface
    */
-  protected $moduleHandler;
+  protected ModuleHandlerInterface $moduleHandler;
 
   /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
-    $producer = parent::create($container, $configuration, $pluginId, $pluginDefinition);
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    $producer = parent::create($container, $configuration, $plugin_id, $plugin_definition);
     $producer->setMetatagManager($container->get('metatag.manager', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     $producer->setModuleHandler($container->get('module_handler'));
     return $producer;

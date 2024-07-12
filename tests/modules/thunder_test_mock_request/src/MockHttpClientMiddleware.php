@@ -6,6 +6,7 @@ use Drupal\Core\State\StateInterface;
 use GuzzleHttp\Promise\Create;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -18,14 +19,7 @@ class MockHttpClientMiddleware {
    *
    * @var \Symfony\Component\HttpFoundation\Request
    */
-  protected $request;
-
-  /**
-   * The state service.
-   *
-   * @var \Drupal\Core\State\StateInterface
-   */
-  protected $state;
+  protected Request $request;
 
   /**
    * MockHttpClientMiddleware constructor.
@@ -35,9 +29,8 @@ class MockHttpClientMiddleware {
    * @param \Drupal\Core\State\StateInterface $state
    *   The state service.
    */
-  public function __construct(RequestStack $requestStack, StateInterface $state) {
+  public function __construct(RequestStack $requestStack, protected readonly StateInterface $state) {
     $this->request = $requestStack->getCurrentRequest();
-    $this->state = $state;
   }
 
   /**

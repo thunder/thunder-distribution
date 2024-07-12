@@ -27,7 +27,7 @@ class ContentTranslationTest extends ThunderTestBase {
    *
    * @var \Drupal\language\ConfigurableLanguageInterface[]
    */
-  protected $languages = [];
+  protected array|ConfigurableLanguage $languages = [];
 
   /**
    * {@inheritdoc}

@@ -2,8 +2,11 @@
 
 namespace Drupal\thunder_gqls\Traits;
 
+use Drupal\graphql\GraphQL\Resolver\Composite;
 use Drupal\graphql\GraphQL\Resolver\ResolverInterface;
 use Drupal\graphql\GraphQL\ResolverBuilder;
+use Drupal\graphql\GraphQL\ResolverRegistryInterface;
+use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerProxy;
 
 /**
  * Helper functions for field resolvers.
@@ -15,14 +18,14 @@ trait ResolverHelperTrait {
    *
    * @var \Drupal\graphql\GraphQL\ResolverBuilder
    */
-  protected $builder;
+  protected ResolverBuilder $builder;
 
   /**
    * ResolverRegistryInterface.
    *
    * @var \Drupal\graphql\GraphQL\ResolverRegistryInterface
    */
-  protected $registry;
+  protected ResolverRegistryInterface $registry;
 
   /**
    * Add field resolver to registry, if it does not already exist.
@@ -60,7 +63,7 @@ trait ResolverHelperTrait {
    * @return \Drupal\graphql\GraphQL\Resolver\Composite
    *   The field data producer.
    */
-  public function fromEntityReference(string $field, ResolverInterface $entity = NULL, bool $multiValue = TRUE) {
+  public function fromEntityReference(string $field, ResolverInterface $entity = NULL, bool $multiValue = TRUE): Composite {
     return $this->builder->compose(
       $this->builder->produce('entity_reference')
         ->map('field', $this->builder->fromValue($field))
@@ -85,7 +88,7 @@ trait ResolverHelperTrait {
    * @return \Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerProxy
    *   The field data producer.
    */
-  public function fromEntityReferenceRevisions(string $field, $entity = NULL) {
+  public function fromEntityReferenceRevisions(string $field, ?ResolverInterface $entity = NULL): DataProducerProxy {
     return $this->builder->produce('entity_reference_revisions')
       ->map('field', $this->builder->fromValue($field))
       ->map('entity', $entity ?: $this->builder->fromParent())
@@ -117,7 +120,7 @@ trait ResolverHelperTrait {
    * @return \Drupal\graphql\GraphQL\Resolver\ResolverInterface
    *   The resolved entity.
    */
-  public function fromRoute(ResolverInterface $path) {
+  public function fromRoute(ResolverInterface $path): ResolverInterface {
     return $this->builder->compose(
       $this->builder->produce('route_load')
         ->map('path', $path),
@@ -138,7 +141,7 @@ trait ResolverHelperTrait {
    * @return string
    *   Returns the mapped bundle name.
    */
-  protected function mapBundleToSchemaName(string $bundleName) {
+  protected function mapBundleToSchemaName(string $bundleName): string {
     return str_replace('_', '', ucwords($bundleName, '_'));
   }
 

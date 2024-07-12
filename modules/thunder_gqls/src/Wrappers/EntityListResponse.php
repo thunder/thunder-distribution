@@ -8,14 +8,7 @@ use GraphQL\Deferred;
 /**
  * The thunder entity list response class.
  */
-class EntityListResponse implements EntityListResponseInterface {
-
-  /**
-   * The query interface.
-   *
-   * @var \Drupal\Core\Entity\Query\QueryInterface
-   */
-  protected $query;
+readonly class EntityListResponse implements EntityListResponseInterface {
 
   /**
    * EntityListResponse constructor.
@@ -23,8 +16,7 @@ class EntityListResponse implements EntityListResponseInterface {
    * @param \Drupal\Core\Entity\Query\QueryInterface $query
    *   The query interface.
    */
-  public function __construct(QueryInterface $query) {
-    $this->query = $query;
+  public function __construct(protected QueryInterface $query) {
   }
 
   /**
@@ -36,7 +28,7 @@ class EntityListResponse implements EntityListResponseInterface {
   public function total(): int {
     $query = clone $this->query;
     $query->range(NULL, NULL)->count();
-    return intval($query->execute());
+    return (int) $query->execute();
   }
 
   /**
@@ -45,7 +37,7 @@ class EntityListResponse implements EntityListResponseInterface {
    * @return array|\GraphQL\Deferred
    *   The entity list.
    */
-  public function items() {
+  public function items(): array|Deferred {
     $result = $this->query->execute();
     if (empty($result)) {
       return [];

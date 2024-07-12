@@ -24,14 +24,14 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
    *
    * @var \Drupal\graphql\Plugin\DataProducerPluginManager
    */
-  protected $dataProducerManager;
+  protected DataProducerPluginManager $dataProducerManager;
 
   /**
    * The entity type manager service.
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
    * {@inheritdoc}

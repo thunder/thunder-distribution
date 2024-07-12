@@ -4,6 +4,7 @@ namespace Drupal\Tests\thunder\Kernel\Integration;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 use Drupal\Tests\thunder\Traits\ThunderKernelTestTrait;
 
 /**
@@ -20,7 +21,7 @@ class MetatagTest extends KernelTestBase {
    *
    * @var \Drupal\node\NodeInterface
    */
-  protected $node;
+  protected NodeInterface $node;
 
   /**
    * {@inheritdoc}
