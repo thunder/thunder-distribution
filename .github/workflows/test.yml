@@ -254,6 +254,7 @@ jobs:
           composer require "drupal/core-dev:~10.3.0" --no-update
 
           composer update
+          composer install
           composer exec -- drush updb -y
 
           cd docroot

@@ -39,10 +39,11 @@ was successfully executed.
 composer require drupal/blazy drupal/slick
 ```
 
-Also, if you have the jquery_ui_draggable or default_content enabled, you have to
+Also, if you have jquery_ui, jquery_ui_draggable or default_content enabled, you have to
 require them own your own, since Thunder removed them from the distribution.
 
 ```bash
+composer require drupal/jquery_ui
 composer require drupal/jquery_ui_draggable
 composer require drupal/default_content
 ```
