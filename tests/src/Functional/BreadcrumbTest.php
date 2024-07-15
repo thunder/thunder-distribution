@@ -11,8 +11,6 @@ use Drupal\Tests\system\Functional\Menu\AssertBreadcrumbTrait;
  * @group Thunder
  */
 class BreadcrumbTest extends ThunderTestBase {
-
-
   use AssertBreadcrumbTrait;
 
   /**

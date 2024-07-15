@@ -10,6 +10,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\taxonomy\TermStorageInterface;
 
 /**
  * Class to define the menu_link breadcrumb builder.
@@ -18,67 +19,11 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   use StringTranslationTrait;
 
   /**
-   * The router request context.
-   *
-   * @var \Drupal\Core\Routing\RequestContext
-   */
-  protected $context;
-
-  /**
-   * The menu link access service.
-   *
-   * @var \Drupal\Core\Access\AccessManagerInterface
-   */
-  protected $accessManager;
-
-  /**
-   * The dynamic router service.
-   *
-   * @var \Symfony\Component\Routing\Matcher\RequestMatcherInterface
-   */
-  protected $router;
-
-  /**
-   * The dynamic router service.
-   *
-   * @var \Drupal\Core\PathProcessor\InboundPathProcessorInterface
-   */
-  protected $pathProcessor;
-
-  /**
-   * Site configFactory object.
-   *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
-   */
-  protected $configFactory;
-
-  /**
-   * The title resolver.
-   *
-   * @var \Drupal\Core\Controller\TitleResolverInterface
-   */
-  protected $titleResolver;
-
-  /**
-   * The current user object.
-   *
-   * @var \Drupal\Core\Session\AccountInterface
-   */
-  protected $currentUser;
-
-  /**
-   * The entity repository service.
-   *
-   * @var \Drupal\Core\Entity\EntityRepositoryInterface
-   */
-  protected $entityRepository;
-
-  /**
    * The taxonomy storage.
    *
    * @var \Drupal\taxonomy\TermStorageInterface
    */
-  protected $termStorage;
+  protected TermStorageInterface $termStorage;
 
   /**
    * Constructs the ThunderArticleBreadcrumbBuilder.
@@ -93,10 +38,8 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, EntityRepositoryInterface $entityRepository, ConfigFactoryInterface $configFactory) {
-    $this->entityRepository = $entityRepository;
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, protected readonly EntityRepositoryInterface $entityRepository, protected readonly ConfigFactoryInterface $configFactory) {
     $this->termStorage = $entityTypeManager->getStorage('taxonomy_term');
-    $this->configFactory = $configFactory;
   }
 
   /**
@@ -106,7 +49,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     // This breadcrumb apply only for all articles.
     $parameters = $route_match->getParameters()->all();
     if (($route_match->getRouteName() === 'entity.node.canonical') && is_object($parameters['node'])) {
-      return $parameters['node']->getType() == 'article';
+      return $parameters['node']->getType() === 'article';
     }
     return FALSE;
   }
@@ -125,7 +68,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
     // Add all parent forums to breadcrumbs.
     /** @var \Drupal\taxonomy\TermInterface|NULL $term */
-    $term = !empty($node->field_channel) ? $node->field_channel->entity : NULL;
+    $term = $node->field_channel->entity ?? NULL;
 
     $links = [];
     if ($term) {
@@ -139,7 +82,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
         $links[] = Link::createFromRoute($term->getName(), 'entity.taxonomy_term.canonical', ['taxonomy_term' => $term->id()]);
       }
     }
-    if (!$links || '/' . $links[0]->getUrl()->getInternalPath() != $this->configFactory->get('system.site')->get('page.front')) {
+    if (!$links || '/' . $links[0]->getUrl()->getInternalPath() !== $this->configFactory->get('system.site')->get('page.front')) {
       array_unshift($links, Link::createFromRoute($this->t('Home'), '<front>'));
     }
 

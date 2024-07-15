@@ -21,7 +21,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
    *
    * @var string
    */
-  protected static $paragraphsField = 'field_paragraphs';
+  protected static string $paragraphsField = 'field_paragraphs';
 
   /**
    * Selector template for CKEditor instances.
@@ -31,7 +31,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
    *
    * @var string
    */
-  protected static $selectorTemplate = "textarea[name='%s[%d][subform][field_text][0][value]']";
+  protected static string $selectorTemplate = "textarea[name='%s[%d][subform][field_text][0][value]']";
 
   /**
    * Test split of paragraph before a selection.

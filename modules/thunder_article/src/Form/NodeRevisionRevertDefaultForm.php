@@ -22,33 +22,17 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
    *
    * @var \Drupal\node\NodeInterface
    */
-  protected $revision;
-
-  /**
-   * The date formatter service.
-   *
-   * @var \Drupal\Core\Datetime\DateFormatterInterface
-   */
-  protected $dateFormatter;
-
-  /**
-   * The time service.
-   *
-   * @var \Drupal\Component\Datetime\TimeInterface
-   */
-  protected $time;
+  protected NodeInterface $revision;
 
   /**
    * Constructs a new NodeRevisionRevertForm.
    *
-   * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
+   * @param \Drupal\Core\Datetime\DateFormatterInterface $dateFormatter
    *   The date formatter service.
    * @param \Drupal\Component\Datetime\TimeInterface $time
    *   The time service.
    */
-  public function __construct(DateFormatterInterface $date_formatter, TimeInterface $time) {
-    $this->dateFormatter = $date_formatter;
-    $this->time = $time;
+  public function __construct(protected readonly DateFormatterInterface $dateFormatter, protected readonly TimeInterface $time) {
   }
 
   /**

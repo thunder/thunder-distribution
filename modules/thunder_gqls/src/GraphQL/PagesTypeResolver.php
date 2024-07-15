@@ -17,7 +17,7 @@ class PagesTypeResolver extends DecoratableTypeResolver {
   /**
    * {@inheritdoc}
    */
-  protected function resolve($object) : ?string {
+  protected function resolve(mixed $object) : ?string {
     if ($object instanceof NodeInterface || $object instanceof TermInterface || $object instanceof UserInterface) {
       if ($object->bundle() === 'page') {
         return 'BasicPage';

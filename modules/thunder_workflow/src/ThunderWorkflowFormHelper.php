@@ -25,20 +25,6 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
   use StringTranslationTrait;
 
   /**
-   * The current user.
-   *
-   * @var \Drupal\Core\Session\AccountInterface
-   */
-  protected AccountInterface $currentUser;
-
-  /**
-   * The messenger service.
-   *
-   * @var \Drupal\Core\Messenger\MessengerInterface
-   */
-  protected MessengerInterface $messenger;
-
-  /**
    * The request object.
    *
    * @var \Symfony\Component\HttpFoundation\Request
@@ -46,45 +32,17 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
   protected Request $request;
 
   /**
-   * The moderation information service.
-   *
-   * @var \Drupal\content_moderation\ModerationInformationInterface
-   */
-  protected ModerationInformationInterface $moderationInfo;
-
-  /**
-   * The entity type manager.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected EntityTypeManagerInterface $entityTypeManager;
-
-  /**
-   * The theme manager.
-   *
-   * @var \Drupal\Core\Theme\ThemeManagerInterface
-   */
-  protected ThemeManagerInterface $themeManager;
-
-  /**
-   * The state transition validation service.
-   *
-   * @var \Drupal\content_moderation\StateTransitionValidationInterface
-   */
-  protected StateTransitionValidationInterface $stateTransitionValidation;
-
-  /**
    * Constructs a NodeForm object.
    *
-   * @param \Drupal\Core\Session\AccountInterface $current_user
+   * @param \Drupal\Core\Session\AccountInterface $currentUser
    *   The current user.
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger service.
    * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
    *   The request stack service.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager.
-   * @param \Drupal\Core\Theme\ThemeManagerInterface $theme_manager
+   * @param \Drupal\Core\Theme\ThemeManagerInterface $themeManager
    *   The theme manager.
    * @param \Drupal\content_moderation\ModerationInformationInterface $moderationInfo
    *   The moderation info service. The optionality is important
@@ -92,14 +50,8 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
    * @param \Drupal\content_moderation\StateTransitionValidationInterface $stateTransitionValidation
    *   The state transition validation service.
    */
-  final public function __construct(AccountInterface $current_user, MessengerInterface $messenger, RequestStack $requestStack, EntityTypeManagerInterface $entity_type_manager, ThemeManagerInterface $theme_manager, ModerationInformationInterface $moderationInfo, StateTransitionValidationInterface $stateTransitionValidation) {
-    $this->currentUser = $current_user;
-    $this->messenger = $messenger;
+  final public function __construct(protected readonly AccountInterface $currentUser, protected readonly MessengerInterface $messenger, RequestStack $requestStack, protected readonly EntityTypeManagerInterface $entityTypeManager, protected readonly ThemeManagerInterface $themeManager, protected readonly ModerationInformationInterface $moderationInfo, protected readonly StateTransitionValidationInterface $stateTransitionValidation) {
     $this->request = $requestStack->getCurrentRequest();
-    $this->entityTypeManager = $entity_type_manager;
-    $this->themeManager = $theme_manager;
-    $this->moderationInfo = $moderationInfo;
-    $this->stateTransitionValidation = $stateTransitionValidation;
   }
 
   /**

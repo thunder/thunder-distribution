@@ -30,42 +30,42 @@ class ModuleConfigureForm extends FormBase {
    *
    * @var \Drupal\Core\Extension\ModuleExtensionList
    */
-  protected $moduleExtensionList;
+  protected ModuleExtensionList $moduleExtensionList;
 
   /**
    * The module installer.
    *
    * @var \Drupal\Core\Extension\ModuleInstallerInterface
    */
-  protected $moduleInstaller;
+  protected ModuleInstallerInterface $moduleInstaller;
 
   /**
    * The access manager service.
    *
    * @var \Drupal\Core\Access\AccessManagerInterface
    */
-  protected $accessManager;
+  protected AccessManagerInterface $accessManager;
 
   /**
    * The module handler service.
    *
    * @var \Drupal\Core\Extension\ModuleHandlerInterface
    */
-  protected $moduleHandler;
+  protected ModuleHandlerInterface $moduleHandler;
 
   /**
    * The current user.
    *
    * @var \Drupal\Core\Session\AccountProxyInterface
    */
-  protected $currentUser;
+  protected AccountProxyInterface $currentUser;
 
   /**
    * The permission handler service.
    *
    * @var \Drupal\user\PermissionHandlerInterface
    */
-  protected $permissionHandler;
+  protected PermissionHandlerInterface $permissionHandler;
 
   /**
    * {@inheritdoc}

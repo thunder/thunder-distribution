@@ -33,27 +33,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ThunderRedirect extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
   /**
-   * Optional redirect module repository.
-   *
-   * @var \Drupal\redirect\RedirectRepository|null
-   */
-  protected $redirectRepository;
-
-  /**
-   * The language manager.
-   *
-   * @var \Drupal\Core\Language\LanguageManagerInterface
-   */
-  protected $languageManager;
-
-  /**
-   * The path validator.
-   *
-   * @var \Drupal\Core\Path\PathValidatorInterface
-   */
-  protected $pathValidator;
-
-  /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
@@ -74,9 +53,9 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    *
    * @param array $configuration
    *   The plugin configuration.
-   * @param string $pluginId
+   * @param string $plugin_id
    *   The plugin id.
-   * @param mixed $pluginDefinition
+   * @param mixed $plugin_definition
    *   The plugin definition.
    * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
    *   The language manager.
@@ -89,16 +68,13 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    */
   public function __construct(
     array $configuration,
-    $pluginId,
-    $pluginDefinition,
-    LanguageManagerInterface $languageManager,
-    PathValidatorInterface $pathValidator,
-    ?RedirectRepository $redirectRepository = NULL,
+    $plugin_id,
+    $plugin_definition,
+    protected readonly LanguageManagerInterface $languageManager,
+    protected readonly PathValidatorInterface $pathValidator,
+    protected readonly ?RedirectRepository $redirectRepository = NULL,
   ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->languageManager = $languageManager;
-    $this->pathValidator = $pathValidator;
-    $this->redirectRepository = $redirectRepository;
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
   /**
