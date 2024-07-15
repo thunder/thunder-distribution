@@ -19,36 +19,15 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The HTTP kernel service.
-   *
-   * @var \Symfony\Component\HttpKernel\HttpKernelInterface
-   */
-  protected $httpKernel;
-
-  /**
-   * The current request.
-   *
-   * @var \Symfony\Component\HttpFoundation\Request
-   */
-  protected $currentRequest;
-
-  /**
-   * The rendering service.
-   *
-   * @var \Drupal\Core\Render\RendererInterface
-   */
-  protected $renderer;
-
-  /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
       $configuration,
-      $pluginId,
-      $pluginDefinition,
+      $plugin_id,
+      $plugin_definition,
       $container->get('http_kernel'),
       $container->get('request_stack')->getCurrentRequest(),
       $container->get('renderer')
@@ -60,9 +39,9 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
    *
    * @param array $configuration
    *   The plugin configuration array.
-   * @param string $pluginId
+   * @param string $plugin_id
    *   The plugin id.
-   * @param mixed $pluginDefinition
+   * @param mixed $plugin_definition
    *   The plugin definition.
    * @param \Symfony\Component\HttpKernel\HttpKernelInterface $httpKernel
    *   The HTTP kernel service.
@@ -73,22 +52,19 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
    */
   public function __construct(
     array $configuration,
-    string $pluginId,
-    $pluginDefinition,
-    HttpKernelInterface $httpKernel,
-    Request $currentRequest,
-    RendererInterface $renderer,
+    string $plugin_id,
+    $plugin_definition,
+    protected readonly HttpKernelInterface $httpKernel,
+    protected readonly Request $currentRequest,
+    protected readonly RendererInterface $renderer,
   ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->httpKernel = $httpKernel;
-    $this->currentRequest = $currentRequest;
-    $this->renderer = $renderer;
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function resolveField(FieldContext $fieldContext) {
+  public function resolveField(FieldContext $field) {
     $contextValues = $this->getContextValues();
 
     if (!isset($contextValues['path'])) {
@@ -96,7 +72,7 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
     }
 
     $url = $this->currentRequest->getSchemeAndHttpHost() . $contextValues['path'];
-    $request = $this->createRequest($this->currentRequest, $url, $fieldContext);
+    $request = $this->createRequest($this->currentRequest, $url, $field);
 
     $response = $this->httpKernel->handle($request, HttpKernelInterface::SUB_REQUEST);
     if ($response instanceof SubRequestResponse) {
@@ -116,13 +92,13 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
    *   The current main request.
    * @param string $url
    *   The url to run the subrequest on.
-   * @param \Drupal\graphql\GraphQL\Execution\FieldContext $fieldContext
+   * @param \Drupal\graphql\GraphQL\Execution\FieldContext $field
    *   The field context.
    *
    * @return \Symfony\Component\HttpFoundation\Request
    *   The request object.
    */
-  protected function createRequest(Request $current, string $url, FieldContext $fieldContext) {
+  protected function createRequest(Request $current, string $url, FieldContext $field): Request {
     $request = Request::create(
       $url,
       'GET',
@@ -132,7 +108,7 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
       $current->server->all()
     );
 
-    $request->attributes->set('_graphql_subrequest', function (CacheableMetadata $cacheableMetadata) use ($fieldContext) {
+    $request->attributes->set('_graphql_subrequest', function (CacheableMetadata $cacheableMetadata) use ($field) {
       if (!method_exists($this, 'resolve')) {
         throw new \LogicException('Missing data producer resolve method.');
       }
@@ -143,12 +119,12 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
         [$this, 'resolve'],
         array_values(array_merge($contextValues, [
           $cacheableMetadata,
-          $fieldContext,
+          $field,
         ]))
       ));
 
       if (!$context->isEmpty()) {
-        $fieldContext->addCacheableDependency($context->pop());
+        $field->addCacheableDependency($context->pop());
       }
 
       return $result ?? '';

@@ -40,36 +40,15 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
   use DataFetcherTrait;
 
   /**
-   * The rendering service.
-   *
-   * @var \Drupal\Core\Render\RendererInterface
-   */
-  protected $renderer;
-
-  /**
-   * The metatag manager service.
-   *
-   * @var \Drupal\metatag\MetatagManager
-   */
-  protected $metatagManager;
-
-  /**
-   * The module handler.
-   *
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface
-   */
-  protected $moduleHandler;
-
-  /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition): self {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     return new static(
       $configuration,
-      $pluginId,
-      $pluginDefinition,
+      $plugin_id,
+      $plugin_definition,
       $container->get('renderer'),
       $container->get('metatag.manager'),
       $container->get('module_handler')
@@ -81,9 +60,9 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
    *
    * @param array $configuration
    *   The plugin configuration array.
-   * @param string $pluginId
+   * @param string $plugin_id
    *   The plugin id.
-   * @param mixed $pluginDefinition
+   * @param mixed $plugin_definition
    *   The plugin definition.
    * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer service.
@@ -94,16 +73,13 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
    */
   public function __construct(
     array $configuration,
-    string $pluginId,
-    $pluginDefinition,
-    RendererInterface $renderer,
-    MetatagManager $metatagManager,
-    ModuleHandlerInterface $moduleHandler,
+    string $plugin_id,
+    $plugin_definition,
+    protected readonly RendererInterface $renderer,
+    protected readonly MetatagManager $metatagManager,
+    protected readonly ModuleHandlerInterface $moduleHandler,
   ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->renderer = $renderer;
-    $this->metatagManager = $metatagManager;
-    $this->moduleHandler = $moduleHandler;
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
   /**
@@ -119,7 +95,7 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
    * @return array
    *   Normalized metatags.
    */
-  public function resolve($value, ?string $type, RefinableCacheableDependencyInterface $metadata): array {
+  public function resolve(mixed $value, ?string $type, RefinableCacheableDependencyInterface $metadata): array {
     if ($value instanceof ContentEntityInterface) {
       $context = new RenderContext();
       $result = $this->renderer->executeInRenderContext($context, function () use ($value): array {

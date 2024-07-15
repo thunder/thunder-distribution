@@ -11,8 +11,8 @@ dependencies:
     - image.style.media_image
     - media.type.image
   module:
-    - blazy
     - empty_fields
+    - image
 id: media.image.default
 targetEntityType: media
 bundle: image
@@ -27,33 +27,13 @@ content:
     weight: 1
     region: content
   field_image:
-    type: blazy
+    type: image
     label: hidden
     settings:
-      caption:
-        title: '0'
-        alt: '0'
-      layout: ''
-      view_mode: ''
-      cache: 0
-      skin: ''
-      lazy: ''
-      style: ''
-      background: false
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      loading: ''
-      preload: false
-      responsive_image_style: ''
-      box_style: ''
+      image_link: ''
       image_style: media_image
-      media_switch: ''
-      ratio: ''
-      thumbnail_style: ''
-      grid: ''
-      grid_medium: ''
-      grid_small: ''
+      image_loading:
+        attribute: lazy
     third_party_settings:
       empty_fields:
         handler: ''

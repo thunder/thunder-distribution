@@ -3,6 +3,7 @@
 namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
 use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 use Drupal\Tests\TestFileCreationTrait;
 
@@ -20,7 +21,7 @@ class ThunderMetatagsTest extends GraphQLTestBase {
    *
    * @var \Drupal\node\NodeInterface
    */
-  protected $node;
+  protected NodeInterface $node;
 
   /**
    * {@inheritdoc}

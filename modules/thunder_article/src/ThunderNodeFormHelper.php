@@ -10,23 +10,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Base for handler for node add/edit forms.
  */
-class ThunderNodeFormHelper implements ContainerInjectionInterface {
-
-  /**
-   * The theme manager.
-   *
-   * @var \Drupal\Core\Theme\ThemeManagerInterface
-   */
-  protected ThemeManagerInterface $themeManager;
+readonly class ThunderNodeFormHelper implements ContainerInjectionInterface {
 
   /**
    * Constructs a ThunderNodeFormHelper object.
    *
-   * @param \Drupal\Core\Theme\ThemeManagerInterface $theme_manager
+   * @param \Drupal\Core\Theme\ThemeManagerInterface $themeManager
    *   The theme manager.
    */
-  final public function __construct(ThemeManagerInterface $theme_manager) {
-    $this->themeManager = $theme_manager;
+  final public function __construct(protected ThemeManagerInterface $themeManager) {
   }
 
   /**

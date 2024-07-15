@@ -31,9 +31,19 @@ drush updb
 You should at least see the Thunder XXXX schema update. If not, double check that the correct version of Thunder
 is installed, and that `drush updb` did not throw any errors.
 
-Before you start with the code and database update please disable the jQuery UI Draggable module or require it on your own.
+Before you start with the code and database update please add the Slick module, the Blazy module and the Responsive
+Preview module to your own composer.json. Both are no longer part of Thunder and can be removed after the update
+was successfully executed.
 
 ```bash
-composer require drupal/jquery_ui_draggable
+composer require drupal/blazy drupal/slick drupal/responsive_preview
 ```
 
+Also, if you have jquery_ui, jquery_ui_draggable or default_content enabled, you have to
+require them own your own, since Thunder removed them from the distribution.
+
+```bash
+composer require drupal/jquery_ui
+composer require drupal/jquery_ui_draggable
+composer require drupal/default_content
+```

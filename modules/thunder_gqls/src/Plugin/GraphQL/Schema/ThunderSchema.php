@@ -25,7 +25,7 @@ class ThunderSchema extends ComposableSchema {
 
   use ResolverHelperTrait;
 
-  public const REQUIRED_EXTENSIONS = [
+  public const array REQUIRED_EXTENSIONS = [
     'thunder_pages',
     'thunder_media',
     'thunder_paragraphs',
@@ -36,7 +36,7 @@ class ThunderSchema extends ComposableSchema {
    *
    * @var \Drupal\graphql\Plugin\DataProducerPluginManager
    */
-  protected $dataProducerManager;
+  protected DataProducerPluginManager $dataProducerManager;
 
   /**
    * {@inheritdoc}
@@ -113,7 +113,7 @@ class ThunderSchema extends ComposableSchema {
   public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form = parent::buildConfigurationForm($form, $form_state);
     foreach (Element::children($form['extensions']) as $extension) {
-      if (in_array($extension, static::REQUIRED_EXTENSIONS)) {
+      if (in_array($extension, static::REQUIRED_EXTENSIONS, TRUE)) {
         $form['extensions'][$extension]['#disabled'] = TRUE;
         $form['extensions'][$extension]['#value'] = TRUE;
       }

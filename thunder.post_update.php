@@ -20,7 +20,6 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
   $moduleInstaller->install([
     'media_library_media_modify',
     'gin_toolbar',
-    'jquery_ui',
     'ckeditor5',
   ]);
 
@@ -124,4 +123,18 @@ function thunder_post_update_0003_enable_sticky_action_buttons(array &$sandbox):
     ->save();
 
   return t('Sticky action buttons enabled.');
+}
+
+/**
+ * This update removes blazy and slick integration.
+ */
+function thunder_post_update_0004_remove_blazy_and_slick(): string {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_post_update_0004_remove_blazy_and_slick');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
 }
