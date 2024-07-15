@@ -40,7 +40,22 @@
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
+            },
+            "drupal/config_update": {
+                "#3452453: D11": "https://git.drupalcode.org/project/config_update/-/merge_requests/13.diff"
+            },
+            "drupal/empty_fields": {
+                "#3425259: D11": "https://git.drupalcode.org/project/empty_fields/-/merge_requests/5.diff"
+            },
+            "drupal/media_entity_slideshow": {
+                "#3431882: D11": "https://www.drupal.org/files/issues/2024-05-30/media_entity_slideshow.2.x-dev.rector.patch"
+            },
+            "drupal/media_entity_twitter": {
+                "#3431884: D11": "https://git.drupalcode.org/project/media_entity_twitter/-/merge_requests/13.diff"
             }
+        },
+        "drupal-lenient": {
+            "allowed-list": ["drupal/config_update", "drupal/empty_fields", "drupal/media_entity_slideshow", "drupal/media_entity_twitter"]
         }
     },
     "require": {
@@ -51,9 +66,9 @@
         "drupal/autofill": "^1.1",
         "drupal/autosave_form": "^1.6",
         "drupal/checklistapi": "^2.1.3",
-        "drupal/core-recommended": "~10.3.0@stable",
-        "drupal/config_selector": "^2.1",
-        "drupal/config_update": "^1.7 || ^2.0",
+        "drupal/core-recommended": "~11.0.0@rc",
+        "drupal/config_selector": "^3.0",
+        "drupal/config_update": "^2.0",
         "drupal/content_lock": "^3.0.0-alpha2",
         "drupal/crop": "^2.2",
         "drupal/diff": "1.7",
