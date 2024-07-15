@@ -81,7 +81,6 @@ install:
   - schema_metatag:schema_article
   - select2:select2
   - simple_sitemap:simple_sitemap
-  - responsive_preview:responsive_preview
   - update_helper_checklist:update_helper_checklist
   - views_bulk_edit:views_bulk_edit
   # thunder
