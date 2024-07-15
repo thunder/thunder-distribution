@@ -21,7 +21,6 @@ dependencies:
     - navigation
     - node
     - path
-    - responsive_preview
     - scheduler
     - system
     - taxonomy
@@ -37,7 +36,6 @@ permissions:
   - 'access files overview'
   - 'access media overview'
   - 'access navigation'
-  - 'access responsive preview'
   - 'access tokens overview'
   - 'access toolbar'
   - 'break content lock'
