@@ -198,16 +198,12 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
         ['@state' => $transition->to()->label()]);
     }
 
-    unset($form['moderation_state']['#group']);
+    // Move to gin_actions and promote moderation_state in gin theme to not end
+    // up in dropdown button.
+    $form['moderation_state']['#group'] = 'gin_actions';
     $form['moderation_state']['#weight'] = 90;
-
-    $form['actions']['moderation_state'] = $form['moderation_state'];
-    unset($form['moderation_state']);
-
-    // Promote moderation_state in gin theme to not end up in
-    // dropdown button.
-    $form['actions']['moderation_state']['#gin_action_item'] = TRUE;
-    $form['actions']['moderation_state']['widget'][0]['#attributes']['form'] = $form['#id'];
+    $form['moderation_state']['#gin_action_item'] = TRUE;
+    $form['moderation_state']['widget'][0]['#attributes']['form'] = $form['#id'];
 
     return $form;
   }
