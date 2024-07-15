@@ -52,10 +52,55 @@
             },
             "drupal/media_entity_twitter": {
                 "#3431884: D11": "https://git.drupalcode.org/project/media_entity_twitter/-/merge_requests/13.diff"
+            },
+            "drupal/metatag_async_widget": {
+                "#3433378: D11": "https://www.drupal.org/files/issues/2024-03-24/metatag_async_widget.1.1.0.rector.patch"
+            },
+            "drupal/paragraphs": {
+                "#3433816: D11": "https://git.drupalcode.org/project/paragraphs/-/merge_requests/115.diff"
+            },
+            "drupal/simple_sitemap": {
+                "#3434566: D11": "https://git.drupalcode.org/project/simple_sitemap/-/merge_requests/99.diff"
+            },
+            "drupal/scheduler": {
+                "#3434566: D11": "https://git.drupalcode.org/project/scheduler/-/merge_requests/150.diff"
+            },
+            "drupal/password_policy": {
+                "#3433859: D11": "https://git.drupalcode.org/project/password_policy/-/merge_requests/84.diff"
+            },
+            "drupal/metatag": {
+                "#3438491: D11": "https://git.drupalcode.org/project/metatag/-/merge_requests/119.diff"
+            },
+            "drupal/media_library_media_modify": {
+                "#3455257: D11": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/58.diff"
+            },
+            "drupal/inline_entity_form": {
+                "#3438428: D11": "https://git.drupalcode.org/project/inline_entity_form/-/merge_requests/115.diff"
+            },
+            "drupal/focal_point": {
+                "#3443663: D11": "https://git.drupalcode.org/project/focal_point/-/merge_requests/25.diff"
+            },
+            "drupal/entity_reference_actions": {
+                "#3443663: D11": "https://git.drupalcode.org/project/focal_point/-/merge_requests/25.diff"
             }
         },
         "drupal-lenient": {
-            "allowed-list": ["drupal/config_update", "drupal/empty_fields", "drupal/media_entity_slideshow", "drupal/media_entity_twitter"]
+            "allowed-list": [
+                "drupal/config_update",
+                "drupal/empty_fields",
+                "drupal/media_entity_slideshow",
+                "drupal/media_entity_twitter",
+                "drupal/metatag_async_widget",
+                "drupal/paragraphs",
+                "drupal/simple_sitemap",
+                "drupal/scheduler",
+                "drupal/password_policy",
+                "drupal/metatag",
+                "drupal/media_library_media_modify",
+                "drupal/inline_entity_form",
+                "drupal/focal_point",
+                "drupal/entity_reference_actions"
+            ]
         }
     },
     "require": {
@@ -82,7 +127,7 @@
         "drupal/gin": "3.0-rc11",
         "drupal/gin_toolbar": "^1.0-rc6",
         "drupal/graphql": "^4.7",
-        "drupal/inline_entity_form": "^1.0-rc14",
+        "drupal/inline_entity_form": "^3.0",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.2",
         "drupal/linkit": "^6.0-beta4",
@@ -103,7 +148,7 @@
         "drupal/responsive_preview": "^2.1",
         "drupal/redirect": "^1.7",
         "drupal/scheduler": "^2.0.2",
-        "drupal/scheduler_content_moderation_integration": "^2.0",
+        "drupal/scheduler_content_moderation_integration": "3.0.x-dev",
         "drupal/schema_metatag": "^2.5",
         "drupal/select2": "^1.7",
         "drupal/search_api_mark_outdated": "^1.0",
