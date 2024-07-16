@@ -116,7 +116,7 @@ jobs:
         ports:
           - 3306:3306
       selenium-chrome:
-        image: selenium/standalone-chrome:105.0
+        image: selenium/standalone-chromium:126.0
         options: --add-host=thunder-testing:host-gateway --name selenium-chrome
         ports:
           - 4444:4444
@@ -180,7 +180,7 @@ jobs:
         ports:
           - 3306:3306
       selenium-chrome:
-        image: selenium/standalone-chrome:105.0
+        image: selenium/standalone-chromium:126.0
         options: --add-host=thunder-testing:host-gateway --name selenium-chrome
         ports:
           - 4444:4444
@@ -291,7 +291,7 @@ jobs:
         ports:
           - 3306:3306
       selenium-chrome:
-        image: selenium/standalone-chrome:105.0
+        image: selenium/standalone-chromium:126.0
         options: --add-host=thunder-testing:host-gateway --name selenium-chrome
         ports:
           - 4444:4444
