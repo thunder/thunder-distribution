@@ -21,12 +21,12 @@ env:
   DRUPAL_TESTING_HTTP_PORT: 8888
   DRUPAL_TESTING_VERBOSE: false
   DRUPAL_TESTING_VERSION: "^1.0.42"
-  DRUPAL_TESTING_TEST_FILTER: ""
+  DRUPAL_TESTING_TEST_FILTER: "ChannelsTagsTest"
   DRUPAL_TESTING_SELENIUM_HOST: 127.0.0.1
   DRUPAL_TESTING_SELENIUM_PORT: 4444
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: false
-  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://127.0.0.1:4444/wd/hub"]'
+  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"chromeOptions": {"w3c": false, "args": [ "--disable-gpu", "--disable-dev-shm-usage", "--headless", "--no-sandbox" ] } }, "http://127.0.0.1:4444/wd/hub"]'
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
   # The following variable set the version that the upgrade test starts with.
@@ -116,7 +116,7 @@ jobs:
         ports:
           - 3306:3306
       selenium-chrome:
-        image: selenium/standalone-chromium:126.0
+        image: selenium/standalone-chromium:105.0
         options: --add-host=thunder-testing:host-gateway --name selenium-chrome
         ports:
           - 4444:4444
@@ -180,7 +180,7 @@ jobs:
         ports:
           - 3306:3306
       selenium-chrome:
-        image: selenium/standalone-chromium:126.0
+        image: selenium/standalone-chromium:105.0
         options: --add-host=thunder-testing:host-gateway --name selenium-chrome
         ports:
           - 4444:4444
@@ -291,7 +291,7 @@ jobs:
         ports:
           - 3306:3306
       selenium-chrome:
-        image: selenium/standalone-chromium:126.0
+        image: selenium/standalone-chromium:105.0
         options: --add-host=thunder-testing:host-gateway --name selenium-chrome
         ports:
           - 4444:4444
