@@ -30,6 +30,7 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
     // Test saving inline entity form when collapsing paragraph form.
     $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
     $this->drupalGet($node->toUrl('edit-form'));
+    $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-actions"] .meta-sidebar__trigger')->click();
 
     // Edit gallery paragraph.
     $this->clickDrupalSelector('field-paragraphs-0-edit-2');

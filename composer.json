@@ -40,6 +40,12 @@
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
+            },
+            "drupal/gin_toolbar": {
+                "Secondary toolbar does not show on the front end when core navigation enabled": "https://www.drupal.org/files/issues/2024-07-10/3460333-gin-toolbar-2.patch"
+            },
+            "drupal/gin": {
+                "Secondary toolbar does not show on the front end when core navigation enabled": "https://git.drupalcode.org/project/gin/-/merge_requests/464.diff"
             }
         }
     },
@@ -47,7 +53,6 @@
         "php": ">=8.3",
         "cweagans/composer-patches": "^1.6.5",
         "drupal/access_unpublished": "^1.5",
-        "drupal/admin_toolbar": "^3.4",
         "drupal/autofill": "^1.1",
         "drupal/autosave_form": "^1.6",
         "drupal/checklistapi": "^2.1.3",

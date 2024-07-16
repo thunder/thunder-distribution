@@ -18,6 +18,7 @@ dependencies:
     - file
     - filter
     - media
+    - navigation
     - node
     - path
     - scheduler
@@ -34,6 +35,7 @@ permissions:
   - 'access contextual links'
   - 'access files overview'
   - 'access media overview'
+  - 'access navigation'
   - 'access tokens overview'
   - 'access toolbar'
   - 'break content lock'

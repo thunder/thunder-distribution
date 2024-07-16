@@ -31,6 +31,7 @@ install:
   - drupal:inline_form_errors
   - drupal:media_library
   - drupal:menu_ui
+  - drupal:navigation
   - drupal:language
   - drupal:options
   - drupal:path
@@ -45,8 +46,6 @@ install:
   - drupal:views_ui
   # contrib
   - access_unpublished:access_unpublished
-  - admin_toolbar:admin_toolbar_tools
-  - admin_toolbar:admin_toolbar_links_access_filter
   - autosave_form:autosave_form
   - autofill:autofill
   - content_lock:content_lock
