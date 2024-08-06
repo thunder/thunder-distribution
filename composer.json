@@ -40,6 +40,9 @@
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
+            },
+            "drupal/gin": {
+                "Refactor toggle styles": "https://git.drupalcode.org/project/gin/-/merge_requests/438.patch"
             }
         }
     },
