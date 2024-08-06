@@ -40,6 +40,9 @@
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
+            },
+            "drupal/password_policy": {
+                "Issue #3465364: Fatal error when changing password when password_policy_history is enabled": "https://www.drupal.org/files/issues/2024-08-05/3465364-1.patch"
             }
         }
     },
@@ -83,7 +86,7 @@
         "drupal/paragraphs": "^1.12",
         "drupal/paragraphs_features": "^2.0.0-beta3",
         "drupal/paragraphs_paste": "^2.0-beta3",
-        "drupal/password_policy": "^4.0",
+        "drupal/password_policy": "4.0.2",
         "drupal/pathauto": "^1.12",
         "drupal/responsive_preview": "^2.1",
         "drupal/redirect": "^1.7",
