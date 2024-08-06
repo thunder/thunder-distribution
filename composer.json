@@ -42,7 +42,7 @@
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
             "drupal/gin": {
-                "Refactor toggle styles": "https://git.drupalcode.org/project/gin/-/merge_requests/438.patch"
+                "Issue #3455558: There is no visible change to a toggle when pressed (but it does trigger conditional fields, value is saved, etc)": "https://www.drupal.org/files/issues/2024-08-06/3455558-Refactor-toggle-styles-mr438.patch"
             },
             "drupal/password_policy": {
                 "Issue #3465364: Fatal error when changing password when password_policy_history is enabled": "https://www.drupal.org/files/issues/2024-08-05/3465364-1.patch"
