@@ -166,7 +166,9 @@ jobs:
 #        uses: mxschmitt/action-tmate@v3
 
       - name: Run tests
-        run: test-drupal-project run_tests
+        run: |
+          test-drupal-project run_tests
+          docker logs ${{ job.services.chrome.id }
         env:
           THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
           DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
