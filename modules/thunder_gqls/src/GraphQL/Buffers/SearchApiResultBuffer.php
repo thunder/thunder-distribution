@@ -52,7 +52,6 @@ class SearchApiResultBuffer extends BufferBase {
    * {@inheritdoc}
    */
   protected function getBufferId($item) {
-    // @phpstan-ignore-next-line
     return $item['index'];
   }
 

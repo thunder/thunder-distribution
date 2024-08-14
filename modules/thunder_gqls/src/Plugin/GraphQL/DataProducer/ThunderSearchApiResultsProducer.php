@@ -147,13 +147,12 @@ class ThunderSearchApiResultsProducer extends DataProducerPluginBase implements 
       'status' => TRUE,
       'search_api_language' => $this->languageManager->getCurrentLanguage()->getId(),
     ];
-
     $conditions = array_merge($defaultConditions, $conditions);
 
     $query = $searchIndex->query();
 
     foreach ($conditions as $field => $value) {
-      $searchIndex->addCondition($field, $value);
+      $query->addCondition($field, $value);
     }
 
     if (!empty($search)) {
@@ -161,7 +160,6 @@ class ThunderSearchApiResultsProducer extends DataProducerPluginBase implements 
     }
 
     $query->range($offset, $limit);
-
     $query->sort('search_api_relevance', QueryInterface::SORT_DESC);
 
     $cacheContext->addCacheTags($searchIndex->getCacheTags());
