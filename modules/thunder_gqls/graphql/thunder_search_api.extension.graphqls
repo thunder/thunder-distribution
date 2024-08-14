@@ -1,3 +1,4 @@
 extend type Query {
-  search(search: String!, offset: Int = 0, limit: Int, index: String): SearchApiResult
+  search(search: String!, index: String!, offset: Int = 0, limit: Int!): SearchApiResult
 }
+

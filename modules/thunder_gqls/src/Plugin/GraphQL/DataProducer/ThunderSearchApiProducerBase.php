@@ -9,46 +9,15 @@ use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 use Drupal\search_api\Entity\Index;
 use Drupal\search_api\Query\QueryInterface;
-use Drupal\thunder_gqls\Wrappers\SearchApiResponse;
+use GraphQL\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Produces an entity list.
- *
- * @DataProducer(
- *   id = "thunder_search_api_results",
- *   name = @Translation("Entity list"),
- *   description = @Translation("Loads a list of entities."),
- *   produces = @ContextDefinition("any",
- *     label = @Translation("Entity list")
- *   ),
- *   consumes = {
- *     "limit" = @ContextDefinition("integer",
- *       label = @Translation("Limit"),
- *       required = TRUE
- *     ),
- *     "offset" = @ContextDefinition("integer",
- *       label = @Translation("Offset"),
- *       required = TRUE
- *     ),
- *     "index" = @ContextDefinition("string",
- *       label = @Translation("Search Api Index"),
- *       required = TRUE
- *     ),
- *     "conditions" = @ContextDefinition("map",
- *       label = @Translation("Filter conditions"),
- *       multiple = TRUE,
- *       required = FALSE,
- *       default_value = {}
- *      ),
- *     "search" = @ContextDefinition("string",
- *       label = @Translation("Search"),
- *       required = FALSE
- *     ),
- *   }
- * )
+ * The thunder base class for search api producers.
  */
-class ThunderSearchApiResultsProducer extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
+class ThunderSearchApiProducerBase extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
+
+  public const MAX_ITEMS = 100;
 
   /**
    * The entity type manager service.
@@ -109,7 +78,7 @@ class ThunderSearchApiResultsProducer extends DataProducerPluginBase implements 
   }
 
   /**
-   * Resolve entity query.
+   * Build base search api query.
    *
    * @param int $limit
    *   Limit of the query.
@@ -124,21 +93,26 @@ class ThunderSearchApiResultsProducer extends DataProducerPluginBase implements 
    * @param \Drupal\graphql\GraphQL\Execution\FieldContext $cacheContext
    *   The caching context related to the current field.
    *
-   * @return \Drupal\thunder_gqls\Wrappers\SearchApiResponse|null
-   *   SearchApi result.
+   * @return \Drupal\search_api\Query\QueryInterface|null
+   *   The query interface.
    *
    * @throws \Drupal\search_api\SearchApiException
    */
-  protected function resolve(
+  protected function getQuery(
     int $limit,
     int $offset,
     string $index,
     ?array $conditions,
     ?string $search,
     FieldContext $cacheContext,
-  ): ?SearchApiResponse {
-    $searchIndex = Index::load($index);
+  ): ?QueryInterface {
+    if ($limit > static::MAX_ITEMS) {
+      throw new UserError(
+        sprintf('Exceeded maximum query limit: %s.', static::MAX_ITEMS)
+      );
+    }
 
+    $searchIndex = Index::load($index);
     if (!$searchIndex) {
       return NULL;
     }
@@ -147,6 +121,7 @@ class ThunderSearchApiResultsProducer extends DataProducerPluginBase implements 
       'status' => TRUE,
       'search_api_language' => $this->languageManager->getCurrentLanguage()->getId(),
     ];
+
     $conditions = array_merge($defaultConditions, $conditions);
 
     $query = $searchIndex->query();
@@ -165,7 +140,7 @@ class ThunderSearchApiResultsProducer extends DataProducerPluginBase implements 
     $cacheContext->addCacheTags($searchIndex->getCacheTags());
     $cacheContext->addCacheContexts($searchIndex->getCacheContexts());
 
-    return new SearchApiResponse($query);
+    return $query;
   }
 
 }
