@@ -36,7 +36,7 @@ class EntityListResponse implements EntityListResponseInterface {
   public function total(): int {
     $query = clone $this->query;
     $query->range(NULL, NULL)->count();
-    return intval($query->execute());
+    return (int) $query->execute();
   }
 
   /**
