@@ -4,5 +4,8 @@ parameters:
   checkMissingIterableValueType: false
   reportUnmatchedIgnoredErrors: true
   level: 6
+  ignoreErrors:
+    # new static() is a best practice in Drupal, so we cannot fix that.
+    - "#^Unsafe usage of new static#"
 includes:
   - ./phpstan-baseline.neon

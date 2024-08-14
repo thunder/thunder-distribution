@@ -6,7 +6,14 @@ use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\thunder_gqls\Wrappers\SearchApiResponse;
 
 /**
- * Extension to add the search api query.
+ * The search api query schema extension.
+ *
+ * @SchemaExtension(
+ *   id = "thunder_search_api",
+ *   name = "Search API extension",
+ *   description = "Adds search api queries.",
+ *   schema = "thunder"
+ * )
  */
 class ThunderSearchApiSchemaExtension extends ThunderSchemaExtensionPluginBase {
 
