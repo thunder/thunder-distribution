@@ -50,7 +50,7 @@ class SearchApiResponse implements SearchApiResponseInterface {
   private ?string $bundle;
 
   /**
-   * PlantfinderResult Constructor.
+   * SearchApiResponse Constructor.
    *
    * @param \Drupal\search_api\Query\QueryInterface $query
    *   The search api query.
