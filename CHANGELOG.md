@@ -4,7 +4,7 @@
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.1...7.3.2)
 
-* [Issue #3462165: Add focal_point patch from ](https://www.drupal.org/node/3462165)
+* [Issue #3462165: Add focal_point patch](https://www.drupal.org/node/3462165)
 
 ## [7.3.1](https://github.com/thunder/thunder-distribution/tree/7.3.1) 2024-06-024
 
