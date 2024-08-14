@@ -70,9 +70,7 @@ class SearchApiResponse implements SearchApiResponseInterface {
   }
 
   /**
-   * Get search facets.
-   *
-   * @return array
+   * {@inheritdoc}
    *
    * @throws \Drupal\search_api\SearchApiException
    */
@@ -102,10 +100,11 @@ class SearchApiResponse implements SearchApiResponseInterface {
    * Get search result items.
    *
    * @return array|\GraphQL\Deferred
+   *   The search result items.
    *
    * @throws \Drupal\search_api\SearchApiException
    */
-  public function items() {
+  public function items(): array|Deferred {
     if (!$this->result) {
       $this->result = $this->query->execute();
     }
@@ -139,6 +138,7 @@ class SearchApiResponse implements SearchApiResponseInterface {
    * Returns the total results.
    *
    * @return int
+   *   The total results.
    *
    * @throws \Drupal\search_api\SearchApiException
    */
@@ -159,6 +159,7 @@ class SearchApiResponse implements SearchApiResponseInterface {
    *   The facet results.
    *
    * @return array
+   *   The processed facet results.
    */
   private function processFacetResults(
     Facet $facet,
@@ -191,6 +192,7 @@ class SearchApiResponse implements SearchApiResponseInterface {
    *   The facet results.
    *
    * @return array
+   *   The processed facet results.
    */
   private function processFacetResultsFromFieldConfig(
     Facet $facet,

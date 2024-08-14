@@ -11,6 +11,7 @@ interface SearchApiResponseInterface extends EntityListResponseInterface {
    * Get search facets.
    *
    * @return array
+   *   The facets.
    */
   public function facets(): array;
 
