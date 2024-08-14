@@ -98,7 +98,7 @@ class ThunderSearchApiProducerBase extends DataProducerPluginBase implements Con
    *
    * @throws \Drupal\search_api\SearchApiException
    */
-  protected function getQuery(
+  protected function buildBaseQuery(
     int $limit,
     int $offset,
     string $index,

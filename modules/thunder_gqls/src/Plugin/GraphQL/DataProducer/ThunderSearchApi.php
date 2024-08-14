@@ -72,7 +72,7 @@ class ThunderSearchApi extends ThunderSearchApiProducerBase {
     ?string $search,
     FieldContext $cacheContext,
   ): ?SearchApiResponse {
-    $query = $this->getQuery(
+    $query = $this->buildBaseQuery(
       $limit,
       $offset,
       $index,
