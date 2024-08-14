@@ -85,9 +85,6 @@ jobs:
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Build the docroot
         run: test-drupal-project build
 
