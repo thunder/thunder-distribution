@@ -1,4 +1,5 @@
 services:
+  _defaults:
+    autowire: true
   thunder_gqls.buffer.search_api_result:
     class: Drupal\thunder_gqls\GraphQL\Buffers\SearchApiResultBuffer
-    arguments: ['@entity_type.manager']

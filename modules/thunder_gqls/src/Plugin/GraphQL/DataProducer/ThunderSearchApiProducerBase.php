@@ -2,7 +2,7 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
-use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
@@ -15,16 +15,16 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * The thunder base class for search api producers.
  */
-class ThunderSearchApiProducerBase extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
+abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
   public const MAX_ITEMS = 100;
 
   /**
    * The entity type manager service.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManager
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected EntityTypeManager $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
    * The language manager service.
@@ -42,38 +42,39 @@ class ThunderSearchApiProducerBase extends DataProducerPluginBase implements Con
     $plugin_id,
     $plugin_definition,
   ): self {
-    return new static(
+    $instance = new static(
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('entity_type.manager'),
-      $container->get('language_manager'),
     );
+
+    $instance->setEntityTypeManager($container->get('entity_type.manager'));
+    $instance->setLanguageManager($container->get('language_manager'));
+
+    return $instance;
   }
 
   /**
-   * EntityLoad constructor.
+   * Set the entity type manager service.
    *
-   * @param array $configuration
-   *   The plugin configuration array.
-   * @param string $pluginId
-   *   The plugin id.
-   * @param array $pluginDefinition
-   *   The plugin definition array.
-   * @param \Drupal\Core\Entity\EntityTypeManager $entityTypeManager
-   *   The entity type manager service.
-   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
-   *   The language manager service.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *  The entity type manager service.
+   *
+   * @return void
    */
-  public function __construct(
-    array $configuration,
-    string $pluginId,
-    array $pluginDefinition,
-    EntityTypeManager $entityTypeManager,
-    LanguageManagerInterface $languageManager,
-  ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
+  public function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager): void {
     $this->entityTypeManager = $entityTypeManager;
+  }
+
+  /**
+   * Set the language manager service.
+   *
+   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
+   *  The language manager service.
+   *
+   * @return void
+   */
+  public function setLanguageManager(LanguageManagerInterface $languageManager): void {
     $this->languageManager = $languageManager;
   }
 
@@ -106,6 +107,14 @@ class ThunderSearchApiProducerBase extends DataProducerPluginBase implements Con
     ?string $search,
     FieldContext $cacheContext,
   ): ?QueryInterface {
+
+    // Make sure offset is zero or positive.
+    $offset = max($offset, 0);
+
+    // Make sure limit is positive and cap the max items.
+    if ($limit <= 0) {
+      $limit = 10;
+    }
     if ($limit > static::MAX_ITEMS) {
       throw new UserError(
         sprintf('Exceeded maximum query limit: %s.', static::MAX_ITEMS)
