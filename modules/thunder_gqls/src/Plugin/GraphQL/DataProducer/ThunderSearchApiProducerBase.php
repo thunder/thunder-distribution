@@ -10,6 +10,7 @@ use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 use Drupal\search_api\Entity\Index;
 use Drupal\search_api\Query\QueryInterface;
+use Drupal\thunder_gqls\Wrappers\SearchApiResponse;
 use GraphQL\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -165,6 +166,21 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
     $cacheContext->addCacheContexts($searchIndex->getCacheContexts());
 
     return $query;
+  }
+
+  /**
+   * The search api response.
+   *
+   * @param \Drupal\search_api\Query\QueryInterface $query
+   *   The search api query.
+   *
+   * @return \Drupal\thunder_gqls\Wrappers\SearchApiResponse
+   *   The search api response.
+   */
+  protected function searchApiResponse(QueryInterface $query): SearchApiResponse {
+    return $this->classResolver
+      ->getInstanceFromDefinition(SearchApiResponse::class)
+      ->setQuery($query);
   }
 
 }
