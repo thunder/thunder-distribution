@@ -81,7 +81,9 @@ class ThunderSearchApi extends ThunderSearchApiProducerBase {
       $cacheContext
     );
 
-    return new SearchApiResponse($query);
+    return $this->classResolver
+      ->getInstanceFromDefinition(SearchApiResponse::class)
+      ->setQuery($query);
   }
 
 }

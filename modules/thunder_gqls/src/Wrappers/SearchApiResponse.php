@@ -2,17 +2,21 @@
 
 namespace Drupal\thunder_gqls\Wrappers;
 
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\facets\Entity\Facet;
 use Drupal\search_api\Query\QueryInterface;
 use Drupal\search_api\Query\ResultSetInterface;
+use Drupal\thunder_gqls\GraphQL\Buffers\SearchApiResultBuffer;
 use GraphQL\Deferred;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * SearchApi Result graphql wrapper.
  *
  * @package Drupal\thunder_gqls
  */
-class SearchApiResponse implements SearchApiResponseInterface {
+class SearchApiResponse implements SearchApiResponseInterface, ContainerInjectionInterface {
 
   /**
    * The Search Api Query.
@@ -31,42 +35,87 @@ class SearchApiResponse implements SearchApiResponseInterface {
   /**
    * Array of Facets.
    *
-   * @var ?array
+   * @var array
    */
-  private ?array $facets;
+  protected array $facets;
 
   /**
    * Array of Facet mapping.
    *
-   * @var ?array
+   * @var array
    */
-  private ?array $facetMapping;
+  protected array $facetMapping;
 
   /**
    * The bundle for fetching facet field information.
    *
-   * @var ?string
+   * @var string
    */
-  private ?string $bundle;
+  protected string $bundle;
 
   /**
    * SearchApiResponse Constructor.
    *
+   * @param \Drupal\thunder_gqls\GraphQL\Buffers\SearchApiResultBuffer $buffer
+   *   The search api result buffer.
+   * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entityFieldManager
+   *   The entity type manager.
+   */
+  public function __construct(protected SearchApiResultBuffer $buffer, protected EntityFieldManagerInterface $entityFieldManager) {
+    $this->result = NULL;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('thunder_gqls.buffer.search_api_result'),
+      $container->get('entity_field.manager'),
+    );
+  }
+
+  /**
+   * Set query.
+   *
    * @param \Drupal\search_api\Query\QueryInterface $query
-   *   The search api query.
-   * @param array|null $facets
-   *   The facets.
-   * @param array|null $facetMapping
-   *   The facet mapping.
-   * @param string|null $bundle
+   *   The query.
+   */
+  public function setQuery(QueryInterface $query): SearchApiResponse {
+    $this->query = $query;
+    return $this;
+  }
+
+  /**
+   * Set Facet mapping.
+   *
+   * @param array $facetMapping
+   */
+  public function setFacetMapping(array $facetMapping): SearchApiResponse {
+    $this->facetMapping = $facetMapping;
+    return $this;
+  }
+
+  /**
+   * Set bundle.
+   *
+   * @param string $bundle
    *   The bundle.
    */
-  public function __construct(QueryInterface $query, mixed $facets = NULL, ?array $facetMapping = NULL, ?string $bundle = NULL) {
-    $this->query = $query;
-    $this->result = NULL;
-    $this->facets = $facets;
-    $this->facetMapping = $facetMapping;
+  public function setBundle(string $bundle): SearchApiResponse {
     $this->bundle = $bundle;
+    return $this;
+  }
+
+  /**
+   * Set facets.
+   *
+   * @param array $facets
+   *   The facets.
+   */
+  public function setFacets(array $facets): SearchApiResponse {
+    $this->facets = $facets;
+    return $this;
   }
 
   /**
@@ -109,9 +158,6 @@ class SearchApiResponse implements SearchApiResponseInterface {
       $this->result = $this->query->execute();
     }
 
-    // @phpstan-ignore-next-line
-    $searchApiResultBuffer = \Drupal::service('thunder_gqls.buffer.search_api_result');
-
     $ids = array_map(static function ($item) {
       return $item->getId();
     }, $this->result->getResultItems());
@@ -122,7 +168,7 @@ class SearchApiResponse implements SearchApiResponseInterface {
       return [];
     }
 
-    $callback = $searchApiResultBuffer->add(
+    $callback = $this->buffer->add(
       $this->query->getIndex()->id(),
       array_values($ids)
     );
@@ -201,10 +247,7 @@ class SearchApiResponse implements SearchApiResponseInterface {
     }
 
     $fieldName = $facet->getFieldIdentifier();
-    /** @var \Drupal\Core\Entity\EntityFieldManagerInterface $entityFieldManager */
-    // @phpstan-ignore-next-line
-    $entityFieldManager = \Drupal::service('entity_field.manager');
-    $fieldConfig = $entityFieldManager->getFieldDefinitions('node', $this->bundle);
+    $fieldConfig = $this->entityFieldManager->getFieldDefinitions('node', $this->bundle);
 
     if (isset($fieldConfig[$fieldName])) {
       $allowedValues = options_allowed_values($fieldConfig[$fieldName]->getFieldStorageDefinition());

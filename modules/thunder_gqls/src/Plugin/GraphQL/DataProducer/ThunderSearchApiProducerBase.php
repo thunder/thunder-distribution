@@ -2,6 +2,7 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
+use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -34,6 +35,13 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
   protected LanguageManagerInterface $languageManager;
 
   /**
+   * The class resolver service.
+   *
+   * @var \Drupal\Core\DependencyInjection\ClassResolverInterface
+   */
+  protected ClassResolverInterface $classResolver;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(
@@ -50,6 +58,7 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
 
     $instance->setEntityTypeManager($container->get('entity_type.manager'));
     $instance->setLanguageManager($container->get('language_manager'));
+    $instance->setClassResolver($container->get('class_resolver'));
 
     return $instance;
   }
@@ -72,6 +81,16 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
    */
   public function setLanguageManager(LanguageManagerInterface $languageManager): void {
     $this->languageManager = $languageManager;
+  }
+
+  /**
+   * Set the class resolver service.
+   *
+   * @param \Drupal\Core\DependencyInjection\ClassResolverInterface $classResolver
+   *   The class resolver service.
+   */
+  public function setClassResolver(ClassResolverInterface $classResolver): void {
+    $this->classResolver = $classResolver;
   }
 
   /**
