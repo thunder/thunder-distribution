@@ -112,7 +112,7 @@ class SearchApiResponse implements SearchApiResponseInterface {
     // @phpstan-ignore-next-line
     $searchApiResultBuffer = \Drupal::service('thunder_gqls.buffer.search_api_result');
 
-    $ids = array_map(function ($item) {
+    $ids = array_map(static function ($item) {
       return $item->getId();
     }, $this->result->getResultItems());
 
@@ -217,8 +217,8 @@ class SearchApiResponse implements SearchApiResponseInterface {
 
       $allowedValueKeys = array_keys($allowedValues);
       usort($facetResults, function ($a, $b) use ($allowedValueKeys) {
-        $indexA = array_search($a['filter'], $allowedValueKeys);
-        $indexB = array_search($b['filter'], $allowedValueKeys);
+        $indexA = array_search($a['filter'], $allowedValueKeys, TRUE);
+        $indexB = array_search($b['filter'], $allowedValueKeys, TRUE);
 
         return $indexA < $indexB ? -1 : 1;
       });
