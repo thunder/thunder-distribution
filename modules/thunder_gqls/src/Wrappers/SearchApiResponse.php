@@ -68,7 +68,7 @@ class SearchApiResponse implements SearchApiResponseInterface, ContainerInjectio
   /**
    * {@inheritDoc}
    */
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): self {
     return new static(
       $container->get('thunder_gqls.buffer.search_api_result'),
       $container->get('entity_field.manager'),
