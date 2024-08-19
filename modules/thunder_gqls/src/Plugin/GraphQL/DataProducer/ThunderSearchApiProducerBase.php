@@ -40,7 +40,7 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
    *
    * @var \Drupal\Core\DependencyInjection\ClassResolverInterface
    */
-  protected ClassResolverInterface $classResolver;
+  private ClassResolverInterface $classResolver;
 
   /**
    * {@inheritdoc}
