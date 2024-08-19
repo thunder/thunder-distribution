@@ -90,6 +90,7 @@ class SearchApiResponse implements SearchApiResponseInterface, ContainerInjectio
    * Set Facet mapping.
    *
    * @param array $facetMapping
+   *   The facet mapping.
    */
   public function setFacetMapping(array $facetMapping): SearchApiResponse {
     $this->facetMapping = $facetMapping;
