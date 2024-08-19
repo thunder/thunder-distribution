@@ -59,8 +59,6 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager service.
-   *
-   * @return void
    */
   public function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager): void {
     $this->entityTypeManager = $entityTypeManager;
@@ -71,8 +69,6 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
    *
    * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
    *   The language manager service.
-   *
-   * @return void
    */
   public function setLanguageManager(LanguageManagerInterface $languageManager): void {
     $this->languageManager = $languageManager;
