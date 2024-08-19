@@ -110,9 +110,7 @@ class SearchApiResponse implements SearchApiResponseInterface {
     }
 
     // @phpstan-ignore-next-line
-    $searchApiResultBuffer = \Drupal::service(
-      'thunder_gqls.buffer.search_api_result'
-    );
+    $searchApiResultBuffer = \Drupal::service('thunder_gqls.buffer.search_api_result');
 
     $ids = array_map(function ($item) {
       return $item->getId();
