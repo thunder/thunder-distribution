@@ -2,7 +2,6 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
-use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -24,9 +23,9 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
   /**
    * The entity type manager service.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManager
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected EntityTypeManager $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
    * The current user.
@@ -82,10 +81,10 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
   /**
    * Set the response wrapper service.
    *
-   * @param \Drupal\thunder_gqls\Wrappers\SearchApiResponse $responseWrapper
+   * @param \Drupal\thunder_gqls\Wrappers\EntityListResponse $responseWrapper
    *   The response wrapper service.
    */
-  public function setResponseWrapper(SearchApiResponse $responseWrapper): void {
+  public function setResponseWrapper(EntityListResponse $responseWrapper): void {
     $this->responseWrapper = $responseWrapper;
   }
 
