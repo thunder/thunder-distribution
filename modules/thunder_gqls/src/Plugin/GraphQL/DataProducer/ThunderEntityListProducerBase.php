@@ -226,7 +226,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
    * @param \Drupal\Core\Entity\Query\QueryInterface $query
    *   The entity query.
    *
-   * @return \Drupal\thunder_gqls\Wrappers\EntityListResponse The search api response.
+   * @return \Drupal\thunder_gqls\Wrappers\EntityListResponse
    *   The entity list response.
    */
   protected function entityListResponse(QueryInterface $query): EntityListResponse {

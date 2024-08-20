@@ -31,10 +31,12 @@ class EntityListResponse implements EntityListResponseInterface, ContainerInject
    * EntityListResponse constructor.
    *
    * @param \Drupal\Core\Entity\Query\QueryInterface|\Drupal\graphql\GraphQL\Buffers\EntityBuffer $parameter
+   *   The query or buffer parameter.
    */
   public function __construct(QueryInterface|EntityBuffer $parameter) {
     if ($parameter instanceof QueryInterface) {
-      @trigger_error('Calling the constructor with the query parameter is deprecated. Use service injection instead of directly instantiating and then use ::setQuery() instead.', E_USER_DEPRECATED);
+      // phpcs:ignore
+      @trigger_error('Calling the constructor with the query parameter is deprecated in Thunder 7.3.3 it will be remove in Thunder 8.0. Use service injection instead of directly instantiating and then use ::setQuery() instead.', E_USER_DEPRECATED);
       $this->setQuery($parameter);
       return;
     }
@@ -86,6 +88,7 @@ class EntityListResponse implements EntityListResponseInterface, ContainerInject
     }
 
     if (empty($this->buffer)) {
+      // phpcs:ignore
       $this->buffer = \Drupal::service('graphql.buffer.entity');
     }
 
