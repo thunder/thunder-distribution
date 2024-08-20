@@ -97,7 +97,7 @@ class ThunderEntityList extends ThunderEntityListProducerBase {
       $cacheContext
     );
 
-    return new EntityListResponse($query);
+    return $this->entityListResponse($query);
   }
 
 }
