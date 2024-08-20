@@ -7,4 +7,5 @@ services:
   thunder_gqls.search_api_response_wrapper:
     class: Drupal\thunder_gqls\Wrappers\SearchApiResponse
   thunder_gqls.entity_list_response_wrapper:
+    autowire: false
     class: Drupal\thunder_gqls\Wrappers\EntityListResponse
