@@ -9,3 +9,4 @@ services:
   thunder_gqls.entity_list_response_wrapper:
     autowire: false
     class: Drupal\thunder_gqls\Wrappers\EntityListResponse
+    arguments: [ '@graphql.buffer.entity' ]
