@@ -69,7 +69,7 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager service.
    */
-  private function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager): void {
+  public function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager): void {
     $this->entityTypeManager = $entityTypeManager;
   }
 
@@ -79,7 +79,7 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
    * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
    *   The language manager service.
    */
-  private function setLanguageManager(LanguageManagerInterface $languageManager): void {
+  public function setLanguageManager(LanguageManagerInterface $languageManager): void {
     $this->languageManager = $languageManager;
   }
 
@@ -89,7 +89,7 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
    * @param \Drupal\thunder_gqls\Wrappers\SearchApiResponse $responseWrapper
    *   The response wrapper service.
    */
-  private function setResponseWrapper(SearchApiResponse $responseWrapper): void {
+  public function setResponseWrapper(SearchApiResponse $responseWrapper): void {
     $this->responseWrapper = $responseWrapper;
   }
 

@@ -65,7 +65,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager service.
    */
-  private function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager): void {
+  public function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager): void {
     $this->entityTypeManager = $entityTypeManager;
   }
 
@@ -75,7 +75,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
    * @param \Drupal\Core\Session\AccountInterface $currentUser
    *   The current user.
    */
-  private function setCurrentUser(AccountInterface $currentUser): void {
+  public function setCurrentUser(AccountInterface $currentUser): void {
     $this->currentUser = $currentUser;
   }
 
@@ -85,7 +85,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
    * @param \Drupal\thunder_gqls\Wrappers\SearchApiResponse $responseWrapper
    *   The response wrapper service.
    */
-  private function setResponseWrapper(SearchApiResponse $responseWrapper): void {
+  public function setResponseWrapper(SearchApiResponse $responseWrapper): void {
     $this->responseWrapper = $responseWrapper;
   }
 
