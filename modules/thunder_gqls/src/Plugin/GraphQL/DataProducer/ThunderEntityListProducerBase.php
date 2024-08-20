@@ -9,7 +9,6 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 use Drupal\thunder_gqls\Wrappers\EntityListResponse;
-use Drupal\thunder_gqls\Wrappers\SearchApiResponse;
 use GraphQL\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -37,9 +36,9 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
   /**
    * The response wrapper service.
    *
-   * @var \Drupal\thunder_gqls\Wrappers\SearchApiResponse
+   * @var \Drupal\thunder_gqls\Wrappers\EntityListResponse
    */
-  private SearchApiResponse $responseWrapper;
+  private EntityListResponse $responseWrapper;
 
   /**
    * {@inheritdoc}
