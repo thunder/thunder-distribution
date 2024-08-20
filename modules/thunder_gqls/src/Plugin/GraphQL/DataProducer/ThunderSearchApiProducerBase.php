@@ -2,7 +2,6 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
-use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -36,7 +35,7 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
   protected LanguageManagerInterface $languageManager;
 
   /**
-   * The class resolver service.
+   * The response wrapper service.
    *
    * @var \Drupal\thunder_gqls\Wrappers\SearchApiResponse
    */
@@ -59,7 +58,7 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
 
     $instance->setEntityTypeManager($container->get('entity_type.manager'));
     $instance->setLanguageManager($container->get('language_manager'));
-    $instance->setResponseWrapper($container->get('thunder_gqls.search_api_response'));
+    $instance->setResponseWrapper($container->get('thunder_gqls.search_api_response_wrapper'));
 
     return $instance;
   }
@@ -85,10 +84,10 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
   }
 
   /**
-   * Set the class resolver service.
+   * Set the response wrapper service.
    *
    * @param \Drupal\thunder_gqls\Wrappers\SearchApiResponse $responseWrapper
-   *   The class resolver service.
+   *   The response wrapper service.
    */
   private function setResponseWrapper(SearchApiResponse $responseWrapper): void {
     $this->responseWrapper = $responseWrapper;

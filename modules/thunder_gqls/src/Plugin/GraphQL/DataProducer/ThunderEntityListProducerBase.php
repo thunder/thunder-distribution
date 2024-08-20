@@ -3,11 +3,14 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
+use Drupal\thunder_gqls\Wrappers\EntityListResponse;
+use Drupal\thunder_gqls\Wrappers\SearchApiResponse;
 use GraphQL\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -23,52 +26,67 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
    *
    * @var \Drupal\Core\Entity\EntityTypeManager
    */
-  protected $entityTypeManager;
+  protected EntityTypeManager $entityTypeManager;
 
   /**
    * The current user.
    *
    * @var \Drupal\Core\Session\AccountInterface
    */
-  protected $currentUser;
+  protected AccountInterface $currentUser;
+
+  /**
+   * The response wrapper service.
+   *
+   * @var \Drupal\thunder_gqls\Wrappers\SearchApiResponse
+   */
+  private SearchApiResponse $responseWrapper;
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
-    return new static(
+    $instance = new static(
       $configuration,
       $plugin_id,
-      $plugin_definition,
-      $container->get('entity_type.manager'),
-      $container->get('current_user')
+      $plugin_definition
     );
+
+    $instance->setEntityTypeManager($container->get('entity_type.manager'));
+    $instance->setCurrentUser($container->get('current_user'));
+    $instance->setResponseWrapper($container->get('thunder_gqls.entity_list_response_wrapper'));
+
+    return $instance;
   }
 
   /**
-   * EntityLoad constructor.
+   * Set the entity type manager service.
    *
-   * @param array $configuration
-   *   The plugin configuration array.
-   * @param string $pluginId
-   *   The plugin id.
-   * @param array $pluginDefinition
-   *   The plugin definition array.
-   * @param \Drupal\Core\Entity\EntityTypeManager $entityTypeManager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager service.
-   * @param \Drupal\Core\Session\AccountInterface $current_user
+   */
+  private function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager): void {
+    $this->entityTypeManager = $entityTypeManager;
+  }
+
+  /**
+   * Set the current user.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $currentUser
    *   The current user.
    */
-  public function __construct(
-    array $configuration,
-    string $pluginId,
-    array $pluginDefinition,
-    EntityTypeManager $entityTypeManager,
-    AccountInterface $current_user,
-  ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->entityTypeManager = $entityTypeManager;
-    $this->currentUser = $current_user;
+  private function setCurrentUser(AccountInterface $currentUser): void {
+    $this->currentUser = $currentUser;
+  }
+
+  /**
+   * Set the response wrapper service.
+   *
+   * @param \Drupal\thunder_gqls\Wrappers\SearchApiResponse $responseWrapper
+   *   The response wrapper service.
+   */
+  private function setResponseWrapper(SearchApiResponse $responseWrapper): void {
+    $this->responseWrapper = $responseWrapper;
   }
 
   /**
@@ -200,6 +218,19 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
       'field' => $publishedKey,
       'value' => '1',
     ];
+  }
+
+  /**
+   * The entity list response.
+   *
+   * @param \Drupal\Core\Entity\Query\QueryInterface $query
+   *   The entity query.
+   *
+   * @return \Drupal\thunder_gqls\Wrappers\EntityListResponse The search api response.
+   *   The entity list response.
+   */
+  protected function entityListResponse(QueryInterface $query): EntityListResponse {
+    return $this->responseWrapper->setQuery($query);
   }
 
 }
