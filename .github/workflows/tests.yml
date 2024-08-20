@@ -28,6 +28,7 @@ env:
   DRUPAL_TESTING_PARALLEL_TESTING: false
   MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://127.0.0.1:9515"]'
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
+  BROWSERTEST_OUTPUT_DIRECTORY: /tmp/test_output
   SKIP_TEST_CLEANUP: true
   # The following variable set the version that the upgrade test starts with.
   DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION: 3.0.12
@@ -167,6 +168,12 @@ jobs:
         env:
           THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
           DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
+
+      - name: Upload test output
+        uses: actions/upload-artifact@v4
+        with:
+          name: output-${{ matrix.PHP_VERSION }}
+          path: ${{BROWSERTEST_OUTPUT_DIRECTORY}}
 
   test-upgrade:
 
