@@ -3,6 +3,7 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\graphql\GraphQL\Execution\FieldContext;
+use Drupal\search_api\Query\QueryInterface;
 use Drupal\thunder_gqls\Wrappers\SearchApiResponse;
 
 /**
@@ -28,6 +29,12 @@ use Drupal\thunder_gqls\Wrappers\SearchApiResponse;
  *       label = @Translation("Search Api Index"),
  *       required = TRUE
  *     ),
+ *     "sortBy" = @ContextDefinition("map",
+ *        label = @Translation("Sorts"),
+ *        multiple = TRUE,
+ *        required = FALSE,
+ *        default_value = {}
+ *       ),
  *     "conditions" = @ContextDefinition("map",
  *       label = @Translation("Filter conditions"),
  *       multiple = TRUE,
@@ -52,6 +59,8 @@ class ThunderSearchApi extends ThunderSearchApiProducerBase {
    *   Offset of the query.
    * @param string $index
    *   Id of the search api index.
+   * @param array|null $sortBy
+   *   List of sorts.
    * @param array|null $conditions
    *   List of conditions to filter the result.
    * @param string|null $search
@@ -68,14 +77,39 @@ class ThunderSearchApi extends ThunderSearchApiProducerBase {
     int $limit,
     int $offset,
     string $index,
+    ?array $sortBy,
     ?array $conditions,
     ?string $search,
     FieldContext $cacheContext,
   ): ?SearchApiResponse {
+
+    // Add default conditions.
+    $conditions = $conditions ?: [
+      [
+        'field' => 'status',
+        'value' => TRUE,
+        'operator' => '=',
+      ],
+      [
+        'field' => 'search_api_language',
+        'value' => $this->languageManager->getCurrentLanguage()->getId(),
+        'operator' => '=',
+      ],
+    ];
+
+    // Add default sorts.
+    $sortBy = $sortBy ?: [
+      [
+        'field' => 'search_api_relevance',
+        'direction' => QueryInterface::SORT_DESC,
+      ],
+    ];
+
     $query = $this->buildBaseQuery(
       $limit,
       $offset,
       $index,
+      $sortBy,
       $conditions,
       $search,
       $cacheContext

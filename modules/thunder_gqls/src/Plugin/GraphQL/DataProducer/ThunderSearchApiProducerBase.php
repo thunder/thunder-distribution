@@ -118,6 +118,7 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
     int $limit,
     int $offset,
     string $index,
+    ?array $sortBy,
     ?array $conditions,
     ?string $search,
     FieldContext $cacheContext,
@@ -141,17 +142,15 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
       return NULL;
     }
 
-    $defaultConditions = [
-      'status' => TRUE,
-      'search_api_language' => $this->languageManager->getCurrentLanguage()->getId(),
-    ];
-
-    $conditions = array_merge($defaultConditions, $conditions);
-
     $query = $searchIndex->query();
 
-    foreach ($conditions as $field => $value) {
-      $query->addCondition($field, $value);
+    foreach ($conditions as $condition) {
+      $query->addCondition($condition['field'], $condition['value'], $condition['operator']);
+    }
+
+    foreach ($sortBy as $sort) {
+      $direction = $sort['direction'] ?? QueryInterface::SORT_ASC;
+      $query->sort($sort['field'], $direction);
     }
 
     if (!empty($search)) {
@@ -159,7 +158,6 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
     }
 
     $query->range($offset, $limit);
-    $query->sort('search_api_relevance', QueryInterface::SORT_DESC);
 
     $cacheContext->addCacheTags($searchIndex->getCacheTags());
     $cacheContext->addCacheContexts($searchIndex->getCacheContexts());

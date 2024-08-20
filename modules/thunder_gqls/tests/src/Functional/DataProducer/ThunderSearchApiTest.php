@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\thunder_gqls\Functional\DataProducer;
 
+use Drupal\search_api\Query\QueryInterface;
 use Drupal\Tests\graphql\Traits\DataProducerExecutionTrait;
 use Drupal\Tests\thunder_gqls\Functional\ThunderGqlsTestBase;
 
@@ -34,20 +35,36 @@ class ThunderSearchApiTest extends ThunderGqlsTestBase {
     $this->assertSession()->statusCodeEquals(200);
     $this->checkForMetaRefresh();
 
-    $result = $this->executeDataProducer('thunder_search_api', [
+    $options = [
       'index' => 'content',
-      'search' => 'Drupal',
+      'search' => 'the',
       'limit' => 10,
       'offset' => 0,
-    ]);
+    ];
 
-    $this->assertEquals(2, $result->total());
+    $result = $this->executeDataProducer('thunder_search_api', $options);
+
+    $this->assertEquals(3, $result->total());
 
     /** @var \GraphQL\Deferred $items */
     $items = $result->items();
     $items->runQueue();
-    $this->assertCount(2, $items->result);
-    $this->assertEquals('Come to DrupalCon New Orleans', $items->result[0]->getTitle());
+    $this->assertEquals('Burda Launches Open-Source CMS Thunder', $items->result[0]->getTitle());
+
+    // Change sort order.
+    $options['sortBy'] = [
+      [
+        'field' => 'search_api_relevance',
+        'direction' => QueryInterface::SORT_ASC,
+      ],
+    ];
+
+    $this->container->get('kernel')->rebuildContainer();
+    $result = $this->executeDataProducer('thunder_search_api', $options);
+    /** @var \GraphQL\Deferred $items */
+    $items = $result->items();
+    $items->runQueue();
+    $this->assertEquals('Legal notice', $items->result[0]->getTitle());
   }
 
 }
