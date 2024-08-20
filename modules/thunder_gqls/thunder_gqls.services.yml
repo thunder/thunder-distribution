@@ -3,3 +3,6 @@ services:
     autowire: true
   thunder_gqls.buffer.search_api_result:
     class: Drupal\thunder_gqls\GraphQL\Buffers\SearchApiResultBuffer
+  Drupal\thunder_gqls\GraphQL\Buffers\SearchApiResultBuffer: '@thunder_gqls.buffer.search_api_result'
+  thunder_gqls.search_api_response:
+    class: Drupal\thunder_gqls\Wrappers\SearchApiResponse

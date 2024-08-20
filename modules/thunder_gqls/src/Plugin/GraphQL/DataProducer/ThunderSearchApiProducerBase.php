@@ -38,9 +38,9 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
   /**
    * The class resolver service.
    *
-   * @var \Drupal\Core\DependencyInjection\ClassResolverInterface
+   * @var \Drupal\thunder_gqls\Wrappers\SearchApiResponse
    */
-  private ClassResolverInterface $classResolver;
+  private SearchApiResponse $responseWrapper;
 
   /**
    * {@inheritdoc}
@@ -59,7 +59,7 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
 
     $instance->setEntityTypeManager($container->get('entity_type.manager'));
     $instance->setLanguageManager($container->get('language_manager'));
-    $instance->setClassResolver($container->get('class_resolver'));
+    $instance->setResponseWrapper($container->get('thunder_gqls.search_api_response'));
 
     return $instance;
   }
@@ -70,7 +70,7 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager service.
    */
-  public function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager): void {
+  private function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager): void {
     $this->entityTypeManager = $entityTypeManager;
   }
 
@@ -80,18 +80,18 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
    * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
    *   The language manager service.
    */
-  public function setLanguageManager(LanguageManagerInterface $languageManager): void {
+  private function setLanguageManager(LanguageManagerInterface $languageManager): void {
     $this->languageManager = $languageManager;
   }
 
   /**
    * Set the class resolver service.
    *
-   * @param \Drupal\Core\DependencyInjection\ClassResolverInterface $classResolver
+   * @param \Drupal\thunder_gqls\Wrappers\SearchApiResponse $responseWrapper
    *   The class resolver service.
    */
-  public function setClassResolver(ClassResolverInterface $classResolver): void {
-    $this->classResolver = $classResolver;
+  private function setResponseWrapper(SearchApiResponse $responseWrapper): void {
+    $this->responseWrapper = $responseWrapper;
   }
 
   /**
@@ -178,9 +178,7 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
    *   The search api response.
    */
   protected function searchApiResponse(QueryInterface $query): SearchApiResponse {
-    return $this->classResolver
-      ->getInstanceFromDefinition(SearchApiResponse::class)
-      ->setQuery($query);
+    return $this->responseWrapper->setQuery($query);
   }
 
 }

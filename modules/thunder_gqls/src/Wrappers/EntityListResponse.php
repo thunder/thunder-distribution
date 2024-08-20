@@ -18,7 +18,7 @@ class EntityListResponse implements EntityListResponseInterface, ContainerInject
    *
    * @var \Drupal\Core\Entity\Query\QueryInterface
    */
-  protected QueryInterface $query;
+  private QueryInterface $query;
 
   /**
    * The entity buffer.
@@ -34,6 +34,7 @@ class EntityListResponse implements EntityListResponseInterface, ContainerInject
    */
   public function __construct(QueryInterface|EntityBuffer $parameter) {
     if ($parameter instanceof QueryInterface) {
+      @trigger_error('Calling the constructor with the query parameter is deprecated. Use service injection instead of directly instantiating and then use ::setQuery() instead.', E_USER_DEPRECATED);
       $this->setQuery($parameter);
       return;
     }

@@ -30,7 +30,7 @@ class SearchApiResponse implements SearchApiResponseInterface, ContainerInjectio
    *
    * @var \Drupal\search_api\Query\ResultSetInterface|null
    */
-  protected ?ResultSetInterface $result;
+  protected ?ResultSetInterface $result = NULL;
 
   /**
    * Array of Facets.
@@ -62,7 +62,6 @@ class SearchApiResponse implements SearchApiResponseInterface, ContainerInjectio
    *   The entity type manager.
    */
   public function __construct(protected SearchApiResultBuffer $buffer, protected EntityFieldManagerInterface $entityFieldManager) {
-    $this->result = NULL;
   }
 
   /**
