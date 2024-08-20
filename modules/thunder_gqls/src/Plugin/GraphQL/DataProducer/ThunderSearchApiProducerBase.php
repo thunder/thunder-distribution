@@ -102,6 +102,8 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
    *   Offset of the query.
    * @param string $index
    *   Id of the search api index.
+   * @param array|null $sortBy
+   *   List of sorts.
    * @param array|null $conditions
    *   List of conditions to filter the result.
    * @param string|null $search
