@@ -2,6 +2,7 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
+use Drupal\Core\Language\LanguageInterface;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\search_api\Query\QueryInterface;
 use Drupal\thunder_gqls\Wrappers\SearchApiResponse;
@@ -92,7 +93,7 @@ class ThunderSearchApi extends ThunderSearchApiProducerBase {
       ],
       [
         'field' => 'search_api_language',
-        'value' => $this->languageManager->getCurrentLanguage()->getId(),
+        'value' => $this->languageManager->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId(),
         'operator' => '=',
       ],
     ];
