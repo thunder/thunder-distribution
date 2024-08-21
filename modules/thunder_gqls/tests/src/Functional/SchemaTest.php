@@ -150,16 +150,23 @@ GQL;
         page(path: \$path) {
           entityLinks {
             versionHistory
+            editForm
+            canonical
           }
         }
       }
 GQL;
 
-    $variables = ['path' => 'news'];
+    $variables = ['path' => 'user/1'];
     $response = $this->query($query, Json::encode($variables));
     $page = $this->jsonDecode($response->getBody());
     $this->assertArrayNotHasKey('errors', $page);
+    // A null value means that the entity does not have the link.
     $this->assertNull($page['data']['page']['entityLinks']['versionHistory']);
+    // An empty string means that the user does not have access.
+    $this->assertSame('', $page['data']['page']['entityLinks']['editForm']);
+    // A working entity link.
+    $this->assertSame('/user/1', $page['data']['page']['entityLinks']['canonical']);
 
   }
 

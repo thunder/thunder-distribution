@@ -22,6 +22,8 @@ settings:
       - '|'
       - heading
       - '|'
+      - splitParagraph
+      - '|'
       - sourceEditing
   plugins:
     ckeditor5_heading:
