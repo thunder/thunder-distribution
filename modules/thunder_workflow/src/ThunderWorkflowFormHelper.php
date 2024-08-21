@@ -216,6 +216,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
    *   The node entity.
    */
   public function displayPublishedinformation(array &$form, NodeInterface $entity): void {
+    /** @var \Drupal\node\Entity\Node $entity */
     /** @var \Drupal\content_moderation\ContentModerationState $state */
     $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
 
