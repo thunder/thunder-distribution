@@ -23,14 +23,6 @@ class ThunderSearchApiSchemaExtension extends ThunderSchemaExtensionPluginBase {
   public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 
-    $this->addFieldResolverIfNotExists('Query', 'search',
-      $this->builder->produce('thunder_search_api')
-        ->map('search', $this->builder->fromArgument('search'))
-        ->map('index', $this->builder->fromArgument('index'))
-        ->map('limit', $this->builder->fromArgument('limit'))
-        ->map('offset', $this->builder->fromArgument('offset'))
-    );
-
     $this->addFieldResolverIfNotExists('SearchApiResult', 'total',
       $this->builder->callback(function (SearchApiResponse $result) {
         return $result->total();
