@@ -87,11 +87,6 @@ class EntityListResponse implements EntityListResponseInterface, ContainerInject
       return [];
     }
 
-    if (empty($this->buffer)) {
-      // phpcs:ignore
-      $this->buffer = \Drupal::service('graphql.buffer.entity');
-    }
-
     $callback = $this->buffer->add($this->query->getEntityTypeId(), array_values($result));
     return new Deferred(fn() => $callback());
   }
