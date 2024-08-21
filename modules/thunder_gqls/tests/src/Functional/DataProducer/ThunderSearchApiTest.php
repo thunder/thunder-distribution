@@ -64,7 +64,7 @@ class ThunderSearchApiTest extends ThunderGqlsTestBase {
     $items->runQueue();
     $this->assertEquals('Legal notice', $items->result[0]->getTitle());
 
-    // Get articles only
+    // Get articles only.
     $options['conditions'] = [
       [
         'field' => 'type',
