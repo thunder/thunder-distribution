@@ -8,14 +8,14 @@ use Drupal\search_api\Query\QueryInterface;
 use Drupal\thunder_gqls\Wrappers\SearchApiResponse;
 
 /**
- * Produces an entity list.
+ * Produces a search api response from a search query.
  *
  * @DataProducer(
  *   id = "thunder_search_api",
  *   name = @Translation("Search api query"),
  *   description = @Translation("Loads a list of entities from search api."),
  *   produces = @ContextDefinition("any",
- *     label = @Translation("Entity list")
+ *     label = @Translation("Search API Response")
  *   ),
  *   consumes = {
  *     "limit" = @ContextDefinition("integer",

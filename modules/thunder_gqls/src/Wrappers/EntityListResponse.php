@@ -30,7 +30,7 @@ class EntityListResponse implements EntityListResponseInterface, ContainerInject
   /**
    * EntityListResponse constructor.
    *
-   * @param \Drupal\Core\Entity\Query\QueryInterface|\Drupal\graphql\GraphQL\Buffers\EntityBuffer $parameter
+   * @param \Drupal\Core\Entity\Query\QueryInterface|\Drupal\graphql\GraphQL\Buffers\EntityBuffer $buffer
    *   The query or buffer parameter.
    */
   public function __construct(QueryInterface|EntityBuffer $buffer) {

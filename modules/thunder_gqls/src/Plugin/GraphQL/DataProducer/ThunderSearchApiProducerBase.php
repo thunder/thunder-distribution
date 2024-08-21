@@ -160,9 +160,7 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
     }
 
     $query->range($offset, $limit);
-
-    $cacheContext->addCacheTags($searchIndex->getCacheTags());
-    $cacheContext->addCacheContexts($searchIndex->getCacheContexts());
+    $cacheContext->addCacheableDependency($searchIndex);
 
     return $query;
   }
