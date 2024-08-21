@@ -43,10 +43,8 @@ class ThunderSearchApiTest extends ThunderGqlsTestBase {
     ];
 
     $result = $this->executeDataProducer('thunder_search_api', $options);
-
     $this->assertEquals(3, $result->total());
 
-    /** @var \GraphQL\Deferred $items */
     $items = $result->items();
     $items->runQueue();
     $this->assertEquals('Burda Launches Open-Source CMS Thunder', $items->result[0]->getTitle());
@@ -61,10 +59,27 @@ class ThunderSearchApiTest extends ThunderGqlsTestBase {
 
     $this->container->get('kernel')->rebuildContainer();
     $result = $this->executeDataProducer('thunder_search_api', $options);
-    /** @var \GraphQL\Deferred $items */
+
     $items = $result->items();
     $items->runQueue();
     $this->assertEquals('Legal notice', $items->result[0]->getTitle());
+
+    // Get articles only
+    $options['conditions'] = [
+      [
+        'field' => 'type',
+        'value' => 'article',
+        'operator' => '=',
+      ],
+    ];
+
+    $this->container->get('kernel')->rebuildContainer();
+    $result = $this->executeDataProducer('thunder_search_api', $options);
+
+    $items = $result->items();
+    $items->runQueue();
+    $this->assertEquals('Come to DrupalCon New Orleans', $items->result[0]->getTitle());
+
   }
 
 }
