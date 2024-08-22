@@ -66,7 +66,6 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
     $this->setCurrentUser($currentUser);
   }
 
-
   /**
    * {@inheritdoc}
    */
