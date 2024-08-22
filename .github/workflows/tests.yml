@@ -164,9 +164,6 @@ jobs:
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
-      - name: Create test output dir
-        run: mkdir ${{ env.BROWSERTEST_OUTPUT_DIRECTORY }}
-
       - name: Run tests
         run: test-drupal-project run_tests
         env:
