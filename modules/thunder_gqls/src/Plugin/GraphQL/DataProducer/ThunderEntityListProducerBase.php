@@ -38,7 +38,34 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
    *
    * @var \Drupal\thunder_gqls\Wrappers\EntityListResponse
    */
-  private EntityListResponse $responseWrapper;
+  protected EntityListResponse $responseWrapper;
+
+  /**
+   * ThunderEntityListProducerBase constructor.
+   *
+   * @param array $configuration
+   *   The plugin configuration array.
+   * @param string $pluginId
+   *   The plugin id.
+   * @param array $pluginDefinition
+   *   The plugin definition array.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager service.
+   * @param \Drupal\Core\Session\AccountInterface $currentUser
+   *   The current user.
+   */
+  public function __construct(
+    array $configuration,
+    string $pluginId,
+    array $pluginDefinition,
+    EntityTypeManagerInterface $entityTypeManager,
+    AccountInterface $currentUser,
+  ) {
+    parent::__construct($configuration, $pluginId, $pluginDefinition);
+    $this->setEntityTypeManager($entityTypeManager);
+    $this->setCurrentUser($currentUser);
+  }
+
 
   /**
    * {@inheritdoc}
@@ -47,11 +74,11 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
     $instance = new static(
       $configuration,
       $plugin_id,
-      $plugin_definition
+      $plugin_definition,
+      $container->get('entity_type.manager'),
+      $container->get('current_user')
     );
 
-    $instance->setEntityTypeManager($container->get('entity_type.manager'));
-    $instance->setCurrentUser($container->get('current_user'));
     $instance->setResponseWrapper($container->get('thunder_gqls.entity_list_response_wrapper'));
 
     return $instance;

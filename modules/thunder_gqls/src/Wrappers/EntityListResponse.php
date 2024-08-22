@@ -18,14 +18,14 @@ class EntityListResponse implements EntityListResponseInterface, ContainerInject
    *
    * @var \Drupal\Core\Entity\Query\QueryInterface
    */
-  private QueryInterface $query;
+  protected QueryInterface $query;
 
   /**
    * The entity buffer.
    *
    * @var \Drupal\graphql\GraphQL\Buffers\EntityBuffer
    */
-  private EntityBuffer $buffer;
+  protected EntityBuffer $buffer;
 
   /**
    * EntityListResponse constructor.
