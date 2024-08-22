@@ -173,16 +173,12 @@ jobs:
           THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
           DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
 
-      - name: Setup tmate
-        uses: mxschmitt/action-tmate@v3
-        if: success() || failure()
-
       - name: Upload test output
         uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
           name: output-${{ matrix.PHP_VERSION }}
-          path: ${{ env.BROWSERTEST_OUTPUT_DIRECTORY }}
+          path: /tmp/test/thunder/install/docroot/sites/simpletest/browser_output/
 
   test-upgrade:
 
