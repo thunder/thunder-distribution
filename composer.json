@@ -91,7 +91,7 @@
         "drupal/paragraphs": "^1.12",
         "drupal/paragraphs_features": "^2.0.0-beta3",
         "drupal/paragraphs_paste": "^2.0-beta3",
-        "drupal/password_policy": "4.0.2",
+        "drupal/password_policy": "^4.0.3",
         "drupal/pathauto": "^1.11",
         "drupal/responsive_preview": "^2.1",
         "drupal/redirect": "^1.7",
