@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.3.3](https://github.com/thunder/thunder-distribution/tree/7.3.3) 2024-08-22
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.2...7.3.3)
+
+Add search api GraphQl schema and data producer.
+
 ## [7.3.2](https://github.com/thunder/thunder-distribution/tree/7.3.2) 2024-08-14
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.1...7.3.2)
