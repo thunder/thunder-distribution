@@ -41,6 +41,23 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
   protected EntityListResponse $responseWrapper;
 
   /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
+    $instance = new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('entity_type.manager'),
+      $container->get('current_user')
+    );
+
+    $instance->setResponseWrapper($container->get('thunder_gqls.entity_list_response_wrapper'));
+
+    return $instance;
+  }
+
+  /**
    * ThunderEntityListProducerBase constructor.
    *
    * @param array $configuration
@@ -64,23 +81,6 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
     parent::__construct($configuration, $pluginId, $pluginDefinition);
     $this->setEntityTypeManager($entityTypeManager);
     $this->setCurrentUser($currentUser);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
-    $instance = new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('entity_type.manager'),
-      $container->get('current_user')
-    );
-
-    $instance->setResponseWrapper($container->get('thunder_gqls.entity_list_response_wrapper'));
-
-    return $instance;
   }
 
   /**
