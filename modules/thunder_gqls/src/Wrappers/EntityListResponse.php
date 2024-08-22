@@ -2,21 +2,51 @@
 
 namespace Drupal\thunder_gqls\Wrappers;
 
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
+use Drupal\graphql\GraphQL\Buffers\EntityBuffer;
 use GraphQL\Deferred;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * The thunder entity list response class.
  */
-readonly class EntityListResponse implements EntityListResponseInterface {
+readonly class EntityListResponse implements EntityListResponseInterface, ContainerInjectionInterface {
+
+  /**
+   * The query interface.
+   *
+   * @var \Drupal\Core\Entity\Query\QueryInterface
+   */
+  protected QueryInterface $query;
 
   /**
    * EntityListResponse constructor.
    *
-   * @param \Drupal\Core\Entity\Query\QueryInterface $query
-   *   The query interface.
+   * @param \Drupal\graphql\GraphQL\Buffers\EntityBuffer $buffer
+   *   The buffer parameter.
    */
-  public function __construct(protected QueryInterface $query) {
+  public function __construct(protected EntityBuffer $buffer) {
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public static function create(ContainerInterface $container): self {
+    return new static(
+      $container->get('graphql.buffer.entity'),
+    );
+  }
+
+  /**
+   * Set query.
+   *
+   * @param \Drupal\Core\Entity\Query\QueryInterface $query
+   *   The query.
+   */
+  public function setQuery(QueryInterface $query): EntityListResponse {
+    $this->query = $query;
+    return $this;
   }
 
   /**
@@ -43,8 +73,7 @@ readonly class EntityListResponse implements EntityListResponseInterface {
       return [];
     }
 
-    $buffer = \Drupal::service('graphql.buffer.entity');
-    $callback = $buffer->add($this->query->getEntityTypeId(), array_values($result));
+    $callback = $this->buffer->add($this->query->getEntityTypeId(), array_values($result));
     return new Deferred(fn() => $callback());
   }
 
