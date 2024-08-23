@@ -29,7 +29,7 @@ env:
   DRUPAL_TESTING_PARALLEL_TESTING: false
   MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://127.0.0.1:9515"]'
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
-  BROWSERTEST_OUTPUT_DIRECTORY: /tmp/test_output
+  BROWSERTEST_OUTPUT_DIRECTORY: /tmp
   SKIP_TEST_CLEANUP: true
   # The following variable set the version that the upgrade test starts with.
   DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION: 3.0.12
@@ -164,8 +164,8 @@ jobs:
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
-      - name: Create test output dir
-        run: mkdir ${{ env.BROWSERTEST_OUTPUT_DIRECTORY }}
+#      - name: Create test output dir
+#        run: mkdir ${{ env.BROWSERTEST_OUTPUT_DIRECTORY }}
 
       - name: Run tests
         run: test-drupal-project run_tests
@@ -177,7 +177,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
-          name: output-${{ matrix.PHP_VERSION }}
+          name: text-max-output-${{ matrix.CHUNK }}-${{ matrix.PHP_VERSION }}
           path: /tmp/test/thunder/install/docroot/sites/simpletest/browser_output/
 
   test-upgrade:
