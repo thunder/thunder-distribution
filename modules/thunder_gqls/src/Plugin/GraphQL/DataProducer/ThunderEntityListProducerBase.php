@@ -2,12 +2,13 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
-use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
+use Drupal\thunder_gqls\Wrappers\EntityListResponse;
 use GraphQL\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -16,43 +17,74 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class ThunderEntityListProducerBase extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
-  public const int MAX_ITEMS = 100;
+  public const MAX_ITEMS = 100;
+
+  /**
+   * The entity type manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected EntityTypeManagerInterface $entityTypeManager;
+
+  /**
+   * The current user.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected AccountInterface $currentUser;
+
+  /**
+   * The response wrapper service.
+   *
+   * @var \Drupal\thunder_gqls\Wrappers\EntityListResponse
+   */
+  protected EntityListResponse $responseWrapper;
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
-    return new static(
+    $instance = new static(
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('entity_type.manager'),
-      $container->get('current_user')
     );
+
+    $instance->setEntityTypeManager($container->get('entity_type.manager'));
+    $instance->setCurrentUser($container->get('current_user'));
+    $instance->setResponseWrapper($container->get('thunder_gqls.entity_list_response_wrapper'));
+
+    return $instance;
   }
 
   /**
-   * EntityLoad constructor.
+   * Set the entity type manager service.
    *
-   * @param array $configuration
-   *   The plugin configuration array.
-   * @param string $plugin_id
-   *   The plugin id.
-   * @param array $plugin_definition
-   *   The plugin definition array.
-   * @param \Drupal\Core\Entity\EntityTypeManager $entityTypeManager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager service.
+   */
+  public function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager): void {
+    $this->entityTypeManager = $entityTypeManager;
+  }
+
+  /**
+   * Set the current user.
+   *
    * @param \Drupal\Core\Session\AccountInterface $currentUser
    *   The current user.
    */
-  public function __construct(
-    array $configuration,
-    string $plugin_id,
-    array $plugin_definition,
-    protected readonly EntityTypeManager $entityTypeManager,
-    protected readonly AccountInterface $currentUser,
-  ) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
+  public function setCurrentUser(AccountInterface $currentUser): void {
+    $this->currentUser = $currentUser;
+  }
+
+  /**
+   * Set the response wrapper service.
+   *
+   * @param \Drupal\thunder_gqls\Wrappers\EntityListResponse $responseWrapper
+   *   The response wrapper service.
+   */
+  public function setResponseWrapper(EntityListResponse $responseWrapper): void {
+    $this->responseWrapper = $responseWrapper;
   }
 
   /**
@@ -147,10 +179,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
     $query->range($offset, $limit);
 
     $storage = $this->entityTypeManager->getStorage($type);
-    $entityType = $storage->getEntityType();
-
-    $cacheContext->addCacheTags($entityType->getListCacheTags());
-    $cacheContext->addCacheContexts($entityType->getListCacheContexts());
+    $cacheContext->addCacheableDependency($storage->getEntityType());
     return $query;
   }
 
@@ -184,6 +213,19 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
       'field' => $publishedKey,
       'value' => '1',
     ];
+  }
+
+  /**
+   * The entity list response.
+   *
+   * @param \Drupal\Core\Entity\Query\QueryInterface $query
+   *   The entity query.
+   *
+   * @return \Drupal\thunder_gqls\Wrappers\EntityListResponse
+   *   The entity list response.
+   */
+  protected function entityListResponse(QueryInterface $query): EntityListResponse {
+    return $this->responseWrapper->setQuery($query);
   }
 
 }
