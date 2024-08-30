@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class ThunderEntityListProducerBase extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
-  public const MAX_ITEMS = 100;
+  public const int MAX_ITEMS = 100;
 
   /**
    * The entity type manager service.
@@ -62,9 +62,9 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
    *
    * @param array $configuration
    *   The plugin configuration array.
-   * @param string $pluginId
+   * @param string $plugin_id
    *   The plugin id.
-   * @param array $pluginDefinition
+   * @param array $plugin_definition
    *   The plugin definition array.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager service.
@@ -191,7 +191,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
         if (!empty($sort['field'])) {
           if (!empty($sort['direction']) && strtolower(
               $sort['direction']
-            ) == 'desc') {
+            ) === 'desc') {
             $direction = 'DESC';
           }
           else {

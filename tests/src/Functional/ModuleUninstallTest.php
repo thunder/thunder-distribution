@@ -16,11 +16,10 @@ class ModuleUninstallTest extends ThunderTestBase {
    *
    * @var string[][]
    */
-  protected static $moduleLists = [
+  protected static array $moduleLists = [
     ['diff'],
     ['content_lock'],
     ['access_unpublished'],
-    ['responsive_preview'],
     ['length_indicator'],
     ['redirect'],
     ['simple_sitemap'],

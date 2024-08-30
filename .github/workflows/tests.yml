@@ -30,9 +30,9 @@ env:
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   SKIP_TEST_CLEANUP: true
   # The following variable set the version that the upgrade test starts with.
-  DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION: 3.0.12
-  DRUPAL_TESTING_UPGRADE_DRUSH_VERSION: 10.3.6
-  DRUPAL_TESTING_UPGRADE_VERSION: 6.5.4
+  DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION: 4.1.0
+  DRUPAL_TESTING_UPGRADE_DRUSH_VERSION: 12.4.3
+  DRUPAL_TESTING_UPGRADE_VERSION: 7.3.0
 
 jobs:
 
@@ -50,7 +50,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.1', '8.3' ]
+        PHP_VERSION: [ '8.3' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
@@ -187,7 +187,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.1' ]
+        PHP_VERSION: [ '8.3' ]
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-upgrade') || github.event_name == 'schedule' }}
 
@@ -229,7 +229,7 @@ jobs:
 
       - name: Fix the old install
         run: |
-          composer upgrade caxy/php-htmldiff
+          composer upgrade league/container
         working-directory: /tmp/test/thunder/install
         env:
           COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
@@ -249,15 +249,13 @@ jobs:
           composer remove thunder/thunder-distribution --no-update
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
-          composer require "drupal/ckeditor" --no-update
-          composer require "drupal/seven" --no-update
-          composer require "drupal/entity_browser" --no-update
-          composer require "drupal/thunder_admin" --no-update
-          composer require "drupal/shariff" --no-update
-          composer require "drupal/ctools" --no-update
-          composer require "drupal/core-dev:~10.0.0" --no-update
+          composer require "drupal/responsive_preview" --no-update
+          composer require "drupal/slick:^2.7" --no-update
+          composer require "drupal/blazy:^2.14" --no-update
+          composer require "drupal/core-dev:~10.3.0" --no-update
 
           composer update
+          composer install
           composer exec -- drush updb -y
 
           cd docroot
@@ -298,7 +296,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.1' ]
+        PHP_VERSION: [ '8.3' ]
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
 

@@ -19,14 +19,14 @@ class DiffTest extends ThunderJavascriptTestBase {
    *
    * @var int
    */
-  protected static $previousTextColumn = 3;
+  protected static int $previousTextColumn = 3;
 
   /**
    * Column in diff table used for new text.
    *
    * @var int
    */
-  protected static $newTextColumn = 6;
+  protected static int $newTextColumn = 6;
 
   /**
    * Validate diff entry for one field.

@@ -82,7 +82,7 @@ class EntityListResponse implements EntityListResponseInterface, ContainerInject
    * @return array|\GraphQL\Deferred
    *   The entity list.
    */
-  public function items() {
+  public function items(): array|Deferred {
     $result = $this->query->execute();
     if (empty($result)) {
       return [];

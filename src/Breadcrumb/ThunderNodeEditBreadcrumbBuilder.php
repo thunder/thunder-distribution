@@ -36,7 +36,7 @@ class ThunderNodeEditBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     $links[] = Link::createFromRoute($this->t('Home'), '<front>');
     $links[] = Link::createFromRoute($this->t('Overview'), 'system.admin_content');
 
-    if ($route_match->getRouteName() == 'node.add') {
+    if ($route_match->getRouteName() === 'node.add') {
       $links[] = Link::createFromRoute($this->t('Add content'), 'node.add_page');
     }
 

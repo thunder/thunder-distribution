@@ -8,6 +8,7 @@ use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\Entity\Vocabulary;
+use Drupal\taxonomy\TermInterface;
 use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 
 /**
@@ -22,12 +23,12 @@ class EntitiesWithTermTest extends GraphQLTestBase {
    *
    * @var \Drupal\taxonomy\TermInterface
    */
-  protected $parent;
+  protected TermInterface $parent;
 
   /**
    * The taxonomy term reference field name.
    */
-  protected const TAXONOMY_FIELD_NAME = 'taxonomy_field';
+  protected const string TAXONOMY_FIELD_NAME = 'taxonomy_field';
 
   /**
    * {@inheritdoc}
