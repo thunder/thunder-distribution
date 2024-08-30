@@ -80,7 +80,11 @@
                 "drupal/media_library_media_modify",
                 "drupal/focal_point",
                 "drupal/entity_reference_actions",
-                "drupal/paragraphs_features"
+                "drupal/paragraphs_features",
+                "drupal/select2",
+                "drupal/paragraphs_paste",
+                "drupal/ivw_integration",
+                "drupal/update_helper"
             ]
         }
     },
