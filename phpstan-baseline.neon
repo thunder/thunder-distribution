@@ -11,11 +11,6 @@ parameters:
 			path: modules/thunder_gqls/src/Plugin/GraphQL/SchemaExtension/ThunderPagesSchemaExtension.php
 
 		-
-			message: "#^\\\\Drupal calls should be avoided in classes, use dependency injection instead$#"
-			count: 1
-			path: modules/thunder_gqls/src/Wrappers/EntityListResponse.php
-
-		-
 			message: "#^Access to an undefined property Drupal\\\\Tests\\\\thunder_gqls\\\\Kernel\\\\DataProducer\\\\EntityLinksTest\\:\\:\\$node\\.$#"
 			count: 4
 			path: modules/thunder_gqls/tests/src/Kernel/DataProducer/EntityLinksTest.php

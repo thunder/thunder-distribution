@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * The thunder entity list response class.
  */
-readonly class EntityListResponse implements EntityListResponseInterface, ContainerInjectionInterface {
+class EntityListResponse implements EntityListResponseInterface, ContainerInjectionInterface {
 
   /**
    * The query interface.
@@ -26,7 +26,7 @@ readonly class EntityListResponse implements EntityListResponseInterface, Contai
    * @param \Drupal\graphql\GraphQL\Buffers\EntityBuffer $buffer
    *   The buffer parameter.
    */
-  public function __construct(protected EntityBuffer $buffer) {
+  public function __construct(protected readonly EntityBuffer $buffer) {
   }
 
   /**
