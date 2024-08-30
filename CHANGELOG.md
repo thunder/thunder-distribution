@@ -1,5 +1,26 @@
 # Changelog
 
+## [7.3.3](https://github.com/thunder/thunder-distribution/tree/7.3.3) 2024-08-22
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.2...7.3.3)
+
+Add search api GraphQl schema and data producer.
+
+## [7.3.2](https://github.com/thunder/thunder-distribution/tree/7.3.2) 2024-08-14
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.1...7.3.2)
+
+* [Issue #3462165: Add focal_point patch](https://www.drupal.org/node/3462165)
+
+## [7.3.1](https://github.com/thunder/thunder-distribution/tree/7.3.1) 2024-06-024
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.0...7.3.1)
+
+Add patches for upstream issues.
+
+* [Issue #3465364: Fatal error when changing password when password_policy_history is enabled](https://www.drupal.org/project/password_policy/issues/3465364)
+* [Issue #3455558: There is no visible change to a toggle when pressed (but it does trigger conditional fields, value is saved, etc)](https://www.drupal.org/project/gin/issues/3455558)
+
 ## [7.3.0](https://github.com/thunder/thunder-distribution/tree/7.1.0) 2024-06-024
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.2.2...7.3.0)
