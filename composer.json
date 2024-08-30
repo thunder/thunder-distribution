@@ -127,7 +127,7 @@
         "drupal/gin": "3.0-rc11",
         "drupal/gin_toolbar": "^1.0-rc6",
         "drupal/graphql": "^4.7",
-        "drupal/inline_entity_form": "^3.0",
+        "drupal/inline_entity_form": "^3.0.0@rc",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.2",
         "drupal/linkit": "^6.0-beta4",
