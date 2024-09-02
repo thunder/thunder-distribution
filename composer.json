@@ -75,7 +75,6 @@
                 "drupal/vgwort",
                 "drupal/media_entity_slideshow",
                 "drupal/media_entity_twitter",
-                "drupal/media_entity_instagram",
                 "drupal/metatag_async_widget",
                 "drupal/media_library_media_modify",
                 "drupal/focal_point",
@@ -84,7 +83,6 @@
                 "drupal/select2",
                 "drupal/paragraphs_paste",
                 "drupal/ivw_integration",
-                "drupal/update_helper",
                 "thunder/thunder_testing_demo"
             ]
         }
@@ -117,7 +115,7 @@
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.2",
         "drupal/linkit": "^7.0.0-alpha1",
-        "drupal/media_entity_instagram": "^3.0.3",
+        "drupal/media_entity_instagram": "^4.0",
         "drupal/media_entity_pinterest": "^2.7",
         "drupal/media_entity_slideshow": "^2.0-alpha1",
         "drupal/media_entity_twitter": "^2.5",
