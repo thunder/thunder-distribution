@@ -84,7 +84,8 @@
                 "drupal/select2",
                 "drupal/paragraphs_paste",
                 "drupal/ivw_integration",
-                "drupal/update_helper"
+                "drupal/update_helper",
+                "thunder/thunder_testing_demo"
             ]
         }
     },
