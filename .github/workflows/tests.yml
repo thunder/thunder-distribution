@@ -88,7 +88,7 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Add necessary packages to lenient
-        run: composer config --json extra.drupal-lenient.allowed-list '["drupal/autosave_form", "drupal/vgwort", "drupal/media_entity_slideshow", "drupal/media_entity_twitter", "drupal/metatag_async_widget", "drupal/media_library_media_modify", "drupal/focal_point", "drupal/entity_reference_actions", "drupal/paragraphs_features", "drupal/select2", "drupal/paragraphs_paste", "drupal/ivw_integration", "thunder/thunder_testing_demo"]'
+        run: composer config --json extra.drupal-lenient.allowed-list '["drupal/autosave_form", "drupal/vgwort", "drupal/media_entity_slideshow", "drupal/media_entity_twitter", "drupal/metatag_async_widget", "drupal/media_library_media_modify", "drupal/paragraphs_features", "drupal/select2", "drupal/paragraphs_paste", "drupal/ivw_integration", "thunder/thunder_testing_demo"]'
         working-directory: /tmp/test/thunder/install
 
       - name: Build the docroot

@@ -56,9 +56,6 @@
             "drupal/media_library_media_modify": {
                 "#3455257: D11": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/58.diff"
             },
-            "drupal/entity_reference_actions": {
-                "#3443663: D11": "https://git.drupalcode.org/project/focal_point/-/merge_requests/25.diff"
-            },
             "drupal/paragraphs_features": {
                 "#3433828: D11": "https://www.drupal.org/files/issues/2024-03-24/paragraphs_features.2.0.0-beta4.rector.patch"
             },
@@ -77,8 +74,6 @@
                 "drupal/media_entity_twitter",
                 "drupal/metatag_async_widget",
                 "drupal/media_library_media_modify",
-                "drupal/focal_point",
-                "drupal/entity_reference_actions",
                 "drupal/paragraphs_features",
                 "drupal/select2",
                 "drupal/paragraphs_paste",
