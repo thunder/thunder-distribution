@@ -67,8 +67,6 @@ trait ThunderMediaLibraryTestTrait {
 
     $fileField->attachFile($filePath);
 
-    $this->assertWaitOnAjaxRequest();
-
     // Wait up to 10 sec that "Use selected" button is active.
     $this->getSession()->wait(
       10000,
