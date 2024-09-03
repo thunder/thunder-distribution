@@ -19,7 +19,7 @@ class ThunderTestSuite extends TestSuite {
   public static function suite(): self {
     $root = dirname(__DIR__, 3);
 
-    $suite = new static('thunder');
+    $suite = static::empty('thunder');
 
     // Extensions' tests will always be in the namespace
     // Drupal\Tests\$extension_name\$suite_namespace\ and be in the
