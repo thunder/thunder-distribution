@@ -59,6 +59,9 @@
             "drupal/paragraphs_features": {
                 "#3433828: D11": "https://www.drupal.org/files/issues/2024-03-24/paragraphs_features.2.0.0-beta4.rector.patch"
             },
+            "drupal/select2": {
+                "#3454104: D11": "https://git.drupalcode.org/project/select2/-/merge_requests/38.diff"
+            },
             "drupal/focal_point": {
                 "Issue #3462165: Preview results in Error: Call to a member function getDefinitions() on null": "https://www.drupal.org/files/issues/2024-07-18/Preview-results-in-Error-3462165.patch"
             },
@@ -135,7 +138,7 @@
         "drupal/token": "^1.7",
         "drupal/update_helper": "^2.0||^3.0.3||^4.0",
         "drupal/search_api": "^1.29",
-        "drupal/views_bulk_edit": "^2.5",
+        "drupal/views_bulk_edit": "^3.0",
         "drupal/views_bulk_operations": "^4.2.7",
         "drupal/vgwort": "^2.0@beta",
         "drupal/xymatic": "^1.0@beta",
@@ -143,7 +146,7 @@
         "npm-asset/exif-js": "^2.3.0",
         "npm-asset/blazy": "^1.8",
         "npm-asset/slick-carousel": "^1.8",
-        "npm-asset/select2": "^4.0.7",
+        "npm-asset/select2": "dev-develop",
         "caxy/php-htmldiff": "^0.1.14",
         "webonyx/graphql-php": "^14.11.8"
     },
