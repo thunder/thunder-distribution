@@ -132,7 +132,7 @@
         "drupal/scheduler": "^2.1.0",
         "drupal/scheduler_content_moderation_integration": "^3.0.1",
         "drupal/schema_metatag": "^3.0.3",
-        "drupal/select2": "^1.7",
+        "drupal/select2": "dev-1.x",
         "drupal/search_api_mark_outdated": "^1.0",
         "drupal/simple_sitemap": "^4.2.1",
         "drupal/token": "^1.7",
