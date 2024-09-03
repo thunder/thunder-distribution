@@ -23,15 +23,6 @@ trait ThunderMediaLibraryTestTrait {
   }
 
   /**
-   * Submit changes in media library modal.
-   */
-  public function submitMediaLibrary(): void {
-    $this->clickCssSelector('.media-library-widget-modal .form-actions button');
-
-    $this->assertWaitOnAjaxRequest();
-  }
-
-  /**
    * Upload file inside media library.
    *
    * NOTE: It will search for first tab with upload widget and file will be

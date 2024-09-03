@@ -152,7 +152,8 @@ JS;
     $media = $this->getMediaByName('reference.jpg');
     $this->toggleMedia([$media->id()]);
 
-    $this->submitMediaLibrary();
+    $this->clickCssSelector('.media-library-widget-modal .form-actions button.button--primary');
+    $this->assertWaitOnAjaxRequest();
 
     $this->clickSave();
 
