@@ -50,7 +50,6 @@ trait ThunderArticleTestTrait {
     $jsScript = "(() => { const elements = document.querySelectorAll('details.js-form-wrapper.form-wrapper:not([open]) > summary'); elements.forEach((elem) => { elem.click(); }); elements.length; })()";
 
     $numOfOpen = $this->getSession()->evaluateScript($jsScript);
-    $this->assertWaitOnAjaxRequest();
 
     for ($i = 0; $i < $maxLevel && $numOfOpen > 0; $i++) {
       $numOfOpen = $this->getSession()->evaluateScript($jsScript);
