@@ -27,7 +27,7 @@ class ImageUploadTest extends ThunderJavascriptTestBase {
     $this->assertWaitOnAjaxRequest();
 
     $this->clickCssSelector('.media-library-widget-modal .form-actions button.button--primary');
-    $this->assertExpectedAjaxRequest(NULL);
+    $this->assertSession()->assertExpectedAjaxRequest(1);
 
     $this->assertSession()->elementTextContains('css', '.media-library-item__name', 'reference.webp');
   }
