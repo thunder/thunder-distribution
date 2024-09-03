@@ -1,7 +1,7 @@
 name: 'Thunder Translation'
 description: 'Enable your editors to translate your content in multiple languages.'
 type: module
-core_version_requirement: ^10
+core_version_requirement: ^11
 package: Thunder Optional
 dependencies:
   - drupal:content_translation
