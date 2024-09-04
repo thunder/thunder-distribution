@@ -80,9 +80,8 @@ class ModeratedContentTest extends ThunderTestBase {
     ], 'Save');
 
     $this->drupalGet($node->toUrl('edit-form'));
-
     // Test, that hook_form_alter successfully moved moderation_state field.
-    $this->assertSession()->elementExists('css', '[data-drupal-selector="edit-actions"] > [data-drupal-selector="edit-moderation-state-wrapper"]');
+    $this->assertSession()->elementExists('css', '[data-drupal-selector="edit-gin-actions"] > [data-drupal-selector="edit-moderation-state-wrapper"]');
 
     $this->submitForm([
       'title[0][value]' => 'Test workflow article in draft 2',

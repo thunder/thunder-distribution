@@ -43,9 +43,6 @@
             },
             "drupal/focal_point": {
                 "Issue #3462165: Preview results in Error: Call to a member function getDefinitions() on null": "https://www.drupal.org/files/issues/2024-07-18/Preview-results-in-Error-3462165.patch"
-            },
-            "drupal/gin": {
-                "Issue #3455558: There is no visible change to a toggle when pressed (but it does trigger conditional fields, value is saved, etc)": "https://www.drupal.org/files/issues/2024-08-06/3455558-Refactor-toggle-styles-mr438.patch"
             }
         }
     },
@@ -72,7 +69,7 @@
         "drupal/field_group": "^3.4",
         "drupal/focal_point": "2.1.1",
         "drupal/facets": "^2.0.6",
-        "drupal/gin": "3.0-rc11",
+        "drupal/gin": "^3.0-rc13",
         "drupal/gin_toolbar": "^1.0-rc6",
         "drupal/graphql": "^4.7",
         "drupal/inline_entity_form": "^1.0-rc14",
