@@ -21,7 +21,6 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
     'media_library_media_modify',
     'gin_toolbar',
     'jquery_ui',
-    'jquery_ui_draggable',
     'ckeditor5',
   ]);
 
@@ -114,4 +113,15 @@ function thunder_post_update_0002_enable_paragraphs_split(array &$sandbox): stri
 
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
+}
+
+/**
+ * Enable sticky action buttons for the Gin theme.
+ */
+function thunder_post_update_0003_enable_sticky_action_buttons(array &$sandbox): string {
+  \Drupal::configFactory()->getEditable('gin.settings')
+    ->set('sticky_action_buttons', TRUE)
+    ->save();
+
+  return t('Sticky action buttons enabled.');
 }
