@@ -56,9 +56,6 @@
             "drupal/media_entity_twitter": {
                 "#3431884: D11": "https://git.drupalcode.org/project/media_entity_twitter/-/merge_requests/13.diff"
             },
-            "drupal/metatag_async_widget": {
-                "#3433378: D11": "https://www.drupal.org/files/issues/2024-03-24/metatag_async_widget.1.1.0.rector.patch"
-            },
             "drupal/media_library_media_modify": {
                 "#3455257: D11": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/58.diff"
             },
@@ -78,10 +75,8 @@
         "drupal-lenient": {
             "allowed-list": [
                 "drupal/autosave_form",
-                "drupal/vgwort",
                 "drupal/media_entity_slideshow",
                 "drupal/media_entity_twitter",
-                "drupal/metatag_async_widget",
                 "drupal/media_library_media_modify",
                 "drupal/paragraphs_features",
                 "drupal/select2",
