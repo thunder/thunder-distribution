@@ -157,7 +157,7 @@ class EntitiesWithTermTest extends GraphQLTestBase {
    *
    * @see ::testEntityWithTerms()
    */
-  public function providerEntityWithTerms() : array {
+  public static function providerEntityWithTerms() : array {
     return [
       'query without depth' => [
         [
