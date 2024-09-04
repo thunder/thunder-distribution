@@ -83,8 +83,7 @@
                 "drupal/paragraphs_features",
                 "drupal/select2",
                 "drupal/paragraphs_paste",
-                "drupal/ivw_integration",
-                "thunder/thunder_testing_demo"
+                "drupal/ivw_integration"
             ]
         }
     },
@@ -169,7 +168,7 @@
     },
     "require-dev": {
         "burdamagazinorg/thunder-dev-tools": "dev-master",
-        "thunder/thunder_testing_demo": "4.x-dev",
+        "thunder/thunder_testing_demo": "dev-d11-readiness",
         "mglaman/phpstan-drupal": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0"
     }
