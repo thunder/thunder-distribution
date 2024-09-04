@@ -28,10 +28,6 @@ class ImageUploadTest extends ThunderJavascriptTestBase {
     $this->clickCssSelector('.media-library-widget-modal .form-actions button.button--primary');
     $this->assertExpectedAjaxRequest(1);
 
-//    /** @var \Drupal\FunctionalJavascriptTests\WebDriverWebAssert $assert_session */
-//    $assert_session = $this->assertSession();
-//    $assert_session->assertExpectedAjaxRequest(1);
-
     $this->assertSession()->elementTextContains('css', '.media-library-item__name', 'reference.webp');
   }
 
