@@ -50,6 +50,7 @@ class ThunderRedirectTest extends GraphQLTestBase {
     $this->node = Node::create([
       'title' => 'Title',
       'type' => 'article',
+      'path' => ['alias' => '/article'],
     ]);
 
     $this->node->save();
@@ -60,27 +61,28 @@ class ThunderRedirectTest extends GraphQLTestBase {
    * Test simple redirect and redirect with query string.
    */
   public function testRedirect(): void {
-    $redirectPath = 'redirect-test-path';
+    $redirectSource = 'redirect-test-source';
+    $redirectDestination = '/redirect-test-destination';
 
     /** @var \Drupal\redirect\Entity\Redirect $redirect */
     $redirect = $this->storage->create();
-    $redirect->setSource($redirectPath);
-    $redirect->setRedirect('node/' . $this->node->id());
+    $redirect->setSource($redirectSource);
+    $redirect->setRedirect($redirectDestination);
     $redirect->setStatusCode(301);
     $redirect->save();
 
     $result = $this->executeDataProducer('thunder_redirect', [
-      'path' => $redirectPath,
+      'path' => $redirectSource,
     ]);
 
-    $this->assertEquals('/node/1', $result['url']);
+    $this->assertEquals($redirectDestination, $result['url']);
     $this->assertEquals('301', $result['status']);
 
     $result = $this->executeDataProducer('thunder_redirect', [
-      'path' => $redirectPath . '?test=1',
+      'path' => $redirectSource . '?test=1',
     ]);
 
-    $this->assertEquals('/node/1?test=1', $result['url']);
+    $this->assertEquals($redirectDestination . '?test=1', $result['url']);
     $this->assertEquals('301', $result['status']);
   }
 

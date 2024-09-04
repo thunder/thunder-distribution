@@ -3,9 +3,13 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
+use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Path\PathValidatorInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Render\RenderContext;
+use Drupal\Core\Render\RendererInterface;
+use Drupal\Core\Url;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 use Drupal\redirect\Entity\Redirect;
 use Drupal\redirect\RedirectRepository;
@@ -33,27 +37,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ThunderRedirect extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
   /**
-   * Optional redirect module repository.
-   *
-   * @var \Drupal\redirect\RedirectRepository|null
-   */
-  protected $redirectRepository;
-
-  /**
-   * The language manager.
-   *
-   * @var \Drupal\Core\Language\LanguageManagerInterface
-   */
-  protected $languageManager;
-
-  /**
-   * The path validator.
-   *
-   * @var \Drupal\Core\Path\PathValidatorInterface
-   */
-  protected $pathValidator;
-
-  /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
@@ -65,7 +48,9 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
       $plugin_definition,
       $container->get('language_manager'),
       $container->get('path.validator'),
-      $container->get('redirect.repository', ContainerInterface::NULL_ON_INVALID_REFERENCE)
+      $container->get('renderer'),
+      $container->get('config.factory'),
+      $container->get('redirect.repository', ContainerInterface::NULL_ON_INVALID_REFERENCE),
     );
   }
 
@@ -82,6 +67,10 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    *   The language manager.
    * @param \Drupal\Core\Path\PathValidatorInterface $pathValidator
    *   The path validator.
+   * @param \Drupal\Core\Render\RendererInterface $renderer
+   *   The renderer service.
+   * @param \Drupal\Core\Config\ConfigFactory $config
+   *   The config.
    * @param \Drupal\redirect\RedirectRepository|null $redirectRepository
    *   The redirect repository.
    *
@@ -91,14 +80,13 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
     array $configuration,
     $pluginId,
     $pluginDefinition,
-    LanguageManagerInterface $languageManager,
-    PathValidatorInterface $pathValidator,
-    ?RedirectRepository $redirectRepository = NULL,
+    protected LanguageManagerInterface $languageManager,
+    protected PathValidatorInterface $pathValidator,
+    protected RendererInterface $renderer,
+    protected ConfigFactory $config,
+    protected ?RedirectRepository $redirectRepository = NULL,
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->languageManager = $languageManager;
-    $this->pathValidator = $pathValidator;
-    $this->redirectRepository = $redirectRepository;
   }
 
   /**
@@ -116,6 +104,9 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
     $metadata->addCacheTags(['redirect_list']);
 
     if ($this->redirectRepository) {
+      $redirectConfig = $this->config->get('redirect.settings');
+      $metadata->addCacheTags($redirectConfig->getCacheTags());
+
       $queryString = parse_url($path, PHP_URL_QUERY) ?: '';
       $pathWithoutQuery = parse_url($path, PHP_URL_PATH) ?: $path;
 
@@ -140,6 +131,30 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
           'url' => $redirectUri . (!empty($queryString) ? '?' . $queryString : ''),
           'status' => $redirect->getStatusCode(),
         ];
+      }
+
+      if ($redirectConfig->get('route_normalizer_enabled')) {
+        // Ensure the path starts with a slash, fromUserInput fails otherwise.
+        if (!str_starts_with($path, '/')) {
+          $aliasPath = '/' . $path;
+        }
+        else {
+          $aliasPath = $path;
+        }
+        $context = new RenderContext();
+        $alias = $this->renderer->executeInRenderContext($context, function () use ($aliasPath): string {
+          return Url::fromUserInput($aliasPath)->toString();
+        });
+        if (!$context->isEmpty()) {
+          $metadata->addCacheableDependency($context->pop());
+        }
+
+        if ($alias !== $path) {
+          return [
+            'url' => $alias,
+            'status' => $redirectConfig->get('default_status_code'),
+          ];
+        }
       }
     }
 
