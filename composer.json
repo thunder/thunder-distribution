@@ -47,6 +47,9 @@
             "drupal/autosave_form": {
                 "#3428200: D11": "https://git.drupalcode.org/project/autosave_form/-/merge_requests/14.diff"
             },
+            "drupal/ivw_integration": {
+                "#3431122: D11": "https://www.drupal.org/files/issues/2024-03-17/ivw_integration.8.x-2.5.rector.patch"
+            },
             "drupal/media_entity_slideshow": {
                 "#3431882: D11": "https://www.drupal.org/files/issues/2024-05-30/media_entity_slideshow.2.x-dev.rector.patch"
             },
