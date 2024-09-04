@@ -64,10 +64,10 @@ trait ThunderMediaLibraryTestTrait {
       '(typeof jQuery === "undefined" || !jQuery(\'input[name="op"]\').is(":disabled"))'
     );
 
-    $this->assertWaitOnAjaxRequest();
+    $this->assertExpectedAjaxRequest(1);
     if (!$skipEditForm) {
       $this->assertSession()->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Save and select');
-      $this->assertWaitOnAjaxRequest();
+      $this->assertExpectedAjaxRequest(1);
     }
   }
 
