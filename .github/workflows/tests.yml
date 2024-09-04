@@ -20,7 +20,7 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
   DRUPAL_TESTING_VERBOSE: false
-  DRUPAL_TESTING_VERSION: "dev-remove-verbose-phpunit"
+  DRUPAL_TESTING_VERSION: "dev-parallel-testing"
   DRUPAL_TESTING_TEST_FILTER: ""
   DRUPAL_TESTING_SELENIUM_HOST: 127.0.0.1
   DRUPAL_TESTING_SELENIUM_PORT: 9515
@@ -114,6 +114,9 @@ jobs:
 
     runs-on: ubuntu-24.04
 
+    env:
+      DRUPAL_TESTING_PARALLEL_TESTING: true
+
     services:
       mysql:
         image: mariadb:lts
@@ -131,7 +134,13 @@ jobs:
       fail-fast: false
       matrix:
         PHP_VERSION: [ '8.3' ]
-        CHUNK: [ 1, 2, 3 ]
+        # Set N number of parallel jobs you want to run tests on.
+        # Use higher number if you have slow tests to split them on more parallel jobs.
+        # Remember to update ci_node_index below to 0..N-1
+        ci_node_total: [ 4 ]
+        # set N-1 indexes for parallel jobs
+        # When you run 2 parallel jobs then first job will have index 0, the second job will have index 1 etc
+        ci_node_index: [ 0, 1, 2, 3 ]
 
     steps:
       - uses: actions/checkout@v3
@@ -171,8 +180,12 @@ jobs:
       - name: Run tests
         run: test-drupal-project run_tests
         env:
-          THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
-          DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
+          # Specifies how many jobs you would like to run in parallel,
+          # used for partitioning
+          CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
+          # Use the index from matrix as an environment variable
+          CI_NODE_INDEX: ${{ matrix.ci_node_index }}
+          #DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
 
   test-upgrade:
 
