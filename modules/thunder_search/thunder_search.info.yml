@@ -1,7 +1,7 @@
 name: 'Thunder Search API'
 description: 'Integrates with the Search API module'
 type: module
-core_version_requirement: ^10
+core_version_requirement: ^11
 package: Thunder Optional
 dependencies:
   - search_api:search_api_db

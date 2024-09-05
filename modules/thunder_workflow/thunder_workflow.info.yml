@@ -1,7 +1,7 @@
 name: 'Thunder Workflow'
 description: 'Get an advanced content creation workflow with scheduling functionality.'
 type: module
-core_version_requirement: ^10
+core_version_requirement: ^11
 package: Thunder Optional
 dependencies:
   - drupal:content_moderation

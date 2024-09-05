@@ -41,12 +41,44 @@
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
+            "drupal/autosave_form": {
+                "#3428200: D11": "https://git.drupalcode.org/project/autosave_form/-/merge_requests/14.diff"
+            },
+            "drupal/ivw_integration": {
+                "#3431122: D11": "https://www.drupal.org/files/issues/2024-03-17/ivw_integration.8.x-2.5.rector.patch"
+            },
+            "drupal/media_entity_slideshow": {
+                "#3431882: D11": "https://www.drupal.org/files/issues/2024-05-30/media_entity_slideshow.2.x-dev.rector.patch"
+            },
+            "drupal/media_entity_twitter": {
+                "#3431884: D11": "https://git.drupalcode.org/project/media_entity_twitter/-/merge_requests/13.diff"
+            },
+            "drupal/media_library_media_modify": {
+                "#3455257: D11": "https://git.drupalcode.org/project/media_library_media_modify/-/merge_requests/58.diff"
+            },
+            "drupal/paragraphs_features": {
+                "#3433828: D11": "https://www.drupal.org/files/issues/2024-03-24/paragraphs_features.2.0.0-beta4.rector.patch"
+            },
+            "drupal/select2": {
+                "#3454104: D11": "https://git.drupalcode.org/project/select2/-/merge_requests/38.diff"
+            },
             "drupal/focal_point": {
                 "Issue #3462165: Preview results in Error: Call to a member function getDefinitions() on null": "https://www.drupal.org/files/issues/2024-07-18/Preview-results-in-Error-3462165.patch"
             },
             "drupal/gin": {
                 "Issue #3455558: There is no visible change to a toggle when pressed (but it does trigger conditional fields, value is saved, etc)": "https://www.drupal.org/files/issues/2024-08-06/3455558-Refactor-toggle-styles-mr438.patch"
             }
+        },
+        "drupal-lenient": {
+            "allowed-list": [
+                "drupal/autosave_form",
+                "drupal/media_entity_slideshow",
+                "drupal/media_entity_twitter",
+                "drupal/paragraphs_features",
+                "drupal/select2",
+                "drupal/paragraphs_paste",
+                "drupal/ivw_integration"
+            ]
         }
     },
     "require": {
@@ -55,16 +87,16 @@
         "drupal/access_unpublished": "^1.5",
         "drupal/admin_toolbar": "^3.4",
         "drupal/autofill": "^1.1",
-        "drupal/autosave_form": "^1.6",
+        "drupal/autosave_form": "dev-1.x",
         "drupal/checklistapi": "^2.1.3",
-        "drupal/core-recommended": "~10.3.0@stable",
-        "drupal/config_selector": "^2.1",
-        "drupal/config_update": "^1.7 || ^2.0",
+        "drupal/core-recommended": "~11.0.0",
+        "drupal/config_selector": "^3.0",
+        "drupal/config_update": "^2.0-alpha4",
         "drupal/content_lock": "^3.0.0-alpha2",
         "drupal/crop": "^2.2",
         "drupal/diff": "1.7",
         "drupal/dropzonejs": "^2.8",
-        "drupal/empty_fields": "^1.0-alpha1",
+        "drupal/empty_fields": "^1.0",
         "drupal/entity_reference_actions": "^1.1.1",
         "drupal/entity_reference_revisions": "^1.3",
         "drupal/field_group": "^3.4",
@@ -73,36 +105,36 @@
         "drupal/gin": "3.0-rc11",
         "drupal/gin_toolbar": "^1.0-rc6",
         "drupal/graphql": "^4.7",
-        "drupal/inline_entity_form": "^3.0.0@rc",
+        "drupal/inline_entity_form": "^3.0.0-rc20",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.2",
-        "drupal/linkit": "^6.0-beta4",
-        "drupal/media_entity_instagram": "^3.0.3",
+        "drupal/linkit": "^7.0.0-alpha1",
+        "drupal/media_entity_instagram": "^4.0",
         "drupal/media_entity_pinterest": "^2.7",
         "drupal/media_entity_slideshow": "^2.0-alpha1",
         "drupal/media_entity_twitter": "^2.5",
         "drupal/media_expire": "^2.6",
-        "drupal/media_library_media_modify": "^1.0.0",
+        "drupal/media_library_media_modify": "dev-1.0.x",
         "drupal/media_file_delete": "^1.2",
-        "drupal/metatag": "^1.26",
+        "drupal/metatag": "^2.0.2",
         "drupal/metatag_async_widget": "^1.0-alpha2",
-        "drupal/paragraphs": "^1.12",
+        "drupal/paragraphs": "^1.18",
         "drupal/paragraphs_features": "^2.0.0-beta3",
         "drupal/paragraphs_paste": "^2.0-beta3",
         "drupal/password_policy": "^4.0.3",
         "drupal/pathauto": "^1.12",
         "drupal/responsive_preview": "^2.1",
         "drupal/redirect": "^1.7",
-        "drupal/scheduler": "^2.0.2",
-        "drupal/scheduler_content_moderation_integration": "^2.0",
-        "drupal/schema_metatag": "^2.5",
-        "drupal/select2": "^1.7",
+        "drupal/scheduler": "^2.1.0",
+        "drupal/scheduler_content_moderation_integration": "^3.0.1",
+        "drupal/schema_metatag": "^3.0.3",
+        "drupal/select2": "dev-1.x",
         "drupal/search_api_mark_outdated": "^1.0",
-        "drupal/simple_sitemap": "^4.1.6",
+        "drupal/simple_sitemap": "^4.2.1",
         "drupal/token": "^1.7",
         "drupal/update_helper": "^2.0||^3.0.3||^4.0",
         "drupal/search_api": "^1.29",
-        "drupal/views_bulk_edit": "^2.5",
+        "drupal/views_bulk_edit": "^3.0",
         "drupal/views_bulk_operations": "^4.2.7",
         "drupal/vgwort": "^2.0@beta",
         "drupal/xymatic": "^1.0@beta",
@@ -110,7 +142,7 @@
         "npm-asset/exif-js": "^2.3.0",
         "npm-asset/blazy": "^1.8",
         "npm-asset/slick-carousel": "^1.8",
-        "npm-asset/select2": "^4.0.7",
+        "npm-asset/select2": "dev-develop",
         "caxy/php-htmldiff": "^0.1.14",
         "webonyx/graphql-php": "^14.11.8"
     },
@@ -130,7 +162,7 @@
     },
     "require-dev": {
         "burdamagazinorg/thunder-dev-tools": "dev-master",
-        "thunder/thunder_testing_demo": "4.x-dev",
+        "thunder/thunder_testing_demo": "dev-d11-readiness",
         "mglaman/phpstan-drupal": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0"
     }

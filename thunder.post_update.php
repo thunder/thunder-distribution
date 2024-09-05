@@ -69,10 +69,8 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
     }
   }
 
-  /** @var \Drupal\ckeditor5\SmartDefaultSettings $ckEditorMigration */
   $ckEditorMigration = new SmartDefaultSettings(
     \Drupal::service('plugin.manager.ckeditor5.plugin'),
-    \Drupal::service('plugin.manager.public_ckeditor4to5upgrade.plugin'),
     $updater->logger(),
     \Drupal::service('module_handler'),
     \Drupal::service('current_user'));
