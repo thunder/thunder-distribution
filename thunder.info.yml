@@ -46,7 +46,6 @@ install:
   # contrib
   - access_unpublished:access_unpublished
   - admin_toolbar:admin_toolbar_tools
-  - admin_toolbar:admin_toolbar_links_access_filter
   - autosave_form:autosave_form
   - autofill:autofill
   - content_lock:content_lock

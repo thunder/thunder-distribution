@@ -41,9 +41,6 @@
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
-            "drupal/admin_toolbar": {
-                "#3471798: D11": "https://git.drupalcode.org/project/admin_toolbar/-/merge_requests/98.diff"
-            },
             "drupal/autosave_form": {
                 "#3428200: D11": "https://git.drupalcode.org/project/autosave_form/-/merge_requests/14.diff"
             },
