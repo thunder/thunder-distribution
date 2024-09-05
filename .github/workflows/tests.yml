@@ -12,6 +12,7 @@ on:
 env:
   DRUPAL_TESTING_COMPOSER_PROJECT: thunder/thunder-project
   DRUPAL_TESTING_COMPOSER_PROJECT_VERSION: "^4.0@stable"
+  DRUPAL_TESTING_CLEANUP: false
   DRUPAL_TESTING_DATABASE_USER: root
   DRUPAL_TESTING_DATABASE_PASSWORD: root
   DRUPAL_TESTING_TEST_DUMP_FILE: site-dump.tar.gz
@@ -28,6 +29,7 @@ env:
   DRUPAL_TESTING_PARALLEL_TESTING: false
   MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://127.0.0.1:9515"]'
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
+  BROWSERTEST_OUTPUT_DIRECTORY: /tmp
   SKIP_TEST_CLEANUP: true
   # The following variable set the version that the upgrade test starts with.
   DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION: 3.0.12
@@ -38,7 +40,7 @@ jobs:
 
   build:
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     services:
       mysql:
@@ -50,7 +52,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.1' ]
+        PHP_VERSION: [ '8.1', '8.3' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
@@ -106,7 +108,7 @@ jobs:
   test-max:
     needs: build
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     services:
       mysql:
@@ -124,7 +126,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        PHP_VERSION: [ '8.1' ]
+        PHP_VERSION: [ '8.3' ]
         CHUNK: [ 1, 2, 3 ]
 
     steps:
@@ -168,9 +170,16 @@ jobs:
           THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
           DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
 
+      - name: Upload test output
+        uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: text-max-output-${{ matrix.CHUNK }}-${{ matrix.PHP_VERSION }}
+          path: /tmp/test/thunder/install/docroot/sites/simpletest/browser_output/
+
   test-upgrade:
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     services:
       mysql:
@@ -281,7 +290,7 @@ jobs:
 
   test-min:
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     services:
       mysql:
@@ -336,7 +345,9 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Install suggested dependencies
-        run: composer require "league/container:^4.2" "consolidation/config:^2.1.2" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+        run: |
+          composer require "league/container:^4.2" "drupal/core-dev:^10.3" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+          composer config allow-plugins.php-http/discovery true --no-plugins --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build

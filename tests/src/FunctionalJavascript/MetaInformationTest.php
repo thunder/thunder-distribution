@@ -104,8 +104,8 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     '[node:title]' => 'Test Note Title',
 
     // For testing Media:1 is used for teaser.
-    '[node:field_teaser_media:entity:field_image:facebook]' => 'LIKE:/files/styles/facebook/public/2016-05/thunder.jpg?',
-    '[node:field_teaser_media:entity:field_image:facebook:mimetype]' => 'image/jpeg',
+    '[node:field_teaser_media:entity:field_image:facebook]' => 'LIKE:/files/styles/facebook/public/2016-05/thunder.jpg.webp?',
+    '[node:field_teaser_media:entity:field_image:facebook:mimetype]' => 'image/webp',
     '[node:field_teaser_media:entity:field_image:facebook:height]' => '630',
     '[node:field_teaser_media:entity:field_image:facebook:width]' => '1200',
   ];
@@ -204,6 +204,8 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
    * Test Meta Tag default configuration and custom configuration for article.
    *
    * @dataProvider providerContentTypes
+   *
+   * @group NoUpdate
    */
   public function testArticleMetaTags(string $contentType): void {
     $globalConfigs = $this->generateMetaTagConfiguration([static::$globalMetaTags]);

@@ -24,3 +24,4 @@ focus_color: ''
 layout_density: small
 show_description_toggle: true
 show_user_theme_settings: true
+sticky_action_buttons: true

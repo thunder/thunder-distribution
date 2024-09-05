@@ -3,5 +3,6 @@ status: true
 dependencies: {  }
 name: Channel
 vid: channel
-description: ''
+description: null
 weight: 0
+new_revision: false
