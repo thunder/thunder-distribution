@@ -1,61 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
-			count: 1
-			path: modules/thunder_article/src/Form/NodeRevisionRevertDefaultForm.php
-
-		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
-			count: 1
-			path: modules/thunder_article/src/Form/ThunderNodeFormHelper.php
-
-		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
-			count: 1
-			path: modules/thunder_article/src/Plugin/Derivative/DynamicLocalTasks.php
-
-		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
-			count: 1
-			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/EntityLinks.php
-
-		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
-			count: 1
-			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/FocalPoint.php
-
-		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
-			count: 1
-			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/MenuLinksActiveTrail.php
-
-		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
-			count: 1
-			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/MetaTags.php
-
-		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
-			count: 1
-			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/ThunderEntityListProducerBase.php
-
-		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
-			count: 1
-			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/ThunderEntitySubRequestBase.php
-
-		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
-			count: 1
-			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/ThunderImage.php
-
-		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
-			count: 1
-			path: modules/thunder_gqls/src/Plugin/GraphQL/DataProducer/ThunderRedirect.php
-
-		-
 			message: "#^Access to an undefined property Drupal\\\\Core\\\\Entity\\\\ContentEntityInterface\\:\\:\\$field_teaser_media\\.$#"
 			count: 1
 			path: modules/thunder_gqls/src/Plugin/GraphQL/SchemaExtension/ThunderPagesSchemaExtension.php
@@ -71,22 +16,9 @@ parameters:
 			path: modules/thunder_gqls/src/Wrappers/EntityListResponse.php
 
 		-
-			message: """
-				#^Call to deprecated method getConfig\\(\\) of class GuzzleHttp\\\\Client\\:
-				Client\\:\\:getConfig will be removed in guzzlehttp/guzzle\\:8\\.0\\.$#
-			"""
-			count: 1
-			path: modules/thunder_gqls/tests/src/Functional/ThunderGqlsTestBase.php
-
-		-
 			message: "#^Access to an undefined property Drupal\\\\Tests\\\\thunder_gqls\\\\Kernel\\\\DataProducer\\\\EntityLinksTest\\:\\:\\$node\\.$#"
 			count: 4
 			path: modules/thunder_gqls/tests/src/Kernel/DataProducer/EntityLinksTest.php
-
-		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
-			count: 1
-			path: modules/thunder_taxonomy/src/ThunderTaxonomyPermissions.php
 
 		-
 			message: "#^Access to an undefined property Drupal\\\\Core\\\\Entity\\\\EntityInterface\\:\\:\\$status\\.$#"
@@ -235,11 +167,6 @@ parameters:
 
 		-
 			message: "#^Function drupal_phpunit_find_extension_directories not found\\.$#"
-			count: 1
-			path: tests/src/TestSuites/ThunderTestSuite.php
-
-		-
-			message: "#^Unsafe usage of new static\\(\\)\\.$#"
 			count: 1
 			path: tests/src/TestSuites/ThunderTestSuite.php
 

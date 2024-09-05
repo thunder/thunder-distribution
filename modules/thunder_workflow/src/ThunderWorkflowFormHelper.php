@@ -204,6 +204,11 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
     $form['actions']['moderation_state'] = $form['moderation_state'];
     unset($form['moderation_state']);
 
+    // Promote moderation_state in gin theme to not end up in
+    // dropdown button.
+    $form['actions']['moderation_state']['#gin_action_item'] = TRUE;
+    $form['actions']['moderation_state']['widget'][0]['#attributes']['form'] = $form['#id'];
+
     return $form;
   }
 
@@ -216,6 +221,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
    *   The node entity.
    */
   public function displayPublishedinformation(array &$form, NodeInterface $entity): void {
+    /** @var \Drupal\node\Entity\Node $entity */
     /** @var \Drupal\content_moderation\ContentModerationState $state */
     $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
 

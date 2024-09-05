@@ -80,6 +80,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $this->assertSession()
       ->elementNotExists('css', '[data-drupal-selector="edit-field-paragraphs-0-subform-field-image-wrapper"] div.messages--error');
 
+    /** @var \Drupal\media\Entity\Media $image2 */
     $image2 = $this->loadMediaByUuid('a4b2fa51-8340-4982-b792-92e060b71eb9');
     $this->selectMedia('field-paragraphs-0-subform-field-image', [$image2->id()]);
 
@@ -87,7 +88,9 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $this->clickAjaxButtonCssSelector('[name="field_paragraphs_0_collapse"]');
     /** @var \Drupal\file\FileInterface $file */
     $file = $image2->field_image->entity;
-    $this->assertEquals([$file->getFilename()], $this->getSession()->evaluateScript('jQuery(\'[data-drupal-selector="edit-field-paragraphs-0-preview"] article.media--view-mode-paragraph-preview img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1)'), 'Image file should be identical to previously selected.');
+    // On installs that use  Drupal 10.3 onwards, the image will be converted to
+    // a webp image.
+    $this->assertMatchesRegularExpression('/^' . preg_quote($file->getFilename()) . '(.webp)?$/', $this->getSession()->evaluateScript('jQuery(\'[data-drupal-selector="edit-field-paragraphs-0-preview"] article.media--view-mode-paragraph-preview img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1)')[0], 'Image file should be identical to previously selected.');
 
     // Go to the media view and try deleting the image media.
     $this->drupalGet('admin/content/media');
@@ -97,14 +100,16 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     /** @var \Drupal\file\FileInterface $file */
     $file = $media->get($media->getSource()->getConfiguration()['source_field'])->entity;
     $this->assertFileExists($file->getFileUri());
-    $this->getSession()->getPage()->find('css', 'div.gin-sidebar')->clickLink('Delete');
+    $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-actions"] .gin-more-actions__trigger')->click();
+    $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-actions"]')->clickLink('Delete');
     $this->assertSession()->assertWaitOnAjaxRequest();
     $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', '#drupal-modal'));
     $this->assertSession()->fieldNotExists('also_delete_file');
     $this->assertSession()->pageTextContains('This action cannot be undone.The file attached to this media is owned by admin so will be retained.');
     Role::load(static::$defaultUserRole)->grantPermission('delete any file')->save();
     $this->getSession()->reload();
-    $this->getSession()->getPage()->find('css', 'div.gin-sidebar')->clickLink('Delete');
+    $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-actions"] .gin-more-actions__trigger')->click();
+    $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-actions"]')->clickLink('Delete');
     $this->assertSession()->assertWaitOnAjaxRequest();
     $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', '#drupal-modal'));
     $this->assertSession()->fieldExists('also_delete_file')->check();

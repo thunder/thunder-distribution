@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder_gqls\Traits;
 
+use Drupal\Core\Url;
+use Drupal\Tests\ApiRequestTrait;
 use Drupal\Tests\BrowserHtmlDebugTrait;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
@@ -10,7 +12,7 @@ use Psr\Http\Message\ResponseInterface;
  * Use this trait query your GraphQL endpoint.
  */
 trait ThunderGqlsTestTrait {
-
+  use ApiRequestTrait;
   use BrowserHtmlDebugTrait;
 
   /**
@@ -69,26 +71,12 @@ trait ThunderGqlsTestTrait {
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
   protected function query(string $query, string $variables): ResponseInterface {
-    $urlGenerator = $this->container->get('url_generator');
-    $url = $urlGenerator->generate('graphql.query.thunder_graphql');
-
     $requestOptions = [];
     $requestOptions[RequestOptions::HEADERS]['Content-Type'] = 'application/json';
     $requestOptions[RequestOptions::JSON]['query'] = $query;
     $requestOptions[RequestOptions::JSON]['variables'] = $variables;
 
-    /** @var \GuzzleHttp\Client $client */
-    $client = $this->container->get('http_client_factory')->fromOptions([
-      'timeout' => NULL,
-      'verify' => FALSE,
-    ]);
-
-    // Inject a Guzzle middleware to generate debug output for every request
-    // performed in the test.
-    $handler_stack = $client->getConfig('handler');
-    $handler_stack->push($this->getResponseLogHandler());
-
-    return $client->request('POST', $this->getAbsoluteUrl($url), $requestOptions);
+    return $this->makeApiRequest('POST', Url::fromRoute('graphql.query.thunder_graphql'), $requestOptions);
   }
 
   /**
