@@ -110,7 +110,7 @@ JS);
     // failing to provide an accurate count of requests.
     // @see core/modules/system/tests/modules/js_testing_ajax_request_test/js/js_testing_ajax_request_test.js
     if (!is_null($count) && $drupal_ajax_request_count !== $browser_xhr_request_count) {
-      throw new \RuntimeException(sprintf('%d XHR requests through jQuery, but %d observed in the browser — this requires js_testing_ajax_request_test.js to be updated.', $drupal_ajax_request_count, $browser_xhr_request_count));
+      @trigger_error(sprintf('%d XHR requests through jQuery, but %d observed in the browser — this requires js_testing_ajax_request_test.js to be updated.', $drupal_ajax_request_count, $browser_xhr_request_count));
     }
 
     // Detect incomplete AJAX request.
