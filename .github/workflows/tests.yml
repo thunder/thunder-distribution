@@ -150,7 +150,7 @@ jobs:
           composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Download build
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v4
         with:
           name: build-${{ matrix.PHP_VERSION }}
 
