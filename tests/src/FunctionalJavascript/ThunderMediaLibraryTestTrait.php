@@ -36,7 +36,7 @@ trait ThunderMediaLibraryTestTrait {
    *
    * @throws \Exception
    */
-  public function uploadFile(string $filePath, bool $skipEditForm = FALSE): void {
+  public function uploadFile(string $filePath): void {
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
@@ -63,12 +63,6 @@ trait ThunderMediaLibraryTestTrait {
       10000,
       '(typeof jQuery === "undefined" || !jQuery(\'input[name="op"]\').is(":disabled"))'
     );
-
-    $this->assertWaitOnAjaxRequest();
-    if (!$skipEditForm) {
-      $this->assertSession()->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Save and select');
-      $this->assertExpectedAjaxRequest(1);
-    }
   }
 
 }

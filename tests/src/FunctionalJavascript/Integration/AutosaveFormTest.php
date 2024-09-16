@@ -26,6 +26,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
 
     // Adjust the autosave form submission interval.
     $this->config('autosave_form.settings')
+      ->set('active_on.content_entity_forms', TRUE)
       ->set('interval', 2000)
       ->save();
   }

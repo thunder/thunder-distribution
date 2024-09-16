@@ -117,8 +117,10 @@ JS;
 
     // Click Select entities -> to open media library.
     $this->openMediaLibrary('field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images');
+    $this->assertExpectedAjaxRequest(2);
 
-    $this->uploadFile(__DIR__ . '/../../fixtures/reference.jpg', TRUE);
+    $this->uploadFile(__DIR__ . '/../../fixtures/reference.jpg');
+    $this->assertExpectedAjaxRequest(3);
 
     $this->clickCssSelector('.media-library-widget-modal .form-actions button.button--primary');
     $this->assertExpectedAjaxRequest(5);

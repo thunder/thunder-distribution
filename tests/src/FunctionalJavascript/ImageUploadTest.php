@@ -20,7 +20,10 @@ class ImageUploadTest extends ThunderJavascriptTestBase {
     $this->drupalGet('node/add/article');
 
     $this->openMediaLibrary('field-teaser-media');
-    $this->uploadFile(__DIR__ . '/../../fixtures/reference.webp', TRUE);
+    $this->assertExpectedAjaxRequest(1);
+
+    $this->uploadFile(__DIR__ . '/../../fixtures/reference.webp');
+    $this->assertExpectedAjaxRequest(2);
 
     $this->clickCssSelector('.media-library-widget-modal .form-actions button.button--primary');
     $this->assertExpectedAjaxRequest(3);
