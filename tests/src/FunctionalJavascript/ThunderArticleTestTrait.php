@@ -22,7 +22,7 @@ trait ThunderArticleTestTrait {
    */
   public function nodeFillNew(array $fieldValues, string $type): void {
     $this->drupalGet('node/add/' . $type);
-    $this->assertWaitOnAjaxRequest();
+
     if (empty($fieldValues)) {
       return;
     }
