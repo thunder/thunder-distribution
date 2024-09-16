@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Helper module for the JavaScript AJAX request tests.
+ */
+
+/**
+ * Implements hook_page_attachments().
+ */
+function thunder_test_js_perf_page_attachments(array &$attachments): void {
+  // Unconditionally attach an asset to the page.
+  $attachments['#attached']['library'][] = 'thunder_test_js_perf/reset_performance';
+}

@@ -39,6 +39,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
     'thunder_testing_demo',
     'thunder_workflow',
     'thunder_news_article',
+    'thunder_test_js_perf',
     'thunder_test_mock_request',
   ];
 
