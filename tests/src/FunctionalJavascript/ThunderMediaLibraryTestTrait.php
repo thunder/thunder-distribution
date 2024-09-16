@@ -31,8 +31,6 @@ trait ThunderMediaLibraryTestTrait {
    *
    * @param string $filePath
    *   Path to file that should be uploaded.
-   * @param bool $skipEditForm
-   *   If set to TRUE, it will skip edit form will just select uploaded files.
    *
    * @throws \Exception
    */
