@@ -121,7 +121,7 @@ JS;
     $this->uploadFile(__DIR__ . '/../../fixtures/reference.jpg', TRUE);
 
     $this->clickCssSelector('.media-library-widget-modal .form-actions button.button--primary');
-    $this->assertWaitOnAjaxRequest();
+    $this->assertExpectedAjaxRequest(5);
 
     // Move new image -> that's 5th image in list, to 3rd position.
     $this->sortableAfter('[data-media-library-item-delta="4"]', '[data-media-library-item-delta="1"]', '#field_media_images-media-library-wrapper-field_paragraphs-0-subform-field_media-0-inline_entity_form .js-media-library-selection');
