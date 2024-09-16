@@ -23,10 +23,10 @@ class ImageUploadTest extends ThunderJavascriptTestBase {
     $this->assertExpectedAjaxRequest(1);
 
     $this->uploadFile(__DIR__ . '/../../fixtures/reference.webp');
-    $this->assertExpectedAjaxRequest(1);
+    $this->assertExpectedAjaxRequest(2);
 
     $this->clickCssSelector('.media-library-widget-modal .form-actions button.button--primary');
-    $this->assertExpectedAjaxRequest(4);
+    $this->assertExpectedAjaxRequest(3);
 
     $this->clickCssSelector('.media-library-widget-modal .form-actions button.button--primary');
     $this->assertExpectedAjaxRequest(5);
