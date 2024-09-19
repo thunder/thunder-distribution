@@ -96,7 +96,7 @@
         "drupal/responsive_preview": "^2.1",
         "drupal/redirect": "^1.7",
         "drupal/scheduler": "^2.0.2",
-        "drupal/scheduler_content_moderation_integration": "^2.0||^3.0",
+        "drupal/scheduler_content_moderation_integration": "^2.0",
         "drupal/schema_metatag": "^2.4",
         "drupal/select2": "^1.7",
         "drupal/search_api_mark_outdated": "^1.0",
