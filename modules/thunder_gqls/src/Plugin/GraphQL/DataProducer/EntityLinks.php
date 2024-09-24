@@ -98,7 +98,8 @@ class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPlug
       });
 
       $transformed_keys = array_map([$this, 'toCamelCase'], array_keys($links));
-      return array_combine($transformed_keys, $links) ?? [];
+      $combined = array_combine($transformed_keys, $links);
+      return !$combined ? [] : $combined;
     });
     return $result ?? [];
   }

@@ -2,8 +2,6 @@
 
 namespace Drupal\thunder_workflow;
 
-use Drupal\content_moderation\ModerationInformationInterface;
-use Drupal\content_moderation\StateTransitionValidationInterface;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -12,6 +10,8 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Theme\ThemeManagerInterface;
 use Drupal\Core\Url;
+use Drupal\content_moderation\ModerationInformationInterface;
+use Drupal\content_moderation\StateTransitionValidationInterface;
 use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
