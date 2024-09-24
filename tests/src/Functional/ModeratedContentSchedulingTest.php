@@ -91,6 +91,22 @@ class ModeratedContentSchedulingTest extends ThunderTestBase {
     $this->assertEquals('published', $node->moderation_state->value);
     $this->assertEquals('Test workflow article 1 - Draft', $node->getTitle());
 
+    // Test published to published.
+    // See: https://www.drupal.org/project/thunder/issues/3474835
+    $this->drupalGet($edit_url);
+    $this->submitForm([
+      'title[0][value]' => 'Test workflow article 1 - Still Published',
+      'moderation_state[0]' => 'published',
+      'publish_on[0][value][date]' => date('Y-m-d', $publish_timestamp),
+      'publish_on[0][value][time]' => date('H:i:s', $publish_timestamp),
+      'publish_state[0]' => 'published',
+    ], 'Save');
+    $node_storage->resetCache([$node->id()]);
+    /** @var \Drupal\node\Entity\Node $node */
+    $node = $node_storage->loadRevision($node_storage->getLatestRevisionId($node->id()));
+    $this->assertEquals(TRUE, $node->isPublished());
+    $this->assertEquals('published', $node->moderation_state->value);
+
   }
 
   /**
