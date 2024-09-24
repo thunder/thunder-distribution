@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\thunder\Functional;
 
-use Drupal\node\Entity\Node;
 use Drupal\Tests\Traits\Core\CronRunTrait;
+use Drupal\node\Entity\Node;
 
 /**
  * Tests publishing/unpublishing scheduling for moderated nodes.

@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\thunder_gqls\Functional;
 
-use Drupal\access_unpublished\Entity\AccessToken;
 use Drupal\Component\Serialization\Json;
+use Drupal\access_unpublished\Entity\AccessToken;
 use Drupal\media\Entity\MediaType;
 use Drupal\node\Entity\Node;
 
