@@ -117,7 +117,20 @@
         "caxy/php-htmldiff": "^0.1.14",
         "webonyx/graphql-php": "^14.11.8",
         "drupal/jquery_ui": "^1.6",
-        "drupal/jquery_ui_draggable": "^2.1"
+        "drupal/jquery_ui_draggable": "^2.1",
+        "symfony/yaml": "6.4.11",
+        "symfony/console": "6.4.11",
+        "symfony/dependency-injection": "6.4.11",
+        "symfony/dom-crawler": "6.4.8",
+        "symfony/http-foundation": "6.4.10",
+        "symfony/http-kernel": "6.4.11",
+        "symfony/mailer": "6.4.9",
+        "symfony/mime": "6.4.11",
+        "symfony/process": "6.4.8",
+        "symfony/routing": "6.4.11",
+        "symfony/serializer": "6.4.11",
+        "symfony/string": "6.4.11",
+        "symfony/validator": "6.4.11"
     },
     "suggest": {
         "drupal/search_api_solr": "Provides a Apache Solr backend for the Search API module"
