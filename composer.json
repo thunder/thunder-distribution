@@ -117,10 +117,11 @@
         "caxy/php-htmldiff": "^0.1.14",
         "webonyx/graphql-php": "^14.11.8",
         "drupal/jquery_ui": "^1.6",
-        "drupal/jquery_ui_draggable": "^2.1"
+        "drupal/jquery_ui_draggable": "^2.1",
+        "symfony/http-foundation": "6.4.11"
     },
     "suggest": {
-        "drupal/search_api_solr": "Provide1s a Apache Solr backend for the Search API module"
+        "drupal/search_api_solr": "Provides a Apache Solr backend for the Search API module"
     },
     "replace": {
         "bower-asset/jquery": "*",
