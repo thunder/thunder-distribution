@@ -120,7 +120,7 @@
         "drupal/jquery_ui_draggable": "^2.1",
         "symfony/yaml": "6.4.11",
         "symfony/http-foundation": "6.4.10",
-        "symfony/http-kernel": "6.4.11",
+        "symfony/http-kernel": "6.4.11"
     },
     "suggest": {
         "drupal/search_api_solr": "Provides a Apache Solr backend for the Search API module"
