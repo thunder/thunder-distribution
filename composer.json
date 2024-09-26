@@ -120,7 +120,7 @@
         "drupal/jquery_ui_draggable": "^2.1"
     },
     "suggest": {
-        "drupal/search_api_solr": "Provides a Apache Solr backend for the Search API module"
+        "drupal/search_api_solr": "Provide1s a Apache Solr backend for the Search API module"
     },
     "replace": {
         "bower-asset/jquery": "*",
