@@ -120,7 +120,7 @@ JS;
     $this->assertExpectedAjaxRequest(2);
 
     $this->uploadFile(__DIR__ . '/../../fixtures/reference.jpg');
-    $this->assertExpectedAjaxRequest(3);
+    $this->assertExpectedAjaxRequest(2);
 
     $this->clickCssSelector('.media-library-widget-modal .form-actions button.button--primary');
     $this->assertExpectedAjaxRequest(5);

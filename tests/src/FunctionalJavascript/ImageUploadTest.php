@@ -26,7 +26,7 @@ class ImageUploadTest extends ThunderJavascriptTestBase {
     $this->assertExpectedAjaxRequest(1);
 
     $this->clickCssSelector('.media-library-widget-modal .form-actions button.button--primary');
-    $this->assertExpectedAjaxRequest(3);
+    $this->assertExpectedAjaxRequest(4);
 
     $this->clickCssSelector('.media-library-widget-modal .form-actions button.button--primary');
     $this->assertExpectedAjaxRequest(5);
