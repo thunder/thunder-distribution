@@ -4,11 +4,11 @@ namespace Drupal\Tests\thunder\Traits;
 
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Config\InstallStorage;
+use Drupal\Tests\TestFileCreationTrait;
 use Drupal\file\Entity\File;
 use Drupal\file\FileInterface;
 use Drupal\media\Entity\Media;
 use Drupal\media\MediaInterface;
-use Drupal\Tests\TestFileCreationTrait;
 
 /**
  * Use this trait to create config and data in kernel tests.

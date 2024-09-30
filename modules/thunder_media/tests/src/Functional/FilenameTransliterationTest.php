@@ -4,8 +4,8 @@ namespace Drupal\Tests\thunder_media\Functional;
 
 use Drupal\Core\File\FileExists;
 use Drupal\Core\StreamWrapper\PublicStream;
-use Drupal\file\Entity\File;
 use Drupal\Tests\thunder\Functional\ThunderTestBase;
+use Drupal\file\Entity\File;
 
 /**
  * Tests for transliteration of file names.

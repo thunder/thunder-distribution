@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.3.5](https://github.com/thunder/thunder-distribution/tree/7.3.5) 2024-09-24
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.3...7.3.5)
+
+Allow scheduler version ^3.0 in composer.json
+
 ## [7.3.3](https://github.com/thunder/thunder-distribution/tree/7.3.3) 2024-08-22
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.2...7.3.3)
