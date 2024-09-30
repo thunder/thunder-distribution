@@ -117,8 +117,7 @@
         "caxy/php-htmldiff": "^0.1.14",
         "webonyx/graphql-php": "^14.11.8",
         "drupal/jquery_ui": "^1.6",
-        "drupal/jquery_ui_draggable": "^2.1",
-        "symfony/http-foundation": "6.4.10"
+        "drupal/jquery_ui_draggable": "^2.1"
     },
     "suggest": {
         "drupal/search_api_solr": "Provides a Apache Solr backend for the Search API module"
