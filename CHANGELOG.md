@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.3.6](https://github.com/thunder/thunder-distribution/tree/7.3.6) 2024-10-04
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.5...7.3.6)
+
+Update diff module to 1.8
+
 ## [7.3.5](https://github.com/thunder/thunder-distribution/tree/7.3.5) 2024-09-24
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.3...7.3.5)
