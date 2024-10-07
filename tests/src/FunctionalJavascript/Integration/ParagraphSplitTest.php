@@ -70,7 +70,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     // Remove the paragraph.
     $driver = $this->getSession()->getDriver();
     $driver->executeScript("document.querySelector('[name=\"field_paragraphs_0_remove\"]').dispatchEvent(new MouseEvent('mousedown'))");
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
 
     // Create second paragraph.
     $this->addTextParagraph(static::$paragraphsField, $firstParagraphContent . $secondParagraphContent);
@@ -155,7 +155,7 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
       ->waitForElementVisible('xpath', '//textarea[@data-ckeditor5-id="' . $ck_editor_id . '"]/following-sibling::div//button[span[text()="Split Paragraph"]]');
     $this->assertNotEmpty($button);
     $button->click();
-    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertWaitOnAjaxRequest();
   }
 
   /**

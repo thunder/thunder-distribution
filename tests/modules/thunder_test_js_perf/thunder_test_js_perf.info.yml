@@ -1,0 +1,4 @@
+name: 'Reset js performance'
+description: 'Reset js performance counter and set buffer..'
+type: module
+package: Testing
