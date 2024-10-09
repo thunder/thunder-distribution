@@ -209,7 +209,6 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
 
     $cacheContext->addCacheTags($entityType->getListCacheTags());
     $cacheContext->addCacheContexts($entityType->getListCacheContexts());
-    $cacheContext->addCacheableDependency($storage->getEntityType());
     return $query;
   }
 
