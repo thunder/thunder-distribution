@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\thunder_gqls\Kernel\TypeResolver;
 
-use Drupal\node\NodeInterface;
 use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
+use Drupal\node\NodeInterface;
 use Drupal\thunder_gqls\GraphQL\DecoratableTypeResolver;
 
 /**
