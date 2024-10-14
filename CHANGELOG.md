@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.3.7](https://github.com/thunder/thunder-distribution/tree/7.3.7) 2024-10-14
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.6...7.3.7)
+
+Re-add list tags to graphql queries
+
 ## [7.3.6](https://github.com/thunder/thunder-distribution/tree/7.3.6) 2024-10-04
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.5...7.3.6)
