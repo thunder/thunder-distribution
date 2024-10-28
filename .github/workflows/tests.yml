@@ -64,7 +64,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: Imagick
+          extensions: :redis, Imagick
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -136,7 +136,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: :sodium, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
+          extensions: :redis, :sodium, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
 
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
@@ -163,9 +163,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
 
       - name: Run tests
         run: test-drupal-project run_tests
@@ -214,7 +211,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: Imagick, gd, pdo_mysql
+          extensions: :redis, Imagick, gd, pdo_mysql
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -324,7 +321,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: Imagick, gd, pdo_mysql
+          extensions: :redis, Imagick, gd, pdo_mysql
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
