@@ -3,9 +3,9 @@
 namespace Drupal\Tests\thunder\Kernel\Integration;
 
 use Drupal\KernelTests\KernelTestBase;
+use Drupal\Tests\thunder\Traits\ThunderKernelTestTrait;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
-use Drupal\Tests\thunder\Traits\ThunderKernelTestTrait;
 
 /**
  * Tests integration with the metatag module.

@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\thunder_gqls\Functional\DataProducer;
 
-use Drupal\search_api\Query\QueryInterface;
 use Drupal\Tests\graphql\Traits\DataProducerExecutionTrait;
 use Drupal\Tests\thunder_gqls\Functional\ThunderGqlsTestBase;
+use Drupal\search_api\Query\QueryInterface;
 
 /**
  * Test ThunderSearchApi data producer.

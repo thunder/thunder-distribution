@@ -63,7 +63,7 @@ trait ResolverHelperTrait {
    * @return \Drupal\graphql\GraphQL\Resolver\Composite
    *   The field data producer.
    */
-  public function fromEntityReference(string $field, ResolverInterface $entity = NULL, bool $multiValue = TRUE): Composite {
+  public function fromEntityReference(string $field, ?ResolverInterface $entity = NULL, bool $multiValue = TRUE): Composite {
     return $this->builder->compose(
       $this->builder->produce('entity_reference')
         ->map('field', $this->builder->fromValue($field))
