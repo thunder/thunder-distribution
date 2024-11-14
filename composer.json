@@ -46,6 +46,9 @@
             },
             "drupal/gin": {
                 "Issue #3455558: There is no visible change to a toggle when pressed (but it does trigger conditional fields, value is saved, etc)": "https://www.drupal.org/files/issues/2024-08-06/3455558-Refactor-toggle-styles-mr438.patch"
+            },
+            "drupal/autosave_form": {
+                "Issue #3487459: Deprecation error on user edit form": "https://git.drupalcode.org/project/autosave_form/-/merge_requests/19.diff"
             }
         }
     },
@@ -55,7 +58,7 @@
         "drupal/access_unpublished": "^1.5",
         "drupal/admin_toolbar": "^3.4",
         "drupal/autofill": "^1.1",
-        "drupal/autosave_form": "^1.6",
+        "drupal/autosave_form": "1.7",
         "drupal/blazy": "^2.14",
         "drupal/checklistapi": "^2.1",
         "drupal/core-recommended": "~10.3.0@stable",
