@@ -41,12 +41,6 @@
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
-            "drupal/media_entity_slideshow": {
-                "#3431882: D11": "https://www.drupal.org/files/issues/2024-05-30/media_entity_slideshow.2.x-dev.rector.patch"
-            },
-            "drupal/media_entity_twitter": {
-                "#3431884: D11": "https://git.drupalcode.org/project/media_entity_twitter/-/merge_requests/13.diff"
-            },
             "drupal/paragraphs_features": {
                 "#3433828: D11": "https://www.drupal.org/files/issues/2024-03-24/paragraphs_features.2.0.0-beta4.rector.patch"
             },
@@ -62,8 +56,6 @@
         },
         "drupal-lenient": {
             "allowed-list": [
-                "drupal/media_entity_slideshow",
-                "drupal/media_entity_twitter",
                 "drupal/paragraphs_features",
                 "drupal/select2",
                 "drupal/paragraphs_paste"
