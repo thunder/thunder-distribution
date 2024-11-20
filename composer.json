@@ -35,6 +35,7 @@
         "installer-name": "thunder",
         "patches": {
             "drupal/core": {
+                "Issue #3487031: Performance Degraded after update to twig 3.14.2": "https://www.drupal.org/files/issues/2024-11-20/3487031-29.patch",
                 "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2021-05-31/3133639.19.patch",
                 "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch"
             },
