@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.3.9](https://github.com/thunder/thunder-distribution/tree/7.3.9) 2024-11-25
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.8...7.3.9)
+
+* Remove Drupal core patch [#3487031](https://www.drupal.org/i/3487031), because it was merged upstream.
+
 ## [7.3.8](https://github.com/thunder/thunder-distribution/tree/7.3.8) 2024-11-20
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.7...7.3.8)
