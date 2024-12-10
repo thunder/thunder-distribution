@@ -1,5 +1,20 @@
 # Changelog
 
+## [7.3.9](https://github.com/thunder/thunder-distribution/tree/7.3.9) 2024-11-25
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.8...7.3.9)
+
+* Remove Drupal core patch [#3487031](https://www.drupal.org/i/3487031), because it was merged upstream.
+
+## [7.3.8](https://github.com/thunder/thunder-distribution/tree/7.3.8) 2024-11-20
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.7...7.3.8)
+
+* Pin autosave_form to 1.7 and apply patch from issue [#3487459](https://www.drupal.org/i/3487459)
+* Add a node Graphql query to fetch a single node by its UUID
+* Make private methods in SearchApiResponse protected.
+* Add Drupal core patch from issue [#3487031](https://www.drupal.org/i/3487031) because of a performance regression.
+
 ## [7.3.7](https://github.com/thunder/thunder-distribution/tree/7.3.7) 2024-10-14
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.6...7.3.7)
