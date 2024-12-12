@@ -27,14 +27,14 @@ class ThunderSearchApiTest extends GraphQLTestBase {
    *
    * @var \Drupal\search_api\ServerInterface
    */
-  protected $server;
+  protected $searchApiServer;
 
   /**
    * The search index used for testing.
    *
    * @var \Drupal\search_api\IndexInterface
    */
-  protected $index;
+  protected $searchApiIndex;
 
   /**
    * {@inheritdoc}
@@ -49,15 +49,15 @@ class ThunderSearchApiTest extends GraphQLTestBase {
     $this->installConfig('search_api');
 
     // Create a test server.
-    $this->server = Server::create([
+    $this->searchApiServer = Server::create([
       'name' => 'Test Server',
       'id' => 'test_server',
       'status' => 1,
       'backend' => 'search_api_test',
     ]);
-    $this->server->save();
+    $this->searchApiServer->save();
 
-    $this->index = Index::create([
+    $this->searchApiIndex = Index::create([
       'name' => 'Test Index',
       'id' => 'test_index',
       'status' => 1,
@@ -67,10 +67,10 @@ class ThunderSearchApiTest extends GraphQLTestBase {
       'datasource_settings' => [
         'entity:node' => [],
       ],
-      'server' => $this->server->id(),
+      'server' => $this->searchApiServer->id(),
       'options' => ['index_directly' => FALSE],
     ]);
-    $this->index->save();
+    $this->searchApiIndex->save();
 
     $schema = <<<GQL
       type Query {
