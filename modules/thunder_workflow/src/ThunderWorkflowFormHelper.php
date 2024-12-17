@@ -189,6 +189,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
 
     if (count($transitions) > 1) {
       $form['actions']['submit']['#value'] = $this->t('Save as');
+      $form['actions']['submit']['#weight'] = 50;
     }
     elseif (count($transitions) === 1) {
       $form['moderation_state']['#attributes']['style'] = 'display: none';
@@ -200,9 +201,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
 
     // Move to gin_actions and promote moderation_state in gin theme to not end
     // up in dropdown button.
-    $form['moderation_state']['#group'] = 'gin_actions';
-    $form['moderation_state']['#weight'] = 90;
-    $form['moderation_state']['#gin_action_item'] = TRUE;
+    $form['moderation_state']['#group'] = 'gin_sticky_actions';
     $form['moderation_state']['widget'][0]['#attributes']['form'] = $form['#id'];
 
     return $form;
