@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
+use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\paragraphs\Entity\ParagraphsType;
-use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 
 /**
  * Tests the paragraphs behavior data producer.
