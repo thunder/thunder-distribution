@@ -6,7 +6,7 @@
 
 * Drupal 10.4 compatibility.
 * Updated Gin theme.
-* Load entity types and add cache tags and contexts in search api producer #.
+* Load entity types and add cache tags and contexts in search api producer.
 
 ## [7.3.9](https://github.com/thunder/thunder-distribution/tree/7.3.9) 2024-11-25
 
