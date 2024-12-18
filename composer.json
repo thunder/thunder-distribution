@@ -41,9 +41,6 @@
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
-            "drupal/gin": {
-                "Issue #3455558: There is no visible change to a toggle when pressed (but it does trigger conditional fields, value is saved, etc)": "https://www.drupal.org/files/issues/2024-08-06/3455558-Refactor-toggle-styles-mr438.patch"
-            },
             "drupal/autosave_form": {
                 "Issue #3487459: Deprecation error on user edit form": "https://git.drupalcode.org/project/autosave_form/-/merge_requests/19.diff"
             }
@@ -58,7 +55,7 @@
         "drupal/autosave_form": "1.7",
         "drupal/blazy": "^2.14",
         "drupal/checklistapi": "^2.1",
-        "drupal/core-recommended": "~10.4.0@rc",
+        "drupal/core-recommended": "~10.4.0@stable",
         "drupal/config_selector": "^2.1",
         "drupal/config_update": "^1.7 || ^2.0",
         "drupal/content_lock": "^2.1",
@@ -72,7 +69,7 @@
         "drupal/field_group": "^3.4",
         "drupal/focal_point": "^2.1.2",
         "drupal/facets": "^2.0.6",
-        "drupal/gin": "3.0-rc11",
+        "drupal/gin": "^3.0-rc15",
         "drupal/gin_toolbar": "^1.0-rc6",
         "drupal/graphql": "^4.7",
         "drupal/inline_entity_form": "^1.0-rc14",
