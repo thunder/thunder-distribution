@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 
-use Drupal\media\Entity\Media;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
+use Drupal\media\Entity\Media;
 
 /**
  * Tests integration with the entity_reference_actions and views_bulk_edit.
@@ -20,6 +20,7 @@ class EntityReferenceActionsTest extends ThunderJavascriptTestBase {
    */
   public function testMediaEditInArticle(): void {
 
+    /** @var \Drupal\node\Entity\Node $node */
     $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
     $this->drupalGet($node->toUrl('edit-form'));
 

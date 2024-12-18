@@ -2,8 +2,6 @@
 
 namespace Drupal\thunder_workflow;
 
-use Drupal\content_moderation\ModerationInformationInterface;
-use Drupal\content_moderation\StateTransitionValidationInterface;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -12,6 +10,8 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Theme\ThemeManagerInterface;
 use Drupal\Core\Url;
+use Drupal\content_moderation\ModerationInformationInterface;
+use Drupal\content_moderation\StateTransitionValidationInterface;
 use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -189,6 +189,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
 
     if (count($transitions) > 1) {
       $form['actions']['submit']['#value'] = $this->t('Save as');
+      $form['actions']['submit']['#weight'] = 50;
     }
     elseif (count($transitions) === 1) {
       $form['moderation_state']['#attributes']['style'] = 'display: none';
@@ -198,11 +199,10 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
         ['@state' => $transition->to()->label()]);
     }
 
-    unset($form['moderation_state']['#group']);
-    $form['moderation_state']['#weight'] = 90;
-
-    $form['actions']['moderation_state'] = $form['moderation_state'];
-    unset($form['moderation_state']);
+    // Move to gin_sticky_actions and promote moderation_state in gin theme to
+    // not end up in dropdown button.
+    $form['moderation_state']['#group'] = 'gin_sticky_actions';
+    $form['moderation_state']['widget'][0]['#attributes']['form'] = $form['#id'];
 
     return $form;
   }
@@ -216,6 +216,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
    *   The node entity.
    */
   public function displayPublishedinformation(array &$form, NodeInterface $entity): void {
+    /** @var \Drupal\node\Entity\Node $entity */
     /** @var \Drupal\content_moderation\ContentModerationState $state */
     $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
 

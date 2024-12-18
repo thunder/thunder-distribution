@@ -5,8 +5,8 @@
  * Update functions for the thunder installation profile.
  */
 
-use Drupal\ckeditor5\SmartDefaultSettings;
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\ckeditor5\SmartDefaultSettings;
 use Drupal\editor\Entity\Editor;
 use Drupal\entity_browser\Entity\EntityBrowser;
 use Drupal\user\Entity\Role;
@@ -21,7 +21,6 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
     'media_library_media_modify',
     'gin_toolbar',
     'jquery_ui',
-    'jquery_ui_draggable',
     'ckeditor5',
   ]);
 
@@ -100,4 +99,29 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
 
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
+}
+
+/**
+ * Configure input formats to enable paragraphs split.
+ */
+function thunder_post_update_0002_enable_paragraphs_split(array &$sandbox): string {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_post_update_0002_enable_paragraphs_split');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
+}
+
+/**
+ * Enable sticky action buttons for the Gin theme.
+ */
+function thunder_post_update_0003_enable_sticky_action_buttons(array &$sandbox): string {
+  \Drupal::configFactory()->getEditable('gin.settings')
+    ->set('sticky_action_buttons', TRUE)
+    ->save();
+
+  return t('Sticky action buttons enabled.');
 }

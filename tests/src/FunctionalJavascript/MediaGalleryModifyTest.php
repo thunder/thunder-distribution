@@ -118,7 +118,7 @@ JS;
     // Click Select entities -> to open media library.
     $this->openMediaLibrary('field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images');
 
-    $this->uploadFile('/fixtures/reference.jpg', TRUE);
+    $this->uploadFile(__DIR__ . '/../../fixtures/reference.jpg', TRUE);
 
     $this->submitMediaLibrary();
 

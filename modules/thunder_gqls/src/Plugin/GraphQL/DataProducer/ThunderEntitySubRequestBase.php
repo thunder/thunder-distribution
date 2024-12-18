@@ -77,7 +77,7 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
     $pluginDefinition,
     HttpKernelInterface $httpKernel,
     Request $currentRequest,
-    RendererInterface $renderer
+    RendererInterface $renderer,
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
     $this->httpKernel = $httpKernel;

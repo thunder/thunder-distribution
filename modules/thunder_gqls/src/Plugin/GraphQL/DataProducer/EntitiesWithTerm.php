@@ -4,7 +4,6 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\taxonomy\TermInterface;
-use Drupal\thunder_gqls\Wrappers\EntityListResponse;
 use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
 
 /**
@@ -119,7 +118,7 @@ class EntitiesWithTerm extends ThunderEntityListProducerBase {
       $cacheContext
     );
 
-    return new EntityListResponse($query);
+    return $this->entityListResponse($query);
   }
 
   /**

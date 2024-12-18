@@ -1,0 +1,4 @@
+type SearchApiResult {
+  items: [Page!]
+  total: Int!
+}

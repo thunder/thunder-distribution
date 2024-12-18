@@ -106,7 +106,7 @@ class MenuLinksActiveTrail extends DataProducerPluginBase implements ContainerFa
   public function resolve(MenuInterface $menu, ?Url $url): array {
     $parameters = new MenuTreeParameters();
 
-    if ($url) {
+    if ($url && $url->isRouted()) {
       $links = $this->menuLinkManager->loadLinksByRoute($url->getRouteName(), $url->getRouteParameters(), $menu->id());
 
       $activeLink = reset($links);

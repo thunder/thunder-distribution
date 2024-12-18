@@ -3,9 +3,9 @@
 namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
 use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
-use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 
 /**
  * ThunderRedirect data producer test class.
@@ -43,6 +43,7 @@ class ThunderRedirectTest extends GraphQLTestBase {
    */
   public function setUp(): void {
     parent::setUp();
+    $this->installEntitySchema('path_alias');
     $this->installConfig(['redirect']);
     $this->installEntitySchema('redirect');
 

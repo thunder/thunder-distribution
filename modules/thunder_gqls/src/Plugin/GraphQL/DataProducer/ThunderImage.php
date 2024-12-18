@@ -95,7 +95,7 @@ class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPlu
     $pluginDefinition,
     RendererInterface $renderer,
     ImageFactory $imageFactory,
-    FileUrlGeneratorInterface $fileUrlGenerator
+    FileUrlGeneratorInterface $fileUrlGenerator,
   ) {
     parent::__construct($configuration, $pluginId, $pluginDefinition);
     $this->renderer = $renderer;
