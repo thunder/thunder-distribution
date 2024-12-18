@@ -1,5 +1,13 @@
 # Changelog
 
+## [7.4.0](https://github.com/thunder/thunder-distribution/tree/7.4.0) 2024-12-18
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.9...7.4.0)
+
+* Drupal 10.4 compatibility.
+* Updated Gin theme.
+* Load entity types and add cache tags and contexts in search api producer.
+
 ## [7.3.9](https://github.com/thunder/thunder-distribution/tree/7.3.9) 2024-11-25
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.8...7.3.9)
