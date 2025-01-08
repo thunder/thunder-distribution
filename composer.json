@@ -53,8 +53,7 @@
         },
         "drupal-lenient": {
             "allowed-list": [
-                "drupal/select2",
-                "drupal/paragraphs_paste"
+                "drupal/select2"
             ]
         }
     },
