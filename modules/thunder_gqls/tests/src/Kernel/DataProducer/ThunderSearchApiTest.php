@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
+use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 use Drupal\search_api\Entity\Index;
 use Drupal\search_api\Entity\Server;
-use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 
 /**
  * Test entities_with_term data producer.
