@@ -105,7 +105,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $this->assertSession()->assertWaitOnAjaxRequest();
     $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', '#drupal-modal'));
     $this->assertSession()->fieldNotExists('also_delete_file');
-    $this->assertSession()->pageTextContains('This action cannot be undone.The file attached to this media is owned by admin so will be retained.');
+    $this->assertSession()->pageTextContains('The file attached to this media is owned by admin so will be retained.');
     Role::load(static::$defaultUserRole)->grantPermission('delete any file')->save();
     $this->getSession()->reload();
     $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-gin-sticky-actions"] .gin-more-actions__trigger')->click();
