@@ -5,8 +5,8 @@
  * Update functions for the thunder installation profile.
  */
 
-use Drupal\ckeditor5\SmartDefaultSettings;
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\ckeditor5\SmartDefaultSettings;
 use Drupal\editor\Entity\Editor;
 use Drupal\entity_browser\Entity\EntityBrowser;
 use Drupal\user\Entity\Role;

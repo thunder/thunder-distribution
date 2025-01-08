@@ -161,6 +161,13 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
 
     $query->range($offset, $limit);
     $cacheContext->addCacheableDependency($searchIndex);
+    foreach ($searchIndex->getDatasources() as $datasource) {
+      $storage = $this->entityTypeManager->getStorage($datasource->getEntityTypeId());
+      $entityType = $storage->getEntityType();
+
+      $cacheContext->addCacheTags($entityType->getListCacheTags());
+      $cacheContext->addCacheContexts($entityType->getListCacheContexts());
+    }
 
     return $query;
   }
