@@ -95,14 +95,14 @@ class CacheInvalidationTest extends ThunderGqlsTestBase {
     $this->assertEquals('New teaser text', $descriptionData['content'], 'The meta tag has the wrong content.');
 
     // Assert that changing the site config invalidates the cache.
-    $descriptionData = $this->jsonDecode($responseData[7]['attributes']);
+    $descriptionData = $this->jsonDecode($responseData[6]['attributes']);
     $this->assertEquals('og:site_name', $descriptionData['property'], 'The meta tag for og:site_name is not the seventh tag in the response.');
     $this->assertEquals('Drush Site-Install', $descriptionData['content'], 'The meta tag has the wrong content.');
 
     $this->setSiteName('Drupal Test Installation');
 
     $responseData = $this->getResponseData($query, $variables)['metatags'];
-    $descriptionData = $this->jsonDecode($responseData[7]['attributes']);
+    $descriptionData = $this->jsonDecode($responseData[6]['attributes']);
 
     $this->assertEquals('og:site_name', $descriptionData['property'], 'The meta tag for og:site_name is not the seventh tag in the response.');
     $this->assertEquals('Drupal Test Installation', $descriptionData['content'], 'The meta tag has the wrong content.');
