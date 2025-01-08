@@ -2,11 +2,11 @@
 
 namespace Drupal\thunder_workflow\Plugin\Field\FieldWidget;
 
-use Drupal\content_moderation\Plugin\Field\FieldWidget\ModerationStateWidget as CoreModerationStateWidget;
 use Drupal\Core\Field\Attribute\FieldWidget;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\content_moderation\Plugin\Field\FieldWidget\ModerationStateWidget as CoreModerationStateWidget;
 
 /**
  * Plugin implementation of the 'thunder_moderation_state_default' widget.

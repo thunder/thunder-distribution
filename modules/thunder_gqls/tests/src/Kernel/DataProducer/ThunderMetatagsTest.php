@@ -2,10 +2,10 @@
 
 namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
+use Drupal\Tests\TestFileCreationTrait;
+use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
-use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
-use Drupal\Tests\TestFileCreationTrait;
 
 /**
  * Data producers Metatags test class.
