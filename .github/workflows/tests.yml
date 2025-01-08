@@ -28,7 +28,7 @@ env:
   DRUPAL_TESTING_SELENIUM_PORT: 9515
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: false
-  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://127.0.0.1:9515"]'
+  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","goog:chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://127.0.0.1:9515"]'
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   BROWSERTEST_OUTPUT_DIRECTORY: /tmp
   SKIP_TEST_CLEANUP: true
@@ -91,7 +91,7 @@ jobs:
         run: test-drupal-project prepare_build
 
       - name: Add necessary packages to lenient
-        run: composer config --json extra.drupal-lenient.allowed-list '["drupal/autosave_form", "drupal/vgwort", "drupal/media_entity_slideshow", "drupal/media_entity_twitter", "drupal/metatag_async_widget", "drupal/media_library_media_modify", "drupal/paragraphs_features", "drupal/select2", "drupal/paragraphs_paste", "drupal/ivw_integration", "thunder/thunder_testing_demo"]'
+        run: composer config --json extra.drupal-lenient.allowed-list '["drupal/select2", "thunder/thunder_testing_demo"]'
         working-directory: /tmp/test/thunder/install
 
       - name: Build the docroot
