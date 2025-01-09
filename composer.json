@@ -51,11 +51,6 @@
                 "Drupal 10.4 RC1 error with field_ui.js": "https://git.drupalcode.org/project/field_group/-/merge_requests/88.diff"
             }
         },
-        "drupal-lenient": {
-            "allowed-list": [
-                "drupal/select2"
-            ]
-        }
     },
     "require": {
         "php": ">=8.3",
@@ -104,7 +99,7 @@
         "drupal/scheduler": "^2.1.0",
         "drupal/scheduler_content_moderation_integration": "^3.0.1",
         "drupal/schema_metatag": "^3.0.3",
-        "drupal/select2": "dev-1.x",
+        "drupal/select2": "^2.0",
         "drupal/search_api_mark_outdated": "^1.0",
         "drupal/simple_sitemap": "^4.2.1",
         "drupal/token": "^1.7",
