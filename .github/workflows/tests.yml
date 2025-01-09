@@ -173,6 +173,8 @@ jobs:
 
       - name: Run tests
         run: test-drupal-project run_tests
+        env:
+          DRUPAL_TESTING_TEST_GROUP: ${{ matrix.DRUPAL_TESTING_TEST_SUITE }}
 
       - name: Upload test output
         uses: actions/upload-artifact@v4
