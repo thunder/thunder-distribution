@@ -134,6 +134,7 @@ jobs:
       fail-fast: false
       matrix:
         PHP_VERSION: [ '8.3' ]
+        DRUPAL_TESTING_TEST_SUITE: [ 'unit', 'kernel', 'functional', 'functional-javascript' ]
 
     steps:
       - uses: actions/checkout@v3
@@ -169,16 +170,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
-
-      - name: Run config tests
-        run: test-drupal-project run_tests -nc
-        env:
-          DRUPAL_TESTING_TEST_GROUP: ThunderConfig
-
-      - name: Run installer tests
-        run: test-drupal-project run_tests -nc
-        env:
-          DRUPAL_TESTING_TEST_GROUP: ThunderInstaller
 
       - name: Run tests
         run: test-drupal-project run_tests
