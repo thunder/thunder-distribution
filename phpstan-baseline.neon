@@ -146,16 +146,6 @@ parameters:
 			path: tests/src/FunctionalJavascript/ThunderJavascriptTestBase.php
 
 		-
-			message: "#^Class Drupal\\\\Tests\\\\TestSuites\\\\ThunderTestSuite extends @internal class PHPUnit\\\\Framework\\\\TestSuite\\.$#"
-			count: 1
-			path: tests/src/TestSuites/ThunderTestSuite.php
-
-		-
-			message: "#^Function drupal_phpunit_find_extension_directories not found\\.$#"
-			count: 1
-			path: tests/src/TestSuites/ThunderTestSuite.php
-
-		-
 			message: "#^Call to method id\\(\\) on an unknown class Drupal\\\\entity_browser\\\\Entity\\\\EntityBrowser\\.$#"
 			count: 1
 			path: thunder.post_update.php
