@@ -36,6 +36,7 @@ class EntityReferenceActionsTest extends ThunderJavascriptTestBase {
 
     $this->getSession()->getPage()->checkField('media[image][_field_selector][field_copyright]');
     $this->getSession()->getPage()->fillField('media[image][field_copyright][0][value]', 'Test copyright');
+    $this->getSession()->getPage()->selectFieldOption('media[image][field_copyright_change_method]', 'replace');
 
     $this->assertSession()->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Confirm');
 

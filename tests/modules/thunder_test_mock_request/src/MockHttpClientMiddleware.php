@@ -59,6 +59,8 @@ class MockHttpClientMiddleware {
    * HTTP middleware that adds the next mocked response.
    */
   public function __invoke(): callable {
+    // Needed due to a bug in coder.
+    // phpcs:disable Generic.CodeAnalysis.EmptyPHPStatement.SemicolonWithoutCodeDetected
     return fn($handler): callable => function (RequestInterface $request, array $options) use ($handler) {
       $items = $this->state->get(static::class, []);
       $url = (string) $request->getUri();

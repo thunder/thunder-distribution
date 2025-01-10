@@ -30,13 +30,19 @@ class DecoratableTypeResolverTest extends GraphQLTestBase {
    */
   public function setUp(): void {
     parent::setUp();
-    $this->resolver = $this->getMockForAbstractClass(DecoratableTypeResolver::class, [NULL]);
+    $this->resolver = $this->getMockBuilder(DecoratableTypeResolver::class)
+      ->setConstructorArgs([NULL])
+      ->onlyMethods(['resolve'])
+      ->getMock();
     $this->resolver->method('resolve')
       ->willReturnCallback(function ($object) {
         return ucfirst($object->bundle());
       });
 
-    $this->decoratedResolver = $this->getMockForAbstractClass(DecoratableTypeResolver::class, [$this->resolver]);
+    $this->decoratedResolver = $this->getMockBuilder(DecoratableTypeResolver::class)
+      ->setConstructorArgs([$this->resolver])
+      ->onlyMethods(['resolve'])
+      ->getMock();
     $this->decoratedResolver->method('resolve')
       ->willReturnCallback(function ($object) {
         if ($object->bundle(

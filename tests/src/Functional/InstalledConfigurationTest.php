@@ -72,6 +72,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_view_mode.content_moderation_state.token',
     'core.entity_view_mode.crop.token',
     'core.entity_view_mode.file.token',
+    'core.entity_view_mode.media.token',
     'core.entity_view_mode.menu_link_content.token',
     'core.entity_view_mode.node.token',
     'core.entity_view_mode.paragraph.token',
