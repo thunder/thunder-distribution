@@ -79,8 +79,6 @@ jobs:
           composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true --no-plugins
           composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
           composer global require php-parallel-lint/php-parallel-lint
-          composer global config --no-plugins allow-plugins.mglaman/composer-drupal-lenient true
-          composer global require mglaman/composer-drupal-lenient
 
       - name: Lint
         run: |
@@ -89,10 +87,6 @@ jobs:
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
-
-      - name: Add necessary packages to lenient
-        run: composer config --json extra.drupal-lenient.allowed-list '["thunder/thunder_testing_demo"]'
-        working-directory: /tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build
