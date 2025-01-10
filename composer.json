@@ -44,9 +44,6 @@
             "drupal/autosave_form": {
                 "Issue #3487459: Deprecation error on user edit form": "https://git.drupalcode.org/project/autosave_form/-/merge_requests/19.diff"
             },
-            "drupal/select2": {
-                "#3454104: D11": "https://git.drupalcode.org/project/select2/-/merge_requests/38.diff"
-            },
             "drupal/field_group": {
                 "Drupal 10.4 RC1 error with field_ui.js": "https://git.drupalcode.org/project/field_group/-/merge_requests/88.diff"
             }
