@@ -2,9 +2,10 @@
 
 namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
+use Drupal\node\NodeInterface;
+use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
-use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 
 /**
  * Data producers EntityLinks test class.
@@ -12,6 +13,13 @@ use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
  * @group Thunder
  */
 class EntityLinksTest extends GraphQLTestBase {
+
+  /**
+   * The node entity.
+   *
+   * @var \Drupal\node\Entity\Node
+   */
+  protected NodeInterface $node;
 
   /**
    * {@inheritdoc}

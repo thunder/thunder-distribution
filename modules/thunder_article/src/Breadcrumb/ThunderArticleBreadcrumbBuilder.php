@@ -4,6 +4,7 @@ namespace Drupal\thunder_article\Breadcrumb;
 
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -45,7 +46,7 @@ class ThunderArticleBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   /**
    * {@inheritdoc}
    */
-  public function applies(RouteMatchInterface $route_match): bool {
+  public function applies(RouteMatchInterface $route_match, ?CacheableMetadata $cacheable_metadata = NULL): bool {
     // This breadcrumb apply only for all articles.
     $parameters = $route_match->getParameters()->all();
     if (($route_match->getRouteName() === 'entity.node.canonical') && is_object($parameters['node'])) {

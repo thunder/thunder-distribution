@@ -1,5 +1,67 @@
 # Changelog
 
+## [7.4.0](https://github.com/thunder/thunder-distribution/tree/7.4.0) 2024-12-18
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.9...7.4.0)
+
+* Drupal 10.4 compatibility.
+* Updated Gin theme.
+* Load entity types and add cache tags and contexts in search api producer.
+
+## [7.3.9](https://github.com/thunder/thunder-distribution/tree/7.3.9) 2024-11-25
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.8...7.3.9)
+
+* Remove Drupal core patch [#3487031](https://www.drupal.org/i/3487031), because it was merged upstream.
+
+## [7.3.8](https://github.com/thunder/thunder-distribution/tree/7.3.8) 2024-11-20
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.7...7.3.8)
+
+* Pin autosave_form to 1.7 and apply patch from issue [#3487459](https://www.drupal.org/i/3487459)
+* Add a node Graphql query to fetch a single node by its UUID
+* Make private methods in SearchApiResponse protected.
+* Add Drupal core patch from issue [#3487031](https://www.drupal.org/i/3487031) because of a performance regression.
+
+## [7.3.7](https://github.com/thunder/thunder-distribution/tree/7.3.7) 2024-10-14
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.6...7.3.7)
+
+Re-add list tags to graphql queries
+
+## [7.3.6](https://github.com/thunder/thunder-distribution/tree/7.3.6) 2024-10-04
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.5...7.3.6)
+
+Update diff module to 1.8
+
+## [7.3.5](https://github.com/thunder/thunder-distribution/tree/7.3.5) 2024-09-24
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.3...7.3.5)
+
+Allow scheduler version ^3.0 in composer.json
+
+## [7.3.3](https://github.com/thunder/thunder-distribution/tree/7.3.3) 2024-08-22
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.2...7.3.3)
+
+Add search api GraphQl schema and data producer.
+
+## [7.3.2](https://github.com/thunder/thunder-distribution/tree/7.3.2) 2024-08-14
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.1...7.3.2)
+
+* [Issue #3462165: Add focal_point patch](https://www.drupal.org/node/3462165)
+
+## [7.3.1](https://github.com/thunder/thunder-distribution/tree/7.3.1) 2024-06-024
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.3.0...7.3.1)
+
+Add patches for upstream issues.
+
+* [Issue #3465364: Fatal error when changing password when password_policy_history is enabled](https://www.drupal.org/project/password_policy/issues/3465364)
+* [Issue #3455558: There is no visible change to a toggle when pressed (but it does trigger conditional fields, value is saved, etc)](https://www.drupal.org/project/gin/issues/3455558)
+
 ## [7.3.0](https://github.com/thunder/thunder-distribution/tree/7.1.0) 2024-06-024
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.2.2...7.3.0)
