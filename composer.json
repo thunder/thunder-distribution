@@ -50,7 +50,7 @@
             "drupal/field_group": {
                 "Drupal 10.4 RC1 error with field_ui.js": "https://git.drupalcode.org/project/field_group/-/merge_requests/88.diff"
             }
-        },
+        }
     },
     "require": {
         "php": ">=8.3",
