@@ -166,7 +166,9 @@ jobs:
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Run tests
-        run: test-drupal-project run_tests
+        run: |
+          pwd
+          test-drupal-project run_tests
         env:
           DRUPAL_TESTING_TEST_SUITE: ${{ matrix.DRUPAL_TESTING_TEST_SUITE }}
 
@@ -281,7 +283,9 @@ jobs:
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Run tests suite
-        run: test-drupal-project run_tests
+        run: |
+          pwd
+          test-drupal-project run_tests
         env:
           COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
@@ -356,7 +360,9 @@ jobs:
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Run the tests
-        run: test-drupal-project run_tests
+        run: |
+          pwd
+          test-drupal-project run_tests
 
 #   Start a debug session.
 #   - name: Setup tmate session
