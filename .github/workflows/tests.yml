@@ -204,6 +204,7 @@ jobs:
 
     env:
       DRUPAL_TESTING_TEST_GROUP_EXCLUDE: "NoUpdate"
+      DRUPAL_TESTING_TEST_GROUP: Thunder
 
     steps:
       - uses: actions/checkout@v3
@@ -267,7 +268,6 @@ jobs:
           composer update
           composer install
           composer exec -- drush updb -y
-          composer exec -- drush pm:uninstall slick -y
 
           cd docroot
           php core/scripts/db-tools.php dump-database-d8-mysql --database-url "${SIMPLETEST_DB}" >"sites/default/database-dump.php"
@@ -284,9 +284,7 @@ jobs:
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Run tests suite
-        run: |
-          pwd
-          test-drupal-project run_tests
+        run: test-drupal-project run_tests
         env:
           COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
@@ -361,9 +359,9 @@ jobs:
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
 
       - name: Run the tests
-        run: |
-          pwd
-          test-drupal-project run_tests
+        run: test-drupal-project run_tests
+        env:
+          DRUPAL_TESTING_TEST_GROUP: Thunder
 
 #   Start a debug session.
 #   - name: Setup tmate session
