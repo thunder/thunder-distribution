@@ -41,9 +41,6 @@
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
-            "drupal/autosave_form": {
-                "Issue #3487459: Deprecation error on user edit form": "https://git.drupalcode.org/project/autosave_form/-/merge_requests/19.diff"
-            },
             "drupal/field_group": {
                 "Drupal 10.4 RC1 error with field_ui.js": "https://git.drupalcode.org/project/field_group/-/merge_requests/88.diff"
             }
@@ -55,7 +52,7 @@
         "drupal/access_unpublished": "^1.5",
         "drupal/admin_toolbar": "^3.4",
         "drupal/autofill": "^1.1",
-        "drupal/autosave_form": "1.7",
+        "drupal/autosave_form": "^1.8",
         "drupal/blazy": "^2.14",
         "drupal/checklistapi": "^2.1",
         "drupal/core-recommended": "~10.4.0@stable",
