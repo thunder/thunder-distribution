@@ -176,7 +176,7 @@ trait ThunderTestTrait {
    * @param string $uuid
    *   The uuid.
    *
-   * @return \Drupal\media\MediaInterface
+   * @return \Drupal\media\Entity\Media
    *   The media entity.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
@@ -193,7 +193,7 @@ trait ThunderTestTrait {
    * @param string $uuid
    *   The uuid.
    *
-   * @return \Drupal\node\NodeInterface
+   * @return \Drupal\node\Entity\Node
    *   The node entity.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
