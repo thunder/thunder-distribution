@@ -66,7 +66,7 @@ class MockHttpClientMiddleware {
    * HTTP middleware that adds the next mocked response.
    */
   public function __invoke(): callable {
-    return fn($handler): callable => function (RequestInterface $request, array $options) use ($handler) {
+    return (fn($handler): callable => function (RequestInterface $request, array $options) use ($handler) {
       $items = $this->state->get(static::class, []);
       $url = (string) $request->getUri();
       if (!empty($items[$url])) {
@@ -78,7 +78,7 @@ class MockHttpClientMiddleware {
       }
 
       return $handler($request, $options);
-    };
+    });
   }
 
 }
