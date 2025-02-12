@@ -18,7 +18,6 @@ class MediaGalleryModifyTest extends ThunderJavascriptTestBase {
   /**
    * {@inheritdoc}
    *
-   * @phpstan-ignore-next-line
    */
   protected function sortableUpdate($item, $from, $to = NULL): void {
     // See core/modules/media_library/js/media_library.widget.es6.js.
