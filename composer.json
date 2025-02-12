@@ -70,7 +70,6 @@
         "drupal/focal_point": "^2.1.2",
         "drupal/facets": "^2.0.6",
         "drupal/gin": "^4.0",
-        "drupal/gin_toolbar": "^1.0-rc6",
         "drupal/graphql": "^4.7",
         "drupal/inline_entity_form": "^1.0-rc14",
         "drupal/ivw_integration": "^2.0",
