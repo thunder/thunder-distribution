@@ -1,6 +1,6 @@
 /* Set background in table header. */
 .field--widget-paragraphs .paragraphs-tabs-wrapper table.field-multiple-table:first-of-type th {
-  background: var(--gin-bg-layer);
+  background: inherit;
 }
 /* Hide paragraphs field label in table header. */
 .field--widget-paragraphs table.field-multiple-table h4.paragraphs-table-header__label {
