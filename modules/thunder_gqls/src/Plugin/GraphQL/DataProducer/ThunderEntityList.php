@@ -3,7 +3,6 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\graphql\GraphQL\Execution\FieldContext;
-use Drupal\thunder_gqls\Wrappers\EntityListResponse;
 use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
 
 /**
@@ -97,7 +96,7 @@ class ThunderEntityList extends ThunderEntityListProducerBase {
       $cacheContext
     );
 
-    return new EntityListResponse($query);
+    return $this->entityListResponse($query);
   }
 
 }

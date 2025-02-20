@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
-use Drupal\simple_sitemap\Queue\QueueWorker;
 use Drupal\Tests\Traits\Core\CronRunTrait;
+use Drupal\simple_sitemap\Queue\QueueWorker;
 
 /**
  * Testing of Meta Information.

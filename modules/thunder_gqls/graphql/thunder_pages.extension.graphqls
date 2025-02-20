@@ -5,4 +5,5 @@ extend type Query {
   channel(uuid: String!): Channel
   user(uuid: String!): User
   page(path: String!): Page
+  node(uuid: String!): Page
 }
