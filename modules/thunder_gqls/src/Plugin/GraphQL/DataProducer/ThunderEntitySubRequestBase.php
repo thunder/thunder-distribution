@@ -88,7 +88,7 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
   /**
    * {@inheritdoc}
    */
-  public function resolveField(FieldContext $fieldContext) {
+  public function resolveField(FieldContext $field): mixed {
     $contextValues = $this->getContextValues();
 
     if (!isset($contextValues['path'])) {
