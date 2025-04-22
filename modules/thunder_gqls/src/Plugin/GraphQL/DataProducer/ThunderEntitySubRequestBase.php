@@ -96,7 +96,7 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
     }
 
     $url = $this->currentRequest->getSchemeAndHttpHost() . $contextValues['path'];
-    $request = $this->createRequest($this->currentRequest, $url, $fieldContext);
+    $request = $this->createRequest($this->currentRequest, $url, $field);
 
     $response = $this->httpKernel->handle($request, HttpKernelInterface::SUB_REQUEST);
     if ($response instanceof SubRequestResponse) {

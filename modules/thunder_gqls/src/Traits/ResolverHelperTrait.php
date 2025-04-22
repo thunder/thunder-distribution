@@ -4,6 +4,7 @@ namespace Drupal\thunder_gqls\Traits;
 
 use Drupal\graphql\GraphQL\Resolver\ResolverInterface;
 use Drupal\graphql\GraphQL\ResolverBuilder;
+use Drupal\graphql\GraphQL\ResolverRegistry;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 
 /**
@@ -19,11 +20,11 @@ trait ResolverHelperTrait {
   protected ResolverBuilder $builder;
 
   /**
-   * ResolverRegistryInterface.
+   * ResolverRegistry.
    *
-   * @var \Drupal\graphql\GraphQL\ResolverRegistryInterface
+   * @var \Drupal\graphql\GraphQL\ResolverRegistry
    */
-  protected ResolverRegistryInterface $registry;
+  protected ResolverRegistry $registry;
 
   /**
    * Add field resolver to registry, if it does not already exist.
