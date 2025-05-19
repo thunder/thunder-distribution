@@ -106,11 +106,6 @@ parameters:
 			path: tests/src/FunctionalJavascript/Integration/InlineEntityFormTest.php
 
 		-
-			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:assertWaitOnAjaxRequest\\(\\)\\.$#"
-			count: 2
-			path: tests/src/FunctionalJavascript/Integration/ParagraphSplitTest.php
-
-		-
 			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
 			count: 7
 			path: tests/src/FunctionalJavascript/Integration/ParagraphSplitTest.php
@@ -129,11 +124,6 @@ parameters:
 			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"
 			count: 5
 			path: tests/src/FunctionalJavascript/MediaGalleryModifyTest.php
-
-		-
-			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:assertWaitOnAjaxRequest\\(\\)\\.$#"
-			count: 2
-			path: tests/src/FunctionalJavascript/MediaImageModifyTest.php
 
 		-
 			message: "#^Call to an undefined method Drupal\\\\Tests\\\\WebAssert\\:\\:waitForElementVisible\\(\\)\\.$#"

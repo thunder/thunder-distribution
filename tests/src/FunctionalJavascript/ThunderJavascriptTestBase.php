@@ -39,6 +39,7 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
     'thunder_testing_demo',
     'thunder_workflow',
     'thunder_news_article',
+    'thunder_test_js_perf',
     'thunder_test_mock_request',
   ];
 
@@ -77,7 +78,8 @@ abstract class ThunderJavascriptTestBase extends WebDriverTestBase {
       ->save();
 
     $autosave_form = $this->config('autosave_form.settings');
-    $autosave_form->set('notification.active', FALSE)
+    $autosave_form->set('active_on.content_entity_forms', FALSE)
+      ->set('notification.active', FALSE)
       ->save();
   }
 

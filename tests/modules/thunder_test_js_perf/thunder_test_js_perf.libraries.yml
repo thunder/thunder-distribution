@@ -1,0 +1,3 @@
+thunder_test_js_perf/reset_performance:
+  js:
+    js/reset_performance.js: {}

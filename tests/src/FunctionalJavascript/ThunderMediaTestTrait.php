@@ -25,7 +25,8 @@ trait ThunderMediaTestTrait {
 
     $this->toggleMedia($medias);
 
-    $this->submitMediaLibrary();
+    $this->clickCssSelector('.media-library-widget-modal .form-actions button.button--primary');
+    $this->assertWaitOnAjaxRequest();
   }
 
   /**

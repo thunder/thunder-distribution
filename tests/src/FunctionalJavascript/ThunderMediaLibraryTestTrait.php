@@ -23,15 +23,6 @@ trait ThunderMediaLibraryTestTrait {
   }
 
   /**
-   * Submit changes in media library modal.
-   */
-  public function submitMediaLibrary(): void {
-    $this->clickCssSelector('.media-library-widget-modal .form-actions button');
-
-    $this->assertWaitOnAjaxRequest();
-  }
-
-  /**
    * Upload file inside media library.
    *
    * NOTE: It will search for first tab with upload widget and file will be
@@ -40,12 +31,10 @@ trait ThunderMediaLibraryTestTrait {
    *
    * @param string $filePath
    *   Path to file that should be uploaded.
-   * @param bool $skipEditForm
-   *   If set to TRUE, it will skip edit form will just select uploaded files.
    *
    * @throws \Exception
    */
-  public function uploadFile(string $filePath, bool $skipEditForm = FALSE): void {
+  public function uploadFile(string $filePath): void {
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
@@ -67,19 +56,11 @@ trait ThunderMediaLibraryTestTrait {
 
     $fileField->attachFile($filePath);
 
-    $this->assertWaitOnAjaxRequest();
-
     // Wait up to 10 sec that "Use selected" button is active.
     $this->getSession()->wait(
       10000,
       '(typeof jQuery === "undefined" || !jQuery(\'input[name="op"]\').is(":disabled"))'
     );
-
-    $this->assertWaitOnAjaxRequest();
-    if (!$skipEditForm) {
-      $this->assertSession()->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Save and select');
-      $this->assertWaitOnAjaxRequest();
-    }
   }
 
 }
