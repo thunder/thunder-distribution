@@ -2,7 +2,7 @@ name: Sync labels in the declarative way
 on:
   push:
     branches:
-      - 8.[1-9]+.x
+      - 7.[1-9]+.x
     paths:
       - .github/labels.yml
 jobs:
