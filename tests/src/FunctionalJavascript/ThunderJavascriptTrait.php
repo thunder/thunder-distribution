@@ -238,7 +238,7 @@ JS);
   protected function clickSave(): void {
     $driver = $this->getSession()->getDriver();
 
-    $driver->click('//div[@data-drupal-selector="edit-actions"]/input[@data-drupal-selector="edit-submit"]');
+    $driver->click('//div[@data-drupal-selector="edit-gin-sticky-actions"]/input[@data-drupal-selector="gin-sticky-edit-submit"]');
   }
 
 }

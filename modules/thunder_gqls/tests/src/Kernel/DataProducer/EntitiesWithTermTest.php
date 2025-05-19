@@ -121,6 +121,46 @@ class EntitiesWithTermTest extends GraphQLTestBase {
     $node3->save();
 
     $this->parent = $parent;
+
+    $schema = <<<GQL
+      type Query {
+        articles: EntityList
+      }
+      type EntityList {
+        total: Int!
+      }
+GQL;
+
+    $this->setUpSchema($schema);
+  }
+
+  /**
+   * Test cache metadata for the query.
+   */
+  public function testQueryCacheMetadata(): void {
+    $query = <<<GQL
+      query {
+        articles {
+          total
+        }
+      }
+GQL;
+
+    $this->mockResolver('Query', 'articles',
+      $this->builder->produce('entities_with_term')
+        ->map('term', $this->builder->fromValue($this->parent))
+        ->map('type', $this->builder->fromValue('node'))
+        ->map('field', $this->builder->fromValue(self::TAXONOMY_FIELD_NAME))
+    );
+    $this->mockResolver('EntityList', 'total', $this->builder->fromValue(1));
+
+    $metadata = $this->defaultCacheMetaData();
+    $metadata->setCacheContexts(['user.permissions', 'user.node_grants:view']);
+    $metadata->addCacheTags(['node_list', 'taxonomy_term:' . $this->parent->id()]);
+
+    $this->assertResults($query, [], [
+      'articles' => ['total' => '1'],
+    ], $metadata);
   }
 
   /**
