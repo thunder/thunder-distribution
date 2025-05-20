@@ -60,7 +60,7 @@ class ThunderSchema extends ComposableSchema {
   /**
    * {@inheritdoc}
    */
-  public function getResolverRegistry(): ResolverRegistryInterface {
+  public function getResolverRegistry(): ResolverRegistry {
     $this->registry = new ResolverRegistry();
     $this->createResolverBuilder();
 
