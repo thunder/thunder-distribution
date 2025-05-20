@@ -6,6 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Url;
 use Drupal\graphql\GraphQL\ResolverRegistry;
+use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\graphql\Plugin\DataProducerPluginManager;
 use Drupal\graphql\Plugin\GraphQL\Schema\ComposableSchema;
 use Drupal\graphql\Plugin\GraphQL\Schema\SdlSchemaPluginBase;
@@ -59,7 +60,7 @@ class ThunderSchema extends ComposableSchema {
   /**
    * {@inheritdoc}
    */
-  public function getResolverRegistry(): ResolverRegistry {
+  public function getResolverRegistry(): ResolverRegistryInterface {
     $this->registry = new ResolverRegistry();
     $this->createResolverBuilder();
 
