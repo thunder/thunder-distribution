@@ -19,3 +19,6 @@ endpoint: /graphql
 debug_flag: 0
 caching: true
 batching: true
+disable_introspection: true
+query_depth: null
+query_complexity: null

@@ -66,7 +66,7 @@
         "drupal/focal_point": "^2.1.2",
         "drupal/facets": "^2.0.7",
         "drupal/gin": "^4.0",
-        "drupal/graphql": "^4.7",
+        "drupal/graphql": "^5.0@alpha",
         "drupal/inline_entity_form": "^3.0.0-rc20",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.2",
@@ -105,8 +105,7 @@
         "npm-asset/blazy": "^1.8",
         "npm-asset/slick-carousel": "^1.8",
         "npm-asset/select2": "dev-develop",
-        "caxy/php-htmldiff": "^0.1.14",
-        "webonyx/graphql-php": "^14.11.8"
+        "caxy/php-htmldiff": "^0.1.14"
     },
     "suggest": {
         "drupal/search_api_solr": "Provides a Apache Solr backend for the Search API module"
