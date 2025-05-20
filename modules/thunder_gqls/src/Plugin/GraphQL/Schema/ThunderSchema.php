@@ -76,7 +76,7 @@ class ThunderSchema extends ComposableSchema {
           ->map('token', $this->builder->fromArgument('auHash'))
       );
     }
-    // * @phpstan-ignore return.type
+    // @phpstan-ignore return.type
     return $this->registry;
   }
 
