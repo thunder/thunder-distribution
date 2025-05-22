@@ -42,7 +42,8 @@
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
             "drupal/graphql": {
-                "Fixes #3525801 ComposableSchema::getResolverRegistry has incorrect return type declaration": "https://www.drupal.org/files/issues/2025-05-21/3525801-graphql-fix-return-type.patch"
+                "Fixes #3525801 ComposableSchema::getResolverRegistry has incorrect return type declaration": "https://www.drupal.org/files/issues/2025-05-21/3525801-graphql-fix-return-type.patch",
+                "Fixes #3525994: The menu_link_label data producer throws internal server error.": "https://www.drupal.org/files/issues/2025-05-22/3525994-graphql-cast-return-value.patch"
             }
         }
     },
