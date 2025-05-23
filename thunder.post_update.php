@@ -136,3 +136,17 @@ function thunder_post_update_0004_remove_blazy_and_slick(): string {
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
 }
+
+/**
+ * Enable the entity_usage module.
+ */
+function thunder_post_update_0005_add_entity_usage(): string {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('thunder', 'thunder_post_update_0005_add_entity_usage');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
+}
