@@ -3,9 +3,10 @@
 namespace Drupal\thunder_test_mock_request;
 
 use Drupal\Core\State\StateInterface;
+use GuzzleHttp\Promise\Create;
 use GuzzleHttp\Psr7\Response;
-use function GuzzleHttp\Promise\promise_for;
 use Psr\Http\Message\RequestInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -18,14 +19,7 @@ class MockHttpClientMiddleware {
    *
    * @var \Symfony\Component\HttpFoundation\Request
    */
-  protected $request;
-
-  /**
-   * The state service.
-   *
-   * @var \Drupal\Core\State\StateInterface
-   */
-  protected $state;
+  protected Request $request;
 
   /**
    * MockHttpClientMiddleware constructor.
@@ -35,9 +29,8 @@ class MockHttpClientMiddleware {
    * @param \Drupal\Core\State\StateInterface $state
    *   The state service.
    */
-  public function __construct(RequestStack $requestStack, StateInterface $state) {
+  public function __construct(RequestStack $requestStack, protected readonly StateInterface $state) {
     $this->request = $requestStack->getCurrentRequest();
-    $this->state = $state;
   }
 
   /**
@@ -52,7 +45,7 @@ class MockHttpClientMiddleware {
    * @param int $status
    *   The response status code.
    */
-  public static function addUrlResponse($url, $body, array $headers = [], $status = 200) {
+  public static function addUrlResponse(string $url, string $body, array $headers = [], int $status = 200): void {
 
     $items = \Drupal::state()->get(static::class, []);
     $items[$url] = ['body' => $body, 'headers' => $headers, 'status' => $status];
@@ -65,22 +58,21 @@ class MockHttpClientMiddleware {
    *
    * HTTP middleware that adds the next mocked response.
    */
-  public function __invoke() {
-    return function ($handler) {
-      return function (RequestInterface $request, array $options) use ($handler) {
-        $items = $this->state->get(static::class, []);
-        $url = (string) $request->getUri();
-        if (!empty($items[$url])) {
-          $response = new Response($items[$url]['status'], $items[$url]['headers'], $items[$url]['body']);
-          // @phpstan-ignore-next-line
-          return promise_for($response);
-        }
-        elseif (strstr($this->request->getHttpHost(), $request->getUri()->getHost()) === FALSE) {
-          throw new \Exception(sprintf("No response for %s defined. See MockHttpClientMiddleware::addUrlResponse().", $url));
-        }
+  public function __invoke(): callable {
+    // Needed due to a bug in coder.
+    // phpcs:disable Generic.CodeAnalysis.EmptyPHPStatement.SemicolonWithoutCodeDetected
+    return fn($handler): callable => function (RequestInterface $request, array $options) use ($handler) {
+      $items = $this->state->get(static::class, []);
+      $url = (string) $request->getUri();
+      if (!empty($items[$url])) {
+        $response = new Response($items[$url]['status'], $items[$url]['headers'], $items[$url]['body']);
+        return Create::promiseFor($response);
+      }
+      if (strpos($this->request->getHttpHost(), $request->getUri()->getHost()) === FALSE) {
+        throw new \Exception(sprintf("No response for %s defined. See MockHttpClientMiddleware::addUrlResponse().", $url));
+      }
 
-        return $handler($request, $options);
-      };
+      return $handler($request, $options);
     };
   }
 

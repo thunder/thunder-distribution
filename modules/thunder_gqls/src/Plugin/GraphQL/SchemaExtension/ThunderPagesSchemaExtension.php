@@ -3,13 +3,9 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
 use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
-use Drupal\node\NodeInterface;
-use Drupal\taxonomy\TermInterface;
-use Drupal\thunder_gqls\Wrappers\EntityListResponse;
-use Drupal\user\UserInterface;
-use GraphQL\Type\Definition\ResolveInfo;
+use Drupal\thunder_gqls\GraphQL\PagesTypeResolver;
+use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
 
 /**
  * Schema extension for page types.
@@ -17,7 +13,7 @@ use GraphQL\Type\Definition\ResolveInfo;
  * @SchemaExtension(
  *   id = "thunder_pages",
  *   name = "Content pages",
- *   description = "Adds page types and their fields.",
+ *   description = "Adds page types and their fields (required).",
  *   schema = "thunder"
  * )
  */
@@ -26,66 +22,67 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function registerResolvers(ResolverRegistryInterface $registry) {
+  public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 
-    $this->registry->addTypeResolver('Page',
-      \Closure::fromCallable([
-        __CLASS__,
-        'resolvePageTypes',
-      ])
+    $this->registry->addTypeResolver(
+      'Page',
+      new PagesTypeResolver($registry->getTypeResolver('Page'))
     );
 
     $this->resolveFields();
   }
 
   /**
-   * Add article field resolvers.
+   * Add page field resolvers.
    */
-  protected function resolveFields() {
+  protected function resolveFields(): void {
 
     // Page.
     $this->addFieldResolverIfNotExists('Query', 'page',
       $this->fromRoute($this->builder->fromArgument('path'))
     );
 
+    $this->resolvePageInterfaceQueryFields('node', 'node');
+
     // Teaser.
     $this->addSimpleCallbackFields('Teaser', ['image', 'text']);
 
-    // Article.
-    $this->resolvePageInterfaceFields('Article', 'node');
-    $this->resolvePageInterfaceQueryFields('article', 'node');
+    // Article and NewsArticle.
+    $articleTypes = ['article' => 'Article', 'newsArticle' => 'NewsArticle'];
+    foreach ($articleTypes as $bundle => $type) {
+      $this->resolvePageInterfaceFields($type, 'node');
+      $this->resolvePageInterfaceQueryFields($bundle, 'node');
 
-    $this->addFieldResolverIfNotExists('Article', 'seoTitle',
-      $this->builder->fromPath('entity', 'field_seo_title.value')
-    );
+      $this->addFieldResolverIfNotExists($type, 'seoTitle',
+        $this->builder->fromPath('entity', 'field_seo_title.value')
+      );
 
-    $this->addFieldResolverIfNotExists('Article', 'channel',
-      $this->builder->fromPath('entity', 'field_channel.entity')
-    );
+      $this->addFieldResolverIfNotExists($type, 'channel',
+        $this->fromEntityReference('field_channel', NULL, FALSE)
+      );
 
-    $this->addFieldResolverIfNotExists('Article', 'tags',
-      $this->fromEntityReference('field_tags')
-    );
+      $this->addFieldResolverIfNotExists($type, 'tags',
+        $this->fromEntityReference('field_tags')
+      );
 
-    $this->addFieldResolverIfNotExists('Article', 'content',
-      $this->fromEntityReferenceRevisions('field_paragraphs')
-    );
+      $this->addFieldResolverIfNotExists($type, 'content',
+        $this->fromEntityReferenceRevisions('field_paragraphs')
+      );
 
-    $this->addFieldResolverIfNotExists('Article', 'teaser',
-     $this->builder->callback(function (ContentEntityInterface $entity) {
-       return [
-         'image' => $entity->field_teaser_media->entity,
-         'text' => $entity->field_teaser_text->value,
-       ];
-     })
-    );
+      $this->addFieldResolverIfNotExists($type, 'teaser',
+        $this->builder->callback(fn(ContentEntityInterface $entity): array => [
+          'image' => $entity->field_teaser_media->entity,
+          'text' => $entity->field_teaser_text->value,
+        ])
+      );
+    }
 
     // Basic page.
     $this->resolvePageInterfaceFields('BasicPage', 'node');
 
     $this->addFieldResolverIfNotExists('BasicPage', 'content',
-      $this->builder->fromPath('entity', 'body.processed')
+      $this->fromEntityReferenceRevisions('field_paragraphs')
     );
 
     // Tags.
@@ -100,7 +97,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
       $this->builder->produce('entities_with_term')
         ->map('term', $this->builder->fromParent())
         ->map('type', $this->builder->fromValue('node'))
-        ->map('bundles', $this->builder->fromValue(['article']))
+        ->map('bundles', $this->builder->fromValue(['article', 'news_article']))
         ->map('field', $this->builder->fromValue('field_tags'))
         ->map('offset', $this->builder->fromArgument('offset'))
         ->map('limit', $this->builder->fromArgument('limit'))
@@ -129,7 +126,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
       $this->builder->produce('entities_with_term')
         ->map('term', $this->builder->fromParent())
         ->map('type', $this->builder->fromValue('node'))
-        ->map('bundles', $this->builder->fromValue(['article']))
+        ->map('bundles', $this->builder->fromValue(['article', 'news_article']))
         ->map('field', $this->builder->fromValue('field_channel'))
         ->map('offset', $this->builder->fromArgument('offset'))
         ->map('limit', $this->builder->fromArgument('limit'))
@@ -147,16 +144,31 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
     $this->resolvePageInterfaceFields('User', 'user');
     $this->resolvePageInterfaceQueryFields('user', 'user');
 
-    $this->addFieldResolverIfNotExists('User', 'mail',
-      $this->builder->fromPath('entity', 'mail.value')
+    $this->registry->addFieldResolver('User', 'mail',
+      $this->builder->compose(
+        $this->builder->produce('field')
+          ->map('entity', $this->builder->fromParent())
+          ->map('field', $this->builder->fromValue('mail')),
+        $this->builder->fromPath('field:string', '0.value')
+      )
     );
 
     $this->addFieldResolverIfNotExists('User', 'access',
-      $this->builder->fromPath('entity', 'access.value')
+      $this->builder->compose(
+        $this->builder->produce('field')
+          ->map('entity', $this->builder->fromParent())
+          ->map('field', $this->builder->fromValue('access')),
+        $this->builder->fromPath('field:string', '0.value')
+      )
     );
 
     $this->addFieldResolverIfNotExists('User', 'published',
-      $this->builder->fromPath('entity', 'status.value')
+      $this->builder->compose(
+        $this->builder->produce('field')
+          ->map('entity', $this->builder->fromParent())
+          ->map('field', $this->builder->fromValue('status')),
+        $this->builder->fromPath('field:string', '0.value')
+      )
     );
 
     $this->addFieldResolverIfNotExists('User', 'picture',
@@ -167,41 +179,12 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
 
     // Entity List.
     $this->addFieldResolverIfNotExists('EntityList', 'total',
-      $this->builder->callback(function (EntityListResponse $entityList) {
-        return $entityList->total();
-      })
+      $this->builder->callback(fn(EntityListResponseInterface $entityList): int => $entityList->total())
     );
 
     $this->addFieldResolverIfNotExists('EntityList', 'items',
-      $this->builder->callback(function (EntityListResponse $entityList) {
-        return $entityList->items();
-      })
+      $this->builder->callback(fn(EntityListResponseInterface $entityList) => $entityList->items())
     );
-  }
-
-  /**
-   * Resolves page types.
-   *
-   * @param mixed $value
-   *   The current value.
-   * @param \Drupal\graphql\GraphQL\Execution\ResolveContext $context
-   *   The resolve context.
-   * @param \GraphQL\Type\Definition\ResolveInfo $info
-   *   The resolve information.
-   *
-   * @return string
-   *   Response type.
-   *
-   * @throws \Exception
-   */
-  protected function resolvePageTypes($value, ResolveContext $context, ResolveInfo $info): string {
-    if ($value instanceof NodeInterface || $value instanceof TermInterface || $value instanceof UserInterface) {
-      if ($value->bundle() === 'page') {
-        return 'BasicPage';
-      }
-      return $this->mapBundleToSchemaName($value->bundle());
-    }
-    throw new \Exception('Invalid page type.');
   }
 
 }

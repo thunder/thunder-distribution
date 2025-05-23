@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_teaser_media
+    - media.type.image
+    - node.type.news_article
+id: node.news_article.field_teaser_media
+field_name: field_teaser_media
+entity_type: node
+bundle: news_article
+label: 'Teaser Media'
+description: 'The teaser image is displayed on overview pages.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+field_type: entity_reference

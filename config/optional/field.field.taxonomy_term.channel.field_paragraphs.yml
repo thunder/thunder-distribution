@@ -19,34 +19,34 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 1
     target_bundles: null
+    negate: 1
     target_bundles_drag_drop:
-      text:
-        weight: 1
-        enabled: false
-      quote:
-        weight: 9
-        enabled: false
-      link:
-        weight: 8
-        enabled: false
-      instagram:
-        weight: 4
-        enabled: false
-      twitter:
-        weight: 5
-        enabled: false
       gallery:
         weight: 3
         enabled: false
       image:
         weight: 2
         enabled: false
-      video:
-        weight: 7
+      instagram:
+        weight: 4
+        enabled: false
+      link:
+        weight: 8
         enabled: false
       pinterest:
         weight: 6
+        enabled: false
+      quote:
+        weight: 9
+        enabled: false
+      text:
+        weight: 1
+        enabled: false
+      twitter:
+        weight: 5
+        enabled: false
+      video:
+        weight: 7
         enabled: false
 field_type: entity_reference_revisions

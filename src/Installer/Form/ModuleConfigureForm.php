@@ -2,8 +2,11 @@
 
 namespace Drupal\thunder\Installer\Form;
 
+use Drupal\Component\Utility\Environment;
 use Drupal\Core\Access\AccessManagerInterface;
 use Drupal\Core\Extension\Extension;
+use Drupal\Core\Extension\ExtensionLifecycle;
+use Drupal\Core\Extension\ModuleDependencyMessageTrait;
 use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ModuleInstallerInterface;
@@ -12,9 +15,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Installer\InstallerKernel;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Url;
-use Drupal\Core\Extension\ModuleDependencyMessageTrait;
 use Drupal\user\PermissionHandlerInterface;
-use Drupal\Component\Utility\Environment;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -29,47 +30,47 @@ class ModuleConfigureForm extends FormBase {
    *
    * @var \Drupal\Core\Extension\ModuleExtensionList
    */
-  protected $moduleExtensionList;
+  protected ModuleExtensionList $moduleExtensionList;
 
   /**
    * The module installer.
    *
    * @var \Drupal\Core\Extension\ModuleInstallerInterface
    */
-  protected $moduleInstaller;
+  protected ModuleInstallerInterface $moduleInstaller;
 
   /**
    * The access manager service.
    *
    * @var \Drupal\Core\Access\AccessManagerInterface
    */
-  protected $accessManager;
+  protected AccessManagerInterface $accessManager;
 
   /**
    * The module handler service.
    *
    * @var \Drupal\Core\Extension\ModuleHandlerInterface
    */
-  protected $moduleHandler;
+  protected ModuleHandlerInterface $moduleHandler;
 
   /**
    * The current user.
    *
    * @var \Drupal\Core\Session\AccountProxyInterface
    */
-  protected $currentUser;
+  protected AccountProxyInterface $currentUser;
 
   /**
    * The permission handler service.
    *
    * @var \Drupal\user\PermissionHandlerInterface
    */
-  protected $permissionHandler;
+  protected PermissionHandlerInterface $permissionHandler;
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): self {
     $form = parent::create($container);
     $form->setModuleExtensionList($container->get('extension.list.module'));
     $form->setModuleInstaller($container->get('module_installer'));
@@ -87,7 +88,7 @@ class ModuleConfigureForm extends FormBase {
    * @param \Drupal\Core\Extension\ModuleExtensionList $moduleExtensionList
    *   The module extension list.
    */
-  protected function setModuleExtensionList(ModuleExtensionList $moduleExtensionList) {
+  protected function setModuleExtensionList(ModuleExtensionList $moduleExtensionList): void {
     $this->moduleExtensionList = $moduleExtensionList;
   }
 
@@ -97,7 +98,7 @@ class ModuleConfigureForm extends FormBase {
    * @param \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller
    *   The module installer.
    */
-  protected function setModuleInstaller(ModuleInstallerInterface $moduleInstaller) {
+  protected function setModuleInstaller(ModuleInstallerInterface $moduleInstaller): void {
     $this->moduleInstaller = $moduleInstaller;
   }
 
@@ -107,7 +108,7 @@ class ModuleConfigureForm extends FormBase {
    * @param \Drupal\Core\Access\AccessManagerInterface $accessManager
    *   The access manager service.
    */
-  protected function setAccessManager(AccessManagerInterface $accessManager) {
+  protected function setAccessManager(AccessManagerInterface $accessManager): void {
     $this->accessManager = $accessManager;
   }
 
@@ -117,7 +118,7 @@ class ModuleConfigureForm extends FormBase {
    * @param \Drupal\Core\Session\AccountProxyInterface $accountProxy
    *   The current user.
    */
-  protected function setCurrentUser(AccountProxyInterface $accountProxy) {
+  protected function setCurrentUser(AccountProxyInterface $accountProxy): void {
     $this->currentUser = $accountProxy;
   }
 
@@ -127,7 +128,7 @@ class ModuleConfigureForm extends FormBase {
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
    *   The module handler service.
    */
-  protected function setModuleHandler(ModuleHandlerInterface $moduleHandler) {
+  protected function setModuleHandler(ModuleHandlerInterface $moduleHandler): void {
     $this->moduleHandler = $moduleHandler;
   }
 
@@ -137,21 +138,21 @@ class ModuleConfigureForm extends FormBase {
    * @param \Drupal\user\PermissionHandlerInterface $handler
    *   The permissions handler service.
    */
-  protected function setPermissionHandler(PermissionHandlerInterface $handler) {
+  protected function setPermissionHandler(PermissionHandlerInterface $handler): void {
     $this->permissionHandler = $handler;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId(): string {
     return 'thunder_module_configure_form';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state): array {
     $form['description'] = [
       '#type' => 'item',
       '#markup' => $this->t('This is a list of modules that are supported by Thunder, but not enabled by default.'),
@@ -163,9 +164,7 @@ class ModuleConfigureForm extends FormBase {
     ];
 
     $modules = $this->moduleExtensionList->getList();
-    $thunder_features = array_filter($modules, function (Extension $module) {
-      return $module->info['package'] === 'Thunder Optional' && (!isset($module->info['hidden']) || !$module->info['hidden']);
-    });
+    $thunder_features = array_filter($modules, fn(Extension $module): bool => $module->info['package'] === 'Thunder Optional' && (!isset($module->info['hidden']) || !$module->info['hidden']));
 
     foreach ($thunder_features as $id => $module) {
 
@@ -213,12 +212,19 @@ class ModuleConfigureForm extends FormBase {
         '#context' => ['list_style' => 'comma-list'],
       ];
 
+      $form['install_modules'][$id]['info']['lifecycle'] = [
+        '#prefix' => '<div class="admin-requirements">',
+        '#suffix' => '</div>',
+        '#type' => 'item',
+        '#markup' => $this->t('Lifecycle status: @lifecycle', ['@lifecycle' => $module->info[ExtensionLifecycle::LIFECYCLE_IDENTIFIER]]),
+      ];
+
       if ($module->status) {
 
         // Generate link for module's help page. Assume that if a hook_help()
         // implementation exists then the module provides an overview page,
         // rather than checking to see if the page exists, which is costly.
-        if ($this->moduleHandler->moduleExists('help') && in_array($module->getName(), $this->moduleHandler->getImplementations('help'))) {
+        if ($this->moduleHandler->moduleExists('help') && $this->moduleHandler->hasImplementations('help', $module->getName())) {
           $form['install_modules'][$id]['info']['links']['help'] = [
             '#type' => 'link',
             '#title' => $this->t('Help'),
@@ -250,7 +256,7 @@ class ModuleConfigureForm extends FormBase {
 
         // Generate link for module's configuration page, if it has one.
         if (isset($module->info['configure'])) {
-          $route_parameters = isset($module->info['configure_parameters']) ? $module->info['configure_parameters'] : [];
+          $route_parameters = $module->info['configure_parameters'] ?? [];
           if ($this->accessManager->checkNamedRoute($module->info['configure'], $route_parameters, $this->currentUser)) {
             $form['install_modules'][$id]['info']['links']['configure'] = [
               '#type' => 'link',
@@ -284,7 +290,7 @@ class ModuleConfigureForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     $operations = [];
     foreach ($form_state->getValue('install_modules') as $module => $values) {
       $extension = $this->moduleExtensionList->get($module);
@@ -324,7 +330,7 @@ class ModuleConfigureForm extends FormBase {
    *
    * @throws \Drupal\Core\Extension\MissingDependencyException
    */
-  public function batchOperation($module, array &$context) {
+  public function batchOperation(string $module, array &$context): void {
     Environment::setTimeLimit(0);
     $this->moduleInstaller->install([$module]);
   }

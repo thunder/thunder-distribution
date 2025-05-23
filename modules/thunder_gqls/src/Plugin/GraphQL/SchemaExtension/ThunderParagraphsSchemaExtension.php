@@ -2,10 +2,8 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
-use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
-use Drupal\paragraphs\ParagraphInterface;
-use GraphQL\Type\Definition\ResolveInfo;
+use Drupal\thunder_gqls\GraphQL\ParagraphsTypeResolver;
 
 /**
  * The paragraph schema extension.
@@ -13,7 +11,7 @@ use GraphQL\Type\Definition\ResolveInfo;
  * @SchemaExtension(
  *   id = "thunder_paragraphs",
  *   name = "Paragraph extension",
- *   description = "Adds paragraphs and their fields.",
+ *   description = "Adds paragraphs and their fields (required).",
  *   schema = "thunder"
  * )
  */
@@ -22,14 +20,12 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
   /**
    * {@inheritdoc}
    */
-  public function registerResolvers(ResolverRegistryInterface $registry) {
+  public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 
-    $this->registry->addTypeResolver('Paragraph',
-      \Closure::fromCallable([
-        __CLASS__,
-        'resolveParagraphTypes',
-      ])
+    $this->registry->addTypeResolver(
+      'Paragraph',
+      new ParagraphsTypeResolver($registry->getTypeResolver('Paragraph'))
     );
 
     $this->resolveFields();
@@ -38,7 +34,7 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
   /**
    * Add paragraph field resolvers.
    */
-  protected function resolveFields() {
+  protected function resolveFields(): void {
 
     // Text.
     $this->resolveParagraphInterfaceFields('ParagraphText');
@@ -55,28 +51,28 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
     // Twitter.
     $this->resolveParagraphInterfaceFields('ParagraphTwitter');
     $this->addFieldResolverIfNotExists('ParagraphTwitter', 'url',
-      $this->builder->compose(
-        $this->builder->fromPath('entity', 'field_media.entity'),
-        $this->builder->fromPath('entity', 'field_url.value')
-      )
+      $this->builder->fromPath('entity', 'field_media.entity.field_url.value'),
+    );
+    $this->addFieldResolverIfNotExists('ParagraphTwitter', 'provider',
+      $this->builder->fromValue('twitter')
     );
 
     // Instagram.
     $this->resolveParagraphInterfaceFields('ParagraphInstagram');
     $this->addFieldResolverIfNotExists('ParagraphInstagram', 'url',
-      $this->builder->compose(
-        $this->builder->fromPath('entity', 'field_media.entity'),
-        $this->builder->fromPath('entity', 'field_url.value')
-      )
+      $this->builder->fromPath('entity', 'field_media.entity.field_url.value'),
+    );
+    $this->addFieldResolverIfNotExists('ParagraphInstagram', 'provider',
+      $this->builder->fromValue('instagram')
     );
 
     // Pinterest.
     $this->resolveParagraphInterfaceFields('ParagraphPinterest');
     $this->addFieldResolverIfNotExists('ParagraphPinterest', 'url',
-      $this->builder->compose(
-        $this->builder->fromPath('entity', 'field_media.entity'),
-        $this->builder->fromPath('entity', 'field_url.value')
-      )
+      $this->builder->fromPath('entity', 'field_media.entity.field_url.value'),
+    );
+    $this->addFieldResolverIfNotExists('ParagraphPinterest', 'provider',
+      $this->builder->fromValue('pinterest')
     );
 
     // Gallery.
@@ -107,6 +103,19 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
     $this->addFieldResolverIfNotExists('ParagraphVideo', 'video',
       $this->builder->fromPath('entity', 'field_video.entity')
     );
+    $this->addFieldResolverIfNotExists('ParagraphVideo', 'metaData',
+      $this->builder->fromPath('entity', 'field_video.entity')
+    );
+    $this->addFieldResolverIfNotExists('ParagraphVideo', 'provider',
+      $this->builder->compose(
+        $this->builder->fromPath('entity', 'field_video.entity'),
+        $this->builder->produce('thunder_media_provider')
+          ->map('media', $this->builder->fromParent())
+      )
+    );
+    $this->addFieldResolverIfNotExists('ParagraphVideo', 'url',
+      $this->builder->fromPath('entity', 'field_video.entity.field_media_video_embed_field.value'),
+    );
 
     // Quote.
     $this->resolveParagraphInterfaceFields('ParagraphQuote');
@@ -114,28 +123,6 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
       $this->builder->fromPath('entity', 'field_text.processed')
     );
 
-  }
-
-  /**
-   * Resolves page types.
-   *
-   * @param mixed $value
-   *   The current value.
-   * @param \Drupal\graphql\GraphQL\Execution\ResolveContext $context
-   *   The resolve context.
-   * @param \GraphQL\Type\Definition\ResolveInfo $info
-   *   The resolve information.
-   *
-   * @return string
-   *   Response type.
-   *
-   * @throws \Exception
-   */
-  protected function resolveParagraphTypes($value, ResolveContext $context, ResolveInfo $info): string {
-    if ($value instanceof ParagraphInterface) {
-      return 'Paragraph' . $this->mapBundleToSchemaName($value->bundle());
-    }
-    throw new \Exception('Invalid paragraph type.');
   }
 
 }

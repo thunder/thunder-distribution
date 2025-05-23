@@ -8,75 +8,36 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
+    - image.style.media_image
     - media.type.image
-    - responsive_image.styles.media_image
   module:
-    - blazy
     - empty_fields
+    - image
 id: media.image.default
 targetEntityType: media
 bundle: image
 mode: default
 content:
   field_copyright:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
   field_image:
-    weight: 0
+    type: image
     label: hidden
     settings:
-      image_style: ''
-      responsive_image_style: media_image
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      sizes: ''
-      breakpoints:
-        xs:
-          image_style: ''
-          width: ''
-        sm:
-          image_style: ''
-          width: ''
-        md:
-          image_style: ''
-          width: ''
-        lg:
-          image_style: ''
-          width: ''
-        xl:
-          image_style: ''
-          width: ''
-      current_view_mode: default
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      icon: ''
-      layout: ''
-      view_mode: ''
-      cache: 0
-      skin: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_style: ''
-      box_media_style: ''
-      grid: '0'
-      grid_header: ''
-      grid_medium: '0'
-      grid_small: '0'
-      fx: ''
-      _uri: ''
+      image_link: ''
+      image_style: media_image
+      image_loading:
+        attribute: lazy
     third_party_settings:
       empty_fields:
         handler: ''
-    type: blazy
+    weight: 0
     region: content
 hidden:
   created: true

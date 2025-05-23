@@ -6,6 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Url;
 use Drupal\graphql\GraphQL\ResolverRegistry;
+use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\graphql\Plugin\DataProducerPluginManager;
 use Drupal\graphql\Plugin\GraphQL\Schema\ComposableSchema;
 use Drupal\graphql\Plugin\GraphQL\Schema\SdlSchemaPluginBase;
@@ -24,7 +25,7 @@ class ThunderSchema extends ComposableSchema {
 
   use ResolverHelperTrait;
 
-  const REQUIRED_EXTENSIONS = [
+  public const array REQUIRED_EXTENSIONS = [
     'thunder_pages',
     'thunder_media',
     'thunder_paragraphs',
@@ -35,12 +36,12 @@ class ThunderSchema extends ComposableSchema {
    *
    * @var \Drupal\graphql\Plugin\DataProducerPluginManager
    */
-  protected $dataProducerManager;
+  protected DataProducerPluginManager $dataProducerManager;
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     $schema = parent::create($container, $configuration, $plugin_id, $plugin_definition);
     $schema->setDataProducerManager($container->get('plugin.manager.graphql.data_producer'));
     return $schema;
@@ -52,14 +53,14 @@ class ThunderSchema extends ComposableSchema {
    * @param \Drupal\graphql\Plugin\DataProducerPluginManager $pluginManager
    *   The data producer plugin manager.
    */
-  protected function setDataProducerManager(DataProducerPluginManager $pluginManager) {
+  protected function setDataProducerManager(DataProducerPluginManager $pluginManager): void {
     $this->dataProducerManager = $pluginManager;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getResolverRegistry() {
+  public function getResolverRegistry(): ResolverRegistryInterface {
     $this->registry = new ResolverRegistry();
     $this->createResolverBuilder();
 
@@ -82,22 +83,39 @@ class ThunderSchema extends ComposableSchema {
 
   /**
    * {@inheritdoc}
+   *
+   * @throws \Drupal\Component\Plugin\Exception\PluginException
    */
-  protected function getExtensions() {
-    return array_map(function ($id) {
-      return $this->extensionManager->createInstance($id);
-    }, array_unique(array_filter($this->getConfiguration()['extensions']) + static::REQUIRED_EXTENSIONS));
+  protected function getExtensions(): array {
+    // Extensions defined by Thunder.
+    $thunderExtensions = $this->getThunderExtensions();
+
+    // Extension that are saved in config.
+    $configuredExtensions = array_filter($this->getConfiguration()['extensions']);
+
+    // Add required extensions, if they are missing in the config.
+    $allExtensions = array_unique(array_merge($configuredExtensions, static::REQUIRED_EXTENSIONS));
+
+    // Sort extensions, so that Thunder extensions are loaded first.
+    usort($allExtensions, static function ($a, $b) use ($thunderExtensions): int {
+      return in_array($a, $thunderExtensions, TRUE) ? -1 : 1;
+    });
+
+    return array_map(
+      fn($id) => $this->extensionManager->createInstance($id),
+      $allExtensions
+    );
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form = parent::buildConfigurationForm($form, $form_state);
     foreach (Element::children($form['extensions']) as $extension) {
-      if (in_array($extension, static::REQUIRED_EXTENSIONS)) {
-        $form['extensions'][$extension]['#access'] = FALSE;
-        unset($form['extensions']['#options'][$extension]);
+      if (in_array($extension, static::REQUIRED_EXTENSIONS, TRUE)) {
+        $form['extensions'][$extension]['#disabled'] = TRUE;
+        $form['extensions'][$extension]['#value'] = TRUE;
       }
     }
     return $form;
@@ -106,14 +124,14 @@ class ThunderSchema extends ComposableSchema {
   /**
    * {@inheritdoc}
    */
-  protected function getSchemaDefinition() {
+  protected function getSchemaDefinition(): string {
     return SdlSchemaPluginBase::getSchemaDefinition();
   }
 
   /**
    * Resolve custom types, that are used in multiple places.
    */
-  private function resolveBaseTypes() {
+  private function resolveBaseTypes(): void {
     $this->addFieldResolverIfNotExists('Link', 'url',
       $this->builder->callback(function ($parent) {
         if (!empty($parent) && isset($parent['uri'])) {
@@ -136,6 +154,25 @@ class ThunderSchema extends ComposableSchema {
     ]);
     $this->addSimpleCallbackFields('ImageDerivative', ['src', 'width', 'height']);
     $this->addSimpleCallbackFields('Schema', ['query']);
+  }
+
+  /**
+   * Get all extensions, that are defined by this module.
+   *
+   * @return string[]
+   *   The extension names.
+   */
+  private function getThunderExtensions(): array {
+    $thunderExtensionPath = $this->moduleHandler->getModule('thunder_gqls')
+      ->getPath() . '/graphql';
+
+    return array_map(
+      fn($file) => explode('.', $file)[0],
+      array_filter(
+        scandir($thunderExtensionPath),
+        fn($file) => str_ends_with($file, 'base.graphqls')
+      )
+    );
   }
 
 }

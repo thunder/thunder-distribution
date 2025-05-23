@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.news_article
+  module:
+    - node
+id: news_article
+label: 'News Article'
+type: 'canonical_entities:node'
+pattern: '[node:field_seo_title]'
+selection_criteria:
+  e4d98e6f-1b80-44d6-98b8-ea6047280ae5:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: e4d98e6f-1b80-44d6-98b8-ea6047280ae5
+    context_mapping:
+      node: node
+    bundles:
+      news_article: news_article
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -2,9 +2,11 @@
 
 ## Highlights
 
-**Thunder Admin Theme**: Admin theme created for Thunder with bigger UX improvements according to the findings of recent
-user tests and a survey conducted with editors currently working with Thunder.\
-[https://www.drupal.org/project/thunder_admin](https://www.drupal.org/project/thunder_admin)
+**Gin Admin Theme**: A radically new UI layout paired with goodies like a Darkmode will give your Drupal's Admin
+interface a facelift. The Gin theme also includes things which are currently out of scope for Claro and/or some
+customisations we're experimenting with for the future. Built on the foundation of Claro from one of the lead
+designers of Claro & Drupal Design System.\
+[https://www.drupal.org/project/gin](https://www.drupal.org/project/gin)
 
 **Content Moderation**: Content Moderation enables you to have an editorial workflow. Editors can have different
 permissions for creating, editing and publishing articles. It also allows you to have a published version of an article,
@@ -16,10 +18,8 @@ anything you want from a simple text block or image to a complex and configurabl
 structure an article into sub-elements, which can easily be created, edited, and reorganized.\
 [https://www.drupal.org/project/paragraphs](https://www.drupal.org/project/paragraphs)
 
-**Entity Browser**: This module provides a generic entity browser/picker/selector. In Thunder, it serves as media
-library which gives you an overview of all your media entities, such as pictures and videos. You can filter and search
-for them, edit them, and add new media.\
-[https://www.drupal.org/project/entity_browser](https://www.drupal.org/project/entity_browser)
+**Media Library**: The media library gives you an overview of all your media entities, such as pictures and videos.
+You can filter and search for them, edit them, and add new media.
 
 **Autosave Form**: The “Autosave Form” module provides an autosave feature for all forms. The autosave submits will be
 triggered every 60 seconds and store the changes from the currently logged-in user in the database.\
@@ -45,10 +45,6 @@ all administration pages.\
 **Autofill**: The Autofill module makes it possible to autofill the values from one textfield to another while typing.
 Once your field input was customized the autofill functionality will be detached.\
 [https://www.drupal.org/project/autofill](https://www.drupal.org/project/autofill)
-
-**Blazy**: Lazy load and multi-serve images to save bandwidth and server requests. The user will have faster load times
-and save data usage if they don't browse the whole page. A friend of mobile devices.\
-[https://www.drupal.org/project/blazy](https://www.drupal.org/project/blazy)
 
 **Content Lock**: When a user is editing a node, any other user that attempts to edit the same node will be blocked from
 doing so, and notified that the content is already being edited.\
@@ -113,11 +109,9 @@ galleries.\
 **Paragraphs Features**: This module adds additional features to the paragraphs module.
 
 1. Provides additional buttons between paragraphs to allow easier adding of a new paragraph to as specific position.
-2. Split Text feature for paragraphs is available for text fields of a paragraph where CKEditor is used. Splits a
-   paragraph into two.
-3. When there is only one option in the actions drop-down, this will be display that as a single button instead of a
+2. When there is only one option in the actions drop-down, this will be display that as a single button instead of a
    drop down with only one value.
-4. Provide a delete confirmation form.
+3. Provide a delete confirmation form.
 
 [https://www.drupal.org/project/paragraphs_features](https://www.drupal.org/project/paragraphs_features)
 
@@ -129,10 +123,6 @@ system that uses tokens which the administrator can change.\
 **Redirect**: The Redirect module automatically adds redirects if the URL of an article has been changed.\
 [https://www.drupal.org/project/redirect](https://www.drupal.org/project/redirect)
 
-**Responsive Preview**: The Responsive Preview module provides editors with a quick way to preview how their site's
-pages will appear at narrow and wide width dimensions on different devices.\
-[https://www.drupal.org/project/responsive_preview](https://www.drupal.org/project/responsive_preview)
-
 **Scheduler**: Scheduler gives content editors the ability to schedule nodes to be published and unpublished at
 specified dates and times in the future. Dates can be entered either as plain text or with calendar popups.\
 [https://www.drupal.org/project/scheduler](https://www.drupal.org/project/scheduler)
@@ -141,18 +131,11 @@ specified dates and times in the future. Dates can be entered either as plain te
 Provides advanced autocomplete functionality for select fields and entity reference fields.\
 [https://www.drupal.org/project/select2](https://www.drupal.org/project/select2)
 
-**Shariff**: This module implements the Shariff social media buttons library by heise online. Shariff enables website
-users to share their favorite content without compromising their privacy.\
-[https://www.drupal.org/project/shariff](https://www.drupal.org/project/shariff)
-
 **Simple XML sitemap**: Every webpage needs an automatic XML sitemap generator for SEO reasons. This module aims to be a
 replacement for the XML sitemap module for Drupal. Simple xml sitemap is lighter than XML sitemap in terms of resources
 and usability. Sitemaps generated by this module adhere to the new Google standard regarding multilingual content by
 creating hreflang sitemaps and image sitemaps.\
 [https://www.drupal.org/project/simple_sitemap](https://www.drupal.org/project/simple_sitemap)
-
-**Slick**: Slick is a powerful and performant slideshow/carousel solution.\
-[https://www.drupal.org/project/slick](https://www.drupal.org/project/slick)
 
 **Token**: Provides additional tokens not supported by core (most notably fields), as well as a UI for browsing
 tokens.\
@@ -163,13 +146,6 @@ tokens.\
 **Search API** This module provides a framework for easily creating searches on any entity known to Drupal, using any
 kind of search engine.\
 [https://www.drupal.org/project/search_api](https://www.drupal.org/project/search_api)
-
-**Google AdSense integration**: This module provides web content providers with the means to earn revenue from visitors
-by displaying ads from Google AdSense advertising service on their sites.\
-[https://www.drupal.org/project/adsense](https://www.drupal.org/project/adsense)
-
-**Google Analytics**: Adds the Google Analytics web statistics tracking system to your website.\
-[https://www.drupal.org/project/google_analytics](https://www.drupal.org/project/google_analytics)
 
 **IVW Integration**: This is an integration module for the German audience measurement organisation IVW.\
 [https://www.drupal.org/project/ivw_integration](https://www.drupal.org/project/ivw_integration)

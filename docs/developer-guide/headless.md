@@ -431,7 +431,7 @@ class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
     parent::registerResolvers($registry);
 
     // This adds all the Page interface fields to the resolver,
-    $this->resolvePageInterfaceFields('MyContentType');
+    $this->resolvePageInterfaceFields('MyContentType', 'node');
 
     // Now we add field resolvers for our new fields. In this case we simply get
     // the value from the field_mycustomfield. parent::registerResolvers($registry)
@@ -514,6 +514,87 @@ class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
 }
 ```
 
+### Extend existing type resolver
+
+We provide type resolvers for our interfaces. For example a page type resolver, that resolves entities to their bundle
+names. E.g. article nodes resolve to 'Article' page type and tha channel taxonomy to 'Channel' page type.
+If that automatic type resolver is not working for you, you can add your own type resolver and decorate it with
+our resolver as a fallback.
+
+To do so add a resolver class similar to this:
+
+```php
+
+<?php
+
+namespace Drupal\myschema\GraphQL;
+
+use Drupal\node\NodeInterface;
+use Drupal\thunder_gqls\GraphQL\DecoratableTypeResolver;
+use Drupal\thunder_gqls\Traits\ResolverHelperTrait;
+
+/**
+ * Type resolver for Page interface.
+ */
+class MyPagesTypeResolver extends DecoratableTypeResolver {
+
+  use ResolverHelperTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function resolve($object) : ?string {
+    // The bundle mytype is resolved to SpecialPage instead of Mytype.
+    if ($object instanceof NodeInterface) {
+      if ($object->bundle() === 'mytype') {
+        return 'SpecialPage';
+      }
+    }
+    // In all other cases return NULL, so the next resolver in the chain is called.
+    return NULL;
+  }
+
+}
+```
+
+You can then add your resolver to the registry in your schema extension:
+
+```php
+<?php
+namespace Drupal\myschema\Plugin\GraphQL\SchemaExtension;
+
+use Drupal\myschema\GraphQL\MyPagesTypeResolver;
+use Drupal\graphql\GraphQL\ResolverRegistryInterface;
+use Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension\ThunderSchemaExtensionPluginBase;
+
+/**
+ * My schema extension.
+ *
+ * @SchemaExtension(
+ *   id = "myschema",
+ *   name = "My schema extension",
+ *   description = "Adds my schema.",
+ *   schema = "thunder"
+ * )
+ */
+class MySchemaExtension extends ThunderSchemaExtensionPluginBase {
+  /**
+   * {@inheritdoc}
+   */
+  public function registerResolvers(ResolverRegistryInterface $registry): void {
+    // Call the parent resolver first.
+    parent::registerResolvers($registry);
+
+    // Add your Page resolver to the registry, and provide existing type resolver as fallback.
+    $this->registry->addTypeResolver(
+      'Page',
+      new MyPagesTypeResolver($registry->getTypeResolver('Page'))
+    );
+
+  }
+}
+```
+
 #### Create entity lists
 
 We have a base class for entity lists, which can be used to create your own list definitions.
@@ -591,6 +672,14 @@ As you can see, you can give either set hard coded values for the producers para
 to use either more query arguments (which could be bad), or implement your own data producer based on
 ThunderEntityListProducerBase. You can find an example in EntitiesWithTerm.php where we dynamically add term IDs to the
 query conditions.
+
+### Use subrequest data producer
+
+Sometimes it's needed to execute a data producer in the context of an URL. Thunder uses this functionality for resolving
+the breadcrumb, JSON-LD structure or the entity language.
+
+The *ThunderEntitySubRequestBase* is data producer base class that can be used for this use cases. See
+*ThunderBreadcrumb*, *ThunderJsonLd* or *ThunderLanguage* as an implementation example.
 
 ## Supported contrib modules
 

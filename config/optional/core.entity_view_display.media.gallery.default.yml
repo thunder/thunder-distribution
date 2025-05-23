@@ -3,99 +3,24 @@ status: true
 dependencies:
   config:
     - field.field.media.gallery.field_media_images
-    - image.style.gallery
     - media.type.gallery
   module:
     - empty_fields
-    - slick
 id: media.gallery.default
 targetEntityType: media
 bundle: gallery
 mode: default
 content:
   field_media_images:
-    weight: 0
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      vanilla: true
-      optionset: thunder_gallery
-      optionset_thumbnail: ''
-      skin: classic
-      skin_thumbnail: ''
-      image_style: gallery
-      responsive_image_style: ''
-      thumbnail_effect: ''
-      thumbnail_position: ''
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: slick
-      image: ''
-      title: field_description
-      link: ''
-      layout: below
-      thumbnail_caption: ''
-      class: ''
-      caption:
-        field_copyright: field_copyright
-        field_description: '0'
-        field_expires: '0'
-        field_image: '0'
-        field_tags: '0'
-      cache: 0
-      sizes: ''
-      current_view_mode: default
-      background: false
-      breakpoints:
-        xs:
-          image_style: ''
-          width: ''
-        sm:
-          image_style: ''
-          width: ''
-        md:
-          image_style: ''
-          width: ''
-        lg:
-          image_style: ''
-          width: ''
-        xl:
-          image_style: ''
-          width: ''
-      override: false
-      overridables:
-        arrows: '0'
-        autoplay: '0'
-        dots: '0'
-        draggable: '0'
-        infinite: '0'
-        mouseWheel: '0'
-        randomize: '0'
-        variableWidth: '0'
-      thumbnail: ''
-      skin_arrows: ''
-      skin_dots: ''
-      style: ''
-      icon: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_style: ''
-      box_media_style: ''
-      preserve_keys: false
-      visible_items: 0
-      grid: '0'
-      grid_header: ''
-      grid_medium: '0'
-      grid_small: '0'
-      id: ''
-      overlay: ''
-      use_theme_field: false
-      fx: ''
-      _uri: ''
+      view_mode: default
+      link: false
     third_party_settings:
       empty_fields:
         handler: ''
-    type: slick_media
+    weight: 1
     region: content
 hidden:
   created: true

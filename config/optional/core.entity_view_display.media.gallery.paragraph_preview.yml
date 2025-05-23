@@ -4,9 +4,10 @@ dependencies:
   config:
     - core.entity_view_mode.media.paragraph_preview
     - field.field.media.gallery.field_media_images
-    - image.style.paragraph_preview_thumbnail
+    - image.style.thumbnail
     - media.type.gallery
   module:
+    - empty_fields
     - media
 id: media.gallery.paragraph_preview
 targetEntityType: media
@@ -14,21 +15,25 @@ bundle: gallery
 mode: paragraph_preview
 content:
   field_media_images:
-    weight: 0
+    type: media_thumbnail
     label: hidden
     settings:
-      image_style: paragraph_preview_thumbnail
       image_link: ''
-    third_party_settings: {  }
-    type: media_thumbnail
+      image_style: thumbnail
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      empty_fields:
+        handler: ''
+    weight: 2
     region: content
   name:
     type: string
-    weight: 1
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 3
     region: content
 hidden:
   created: true

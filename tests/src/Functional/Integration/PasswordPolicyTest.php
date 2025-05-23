@@ -21,7 +21,8 @@ class PasswordPolicyTest extends ThunderTestBase {
   /**
    * Tests redirect from old URL to new one.
    */
-  public function testPasswordPolicies() {
+  public function testPasswordPolicies(): void {
+    $edit = [];
     $editor = $this->logWithRole('editor');
 
     $current_password = $editor->passRaw;
@@ -40,7 +41,7 @@ class PasswordPolicyTest extends ThunderTestBase {
     $edit['pass[pass1]'] = $valid_password;
 
     $this->drupalGet("user/" . $editor->id() . "/edit");
-    $this->submitForm($edit, $this->t('Save'));
+    $this->submitForm($edit, 'Save');
     $this->assertSession()->responseContains('The changes have been saved.');
 
     // Testing reusing of password.
@@ -49,7 +50,7 @@ class PasswordPolicyTest extends ThunderTestBase {
     $edit['pass[pass1]'] = $another_valid_password;
 
     $this->drupalGet("user/" . $editor->id() . "/edit");
-    $this->submitForm($edit, $this->t('Save'));
+    $this->submitForm($edit, 'Save');
     $this->assertSession()->responseContains('The changes have been saved.');
 
     $edit['current_pass'] = $another_valid_password;
@@ -57,7 +58,7 @@ class PasswordPolicyTest extends ThunderTestBase {
     $edit['pass[pass1]'] = $valid_password;
 
     $this->drupalGet("user/" . $editor->id() . "/edit");
-    $this->submitForm($edit, $this->t('Save'));
+    $this->submitForm($edit, 'Save');
     $this->assertSession()->responseNotContains('The changes have been saved.');
 
     // Testing invalid character type combinations and length restriction.
@@ -66,7 +67,7 @@ class PasswordPolicyTest extends ThunderTestBase {
       $edit['pass[pass1]'] = $password;
 
       $this->drupalGet("user/" . $editor->id() . "/edit");
-      $this->submitForm($edit, $this->t('Save'));
+      $this->submitForm($edit, 'Save');
       $this->assertSession()->responseContains($response);
     }
 

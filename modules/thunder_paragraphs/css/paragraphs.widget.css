@@ -1,0 +1,51 @@
+/* Set background in table header. */
+.field--widget-paragraphs .paragraphs-tabs-wrapper table.field-multiple-table:first-of-type th {
+  background: inherit;
+}
+/* Hide paragraphs field label in table header. */
+.field--widget-paragraphs table.field-multiple-table h4.paragraphs-table-header__label {
+  display: none;
+}
+/* Subform */
+.paragraph-type--link .paragraphs-subform .field--name-field-link table.field-multiple-table:first-of-type thead {
+  display: none;
+}
+.paragraph-type--text .paragraphs-subform .field--name-field-text label,
+.paragraph-type--quote .paragraphs-subform .field--name-field-text label {
+  display: none;
+}
+.paragraph-type--link .paragraphs-subform .field--name-field-link,
+.paragraph-type--text .paragraphs-subform .field--name-field-text,
+.paragraph-type--quote .paragraphs-subform .field--name-field-text {
+  margin-top: var(--space-l);
+}
+.paragraph-type--gallery .paragraphs-subform .field--name-name .form-item {
+  margin-bottom: 0;
+}
+/* Remove details summary and type info. */
+.paragraph-form-item--has-subform .field--name-field-video > details[open] > summary,
+.paragraph-form-item--has-subform .field--name-field-image > details[open] > summary,
+.paragraph-form-item--has-subform .field--name-field-media-images > details[open] > summary,
+.paragraph-form-item--has-subform .paragraph-top .paragraph-type {
+  display: none;
+}
+/* Reduce details styling. */
+.paragraph-form-item--has-subform .field--name-field-video > details,
+.paragraph-form-item--has-subform .field--name-field-image > details {
+  margin: 0;
+  border: 0;
+}
+.paragraph-form-item--has-subform .field--name-field-video > details .details-wrapper,
+.paragraph-form-item--has-subform .field--name-field-image > details .details-wrapper {
+  padding: 0;
+}
+/* Layout for media in paragraph preview. */
+.media--view-mode-paragraph-preview {
+  display: flex;
+}
+.media--view-mode-paragraph-preview .group-left {
+  margin-right: 1em;
+}
+.media--view-mode-paragraph-preview .group-right {
+  flex: 1 1 auto;
+}

@@ -59,7 +59,7 @@ For general help using Thunder, please refer to [the official Thunder documentat
 
 ### Community support
 
-For additional help, you can use one of this channel to ask question:
+For additional help, you can use one of these channels to ask question:
 
 * [Slack](https://thunder.org/contact-us) (highly recommended for faster support)
 * [Twitter](https://twitter.com/ThunderCoreTeam)
@@ -67,7 +67,7 @@ For additional help, you can use one of this channel to ask question:
 
 ## Contributing
 
-If you want to help, to make Thunder even better, please take a look at the [contributing guidelines](CONTRIBUTING.md).
+If you want to help, to make Thunder even better, please take a look at the [contributing guidelines](docs/contributing.md).
 
 ## Development
 

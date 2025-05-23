@@ -7,8 +7,8 @@ on:
       - 'package.json'
       - 'package-lock.json'
       - 'CHANGELOG.md'
-    branches:
-      - 6.2.x
+    tags:
+      - 7.0.*
 jobs:
   docs:
     runs-on: ubuntu-latest
@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: Install dependencies

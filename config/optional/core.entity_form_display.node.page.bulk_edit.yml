@@ -3,7 +3,8 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.node.bulk_edit
-    - field.field.node.page.body
+    - field.field.node.page.field_meta_tags
+    - field.field.node.page.field_paragraphs
     - node.type.page
   module:
     - select2
@@ -12,25 +13,32 @@ targetEntityType: node
 bundle: page
 mode: bulk_edit
 content:
+  simple_sitemap:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   uid:
     type: select2_entity_reference
     weight: 0
     region: content
     settings:
+      width: 100%
+      autocomplete: false
       match_operator: CONTAINS
       match_limit: 10
-      autocomplete: false
-      width: 100%
     third_party_settings: {  }
 hidden:
-  body: true
   created: true
+  field_meta_tags: true
+  field_paragraphs: true
   langcode: true
   moderation_state: true
   path: true
   promote: true
   publish_on: true
   publish_state: true
+  scheduler_settings: true
   status: true
   sticky: true
   title: true

@@ -5,5 +5,6 @@ dependencies:
     - media
 id: media.bulk_edit
 label: 'Bulk Edit'
+description: ''
 targetEntityType: media
 cache: true

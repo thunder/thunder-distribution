@@ -10,7 +10,6 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\RenderContext;
 use Drupal\Core\Render\RendererInterface;
-use Drupal\Core\TypedData\TypedDataTrait;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 use Drupal\metatag\MetatagManager;
 use Drupal\typed_data\DataFetcherTrait;
@@ -23,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "thunder_metatags",
  *   name = @Translation("Metatags"),
  *   description = @Translation("Resolves metatags."),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("map",
  *     label = @Translation("Metatag values")
  *   ),
  *   consumes = {
@@ -38,40 +37,18 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
-  use TypedDataTrait;
   use DataFetcherTrait;
-
-  /**
-   * The rendering service.
-   *
-   * @var \Drupal\Core\Render\RendererInterface
-   */
-  protected $renderer;
-
-  /**
-   * The metatag manager service.
-   *
-   * @var \Drupal\metatag\MetatagManager
-   */
-  protected $metatagManager;
-
-  /**
-   * The module handler.
-   *
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface
-   */
-  protected $moduleHandler;
 
   /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     return new static(
       $configuration,
-      $pluginId,
-      $pluginDefinition,
+      $plugin_id,
+      $plugin_definition,
       $container->get('renderer'),
       $container->get('metatag.manager'),
       $container->get('module_handler')
@@ -83,9 +60,9 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
    *
    * @param array $configuration
    *   The plugin configuration array.
-   * @param string $pluginId
+   * @param string $plugin_id
    *   The plugin id.
-   * @param mixed $pluginDefinition
+   * @param mixed $plugin_definition
    *   The plugin definition.
    * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer service.
@@ -96,16 +73,13 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
    */
   public function __construct(
     array $configuration,
-    string $pluginId,
-    $pluginDefinition,
-    RendererInterface $renderer,
-    MetatagManager $metatagManager,
-    ModuleHandlerInterface $moduleHandler
+    string $plugin_id,
+    $plugin_definition,
+    protected readonly RendererInterface $renderer,
+    protected readonly MetatagManager $metatagManager,
+    protected readonly ModuleHandlerInterface $moduleHandler,
   ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->renderer = $renderer;
-    $this->metatagManager = $metatagManager;
-    $this->moduleHandler = $moduleHandler;
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
   /**
@@ -118,13 +92,13 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
    * @param \Drupal\Core\Cache\RefinableCacheableDependencyInterface $metadata
    *   The cacheable dependency interface.
    *
-   * @return mixed
+   * @return array
    *   Normalized metatags.
    */
-  public function resolve($value, ?string $type, RefinableCacheableDependencyInterface $metadata) {
+  public function resolve(mixed $value, ?string $type, RefinableCacheableDependencyInterface $metadata): array {
     if ($value instanceof ContentEntityInterface) {
       $context = new RenderContext();
-      $result = $this->renderer->executeInRenderContext($context, function () use ($value) {
+      $result = $this->renderer->executeInRenderContext($context, function () use ($value): array {
         $tags = $this->metatagManager->tagsFromEntityWithDefaults($value);
 
         // Trigger hook_metatags_attachments_alter().
@@ -136,15 +110,13 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
         $elements = $this->metatagManager->generateRawElements($tags, $value);
         $elements = array_filter(
           $elements,
-          function ($metatag_object) {
-            return !NestedArray::getValue(
-              $metatag_object,
-              [
-                '#attributes',
-                'schema_metatag',
-              ]
-            );
-          }
+          fn($metatag_object): bool => !NestedArray::getValue(
+            $metatag_object,
+            [
+              '#attributes',
+              'schema_metatag',
+            ]
+          )
         );
 
         $data = [];
@@ -163,7 +135,7 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
       }
     }
 
-    return $result ?? NULL;
+    return $result ?? [];
   }
 
 }

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.channel
+  module:
+    - facets
+  theme:
+    - gin
+id: gin_facet_channel
+theme: gin
+region: content
+weight: -7
+provider: null
+plugin: 'facet_block:channel'
+settings:
+  id: 'facet_block:channel'
+  label: Channel
+  provider: facets
+  label_display: '0'
+  block_id: gin_facet_channel
+visibility: {  }

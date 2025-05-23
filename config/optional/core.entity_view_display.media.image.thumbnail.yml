@@ -9,9 +9,10 @@ dependencies:
     - field.field.media.image.field_image
     - field.field.media.image.field_source
     - field.field.media.image.field_tags
-    - image.style.media_thumbnail
+    - image.style.thumbnail
     - media.type.image
   module:
+    - empty_fields
     - image
 id: media.image.thumbnail
 targetEntityType: media
@@ -19,13 +20,17 @@ bundle: image
 mode: thumbnail
 content:
   field_image:
-    weight: 0
+    type: image
     label: hidden
     settings:
-      image_style: media_thumbnail
       image_link: ''
-    third_party_settings: {  }
-    type: image
+      image_style: thumbnail
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      empty_fields:
+        handler: ''
+    weight: 0
     region: content
 hidden:
   created: true

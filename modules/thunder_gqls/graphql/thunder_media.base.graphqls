@@ -15,6 +15,25 @@ interface Media implements Entity{
   fallbackMedia: Media
 }
 
+interface Video implements Media & Entity {
+  id: Int!
+  uuid: String!
+  entity: String!
+  language: String
+  name: String!
+  url: String!
+  entityLinks: EntityLinks
+
+  created: String!
+  changed: String!
+  author: User
+  thumbnail: Thumbnail
+  published: Boolean
+  fallbackMedia: Media
+
+  src: String
+}
+
 type MediaImage implements Media & Image & Entity {
   id: Int!
   uuid: String!
@@ -45,7 +64,7 @@ type MediaImage implements Media & Image & Entity {
   source: String
 }
 
-type MediaVideo implements Media & Entity {
+type MediaVideo implements Video & Media & Entity {
   id: Int!
   uuid: String!
   entity: String!

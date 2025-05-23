@@ -3,6 +3,7 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
+use Drupal\Core\File\FileUrlGeneratorInterface;
 use Drupal\Core\Image\ImageFactory;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\RenderContext;
@@ -18,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "thunder_image",
  *   name = @Translation("Image meta data"),
  *   description = @Translation("Returns the meta data of an image entity."),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("map",
  *     label = @Translation("Metadata")
  *   ),
  *   consumes = {
@@ -34,31 +35,18 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The rendering service.
-   *
-   * @var \Drupal\Core\Render\RendererInterface
-   */
-  protected $renderer;
-
-  /**
-   * The image factory.
-   *
-   * @var \Drupal\Core\Image\ImageFactory
-   */
-  protected $imageFactory;
-
-  /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     return new static(
       $configuration,
-      $pluginId,
-      $pluginDefinition,
+      $plugin_id,
+      $plugin_definition,
       $container->get('renderer'),
-      $container->get('image.factory')
+      $container->get('image.factory'),
+      $container->get('file_url_generator')
     );
   }
 
@@ -67,27 +55,28 @@ class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPlu
    *
    * @param array $configuration
    *   The plugin configuration array.
-   * @param string $pluginId
+   * @param string $plugin_id
    *   The plugin id.
-   * @param mixed $pluginDefinition
+   * @param mixed $plugin_definition
    *   The plugin definition.
    * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer service.
    * @param \Drupal\Core\Image\ImageFactory $imageFactory
    *   The image factory.
+   * @param \Drupal\Core\File\FileUrlGeneratorInterface $fileUrlGenerator
+   *   The file URL generator service.
    *
    * @codeCoverageIgnore
    */
   public function __construct(
     array $configuration,
-    $pluginId,
-    $pluginDefinition,
-    RendererInterface $renderer,
-    ImageFactory $imageFactory
+    $plugin_id,
+    $plugin_definition,
+    protected readonly RendererInterface $renderer,
+    protected readonly ImageFactory $imageFactory,
+    protected readonly FileUrlGeneratorInterface $fileUrlGenerator,
   ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->renderer = $renderer;
-    $this->imageFactory = $imageFactory;
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
   /**
@@ -103,19 +92,19 @@ class ThunderImage extends DataProducerPluginBase implements ContainerFactoryPlu
    * @return array
    *   The image meta data
    */
-  public function resolve(FileInterface $entity, array $field, RefinableCacheableDependencyInterface $metadata) {
+  public function resolve(FileInterface $entity, array $field, RefinableCacheableDependencyInterface $metadata): array {
     $access = $entity->access('view', NULL, TRUE);
     $metadata->addCacheableDependency($access);
     if ($access->isAllowed()) {
       $context = new RenderContext();
       $imageFactory = $this->imageFactory;
 
-      $data = $this->renderer->executeInRenderContext($context, function () use ($entity, $imageFactory, $field) {
+      $data = $this->renderer->executeInRenderContext($context, function () use ($entity, $imageFactory, $field): array {
         $uri = $entity->getFileUri();
         $image = $imageFactory->get($uri);
         $current_field = reset($field);
         return [
-          'src' => file_create_url($uri),
+          'src' => $this->fileUrlGenerator->generateAbsoluteString($uri),
           'width' => $image->getWidth(),
           'height' => $image->getHeight(),
           'alt' => $current_field['alt'],

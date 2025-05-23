@@ -8,8 +8,8 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\graphql\Plugin\DataProducerPluginManager;
 use Drupal\graphql\Plugin\GraphQL\SchemaExtension\SdlSchemaExtensionPluginBase;
-use Drupal\user\EntityOwnerInterface;
 use Drupal\thunder_gqls\Traits\ResolverHelperTrait;
+use Drupal\user\EntityOwnerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -24,14 +24,14 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
    *
    * @var \Drupal\graphql\Plugin\DataProducerPluginManager
    */
-  protected $dataProducerManager;
+  protected DataProducerPluginManager $dataProducerManager;
 
   /**
    * The entity type manager service.
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
    * {@inheritdoc}
@@ -47,7 +47,7 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
   /**
    * {@inheritdoc}
    */
-  public function registerResolvers(ResolverRegistryInterface $registry) {
+  public function registerResolvers(ResolverRegistryInterface $registry): void {
     $this->registry = $registry;
   }
 
@@ -57,7 +57,7 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
    * @param \Drupal\graphql\Plugin\DataProducerPluginManager $pluginManager
    *   The data producer plugin manager.
    */
-  protected function setDataProducerManager(DataProducerPluginManager $pluginManager) {
+  protected function setDataProducerManager(DataProducerPluginManager $pluginManager): void {
     $this->dataProducerManager = $pluginManager;
   }
 
@@ -67,21 +67,8 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager service.
    */
-  protected function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager) {
+  protected function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager): void {
     $this->entityTypeManager = $entityTypeManager;
-  }
-
-  /**
-   * Takes the bundle name and returns the schema name.
-   *
-   * @param string $bundleName
-   *   The bundle name.
-   *
-   * @return string
-   *   Returns the mapped bundle name.
-   */
-  protected function mapBundleToSchemaName(string $bundleName) {
-    return str_replace('_', '', ucwords($bundleName, '_'));
   }
 
   /**
@@ -92,7 +79,7 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
    * @param string $entity_type_id
    *   The entity type ID.
    */
-  protected function resolveBaseFields(string $type, string $entity_type_id) {
+  protected function resolveBaseFields(string $type, string $entity_type_id): void {
     $this->addFieldResolverIfNotExists(
       $type,
       'uuid',
@@ -117,8 +104,13 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
     $this->addFieldResolverIfNotExists(
       $type,
       'name',
-      $this->builder->produce('entity_label')
-        ->map('entity', $this->builder->fromParent())
+      $this->builder->compose(
+        $this->builder->produce('entity_label')
+          ->map('entity', $this->builder->fromParent()),
+        $this->builder->callback(function ($parent) {
+          return $parent ?: '';
+        })
+      )
     );
 
     $this->addFieldResolverIfNotExists($type, 'language',
@@ -182,7 +174,7 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
    * @param string $type
    *   The type name.
    */
-  protected function resolveMediaInterfaceFields(string $type) {
+  protected function resolveMediaInterfaceFields(string $type): void {
     $this->resolveBaseFields($type, 'media');
 
     $this->addFieldResolverIfNotExists($type, 'thumbnail',
@@ -200,12 +192,12 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
   }
 
   /**
-   * Add fields common to all media types.
+   * Add fields common to all paragraph types.
    *
    * @param string $type
    *   The type name.
    */
-  protected function resolveParagraphInterfaceFields(string $type) {
+  protected function resolveParagraphInterfaceFields(string $type): void {
     $this->addFieldResolverIfNotExists($type, 'summary',
       $this->builder->produce('paragraph_summary')
         ->map('paragraph', $this->builder->fromParent())
@@ -220,7 +212,7 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
    * @param string $entity_type_id
    *   The entity type ID.
    */
-  protected function resolvePageInterfaceFields(string $type, string $entity_type_id) {
+  protected function resolvePageInterfaceFields(string $type, string $entity_type_id): void {
     $this->resolveBaseFields($type, $entity_type_id);
   }
 
@@ -232,7 +224,7 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
    * @param string $entity_type_id
    *   The entity type ID.
    */
-  protected function resolvePageInterfaceQueryFields(string $page_type, string $entity_type_id) {
+  protected function resolvePageInterfaceQueryFields(string $page_type, string $entity_type_id): void {
     $this->addFieldResolverIfNotExists('Query', $page_type,
       $this->builder->produce('entity_load_by_uuid')
         ->map('type', $this->builder->fromValue($entity_type_id))

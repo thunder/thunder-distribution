@@ -2,5 +2,11 @@ fieldwidget_settings:
   js:
     js/paragraphs_fieldwidget.settings.js: {}
   dependencies:
-    - core/jquery
     - core/drupal
+    - core/drupal.message
+    - core/once
+
+paragraphs.widget:
+  css:
+    theme:
+      css/paragraphs.widget.css: {}

@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * @file
+ * The install file.
+ */
+
+use Drupal\Core\Config\FileStorage;
+use Drupal\user\Entity\Role;
+
+/**
+ * Implements hook_install().
+ *
+ * If workflow module is enabled, we try to add the news article to the
+ * editorial workflow.
+ */
+function thunder_news_article_install(): void {
+  try {
+    // Copy existing permissions for articles to news article.
+    $roles = Role::loadMultiple();
+    $permissionsMap = [
+      'create article content' => 'create news_article content',
+      'edit any article content' => 'edit any news_article content',
+      'edit own article content' => 'edit own news_article content',
+      'delete any article content' => 'delete any news_article content',
+      'delete own article content' => 'delete own news_article content',
+      'view any article content' => 'view any news_article content',
+      'delete article revisions' => 'delete news_article revisions',
+      'revert article revisions' => 'revert news_article revisions',
+      'access_unpublished node article' => 'access_unpublished node news_article',
+    ];
+
+    foreach ($roles as $role) {
+      foreach ($permissionsMap as $articlePermission => $newsArticlePermission) {
+        if ($role->hasPermission($articlePermission)) {
+          $role->grantPermission($newsArticlePermission);
+        }
+      }
+
+      $role->save();
+    }
+
+    if (\Drupal::moduleHandler()->moduleExists('simple_sitemap')) {
+      $config_path = Drupal::service('extension.list.profile')->getPath('thunder') . '/config/install';
+      $source = new FileStorage($config_path);
+      $config_storage = \Drupal::service('config.storage');
+
+      if (($sitemapVariantsSettings = $config_storage->read(
+          'simple_sitemap.variants.default_hreflang'
+        )) && empty($sitemapVariantsSettings['variants']['news_article'])) {
+        $sitemapVariantsSettings['variants']['news_article'] = $source->read('simple_sitemap.variants.default_hreflang')['variants']['news_article'];
+        $config_storage->write('simple_sitemap.variants.default_hreflang', $sitemapVariantsSettings);
+        $config_storage->write('simple_sitemap.bundle_settings.news_article.node.news_article', $source->read('simple_sitemap.bundle_settings.news_article.node.news_article'));
+      }
+    }
+
+    // Ignore, if workflow entity is not available.
+    if (!\Drupal::entityTypeManager()->getDefinition('workflow', FALSE)) {
+      return;
+    }
+    // Ignore, if editorial workflow is not available.
+    if (!$editorialWorkflow = \Drupal::entityTypeManager()->getStorage('workflow')->load('editorial')) {
+      return;
+    }
+
+    // Ignore, if news_article is already configured.
+    $config = $editorialWorkflow->getTypePlugin()->getConfiguration();
+    if (isset($config['entity_types']['node']['news_article'])) {
+      return;
+    }
+
+    $config['entity_types']['node'][] = 'news_article';
+    $editorialWorkflow->getTypePlugin()->setConfiguration($config);
+    $editorialWorkflow->save();
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('thunder')->info(t('Could not add news_article content type to editorial workflow: "@message"', ['@message' => $e->getMessage()]));
+    return;
+  }
+}
+
+/* hook_update_n implementations should be in the profile instead of this
+submodule. */

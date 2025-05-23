@@ -12,7 +12,7 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
   /**
    * {@inheritdoc}
    */
-  protected $knownWarnings = 0;
+  protected int $knownWarnings = 0;
 
   /**
    * {@inheritdoc}
@@ -31,7 +31,7 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
   /**
    * {@inheritdoc}
    */
-  protected function visitInstaller() {
+  protected function visitInstaller(): void {
     include_once DRUPAL_ROOT . '/core/includes/install.core.inc';
     $version = _install_get_version_info(\Drupal::VERSION)['major'] . '.0.0';
 
@@ -52,7 +52,7 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
    * @return string
    *   Contents for the test .po file.
    */
-  protected function getPo($langcode) {
+  protected function getPo(string $langcode): string {
     return <<<ENDPO
 msgid ""
 msgstr ""
@@ -75,33 +75,9 @@ ENDPO;
   /**
    * {@inheritdoc}
    */
-  protected function continueOnExpectedWarnings($expected_warnings = []) {
-    // Don't try to continue if there are errors.
-    if (strpos($this->getTextContent(), $this->translations['Errors found']) !== FALSE) {
-      return;
-    }
-    // Allow only details elements that are directly after the warning header
-    // or each other. There is no guaranteed wrapper we can rely on across
-    // distributions. When there are multiple warnings, the selectors will be:
-    // - h3#warning+details summary
-    // - h3#warning+details+details summary
-    // - etc.
-    // We add one more selector than expected warnings to confirm that there
-    // isn't any other warning before clicking the link.
-    // @todo Make this more reliable in
-    //   https://www.drupal.org/project/drupal/issues/2927345.
-    $selectors = [];
-    for ($i = 0; $i <= count($expected_warnings); $i++) {
-      $selectors[] = 'h3#warning' . implode('', array_fill(0, $i + 1, '+details')) . ' summary';
-    }
-    $warning_elements = $this->cssSelect(implode(', ', $selectors));
-
-    // Confirm that there are only the expected warnings.
-    $warnings = [];
-    foreach ($warning_elements as $warning) {
-      $warnings[] = trim($warning->getText());
-    }
-    $this->assertEquals($expected_warnings, $warnings);
+  protected function continueOnExpectedWarnings($expected_warnings = []): void {
+    $this->assertSession()->pageTextNotContains((string) $this->translations['Errors found']);
+    $this->assertWarningSummaries($expected_warnings);
     $this->clickLink($this->translations['continue anyway']);
     $this->checkForMetaRefresh();
   }

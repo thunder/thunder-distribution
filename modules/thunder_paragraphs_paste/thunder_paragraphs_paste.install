@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Thunder Paragraphs Paste install hooks.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function thunder_paragraphs_paste_install(): void {
+
+  try {
+    /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
+    $form_display = Drupal::service('entity_display.repository')
+      ->getFormDisplay('node', 'article', 'default');
+
+    $config = $form_display->get('content');
+    $config['field_paragraphs']['third_party_settings']['paragraphs_paste'] = [
+      'enabled' => TRUE,
+      'property_path_mapping' => [
+        'oembed_url:video' => 'paragraph.video.field_video:video.field_media_video_embed_field',
+        'oembed_url:twitter' => 'paragraph.twitter.field_media:twitter.field_url',
+        'text' => 'paragraph.text.field_text',
+      ],
+      'custom_split_method' => FALSE,
+      'custom_split_method_regex' => '',
+    ];
+
+    $form_display->set('content', $config)
+      ->save();
+  }
+  catch (Exception $e) {
+    \Drupal::logger('thunder')->info(t('Could not enable paragraphs_paste on article node: "@message"', ['@message' => $e->getMessage()]));
+  }
+
+}
+
+/* hook_update_n implementations should be in the profile instead of this
+submodule. */

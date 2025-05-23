@@ -23,26 +23,8 @@ Please also note the pull request template to create better quality pull request
 
 ## Setup Thunder for development
 
-To install the Thunder Distribution for development create the thunder-develop project:
-
-```bash
-composer create-project thunder/thunder-develop -s dev
-cd thunder-develop
-```
-
-This will install thunder into the docroot folder. The actual distribution repository will be cloned into
-docroot/profiles/contrib/thunder.
-
-Now you can install thunder. Point the web server to the docroot directory and do a normal site install.
-
-To work on the distribution, work inside the docroot/profiles/contrib/thunder folder.
-
-```bash
-cd docroot/profiles/contrib/thunder
-git checkout -b feature/new-thunder-feature # <-- this will be a branch in the distribution not the project
-<make changes>
-git commit .
-```
+To install the Thunder Distribution for development take a look at the
+[Thunder Develop Project](https://github.com/thunder/thunder-develop).
 
 ## Automated code checks
 
@@ -205,8 +187,8 @@ Workflow to generate Thunder configuration update is following:
 2. When Thunder is installed, make code update (with code update also configuration files will be updated, but not
    active configuration in the database)
 3. Execute update hooks if it's necessary (e.g. in a case when you have a module and/or core updates in your branch)
-4. Now is a moment to generate Thunder configuration update code. For that, we have provided the following drupal
-   console command: `drupal generate:configuration:update`. That command should be executed and there is some
+4. Now is a moment to generate Thunder configuration update code. For that, we have provided the following drush command:
+   `drush generate configuration-update`. That command should be executed and there is some
    information that has to be filled, like module name where all generated data will be saved (CUD file,
    checklist `update.yml` and update hook function). Then also information for checklist entry, like title, success
    message, and failure message. Command will generate CUD file and save it in `config/update` folder of the module, it
@@ -214,9 +196,6 @@ Workflow to generate Thunder configuration update is following:
    in `<module_name>.install` file.
 5. After the command has finished it will display what files are modified and generated. It's always good to make an
    additional check of generated code.
-
-Additional information about command options is provided with `drupal generate:configuration:update --help` and it's
-also possible to provide all information directly in the command line without using the wizard.
 
 ### Write automated tests
 
@@ -235,49 +214,6 @@ php ./core/scripts/db-tools.php dump-database-d8-mysql | gzip > thunder.sql.gz
 export thunderDumpFile=/path/to/thunder.sql.gz
 ```
 
-### How to run the NightwatchJS performance tests <Badge type="danger" text="Not reviewed" vertical="bottom" />
-
-1. You need to install [Yarn](https://yarnpkg.com). Please check the installation documentation for it.
-2. You have to install `thunder/thunder_performance_measurement` package. To do that, execute the following command in
-   your project root directory: `composer require thunder/thunder_performance_measurement:dev-master --dev` and enable
-   the module by executing: `drush en thunder_performance_measurement` in your `docroot` directory.
-3. You need to install [Elastic APM Node.js Agent](https://www.npmjs.com/package/elastic-apm-node) in Drupal Core node
-   packages. To do that go to your `docroot/core` directory and execute the following
-   command: `yarn add elastic-apm-node --dev`
-4. You have to adjust your `.env` file inside `docroot/core` directory. You can copy the `.env.example` to `.env` and
-   edit it accordingly. Thunder tests require the following environment variables: `DRUPAL_TEST_BASE_URL`
-   , `THUNDER_BRANCH`, `THUNDER_SITE_HOSTNAME` and `THUNDER_APM_URL`. The `THUNDER_BRANCH` is the branch name where
-   tests are executing, for example, `8.x-4.x`. The `THUNDER_SITE_HOSTNAME` is the hostname where tests are executing,
-   for example, `thunder.dev`. The `THUNDER_APM_URL` is URL to Elastic APM Server, for example, `http://localhost:8200`.
-5. After that, you can run NightwatchJS tests by executing the following command inside `docroot/core`
-   directory: `yarn test:nightwatch <path to JS Test file>`. Here is an
-   example: `yarn test:nightwatch ../profiles/contrib/thunder/tests/src/Nightwatch/Tests/CreateMostUsedContent.js`
-
-#### If you have a problem with outdated chromedriver
-
-Drupal core does not update javascript dependencies so fast and chromedriver may be outdated and unable to work with
-chrome installed on the system. You can provide chrome that can be used by chromedriver inside a docker container. You
-can do it with the following command:
-
-```bash
-docker run --name selenium_chrome -d -P -p 6000:5900 -p 4444:4444 --shm-size 256m --add-host="thunder.dd:172.16.123.1" selenium/standalone-chrome-debug:3.141.59-selenium
-```
-
-You have to find what is correct docker image tag for the chrome version you need. To do that you have to take a look
-at [selenium docker releases](https://github.com/SeleniumHQ/docker-selenium/releases). This workflow is similar to PHP
-JavaScript tests and for additional information, you can take a look at **How to run the tests** section.
-
-After you have running chrome in docker, you have also to change environment variables in `.env` file. The following
-environment variable should be set:
-
-```bash
-DRUPAL_TEST_WEBDRIVER_PORT=4444
-DRUPAL_TEST_WEBDRIVER_PATH_PREFIX=/wd/hub
-DRUPAL_TEST_CHROMEDRIVER_AUTOSTART=false
-```
-
-You can copy/paste this section to the bottom of your `.env` file.
-
 ## Documentation
 
 To help with the documentation, please run:
@@ -285,6 +221,7 @@ To help with the documentation, please run:
   ```bash
   git clone git@github.com:thunder/thunder-distribution.git
   cd thunder-distribution
+  nvm use
   npm install
   npm run docs:dev
   ```

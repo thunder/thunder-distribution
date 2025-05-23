@@ -1,19 +1,11 @@
 parameters:
-  drupal:
-    drupal_root: %currentWorkingDirectory%/docroot
   customRulesetUsed: true
-  reportUnmatchedIgnoredErrors: false
-  level: 3
+  reportUnmatchedIgnoredErrors: true
+  level: 6
   ignoreErrors:
-    - '#\Drupal calls should be avoided in classes, use dependency injection instead#'
-    - '#\Call to an undefined method Drupal\\Tests\\WebAssert::#'
-    - "#^Unsafe usage of new static\\(\\)\\.$#"
-    # Drupal allows object property access to custom fields, so we cannot fix
-    # that.
-    - "#^Access to an undefined property Drupal\\\\#"
-    - "#^Property Drupal\\\\.+ \\(Drupal\\\\Core\\\\Field\\\\FieldItemListInterface\\) does not accept .+\\.$#"
-
-
+    # new static() is a best practice in Drupal, so we cannot fix that.
+    - "#^Unsafe usage of new static#"
+    - identifier: missingType.generics
+    - identifier: missingType.iterableValue
 includes:
-  - ./vendor/mglaman/phpstan-drupal/extension.neon
-  - ./vendor/phpstan/phpstan-deprecation-rules/rules.neon
+  - ./phpstan-baseline.neon

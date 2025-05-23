@@ -2,5 +2,9 @@
   "root": true,
   "extends": [
     "drupal"
-  ]
+  ],
+  "globals": {
+    "Drupal": true,
+    "once": true
+  }
 }

@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.pinterest.field_url
+    - image.style.media_library
+    - media.type.pinterest
+  module:
+    - empty_fields
+    - image
+id: media.pinterest.media_library
+targetEntityType: media
+bundle: pinterest
+mode: media_library
+content:
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: media_library
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      empty_fields:
+        handler: ''
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_url: true
+  langcode: true
+  name: true
+  uid: true

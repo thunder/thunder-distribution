@@ -1,0 +1,34 @@
+.content-form__form-section.base-info .field--name-title .form-element,
+.content-form__form-section.base-info .field--name-field-seo-title .form-element,
+.content-form__form-section.base-info .field--name-field-tags .form-element {
+  width: 100%;
+}
+
+/*
+ * Render fields inline.
+ * Media query as found in gin theme.
+ */
+@media only screen and (min-width: 36em) {
+  .content-form__form-section.article-teaser > .fieldset__wrapper {
+    display: flex;
+  }
+}
+/* Fix throbber position */
+.content-form__form-section.article-teaser .fieldset__suffix {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-form__form-section.article-teaser .field--name-field-teaser-media {
+  min-width: 220px;
+  width: 20%;
+}
+
+.content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-widget {
+  margin-right: var(--space-l);
+  padding-top: 0;
+}
+
+.content-form__form-section.article-teaser .field--name-field-teaser-media .media-library-selection .media-library-item--grid {
+  width: 100%;
+}

@@ -16,13 +16,13 @@ mode: default
 content:
   field_url:
     type: instagram_embed
-    weight: 0
     label: hidden
     settings:
       max_width: 0
     third_party_settings:
       empty_fields:
         handler: ''
+    weight: 0
     region: content
 hidden:
   created: true

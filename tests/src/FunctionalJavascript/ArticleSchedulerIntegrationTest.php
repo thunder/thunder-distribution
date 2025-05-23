@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript;
 
+use Drupal\Tests\Traits\Core\CronRunTrait;
+
 /**
  * Tests content moderation and scheduling.
  *
@@ -10,18 +12,21 @@ namespace Drupal\Tests\thunder\FunctionalJavascript;
 class ArticleSchedulerIntegrationTest extends ThunderJavascriptTestBase {
 
   use ThunderArticleTestTrait;
+  use CronRunTrait;
 
   /**
-   * Test Creation of Article.
+   * Test that restricted editors are not allowed to edit scheduled articles.
+   *
+   * @dataProvider providerContentTypes
    */
-  public function testSchedulerAccess() {
+  public function testRestrictedEditorSchedulerAccess(string $contentType, string $contentTypeDisplayName): void {
     $this->logWithRole('restricted_editor');
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
-    $this->articleFillNew([
+    $this->nodeFillNew([
       'field_channel' => $term->id(),
       'title[0][value]' => 'Scheduler integration testing',
       'field_seo_title[0][value]' => 'Scheduler integration testing seo title',
-    ]);
+    ], $contentType);
     $this->assertSession()->elementNotExists('xpath', '//*[@data-drupal-selector="edit-publish-on-wrapper"]');
 
     $this->clickSave();
@@ -35,7 +40,7 @@ class ArticleSchedulerIntegrationTest extends ThunderJavascriptTestBase {
     $this->drupalGet($edit_url);
     $this->expandAllTabs();
     $publish_timestamp = strtotime('-1 days');
-    $this->setFieldValues($this->getSession()->getPage(), [
+    $this->setFieldValues([
       'publish_on[0][value][date]' => date('Y-m-d', $publish_timestamp),
       'publish_on[0][value][time]' => date('H:i:s', $publish_timestamp),
       'publish_state[0]' => 'published',
@@ -45,13 +50,12 @@ class ArticleSchedulerIntegrationTest extends ThunderJavascriptTestBase {
     // Test restricted editor access.
     $this->logWithRole('restricted_editor');
     $this->drupalGet($edit_url);
-    $this->assertEquals(1, count($this->xpath('//h1[contains(@class, "page-title")]//span[text() = "403"]')));
+    $this->assertCount(1, $this->xpath('//h1[contains(@class, "page-title") and text() = "403"]'));
 
-    $this->container->get('cron')->run();
+    $this->cronRun();
 
     $this->drupalGet($edit_url);
-    $this->assertEquals(1, count($this->xpath('//h1[contains(@class, "page-title")]//em[text() = "Edit Article"]')));
-
+    $this->assertCount(1, $this->xpath('//h1[contains(@class, "page-title") and text() = "Scheduler integration testing"]'));
   }
 
 }

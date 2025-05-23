@@ -4,6 +4,7 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Path\PathValidatorInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 use Drupal\redirect\Entity\Redirect;
@@ -17,7 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "thunder_redirect",
  *   name = @Translation("Redirect"),
  *   description = @Translation("Redirect."),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("map",
  *     label = @Translation("Redirect")
  *   ),
  *   consumes = {
@@ -32,30 +33,17 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ThunderRedirect extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
   /**
-   * Optional redirect module repository.
-   *
-   * @var \Drupal\redirect\RedirectRepository|null
-   */
-  protected $redirectRepository;
-
-  /**
-   * The language manager.
-   *
-   * @var \Drupal\Core\Language\LanguageManagerInterface
-   */
-  protected $languageManager;
-
-  /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     return new static(
       $configuration,
       $plugin_id,
       $plugin_definition,
       $container->get('language_manager'),
+      $container->get('path.validator'),
       $container->get('redirect.repository', ContainerInterface::NULL_ON_INVALID_REFERENCE)
     );
   }
@@ -65,12 +53,14 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    *
    * @param array $configuration
    *   The plugin configuration.
-   * @param string $pluginId
+   * @param string $plugin_id
    *   The plugin id.
-   * @param mixed $pluginDefinition
+   * @param mixed $plugin_definition
    *   The plugin definition.
    * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
    *   The language manager.
+   * @param \Drupal\Core\Path\PathValidatorInterface $pathValidator
+   *   The path validator.
    * @param \Drupal\redirect\RedirectRepository|null $redirectRepository
    *   The redirect repository.
    *
@@ -78,14 +68,13 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    */
   public function __construct(
     array $configuration,
-    $pluginId,
-    $pluginDefinition,
-    LanguageManagerInterface $languageManager,
-    ?RedirectRepository $redirectRepository = NULL
+    $plugin_id,
+    $plugin_definition,
+    protected readonly LanguageManagerInterface $languageManager,
+    protected readonly PathValidatorInterface $pathValidator,
+    protected readonly ?RedirectRepository $redirectRepository = NULL,
   ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->languageManager = $languageManager;
-    $this->redirectRepository = $redirectRepository;
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
   /**
@@ -99,26 +88,59 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    * @return array
    *   The redirect data.
    */
-  public function resolve(string $path, RefinableCacheableDependencyInterface $metadata) {
-    if (!$this->redirectRepository) {
-      return [];
-    }
-    $language = $this->languageManager->getCurrentLanguage()->getId();
+  public function resolve(string $path, RefinableCacheableDependencyInterface $metadata): array {
+    $metadata->addCacheTags(['redirect_list']);
 
-    /** @var \Drupal\redirect\Entity\Redirect|null $redirect */
-    $redirect = $this->redirectRepository->findMatchingRedirect($path, [], $language);
-    if ($redirect instanceof Redirect) {
-      $urlObject = $redirect->getRedirectUrl();
-      $metadata->addCacheTags(
-        array_merge($redirect->getCacheTags(), ['redirect_list'])
+    if ($this->redirectRepository) {
+      $queryString = parse_url($path, PHP_URL_QUERY) ?: '';
+      $pathWithoutQuery = parse_url($path, PHP_URL_PATH) ?: $path;
+
+      $language = $this->languageManager->getCurrentLanguage()->getId();
+      $queryParameters = [];
+
+      parse_str($queryString, $queryParameters);
+
+      /** @var \Drupal\redirect\Entity\Redirect|null $redirect */
+      $redirect = $this->redirectRepository->findMatchingRedirect(
+        $pathWithoutQuery,
+        $queryParameters,
+        $language
       );
 
-      return [
-        'url' => $urlObject->toString(TRUE)->getGeneratedUrl(),
-        'status' => $redirect->getStatusCode(),
-      ];
+      if ($redirect instanceof Redirect) {
+        $urlObject = $redirect->getRedirectUrl();
+        $metadata->addCacheTags($redirect->getCacheTags());
+
+        $redirectUri = $urlObject->toString(TRUE)->getGeneratedUrl();
+        return [
+          'url' => $redirectUri . (!empty($queryString) ? '?' . $queryString : ''),
+          'status' => $redirect->getStatusCode(),
+        ];
+      }
     }
-    return [];
+
+    if (($url = $this->pathValidator->getUrlIfValidWithoutAccessCheck($path)) && $url->isRouted()) {
+
+      if ($url->access()) {
+        return [
+          'url' => $path,
+          'status' => 200,
+        ];
+      }
+      else {
+        $metadata->addCacheTags(['4xx-response']);
+        return [
+          'url' => $path,
+          'status' => 403,
+        ];
+      }
+    }
+
+    $metadata->addCacheTags(['4xx-response']);
+    return [
+      'url' => $path,
+      'status' => 404,
+    ];
   }
 
 }

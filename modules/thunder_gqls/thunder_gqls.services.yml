@@ -1,6 +1,12 @@
 services:
-  main_content_renderer.thunder_gqls:
-    class: Drupal\thunder_gqls\Render\MainContent\ThunderGqlsRenderer
-    arguments: ['@module_handler', '@renderer', '@breadcrumb', '@current_route_match', '@metatag.manager', '@language_manager']
-    tags:
-      - { name: render.main_content_renderer, format: thunder_gqls }
+  _defaults:
+    autowire: true
+  thunder_gqls.buffer.search_api_result:
+    class: Drupal\thunder_gqls\GraphQL\Buffers\SearchApiResultBuffer
+  Drupal\thunder_gqls\GraphQL\Buffers\SearchApiResultBuffer: '@thunder_gqls.buffer.search_api_result'
+  thunder_gqls.search_api_response_wrapper:
+    class: Drupal\thunder_gqls\Wrappers\SearchApiResponse
+  thunder_gqls.entity_list_response_wrapper:
+    autowire: false
+    class: Drupal\thunder_gqls\Wrappers\EntityListResponse
+    arguments: [ '@graphql.buffer.entity' ]

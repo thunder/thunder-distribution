@@ -12,7 +12,7 @@ bundle: pinterest
 mode: default
 content:
   field_media:
-    weight: 0
+    type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: default
@@ -20,6 +20,6 @@ content:
     third_party_settings:
       empty_fields:
         handler: ''
-    type: entity_reference_entity_view
+    weight: 0
     region: content
 hidden: {  }

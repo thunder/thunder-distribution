@@ -5,18 +5,19 @@ namespace Drupal\thunder_media\Plugin\ImageEffect;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Image\ImageInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\image\Attribute\ImageEffect;
 use Drupal\image\ConfigurableImageEffectBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Resizes an image resource.
- *
- * @ImageEffect(
- *   id = "thunder_media_auto_aspect",
- *   label = @Translation("Auto Aspect"),
- *   description = @Translation("Use different effects depending on whether the image is landscape of portrait shaped. This re-uses other preset definitions, and just chooses between them based on the rule.")
- * )
  */
+#[ImageEffect(
+  id: "thunder_media_auto_aspect",
+  label: new TranslatableMarkup("Auto Aspect"),
+  description: new TranslatableMarkup("Use different effects depending on whether the image is landscape of portrait shaped. This re-uses other preset definitions, and just chooses between them based on the rule."),
+)]
 class AutoAspectEffect extends ConfigurableImageEffectBase {
 
   /**
@@ -24,12 +25,12 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     $style = parent::create($container, $configuration, $plugin_id, $plugin_definition);
     $style->setEntityTypeManager($container->get('entity_type.manager'));
     return $style;
@@ -41,14 +42,14 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager service.
    */
-  protected function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager) {
+  protected function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager): void {
     $this->entityTypeManager = $entityTypeManager;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     $ratio_adjustment = isset($this->configuration['ratio_adjustment']) ? floatval($this->configuration['ratio_adjustment']) : 1;
     $aspect = $image->getWidth() / $image->getHeight();
 
@@ -60,7 +61,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
       return TRUE;
     }
 
-    /** @var \Drupal\image\ImageStyleInterface $style */
+    /** @var \Drupal\image\ImageStyleInterface|NULL $style */
     $style = $this->entityTypeManager->getStorage('image_style')->load($style_name);
     if (empty($style)) {
       // Required preset has gone missing?
@@ -78,7 +79,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function transformDimensions(array &$dimensions, $uri) {
+  public function transformDimensions(array &$dimensions, $uri): void {
     if (!isset($dimensions['width']) || !isset($dimensions['height'])) {
       // We cannot know which preset would be executed and thus cannot know the
       // resulting dimensions, unless both styles return the same dimensions:
@@ -113,7 +114,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     $summary = [
       '#theme' => 'image_resize_summary',
       '#data' => $this->configuration,
@@ -126,7 +127,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'landscape' => NULL,
       'portrait' => NULL,
@@ -137,7 +138,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function calculateDependencies() {
+  public function calculateDependencies(): array {
     $dependencies = parent::calculateDependencies();
 
     $image_style_storage = $this->entityTypeManager->getStorage('image_style');
@@ -158,7 +159,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $image_styles = image_style_options(FALSE);
     $form['landscape'] = [
       '#type' => 'select',
@@ -182,7 +183,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
 
     $this->configuration['landscape'] = $form_state->getValue('landscape');

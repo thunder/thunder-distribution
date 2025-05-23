@@ -12,16 +12,14 @@ use Drupal\Tests\thunder\Functional\ThunderTestBase;
 class FileRemoveButtonTest extends ThunderTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
-  public static $modules = ['thunder_testing_demo', 'thunder_workflow'];
+  protected static $modules = ['thunder_testing_demo', 'thunder_workflow'];
 
   /**
    * Test for transliteration of file name.
    */
-  public function testRemoveButtonGone() {
+  public function testRemoveButtonGone(): void {
 
     $this->logWithRole('editor');
     $media = $this->getMediaByName('Image 1');

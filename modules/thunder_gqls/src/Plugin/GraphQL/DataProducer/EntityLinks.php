@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "entity_links",
  *   name = @Translation("Entity links"),
  *   description = @Translation("Returns the entity's links."),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("map",
  *     label = @Translation("Links")
  *   ),
  *   consumes = {
@@ -29,22 +29,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The rendering service.
-   *
-   * @var \Drupal\Core\Render\RendererInterface
-   */
-  protected $renderer;
-
-  /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     return new static(
       $configuration,
-      $pluginId,
-      $pluginDefinition,
+      $plugin_id,
+      $plugin_definition,
       $container->get('renderer')
     );
   }
@@ -54,21 +47,20 @@ class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPlug
    *
    * @param array $configuration
    *   The plugin configuration array.
-   * @param string $pluginId
+   * @param string $plugin_id
    *   The plugin id.
-   * @param mixed $pluginDefinition
+   * @param mixed $plugin_definition
    *   The plugin definition.
    * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer service.
    */
   public function __construct(
     array $configuration,
-    string $pluginId,
-    $pluginDefinition,
-    RendererInterface $renderer
+    string $plugin_id,
+    $plugin_definition,
+    protected readonly RendererInterface $renderer,
   ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->renderer = $renderer;
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
   /**
@@ -80,24 +72,27 @@ class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPlug
    * @return string[]
    *   The entity links.
    */
-  public function resolve(EntityInterface $entity) {
+  public function resolve(EntityInterface $entity): array {
     $context = new RenderContext();
-    $result = $this->renderer->executeInRenderContext($context, function () use ($entity) {
+    $result = $this->renderer->executeInRenderContext($context, function () use ($entity): array {
       $links = $entity->getEntityType()->getLinkTemplates();
 
-      array_walk($links, function (&$url, $rel) use ($entity) {
+      array_walk($links, function (&$url, $rel) use ($entity): void {
+        $url = '';
         try {
-          $url = $entity->toUrl($rel)->toString();
+          $urlObject = $entity->toUrl($rel);
+          if ($urlObject->access()) {
+            $url = $urlObject->toString();
+          }
         }
         catch (\Exception $exception) {
-          $url = '';
         }
       });
 
       $transformed_keys = array_map([$this, 'toCamelCase'], array_keys($links));
       return array_combine($transformed_keys, $links);
     });
-    return $result ?? NULL;
+    return $result ?? [];
   }
 
   /**
@@ -109,7 +104,7 @@ class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPlug
    * @return string
    *   Camel case string.
    */
-  public static function toCamelCase($input) {
+  public static function toCamelCase(string $input): string {
     return lcfirst(str_replace(' ', '', ucwords(str_replace('-', ' ', $input))));
   }
 

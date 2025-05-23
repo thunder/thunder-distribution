@@ -12,7 +12,7 @@ use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
  *   id = "menu_tree_in_active_trail",
  *   name = @Translation("Menu tree element is in active trail"),
  *   description = @Translation("Returns if the menu tree element is in active trail."),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("boolean",
  *     label = @Translation("Menu link tree is in active trail.")
  *   ),
  *   consumes = {
@@ -33,7 +33,7 @@ class MenuTreeInActiveTrail extends DataProducerPluginBase {
    * @return bool
    *   Is current element in active trail.
    */
-  public function resolve(MenuLinkTreeElement $element) {
+  public function resolve(MenuLinkTreeElement $element): bool {
     return $element->inActiveTrail;
   }
 

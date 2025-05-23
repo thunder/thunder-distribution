@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\thunder\Functional\Integration;
 
+use Drupal\Tests\thunder\Functional\ThunderTestBase;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\language\Entity\ConfigurableLanguage;
-use Drupal\Tests\thunder\Functional\ThunderTestBase;
 
 /**
  * Tests integration with the content_translation.
@@ -27,12 +27,12 @@ class ContentTranslationTest extends ThunderTestBase {
    *
    * @var \Drupal\language\ConfigurableLanguageInterface[]
    */
-  protected $languages = [];
+  protected array|ConfigurableLanguage $languages = [];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->languages['en'] = ConfigurableLanguage::createFromLangcode('en');
@@ -43,7 +43,7 @@ class ContentTranslationTest extends ThunderTestBase {
   /**
    * Test that basic translation creation works.
    */
-  public function testBasicContentTranslation() {
+  public function testBasicContentTranslation(): void {
 
     $this->logWithRole('editor');
 
@@ -70,7 +70,7 @@ class ContentTranslationTest extends ThunderTestBase {
   /**
    * Test the field translatable property for all field configs.
    */
-  public function testFieldTranslationKey() {
+  public function testFieldTranslationKey(): void {
     $whitelist = [
       'field.field.media.instagram.field_url',
       'field.field.media.pinterest.field_url',

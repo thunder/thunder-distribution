@@ -2,10 +2,10 @@
 
 namespace Drupal\Tests\thunder_media\Functional;
 
-use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\FileExists;
 use Drupal\Core\StreamWrapper\PublicStream;
-use Drupal\file\Entity\File;
 use Drupal\Tests\thunder\Functional\ThunderTestBase;
+use Drupal\file\Entity\File;
 
 /**
  * Tests for transliteration of file names.
@@ -15,28 +15,29 @@ use Drupal\Tests\thunder\Functional\ThunderTestBase;
 class FilenameTransliterationTest extends ThunderTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
-  public static $modules = ['file_test', 'file'];
+  protected static $modules = ['file_test', 'file'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
 
     parent::setUp();
 
-    $this->config('thunder_media.settings')
-      ->set('enable_filename_transliteration', TRUE)
+    $this->config('file.settings')
+      ->set('filename_sanitization.transliterate', TRUE)
+      ->set('filename_sanitization.replace_whitespace', TRUE)
+      ->set('filename_sanitization.replace_non_alphanumeric', TRUE)
+      ->set('filename_sanitization.deduplicate_separators', TRUE)
       ->save();
   }
 
   /**
    * Test for transliteration of file name.
    */
-  public function testFileTransliteration() {
+  public function testFileTransliteration(): void {
 
     $account = $this->drupalCreateUser(['access site reports']);
     $this->drupalLogin($account);
@@ -46,17 +47,19 @@ class FilenameTransliterationTest extends ThunderTestBase {
     }
     else {
       // Needed for min testing.
-      $original = drupal_get_path('module', 'simpletest') . '/files';
+      /** @var \Drupal\Core\Extension\ExtensionPathResolver $extensionPathResolver */
+      $extensionPathResolver = \Drupal::service('extension.path.resolver');
+      $original = $extensionPathResolver->getPath('module', 'simpletest') . '/files';
       \Drupal::service('file_system')->copy($original . '/image-1.png', PublicStream::basePath() . '/foo°.png');
     }
 
     // Upload with replace to guarantee there's something there.
     $edit = [
-      'file_test_replace' => FileSystemInterface::EXISTS_RENAME,
+      'file_test_replace' => FileExists::Rename->name,
       'files[file_test_upload]' => \Drupal::service('file_system')->realpath('public://foo°.png'),
     ];
     $this->drupalGet('file-test/upload');
-    $this->submitForm($edit, $this->t('Submit'));
+    $this->submitForm($edit, 'Submit');
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->responseContains('You WIN!');
 

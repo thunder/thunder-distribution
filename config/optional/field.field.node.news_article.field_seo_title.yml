@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_seo_title
+    - node.type.news_article
+id: node.news_article.field_seo_title
+field_name: field_seo_title
+entity_type: node
+bundle: news_article
+label: 'SEO Title'
+description: "The SEO Title is used for the automatic generation of the Url. It's best to put the major keywords at the beginning."
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -29,11 +29,9 @@ class InstalledConfigurationTest extends ThunderTestBase {
    */
   protected static $modules = [
     'thunder_testing_demo',
-    'thunder_google_analytics',
     'thunder_ivw',
     // Because of https://github.com/drupal-graphql/graphql/issues/1177
     // 'thunder_gqls',
-    'adsense',
   ];
 
   /**
@@ -41,19 +39,20 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *
    * @var string
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'stable9';
 
   /**
    * Ignore list of Core related configurations.
    *
    * @var array
    */
-  protected static $ignoreCoreConfigs = [
+  protected static array $ignoreCoreConfigs = [
     'checklistapi.progress.update_helper_checklist',
     'system.site',
     'core.extension',
     'system.performance',
     'system.theme',
+    'system.mail',
 
     // Configs created by User module.
     'system.action.user_add_role_action.administrator',
@@ -73,6 +72,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_view_mode.content_moderation_state.token',
     'core.entity_view_mode.crop.token',
     'core.entity_view_mode.file.token',
+    'core.entity_view_mode.media.token',
     'core.entity_view_mode.menu_link_content.token',
     'core.entity_view_mode.node.token',
     'core.entity_view_mode.paragraph.token',
@@ -80,6 +80,10 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'core.entity_view_mode.user.token',
     'core.entity_view_mode.path_alias.token',
     'core.entity_view_mode.search_api_task.token',
+
+    // Configs are missing the 'description' key.
+    'core.entity_view_mode.node.diff',
+    'core.entity_view_mode.paragraph.preview',
 
     // SearchAPI tour.
     'tour.tour.search-api-index',
@@ -101,7 +105,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *
    * @var array
    */
-  protected static $ignoreConfigKeys = [
+  protected static array $ignoreConfigKeys = [
     // It's not exported in Yaml, so that new key is generated.
     'scheduler.settings' => [
       'lightweight_cron_access_key' => TRUE,
@@ -204,6 +208,20 @@ class InstalledConfigurationTest extends ThunderTestBase {
         'field_ivw' => TRUE,
       ],
     ],
+    'core.entity_form_display.node.news_article.default' => [
+      'content' => [
+        'field_ivw' => TRUE,
+      ],
+      'dependencies' => [
+        'config' => TRUE,
+        'module' => TRUE,
+      ],
+    ],
+    'core.entity_form_display.node.news_article.bulk_edit' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
     'core.entity_form_display.taxonomy_term.channel.default' => [
       'content' => [
         'field_ivw' => TRUE,
@@ -238,6 +256,41 @@ class InstalledConfigurationTest extends ThunderTestBase {
         'field_ivw' => TRUE,
       ],
     ],
+    'core.entity_view_display.node.news_article.default' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
+    'core.entity_view_display.node.news_article.rss' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
+    'core.entity_view_display.node.news_article.search_index' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
+    'core.entity_view_display.node.news_article.teaser' => [
+      'hidden' => [
+        'field_ivw' => TRUE,
+      ],
+    ],
+    'views.view.locked_content' => [
+      'display' => [
+        'default' => [
+          'display_options' => [
+            'sorts' => ['created' => ['expose' => ['field_identifier' => TRUE]]],
+            'pager' => ['options' => ['pagination_heading_level' => TRUE]],
+          ],
+        ],
+      ],
+    ],
+    'views.view.redirect' => [
+      'display' => [
+        'default' => ['display_options' => ['pager' => ['options' => ['pagination_heading_level' => TRUE]]]],
+      ],
+    ],
   ];
 
   /**
@@ -245,7 +298,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *
    * @var string
    */
-  protected static $configPathSeparator = '::';
+  public const string CONFIG_PATH_SEPARATOR = '::';
 
   /**
    * Ignore configuration list values. Path to key is separated by '::'.
@@ -262,11 +315,29 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *
    * @todo use this functionality for more strict "dependencies" checking.
    */
-  protected static $ignoreConfigListValues = [
-    // Google analytics adds one permission dynamically in the install hook.
-    'user.role.authenticated' => [
+  protected static array $ignoreConfigListValues = [
+    'user.role.editor' => [
       'permissions' => [
-        'opt-in or out of google analytics tracking',
+        'access tour',
+      ],
+      'dependencies::module' => [
+        'tour',
+      ],
+    ],
+    'user.role.restricted_editor' => [
+      'permissions' => [
+        'access tour',
+      ],
+      'dependencies::module' => [
+        'tour',
+      ],
+    ],
+    'user.role.seo' => [
+      'permissions' => [
+        'access tour',
+      ],
+      'dependencies::module' => [
+        'tour',
       ],
     ],
   ];
@@ -279,7 +350,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    *
    * @var array
    */
-  protected static $ignoreConfigs = [];
+  protected static array $ignoreConfigs = [];
 
   /**
    * Set default theme for test.
@@ -287,7 +358,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    * @param string $defaultTheme
    *   Default Theme.
    */
-  protected function setDefaultTheme($defaultTheme) {
+  protected function setDefaultTheme(string $defaultTheme): void {
     \Drupal::service('theme_installer')->install([$defaultTheme]);
 
     $themeConfig = \Drupal::configFactory()->getEditable('system.theme');
@@ -306,7 +377,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    * @return array
    *   Returns cleaned-up configurations.
    */
-  protected function cleanupConfigurations(array $configurations, $configurationName) {
+  protected function cleanupConfigurations(array $configurations, string $configurationName): array {
     /** @var \Drupal\Core\Config\ExtensionInstallStorage $optionalStorage */
     $optionalStorage = \Drupal::service('config_update.extension_optional_storage');
 
@@ -321,7 +392,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
     if (array_key_exists($configurationName, static::$ignoreConfigListValues)) {
       foreach (static::$ignoreConfigListValues[$configurationName] as $keyPath => $ignoreValues) {
         $ignoreListRules[] = [
-          'key_path' => explode(static::$configPathSeparator, $keyPath),
+          'key_path' => explode(self::CONFIG_PATH_SEPARATOR, $keyPath),
           'ignore_values' => $ignoreValues,
         ];
       }
@@ -372,7 +443,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
    * @return array
    *   Return cleaned-up list.
    */
-  protected function cleanupConfigList(array $list, array $ignoreValues) {
+  protected function cleanupConfigList(array $list, array $ignoreValues): array {
     $cleanList = $list;
 
     if (!empty($cleanList)) {
@@ -395,7 +466,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
   /**
    * Compare active configuration with configuration Yaml files.
    */
-  public function testInstalledConfiguration() {
+  public function testInstalledConfiguration(): void {
     $this->setDefaultTheme($this->defaultTheme);
 
     /** @var \Drupal\config_update\ConfigReverter $configUpdate */
@@ -458,7 +529,7 @@ class InstalledConfigurationTest extends ThunderTestBase {
       }
 
       // Clean up configuration if it's required.
-      list($activeConfig, $fileConfig) = $this->cleanupConfigurations(
+      [$activeConfig, $fileConfig] = $this->cleanupConfigurations(
         [
           $activeConfig,
           $fileConfig,

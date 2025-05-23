@@ -19,13 +19,12 @@ class ThunderJsonLdSchemaExtension extends ThunderSchemaExtensionPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function registerResolvers(ResolverRegistryInterface $registry) {
+  public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 
     $this->addFieldResolverIfNotExists('Query', 'jsonld',
-      $this->builder->produce('thunder_entity_sub_request')
-        ->map('path', $this->builder->fromArgument('path'))
-        ->map('key', $this->builder->fromValue('jsonld')
+      $this->builder->produce('thunder_jsonld')
+        ->map('path', $this->builder->fromArgument('path')
       )
     );
   }

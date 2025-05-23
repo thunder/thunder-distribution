@@ -1,6 +1,15 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.basic_html
+  module:
+    - access_unpublished
+    - file
+    - filter
+    - media
+    - system
+    - thunder_taxonomy
 id: authenticated
 label: 'Authenticated user'
 weight: -9
@@ -9,8 +18,10 @@ permissions:
   - 'access content'
   - 'access user profiles'
   - 'access_unpublished node article'
+  - 'access_unpublished node news_article'
   - 'cancel account'
   - 'change own username'
+  - 'delete own files'
   - 'use text format basic_html'
   - 'view media'
   - 'view published terms in channel'

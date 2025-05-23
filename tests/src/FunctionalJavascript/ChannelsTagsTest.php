@@ -19,49 +19,46 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
    *
    * @var string
    */
-  protected static $defaultUserRole = 'administrator';
+  protected static string $defaultUserRole = 'administrator';
 
   /**
    * Test channel creation, tagging of articles and channel page with articles.
    */
-  public function testChannelsCreation() {
+  public function testChannelsCreation(): void {
     $this->drupalGet('admin/structure/taxonomy/manage/channel/add');
-    $page = $this->getSession()->getPage();
 
     // Create new Channel with 2 paragraphs.
-    $this->setFieldValue($page, 'name[0][value]', 'New Section');
-    $image1 = $this->loadMediaByUuid('5d719c64-7f32-4062-9967-9874f5ca3eba');
-    $this->addImageParagraph('field_paragraphs', ['media:' . $image1->id()]);
+    $this->setFieldValue('name[0][value]', 'New Section');
+    $image1 = $this->loadMediaByUuid('507fcccf-b8ff-47d0-a704-2ee2de1dcab5');
+    $this->addImageParagraph('field_paragraphs', [$image1->id()]);
     $this->addTextParagraph('field_paragraphs', 'Text for Channel');
     $this->clickSave();
 
     // Create 1. Article.
-    $this->articleFillNew([
+    $this->nodeFillNew([
       'field_channel' => 6,
       'title[0][value]' => 'Article 1',
       'field_seo_title[0][value]' => 'Article 1',
       'field_tags[]' => ['New Section', 'Tag1'],
       'field_teaser_text[0][value]' => 'Teaser 1',
-    ]);
+    ], 'article');
     $image2 = $this->loadMediaByUuid('a4b2fa51-8340-4982-b792-92e060b71eb9');
-    $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $image2->id()]);
-    $this->waitForImages('[data-drupal-selector="edit-field-teaser-media-current-items-0"] img', 1);
+    $this->selectMedia('field_teaser_media', [$image2->id()]);
 
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
     $this->setModerationState('published');
     $this->clickSave();
 
-    // Create 2. Article.
-    $this->articleFillNew([
+    // Create 2. News Article.
+    $this->nodeFillNew([
       'field_channel' => 6,
       'title[0][value]' => 'Article 2',
       'field_seo_title[0][value]' => 'Article 2',
       'field_tags[]' => [[7, 'New Section'], 'Tag2'],
       'field_teaser_text[0][value]' => 'Teaser 2',
-    ]);
+    ], 'news_article');
     $image3 = $this->loadMediaByUuid('5bd93c54-469b-4ac7-927b-cf6bb1dcf3dd');
-    $this->selectMedia('field_teaser_media', 'image_browser', ['media:' . $image3->id()]);
-    $this->waitForImages('[data-drupal-selector="edit-field-teaser-media-current-items-0"] img', 1);
+    $this->selectMedia('field_teaser_media', [$image3->id()]);
 
     $this->addTextParagraph('field_paragraphs', 'Article Text 2');
     $this->setModerationState('published');
@@ -100,7 +97,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->assertSession()
       ->elementExists('xpath', '//img[contains(@src, "picjumbo.com_HNCK7731.jpg")]');
     $this->assertSession()
-      ->elementExists('xpath', '//img[contains(@src, "thunder-city.jpg")]');
+      ->elementExists('xpath', '//img[contains(@src, "26672422700_25e081cf78_k.jpg")]');
 
     $this->assertSession()->linkExists('Article 1');
     $this->assertSession()->linkExists('Article 2');

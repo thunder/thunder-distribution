@@ -1,0 +1,9 @@
+.gin-sticky .form-actions > div .form-item {
+  margin: 0;
+}
+
+.gin-sticky .form-actions > div {
+  margin-top: var(--space-m);
+  margin-bottom: var(--space-m);
+  margin-right: var(--gin-spacing-xs);
+}

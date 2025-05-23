@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.promoted_to_front_page
+  module:
+    - facets
+  theme:
+    - claro
+id: claro_facet_promoted
+theme: claro
+region: content
+weight: -2
+provider: null
+plugin: 'facet_block:promoted_to_front_page'
+settings:
+  id: 'facet_block:promoted_to_front_page'
+  label: Promoted
+  provider: facets
+  label_display: '0'
+  block_id: claro_facet_promoted
+visibility: {  }

@@ -25,6 +25,14 @@ query ($path: String!) {
             title
           }
         }
+        ... on ParagraphVideo {
+          url
+          provider
+        }
+        ... on ParagraphPinterest {
+          url
+          provider
+        }
       }
     }
   }

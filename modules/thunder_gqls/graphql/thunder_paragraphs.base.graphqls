@@ -11,18 +11,21 @@ type ParagraphImage implements Paragraph {
 type ParagraphTwitter implements Paragraph {
   summary: [String]
 
+  provider: String
   url: String
 }
 
 type ParagraphInstagram implements Paragraph {
   summary: [String]
 
+  provider: String
   url: String
 }
 
 type ParagraphPinterest implements Paragraph {
   summary: [String]
 
+  provider: String
   url: String
 }
 
@@ -48,7 +51,10 @@ type ParagraphLink implements Paragraph {
 type ParagraphVideo implements Paragraph {
   summary: [String]
 
-  video: MediaVideo
+  provider: String
+  url: String @deprecated(reason: "Use metaData instead")
+  video: MediaVideo @deprecated(reason: "Use metaData instead")
+  metaData: Video
 }
 
 type ParagraphQuote implements Paragraph {

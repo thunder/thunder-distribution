@@ -10,30 +10,26 @@ namespace Drupal\Tests\thunder_gqls\Functional;
 class JsonLdSchemaTest extends ThunderGqlsTestBase {
 
   /**
-   * {@inheritdoc}
-   */
-  protected static $modules = [
-    'schema_article',
-  ];
-
-  /**
    * Tests the jsonld extension.
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public function testSchema() {
+  public function testSchema(): void {
     $tags = $this->config('metatag.metatag_defaults.node__article')->get('tags');
-    $tags['schema_article_type'] = 'Article';
+    unset($tags['schema_article_date_modified'], $tags['schema_article_image'], $tags['schema_article_publisher']);
     $this->config('metatag.metatag_defaults.node__article')->set('tags', $tags)
       ->save();
 
-    $extensions = $this->config('graphql.graphql_servers.thunder_graphql')->get('schema_configuration.thunder.extensions');
-    $extensions['thunder_jsonld'] = 'thunder_jsonld';
-    $this->config('graphql.graphql_servers.thunder_graphql')->set('schema_configuration.thunder.extensions', $extensions)
-      ->save();
+    $schema = 'jsonld';
 
-    $this->drupalLogin($this->graphqlUser);
-    $this->runAndTestQuery('jsonld');
+    $query = $this->getQueryFromFile($schema);
+    $variables = $this->getVariablesFromFile($schema);
+
+    $responseData = $this->jsonDecode(strip_tags((string) $this->getResponseData($query, $variables)['jsonld']));
+    $expectedData = $this->jsonDecode(strip_tags((string) $this->jsonDecode($this->getExpectedResponseFromFile($schema))['data']['jsonld']));
+
+    $this->assertEqualsCanonicalizing($expectedData, $responseData);
+
   }
 
 }

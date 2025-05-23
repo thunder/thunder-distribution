@@ -11,7 +11,7 @@ use Drupal\user\Entity\Role;
 /**
  * Implements hook_install().
  */
-function thunder_translation_install() {
+function thunder_translation_install(): void {
   /** @var \Drupal\user\Entity\Role[] $roles */
   $roles = Role::loadMultiple(['editor', 'seo', 'restricted_editor']);
   foreach ($roles as $role) {

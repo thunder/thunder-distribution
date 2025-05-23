@@ -1,0 +1,96 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.override
+    - field.field.media.image.field_copyright
+    - field.field.media.image.field_description
+    - field.field.media.image.field_expires
+    - field.field.media.image.field_image
+    - field.field.media.image.field_source
+    - field.field.media.image.field_tags
+    - image.style.media_library
+    - media.type.image
+  module:
+    - field_group
+    - image
+    - text
+third_party_settings:
+  field_group:
+    group_basis:
+      children:
+        - name
+        - field_image
+        - field_description
+      label: ''
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        classes: content-form__form-section
+        id: ''
+        description: ''
+        required_fields: true
+    group_credits:
+      children:
+        - status
+        - uid
+        - created
+        - field_copyright
+        - field_expires
+        - field_source
+      label: ''
+      region: hidden
+      parent_name: ''
+      weight: 4
+      format_type: fieldset
+      format_settings:
+        classes: content-form__form-section
+        id: ''
+        description: ''
+        required_fields: true
+id: media.image.override
+targetEntityType: media
+bundle: image
+mode: override
+content:
+  field_description:
+    type: text_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_image:
+    type: image_image
+    weight: 3
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: media_library
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_copyright: true
+  field_expires: true
+  field_source: true
+  field_tags: true
+  langcode: true
+  moderation_state: true
+  path: true
+  publish_on: true
+  publish_state: true
+  status: true
+  uid: true
+  unpublish_on: true
+  unpublish_state: true

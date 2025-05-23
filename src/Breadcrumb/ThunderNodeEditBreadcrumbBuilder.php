@@ -4,6 +4,7 @@ namespace Drupal\thunder\Breadcrumb;
 
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Link;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -17,7 +18,7 @@ class ThunderNodeEditBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   /**
    * {@inheritdoc}
    */
-  public function applies(RouteMatchInterface $route_match) {
+  public function applies(RouteMatchInterface $route_match, ?CacheableMetadata $cacheable_metadata = NULL): bool {
     return in_array($route_match->getRouteName(), [
       'entity.node.edit_form',
       'node.add',
@@ -28,14 +29,15 @@ class ThunderNodeEditBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   /**
    * {@inheritdoc}
    */
-  public function build(RouteMatchInterface $route_match) {
+  public function build(RouteMatchInterface $route_match): Breadcrumb {
+    $links = [];
     $breadcrumb = new Breadcrumb();
     $breadcrumb->addCacheContexts(['route']);
 
     $links[] = Link::createFromRoute($this->t('Home'), '<front>');
     $links[] = Link::createFromRoute($this->t('Overview'), 'system.admin_content');
 
-    if ($route_match->getRouteName() == 'node.add') {
+    if ($route_match->getRouteName() === 'node.add') {
       $links[] = Link::createFromRoute($this->t('Add content'), 'node.add_page');
     }
 

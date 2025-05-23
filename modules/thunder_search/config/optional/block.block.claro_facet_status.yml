@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.status
+  module:
+    - facets
+  theme:
+    - claro
+id: claro_facet_status
+theme: claro
+region: content
+weight: -3
+provider: null
+plugin: 'facet_block:status'
+settings:
+  id: 'facet_block:status'
+  label: Status
+  provider: facets
+  label_display: '0'
+  block_id: claro_facet_status
+visibility: {  }

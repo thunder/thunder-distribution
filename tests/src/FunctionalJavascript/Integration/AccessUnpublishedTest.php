@@ -20,26 +20,31 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
 
   /**
    * Testing integration of "access_unpublished" module.
+   *
+   * @dataProvider providerContentTypes
    */
-  public function testAccessUnpublished() {
+  public function testAccessUnpublished(string $contentType, string $contentTypeDisplayName): void {
     $term = $this->loadTermByUuid('bfc251bc-de35-467d-af44-1f7a7012b845');
+
+    $nodeTitle = $contentTypeDisplayName;
     // Create article and save it as unpublished.
-    $this->articleFillNew([
+    $this->nodeFillNew([
       'field_channel' => $term->id(),
-      'title[0][value]' => 'Article 1',
-      'field_seo_title[0][value]' => 'Article 1',
-    ]);
+      'title[0][value]' => $nodeTitle,
+      'field_seo_title[0][value]' => $nodeTitle,
+    ], $contentType);
     $this->addTextParagraph('field_paragraphs', 'Article Text 1');
     $this->setModerationState('draft');
     $this->clickSave();
     // Edit article and generate access unpublished token.
-    $node = $this->drupalGetNodeByTitle('Article 1');
+    $node = $this->drupalGetNodeByTitle($nodeTitle);
     $this->drupalGet($node->toUrl('edit-form'));
     $this->expandAllTabs();
     $page = $this->getSession()->getPage();
+    $driver = $this->getSession()->getDriver();
     $this->scrollElementInView('[data-drupal-selector="edit-generate-token"]');
-    $page->find('xpath', '//*[@data-drupal-selector="edit-generate-token"]')->click();
-    $this->waitUntilVisible('[data-drupal-selector="access-token-list"] a.clipboard-button', 5000);
+    $driver->click('//*[@data-drupal-selector="edit-generate-token"]');
+    $this->assertSession()->waitForElementVisible('css', '[data-drupal-selector="access-token-list"] a.clipboard-button', 5000);
     $copyToClipboard = $page->find('xpath', '//*[@data-drupal-selector="access-token-list"]//a[contains(@class, "clipboard-button")]');
     $tokenUrl = $copyToClipboard->getAttribute('data-unpublished-access-url');
 
@@ -57,8 +62,8 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
     $this->drupalGet($node->toUrl('edit-form'));
     $this->expandAllTabs();
     $this->scrollElementInView('[data-drupal-selector="edit-generate-token"]');
-    $page->find('css', '[data-drupal-selector="access-token-list"] li.dropbutton-toggle > button')->click();
-    $page->find('css', '[data-drupal-selector="access-token-list"] li.delete > a')->click();
+    $this->click('[data-drupal-selector="access-token-list"] li.dropbutton-toggle > button');
+    $this->click('[data-drupal-selector="access-token-list"] li.delete > a');
     $this->assertWaitOnAjaxRequest();
     $this->clickSave();
 
@@ -66,7 +71,7 @@ class AccessUnpublishedTest extends ThunderJavascriptTestBase {
     $this->drupalLogout();
     $this->drupalGet($tokenUrl);
     $noAccess = $this->xpath('//h1[contains(@class, "page-title")]//span[text() = "403"]');
-    $this->assertEquals(1, count($noAccess));
+    $this->assertCount(1, $noAccess);
 
     // Log-In and publish article.
     $this->drupalLogin($loggedInUser);

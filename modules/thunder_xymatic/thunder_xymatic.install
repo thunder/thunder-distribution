@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * The install file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function thunder_xymatic_install(bool $is_syncing): void {
+
+  if ($is_syncing) {
+    return;
+  }
+
+  // Load field.field.paragraph.video.field_video field config and add xymatic
+  // to the target_bundles.
+  if ($field_config = \Drupal::entityTypeManager()->getStorage('field_config')->load('paragraph.video.field_video')) {
+    $handler_settings = $field_config->getSetting('handler_settings');
+    $handler_settings['target_bundles']['xymatic'] = 'xymatic';
+    $field_config->setSetting('handler_settings', $handler_settings);
+    $field_config->save();
+  }
+
+}

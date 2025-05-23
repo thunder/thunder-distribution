@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_xymatic
+    - media.type.xymatic
+id: media.xymatic.field_media_xymatic
+field_name: field_media_xymatic
+entity_type: media
+bundle: xymatic
+label: Xymatic
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - simple_sitemap.type.default_hreflang
+id: tags
+label: Tags
+description: null
+type: default_hreflang
+weight: -7

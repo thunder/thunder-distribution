@@ -10,7 +10,7 @@ use Drupal\user\Entity\Role;
 /**
  * Implements hook_install().
  */
-function thunder_gqls_install() {
+function thunder_gqls_install(): void {
   $graphql_permissions = [
     'execute thunder_graphql arbitrary graphql requests',
     'execute thunder_graphql persisted graphql requests',

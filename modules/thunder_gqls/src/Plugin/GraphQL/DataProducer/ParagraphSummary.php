@@ -3,7 +3,7 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
-use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\paragraphs\ParagraphInterface;
 
 /**
  * Resolves the paragraphs summary.
@@ -12,7 +12,7 @@ use Drupal\paragraphs\Entity\Paragraph;
  *   id = "paragraph_summary",
  *   name = @Translation("Paragraphs Summary"),
  *   description = @Translation("Resolves the paragraphs summary."),
- *   produces = @ContextDefinition("any",
+ *   produces = @ContextDefinition("map",
  *     label = @Translation("Summary")
  *   ),
  *   consumes = {
@@ -27,14 +27,14 @@ class ParagraphSummary extends DataProducerPluginBase {
   /**
    * Resolves the paragraphs summary.
    *
-   * @param \Drupal\paragraphs\Entity\Paragraph $paragraph
+   * @param \Drupal\paragraphs\ParagraphInterface $paragraph
    *   The entity.
    *
-   * @return mixed
+   * @return array
    *   The paragraphs summary.
    */
-  public function resolve(Paragraph $paragraph) {
-    return $paragraph->getSummaryItems()['content'];
+  public function resolve(ParagraphInterface $paragraph): array {
+    return $paragraph->getSummaryItems()['content'] ?? [];
   }
 
 }

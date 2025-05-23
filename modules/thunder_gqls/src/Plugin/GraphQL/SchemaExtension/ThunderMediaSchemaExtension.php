@@ -2,10 +2,8 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
-use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
-use Drupal\media\MediaInterface;
-use GraphQL\Type\Definition\ResolveInfo;
+use Drupal\thunder_gqls\GraphQL\MediaTypeResolver;
 
 /**
  * The media schema extension.
@@ -13,7 +11,7 @@ use GraphQL\Type\Definition\ResolveInfo;
  * @SchemaExtension(
  *   id = "thunder_media",
  *   name = "Media extension",
- *   description = "Adds media entities and their fields.",
+ *   description = "Adds media entities and their fields (required).",
  *   schema = "thunder"
  * )
  */
@@ -22,14 +20,17 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function registerResolvers(ResolverRegistryInterface $registry) {
+  public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 
-    $this->registry->addTypeResolver('Media',
-      \Closure::fromCallable([
-        __CLASS__,
-        'resolveMediaTypes',
-      ])
+    $this->registry->addTypeResolver(
+      'Media',
+      new MediaTypeResolver($registry->getTypeResolver('Media'))
+    );
+
+    $this->registry->addTypeResolver(
+      'Video',
+      new MediaTypeResolver($registry->getTypeResolver('Video'))
     );
 
     $this->resolveFields();
@@ -38,7 +39,7 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
   /**
    * Add image media field resolvers.
    */
-  protected function resolveFields() {
+  protected function resolveFields(): void {
     // Image.
     $this->resolveMediaInterfaceFields('MediaImage');
     $this->addFieldResolverIfNotExists('MediaImage', 'copyright',
@@ -67,7 +68,7 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
           if (!empty($values['url'])) {
             return $values + ['src' => $values['url']];
           }
-          return;
+          return $values;
         })
       )
     );
@@ -108,7 +109,7 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
     $this->resolveMediaInterfaceFields('MediaVideo');
 
     $this->addFieldResolverIfNotExists('MediaVideo', 'src',
-      $this->builder->fromPath('entity', 'field_media_video_embed_field.value')
+      $this->builder->produce('media_source_field')->map('media', $this->builder->fromParent())
     );
 
     $this->addFieldResolverIfNotExists('MediaVideo', 'username',
@@ -131,28 +132,6 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
       $this->builder->fromPath('entity', 'field_source.value')
     );
 
-  }
-
-  /**
-   * Resolves media types.
-   *
-   * @param mixed $value
-   *   The current value.
-   * @param \Drupal\graphql\GraphQL\Execution\ResolveContext $context
-   *   The resolve context.
-   * @param \GraphQL\Type\Definition\ResolveInfo $info
-   *   The resolve information.
-   *
-   * @return string
-   *   Response type.
-   *
-   * @throws \Exception
-   */
-  protected function resolveMediaTypes($value, ResolveContext $context, ResolveInfo $info): string {
-    if ($value instanceof MediaInterface) {
-      return 'Media' . $this->mapBundleToSchemaName($value->bundle());
-    }
-    throw new \Exception('Invalid media type.');
   }
 
 }

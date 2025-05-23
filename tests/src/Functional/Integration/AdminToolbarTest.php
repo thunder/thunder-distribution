@@ -14,7 +14,7 @@ class AdminToolbarTest extends ThunderTestBase {
   /**
    * Tests empty menu groups are gone with admin_toolbar_links_access_filter.
    */
-  public function testEmptyMenuEntriesAreGone() {
+  public function testEmptyMenuEntriesAreGone(): void {
 
     $this->logWithRole('seo');
 

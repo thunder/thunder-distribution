@@ -8,7 +8,7 @@ module.exports = {
     logo: '/thunder.svg',
     repo: 'https://github.com/thunder/thunder-distribution',
     docsDir: 'docs',
-    docsBranch: '6.2.x',
+    docsBranch: '6.3.x',
     contributors: false,
     navbar: [
       {
@@ -42,9 +42,11 @@ module.exports = {
         },
         '/developer-guide/testing.md',
         '/developer-guide/headless.md',
+        '/developer-guide/paragraphs_paste.md',
         {
           text: 'Migration',
           children: [
+            '/developer-guide/migration/migrate-6-7.md',
             '/developer-guide/migration/migrate-3-6.md',
             '/developer-guide/migration/migrate-2-3.md',
           ],
@@ -52,6 +54,10 @@ module.exports = {
         {
           text: 'Changelogs',
           children: [
+            '/changelog/7.0.x',
+            '/changelog/6.5.x',
+            '/changelog/6.4.x',
+            '/changelog/6.3.x',
             '/changelog/6.2.x',
             '/changelog/6.1.x',
             '/changelog/6.0.x',
@@ -78,6 +84,10 @@ module.exports = {
       {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.0.x/CHANGELOG.md', title: 'Changelog 6.0.x', path: '/changelog/6.0.x'},
       {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.1.x/CHANGELOG.md', title: 'Changelog 6.1.x', path: '/changelog/6.1.x'},
       {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.2.x/CHANGELOG.md', title: 'Changelog 6.2.x', path: '/changelog/6.2.x'},
+      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.3.x/CHANGELOG.md', title: 'Changelog 6.3.x', path: '/changelog/6.3.x'},
+      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.4.x/CHANGELOG.md', title: 'Changelog 6.4.x', path: '/changelog/6.4.x'},
+      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.5.x/CHANGELOG.md', title: 'Changelog 6.5.x', path: '/changelog/6.5.x'},
+      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/7.0.x/CHANGELOG.md', title: 'Changelog 7.0.x', path: '/changelog/7.0.x'},
     ]
     await Promise.all(logs.map(async (log) => {
       const content = await rp(log.url);
