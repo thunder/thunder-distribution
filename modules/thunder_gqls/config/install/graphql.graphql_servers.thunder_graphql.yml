@@ -9,8 +9,8 @@ schema: thunder
 caching: true
 batching: true
 disable_introspection: false
-query_depth: 100
-query_complexity: 100
+query_depth: 0
+query_complexity: 0
 schema_configuration:
   thunder:
     extensions:
