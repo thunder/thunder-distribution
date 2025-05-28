@@ -16,7 +16,7 @@ plugin: 'facet_block:author'
 settings:
   id: 'facet_block:author'
   label: Author
-  provider: facets
   label_display: '0'
+  provider: facets
   block_id: claro_facet_author
 visibility: {  }

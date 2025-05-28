@@ -78,8 +78,8 @@ install:
   - scheduler:scheduler
   - scheduler:scheduler_content_moderation_integration
   - schema_metatag:schema_article
-  - select2:select2
   - simple_sitemap:simple_sitemap
+  - tagify:tagify
   - update_helper_checklist:update_helper_checklist
   - views_bulk_edit:views_bulk_edit
   # thunder

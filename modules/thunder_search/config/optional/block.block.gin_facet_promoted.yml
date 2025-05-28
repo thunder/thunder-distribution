@@ -16,7 +16,7 @@ plugin: 'facet_block:promoted_to_front_page'
 settings:
   id: 'facet_block:promoted_to_front_page'
   label: Promoted
-  provider: facets
   label_display: '0'
+  provider: facets
   block_id: gin_facet_promoted
 visibility: {  }

@@ -1,3 +1,4 @@
+uuid: 6e28146a-13ec-4926-8eb7-3279c2edff49
 langcode: en
 status: true
 dependencies:
@@ -14,7 +15,7 @@ dependencies:
     - datetime
     - field_group
     - focal_point
-    - select2
+    - tagify
     - text
 third_party_settings:
   field_group:
@@ -100,13 +101,17 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_tags:
-    type: select2_entity_reference
+    type: tagify_entity_reference_autocomplete_widget
     weight: 2
     region: content
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
+      match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
     third_party_settings: {  }
   name:
     type: string_textfield
@@ -124,13 +129,17 @@ content:
       display_label: true
     third_party_settings: {  }
   uid:
-    type: select2_entity_reference
+    type: tagify_entity_reference_autocomplete_widget
     weight: 4
     region: content
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
+      match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
     third_party_settings: {  }
 hidden:
   langcode: true

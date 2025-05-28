@@ -1,3 +1,4 @@
+uuid: 6158b59c-7ff3-45ae-9a98-32cedacbdda9
 langcode: en
 status: true
 dependencies:
@@ -8,7 +9,7 @@ dependencies:
     - entity_reference_actions
     - field_group
     - media_library_media_modify
-    - select2
+    - tagify
 third_party_settings:
   field_group:
     group_basis:
@@ -46,8 +47,8 @@ content:
       form_mode: override
       check_selected: true
       replace_checkbox_by_order_indicator: true
-      no_edit_on_create: true
       multi_edit_on_create: false
+      no_edit_on_create: true
     third_party_settings:
       entity_reference_actions:
         enabled: true
@@ -76,14 +77,17 @@ content:
       display_label: true
     third_party_settings: {  }
   uid:
-    type: select2_entity_reference
+    type: tagify_entity_reference_autocomplete_widget
     weight: 3
     region: content
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
     third_party_settings: {  }
 hidden:
   langcode: true

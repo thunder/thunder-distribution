@@ -1,3 +1,4 @@
+uuid: d306ea02-99bc-4e5b-985d-0347aa454e01
 langcode: en
 status: true
 dependencies:
@@ -12,7 +13,7 @@ dependencies:
     - media.type.image
   module:
     - datetime
-    - select2
+    - tagify
     - text
 id: media.image.bulk_edit
 targetEntityType: media
@@ -50,14 +51,17 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_tags:
-    type: select2_entity_reference
+    type: tagify_entity_reference_autocomplete_widget
     weight: 4
     region: content
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
     third_party_settings: {  }
 hidden:
   created: true

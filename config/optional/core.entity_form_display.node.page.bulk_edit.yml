@@ -1,3 +1,4 @@
+uuid: b6879a79-3cad-4fbb-b300-7c5b9ae6bfce
 langcode: en
 status: true
 dependencies:
@@ -7,7 +8,7 @@ dependencies:
     - field.field.node.page.field_paragraphs
     - node.type.page
   module:
-    - select2
+    - tagify
 id: node.page.bulk_edit
 targetEntityType: node
 bundle: page
@@ -19,14 +20,17 @@ content:
     settings: {  }
     third_party_settings: {  }
   uid:
-    type: select2_entity_reference
+    type: tagify_entity_reference_autocomplete_widget
     weight: 0
     region: content
     settings:
-      width: 100%
-      autocomplete: false
       match_operator: CONTAINS
       match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
     third_party_settings: {  }
 hidden:
   created: true

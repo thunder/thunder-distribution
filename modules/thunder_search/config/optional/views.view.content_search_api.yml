@@ -36,7 +36,7 @@ display:
         options:
           perm: 'access content overview'
       cache:
-        type: none
+        type: search_api_none
         options: {  }
       query:
         type: search_api_query

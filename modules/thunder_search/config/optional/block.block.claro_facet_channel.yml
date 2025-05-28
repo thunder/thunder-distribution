@@ -16,7 +16,7 @@ plugin: 'facet_block:channel'
 settings:
   id: 'facet_block:channel'
   label: Channel
-  provider: facets
   label_display: '0'
+  provider: facets
   block_id: claro_facet_channel
 visibility: {  }

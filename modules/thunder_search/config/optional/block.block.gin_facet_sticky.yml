@@ -16,7 +16,7 @@ plugin: 'facet_block:sticky_at_top_of_lists'
 settings:
   id: 'facet_block:sticky_at_top_of_lists'
   label: Sticky
-  provider: facets
   label_display: '0'
+  provider: facets
   block_id: gin_facet_sticky
 visibility: {  }

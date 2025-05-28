@@ -6,13 +6,14 @@ dependencies:
     - field.field.node.page.field_paragraphs
     - node.type.page
   module:
+    - content_moderation
     - entity_reference_actions
     - field_group
     - metatag_async_widget
     - paragraphs
     - paragraphs_features
     - path
-    - select2
+    - tagify
 third_party_settings:
   field_group:
     group_paragraphs:
@@ -133,14 +134,17 @@ content:
       placeholder: ''
     third_party_settings: {  }
   uid:
-    type: select2_entity_reference
+    type: tagify_entity_reference_autocomplete_widget
     weight: 2
     region: content
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
     third_party_settings: {  }
   url_redirects:
     weight: 10

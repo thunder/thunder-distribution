@@ -1,3 +1,4 @@
+uuid: f146b49e-4070-4d4f-9559-bbce42aa2cd6
 langcode: en
 status: true
 dependencies:
@@ -8,8 +9,8 @@ dependencies:
     - media.type.twitter
   module:
     - field_group
-    - link
-    - select2
+    - media
+    - tagify
 third_party_settings:
   field_group:
     group_basis:
@@ -55,12 +56,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_url:
-    type: link_default
+    type: oembed_textfield
     weight: 0
     region: content
     settings:
-      placeholder_url: ''
-      placeholder_title: ''
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   status:
     type: boolean_checkbox
@@ -70,13 +71,17 @@ content:
       display_label: true
     third_party_settings: {  }
   uid:
-    type: select2_entity_reference
+    type: tagify_entity_reference_autocomplete_widget
     weight: 2
     region: content
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
+      match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
     third_party_settings: {  }
 hidden:
   langcode: true
