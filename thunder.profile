@@ -155,15 +155,6 @@ function thunder_page_attachments(array &$attachments): void {
 }
 
 /**
- * Implements hook_library_info_alter().
- */
-function thunder_toolbar_alter(array &$items): void {
-  if (!empty($items['admin_toolbar_tools'])) {
-    $items['admin_toolbar_tools']['#attached']['library'][] = 'thunder/toolbar.icon';
-  }
-}
-
-/**
  * Implements hook_field_widget_info_alter().
  */
 function thunder_field_widget_info_alter(array &$info): void {
