@@ -58,7 +58,7 @@ abstract class DecoratableTypeResolver {
    * @return string|null
    *   The GraphQL type name or NULL if this resolver could not determine it.
    */
-  abstract protected function resolve($object) : ?string;
+  abstract protected function resolve(mixed $object) : ?string;
 
   /**
    * Allows this type resolver to be called by the GraphQL library.
@@ -75,7 +75,7 @@ abstract class DecoratableTypeResolver {
    * @throws \RuntimeException
    *   When a type was passed for which no type resolver exists in the chain.
    */
-  public function __invoke($object) : string {
+  public function __invoke(mixed $object) : string {
     $type = $this->resolve($object);
     if ($type !== NULL) {
       return $type;

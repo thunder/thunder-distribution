@@ -17,20 +17,12 @@ class ThunderTaxonomyPermissions implements ContainerInjectionInterface {
   use StringTranslationTrait;
 
   /**
-   * The entity manager.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected $entityTypeManager;
-
-  /**
    * Constructs a TaxonomyPermissions instance.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager.
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
-    $this->entityTypeManager = $entityTypeManager;
+  public function __construct(protected readonly EntityTypeManagerInterface $entityTypeManager) {
   }
 
   /**

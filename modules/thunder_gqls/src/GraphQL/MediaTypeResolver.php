@@ -15,7 +15,7 @@ class MediaTypeResolver extends DecoratableTypeResolver {
   /**
    * {@inheritdoc}
    */
-  protected function resolve($object) : ?string {
+  protected function resolve(mixed $object) : ?string {
     if ($object instanceof MediaInterface) {
       return 'Media' . $this->mapBundleToSchemaName($object->bundle());
     }

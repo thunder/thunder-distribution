@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 
-use Drupal\media\Entity\Media;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
+use Drupal\media\Entity\Media;
 
 /**
  * Tests integration with the entity_reference_actions and views_bulk_edit.
@@ -36,6 +36,7 @@ class EntityReferenceActionsTest extends ThunderJavascriptTestBase {
 
     $this->getSession()->getPage()->checkField('media[image][_field_selector][field_copyright]');
     $this->getSession()->getPage()->fillField('media[image][field_copyright][0][value]', 'Test copyright');
+    $this->getSession()->getPage()->selectFieldOption('media[image][field_copyright_change_method]', 'replace');
 
     $this->assertSession()->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Confirm');
 

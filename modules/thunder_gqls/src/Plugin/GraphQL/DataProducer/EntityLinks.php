@@ -29,22 +29,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The rendering service.
-   *
-   * @var \Drupal\Core\Render\RendererInterface
-   */
-  protected $renderer;
-
-  /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition): self {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     return new static(
       $configuration,
-      $pluginId,
-      $pluginDefinition,
+      $plugin_id,
+      $plugin_definition,
       $container->get('renderer')
     );
   }
@@ -54,21 +47,20 @@ class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPlug
    *
    * @param array $configuration
    *   The plugin configuration array.
-   * @param string $pluginId
+   * @param string $plugin_id
    *   The plugin id.
-   * @param mixed $pluginDefinition
+   * @param mixed $plugin_definition
    *   The plugin definition.
    * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer service.
    */
   public function __construct(
     array $configuration,
-    string $pluginId,
-    $pluginDefinition,
-    RendererInterface $renderer,
+    string $plugin_id,
+    $plugin_definition,
+    protected readonly RendererInterface $renderer,
   ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->renderer = $renderer;
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
   /**

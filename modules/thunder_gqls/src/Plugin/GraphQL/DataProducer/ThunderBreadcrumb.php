@@ -32,22 +32,22 @@ class ThunderBreadcrumb extends ThunderEntitySubRequestBase {
   /**
    * The breadcrumb manager.
    *
-   * @var \Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface
+   * @var \Drupal\Core\Breadcrumb\BreadcrumbManager
    */
-  protected $breadcrumbManager;
+  protected BreadcrumbManager $breadcrumbManager;
 
   /**
    * The route match service.
    *
    * @var \Drupal\Core\Routing\CurrentRouteMatch
    */
-  protected $currentRouteMatch;
+  protected CurrentRouteMatch $currentRouteMatch;
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
-    $producer = parent::create($container, $configuration, $pluginId, $pluginDefinition);
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    $producer = parent::create($container, $configuration, $plugin_id, $plugin_definition);
     $producer->setCurrentRouteMatch($container->get('current_route_match'));
     $producer->setBreadcrumbManager($container->get('breadcrumb'));
     return $producer;

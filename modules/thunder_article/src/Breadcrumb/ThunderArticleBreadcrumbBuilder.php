@@ -3,6 +3,7 @@
 namespace Drupal\thunder_article\Breadcrumb;
 
 use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\taxonomy\TermInterface;
 
@@ -14,7 +15,7 @@ class ThunderArticleBreadcrumbBuilder extends ThunderTaxonomyTermBreadcrumbBuild
   /**
    * {@inheritdoc}
    */
-  public function applies(RouteMatchInterface $route_match): bool {
+  public function applies(RouteMatchInterface $route_match, ?CacheableMetadata $cacheable_metadata = NULL): bool {
     // This breadcrumb apply only for all articles.
     $parameters = $route_match->getParameters()->all();
     return ($route_match->getRouteName() === 'entity.node.canonical') && is_object($parameters['node']) && $parameters['node']->getType() === 'article' && !empty($parameters['node']->field_channel->entity);

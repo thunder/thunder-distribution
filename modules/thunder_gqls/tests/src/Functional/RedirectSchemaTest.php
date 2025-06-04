@@ -3,6 +3,7 @@
 namespace Drupal\Tests\thunder_gqls\Functional;
 
 use Drupal\Component\Serialization\Json;
+use Drupal\node\NodeInterface;
 
 /**
  * Test the redirect endpoint.
@@ -16,7 +17,7 @@ class RedirectSchemaTest extends ThunderGqlsTestBase {
    *
    * @var \Drupal\node\NodeInterface
    */
-  protected $unpublishedEntity;
+  protected NodeInterface $unpublishedEntity;
 
   /**
    * {@inheritdoc}

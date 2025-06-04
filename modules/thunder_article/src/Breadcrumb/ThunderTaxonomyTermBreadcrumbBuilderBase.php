@@ -11,6 +11,7 @@ use Drupal\Core\Link;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\taxonomy\TermInterface;
+use Drupal\taxonomy\TermStorageInterface;
 
 /**
  * Class to define the menu_link breadcrumb builder.
@@ -19,25 +20,11 @@ abstract class ThunderTaxonomyTermBreadcrumbBuilderBase implements BreadcrumbBui
   use StringTranslationTrait;
 
   /**
-   * Site configFactory object.
-   *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
-   */
-  protected $configFactory;
-
-  /**
-   * The entity repository service.
-   *
-   * @var \Drupal\Core\Entity\EntityRepositoryInterface
-   */
-  protected $entityRepository;
-
-  /**
    * The taxonomy storage.
    *
    * @var \Drupal\taxonomy\TermStorageInterface
    */
-  protected $termStorage;
+  protected TermStorageInterface $termStorage;
 
   /**
    * Constructs the ThunderArticleBreadcrumbBuilder.
@@ -52,10 +39,8 @@ abstract class ThunderTaxonomyTermBreadcrumbBuilderBase implements BreadcrumbBui
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, EntityRepositoryInterface $entityRepository, ConfigFactoryInterface $configFactory) {
-    $this->entityRepository = $entityRepository;
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, protected readonly EntityRepositoryInterface $entityRepository, protected readonly ConfigFactoryInterface $configFactory) {
     $this->termStorage = $entityTypeManager->getStorage('taxonomy_term');
-    $this->configFactory = $configFactory;
   }
 
   /**

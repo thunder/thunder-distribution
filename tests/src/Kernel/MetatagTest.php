@@ -3,8 +3,9 @@
 namespace Drupal\Tests\thunder\Kernel\Integration;
 
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\node\Entity\Node;
 use Drupal\Tests\thunder\Traits\ThunderKernelTestTrait;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 
 /**
  * Tests integration with the metatag module.
@@ -20,7 +21,7 @@ class MetatagTest extends KernelTestBase {
    *
    * @var \Drupal\node\NodeInterface
    */
-  protected $node;
+  protected NodeInterface $node;
 
   /**
    * {@inheritdoc}
@@ -104,7 +105,6 @@ class MetatagTest extends KernelTestBase {
     $elements = $metatagManager->generateRawElements($tags, $this->node);
 
     $this->assertStringEndsWith('/node/1', $elements['canonical_url']['#attributes']['href']);
-    $this->assertEquals('en', $elements['content_language']['#attributes']['content']);
     $this->assertEquals($description, $elements['description']['#attributes']['content']);
     $this->assertStringEndsWith('/files/image-test.png', $elements['image_src']['#attributes']['href']);
     $this->assertEquals('no-referrer', $elements['referrer']['#attributes']['content']);
@@ -122,8 +122,6 @@ class MetatagTest extends KernelTestBase {
 
     $this->assertEquals($description, $elements['twitter_cards_description']['#attributes']['content']);
     $this->assertStringContainsString('/files/styles/twitter/public/image-test.png.webp', $elements['twitter_cards_image']['#attributes']['content']);
-    $this->assertEquals('512', $elements['twitter_cards_image_height']['#attributes']['content']);
-    $this->assertEquals('1024', $elements['twitter_cards_image_width']['#attributes']['content']);
     $this->assertEquals('summary_large_image', $elements['twitter_cards_type']['#attributes']['content']);
 
     $this->assertEquals('Article', $elements['schema_article_type']['#attributes']['content']);

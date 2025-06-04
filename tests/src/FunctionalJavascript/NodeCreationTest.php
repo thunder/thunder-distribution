@@ -90,8 +90,11 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
     $this->assertSession()->pageTextContains('Awesome text');
 
     // Check Gallery paragraph. Ensure that there are 2 images in gallery.
-    $this->assertSession()
-      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][3]//div[contains(@class, "slick-track")]/div[not(contains(@class, "slick-cloned"))]//img', 2);
+    $this->assertEquals(
+      2,
+      $this->getSession()->evaluateScript('document.querySelectorAll("div.field--name-field-media-images div.field__item img").length'),
+      'There should be two images shown in frontend.'
+    );
 
     // Check Quote paragraph.
     $this->assertSession()->pageTextContains('Awesome quote');
