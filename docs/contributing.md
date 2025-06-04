@@ -214,49 +214,6 @@ php ./core/scripts/db-tools.php dump-database-d8-mysql | gzip > thunder.sql.gz
 export thunderDumpFile=/path/to/thunder.sql.gz
 ```
 
-### How to run the NightwatchJS performance tests <Badge type="danger" text="Not reviewed" vertical="bottom" />
-
-1. You need to install [Yarn](https://yarnpkg.com). Please check the installation documentation for it.
-2. You have to install `thunder/thunder_performance_measurement` package. To do that, execute the following command in
-   your project root directory: `composer require thunder/thunder_performance_measurement:dev-master --dev` and enable
-   the module by executing: `drush en thunder_performance_measurement` in your `docroot` directory.
-3. You need to install [Elastic APM Node.js Agent](https://www.npmjs.com/package/elastic-apm-node) in Drupal Core node
-   packages. To do that go to your `docroot/core` directory and execute the following
-   command: `yarn add elastic-apm-node --dev`
-4. You have to adjust your `.env` file inside `docroot/core` directory. You can copy the `.env.example` to `.env` and
-   edit it accordingly. Thunder tests require the following environment variables: `DRUPAL_TEST_BASE_URL`
-   , `THUNDER_BRANCH`, `THUNDER_SITE_HOSTNAME` and `THUNDER_APM_URL`. The `THUNDER_BRANCH` is the branch name where
-   tests are executing, for example, `8.x-4.x`. The `THUNDER_SITE_HOSTNAME` is the hostname where tests are executing,
-   for example, `thunder.dev`. The `THUNDER_APM_URL` is URL to Elastic APM Server, for example, `http://localhost:8200`.
-5. After that, you can run NightwatchJS tests by executing the following command inside `docroot/core`
-   directory: `yarn test:nightwatch <path to JS Test file>`. Here is an
-   example: `yarn test:nightwatch ../profiles/contrib/thunder/tests/src/Nightwatch/Tests/CreateMostUsedContent.js`
-
-#### If you have a problem with outdated chromedriver
-
-Drupal core does not update javascript dependencies so fast and chromedriver may be outdated and unable to work with
-chrome installed on the system. You can provide chrome that can be used by chromedriver inside a docker container. You
-can do it with the following command:
-
-```bash
-docker run --name selenium_chrome -d -P -p 6000:5900 -p 4444:4444 --shm-size 256m --add-host="thunder.dd:172.16.123.1" selenium/standalone-chrome-debug:3.141.59-selenium
-```
-
-You have to find what is correct docker image tag for the chrome version you need. To do that you have to take a look
-at [selenium docker releases](https://github.com/SeleniumHQ/docker-selenium/releases). This workflow is similar to PHP
-JavaScript tests and for additional information, you can take a look at **How to run the tests** section.
-
-After you have running chrome in docker, you have also to change environment variables in `.env` file. The following
-environment variable should be set:
-
-```bash
-DRUPAL_TEST_WEBDRIVER_PORT=4444
-DRUPAL_TEST_WEBDRIVER_PATH_PREFIX=/wd/hub
-DRUPAL_TEST_CHROMEDRIVER_AUTOSTART=false
-```
-
-You can copy/paste this section to the bottom of your `.env` file.
-
 ## Documentation
 
 To help with the documentation, please run:

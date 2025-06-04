@@ -15,7 +15,7 @@ class ParagraphsTypeResolver extends DecoratableTypeResolver {
   /**
    * {@inheritdoc}
    */
-  protected function resolve($object) : ?string {
+  protected function resolve(mixed $object) : ?string {
     if ($object instanceof ParagraphInterface) {
       return 'Paragraph' . $this->mapBundleToSchemaName($object->bundle());
     }

@@ -59,9 +59,9 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    *
    * @param array $configuration
    *   The plugin configuration.
-   * @param string $pluginId
+   * @param string $plugin_id
    *   The plugin id.
-   * @param mixed $pluginDefinition
+   * @param mixed $plugin_definition
    *   The plugin definition.
    * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
    *   The language manager.
@@ -78,15 +78,15 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
    */
   public function __construct(
     array $configuration,
-    $pluginId,
-    $pluginDefinition,
-    protected LanguageManagerInterface $languageManager,
-    protected PathValidatorInterface $pathValidator,
-    protected RendererInterface $renderer,
-    protected ConfigFactory $config,
-    protected ?RedirectRepository $redirectRepository = NULL,
+    $plugin_id,
+    $plugin_definition,
+    protected readonly LanguageManagerInterface $languageManager,
+    protected readonly PathValidatorInterface $pathValidator,
+    protected readonly RendererInterface $renderer,
+    protected readonly ConfigFactory $config,
+    protected readonly ?RedirectRepository $redirectRepository = NULL,
   ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
   /**

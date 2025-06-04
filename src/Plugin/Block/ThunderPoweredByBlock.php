@@ -2,16 +2,18 @@
 
 namespace Drupal\thunder\Plugin\Block;
 
+use Drupal\Core\Block\Attribute\Block;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Provides a 'Powered by Thunder' block.
- *
- * @Block(
- *   id = "thunder_powered_by_block",
- *   admin_label = @Translation("Powered by Thunder")
- * )
  */
+#[Block(
+  id: "thunder_powered_by_block",
+  admin_label: new TranslatableMarkup("Powered by Thunder"),
+  category: new TranslatableMarkup("Footer")
+)]
 class ThunderPoweredByBlock extends BlockBase {
 
   /**

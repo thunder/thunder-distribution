@@ -2,6 +2,8 @@
 
 namespace Drupal\thunder_gqls\Wrappers;
 
+use GraphQL\Deferred;
+
 /**
  * The thunder entity list response class.
  */
@@ -21,6 +23,6 @@ interface EntityListResponseInterface {
    * @return array|\GraphQL\Deferred
    *   The entity list.
    */
-  public function items();
+  public function items(): array|Deferred;
 
 }

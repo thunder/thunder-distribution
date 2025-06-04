@@ -1,7 +1,7 @@
 name: 'Thunder Media'
 description: 'Provides media bundles for thunder.'
 type: module
-core_version_requirement: ^10
+core_version_requirement: ^11
 dependencies:
   - drupal:image
 package: Thunder

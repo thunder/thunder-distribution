@@ -19,10 +19,10 @@ dependencies:
     - filter
     - media
     - metatag
+    - navigation
     - node
     - path
     - redirect
-    - responsive_preview
     - scheduler
     - system
     - taxonomy
@@ -40,7 +40,7 @@ permissions:
   - 'access contextual links'
   - 'access files overview'
   - 'access media overview'
-  - 'access responsive preview'
+  - 'access navigation'
   - 'access tokens overview'
   - 'access toolbar'
   - 'administer menu'

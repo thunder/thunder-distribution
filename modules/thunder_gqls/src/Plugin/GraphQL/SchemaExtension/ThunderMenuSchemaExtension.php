@@ -52,7 +52,7 @@ class ThunderMenuSchemaExtension extends ThunderSchemaExtensionPluginBase {
 
     );
 
-    // Menu title.
+    // Menu item title.
     $this->addFieldResolverIfNotExists(
       'MenuItem',
       'title',
@@ -64,7 +64,31 @@ class ThunderMenuSchemaExtension extends ThunderSchemaExtensionPluginBase {
         )
     );
 
-    // Menu in active trail.
+    // Menu item description.
+    $this->addFieldResolverIfNotExists(
+      'MenuItem',
+      'description',
+      $this->builder->produce('menu_link_description')
+        ->map(
+          'link',
+          $this->builder->produce('menu_tree_link')
+            ->map('element', $this->builder->fromParent())
+        )
+    );
+
+    // Menu item expanded.
+    $this->addFieldResolverIfNotExists(
+      'MenuItem',
+      'expanded',
+      $this->builder->produce('menu_link_expanded')
+        ->map(
+          'link',
+          $this->builder->produce('menu_tree_link')
+            ->map('element', $this->builder->fromParent())
+        )
+    );
+
+    // Menu item in active trail.
     $this->addFieldResolverIfNotExists(
       'MenuItem',
       'inActiveTrail',
@@ -72,7 +96,7 @@ class ThunderMenuSchemaExtension extends ThunderSchemaExtensionPluginBase {
         ->map('element', $this->builder->fromParent())
     );
 
-    // Menu children.
+    // Menu item children.
     $this->addFieldResolverIfNotExists(
       'MenuItem',
       'children',
@@ -80,7 +104,7 @@ class ThunderMenuSchemaExtension extends ThunderSchemaExtensionPluginBase {
         ->map('element', $this->builder->fromParent())
     );
 
-    // Menu url.
+    // Menu item url.
     $this->addFieldResolverIfNotExists(
       'MenuItem',
       'url',

@@ -5,18 +5,19 @@ namespace Drupal\thunder_media\Plugin\ImageEffect;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Image\ImageInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\image\Attribute\ImageEffect;
 use Drupal\image\ConfigurableImageEffectBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Resizes an image resource.
- *
- * @ImageEffect(
- *   id = "thunder_media_auto_aspect",
- *   label = @Translation("Auto Aspect"),
- *   description = @Translation("Use different effects depending on whether the image is landscape of portrait shaped. This re-uses other preset definitions, and just chooses between them based on the rule.")
- * )
  */
+#[ImageEffect(
+  id: "thunder_media_auto_aspect",
+  label: new TranslatableMarkup("Auto Aspect"),
+  description: new TranslatableMarkup("Use different effects depending on whether the image is landscape of portrait shaped. This re-uses other preset definitions, and just chooses between them based on the rule."),
+)]
 class AutoAspectEffect extends ConfigurableImageEffectBase {
 
   /**
@@ -24,7 +25,7 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
    * {@inheritdoc}

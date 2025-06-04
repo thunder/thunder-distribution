@@ -45,8 +45,6 @@ class VgWortSchemaTest extends ThunderGqlsTestBase {
   /**
    * Tests the article schema.
    *
-   * @group NoUpdate
-   *
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
   public function testSchema(): void {

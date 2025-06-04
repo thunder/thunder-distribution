@@ -43,6 +43,8 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
       $this->fromRoute($this->builder->fromArgument('path'))
     );
 
+    $this->resolvePageInterfaceQueryFields('node', 'node');
+
     // Teaser.
     $this->addSimpleCallbackFields('Teaser', ['image', 'text']);
 

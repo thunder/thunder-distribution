@@ -5,8 +5,8 @@
  * Update functions for the thunder installation profile.
  */
 
-use Drupal\ckeditor5\SmartDefaultSettings;
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\ckeditor5\SmartDefaultSettings;
 use Drupal\editor\Entity\Editor;
 use Drupal\entity_browser\Entity\EntityBrowser;
 use Drupal\user\Entity\Role;
@@ -20,7 +20,6 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
   $moduleInstaller->install([
     'media_library_media_modify',
     'gin_toolbar',
-    'jquery_ui',
     'ckeditor5',
   ]);
 
@@ -70,10 +69,8 @@ function thunder_post_update_0001_upgrade_to_thunder7(array &$sandbox): string {
     }
   }
 
-  /** @var \Drupal\ckeditor5\SmartDefaultSettings $ckEditorMigration */
   $ckEditorMigration = new SmartDefaultSettings(
     \Drupal::service('plugin.manager.ckeditor5.plugin'),
-    \Drupal::service('plugin.manager.public_ckeditor4to5upgrade.plugin'),
     $updater->logger(),
     \Drupal::service('module_handler'),
     \Drupal::service('current_user'));
@@ -124,4 +121,18 @@ function thunder_post_update_0003_enable_sticky_action_buttons(array &$sandbox):
     ->save();
 
   return t('Sticky action buttons enabled.');
+}
+
+/**
+ * This update removes blazy and slick integration.
+ */
+function thunder_post_update_0004_remove_blazy_and_slick(): string {
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updater->executeUpdate('thunder', 'thunder_post_update_0004_remove_blazy_and_slick');
+
+  // Output logged messages to related channel of update execution.
+  return $updater->logger()->output();
 }

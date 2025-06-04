@@ -10,3 +10,9 @@ v7.2.2:
   thunder_post_update_0002_enable_paragraphs_split:
     '#title': 'Enable paragraphs split functionality.'
     '#description': '<p>This configuration update will update input formats and editors settings</p>'
+v7.X.X:
+  '#title': 'Update to version v7.X.X'
+  '#description': '<h3>Remove blazy and slick integration</h3>'
+  thunder_post_update_0002_enable_paragraphs_split:
+    '#title': 'Remove blazy and slick integration.'
+    '#description': '<p>Remove configuration for blazy and slick modules</p>'
