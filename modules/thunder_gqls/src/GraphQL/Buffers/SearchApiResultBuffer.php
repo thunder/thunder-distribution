@@ -51,14 +51,14 @@ class SearchApiResultBuffer extends BufferBase {
   /**
    * {@inheritdoc}
    */
-  protected function getBufferId($item) {
+  protected function getBufferId(\ArrayObject $item): string {
     return $item['index'];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function resolveBufferArray(array $buffer) {
+  public function resolveBufferArray(array $buffer): array {
     $index = reset($buffer)['index'];
     $ids = array_map(function (\ArrayObject $item) {
       return (array) $item['id'];
