@@ -53,7 +53,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.3' ]
+        PHP_VERSION: [ '8.3', '8.4' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
@@ -127,7 +127,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        PHP_VERSION: [ '8.3' ]
+        PHP_VERSION: [ '8.3', '8.4' ]
         DRUPAL_TESTING_TEST_SUITE: [ 'kernel', 'functional', 'functional-javascript' ]
 
     steps:
@@ -196,7 +196,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.3' ]
+        PHP_VERSION: [ '8.3', '8.4' ]
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-upgrade') || github.event_name == 'schedule' }}
 
@@ -305,7 +305,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.3' ]
+        PHP_VERSION: [ '8.3', '8.4' ]
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
 
