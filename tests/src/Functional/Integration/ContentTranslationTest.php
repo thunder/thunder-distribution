@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\thunder\Functional\Integration;
 
+use Drupal\Tests\thunder\Functional\ThunderTestBase;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\language\Entity\ConfigurableLanguage;
-use Drupal\Tests\thunder\Functional\ThunderTestBase;
 
 /**
  * Tests integration with the content_translation.

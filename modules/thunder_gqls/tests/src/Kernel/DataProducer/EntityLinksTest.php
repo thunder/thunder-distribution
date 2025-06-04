@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
+use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
-use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 
 /**
  * Data producers EntityLinks test class.

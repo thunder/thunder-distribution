@@ -80,7 +80,7 @@ class SearchApiResponse implements SearchApiResponseInterface, ContainerInjectio
    * @param \Drupal\search_api\Query\QueryInterface $query
    *   The query.
    */
-  public function setQuery(QueryInterface $query): SearchApiResponse {
+  public function setQuery(QueryInterface $query): static {
     $this->query = $query;
     return $this;
   }
@@ -91,7 +91,7 @@ class SearchApiResponse implements SearchApiResponseInterface, ContainerInjectio
    * @param array $facetMapping
    *   The facet mapping.
    */
-  public function setFacetMapping(array $facetMapping): SearchApiResponse {
+  public function setFacetMapping(array $facetMapping): static {
     $this->facetMapping = $facetMapping;
     return $this;
   }
@@ -102,7 +102,7 @@ class SearchApiResponse implements SearchApiResponseInterface, ContainerInjectio
    * @param string $bundle
    *   The bundle.
    */
-  public function setBundle(string $bundle): SearchApiResponse {
+  public function setBundle(string $bundle): static {
     $this->bundle = $bundle;
     return $this;
   }
@@ -113,7 +113,7 @@ class SearchApiResponse implements SearchApiResponseInterface, ContainerInjectio
    * @param array $facets
    *   The facets.
    */
-  public function setFacets(array $facets): SearchApiResponse {
+  public function setFacets(array $facets): static {
     $this->facets = $facets;
     return $this;
   }
@@ -205,7 +205,7 @@ class SearchApiResponse implements SearchApiResponseInterface, ContainerInjectio
    * @return array
    *   The processed facet results.
    */
-  private function processFacetResults(
+  protected function processFacetResults(
     Facet $facet,
     array $facetResults,
   ): array {
@@ -238,7 +238,7 @@ class SearchApiResponse implements SearchApiResponseInterface, ContainerInjectio
    * @return array
    *   The processed facet results.
    */
-  private function processFacetResultsFromFieldConfig(
+  protected function processFacetResultsFromFieldConfig(
     Facet $facet,
     array $facetResults,
   ): array {

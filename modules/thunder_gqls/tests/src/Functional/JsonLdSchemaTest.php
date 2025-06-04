@@ -27,8 +27,8 @@ class JsonLdSchemaTest extends ThunderGqlsTestBase {
     $query = $this->getQueryFromFile($schema);
     $variables = $this->getVariablesFromFile($schema);
 
-    $responseData = $this->jsonDecode(strip_tags($this->getResponseData($query, $variables)['jsonld']));
-    $expectedData = $this->jsonDecode(strip_tags($this->jsonDecode($this->getExpectedResponseFromFile($schema))['data']['jsonld']));
+    $responseData = $this->jsonDecode(strip_tags((string) $this->getResponseData($query, $variables)['jsonld']));
+    $expectedData = $this->jsonDecode(strip_tags((string) $this->jsonDecode($this->getExpectedResponseFromFile($schema))['data']['jsonld']));
 
     $this->assertEqualsCanonicalizing($expectedData, $responseData);
 
