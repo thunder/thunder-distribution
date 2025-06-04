@@ -261,6 +261,7 @@ jobs:
           composer require "drupal/responsive_preview" --no-update
           composer require "drupal/slick" --no-update
           composer require "drupal/blazy" --no-update
+          composer require "drupal/admin_toolbar:^3.4" --no-update
           composer require "drupal/core-dev:~11.1.0" --no-update
 
           composer update
@@ -341,7 +342,7 @@ jobs:
 
       - name: Install suggested dependencies
         run: |
-          composer require "league/container:^4.2" "drupal/core-dev:^11.0" "grasmash/yaml-cli:^3.2.1" "drupal/tour:2.0.5" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+          composer require "league/container:^4.2" "drupal/core-dev:^11.0" "grasmash/yaml-cli:^3.2.1" "drupal/tour:2.0.8" --no-update --no-progress --working-dir=/tmp/test/thunder/install
           composer config allow-plugins.php-http/discovery true --no-plugins --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
