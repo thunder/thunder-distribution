@@ -38,13 +38,13 @@ class ThunderLanguage extends ThunderEntitySubRequestBase {
    *
    * @var \Drupal\Core\Language\LanguageManagerInterface
    */
-  protected $languageManager;
+  protected LanguageManagerInterface $languageManager;
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
-    $producer = parent::create($container, $configuration, $pluginId, $pluginDefinition);
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    $producer = parent::create($container, $configuration, $plugin_id, $plugin_definition);
     $producer->setLanguageManager($container->get('language_manager'));
     return $producer;
   }

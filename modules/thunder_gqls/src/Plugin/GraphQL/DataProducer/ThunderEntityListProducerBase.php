@@ -47,40 +47,14 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
     $instance = new static(
       $configuration,
       $plugin_id,
-      $plugin_definition,
-      $container->get('entity_type.manager'),
-      $container->get('current_user')
+      $plugin_definition
     );
 
     $instance->setResponseWrapper($container->get('thunder_gqls.entity_list_response_wrapper'));
+    $instance->setEntityTypeManager($container->get('entity_type.manager'));
+    $instance->setCurrentUser($container->get('current_user'));
 
     return $instance;
-  }
-
-  /**
-   * ThunderEntityListProducerBase constructor.
-   *
-   * @param array $configuration
-   *   The plugin configuration array.
-   * @param string $pluginId
-   *   The plugin id.
-   * @param array $pluginDefinition
-   *   The plugin definition array.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
-   *   The entity type manager service.
-   * @param \Drupal\Core\Session\AccountInterface $currentUser
-   *   The current user.
-   */
-  public function __construct(
-    array $configuration,
-    string $pluginId,
-    array $pluginDefinition,
-    EntityTypeManagerInterface $entityTypeManager,
-    AccountInterface $currentUser,
-  ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->setEntityTypeManager($entityTypeManager);
-    $this->setCurrentUser($currentUser);
   }
 
   /**
@@ -191,7 +165,7 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
         if (!empty($sort['field'])) {
           if (!empty($sort['direction']) && strtolower(
               $sort['direction']
-            ) == 'desc') {
+            ) === 'desc') {
             $direction = 'DESC';
           }
           else {
@@ -205,7 +179,10 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
     $query->range($offset, $limit);
 
     $storage = $this->entityTypeManager->getStorage($type);
-    $cacheContext->addCacheableDependency($storage->getEntityType());
+    $entityType = $storage->getEntityType();
+
+    $cacheContext->addCacheTags($entityType->getListCacheTags());
+    $cacheContext->addCacheContexts($entityType->getListCacheContexts());
     return $query;
   }
 

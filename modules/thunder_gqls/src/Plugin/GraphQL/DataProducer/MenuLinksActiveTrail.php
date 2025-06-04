@@ -40,29 +40,15 @@ class MenuLinksActiveTrail extends DataProducerPluginBase implements ContainerFa
   use DependencySerializationTrait;
 
   /**
-   * The menu link tree.
-   *
-   * @var \Drupal\Core\Menu\MenuLinkTreeInterface
-   */
-  protected $menuLinkTree;
-
-  /**
-   * The menu link tree.
-   *
-   * @var \Drupal\Core\Menu\MenuLinkManagerInterface
-   */
-  protected $menuLinkManager;
-
-  /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition): self {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     return new static(
       $configuration,
-      $pluginId,
-      $pluginDefinition,
+      $plugin_id,
+      $plugin_definition,
       $container->get('menu.link_tree'),
       $container->get('plugin.manager.menu.link')
     );
@@ -73,9 +59,9 @@ class MenuLinksActiveTrail extends DataProducerPluginBase implements ContainerFa
    *
    * @param array $configuration
    *   The plugin configuration array.
-   * @param string $pluginId
+   * @param string $plugin_id
    *   The plugin id.
-   * @param mixed $pluginDefinition
+   * @param mixed $plugin_definition
    *   The plugin definition.
    * @param \Drupal\Core\Menu\MenuLinkTreeInterface $menuLinkTree
    *   The menu link tree service.
@@ -84,10 +70,8 @@ class MenuLinksActiveTrail extends DataProducerPluginBase implements ContainerFa
    *
    * @codeCoverageIgnore
    */
-  public function __construct(array $configuration, $pluginId, $pluginDefinition, MenuLinkTreeInterface $menuLinkTree, MenuLinkManagerInterface $menuLinkManager) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
-    $this->menuLinkTree = $menuLinkTree;
-    $this->menuLinkManager = $menuLinkManager;
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, protected readonly MenuLinkTreeInterface $menuLinkTree, protected readonly MenuLinkManagerInterface $menuLinkManager) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
   /**

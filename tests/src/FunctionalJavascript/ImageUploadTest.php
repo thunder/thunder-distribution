@@ -13,8 +13,6 @@ class ImageUploadTest extends ThunderJavascriptTestBase {
 
   /**
    * Test upload of webp images in media library.
-   *
-   * @group NoUpdate
    */
   public function testWebpImageUpload(): void {
     $this->drupalGet('node/add/article');

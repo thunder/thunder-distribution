@@ -17,7 +17,7 @@ class ThunderInstallerTest extends InstallerTestBase {
    *
    * @var int
    */
-  protected $knownWarnings = 0;
+  protected int $knownWarnings = 0;
 
   /**
    * {@inheritdoc}

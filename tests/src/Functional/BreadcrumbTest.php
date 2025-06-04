@@ -11,8 +11,6 @@ use Drupal\Tests\system\Functional\Menu\AssertBreadcrumbTrait;
  * @group Thunder
  */
 class BreadcrumbTest extends ThunderTestBase {
-
-
   use AssertBreadcrumbTrait;
 
   /**
@@ -24,8 +22,6 @@ class BreadcrumbTest extends ThunderTestBase {
 
   /**
    * Tests breadcrumbs on node and administrative paths.
-   *
-   * @group NoUpdate
    */
   public function testBreadCrumbs(): void {
 

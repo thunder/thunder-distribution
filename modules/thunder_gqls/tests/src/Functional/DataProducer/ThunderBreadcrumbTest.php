@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\thunder_gqls\Functional;
 
-use Drupal\redirect\Entity\Redirect;
 use Drupal\Tests\graphql\Traits\DataProducerExecutionTrait;
+use Drupal\redirect\Entity\Redirect;
 
 /**
  * Test the schema.

@@ -3,6 +3,7 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\file\FileInterface;
@@ -34,32 +35,18 @@ class FocalPoint extends DataProducerPluginBase implements ContainerFactoryPlugi
    *
    * @var \Drupal\Core\Config\ImmutableConfig
    */
-  protected $config;
-
-  /**
-   * The focal point manager service.
-   *
-   * @var \Drupal\focal_point\FocalPointManagerInterface
-   */
-  protected $focalPointManager;
-
-  /**
-   * The module handler.
-   *
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface
-   */
-  protected $moduleHandler;
+  protected ImmutableConfig $config;
 
   /**
    * {@inheritdoc}
    *
    * @codeCoverageIgnore
    */
-  public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition): self {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     return new static(
       $configuration,
-      $pluginId,
-      $pluginDefinition,
+      $plugin_id,
+      $plugin_definition,
       $container->get('config.factory'),
       $container->get('focal_point.manager'),
       $container->get('module_handler')
@@ -71,9 +58,9 @@ class FocalPoint extends DataProducerPluginBase implements ContainerFactoryPlugi
    *
    * @param array $configuration
    *   The plugin configuration array.
-   * @param string $pluginId
+   * @param string $plugin_id
    *   The plugin id.
-   * @param mixed $pluginDefinition
+   * @param mixed $plugin_definition
    *   The plugin definition.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config factory service.
@@ -84,16 +71,14 @@ class FocalPoint extends DataProducerPluginBase implements ContainerFactoryPlugi
    */
   public function __construct(
     array $configuration,
-    string $pluginId,
-    $pluginDefinition,
+    string $plugin_id,
+    $plugin_definition,
     ConfigFactoryInterface $configFactory,
-    FocalPointManagerInterface $focalPointManager,
-    ModuleHandlerInterface $moduleHandler,
+    protected readonly FocalPointManagerInterface $focalPointManager,
+    protected readonly ModuleHandlerInterface $moduleHandler,
   ) {
-    parent::__construct($configuration, $pluginId, $pluginDefinition);
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->config = $configFactory->get('focal_point.settings');
-    $this->focalPointManager = $focalPointManager;
-    $this->moduleHandler = $moduleHandler;
   }
 
   /**

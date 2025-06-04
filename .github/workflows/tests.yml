@@ -19,22 +19,23 @@ env:
   DRUPAL_TESTING_DATABASE_ENGINE: mysql
   DRUPAL_TESTING_TEST_CODING_STYLES: false
   DRUPAL_TESTING_TEST_PROFILE: thunder
+  DRUPAL_TESTING_TEST_CONFIGURATION: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/
   DRUPAL_TESTING_HTTP_PORT: 8888
   DRUPAL_TESTING_VERBOSE: false
-  DRUPAL_TESTING_VERSION: "^1.0.42"
+  DRUPAL_TESTING_VERSION: "^1.0.46"
   DRUPAL_TESTING_TEST_FILTER: ""
   DRUPAL_TESTING_SELENIUM_HOST: 127.0.0.1
   DRUPAL_TESTING_SELENIUM_PORT: 9515
   PHPSTAN_MEMORY_LIMIT: 4G
   DRUPAL_TESTING_PARALLEL_TESTING: false
-  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://127.0.0.1:9515"]'
+  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","goog:chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://127.0.0.1:9515"]'
   SIMPLETEST_BASE_URL: http://thunder-testing:8888
   BROWSERTEST_OUTPUT_DIRECTORY: /tmp
   SKIP_TEST_CLEANUP: true
   # The following variable set the version that the upgrade test starts with.
-  DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION: 3.0.12
-  DRUPAL_TESTING_UPGRADE_DRUSH_VERSION: 10.3.6
-  DRUPAL_TESTING_UPGRADE_VERSION: 6.5.4
+  DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION: 4.1.0
+  DRUPAL_TESTING_UPGRADE_DRUSH_VERSION: 12.4.3
+  DRUPAL_TESTING_UPGRADE_VERSION: 7.4.0
 
 jobs:
 
@@ -52,7 +53,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.1', '8.3' ]
+        PHP_VERSION: [ '8.3', '8.4' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
@@ -64,7 +65,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: Imagick
+          extensions: :redis, Imagick
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -100,7 +101,7 @@ jobs:
         run: cd /tmp/test; tar cfz build-${{ matrix.PHP_VERSION }}.tgz thunder; mv build-${{ matrix.PHP_VERSION }}.tgz ${GITHUB_WORKSPACE}
 
       - name: Upload build
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-${{ matrix.PHP_VERSION }}
           path: build-${{ matrix.PHP_VERSION }}.tgz
@@ -126,8 +127,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        PHP_VERSION: [ '8.3' ]
-        CHUNK: [ 1, 2, 3 ]
+        PHP_VERSION: [ '8.3', '8.4' ]
+        DRUPAL_TESTING_TEST_SUITE: [ 'kernel', 'functional', 'functional-javascript' ]
 
     steps:
       - uses: actions/checkout@v3
@@ -136,7 +137,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: :sodium, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
+          extensions: :redis, :sodium, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
 
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
@@ -150,12 +151,12 @@ jobs:
           composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Download build
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v4
         with:
           name: build-${{ matrix.PHP_VERSION }}
 
       - name: Unzip build artifact
-        run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}/build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
+        run: mkdir -p /tmp/test; tar xCfz /tmp/test build-${{ matrix.PHP_VERSION }}.tgz thunder; rm -rf build-${{ matrix.PHP_VERSION }}
 
       - name: Setup Apache
         uses: thunder/apache-shiva-php-action@v1
@@ -167,14 +168,13 @@ jobs:
       - name: Run tests
         run: test-drupal-project run_tests
         env:
-          THUNDER_TEST_CHUNK: ${{ matrix.CHUNK }}
-          DRUPAL_TESTING_TEST_PATH: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/tests/src/TestSuites/ThunderTestSuite.php
+          DRUPAL_TESTING_TEST_SUITE: ${{ matrix.DRUPAL_TESTING_TEST_SUITE }}
 
       - name: Upload test output
         uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
-          name: text-max-output-${{ matrix.CHUNK }}-${{ matrix.PHP_VERSION }}
+          name: text-max-output-${{ matrix.DRUPAL_TESTING_TEST_SUITE }}-${{ matrix.PHP_VERSION }}
           path: /tmp/test/thunder/install/docroot/sites/simpletest/browser_output/
 
   test-upgrade:
@@ -196,7 +196,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.1' ]
+        PHP_VERSION: [ '8.3', '8.4' ]
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-upgrade') || github.event_name == 'schedule' }}
 
@@ -211,7 +211,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: Imagick, gd, pdo_mysql
+          extensions: :redis, Imagick, gd, pdo_mysql
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -238,7 +238,7 @@ jobs:
 
       - name: Fix the old install
         run: |
-          composer upgrade caxy/php-htmldiff
+          composer upgrade league/container
         working-directory: /tmp/test/thunder/install
         env:
           COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
@@ -258,15 +258,14 @@ jobs:
           composer remove thunder/thunder-distribution --no-update
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
-          composer require "drupal/ckeditor" --no-update
-          composer require "drupal/seven" --no-update
-          composer require "drupal/entity_browser" --no-update
-          composer require "drupal/thunder_admin" --no-update
-          composer require "drupal/shariff" --no-update
-          composer require "drupal/ctools" --no-update
-          composer require "drupal/core-dev:~10.0.0" --no-update
+          composer require "drupal/responsive_preview" --no-update
+          composer require "drupal/slick" --no-update
+          composer require "drupal/blazy" --no-update
+          composer require "drupal/admin_toolbar:^3.4" --no-update
+          composer require "drupal/core-dev:~11.1.0" --no-update
 
           composer update
+          composer install
           composer exec -- drush updb -y
 
           cd docroot
@@ -307,12 +306,9 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.1' ]
+        PHP_VERSION: [ '8.3', '8.4' ]
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
-
-    env:
-      DRUPAL_TESTING_TEST_GROUP: Thunder
 
     steps:
       - uses: actions/checkout@v3
@@ -321,7 +317,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: Imagick, gd, pdo_mysql
+          extensions: :redis, Imagick, gd, pdo_mysql
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -346,7 +342,7 @@ jobs:
 
       - name: Install suggested dependencies
         run: |
-          composer require "league/container:^4.2" "drupal/core-dev:^10.3" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+          composer require "league/container:^4.2" "drupal/core-dev:^11.0" "grasmash/yaml-cli:^3.2.1" "drupal/tour:2.0.8" --no-update --no-progress --working-dir=/tmp/test/thunder/install
           composer config allow-plugins.php-http/discovery true --no-plugins --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
@@ -363,6 +359,8 @@ jobs:
 
       - name: Run the tests
         run: test-drupal-project run_tests
+        env:
+          DRUPAL_TESTING_TEST_GROUP: Thunder
 
 #   Start a debug session.
 #   - name: Setup tmate session
