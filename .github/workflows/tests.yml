@@ -53,7 +53,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.3' ]
+        PHP_VERSION: [ '8.3', '8.4' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
@@ -127,7 +127,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        PHP_VERSION: [ '8.3' ]
+        PHP_VERSION: [ '8.3', '8.4' ]
         DRUPAL_TESTING_TEST_SUITE: [ 'kernel', 'functional', 'functional-javascript' ]
 
     steps:
@@ -196,7 +196,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.3' ]
+        PHP_VERSION: [ '8.3', '8.4' ]
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-upgrade') || github.event_name == 'schedule' }}
 
@@ -261,6 +261,7 @@ jobs:
           composer require "drupal/responsive_preview" --no-update
           composer require "drupal/slick" --no-update
           composer require "drupal/blazy" --no-update
+          composer require "drupal/admin_toolbar:^3.4" --no-update
           composer require "drupal/core-dev:~11.1.0" --no-update
 
           composer update
@@ -305,7 +306,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.3' ]
+        PHP_VERSION: [ '8.3', '8.4' ]
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
 
@@ -341,7 +342,7 @@ jobs:
 
       - name: Install suggested dependencies
         run: |
-          composer require "league/container:^4.2" "drupal/core-dev:^11.0" "grasmash/yaml-cli:^3.2.1" "drupal/tour:2.0.5" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+          composer require "league/container:^4.2" "drupal/core-dev:^11.0" "grasmash/yaml-cli:^3.2.1" "drupal/tour:2.0.8" --no-update --no-progress --working-dir=/tmp/test/thunder/install
           composer config allow-plugins.php-http/discovery true --no-plugins --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
