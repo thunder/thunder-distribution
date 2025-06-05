@@ -26,12 +26,10 @@ hierarchy:
 expand_hierarchy: true
 enable_parent_when_child_gets_disabled: true
 widget:
-  type: tagify
+  type: dropdown
   config:
     show_numbers: true
-    match_operator: CONTAINS
-    max_items: 10
-    placeholder: ''
+    default_option_label: Choose
 empty_behavior:
   behavior: none
 only_visible_when_facet_source_is_visible: true
