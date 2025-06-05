@@ -41,6 +41,9 @@
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
             },
+            "drupal/facets": {
+                "Issue #3523188: The configuration property processor_id doesn't exist":"https://git.drupalcode.org/project/facets/-/merge_requests/307.diff"
+            },
             "drupal/graphql": {
                 "Fixes #3525801 ComposableSchema::getResolverRegistry has incorrect return type declaration": "https://www.drupal.org/files/issues/2025-05-21/3525801-graphql-fix-return-type.patch",
                 "Fixes #3525994: The menu_link_label data producer throws internal server error.": "https://www.drupal.org/files/issues/2025-05-22/3525994-graphql-cast-return-value.patch",

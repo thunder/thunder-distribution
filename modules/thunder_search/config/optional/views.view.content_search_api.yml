@@ -1207,6 +1207,7 @@ display:
             show_numbers: false
             processor_configs:
               boolean_item:
+                processor_id: boolean_item
                 weights:
                   build: 35
                 settings:
