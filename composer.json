@@ -111,7 +111,7 @@
         "npm-asset/slick-carousel": "^1.8",
         "npm-asset/yaireo--tagify": "^4.32.2",
         "npm-asset/select2": "dev-develop",
-        "caxy/php-htmldiff": "^0.1.14",
+        "caxy/php-htmldiff": "^0.1.14"
     },
     "suggest": {
         "drupal/search_api_solr": "Provides a Apache Solr backend for the Search API module"
