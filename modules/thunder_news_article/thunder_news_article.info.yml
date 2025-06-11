@@ -5,3 +5,4 @@ core_version_requirement: ^11
 package: Thunder
 dependencies:
   - drupal:node
+  - thunder:thunder_article

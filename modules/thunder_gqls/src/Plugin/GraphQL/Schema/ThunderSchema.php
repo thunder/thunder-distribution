@@ -62,8 +62,8 @@ class ThunderSchema extends ComposableSchema {
    */
   public function getResolverRegistry(): ResolverRegistryInterface {
     $this->registry = new ResolverRegistry();
-    $this->createResolverBuilder();
 
+    $this->createResolverBuilder();
     $this->resolveBaseTypes();
 
     $this->addFieldResolverIfNotExists('Query', 'redirect',
