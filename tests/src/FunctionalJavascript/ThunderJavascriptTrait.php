@@ -99,8 +99,7 @@ JS;
    * Scroll to top of window.
    */
   public function scrollToTop(): void {
-    $this->getSession()
-      ->executeScript("window.scrollTo(0, 0);");
+    $this->getSession()->executeScript("window.scrollTo(0, 0);");
   }
 
   /**
