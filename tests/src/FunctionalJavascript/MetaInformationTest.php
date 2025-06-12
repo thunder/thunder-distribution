@@ -142,7 +142,7 @@ class MetaInformationTest extends ThunderJavascriptTestBase {
     $this->expandAllTabs();
     $this->setFieldValues($this->generateMetaTagFieldValues($configuration));
 
-    $this->scrollElementInView('[name="op"]');
+    $this->scrollToTop();
     $driver->click('//input[@name="op"]');
   }
 
