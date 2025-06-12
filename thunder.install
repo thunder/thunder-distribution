@@ -34,7 +34,7 @@ function _thunder_mark_update_checklist(string $update_id, bool $successful, Upd
     $updateLogger->warning(t('Unable to mark update in checklist.'));
   }
   catch (ServiceNotFoundException $se) {
-    // If service is not available, we will just ignore it.
+    // If service is not available, we can ignore it.
   }
 }
 
