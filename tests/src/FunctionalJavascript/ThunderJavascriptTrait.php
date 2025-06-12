@@ -96,6 +96,14 @@ JS;
   }
 
   /**
+   * Scroll to top of window.
+   */
+  public function scrollToTop(): void {
+    $this->getSession()
+      ->executeScript("window.scrollTo(0, 0);");
+  }
+
+  /**
    * Click on Button based on Drupal selector (data-drupal-selector).
    *
    * @param string $drupalSelector
@@ -167,6 +175,7 @@ JS;
   protected function clickSave(): void {
     $driver = $this->getSession()->getDriver();
 
+    $this->scrollToTop();
     $driver->click('//div[@data-drupal-selector="edit-gin-sticky-actions"]/input[@data-drupal-selector="gin-sticky-edit-submit"]');
   }
 
