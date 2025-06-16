@@ -69,7 +69,7 @@
         "drupal/field_group": "^4.0",
         "drupal/focal_point": "^2.1.2",
         "drupal/facets": "^2.0.7",
-        "drupal/gin": "^4.0",
+        "drupal/gin": "^4.0.6",
         "drupal/graphql": "^5.0@alpha",
         "drupal/inline_entity_form": "^3.0.0-rc20",
         "drupal/ivw_integration": "^2.0",
