@@ -129,7 +129,6 @@
         "burdamagazinorg/thunder-dev-tools": "dev-master",
         "thunder/thunder_testing_demo": "4.x-dev",
         "mglaman/phpstan-drupal": "^1.1",
-        "phpstan/phpstan-deprecation-rules": "^1.0",
-        "phpunit/phpunit": "^10.5.46"
+        "phpstan/phpstan-deprecation-rules": "^1.0"
     }
 }
