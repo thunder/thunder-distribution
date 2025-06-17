@@ -45,7 +45,10 @@
                 "Fixes #3525801 ComposableSchema::getResolverRegistry has incorrect return type declaration": "https://www.drupal.org/files/issues/2025-05-21/3525801-graphql-fix-return-type.patch",
                 "Fixes #3525994: The menu_link_label data producer throws internal server error.": "https://www.drupal.org/files/issues/2025-05-22/3525994-graphql-cast-return-value.patch",
                 "Fix missing server_id. Extracted from #3477239: GraphQL query stops working - seems cache issue.": "https://www.drupal.org/files/issues/2025-05-26/3477239-missing-server_id.patch"
-            }
+            },
+            "drupal/pathauto": {
+                "Fixes #3489108: Fix PHP 8.4 implicit nullable deprecation.": "https://www.drupal.org/files/issues/2025-03-06/pathauto-3489108.diff"
+            },
         }
     },
     "require": {
@@ -88,7 +91,7 @@
         "drupal/paragraphs_features": "^2.1.0",
         "drupal/paragraphs_paste": "^2.0-beta3",
         "drupal/password_policy": "^4.0.3",
-        "drupal/pathauto": "^1.12",
+        "drupal/pathauto": "^1.13",
         "drupal/responsive_preview": "^2.1",
         "drupal/redirect": "^1.7",
         "drupal/scheduler": "^2.1.0",
