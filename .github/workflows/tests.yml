@@ -66,6 +66,7 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: :redis, Imagick
+          ini-values: opcache.enable_cli=1, opcache.jit=tracing, opcache.jit_buffer_size=64M
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -137,6 +138,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
+          ini-values: opcache.enable_cli=1, opcache.jit=tracing, opcache.jit_buffer_size=64M
           extensions: :redis, :sodium, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
 
       - name: PHP Info
@@ -217,6 +219,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
+          ini-values: opcache.enable_cli=1, opcache.jit=tracing, opcache.jit_buffer_size=64M
           extensions: :redis, Imagick, gd, pdo_mysql
 
       - name: Cache composer dependencies
@@ -326,6 +329,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
+          ini-values: opcache.enable_cli=1, opcache.jit=tracing, opcache.jit_buffer_size=64M
           extensions: :redis, Imagick, gd, pdo_mysql
 
       - name: Setup database
