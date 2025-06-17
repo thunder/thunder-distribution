@@ -28,7 +28,7 @@ trait ThunderMediaLibraryTestTrait {
   public function submitMediaLibrary(): void {
     $this->clickCssSelector('.media-library-widget-modal .form-actions button');
 
-    $this->assertWaitOnAjaxRequest();
+    $this->assertSession()->assertWaitOnAjaxRequest();
   }
 
   /**
