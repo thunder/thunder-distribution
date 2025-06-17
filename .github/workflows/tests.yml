@@ -140,7 +140,9 @@ jobs:
           extensions: :redis, :sodium, :pspell, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
 
       - name: PHP Info
-        run: php -m
+        run: |
+          php -m
+          php -i
 
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
