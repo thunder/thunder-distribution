@@ -21,6 +21,7 @@ class ImageUploadTest extends ThunderJavascriptTestBase {
     $this->openMediaLibrary('field-teaser-media');
     $this->uploadFile(__DIR__ . '/../../fixtures/reference.webp', TRUE);
     $this->submitMediaLibrary();
+    $this->assertSession()->waitForElement('css', '.media-library-item__name');
     $this->assertSession()->elementTextContains('css', '.media-library-item__name', 'reference.webp');
   }
 
