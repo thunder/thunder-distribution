@@ -65,8 +65,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: :redis, Imagick
-          ini-values: opcache.enable_cli=1, opcache.jit=tracing, opcache.jit_buffer_size=64M
+          extensions: :redis, :pspell, Imagick
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -138,8 +137,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          ini-values: opcache.enable_cli=1, opcache.jit=tracing, opcache.jit_buffer_size=64M
-          extensions: :redis, :sodium, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
+          extensions: :redis, :sodium, :pspell, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
 
       - name: PHP Info
         run: php -m
@@ -219,8 +217,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          ini-values: opcache.enable_cli=1, opcache.jit=tracing, opcache.jit_buffer_size=64M
-          extensions: :redis, Imagick, gd, pdo_mysql
+          extensions: :redis, :pspell, Imagick, gd, pdo_mysql
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -329,8 +326,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          ini-values: opcache.enable_cli=1, opcache.jit=tracing, opcache.jit_buffer_size=64M
-          extensions: :redis, Imagick, gd, pdo_mysql
+          extensions: :redis, :pspell, Imagick, gd, pdo_mysql
 
       - name: Setup database
         run: mysql -u root -h 127.0.0.1 --password=root mysql -e "set GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED"
