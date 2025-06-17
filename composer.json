@@ -48,7 +48,7 @@
             },
             "drupal/pathauto": {
                 "Fixes #3489108: Fix PHP 8.4 implicit nullable deprecation.": "https://www.drupal.org/files/issues/2025-03-06/pathauto-3489108.diff"
-            },
+            }
         }
     },
     "require": {
