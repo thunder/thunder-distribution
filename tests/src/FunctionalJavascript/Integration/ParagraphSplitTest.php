@@ -154,7 +154,6 @@ class ParagraphSplitTest extends ThunderJavascriptTestBase {
     $button = $this->assertSession()
       ->waitForElementVisible('xpath', '//textarea[@data-ckeditor5-id="' . $ck_editor_id . '"]/following-sibling::div//button[span[text()="Split Paragraph"]]');
     $this->assertNotEmpty($button);
-    sleep(1);
     $button->click();
     $this->assertSession()->assertWaitOnAjaxRequest();
   }
