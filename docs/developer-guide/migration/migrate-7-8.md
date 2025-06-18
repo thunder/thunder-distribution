@@ -47,3 +47,6 @@ composer require drupal/jquery_ui
 composer require drupal/jquery_ui_draggable
 composer require drupal/default_content
 ```
+
+## Update Thunder 7 to Thunder 8
+As `paragraphs_paste module` is removed from composer.json, you have to remove `modules/thunder_paragraphs_paste` manually from your project.
