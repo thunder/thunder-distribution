@@ -80,7 +80,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     // Ensure the remove button exists before clicking.
     $this->assertNotNull($removeButton, 'Remove button not found.');
     $removeButton->click();
-
+    $this->assertSession()->assertWaitOnAjaxRequest();
     // Check that there are no errors.
     $this->assertSession()
       ->elementNotExists('css', '[data-drupal-selector="edit-field-paragraphs-0-subform-field-image-wrapper"] div.messages--error');
