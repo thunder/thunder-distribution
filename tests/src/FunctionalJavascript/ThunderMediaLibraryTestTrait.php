@@ -40,12 +40,12 @@ trait ThunderMediaLibraryTestTrait {
    *
    * @param string $filePath
    *   Path to file that should be uploaded.
-   * @param int $number_of_items_selected_after_upload
-   *   (optional) Assert number of items selected after upload.
+   * @param bool $skipEditForm
+   *   If set to TRUE, it will skip edit form will just select uploaded files.
    *
    * @throws \Exception
    */
-  public function uploadFile(string $filePath, ?int $number_of_items_selected_after_upload = NULL): void {
+  public function uploadFile(string $filePath, bool $skipEditForm = FALSE): void {
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
@@ -61,6 +61,8 @@ trait ThunderMediaLibraryTestTrait {
       );
     }
 
+    $expected_file_count = count($this->getSession()->getPage()->findAll('css', '.js-media-library-item')) + 1;
+
     // Make file field visible and isolate possible problems with "multiple".
     $this->getSession()
       ->executeScript('jQuery("' . $fileFieldSelector . '").show(0).css("visibility","visible").width(200).height(30).removeAttr("multiple");');
@@ -75,9 +77,20 @@ trait ThunderMediaLibraryTestTrait {
       '(typeof jQuery === "undefined" || !jQuery(\'input[name="op"]\').is(":disabled"))'
     );
 
-    if (is_int($number_of_items_selected_after_upload)) {
-      $this->assertTrue($this->assertSession()->waitForText($number_of_items_selected_after_upload . ' items selected'));
+    if (!$skipEditForm) {
+      $this->assertSession()->waitForButton('Save and select');
+      // The button is not interactable via webdriver.
+      $this->getSession()->executeScript("document.querySelector('.ui-dialog-buttonset button').click()");
     }
+
+    // Wait up to 10 sec for the item count to be updated.
+    $this->getSession()->wait(
+      10000,
+      "document.querySelectorAll('.js-media-library-item').length === {$expected_file_count}"
+    );
+    $this->assertSession()->elementsCount('css', '.js-media-library-item', $expected_file_count);
+
+
   }
 
 }
