@@ -104,22 +104,14 @@ JS;
     $this->clickDrupalSelector('edit-field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images-selection-1-remove-button');
 
     $this->clickSave();
+    $this->assertTrue($this->assertSession()->waitForText("Article Come to DrupalCon New Orleans has been updated."));
 
     // Check that there are 4 images in gallery.
-    $this->assertEquals(
-      4,
-      $this->getSession()->evaluateScript('document.querySelectorAll("div.field--name-field-media-images div.field__item img").length'),
-      'There should be four images shown in frontend.'
-    );
+    $gallery_images = $this->getSession()->getPage()->findAll('css', 'div.field--name-field-media-images div.field__item img');
+    $this->assertCount(4, $gallery_images);
 
     // Check that, 2nd image is file: 26315068204_24ffa6cfc4_o.jpg.
-    $fileNamePosition = $this->getSession()
-      ->evaluateScript('document.querySelector("div.field--name-field-media-images div.field__item:nth-child(2) div.field--name-field-image img").getAttribute("src").indexOf("26315068204_24ffa6cfc4_o.jpg")');
-    $this->assertNotEquals(
-      -1,
-      $fileNamePosition,
-      'For 2nd image in gallery, used file should be "26315068204_24ffa6cfc4_o.jpg".'
-    );
+    $this->assertStringContainsString('26315068204_24ffa6cfc4_o.jpg', $gallery_images[1]->getAttribute('src'));
 
     // Test add + reorder inside media library.
     $this->drupalGet($node->toUrl('edit-form'));
@@ -128,31 +120,23 @@ JS;
 
     // Click Select entities -> to open media library.
     $this->openMediaLibrary('field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images');
-
     $this->uploadFile(__DIR__ . '/../../fixtures/reference.jpg', TRUE);
-
+    // @todo move this into
+    //   \Drupal\Tests\thunder\FunctionalJavascript\ThunderMediaLibraryTestTrait::uploadFile().
+    $this->assertTrue($this->assertSession()->waitForText('5 items selected'));
     $this->submitMediaLibrary();
-
     // Move new image -> that's 5th image in list, to 3rd position.
     $this->sortableAfter('[data-media-library-item-delta="4"]', '[data-media-library-item-delta="1"]', '#field_media_images-media-library-wrapper-field_paragraphs-0-subform-field_media-0-inline_entity_form .js-media-library-selection');
 
     $this->clickSave();
+    $this->assertTrue($this->assertSession()->waitForText("Article Come to DrupalCon New Orleans has been updated."));
 
     // Check that, there are 5 images in gallery.
-    $this->assertEquals(
-      5,
-      $this->getSession()->evaluateScript('document.querySelectorAll("div.field--name-field-media-images div.field__item img").length'),
-      'There should be five images shown in frontend.'
-    );
+    $gallery_images = $this->getSession()->getPage()->findAll('css', 'div.field--name-field-media-images div.field__item img');
+    $this->assertCount(5, $gallery_images);
 
     // Check that, 3rd image is file: reference.jpg.
-    $fileNamePosition = $this->getSession()
-      ->evaluateScript('document.querySelector("div.field--name-field-media-images div.field__item:nth-child(3) div.field--name-field-image img").getAttribute("src").indexOf("reference.jpg")');
-    $this->assertNotEquals(
-      -1,
-      $fileNamePosition,
-      'For 3rd image in gallery, used file should be "reference.jpg".'
-    );
+    $this->assertStringContainsString('reference.jpg', $gallery_images[2]->getAttribute('src'));
 
     // Test remove inside media library.
     $this->drupalGet($node->toUrl('edit-form'));
@@ -161,29 +145,18 @@ JS;
 
     // Click Select entities -> to open media library.
     $this->openMediaLibrary('field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images');
-
     $media = $this->getMediaByName('reference.jpg');
     $this->toggleMedia([$media->id()]);
-
     $this->submitMediaLibrary();
-
     $this->clickSave();
+    $this->assertTrue($this->assertSession()->waitForText("Article Come to DrupalCon New Orleans has been updated."));
 
     // Check that, there are 4 images in gallery.
-    $this->assertEquals(
-      4,
-      $this->getSession()->evaluateScript('document.querySelectorAll("div.field--name-field-media-images div.field__item img").length'),
-      'There should be four images shown in frontend.'
-    );
+    $gallery_images = $this->getSession()->getPage()->findAll('css', 'div.field--name-field-media-images div.field__item img');
+    $this->assertCount(4, $gallery_images);
 
     // Check that, 3rd image is not file: reference.jpg.
-    $fileNamePosition = $this->getSession()
-      ->evaluateScript('document.querySelector("div.field--name-field-media-images div.field__item:nth-child(3) div.field--name-field-image img").getAttribute("src").indexOf("reference.jpg")');
-    $this->assertEquals(
-      -1,
-      $fileNamePosition,
-      'For 3rd image in gallery, used file should not be "reference.jpg".'
-    );
+    $this->assertStringNotContainsString('reference.jpg', $gallery_images[2]->getAttribute('src'));
 
   }
 
