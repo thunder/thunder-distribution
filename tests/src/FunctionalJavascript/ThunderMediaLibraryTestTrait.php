@@ -89,8 +89,6 @@ trait ThunderMediaLibraryTestTrait {
       "document.querySelectorAll('.js-media-library-item').length === {$expected_file_count}"
     );
     $this->assertSession()->elementsCount('css', '.js-media-library-item', $expected_file_count);
-
-
   }
 
 }
