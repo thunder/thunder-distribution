@@ -77,7 +77,7 @@
         "drupal/inline_entity_form": "^3.0.0-rc20",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.2",
-        "drupal/linkit": "^7.0.0-alpha1",
+        "drupal/linkit": "^7.0.5",
         "drupal/media_entity_instagram": "^4.0@beta",
         "drupal/media_entity_pinterest": "^2.7",
         "drupal/media_entity_slideshow": "^2.0-alpha1",
