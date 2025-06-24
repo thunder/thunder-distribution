@@ -40,12 +40,12 @@ trait ThunderMediaLibraryTestTrait {
    *
    * @param string $filePath
    *   Path to file that should be uploaded.
-   * @param bool $skipEditForm
-   *   If set to TRUE, it will skip edit form will just select uploaded files.
+   * @param int $number_of_items_selected_after_upload
+   *   (optional) Assert number of items selected after upload.
    *
    * @throws \Exception
    */
-  public function uploadFile(string $filePath, bool $skipEditForm = FALSE): void {
+  public function uploadFile(string $filePath, ?int $number_of_items_selected_after_upload = NULL): void {
     /** @var \Behat\Mink\Element\DocumentElement $page */
     $page = $this->getSession()->getPage();
 
@@ -75,10 +75,8 @@ trait ThunderMediaLibraryTestTrait {
       '(typeof jQuery === "undefined" || !jQuery(\'input[name="op"]\').is(":disabled"))'
     );
 
-    $this->assertWaitOnAjaxRequest();
-    if (!$skipEditForm) {
-      $this->assertSession()->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Save and select');
-      $this->assertWaitOnAjaxRequest();
+    if (is_int($number_of_items_selected_after_upload)) {
+      $this->assertTrue($this->assertSession()->waitForText($number_of_items_selected_after_upload . ' items selected'));
     }
   }
 

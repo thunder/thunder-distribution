@@ -120,10 +120,7 @@ JS;
 
     // Click Select entities -> to open media library.
     $this->openMediaLibrary('field-paragraphs-0-subform-field-media-0-inline-entity-form-field-media-images');
-    $this->uploadFile(__DIR__ . '/../../fixtures/reference.jpg', TRUE);
-    // @todo move this into
-    //   \Drupal\Tests\thunder\FunctionalJavascript\ThunderMediaLibraryTestTrait::uploadFile().
-    $this->assertTrue($this->assertSession()->waitForText('5 items selected'));
+    $this->uploadFile(__DIR__ . '/../../fixtures/reference.jpg', 5);
     $this->submitMediaLibrary();
     // Move new image -> that's 5th image in list, to 3rd position.
     $this->sortableAfter('[data-media-library-item-delta="4"]', '[data-media-library-item-delta="1"]', '#field_media_images-media-library-wrapper-field_paragraphs-0-subform-field_media-0-inline_entity_form .js-media-library-selection');
