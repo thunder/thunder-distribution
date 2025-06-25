@@ -106,7 +106,7 @@
         "drupal/views_bulk_edit": "^3.0",
         "drupal/views_bulk_operations": "^4.2.7",
         "drupal/vgwort": "^3.0",
-        "drupal/xymatic": "^1.0@beta6",
+        "drupal/xymatic": "^1.0@beta",
         "npm-asset/dropzone": "^5.5.1",
         "npm-asset/exif-js": "^2.3.0",
         "npm-asset/blazy": "^1.8",
