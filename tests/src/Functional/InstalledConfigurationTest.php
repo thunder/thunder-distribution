@@ -35,19 +35,11 @@ class InstalledConfigurationTest extends ThunderTestBase {
   ];
 
   /**
-   * Theme name that will be used on installation of test.
-   *
-   * @var string
-   */
-  protected $defaultTheme = 'stable9';
-
-  /**
    * Ignore list of Core related configurations.
    *
    * @var array
    */
   protected static array $ignoreCoreConfigs = [
-    'checklistapi.progress.update_helper_checklist',
     'system.site',
     'core.extension',
     'system.performance',
@@ -63,42 +55,43 @@ class InstalledConfigurationTest extends ThunderTestBase {
     'system.action.user_remove_role_action.editor',
     'system.action.user_remove_role_action.restricted_editor',
     'system.action.user_remove_role_action.seo',
-    'system.action.user_add_role_action.harbourmaster',
-    'system.action.user_remove_role_action.harbourmaster',
 
     // Configs created by Token module.
     'core.entity_view_mode.access_token.token',
     'core.entity_view_mode.block.token',
     'core.entity_view_mode.content_moderation_state.token',
-    'core.entity_view_mode.crop.token',
     'core.entity_view_mode.file.token',
     'core.entity_view_mode.media.token',
     'core.entity_view_mode.menu_link_content.token',
     'core.entity_view_mode.node.token',
     'core.entity_view_mode.paragraph.token',
+    'core.entity_view_mode.path_alias.token',
     'core.entity_view_mode.taxonomy_term.token',
     'core.entity_view_mode.user.token',
-    'core.entity_view_mode.path_alias.token',
-    'core.entity_view_mode.search_api_task.token',
 
     // Configs are missing the 'description' key.
     'core.entity_view_mode.node.diff',
     'core.entity_view_mode.paragraph.preview',
-
-    // SearchAPI tour.
-    'tour.tour.search-api-index',
-    'tour.tour.search-api-index-fields',
-    'tour.tour.search-api-index-form',
-    'tour.tour.search-api-index-processors',
-    'tour.tour.search-api-server',
-    'tour.tour.search-api-server-form',
 
     // Because of https://www.drupal.org/node/3204093
     'tour.tour.content-add',
     'tour.tour.content-list',
     'tour.tour.content-paragraphs',
     'tour.tour.homepage',
+
+    // Can be removed once https://www.drupal.org/i/issues/3529614 is released.
+    'views.view.locked_content',
+
+    // Redirect module need to update the shipped configuration.
+    'views.view.redirect',
   ];
+
+  /**
+   * Theme name that will be used on installation of test.
+   *
+   * @var string
+   */
+  protected $defaultTheme = 'stable9';
 
   /**
    * Ignore custom keys that are changed during installation process.
@@ -106,11 +99,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
    * @var array
    */
   protected static array $ignoreConfigKeys = [
-    // It's not exported in Yaml, so that new key is generated.
-    'scheduler.settings' => [
-      'lightweight_cron_access_key' => TRUE,
-    ],
-
     // Changed on installation.
     'system.date' => [
       'timezone' => [
@@ -145,40 +133,6 @@ class InstalledConfigurationTest extends ThunderTestBase {
     // Changed on installation.
     'views.view.content' => [
       'status' => TRUE,
-    ],
-    'views.view.glossary' => [
-      'dependencies' => [
-        'config' => TRUE,
-      ],
-      'display' => [
-        'page_1' => ['cache_metadata' => ['max-age' => TRUE]],
-        'attachment_1' => ['cache_metadata' => ['max-age' => TRUE]],
-        'default' => ['cache_metadata' => ['max-age' => TRUE]],
-      ],
-    ],
-    'views.view.watchdog' => [
-      'display' => [
-        'page' => ['cache_metadata' => ['max-age' => TRUE]],
-        'default' => ['cache_metadata' => ['max-age' => TRUE]],
-      ],
-    ],
-    'views.view.files' => [
-      'display' => [
-        'page_1' => ['cache_metadata' => ['max-age' => TRUE]],
-        'page_2' => ['cache_metadata' => ['max-age' => TRUE]],
-        'default' => ['cache_metadata' => ['max-age' => TRUE]],
-      ],
-    ],
-    'views.view.moderated_content' => [
-      'display' => [
-        'moderated_content' => [
-          'cache_metadata' => [
-            'max-age' => TRUE,
-            'tags' => TRUE,
-          ],
-        ],
-        'default' => ['cache_metadata' => ['max-age' => TRUE, 'tags' => TRUE]],
-      ],
     ],
     // Diff Module: changed on installation of module when additional library
     // exists on system: mkalkbrenner/php-htmldiff-advanced.
