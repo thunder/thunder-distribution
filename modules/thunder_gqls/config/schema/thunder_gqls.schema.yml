@@ -1,0 +1,14 @@
+graphql.schema.thunder:
+  type: mapping
+  label: 'Thunder schema'
+  mapping:
+    thunder:
+      type: mapping
+      label: 'Composition'
+      mapping:
+        extensions:
+          label: Enabled extensions
+          type: sequence
+          orderby: key
+          sequence:
+            type: string
