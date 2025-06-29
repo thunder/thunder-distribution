@@ -53,6 +53,7 @@ install:
   - dropzonejs:dropzonejs
   - empty_fields:empty_fields
   - entity_reference_actions:entity_reference_actions
+  - entity_usage:entity_usage
   - media_library_media_modify:media_library_media_modify
   - field_group:field_group
   - focal_point:focal_point

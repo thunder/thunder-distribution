@@ -16,3 +16,8 @@ v7.X.X:
   thunder_post_update_0002_enable_paragraphs_split:
     '#title': 'Remove blazy and slick integration.'
     '#description': '<p>Remove configuration for blazy and slick modules</p>'
+  thunder_update_8318:
+    '#title': 'Enable the entity_usage module.'
+    '#description': '<p>The entity_usage module enables the editor to see in which articles media items or taxonomy terms are used.</p>'
+    '#description_successful': '<p>Configuration is successfully updated.</p>'
+    '#description_failed': '<p><strong>Update of configuration has failed.</strong><p>'
