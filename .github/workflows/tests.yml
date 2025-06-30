@@ -65,7 +65,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: :redis, Imagick
+          extensions: :redis, :pspell, Imagick
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -137,7 +137,12 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: :redis, :sodium, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
+          extensions: :redis, :sodium, :pspell, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
+
+      - name: PHP Info
+        run: |
+          php -m
+          php -i
 
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
@@ -164,6 +169,9 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           site-directory: /tmp/test/thunder/install/docroot
           http-port: ${{ env.DRUPAL_TESTING_HTTP_PORT }}
+
+      - name: Setup database
+        run: mysql -u root -h 127.0.0.1 --password=root mysql -e "set GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED"
 
       - name: Run tests
         run: test-drupal-project run_tests
@@ -211,7 +219,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: :redis, Imagick, gd, pdo_mysql
+          extensions: :redis, :pspell, Imagick, gd, pdo_mysql
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -230,6 +238,9 @@ jobs:
         run: |
           composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true --no-plugins
           composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
+
+      - name: Setup database
+        run: mysql -u root -h 127.0.0.1 --password=root mysql -e "set GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED"
 
       - name: Prepare the old install
         run: test-drupal-project prepare_old_install
@@ -317,7 +328,10 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: :redis, Imagick, gd, pdo_mysql
+          extensions: :redis, :pspell, Imagick, gd, pdo_mysql
+
+      - name: Setup database
+        run: mysql -u root -h 127.0.0.1 --password=root mysql -e "set GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED"
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
