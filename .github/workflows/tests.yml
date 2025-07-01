@@ -65,7 +65,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: :redis, :pspell, Imagick
+          extensions: :xdebug, :redis, :pspell, Imagick
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -137,12 +137,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: :redis, :sodium, :pspell, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
-
-      - name: PHP Info
-        run: |
-          php -m
-          php -i
+          extensions: :xdebug, :redis, :sodium, :pspell, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
 
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
@@ -224,7 +219,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: :redis, :pspell, Imagick, gd, pdo_mysql
+          extensions: :xdebug, :redis, :pspell, Imagick, gd, pdo_mysql
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -333,7 +328,7 @@ jobs:
         with:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
-          extensions: :redis, :pspell, Imagick, gd, pdo_mysql
+          extensions: :xdebug, :redis, :pspell, Imagick, gd, pdo_mysql
 
       - name: Setup database
         run: mysql -u root -h 127.0.0.1 --password=root mysql -e "set GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED"
