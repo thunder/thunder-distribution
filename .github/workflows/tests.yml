@@ -173,6 +173,11 @@ jobs:
       - name: Setup database
         run: mysql -u root -h 127.0.0.1 --password=root mysql -e "set GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED"
 
+      - name: PHP Info
+        run: |
+          php -m
+          php -i
+
       - name: Run tests
         run: test-drupal-project run_tests
         env:
