@@ -139,11 +139,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: :redis, :sodium, :pspell, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
 
-      - name: PHP Info
-        run: |
-          php -m
-          php -i
-
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
 
@@ -172,6 +167,11 @@ jobs:
 
       - name: Setup database
         run: mysql -u root -h 127.0.0.1 --password=root mysql -e "set GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED"
+
+      - name: PHP Info
+        run: |
+          php -m
+          php -i
 
       - name: Run tests
         run: test-drupal-project run_tests
