@@ -173,9 +173,6 @@ jobs:
           php -m
           php -i
 
-      - name: Check selenium chromedriver
-        run: curl http://127.0.0.1:4444/status
-
       - name: Run tests
         run: test-drupal-project run_tests
         env:
@@ -200,10 +197,10 @@ jobs:
         ports:
           - 3306:3306
       chrome:
-        image: drupalci/chromedriver:production
+        image: seleniarm/standalone-chromium:latest
         options: --add-host=thunder-testing:host-gateway --name chrome
         ports:
-          - 9515:9515
+          - 4444:4444
 
     strategy:
       matrix:
@@ -313,10 +310,10 @@ jobs:
         ports:
           - 3306:3306
       chrome:
-        image: drupalci/chromedriver:production
+        image: seleniarm/standalone-chromium:latest
         options: --add-host=thunder-testing:host-gateway --name chrome
         ports:
-          - 9515:9515
+          - 4444:4444
 
     strategy:
       matrix:
