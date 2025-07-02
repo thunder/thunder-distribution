@@ -119,7 +119,7 @@ jobs:
         ports:
           - 3306:3306
       chrome:
-        image: drupalci/chromedriver:production
+        image: seleniarm/standalone-chromium:latest
         options: --add-host=thunder-testing:host-gateway --name chrome
         ports:
           - 9515:9515
