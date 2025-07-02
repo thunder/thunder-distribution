@@ -61,7 +61,7 @@ function thunder_update_8328(): \Stringable|string {
 /**
  * Update field widget types from 'select2' to 'tagify'.
  */
-function thunder_update_8329() {
+function thunder_update_8329(): \Stringable|string {
   $moduleInstaller = \Drupal::service('module_installer');
   $moduleInstaller->install(['tagify']);
 
@@ -84,14 +84,13 @@ function thunder_update_8329() {
         $plugin_id = 'tagify_entity_reference_autocomplete_widget';
         $widget_manager = \Drupal::service('plugin.manager.field.widget');
 
-        if ($widget_manager->hasDefinition($plugin_id)) {
-          $plugin = $widget_manager->createInstance($plugin_id, [
-            'field_definition' => $field_definition,
-            'settings' => [],
-            'third_party_settings' => [],
-          ]);
-          $default_settings = $plugin->getSettings();
-        }
+
+        $plugin = $widget_manager->createInstance($plugin_id, [
+          'field_definition' => $field_definition,
+          'settings' => [],
+          'third_party_settings' => [],
+        ]);
+        $default_settings = $plugin->getSettings();
 
         $form_display->setComponent($field_name, [
           'type' => $plugin_id,
