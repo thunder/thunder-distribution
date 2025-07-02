@@ -173,6 +173,11 @@ jobs:
           php -m
           php -i
 
+      - name: Check selenium chromedriver
+        run: |
+          curl http://127.0.0.1:4444/status
+          curl http://127.0.0.1:9515/status
+
       - name: Run tests
         run: test-drupal-project run_tests
         env:
