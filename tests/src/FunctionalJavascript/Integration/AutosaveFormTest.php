@@ -47,7 +47,8 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     // Reject the changes.
     $this->pressRejectButton();
     $term = $this->loadTermByUuid('35bdba6e-9b45-472a-8fda-11e7e69de71b');
-    $this->assertEquals([$term->id()], $page->findField('field_tags[]')->getValue());
+
+    $this->assertEquals('[{"value":"' . $term->id() . '","label":"' . $term->getName() . '","entity_id":"' . $term->id() . '","info_label":"","editable":false}]', $page->findField('field_tags')->getValue());
     $this->assertEquals('Come to DrupalCon New Orleans', $page->findField('title[0][value]')->getValue());
     $this->assertSession()->elementNotExists('css', '.form-item--field-paragraphs-5-subform-field-text-0-value');
 
@@ -58,7 +59,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     $this->drupalGet($node->toUrl('edit-form'));
 
     $this->pressRestoreButton();
-    $this->assertEquals([$term->id(), '$ID:Tag2'], $page->findField('field_tags[]')->getValue());
+    $this->assertEquals('[{"value":"' . $term->id() . '","label":"' . $term->getName() . '","entity_id":"' . $term->id() . '","info_label":"","editable":false},{"label":"Tag2","value":"Tag2"}]', $page->findField('field_tags')->getValue());
     $this->assertEquals('New title', $page->findField('title[0][value]')->getValue());
     $this->assertSession()->elementExists('css', '.form-item--field-paragraphs-7-subform-field-text-0-value');
 
@@ -107,7 +108,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     $term = $this->loadTermByUuid('35bdba6e-9b45-472a-8fda-11e7e69de71b');
     $fieldValues = [
       'title[0][value]' => 'New title',
-      'field_tags[]' => [[$term->id(), $term->getName()], 'Tag2'],
+      'field_tags' => '[{"value":"' . $term->id() . '","label":"' . $term->getName() . '","entity_id":"' . $term->id() . '","info_label":"","editable":false},{"label":"Tag2","value":"Tag2"}]',
       'publish_on[0][value][date]' => date('Y-m-d', $startTimestamp),
       'publish_on[0][value][time]' => date('H:i:s', $startTimestamp),
       'unpublish_on[0][value][date]' => date('Y-m-d', $endTimestamp),

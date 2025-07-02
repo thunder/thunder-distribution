@@ -61,6 +61,11 @@ trait ThunderFormFieldTestTrait {
 
       return;
     }
+    $tagifyFields = $page->findAll('xpath', "//input[contains(@class, \"tagify-widget\") and @name=\"{$fieldName}\"]");
+    if (!empty($tagifyFields)) {
+      $this->setRawFieldValue($fieldName, $value);
+      return;
+    }
 
     // Handle specific types of form fields.
     $field = $page->findField($fieldName);
