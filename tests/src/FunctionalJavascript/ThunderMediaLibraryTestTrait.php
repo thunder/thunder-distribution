@@ -61,6 +61,8 @@ trait ThunderMediaLibraryTestTrait {
       );
     }
 
+    $expected_file_count = count($this->getSession()->getPage()->findAll('css', '.js-media-library-item')) + 1;
+
     // Make file field visible and isolate possible problems with "multiple".
     $this->getSession()
       ->executeScript('jQuery("' . $fileFieldSelector . '").show(0).css("visibility","visible").width(200).height(30).removeAttr("multiple");');
@@ -75,11 +77,18 @@ trait ThunderMediaLibraryTestTrait {
       '(typeof jQuery === "undefined" || !jQuery(\'input[name="op"]\').is(":disabled"))'
     );
 
-    $this->assertWaitOnAjaxRequest();
     if (!$skipEditForm) {
-      $this->assertSession()->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Save and select');
-      $this->assertWaitOnAjaxRequest();
+      $this->assertSession()->waitForButton('Save and select');
+      // The button is not interactable via webdriver.
+      $this->getSession()->executeScript("document.querySelector('.ui-dialog-buttonset button').click()");
     }
+
+    // Wait up to 10 sec for the item count to be updated.
+    $this->getSession()->wait(
+      10000,
+      "document.querySelectorAll('.js-media-library-item').length === {$expected_file_count}"
+    );
+    $this->assertSession()->elementsCount('css', '.js-media-library-item', $expected_file_count);
   }
 
 }
