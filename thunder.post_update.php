@@ -136,3 +136,70 @@ function thunder_post_update_0004_remove_blazy_and_slick(): string {
   // Output logged messages to related channel of update execution.
   return $updater->logger()->output();
 }
+
+/**
+ * Update field widget types from 'select2' to 'tagify'.
+ */
+function thunder_post_update_0005_switch_to_tagify(): string {
+  $moduleInstaller = \Drupal::service('module_installer');
+  $moduleInstaller->install(['tagify']);
+
+  $storage = \Drupal::entityTypeManager()->getStorage('entity_form_display');
+  $display_ids = $storage->getQuery()->execute();
+
+  foreach ($storage->loadMultiple($display_ids) as $form_display) {
+    $components = $form_display->getComponents();
+    foreach ($components as $field_name => $component) {
+
+      if (!empty($component['type']) && $component['type'] === 'select2_entity_reference') {
+
+        // Get field definition and base settings.
+        $field_definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions(
+          $form_display->getTargetEntityTypeId(),
+          $form_display->getTargetBundle()
+        );
+
+        $field_definition = $field_definitions[$field_name];
+        $plugin_id = 'tagify_entity_reference_autocomplete_widget';
+        $widget_manager = \Drupal::service('plugin.manager.field.widget');
+
+        $plugin = $widget_manager->createInstance($plugin_id, [
+          'field_definition' => $field_definition,
+          'settings' => [],
+          'third_party_settings' => [],
+        ]);
+        $default_settings = $plugin->getSettings();
+
+        $form_display->setComponent($field_name, [
+          'type' => $plugin_id,
+          'settings' => $default_settings,
+          'third_party_settings' => [],
+        ] + $component);
+
+        $form_display->save();
+      }
+    }
+  }
+
+  return t('Updated field widget types from "select2" to "tagify".');
+}
+
+/**
+ * Switch to core navigation module.
+ */
+function thunder_post_update_0006_switch_to_core_navigation(): string {
+  $moduleInstaller = \Drupal::service('module_installer');
+  $moduleInstaller->install(['navigation']);
+  $moduleInstaller->uninstall(['admin_toolbar']);
+
+  // Grant 'access navigation' permission to editorial roles.
+  foreach (['seo', 'editor', 'restricted_editor'] as $role_id) {
+    $role = Role::load($role_id);
+    if ($role && !$role->hasPermission('access navigation')) {
+      $role->grantPermission('access navigation');
+      $role->save();
+    }
+  }
+
+  return t('Switched to core navigation module and granted "access navigation" permission to editorial roles.');
+}
