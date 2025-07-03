@@ -73,14 +73,9 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
 
     $this->editParagraph('field_paragraphs', 0);
 
-    // Wait for the remove button to be visible.
-    $this->assertSession()->assertWaitOnAjaxRequest();
-    $removeButton = $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-field-paragraphs-0-subform-field-image-selection-0-remove-button"]');
+    // Remove image.
+    $this->clickDrupalSelector('edit-field-paragraphs-0-subform-field-image-selection-0-remove-button');
 
-    // Ensure the remove button exists before clicking.
-    $this->assertNotNull($removeButton, 'Remove button not found.');
-    $removeButton->click();
-    $this->assertSession()->assertWaitOnAjaxRequest();
     // Check that there are no errors.
     $this->assertSession()
       ->elementNotExists('css', '[data-drupal-selector="edit-field-paragraphs-0-subform-field-image-wrapper"] div.messages--error');
@@ -93,8 +88,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $this->clickAjaxButtonCssSelector('[name="field_paragraphs_0_collapse"]');
     /** @var \Drupal\file\FileInterface $file */
     $file = $image2->field_image->entity;
-
-    // On installs that use Drupal 10.3 onwards, the image will be converted to
+    // On installs that use  Drupal 10.3 onwards, the image will be converted to
     // a webp image.
     $this->assertMatchesRegularExpression('/^' . preg_quote($file->getFilename()) . '(.webp)?$/', $this->getSession()->evaluateScript('jQuery(\'[data-drupal-selector="edit-field-paragraphs-0-preview"] article.media--view-mode-paragraph-preview img\').attr(\'src\').split(\'?\')[0].split(\'/\').splice(-1)')[0], 'Image file should be identical to previously selected.');
 
