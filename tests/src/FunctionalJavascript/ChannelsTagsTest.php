@@ -39,7 +39,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
       'field_channel' => 6,
       'title[0][value]' => 'Article 1',
       'field_seo_title[0][value]' => 'Article 1',
-      'field_tags[]' => ['New Section', 'Tag1'],
+      'field_tags' => '[{"label":"New Section","value":"New Section"},{"label":"Tag1","value":"Tag1"}]',
       'field_teaser_text[0][value]' => 'Teaser 1',
     ], 'article');
     $image2 = $this->loadMediaByUuid('a4b2fa51-8340-4982-b792-92e060b71eb9');
@@ -54,7 +54,7 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
       'field_channel' => 6,
       'title[0][value]' => 'Article 2',
       'field_seo_title[0][value]' => 'Article 2',
-      'field_tags[]' => [[7, 'New Section'], 'Tag2'],
+      'field_tags' => '[{"value":"7","label":"New Section","entity_id":"7","info_label":"","editable":false},{"label":"Tag2","value":"Tag2"}]',
       'field_teaser_text[0][value]' => 'Teaser 2',
     ], 'news_article');
     $image3 = $this->loadMediaByUuid('5bd93c54-469b-4ac7-927b-cf6bb1dcf3dd');
@@ -91,7 +91,6 @@ class ChannelsTagsTest extends ThunderJavascriptTestBase {
     $this->drupalGet('new-section');
 
     $this->createScreenshot($this->getScreenshotFolder() . '/ChannelsTagsTest_testChannelsCreation_' . date('Ymd_His') . '.png');
-
     $this->assertSession()
       ->elementExists('xpath', '//img[contains(@src, "picjumbo.com_HNCK7373.jpg")]');
     $this->assertSession()

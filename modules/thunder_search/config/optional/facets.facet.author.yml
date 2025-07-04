@@ -8,26 +8,33 @@ dependencies:
     - search_api
 id: author
 name: Author
-url_alias: author
 weight: -2
 min_count: 1
-show_only_one_result: true
-field_identifier: uid
+missing: false
+missing_label: others
+url_alias: author
 facet_source_id: 'search_api:views_page__content_search_api__page_1'
-widget:
-  type: select2
-  config:
-    show_numbers: true
-    width: resolve
-    autocomplete: false
-    match_operator: CONTAINS
+field_identifier: uid
 query_operator: or
-use_hierarchy: false
-expand_hierarchy: false
-enable_parent_when_child_gets_disabled: true
 hard_limit: 20
 exclude: false
+use_hierarchy: false
+keep_hierarchy_parents_active: false
+hierarchy:
+  type: taxonomy
+  config: {  }
+expand_hierarchy: false
+enable_parent_when_child_gets_disabled: true
+widget:
+  type: dropdown
+  config:
+    show_numbers: true
+    default_option_label: Choose
+empty_behavior:
+  behavior: none
 only_visible_when_facet_source_is_visible: true
+show_only_one_result: true
+show_title: true
 processor_configs:
   active_widget_order:
     processor_id: active_widget_order
@@ -52,6 +59,11 @@ processor_configs:
     weights:
       build: -10
     settings: {  }
+  hierarchy_processor:
+    processor_id: hierarchy_processor
+    weights:
+      build: 100
+    settings: {  }
   uid_to_username_callback:
     processor_id: uid_to_username_callback
     weights:
@@ -63,6 +75,3 @@ processor_configs:
       pre_query: -10
       build: -10
     settings: {  }
-empty_behavior:
-  behavior: none
-show_title: true

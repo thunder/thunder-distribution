@@ -15,7 +15,7 @@ dependencies:
     - datetime
     - entity_reference_actions
     - image
-    - select2
+    - tagify
 id: media.image.media_library
 targetEntityType: media
 bundle: image
@@ -58,14 +58,17 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_tags:
-    type: select2_entity_reference
+    type: tagify_entity_reference_autocomplete_widget
     weight: 5
     region: content
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
     third_party_settings:
       entity_reference_actions:
         enabled: false

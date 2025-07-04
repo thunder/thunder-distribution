@@ -21,7 +21,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
-    - select2
+    - tagify
     - thunder_workflow
 third_party_settings:
   field_group:
@@ -144,14 +144,17 @@ content:
           optimax: 50
           tolerance: 10
   field_tags:
-    type: select2_entity_reference
+    type: tagify_entity_reference_autocomplete_widget
     weight: 5
     region: content
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
     third_party_settings: {  }
   field_teaser_media:
     type: media_library_media_modify_widget
@@ -163,8 +166,8 @@ content:
       form_mode: override
       check_selected: false
       replace_checkbox_by_order_indicator: false
-      no_edit_on_create: false
       multi_edit_on_create: false
+      no_edit_on_create: false
     third_party_settings:
       entity_reference_actions:
         enabled: false
@@ -256,14 +259,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
   uid:
-    type: select2_entity_reference
+    type: entity_reference_autocomplete
     weight: 0
     region: content
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
