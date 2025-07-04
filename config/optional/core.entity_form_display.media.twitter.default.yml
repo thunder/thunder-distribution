@@ -71,17 +71,14 @@ content:
       display_label: true
     third_party_settings: {  }
   uid:
-    type: tagify_entity_reference_autocomplete_widget
+    type: entity_reference_autocomplete
     weight: 2
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
+      size: 60
       placeholder: ''
-      suggestions_dropdown: 1
-      show_entity_id: 0
-      show_info_label: 0
-      info_label: ''
     third_party_settings: {  }
 hidden:
   langcode: true

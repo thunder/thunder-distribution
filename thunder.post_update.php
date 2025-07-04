@@ -150,7 +150,6 @@ function thunder_post_update_0005_switch_to_tagify(): string {
   foreach ($storage->loadMultiple($display_ids) as $form_display) {
     $components = $form_display->getComponents();
     foreach ($components as $field_name => $component) {
-
       if (!empty($component['type']) && $component['type'] === 'select2_entity_reference') {
 
         // Get field definition and base settings.
@@ -158,9 +157,15 @@ function thunder_post_update_0005_switch_to_tagify(): string {
           $form_display->getTargetEntityTypeId(),
           $form_display->getTargetBundle()
         );
-
         $field_definition = $field_definitions[$field_name];
-        $plugin_id = 'tagify_entity_reference_autocomplete_widget';
+
+        // Set core autocomplete for uid (author) field.
+        if ($field_name === "uid") {
+          $plugin_id = 'entity_reference_autocomplete';
+        }
+        else {
+          $plugin_id = 'tagify_entity_reference_autocomplete_widget';
+        }
         $widget_manager = \Drupal::service('plugin.manager.field.widget');
 
         $plugin = $widget_manager->createInstance($plugin_id, [
