@@ -30,7 +30,6 @@ class ModuleUninstallTest extends ThunderTestBase {
       'search_api',
       'facets',
       'views_bulk_operations',
-      'select2_facets',
     ],
   ];
 

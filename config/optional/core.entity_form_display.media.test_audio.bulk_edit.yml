@@ -2,55 +2,53 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.media.pinterest.field_url
-    - media.type.pinterest
+    - core.entity_form_mode.media.bulk_edit
+    - field.field.media.test_audio.field_media_audio_file
+    - media.type.test_audio
   module:
-    - field_group
-    - tagify
-third_party_settings:
-  field_group:
-    group_basis:
-      children:
-        - field_url
-      label: ''
-      region: content
-      parent_name: ''
-      weight: 0
-      format_type: fieldset
-      format_settings:
-        classes: content-form__form-section
-        id: ''
-        description: ''
-        required_fields: true
-id: media.pinterest.default
+    - path
+id: media.test_audio.bulk_edit
 targetEntityType: media
-bundle: pinterest
-mode: default
+bundle: test_audio
+mode: bulk_edit
 content:
   created:
     type: datetime_timestamp
-    weight: 1
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_url:
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
     type: string_textfield
-    weight: 1
+    weight: -5
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 1
+    weight: 100
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 2
+    weight: 5
     region: content
     settings:
       match_operator: CONTAINS
@@ -59,11 +57,9 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
-  langcode: true
-  moderation_state: true
-  name: true
-  path: true
+  field_media_audio_file: true
   publish_on: true
   publish_state: true
+  scheduler_settings: true
   unpublish_on: true
   unpublish_state: true

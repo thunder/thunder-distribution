@@ -12,31 +12,37 @@ dependencies:
     - field.field.node.article.field_teaser_text
     - node.type.article
   module:
-    - select2
+    - tagify
 id: node.article.bulk_edit
 targetEntityType: node
 bundle: article
 mode: bulk_edit
 content:
   field_channel:
-    type: select2_entity_reference
+    type: tagify_entity_reference_autocomplete_widget
     weight: 0
     region: content
     settings:
-      width: 100%
-      autocomplete: false
       match_operator: CONTAINS
       match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
     third_party_settings: {  }
   field_tags:
-    type: select2_entity_reference
+    type: tagify_entity_reference_autocomplete_widget
     weight: 1
     region: content
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
     third_party_settings:
       entity_reference_actions:
         enabled: false
@@ -53,14 +59,14 @@ content:
     settings: {  }
     third_party_settings: {  }
   uid:
-    type: select2_entity_reference
+    type: entity_reference_autocomplete
     weight: 2
     region: content
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
 hidden:
   created: true
