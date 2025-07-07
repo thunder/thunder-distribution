@@ -31,12 +31,12 @@ drush updb
 You should at least see the Thunder XXXX schema update. If not, double check that the correct version of Thunder
 is installed, and that `drush updb` did not throw any errors.
 
-Before you start with the code and database update please add the Slick module, the Blazy module, Admin Toolbar and the
-Responsive Preview module to your own composer.json. All are no longer part of Thunder and can be removed after the
-update was successfully executed.
+Before you start with the code and database update please add the Slick module, the Admin Toolbar, Blazy, Select2
+(replaced by Tagify) and the Responsive Preview module to your own composer.json. All are no longer part of Thunder and
+can be removed after the update was successfully executed.
 
 ```bash
-composer require drupal/blazy drupal/slick drupal/responsive_preview drupal/admin_toolbar
+composer require drupal/admin_toolbar drupal/blazy drupal/select2 drupal/slick drupal/responsive_preview
 ```
 
 Also, if you have jquery_ui, jquery_ui_draggable, default_content or paragraphs_paste enabled, you have to either

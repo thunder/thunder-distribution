@@ -61,6 +61,11 @@ trait ThunderFormFieldTestTrait {
 
       return;
     }
+    $tagifyFields = $page->findAll('xpath', "//input[contains(@class, \"tagify-widget\") and @name=\"{$fieldName}\"]");
+    if (!empty($tagifyFields)) {
+      $this->setRawFieldValue($fieldName, $value);
+      return;
+    }
 
     // Handle specific types of form fields.
     $field = $page->findField($fieldName);
@@ -73,22 +78,7 @@ trait ThunderFormFieldTestTrait {
     }
     elseif ($fieldTag === 'select') {
       // Handling of dropdown list.
-      if (!$page->find('css', "[name=\"{$fieldName}\"][class*='select2-widget']")) {
-        $page->selectFieldOption($fieldName, $value, TRUE);
-      }
-      else {
-        foreach ($value as $item) {
-          $id = is_array($item) ? $item[0] : "\$ID:$item";
-          $label = is_array($item) ? $item[1] : $item;
-          if (!$field->find('named', ['option', $id])) {
-            $this->getSession()->evaluateScript("jQuery('[name=\"{$fieldName}\"]').append(new Option('$label', '$id', false, false)).trigger('change')");
-            $page->selectFieldOption($fieldName, $id, TRUE);
-          }
-          else {
-            $page->selectFieldOption($fieldName, $id, TRUE);
-          }
-        }
-      }
+      $page->selectFieldOption($fieldName, $value, TRUE);
       return;
     }
 
