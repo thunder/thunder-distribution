@@ -41,6 +41,7 @@ composer require drupal/blazy drupal/slick drupal/responsive_preview drupal/admi
 
 Also, if you have jquery_ui, jquery_ui_draggable, default_content or paragraphs_paste enabled, you have to either
 uninstall them prior to the update or require them own your own, since Thunder removed them from the distribution.
+We cannot garantee, that those modules will work with Drupal 11!
 
 Even if you continue to use paragraphs_paste, you have to disable thunder_paragrphs_paste module before the update.
 
