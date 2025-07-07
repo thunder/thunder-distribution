@@ -39,15 +39,14 @@ update was successfully executed.
 composer require drupal/blazy drupal/slick drupal/responsive_preview drupal/admin_toolbar
 ```
 
-Also, if you have jquery_ui, jquery_ui_draggable or default_content enabled, you have to
-require them own your own, since Thunder removed them from the distribution.
+Also, if you have jquery_ui, jquery_ui_draggable, default_content or paragraphs_paste enabled, you have to either
+uninstall them prior to the update or require them own your own, since Thunder removed them from the distribution.
+
+Even if you continue to use paragraphs_paste, you have to disable thunder_paragrphs_paste module before the update.
 
 ```bash
 composer require drupal/jquery_ui
 composer require drupal/jquery_ui_draggable
 composer require drupal/default_content
+composer require drupal/paragraphs_paste
 ```
-
-## Remove paragraphs_paste module
-As `paragraphs_paste module` is removed from composer.json, you have to remove
-`modules/thunder_paragraphs_paste` manually from your project.
