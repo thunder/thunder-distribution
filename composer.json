@@ -93,7 +93,6 @@
         "drupal/metatag_async_widget": "^1.2",
         "drupal/paragraphs": "^1.19",
         "drupal/paragraphs_features": "^2.2",
-        "drupal/paragraphs_paste": "^2.0-beta7",
         "drupal/password_policy": "^4.0.3",
         "drupal/pathauto": "^1.13",
         "drupal/responsive_preview": "^2.1",
