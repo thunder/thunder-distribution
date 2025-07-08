@@ -45,7 +45,6 @@ jobs:
     services:
       mysql:
         image: mariadb:lts
-        options: --transaction-isolation=READ-COMMITTED
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
@@ -66,6 +65,9 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: :redis, Imagick
+
+      - name: Setup database
+        run: mysql -u root -h 127.0.0.1 --password=root mysql -e "set GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED"
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -114,7 +116,6 @@ jobs:
     services:
       mysql:
         image: mariadb:lts
-        options: --transaction-isolation=READ-COMMITTED
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
@@ -139,6 +140,9 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: :redis, :sodium, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
+
+      - name: Setup database
+        run: mysql -u root -h 127.0.0.1 --password=root mysql -e "set GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED"
 
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
@@ -186,7 +190,6 @@ jobs:
     services:
       mysql:
         image: mariadb:lts
-        options: --transaction-isolation=READ-COMMITTED
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
@@ -215,6 +218,9 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: :redis, Imagick, gd, pdo_mysql
+
+      - name: Setup database
+        run: mysql -u root -h 127.0.0.1 --password=root mysql -e "set GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED"
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -298,7 +304,6 @@ jobs:
     services:
       mysql:
         image: mariadb:lts
-        options: --transaction-isolation=READ-COMMITTED
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
@@ -326,6 +331,9 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: :redis, Imagick, gd, pdo_mysql
+
+      - name: Setup database
+        run: mysql -u root -h 127.0.0.1 --password=root mysql -e "set GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED"
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
