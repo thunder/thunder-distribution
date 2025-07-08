@@ -21,7 +21,7 @@ env:
   DRUPAL_TESTING_TEST_PROFILE: thunder
   DRUPAL_TESTING_HTTP_PORT: 8888
   DRUPAL_TESTING_VERBOSE: false
-  DRUPAL_TESTING_VERSION: "^1.0.42"
+  DRUPAL_TESTING_VERSION: "set-transaction-isolation-level-dev"
   DRUPAL_TESTING_TEST_FILTER: ""
   DRUPAL_TESTING_SELENIUM_HOST: 127.0.0.1
   DRUPAL_TESTING_SELENIUM_PORT: 9515
@@ -65,9 +65,6 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: :redis, Imagick
-
-      - name: Setup database
-        run: mysql -u root -h 127.0.0.1 --password=root mysql -e "set GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED"
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -141,8 +138,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: :redis, :sodium, Imagick, gd, PDO, mysql, pdo_mysql, mbstring, xmlwriter, pdo, date, dom, filter, hash, json, pcre, session, SimpleXML, SPL, tokenizer, xml, curl
 
-      - name: Setup database
-        run: mysql -u root -h 127.0.0.1 --password=root mysql -e "set GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED"
 
       - name: Add host
         run: echo "127.0.0.1 thunder-testing" | sudo tee -a /etc/hosts
@@ -219,8 +214,6 @@ jobs:
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: :redis, Imagick, gd, pdo_mysql
 
-      - name: Setup database
-        run: mysql -u root -h 127.0.0.1 --password=root mysql -e "set GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED"
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
@@ -331,9 +324,6 @@ jobs:
           coverage: none
           php-version: ${{ matrix.PHP_VERSION }}
           extensions: :redis, Imagick, gd, pdo_mysql
-
-      - name: Setup database
-        run: mysql -u root -h 127.0.0.1 --password=root mysql -e "set GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED"
 
       - name: Cache composer dependencies
         uses: actions/cache@v3
