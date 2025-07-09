@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\thunder\Functional\Integration;
 
+use Drupal\Tests\content_lock\Tools\LogoutTrait;
 use Drupal\Tests\thunder\Functional\ThunderTestBase;
 
 /**
@@ -10,6 +11,7 @@ use Drupal\Tests\thunder\Functional\ThunderTestBase;
  * @group Thunder
  */
 class ContentLockTest extends ThunderTestBase {
+  use LogoutTrait;
 
   /**
    * {@inheritdoc}
