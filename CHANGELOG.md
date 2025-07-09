@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.5.0](https://github.com/thunder/thunder-distribution/tree/7.4.0) 2025-07-09
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.4.1...7.5.0)
+
+* Drupal 10.5 compatibility.
+
 ## [7.4.1](https://github.com/thunder/thunder-distribution/tree/7.4.1) 2025-02-18
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.4.0...7.4.1)
