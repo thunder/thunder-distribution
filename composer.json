@@ -112,8 +112,6 @@
         "drupal/xymatic": "^1.0@beta",
         "npm-asset/dropzone": "^5.5.1",
         "npm-asset/exif-js": "^2.3.0",
-        "npm-asset/blazy": "^1.8",
-        "npm-asset/slick-carousel": "^1.8",
         "npm-asset/yaireo--tagify": "^4.32.2",
         "caxy/php-htmldiff": "^0.1.14"
     },
@@ -134,8 +132,8 @@
     "require-dev": {
         "burdamagazinorg/thunder-dev-tools": "dev-master",
         "thunder/thunder_testing_demo": "4.x-dev",
-        "mglaman/phpstan-drupal": "^1.1",
-        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "mglaman/phpstan-drupal": "^2.0",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpunit/phpunit": "^10.5.46"
     }
 }

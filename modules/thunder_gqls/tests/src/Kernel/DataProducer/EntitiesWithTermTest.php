@@ -172,7 +172,7 @@ GQL;
    * @param array $expectedResult
    *   The expected results.
    *
-   * @covers EntitiesWithTerm::resolve
+   * @covers \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntitiesWithTerm::resolve
    *
    * @dataProvider providerEntityWithTerms
    */

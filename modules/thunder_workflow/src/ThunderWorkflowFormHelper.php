@@ -12,6 +12,7 @@ use Drupal\Core\Theme\ThemeManagerInterface;
 use Drupal\Core\Url;
 use Drupal\content_moderation\ModerationInformationInterface;
 use Drupal\content_moderation\StateTransitionValidationInterface;
+use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -75,7 +76,7 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
   public function formAlter(array &$form, FormStateInterface $form_state): void {
     /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
     $form_object = $form_state->getFormObject();
-    /** @var \Drupal\node\NodeInterface $entity */
+    /** @var \Drupal\node\Entity\Node $entity */
     $entity = $form_object->getEntity();
 
     if (!$this->moderationInfo->isModeratedEntity($entity)) {
@@ -164,11 +165,10 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
    *
    * @param array $form
    *   The form array.
-   * @param \Drupal\node\NodeInterface $entity
+   * @param \Drupal\node\Entity\Node $entity
    *   The node entity.
    */
-  public function displayPublishedinformation(array &$form, NodeInterface $entity): void {
-    /** @var \Drupal\node\Entity\Node $entity */
+  public function displayPublishedinformation(array &$form, Node $entity): void {
     /** @var \Drupal\content_moderation\ContentModerationState $state */
     $state = $this->moderationInfo->getWorkflowForEntity($entity)->getTypePlugin()->getState($entity->moderation_state->value);
 

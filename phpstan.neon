@@ -1,6 +1,7 @@
 parameters:
   customRulesetUsed: true
   reportUnmatchedIgnoredErrors: true
+  treatPhpDocTypesAsCertain: false
   level: 6
   ignoreErrors:
     # new static() is a best practice in Drupal, so we cannot fix that.
