@@ -36,7 +36,8 @@ Before you start with the code and database update please add the Slick module, 
 can be removed after the update was successfully executed if you do not need them anymore.
 
 ```bash
-composer require drupal/admin_toolbar drupal/blazy drupal/select2 drupal/slick drupal/responsive_preview npm-asset/blazy npm-asset/slick-carousel npm-asset/select2
+composer require drupal/admin_toolbar drupal/blazy drupal/select2 drupal/slick drupal/responsive_preview
+composer require npm-asset/blazy npm-asset/slick-carousel npm-asset/select2
 ```
 
 Also, if you have jquery_ui, jquery_ui_draggable, default_content or paragraphs_paste enabled, you have to either
