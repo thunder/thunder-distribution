@@ -54,3 +54,4 @@ filters:
     weight: 0
     settings:
       title: true
+      media_substitution: metadata

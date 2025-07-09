@@ -9,7 +9,7 @@ dependencies:
   module:
     - field_group
     - media
-    - select2
+    - tagify
 third_party_settings:
   field_group:
     group_basis:
@@ -70,14 +70,14 @@ content:
       display_label: true
     third_party_settings: {  }
   uid:
-    type: select2_entity_reference
+    type: entity_reference_autocomplete
     weight: 5
     region: content
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
 hidden:
   langcode: true

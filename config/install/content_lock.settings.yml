@@ -1,4 +1,4 @@
-verbose: 1
+verbose: true
 types:
   node:
     article: article
@@ -14,7 +14,6 @@ types:
   paragraph: {  }
   content_moderation_state: {  }
 types_translation_lock: {  }
-types_js_lock: {  }
 form_op_lock:
   access_token:
     mode: null
