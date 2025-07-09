@@ -127,9 +127,9 @@ system that uses tokens which the administrator can change.\
 specified dates and times in the future. Dates can be entered either as plain text or with calendar popups.\
 [https://www.drupal.org/project/scheduler](https://www.drupal.org/project/scheduler)
 
-**Select2**: Integrates Drupal autocomplete and select fields with the [Select2](https://select2.org/) jQuery library.
+**Tagify**: Integrates Drupal autocomplete and select fields with the [Tagify](https://yaireo.github.io/tagify/) jQuery library.
 Provides advanced autocomplete functionality for select fields and entity reference fields.\
-[https://www.drupal.org/project/select2](https://www.drupal.org/project/select2)
+[https://www.drupal.org/project/tagify](https://www.drupal.org/project/tagify)
 
 **Simple XML sitemap**: Every webpage needs an automatic XML sitemap generator for SEO reasons. This module aims to be a
 replacement for the XML sitemap module for Drupal. Simple xml sitemap is lighter than XML sitemap in terms of resources
