@@ -9,17 +9,17 @@ You have to make sure that your Thunder 7 project and all its dependencies are f
 versions. Run the following command in your docroot:
 
 ```bash
-drush ev "print drupal_get_installed_schema_version('thunder') . PHP_EOL;"
+drush ev "print \Drupal::service('update.update_hook_registry')->getInstalledVersion('thunder') . PHP_EOL;"
 ```
 
-This should print the number XXXX or greater. If that is not the case, update your project.
+This should print the number 8328 or greater. If that is not the case, update your project.
 
 ```bash
 cd ..
 composer update
 ```
 
-This should update to Thunder 7.3 or greater.
+This should update to Thunder 7.4 or greater.
 
 Now run database updates:
 
@@ -28,7 +28,7 @@ cd docroot
 drush updb
 ```
 
-You should at least see the Thunder XXXX schema update. If not, double check that the correct version of Thunder
+You should at least see the Thunder 8328 schema update. If not, double check that the correct version of Thunder
 is installed, and that `drush updb` did not throw any errors.
 
 Before you start with the code and database update please add the Slick module, the Admin Toolbar, Blazy, Select2
