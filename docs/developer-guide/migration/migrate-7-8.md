@@ -43,8 +43,8 @@ composer require drupal/admin_toolbar drupal/blazy drupal/select2 drupal/slick d
 composer require npm-asset/blazy npm-asset/slick-carousel npm-asset/select2
 ```
 
-Additionally, if you're using any of the following modules: jquery_ui, jquery_ui_draggable, default_content or 
-paragraphs_paste, either **uninstall** them before migrating **or** explicitly require them yourself, since they’ve 
+Additionally, if you're using any of the following modules: jquery_ui, jquery_ui_draggable, default_content or
+paragraphs_paste, either **uninstall** them before migrating **or** explicitly require them yourself, since they’ve
 been removed from the Thunder distribution. These modules may not be compatible with Drupal 11.
 
 To re-add them manually via composer:
