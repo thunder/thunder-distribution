@@ -8,11 +8,13 @@ If you're installing Thunder for the first time, please follow the [Thunder inst
 Before proceeding, ensure your Thunder 7 project and all dependencies are fully updated:
 
 In your project's docroot, run:
+
 ```bash
 drush ev "print \Drupal::service('update.update_hook_registry')->getInstalledVersion('thunder') . PHP_EOL;"
 ```
 
 You should see a version number **8328** or higher. If it's lower, update to the latest Thunder 7 release:
+
 ```bash
 cd ..
 composer update
@@ -21,6 +23,7 @@ composer update
 This should update to Thunder 7.4 or greater.
 
 Now run database updates:
+
 ```bash
 cd docroot
 drush updb
@@ -45,6 +48,7 @@ either **uninstall** them before migrating **or** explicitly require them yourse
 These modules may not be compatible with Drupal 11.
 
 To re-add them manually via composer:
+
 ```bash
 composer require drupal/jquery_ui
 composer require drupal/jquery_ui_draggable
