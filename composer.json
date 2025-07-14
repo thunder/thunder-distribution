@@ -45,8 +45,6 @@
                 "Issue #3523188: The configuration property processor_id doesn't exist":"https://www.drupal.org/files/issues/2025-07-04/3523188-8.patch"
             },
             "drupal/graphql": {
-                "Fixes #3525801 ComposableSchema::getResolverRegistry has incorrect return type declaration": "https://www.drupal.org/files/issues/2025-05-21/3525801-graphql-fix-return-type.patch",
-                "Fixes #3525994: The menu_link_label data producer throws internal server error.": "https://www.drupal.org/files/issues/2025-05-22/3525994-graphql-cast-return-value.patch",
                 "Fix missing server_id. Extracted from #3477239: GraphQL query stops working - seems cache issue.": "https://www.drupal.org/files/issues/2025-05-26/3477239-missing-server_id.patch"
             },
             "drupal/pathauto": {
@@ -77,7 +75,7 @@
         "drupal/focal_point": "^2.1.2",
         "drupal/facets": "^3.0.0",
         "drupal/gin": "^5.0.2",
-        "drupal/graphql": "^5.0@alpha",
+        "drupal/graphql": "^5.0.0-alpha2@alpha",
         "drupal/inline_entity_form": "^3.0.0-rc20",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.2",
