@@ -10,7 +10,7 @@ on:
     tags:
       - 8.2.*
     branches:
-      - fix-documenation
+      - fix-documentation
 jobs:
   docs:
     runs-on: ubuntu-latest
