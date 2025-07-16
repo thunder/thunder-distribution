@@ -4,7 +4,7 @@
 
 First release of Thunder 8 with Drupal 11 support.
 
-Besides being Drupal 11 compatibility, the most notable change is the removal of
+Besides being compatible to Drupal 11, the most notable change is the removal of
 several module dependencies.
 
 Therefore, manual update steps for updating from Thunder 7 are required and can be found here:
