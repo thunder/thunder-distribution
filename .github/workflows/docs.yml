@@ -8,7 +8,7 @@ on:
       - 'package-lock.json'
       - 'CHANGELOG.md'
     tags:
-      - 7.0.*
+      - 8.2.*
 jobs:
   docs:
     runs-on: ubuntu-latest
