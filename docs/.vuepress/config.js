@@ -1,10 +1,17 @@
-const {path} = require('@vuepress/utils')
-module.exports = {
+import { viteBundler } from '@vuepress/bundler-vite'
+import { defaultTheme } from '@vuepress/theme-default'
+import { defineUserConfig } from 'vuepress'
+import { createPage } from '@vuepress/core'
+import { searchPlugin } from '@vuepress/plugin-search'
+import { path } from '@vuepress/utils'
+import axios from 'axios'
+
+export default defineUserConfig({
   title: 'Thunder',
   description: 'Thunder is a Drupal distribution for professional publishers.',
   head: [['link', {rel: 'icon', href: '/thunder.svg'}]],
-  theme: path.resolve(__dirname, './theme'),
-  themeConfig: {
+  bundler: viteBundler(),
+  theme: defaultTheme({
     logo: '/thunder.svg',
     repo: 'https://github.com/thunder/thunder-distribution',
     docsDir: 'docs',
@@ -71,20 +78,17 @@ module.exports = {
 
       ],
     }
-  },
+  }),
   plugins: [
     [
-      '@vuepress/plugin-search',
-      {
+      searchPlugin({
         // exclude the homepage
         isSearchable: (page) => page.path !== '/',
         getExtraFields: (page) => page.frontmatter.tags ?? [],
-      },
+      }),
     ],
   ],
   async onInitialized(app) {
-    const rp = require('request-promise');
-    const {createPage} = require("@vuepress/core");
     const logs = [
       {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.0.x/CHANGELOG.md', title: 'Changelog 6.0.x', path: '/changelog/6.0.x'},
       {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.1.x/CHANGELOG.md', title: 'Changelog 6.1.x', path: '/changelog/6.1.x'},
@@ -100,18 +104,19 @@ module.exports = {
       {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/7.5.x/CHANGELOG.md', title: 'Changelog 7.5.x', path: '/changelog/7.5.x'},
       {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/8.2.x/CHANGELOG.md', title: 'Changelog 8.2.x', path: '/changelog/8.2.x'},
     ]
-    await Promise.all(logs.map(async (log) => {
-      const content = await rp(log.url);
-      const page = await createPage(app, {
-        path: log.path,
-        frontmatter: {
-          layout: 'Layout',
-          sidebar: 'auto',
-          title: log.title
-        },
-        content
+    await Promise.all(
+      logs.map(async(log) => {
+        const { data: content } = await axios.get(log.url);
+        const page = await createPage(app, {
+          path: log.path,
+          frontmatter: {
+            sidebar: 'auto',
+            title: log.title,
+          },
+          content,
+        });
+        app.pages.push(page);
       })
-      app.pages.push(page)
-    }));
+    );
   }
-}
+});
