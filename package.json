@@ -22,8 +22,6 @@
     "eslint-config-drupal": "^5.0.2",
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "^2.5.1",
-    "request": "^2.88.2",
-    "request-promise": "^0.0.1",
     "sass-embedded": "^1.89.2",
     "vuepress": "^2.0.0-rc.24"
   },
