@@ -37,4 +37,4 @@ jobs:
           target_branch: main
           build_dir: docs/.vuepress/dist
         env:
-          GH_PAT: ${{ secrets.PUSH_DOCS_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
