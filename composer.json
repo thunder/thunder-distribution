@@ -49,6 +49,9 @@
             },
             "drupal/pathauto": {
                 "Fixes #3489108: Fix PHP 8.4 implicit nullable deprecation.": "https://www.drupal.org/files/issues/2025-03-06/pathauto-3489108.diff"
+            },
+            "drupal/gin": {
+                "Issue #3535333: Cancel link in top bar adds padding and hides page title": "https://www.drupal.org/files/issues/2025-07-21/3535333.diff"
             }
         }
     },
