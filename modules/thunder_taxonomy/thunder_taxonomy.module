@@ -67,7 +67,7 @@ function thunder_taxonomy_form_taxonomy_overview_terms_alter(array &$form, FormS
     [t('Status')],
     array_slice($form['terms']['#header'], 1, NULL, TRUE));
 
-  foreach ($form['terms'] as &$term) {
+  foreach ((array) $form['terms'] as &$term) {
     if (is_array($term) && !empty($term['#term'])) {
       $status['status'] = [
         '#markup' => ($term['#term']->status->value) ? t('Published') : t('Unpublished'),

@@ -1,5 +1,9 @@
 # Changelog
 
+## [8.2.1](https://github.com/thunder/thunder-distribution/tree/8.2.1) 2025-07-25
+
+- Fix navigation bar with moderation items
+
 ## [8.2.0](https://github.com/thunder/thunder-distribution/tree/8.2.0) 2025-07-16
 
 First release of Thunder 8 with Drupal 11 support.
