@@ -3,7 +3,6 @@ import { defaultTheme } from '@vuepress/theme-default'
 import { defineUserConfig } from 'vuepress'
 import { createPage } from '@vuepress/core'
 import { searchPlugin } from '@vuepress/plugin-search'
-import { path } from '@vuepress/utils'
 import axios from 'axios'
 
 export default defineUserConfig({
@@ -57,25 +56,7 @@ export default defineUserConfig({
             '/developer-guide/migration/migrate-3-6.md',
             '/developer-guide/migration/migrate-2-3.md',
           ],
-        },
-        {
-          text: 'Changelogs',
-          children: [
-            '/changelog/7.5.x',
-            '/changelog/7.4.x',
-            '/changelog/7.3.x',
-            '/changelog/7.2.x',
-            '/changelog/7.1.x',
-            '/changelog/7.0.x',
-            '/changelog/6.5.x',
-            '/changelog/6.4.x',
-            '/changelog/6.3.x',
-            '/changelog/6.2.x',
-            '/changelog/6.1.x',
-            '/changelog/6.0.x',
-          ],
-        },
-
+        }
       ],
     }
   }),
@@ -87,36 +68,5 @@ export default defineUserConfig({
         getExtraFields: (page) => page.frontmatter.tags ?? [],
       }),
     ],
-  ],
-  async onInitialized(app) {
-    const logs = [
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.0.x/CHANGELOG.md', title: 'Changelog 6.0.x', path: '/changelog/6.0.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.1.x/CHANGELOG.md', title: 'Changelog 6.1.x', path: '/changelog/6.1.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.2.x/CHANGELOG.md', title: 'Changelog 6.2.x', path: '/changelog/6.2.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.3.x/CHANGELOG.md', title: 'Changelog 6.3.x', path: '/changelog/6.3.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.4.x/CHANGELOG.md', title: 'Changelog 6.4.x', path: '/changelog/6.4.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.5.x/CHANGELOG.md', title: 'Changelog 6.5.x', path: '/changelog/6.5.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/7.0.x/CHANGELOG.md', title: 'Changelog 7.0.x', path: '/changelog/7.0.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/7.1.x/CHANGELOG.md', title: 'Changelog 7.1.x', path: '/changelog/7.1.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/7.2.x/CHANGELOG.md', title: 'Changelog 7.2.x', path: '/changelog/7.2.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/7.3.x/CHANGELOG.md', title: 'Changelog 7.3.x', path: '/changelog/7.3.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/7.4.x/CHANGELOG.md', title: 'Changelog 7.4.x', path: '/changelog/7.4.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/7.5.x/CHANGELOG.md', title: 'Changelog 7.5.x', path: '/changelog/7.5.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/8.2.x/CHANGELOG.md', title: 'Changelog 8.2.x', path: '/changelog/8.2.x'},
-    ]
-    await Promise.all(
-      logs.map(async(log) => {
-        const { data: content } = await axios.get(log.url);
-        const page = await createPage(app, {
-          path: log.path,
-          frontmatter: {
-            sidebar: 'auto',
-            title: log.title,
-          },
-          content,
-        });
-        app.pages.push(page);
-      })
-    );
-  }
+  ]
 });
