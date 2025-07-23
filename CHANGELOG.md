@@ -1,6 +1,12 @@
 # Changelog
 
-## [7.5.0](https://github.com/thunder/thunder-distribution/tree/7.4.0) 2025-07-09
+## [7.5.1](https://github.com/thunder/thunder-distribution/tree/7.5.1) 2025-08-23
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.5.0...7.5.1)
+
+* Require linkit 7
+
+## [7.5.0](https://github.com/thunder/thunder-distribution/tree/7.5.0) 2025-07-09
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/7.4.1...7.5.0)
 
