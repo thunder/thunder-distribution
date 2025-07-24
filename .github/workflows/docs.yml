@@ -2,13 +2,15 @@ name: Deploy docs
 
 on:
   push:
-    path:
+    paths:
       - 'docs/**'
       - 'package.json'
       - 'package-lock.json'
       - 'CHANGELOG.md'
     tags:
       - 8.2.*
+    branches:
+      - fix-documentation
 jobs:
   docs:
     runs-on: ubuntu-latest
