@@ -9,8 +9,6 @@ on:
       - 'CHANGELOG.md'
     tags:
       - 8.2.*
-    branches:
-      - fix-documentation
 jobs:
   docs:
     runs-on: ubuntu-latest
