@@ -8,7 +8,9 @@ import axios from 'axios'
 export default defineUserConfig({
   title: 'Thunder',
   description: 'Thunder is a Drupal distribution for professional publishers.',
-  head: [['link', {rel: 'icon', href: '/thunder.svg'}]],
+  head: [
+    ['link', {rel: 'icon', href: '/thunder.svg'}]
+  ],
   bundler: viteBundler(),
   theme: defaultTheme({
     logo: '/thunder.svg',
