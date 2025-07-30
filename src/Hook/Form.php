@@ -6,9 +6,10 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
- * Generic form alter hook implementation for the thunder distribution.
+ * Generic form hooks implementation for the thunder distribution.
  */
-class FormAlter {
+class Form {
+
   /**
    * Implements hook_form_alter().
    */
