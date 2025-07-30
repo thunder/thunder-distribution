@@ -1,0 +1,23 @@
+<?php
+
+namespace Drupal\thunder\Hook;
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\Hook;
+
+/**
+ * Generic form alter hook implementation for the thunder distribution.
+ */
+class FormAlter {
+  /**
+   * Implements hook_form_alter().
+   */
+  #[Hook('form_alter')]
+  public function formAlter(&$form, FormStateInterface $form_state, $form_id): void {
+    // Move content lock unlock button to the more actions array.
+    if (!empty($form['actions']['unlock']['#gin_action_item'])) {
+      $form['actions']['unlock']['#gin_action_item'] = FALSE;
+    }
+  }
+
+}
