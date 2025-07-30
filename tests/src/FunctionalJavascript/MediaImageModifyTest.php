@@ -80,6 +80,7 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $this->assertSession()
       ->elementNotExists('css', '[data-drupal-selector="edit-field-paragraphs-0-subform-field-image-wrapper"] div.messages--error');
 
+    /** @var \Drupal\media\Entity\Media $image2 */
     $image2 = $this->loadMediaByUuid('a4b2fa51-8340-4982-b792-92e060b71eb9');
     $this->selectMedia('field-paragraphs-0-subform-field-image', [$image2->id()]);
 
@@ -101,14 +102,18 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     $this->assertFileExists($file->getFileUri());
     $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-gin-sticky-actions"] .gin-more-actions__trigger')->click();
     $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-gin-sticky-actions"]')->clickLink('Delete');
+    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', '#drupal-modal'));
     $this->assertSession()->fieldNotExists('also_delete_file');
     $this->assertSession()->pageTextContains('The file attached to this media is owned by admin so will be retained.');
     Role::load(static::$defaultUserRole)->grantPermission('delete any file')->save();
     $this->getSession()->reload();
+    $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-gin-sticky-actions"] .gin-more-actions__trigger')->click();
+    $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-gin-sticky-actions"]')->clickLink('Delete');
+    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', '#drupal-modal'));
     $this->assertSession()->fieldExists('also_delete_file')->check();
-    $this->assertSession()->buttonExists('Delete')->click();
-    $this->assertSession()->waitForText('Deleted the associated file thunder-city.jpg.');
-    $this->assertSession()->pageTextContains('Deleted the associated file thunder-city.jpg.');
+    $this->click('.ui-dialog button:contains("Delete")');
     $this->assertFileDoesNotExist($file->getFileUri());
   }
 
