@@ -99,8 +99,8 @@ class MediaImageModifyTest extends ThunderJavascriptTestBase {
     /** @var \Drupal\file\FileInterface $file */
     $file = $media->get($media->getSource()->getConfiguration()['source_field'])->entity;
     $this->assertFileExists($file->getFileUri());
-    $this->assertSession()->waitForElement('css', '[data-drupal-selector="edit-gin-sticky-actions"] + button')->click();
-    $this->getSession()->getPage()->find('css', '.top-bar__actions .toolbar-dropdown__item')->clickLink('Delete');
+    $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-gin-sticky-actions"] .gin-more-actions__trigger')->click();
+    $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-gin-sticky-actions"]')->clickLink('Delete');
     $this->assertSession()->fieldNotExists('also_delete_file');
     $this->assertSession()->pageTextContains('The file attached to this media is owned by admin so will be retained.');
     Role::load(static::$defaultUserRole)->grantPermission('delete any file')->save();
