@@ -273,6 +273,7 @@ jobs:
           composer update
           composer install
           composer exec -- drush updb -y
+          composer exec -- drush pmu admin_toolbar -y
 
           cd docroot
           php core/scripts/db-tools.php dump-database-d8-mysql --database-url "${SIMPLETEST_DB}" >"sites/default/database-dump.php"
