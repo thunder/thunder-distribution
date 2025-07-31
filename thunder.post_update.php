@@ -188,23 +188,3 @@ function thunder_post_update_0005_switch_to_tagify(): string {
 
   return t('Updated field widget types from "select2" to "tagify".');
 }
-
-/**
- * Switch to core navigation module.
- */
-function thunder_post_update_0006_switch_to_core_navigation(): string {
-  $moduleInstaller = \Drupal::service('module_installer');
-  $moduleInstaller->install(['navigation']);
-  $moduleInstaller->uninstall(['admin_toolbar']);
-
-  // Grant 'access navigation' permission to editorial roles.
-  foreach (['seo', 'editor', 'restricted_editor'] as $role_id) {
-    $role = Role::load($role_id);
-    if ($role && !$role->hasPermission('access navigation')) {
-      $role->grantPermission('access navigation');
-      $role->save();
-    }
-  }
-
-  return t('Switched to core navigation module and granted "access navigation" permission to editorial roles.');
-}
