@@ -1,10 +1,18 @@
-const {path} = require('@vuepress/utils')
-module.exports = {
+import { viteBundler } from '@vuepress/bundler-vite'
+import { defaultTheme } from '@vuepress/theme-default'
+import { defineUserConfig } from 'vuepress'
+import { createPage } from '@vuepress/core'
+import { searchPlugin } from '@vuepress/plugin-search'
+import axios from 'axios'
+
+export default defineUserConfig({
   title: 'Thunder',
   description: 'Thunder is a Drupal distribution for professional publishers.',
-  head: [['link', {rel: 'icon', href: '/thunder.svg'}]],
-  theme: path.resolve(__dirname, './theme'),
-  themeConfig: {
+  head: [
+    ['link', {rel: 'icon', href: '/thunder.svg'}]
+  ],
+  bundler: viteBundler(),
+  theme: defaultTheme({
     logo: '/thunder.svg',
     repo: 'https://github.com/thunder/thunder-distribution',
     docsDir: 'docs',
@@ -45,61 +53,22 @@ module.exports = {
         {
           text: 'Migration',
           children: [
+            '/developer-guide/migration/migrate-7-8.md',
             '/developer-guide/migration/migrate-6-7.md',
             '/developer-guide/migration/migrate-3-6.md',
             '/developer-guide/migration/migrate-2-3.md',
           ],
-        },
-        {
-          text: 'Changelogs',
-          children: [
-            '/changelog/7.0.x',
-            '/changelog/6.5.x',
-            '/changelog/6.4.x',
-            '/changelog/6.3.x',
-            '/changelog/6.2.x',
-            '/changelog/6.1.x',
-            '/changelog/6.0.x',
-          ],
-        },
-
+        }
       ],
     }
-  },
+  }),
   plugins: [
     [
-      '@vuepress/plugin-search',
-      {
+      searchPlugin({
         // exclude the homepage
         isSearchable: (page) => page.path !== '/',
         getExtraFields: (page) => page.frontmatter.tags ?? [],
-      },
+      }),
     ],
-  ],
-  async onInitialized(app) {
-    const rp = require('request-promise');
-    const {createPage} = require("@vuepress/core");
-    const logs = [
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.0.x/CHANGELOG.md', title: 'Changelog 6.0.x', path: '/changelog/6.0.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.1.x/CHANGELOG.md', title: 'Changelog 6.1.x', path: '/changelog/6.1.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.2.x/CHANGELOG.md', title: 'Changelog 6.2.x', path: '/changelog/6.2.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.3.x/CHANGELOG.md', title: 'Changelog 6.3.x', path: '/changelog/6.3.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.4.x/CHANGELOG.md', title: 'Changelog 6.4.x', path: '/changelog/6.4.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/6.5.x/CHANGELOG.md', title: 'Changelog 6.5.x', path: '/changelog/6.5.x'},
-      {url: 'https://raw.githubusercontent.com/thunder/thunder-distribution/7.0.x/CHANGELOG.md', title: 'Changelog 7.0.x', path: '/changelog/7.0.x'},
-    ]
-    await Promise.all(logs.map(async (log) => {
-      const content = await rp(log.url);
-      const page = await createPage(app, {
-        path: log.path,
-        frontmatter: {
-          layout: 'Layout',
-          sidebar: 'auto',
-          title: log.title
-        },
-        content
-      })
-      app.pages.push(page)
-    }));
-  }
-}
+  ]
+});
