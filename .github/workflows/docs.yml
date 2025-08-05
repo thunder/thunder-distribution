@@ -2,7 +2,7 @@ name: Deploy docs
 
 on:
   push:
-    path:
+    paths:
       - 'docs/**'
       - 'package.json'
       - 'package-lock.json'
@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
@@ -29,7 +29,7 @@ jobs:
         run: npm run docs:build
 
       - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v2
+        uses: crazy-max/ghaction-github-pages@v4
         with:
           repo: thunder/thunder.github.io
           target_branch: main
