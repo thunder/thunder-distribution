@@ -59,6 +59,7 @@
         "php": ">=8.3",
         "cweagans/composer-patches": "^1.6.5",
         "drupal/access_unpublished": "^1.5",
+        "drupal/admin_toolbar": "^3.6",
         "drupal/advancedqueue": "^1.2",
         "drupal/autofill": "^1.1",
         "drupal/autosave_form": "^1.8",
@@ -135,6 +136,6 @@
         "thunder/thunder_testing_demo": "4.x-dev",
         "mglaman/phpstan-drupal": "^2.0",
         "phpstan/phpstan-deprecation-rules": "^2.0",
-        "phpunit/phpunit": "^10.5.46"
+        "phpunit/phpunit": "^11.5"
     }
 }
