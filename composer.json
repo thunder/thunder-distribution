@@ -136,6 +136,6 @@
         "thunder/thunder_testing_demo": "4.x-dev",
         "mglaman/phpstan-drupal": "^2.0",
         "phpstan/phpstan-deprecation-rules": "^2.0",
-        "phpunit/phpunit": "^10.5.46"
+        "phpunit/phpunit": "^11.5"
     }
 }
