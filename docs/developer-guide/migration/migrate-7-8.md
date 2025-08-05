@@ -39,7 +39,7 @@ Before you start with the code and database update please add the Slick module, 
 Thunder and can be removed after the update was successfully executed but may still be required for your project.
 
 ```bash
-composer require rupal/blazy drupal/select2 drupal/slick drupal/responsive_preview
+composer require drupal/blazy drupal/select2 drupal/slick drupal/responsive_preview
 composer require npm-asset/blazy npm-asset/slick-carousel npm-asset/select2
 ```
 
