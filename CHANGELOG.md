@@ -1,6 +1,14 @@
 # Changelog
 
+## [8.2.2](https://github.com/thunder/thunder-distribution/tree/8.2.2) 2025-08-06
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.2.1...8.2.2)
+
+- Remove navigation bar and revert to admin toolbar
+
 ## [8.2.1](https://github.com/thunder/thunder-distribution/tree/8.2.1) 2025-07-25
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.2.0...8.2.1)
 
 - Fix navigation bar with moderation items
 
