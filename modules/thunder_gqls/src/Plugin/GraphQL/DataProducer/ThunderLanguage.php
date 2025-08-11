@@ -20,7 +20,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   ),
  *   consumes = {
  *     "url" = @ContextDefinition("any",
- *       label = @Translation("The URL")
+ *       label = @Translation("The URL"),
+ *       required = TRUE
  *     ),
  *     "type" = @ContextDefinition("string",
  *       label = @Translation("Language type"),

@@ -18,7 +18,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   name = @Translation("Breadcrumb"),
  *   description = @Translation("Breadcrumb"),
  *   produces = @ContextDefinition("map",
- *     label = @Translation("Breadcrumb")
+ *     label = @Translation("Breadcrumb"),
+ *     required = TRUE
  *   ),
  *   consumes = {
  *     "url" = @ContextDefinition("any",
