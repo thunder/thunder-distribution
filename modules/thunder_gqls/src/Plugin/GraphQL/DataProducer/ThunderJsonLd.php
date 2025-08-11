@@ -19,12 +19,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   name = @Translation("JSON-LD"),
  *   description = @Translation("JSON-LD."),
  *   produces = @ContextDefinition("string",
- *     label = @Translation("Script tag"),
- *     required = TRUE
+ *     label = @Translation("Script tag")
  *   ),
  *   consumes = {
  *     "url" = @ContextDefinition("any",
- *       label = @Translation("The URL")
+ *       label = @Translation("The URL"),
+ *       required = TRUE
  *     ),
  *   }
  * )
