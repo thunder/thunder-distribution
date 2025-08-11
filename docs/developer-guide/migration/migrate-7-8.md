@@ -60,7 +60,7 @@ If you continue using paragraphs_paste, be sure to **disable** the thunder_parag
 
 ## Breaking Changes
 
-#### Interface changes in GraphQL producers
+### Interface changes in GraphQL producers
 
 The producers ThunderLanguage, ThunderBreadcrumb and ThunderJsonLd are now expecting a URL object instead of a path
 string.
