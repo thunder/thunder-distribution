@@ -23,11 +23,11 @@ class ThunderBreadcrumbSchemaExtension extends ThunderSchemaExtensionPluginBase 
     parent::registerResolvers($registry);
 
     $this->addFieldResolverIfNotExists('Query', 'breadcrumb',
-      $this->builder->produce('thunder_breadcrumb')
-        ->map('path', $this->builder->fromArgument('path')
+      $this->builder->compose(
+        $this->builder->produce('route_load')->map('path', $this->builder->fromArgument('path')),
+        $this->builder->produce('thunder_breadcrumb')->map('url', $this->builder->fromParent())
       )
     );
-
   }
 
 }

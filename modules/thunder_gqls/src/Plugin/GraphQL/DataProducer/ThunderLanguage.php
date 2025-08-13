@@ -4,6 +4,7 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Url;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -18,8 +19,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *     label = @Translation("Langcode")
  *   ),
  *   consumes = {
- *     "path" = @ContextDefinition("string",
- *       label = @Translation("Path"),
+ *     "url" = @ContextDefinition("any",
+ *       label = @Translation("The URL"),
  *       required = TRUE
  *     ),
  *     "type" = @ContextDefinition("string",
@@ -62,8 +63,8 @@ class ThunderLanguage extends ThunderEntitySubRequestBase {
   /**
    * Resolve language.
    *
-   * @param string $path
-   *   The path.
+   * @param \Drupal\Core\Url $url
+   *   The URL to resolve the language for.
    * @param string $type
    *   The language type.
    * @param \Drupal\Core\Cache\CacheableMetadata $cacheableMetadata
@@ -74,7 +75,7 @@ class ThunderLanguage extends ThunderEntitySubRequestBase {
    * @return string
    *   The resolved language code.
    */
-  protected function resolve(string $path, string $type, CacheableMetadata $cacheableMetadata, FieldContext $fieldContext) : string {
+  protected function resolve(Url $url, string $type, CacheableMetadata $cacheableMetadata, FieldContext $fieldContext) : string {
     return $this->languageManager->getCurrentLanguage($type)->getId();
   }
 

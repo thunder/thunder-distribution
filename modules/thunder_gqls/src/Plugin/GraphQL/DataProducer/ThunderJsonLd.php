@@ -5,6 +5,7 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Url;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\metatag\MetatagManager;
 use Drupal\schema_metatag\SchemaMetatagManager;
@@ -21,8 +22,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *     label = @Translation("Script tag")
  *   ),
  *   consumes = {
- *     "path" = @ContextDefinition("string",
- *       label = @Translation("Path"),
+ *     "url" = @ContextDefinition("any",
+ *       label = @Translation("The URL"),
  *       required = TRUE
  *     ),
  *   }
@@ -79,8 +80,8 @@ class ThunderJsonLd extends ThunderEntitySubRequestBase {
   /**
    * Resolve json-ld.
    *
-   * @param string $path
-   *   The path.
+   * @param \Drupal\Core\Url $url
+   *   The URL to resolve the language for.
    * @param \Drupal\Core\Cache\CacheableMetadata $cacheableMetadata
    *   Cache metadata for the subrequest.
    * @param \Drupal\graphql\GraphQL\Execution\FieldContext $fieldContext
@@ -91,7 +92,7 @@ class ThunderJsonLd extends ThunderEntitySubRequestBase {
    *
    * @throws \Exception
    */
-  protected function resolve(string $path, CacheableMetadata $cacheableMetadata, FieldContext $fieldContext) : string {
+  protected function resolve(Url $url, CacheableMetadata $cacheableMetadata, FieldContext $fieldContext) : string {
     // If nothing was passed in, assume the current entity.
     // @see schema_metatag_entity_load() to understand why this works.
     if (!$this->metatagManager || !$this->moduleHandler->moduleExists('schema_metatag')) {

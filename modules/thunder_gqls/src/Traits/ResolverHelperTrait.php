@@ -127,7 +127,7 @@ trait ResolverHelperTrait {
       $this->builder->produce('route_entity')
         ->map('url', $this->builder->fromParent())
         ->map('language', $this->builder->produce('thunder_language')
-          ->map('path', $path)
+          ->map('url', $this->builder->fromParent())
         )
     );
   }

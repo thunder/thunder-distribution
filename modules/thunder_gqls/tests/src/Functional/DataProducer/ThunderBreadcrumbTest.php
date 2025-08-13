@@ -3,7 +3,6 @@
 namespace Drupal\Tests\thunder_gqls\Functional;
 
 use Drupal\Tests\graphql\Traits\DataProducerExecutionTrait;
-use Drupal\redirect\Entity\Redirect;
 
 /**
  * Test the schema.
@@ -15,14 +14,6 @@ class ThunderBreadcrumbTest extends ThunderGqlsTestBase {
   use DataProducerExecutionTrait;
 
   /**
-   * {@inheritdoc}
-   */
-  protected static $modules = [
-    'path_alias',
-    'redirect',
-  ];
-
-  /**
    * @covers \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\ThunderBreadCrumb::resolve
    */
   public function testThunderBreadCrumb(): void {
@@ -31,32 +22,10 @@ class ThunderBreadcrumbTest extends ThunderGqlsTestBase {
 
     // Test with canonical url.
     $result = $this->executeDataProducer('thunder_breadcrumb', [
-      'path' => $node->toUrl()->toString(),
+      'url' => $node->toUrl(),
     ]);
 
     $this->assertBreadcrumb($result);
-
-    // Test with alias url.
-    $result = $this->executeDataProducer('thunder_breadcrumb', [
-      'path' => '/come-drupalcon-new-orleans',
-    ]);
-
-    $this->assertBreadcrumb($result);
-
-    // Test redirect url.
-    $redirect = Redirect::create();
-    $redirect->setSource('redirected-url');
-    $redirect->setRedirect($node->toUrl()->toString());
-    $redirect->setStatusCode(301);
-    $redirect->setLanguage($node->language()->getId());
-    $redirect->save();
-
-    $result = $this->executeDataProducer('thunder_breadcrumb', [
-      'path' => '/redirected-url',
-    ]);
-
-    $this->assertIsArray($result);
-    $this->assertEmpty($result);
   }
 
   /**

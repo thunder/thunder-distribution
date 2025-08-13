@@ -23,8 +23,9 @@ class ThunderJsonLdSchemaExtension extends ThunderSchemaExtensionPluginBase {
     parent::registerResolvers($registry);
 
     $this->addFieldResolverIfNotExists('Query', 'jsonld',
-      $this->builder->produce('thunder_jsonld')
-        ->map('path', $this->builder->fromArgument('path')
+      $this->builder->compose(
+        $this->builder->produce('route_load')->map('path', $this->builder->fromArgument('path')),
+        $this->builder->produce('thunder_jsonld')->map('url', $this->builder->fromParent())
       )
     );
   }

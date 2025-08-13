@@ -57,3 +57,10 @@ composer require drupal/paragraphs_paste
 ```
 
 If you continue using paragraphs_paste, be sure to **disable** the thunder_paragraphs_paste sub-module before upgrading.
+
+## Breaking Changes
+
+### Interface changes in GraphQL producers
+
+The producers ThunderLanguage, ThunderBreadcrumb and ThunderJsonLd are now expecting a URL object instead of a path
+string.

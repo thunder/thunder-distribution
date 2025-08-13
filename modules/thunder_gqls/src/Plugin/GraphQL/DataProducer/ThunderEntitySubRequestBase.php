@@ -6,6 +6,7 @@ use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\RenderContext;
 use Drupal\Core\Render\RendererInterface;
+use Drupal\Core\Url;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 use Drupal\graphql\SubRequestResponse;
@@ -67,12 +68,12 @@ abstract class ThunderEntitySubRequestBase extends DataProducerPluginBase implem
   public function resolveField(FieldContext $field): mixed {
     $contextValues = $this->getContextValues();
 
-    if (!isset($contextValues['path'])) {
-      throw new \LogicException('Missing required path argument.');
+    if (!isset($contextValues['url']) || !($contextValues['url'] instanceof Url)) {
+      throw new \LogicException('The "url" context value must be set and must be an instance of \Drupal\Core\Url.');
     }
 
-    $url = $this->currentRequest->getSchemeAndHttpHost() . $contextValues['path'];
-    $request = $this->createRequest($this->currentRequest, $url, $field);
+    $contextValues['url']->setAbsolute();
+    $request = $this->createRequest($this->currentRequest, $contextValues['url']->toString(), $field);
 
     $response = $this->httpKernel->handle($request, HttpKernelInterface::SUB_REQUEST);
     if ($response instanceof SubRequestResponse) {

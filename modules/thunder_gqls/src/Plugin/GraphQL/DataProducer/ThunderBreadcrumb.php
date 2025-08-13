@@ -6,6 +6,7 @@ use Drupal\Core\Breadcrumb\BreadcrumbManager;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Url;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -20,8 +21,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *     label = @Translation("Breadcrumb")
  *   ),
  *   consumes = {
- *     "path" = @ContextDefinition("string",
- *       label = @Translation("Path"),
+ *     "url" = @ContextDefinition("any",
+ *       label = @Translation("The URL"),
  *       required = TRUE
  *     ),
  *   }
@@ -76,8 +77,8 @@ class ThunderBreadcrumb extends ThunderEntitySubRequestBase {
   /**
    * Resolve the breadcrumb.
    *
-   * @param string $path
-   *   The path.
+   * @param \Drupal\Core\Url $url
+   *   The URL to resolve the language for.
    * @param \Drupal\Core\Cache\CacheableMetadata $cacheableMetadata
    *   Cache metadata for the subrequest.
    * @param \Drupal\graphql\GraphQL\Execution\FieldContext $fieldContext
@@ -86,7 +87,7 @@ class ThunderBreadcrumb extends ThunderEntitySubRequestBase {
    * @return array
    *   The breadcrumb entries.
    */
-  protected function resolve(string $path, CacheableMetadata $cacheableMetadata, FieldContext $fieldContext) : array {
+  protected function resolve(Url $url, CacheableMetadata $cacheableMetadata, FieldContext $fieldContext) : array {
     $build = $this->breadcrumbManager->build($this->currentRouteMatch->getCurrentRouteMatch());
 
     $breadCrumb = [];
