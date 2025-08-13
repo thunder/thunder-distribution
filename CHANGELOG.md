@@ -1,5 +1,11 @@
 # Changelog
 
+## [8.2.3](https://github.com/thunder/thunder-distribution/tree/8.2.3) 2025-08-13
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.2.2...8.2.3)
+
+- Fix fromRoute GraphQL helper to not throw warnings on 404 routes
+
 ## [8.2.2](https://github.com/thunder/thunder-distribution/tree/8.2.2) 2025-08-06
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.2.1...8.2.2)
