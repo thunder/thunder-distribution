@@ -65,7 +65,7 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
 
     $query = \Drupal::entityQuery('media');
     $query->condition('bundle', 'twitter');
-    $query->condition('field_url', '', 'IS NULL');
+    $query->condition('field_url', NULL, 'IS NULL');
     $query->accessCheck(FALSE);
     $ids = $query->execute();
     $this->assertEmpty($ids, 'No media entity left after deleting a paragraph with inline entity form.');
