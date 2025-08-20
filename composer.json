@@ -44,6 +44,9 @@
             "drupal/facets": {
                 "Issue #3523188: The configuration property processor_id doesn't exist":"https://www.drupal.org/files/issues/2025-07-04/3523188-8.patch"
             },
+            "drupal/graphql": {
+                "Fix missing server_id. Extracted from #3477239: GraphQL query stops working - seems cache issue.": "https://git.drupalcode.org/project/graphql/-/merge_requests/34.diff"
+            },
             "drupal/pathauto": {
                 "Fixes #3489108: Fix PHP 8.4 implicit nullable deprecation.": "https://www.drupal.org/files/issues/2025-03-06/pathauto-3489108.diff"
             },
@@ -79,7 +82,7 @@
         "drupal/focal_point": "^2.1.2",
         "drupal/facets": "^3.0.0",
         "drupal/gin": "^5.0.2",
-        "drupal/graphql": "^5.0.0-alpha2@alpha",
+        "drupal/graphql": "5.0.0-alpha2@alpha",
         "drupal/inline_entity_form": "^3.0.0-rc20",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.2",
