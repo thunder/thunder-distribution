@@ -4,6 +4,7 @@ namespace Drupal\Tests\thunder\FunctionalJavascript\Integration;
 
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderFormFieldTestTrait;
 use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
+use Drupal\Tests\thunder\FunctionalJavascript\ThunderParagraphsTestTrait;
 
 /**
  * Test for update hook changes.
@@ -15,6 +16,7 @@ use Drupal\Tests\thunder\FunctionalJavascript\ThunderJavascriptTestBase;
 class InlineEntityFormTest extends ThunderJavascriptTestBase {
 
   use ThunderFormFieldTestTrait;
+  use ThunderParagraphsTestTrait;
 
   /**
    * Test saving collapsed gallery paragraph.
@@ -44,6 +46,29 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
     $this->drupalGet($node->toUrl('edit-form'));
     $this->assertSession()
       ->pageTextContains('New gallery name before collapse');
+  }
+
+  /**
+   * Test that no media item is created when a paragraph is deleted.
+   */
+  public function testNoMediaEntityAfterParagraphDeletion(): void {
+    // Test that no media entity is left after deleting a paragraph.
+    $node = $this->loadNodeByUuid('36b2e2b2-3df0-43eb-a282-d792b0999c07');
+    $this->drupalGet($node->toUrl('edit-form'));
+
+    $this->addSocialParagraph('field_paragraphs', '', 'twitter', 0);
+    $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-field-paragraphs-7"] button')->click();
+    $this->getSession()->getPage()->find('css', '[data-drupal-selector="edit-field-paragraphs-7"] + .paragraphs-features__delete-confirmation button.paragraphs-features__delete-confirmation__remove-button')->click();
+    $this->assertWaitOnAjaxRequest();
+    $this->clickSave();
+    $this->assertSession()->waitForText('Article Come to DrupalCon New Orleans has been updated.');
+
+    $query = \Drupal::entityQuery('media');
+    $query->condition('bundle', 'twitter');
+    $query->condition('field_url', NULL, 'IS NULL');
+    $query->accessCheck(FALSE);
+    $ids = $query->execute();
+    $this->assertEmpty($ids, 'No media entity left after deleting a paragraph with inline entity form.');
   }
 
 }
