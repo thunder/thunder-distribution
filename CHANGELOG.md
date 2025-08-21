@@ -4,8 +4,8 @@
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.2.3...8.2.4)
 
-- Update graphql module
-- Add IEF patch to prevent empty media items
+- [Update graphql module](https://www.drupal.org/project/thunder/issues/3542384)
+- [Add IEF patch to prevent empty media items](https://www.drupal.org/project/thunder/issues/3542377)
 
 ## [8.2.3](https://github.com/thunder/thunder-distribution/tree/8.2.3) 2025-08-13
 
