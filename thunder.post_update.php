@@ -193,7 +193,8 @@ function thunder_post_update_0005_switch_to_tagify(): string {
 /**
  * Remove empty media items.
  */
-function thunder_post_update_0006_remove_empty_media_items() {
+function thunder_post_update_0006_remove_empty_media_items(): string {
+  $count = 0;
   foreach (MediaType::loadMultiple() as $mediaType) {
     $sourceField = $mediaType->getSource()->getSourceFieldDefinition($mediaType);
 
@@ -205,6 +206,8 @@ function thunder_post_update_0006_remove_empty_media_items() {
     if (!empty($ids)) {
       $media_entities = \Drupal::entityTypeManager()->getStorage('media')->loadMultiple($ids);
       \Drupal::entityTypeManager()->getStorage('media')->delete($media_entities);
+      $count += count($ids);
     }
   }
+  return t('Removed @count empty media items.', ['@count' => $count]);
 }
