@@ -49,16 +49,13 @@
             },
             "drupal/gin": {
                 "Issue #3535333: Cancel link in top bar adds padding and hides page title": "https://www.drupal.org/files/issues/2025-07-21/3535333.diff"
-            },
-            "drupal/access_unpublished": {
-                "Issue #3542258: AccessUnpublishedRouteLoad::resolveField(Drupal\\graphql\\GraphQL\\Execution\\FieldContext $field) must be compatible with Drupal\\graphql\\Plugin\\GraphQL\\DataProducer\\DataProducerPluginBase::resolveField": "https://git.drupalcode.org/project/access_unpublished/-/merge_requests/30.diff"
             }
         }
     },
     "require": {
         "php": ">=8.3",
         "cweagans/composer-patches": "^1.6.5",
-        "drupal/access_unpublished": "^1.5",
+        "drupal/access_unpublished": "^1.8",
         "drupal/admin_toolbar": "^3.6",
         "drupal/advancedqueue": "^1.2",
         "drupal/autofill": "^1.1",
