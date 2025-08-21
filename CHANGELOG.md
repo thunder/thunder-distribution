@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.2.4](https://github.com/thunder/thunder-distribution/tree/8.2.4) 2025-08-21
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.2.3...8.2.4)
+
+- Update graphql module
+- Add IEF patch to prevent empty media items
+
 ## [8.2.3](https://github.com/thunder/thunder-distribution/tree/8.2.3) 2025-08-13
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.2.2...8.2.3)
