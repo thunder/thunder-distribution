@@ -9,6 +9,7 @@ use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\ckeditor5\SmartDefaultSettings;
 use Drupal\editor\Entity\Editor;
 use Drupal\entity_browser\Entity\EntityBrowser;
+use Drupal\media\Entity\MediaType;
 use Drupal\user\Entity\Role;
 
 /**
@@ -187,4 +188,26 @@ function thunder_post_update_0005_switch_to_tagify(): string {
   }
 
   return t('Updated field widget types from "select2" to "tagify".');
+}
+
+/**
+ * Remove empty media items.
+ */
+function thunder_post_update_0006_remove_empty_media_items(): string {
+  $count = 0;
+  foreach (MediaType::loadMultiple() as $mediaType) {
+    $sourceField = $mediaType->getSource()->getSourceFieldDefinition($mediaType);
+
+    $query = \Drupal::entityQuery('media');
+    $query->condition('bundle', $mediaType->id());
+    $query->condition($sourceField->getName(), '', 'IS NULL');
+    $query->accessCheck(FALSE);
+    $ids = $query->execute();
+    if (!empty($ids)) {
+      $media_entities = \Drupal::entityTypeManager()->getStorage('media')->loadMultiple($ids);
+      \Drupal::entityTypeManager()->getStorage('media')->delete($media_entities);
+      $count += count($ids);
+    }
+  }
+  return t('Removed @count empty media items.', ['@count' => $count]);
 }
