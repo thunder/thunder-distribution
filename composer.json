@@ -35,7 +35,6 @@
         "installer-name": "thunder",
         "patches": {
             "drupal/core": {
-                "Fix Claro styles for exposed views filters wrapped in fieldsets": "https://www.drupal.org/files/issues/2021-05-31/3133639.19.patch",
                 "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch"
             },
             "drupal/diff": {
