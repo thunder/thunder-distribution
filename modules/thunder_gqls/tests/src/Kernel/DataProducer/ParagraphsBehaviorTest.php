@@ -61,7 +61,7 @@ class ParagraphsBehaviorTest extends GraphQLTestBase {
       'paragraph' => $paragraph,
       'behavior_plugin_id' => 'test_text_color',
       'behavior_plugin_key' => 'text_color',
-      'behavior_plugin_default' => null,
+      'behavior_plugin_default' => NULL,
     ]);
     $this->assertNull($result);
 
@@ -81,7 +81,7 @@ class ParagraphsBehaviorTest extends GraphQLTestBase {
       'paragraph' => $paragraph,
       'behavior_plugin_id' => 'test_text_color',
       'behavior_plugin_key' => 'text_color',
-      'behavior_plugin_default' => null,
+      'behavior_plugin_default' => NULL,
     ]);
 
     // Now we should not get the default value.
