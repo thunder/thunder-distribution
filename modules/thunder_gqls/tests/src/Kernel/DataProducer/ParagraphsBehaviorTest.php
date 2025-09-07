@@ -61,9 +61,9 @@ class ParagraphsBehaviorTest extends GraphQLTestBase {
       'paragraph' => $paragraph,
       'behavior_plugin_id' => 'test_text_color',
       'behavior_plugin_key' => 'text_color',
-      'behavior_plugin_default' => 'blue',
+      'behavior_plugin_default' => null,
     ]);
-    $this->assertEquals('blue', $result);
+    $this->assertNull($result);
 
     // Create a paragraph and set its feature settings.
     $paragraph = Paragraph::create([
@@ -81,7 +81,7 @@ class ParagraphsBehaviorTest extends GraphQLTestBase {
       'paragraph' => $paragraph,
       'behavior_plugin_id' => 'test_text_color',
       'behavior_plugin_key' => 'text_color',
-      'behavior_plugin_default' => 'blue',
+      'behavior_plugin_default' => null,
     ]);
 
     // Now we should not get the default value.
