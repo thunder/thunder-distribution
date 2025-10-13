@@ -43,9 +43,6 @@
             "drupal/facets": {
                 "Issue #3523188: The configuration property processor_id doesn't exist":"https://www.drupal.org/files/issues/2025-07-04/3523188-8.patch"
             },
-            "drupal/pathauto": {
-                "Fixes #3489108: Fix PHP 8.4 implicit nullable deprecation.": "https://www.drupal.org/files/issues/2025-03-06/pathauto-3489108.diff"
-            },
             "drupal/inline_entity_form": {
                 "Issue #3542076: Empty media entities with simple widget in paragraphs": "https://www.drupal.org/files/issues/2025-08-20/3542076-empty-media-entities-with-simple-widget-in-paragraphs.diff"
             }
@@ -92,7 +89,7 @@
         "drupal/paragraphs": "^1.19",
         "drupal/paragraphs_features": "^2.2",
         "drupal/password_policy": "^4.0.3",
-        "drupal/pathauto": "^1.13",
+        "drupal/pathauto": "^1.14",
         "drupal/responsive_preview": "^2.1",
         "drupal/redirect": "^1.7",
         "drupal/scheduler": "^2.1.0",
