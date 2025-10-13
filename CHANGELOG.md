@@ -1,6 +1,13 @@
 # Changelog
 
-## [8.2.5](https://github.com/thunder/thunder-distribution/tree/8.2.3) 2025-08-28
+## [8.2.6](https://github.com/thunder/thunder-distribution/tree/8.2.6) 2025-10-13
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.2.5...8.2.6)
+
+- Skip custom storage fields in media item removal.
+- Remove deprecated pathauto patch and update version.
+
+## [8.2.5](https://github.com/thunder/thunder-distribution/tree/8.2.5) 2025-08-28
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.2.4...8.2.5)
 
