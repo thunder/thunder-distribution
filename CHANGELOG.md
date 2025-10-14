@@ -1,6 +1,6 @@
 # Changelog
 
-## [8.2.6](https://github.com/thunder/thunder-distribution/tree/8.2.6) 2025-10-13
+## [8.2.6](https://github.com/thunder/thunder-distribution/tree/8.2.6) 2025-10-14
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.2.5...8.2.6)
 
