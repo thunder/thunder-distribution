@@ -13,8 +13,9 @@
 
   function triggerEdit(wrapper) {
     const btn = findEditButton(wrapper);
-    if (!btn) return;
-    btn.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+    if (!btn) { return;
+    }
+    btn.dispatchEvent(new MouseEvent('mousedown', { bubbles: TRUE }));
     btn.click();
   }
 
@@ -27,46 +28,62 @@
   }
 
   function bind(wrapper) {
-    if (wrapper.dataset.clickEditBound === '1') return;
-    if (!isParagraphWrapper(wrapper)) return;
-    if (wrapper.querySelector('.paragraphs-subform')) return;
+    if (wrapper.dataset.clickEditBound === '1') { return;
+    }
+    if (!isParagraphWrapper(wrapper)) { return;
+    }
+    if (wrapper.querySelector('.paragraphs-subform')) { return;
+    }
 
     wrapper.dataset.clickEditBound = '1';
 
     wrapper.addEventListener(
       'click',
       (e) => {
-        if (e.target.closest('.paragraphs-subform')) return;
+        if (e.target.closest('.paragraphs-subform')) { return;
+        }
         if (
           e.target.matches('.paragraphs-features__delete-confirm') ||
           e.target.matches('[name*="_remove"]')
-        ) return;
+        ) {
+          return;
+        }
         e.preventDefault();
         triggerEdit(wrapper);
       },
-      true
+      TRUE,
     );
   }
 
   function scan(context) {
-    once('thunderParagraphsClickEdit', PARAGRAPH_SELECTOR, context).forEach(bind);
+    once(
+      'thunderParagraphsClickEdit',
+      PARAGRAPH_SELECTOR,
+      context,
+    ).forEach(bind);
   }
 
   function startObserver() {
-    if (window.__thunderParagraphsObserver) return;
+    if (window.__thunderParagraphsObserver) { return;
+    }
     window.__thunderParagraphsObserver = new MutationObserver((muts) => {
       muts.forEach((m) =>
         m.addedNodes.forEach((n) => {
-          if (n.nodeType !== 1) return;
-          if (n.matches && n.matches(PARAGRAPH_SELECTOR)) bind(n);
-          n.querySelectorAll &&
-          n.querySelectorAll(PARAGRAPH_SELECTOR).forEach((el) => bind(el));
-        })
+          if (n.nodeType !== 1) { return;
+          }
+          if (n.matches && n.matches(PARAGRAPH_SELECTOR)) { bind(n);
+          }
+          if (n.querySelectorAll) {
+            n
+              .querySelectorAll(PARAGRAPH_SELECTOR)
+              .forEach((el) => bind(el));
+          }
+        }),
       );
     });
     window.__thunderParagraphsObserver.observe(document.documentElement, {
-      childList: true,
-      subtree: true
+      childList: TRUE,
+      subtree: TRUE,
     });
   }
 
@@ -74,6 +91,6 @@
     attach(context) {
       scan(context);
       startObserver();
-    }
+    },
   };
 })(Drupal, once);
