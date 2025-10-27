@@ -3,12 +3,9 @@
  * Provides click-to-edit functionality for paragraphs.
  */
 
-/* global Drupal, once */
-
 (function paragraphsClickEditModule(Drupal, once) {
-  'use strict';
-
-  const PARAGRAPH_SELECTOR = '.paragraphs-item, .paragraph-form-item--has-preview, [id^="field-paragraphs-"][id*="-item-wrapper"]';
+  const PARAGRAPH_SELECTOR =
+    '.paragraphs-item, .paragraph-form-item--has-preview, [id^="field-paragraphs-"][id*="-item-wrapper"]';
 
   /**
    * Finds the edit button within a paragraph wrapper.
@@ -39,7 +36,7 @@
     if (!btn) {
       return;
     }
-    btn.dispatchEvent(new MouseEvent('mousedown', {bubbles: true}));
+    btn.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
     btn.click();
   }
 
@@ -108,10 +105,10 @@
 
     wrapper.addEventListener(
       'click',
-      function (e) {
+      function clickHandler(e) {
         handleParagraphClick(e, wrapper);
       },
-      true
+      true,
     );
   }
 
@@ -122,11 +119,9 @@
    *   The context to scan.
    */
   function scan(context) {
-    once(
-      'thunderParagraphsClickEdit',
-      PARAGRAPH_SELECTOR,
-      context
-    ).forEach(bind);
+    once('thunderParagraphsClickEdit', PARAGRAPH_SELECTOR, context).forEach(
+      bind,
+    );
   }
 
   /**
@@ -151,8 +146,8 @@
    *   Array of mutation records.
    */
   function handleMutations(mutations) {
-    mutations.forEach(function (mutation) {
-      mutation.addedNodes.forEach(function (node) {
+    mutations.forEach(function mutationHandler(mutation) {
+      mutation.addedNodes.forEach(function nodeHandler(node) {
         if (node.nodeType === 1) {
           handleAddedNode(node);
         }
@@ -172,7 +167,7 @@
 
     window.__thunderParagraphsObserver.observe(document.documentElement, {
       childList: true,
-      subtree: true
+      subtree: true,
     });
   }
 
@@ -182,10 +177,9 @@
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.thunderParagraphsClickEdit = {
-    attach: function (context) {
+    attach(context) {
       scan(context);
       startObserver();
-    }
+    },
   };
-
 })(Drupal, once);
