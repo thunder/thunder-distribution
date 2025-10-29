@@ -205,7 +205,7 @@ class SearchApiResponse implements SearchApiResponseInterface, ContainerInjectio
    * @return array
    *   The processed facet results.
    */
-  private function processFacetResults(
+  protected function processFacetResults(
     Facet $facet,
     array $facetResults,
   ): array {
@@ -238,7 +238,7 @@ class SearchApiResponse implements SearchApiResponseInterface, ContainerInjectio
    * @return array
    *   The processed facet results.
    */
-  private function processFacetResultsFromFieldConfig(
+  protected function processFacetResultsFromFieldConfig(
     Facet $facet,
     array $facetResults,
   ): array {
