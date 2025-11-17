@@ -3,12 +3,10 @@ type: profile
 description: 'The Drupal based CMS for professional publishing.'
 project: thunder
 core_version_requirement: ~11.2.0
-version: '8.2.4'
+version: '8.2.6'
 
 distribution:
   name: Thunder
-  install:
-    finish_url: ?tour=1
 
 # Required modules
 dependencies:

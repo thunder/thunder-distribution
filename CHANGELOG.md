@@ -1,5 +1,20 @@
 # Changelog
 
+## [8.2.6](https://github.com/thunder/thunder-distribution/tree/8.2.6) 2025-10-14
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.2.5...8.2.6)
+
+- Skip custom storage fields in media item removal.
+- Remove deprecated pathauto patch and update version.
+
+## [8.2.5](https://github.com/thunder/thunder-distribution/tree/8.2.5) 2025-08-28
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.2.4...8.2.5)
+
+- Fix drupal/facets to 3.0.0 until we have made Thunder compatible with 3.0.1
+- Remove gin patch (it was only needed in combination with core navigation)
+- Remove claro patch
+
 ## [8.2.4](https://github.com/thunder/thunder-distribution/tree/8.2.4) 2025-08-21
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.2.3...8.2.4)
