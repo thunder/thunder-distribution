@@ -840,10 +840,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              editor: '0'
-              seo: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -966,11 +962,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              restricted_editor: '0'
-              editor: '0'
-              seo: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -993,7 +984,6 @@ display:
               translate_entity:
                 weights:
                   build: 5
-                settings: {  }
         facets_field_tags:
           id: facets_field_tags
           table: search_api_index_content
@@ -1020,12 +1010,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              0: '0'
-              anonymous: '0'
-              restricted_editor: '0'
-              editor: '0'
-              seo: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -1048,7 +1032,6 @@ display:
               translate_entity:
                 weights:
                   build: 5
-                settings: {  }
         facets_name:
           id: facets_name
           table: search_api_index_content
@@ -1075,12 +1058,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              0: '0'
-              anonymous: '0'
-              restricted_editor: '0'
-              editor: '0'
-              seo: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -1126,12 +1103,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              0: '0'
-              anonymous: '0'
-              restricted_editor: '0'
-              editor: '0'
-              seo: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -1154,7 +1125,6 @@ display:
               translate_entity:
                 weights:
                   build: 5
-                settings: {  }
         facets_status:
           id: facets_status
           table: search_api_index_content
@@ -1181,12 +1151,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              0: '0'
-              anonymous: '0'
-              restricted_editor: '0'
-              editor: '0'
-              seo: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
