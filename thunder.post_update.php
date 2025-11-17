@@ -197,7 +197,10 @@ function thunder_post_update_0006_remove_empty_media_items(): string {
   $count = 0;
   foreach (MediaType::loadMultiple() as $mediaType) {
     $sourceField = $mediaType->getSource()->getSourceFieldDefinition($mediaType);
-
+    if ($sourceField->getFieldStorageDefinition()->hasCustomStorage()) {
+      // Skip custom storage fields.
+      continue;
+    }
     $query = \Drupal::entityQuery('media');
     $query->condition('bundle', $mediaType->id());
     $query->condition($sourceField->getName(), '', 'IS NULL');
