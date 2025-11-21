@@ -49,6 +49,7 @@ To make the paragraph-click-to-open module work with Thunder Paragraphs, you nee
 
 ```
 selector: '.paragraph-form-item--has-preview, [id^="field-paragraphs-"][id*="-item-wrapper"]'
+```
 
 you can also provide additional CSS selectors if you have custom paragraph types.
-```
+
