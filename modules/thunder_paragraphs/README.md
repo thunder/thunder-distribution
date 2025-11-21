@@ -41,3 +41,14 @@ Same as text paragraph. The difference is it will be displayed as a quote in the
 ## Link
 
 Lets you add a list of internal or external links to your article.
+
+## Make drupal paragraph-click-to-open on edit pages with selector configuration
+
+To make the paragraph-click-to-open module work with Thunder Paragraphs, you need to add the following configuration to your
+`drupal file: at '/admin/config/content/thunder-paragraphs'`:
+
+```
+selector: '.paragraph-form-item--has-preview, [id^="field-paragraphs-"][id*="-item-wrapper"]'
+
+you can also provide additional CSS selectors if you have custom paragraph types.
+```
