@@ -5,17 +5,29 @@ namespace Drupal\thunder_paragraphs\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
+/**
+ * Configure Thunder Paragraphs click-to-edit settings.
+ */
 class ThunderParagraphsClickEditSettingsForm extends ConfigFormBase {
 
-  public function getFormId() {
+  /**
+   * Get Form Id.
+   */
+  public function getFormId(): string {
     return 'thunder_paragraphs_click_edit_settings_form';
   }
 
-  protected function getEditableConfigNames() {
+  /**
+   * Get Editable ConfigNames.
+   */
+  protected function getEditableConfigNames(): array {
     return ['thunder_paragraphs.settings'];
   }
 
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  /**
+   * Build Form.
+   */
+  public function buildForm(array $form, FormStateInterface $form_state): array {
     $config = $this->config('thunder_paragraphs.settings');
     $default_selector = '.paragraphs-item, .paragraph-form-item--has-preview, [id^="field-paragraphs-"][id*="-item-wrapper"]';
 
@@ -37,7 +49,10 @@ class ThunderParagraphsClickEditSettingsForm extends ConfigFormBase {
     return parent::buildForm($form, $form_state);
   }
 
-  public function validateForm(array &$form, FormStateInterface $form_state) {
+  /**
+   * Validate Form.
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state): void {
     $selector = trim($form_state->getValue('selector'));
     if ($selector === '') {
       $form_state->setErrorByName('selector', $this->t('Selector cannot be empty.'));
@@ -48,7 +63,10 @@ class ThunderParagraphsClickEditSettingsForm extends ConfigFormBase {
     parent::validateForm($form, $form_state);
   }
 
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  /**
+   * Submit Form.
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     $this->config('thunder_paragraphs.settings')
       ->set('click_edit.selector', trim($form_state->getValue('selector')))
       ->save();
