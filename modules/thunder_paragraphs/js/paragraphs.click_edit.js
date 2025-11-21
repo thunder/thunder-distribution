@@ -1,20 +1,26 @@
 /**
  * @file
- * Provides click-to-edit functionality for paragraphs.
+ * Provides configurable click-to-edit functionality for paragraphs.
  */
+(function (Drupal, once) {
+  const NS = (Drupal.thunderParagraphsClickEdit = Drupal.thunderParagraphsClickEdit || {});
+  NS.defaults = {
+    selector: '.paragraphs-item, .paragraph-form-item--has-preview, [id^="field-paragraphs-"][id*="-item-wrapper"]',
+    onceKey: 'thunderParagraphsClickEdit'
+  };
 
-(function paragraphsClickEditModule(Drupal, once) {
-  const PARAGRAPH_SELECTOR =
-    '.paragraphs-item, .paragraph-form-item--has-preview, [id^="field-paragraphs-"][id*="-item-wrapper"]';
+  NS.getSelector = function (settings) {
+    return (settings?.thunderParagraphsClickEdit?.selector || NS.defaults.selector);
+  };
 
   /**
-   * Finds the edit button within a paragraph wrapper.
+   * Find the edit button within the given scope.
    *
-   * @param {HTMLElement} scope
-   *   The scope to search within.
+   * @param {Element} scope
+   *  The scope to search within.
    *
-   * @return {HTMLElement|null}
-   *   The edit button element or null.
+   * @return {Element|null}
+   * The edit button element, or null if not found.
    */
   function findEditButton(scope) {
     return (
@@ -26,28 +32,26 @@
   }
 
   /**
-   * Triggers the edit action on a paragraph wrapper.
+   * Trigger the edit action on the paragraph wrapper.
    *
-   * @param {HTMLElement} wrapper
-   *   The paragraph wrapper element.
+   * @param wrapper {HTMLElement} Wrapper element of the paragraph.
+   *   the paragraph element.
    */
   function triggerEdit(wrapper) {
     const btn = findEditButton(wrapper);
-    if (!btn) {
-      return;
-    }
+    if (!btn) return;
     btn.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
     btn.click();
   }
 
   /**
-   * Checks if a node is a paragraph wrapper.
+   * Check if the given node is a paragraph wrapper.
    *
    * @param {HTMLElement} node
-   *   The node to check.
+   *  The node to check.
    *
-   * @return {boolean}
-   *   True if the node is a paragraph wrapper.
+   * @returns {boolean|boolean}
+   *  True if the node is a paragraph wrapper, false otherwise.
    */
   function isParagraphWrapper(node) {
     return (
@@ -56,130 +60,82 @@
       node.querySelector('[data-drupal-selector$="-preview"]') !== null
     );
   }
-
   /**
-   * Handles click events on paragraph wrappers.
+   * Handle click events on paragraph wrappers.
    *
    * @param {Event} e
-   *   The click event.
+   * The click event.
    * @param {HTMLElement} wrapper
    *   The paragraph wrapper element.
+   * @returns {void}
    */
   function handleParagraphClick(e, wrapper) {
-    // Ignore clicks within subforms.
-    if (e.target.closest('.paragraphs-subform')) {
-      return;
-    }
-    // Ignore clicks on delete confirm or remove buttons.
-    if (
-      e.target.matches('.paragraphs-features__delete-confirm') ||
-      e.target.matches('[name*="_remove"]')
-    ) {
-      return;
-    }
+    if (e.target.closest('.paragraphs-subform')) return;
+    if (e.target.matches('.paragraphs-features__delete-confirm') || e.target.matches('[name*="_remove"]')) return;
     e.preventDefault();
     triggerEdit(wrapper);
   }
-
   /**
-   * Binds click-to-edit functionality to a paragraph wrapper.
+   * Bind click event listener to the paragraph wrapper.
    *
    * @param {HTMLElement} wrapper
    *   The paragraph wrapper element.
    */
   function bind(wrapper) {
-    // Skip if already bound.
-    if (wrapper.dataset.clickEditBound === '1') {
-      return;
-    }
-    // Skip if not a paragraph wrapper.
-    if (!isParagraphWrapper(wrapper)) {
-      return;
-    }
-    // Skip if already in edit mode.
-    if (wrapper.querySelector('.paragraphs-subform')) {
-      return;
-    }
-
+    if (wrapper.dataset.clickEditBound === '1') return;
+    if (!isParagraphWrapper(wrapper)) return;
+    if (wrapper.querySelector('.paragraphs-subform')) return;
     wrapper.dataset.clickEditBound = '1';
-
-    wrapper.addEventListener(
-      'click',
-      function clickHandler(e) {
-        handleParagraphClick(e, wrapper);
-      },
-      true,
-    );
+    wrapper.addEventListener('click', (e) => handleParagraphClick(e, wrapper), true);
   }
 
   /**
-   * Scans the context for paragraph elements and binds click handlers.
-   *
-   * @param {HTMLElement|Document} context
-   *   The context to scan.
+   * Scan the context for paragraph wrappers and bind click event listeners.
+   * @param context
+   * @param selector
    */
-  function scan(context) {
-    once('thunderParagraphsClickEdit', PARAGRAPH_SELECTOR, context).forEach(
-      bind,
-    );
+  function scan(context, selector) {
+    once(NS.defaults.onceKey, selector, context).forEach(bind);
+  }
+  /**
+   * Handle added nodes in mutations.
+   * @param node
+   * @param selector
+   */
+  function handleAddedNode(node, selector) {
+    if (node.matches && node.matches(selector)) bind(node);
+    if (node.querySelectorAll) node.querySelectorAll(selector).forEach(bind);
   }
 
   /**
-   * Handles a newly added node from MutationObserver.
+   * Handle mutations from the MutationObserver.
    *
-   * @param {Node} node
-   *   The added node.
+   * @param mutations
+   * @param selector
    */
-  function handleAddedNode(node) {
-    if (node.matches && node.matches(PARAGRAPH_SELECTOR)) {
-      bind(node);
-    }
-    if (node.querySelectorAll) {
-      node.querySelectorAll(PARAGRAPH_SELECTOR).forEach(bind);
-    }
-  }
-
-  /**
-   * Processes mutations from MutationObserver.
-   *
-   * @param {MutationRecord[]} mutations
-   *   Array of mutation records.
-   */
-  function handleMutations(mutations) {
-    mutations.forEach(function mutationHandler(mutation) {
-      mutation.addedNodes.forEach(function nodeHandler(node) {
-        if (node.nodeType === 1) {
-          handleAddedNode(node);
-        }
+  function handleMutations(mutations, selector) {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType === 1) handleAddedNode(node, selector);
       });
     });
   }
 
   /**
-   * Starts the MutationObserver to watch for new paragraph elements.
+   * Start the MutationObserver to monitor for added paragraph wrappers.
+   * @param selector
    */
-  function startObserver() {
-    if (window.__thunderParagraphsObserver) {
-      return;
-    }
-
-    window.__thunderParagraphsObserver = new MutationObserver(handleMutations);
-
-    window.__thunderParagraphsObserver.observe(document.documentElement, {
-      childList: true,
-      subtree: true,
-    });
+  function startObserver(selector) {
+    if (NS.observer) return;
+    NS.observer = new MutationObserver((m) => handleMutations(m, selector));
+    NS.observer.observe(document.documentElement, { childList: true, subtree: true });
   }
 
-  /**
-   * Drupal behavior for paragraph click-to-edit functionality.
-   *
-   * @type {Drupal~behavior}
-   */
   Drupal.behaviors.thunderParagraphsClickEdit = {
-    attach(context) {
-      scan(context);
-      startObserver();
-    },
+    attach(context, settings) {
+      const selector = NS.getSelector(settings);
+      scan(context, selector);
+      startObserver(selector);
+    }
   };
 })(Drupal, once);

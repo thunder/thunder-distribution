@@ -14,6 +14,4 @@ paragraphs.widget:
     js/paragraphs.click_edit.js: {}
   dependencies:
     - core/drupal
-    - core/drupal.message
     - core/once
-    - core/drupal.ajax

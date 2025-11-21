@@ -113,3 +113,14 @@ function thunder_paragraphs__attach_ief_submit(array &$element, array $button_pa
     }
   }
 }
+
+/**
+ * Implements hook_page_attachments().
+ */
+function thunder_paragraphs_page_attachments(array &$attachments) {
+  $config = \Drupal::config('thunder_paragraphs.settings');
+  $selector = $config->get('click_edit.selector');
+  if ($selector) {
+    $attachments['#attached']['drupalSettings']['thunderParagraphsClickEdit']['selector'] = $selector;
+  }
+}

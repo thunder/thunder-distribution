@@ -1,0 +1,13 @@
+# Config schema for thunder_paragraphs.
+thunder_paragraphs.settings:
+  type: config_object
+  label: 'Thunder Paragraphs settings'
+  mapping:
+    click_edit:
+      type: mapping
+      label: 'Click edit settings'
+      mapping:
+        selector:
+          type: text
+          label: 'Paragraph wrapper CSS selector'
+          description: 'CSS selector used to bind click-to-edit behavior.'

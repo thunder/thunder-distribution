@@ -1,0 +1,10 @@
+thunder_paragraphs.settings_form:
+  path: '/admin/config/content/thunder-paragraphs'
+  defaults:
+    _form: '\Drupal\thunder_paragraphs\Form\ThunderParagraphsClickEditSettingsForm'
+    _title: 'Thunder Paragraphs'
+  requirements:
+    _permission: 'administer site configuration'
+  options:  
+    _admin_route: TRUE
+  
