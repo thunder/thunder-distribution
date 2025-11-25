@@ -7,4 +7,3 @@ thunder_paragraphs.settings_form:
     _permission: 'administer site configuration'
   options:
     _admin_route: TRUE
-  
