@@ -11,7 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
 class ThunderParagraphsClickEditSettingsForm extends ConfigFormBase {
 
   /**
-   * Get Form Id.
+   * {@inheritdoc}
    */
   public function getFormId(): string {
     return 'thunder_paragraphs_click_edit_settings_form';
@@ -25,7 +25,7 @@ class ThunderParagraphsClickEditSettingsForm extends ConfigFormBase {
   }
 
   /**
-   * Build Form.
+   * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
     $config = $this->config('thunder_paragraphs.settings');
@@ -64,7 +64,7 @@ class ThunderParagraphsClickEditSettingsForm extends ConfigFormBase {
   }
 
   /**
-   * Submit Form.
+   * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $this->config('thunder_paragraphs.settings')
