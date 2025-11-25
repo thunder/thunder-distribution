@@ -50,7 +50,7 @@ class ThunderParagraphsClickEditSettingsForm extends ConfigFormBase {
   }
 
   /**
-   * Validate Form.
+   * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state): void {
     $selector = trim($form_state->getValue('selector'));
