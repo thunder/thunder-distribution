@@ -5,6 +5,6 @@ thunder_paragraphs.settings_form:
     _title: 'Thunder Paragraphs'
   requirements:
     _permission: 'administer site configuration'
-  options:  
+  options:
     _admin_route: TRUE
   
