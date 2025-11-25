@@ -18,7 +18,7 @@ class ThunderParagraphsClickEditSettingsForm extends ConfigFormBase {
   }
 
   /**
-   * Get Editable ConfigNames.
+   * {@inheritdoc}
    */
   protected function getEditableConfigNames(): array {
     return ['thunder_paragraphs.settings'];
