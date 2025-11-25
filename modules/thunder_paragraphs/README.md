@@ -51,5 +51,5 @@ Navigate to the configuration page at `/admin/config/content/thunder-paragraphs`
 selector: '.paragraph-form-item--has-preview, [id^="field-paragraphs-"][id*="-item-wrapper"]'
 ```
 
-you can also provide additional CSS selectors if you have custom paragraph types.
+You can also provide additional CSS selectors if you have custom paragraph types.
 
