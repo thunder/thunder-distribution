@@ -1,3 +1,4 @@
+# yaml
 # Config schema for thunder_paragraphs.
 thunder_paragraphs.settings:
   type: config_object
@@ -7,7 +8,7 @@ thunder_paragraphs.settings:
       type: mapping
       label: 'Click edit settings'
       mapping:
-        selector:
-          type: text
-          label: 'Paragraph wrapper CSS selector'
-          description: 'CSS selector used to bind click-to-edit behavior.'
+        enabled:
+          type: boolean
+          label: 'Enable click-to-edit'
+          description: 'Enable or disable click-to-edit behavior globally.'

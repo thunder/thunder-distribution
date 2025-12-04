@@ -15,3 +15,4 @@ paragraphs.widget:
   dependencies:
     - core/drupal
     - core/once
+    - core/drupalSettings

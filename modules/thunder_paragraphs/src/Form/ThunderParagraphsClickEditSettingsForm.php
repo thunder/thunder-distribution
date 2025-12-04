@@ -29,7 +29,6 @@ class ThunderParagraphsClickEditSettingsForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
     $config = $this->config('thunder_paragraphs.settings');
-    $default_selector = '.paragraphs-item, .paragraph-form-item--has-preview, [id^="field-paragraphs-"][id*="-item-wrapper"]';
 
     $form['click_edit'] = [
       '#type' => 'details',
@@ -37,13 +36,11 @@ class ThunderParagraphsClickEditSettingsForm extends ConfigFormBase {
       '#open' => TRUE,
     ];
 
-    $form['click_edit']['selector'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Wrapper CSS selector'),
-      '#default_value' => $config->get('click_edit.selector') ?: $default_selector,
-      '#description' => $this->t('Selector used to attach click-to-edit. Keep it specific to paragraph wrappers.'),
-      '#maxlength' => 500,
-      '#required' => TRUE,
+    $form['click_edit']['enabled'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enable click-to-edit'),
+      '#default_value' => (bool) ($config->get('click_edit.enabled') ?? TRUE),
+      '#description' => $this->t('Toggle to enable or disable click-to-edit behavior.'),
     ];
 
     return parent::buildForm($form, $form_state);
@@ -52,23 +49,9 @@ class ThunderParagraphsClickEditSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state): void {
-    $selector = trim($form_state->getValue('selector'));
-    if ($selector === '') {
-      $form_state->setErrorByName('selector', $this->t('Selector cannot be empty.'));
-    }
-    if (preg_match('/[<>]/', $selector)) {
-      $form_state->setErrorByName('selector', $this->t('Invalid characters in selector.'));
-    }
-    parent::validateForm($form, $form_state);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $this->config('thunder_paragraphs.settings')
-      ->set('click_edit.selector', trim($form_state->getValue('selector')))
+      ->set('click_edit.enabled', (bool) $form_state->getValue('enabled'))
       ->save();
     parent::submitForm($form, $form_state);
   }
