@@ -1,6 +1,6 @@
 // javascript
 /* eslint-env browser */
-(function (Drupal, once) {
+(function thunderParagraphsClickEditIife(Drupal, once) {
   const defaults = {
     selector: '.paragraphs-item, .paragraph-form-item--has-preview',
     onceKey: 'thunder-paragraphs-click-edit',
