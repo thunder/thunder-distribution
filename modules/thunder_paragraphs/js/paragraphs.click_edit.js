@@ -41,12 +41,8 @@
     const { button, target } = event;
     return (
       (button === undefined || button === 0) &&
-      !target.matches(
-        'input, select, textarea, button, a, [role="button"], .button',
-      ) &&
-      !target.matches(
-        '.paragraphs-features__delete-confirm, [name*="_remove"]',
-      ) &&
+      !target.matches('input, select, textarea, button, a, [role="button"], .button') &&
+      !target.matches('.paragraphs-features__delete-confirm, [name*="_remove"]') &&
       !target.closest('.paragraphs-subform') &&
       !target.closest('.click-edit-exclude')
     );
@@ -81,13 +77,11 @@
           ? behaviorSettings.enabled
           : defaults.enabled;
 
-      if (!enabled) {
-        return;
+      if (enabled) {
+        const selector =
+          'tr.draggable .paragraphs-item, .paragraph-form-item--has-preview';
+        once(defaults.onceKey, selector, context).forEach(initClickToEdit);
       }
-
-      const selector =
-        'tr.draggable .paragraphs-item, .paragraph-form-item--has-preview';
-      once(defaults.onceKey, selector, context).forEach(initClickToEdit);
     },
   };
 
