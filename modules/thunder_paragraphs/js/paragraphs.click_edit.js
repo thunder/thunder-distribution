@@ -2,7 +2,6 @@
 /* eslint-env browser */
 (function thunderParagraphsClickEditIife(Drupal, once) {
   const defaults = {
-    selector: '.paragraphs-item, .paragraph-form-item--has-preview',
     onceKey: 'thunder-paragraphs-click-edit',
     enabled: true,
   };
@@ -36,33 +35,21 @@
       return;
     }
     button.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-    button.click();
   }
 
   function shouldTriggerEdit(event) {
-    if (event.button !== undefined && event.button !== 0) {
-      return false;
-    }
-    const { target } = event;
-    if (
-      target.matches(
+    const { button, target } = event;
+    return (
+      (button === undefined || button === 0) &&
+      !target.matches(
         'input, select, textarea, button, a, [role="button"], .button',
-      )
-    ) {
-      return false;
-    }
-    if (
-      target.matches('.paragraphs-features__delete-confirm, [name*="_remove"]')
-    ) {
-      return false;
-    }
-    if (target.closest('.paragraphs-subform')) {
-      return false;
-    }
-    if (target.closest('.click-edit-exclude')) {
-      return false;
-    }
-    return true;
+      ) &&
+      !target.matches(
+        '.paragraphs-features__delete-confirm, [name*="_remove"]',
+      ) &&
+      !target.closest('.paragraphs-subform') &&
+      !target.closest('.click-edit-exclude')
+    );
   }
 
   function handleParagraphClick(event) {
@@ -76,13 +63,11 @@
   }
 
   function initClickToEdit(wrapper) {
-    if (!shouldEnableClickToEdit(wrapper)) {
-      return;
-    }
-    if (wrapper.querySelector('.paragraphs-subform')) {
-      return;
-    }
-    if (!findEditButton(wrapper)) {
+    if (
+      !shouldEnableClickToEdit(wrapper) ||
+      wrapper.querySelector('.paragraphs-subform') ||
+      !findEditButton(wrapper)
+    ) {
       return;
     }
     wrapper.addEventListener('click', handleParagraphClick);
@@ -100,7 +85,8 @@
         return;
       }
 
-      const selector = behaviorSettings.selector || defaults.selector;
+      const selector =
+        'tr.draggable .paragraphs-item, .paragraph-form-item--has-preview';
       once(defaults.onceKey, selector, context).forEach(initClickToEdit);
     },
   };
