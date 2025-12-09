@@ -2,6 +2,7 @@
 
 namespace Drupal\thunder_gqls\Traits;
 
+use Drupal\Core\Url;
 use Drupal\graphql\GraphQL\Resolver\Composite;
 use Drupal\graphql\GraphQL\Resolver\ResolverInterface;
 use Drupal\graphql\GraphQL\ResolverBuilder;
@@ -129,6 +130,36 @@ trait ResolverHelperTrait {
         ->map('language', $this->builder->produce('thunder_language')
           ->map('url', $this->builder->fromParent())
         )
+    );
+  }
+
+  /**
+   * Produces an entity preview.
+   *
+   * @param \Drupal\graphql\GraphQL\Resolver\ResolverInterface $path
+   *   The path resolver.
+   *
+   * @return \Drupal\graphql\GraphQL\Resolver\ResolverInterface
+   *   The resolved entity.
+   */
+  public function fromPreviewRoute(ResolverInterface $path): ResolverInterface {
+    return $this->builder->compose(
+      $path,
+      $this->builder->callback(function ($path_string) {
+        $parts = explode('/', trim($path_string, '/'));
+        if (count($parts) == 3 || $parts[0] !== 'node' || $parts[1] !== 'preview') {
+          return NULL;
+        }
+
+        $uuid = $parts[2];
+        // $view_mode = $parts[3];
+        $store = \Drupal::service('tempstore.private')->get('node_preview');
+        if ($form_state = $store->get($uuid)) {
+          $node = $form_state->getFormObject()->getEntity();
+        }
+
+        return $node ?? NULL;
+      })
     );
   }
 
