@@ -38,7 +38,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
    */
   protected function resolveFields(): void {
 
-    $this->registry->addFieldResolver('Query', 'page',
+    $this->addFieldResolverIfNotExists('Query', 'page',
       $this->builder->cond([
         [
           // Node preview page.

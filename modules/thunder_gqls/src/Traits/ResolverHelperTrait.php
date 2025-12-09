@@ -2,7 +2,6 @@
 
 namespace Drupal\thunder_gqls\Traits;
 
-use Drupal\Core\Url;
 use Drupal\graphql\GraphQL\Resolver\Composite;
 use Drupal\graphql\GraphQL\Resolver\ResolverInterface;
 use Drupal\graphql\GraphQL\ResolverBuilder;
