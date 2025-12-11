@@ -143,22 +143,8 @@ trait ResolverHelperTrait {
    */
   public function fromPreviewRoute(ResolverInterface $path): ResolverInterface {
     return $this->builder->compose(
-      $path,
-      $this->builder->callback(function ($path_string) {
-        $parts = explode('/', trim($path_string, '/'));
-        if (count($parts) == 3 || $parts[0] !== 'node' || $parts[1] !== 'preview') {
-          return NULL;
-        }
-
-        $uuid = $parts[2];
-        // $view_mode = $parts[3];
-        $store = \Drupal::service('tempstore.private')->get('node_preview');
-        if ($form_state = $store->get($uuid)) {
-          $node = $form_state->getFormObject()->getEntity();
-        }
-
-        return $node ?? NULL;
-      })
+      $this->builder->produce('thunder_node_preview')
+        ->map('path', $path),
     );
   }
 
