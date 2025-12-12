@@ -29,6 +29,13 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "path",
+            "url": "./recipes/thunder_article",
+            "options": {
+                "symlink": false
+            }
         }
     ],
     "extra": {
