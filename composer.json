@@ -52,6 +52,7 @@
         "drupal/admin_toolbar": "^3.6",
         "drupal/advancedqueue": "^1.2",
         "drupal/ai": "^1.2",
+        "drupal/ai_provider_openai": "^1.2",
         "drupal/autofill": "^1.1",
         "drupal/autosave_form": "^1.8",
         "drupal/better_exposed_filters": "^7.0.5",
