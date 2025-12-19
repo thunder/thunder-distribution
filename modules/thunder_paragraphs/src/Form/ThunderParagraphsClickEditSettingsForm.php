@@ -39,21 +39,12 @@ class ThunderParagraphsClickEditSettingsForm extends ConfigFormBase {
     $form['click_edit']['enabled'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Enable click-to-edit'),
-      '#default_value' => (bool) ($config->get('click_edit.enabled') ?? TRUE),
+      '#default_value' => (bool) ($config->get('click_edit.enabled')),
       '#description' => $this->t('Toggle to enable or disable click-to-edit behavior.'),
+      '#config_target' => 'thunder_paragraphs.settings:click_edit.enabled',
     ];
 
     return parent::buildForm($form, $form_state);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function submitForm(array &$form, FormStateInterface $form_state): void {
-    $this->config('thunder_paragraphs.settings')
-      ->set('click_edit.enabled', (bool) $form_state->getValue('enabled'))
-      ->save();
-    parent::submitForm($form, $form_state);
   }
 
 }
