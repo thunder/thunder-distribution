@@ -265,6 +265,7 @@ jobs:
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
           composer require "drupal/slick" --no-update
           composer require "drupal/blazy" --no-update
+          composer require "drupal/select2" --no-update
           composer require "drupal/core-dev:~11.3.0" --no-update
 
           composer update
