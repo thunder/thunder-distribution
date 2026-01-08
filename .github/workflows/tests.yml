@@ -293,6 +293,13 @@ jobs:
         env:
           COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
+      - name: Upload test output
+        uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: text-upgrade-output-${{ matrix.PHP_VERSION }}
+          path: /tmp/test/thunder/install/docroot/sites/simpletest/browser_output/
+
   test-min:
 
     runs-on: ubuntu-24.04
@@ -367,6 +374,13 @@ jobs:
         run: test-drupal-project run_tests
         env:
           DRUPAL_TESTING_TEST_GROUP: Thunder
+
+      - name: Upload test output
+        uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: text-min-output-${{ matrix.PHP_VERSION }}
+          path: /tmp/test/thunder/install/docroot/sites/simpletest/browser_output/
 
 #   Start a debug session.
 #   - name: Setup tmate session
