@@ -1,3 +1,4 @@
+uuid: f531028e-d4bf-4a34-938f-88744a467dae
 langcode: en
 status: true
 dependencies:
@@ -76,6 +77,7 @@ permissions:
   - 'edit own page content'
   - 'edit terms in channel'
   - 'edit terms in tags'
+  - 'rebuild node access permissions'
   - 'renew token'
   - 'revert article revisions'
   - 'revert news_article revisions'
