@@ -5,6 +5,6 @@ dependencies:
     - media
 id: media.override
 label: Override
-description: ''
+description: null
 targetEntityType: media
 cache: true
