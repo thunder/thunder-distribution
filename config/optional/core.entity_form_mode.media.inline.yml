@@ -5,6 +5,6 @@ dependencies:
     - media
 id: media.inline
 label: Inline
-description: ''
+description: null
 targetEntityType: media
 cache: true
