@@ -41,11 +41,11 @@ class InlineEntityFormTest extends ThunderJavascriptTestBase {
     // Collapse parargraph form.
     $this->clickCssSelector('[name="field_paragraphs_0_collapse"]');
     $this->clickSave();
+    $this->assertSession()->waitForText('Article Come to DrupalCon New Orleans has been updated.');
 
     // Re-open edit form, value has changed.
     $this->drupalGet($node->toUrl('edit-form'));
-    $this->assertSession()
-      ->pageTextContains('New gallery name before collapse');
+    $this->assertSession()->pageTextContains('New gallery name before collapse');
   }
 
   /**
