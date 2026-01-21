@@ -63,7 +63,7 @@
         "drupal/config_update": "^2.0-alpha4",
         "drupal/content_lock": "^3.0.0-alpha4",
         "drupal/crop": "^2.2",
-        "drupal/diff": "1.9",
+        "drupal/diff": "1.10",
         "drupal/dropzonejs": "^2.8",
         "drupal/empty_fields": "^1.0",
         "drupal/entity_reference_actions": "^1.1.1",
