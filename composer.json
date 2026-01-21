@@ -110,6 +110,9 @@
         "npm-asset/yaireo--tagify": "^4.32.2",
         "caxy/php-htmldiff": "^0.1.14"
     },
+    "conflict": {
+        "drupal/gin": "5.0.12"
+    },
     "suggest": {
         "drupal/search_api_solr": "Provides a Apache Solr backend for the Search API module"
     },
