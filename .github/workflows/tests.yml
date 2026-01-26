@@ -33,9 +33,9 @@ env:
   BROWSERTEST_OUTPUT_DIRECTORY: /tmp
   SKIP_TEST_CLEANUP: true
   # The following variable set the version that the upgrade test starts with.
-  DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION: 4.1.0
-  DRUPAL_TESTING_UPGRADE_DRUSH_VERSION: 12.5.1
-  DRUPAL_TESTING_UPGRADE_VERSION: 7.4.0
+  DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION: 4.2.0
+  DRUPAL_TESTING_UPGRADE_DRUSH_VERSION: 13.4.0
+  DRUPAL_TESTING_UPGRADE_VERSION: 7.5.1
 
 jobs:
 
@@ -263,12 +263,10 @@ jobs:
           composer remove thunder/thunder-distribution --no-update
           composer config name "drupal-testing-thunder/thunder-distribution" --working-dir="${GITHUB_WORKSPACE}"
           composer require "drupal-testing-thunder/thunder-distribution:*" --no-update
-          composer require "drupal/responsive_preview" --no-update
           composer require "drupal/slick" --no-update
-          composer require "drupal/select2" --no-update
           composer require "drupal/blazy" --no-update
-          composer require "drupal/admin_toolbar:^3.4" --no-update
-          composer require "drupal/core-dev:~11.2.0" --no-update
+          composer require "drupal/select2" --no-update
+          composer require "drupal/core-dev:~11.3.0" --no-update
 
           composer update
           composer install
@@ -292,6 +290,13 @@ jobs:
         run: test-drupal-project run_tests
         env:
           COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
+
+      - name: Upload test output
+        uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: text-upgrade-output-${{ matrix.PHP_VERSION }}
+          path: /tmp/test/thunder/install/docroot/sites/simpletest/browser_output/
 
   test-min:
 
@@ -348,7 +353,7 @@ jobs:
 
       - name: Install suggested dependencies
         run: |
-          composer require "league/container:^4.2" "drupal/core-dev:^11.2" "grasmash/yaml-cli:^3.2.1" "drupal/tour:2.0.8" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+          composer require "league/container:^4.2" "drupal/core-dev:^11.3" "grasmash/yaml-cli:^3.2.1" "drupal/tour:2.0.8" --no-update --no-progress --working-dir=/tmp/test/thunder/install
           composer config allow-plugins.php-http/discovery true --no-plugins --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
@@ -367,6 +372,13 @@ jobs:
         run: test-drupal-project run_tests
         env:
           DRUPAL_TESTING_TEST_GROUP: Thunder
+
+      - name: Upload test output
+        uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: text-min-output-${{ matrix.PHP_VERSION }}
+          path: /tmp/test/thunder/install/docroot/sites/simpletest/browser_output/
 
 #   Start a debug session.
 #   - name: Setup tmate session

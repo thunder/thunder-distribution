@@ -111,7 +111,7 @@ class NodeRevisionRevertDefaultForm extends ConfirmFormBase {
       ]);
     $this->messenger()
       ->addStatus($this->t('@type %title has been reverted to the revision from %revision-date.', [
-        '@type' => node_get_type_label($this->revision),
+        '@type' => $this->revision->getBundleEntity()->label(),
         '%title' => $this->revision->label(),
         '%revision-date' => $this->dateFormatter->format($original_revision_timestamp),
       ]));
