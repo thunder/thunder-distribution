@@ -6,7 +6,7 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Configure Thunder Paragraphs click-to-edit settings.
+ * Configure Thunder Paragraphs click-to-edit settings to enable.
  */
 class ThunderParagraphsClickEditSettingsForm extends ConfigFormBase {
 
