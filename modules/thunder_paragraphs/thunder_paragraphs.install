@@ -1,0 +1,11 @@
+<?php
+/**
+ * Set default for click-to-edit on existing sites.
+ */
+function thunder_paragraphs_update_9001(): void {
+  $config = \Drupal::configFactory()->getEditable('thunder_paragraphs.settings');
+
+  if ($config->get('click_edit.enabled') === NULL) {
+    $config->set('click_edit.enabled', TRUE)->save();
+  }
+}
