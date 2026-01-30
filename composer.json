@@ -45,9 +45,6 @@
             },
             "drupal/graphql": {
                 "#3563846: Add node preview": "https://git.drupalcode.org/project/graphql/-/merge_requests/66.patch"
-            },
-            "drupal/consumer_base_url": {
-                "#3565024: Make consumer routes alterable": "https://git.drupalcode.org/project/consumer_base_url/-/merge_requests/14.patch"
             }
         }
     },
