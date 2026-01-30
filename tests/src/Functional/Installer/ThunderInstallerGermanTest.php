@@ -12,7 +12,7 @@ class ThunderInstallerGermanTest extends ThunderInstallerTest {
   /**
    * {@inheritdoc}
    */
-  protected int $knownWarnings = 2;
+  protected int $knownWarnings = 0;
 
   /**
    * {@inheritdoc}
