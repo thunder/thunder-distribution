@@ -41,3 +41,8 @@ Same as text paragraph. The difference is it will be displayed as a quote in the
 ## Link
 
 Lets you add a list of internal or external links to your article.
+
+## Click-to-Edit Configuration
+
+To enable the paragraph-click-to-edit feature, you need to enable it at the
+configuration page `/admin/config/content/thunder-paragraphs`.

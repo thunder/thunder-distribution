@@ -1,0 +1,14 @@
+# yaml
+# Config schema for thunder_paragraphs.
+thunder_paragraphs.settings:
+  type: config_object
+  label: 'Thunder Paragraphs settings'
+  mapping:
+    click_edit:
+      type: mapping
+      label: 'Click edit settings'
+      mapping:
+        enabled:
+          type: boolean
+          label: 'Enable click-to-edit'
+          description: 'Enable or disable click-to-edit behavior globally.'

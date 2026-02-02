@@ -10,3 +10,9 @@ paragraphs.widget:
   css:
     theme:
       css/paragraphs.widget.css: {}
+  js:
+    js/paragraphs.click_edit.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - core/drupalSettings
