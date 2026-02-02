@@ -133,22 +133,6 @@ trait ResolverHelperTrait {
   }
 
   /**
-   * Produces an entity preview.
-   *
-   * @param \Drupal\graphql\GraphQL\Resolver\ResolverInterface $path
-   *   The path resolver.
-   *
-   * @return \Drupal\graphql\GraphQL\Resolver\ResolverInterface
-   *   The resolved entity.
-   */
-  public function fromPreviewRoute(ResolverInterface $path): ResolverInterface {
-    return $this->builder->compose(
-      $this->builder->produce('thunder_node_preview')
-        ->map('path', $path),
-    );
-  }
-
-  /**
    * Takes the bundle name and returns the schema name.
    *
    * @param string $bundleName
