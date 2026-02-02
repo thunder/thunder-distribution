@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the thunder_paragraphs module.
+ */
+
 /**
  * Set default for click-to-edit on existing sites.
  */

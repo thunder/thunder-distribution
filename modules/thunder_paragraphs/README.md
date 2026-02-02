@@ -44,12 +44,5 @@ Lets you add a list of internal or external links to your article.
 
 ## Click-to-Edit Configuration
 
-To make the paragraph-click-to-open module work with Thunder Paragraphs, you need to add the following configuration:
-Navigate to the configuration page at `/admin/config/content/thunder-paragraphs`:
-
-```
-selector: '.paragraph-form-item--has-preview, [id^="field-paragraphs-"][id*="-item-wrapper"]'
-```
-
-You can also provide additional CSS selectors if you have custom paragraph types.
-
+To enable the paragraph-click-to-edit feature, you need to enable it at the
+configuration page `/admin/config/content/thunder-paragraphs`.
