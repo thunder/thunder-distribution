@@ -7,6 +7,7 @@
 
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\ckeditor5\SmartDefaultSettings;
 use Drupal\editor\Entity\Editor;
 use Drupal\entity_browser\Entity\EntityBrowser;
@@ -194,11 +195,11 @@ function thunder_post_update_0005_switch_to_tagify(): string {
 /**
  * Remove empty media items.
  */
-function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?string {
+function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?TranslatableMarkup {
   if (empty($sandbox['thunder_post_update_0006'])) {
     // Create a list of media types to process. We skip processing media types
     // with custom storage.
-    foreach(MediaType::loadMultiple() as $id => $mediaType) {
+    foreach (MediaType::loadMultiple() as $id => $mediaType) {
       $sourceField = $mediaType->getSource()->getSourceFieldDefinition($mediaType);
       if (!$sourceField->getFieldStorageDefinition()->hasCustomStorage()) {
         $sandbox['thunder_post_update_0006']['media_types'][$id] = $id;
@@ -207,7 +208,7 @@ function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?st
     $sandbox['thunder_post_update_0006']['media_types_count'] = count($sandbox['thunder_post_update_0006']['media_types']);
   }
 
-  $count = 0;
+  $message = NULL;
   if (!empty($sandbox['thunder_post_update_0006']['media_types'])) {
     $mediaType = MediaType::load(reset($sandbox['thunder_post_update_0006']['media_types']));
     $sourceField = $mediaType->getSource()->getSourceFieldDefinition($mediaType);
@@ -226,6 +227,9 @@ function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?st
       // There are no more empty media items to remove of this type.
       unset($sandbox['thunder_post_update_0006']['media_types'][$mediaType->id()]);
     }
+    if ($count > 0) {
+      $message = t('Removed @count empty @type media items.', ['@count' => $count, '@type' => $mediaType->label()]);
+    }
   }
 
   if (!empty($sandbox['thunder_post_update_0006']['media_types'])) {
@@ -236,9 +240,5 @@ function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?st
     $sandbox['finished'] = 1;
   }
 
-  if ($count > 0) {
-    return t('Removed @count empty media items.', ['@count' => $count]);
-  }
-
-  return NULL;
+  return $message;
 }
