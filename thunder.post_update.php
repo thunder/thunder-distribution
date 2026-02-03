@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\Core\Site\Settings;
 use Drupal\ckeditor5\SmartDefaultSettings;
 use Drupal\editor\Entity\Editor;
 use Drupal\entity_browser\Entity\EntityBrowser;
@@ -193,24 +194,51 @@ function thunder_post_update_0005_switch_to_tagify(): string {
 /**
  * Remove empty media items.
  */
-function thunder_post_update_0006_remove_empty_media_items(): string {
-  $count = 0;
-  foreach (MediaType::loadMultiple() as $mediaType) {
-    $sourceField = $mediaType->getSource()->getSourceFieldDefinition($mediaType);
-    if ($sourceField->getFieldStorageDefinition()->hasCustomStorage()) {
-      // Skip custom storage fields.
-      continue;
+function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?string {
+  if (empty($sandbox['thunder_post_update_0006'])) {
+    // Create a list of media types to process. We skip processing media types
+    // with custom storage.
+    foreach(MediaType::loadMultiple() as $id => $mediaType) {
+      $sourceField = $mediaType->getSource()->getSourceFieldDefinition($mediaType);
+      if (!$sourceField->getFieldStorageDefinition()->hasCustomStorage()) {
+        $sandbox['thunder_post_update_0006']['media_types'][$id] = $id;
+      }
     }
+    $sandbox['thunder_post_update_0006']['media_types_count'] = count($sandbox['thunder_post_update_0006']['media_types']);
+  }
+
+  $count = 0;
+  if (!empty($sandbox['thunder_post_update_0006']['media_types'])) {
+    $mediaType = MediaType::load(reset($sandbox['thunder_post_update_0006']['media_types']));
+    $sourceField = $mediaType->getSource()->getSourceFieldDefinition($mediaType);
     $query = \Drupal::entityQuery('media');
     $query->condition('bundle', $mediaType->id());
     $query->condition($sourceField->getName(), '', 'IS NULL');
     $query->accessCheck(FALSE);
+    $query->range(0, Settings::get('entity_update_batch_size'));
     $ids = $query->execute();
+    $count = count($ids);
     if (!empty($ids)) {
       $media_entities = \Drupal::entityTypeManager()->getStorage('media')->loadMultiple($ids);
       \Drupal::entityTypeManager()->getStorage('media')->delete($media_entities);
-      $count += count($ids);
+    }
+    if ($count < Settings::get('entity_update_batch_size')) {
+      // There are no more empty media items to remove of this type.
+      unset($sandbox['thunder_post_update_0006']['media_types'][$mediaType->id()]);
     }
   }
-  return t('Removed @count empty media items.', ['@count' => $count]);
+
+  if (!empty($sandbox['thunder_post_update_0006']['media_types'])) {
+    $processed = count($sandbox['thunder_post_update_0006']['media_types']) - $sandbox['thunder_post_update_0006']['media_types_count'];
+    $sandbox['finished'] = $processed / $sandbox['thunder_post_update_0006']['media_types_count'];
+  }
+  else {
+    $sandbox['finished'] = 1;
+  }
+
+  if ($count > 0) {
+    return t('Removed @count empty media items.', ['@count' => $count]);
+  }
+
+  return NULL;
 }
