@@ -206,6 +206,7 @@ function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?Tr
       }
     }
     $sandbox['thunder_post_update_0006']['media_types_count'] = count($sandbox['thunder_post_update_0006']['media_types']);
+    $sandbox['thunder_post_update_0006']['batch_size'] = Settings::get('entity_update_batch_size');
   }
 
   $message = NULL;
@@ -216,14 +217,14 @@ function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?Tr
     $query->condition('bundle', $mediaType->id());
     $query->condition($sourceField->getName(), '', 'IS NULL');
     $query->accessCheck(FALSE);
-    $query->range(0, Settings::get('entity_update_batch_size'));
+    $query->range(0, $sandbox['thunder_post_update_0006']['batch_size']);
     $ids = $query->execute();
     $count = count($ids);
     if (!empty($ids)) {
       $media_entities = \Drupal::entityTypeManager()->getStorage('media')->loadMultiple($ids);
       \Drupal::entityTypeManager()->getStorage('media')->delete($media_entities);
     }
-    if ($count < Settings::get('entity_update_batch_size')) {
+    if ($count < $sandbox['thunder_post_update_0006']['batch_size']) {
       // There are no more empty media items to remove of this type.
       unset($sandbox['thunder_post_update_0006']['media_types'][$mediaType->id()]);
     }
@@ -233,11 +234,11 @@ function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?Tr
   }
 
   if (!empty($sandbox['thunder_post_update_0006']['media_types'])) {
-    $processed = count($sandbox['thunder_post_update_0006']['media_types']) - $sandbox['thunder_post_update_0006']['media_types_count'];
-    $sandbox['finished'] = $processed / $sandbox['thunder_post_update_0006']['media_types_count'];
+    $processed = $sandbox['thunder_post_update_0006']['media_types_count'] - count($sandbox['thunder_post_update_0006']['media_types']);
+    $sandbox['#finished'] = $processed / $sandbox['thunder_post_update_0006']['media_types_count'];
   }
   else {
-    $sandbox['finished'] = 1;
+    $sandbox['#finished'] = 1;
   }
 
   return $message;
