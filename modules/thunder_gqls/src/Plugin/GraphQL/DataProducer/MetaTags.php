@@ -96,7 +96,7 @@ class MetaTags extends DataProducerPluginBase implements ContainerFactoryPluginI
    *   Normalized metatags.
    */
   public function resolve(mixed $value, ?string $type, RefinableCacheableDependencyInterface $metadata): array {
-    if ($value instanceof ContentEntityInterface) {
+    if ($value instanceof ContentEntityInterface && !$value->isNew()) {
       $context = new RenderContext();
       $result = $this->renderer->executeInRenderContext($context, function () use ($value): array {
         $tags = $this->metatagManager->tagsFromEntityWithDefaults($value);
