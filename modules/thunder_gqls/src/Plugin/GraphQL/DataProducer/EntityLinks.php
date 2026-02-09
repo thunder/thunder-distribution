@@ -6,6 +6,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\RenderContext;
 use Drupal\Core\Render\RendererInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -38,7 +39,8 @@ class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPlug
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('renderer')
+      $container->get('renderer'),
+      $container->get('current_route_match')
     );
   }
 
@@ -53,12 +55,15 @@ class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPlug
    *   The plugin definition.
    * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer service.
+   * @param \Drupal\Core\Routing\RouteMatchInterface $routeMatch
+   *   The current route match.
    */
   public function __construct(
     array $configuration,
     string $plugin_id,
     $plugin_definition,
     protected readonly RendererInterface $renderer,
+    protected readonly RouteMatchInterface $routeMatch,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
@@ -73,6 +78,11 @@ class EntityLinks extends DataProducerPluginBase implements ContainerFactoryPlug
    *   The entity links.
    */
   public function resolve(EntityInterface $entity): array {
+    // Do not expose links on node preview.
+    if ($this->routeMatch->getRouteName() === 'entity.node.preview') {
+      return [];
+    }
+
     $context = new RenderContext();
     $result = $this->renderer->executeInRenderContext($context, function () use ($entity): array {
       $links = $entity->getEntityType()->getLinkTemplates();
