@@ -44,7 +44,7 @@
                 "Issue #3542076: Empty media entities with simple widget in paragraphs": "https://www.drupal.org/files/issues/2025-08-20/3542076-empty-media-entities-with-simple-widget-in-paragraphs.diff"
             },
             "drupal/graphql": {
-                "#3563846: Add node preview": "https://git.drupalcode.org/project/graphql/-/merge_requests/66.patch"
+                "#3563846: Add node preview": "https://git.drupalcode.org/project/graphql/-/merge_requests/66.diff"
             }
         }
     },
