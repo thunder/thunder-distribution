@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.2.7](https://github.com/thunder/thunder-distribution/tree/8.2.7) 2025-12-26
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.2.6...8.2.7)
+
+- Update function visibility in gql wrapper for searchApi.
+- Remove facets patch.
+
 ## [8.2.6](https://github.com/thunder/thunder-distribution/tree/8.2.6) 2025-10-14
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.2.5...8.2.6)
