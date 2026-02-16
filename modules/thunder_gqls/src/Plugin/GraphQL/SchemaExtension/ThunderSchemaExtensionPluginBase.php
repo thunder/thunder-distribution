@@ -90,8 +90,12 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
     $this->addFieldResolverIfNotExists(
       $type,
       'id',
-      $this->builder->produce('entity_id')
-        ->map('entity', $this->builder->fromParent())
+      $this->builder->compose(
+        $this->builder->produce('entity_id')
+          ->map('entity', $this->builder->fromParent()),
+        // Coerce NULL to 0 for preview.
+        $this->builder->callback(fn ($parent) => $parent ?: 0)
+      )
     );
 
     $this->addFieldResolverIfNotExists(
@@ -121,10 +125,20 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
     if ($entity_type->hasLinkTemplate('canonical')) {
       $this->addFieldResolverIfNotExists($type, 'url',
         $this->builder->compose(
-          $this->builder->produce('entity_url')
-            ->map('entity', $this->builder->fromParent()),
-          $this->builder->produce('url_path')
-            ->map('url', $this->builder->fromParent())
+          $this->builder->cond([
+            [
+              $this->builder->callback(fn ($entity) => !$entity->isNew()),
+              $this->builder->compose(
+                $this->builder->produce('entity_url')
+                  ->map('entity', $this->builder->fromParent()),
+                $this->builder->produce('url_path')
+                  ->map('url', $this->builder->fromParent()),
+              ),
+            ], [
+              $this->builder->fromValue('TRUE'),
+              $this->builder->fromValue('#'),
+            ],
+          ])
         )
       );
     }
