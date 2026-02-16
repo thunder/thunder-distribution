@@ -1,0 +1,6 @@
+thunder_paragraphs.settings_form:
+  title: 'Thunder Paragraphs'
+  description: 'Configure click-to-edit behavior for paragraphs.'
+  route_name: thunder_paragraphs.settings_form
+  parent: system.admin_config_content
+  weight: 100

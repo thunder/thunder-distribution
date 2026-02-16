@@ -57,3 +57,17 @@ function thunder_update_8328(): \Stringable|string {
   }
   return t('No update required.');
 }
+
+/**
+ * Enable paragraphs click-to-edit on existing sites.
+ */
+function thunder_update_8329(): void {
+  if (\Drupal::moduleHandler()->moduleExists('thunder_paragraphs')) {
+    $config = \Drupal::configFactory()
+      ->getEditable('thunder_paragraphs.settings');
+
+    if ($config->get('click_edit.enabled') === NULL) {
+      $config->set('click_edit.enabled', TRUE)->save();
+    }
+  }
+}
