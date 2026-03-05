@@ -1,5 +1,11 @@
 # Changelog
 
+## [8.3.3](https://github.com/thunder/thunder-distribution/tree/8.3.3) 2026-03-05
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.3.2...8.3.3)
+
+- Remove merged graphql patch to fix the composer install.
+
 ## [8.3.2](https://github.com/thunder/thunder-distribution/tree/8.3.2) 2026-02-17
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.3.1...8.3.2)
