@@ -52,7 +52,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.1', '8.3' ]
+        PHP_VERSION: [ '8.3' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
@@ -346,7 +346,7 @@ jobs:
 
       - name: Install suggested dependencies
         run: |
-          composer require "league/container:^4.2" "drupal/core-dev:^10.5" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+          composer require "league/container:^4.2" "drupal/core-dev:^10.6" --no-update --no-progress --working-dir=/tmp/test/thunder/install
           composer config allow-plugins.php-http/discovery true --no-plugins --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
