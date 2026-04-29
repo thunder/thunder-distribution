@@ -5,7 +5,6 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\Schema;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Url;
-use Drupal\graphql\GraphQL\ResolverRegistry;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\graphql\Plugin\DataProducerPluginManager;
 use Drupal\graphql\Plugin\GraphQL\Schema\ComposableSchema;
