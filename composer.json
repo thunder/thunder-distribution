@@ -69,7 +69,7 @@
         "drupal/focal_point": "^2.1.2",
         "drupal/facets": "^3.0.2",
         "drupal/gin": "^5.0.2",
-        "drupal/graphql": "dev-5.x",
+        "drupal/graphql": "dev-5.x@dev",
         "drupal/inline_entity_form": "^3.0.0-rc20",
         "drupal/ivw_integration": "^2.0",
         "drupal/length_indicator": "^1.2",
@@ -130,6 +130,5 @@
         "mglaman/phpstan-drupal": "^2.0",
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpunit/phpunit": "^11.5"
-    },
-    "minimum-stability": "dev"
+    }
 }
