@@ -4,6 +4,7 @@ namespace Drupal\thunder_xymatic\Plugin\GraphQL\SchemaExtension;
 
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension\ThunderSchemaExtensionPluginBase;
+use GraphQL\Language\Source;
 
 /**
  * The Thunder VG Wort schema extension.
@@ -16,6 +17,13 @@ use Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension\ThunderSchemaExtensionPlu
  * )
  */
 class ThunderXymaticSchemaExtension extends ThunderSchemaExtensionPluginBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getExtensionDefinition(): NULL {
+    return NULL;
+  }
 
   /**
    * {@inheritdoc}
