@@ -1,4 +1,4 @@
-<BS>
+{
     "name": "thunder/thunder-distribution",
     "description": "The thunder distribution",
     "type": "drupal-profile",
