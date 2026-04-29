@@ -19,6 +19,13 @@ class ThunderBreadcrumbSchemaExtension extends ThunderSchemaExtensionPluginBase 
   /**
    * {@inheritdoc}
    */
+  public function getBaseDefinition(): NULL {
+    return NULL;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 

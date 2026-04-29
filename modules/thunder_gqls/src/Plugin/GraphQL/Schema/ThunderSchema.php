@@ -11,6 +11,7 @@ use Drupal\graphql\Plugin\DataProducerPluginManager;
 use Drupal\graphql\Plugin\GraphQL\Schema\ComposableSchema;
 use Drupal\graphql\Plugin\GraphQL\Schema\SdlSchemaPluginBase;
 use Drupal\thunder_gqls\Traits\ResolverHelperTrait;
+use GraphQL\Language\Source;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -60,9 +61,8 @@ class ThunderSchema extends ComposableSchema {
   /**
    * {@inheritdoc}
    */
-  public function getResolverRegistry(): ResolverRegistryInterface {
-    $this->registry = new ResolverRegistry();
-
+  public function registerResolvers(ResolverRegistryInterface $registry): void {
+    $this->registry = $registry;
     $this->createResolverBuilder();
     $this->resolveBaseTypes();
 
@@ -77,8 +77,6 @@ class ThunderSchema extends ComposableSchema {
           ->map('token', $this->builder->fromArgument('auHash'))
       );
     }
-
-    return $this->registry;
   }
 
   /**
@@ -124,7 +122,7 @@ class ThunderSchema extends ComposableSchema {
   /**
    * {@inheritdoc}
    */
-  protected function getSchemaDefinition(): string {
+  protected function getSchemaDefinition(): Source {
     return SdlSchemaPluginBase::getSchemaDefinition();
   }
 

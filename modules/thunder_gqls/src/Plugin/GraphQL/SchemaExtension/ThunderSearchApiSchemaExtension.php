@@ -20,6 +20,13 @@ class ThunderSearchApiSchemaExtension extends ThunderSchemaExtensionPluginBase {
   /**
    * {@inheritdoc}
    */
+  public function getExtensionDefinition(): NULL {
+    return NULL;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 
