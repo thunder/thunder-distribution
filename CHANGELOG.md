@@ -1,5 +1,11 @@
 # Changelog
 
+## [8.3.4](https://github.com/thunder/thunder-distribution/tree/8.3.4) 2026-04-26
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.3.3...8.3.4)
+
+- Pin GraphQL and Scheduler Content Moderation Integration modules to prevent braking changes to crawl in without a fix.
+
 ## [8.3.3](https://github.com/thunder/thunder-distribution/tree/8.3.3) 2026-03-05
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.3.2...8.3.3)
