@@ -36,8 +36,8 @@ class ThunderArticleTeaser extends DataProducerPluginBase {
    */
   public function resolve(ContentEntityInterface $entity): array {
     return [
-      'image' => $entity->field_teaser_media->entity,
-      'text' => $entity->field_teaser_text->value,
+      'image' => $entity->get('field_teaser_media')->entity,
+      'text' => $entity->get('field_teaser_text')->value,
     ];
   }
 
