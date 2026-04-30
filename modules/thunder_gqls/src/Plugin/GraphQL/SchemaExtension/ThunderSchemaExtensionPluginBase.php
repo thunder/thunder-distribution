@@ -129,17 +129,17 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
         $this->builder->compose(
           $this->builder->cond([
             [
-              $this->builder->produce('entity_is_not_new')
+              $this->builder->produce('entity_is_new')
                 ->map('entity', $this->builder->fromParent()),
+              $this->builder->fromValue('#'),
+            ], [
+              $this->builder->fromValue('TRUE'),
               $this->builder->compose(
                 $this->builder->produce('entity_url')
                   ->map('entity', $this->builder->fromParent()),
                 $this->builder->produce('url_path')
                   ->map('url', $this->builder->fromParent()),
               ),
-            ], [
-              $this->builder->fromValue('TRUE'),
-              $this->builder->fromValue('#'),
             ],
           ])
         )

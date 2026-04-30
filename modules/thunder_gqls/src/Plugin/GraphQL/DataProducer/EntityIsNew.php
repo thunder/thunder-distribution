@@ -6,14 +6,14 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 
 /**
- * Returns TRUE if the entity has been saved (is not new).
+ * Returns TRUE if the entity has not yet been saved.
  *
  * @DataProducer(
- *   id = "entity_is_not_new",
- *   name = @Translation("Entity Is Not New"),
- *   description = @Translation("Returns TRUE if the entity has been saved (is not new)."),
+ *   id = "entity_is_new",
+ *   name = @Translation("Entity Is New"),
+ *   description = @Translation("Returns TRUE if the entity has not yet been saved."),
  *   produces = @ContextDefinition("boolean",
- *     label = @Translation("Is not new")
+ *     label = @Translation("Is new")
  *   ),
  *   consumes = {
  *     "entity" = @ContextDefinition("entity",
@@ -23,19 +23,19 @@ use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
  *   }
  * )
  */
-class EntityIsNotNew extends DataProducerPluginBase {
+class EntityIsNew extends DataProducerPluginBase {
 
   /**
-   * Resolves whether the entity is not new.
+   * Resolves whether the entity is new.
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The entity.
    *
    * @return bool
-   *   TRUE if the entity has been saved, FALSE if it is new.
+   *   TRUE if the entity has not been saved yet, FALSE otherwise.
    */
   public function resolve(EntityInterface $entity): bool {
-    return !$entity->isNew();
+    return $entity->isNew();
   }
 
 }
