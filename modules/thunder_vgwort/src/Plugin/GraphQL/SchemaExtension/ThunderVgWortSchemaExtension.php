@@ -4,7 +4,6 @@ namespace Drupal\thunder_vgwort\Plugin\GraphQL\SchemaExtension;
 
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension\ThunderSchemaExtensionPluginBase;
-use GraphQL\Language\Source;
 
 /**
  * The Thunder VG Wort schema extension.

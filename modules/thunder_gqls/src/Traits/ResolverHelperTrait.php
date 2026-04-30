@@ -68,12 +68,9 @@ trait ResolverHelperTrait {
       $this->builder->produce('entity_reference')
         ->map('field', $this->builder->fromValue($field))
         ->map('entity', $entity ?: $this->builder->fromParent()),
-      $this->builder->callback(function ($parent) use ($multiValue) {
-        if ($multiValue) {
-          return $parent;
-        }
-        return $parent[0] ?? NULL;
-      })
+      $this->builder->produce('entity_reference_item')
+        ->map('list', $this->builder->fromParent())
+        ->map('multiple', $this->builder->fromValue($multiValue))
     );
   }
 
@@ -106,7 +103,9 @@ trait ResolverHelperTrait {
   public function addSimpleCallbackFields(string $type, array $fields): void {
     foreach ($fields as $field) {
       $this->addFieldResolverIfNotExists($type, $field,
-        $this->builder->callback(fn($arr) => $arr[$field] ?? NULL)
+        $this->builder->produce('array_value')
+          ->map('input', $this->builder->fromParent())
+          ->map('key', $this->builder->fromValue($field))
       );
     }
   }
