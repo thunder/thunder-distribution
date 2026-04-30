@@ -9,8 +9,8 @@ use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
  * Resolves the URL string from a link array containing a 'uri' key.
  *
  * @DataProducer(
- *   id = "thunder_link_url",
- *   name = @Translation("Thunder Link URL"),
+ *   id = "link_url",
+ *   name = @Translation("Link URL"),
  *   description = @Translation("Resolves the URL string from a link array containing a 'uri' key."),
  *   produces = @ContextDefinition("string",
  *     label = @Translation("URL string")
@@ -23,7 +23,7 @@ use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
  *   }
  * )
  */
-class ThunderLinkUrl extends DataProducerPluginBase {
+class LinkUrl extends DataProducerPluginBase {
 
   /**
    * Resolves the URL from a link array.

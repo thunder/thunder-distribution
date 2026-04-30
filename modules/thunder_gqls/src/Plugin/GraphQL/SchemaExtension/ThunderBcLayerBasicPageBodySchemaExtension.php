@@ -3,6 +3,7 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
+use GraphQL\Language\Source;
 
 /**
  * The menu schema extension.
@@ -19,7 +20,7 @@ class ThunderBcLayerBasicPageBodySchemaExtension extends ThunderSchemaExtensionP
   /**
    * {@inheritdoc}
    */
-  public function getBaseDefinition(): NULL {
+  public function getBaseDefinition(): ?Source {
     return NULL;
   }
 

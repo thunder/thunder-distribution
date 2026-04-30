@@ -3,6 +3,7 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
+use GraphQL\Language\Source;
 
 /**
  * Extension to add the JSON-LD script tag query.
@@ -19,7 +20,7 @@ class ThunderJsonLdSchemaExtension extends ThunderSchemaExtensionPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function getBaseDefinition(): NULL {
+  public function getBaseDefinition(): ?Source {
     return NULL;
   }
 

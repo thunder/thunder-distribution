@@ -4,6 +4,7 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\thunder_gqls\GraphQL\ParagraphsTypeResolver;
+use GraphQL\Language\Source;
 
 /**
  * The paragraph schema extension.
@@ -20,7 +21,7 @@ class ThunderParagraphsSchemaExtension extends ThunderSchemaExtensionPluginBase 
   /**
    * {@inheritdoc}
    */
-  public function getExtensionDefinition(): NULL {
+  public function getExtensionDefinition(): ?Source {
     return NULL;
   }
 

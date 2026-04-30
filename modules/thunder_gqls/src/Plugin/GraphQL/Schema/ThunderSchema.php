@@ -129,7 +129,7 @@ class ThunderSchema extends ComposableSchema {
    */
   private function resolveBaseTypes(): void {
     $this->addFieldResolverIfNotExists('Link', 'url',
-      $this->builder->produce('thunder_link_url')
+      $this->builder->produce('link_url')
         ->map('link', $this->builder->fromParent())
     );
 

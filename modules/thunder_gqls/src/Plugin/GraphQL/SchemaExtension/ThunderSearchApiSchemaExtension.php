@@ -3,6 +3,7 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
+use GraphQL\Language\Source;
 
 /**
  * The search api query schema extension.
@@ -19,7 +20,7 @@ class ThunderSearchApiSchemaExtension extends ThunderSchemaExtensionPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function getExtensionDefinition(): NULL {
+  public function getExtensionDefinition(): ?Source {
     return NULL;
   }
 
