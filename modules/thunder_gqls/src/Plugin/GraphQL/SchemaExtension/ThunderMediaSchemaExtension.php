@@ -71,12 +71,8 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
         $this->builder->produce('image_derivative')
           ->map('entity', $this->builder->fromParent())
           ->map('style', $this->builder->fromArgument('style')),
-        $this->builder->callback(function ($values) {
-          if (!empty($values['url'])) {
-            return $values + ['src' => $values['url']];
-          }
-          return $values;
-        })
+        $this->builder->produce('image_derivative_src')
+          ->map('derivative', $this->builder->fromParent())
       )
     );
 

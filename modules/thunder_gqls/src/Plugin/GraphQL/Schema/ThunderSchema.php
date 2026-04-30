@@ -4,7 +4,6 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\Schema;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
-use Drupal\Core\Url;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\graphql\Plugin\DataProducerPluginManager;
 use Drupal\graphql\Plugin\GraphQL\Schema\ComposableSchema;
@@ -130,13 +129,8 @@ class ThunderSchema extends ComposableSchema {
    */
   private function resolveBaseTypes(): void {
     $this->addFieldResolverIfNotExists('Link', 'url',
-      $this->builder->callback(function ($parent) {
-        if (!empty($parent) && isset($parent['uri'])) {
-          $urlObject = Url::fromUri($parent['uri']);
-          $url = $urlObject->toString(TRUE)->getGeneratedUrl();
-        }
-        return $url ?? '';
-      })
+      $this->builder->produce('thunder_link_url')
+        ->map('link', $this->builder->fromParent())
     );
 
     $this->addSimpleCallbackFields('Link', ['title']);

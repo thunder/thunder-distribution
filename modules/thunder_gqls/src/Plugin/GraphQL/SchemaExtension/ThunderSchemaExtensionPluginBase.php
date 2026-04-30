@@ -94,7 +94,9 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
         $this->builder->produce('entity_id')
           ->map('entity', $this->builder->fromParent()),
         // Coerce NULL to 0 for preview.
-        $this->builder->callback(fn ($parent) => $parent ?: 0)
+        $this->builder->produce('fallback_value')
+          ->map('input', $this->builder->fromParent())
+          ->map('fallback', $this->builder->fromValue(0))
       )
     );
 
@@ -111,9 +113,9 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
       $this->builder->compose(
         $this->builder->produce('entity_label')
           ->map('entity', $this->builder->fromParent()),
-        $this->builder->callback(function ($parent) {
-          return $parent ?: '';
-        })
+        $this->builder->produce('fallback_value')
+          ->map('input', $this->builder->fromParent())
+          ->map('fallback', $this->builder->fromValue(''))
       )
     );
 
@@ -127,7 +129,8 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
         $this->builder->compose(
           $this->builder->cond([
             [
-              $this->builder->callback(fn ($entity) => !$entity->isNew()),
+              $this->builder->produce('entity_is_not_new')
+                ->map('entity', $this->builder->fromParent()),
               $this->builder->compose(
                 $this->builder->produce('entity_url')
                   ->map('entity', $this->builder->fromParent()),
