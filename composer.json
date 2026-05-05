@@ -44,7 +44,7 @@
                 "Issue #3542076: Empty media entities with simple widget in paragraphs": "https://www.drupal.org/files/issues/2025-08-20/3542076-empty-media-entities-with-simple-widget-in-paragraphs.diff"
             },
             "drupal/vgwort": {
-                "Issue #3587617: Graphql 5 support": "https://git.drupalcode.org/project/vgwort/-/merge_requests/62.diff"
+                "Issue #3587617: Graphql 5 support": "https://www.drupal.org/files/issues/2026-05-05/3587617.patch"
             }
         }
     },
