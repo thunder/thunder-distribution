@@ -6,7 +6,7 @@ dependencies:
 id: channel
 label: Channel
 type: 'canonical_entities:taxonomy_term'
-pattern: '[term:parents:join-path]/[term:name]'
+pattern: '/[term:parents:join-path]/[term:name]'
 selection_criteria:
   10250d56-f16e-4847-b5a3-ff9a90e2e1b5:
     id: 'entity_bundle:taxonomy_term'
