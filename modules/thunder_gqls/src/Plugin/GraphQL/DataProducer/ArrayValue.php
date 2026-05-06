@@ -2,6 +2,7 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
+use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 
 /**
@@ -21,7 +22,7 @@ use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
  *     ),
  *     "key" = @ContextDefinition("string",
  *       label = @Translation("Key"),
- *       required = TRUE
+ *       required = FALSE
  *     )
  *   }
  * )
@@ -31,19 +32,24 @@ class ArrayValue extends DataProducerPluginBase {
   /**
    * Resolves the value for the given key.
    *
+   * When no key is provided, uses the GraphQL field name (mirroring
+   * graphql-php's defaultFieldResolver behaviour).
+   *
    * @param mixed $input
    *   The input array.
-   * @param string $key
-   *   The key to look up.
+   * @param string|null $key
+   *   The key to look up, or NULL to use the field name.
+   * @param \Drupal\graphql\GraphQL\Execution\FieldContext $field
+   *   The current field context.
    *
    * @return mixed
    *   The value or NULL if not present.
    */
-  public function resolve(mixed $input, string $key): mixed {
+  public function resolve(mixed $input, ?string $key, FieldContext $field): mixed {
     if (!is_array($input)) {
       return NULL;
     }
-    return $input[$key] ?? NULL;
+    return $input[$key ?? $field->getFieldName()] ?? NULL;
   }
 
 }

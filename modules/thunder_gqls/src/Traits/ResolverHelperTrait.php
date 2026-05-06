@@ -105,7 +105,6 @@ trait ResolverHelperTrait {
       $this->addFieldResolverIfNotExists($type, $field,
         $this->builder->produce('array_value')
           ->map('input', $this->builder->fromParent())
-          ->map('key', $this->builder->fromValue($field))
       );
     }
   }
