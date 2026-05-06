@@ -8,7 +8,7 @@ dependencies:
 id: news_article
 label: 'News Article'
 type: 'canonical_entities:node'
-pattern: '[node:field_seo_title]'
+pattern: '/[node:field_seo_title]'
 selection_criteria:
   e4d98e6f-1b80-44d6-98b8-ea6047280ae5:
     id: 'entity_bundle:node'
