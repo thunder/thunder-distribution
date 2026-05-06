@@ -10,6 +10,7 @@ use Drupal\graphql\Plugin\DataProducerPluginManager;
 use Drupal\graphql\Plugin\GraphQL\SchemaExtension\SdlSchemaExtensionPluginBase;
 use Drupal\thunder_gqls\Traits\ResolverHelperTrait;
 use Drupal\user\EntityOwnerInterface;
+use GraphQL\Language\Source;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -42,6 +43,68 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
     $plugin->setDataProducerManager($container->get('plugin.manager.graphql.data_producer'));
     $plugin->setEntityTypeManager($container->get('entity_type.manager'));
     return $plugin;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getBaseDefinition(): ?Source {
+    return $this->loadDefinitionFileSafe('base');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getExtensionDefinition(): ?Source {
+    return $this->loadDefinitionFileSafe('extension');
+  }
+
+  /**
+   * Returns the path to a schema definition file.
+   *
+   * @param string $type
+   *   The definition type ('base' or 'extension').
+   *
+   * @return string
+   *   Absolute path to the .graphqls file.
+   */
+  protected function getDefinitionFileName(string $type): string {
+    $id = $this->getPluginId();
+    $definition = $this->getPluginDefinition();
+    $module = $this->moduleHandler->getModule($definition['provider']);
+    return $module->getPath() . '/graphql/' . $id . '.' . $type . '.graphqls';
+  }
+
+  /**
+   * Loads a definition file without throwing when the file is absent.
+   *
+   * Returns NULL when no file exists, allowing schema extensions that only
+   * need one of the two definition types to omit the other entirely.
+   * Emits a deprecation warning when an empty file is found, since older
+   * graphql module versions required an empty file as a no-op placeholder.
+   *
+   * @param string $type
+   *   The definition type ('base' or 'extension').
+   *
+   * @return \GraphQL\Language\Source|null
+   *   The parsed source, or NULL if no file is present.
+   */
+  protected function loadDefinitionFileSafe(string $type): ?Source {
+    $file = $this->getDefinitionFileName($type);
+
+    if (!file_exists($file)) {
+      return NULL;
+    }
+
+    if (trim(file_get_contents($file)) === '') {
+      @trigger_error(sprintf(
+        'The schema definition file "%s" is empty. Empty definition files are no longer needed; remove the file.',
+        $file
+      ), E_USER_DEPRECATED);
+      return NULL;
+    }
+
+    return parent::loadDefinitionFile($type);
   }
 
   /**
