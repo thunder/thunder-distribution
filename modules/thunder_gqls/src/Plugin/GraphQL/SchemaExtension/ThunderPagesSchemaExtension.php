@@ -5,6 +5,7 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\thunder_gqls\GraphQL\PagesTypeResolver;
+use Drupal\thunder_gqls\Wrappers\EntityListResponseHasMoreInterface;
 use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
 
 /**
@@ -184,6 +185,12 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
 
     $this->addFieldResolverIfNotExists('EntityList', 'items',
       $this->builder->callback(fn(EntityListResponseInterface $entityList) => $entityList->items())
+    );
+    $this->addFieldResolverIfNotExists('EntityList', 'hasMore',
+      $this->builder->callback(function (EntityListResponseInterface $entityList) {
+        assert($entityList instanceof EntityListResponseHasMoreInterface);
+        return $entityList->hasMore();
+      })
     );
   }
 
