@@ -159,8 +159,10 @@ class ThunderRedirect extends DataProducerPluginBase implements ContainerFactory
     }
 
     if (($url = $this->pathValidator->getUrlIfValidWithoutAccessCheck($path)) && $url->isRouted()) {
+      $accessResult = $url->access(NULL, TRUE);
+      $metadata->addCacheableDependency($accessResult);
 
-      if ($url->access()) {
+      if ($accessResult->isAllowed()) {
         return [
           'url' => $path,
           'status' => 200,

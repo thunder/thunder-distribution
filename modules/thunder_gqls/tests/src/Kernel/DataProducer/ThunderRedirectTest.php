@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 use Drupal\node\Entity\Node;
@@ -55,6 +56,21 @@ class ThunderRedirectTest extends GraphQLTestBase {
 
     $this->node->save();
     $this->storage = $this->container->get('entity_type.manager')->getStorage('redirect');
+  }
+
+  /**
+   * Test that cache metadata from the access check is propagated for a 200.
+   */
+  public function testRedirectCacheMetadataFor200(): void {
+    /** @var \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\ThunderRedirect $producer */
+    $producer = $this->container->get('plugin.manager.graphql.data_producer')
+      ->createInstance('thunder_redirect');
+
+    $metadata = new CacheableMetadata();
+    $result = $producer->resolve('/node/' . $this->node->id(), $metadata);
+
+    $this->assertEquals(200, $result['status']);
+    $this->assertNotEmpty($metadata->getCacheContexts(), 'Access check cache contexts must be propagated for 200 responses.');
   }
 
   /**
