@@ -14,7 +14,6 @@ interface Page implements Entity {
 type EntityList {
   total: Int!
   items: [Page!]
-  hasMore: Boolean!
 }
 
 type Teaser {
