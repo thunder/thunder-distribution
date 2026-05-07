@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * The thunder entity list response class.
  */
-class EntityListResponse implements EntityListResponseInterface, ContainerInjectionInterface {
+class EntityListResponse implements EntityListResponseInterface, EntityListResponseHasMoreInterface, ContainerInjectionInterface {
 
   /**
    * The query interface.
@@ -19,6 +19,20 @@ class EntityListResponse implements EntityListResponseInterface, ContainerInject
    * @var \Drupal\Core\Entity\Query\QueryInterface
    */
   protected QueryInterface $query;
+
+  /**
+   * The pagination offset.
+   *
+   * @var int
+   */
+  protected int $offset = 0;
+
+  /**
+   * The pagination limit.
+   *
+   * @var int
+   */
+  protected int $limit = 0;
 
   /**
    * EntityListResponse constructor.
@@ -50,6 +64,28 @@ class EntityListResponse implements EntityListResponseInterface, ContainerInject
   }
 
   /**
+   * Set offset.
+   *
+   * @param int $offset
+   *   The offset.
+   */
+  public function setOffset(int $offset): EntityListResponse {
+    $this->offset = $offset;
+    return $this;
+  }
+
+  /**
+   * Set limit.
+   *
+   * @param int $limit
+   *   The limit.
+   */
+  public function setLimit(int $limit): EntityListResponse {
+    $this->limit = $limit;
+    return $this;
+  }
+
+  /**
    * Calculate the total amount of results.
    *
    * @return int
@@ -75,6 +111,16 @@ class EntityListResponse implements EntityListResponseInterface, ContainerInject
 
     $callback = $this->buffer->add($this->query->getEntityTypeId(), array_values($result));
     return new Deferred(fn() => $callback());
+  }
+
+  /**
+   * Check if there are more items beyond the current page.
+   *
+   * @return bool
+   *   TRUE if more items exist past the current offset + limit.
+   */
+  public function hasMore(): bool {
+    return ($this->offset + $this->limit) < $this->total();
   }
 
 }
