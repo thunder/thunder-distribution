@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Hooks for thunder_test_mock_request.
+ */
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function thunder_test_mock_request_library_info_alter(array &$libraries, string $extension): void {
+  if ($extension !== 'media_entity_pinterest' || !isset($libraries['pinterest.widgets'])) {
+    return;
+  }
+  $module_path = \Drupal::moduleHandler()->getModule('thunder_test_mock_request')->getPath();
+  $libraries['pinterest.widgets']['js'] = [
+    '/' . $module_path . '/js/stub-pinit.js' => [],
+  ];
+  unset($libraries['pinterest.widgets']['remote'], $libraries['pinterest.widgets']['license']);
+}
