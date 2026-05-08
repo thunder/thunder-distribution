@@ -115,9 +115,9 @@ class NodeCreationTest extends ThunderJavascriptTestBase {
     $numOfElements = $this->getSession()->evaluateScript("jQuery('iframe').filter(function(){return (this.src.indexOf('/media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3DPWjcqE3QKBg') !== -1);}).length");
     $this->assertEquals(1, $numOfElements, "Number of youtube on page should be one.");
 
-    // Check that one Pinterest widget is on page.
+    // Check that Pinterest paragraph is on page.
     $this->assertSession()
-      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][8]//span[contains(@data-pin-id, "478085316687452268")]', 2);
+      ->elementsCount('xpath', '//div[contains(@class, "field--name-field-paragraphs")]/div[contains(@class, "field__item")][8]//a[@data-pin-do="embedPin"][contains(@href, "478085316687452268")]', 1);
   }
 
 }
