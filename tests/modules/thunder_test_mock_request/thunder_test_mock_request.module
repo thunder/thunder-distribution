@@ -12,9 +12,9 @@ function thunder_test_mock_request_library_info_alter(array &$libraries, string 
   if ($extension !== 'media_entity_pinterest' || !isset($libraries['pinterest.widgets'])) {
     return;
   }
-  $module_path = \Drupal::moduleHandler()->getModule('thunder_test_mock_request')->getPath();
-  $libraries['pinterest.widgets']['js'] = [
-    '/' . $module_path . '/js/stub-pinit.js' => [],
-  ];
+  // Prevent pinit.js from being loaded from the external Pinterest CDN during
+  // tests. Tests assert the static Drupal-rendered anchor instead of the
+  // JS-generated widget.
+  $libraries['pinterest.widgets']['js'] = [];
   unset($libraries['pinterest.widgets']['remote'], $libraries['pinterest.widgets']['license']);
 }
