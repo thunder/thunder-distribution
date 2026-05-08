@@ -5,7 +5,6 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\thunder_gqls\GraphQL\PagesTypeResolver;
-use Drupal\thunder_gqls\Wrappers\EntityListResponseHasNextInterface;
 use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
 
 /**
