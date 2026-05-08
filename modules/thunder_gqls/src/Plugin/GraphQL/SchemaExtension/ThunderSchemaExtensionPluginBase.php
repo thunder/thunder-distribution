@@ -153,13 +153,11 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
     $this->addFieldResolverIfNotExists(
       $type,
       'id',
-      $this->builder->compose(
+      // Coerce NULL to 0 for preview.
+      $this->builder->defaultValue(
         $this->builder->produce('entity_id')
           ->map('entity', $this->builder->fromParent()),
-        // Coerce NULL to 0 for preview.
-        $this->builder->produce('fallback_value')
-          ->map('input', $this->builder->fromParent())
-          ->map('fallback', $this->builder->fromValue(0))
+        $this->builder->fromValue(0)
       )
     );
 
@@ -173,12 +171,10 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
     $this->addFieldResolverIfNotExists(
       $type,
       'name',
-      $this->builder->compose(
+      $this->builder->defaultValue(
         $this->builder->produce('entity_label')
           ->map('entity', $this->builder->fromParent()),
-        $this->builder->produce('fallback_value')
-          ->map('input', $this->builder->fromParent())
-          ->map('fallback', $this->builder->fromValue(''))
+        $this->builder->fromValue('')
       )
     );
 
