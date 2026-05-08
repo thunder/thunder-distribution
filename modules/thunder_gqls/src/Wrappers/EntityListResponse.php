@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * The thunder entity list response class.
  */
-class EntityListResponse implements EntityListResponseInterface, EntityListResponseHasMoreInterface, ContainerInjectionInterface {
+class EntityListResponse implements EntityListResponseInterface, EntityListResponseHasNextInterface, ContainerInjectionInterface {
 
   /**
    * The query interface.
@@ -119,7 +119,7 @@ class EntityListResponse implements EntityListResponseInterface, EntityListRespo
    * @return bool
    *   TRUE if more items exist past the current offset + limit.
    */
-  public function hasMore(): bool {
+  public function hasNext(): bool {
     return ($this->offset + $this->limit) < $this->total();
   }
 
