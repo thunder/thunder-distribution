@@ -93,23 +93,6 @@ trait ResolverHelperTrait {
   }
 
   /**
-   * Define callback field resolver for a type.
-   *
-   * @param string $type
-   *   Type to add fields.
-   * @param array $fields
-   *   The fields.
-   */
-  public function addSimpleCallbackFields(string $type, array $fields): void {
-    foreach ($fields as $field) {
-      $this->addFieldResolverIfNotExists($type, $field,
-        $this->builder->produce('array_value')
-          ->map('input', $this->builder->fromParent())
-      );
-    }
-  }
-
-  /**
    * Produces an entity from a given path.
    *
    * @param \Drupal\graphql\GraphQL\Resolver\ResolverInterface $path
