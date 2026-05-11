@@ -98,9 +98,9 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
 
     if (trim(file_get_contents($file)) === '') {
       @trigger_error(sprintf(
-        'An empty schema definition file "%s" is deprecated in graphql:5.0.0 and is removed from graphql:5.0.0. Empty definition files are no longer needed; remove the file. See https://www.drupal.org/node/3587519',
+        'An empty schema definition file "%s" was found for plugin "%s". Empty definition files are no longer required and should be removed. Please delete the file.',
         $file
-      ), E_USER_DEPRECATED);
+      ), E_USER_NOTICE);
       return NULL;
     }
 
