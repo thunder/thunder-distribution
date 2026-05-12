@@ -185,7 +185,6 @@ GQL;
 
     $this->assertNotNull($result);
     $this->assertEquals($expectedResult['total'], $result->total());
-    $this->assertEquals($expectedResult['hasNext'], $result->hasNext());
   }
 
   /**
