@@ -16,6 +16,9 @@ dependencies:
   - drupal:views
   - update_helper:update_helper
 
+recipes:
+  - thunder_article
+
 install:
   # core
   - drupal:block

@@ -1,0 +1,9 @@
+{
+    "name": "thunder/thunder-article-recipe",
+    "type": "drupal-recipe",
+    "description": "Thunder recipe that installs the Trash module for content recovery",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "drupal/trash": "^3.0"
+    }
+}

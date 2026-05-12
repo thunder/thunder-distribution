@@ -1,0 +1,10 @@
+name: 'Thunder Article Recipe'
+description: 'Installs the Trash module with default configuration for content recovery in Thunder'
+type: 'Feature'
+
+install:
+  - trash
+
+config:
+  import:
+    trash: '*'
