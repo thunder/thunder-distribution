@@ -33,7 +33,6 @@ class ThunderEntityListTest extends GraphQLTestBase {
     parent::setUp();
 
     $this->installEntitySchema('node');
-    $this->installSchema('node', ['node_access']);
 
     $contentType = NodeType::create([
       'type' => 'article',
@@ -51,13 +50,13 @@ class ThunderEntityListTest extends GraphQLTestBase {
     }
 
     $schema = <<<GQL
-      type Query {
-        articles: EntityList
-      }
-      type EntityList {
-        total: Int!
-        hasNext: Boolean!
-      }
+    type Query {
+      articles: EntityList
+    }
+    type EntityList {
+      total: Int!
+      hasNext: Boolean!
+    }
 GQL;
 
     $this->setUpSchema($schema);
