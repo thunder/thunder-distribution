@@ -109,7 +109,7 @@ GQL;
     );
     $this->mockResolver('EntityList', 'hasNext',
       $this->builder->produce('thunder_entity_list_has_next')
-        ->map('entityList', $this->builder->fromParent())
+        ->map('list', $this->builder->fromParent())
     );
 
     $metadata = $this->defaultCacheMetaData();
