@@ -2,32 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\thunder_gqls\Unit\DataProducer;
+namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Tests\UnitTestCase;
-use Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntityIsNew;
+use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 
 /**
  * @coversDefaultClass \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntityIsNew
  * @group Thunder
  */
-class EntityIsNewTest extends UnitTestCase {
-
-  /**
-   * The data producer under test.
-   *
-   * @var \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntityIsNew
-   */
-  protected EntityIsNew $producer;
+class EntityIsNewTest extends GraphQLTestBase {
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
-    parent::setUp();
-    $this->producer = new EntityIsNew([], 'entity_is_new', []);
-  }
+  protected static $modules = [
+    'thunder_gqls',
+  ];
 
   /**
    * @covers ::resolve
@@ -35,7 +26,7 @@ class EntityIsNewTest extends UnitTestCase {
   public function testNewEntityReturnsTrue(): void {
     $entity = $this->createMock(EntityInterface::class);
     $entity->method('isNew')->willReturn(TRUE);
-    $this->assertTrue($this->producer->resolve($entity));
+    $this->assertTrue($this->executeDataProducer('entity_is_new', ['entity' => $entity]));
   }
 
   /**
@@ -44,7 +35,7 @@ class EntityIsNewTest extends UnitTestCase {
   public function testSavedEntityReturnsFalse(): void {
     $entity = $this->createMock(EntityInterface::class);
     $entity->method('isNew')->willReturn(FALSE);
-    $this->assertFalse($this->producer->resolve($entity));
+    $this->assertFalse($this->executeDataProducer('entity_is_new', ['entity' => $entity]));
   }
 
 }

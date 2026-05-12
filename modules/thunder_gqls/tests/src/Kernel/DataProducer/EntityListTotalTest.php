@@ -2,32 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\thunder_gqls\Unit\DataProducer;
+namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
-use Drupal\Tests\UnitTestCase;
-use Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntityListTotal;
+use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
 
 /**
  * @coversDefaultClass \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntityListTotal
  * @group Thunder
  */
-class EntityListTotalTest extends UnitTestCase {
-
-  /**
-   * The data producer under test.
-   *
-   * @var \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntityListTotal
-   */
-  protected EntityListTotal $producer;
+class EntityListTotalTest extends GraphQLTestBase {
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
-    parent::setUp();
-    $this->producer = new EntityListTotal([], 'entity_list_total', []);
-  }
+  protected static $modules = [
+    'thunder_gqls',
+  ];
 
   /**
    * @covers ::resolve
@@ -35,7 +26,7 @@ class EntityListTotalTest extends UnitTestCase {
   public function testReturnsTotalFromList(): void {
     $list = $this->createMock(EntityListResponseInterface::class);
     $list->method('total')->willReturn(42);
-    $this->assertSame(42, $this->producer->resolve($list));
+    $this->assertSame(42, $this->executeDataProducer('entity_list_total', ['list' => $list]));
   }
 
   /**
@@ -44,7 +35,7 @@ class EntityListTotalTest extends UnitTestCase {
   public function testReturnsZeroTotal(): void {
     $list = $this->createMock(EntityListResponseInterface::class);
     $list->method('total')->willReturn(0);
-    $this->assertSame(0, $this->producer->resolve($list));
+    $this->assertSame(0, $this->executeDataProducer('entity_list_total', ['list' => $list]));
   }
 
 }

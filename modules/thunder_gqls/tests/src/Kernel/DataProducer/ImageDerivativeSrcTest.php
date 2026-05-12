@@ -2,37 +2,30 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\thunder_gqls\Unit\DataProducer;
+namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
-use Drupal\Tests\UnitTestCase;
-use Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\ImageDerivativeSrc;
+use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 
 /**
  * @coversDefaultClass \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\ImageDerivativeSrc
  * @group Thunder
  */
-class ImageDerivativeSrcTest extends UnitTestCase {
-
-  /**
-   * The data producer under test.
-   *
-   * @var \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\ImageDerivativeSrc
-   */
-  protected ImageDerivativeSrc $producer;
+class ImageDerivativeSrcTest extends GraphQLTestBase {
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
-    parent::setUp();
-    $this->producer = new ImageDerivativeSrc([], 'image_derivative_src', []);
-  }
+  protected static $modules = [
+    'thunder_gqls',
+  ];
 
   /**
    * @covers ::resolve
    */
   public function testAddsSrcAlias(): void {
-    $result = $this->producer->resolve(['url' => 'https://example.com/image.jpg', 'width' => 100]);
+    $result = $this->executeDataProducer('image_derivative_src', [
+      'derivative' => ['url' => 'https://example.com/image.jpg', 'width' => 100],
+    ]);
     $this->assertSame('https://example.com/image.jpg', $result['src']);
     $this->assertSame('https://example.com/image.jpg', $result['url']);
     $this->assertSame(100, $result['width']);
@@ -43,7 +36,7 @@ class ImageDerivativeSrcTest extends UnitTestCase {
    */
   public function testPassesThroughWithoutUrl(): void {
     $input = ['width' => 100, 'height' => 200];
-    $result = $this->producer->resolve($input);
+    $result = $this->executeDataProducer('image_derivative_src', ['derivative' => $input]);
     $this->assertSame($input, $result);
     $this->assertArrayNotHasKey('src', $result);
   }
@@ -52,14 +45,14 @@ class ImageDerivativeSrcTest extends UnitTestCase {
    * @covers ::resolve
    */
   public function testPassesThroughNull(): void {
-    $this->assertNull($this->producer->resolve(NULL));
+    $this->assertNull($this->executeDataProducer('image_derivative_src', ['derivative' => NULL]));
   }
 
   /**
    * @covers ::resolve
    */
   public function testPassesThroughEmptyArray(): void {
-    $this->assertSame([], $this->producer->resolve([]));
+    $this->assertSame([], $this->executeDataProducer('image_derivative_src', ['derivative' => []]));
   }
 
 }
