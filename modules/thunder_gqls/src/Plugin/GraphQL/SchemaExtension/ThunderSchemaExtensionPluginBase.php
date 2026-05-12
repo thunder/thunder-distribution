@@ -97,11 +97,11 @@ abstract class ThunderSchemaExtensionPluginBase extends SdlSchemaExtensionPlugin
     }
 
     if (trim(file_get_contents($file)) === '') {
-//      @trigger_error(sprintf(
-//        'An empty schema definition file "%s" was found for plugin "%s". Empty definition files are no longer required and should be removed. Please delete the file.',
-//        $file,
-//        $this->getPluginId()
-//      ), E_USER_NOTICE);
+      @trigger_error(sprintf(
+        'An empty schema definition file "%s" was found for plugin "%s". Empty definition files are no longer required and should be removed. Please delete the file.',
+        $file,
+        $this->getPluginId()
+      ), E_USER_NOTICE);
       return NULL;
     }
 
