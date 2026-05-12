@@ -8,10 +8,10 @@ use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
 
 /**
- * @coversDefaultClass \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntityListTotal
+ * @coversDefaultClass \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\ThunderEntityListTotal
  * @group Thunder
  */
-class EntityListTotalTest extends GraphQLTestBase {
+class ThunderEntityListTotalTest extends GraphQLTestBase {
 
   /**
    * {@inheritdoc}
@@ -26,7 +26,7 @@ class EntityListTotalTest extends GraphQLTestBase {
   public function testReturnsTotalFromList(): void {
     $list = $this->createMock(EntityListResponseInterface::class);
     $list->method('total')->willReturn(42);
-    $this->assertSame(42, $this->executeDataProducer('entity_list_total', ['list' => $list]));
+    $this->assertSame(42, $this->executeDataProducer('thunder_entity_list_total', ['list' => $list]));
   }
 
   /**
@@ -35,7 +35,7 @@ class EntityListTotalTest extends GraphQLTestBase {
   public function testReturnsZeroTotal(): void {
     $list = $this->createMock(EntityListResponseInterface::class);
     $list->method('total')->willReturn(0);
-    $this->assertSame(0, $this->executeDataProducer('entity_list_total', ['list' => $list]));
+    $this->assertSame(0, $this->executeDataProducer('thunder_entity_list_total', ['list' => $list]));
   }
 
 }

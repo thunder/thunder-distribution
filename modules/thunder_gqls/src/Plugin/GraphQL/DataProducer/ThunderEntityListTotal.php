@@ -7,18 +7,17 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\graphql\Attribute\DataProducer;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
-use GraphQL\Deferred;
 
 /**
- * Returns the items from an entity list response.
+ * Returns the total count from an entity list response.
  */
 #[DataProducer(
-  id: "entity_list_items",
-  name: new TranslatableMarkup("Entity List Items"),
-  description: new TranslatableMarkup("Returns the items from an entity list response."),
+  id: "thunder_entity_list_total",
+  name: new TranslatableMarkup("Entity List Total"),
+  description: new TranslatableMarkup("Returns the total count from an entity list response."),
   produces: new ContextDefinition(
-    data_type: "any",
-    label: new TranslatableMarkup("Items")
+    data_type: "integer",
+    label: new TranslatableMarkup("Total")
   ),
   consumes: [
     "list" => new ContextDefinition(
@@ -27,19 +26,19 @@ use GraphQL\Deferred;
     ),
   ]
 )]
-class EntityListItems extends DataProducerPluginBase {
+class ThunderEntityListTotal extends DataProducerPluginBase {
 
   /**
-   * Resolves the items.
+   * Resolves the total count.
    *
    * @param \Drupal\thunder_gqls\Wrappers\EntityListResponseInterface $list
    *   The entity list response.
    *
-   * @return array|\GraphQL\Deferred
-   *   The items.
+   * @return int
+   *   The total count.
    */
-  public function resolve(EntityListResponseInterface $list): array|Deferred {
-    return $list->items();
+  public function resolve(EntityListResponseInterface $list): int {
+    return $list->total();
   }
 
 }

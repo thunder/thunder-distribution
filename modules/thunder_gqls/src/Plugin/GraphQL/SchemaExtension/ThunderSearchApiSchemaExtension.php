@@ -31,12 +31,12 @@ class ThunderSearchApiSchemaExtension extends ThunderSchemaExtensionPluginBase {
     parent::registerResolvers($registry);
 
     $this->addFieldResolverIfNotExists('SearchApiResult', 'total',
-      $this->builder->produce('entity_list_total')
+      $this->builder->produce('thunder_entity_list_total')
         ->map('list', $this->builder->fromParent())
     );
 
     $this->addFieldResolverIfNotExists('SearchApiResult', 'items',
-      $this->builder->produce('entity_list_items')
+      $this->builder->produce('thunder_entity_list_items')
         ->map('list', $this->builder->fromParent())
     );
   }

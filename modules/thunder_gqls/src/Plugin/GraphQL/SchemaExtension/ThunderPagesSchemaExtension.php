@@ -175,12 +175,12 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
 
     // Entity List.
     $this->addFieldResolverIfNotExists('EntityList', 'total',
-      $this->builder->produce('entity_list_total')
+      $this->builder->produce('thunder_entity_list_total')
         ->map('list', $this->builder->fromParent())
     );
 
     $this->addFieldResolverIfNotExists('EntityList', 'items',
-      $this->builder->produce('entity_list_items')
+      $this->builder->produce('thunder_entity_list_items')
         ->map('list', $this->builder->fromParent())
     );
 

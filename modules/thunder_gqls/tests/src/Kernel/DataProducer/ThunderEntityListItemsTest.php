@@ -8,10 +8,10 @@ use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
 
 /**
- * @coversDefaultClass \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntityListItems
+ * @coversDefaultClass \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\ThunderEntityListItems
  * @group Thunder
  */
-class EntityListItemsTest extends GraphQLTestBase {
+class ThunderEntityListItemsTest extends GraphQLTestBase {
 
   /**
    * {@inheritdoc}
@@ -27,7 +27,7 @@ class EntityListItemsTest extends GraphQLTestBase {
     $items = ['a', 'b', 'c'];
     $list = $this->createMock(EntityListResponseInterface::class);
     $list->method('items')->willReturn($items);
-    $this->assertSame($items, $this->executeDataProducer('entity_list_items', ['list' => $list]));
+    $this->assertSame($items, $this->executeDataProducer('thunder_entity_list_items', ['list' => $list]));
   }
 
   /**
@@ -36,7 +36,7 @@ class EntityListItemsTest extends GraphQLTestBase {
   public function testReturnsEmptyItems(): void {
     $list = $this->createMock(EntityListResponseInterface::class);
     $list->method('items')->willReturn([]);
-    $this->assertSame([], $this->executeDataProducer('entity_list_items', ['list' => $list]));
+    $this->assertSame([], $this->executeDataProducer('thunder_entity_list_items', ['list' => $list]));
   }
 
 }
