@@ -2,10 +2,12 @@
 
 namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
+use Drupal\node\Entity\Node;
+use Drupal\node\Entity\NodeType;
 use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 
 /**
- * Test entities_with_term data producer.
+ * Test thunder_entity_list data producer.
  *
  * @group Thunder
  */
@@ -20,10 +22,33 @@ class ThunderEntityListTest extends GraphQLTestBase {
   ];
 
   /**
+   * Total number of nodes created for testing.
+   */
+  protected const int NODE_COUNT = 5;
+
+  /**
    * {@inheritdoc}
    */
   public function setUp(): void {
     parent::setUp();
+
+    $this->installEntitySchema('node');
+    $this->installSchema('node', ['node_access']);
+
+    $contentType = NodeType::create([
+      'type' => 'article',
+      'name' => 'Article',
+      'display_submitted' => FALSE,
+    ]);
+    $contentType->save();
+
+    for ($i = 1; $i <= self::NODE_COUNT; $i++) {
+      Node::create([
+        'title' => 'Article ' . $i,
+        'type' => 'article',
+        'status' => 1,
+      ])->save();
+    }
 
     $schema = <<<GQL
       type Query {
@@ -31,6 +56,7 @@ class ThunderEntityListTest extends GraphQLTestBase {
       }
       type EntityList {
         total: Int!
+        hasNext: Boolean!
       }
 GQL;
 
@@ -64,4 +90,35 @@ GQL;
     ], $metadata);
   }
 
+  /**
+   * Tests hasNext is TRUE when more items exist beyond the current page.
+   */
+  public function testHasNextReturnsTrueWhenMoreItemsExist(): void {
+    $query = <<<GQL
+      query {
+        articles {
+          hasNext
+        }
+      }
+GQL;
+
+    $this->mockResolver('Query', 'articles',
+      $this->builder->produce('thunder_entity_list')
+        ->map('type', $this->builder->fromValue('node'))
+        ->map('offset', $this->builder->fromValue(0))
+        ->map('limit', $this->builder->fromValue(3))
+    );
+    $this->mockResolver('EntityList', 'hasNext',
+      $this->builder->produce('thunder_entity_list_has_next')
+        ->map('entityList', $this->builder->fromParent())
+    );
+
+    $metadata = $this->defaultCacheMetaData();
+    $metadata->setCacheContexts(['user.permissions', 'user.node_grants:view']);
+    $metadata->addCacheTags(['node_list']);
+
+    $this->assertResults($query, [], [
+      'articles' => ['hasNext' => TRUE],
+    ], $metadata);
+  }
 }
