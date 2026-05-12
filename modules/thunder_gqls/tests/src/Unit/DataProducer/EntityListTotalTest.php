@@ -14,8 +14,16 @@ use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
  */
 class EntityListTotalTest extends UnitTestCase {
 
+  /**
+   * The data producer under test.
+   *
+   * @var \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntityListTotal
+   */
   protected EntityListTotal $producer;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
     $this->producer = new EntityListTotal([], 'entity_list_total', []);

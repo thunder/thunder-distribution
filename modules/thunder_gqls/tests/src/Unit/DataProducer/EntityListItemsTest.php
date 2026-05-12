@@ -14,8 +14,16 @@ use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
  */
 class EntityListItemsTest extends UnitTestCase {
 
+  /**
+   * The data producer under test.
+   *
+   * @var \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntityListItems
+   */
   protected EntityListItems $producer;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
     $this->producer = new EntityListItems([], 'entity_list_items', []);

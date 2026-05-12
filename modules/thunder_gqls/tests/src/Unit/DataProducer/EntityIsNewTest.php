@@ -14,8 +14,16 @@ use Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntityIsNew;
  */
 class EntityIsNewTest extends UnitTestCase {
 
+  /**
+   * The data producer under test.
+   *
+   * @var \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntityIsNew
+   */
   protected EntityIsNew $producer;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
     $this->producer = new EntityIsNew([], 'entity_is_new', []);

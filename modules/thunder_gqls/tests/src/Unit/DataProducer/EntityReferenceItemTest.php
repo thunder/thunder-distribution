@@ -13,8 +13,16 @@ use Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntityReferenceItem;
  */
 class EntityReferenceItemTest extends UnitTestCase {
 
+  /**
+   * The data producer under test.
+   *
+   * @var \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\EntityReferenceItem
+   */
   protected EntityReferenceItem $producer;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
     $this->producer = new EntityReferenceItem([], 'entity_reference_item', []);

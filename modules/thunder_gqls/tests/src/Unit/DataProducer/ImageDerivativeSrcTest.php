@@ -13,8 +13,16 @@ use Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\ImageDerivativeSrc;
  */
 class ImageDerivativeSrcTest extends UnitTestCase {
 
+  /**
+   * The data producer under test.
+   *
+   * @var \Drupal\thunder_gqls\Plugin\GraphQL\DataProducer\ImageDerivativeSrc
+   */
   protected ImageDerivativeSrc $producer;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
     $this->producer = new ImageDerivativeSrc([], 'image_derivative_src', []);
