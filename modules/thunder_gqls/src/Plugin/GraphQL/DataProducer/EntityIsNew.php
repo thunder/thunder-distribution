@@ -3,26 +3,29 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Plugin\Context\ContextDefinition;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\graphql\Attribute\DataProducer;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 
 /**
  * Returns TRUE if the entity has not yet been saved.
- *
- * @DataProducer(
- *   id = "entity_is_new",
- *   name = @Translation("Entity Is New"),
- *   description = @Translation("Returns TRUE if the entity has not yet been saved."),
- *   produces = @ContextDefinition("boolean",
- *     label = @Translation("Is new")
- *   ),
- *   consumes = {
- *     "entity" = @ContextDefinition("entity",
- *       label = @Translation("Entity"),
- *       required = TRUE
- *     )
- *   }
- * )
  */
+#[DataProducer(
+  id: "entity_is_new",
+  name: new TranslatableMarkup("Entity Is New"),
+  description: new TranslatableMarkup("Returns TRUE if the entity has not yet been saved."),
+  produces: new ContextDefinition(
+    data_type: "boolean",
+    label: new TranslatableMarkup("Is new")
+  ),
+  consumes: [
+    "entity" => new ContextDefinition(
+      data_type: "entity",
+      label: new TranslatableMarkup("Entity")
+    ),
+  ]
+)]
 class EntityIsNew extends DataProducerPluginBase {
 
   /**

@@ -2,26 +2,29 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
+use Drupal\Core\Plugin\Context\ContextDefinition;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\graphql\Attribute\DataProducer;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 
 /**
  * Normalizes image derivative data by adding a 'src' alias for the URL.
- *
- * @DataProducer(
- *   id = "image_derivative_src",
- *   name = @Translation("Image Derivative Src"),
- *   description = @Translation("Normalizes image derivative data by adding a 'src' alias for the URL."),
- *   produces = @ContextDefinition("any",
- *     label = @Translation("Image derivative data")
- *   ),
- *   consumes = {
- *     "derivative" = @ContextDefinition("any",
- *       label = @Translation("Image derivative values"),
- *       required = TRUE
- *     )
- *   }
- * )
  */
+#[DataProducer(
+  id: "image_derivative_src",
+  name: new TranslatableMarkup("Image Derivative Src"),
+  description: new TranslatableMarkup("Normalizes image derivative data by adding a 'src' alias for the URL."),
+  produces: new ContextDefinition(
+    data_type: "any",
+    label: new TranslatableMarkup("Image derivative data")
+  ),
+  consumes: [
+    "derivative" => new ContextDefinition(
+      data_type: "any",
+      label: new TranslatableMarkup("Image derivative values")
+    ),
+  ]
+)]
 class ImageDerivativeSrc extends DataProducerPluginBase {
 
   /**

@@ -2,28 +2,31 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
+use Drupal\Core\Plugin\Context\ContextDefinition;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\graphql\Attribute\DataProducer;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
 use GraphQL\Deferred;
 
 /**
  * Returns the items from an entity list response.
- *
- * @DataProducer(
- *   id = "entity_list_items",
- *   name = @Translation("Entity List Items"),
- *   description = @Translation("Returns the items from an entity list response."),
- *   produces = @ContextDefinition("any",
- *     label = @Translation("Items")
- *   ),
- *   consumes = {
- *     "list" = @ContextDefinition("any",
- *       label = @Translation("Entity list response"),
- *       required = TRUE
- *     )
- *   }
- * )
  */
+#[DataProducer(
+  id: "entity_list_items",
+  name: new TranslatableMarkup("Entity List Items"),
+  description: new TranslatableMarkup("Returns the items from an entity list response."),
+  produces: new ContextDefinition(
+    data_type: "any",
+    label: new TranslatableMarkup("Items")
+  ),
+  consumes: [
+    "list" => new ContextDefinition(
+      data_type: "any",
+      label: new TranslatableMarkup("Entity list response")
+    ),
+  ]
+)]
 class EntityListItems extends DataProducerPluginBase {
 
   /**

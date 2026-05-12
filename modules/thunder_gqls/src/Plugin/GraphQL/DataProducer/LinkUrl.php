@@ -2,27 +2,30 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
+use Drupal\Core\Plugin\Context\ContextDefinition;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
+use Drupal\graphql\Attribute\DataProducer;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 
 /**
  * Resolves the URL string from a link array containing a 'uri' key.
- *
- * @DataProducer(
- *   id = "link_url",
- *   name = @Translation("Link URL"),
- *   description = @Translation("Resolves the URL string from a link array containing a 'uri' key."),
- *   produces = @ContextDefinition("string",
- *     label = @Translation("URL string")
- *   ),
- *   consumes = {
- *     "link" = @ContextDefinition("any",
- *       label = @Translation("Link data"),
- *       required = TRUE
- *     )
- *   }
- * )
  */
+#[DataProducer(
+  id: "link_url",
+  name: new TranslatableMarkup("Link URL"),
+  description: new TranslatableMarkup("Resolves the URL string from a link array containing a 'uri' key."),
+  produces: new ContextDefinition(
+    data_type: "string",
+    label: new TranslatableMarkup("URL string")
+  ),
+  consumes: [
+    "link" => new ContextDefinition(
+      data_type: "any",
+      label: new TranslatableMarkup("Link data")
+    ),
+  ]
+)]
 class LinkUrl extends DataProducerPluginBase {
 
   /**

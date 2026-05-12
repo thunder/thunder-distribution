@@ -2,31 +2,35 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
+use Drupal\Core\Plugin\Context\ContextDefinition;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\graphql\Attribute\DataProducer;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 
 /**
  * Returns the value for a given key from an array.
- *
- * @DataProducer(
- *   id = "array_value",
- *   name = @Translation("Array Value"),
- *   description = @Translation("Returns the value for a given key from an array."),
- *   produces = @ContextDefinition("any",
- *     label = @Translation("Value")
- *   ),
- *   consumes = {
- *     "input" = @ContextDefinition("any",
- *       label = @Translation("Input array"),
- *       required = TRUE
- *     ),
- *     "key" = @ContextDefinition("string",
- *       label = @Translation("Key"),
- *       required = FALSE
- *     )
- *   }
- * )
  */
+#[DataProducer(
+  id: "array_value",
+  name: new TranslatableMarkup("Array Value"),
+  description: new TranslatableMarkup("Returns the value for a given key from an array."),
+  produces: new ContextDefinition(
+    data_type: "any",
+    label: new TranslatableMarkup("Value")
+  ),
+  consumes: [
+    "input" => new ContextDefinition(
+      data_type: "any",
+      label: new TranslatableMarkup("Input array"),
+    ),
+    "key" => new ContextDefinition(
+      data_type: "string",
+      label: new TranslatableMarkup("Key"),
+      required: FALSE
+    ),
+  ]
+)]
 class ArrayValue extends DataProducerPluginBase {
 
   /**

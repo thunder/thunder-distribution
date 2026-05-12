@@ -3,26 +3,29 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Plugin\Context\ContextDefinition;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\graphql\Attribute\DataProducer;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 
 /**
  * Builds the teaser array from a Thunder article entity.
- *
- * @DataProducer(
- *   id = "thunder_article_teaser",
- *   name = @Translation("Thunder Article Teaser"),
- *   description = @Translation("Builds the teaser array from a Thunder article entity."),
- *   produces = @ContextDefinition("any",
- *     label = @Translation("Teaser")
- *   ),
- *   consumes = {
- *     "entity" = @ContextDefinition("entity",
- *       label = @Translation("Entity"),
- *       required = TRUE
- *     )
- *   }
- * )
  */
+#[DataProducer(
+  id: "thunder_article_teaser",
+  name: new TranslatableMarkup("Thunder Article Teaser"),
+  description: new TranslatableMarkup("Builds the teaser array from a Thunder article entity."),
+  produces: new ContextDefinition(
+    data_type: "any",
+    label: new TranslatableMarkup("Teaser")
+  ),
+  consumes: [
+    "entity" => new ContextDefinition(
+      data_type: "entity",
+      label: new TranslatableMarkup("Entity")
+    ),
+  ]
+)]
 class ThunderArticleTeaser extends DataProducerPluginBase {
 
   /**

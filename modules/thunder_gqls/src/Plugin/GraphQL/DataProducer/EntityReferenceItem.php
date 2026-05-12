@@ -2,31 +2,35 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
+use Drupal\Core\Plugin\Context\ContextDefinition;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\graphql\Attribute\DataProducer;
 use Drupal\graphql\Plugin\GraphQL\DataProducer\DataProducerPluginBase;
 
 /**
  * Returns a single item or the full list from entity reference results.
- *
- * @DataProducer(
- *   id = "entity_reference_item",
- *   name = @Translation("Entity Reference Item"),
- *   description = @Translation("Returns a single item or the full list from entity reference results."),
- *   produces = @ContextDefinition("any",
- *     label = @Translation("Entity or entity list")
- *   ),
- *   consumes = {
- *     "list" = @ContextDefinition("any",
- *       label = @Translation("List of entities"),
- *       required = TRUE
- *     ),
- *     "multiple" = @ContextDefinition("boolean",
- *       label = @Translation("Multiple values"),
- *       default_value = TRUE,
- *       required = FALSE
- *     )
- *   }
- * )
  */
+#[DataProducer(
+  id: "entity_reference_item",
+  name: new TranslatableMarkup("Entity Reference Item"),
+  description: new TranslatableMarkup("Returns a single item or the full list from entity reference results."),
+  produces: new ContextDefinition(
+    data_type: "any",
+    label: new TranslatableMarkup("Entity or entity list")
+  ),
+  consumes: [
+    "list" => new ContextDefinition(
+      data_type: "any",
+      label: new TranslatableMarkup("List of entities")
+    ),
+    "multiple" => new ContextDefinition(
+      data_type: "boolean",
+      label: new TranslatableMarkup("Multiple values"),
+      required: FALSE,
+      default_value: TRUE
+    ),
+  ]
+)]
 class EntityReferenceItem extends DataProducerPluginBase {
 
   /**
