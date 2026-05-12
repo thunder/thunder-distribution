@@ -197,7 +197,7 @@ GQL;
    *
    * @see ::testEntityWithTerms()
    */
-  public static function providerEntityWithTerms() : array {
+  public static function providerEntityWithTerms(): array {
     return [
       'query without depth' => [
         [
@@ -213,6 +213,7 @@ GQL;
         ],
         [
           'total' => 1,
+          'hasNext' => FALSE,
         ],
       ],
       'query with depth=1' => [
@@ -229,6 +230,7 @@ GQL;
         ],
         [
           'total' => 2,
+          'hasNext' => FALSE,
         ],
       ],
       'query with custom conditions' => [
@@ -256,6 +258,24 @@ GQL;
         ],
         [
           'total' => 2,
+          'hasNext' => FALSE,
+        ],
+      ],
+      'query with depth=1 and limit=1 has next page' => [
+        [
+          'type' => 'node',
+          'bundles' => ['article'],
+          'field' => self::TAXONOMY_FIELD_NAME,
+          'offset' => 0,
+          'limit' => 1,
+          'conditions' => [],
+          'languages' => [],
+          'sortBy' => [],
+          'depth' => 1,
+        ],
+        [
+          'total' => 2,
+          'hasNext' => TRUE,
         ],
       ],
     ];

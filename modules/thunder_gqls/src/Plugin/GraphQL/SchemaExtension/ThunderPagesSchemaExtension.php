@@ -183,6 +183,11 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
       $this->builder->produce('entity_list_items')
         ->map('list', $this->builder->fromParent())
     );
+
+    $this->addFieldResolverIfNotExists('EntityList', 'hasNext',
+      $this->builder->produce('thunder_entity_list_has_next')
+        ->map('list', $this->builder->fromParent())
+    );
   }
 
 }
