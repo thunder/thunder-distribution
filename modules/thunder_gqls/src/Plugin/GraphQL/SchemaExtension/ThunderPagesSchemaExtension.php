@@ -188,7 +188,7 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
 
     $this->addFieldResolverIfNotExists('EntityList', 'hasNext',
       $this->builder->produce('thunder_entity_list_has_next')
-        ->map('entityList', $this->builder->fromParent())
+        ->map('list', $this->builder->fromParent())
     );
   }
 

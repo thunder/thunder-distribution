@@ -18,7 +18,7 @@ use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
   description: new TranslatableMarkup('Whether there are more items beyond the current page.'),
   produces: new ContextDefinition('boolean', label: new TranslatableMarkup('Has next')),
   consumes: [
-    'entityList' => new ContextDefinition('any', label: new TranslatableMarkup('Entity list response')),
+    'list' => new ContextDefinition('any', label: new TranslatableMarkup('Entity list response')),
   ]
 )]
 class ThunderEntityListHasNext extends DataProducerPluginBase {
@@ -26,15 +26,15 @@ class ThunderEntityListHasNext extends DataProducerPluginBase {
   /**
    * Resolve has next.
    *
-   * @param \Drupal\thunder_gqls\Wrappers\EntityListResponseInterface $entityList
+   * @param \Drupal\thunder_gqls\Wrappers\EntityListResponseInterface $list
    *   The entity list response.
    *
    * @return bool
    *   TRUE if more items exist past the current offset + limit.
    */
-  public function resolve(EntityListResponseInterface $entityList): bool {
-    assert($entityList instanceof EntityListResponseHasNextInterface);
-    return $entityList->hasNext();
+  public function resolve(EntityListResponseInterface $list): bool {
+    assert($list instanceof EntityListResponseHasNextInterface);
+    return $list->hasNext();
   }
 
 }
