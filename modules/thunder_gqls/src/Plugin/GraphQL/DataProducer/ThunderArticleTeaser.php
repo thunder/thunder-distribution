@@ -3,6 +3,7 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\DataProducer;
 
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityPublishedInterface;
 use Drupal\Core\Plugin\Context\ContextDefinition;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\graphql\Attribute\DataProducer;
@@ -40,7 +41,7 @@ class ThunderArticleTeaser extends DataProducerPluginBase {
   public function resolve(ContentEntityInterface $entity): array {
     $media = $entity->get('field_teaser_media')->entity;
     return [
-      'image' => $media && $media->isPublished() ? $media : NULL,
+      'image' => $media instanceof EntityPublishedInterface && $media->isPublished() ? $media : NULL,
       'text' => $entity->get('field_teaser_text')->value,
     ];
   }

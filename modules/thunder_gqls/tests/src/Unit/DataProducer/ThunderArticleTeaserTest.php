@@ -43,6 +43,7 @@ class ThunderArticleTeaserTest extends UnitTestCase {
       fn(string $field) => match ($field) {
         'field_teaser_media' => $mediaField,
         'field_teaser_text' => $textField,
+        default => throw new \InvalidArgumentException("Unexpected field: $field"),
       }
     );
 
