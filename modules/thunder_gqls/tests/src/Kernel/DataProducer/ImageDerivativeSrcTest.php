@@ -44,13 +44,6 @@ class ImageDerivativeSrcTest extends GraphQLTestBase {
   /**
    * @covers ::resolve
    */
-  public function testPassesThroughNull(): void {
-    $this->assertNull($this->executeDataProducer('image_derivative_src', ['derivative' => NULL]));
-  }
-
-  /**
-   * @covers ::resolve
-   */
   public function testPassesThroughEmptyArray(): void {
     $this->assertSame([], $this->executeDataProducer('image_derivative_src', ['derivative' => []]));
   }

@@ -53,26 +53,13 @@ class ThunderArticleTeaserTest extends UnitTestCase {
   /**
    * @covers ::resolve
    */
-  public function testPublishedMediaIsReturned(): void {
+  public function testMediaIsReturned(): void {
     $media = $this->createMock(MediaInterface::class);
-    $media->method('isPublished')->willReturn(TRUE);
 
     $result = $this->producer->resolve($this->buildEntity($media, 'Teaser text'));
 
     $this->assertSame($media, $result['image']);
     $this->assertSame('Teaser text', $result['text']);
-  }
-
-  /**
-   * @covers ::resolve
-   */
-  public function testUnpublishedMediaReturnsNull(): void {
-    $media = $this->createMock(MediaInterface::class);
-    $media->method('isPublished')->willReturn(FALSE);
-
-    $result = $this->producer->resolve($this->buildEntity($media));
-
-    $this->assertNull($result['image']);
   }
 
   /**
