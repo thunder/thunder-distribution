@@ -121,4 +121,5 @@ GQL;
       'articles' => ['hasNext' => TRUE],
     ], $metadata);
   }
+
 }
