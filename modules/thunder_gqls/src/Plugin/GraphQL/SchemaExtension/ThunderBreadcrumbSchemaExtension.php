@@ -3,6 +3,7 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
+use GraphQL\Language\Source;
 
 /**
  * The menu schema extension.
@@ -15,6 +16,13 @@ use Drupal\graphql\GraphQL\ResolverRegistryInterface;
  * )
  */
 class ThunderBreadcrumbSchemaExtension extends ThunderSchemaExtensionPluginBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getBaseDefinition(): ?Source {
+    return NULL;
+  }
 
   /**
    * {@inheritdoc}

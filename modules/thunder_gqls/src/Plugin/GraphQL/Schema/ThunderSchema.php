@@ -4,13 +4,12 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\Schema;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
-use Drupal\Core\Url;
-use Drupal\graphql\GraphQL\ResolverRegistry;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\graphql\Plugin\DataProducerPluginManager;
 use Drupal\graphql\Plugin\GraphQL\Schema\ComposableSchema;
 use Drupal\graphql\Plugin\GraphQL\Schema\SdlSchemaPluginBase;
 use Drupal\thunder_gqls\Traits\ResolverHelperTrait;
+use GraphQL\Language\Source;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -60,9 +59,8 @@ class ThunderSchema extends ComposableSchema {
   /**
    * {@inheritdoc}
    */
-  public function getResolverRegistry(): ResolverRegistryInterface {
-    $this->registry = new ResolverRegistry();
-
+  public function registerResolvers(ResolverRegistryInterface $registry): void {
+    $this->registry = $registry;
     $this->createResolverBuilder();
     $this->resolveBaseTypes();
 
@@ -77,8 +75,6 @@ class ThunderSchema extends ComposableSchema {
           ->map('token', $this->builder->fromArgument('auHash'))
       );
     }
-
-    return $this->registry;
   }
 
   /**
@@ -124,7 +120,7 @@ class ThunderSchema extends ComposableSchema {
   /**
    * {@inheritdoc}
    */
-  protected function getSchemaDefinition(): string {
+  protected function getSchemaDefinition(): Source {
     return SdlSchemaPluginBase::getSchemaDefinition();
   }
 
@@ -133,13 +129,8 @@ class ThunderSchema extends ComposableSchema {
    */
   private function resolveBaseTypes(): void {
     $this->addFieldResolverIfNotExists('Link', 'url',
-      $this->builder->callback(function ($parent) {
-        if (!empty($parent) && isset($parent['uri'])) {
-          $urlObject = Url::fromUri($parent['uri']);
-          $url = $urlObject->toString(TRUE)->getGeneratedUrl();
-        }
-        return $url ?? '';
-      })
+      $this->builder->produce('link_url')
+        ->map('link', $this->builder->fromParent())
     );
 
     $this->addSimpleCallbackFields('Link', ['title']);

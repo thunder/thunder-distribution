@@ -1,16 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Access to an undefined property Drupal\\\\Core\\\\Entity\\\\ContentEntityInterface\\:\\:\\$field_teaser_media\\.$#"
-			count: 1
-			path: modules/thunder_gqls/src/Plugin/GraphQL/SchemaExtension/ThunderPagesSchemaExtension.php
-
-		-
-			message: "#^Access to an undefined property Drupal\\\\Core\\\\Entity\\\\ContentEntityInterface\\:\\:\\$field_teaser_text\\.$#"
-			count: 1
-			path: modules/thunder_gqls/src/Plugin/GraphQL/SchemaExtension/ThunderPagesSchemaExtension.php
-
-		-
 			message: "#^Access to an undefined property Drupal\\\\Core\\\\Entity\\\\EntityInterface\\:\\:\\$status\\.$#"
 			count: 1
 			path: modules/thunder_taxonomy/src/ThunderTermAccessControlHandler.php
