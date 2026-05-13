@@ -3,7 +3,7 @@
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
-use Drupal\thunder_gqls\Wrappers\SearchApiResponse;
+use GraphQL\Language\Source;
 
 /**
  * The search api query schema extension.
@@ -20,19 +20,24 @@ class ThunderSearchApiSchemaExtension extends ThunderSchemaExtensionPluginBase {
   /**
    * {@inheritdoc}
    */
+  public function getExtensionDefinition(): ?Source {
+    return NULL;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function registerResolvers(ResolverRegistryInterface $registry): void {
     parent::registerResolvers($registry);
 
     $this->addFieldResolverIfNotExists('SearchApiResult', 'total',
-      $this->builder->callback(function (SearchApiResponse $result) {
-        return $result->total();
-      })
+      $this->builder->produce('thunder_entity_list_total')
+        ->map('list', $this->builder->fromParent())
     );
 
     $this->addFieldResolverIfNotExists('SearchApiResult', 'items',
-      $this->builder->callback(function (SearchApiResponse $result) {
-        return $result->items();
-      })
+      $this->builder->produce('thunder_entity_list_items')
+        ->map('list', $this->builder->fromParent())
     );
   }
 

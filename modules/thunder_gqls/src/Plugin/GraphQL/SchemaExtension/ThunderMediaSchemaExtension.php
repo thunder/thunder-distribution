@@ -4,6 +4,7 @@ namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\thunder_gqls\GraphQL\MediaTypeResolver;
+use GraphQL\Language\Source;
 
 /**
  * The media schema extension.
@@ -16,6 +17,13 @@ use Drupal\thunder_gqls\GraphQL\MediaTypeResolver;
  * )
  */
 class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getExtensionDefinition(): ?Source {
+    return NULL;
+  }
 
   /**
    * {@inheritdoc}
@@ -64,12 +72,8 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
         $this->builder->produce('image_derivative')
           ->map('entity', $this->builder->fromParent())
           ->map('style', $this->builder->fromArgument('style')),
-        $this->builder->callback(function ($values) {
-          if (!empty($values['url'])) {
-            return $values + ['src' => $values['url']];
-          }
-          return $values;
-        })
+        $this->builder->produce('image_derivative_src')
+          ->map('derivative', $this->builder->fromParent())
       )
     );
 

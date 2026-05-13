@@ -2,10 +2,8 @@
 
 namespace Drupal\thunder_gqls\Plugin\GraphQL\SchemaExtension;
 
-use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\graphql\GraphQL\ResolverRegistryInterface;
 use Drupal\thunder_gqls\GraphQL\PagesTypeResolver;
-use Drupal\thunder_gqls\Wrappers\EntityListResponseInterface;
 
 /**
  * Schema extension for page types.
@@ -71,10 +69,8 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
       );
 
       $this->addFieldResolverIfNotExists($type, 'teaser',
-        $this->builder->callback(fn(ContentEntityInterface $entity): array => [
-          'image' => $entity->field_teaser_media->entity,
-          'text' => $entity->field_teaser_text->value,
-        ])
+        $this->builder->produce('thunder_article_teaser')
+          ->map('entity', $this->builder->fromParent())
       );
     }
 
@@ -179,11 +175,13 @@ class ThunderPagesSchemaExtension extends ThunderSchemaExtensionPluginBase {
 
     // Entity List.
     $this->addFieldResolverIfNotExists('EntityList', 'total',
-      $this->builder->callback(fn(EntityListResponseInterface $entityList): int => $entityList->total())
+      $this->builder->produce('thunder_entity_list_total')
+        ->map('list', $this->builder->fromParent())
     );
 
     $this->addFieldResolverIfNotExists('EntityList', 'items',
-      $this->builder->callback(fn(EntityListResponseInterface $entityList) => $entityList->items())
+      $this->builder->produce('thunder_entity_list_items')
+        ->map('list', $this->builder->fromParent())
     );
 
     $this->addFieldResolverIfNotExists('EntityList', 'hasNext',
