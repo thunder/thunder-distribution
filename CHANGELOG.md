@@ -23,8 +23,10 @@ automatically. If your project has custom GraphQL schema extension plugins, be a
 2. **Replace inline `callback()` resolvers with DataProducer plugins.** Use one of the new built-in producers
    (`array_value`, `entity_reference_item`, `image_derivative_src`, etc.) or create your own `@DataProducer` plugin.
 
-3. **Delete empty `.graphqls` stub files.** GraphQL 5 no longer needs them. Return `null` from
-   `getBaseDefinition()` / `getExtensionDefinition()` instead.
+3. **Delete empty `.graphqls` stub files.** GraphQL 5 no longer needs them. If you extend
+   `ThunderSchemaExtensionPluginBase` that is all you need to do — the base class returns `null` for
+   missing definitions automatically. Only if you implement `SdlSchemaPluginInterface` directly do you
+   need to explicitly return `null` from `getBaseDefinition()` / `getExtensionDefinition()`.
 
 ## [8.3.4](https://github.com/thunder/thunder-distribution/tree/8.3.4) 2026-04-26
 
