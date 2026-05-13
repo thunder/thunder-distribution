@@ -12,13 +12,19 @@
 
 ### Preparing for GraphQL 5 stable (`drupal/graphql ^5.0@RC`)
 
-`drupal/graphql` is updated from `5.0.0-beta2` to `^5.0@RC`, allowing RC and eventual stable releases to be picked up automatically. If your project has custom GraphQL schema extension plugins, be aware of these breaking changes:
+`drupal/graphql` is updated from `5.0.0-beta2` to `^5.0@RC`, allowing RC and eventual stable releases to be picked up
+automatically. If your project has custom GraphQL schema extension plugins, be aware of these breaking changes:
 
-1. **Update schema plugin API.** Classes extending `ThunderSchemaExtensionPluginBase` or implementing `SdlSchemaPluginInterface` must return `GraphQL\Language\Source` (not `string`) from `getSchemaDefinition()` / `getBaseDefinition()` / `getExtensionDefinition()`, and replace `getResolverRegistry()` with `registerResolvers(ResolverRegistryInterface $registry): void`.
+1. **Update schema plugin API.** Classes extending `ThunderSchemaExtensionPluginBase` or implementing
+   `SdlSchemaPluginInterface` must return `GraphQL\Language\Source` (not `string`) from
+   `getSchemaDefinition()` / `getBaseDefinition()` / `getExtensionDefinition()`, and replace
+   `getResolverRegistry()` with `registerResolvers(ResolverRegistryInterface $registry): void`.
 
-2. **Replace inline `callback()` resolvers with DataProducer plugins.** Use one of the new built-in producers (`array_value`, `entity_reference_item`, `image_derivative_src`, etc.) or create your own `@DataProducer` plugin.
+2. **Replace inline `callback()` resolvers with DataProducer plugins.** Use one of the new built-in producers
+   (`array_value`, `entity_reference_item`, `image_derivative_src`, etc.) or create your own `@DataProducer` plugin.
 
-3. **Delete empty `.graphqls` stub files.** GraphQL 5 no longer needs them. Return `null` from `getBaseDefinition()` / `getExtensionDefinition()` instead.
+3. **Delete empty `.graphqls` stub files.** GraphQL 5 no longer needs them. Return `null` from
+   `getBaseDefinition()` / `getExtensionDefinition()` instead.
 
 ## [8.3.4](https://github.com/thunder/thunder-distribution/tree/8.3.4) 2026-04-26
 
