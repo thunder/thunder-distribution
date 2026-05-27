@@ -90,7 +90,7 @@ jobs:
 
       - name: Workaround https://www.drupal.org/project/drupal/issues/3592065
         run: |
-          composer require "symfony/polyfill-intl-idn:1.38.1 as 1.37.0
+          composer require symfony/polyfill-intl-idn:1.38.1 as 1.37.0
         working-directory: /tmp/test/thunder/install
 
       - name: Build the docroot
