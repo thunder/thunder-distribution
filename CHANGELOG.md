@@ -1,5 +1,9 @@
 # Changelog
 
+## [8.3.6](https://github.com/thunder/thunder-distribution/tree/8.3.6) 2026-05-02
+
+- Fix bug when removing paragraphs 2 click are required.
+
 ## [8.3.5](https://github.com/thunder/thunder-distribution/tree/8.3.5) 2026-05-13
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.3.4...8.3.5)
