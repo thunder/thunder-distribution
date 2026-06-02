@@ -23,19 +23,25 @@
 
   clickEdit.shouldTriggerEdit = (event) => {
     const { button, target } = event;
+
+    const isInteractiveTarget = target.closest(
+      'input, select, textarea, button, a, [role="button"], .button',
+    );
+
+    // Ignore all Paragraphs action controls (including remove/delete widgets).
+    const isParagraphAction = target.closest(
+      '.paragraphs-actions, .paragraphs-dropdown, .paragraphs-features__delete-confirm, [name*="_remove"], [data-drupal-selector*="remove"], [data-drupal-selector*="delete"]',
+    );
+
     return (
       (button === undefined || button === 0) &&
-      !target.matches(
-        'input, select, textarea, button, a, [role="button"], .button',
-      ) &&
-      !target.matches(
-        '.paragraphs-features__delete-confirm, [name*="_remove"]',
-      ) &&
+      !isInteractiveTarget &&
+      !isParagraphAction &&
       !target.closest('.click-edit-exclude')
     );
   };
 
-  clickEdit.handleParagraphClick = (event) => {
+  clickEdit.handleParagraphMouseDown = (event) => {
     if (!clickEdit.shouldTriggerEdit(event)) return;
 
     clickEdit.triggerEdit(event.currentTarget);
@@ -58,7 +64,7 @@
 
       once('thunder-paragraphs-click-edit', rows, context).forEach((elem) => {
         if (!clickEdit.findEditButton(elem)) return;
-        elem.addEventListener('click', clickEdit.handleParagraphClick);
+        elem.addEventListener('mousedown', clickEdit.handleParagraphMouseDown);
       });
     },
   };

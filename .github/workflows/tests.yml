@@ -22,7 +22,7 @@ env:
   DRUPAL_TESTING_TEST_CONFIGURATION: /tmp/test/thunder/install/docroot/profiles/contrib/thunder/
   DRUPAL_TESTING_HTTP_PORT: 8888
   DRUPAL_TESTING_VERBOSE: false
-  DRUPAL_TESTING_VERSION: "^2.0"
+  DRUPAL_TESTING_VERSION: "^3.0"
   DRUPAL_TESTING_TEST_FILTER: ""
   DRUPAL_TESTING_SELENIUM_HOST: 127.0.0.1
   DRUPAL_TESTING_SELENIUM_PORT: 4444
@@ -87,6 +87,11 @@ jobs:
 
       - name: Prepare the build
         run: test-drupal-project prepare_build
+
+      - name: Workaround https://www.drupal.org/project/drupal/issues/3592065
+        run: |
+          composer config audit.block-insecure false
+        working-directory: /tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build
