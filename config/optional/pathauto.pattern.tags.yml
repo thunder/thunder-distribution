@@ -11,11 +11,11 @@ selection_criteria:
   1e3f1c00-23a8-400c-a7bb-89877d2c1b22:
     id: 'entity_bundle:taxonomy_term'
     negate: false
-    uuid: 1e3f1c00-23a8-400c-a7bb-89877d2c1b22
     context_mapping:
       taxonomy_term: taxonomy_term
     bundles:
       tags: tags
+    uuid: 1e3f1c00-23a8-400c-a7bb-89877d2c1b22
 selection_logic: and
 weight: -5
 relationships: {  }
