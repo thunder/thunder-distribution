@@ -130,6 +130,7 @@ trait ThunderTestTrait {
    *   The newly created user.
    */
   protected function logWithRole(string $role): User {
+    /** @var \Drupal\user\Entity\User $editor */
     $editor = $this->drupalCreateUser();
     $editor->addRole($role);
     $editor->save();
