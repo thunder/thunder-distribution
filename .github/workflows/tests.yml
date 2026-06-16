@@ -267,6 +267,7 @@ jobs:
           composer require "drupal/blazy" --no-update
           composer require "drupal/select2" --no-update
           composer require "drupal/core-dev:~11.4.0" --no-update
+          composer config --no-plugins allow-plugins.symfony/runtime true
 
           composer update
           composer install
@@ -355,6 +356,7 @@ jobs:
         run: |
           composer require "league/container:^4.2" "drupal/core-dev:^11.4" "grasmash/yaml-cli:^3.2.1" "drupal/tour:2.0.8" --no-update --no-progress --working-dir=/tmp/test/thunder/install
           composer config allow-plugins.php-http/discovery true --no-plugins --working-dir=/tmp/test/thunder/install
+          composer config --no-plugins allow-plugins.symfony/runtime true --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build
