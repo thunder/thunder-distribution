@@ -43,6 +43,7 @@ install:
   - drupal:views_ui
   # contrib
   - access_unpublished:access_unpublished
+  - admin_toolbar:admin_toolbar
   - admin_toolbar:admin_toolbar_tools
   - autosave_form:autosave_form
   - autofill:autofill
