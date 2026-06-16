@@ -35,7 +35,8 @@
         "installer-name": "thunder",
         "patches": {
             "drupal/core": {
-                "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch"
+                "Let users configure the text of the \"Add media\" button": "https://www.drupal.org/files/issues/2021-10-01/3169956-34.patch",
+                "Revert #3514748": "https://www.drupal.org/files/issues/2026-06-16/revert-3514748-1.diff"
             },
             "drupal/diff": {
                 "Back button for comparison page": "https://www.drupal.org/files/issues/back_button_for-2853193-4.patch"
