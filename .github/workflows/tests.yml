@@ -354,7 +354,7 @@ jobs:
 
       - name: Install suggested dependencies
         run: |
-          composer require "league/container:^4.2" "drupal/core-dev:^11.4" "grasmash/yaml-cli:^3.2.1" "drupal/tour:2.0.8" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+          composer require "league/container:^4.2" "drupal/core-dev:^11.4" "grasmash/yaml-cli:^3.2.1" "drupal/tour:2.0.13" --no-update --no-progress --working-dir=/tmp/test/thunder/install
           composer config allow-plugins.php-http/discovery true --no-plugins --working-dir=/tmp/test/thunder/install
           composer config --no-plugins allow-plugins.symfony/runtime true --working-dir=/tmp/test/thunder/install
 
