@@ -1,6 +1,8 @@
 langcode: en
 status: true
 dependencies:
+  config:
+    - taxonomy.vocabulary.channel
   module:
     - taxonomy
 id: channel
@@ -15,7 +17,6 @@ selection_criteria:
       taxonomy_term: taxonomy_term
     bundles:
       channel: channel
-    uuid: 10250d56-f16e-4847-b5a3-ff9a90e2e1b5
 selection_logic: and
 weight: -5
 relationships: {  }
