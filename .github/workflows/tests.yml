@@ -88,11 +88,6 @@ jobs:
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
-      - name: Workaround https://www.drupal.org/project/drupal/issues/3592065
-        run: |
-          composer config --no-plugins allow-plugins.symfony/runtime true
-        working-directory: /tmp/test/thunder/install
-
       - name: Build the docroot
         run: test-drupal-project build
 
