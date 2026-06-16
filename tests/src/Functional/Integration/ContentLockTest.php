@@ -47,7 +47,7 @@ class ContentLockTest extends ThunderTestBase {
     $this->logWithRole('restricted_editor');
 
     $this->drupalGet($node->toUrl('edit-form'));
-    $this->assertSession()->pageTextContains('This content is being edited by the user ' . $loggedInUser . ' and is therefore locked to prevent other users changes.');
+    $this->assertSession()->pageTextContains('This content is being edited by the user ' . $loggedInUser . ' and is therefore locked to prevent changes by other users.');
   }
 
 }
