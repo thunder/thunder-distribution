@@ -43,6 +43,9 @@
             },
             "drupal/inline_entity_form": {
                 "Issue #3542076: Empty media entities with simple widget in paragraphs": "https://www.drupal.org/files/issues/2025-08-20/3542076-empty-media-entities-with-simple-widget-in-paragraphs.diff"
+            },
+            "drupal/gin": {
+                "Issue #3583491: fix using null as an array offset is deprecated": "https://www.drupal.org/files/issues/2026-06-17/3583491.diff"
             }
         }
     },
