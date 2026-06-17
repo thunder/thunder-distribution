@@ -2,8 +2,8 @@ name: Thunder
 type: profile
 description: 'The Drupal based CMS for professional publishing.'
 project: thunder
-core_version_requirement: ~11.3.0
-version: '8.3.6'
+core_version_requirement: ~11.4.0
+version: '8.4.0'
 
 distribution:
   name: Thunder
@@ -43,8 +43,8 @@ install:
   - drupal:views_ui
   # contrib
   - access_unpublished:access_unpublished
+  - admin_toolbar:admin_toolbar
   - admin_toolbar:admin_toolbar_tools
-  - admin_toolbar:admin_toolbar_links_access_filter
   - autosave_form:autosave_form
   - autofill:autofill
   - content_lock:content_lock
