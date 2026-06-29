@@ -53,13 +53,13 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.3', '8.4' ]
+        PHP_VERSION: [ '8.5', '8.4' ]
 
     env:
       DRUPAL_TESTING_TEST_DEPRECATION: true
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
       - uses: shivammathur/setup-php@v2
         with:
@@ -68,7 +68,7 @@ jobs:
           extensions: :redis, :pspell, Imagick
 
       - name: Cache composer dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
@@ -88,11 +88,6 @@ jobs:
       - name: Prepare the build
         run: test-drupal-project prepare_build
 
-      - name: Workaround https://www.drupal.org/project/drupal/issues/3592065
-        run: |
-          composer config audit.block-insecure false
-        working-directory: /tmp/test/thunder/install
-
       - name: Build the docroot
         run: test-drupal-project build
 
@@ -106,7 +101,7 @@ jobs:
         run: cd /tmp/test; tar cfz build-${{ matrix.PHP_VERSION }}.tgz thunder; mv build-${{ matrix.PHP_VERSION }}.tgz ${GITHUB_WORKSPACE}
 
       - name: Upload build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: build-${{ matrix.PHP_VERSION }}
           path: build-${{ matrix.PHP_VERSION }}.tgz
@@ -132,11 +127,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        PHP_VERSION: [ '8.3', '8.4' ]
+        PHP_VERSION: [ '8.5', '8.4' ]
         DRUPAL_TESTING_TEST_SUITE: [ 'kernel', 'functional', 'functional-javascript' ]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
       - uses: shivammathur/setup-php@v2
         with:
@@ -156,7 +151,7 @@ jobs:
           composer global require thunder/drupal-testing:${DRUPAL_TESTING_VERSION}
 
       - name: Download build
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: build-${{ matrix.PHP_VERSION }}
 
@@ -181,7 +176,7 @@ jobs:
           DRUPAL_TESTING_TEST_SUITE: ${{ matrix.DRUPAL_TESTING_TEST_SUITE }}
 
       - name: Upload test output
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: success() || failure()
         with:
           name: text-max-output-${{ matrix.DRUPAL_TESTING_TEST_SUITE }}-${{ matrix.PHP_VERSION }}
@@ -206,7 +201,7 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.3', '8.4' ]
+        PHP_VERSION: [ '8.5', '8.4' ]
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-upgrade') || github.event_name == 'schedule' }}
 
@@ -215,7 +210,7 @@ jobs:
       DRUPAL_TESTING_TEST_GROUP: Thunder
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
       - uses: shivammathur/setup-php@v2
         with:
@@ -224,7 +219,7 @@ jobs:
           extensions: :redis, :pspell, Imagick, gd, pdo_mysql
 
       - name: Cache composer dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
@@ -271,7 +266,8 @@ jobs:
           composer require "drupal/slick" --no-update
           composer require "drupal/blazy" --no-update
           composer require "drupal/select2" --no-update
-          composer require "drupal/core-dev:~11.3.0" --no-update
+          composer require "drupal/core-dev:~11.4.0" --no-update
+          composer config --no-plugins allow-plugins.symfony/runtime true
 
           composer update
           composer install
@@ -297,7 +293,7 @@ jobs:
           COMPOSER_ROOT_VERSION: ${{ env.DRUPAL_TESTING_UPGRADE_COMPOSER_PROJECT_VERSION }}
 
       - name: Upload test output
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: success() || failure()
         with:
           name: text-upgrade-output-${{ matrix.PHP_VERSION }}
@@ -322,12 +318,12 @@ jobs:
 
     strategy:
       matrix:
-        PHP_VERSION: [ '8.3', '8.4' ]
+        PHP_VERSION: [ '8.5', '8.4' ]
 
     if: ${{ contains(github.event.pull_request.labels.*.name, 'test-min') || github.event_name == 'schedule' }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
       - uses: shivammathur/setup-php@v2
         with:
@@ -336,7 +332,7 @@ jobs:
           extensions: :redis, :pspell, Imagick, gd, pdo_mysql
 
       - name: Cache composer dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-cache-${{ hashFiles('**/composer.json') }}
@@ -358,8 +354,9 @@ jobs:
 
       - name: Install suggested dependencies
         run: |
-          composer require "league/container:^4.2" "drupal/core-dev:^11.3" "grasmash/yaml-cli:^3.2.1" "drupal/tour:2.0.8" --no-update --no-progress --working-dir=/tmp/test/thunder/install
+          composer require "league/container:^4.2" "drupal/core-dev:^11.4" "grasmash/yaml-cli:^3.2.1" "drupal/tour:2.0.13" --no-update --no-progress --working-dir=/tmp/test/thunder/install
           composer config allow-plugins.php-http/discovery true --no-plugins --working-dir=/tmp/test/thunder/install
+          composer config --no-plugins allow-plugins.symfony/runtime true --working-dir=/tmp/test/thunder/install
 
       - name: Build the docroot
         run: test-drupal-project build
@@ -379,7 +376,7 @@ jobs:
           DRUPAL_TESTING_TEST_GROUP: Thunder
 
       - name: Upload test output
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: success() || failure()
         with:
           name: text-min-output-${{ matrix.PHP_VERSION }}

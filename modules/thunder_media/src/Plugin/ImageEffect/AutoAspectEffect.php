@@ -8,6 +8,7 @@ use Drupal\Core\Image\ImageInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\image\Attribute\ImageEffect;
 use Drupal\image\ConfigurableImageEffectBase;
+use Drupal\image\ImageDerivativeUtilities;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -28,11 +29,19 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
   protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
+   * The image derivative utilities.
+   *
+   * @var \Drupal\image\ImageDerivativeUtilities
+   */
+  protected ImageDerivativeUtilities $imageDerivativeUtilities;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     $style = parent::create($container, $configuration, $plugin_id, $plugin_definition);
     $style->setEntityTypeManager($container->get('entity_type.manager'));
+    $style->imageDerivativeUtilities = $container->get(ImageDerivativeUtilities::class);
     return $style;
   }
 
@@ -160,7 +169,8 @@ class AutoAspectEffect extends ConfigurableImageEffectBase {
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
-    $image_styles = image_style_options(FALSE);
+    $image_styles = $this->imageDerivativeUtilities->styleOptions(FALSE);
+
     $form['landscape'] = [
       '#type' => 'select',
       '#title' => $this->t('Landscape image style'),

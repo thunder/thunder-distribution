@@ -83,7 +83,7 @@ class FilterExtension extends AbstractExtension {
       if (isset($element['#printed']) && $element['#printed'] == TRUE && isset($element['#markup']) && strlen($element['#markup']) > 0) {
         return $element['#markup'];
       }
-      show($element);
+      $element['#printed'] = FALSE;
       return \Drupal::service('renderer')->render($element);
     }
     else {
