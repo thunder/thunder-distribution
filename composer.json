@@ -87,7 +87,7 @@
         "drupal/media_expire": "^2.6",
         "drupal/media_library_media_modify": "^2.0.0-beta1",
         "drupal/media_file_delete": "^1.2",
-        "drupal/metatag": "^2.0.2",
+        "drupal/metatag": "^2.1.1",
         "drupal/metatag_async_widget": "^1.2",
         "drupal/paragraphs": "^1.19",
         "drupal/paragraphs_features": "^2.2",
