@@ -121,4 +121,36 @@ GQL;
     ], $metadata);
   }
 
+  /**
+   * Tests hasNext is FALSE when the page covers all remaining items.
+   */
+  public function testHasNextReturnsFalseWhenNoMoreItemsExist(): void {
+    $query = <<<GQL
+      query {
+        articles {
+          hasNext
+        }
+      }
+GQL;
+
+    $this->mockResolver('Query', 'articles',
+      $this->builder->produce('thunder_entity_list')
+        ->map('type', $this->builder->fromValue('node'))
+        ->map('offset', $this->builder->fromValue(0))
+        ->map('limit', $this->builder->fromValue(self::NODE_COUNT))
+    );
+    $this->mockResolver('EntityList', 'hasNext',
+      $this->builder->produce('thunder_entity_list_has_next')
+        ->map('list', $this->builder->fromParent())
+    );
+
+    $metadata = $this->defaultCacheMetaData();
+    $metadata->setCacheContexts(['user.permissions', 'user.node_grants:view']);
+    $metadata->addCacheTags(['node_list']);
+
+    $this->assertResults($query, [], [
+      'articles' => ['hasNext' => FALSE],
+    ], $metadata);
+  }
+
 }

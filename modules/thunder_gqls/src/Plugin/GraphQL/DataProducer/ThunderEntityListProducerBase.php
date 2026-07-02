@@ -41,6 +41,20 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
   protected EntityListResponse $responseWrapper;
 
   /**
+   * The pagination offset of the most recently built query.
+   *
+   * @var int
+   */
+  protected int $offset = 0;
+
+  /**
+   * The pagination limit of the most recently built query.
+   *
+   * @var int
+   */
+  protected int $limit = 0;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
@@ -178,6 +192,11 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
 
     $query->range($offset, $limit);
 
+    // Remember the pagination window so the response wrapper can compute
+    // hasNext correctly (offset + limit < total).
+    $this->offset = $offset;
+    $this->limit = $limit;
+
     $storage = $this->entityTypeManager->getStorage($type);
     $entityType = $storage->getEntityType();
 
@@ -228,7 +247,10 @@ abstract class ThunderEntityListProducerBase extends DataProducerPluginBase impl
    *   The entity list response.
    */
   protected function entityListResponse(QueryInterface $query): EntityListResponse {
-    return $this->responseWrapper->setQuery($query);
+    return $this->responseWrapper
+      ->setQuery($query)
+      ->setOffset($this->offset)
+      ->setLimit($this->limit);
   }
 
 }
