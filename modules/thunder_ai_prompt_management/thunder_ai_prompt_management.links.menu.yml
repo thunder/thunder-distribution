@@ -4,8 +4,8 @@ entity.ai_prompt_content.collection:
   route_name: entity.ai_prompt_content.collection
   parent: system.admin_content
 
-entity.ai_prompt_content_type.overview:
-  title: AI Prompt Types
+entity.ai_task.overview:
+  title: AiTasks
   parent: system.admin_structure
-  description: 'List of ai prompt types to extend site functionality.'
-  route_name: entity.ai_prompt_content_type.collection
+  description: 'List of ai tasks to extend site functionality.'
+  route_name: entity.ai_task.collection

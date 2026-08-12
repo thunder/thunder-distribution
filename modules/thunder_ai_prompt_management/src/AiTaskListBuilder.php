@@ -8,9 +8,9 @@ use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
 
 /**
- * Provides a listing of ai prompt types.
+ * Provides a listing of ai tasks.
  */
-final class AiPromptTypeListBuilder extends ConfigEntityListBuilder {
+final class AiTaskListBuilder extends ConfigEntityListBuilder {
 
   /**
    * {@inheritdoc}
@@ -26,7 +26,7 @@ final class AiPromptTypeListBuilder extends ConfigEntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity): array {
-    /** @var \Drupal\thunder_ai_prompt_management\AiPromptTypeInterface $entity */
+    /** @var \Drupal\thunder_ai_prompt_management\AiTaskInterface $entity */
     $row['label'] = $entity->label();
     $row['id'] = $entity->id();
     $row['status'] = $entity->status() ? $this->t('Enabled') : $this->t('Disabled');

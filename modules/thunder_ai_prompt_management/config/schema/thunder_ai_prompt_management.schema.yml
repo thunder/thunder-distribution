@@ -1,6 +1,6 @@
-thunder_ai_prompt_management.ai_prompt_content_type.*:
+thunder_ai_prompt_management.ai_task.*:
   type: config_entity
-  label: AI Prompt Type
+  label: AiTask
   mapping:
     id:
       type: string

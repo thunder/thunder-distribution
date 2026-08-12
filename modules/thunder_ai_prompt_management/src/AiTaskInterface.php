@@ -7,8 +7,8 @@ namespace Drupal\thunder_ai_prompt_management;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 
 /**
- * Provides an interface defining an ai prompt type entity type.
+ * Provides an interface defining an ai task entity type.
  */
-interface AiPromptTypeInterface extends ConfigEntityInterface {
+interface AiTaskInterface extends ConfigEntityInterface {
 
 }

@@ -1,31 +1,31 @@
-entity.ai_prompt_content_type.collection:
-  path: '/admin/structure/ai-prompt-content-type'
+entity.ai_task.collection:
+  path: '/admin/structure/ai-task'
   defaults:
-    _entity_list: 'ai_prompt_content_type'
-    _title: 'AI Prompt Type configuration'
+    _entity_list: 'ai_task'
+    _title: 'AiTask configuration'
   requirements:
-    _permission: 'administer ai_prompt_content_type'
+    _permission: 'administer ai_task'
 
-entity.ai_prompt_content_type.add_form:
-  path: '/admin/structure/ai_prompt_content_type/add'
+entity.ai_task.add_form:
+  path: '/admin/structure/ai_task/add'
   defaults:
-    _entity_form: 'ai_prompt_content_type.add'
-    _title: 'Add an ai prompt type'
+    _entity_form: 'ai_task.add'
+    _title: 'Add an ai task'
   requirements:
-    _permission: 'administer ai_prompt_content_type'
+    _permission: 'administer ai_task'
 
-entity.ai_prompt_content_type.edit_form:
-  path: '/admin/structure/ai-prompt-content-type/{ai_prompt_content_type}'
+entity.ai_task.edit_form:
+  path: '/admin/structure/ai-task/{ai_task}'
   defaults:
-    _entity_form: 'ai_prompt_content_type.edit'
-    _title: 'Edit an ai prompt type'
+    _entity_form: 'ai_task.edit'
+    _title: 'Edit an ai task'
   requirements:
-    _permission: 'administer ai_prompt_content_type'
+    _permission: 'administer ai_task'
 
-entity.ai_prompt_content_type.delete_form:
-  path: '/admin/structure/ai-prompt-content-type/{ai_prompt_content_type}/delete'
+entity.ai_task.delete_form:
+  path: '/admin/structure/ai-task/{ai_task}/delete'
   defaults:
-    _entity_form: 'ai_prompt_content_type.delete'
-    _title: 'Delete an ai prompt type'
+    _entity_form: 'ai_task.delete'
+    _title: 'Delete an ai task'
   requirements:
-    _permission: 'administer ai_prompt_content_type'
+    _permission: 'administer ai_task'

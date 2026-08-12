@@ -6,12 +6,12 @@ namespace Drupal\thunder_ai_prompt_management\Form;
 
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\thunder_ai_prompt_management\Entity\AiPromptType;
+use Drupal\thunder_ai_prompt_management\Entity\AiTask;
 
 /**
- * AI Prompt Type form.
+ * AiTask form.
  */
-final class AiPromptTypeForm extends EntityForm {
+final class AiTaskForm extends EntityForm {
 
   /**
    * {@inheritdoc}
@@ -32,7 +32,7 @@ final class AiPromptTypeForm extends EntityForm {
       '#type' => 'machine_name',
       '#default_value' => $this->entity->id(),
       '#machine_name' => [
-        'exists' => [AiPromptType::class, 'load'],
+        'exists' => [AiTask::class, 'load'],
       ],
       '#disabled' => !$this->entity->isNew(),
     ];
