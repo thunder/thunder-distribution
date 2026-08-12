@@ -1,0 +1,5 @@
+ai_prompt_content.add_form:
+  title: 'Add ai prompt'
+  route_name: entity.ai_prompt_content.add_form
+  appears_on:
+    - entity.ai_prompt_content.collection

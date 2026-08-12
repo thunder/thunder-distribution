@@ -1,0 +1,5 @@
+entity.ai_prompt_content.collection:
+  title: 'AI Prompts'
+  description: 'List of ai prompts.'
+  route_name: entity.ai_prompt_content.collection
+  parent: system.admin_content

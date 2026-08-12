@@ -1,0 +1,5 @@
+entity.ai_prompt_content.collection:
+  title: 'AI Prompts'
+  route_name: entity.ai_prompt_content.collection
+  base_route: system.admin_content
+  weight: 10

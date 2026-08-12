@@ -1,0 +1,3 @@
+administer ai_prompt_content:
+  title: 'Administer ai prompts'
+  restrict access: true
