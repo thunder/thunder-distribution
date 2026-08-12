@@ -1,0 +1,107 @@
+/*
+ * @file
+ * Styles for the ai prompt entity form.
+ */
+
+/* Claro cards the fieldset itself, which puts the legend inside the card.
+   Element selector needed: theme CSS loads after module CSS. */
+fieldset.entity-context-widget {
+  margin-inline: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* Gin top-aligns the help toggle, which sits high next to a plain legend.
+   Block padding has to stay symmetric, or centering offsets it again. */
+.entity-context-widget > .help-icon {
+  align-items: center;
+  margin-block-end: var(--gin-spacing-xs, 4px);
+}
+
+.entity-context-widget > .help-icon .fieldset__label {
+  padding: 0;
+}
+
+.entity-context-widget > .help-icon > .fieldset__legend {
+  margin-block-end: 0;
+}
+
+/* The card moves to the wrapper, so it holds the rows only. Same surface as
+   a Gin form element, so it sits with the other fields on the form. */
+.entity-context-widget > .fieldset__wrapper {
+  margin: 0;
+  padding-inline: var(--input-padding-horizontal, 16px);
+  border: 1px solid var(--gin-border-color-form-element, #d4d4d8);
+  border-radius: var(--gin-border-m, 8px);
+  background-color: var(--gin-bg-input, #fff);
+}
+
+.entity-context-widget .fieldset__description {
+  padding-block: var(--gin-spacing-s, 12px);
+}
+
+.entity-context-widget__row {
+  display: grid;
+  grid-template-columns: minmax(0, 12rem) 1fr;
+  gap: var(--gin-spacing-m, 16px);
+  align-items: baseline;
+  padding-block: var(--gin-spacing-s, 12px);
+  border-block-start: 1px solid var(--gin-border-color-table, #e6e6e6);
+}
+
+/* The checkboxes render as a composite fieldset; drop its own spacing. */
+.entity-context-widget__row .fieldset,
+.entity-context-widget__row .fieldset__wrapper {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.entity-context-widget__row:first-of-type {
+  border-block-start: 0;
+}
+
+.entity-context-widget__type {
+  color: var(--gin-color-title, inherit);
+  font-size: var(--gin-font-size-s, 0.875rem);
+  font-weight: var(--gin-font-weight-semibold, 600);
+}
+
+.entity-context-widget .form-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gin-spacing-xs, 4px) var(--gin-spacing-m, 16px);
+}
+
+.entity-context-widget .form-checkboxes > .form-item {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--gin-spacing-xs, 4px);
+  margin: 0;
+}
+
+/* Claro floats the box with a negative margin, which breaks inside a flex row. */
+.entity-context-widget .form-checkboxes .form-boolean {
+  position: static;
+  float: none;
+  margin-inline: 0;
+  transform: none;
+}
+
+/* Theme label margins are asymmetric, which offsets the text from the box. */
+.entity-context-widget .form-checkboxes .form-item__label {
+  display: block;
+  margin-block: 0;
+  line-height: 1.2;
+}
+
+@media (max-width: 48em) {
+  .entity-context-widget__row {
+    grid-template-columns: 1fr;
+    gap: var(--gin-spacing-xs, 4px);
+  }
+}

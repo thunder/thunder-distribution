@@ -92,7 +92,7 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
     $prompt = AIPrompt::create([
       'label' => 'SEO description prompt',
       'prompt' => 'Suggest a meta description for the article.',
-      'ai_task' => ['seo_description'],
+      'ai_task' => 'seo_description',
       'model' => 'openai__gpt-4o',
       'uid' => $owner_id,
     ]);
@@ -221,6 +221,43 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
       ->execute();
 
     $this->assertCount(1, $ids);
+  }
+
+  /**
+   * Tests that prompts are discoverable by their entity context.
+   */
+  public function testPromptsDiscoverableByEntityContext(): void {
+    $this->createTask();
+    $owner = $this->createUserWithPermissions([]);
+
+    AIPrompt::create([
+      'label' => 'Node article prompt',
+      'prompt' => 'A prompt for node articles.',
+      'ai_task' => 'seo_description',
+      'model' => 'openai__gpt-4o',
+      'uid' => $owner->id(),
+      'entity_context' => ['node.article', 'node.*', 'media.image'],
+    ])->save();
+
+    $storage = $this->container->get('entity_type.manager')->getStorage('ai_prompt_content');
+
+    $specific_bundle_ids = $storage->getQuery()
+      ->condition('entity_context', 'node.article', 'IN')
+      ->accessCheck(FALSE)
+      ->execute();
+    $this->assertCount(1, $specific_bundle_ids);
+
+    $all_bundle_ids = $storage->getQuery()
+      ->condition('entity_context', 'node.*', 'IN')
+      ->accessCheck(FALSE)
+      ->execute();
+    $this->assertCount(1, $all_bundle_ids);
+
+    $unrelated_ids = $storage->getQuery()
+      ->condition('entity_context', 'taxonomy_term.*', 'IN')
+      ->accessCheck(FALSE)
+      ->execute();
+    $this->assertCount(0, $unrelated_ids);
   }
 
 }

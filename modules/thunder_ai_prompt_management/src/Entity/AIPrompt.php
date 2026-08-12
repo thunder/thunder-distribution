@@ -203,13 +203,13 @@ class AIPrompt extends EditorialContentEntityBase implements AIPromptInterface {
       ->setDisplayConfigurable('form', TRUE);
 
     $fields['ai_task'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Ai task'))
-      ->setDescription(t('The ai tasks this prompt is used for.'))
+      ->setLabel(t('AI Task'))
+      ->setDescription(t('The ai task this prompt is used for.'))
       ->setSetting('target_type', 'ai_task')
-      ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
+      ->setCardinality(1)
       ->setRevisionable(TRUE)
       ->setDisplayOptions('form', [
-        'type' => 'options_buttons',
+        'type' => 'options_select',
         'weight' => 5,
       ])
       ->setDisplayConfigurable('form', TRUE)
@@ -217,6 +217,23 @@ class AIPrompt extends EditorialContentEntityBase implements AIPromptInterface {
         'label' => 'above',
         'type' => 'entity_reference_label',
         'weight' => 5,
+      ])
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['entity_context'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Entity context'))
+      ->setDescription(t('The entity types and bundles this prompt can be used for.'))
+      ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'type' => 'entity_context',
+        'weight' => 10,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => 10,
       ])
       ->setDisplayConfigurable('view', TRUE);
 

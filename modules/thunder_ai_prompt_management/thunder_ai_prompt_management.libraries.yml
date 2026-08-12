@@ -1,5 +1,8 @@
 form:
   version: VERSION
+  css:
+    component:
+      css/form.css: {}
   js:
     js/form.js: {}
   dependencies:
