@@ -3,3 +3,9 @@ ai_prompt_content.add_form:
   route_name: entity.ai_prompt_content.add_form
   appears_on:
     - entity.ai_prompt_content.collection
+
+entity.ai_prompt_content_type.add_form:
+  route_name: 'entity.ai_prompt_content_type.add_form'
+  title: 'Add ai prompt type'
+  appears_on:
+    - entity.ai_prompt_content_type.collection

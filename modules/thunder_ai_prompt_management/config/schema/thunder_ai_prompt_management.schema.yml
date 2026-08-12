@@ -1,0 +1,14 @@
+thunder_ai_prompt_management.ai_prompt_content_type.*:
+  type: config_entity
+  label: AI Prompt Type
+  mapping:
+    id:
+      type: string
+      label: ID
+    label:
+      type: label
+      label: Label
+    uuid:
+      type: string
+    description:
+      type: string

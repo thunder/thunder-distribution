@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Drupal\thunder_ai_prompt_management;
+
+use Drupal\Core\Config\Entity\ConfigEntityInterface;
+
+/**
+ * Provides an interface defining an ai prompt type entity type.
+ */
+interface AiPromptTypeInterface extends ConfigEntityInterface {
+
+}
