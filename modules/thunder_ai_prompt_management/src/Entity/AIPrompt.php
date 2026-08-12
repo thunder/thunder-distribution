@@ -15,7 +15,9 @@ use Drupal\Core\Entity\Form\RevisionDeleteForm;
 use Drupal\Core\Entity\Form\RevisionRevertForm;
 use Drupal\Core\Entity\Routing\RevisionHtmlRouteProvider;
 use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\thunder_ai_prompt_management\AIPromptAccessControlHandler;
 use Drupal\thunder_ai_prompt_management\AIPromptInterface;
 use Drupal\thunder_ai_prompt_management\AIPromptListBuilder;
 use Drupal\thunder_ai_prompt_management\Form\AIPromptForm;
@@ -42,6 +44,7 @@ use Drupal\views\EntityViewsData;
   ],
   handlers: [
     'list_builder' => AIPromptListBuilder::class,
+    'access' => AIPromptAccessControlHandler::class,
     'views_data' => EntityViewsData::class,
     'form' => [
       'add' => AIPromptForm::class,
@@ -69,6 +72,7 @@ use Drupal\views\EntityViewsData;
     'version-history' => '/admin/content/prompts/{ai_prompt_content}/revisions',
   ],
   admin_permission: 'administer ai_prompt_content',
+  collection_permission: 'view ai_prompt_content',
   base_table: 'ai_prompt_content',
   revision_table: 'ai_prompt_content_revision',
   show_revision_ui: TRUE,
@@ -186,16 +190,42 @@ class AIPrompt extends EditorialContentEntityBase implements AIPromptInterface {
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the ai prompt was last edited.'));
 
-    $fields['prompt'] = BaseFieldDefinition::create('string')
+    $fields['prompt'] = BaseFieldDefinition::create('string_long')
       ->setLabel(t('Prompt'))
       ->setDescription(t('The prompt.'))
       ->setRevisionable(TRUE)
       ->setRequired(TRUE)
       ->setDisplayOptions('form', [
-        'type' => 'string_textfield',
+        'type' => 'string_textarea',
         'weight' => -5,
+        'rows' => 5,
       ])
       ->setDisplayConfigurable('form', TRUE);
+
+    $fields['ai_task'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Ai task'))
+      ->setDescription(t('The ai tasks this prompt is used for.'))
+      ->setSetting('target_type', 'ai_task')
+      ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'type' => 'options_buttons',
+        'weight' => 5,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'entity_reference_label',
+        'weight' => 5,
+      ])
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['model'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Model'))
+      ->setDescription(t('The AI provider model this prompt is intended for.'))
+      ->setSetting('max_length', 255)
+      ->setRevisionable(TRUE)
+      ->setRequired(TRUE);
 
     return $fields;
   }

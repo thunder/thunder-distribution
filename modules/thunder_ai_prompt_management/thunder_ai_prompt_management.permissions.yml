@@ -1,3 +1,21 @@
+view ai_prompt_content:
+  title: 'View ai prompts'
+
+create ai_prompt_content:
+  title: 'Create ai prompts'
+
+edit own ai_prompt_content:
+  title: 'Edit own ai prompts'
+
+edit any ai_prompt_content:
+  title: 'Edit any ai prompts'
+
+delete own ai_prompt_content:
+  title: 'Delete own ai prompts'
+
+delete any ai_prompt_content:
+  title: 'Delete any ai prompts'
+
 administer ai_prompt_content:
   title: 'Administer ai prompts'
   restrict access: true

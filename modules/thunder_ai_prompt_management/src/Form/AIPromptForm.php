@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Drupal\thunder_ai_prompt_management\Form;
 
 use Drupal\Component\Datetime\TimeInterface;
+use Drupal\ai\AiProviderPluginManager;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\TempStore\PrivateTempStoreFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -26,14 +26,25 @@ final class AIPromptForm extends ContentEntityForm {
    */
   protected $currentUser;
 
+  /**
+   * The AI provider plugin manager.
+   *
+   * @var \Drupal\ai\AiProviderPluginManager
+   */
+  protected $providerPluginManager;
 
   /**
-   * Constructs a NodeForm object.
+   * The date formatter service.
+   *
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   */
+  protected $dateFormatter;
+
+  /**
+   * Constructs an AIPromptForm object.
    *
    * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
    *   The entity repository.
-   * @param \Drupal\Core\TempStore\PrivateTempStoreFactory $temp_store_factory
-   *   The factory for the temp store object.
    * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
    *   The entity type bundle service.
    * @param \Drupal\Component\Datetime\TimeInterface $time
@@ -42,15 +53,21 @@ final class AIPromptForm extends ContentEntityForm {
    *   The current user.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   The date formatter service.
+   * @param \Drupal\ai\AiProviderPluginManager $provider_plugin_manager
+   *   The AI provider plugin manager.
    */
   public function __construct(
     EntityRepositoryInterface $entity_repository,
     EntityTypeBundleInfoInterface $entity_type_bundle_info,
     TimeInterface $time,
     AccountInterface $current_user,
+    DateFormatterInterface $date_formatter,
+    AiProviderPluginManager $provider_plugin_manager,
   ) {
     parent::__construct($entity_repository, $entity_type_bundle_info, $time);
     $this->currentUser = $current_user;
+    $this->dateFormatter = $date_formatter;
+    $this->providerPluginManager = $provider_plugin_manager;
   }
 
   /**
@@ -62,6 +79,8 @@ final class AIPromptForm extends ContentEntityForm {
       $container->get('entity_type.bundle.info'),
       $container->get('datetime.time'),
       $container->get('current_user'),
+      $container->get('date.formatter'),
+      $container->get('ai.provider'),
     );
   }
 
@@ -97,13 +116,30 @@ final class AIPromptForm extends ContentEntityForm {
     return $result;
   }
 
-  public function form(array $form, FormStateInterface $form_state)
-  {
-
+  /**
+   * {@inheritdoc}
+   */
+  public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
 
-    /** @var \Drupal\node\NodeInterface $node */
+    /** @var \Drupal\thunder_ai_prompt_management\AIPromptInterface $node */
     $node = $this->entity;
+
+    $model_options = $this->providerPluginManager->getSimpleProviderModelOptions('chat', FALSE);
+    $default_model = $this->entity->get('model')->value;
+    if (!$default_model && $default = $this->providerPluginManager->getDefaultProviderForOperationType('chat')) {
+      $default_model = $default['provider_id'] . '__' . $default['model_id'];
+    }
+    $form['model'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Model'),
+      '#description' => $this->t('The AI provider model this prompt is intended for.'),
+      '#options' => $model_options,
+      '#default_value' => $default_model,
+      '#empty_option' => $this->t('- Select a model -'),
+      '#required' => TRUE,
+      '#weight' => 5,
+    ];
 
     $form['advanced']['#attributes']['class'][] = 'entity-meta';
 
@@ -114,7 +150,7 @@ final class AIPromptForm extends ContentEntityForm {
       '#title' => $this->t('Status'),
       '#attributes' => ['class' => ['entity-meta__header']],
       '#tree' => TRUE,
-      '#access' => $this->currentUser->hasPermission('administer nodes'),
+      '#access' => $this->currentUser->hasPermission('administer ai_prompt_content'),
     ];
     $form['meta']['published'] = [
       '#type' => 'item',
@@ -161,9 +197,7 @@ final class AIPromptForm extends ContentEntityForm {
 
     $form['#attached']['library'][] = 'node/drupal.node';
 
-
     return $form;
-
 
   }
 
