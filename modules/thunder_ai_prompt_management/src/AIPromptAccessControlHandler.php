@@ -26,23 +26,24 @@ final class AIPromptAccessControlHandler extends EntityAccessControlHandler {
       }
     }
 
-    if ($operation === 'view') {
+    if ($operation === 'view' || $operation === 'view all revisions' || $operation === 'view revision') {
       return AccessResult::allowedIfHasPermission($account, 'view ai_prompt_content');
     }
 
-    if ($operation === 'update' || $operation === 'delete') {
+    if ($operation === 'update' || $operation === 'revert') {
       $own = $entity->getOwnerId() === $account->id();
-      if ($operation === 'update') {
-        return AccessResult::allowedIf($own)
-          ->andIf(AccessResult::allowedIfHasPermission($account, 'edit own ai_prompt_content'))
-          ->orIf(AccessResult::allowedIfHasPermission($account, 'edit any ai_prompt_content'));
-      }
+      return AccessResult::allowedIf($own)
+        ->andIf(AccessResult::allowedIfHasPermission($account, 'edit own ai_prompt_content'))
+        ->orIf(AccessResult::allowedIfHasPermission($account, 'edit any ai_prompt_content'));
+    }
+
+    if ($operation === 'delete' || $operation === 'delete revision') {
+      $own = $entity->getOwnerId() === $account->id();
       return AccessResult::allowedIf($own)
         ->andIf(AccessResult::allowedIfHasPermission($account, 'delete own ai_prompt_content'))
         ->orIf(AccessResult::allowedIfHasPermission($account, 'delete any ai_prompt_content'));
     }
 
-    // Revert and delete-revision operations remain admin only.
     return AccessResult::neutral();
   }
 

@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for the thunder_ai_prompt_management module.
+ */
+
+/**
+ * Implements hook_gin_content_form_routes_alter().
+ *
+ * Render the prompt edit forms with the Gin sidebar, like for media items.
+ */
+function thunder_ai_prompt_management_gin_content_form_routes_alter(array &$routes): void {
+  $routes[] = 'entity.ai_prompt_content.canonical';
+  $routes[] = 'entity.ai_prompt_content.add_form';
+  $routes[] = 'entity.ai_prompt_content.edit_form';
+}

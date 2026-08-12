@@ -3,3 +3,9 @@ entity.ai_prompt_content.collection:
   route_name: entity.ai_prompt_content.collection
   base_route: system.admin_content
   weight: 10
+
+entity.ai_prompt_content.canonical:
+  title: 'Edit'
+  route_name: entity.ai_prompt_content.canonical
+  base_route: entity.ai_prompt_content.canonical
+  weight: 10

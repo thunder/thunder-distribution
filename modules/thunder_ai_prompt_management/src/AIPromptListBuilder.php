@@ -32,7 +32,7 @@ final class AIPromptListBuilder extends EntityListBuilder {
     /** @var \Drupal\thunder_ai_prompt_management\AIPromptInterface $entity */
     $row['id'] = $entity->id();
     $row['label'] = $entity->label();
-    $row['status'] = $entity->get('status')->value ? $this->t('Enabled') : $this->t('Disabled');
+    $row['status'] = $entity->get('status')->value ? $this->t('Published') : $this->t('Unpublished');
     $username_options = [
       'label' => 'hidden',
       'settings' => ['link' => $entity->get('uid')->entity->isAuthenticated()],

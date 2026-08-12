@@ -128,15 +128,15 @@ class AIPrompt extends EditorialContentEntityBase implements AIPromptInterface {
 
     $fields['status'] = BaseFieldDefinition::create('boolean')
       ->setRevisionable(TRUE)
-      ->setLabel(t('Status'))
+      ->setLabel(t('Published'))
       ->setDefaultValue(TRUE)
-      ->setSetting('on_label', 'Enabled')
+      ->setSetting('on_label', 'Published')
       ->setDisplayOptions('form', [
         'type' => 'boolean_checkbox',
         'settings' => [
-          'display_label' => FALSE,
+          'display_label' => TRUE,
         ],
-        'weight' => 0,
+        'weight' => 100,
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [

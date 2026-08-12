@@ -175,13 +175,13 @@ final class AIPromptForm extends ContentEntityForm {
       $form['status']['#group'] = 'footer';
     }
 
-    // Node author information for administrators.
+    // Author information for administrators.
     $form['author'] = [
       '#type' => 'details',
       '#title' => $this->t('Authoring information'),
       '#group' => 'advanced',
       '#attributes' => [
-        'class' => ['node-form-author'],
+        'class' => ['ai-prompt-form-author'],
       ],
       '#weight' => 90,
       '#optional' => TRUE,
@@ -195,7 +195,7 @@ final class AIPromptForm extends ContentEntityForm {
       $form['created']['#group'] = 'author';
     }
 
-    $form['#attached']['library'][] = 'node/drupal.node';
+    $form['#attached']['library'][] = 'thunder_ai_prompt_management/form';
 
     return $form;
 

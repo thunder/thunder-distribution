@@ -121,7 +121,9 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
       ->createAccess(NULL, $nobody));
 
     $this->assertTrue($prompt->access('view', $viewer));
+    $this->assertTrue($prompt->access('view all revisions', $viewer));
     $this->assertFalse($prompt->access('view', $nobody));
+    $this->assertFalse($prompt->access('view all revisions', $nobody));
   }
 
   /**
@@ -145,6 +147,13 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
     $this->assertTrue($other_owner_prompt->access('update', $own_editor));
     $this->assertFalse($prompt->access('update', $own_editor));
     $this->assertTrue($prompt->access('update', $any_editor));
+
+    $storage = $this->container->get('entity_type.manager')->getStorage('ai_prompt_content');
+    $first_revision = $storage->getLatestRevisionId($prompt->id());
+    $prompt->setNewRevision(TRUE);
+    $prompt->setRevisionLogMessage('Update');
+    $prompt->save();
+    $this->assertTrue($storage->loadRevision($first_revision)->access('revert', $any_editor));
   }
 
   /**
@@ -168,6 +177,13 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
     $this->assertTrue($other_owner_prompt->access('delete', $own_deleter));
     $this->assertFalse($prompt->access('delete', $own_deleter));
     $this->assertTrue($prompt->access('delete', $any_deleter));
+
+    $storage = $this->container->get('entity_type.manager')->getStorage('ai_prompt_content');
+    $first_revision = $storage->getLatestRevisionId($prompt->id());
+    $prompt->setNewRevision(TRUE);
+    $prompt->setRevisionLogMessage('Update');
+    $prompt->save();
+    $this->assertTrue($storage->loadRevision($first_revision)->access('delete revision', $any_deleter));
   }
 
   /**
