@@ -39,7 +39,7 @@ abstract class ThunderSearchApiProducerBase extends DataProducerPluginBase imple
    *
    * @var \Drupal\thunder_gqls\Wrappers\SearchApiResponse
    */
-  private SearchApiResponse $responseWrapper;
+  protected SearchApiResponse $responseWrapper;
 
   /**
    * {@inheritdoc}
