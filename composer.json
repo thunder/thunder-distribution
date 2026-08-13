@@ -86,7 +86,7 @@
         "drupal/media_file_delete": "^1.2",
         "drupal/metatag": "^2.1.1",
         "drupal/metatag_async_widget": "^1.2",
-        "drupal/paragraphs": "^1.19",
+        "drupal/paragraphs": "^1.22",
         "drupal/paragraphs_features": "^2.2",
         "drupal/password_policy": "^4.0.3",
         "drupal/pathauto": "^1.15",
