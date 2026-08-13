@@ -17,6 +17,7 @@ use Drupal\Core\Entity\Routing\RevisionHtmlRouteProvider;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Url;
 use Drupal\thunder_ai_prompt_management\AIPromptAccessControlHandler;
 use Drupal\thunder_ai_prompt_management\AIPromptInterface;
 use Drupal\thunder_ai_prompt_management\AIPromptListBuilder;
@@ -204,7 +205,9 @@ class AIPrompt extends EditorialContentEntityBase implements AIPromptInterface {
 
     $fields['ai_task'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('AI Task'))
-      ->setDescription(t('The ai task this prompt is used for.'))
+      ->setDescription(t('The ai task this prompt is used for. Manage available tasks on the <a href=":url">AI Task configuration</a> page.', [
+        ':url' => Url::fromRoute('entity.ai_task.collection')->toString(),
+      ]))
       ->setSetting('target_type', 'ai_task')
       ->setCardinality(1)
       ->setRevisionable(TRUE)
