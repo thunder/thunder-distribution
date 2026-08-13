@@ -17,7 +17,6 @@ use Drupal\Core\Entity\Routing\RevisionHtmlRouteProvider;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Url;
 use Drupal\thunder_ai_prompt_management\AIPromptAccessControlHandler;
 use Drupal\thunder_ai_prompt_management\AIPromptInterface;
 use Drupal\thunder_ai_prompt_management\AIPromptListBuilder;
@@ -25,7 +24,6 @@ use Drupal\thunder_ai_prompt_management\Form\AIPromptForm;
 use Drupal\thunder_ai_prompt_management\Routing\AIPromptHtmlRouteProvider;
 use Drupal\user\EntityOwnerTrait;
 use Drupal\views\EntityViewsData;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 /**
  * Defines the ai prompt entity class.
@@ -204,21 +202,9 @@ class AIPrompt extends EditorialContentEntityBase implements AIPromptInterface {
       ])
       ->setDisplayConfigurable('form', TRUE);
 
-    try {
-      $aiTaskCollectionUrl = Url::fromRoute('entity.ai_task.collection')->toString();
-    }
-    catch (RouteNotFoundException) {
-      // The route table may not be rebuilt yet when base field definitions
-      // are collected for unrelated entity types. In that case, fall back to
-      // the hardcoded path.
-      $aiTaskCollectionUrl = '/admin/structure/ai-task';
-    }
-
     $fields['ai_task'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('AI Task'))
-      ->setDescription(t('The ai task this prompt is used for. Manage available tasks on the <a href=":url">AI Task configuration</a> page.', [
-        ':url' => $aiTaskCollectionUrl,
-      ]))
+      ->setDescription(t('The ai task this prompt is used for.'))
       ->setSetting('target_type', 'ai_task')
       ->setCardinality(1)
       ->setRevisionable(TRUE)

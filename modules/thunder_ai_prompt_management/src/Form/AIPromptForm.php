@@ -12,6 +12,7 @@ use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -124,6 +125,12 @@ final class AIPromptForm extends ContentEntityForm {
 
     /** @var \Drupal\thunder_ai_prompt_management\AIPromptInterface $node */
     $node = $this->entity;
+
+    if (isset($form['ai_task']['widget'])) {
+      $form['ai_task']['widget']['#description'] = $this->t('The ai task this prompt is used for. Manage available tasks on the <a href=":url">AI Task configuration</a> page.', [
+        ':url' => Url::fromRoute('entity.ai_task.collection')->toString(),
+      ]);
+    }
 
     $model_options = $this->providerPluginManager->getSimpleProviderModelOptions('chat', FALSE);
     $default_model = $this->entity->get('model')->value;
