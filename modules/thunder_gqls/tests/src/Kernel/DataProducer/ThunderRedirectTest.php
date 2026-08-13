@@ -3,7 +3,6 @@
 namespace Drupal\Tests\thunder_gqls\Kernel\DataProducer;
 
 use Drupal\Core\Cache\CacheableMetadata;
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Tests\graphql\Kernel\GraphQLTestBase;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
@@ -21,13 +20,6 @@ class ThunderRedirectTest extends GraphQLTestBase {
    * @var \Drupal\node\NodeInterface
    */
   protected NodeInterface $node;
-
-  /**
-   * The redirect entity.
-   *
-   * @var \Drupal\Core\Entity\EntityStorageInterface
-   */
-  protected EntityStorageInterface $storage;
 
   /**
    * {@inheritdoc}
@@ -55,7 +47,6 @@ class ThunderRedirectTest extends GraphQLTestBase {
     ]);
 
     $this->node->save();
-    $this->storage = $this->container->get('entity_type.manager')->getStorage('redirect');
   }
 
   /**
@@ -81,7 +72,7 @@ class ThunderRedirectTest extends GraphQLTestBase {
     $redirectDestination = '/redirect-test-destination';
 
     /** @var \Drupal\redirect\Entity\Redirect $redirect */
-    $redirect = $this->storage->create();
+    $redirect = $this->container->get('entity_type.manager')->getStorage('redirect')->create();
     $redirect->setSource($redirectSource);
     $redirect->setRedirect($redirectDestination);
     $redirect->setStatusCode(301);
