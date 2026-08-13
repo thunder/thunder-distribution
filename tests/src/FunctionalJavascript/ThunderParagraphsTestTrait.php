@@ -115,7 +115,9 @@ trait ThunderParagraphsTestTrait {
 
     $this->clickCssSelector($addButtonCssSelector);
     if ($index > 3) {
-      $this->getSession()->getDriver()->click("//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"{$fieldName}_{$type}_add_more\"]");
+      $addMoreButtonXpath = "//div[contains(@class, \"ui-dialog-content\")]/*[contains(@class, \"paragraphs-add-dialog-list\")]//*[@name=\"{$fieldName}_{$type}_add_more\"]";
+      $this->assertNotEmpty($this->assertSession()->waitForElementVisible('xpath', $addMoreButtonXpath));
+      $this->getSession()->getDriver()->click($addMoreButtonXpath);
       $this->assertWaitOnAjaxRequest();
     }
     $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', "#edit-{$fieldSelector}-wrapper table > tbody > tr:nth-child(" . (($numberOfParagraphs + 1) * 2 + 1) . ")"));

@@ -11,20 +11,12 @@ use Drupal\Core\Link;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\taxonomy\TermInterface;
-use Drupal\taxonomy\TermStorageInterface;
 
 /**
  * Class to define the menu_link breadcrumb builder.
  */
 abstract class ThunderTaxonomyTermBreadcrumbBuilderBase implements BreadcrumbBuilderInterface {
   use StringTranslationTrait;
-
-  /**
-   * The taxonomy storage.
-   *
-   * @var \Drupal\taxonomy\TermStorageInterface
-   */
-  protected TermStorageInterface $termStorage;
 
   /**
    * Constructs the ThunderArticleBreadcrumbBuilder.
@@ -35,12 +27,8 @@ abstract class ThunderTaxonomyTermBreadcrumbBuilderBase implements BreadcrumbBui
    *   The entity repository service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config factory.
-   *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, protected readonly EntityRepositoryInterface $entityRepository, protected readonly ConfigFactoryInterface $configFactory) {
-    $this->termStorage = $entityTypeManager->getStorage('taxonomy_term');
+  public function __construct(protected readonly EntityTypeManagerInterface $entityTypeManager, protected readonly EntityRepositoryInterface $entityRepository, protected readonly ConfigFactoryInterface $configFactory) {
   }
 
   /**
@@ -67,7 +55,7 @@ abstract class ThunderTaxonomyTermBreadcrumbBuilderBase implements BreadcrumbBui
     $breadcrumb->addCacheableDependency($term);
 
     $links = [];
-    $parents = $this->termStorage->loadAllParents($term->id());
+    $parents = $this->entityTypeManager->getStorage('taxonomy_term')->loadAllParents($term->id());
     foreach (array_reverse($parents) as $term) {
       /** @var \Drupal\taxonomy\TermInterface $term */
       $term = $this->entityRepository->getTranslationFromContext($term);
