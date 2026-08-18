@@ -10,6 +10,7 @@ use Drupal\thunder_ai_prompt_management\Entity\AIPrompt;
 use Drupal\thunder_ai_prompt_management\Entity\AiTask;
 use Drupal\user\Entity\Role;
 use Drupal\user\Entity\User;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests the access control handler for the ai prompt entity.
@@ -17,6 +18,7 @@ use Drupal\user\Entity\User;
  * @coversDefaultClass \Drupal\thunder_ai_prompt_management\AIPromptAccessControlHandler
  * @group Thunder
  */
+#[RunTestsInSeparateProcesses]
 class AIPromptAccessControlHandlerTest extends KernelTestBase {
 
   /**
@@ -25,6 +27,8 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
   protected static $modules = [
     'system',
     'user',
+    'field',
+    'entity_blueprint',
     'thunder_ai_prompt_management',
   ];
 

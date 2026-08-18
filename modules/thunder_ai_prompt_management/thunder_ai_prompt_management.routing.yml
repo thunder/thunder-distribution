@@ -1,3 +1,15 @@
+entity.ai_prompt_content.test_form:
+  path: '/admin/content/prompts/{ai_prompt_content}/test'
+  defaults:
+    _form: '\Drupal\thunder_ai_prompt_management\Form\AIPromptTestForm'
+    _title: 'Test prompt'
+  requirements:
+    _entity_access: 'ai_prompt_content.update'
+  options:
+    parameters:
+      ai_prompt_content:
+        type: entity:ai_prompt_content
+
 entity.ai_task.collection:
   path: '/admin/structure/ai-task'
   defaults:

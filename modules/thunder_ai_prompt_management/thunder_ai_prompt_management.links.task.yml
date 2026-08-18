@@ -9,3 +9,9 @@ entity.ai_prompt_content.canonical:
   route_name: entity.ai_prompt_content.canonical
   base_route: entity.ai_prompt_content.canonical
   weight: 10
+
+entity.ai_prompt_content.test_form:
+  title: 'Test'
+  route_name: entity.ai_prompt_content.test_form
+  base_route: entity.ai_prompt_content.canonical
+  weight: 20
