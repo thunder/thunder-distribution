@@ -109,6 +109,14 @@ class ThunderMediaSchemaExtension extends ThunderSchemaExtensionPluginBase {
       $this->builder->fromPath('entity', 'field_source.value')
     );
 
+    $this->addFieldResolverIfNotExists('MediaImage', 'editedWithAi',
+      $this->builder->fromPath('entity', 'field_edited_with_ai.value')
+    );
+
+    $this->addFieldResolverIfNotExists('MediaImage', 'createdWithAi',
+      $this->builder->fromPath('entity', 'field_created_with_ai.value')
+    );
+
     // Video.
     $this->resolveMediaInterfaceFields('MediaVideo');
 

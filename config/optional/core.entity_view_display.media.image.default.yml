@@ -3,7 +3,9 @@ status: true
 dependencies:
   config:
     - field.field.media.image.field_copyright
+    - field.field.media.image.field_created_with_ai
     - field.field.media.image.field_description
+    - field.field.media.image.field_edited_with_ai
     - field.field.media.image.field_expires
     - field.field.media.image.field_image
     - field.field.media.image.field_source
@@ -43,7 +45,9 @@ hidden:
   created: true
   field_brands: true
   field_channel: true
+  field_created_with_ai: true
   field_description: true
+  field_edited_with_ai: true
   field_events: true
   field_expires: true
   field_people: true
