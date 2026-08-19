@@ -22,9 +22,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 final class AIPromptTestForm extends FormBase {
 
   public function __construct(
-    private readonly EntityTypeManagerInterface $entityTypeManager,
-    private readonly AiProviderPluginManager $providerPluginManager,
-    private readonly EntityContextPromptBuilderInterface $promptBuilder,
+    protected readonly EntityTypeManagerInterface $entityTypeManager,
+    protected readonly AiProviderPluginManager $providerPluginManager,
+    protected readonly EntityContextPromptBuilderInterface $promptBuilder,
   ) {}
 
   /**
