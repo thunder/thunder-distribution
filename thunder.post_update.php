@@ -269,14 +269,25 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): TranslatableMa
   }
 
   if (!FieldConfig::loadByName('media', 'image', $field_name)) {
-    FieldConfig::create([
-      'field_name' => $field_name,
-      'entity_type' => 'media',
-      'bundle' => 'image',
-      'label' => 'AI disclosure',
-      'required' => FALSE,
-      'translatable' => TRUE,
-    ])->save();
+    try {
+      FieldConfig::create([
+        'field_name' => $field_name,
+        'entity_type' => 'media',
+        'bundle' => 'image',
+        'label' => 'AI disclosure',
+        'required' => FALSE,
+        'translatable' => TRUE,
+      ])->save();
+    }
+    catch (\Exception $e) {
+      // Saving a new field config for the bundle triggers Drupal core to
+      // resave every display for that bundle (see field_config_insert() /
+      // EntityDisplayRebuilder). On sites with unrelated, pre-existing
+      // invalid data on one of those displays that resave can throw; the
+      // field itself is already persisted by that point, so this must not
+      // abort the whole update run.
+      \Drupal::logger('thunder')->warning('Could not save the "field_digital_source_type" field or resave dependent displays: @message', ['@message' => $e->getMessage()]);
+    }
   }
 
   $form_display = EntityFormDisplay::load('media.image.default');
