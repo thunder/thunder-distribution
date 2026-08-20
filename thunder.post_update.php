@@ -261,8 +261,8 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): TranslatableMa
       'translatable' => TRUE,
       'settings' => [
         'allowed_values' => [
-          ['value' => 'trainedAlgorithmicMedia', 'label' => 'Created with AI'],
-          ['value' => 'compositeWithTrainedAlgorithmicMedia', 'label' => 'Edited with AI'],
+          'trainedAlgorithmicMedia' => 'Created with AI',
+          'compositeWithTrainedAlgorithmicMedia' => 'Edited with AI',
         ],
       ],
     ])->save();
