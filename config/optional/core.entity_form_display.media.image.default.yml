@@ -40,6 +40,7 @@ third_party_settings:
       children:
         - field_copyright
         - field_source
+        - field_digital_source_type
       label: ''
       region: content
       parent_name: ''

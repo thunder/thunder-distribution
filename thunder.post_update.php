@@ -275,8 +275,25 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): TranslatableMa
       'bundle' => 'image',
       'label' => 'Digital source type',
       'required' => FALSE,
-      'translatable' => FALSE,
+      'translatable' => TRUE,
     ])->save();
+  }
+
+  $form_display = EntityFormDisplay::load('media.image.default');
+  if ($form_display && !$form_display->getComponent($field_name)) {
+    $form_display->setComponent($field_name, [
+      'type' => 'options_buttons',
+      'weight' => 6,
+      'region' => 'content',
+    ]);
+
+    $group = $form_display->getThirdPartySetting('field_group', 'group_credits');
+    if ($group && !in_array($field_name, $group['children'], TRUE)) {
+      $group['children'][] = $field_name;
+      $form_display->setThirdPartySetting('field_group', 'group_credits', $group);
+    }
+
+    $form_display->save();
   }
 
   return t('Added "Digital source type" field to the Image media type.');
