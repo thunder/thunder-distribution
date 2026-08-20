@@ -10,7 +10,7 @@ use Symfony\Component\Process\ExecutableFinder;
 /**
  * Implements hook_requirements().
  */
-function thunder_media_requirements($phase): array {
+function thunder_media_requirements(string $phase): array {
   $requirements = [];
 
   if ($phase === 'runtime' && (new ExecutableFinder())->find('exiftool') === NULL) {

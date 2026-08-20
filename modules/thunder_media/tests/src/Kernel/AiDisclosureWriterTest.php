@@ -4,6 +4,8 @@ namespace Drupal\Tests\thunder_media\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\Tests\thunder\Traits\ThunderKernelTestTrait;
+use Drupal\file\FileInterface;
+use Drupal\media\MediaInterface;
 use Drupal\thunder_media\AiDisclosureWriterInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -75,13 +77,15 @@ class AiDisclosureWriterTest extends KernelTestBase {
    * Selecting "Created with AI" writes the trainedAlgorithmicMedia term.
    */
   public function testCreatedWithAiIsWritten(): void {
+    $media = $this->createSampleImageMedia();
+    $realPath = $this->realPathOfImage($media);
+
     $writer = $this->mockWriter();
     $writer->expects($this->once())
       ->method('writeDigitalSourceType')
-      ->with($this->isType('string'), 'trainedAlgorithmicMedia')
+      ->with($realPath, 'trainedAlgorithmicMedia')
       ->willReturn(TRUE);
 
-    $media = $this->createSampleImageMedia();
     $media->set('field_digital_source_type', 'trainedAlgorithmicMedia');
     $media->save();
   }
@@ -90,15 +94,26 @@ class AiDisclosureWriterTest extends KernelTestBase {
    * Selecting "Edited with AI" writes the composite AI term.
    */
   public function testEditedWithAiIsWritten(): void {
+    $media = $this->createSampleImageMedia();
+    $realPath = $this->realPathOfImage($media);
+
     $writer = $this->mockWriter();
     $writer->expects($this->once())
       ->method('writeDigitalSourceType')
-      ->with($this->isType('string'), 'compositeWithTrainedAlgorithmicMedia')
+      ->with($realPath, 'compositeWithTrainedAlgorithmicMedia')
       ->willReturn(TRUE);
 
-    $media = $this->createSampleImageMedia();
     $media->set('field_digital_source_type', 'compositeWithTrainedAlgorithmicMedia');
     $media->save();
+  }
+
+  /**
+   * Resolves the real filesystem path of a media entity's image file.
+   */
+  protected function realPathOfImage(MediaInterface $media): string {
+    $file = $media->get('field_image')->entity;
+    assert($file instanceof FileInterface);
+    return $this->container->get('file_system')->realpath($file->getFileUri());
   }
 
   /**
