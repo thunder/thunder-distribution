@@ -13,7 +13,7 @@ bundle: image
 label: 'Digital source type'
 description: 'If this image was created or edited with the help of AI, select which applies. This is embedded into the image file as IPTC/XMP metadata on save.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }
