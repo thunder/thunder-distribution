@@ -5,6 +5,7 @@ namespace Drupal\Tests\thunder_media\Kernel;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\Tests\thunder\Traits\ThunderKernelTestTrait;
 use Drupal\thunder_media\AiDisclosureWriterInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Tests that saving an image media entity writes AI-disclosure metadata.
@@ -54,7 +55,7 @@ class AiDisclosureWriterTest extends KernelTestBase {
   /**
    * Overrides the AI-disclosure writer service with a mock.
    */
-  protected function mockWriter(): \PHPUnit\Framework\MockObject\MockObject {
+  protected function mockWriter(): MockObject {
     $mock = $this->createMock(AiDisclosureWriterInterface::class);
     $this->container->set('thunder_media.ai_disclosure_writer', $mock);
     return $mock;
@@ -71,7 +72,7 @@ class AiDisclosureWriterTest extends KernelTestBase {
   }
 
   /**
-   * "Created with AI" writes the trainedAlgorithmicMedia term.
+   * Selecting "Created with AI" writes the trainedAlgorithmicMedia term.
    */
   public function testCreatedWithAiIsWritten(): void {
     $writer = $this->mockWriter();
@@ -86,7 +87,7 @@ class AiDisclosureWriterTest extends KernelTestBase {
   }
 
   /**
-   * "Edited with AI" writes the compositeWithTrainedAlgorithmicMedia term.
+   * Selecting "Edited with AI" writes the composite AI term.
    */
   public function testEditedWithAiIsWritten(): void {
     $writer = $this->mockWriter();
