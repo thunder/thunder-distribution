@@ -9,11 +9,8 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\ai\AiProviderPluginManager;
-use Drupal\ai\OperationType\Chat\ChatInput;
-use Drupal\ai\OperationType\Chat\ChatMessage;
-use Drupal\entity_blueprint\Exception\BlueprintException;
 use Drupal\thunder_ai_prompt_management\AIPromptInterface;
-use Drupal\thunder_ai_prompt_management\EntityContextPromptBuilderInterface;
+use Drupal\thunder_ai_prompt_management\AIPromptRunner;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -24,7 +21,7 @@ final class AIPromptTestForm extends FormBase {
   public function __construct(
     protected readonly EntityTypeManagerInterface $entityTypeManager,
     protected readonly AiProviderPluginManager $providerPluginManager,
-    protected readonly EntityContextPromptBuilderInterface $promptBuilder,
+    protected readonly AIPromptRunner $promptRunner,
   ) {}
 
   /**
@@ -34,7 +31,7 @@ final class AIPromptTestForm extends FormBase {
     return new static(
       $container->get('entity_type.manager'),
       $container->get('ai.provider'),
-      $container->get('thunder_ai_prompt_management.entity_context_prompt_builder'),
+      $container->get('thunder_ai_prompt_management.prompt_runner'),
     );
   }
 
@@ -122,33 +119,14 @@ final class AIPromptTestForm extends FormBase {
     /** @var \Drupal\thunder_ai_prompt_management\AIPromptInterface $prompt */
     $prompt = $form_state->get('ai_prompt_content');
     $entity = $this->resolveEntity($form_state, $prompt);
-    $prompt_text = (string) $form_state->getValue('prompt_text');
 
-    try {
-      $system_prompt = $this->promptBuilder->build($prompt_text, $entity);
-    }
-    catch (BlueprintException $e) {
-      $this->messenger()->addWarning($this->t('Could not include the entity context: @message. Running the prompt without it.', ['@message' => $e->getMessage()]));
-      $system_prompt = $this->promptBuilder->build($prompt_text);
-    }
+    // Run the edited text against the model picked in the form rather than the
+    // stored ones, so the form can be used to refine a prompt before saving it.
+    $clone = clone $prompt;
+    $clone->set('model', (string) $form_state->getValue('model'));
+    $response = $this->promptRunner->run($clone, $entity, (string) $form_state->getValue('prompt_text'));
 
-    try {
-      $provider = $this->providerPluginManager->getSetProvider('chat', (string) $form_state->getValue('model'));
-      // The chat API always needs a user turn; the system prompt under test
-      // carries the actual instructions plus the entity context, so this is
-      // just a generic trigger.
-      $input = new ChatInput([new ChatMessage('user', 'Please respond.')]);
-      $input->setSystemPrompt($system_prompt);
-      $response = $provider['provider_id']->chat($input, $provider['model_id'], [
-        'thunder_ai_prompt_management',
-        'prompt_test',
-      ])->getNormalized();
-      $form_state->set('response', $response->getText());
-    }
-    catch (\Exception $e) {
-      $this->messenger()->addError($this->t('The AI provider returned an error: @message', ['@message' => $e->getMessage()]));
-      $form_state->set('response', NULL);
-    }
+    $form_state->set('response', $response !== '' ? $response : NULL);
   }
 
   /**

@@ -40,10 +40,15 @@ final class EntityContextPromptBuilder implements EntityContextPromptBuilderInte
     // tool-calling loop for the model to fetch the second one itself.
     $schema = $this->filteredSchema($entity->getEntityTypeId(), $entity->bundle());
     $header = sprintf('The editor has a %s/%s open for editing. Its schema:', $entity->getEntityTypeId(), $entity->bundle());
+
+    // Replace tokens before appending the context: the entity's own field
+    // values can contain bracketed text, and expanding tokens inside the
+    // serialized JSON would corrupt the very content being described.
+    $prompt = $this->token->replacePlain($prompt, [$entity->getEntityTypeId() => $entity]);
     $prompt .= "\n\n" . $header . "\n" . Json::encode($schema);
     $prompt .= "\n\nIts current content:\n" . Json::encode($this->serializer->serialize($entity));
 
-    return $this->token->replacePlain($prompt, [$entity->getEntityTypeId() => $entity]);
+    return $prompt;
   }
 
   /**

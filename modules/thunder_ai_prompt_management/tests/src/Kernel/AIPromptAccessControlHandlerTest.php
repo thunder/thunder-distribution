@@ -28,6 +28,9 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
     'system',
     'user',
     'field',
+    'file',
+    'key',
+    'ai',
     'entity_blueprint',
     'thunder_ai_prompt_management',
   ];

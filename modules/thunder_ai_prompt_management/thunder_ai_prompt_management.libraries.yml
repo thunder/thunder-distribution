@@ -7,3 +7,9 @@ form:
     js/form.js: {}
   dependencies:
     - core/drupal.form
+
+field_widget_action:
+  version: VERSION
+  css:
+    component:
+      css/field-widget-action.css: {}

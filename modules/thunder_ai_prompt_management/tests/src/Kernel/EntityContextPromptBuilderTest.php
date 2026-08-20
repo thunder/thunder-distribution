@@ -32,6 +32,9 @@ class EntityContextPromptBuilderTest extends KernelTestBase {
     'text',
     'filter',
     'entity_test',
+    'file',
+    'key',
+    'ai',
     'entity_blueprint',
     'thunder_ai_prompt_management',
   ];
