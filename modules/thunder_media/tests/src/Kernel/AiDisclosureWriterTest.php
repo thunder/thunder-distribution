@@ -117,6 +117,27 @@ class AiDisclosureWriterTest extends KernelTestBase {
   }
 
   /**
+   * Switching the disclosure back to "N/A" clears the embedded metadata.
+   */
+  public function testClearingDisclosureRemovesMetadata(): void {
+    $media = $this->createSampleImageMedia();
+    $media->set('field_digital_source_type', 'trainedAlgorithmicMedia');
+    $media->save();
+
+    $realPath = $this->realPathOfImage($media);
+
+    $writer = $this->mockWriter();
+    $writer->expects($this->once())
+      ->method('clearDigitalSourceType')
+      ->with($realPath)
+      ->willReturn(TRUE);
+    $writer->expects($this->never())->method('writeDigitalSourceType');
+
+    $media->set('field_digital_source_type', '');
+    $media->save();
+  }
+
+  /**
    * Resaving without changing the field must not re-run the writer.
    */
   public function testUnchangedResaveDoesNotRewrite(): void {

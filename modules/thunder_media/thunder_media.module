@@ -103,24 +103,34 @@ function thunder_media_write_ai_disclosure(MediaInterface $media): void {
   }
 
   $term = $media->get('field_digital_source_type')->value;
-  if (!$term) {
-    return;
-  }
 
   $file = $media->get('field_image')->entity;
   if (!$file instanceof FileInterface) {
     return;
   }
 
+  $term_changed = FALSE;
+  $image_changed = FALSE;
   $original = $media->getOriginal();
   if ($original instanceof MediaInterface) {
     $term_changed = $original->get('field_digital_source_type')->value !== $term;
     $image_changed = $original->get('field_image')->target_id !== $file->id();
-    if (!$term_changed && !$image_changed) {
-      // Neither the disclosure nor the underlying file changed since the
-      // last save; avoid needlessly re-running the writer on every save.
-      return;
-    }
+  }
+  elseif (!$term) {
+    // New media with no disclosure selected: nothing to write.
+    return;
+  }
+
+  if (!$term_changed && !$image_changed) {
+    // Neither the disclosure nor the underlying file changed since the
+    // last save; avoid needlessly re-running the writer on every save.
+    return;
+  }
+
+  if (!$term && !$term_changed) {
+    // No disclosure is set and it did not just get cleared: nothing to
+    // remove from the (possibly new) file.
+    return;
   }
 
   $real_path = \Drupal::service('file_system')->realpath($file->getFileUri());
@@ -129,7 +139,13 @@ function thunder_media_write_ai_disclosure(MediaInterface $media): void {
     return;
   }
 
-  \Drupal::service('thunder_media.ai_disclosure_writer')->writeDigitalSourceType($real_path, $term);
+  $writer = \Drupal::service('thunder_media.ai_disclosure_writer');
+  if ($term) {
+    $writer->writeDigitalSourceType($real_path, $term);
+  }
+  else {
+    $writer->clearDigitalSourceType($real_path);
+  }
 }
 
 /**

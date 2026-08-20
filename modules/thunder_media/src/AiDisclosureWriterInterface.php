@@ -26,4 +26,15 @@ interface AiDisclosureWriterInterface {
    */
   public function writeDigitalSourceType(string $realPath, string $term): bool;
 
+  /**
+   * Removes the Digital Source Type metadata from the image at the path.
+   *
+   * @param string $realPath
+   *   Local filesystem path to the image file.
+   *
+   * @return bool
+   *   TRUE on success, FALSE if the removal could not be performed.
+   */
+  public function clearDigitalSourceType(string $realPath): bool;
+
 }
