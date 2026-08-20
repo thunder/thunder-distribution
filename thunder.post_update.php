@@ -280,12 +280,7 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): TranslatableMa
       ])->save();
     }
     catch (\Exception $e) {
-      // Saving a new field config for the bundle triggers Drupal core to
-      // resave every display for that bundle (see field_config_insert() /
-      // EntityDisplayRebuilder). On sites with unrelated, pre-existing
-      // invalid data on one of those displays that resave can throw; the
-      // field itself is already persisted by that point, so this must not
-      // abort the whole update run.
+      // Resaving displays for the bundle can hit unrelated stale data.
       \Drupal::logger('thunder')->warning('Could not save the "field_digital_source_type" field or resave dependent displays: @message', ['@message' => $e->getMessage()]);
     }
   }
@@ -308,8 +303,7 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): TranslatableMa
       $form_display->save();
     }
     catch (\Exception $e) {
-      // Placing the widget is a cosmetic nicety; unrelated, pre-existing
-      // invalid data on this display must not abort the whole update run.
+      // Widget placement is cosmetic; unrelated stale data must not abort this.
       \Drupal::logger('thunder')->warning('Could not save the "media.image.default" form display while adding the AI disclosure widget: @message', ['@message' => $e->getMessage()]);
     }
   }
