@@ -283,39 +283,5 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): TranslatableMa
     }
   }
 
-  $display_repository = \Drupal::service('entity_display.repository');
-
-  $form_mode_weights = [
-    'default' => ['field_edited_with_ai' => 6, 'field_created_with_ai' => 7],
-    'media_library' => ['field_edited_with_ai' => 5, 'field_created_with_ai' => 6],
-    'bulk_edit' => ['field_edited_with_ai' => 5, 'field_created_with_ai' => 6],
-  ];
-  foreach ($form_mode_weights as $form_mode => $weights) {
-    $form_display = $display_repository->getFormDisplay('media', 'image', $form_mode);
-    foreach ($weights as $field_name => $weight) {
-      $form_display->setComponent($field_name, [
-        'type' => 'boolean_checkbox',
-        'weight' => $weight,
-        'region' => 'content',
-        'settings' => ['display_label' => TRUE],
-      ]);
-    }
-    $form_display->save();
-  }
-
-  foreach (['inline', 'override'] as $form_mode) {
-    $form_display = $display_repository->getFormDisplay('media', 'image', $form_mode);
-    $form_display->removeComponent('field_edited_with_ai');
-    $form_display->removeComponent('field_created_with_ai');
-    $form_display->save();
-  }
-
-  foreach (['default', 'media_library', 'thumbnail', 'paragraph_preview'] as $view_mode) {
-    $view_display = $display_repository->getViewDisplay('media', 'image', $view_mode);
-    $view_display->removeComponent('field_edited_with_ai');
-    $view_display->removeComponent('field_created_with_ai');
-    $view_display->save();
-  }
-
   return t('Added "Edited with AI" and "Created with AI" fields to the Image media type.');
 }
