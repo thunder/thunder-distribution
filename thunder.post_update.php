@@ -293,7 +293,14 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): TranslatableMa
       $form_display->setThirdPartySetting('field_group', 'group_credits', $group);
     }
 
-    $form_display->save();
+    try {
+      $form_display->save();
+    }
+    catch (\Exception $e) {
+      // Placing the widget is a cosmetic nicety; unrelated, pre-existing
+      // invalid data on this display must not abort the whole update run.
+      \Drupal::logger('thunder')->warning('Could not save the "media.image.default" form display while adding the AI disclosure widget: @message', ['@message' => $e->getMessage()]);
+    }
   }
 
   return t('Added "AI disclosure" field to the Image media type.');
