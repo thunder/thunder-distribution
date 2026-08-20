@@ -50,8 +50,7 @@ class MediaForm {
   /**
    * Implements hook_field_widget_single_element_WIDGET_TYPE_form_alter().
    *
-   * Disables the "AI disclosure" field once the image has already been
-   * uploaded, if configured to be settable only at upload time.
+   * Disables the "AI disclosure" field once uploaded, if so configured.
    */
   #[Hook('field_widget_single_element_options_select_form_alter')]
   public function fieldWidgetSingleElementOptionsSelectFormAlter(array &$element, FormStateInterface $form_state, array $context): void {

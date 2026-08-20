@@ -23,10 +23,6 @@ class AiDisclosure {
 
   /**
    * Implements hook_ENTITY_TYPE_presave() for media entities.
-   *
-   * Uses the IPTC Photo Metadata "Digital Source Type" vocabulary term
-   * stored in field_digital_source_type as the value written into the
-   * image's XMP metadata, so the disclosure survives outside Drupal.
    */
   #[Hook('media_presave')]
   public function mediaPresave(MediaInterface $media): void {
@@ -51,21 +47,18 @@ class AiDisclosure {
       $image_changed = $original->get('field_image')->target_id !== $file->id();
     }
     else {
-      // New media has no prior state to compare against: a set disclosure
-      // always needs writing, and the file is always treated as new.
+      // New media has no prior state, so a set disclosure always needs writing.
       $term_changed = (bool) $term;
       $image_changed = TRUE;
     }
 
     if (!$term_changed && !$image_changed) {
-      // Neither the disclosure nor the underlying file changed since the
-      // last save; avoid needlessly re-running the writer on every save.
+      // Nothing changed since the last save: avoid re-running the writer.
       return;
     }
 
     if (!$term && !$term_changed) {
-      // No disclosure is set and it did not just get cleared: nothing to
-      // remove from the (possibly new) file.
+      // No disclosure set and it was not just cleared: nothing to remove.
       return;
     }
 

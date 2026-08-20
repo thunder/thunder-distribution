@@ -112,9 +112,6 @@ class AiDisclosureWriterTest extends KernelTestBase {
 
   /**
    * Setting the disclosure on brand-new media (upload time) writes it too.
-   *
-   * There is no "original" entity to diff against on insert, so this
-   * guards against the write being skipped as a no-op change.
    */
   public function testDisclosureSetAtCreationIsWritten(): void {
     $writer = $this->mockWriter();
