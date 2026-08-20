@@ -62,6 +62,8 @@ type MediaImage implements Media & Image & Entity {
   description: String
   tags: [Tags]
   source: String
+  editedWithAi: Boolean
+  createdWithAi: Boolean
 }
 
 type MediaVideo implements Video & Media & Entity {
