@@ -273,7 +273,7 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): TranslatableMa
       'field_name' => $field_name,
       'entity_type' => 'media',
       'bundle' => 'image',
-      'label' => 'Digital source type',
+      'label' => 'AI disclosure',
       'required' => FALSE,
       'translatable' => TRUE,
     ])->save();
@@ -282,7 +282,7 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): TranslatableMa
   $form_display = EntityFormDisplay::load('media.image.default');
   if ($form_display && !$form_display->getComponent($field_name)) {
     $form_display->setComponent($field_name, [
-      'type' => 'options_buttons',
+      'type' => 'options_select',
       'weight' => 6,
       'region' => 'content',
     ]);
@@ -296,5 +296,5 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): TranslatableMa
     $form_display->save();
   }
 
-  return t('Added "Digital source type" field to the Image media type.');
+  return t('Added "AI disclosure" field to the Image media type.');
 }

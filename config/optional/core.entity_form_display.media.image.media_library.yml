@@ -32,7 +32,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_digital_source_type:
-    type: options_buttons
+    type: options_select
     weight: 5
     region: content
     settings: {  }

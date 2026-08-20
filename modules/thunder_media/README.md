@@ -30,7 +30,7 @@ which must be placed here: /admin/structure/media/manage/twitter.
 
 ### AI disclosure metadata
 
-Image media items have a "Digital source type" field, based on the IPTC Photo
+Image media items have an "AI disclosure" field, based on the IPTC Photo
 Metadata "Digital Source Type" controlled vocabulary, letting editors flag an
 image as "Created with AI" or "Edited with AI". When set, the value is
 embedded directly into the image file as `XMP-iptcExt:DigitalSourceType`
