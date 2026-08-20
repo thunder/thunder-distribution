@@ -37,4 +37,16 @@ interface AiDisclosureWriterInterface {
    */
   public function clearDigitalSourceType(string $realPath): bool;
 
+  /**
+   * Reads the Digital Source Type term embedded in the image at the path.
+   *
+   * @param string $realPath
+   *   Local filesystem path to the image file.
+   *
+   * @return string|null
+   *   The IPTC Digital Source Type vocabulary term, or NULL if none is
+   *   embedded or it could not be read.
+   */
+  public function readDigitalSourceType(string $realPath): ?string;
+
 }

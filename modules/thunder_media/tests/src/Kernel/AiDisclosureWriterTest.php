@@ -134,6 +134,52 @@ class AiDisclosureWriterTest extends KernelTestBase {
   }
 
   /**
+   * A disclosure already embedded in an uploaded file is adopted.
+   */
+  public function testExistingDisclosureIsAdoptedFromUpload(): void {
+    $writer = $this->mockWriter();
+
+    $image = $this->createSampleFile('image');
+    $realPath = $this->container->get('file_system')->realpath($image->getFileUri());
+
+    $writer->method('readDigitalSourceType')->with($realPath)->willReturn('trainedAlgorithmicMedia');
+    $writer->expects($this->once())
+      ->method('writeDigitalSourceType')
+      ->with($realPath, 'trainedAlgorithmicMedia')
+      ->willReturn(TRUE);
+
+    $media = Media::create([
+      'bundle' => 'image',
+      'name' => 'Test image media',
+      'field_image' => ['target_id' => $image->id()],
+    ]);
+    $media->save();
+
+    $this->assertSame('trainedAlgorithmicMedia', $media->get('field_digital_source_type')->value);
+  }
+
+  /**
+   * An embedded term outside the field's allowed values is ignored.
+   */
+  public function testUnknownEmbeddedDisclosureIsIgnored(): void {
+    $writer = $this->mockWriter();
+
+    $image = $this->createSampleFile('image');
+    $writer->method('readDigitalSourceType')->willReturn('digitalCapture');
+    $writer->expects($this->never())->method('writeDigitalSourceType');
+    $writer->expects($this->never())->method('clearDigitalSourceType');
+
+    $media = Media::create([
+      'bundle' => 'image',
+      'name' => 'Test image media',
+      'field_image' => ['target_id' => $image->id()],
+    ]);
+    $media->save();
+
+    $this->assertSame('', $media->get('field_digital_source_type')->value ?? '');
+  }
+
+  /**
    * Resolves the real filesystem path of a media entity's image file.
    */
   protected function realPathOfImage(MediaInterface $media): string {

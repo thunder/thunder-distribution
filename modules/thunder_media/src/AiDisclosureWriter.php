@@ -34,6 +34,37 @@ class AiDisclosureWriter implements AiDisclosureWriterInterface {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function readDigitalSourceType(string $realPath): ?string {
+    $exiftool = $this->findExiftool();
+    if ($exiftool === FALSE) {
+      return NULL;
+    }
+
+    $process = new Process([
+      $exiftool,
+      '-s3',
+      '-XMP-iptcExt:DigitalSourceType',
+      $realPath,
+    ]);
+
+    try {
+      $process->mustRun();
+    }
+    catch (ExceptionInterface) {
+      return NULL;
+    }
+
+    $value = trim($process->getOutput());
+    if (!str_starts_with($value, self::BASE_URI)) {
+      return NULL;
+    }
+
+    return substr($value, strlen(self::BASE_URI));
+  }
+
+  /**
    * Sets or clears the DigitalSourceType XMP tag on the given image.
    *
    * @param string $realPath
