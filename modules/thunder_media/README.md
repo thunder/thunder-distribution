@@ -40,3 +40,9 @@ This requires **`exiftool`** to be installed and available on `PATH` on the
 server; it is not bundled with Thunder or installable via Composer. If it is
 missing, the media entity still saves normally, a warning is logged, and
 `/admin/reports/status` shows a warning until it is installed.
+
+The "Only allow the AI disclosure to be set on upload" option on the
+[Thunder Media Configuration form](/admin/config/thunder_media/configuration)
+disables the field on the media edit form once the image has already been
+uploaded, so editors can only declare AI involvement at upload time and not
+change it afterwards.

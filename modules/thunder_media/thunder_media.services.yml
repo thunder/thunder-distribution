@@ -1,3 +1,4 @@
 services:
   thunder_media.ai_disclosure_writer:
     class: Drupal\thunder_media\AiDisclosureWriter
+  Drupal\thunder_media\AiDisclosureWriterInterface: '@thunder_media.ai_disclosure_writer'

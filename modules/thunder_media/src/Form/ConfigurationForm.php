@@ -30,6 +30,13 @@ class ConfigurationForm extends ConfigFormBase {
       '#config_target' => 'thunder_media.settings:enable_filefield_remove_button',
     ];
 
+    $form['ai_disclosure_upload_only'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Only allow the AI disclosure to be set on upload'),
+      '#description' => $this->t('Enable this checkbox to disable the "AI disclosure" field on image media once it has been uploaded, so it can only be set while uploading the file.'),
+      '#config_target' => 'thunder_media.settings:ai_disclosure_upload_only',
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 

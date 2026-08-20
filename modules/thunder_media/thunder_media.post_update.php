@@ -23,3 +23,14 @@ function thunder_media_post_update_filename_transliteration(): void {
 
   $thunder_media_config->clear('enable_filename_transliteration')->save();
 }
+
+/**
+ * Add the "AI disclosure upload only" setting.
+ */
+function thunder_media_post_update_add_ai_disclosure_upload_only_setting(): void {
+  $config = \Drupal::configFactory()->getEditable('thunder_media.settings');
+
+  if ($config->get('ai_disclosure_upload_only') === NULL) {
+    $config->set('ai_disclosure_upload_only', FALSE)->save();
+  }
+}
