@@ -250,38 +250,34 @@ function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?Tr
  * Add "Edited with AI" and "Created with AI" fields to image media.
  */
 function thunder_post_update_0007_add_ai_fields_to_image_media(): TranslatableMarkup {
-  $fields = [
-    'field_edited_with_ai' => 'Edited with AI',
-    'field_created_with_ai' => 'Created with AI',
-  ];
+  $field_name = 'field_digital_source_type';
 
-  foreach ($fields as $field_name => $label) {
-    if (!FieldStorageConfig::loadByName('media', $field_name)) {
-      FieldStorageConfig::create([
-        'field_name' => $field_name,
-        'entity_type' => 'media',
-        'type' => 'boolean',
-        'cardinality' => 1,
-        'translatable' => TRUE,
-      ])->save();
-    }
-
-    if (!FieldConfig::loadByName('media', 'image', $field_name)) {
-      FieldConfig::create([
-        'field_name' => $field_name,
-        'entity_type' => 'media',
-        'bundle' => 'image',
-        'label' => $label,
-        'required' => FALSE,
-        'translatable' => FALSE,
-        'default_value' => [['value' => 0]],
-        'settings' => [
-          'on_label' => 'Yes',
-          'off_label' => 'No',
+  if (!FieldStorageConfig::loadByName('media', $field_name)) {
+    FieldStorageConfig::create([
+      'field_name' => $field_name,
+      'entity_type' => 'media',
+      'type' => 'list_string',
+      'cardinality' => 1,
+      'translatable' => TRUE,
+      'settings' => [
+        'allowed_values' => [
+          ['value' => 'trainedAlgorithmicMedia', 'label' => 'Created with AI'],
+          ['value' => 'compositeWithTrainedAlgorithmicMedia', 'label' => 'Edited with AI'],
         ],
-      ])->save();
-    }
+      ],
+    ])->save();
   }
 
-  return t('Added "Edited with AI" and "Created with AI" fields to the Image media type.');
+  if (!FieldConfig::loadByName('media', 'image', $field_name)) {
+    FieldConfig::create([
+      'field_name' => $field_name,
+      'entity_type' => 'media',
+      'bundle' => 'image',
+      'label' => 'Digital source type',
+      'required' => FALSE,
+      'translatable' => FALSE,
+    ])->save();
+  }
+
+  return t('Added "Digital source type" field to the Image media type.');
 }

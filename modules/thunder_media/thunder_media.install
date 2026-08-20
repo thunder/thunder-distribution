@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Thunder Media module.
+ */
+
+use Symfony\Component\Process\ExecutableFinder;
+
+/**
+ * Implements hook_requirements().
+ */
+function thunder_media_requirements($phase): array {
+  $requirements = [];
+
+  if ($phase === 'runtime' && (new ExecutableFinder())->find('exiftool') === NULL) {
+    $requirements['thunder_media_exiftool'] = [
+      'title' => t('Thunder Media: exiftool'),
+      'value' => t('Not found'),
+      'description' => t('The "exiftool" binary was not found on PATH. Images flagged via the "Digital source type" field will not have AI-disclosure metadata embedded until it is installed.'),
+      'severity' => REQUIREMENT_WARNING,
+    ];
+  }
+
+  return $requirements;
+}

@@ -9,6 +9,8 @@ use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
+use Drupal\file\FileInterface;
+use Drupal\media\MediaInterface;
 
 /**
  * Implements hook_preprocess_media().
@@ -75,6 +77,59 @@ function thunder_media_inline_entity_form_image_widget_process(array $element, F
   }
 
   return $element;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for media entities.
+ */
+function thunder_media_media_presave(MediaInterface $media): void {
+  thunder_media_write_ai_disclosure($media);
+}
+
+/**
+ * Embeds the "Digital source type" AI-disclosure into the image file.
+ *
+ * Uses the IPTC Photo Metadata "Digital Source Type" vocabulary term stored
+ * in field_digital_source_type as the value written into the image's XMP
+ * metadata, so the disclosure survives outside Drupal.
+ */
+function thunder_media_write_ai_disclosure(MediaInterface $media): void {
+  if ($media->bundle() !== 'image'
+    || !$media->isDefaultTranslation()
+    || !$media->hasField('field_digital_source_type')
+    || !$media->hasField('field_image')
+  ) {
+    return;
+  }
+
+  $term = $media->get('field_digital_source_type')->value;
+  if (!$term) {
+    return;
+  }
+
+  $file = $media->get('field_image')->entity;
+  if (!$file instanceof FileInterface) {
+    return;
+  }
+
+  $original = $media->getOriginal();
+  if ($original instanceof MediaInterface) {
+    $term_changed = $original->get('field_digital_source_type')->value !== $term;
+    $image_changed = $original->get('field_image')->target_id !== $file->id();
+    if (!$term_changed && !$image_changed) {
+      // Neither the disclosure nor the underlying file changed since the
+      // last save; avoid needlessly re-running the writer on every save.
+      return;
+    }
+  }
+
+  $real_path = \Drupal::service('file_system')->realpath($file->getFileUri());
+  if (!$real_path) {
+    \Drupal::logger('thunder_media')->notice('Cannot write AI-disclosure metadata for @uri: not a local file.', ['@uri' => $file->getFileUri()]);
+    return;
+  }
+
+  \Drupal::service('thunder_media.ai_disclosure_writer')->writeDigitalSourceType($real_path, $term);
 }
 
 /**
