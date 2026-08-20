@@ -54,10 +54,18 @@ final class AIPromptTestForm extends FormBase {
     $form['prompt_text'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Prompt text'),
-      '#description' => $this->t('Used as the system prompt. Edit freely to refine it - nothing is saved here; copy your final wording back to the prompt when you are happy with it.'),
+      '#description' => $this->t('Used as the system prompt. Edit freely to refine it, then save it back to the prompt when you are happy with it.'),
       '#default_value' => $ai_prompt_content->get('prompt')->value,
       '#required' => TRUE,
       '#rows' => 5,
+    ];
+
+    $form['model'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Model'),
+      '#options' => $this->providerPluginManager->getSimpleProviderModelOptions('chat', FALSE),
+      '#default_value' => $ai_prompt_content->get('model')->value,
+      '#required' => TRUE,
     ];
 
     $form['contexts'] = [
@@ -81,6 +89,11 @@ final class AIPromptTestForm extends FormBase {
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Run test'),
+    ];
+    $form['actions']['save'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Save prompt'),
+      '#submit' => ['::savePrompt'],
     ];
 
     $response = $form_state->get('response');
@@ -120,7 +133,7 @@ final class AIPromptTestForm extends FormBase {
     }
 
     try {
-      $provider = $this->providerPluginManager->getSetProvider('chat', (string) $prompt->get('model')->value);
+      $provider = $this->providerPluginManager->getSetProvider('chat', (string) $form_state->getValue('model'));
       // The chat API always needs a user turn; the system prompt under test
       // carries the actual instructions plus the entity context, so this is
       // just a generic trigger.
@@ -136,6 +149,22 @@ final class AIPromptTestForm extends FormBase {
       $this->messenger()->addError($this->t('The AI provider returned an error: @message', ['@message' => $e->getMessage()]));
       $form_state->set('response', NULL);
     }
+  }
+
+  /**
+   * Saves the edited prompt text and model back to the prompt entity.
+   */
+  public function savePrompt(array &$form, FormStateInterface $form_state): void {
+    $form_state->setRebuild(TRUE);
+
+    /** @var \Drupal\thunder_ai_prompt_management\AIPromptInterface $prompt */
+    $prompt = $form_state->get('ai_prompt_content');
+    $prompt->set('prompt', (string) $form_state->getValue('prompt_text'));
+    $prompt->set('model', (string) $form_state->getValue('model'));
+    $prompt->setNewRevision();
+    $prompt->save();
+
+    $this->messenger()->addStatus($this->t('The prompt %label has been updated.', ['%label' => $prompt->label()]));
   }
 
   /**
