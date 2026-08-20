@@ -11,8 +11,6 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\ckeditor5\SmartDefaultSettings;
 use Drupal\editor\Entity\Editor;
 use Drupal\entity_browser\Entity\EntityBrowser;
-use Drupal\field\Entity\FieldConfig;
-use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\media\Entity\MediaType;
 use Drupal\user\Entity\Role;
 
@@ -252,37 +250,22 @@ function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?Tr
 function thunder_post_update_0007_add_ai_fields_to_image_media(): TranslatableMarkup {
   $field_name = 'field_digital_source_type';
 
-  if (!FieldStorageConfig::loadByName('media', $field_name)) {
-    FieldStorageConfig::create([
-      'field_name' => $field_name,
-      'entity_type' => 'media',
-      'type' => 'list_string',
-      'cardinality' => 1,
-      'translatable' => TRUE,
-      'settings' => [
-        'allowed_values' => [
-          'trainedAlgorithmicMedia' => 'Created with AI',
-          'compositeWithTrainedAlgorithmicMedia' => 'Edited with AI',
-        ],
-      ],
-    ])->save();
-  }
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
 
-  if (!FieldConfig::loadByName('media', 'image', $field_name)) {
-    try {
-      FieldConfig::create([
-        'field_name' => $field_name,
-        'entity_type' => 'media',
-        'bundle' => 'image',
-        'label' => 'AI disclosure',
-        'required' => FALSE,
-        'translatable' => TRUE,
-      ])->save();
-    }
-    catch (\Exception $e) {
-      // Resaving displays for the bundle can hit unrelated stale data.
-      \Drupal::logger('thunder')->warning('Could not save the "field_digital_source_type" field or resave dependent displays: @message', ['@message' => $e->getMessage()]);
-    }
+  // Remove a stale blazy/slick "breakpoints" setting some sites still carry;
+  // it would otherwise break the display resave triggered by importing the
+  // field below.
+  $updater->executeUpdate('thunder', 'thunder_post_update_0007_add_ai_fields_to_image_media');
+
+  // Import the field storage and field config from their optional config,
+  // skipping either that already exists.
+  try {
+    $updater->executeUpdate('thunder', 'thunder_post_update_0007_import_ai_fields');
+  }
+  catch (\Exception $e) {
+    // Importing resaves every display; unrelated stale data must not abort.
+    \Drupal::logger('thunder')->warning('Could not import the "field_digital_source_type" field or resave dependent displays: @message', ['@message' => $e->getMessage()]);
   }
 
   $form_display = EntityFormDisplay::load('media.image.default');

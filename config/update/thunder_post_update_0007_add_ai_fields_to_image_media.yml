@@ -1,0 +1,8 @@
+core.entity_form_display.media.image.default:
+  expected_config: {}
+  update_actions:
+    delete:
+      content:
+        field_image:
+          settings:
+            breakpoints: {}
