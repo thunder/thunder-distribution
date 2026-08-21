@@ -21,10 +21,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Suggests field content from the prompts of a managed AI task.
- *
- * Each published prompt assigned to the configured task becomes one entry of a
- * dropbutton; a task with a single prompt renders as a plain button. Running
- * one opens the suggestions dialog, where the editor picks the text to insert.
  */
 #[FieldWidgetAction(
   id: 'thunder_ai_task_suggestion',
@@ -61,6 +57,13 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
    * The prompt runner.
    */
   protected AIPromptRunner $promptRunner;
+
+  /**
+   * Per-request memoization of loadPrompts(), keyed by task/type/bundle.
+   *
+   * @var array<string, \Drupal\thunder_ai_prompt_management\AIPromptInterface[]>
+   */
+  protected array $promptsCache = [];
 
   /**
    * {@inheritdoc}
@@ -149,9 +152,7 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
   /**
    * {@inheritdoc}
    *
-   * Renders one button per prompt, grouped into a dropbutton when the task has
-   * more than one. Each button is built by the parent so it keeps the full
-   * AJAX wiring; only the label and the prompt reference differ.
+   * Renders one button per prompt, grouped into a dropbutton when there's more than one.
    */
   protected function actionButton(array &$form, FormStateInterface $form_state, array $context = []): void {
     $prompts = $this->loadPrompts($context['items']->getEntity());
@@ -170,21 +171,15 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
 
     $links = [];
     foreach ($prompts as $prompt) {
-      // A distinct action_id gives each button a unique #name, so Drupal can
-      // tell which prompt was clicked.
+      // A distinct action_id gives each button a unique #name to identify the click.
       $subContext = ['action_id' => $groupId . '__' . $prompt->id()] + $context;
       parent::actionButton($form, $form_state, $subContext);
-      // Ask for the key rather than assuming action_id: the parent appends the
-      // delta for every item after the first, and this action is multiple by
-      // default, so guessing would leave the entries empty on those items.
+      // Read back the key: the parent appends the delta past the first item, so guessing it would miss those entries.
       $key = $this->getActionButtonWidgetId($fieldName, $subContext);
 
       $form[$key]['#value'] = $prompt->label();
       $form[$key]['#ai_prompt_id'] = $prompt->id();
-      // Drupal only assigns #id to elements it walks as part of the form tree.
-      // A button living under #links is not one, and preRenderAjaxForm() keys
-      // its settings by #id - so without an explicit one every entry would
-      // register under an empty key and overwrite the others.
+      // preRenderAjaxForm() keys settings by #id, but a button under #links never gets one assigned automatically.
       $form[$key]['#id'] = Html::getId(implode('-', array_filter([
         'fwa',
         $fieldName,
@@ -192,28 +187,20 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
         (string) $prompt->id(),
       ], static fn ($part) => $part !== '')));
 
-      // Let the dropbutton own the entry's sizing; the standalone button
-      // classes inherited from the parent make it too wide for the space the
-      // list reserves, so the toggle ends up over the label.
+      // Drop the standalone-button sizing classes so the dropbutton's own sizing applies instead.
       $classes = $form[$key]['#attributes']['class'] ?? [];
       $form[$key]['#attributes']['class'] = array_values(
         array_diff($classes, ['button--secondary', 'button--small'])
       );
 
-      // Render a copy inside the dropbutton, but leave the original in the
-      // form tree: Drupal only recognises a real form child as the triggering
-      // element, and without that the click falls through to a plain submit.
-      // Nested under #links the copy never passes through the form render
-      // pipeline, so bind its #ajax here or the entry does nothing.
+      // The original stays the triggering element; bind #ajax here since #links skips the render pipeline.
       $links[$key] = ['title' => RenderElementBase::preRenderAjaxForm($form[$key])];
       $form[$key]['#printed'] = TRUE;
     }
 
     $form[$groupId] = [
       '#type' => 'dropbutton',
-      // Without a size variant the toggle renders at its full width while the
-      // list only reserves room for a small one, so the arrow sits on top of
-      // the first button's label. 'small' matches the paragraph add buttons.
+      // 'small' matches the paragraph add buttons; the default size covers the label.
       '#dropbutton_type' => 'small',
       '#attributes' => ['class' => ['ai-task-suggestion-dropbutton']],
       '#links' => $links,
@@ -244,12 +231,7 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
   /**
    * {@inheritdoc}
    *
-   * The parent resolves the widget from the root of the form, which misses a
-   * field rendered inside a nested inline form - a paragraph, or
-   * inline_entity_form. The button's own #array_parents carry the real path,
-   * so fall back to walking from there; without it the suggestions dialog
-   * would open with no insert target and clicking a suggestion would silently
-   * do nothing.
+   * Falls back to the button's own #array_parents for fields nested inside a paragraph or inline_entity_form.
    */
   protected function getTargetElement(array &$form, FormStateInterface $form_state): array {
     $element = parent::getTargetElement($form, $form_state);
@@ -286,15 +268,17 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
     }
 
     $entityTypeId = $fieldDefinition->getTargetEntityTypeId();
-    // Base fields such as the node title report no target bundle, so fall back
-    // to the entity being edited.
+    // Base fields such as the node title report no target bundle, so fall back to the entity being edited.
     $bundle = $fieldDefinition->getTargetBundle() ?? $entity?->bundle();
-    // entity_context values are "type.bundle" strings, with "*" meaning every
-    // bundle of that entity type - see
-    // EntityContextWidget::massageFormValues().
+    // "*" means every bundle of that entity type - see EntityContextWidget::massageFormValues().
     $contexts = [$entityTypeId . '.*'];
     if ($bundle) {
       $contexts[] = $entityTypeId . '.' . $bundle;
+    }
+
+    $cacheKey = $task . ':' . implode(',', $contexts);
+    if (isset($this->promptsCache[$cacheKey])) {
+      return $this->promptsCache[$cacheKey];
     }
 
     $storage = $this->entityTypeManager->getStorage('ai_prompt_content');
@@ -307,11 +291,10 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
       ->execute();
 
     if (!$ids) {
-      return [];
+      return $this->promptsCache[$cacheKey] = [];
     }
 
-    // loadMultiple() returns entities in storage order, so re-apply the sort.
-    // The query is keyed by revision ID, so order by its values.
+    // loadMultiple() returns entities in storage order, so re-apply the sort by revision ID.
     /** @var \Drupal\thunder_ai_prompt_management\AIPromptInterface[] $prompts */
     $prompts = $storage->loadMultiple($ids);
     $sorted = [];
@@ -321,7 +304,7 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
       }
     }
 
-    return $sorted;
+    return $this->promptsCache[$cacheKey] = $sorted;
   }
 
   /**

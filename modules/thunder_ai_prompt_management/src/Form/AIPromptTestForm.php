@@ -11,6 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\ai\AiProviderPluginManager;
 use Drupal\thunder_ai_prompt_management\AIPromptInterface;
 use Drupal\thunder_ai_prompt_management\AIPromptRunner;
+use Drupal\thunder_ai_prompt_management\Plugin\Field\FieldWidget\EntityContextWidget;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -70,7 +71,10 @@ final class AIPromptTestForm extends FormBase {
       '#tree' => FALSE,
     ];
     foreach ($this->allowedContexts($ai_prompt_content) as $type_id => $bundles) {
-      $definition = $this->entityTypeManager->getDefinition($type_id);
+      $definition = $this->entityTypeManager->getDefinition($type_id, FALSE);
+      if (!$definition) {
+        continue;
+      }
       $form['contexts']['entity_' . $type_id] = [
         '#type' => 'entity_autocomplete',
         '#target_type' => $type_id,
@@ -120,8 +124,7 @@ final class AIPromptTestForm extends FormBase {
     $prompt = $form_state->get('ai_prompt_content');
     $entity = $this->resolveEntity($form_state, $prompt);
 
-    // Run the edited text against the model picked in the form rather than the
-    // stored ones, so the form can be used to refine a prompt before saving it.
+    // Run against the form's edited text and model, not the stored ones, so a prompt can be refined before saving.
     $clone = clone $prompt;
     $clone->set('model', (string) $form_state->getValue('model'));
     $response = $this->promptRunner->run($clone, $entity, (string) $form_state->getValue('prompt_text'));
@@ -154,7 +157,7 @@ final class AIPromptTestForm extends FormBase {
   private function allowedContexts(AIPromptInterface $prompt): array {
     $contexts = [];
     foreach ($prompt->get('entity_context') as $item) {
-      [$type_id, $bundle_id] = array_pad(explode('.', $item->getString(), 2), 2, '*');
+      [$type_id, $bundle_id] = EntityContextWidget::decodeContext($item->getString());
       $contexts[$type_id][] = $bundle_id;
     }
     return $contexts;

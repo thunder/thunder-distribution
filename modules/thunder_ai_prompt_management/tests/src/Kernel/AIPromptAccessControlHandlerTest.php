@@ -42,6 +42,9 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
     parent::setUp();
     $this->installEntitySchema('ai_prompt_content');
     $this->installEntitySchema('user');
+
+    // User 1 is created first so it never owns the prompts under test as the superuser.
+    User::create(['uid' => 1, 'name' => 'admin'])->save();
   }
 
   /**
@@ -138,7 +141,7 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
    */
   public function testUpdateOwnAndAnyAccess(): void {
     $this->createTask();
-    $owner = $this->createUserWithPermissions([]);
+    $owner = $this->createUserWithPermissions(['edit own ai_prompt_content']);
     $prompt = $this->createPrompt((int) $owner->id());
 
     $own_editor = $this->createUserWithPermissions(['edit own ai_prompt_content']);
@@ -169,7 +172,7 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
    */
   public function testDeleteOwnAndAnyAccess(): void {
     $this->createTask();
-    $owner = $this->createUserWithPermissions([]);
+    $owner = $this->createUserWithPermissions(['delete own ai_prompt_content']);
     $prompt = $this->createPrompt((int) $owner->id());
 
     $own_deleter = $this->createUserWithPermissions(['delete own ai_prompt_content']);

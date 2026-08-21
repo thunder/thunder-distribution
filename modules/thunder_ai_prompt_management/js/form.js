@@ -3,7 +3,7 @@
  * Defines JavaScript behaviors for the ai prompt edit form.
  */
 
-(function aiPromptForm($, Drupal) {
+(($, Drupal) => {
   /**
    * Summaries for the authoring information tab.
    *

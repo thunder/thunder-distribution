@@ -151,10 +151,24 @@ final class EntityContextWidget extends WidgetBase implements ContainerFactoryPl
   protected function currentSelections(FieldItemListInterface $items): array {
     $selected = [];
     foreach ($items as $item) {
-      [$type_id, $bundle_id] = array_pad(explode('.', (string) $item->getValue()['value'], 2), 2, '*');
+      [$type_id, $bundle_id] = self::decodeContext((string) $item->getValue()['value']);
       $selected[$type_id][] = $bundle_id;
     }
     return $selected;
+  }
+
+  /**
+   * Splits a stored "type.bundle" value into its parts.
+   *
+   * @param string $value
+   *   A value in the format produced by massageFormValues(): "type.bundle",
+   *   with "*" for the bundle meaning every bundle of that entity type.
+   *
+   * @return array{0: string, 1: string}
+   *   The entity type ID and bundle key.
+   */
+  public static function decodeContext(string $value): array {
+    return array_pad(explode('.', $value, 2), 2, '*');
   }
 
   /**

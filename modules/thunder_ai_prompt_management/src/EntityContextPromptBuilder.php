@@ -34,16 +34,11 @@ final class EntityContextPromptBuilder implements EntityContextPromptBuilderInte
       return $this->token->replacePlain($prompt);
     }
 
-    // The schema mirrors AgentDraftContext's system-prompt block; the
-    // serialized entity mirrors what LoadCurrentDraft returns as a function
-    // call result. Testing sends both up front since this tool has no
-    // tool-calling loop for the model to fetch the second one itself.
+    // Mirrors AgentDraftContext's schema block plus LoadCurrentDraft's result, sent up front since this tool has no tool-calling loop.
     $schema = $this->filteredSchema($entity->getEntityTypeId(), $entity->bundle());
     $header = sprintf('The editor has a %s/%s open for editing. Its schema:', $entity->getEntityTypeId(), $entity->bundle());
 
-    // Replace tokens before appending the context: the entity's own field
-    // values can contain bracketed text, and expanding tokens inside the
-    // serialized JSON would corrupt the very content being described.
+    // Replace tokens before appending the context, so bracketed text in field values can't corrupt the serialized JSON.
     $prompt = $this->token->replacePlain($prompt, [$entity->getEntityTypeId() => $entity]);
     $prompt .= "\n\n" . $header . "\n" . Json::encode($schema);
     $prompt .= "\n\nIts current content:\n" . Json::encode($this->serializer->serialize($entity));
@@ -54,14 +49,7 @@ final class EntityContextPromptBuilder implements EntityContextPromptBuilderInte
   /**
    * Gets the entity's bundle schema, with base fields dropped throughout.
    *
-   * Ported from
-   * \Drupal\ai_chatbot_assistant_ui_form_bridge\AgentDraftContext::filteredSchema()
-   * to reproduce the exact context block the chatbot sends - that class is
-   * tied to its own session-based draft store, so it isn't reusable as-is.
-   * Unlike that class, this does not catch BlueprintException: the real
-   * chatbot can afford to silently skip the schema block for one of many
-   * open drafts, but a test tool must not hide *why* the entity context
-   * was left out.
+   * Ported from AgentDraftContext::filteredSchema(); unlike that class, this does not catch BlueprintException.
    *
    * @return array<string, mixed>
    *   The schema.

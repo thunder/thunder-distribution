@@ -63,8 +63,8 @@ final class AiTaskForm extends EntityForm {
     $message_args = ['%label' => $this->entity->label()];
     $this->messenger()->addStatus(
       match ($result) {
-        \SAVED_NEW => $this->t('Created new example %label.', $message_args),
-        \SAVED_UPDATED => $this->t('Updated example %label.', $message_args),
+        \SAVED_NEW => $this->t('Created new AI task %label.', $message_args),
+        \SAVED_UPDATED => $this->t('Updated AI task %label.', $message_args),
         default => throw new \LogicException('Could not save the entity.'),
       }
     );

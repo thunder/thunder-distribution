@@ -33,14 +33,14 @@ final class AIPromptAccessControlHandler extends EntityAccessControlHandler {
     }
 
     if ($operation === 'update' || $operation === 'revert') {
-      $own = $entity->getOwnerId() === $account->id();
+      $own = (int) $entity->getOwnerId() === (int) $account->id();
       return AccessResult::allowedIf($own)
         ->andIf(AccessResult::allowedIfHasPermission($account, 'edit own ai_prompt_content'))
         ->orIf(AccessResult::allowedIfHasPermission($account, 'edit any ai_prompt_content'));
     }
 
     if ($operation === 'delete' || $operation === 'delete revision') {
-      $own = $entity->getOwnerId() === $account->id();
+      $own = (int) $entity->getOwnerId() === (int) $account->id();
       return AccessResult::allowedIf($own)
         ->andIf(AccessResult::allowedIfHasPermission($account, 'delete own ai_prompt_content'))
         ->orIf(AccessResult::allowedIfHasPermission($account, 'delete any ai_prompt_content'));

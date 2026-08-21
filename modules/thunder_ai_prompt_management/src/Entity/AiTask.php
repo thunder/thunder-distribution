@@ -55,17 +55,17 @@ use Drupal\thunder_ai_prompt_management\Form\AiTaskForm;
 final class AiTask extends ConfigEntityBase implements AiTaskInterface {
 
   /**
-   * The example ID.
+   * The AI task ID.
    */
   protected string $id;
 
   /**
-   * The example label.
+   * The AI task label.
    */
   protected string $label;
 
   /**
-   * The example description.
+   * The AI task description.
    */
   protected string $description = '';
 

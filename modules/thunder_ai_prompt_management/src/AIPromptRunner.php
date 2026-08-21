@@ -88,16 +88,14 @@ TEXT;
       return [];
     }
 
-    // A prompt that ignores the JSON instruction still yields one usable
-    // answer, so fall back to the raw text rather than showing nothing.
+    // A prompt that ignores the JSON instruction still yields one usable answer as raw text.
     $decoded = $this->promptJsonDecoder->decode($response);
     if (!is_array($decoded)) {
       $text = trim($response->getText());
       return $text !== '' ? [$text] : [];
     }
 
-    // A model that answers with a single object rather than a list would
-    // otherwise fall through array_column() as an empty dialog.
+    // A single-object answer would otherwise fall through array_column() as an empty dialog.
     if (array_key_exists('suggestion', $decoded)) {
       $decoded = [$decoded];
     }
@@ -136,8 +134,7 @@ TEXT;
   private function chat(AIPromptInterface $prompt, string $systemPrompt): ?ChatMessage {
     try {
       $provider = $this->providerPluginManager->getSetProvider('chat', (string) $prompt->get('model')->value);
-      // The chat API always needs a user turn; the prompt carries the actual
-      // instructions plus the entity context, so this is just a trigger.
+      // The chat API always needs a user turn; the real instructions live in the system prompt.
       $input = new ChatInput([new ChatMessage('user', 'Please respond.')]);
       $input->setSystemPrompt($systemPrompt);
       $response = $provider['provider_id']->chat($input, $provider['model_id'], [

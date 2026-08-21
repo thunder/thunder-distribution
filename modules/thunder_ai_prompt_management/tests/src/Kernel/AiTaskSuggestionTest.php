@@ -125,8 +125,7 @@ class AiTaskSuggestionTest extends KernelTestBase {
   /**
    * Prompts scoped to another entity type or bundle are not offered.
    *
-   * The bundle comes from the entity being edited, because base fields such as
-   * the node title report no target bundle of their own.
+   * The bundle comes from the entity being edited, since base fields like the node title report none of their own.
    */
   public function testFiltersByEntityContext(): void {
     $this->createPrompt('For articles', ['entity_context' => ['node.article']]);
@@ -185,9 +184,7 @@ class AiTaskSuggestionTest extends KernelTestBase {
     $this->assertNotNull($group, 'the prompts are grouped into a dropbutton');
     $this->assertCount(2, $group['#links']);
 
-    // The originals must stay in the form tree: Drupal only recognises a real
-    // form child as the triggering element, so removing them would make the
-    // click fall through to a plain submit. They are hidden, not deleted.
+    // Originals stay in the form tree (only a real form child is recognised as the triggering element) but are hidden.
     $this->assertCount(2, $originals);
     foreach ($originals as $original) {
       $this->assertTrue($original['#printed'], 'the original button is hidden rather than removed');
@@ -214,8 +211,7 @@ class AiTaskSuggestionTest extends KernelTestBase {
         'entry registers its AJAX settings under its own id'
       );
     }
-    // The colliding-settings bug this guards against was invisible until two
-    // buttons existed, so assert the ids and names really differ.
+    // The colliding-settings bug this guards against was invisible with only one button.
     $ids = array_column($entries, '#id');
     $this->assertSame($ids, array_unique($ids));
     $names = array_column($entries, '#name');
@@ -225,10 +221,7 @@ class AiTaskSuggestionTest extends KernelTestBase {
   /**
    * Dropbutton entries still work on a delta other than zero.
    *
-   * This action is multiple by default, so buttons are built per item.
-   * getActionButtonWidgetId() appends the delta for every item after the
-   * first, so reading the button back by action_id alone finds nothing and the
-   * dropdown entries render empty and unclickable.
+   * Reading back by action_id alone misses the delta suffix past the first item.
    */
   public function testDropbuttonEntriesSurviveNonZeroDelta(): void {
     $this->createPrompt('Punchy');
@@ -260,9 +253,7 @@ class AiTaskSuggestionTest extends KernelTestBase {
   /**
    * The button keeps its own AJAX callback.
    *
-   * FieldWidgetActionBase only attaches clearErrorsForAction() when the plugin
-   * declares an AJAX callback. Without it, asking for a suggestion on a fresh
-   * form reports every other required field the editor has not filled in yet.
+   * FieldWidgetActionBase only attaches clearErrorsForAction() when the plugin declares an AJAX callback.
    */
   public function testButtonUsesOwnAjaxCallbackAndSuppressesRequiredErrors(): void {
     $this->createPrompt('Punchy');
