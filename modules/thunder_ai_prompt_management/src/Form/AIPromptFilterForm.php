@@ -61,6 +61,7 @@ final class AIPromptFilterForm extends FormBase {
 
     $form['#method'] = 'get';
     $form['#attributes']['class'][] = 'container-inline';
+    $form['#attributes']['class'][] = 'ai-prompt-filters';
 
     $form['title'] = [
       '#type' => 'textfield',
@@ -87,15 +88,16 @@ final class AIPromptFilterForm extends FormBase {
       '#default_value' => (string) $request->query->get('status', ''),
     ];
 
-    $form['actions'] = [
-      '#type' => 'actions',
+    $form['filter_controls'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['ai-prompt-filters__controls']],
     ];
-    $form['actions']['submit'] = [
+    $form['filter_controls']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Filter'),
       '#button_type' => 'primary',
     ];
-    $form['actions']['reset'] = [
+    $form['filter_controls']['reset'] = [
       '#type' => 'link',
       '#title' => $this->t('Reset'),
       '#url' => Url::fromRoute('entity.ai_prompt_content.collection'),
