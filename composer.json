@@ -111,7 +111,8 @@
         "npm-asset/yaireo--tagify": "^4.32.2",
         "caxy/php-htmldiff": "^0.1.14",
         "drupal/ai": "^1.4",
-        "drupal/entity_blueprint": "^1.0"
+        "drupal/entity_blueprint": "^1.0",
+        "drupal/field_widget_actions": "^1.4"
     },
     "conflict": {
         "drupal/gin": "5.0.12"
