@@ -16,7 +16,7 @@
     attach(context) {
       const $context = $(context);
 
-      $context.find('.ai-prompt-form-author').drupalSetSummary(element => {
+      $context.find('.ai-prompt-form-author').drupalSetSummary((element) => {
         const nameElement = element.querySelector('.field--name-uid input');
         const name = nameElement && nameElement.value;
         const dateElement = element.querySelector('.field--name-created input');
