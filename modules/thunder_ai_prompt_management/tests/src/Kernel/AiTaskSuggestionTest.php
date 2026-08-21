@@ -125,7 +125,7 @@ class AiTaskSuggestionTest extends KernelTestBase {
   /**
    * Prompts scoped to another entity type or bundle are not offered.
    *
-   * The bundle comes from the entity being edited, since base fields like the node title report none of their own.
+   * The bundle comes from the entity; base fields report none of their own.
    */
   public function testFiltersByEntityContext(): void {
     $this->createPrompt('For articles', ['entity_context' => ['node.article']]);
@@ -184,7 +184,7 @@ class AiTaskSuggestionTest extends KernelTestBase {
     $this->assertNotNull($group, 'the prompts are grouped into a dropbutton');
     $this->assertCount(2, $group['#links']);
 
-    // Originals stay in the form tree (only a real form child is recognised as the triggering element) but are hidden.
+    // Originals stay in the form tree as the real trigger, but hidden.
     $this->assertCount(2, $originals);
     foreach ($originals as $original) {
       $this->assertTrue($original['#printed'], 'the original button is hidden rather than removed');
@@ -211,7 +211,7 @@ class AiTaskSuggestionTest extends KernelTestBase {
         'entry registers its AJAX settings under its own id'
       );
     }
-    // The colliding-settings bug this guards against was invisible with only one button.
+    // The bug this guards against was invisible with only one button.
     $ids = array_column($entries, '#id');
     $this->assertSame($ids, array_unique($ids));
     $names = array_column($entries, '#name');
@@ -221,7 +221,7 @@ class AiTaskSuggestionTest extends KernelTestBase {
   /**
    * Dropbutton entries still work on a delta other than zero.
    *
-   * Reading back by action_id alone misses the delta suffix past the first item.
+   * Reading back by action_id alone misses the delta past the first item.
    */
   public function testDropbuttonEntriesSurviveNonZeroDelta(): void {
     $this->createPrompt('Punchy');
@@ -253,7 +253,7 @@ class AiTaskSuggestionTest extends KernelTestBase {
   /**
    * The button keeps its own AJAX callback.
    *
-   * FieldWidgetActionBase only attaches clearErrorsForAction() when the plugin declares an AJAX callback.
+   * Only attaches clearErrorsForAction() when an AJAX callback is declared.
    */
   public function testButtonUsesOwnAjaxCallbackAndSuppressesRequiredErrors(): void {
     $this->createPrompt('Punchy');

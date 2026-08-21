@@ -124,7 +124,7 @@ final class AIPromptTestForm extends FormBase {
     $prompt = $form_state->get('ai_prompt_content');
     $entity = $this->resolveEntity($form_state, $prompt);
 
-    // Run against the form's edited text and model, not the stored ones, so a prompt can be refined before saving.
+    // Runs the form's edits, not the stored values, to allow refining first.
     $clone = clone $prompt;
     $clone->set('model', (string) $form_state->getValue('model'));
     $response = $this->promptRunner->run($clone, $entity, (string) $form_state->getValue('prompt_text'));

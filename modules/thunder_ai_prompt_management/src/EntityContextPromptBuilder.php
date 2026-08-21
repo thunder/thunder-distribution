@@ -34,11 +34,11 @@ final class EntityContextPromptBuilder implements EntityContextPromptBuilderInte
       return $this->token->replacePlain($prompt);
     }
 
-    // Mirrors AgentDraftContext's schema block plus LoadCurrentDraft's result, sent up front since this tool has no tool-calling loop.
+    // Mirrors AgentDraftContext's block plus LoadCurrentDraft's result.
     $schema = $this->filteredSchema($entity->getEntityTypeId(), $entity->bundle());
     $header = sprintf('The editor has a %s/%s open for editing. Its schema:', $entity->getEntityTypeId(), $entity->bundle());
 
-    // Replace tokens before appending the context, so bracketed text in field values can't corrupt the serialized JSON.
+    // Replace tokens first, so bracketed field values can't corrupt the JSON.
     $prompt = $this->token->replacePlain($prompt, [$entity->getEntityTypeId() => $entity]);
     $prompt .= "\n\n" . $header . "\n" . Json::encode($schema);
     $prompt .= "\n\nIts current content:\n" . Json::encode($this->serializer->serialize($entity));
@@ -49,7 +49,7 @@ final class EntityContextPromptBuilder implements EntityContextPromptBuilderInte
   /**
    * Gets the entity's bundle schema, with base fields dropped throughout.
    *
-   * Ported from AgentDraftContext::filteredSchema(); unlike that class, this does not catch BlueprintException.
+   * Ported from AgentDraftContext::filteredSchema(), minus the exception catch.
    *
    * @return array<string, mixed>
    *   The schema.

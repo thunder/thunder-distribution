@@ -43,7 +43,7 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
     $this->installEntitySchema('ai_prompt_content');
     $this->installEntitySchema('user');
 
-    // User 1 is created first so it never owns the prompts under test as the superuser.
+    // User 1 is created first so it never owns the prompts under test.
     User::create(['uid' => 1, 'name' => 'admin'])->save();
   }
 

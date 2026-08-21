@@ -14,7 +14,7 @@ interface EntityContextPromptBuilderInterface {
   /**
    * Assembles the system prompt, optionally scoped to a real entity.
    *
-   * Mirrors the schema block and serialized entity ai_chatbot_assistant_ui_form_bridge sends for an open editor draft.
+   * Mirrors the schema/entity block ai_chatbot_assistant_ui_form_bridge sends.
    *
    * @param string $prompt
    *   The prompt entity's own "prompt" field text.

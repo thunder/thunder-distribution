@@ -152,7 +152,7 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
   /**
    * {@inheritdoc}
    *
-   * Renders one button per prompt, grouped into a dropbutton when there's more than one.
+   * Renders one button per prompt; a dropbutton groups more than one.
    */
   protected function actionButton(array &$form, FormStateInterface $form_state, array $context = []): void {
     $prompts = $this->loadPrompts($context['items']->getEntity());
@@ -171,15 +171,15 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
 
     $links = [];
     foreach ($prompts as $prompt) {
-      // A distinct action_id gives each button a unique #name to identify the click.
+      // A distinct action_id gives each button its own #name.
       $subContext = ['action_id' => $groupId . '__' . $prompt->id()] + $context;
       parent::actionButton($form, $form_state, $subContext);
-      // Read back the key: the parent appends the delta past the first item, so guessing it would miss those entries.
+      // Read back the key: the parent appends the delta past the first item.
       $key = $this->getActionButtonWidgetId($fieldName, $subContext);
 
       $form[$key]['#value'] = $prompt->label();
       $form[$key]['#ai_prompt_id'] = $prompt->id();
-      // preRenderAjaxForm() keys settings by #id, but a button under #links never gets one assigned automatically.
+      // preRenderAjaxForm() keys settings by #id, which #links buttons lack.
       $form[$key]['#id'] = Html::getId(implode('-', array_filter([
         'fwa',
         $fieldName,
@@ -187,20 +187,20 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
         (string) $prompt->id(),
       ], static fn ($part) => $part !== '')));
 
-      // Drop the standalone-button sizing classes so the dropbutton's own sizing applies instead.
+      // Drop the standalone-button sizing classes for the dropbutton's own.
       $classes = $form[$key]['#attributes']['class'] ?? [];
       $form[$key]['#attributes']['class'] = array_values(
         array_diff($classes, ['button--secondary', 'button--small'])
       );
 
-      // The original stays the triggering element; bind #ajax here since #links skips the render pipeline.
+      // The original stays the trigger; bind #ajax here, #links skips it.
       $links[$key] = ['title' => RenderElementBase::preRenderAjaxForm($form[$key])];
       $form[$key]['#printed'] = TRUE;
     }
 
     $form[$groupId] = [
       '#type' => 'dropbutton',
-      // 'small' matches the paragraph add buttons; the default size covers the label.
+      // 'small' matches the paragraph add buttons.
       '#dropbutton_type' => 'small',
       '#attributes' => ['class' => ['ai-task-suggestion-dropbutton']],
       '#links' => $links,
@@ -231,7 +231,7 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
   /**
    * {@inheritdoc}
    *
-   * Falls back to the button's own #array_parents for fields nested inside a paragraph or inline_entity_form.
+   * Falls back to #array_parents for fields nested in a paragraph/IEF.
    */
   protected function getTargetElement(array &$form, FormStateInterface $form_state): array {
     $element = parent::getTargetElement($form, $form_state);
@@ -268,9 +268,9 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
     }
 
     $entityTypeId = $fieldDefinition->getTargetEntityTypeId();
-    // Base fields such as the node title report no target bundle, so fall back to the entity being edited.
+    // Base fields report no target bundle, so fall back to the entity.
     $bundle = $fieldDefinition->getTargetBundle() ?? $entity?->bundle();
-    // "*" means every bundle of that entity type - see EntityContextWidget::massageFormValues().
+    // "*" means every bundle - see EntityContextWidget::massageFormValues().
     $contexts = [$entityTypeId . '.*'];
     if ($bundle) {
       $contexts[] = $entityTypeId . '.' . $bundle;
@@ -294,7 +294,7 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
       return $this->promptsCache[$cacheKey] = [];
     }
 
-    // loadMultiple() returns entities in storage order, so re-apply the sort by revision ID.
+    // loadMultiple() loses order, so re-apply the sort by revision ID.
     /** @var \Drupal\thunder_ai_prompt_management\AIPromptInterface[] $prompts */
     $prompts = $storage->loadMultiple($ids);
     $sorted = [];
