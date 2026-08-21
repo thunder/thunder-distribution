@@ -10,6 +10,7 @@ use Drupal\thunder_ai_prompt_management\Entity\AIPrompt;
 use Drupal\thunder_ai_prompt_management\Entity\AiTask;
 use Drupal\user\Entity\Role;
 use Drupal\user\Entity\User;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests the access control handler for the ai prompt entity.
@@ -17,6 +18,7 @@ use Drupal\user\Entity\User;
  * @coversDefaultClass \Drupal\thunder_ai_prompt_management\AIPromptAccessControlHandler
  * @group Thunder
  */
+#[RunTestsInSeparateProcesses]
 class AIPromptAccessControlHandlerTest extends KernelTestBase {
 
   /**
@@ -25,6 +27,11 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
   protected static $modules = [
     'system',
     'user',
+    'field',
+    'file',
+    'key',
+    'ai',
+    'entity_blueprint',
     'thunder_ai_prompt_management',
   ];
 
@@ -148,6 +155,7 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
     $this->assertFalse($prompt->access('update', $own_editor));
     $this->assertTrue($prompt->access('update', $any_editor));
 
+    /** @var \Drupal\Core\Entity\RevisionableStorageInterface $storage */
     $storage = $this->container->get('entity_type.manager')->getStorage('ai_prompt_content');
     $first_revision = $storage->getLatestRevisionId($prompt->id());
     $prompt->setNewRevision(TRUE);
@@ -178,6 +186,7 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
     $this->assertFalse($prompt->access('delete', $own_deleter));
     $this->assertTrue($prompt->access('delete', $any_deleter));
 
+    /** @var \Drupal\Core\Entity\RevisionableStorageInterface $storage */
     $storage = $this->container->get('entity_type.manager')->getStorage('ai_prompt_content');
     $first_revision = $storage->getLatestRevisionId($prompt->id());
     $prompt->setNewRevision(TRUE);

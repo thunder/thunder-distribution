@@ -5,3 +5,5 @@ package: '@todo Add package'
 core_version_requirement: ^10 || ^11
 dependencies:
   - ai:ai
+  - entity_blueprint:entity_blueprint
+  - field_widget_actions:field_widget_actions

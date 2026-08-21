@@ -1,6 +1,11 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Access to an undefined property Drupal\\\\Core\\\\Entity\\\\ContentEntityInterface\\:\\:\\$in_preview\\.$#"
+			count: 1
+			path: modules/thunder_ai_prompt_management/src/Plugin/FieldWidgetAction/AiTaskSuggestion.php
+
+		-
 			message: "#^Access to an undefined property Drupal\\\\Core\\\\Entity\\\\EntityInterface\\:\\:\\$status\\.$#"
 			count: 1
 			path: modules/thunder_taxonomy/src/ThunderTermAccessControlHandler.php

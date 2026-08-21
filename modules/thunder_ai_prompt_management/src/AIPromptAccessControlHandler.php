@@ -20,6 +20,8 @@ final class AIPromptAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account): AccessResult {
+    assert($entity instanceof AIPromptInterface);
+
     if ($admin_permission = $this->entityType->getAdminPermission()) {
       if ($account->hasPermission($admin_permission)) {
         return AccessResult::allowed();

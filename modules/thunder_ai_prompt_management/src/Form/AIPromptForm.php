@@ -120,7 +120,7 @@ final class AIPromptForm extends ContentEntityForm {
   /**
    * {@inheritdoc}
    */
-  public function form(array $form, FormStateInterface $form_state) {
+  public function form(array $form, FormStateInterface $form_state): array {
     $form = parent::form($form, $form_state);
 
     /** @var \Drupal\thunder_ai_prompt_management\AIPromptInterface $node */

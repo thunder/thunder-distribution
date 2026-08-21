@@ -1,0 +1,11 @@
+/*
+ * @file
+ * Styles for the AI task suggestion field widget action.
+ */
+
+/* Gin forces an extrasmall-sized gap on every multiple dropbutton with
+   !important, so its own small-toggle rule loses and the toggle overlaps the
+   label. Same formula Gin uses, with the small toggle size substituted. */
+.ai-task-suggestion-dropbutton.dropbutton--multiple > .dropbutton__item:first-of-type {
+  margin-inline-end: calc(var(--dropbutton-small-toggle-size) + var(--dropbutton-toggle-size-spacing) - 2px) !important;
+}

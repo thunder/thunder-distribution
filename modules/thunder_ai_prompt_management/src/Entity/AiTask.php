@@ -67,6 +67,6 @@ final class AiTask extends ConfigEntityBase implements AiTaskInterface {
   /**
    * The example description.
    */
-  protected string $description;
+  protected string $description = '';
 
 }

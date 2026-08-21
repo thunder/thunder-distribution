@@ -20,33 +20,36 @@ final class AiTaskForm extends EntityForm {
 
     $form = parent::form($form, $form_state);
 
+    /** @var \Drupal\thunder_ai_prompt_management\Entity\AiTask $entity */
+    $entity = $this->entity;
+
     $form['label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Label'),
       '#maxlength' => 255,
-      '#default_value' => $this->entity->label(),
+      '#default_value' => $entity->label(),
       '#required' => TRUE,
     ];
 
     $form['id'] = [
       '#type' => 'machine_name',
-      '#default_value' => $this->entity->id(),
+      '#default_value' => $entity->id(),
       '#machine_name' => [
         'exists' => [AiTask::class, 'load'],
       ],
-      '#disabled' => !$this->entity->isNew(),
+      '#disabled' => !$entity->isNew(),
     ];
 
     $form['status'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Enabled'),
-      '#default_value' => $this->entity->status(),
+      '#default_value' => $entity->status(),
     ];
 
     $form['description'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Description'),
-      '#default_value' => $this->entity->get('description'),
+      '#default_value' => $entity->get('description'),
     ];
 
     return $form;
@@ -59,9 +62,10 @@ final class AiTaskForm extends EntityForm {
     $result = parent::save($form, $form_state);
     $message_args = ['%label' => $this->entity->label()];
     $this->messenger()->addStatus(
-      match($result) {
+      match ($result) {
         \SAVED_NEW => $this->t('Created new example %label.', $message_args),
         \SAVED_UPDATED => $this->t('Updated example %label.', $message_args),
+        default => throw new \LogicException('Could not save the entity.'),
       }
     );
     $form_state->setRedirectUrl($this->entity->toUrl('collection'));

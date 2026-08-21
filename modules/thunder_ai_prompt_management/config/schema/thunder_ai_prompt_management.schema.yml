@@ -12,3 +12,15 @@ thunder_ai_prompt_management.ai_task.*:
       type: string
     description:
       type: string
+
+field_widget_action.plugin.thunder_ai_task_suggestion:
+  type: field_widget_action_plugin_base
+  label: 'AI Task suggestion'
+  mapping:
+    settings:
+      type: mapping
+      label: Settings
+      mapping:
+        ai_task:
+          type: string
+          label: 'AI Task'
