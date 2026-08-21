@@ -3,7 +3,7 @@
  * Defines JavaScript behaviors for the ai prompt edit form.
  */
 
-(function ($, Drupal) {
+(function aiPromptForm($, Drupal) {
   /**
    * Summaries for the authoring information tab.
    *
@@ -16,11 +16,11 @@
     attach(context) {
       const $context = $(context);
 
-      $context.find('.ai-prompt-form-author').drupalSetSummary((context) => {
-        const nameElement = context.querySelector('.field--name-uid input');
-        const name = nameElement?.value;
-        const dateElement = context.querySelector('.field--name-created input');
-        const date = dateElement?.value;
+      $context.find('.ai-prompt-form-author').drupalSetSummary(element => {
+        const nameElement = element.querySelector('.field--name-uid input');
+        const name = nameElement && nameElement.value;
+        const dateElement = element.querySelector('.field--name-created input');
+        const date = dateElement && dateElement.value;
 
         if (name && date) {
           return Drupal.t('By @name on @date', {
