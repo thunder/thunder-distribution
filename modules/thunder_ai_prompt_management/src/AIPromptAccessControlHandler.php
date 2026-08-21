@@ -8,7 +8,6 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\thunder_ai_prompt_management\AIPromptInterface;
 
 /**
  * Access controller for the ai prompt entity.

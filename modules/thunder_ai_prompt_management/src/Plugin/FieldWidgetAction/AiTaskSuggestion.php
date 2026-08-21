@@ -290,7 +290,8 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
     // to the entity being edited.
     $bundle = $fieldDefinition->getTargetBundle() ?? $entity?->bundle();
     // entity_context values are "type.bundle" strings, with "*" meaning every
-    // bundle of that entity type - see EntityContextWidget::massageFormValues().
+    // bundle of that entity type - see
+    // EntityContextWidget::massageFormValues().
     $contexts = [$entityTypeId . '.*'];
     if ($bundle) {
       $contexts[] = $entityTypeId . '.' . $bundle;

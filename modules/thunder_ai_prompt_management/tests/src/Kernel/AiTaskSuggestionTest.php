@@ -6,7 +6,6 @@ namespace Drupal\Tests\thunder_ai_prompt_management\Kernel;
 
 use Drupal\Core\Form\FormState;
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\Core\Render\Element;
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
 use Drupal\thunder_ai_prompt_management\Entity\AIPrompt;

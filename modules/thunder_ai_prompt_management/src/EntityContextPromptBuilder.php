@@ -82,6 +82,10 @@ final class EntityContextPromptBuilder implements EntityContextPromptBuilderInte
   /**
    * Recursively drops base-field entries from a getSchema() "fields" map.
    *
+   * @param string $entityType
+   *   The entity type ID the fields belong to.
+   * @param string $bundle
+   *   The bundle the fields belong to.
    * @param array<mixed> $fields
    *   The schema's "fields" map, keyed by field name.
    *
@@ -117,6 +121,10 @@ final class EntityContextPromptBuilder implements EntityContextPromptBuilderInte
   /**
    * Drops entries for base fields from a getSchema() "fields" map.
    *
+   * @param string $entityType
+   *   The entity type ID the fields belong to.
+   * @param string $bundle
+   *   The bundle the fields belong to.
    * @param array<mixed> $fields
    *   The schema's "fields" map, keyed by field name.
    *
