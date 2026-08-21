@@ -35,7 +35,7 @@ final class AIPromptListBuilder extends EntityListBuilder {
     $row['status'] = $entity->get('status')->value ? $this->t('Published') : $this->t('Unpublished');
     $username_options = [
       'label' => 'hidden',
-      'settings' => ['link' => $entity->get('uid')->entity->isAuthenticated()],
+      'settings' => ['link' => $entity->getOwner()?->isAuthenticated()],
     ];
     $row['uid']['data'] = $entity->get('uid')->view($username_options);
     $row['created']['data'] = $entity->get('created')->view(['label' => 'hidden']);

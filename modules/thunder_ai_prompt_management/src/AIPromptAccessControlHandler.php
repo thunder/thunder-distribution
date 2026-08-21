@@ -8,6 +8,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\thunder_ai_prompt_management\AIPromptInterface;
 
 /**
  * Access controller for the ai prompt entity.
@@ -20,6 +21,8 @@ final class AIPromptAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account): AccessResult {
+    assert($entity instanceof AIPromptInterface);
+
     if ($admin_permission = $this->entityType->getAdminPermission()) {
       if ($account->hasPermission($admin_permission)) {
         return AccessResult::allowed();

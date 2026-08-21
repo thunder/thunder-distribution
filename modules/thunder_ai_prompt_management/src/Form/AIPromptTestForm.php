@@ -154,7 +154,7 @@ final class AIPromptTestForm extends FormBase {
   private function allowedContexts(AIPromptInterface $prompt): array {
     $contexts = [];
     foreach ($prompt->get('entity_context') as $item) {
-      [$type_id, $bundle_id] = array_pad(explode('.', (string) $item->value, 2), 2, '*');
+      [$type_id, $bundle_id] = array_pad(explode('.', $item->getString(), 2), 2, '*');
       $contexts[$type_id][] = $bundle_id;
     }
     return $contexts;

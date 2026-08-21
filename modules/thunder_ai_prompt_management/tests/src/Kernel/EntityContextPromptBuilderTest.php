@@ -62,6 +62,7 @@ class EntityContextPromptBuilderTest extends KernelTestBase {
    * @covers ::build
    */
   public function testBuildWithEntityAppendsBlueprintSchema(): void {
+    /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
     $entity = $this->container->get('entity_type.manager')
       ->getStorage('entity_test')
       ->create(['name' => 'Test entity']);
@@ -88,6 +89,7 @@ class EntityContextPromptBuilderTest extends KernelTestBase {
    * @covers ::build
    */
   public function testBuildWithEntityThrowsWhenAccessDenied(): void {
+    /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
     $entity = $this->container->get('entity_type.manager')
       ->getStorage('entity_test')
       ->create(['name' => 'Test entity']);

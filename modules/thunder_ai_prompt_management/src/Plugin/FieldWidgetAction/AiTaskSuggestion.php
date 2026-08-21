@@ -6,6 +6,7 @@ namespace Drupal\thunder_ai_prompt_management\Plugin\FieldWidgetAction;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -131,7 +132,7 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
   /**
    * {@inheritdoc}
    */
-  public function getAjaxCallback(): ?string {
+  public function getAjaxCallback(): string {
     return 'aiTaskSuggestionAjax';
   }
 
@@ -152,7 +153,7 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
    * more than one. Each button is built by the parent so it keeps the full
    * AJAX wiring; only the label and the prompt reference differ.
    */
-  protected function actionButton(array &$form, FormStateInterface $form_state, array $context = []) {
+  protected function actionButton(array &$form, FormStateInterface $form_state, array $context = []): void {
     $prompts = $this->loadPrompts($context['items']->getEntity());
     if (!$prompts) {
       return;
@@ -223,7 +224,7 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
   /**
    * Runs the clicked prompt and offers the results in the suggestions dialog.
    */
-  public function aiTaskSuggestionAjax(array &$form, FormStateInterface $form_state) {
+  public function aiTaskSuggestionAjax(array &$form, FormStateInterface $form_state): AjaxResponse {
     $trigger = $form_state->getTriggeringElement();
     $selector = $this->getSuggestionsTarget($form, $form_state);
     $prompt = $this->loadPrompt($trigger['#ai_prompt_id'] ?? NULL);
@@ -310,6 +311,7 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
 
     // loadMultiple() returns entities in storage order, so re-apply the sort.
     // The query is keyed by revision ID, so order by its values.
+    /** @var \Drupal\thunder_ai_prompt_management\AIPromptInterface[] $prompts */
     $prompts = $storage->loadMultiple($ids);
     $sorted = [];
     foreach ($ids as $id) {
