@@ -109,7 +109,9 @@
         "npm-asset/dropzone": "^5.5.1",
         "npm-asset/exif-js": "^2.3.0",
         "npm-asset/yaireo--tagify": "^4.32.2",
-        "caxy/php-htmldiff": "^0.1.14"
+        "caxy/php-htmldiff": "^0.1.14",
+        "drupal/ai": "^1.4",
+        "drupal/entity_blueprint": "^1.0"
     },
     "conflict": {
         "drupal/gin": "5.0.12"
