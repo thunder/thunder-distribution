@@ -9,8 +9,6 @@ use Drupal\Core\DependencyInjection\AutowireTrait;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Utility\Token;
-use Drupal\entity_blueprint\BlueprintSchemaBuilderInterface;
-use Drupal\entity_blueprint\BlueprintSerializerInterface;
 
 /**
  * Builds the system prompt sent when testing an AI prompt.
@@ -20,8 +18,8 @@ final class EntityContextPromptBuilder implements EntityContextPromptBuilderInte
   use AutowireTrait;
 
   public function __construct(
-    private readonly BlueprintSchemaBuilderInterface $schemaBuilder,
-    private readonly BlueprintSerializerInterface $serializer,
+    private readonly ?object $schemaBuilder,
+    private readonly ?object $serializer,
     private readonly EntityFieldManagerInterface $entityFieldManager,
     private readonly Token $token,
   ) {}
@@ -58,6 +56,7 @@ final class EntityContextPromptBuilder implements EntityContextPromptBuilderInte
    *   If the bundle is unknown, or the current user may not create it.
    */
   private function filteredSchema(string $entityType, string $bundle): array {
+    $this->assertBlueprintAvailable();
     $schema = $this->schemaBuilder->getSchema($entityType, $bundle);
     $fields = $schema['fields'] ?? [];
     if (!is_array($fields)) {
@@ -65,6 +64,15 @@ final class EntityContextPromptBuilder implements EntityContextPromptBuilderInte
     }
     $schema['fields'] = $this->filterFields($entityType, $bundle, $fields);
     return $schema;
+  }
+
+  /**
+   * Ensures entity_blueprint services are available before entity-context use.
+   */
+  private function assertBlueprintAvailable(): void {
+    if ($this->schemaBuilder === NULL || $this->serializer === NULL) {
+      throw new \RuntimeException('The entity_blueprint module must be enabled to build entity-context prompts.');
+    }
   }
 
   /**
