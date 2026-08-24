@@ -85,7 +85,7 @@ class MediaFormTest extends KernelTestBase {
     ]);
 
     $element = [];
-    $this->mediaForm($writer)->fieldWidgetSingleElementOptionsSelectFormAlter(
+    $this->mediaForm($writer)->fieldWidgetSingleElementFormAlter(
       $element,
       new FormState(),
       ['items' => $media->get('field_digital_source_type')]
@@ -110,7 +110,7 @@ class MediaFormTest extends KernelTestBase {
     ]);
 
     $element = [];
-    $this->mediaForm($writer)->fieldWidgetSingleElementOptionsSelectFormAlter(
+    $this->mediaForm($writer)->fieldWidgetSingleElementFormAlter(
       $element,
       new FormState(),
       ['items' => $media->get('field_digital_source_type')]
@@ -136,7 +136,7 @@ class MediaFormTest extends KernelTestBase {
     ]);
 
     $element = [];
-    $this->mediaForm($writer)->fieldWidgetSingleElementOptionsSelectFormAlter(
+    $this->mediaForm($writer)->fieldWidgetSingleElementFormAlter(
       $element,
       new FormState(),
       ['items' => $media->get('field_digital_source_type')]
@@ -161,7 +161,7 @@ class MediaFormTest extends KernelTestBase {
     ]);
 
     $element = [];
-    $this->mediaForm($writer)->fieldWidgetSingleElementOptionsSelectFormAlter(
+    $this->mediaForm($writer)->fieldWidgetSingleElementFormAlter(
       $element,
       new FormState(),
       ['items' => $media->get('field_digital_source_type')]
@@ -191,11 +191,11 @@ class MediaFormTest extends KernelTestBase {
     $media_form = $this->mediaForm($writer);
 
     $first = [];
-    $media_form->fieldWidgetSingleElementOptionsSelectFormAlter($first, $form_state, ['items' => $media->get('field_digital_source_type')]);
+    $media_form->fieldWidgetSingleElementFormAlter($first, $form_state, ['items' => $media->get('field_digital_source_type')]);
 
     // Simulate an AJAX rebuild reusing the same form state.
     $second = [];
-    $media_form->fieldWidgetSingleElementOptionsSelectFormAlter($second, $form_state, ['items' => $media->get('field_digital_source_type')]);
+    $media_form->fieldWidgetSingleElementFormAlter($second, $form_state, ['items' => $media->get('field_digital_source_type')]);
 
     $this->assertSame('trainedAlgorithmicMedia', $first['#default_value']);
     $this->assertArrayNotHasKey('#default_value', $second);

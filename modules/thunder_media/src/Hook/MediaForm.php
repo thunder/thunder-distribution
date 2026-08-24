@@ -23,14 +23,15 @@ class MediaForm {
   ) {}
 
   /**
-   * Implements hook_field_widget_single_element_WIDGET_TYPE_form_alter().
+   * Implements hook_field_widget_single_element_form_alter().
    *
    * Disables the "AI disclosure" field once uploaded, if so configured.
    * On a new, unsaved media item, pre-selects a disclosure already embedded
    * in the just-uploaded file, so it is visible before the first save.
+   * Applies regardless of which widget is used for the field.
    */
-  #[Hook('field_widget_single_element_options_select_form_alter')]
-  public function fieldWidgetSingleElementOptionsSelectFormAlter(array &$element, FormStateInterface $form_state, array $context): void {
+  #[Hook('field_widget_single_element_form_alter')]
+  public function fieldWidgetSingleElementFormAlter(array &$element, FormStateInterface $form_state, array $context): void {
     $items = $context['items'];
     if ($items->getFieldDefinition()->getName() !== 'field_digital_source_type') {
       return;
