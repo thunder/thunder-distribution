@@ -25,12 +25,17 @@ function thunder_media_post_update_filename_transliteration(): void {
 }
 
 /**
- * Add the "AI disclosure upload only" setting.
+ * Add the "AI disclosure" settings.
  */
-function thunder_media_post_update_add_ai_disclosure_upload_only_setting(): void {
+function thunder_media_post_update_add_ai_disclosure_settings(): void {
   $config = \Drupal::configFactory()->getEditable('thunder_media.settings');
 
   if ($config->get('ai_disclosure_upload_only') === NULL) {
-    $config->set('ai_disclosure_upload_only', FALSE)->save();
+    $config->set('ai_disclosure_upload_only', FALSE);
   }
+  if ($config->get('ai_disclosure_auto_detect') === NULL) {
+    $config->set('ai_disclosure_auto_detect', TRUE);
+  }
+
+  $config->save();
 }

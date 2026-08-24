@@ -254,24 +254,13 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): string {
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
 
-  // Remove a stale blazy/slick "breakpoints" setting some sites still carry;
-  // it would otherwise break the display resave triggered below.
+  // Import the field, and remove a stale blazy/slick "breakpoints" setting
+  // that would otherwise break the display resave triggered below.
   try {
     $updater->executeUpdate('thunder', 'thunder_post_update_0007_add_ai_fields_to_image_media');
   }
   catch (\Exception $e) {
-    // Unrelated stale data on this config must not abort the field import.
-    \Drupal::logger('thunder')->warning('Could not remove the stale blazy/slick "breakpoints" setting: @message', ['@message' => $e->getMessage()]);
-  }
-
-  // Import the field storage and field config from their optional config,
-  // skipping either that already exists.
-  try {
-    $updater->executeUpdate('thunder', 'thunder_post_update_0007_import_ai_fields');
-  }
-  catch (\Exception $e) {
-    // Importing resaves every display; unrelated stale data must not abort.
-    \Drupal::logger('thunder')->warning('Could not import the "field_digital_source_type" field or resave dependent displays: @message', ['@message' => $e->getMessage()]);
+    \Drupal::logger('thunder')->warning('Could not import the "field_digital_source_type" field or remove the stale blazy/slick "breakpoints" setting: @message', ['@message' => $e->getMessage()]);
   }
 
   $form_display = EntityFormDisplay::load('media.image.default');

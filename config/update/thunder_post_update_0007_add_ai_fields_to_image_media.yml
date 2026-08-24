@@ -1,3 +1,7 @@
+__global_actions:
+  import_configs:
+    - field.storage.media.field_digital_source_type
+    - field.field.media.image.field_digital_source_type
 core.entity_form_display.media.image.default:
   expected_config: {}
   update_actions:
