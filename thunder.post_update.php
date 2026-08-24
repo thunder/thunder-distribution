@@ -248,41 +248,16 @@ function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?Tr
  * Add "Edited with AI" and "Created with AI" fields to image media.
  */
 function thunder_post_update_0007_add_ai_fields_to_image_media(): string {
-  $field_name = 'field_digital_source_type';
-
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
 
-  // Import the field, and remove a stale blazy/slick "breakpoints" setting
-  // that would otherwise break the display resave triggered below.
+  // Import the field, place its widget, and remove a stale blazy/slick
+  // "breakpoints" setting that would otherwise break the display resave.
   try {
     $updater->executeUpdate('thunder', 'thunder_post_update_0007_add_ai_fields_to_image_media');
   }
   catch (\Exception $e) {
-    \Drupal::logger('thunder')->warning('Could not import the "field_digital_source_type" field or remove the stale blazy/slick "breakpoints" setting: @message', ['@message' => $e->getMessage()]);
-  }
-
-  $form_display = EntityFormDisplay::load('media.image.default');
-  if ($form_display && !$form_display->getComponent($field_name)) {
-    $form_display->setComponent($field_name, [
-      'type' => 'options_select',
-      'weight' => 6,
-      'region' => 'content',
-    ]);
-
-    $group = $form_display->getThirdPartySetting('field_group', 'group_credits');
-    if ($group && !in_array($field_name, $group['children'], TRUE)) {
-      $group['children'][] = $field_name;
-      $form_display->setThirdPartySetting('field_group', 'group_credits', $group);
-    }
-
-    try {
-      $form_display->save();
-    }
-    catch (\Exception $e) {
-      // Widget placement is cosmetic; unrelated stale data must not abort this.
-      \Drupal::logger('thunder')->warning('Could not save the "media.image.default" form display while adding the AI disclosure widget: @message', ['@message' => $e->getMessage()]);
-    }
+    \Drupal::logger('thunder')->warning('Could not import the "field_digital_source_type" field: @message', ['@message' => $e->getMessage()]);
   }
 
   return $updater->logger()->output();
