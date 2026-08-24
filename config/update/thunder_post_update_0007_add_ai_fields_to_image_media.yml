@@ -10,3 +10,25 @@ core.entity_form_display.media.image.default:
         field_image:
           settings:
             breakpoints: {}
+core.entity_form_display.media.image.bulk_edit:
+  expected_config: {}
+  update_actions:
+    add:
+      content:
+        field_digital_source_type:
+          type: options_select
+          weight: 5
+          region: content
+          settings: {}
+          third_party_settings: {}
+core.entity_form_display.media.image.media_library:
+  expected_config: {}
+  update_actions:
+    add:
+      content:
+        field_digital_source_type:
+          type: options_select
+          weight: 5
+          region: content
+          settings: {}
+          third_party_settings: {}
