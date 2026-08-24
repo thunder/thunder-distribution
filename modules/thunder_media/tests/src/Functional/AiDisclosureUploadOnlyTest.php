@@ -42,4 +42,24 @@ class AiDisclosureUploadOnlyTest extends ThunderTestBase {
     $this->assertSession()->fieldDisabled('field_digital_source_type');
   }
 
+  /**
+   * The lock is enforced in the presave hook, not just the disabled widget.
+   *
+   * A direct entity API save never goes through the widget's form-alter.
+   */
+  public function testFieldCannotBeChangedViaApiWhenConfigured(): void {
+    $this->config('thunder_media.settings')
+      ->set('ai_disclosure_upload_only', TRUE)
+      ->save();
+
+    $media = $this->getMediaByName('Image 1');
+    $original = $media->get('field_digital_source_type')->value;
+
+    $media->set('field_digital_source_type', 'trainedAlgorithmicMedia');
+    $media->save();
+
+    $media = $this->getMediaByName('Image 1', TRUE);
+    $this->assertSame($original, $media->get('field_digital_source_type')->value);
+  }
+
 }

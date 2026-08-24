@@ -2,6 +2,7 @@
 
 namespace Drupal\thunder_media\Hook;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Logger\LoggerChannelTrait;
@@ -19,6 +20,7 @@ class AiDisclosure {
   public function __construct(
     protected readonly AiDisclosureWriterInterface $writer,
     protected readonly FileSystemInterface $fileSystem,
+    protected readonly ConfigFactoryInterface $configFactory,
   ) {}
 
   /**
@@ -34,6 +36,36 @@ class AiDisclosure {
       return;
     }
 
+    $term = $media->get('field_digital_source_type')->value;
+
+    $original = $media->getOriginal();
+    if ($original instanceof MediaInterface) {
+      $original_term = $original->get('field_digital_source_type')->value;
+      $term_changed = !$original->get('field_digital_source_type')->equals($media->get('field_digital_source_type'));
+      $image_changed = $original->get('field_image')->target_id !== $media->get('field_image')->target_id;
+    }
+    else {
+      // New media has no prior state, so a set disclosure always needs writing.
+      $original_term = '';
+      $term_changed = (bool) $term;
+      $image_changed = TRUE;
+    }
+
+    $config = $this->configFactory->get('thunder_media.settings');
+    $locked = $config->get('ai_disclosure_upload_only') && !$media->isNew();
+    if ($locked && $term_changed) {
+      // The field may only be set at upload time: revert any other change,
+      // whether from the (disabled) widget or a non-UI write path.
+      $term = $original_term;
+      $term_changed = FALSE;
+      $media->set('field_digital_source_type', $term);
+    }
+
+    if (!$term_changed && !$image_changed) {
+      // Nothing changed since the last save: avoid re-running the writer.
+      return;
+    }
+
     $file = $media->get('field_image')->entity;
     if (!$file instanceof FileInterface) {
       return;
@@ -45,20 +77,7 @@ class AiDisclosure {
       return;
     }
 
-    $term = $media->get('field_digital_source_type')->value;
-
-    $original = $media->getOriginal();
-    if ($original instanceof MediaInterface) {
-      $term_changed = $original->get('field_digital_source_type')->value !== $term;
-      $image_changed = $original->get('field_image')->target_id !== $file->id();
-    }
-    else {
-      // New media has no prior state, so a set disclosure always needs writing.
-      $term_changed = (bool) $term;
-      $image_changed = TRUE;
-    }
-
-    if (!$term && $image_changed) {
+    if (!$term && $image_changed && !$term_changed && !$locked && $config->get('ai_disclosure_auto_detect') !== FALSE) {
       // A newly uploaded file may already carry a disclosure: adopt it.
       $adopted = $this->adoptExistingDisclosure($media, $real_path);
       if ($adopted !== NULL) {
@@ -67,21 +86,31 @@ class AiDisclosure {
       }
     }
 
-    if (!$term_changed && !$image_changed) {
-      // Nothing changed since the last save: avoid re-running the writer.
-      return;
-    }
-
     if (!$term && !$term_changed) {
       // No disclosure set and it was not just cleared: nothing to remove.
       return;
     }
 
-    if ($term) {
-      $this->writer->writeDigitalSourceType($real_path, $term);
+    $success = $term
+      ? $this->writer->writeDigitalSourceType($real_path, $term)
+      : $this->writer->clearDigitalSourceType($real_path);
+
+    if (!$success) {
+      // Keep the field in sync with the file, not an unwritten value.
+      $media->set('field_digital_source_type', $original_term);
+      return;
     }
-    else {
-      $this->writer->clearDigitalSourceType($real_path);
+
+    // The file's bytes changed on disk: refresh the cached filesize.
+    clearstatcache(TRUE, $real_path);
+    try {
+      $file->save();
+    }
+    catch (\Exception $e) {
+      $this->getLogger('thunder_media')->warning('Could not update the cached filesize for @uri after writing AI-disclosure metadata: @message', [
+        '@uri' => $file->getFileUri(),
+        '@message' => $e->getMessage(),
+      ]);
     }
   }
 
@@ -103,7 +132,8 @@ class AiDisclosure {
       return NULL;
     }
 
-    $allowed_values = $media->get('field_digital_source_type')->getFieldDefinition()->getSetting('allowed_values');
+    $field_definition = $media->get('field_digital_source_type')->getFieldDefinition();
+    $allowed_values = options_allowed_values($field_definition->getFieldStorageDefinition(), $media);
     if (!array_key_exists($existing, $allowed_values)) {
       return NULL;
     }

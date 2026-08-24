@@ -11,6 +11,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\ckeditor5\SmartDefaultSettings;
 use Drupal\editor\Entity\Editor;
 use Drupal\entity_browser\Entity\EntityBrowser;
+use Drupal\field\Entity\FieldConfig;
 use Drupal\media\Entity\MediaType;
 use Drupal\user\Entity\Role;
 
@@ -247,16 +248,21 @@ function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?Tr
 /**
  * Add "Edited with AI" and "Created with AI" fields to image media.
  */
-function thunder_post_update_0007_add_ai_fields_to_image_media(): TranslatableMarkup {
+function thunder_post_update_0007_add_ai_fields_to_image_media(): string {
   $field_name = 'field_digital_source_type';
 
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
 
   // Remove a stale blazy/slick "breakpoints" setting some sites still carry;
-  // it would otherwise break the display resave triggered by importing the
-  // field below.
-  $updater->executeUpdate('thunder', 'thunder_post_update_0007_add_ai_fields_to_image_media');
+  // it would otherwise break the display resave triggered below.
+  try {
+    $updater->executeUpdate('thunder', 'thunder_post_update_0007_add_ai_fields_to_image_media');
+  }
+  catch (\Exception $e) {
+    // Unrelated stale data on this config must not abort the field import.
+    \Drupal::logger('thunder')->warning('Could not remove the stale blazy/slick "breakpoints" setting: @message', ['@message' => $e->getMessage()]);
+  }
 
   // Import the field storage and field config from their optional config,
   // skipping either that already exists.
@@ -291,5 +297,18 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): TranslatableMa
     }
   }
 
-  return t('Added "AI disclosure" field to the Image media type.');
+  return $updater->logger()->output();
+}
+
+/**
+ * Make the "AI disclosure" field untranslatable.
+ */
+function thunder_post_update_0008_untranslate_ai_disclosure_field(): TranslatableMarkup {
+  $field = FieldConfig::loadByName('media', 'image', 'field_digital_source_type');
+  if ($field instanceof FieldConfig && $field->isTranslatable()) {
+    $field->setTranslatable(FALSE);
+    $field->save();
+  }
+
+  return t('Made the "AI disclosure" field untranslatable, since it describes the shared image file rather than per-language content.');
 }

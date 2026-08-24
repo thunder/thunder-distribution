@@ -5,7 +5,7 @@ namespace Drupal\thunder_media\Hook;
 use Drupal\Core\Extension\Requirement\RequirementSeverity;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Symfony\Component\Process\ExecutableFinder;
+use Drupal\thunder_media\AiDisclosureWriterInterface;
 
 /**
  * Runtime requirements hooks for the thunder_media module.
@@ -14,6 +14,10 @@ class Requirements {
 
   use StringTranslationTrait;
 
+  public function __construct(
+    protected readonly AiDisclosureWriterInterface $writer,
+  ) {}
+
   /**
    * Implements hook_runtime_requirements().
    */
@@ -21,7 +25,7 @@ class Requirements {
   public function runtimeRequirements(): array {
     $requirements = [];
 
-    if ((new ExecutableFinder())->find('exiftool') === NULL) {
+    if (!$this->writer->isAvailable()) {
       $requirements['thunder_media_exiftool'] = [
         'title' => $this->t('Thunder Media: exiftool'),
         'value' => $this->t('Not found'),

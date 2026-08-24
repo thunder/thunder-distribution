@@ -57,6 +57,8 @@ class AiDisclosureWriterTest extends KernelTestBase {
 
   /**
    * Overrides the AI-disclosure writer service with a mock.
+   *
+   * Must be called before any media entity is saved in the test.
    */
   protected function mockWriter(): MockObject {
     $mock = $this->createMock(AiDisclosureWriterInterface::class);
@@ -229,6 +231,108 @@ class AiDisclosureWriterTest extends KernelTestBase {
     // Unrelated re-save: the field and the image did not change.
     $media->setName('Renamed');
     $media->save();
+  }
+
+  /**
+   * The upload-only lock is enforced in mediaPresave() itself.
+   *
+   * A direct field write on a locked, already-uploaded item must not change.
+   */
+  public function testUploadOnlyLockIsEnforcedInPresave(): void {
+    $writer = $this->mockWriter();
+    // Creating the (new) sample media is unlocked and attempts adoption
+    // once; the sample file carries no embedded disclosure.
+    $writer->expects($this->once())->method('readDigitalSourceType')->willReturn(NULL);
+    $writer->expects($this->never())->method('writeDigitalSourceType');
+    $writer->expects($this->never())->method('clearDigitalSourceType');
+
+    $media = $this->createSampleImageMedia();
+
+    $this->config('thunder_media.settings')->set('ai_disclosure_upload_only', TRUE)->save();
+
+    $newImage = $this->createSampleFile('image');
+    $media->set('field_image', ['target_id' => $newImage->id()]);
+    $media->set('field_digital_source_type', 'trainedAlgorithmicMedia');
+    $media->save();
+
+    $this->assertSame('', $media->get('field_digital_source_type')->value ?? '');
+  }
+
+  /**
+   * Explicitly clearing the field is not overridden by adoption.
+   */
+  public function testExplicitClearIsNotOverriddenByAdoption(): void {
+    $writer = $this->mockWriter();
+
+    $media = $this->createSampleImageMedia();
+    $realPath = $this->realPathOfImage($media);
+
+    $writer->expects($this->once())
+      ->method('writeDigitalSourceType')
+      ->with($realPath, 'trainedAlgorithmicMedia')
+      ->willReturn(TRUE);
+
+    $media->set('field_digital_source_type', 'trainedAlgorithmicMedia');
+    $media->save();
+
+    $newImage = $this->createSampleFile('image');
+    $newRealPath = $this->container->get('file_system')->realpath($newImage->getFileUri());
+
+    // The new file carries an adoptable disclosure, but the explicit
+    // clear must win: adoption must not even be attempted.
+    $writer->expects($this->never())->method('readDigitalSourceType');
+    $writer->expects($this->once())
+      ->method('clearDigitalSourceType')
+      ->with($newRealPath)
+      ->willReturn(TRUE);
+
+    $media->set('field_image', ['target_id' => $newImage->id()]);
+    $media->set('field_digital_source_type', '');
+    $media->save();
+
+    $this->assertSame('', $media->get('field_digital_source_type')->value ?? '');
+  }
+
+  /**
+   * A failed write reverts the field instead of leaving it out of sync.
+   */
+  public function testWriteFailureRevertsField(): void {
+    $writer = $this->mockWriter();
+
+    $media = $this->createSampleImageMedia();
+    $realPath = $this->realPathOfImage($media);
+
+    $writer->expects($this->once())
+      ->method('writeDigitalSourceType')
+      ->with($realPath, 'trainedAlgorithmicMedia')
+      ->willReturn(FALSE);
+
+    $media->set('field_digital_source_type', 'trainedAlgorithmicMedia');
+    $media->save();
+
+    $this->assertSame('', $media->get('field_digital_source_type')->value ?? '');
+  }
+
+  /**
+   * Disabling auto-detect skips adopting a disclosure from an upload.
+   */
+  public function testAutoDetectDisabledSkipsAdoption(): void {
+    $this->config('thunder_media.settings')->set('ai_disclosure_auto_detect', FALSE)->save();
+
+    $writer = $this->mockWriter();
+    $writer->expects($this->never())->method('readDigitalSourceType');
+    $writer->expects($this->never())->method('writeDigitalSourceType');
+
+    $image = $this->createSampleFile('image');
+
+    $media = Media::create([
+      'bundle' => 'image',
+      'name' => 'Test image media',
+      'field_image' => ['target_id' => $image->id()],
+    ]);
+    $media->save();
+
+    $this->assertSame('', $media->get('field_digital_source_type')->value ?? '');
   }
 
 }

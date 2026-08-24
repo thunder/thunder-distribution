@@ -38,6 +38,14 @@ interface AiDisclosureWriterInterface {
   public function clearDigitalSourceType(string $realPath): bool;
 
   /**
+   * Checks whether the exiftool binary is available.
+   *
+   * @return bool
+   *   TRUE if exiftool was found on PATH, FALSE otherwise.
+   */
+  public function isAvailable(): bool;
+
+  /**
    * Reads the Digital Source Type term embedded in the image at the path.
    *
    * @param string $realPath

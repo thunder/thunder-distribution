@@ -36,23 +36,33 @@ class AiDisclosureWriter implements AiDisclosureWriterInterface {
   /**
    * {@inheritdoc}
    */
+  public function isAvailable(): bool {
+    return $this->findExiftool() !== FALSE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function readDigitalSourceType(string $realPath): ?string {
     $exiftool = $this->findExiftool();
     if ($exiftool === FALSE) {
       return NULL;
     }
 
-    $process = new Process([
-      $exiftool,
-      '-s3',
-      '-XMP-iptcExt:DigitalSourceType',
-      $realPath,
-    ]);
-
     try {
+      $process = new Process([
+        $exiftool,
+        '-s3',
+        '-XMP-iptcExt:DigitalSourceType',
+        $realPath,
+      ]);
       $process->mustRun();
     }
-    catch (ExceptionInterface) {
+    catch (ExceptionInterface $e) {
+      $this->getLogger('thunder_media')->warning('Failed to read AI-disclosure metadata for @path: @message', [
+        '@path' => $realPath,
+        '@message' => $e->getMessage(),
+      ]);
       return NULL;
     }
 
@@ -87,14 +97,13 @@ class AiDisclosureWriter implements AiDisclosureWriterInterface {
       return FALSE;
     }
 
-    $process = new Process([
-      $exiftool,
-      '-overwrite_original',
-      '-XMP-iptcExt:DigitalSourceType=' . $value,
-      $realPath,
-    ]);
-
     try {
+      $process = new Process([
+        $exiftool,
+        '-overwrite_original',
+        '-XMP-iptcExt:DigitalSourceType=' . $value,
+        $realPath,
+      ]);
       $process->mustRun();
     }
     catch (ExceptionInterface $e) {
