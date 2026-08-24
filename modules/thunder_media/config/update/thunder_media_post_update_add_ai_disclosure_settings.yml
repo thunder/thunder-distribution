@@ -2,5 +2,5 @@ thunder_media.settings:
   expected_config: {}
   update_actions:
     add:
-      ai_disclosure_upload_only: false
+      ai_disclosure_upload_only: true
       ai_disclosure_auto_detect: true

@@ -96,8 +96,13 @@ class AiDisclosure {
       : $this->writer->clearDigitalSourceType($real_path);
 
     if (!$success) {
-      // Keep the field in sync with the file, not an unwritten value.
-      $media->set('field_digital_source_type', $original_term);
+      if ($this->writer->isAvailable()) {
+        // A real write attempt failed: keep the field in sync with the
+        // file, not an unwritten value.
+        $media->set('field_digital_source_type', $original_term);
+      }
+      // Else exiftool itself is unavailable: the entity still saves
+      // normally, per the documented fallback behavior.
       return;
     }
 

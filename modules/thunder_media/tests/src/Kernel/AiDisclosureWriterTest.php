@@ -298,6 +298,7 @@ class AiDisclosureWriterTest extends KernelTestBase {
    */
   public function testWriteFailureRevertsField(): void {
     $writer = $this->mockWriter();
+    $writer->method('isAvailable')->willReturn(TRUE);
 
     $media = $this->createSampleImageMedia();
     $realPath = $this->realPathOfImage($media);
@@ -311,6 +312,25 @@ class AiDisclosureWriterTest extends KernelTestBase {
     $media->save();
 
     $this->assertSame('', $media->get('field_digital_source_type')->value ?? '');
+  }
+
+  /**
+   * A write failure when exiftool is unavailable does not revert the field.
+   */
+  public function testWriteFailureWithoutExiftoolKeepsField(): void {
+    $writer = $this->mockWriter();
+    $writer->method('isAvailable')->willReturn(FALSE);
+
+    $media = $this->createSampleImageMedia();
+
+    $writer->expects($this->once())
+      ->method('writeDigitalSourceType')
+      ->willReturn(FALSE);
+
+    $media->set('field_digital_source_type', 'trainedAlgorithmicMedia');
+    $media->save();
+
+    $this->assertSame('trainedAlgorithmicMedia', $media->get('field_digital_source_type')->value);
   }
 
   /**

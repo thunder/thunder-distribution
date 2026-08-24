@@ -1,3 +1,3 @@
-ai_disclosure_upload_only: false
+ai_disclosure_upload_only: true
 ai_disclosure_auto_detect: true
 enable_filefield_remove_button: false
