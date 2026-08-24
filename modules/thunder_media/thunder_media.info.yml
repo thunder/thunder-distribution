@@ -4,5 +4,6 @@ type: module
 core_version_requirement: ^11
 dependencies:
   - drupal:image
+  - update_helper:update_helper
 package: Thunder
 configure: thunder_media.configuration_form
