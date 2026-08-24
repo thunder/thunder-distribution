@@ -179,7 +179,9 @@ GQL;
       ],
     ], $this->jsonDecode($response->getBody())['data']['page']);
 
-    // Set the AI disclosure and confirm it is exposed via the API.
+    // Set the AI disclosure and confirm it is exposed via the API. The
+    // upload-only lock would otherwise block this direct API change.
+    $this->config('thunder_media.settings')->set('ai_disclosure_upload_only', FALSE)->save();
     $this->loadMediaByUuid('17965877-27b2-428f-8b8c-7dccba9786e5')
       ->set('field_digital_source_type', 'trainedAlgorithmicMedia')
       ->save();
