@@ -11,7 +11,6 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\ckeditor5\SmartDefaultSettings;
 use Drupal\editor\Entity\Editor;
 use Drupal\entity_browser\Entity\EntityBrowser;
-use Drupal\field\Entity\FieldConfig;
 use Drupal\media\Entity\MediaType;
 use Drupal\user\Entity\Role;
 
@@ -287,17 +286,4 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): string {
   }
 
   return $updater->logger()->output();
-}
-
-/**
- * Make the "AI disclosure" field untranslatable.
- */
-function thunder_post_update_0008_untranslate_ai_disclosure_field(): TranslatableMarkup {
-  $field = FieldConfig::loadByName('media', 'image', 'field_digital_source_type');
-  if ($field instanceof FieldConfig && $field->isTranslatable()) {
-    $field->setTranslatable(FALSE);
-    $field->save();
-  }
-
-  return t('Made the "AI disclosure" field untranslatable, since it describes the shared image file rather than per-language content.');
 }
