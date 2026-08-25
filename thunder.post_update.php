@@ -260,6 +260,11 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): string {
       continue;
     }
     $component = $form_display->getComponent('field_image');
+    // @todo DEBUG remove before merging.
+    \Drupal::logger('thunder')->notice('DEBUG @id field_image component before cleanup: @data', [
+      '@id' => $form_display_id,
+      '@data' => json_encode($component),
+    ]);
     if ($component && array_key_exists('breakpoints', $component['settings'] ?? [])) {
       unset($component['settings']['breakpoints']);
       $form_display->setComponent('field_image', $component)->save();
@@ -275,6 +280,8 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): string {
   }
   catch (\Exception $e) {
     \Drupal::logger('thunder')->warning('Could not import the "field_digital_source_type" field: @message', ['@message' => $e->getMessage()]);
+    // @todo DEBUG remove before merging.
+    \Drupal::logger('thunder')->warning('DEBUG trace: @trace', ['@trace' => $e->getTraceAsString()]);
   }
 
   return $updater->logger()->output();
