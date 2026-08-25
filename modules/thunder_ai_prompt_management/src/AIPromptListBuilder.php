@@ -4,16 +4,53 @@ declare(strict_types=1);
 
 namespace Drupal\thunder_ai_prompt_management;
 
+use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Form\FormBuilderInterface;
+use Drupal\Core\Routing\RouteProviderInterface;
 use Drupal\Core\Url;
 use Drupal\thunder_ai_prompt_management\Form\AIPromptListFilterForm;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 /**
  * Provides a list controller for the ai prompt entity type.
  */
 final class AIPromptListBuilder extends EntityListBuilder {
+
+  public function __construct(
+    EntityTypeInterface $entity_type,
+    EntityStorageInterface $storage,
+    protected readonly FormBuilderInterface $formBuilder,
+    protected readonly RequestStack $requestStack,
+    protected readonly RouteProviderInterface $routeProvider,
+  ) {
+    parent::__construct($entity_type, $storage);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type): static {
+    /** @var \Drupal\Core\Form\FormBuilderInterface $form_builder */
+    $form_builder = $container->get('form_builder');
+    /** @var \Symfony\Component\HttpFoundation\RequestStack $request_stack */
+    $request_stack = $container->get('request_stack');
+    /** @var \Drupal\Core\Routing\RouteProviderInterface $route_provider */
+    $route_provider = $container->get('router.route_provider');
+
+    return new static(
+      $entity_type,
+      $container->get('entity_type.manager')->getStorage($entity_type->id()),
+      $form_builder,
+      $request_stack,
+      $route_provider,
+    );
+  }
 
   /**
    * Number of rows shown on the admin listing page.
@@ -33,7 +70,7 @@ final class AIPromptListBuilder extends EntityListBuilder {
       '#open' => TRUE,
       '#weight' => -20,
     ];
-    $build['filters']['form'] = \Drupal::formBuilder()->getForm(AIPromptListFilterForm::class);
+    $build['filters']['form'] = $this->formBuilder->getForm(AIPromptListFilterForm::class);
 
     return $build;
   }
@@ -81,7 +118,7 @@ final class AIPromptListBuilder extends EntityListBuilder {
       ->accessCheck(TRUE)
       ->sort($this->entityType->getKey('id'));
 
-    $request = \Drupal::requestStack()->getCurrentRequest();
+    $request = $this->requestStack->getCurrentRequest();
     if ($request === NULL) {
       return parent::getEntityIds();
     }
@@ -112,8 +149,8 @@ final class AIPromptListBuilder extends EntityListBuilder {
   /**
    * {@inheritdoc}
    */
-  protected function getDefaultOperations(EntityInterface $entity): array {
-    $operations = parent::getDefaultOperations($entity);
+  protected function getDefaultOperations(EntityInterface $entity, ?CacheableMetadata $cacheability = NULL): array {
+    $operations = parent::getDefaultOperations($entity, $cacheability);
 
     if ($entity->access('update') && $this->isTestRouteAvailable()) {
       $operations['test'] = [
@@ -131,7 +168,7 @@ final class AIPromptListBuilder extends EntityListBuilder {
    */
   private function isTestRouteAvailable(): bool {
     try {
-      \Drupal::service('router.route_provider')->getRouteByName('entity.ai_prompt_content.test_form');
+      $this->routeProvider->getRouteByName('entity.ai_prompt_content.test_form');
       return TRUE;
     }
     catch (RouteNotFoundException) {
