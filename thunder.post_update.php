@@ -248,53 +248,42 @@ function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?Tr
  * Add "Edited with AI" and "Created with AI" fields to image media.
  */
 function thunder_post_update_0007_add_ai_fields_to_image_media(): string {
-  // Remove a stale image-crop "breakpoints" widget setting left over from a
-  // much older Thunder release, on sites that still carry it. It fails
-  // schema validation as soon as anything resaves the display - including
-  // the field import below, which normally happens first - so it has to be
-  // cleaned up before the update definition runs, not via its "delete"
-  // action.
-  foreach (['media.image.default', 'media.image.bulk_edit', 'media.image.media_library'] as $form_display_id) {
-    $form_display = EntityFormDisplay::load($form_display_id);
-    if (!$form_display) {
-      continue;
-    }
-    $component = $form_display->getComponent('field_image');
-    if ($component && array_key_exists('breakpoints', $component['settings'] ?? [])) {
-      unset($component['settings']['breakpoints']);
-      $form_display->setComponent('field_image', $component)->save();
-    }
-  }
-
-  // @todo DEBUG remove before merging.
-  // The field import below triggers Drupal core's EntityDisplayRebuilder,
-  // which resaves *every* form/view display for the "media" entity type
-  // (all bundles, not just "image"). Find any display whose stored data
-  // still contains a stray "breakpoints" key anywhere, on any bundle, so we
-  // know exactly which legacy display needs cleaning up.
-  $config_factory = \Drupal::configFactory();
-  foreach (['core.entity_view_display.media.', 'core.entity_form_display.media.'] as $prefix) {
-    foreach ($config_factory->listAll($prefix) as $config_name) {
-      $data = $config_factory->get($config_name)->getRawData();
-      $hits = [];
-      $walker = function ($value, $path) use (&$walker, &$hits) {
-        if (!is_array($value)) {
-          return;
+  // Creating the field below makes Drupal core's EntityDisplayRebuilder
+  // resave every view/form display of the "media" entity type (all
+  // bundles, not just "image"). Some sites still carry a "breakpoints"
+  // component setting left over from a long-removed widget/formatter
+  // version (e.g. an orphaned "image.slick" view mode from before Thunder
+  // dropped blazy/slick) that is no longer recognized by that component's
+  // current config schema, which makes the resave fail schema casting.
+  //
+  // Resave every such display *now*, before the field import triggers an
+  // uncatchable rebuild, and only strip "breakpoints" from a display that
+  // actually fails to save because of it. A display whose component still
+  // legitimately defines and uses "breakpoints" (e.g. a site that kept
+  // blazy/slick installed and configured) saves successfully on the first
+  // try and is never touched.
+  foreach (['entity_view_display', 'entity_form_display'] as $entity_type_id) {
+    $config_prefix = "core.$entity_type_id.media.";
+    $storage = \Drupal::entityTypeManager()->getStorage($entity_type_id);
+    foreach (\Drupal::configFactory()->listAll($config_prefix) as $config_name) {
+      $display = $storage->load(substr($config_name, strlen("core.$entity_type_id.")));
+      if (!$display) {
+        continue;
+      }
+      try {
+        $display->save();
+      }
+      catch (\InvalidArgumentException $e) {
+        if (!str_contains($e->getMessage(), 'breakpoints')) {
+          throw $e;
         }
-        foreach ($value as $key => $sub_value) {
-          $sub_path = $path === '' ? (string) $key : $path . '.' . $key;
-          if ($key === 'breakpoints') {
-            $hits[] = $sub_path;
+        foreach ($display->get('content') as $field_name => $component) {
+          if (is_array($component) && array_key_exists('breakpoints', $component['settings'] ?? [])) {
+            unset($component['settings']['breakpoints']);
+            $display->setComponent($field_name, $component);
           }
-          $walker($sub_value, $sub_path);
         }
-      };
-      $walker($data, '');
-      if ($hits) {
-        \Drupal::logger('thunder')->notice('DEBUG @name has breakpoints at: @hits', [
-          '@name' => $config_name,
-          '@hits' => implode(', ', $hits),
-        ]);
+        $display->save();
       }
     }
   }
@@ -308,8 +297,6 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): string {
   }
   catch (\Exception $e) {
     \Drupal::logger('thunder')->warning('Could not import the "field_digital_source_type" field: @message', ['@message' => $e->getMessage()]);
-    // @todo DEBUG remove before merging.
-    \Drupal::logger('thunder')->warning('DEBUG trace: @trace', ['@trace' => $e->getTraceAsString()]);
   }
 
   return $updater->logger()->output();
