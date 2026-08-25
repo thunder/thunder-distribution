@@ -11,7 +11,7 @@ use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides GET filters for the AI prompt admin listing.
+ * Provides GET filters for the AI prompt admin listing page.
  */
 final class AIPromptListFilterForm extends FormBase {
 
