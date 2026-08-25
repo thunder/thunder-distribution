@@ -5,11 +5,6 @@ __global_actions:
 core.entity_form_display.media.image.default:
   expected_config: {}
   update_actions:
-    delete:
-      content:
-        field_image:
-          settings:
-            breakpoints: {}
     add:
       content:
         field_digital_source_type:
