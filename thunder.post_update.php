@@ -248,11 +248,28 @@ function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?Tr
  * Add "Edited with AI" and "Created with AI" fields to image media.
  */
 function thunder_post_update_0007_add_ai_fields_to_image_media(): string {
+  // Remove a stale image-crop "breakpoints" widget setting left over from a
+  // much older Thunder release, on sites that still carry it. It fails
+  // schema validation as soon as anything resaves the display - including
+  // the field import below, which normally happens first - so it has to be
+  // cleaned up before the update definition runs, not via its "delete"
+  // action.
+  foreach (['media.image.default', 'media.image.bulk_edit', 'media.image.media_library'] as $form_display_id) {
+    $form_display = EntityFormDisplay::load($form_display_id);
+    if (!$form_display) {
+      continue;
+    }
+    $component = $form_display->getComponent('field_image');
+    if ($component && array_key_exists('breakpoints', $component['settings'] ?? [])) {
+      unset($component['settings']['breakpoints']);
+      $form_display->setComponent('field_image', $component)->save();
+    }
+  }
+
   /** @var \Drupal\update_helper\Updater $updater */
   $updater = \Drupal::service('update_helper.updater');
 
-  // Import the field, place its widget, and remove a stale blazy/slick
-  // "breakpoints" setting that would otherwise break the display resave.
+  // Import the field and place its widget.
   try {
     $updater->executeUpdate('thunder', 'thunder_post_update_0007_add_ai_fields_to_image_media');
   }
