@@ -273,6 +273,11 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): string {
       try {
         $display->save();
       }
+      // Schema casting deep inside Config::save() throws this for a
+      // component setting the active schema no longer defines; PHPStan
+      // cannot trace that dynamic call chain, so it wrongly reports the
+      // catch as dead.
+      // @phpstan-ignore-next-line
       catch (\InvalidArgumentException $e) {
         if (!str_contains($e->getMessage(), 'breakpoints')) {
           throw $e;
