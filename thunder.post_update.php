@@ -260,14 +260,42 @@ function thunder_post_update_0007_add_ai_fields_to_image_media(): string {
       continue;
     }
     $component = $form_display->getComponent('field_image');
-    // @todo DEBUG remove before merging.
-    \Drupal::logger('thunder')->notice('DEBUG @id field_image component before cleanup: @data', [
-      '@id' => $form_display_id,
-      '@data' => json_encode($component),
-    ]);
     if ($component && array_key_exists('breakpoints', $component['settings'] ?? [])) {
       unset($component['settings']['breakpoints']);
       $form_display->setComponent('field_image', $component)->save();
+    }
+  }
+
+  // @todo DEBUG remove before merging.
+  // The field import below triggers Drupal core's EntityDisplayRebuilder,
+  // which resaves *every* form/view display for the "media" entity type
+  // (all bundles, not just "image"). Find any display whose stored data
+  // still contains a stray "breakpoints" key anywhere, on any bundle, so we
+  // know exactly which legacy display needs cleaning up.
+  $config_factory = \Drupal::configFactory();
+  foreach (['core.entity_view_display.media.', 'core.entity_form_display.media.'] as $prefix) {
+    foreach ($config_factory->listAll($prefix) as $config_name) {
+      $data = $config_factory->get($config_name)->getRawData();
+      $hits = [];
+      $walker = function ($value, $path) use (&$walker, &$hits) {
+        if (!is_array($value)) {
+          return;
+        }
+        foreach ($value as $key => $sub_value) {
+          $sub_path = $path === '' ? (string) $key : $path . '.' . $key;
+          if ($key === 'breakpoints') {
+            $hits[] = $sub_path;
+          }
+          $walker($sub_value, $sub_path);
+        }
+      };
+      $walker($data, '');
+      if ($hits) {
+        \Drupal::logger('thunder')->notice('DEBUG @name has breakpoints at: @hits', [
+          '@name' => $config_name,
+          '@hits' => implode(', ', $hits),
+        ]);
+      }
     }
   }
 
