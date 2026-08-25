@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Drupal\thunder_ai_prompt_management;
 
 use Drupal\Core\Cache\CacheableMetadata;
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Routing\RouteProviderInterface;
 use Drupal\Core\Url;
@@ -24,12 +24,12 @@ final class AIPromptListBuilder extends EntityListBuilder {
 
   public function __construct(
     EntityTypeInterface $entity_type,
-    EntityStorageInterface $storage,
-    protected readonly FormBuilderInterface $formBuilder,
-    protected readonly RequestStack $requestStack,
-    protected readonly RouteProviderInterface $routeProvider,
+    EntityTypeManagerInterface $entityTypeManager,
+    protected FormBuilderInterface $formBuilder,
+    protected RequestStack $requestStack,
+    protected RouteProviderInterface $routeProvider,
   ) {
-    parent::__construct($entity_type, $storage);
+    parent::__construct($entity_type, $entityTypeManager->getStorage($entity_type->id()));
   }
 
   /**
@@ -42,10 +42,12 @@ final class AIPromptListBuilder extends EntityListBuilder {
     $request_stack = $container->get('request_stack');
     /** @var \Drupal\Core\Routing\RouteProviderInterface $route_provider */
     $route_provider = $container->get('router.route_provider');
+    /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
+    $entity_type_manager = $container->get('entity_type.manager');
 
     return new static(
       $entity_type,
-      $container->get('entity_type.manager')->getStorage($entity_type->id()),
+      $entity_type_manager,
       $form_builder,
       $request_stack,
       $route_provider,
