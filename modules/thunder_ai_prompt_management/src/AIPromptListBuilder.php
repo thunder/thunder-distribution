@@ -6,7 +6,7 @@ namespace Drupal\thunder_ai_prompt_management;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Form\FormBuilderInterface;
@@ -36,8 +36,8 @@ final class AIPromptListBuilder extends EntityListBuilder {
   /**
    * Constructs a new AIPromptListBuilder.
    */
-  public function __construct(EntityTypeInterface $entity_type, EntityTypeManagerInterface $entity_type_manager, FormBuilderInterface $form_builder, RequestStack $request_stack) {
-    parent::__construct($entity_type, $entity_type_manager->getStorage($entity_type->id()));
+  public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage, FormBuilderInterface $form_builder, RequestStack $request_stack) {
+    parent::__construct($entity_type, $storage);
     $this->formBuilder = $form_builder;
     $this->requestStack = $request_stack;
   }
@@ -46,8 +46,6 @@ final class AIPromptListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type): self {
-    $entity_type_manager = $container->get('entity_type.manager');
-    assert($entity_type_manager instanceof EntityTypeManagerInterface);
     $form_builder = $container->get('form_builder');
     assert($form_builder instanceof FormBuilderInterface);
     $request_stack = $container->get('request_stack');
@@ -55,7 +53,7 @@ final class AIPromptListBuilder extends EntityListBuilder {
 
     return new static(
       $entity_type,
-      $entity_type_manager,
+      $container->get('entity_type.manager')->getStorage($entity_type->id()),
       $form_builder,
       $request_stack,
     );

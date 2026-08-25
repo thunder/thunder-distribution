@@ -1,12 +1,7 @@
 services:
   thunder_ai_prompt_management.entity_context_prompt_builder:
     class: Drupal\thunder_ai_prompt_management\EntityContextPromptBuilder
-    autowire: false
-    arguments:
-      $schemaBuilder: '@?entity_blueprint.schema_builder'
-      $serializer: '@?entity_blueprint.serializer'
-      $entityFieldManager: '@entity_field.manager'
-      $token: '@token'
+    autowire: true
   thunder_ai_prompt_management.prompt_runner:
     class: Drupal\thunder_ai_prompt_management\AIPromptRunner
     autowire: true
