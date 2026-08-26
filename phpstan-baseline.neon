@@ -11,11 +11,6 @@ parameters:
 			path: modules/thunder_taxonomy/src/ThunderTermAccessControlHandler.php
 
 		-
-			message: "#^Class Drupal\\\\thunder_ai_prompt_management\\\\ThunderPromptSource implements unknown interface Drupal\\\\ai_chatbot_assistant_ui\\\\PromptSourceInterface\\.$#"
-			count: 1
-			path: modules/thunder_ai_prompt_management/src/ThunderPromptSource.php
-
-		-
 			message: "#^Access to an undefined property Drupal\\\\Core\\\\Extension\\\\Extension\\:\\:\\$requires\\.$#"
 			count: 1
 			path: src/Installer/Form/ModuleConfigureForm.php
