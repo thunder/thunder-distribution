@@ -23,12 +23,17 @@ class ThunderPromptSourceTest extends KernelTestBase {
   protected static $modules = [
     'system',
     'user',
+    'field',
+    'text',
+    'filter',
+    'entity_test',
     'key',
     'file',
     'ai',
     'ai_test',
     'ai_assistant_api',
     'ai_chatbot_assistant_ui',
+    'entity_blueprint',
     'thunder_ai_prompt_management',
   ];
 
