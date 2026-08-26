@@ -179,7 +179,7 @@ final class ThunderPromptSource implements PromptSourceInterface {
     }
     $contexts = [];
     foreach ($prompt->get('entity_context') as $item) {
-      $value = (string) $item->value;
+      $value = (string) $item->getValue()['value'];
       if ($value !== '') {
         $contexts[] = $value;
       }

@@ -115,7 +115,7 @@ class ThunderPromptSourceTest extends KernelTestBase {
   }
 
   /**
-   * getSlashGroups() adds the prompt's and its task's cache tags.
+   * GetSlashGroups() adds the prompt's and its task's cache tags.
    */
   public function testSlashGroupsCacheability(): void {
     $this->createTask('seo', 'SEO');
