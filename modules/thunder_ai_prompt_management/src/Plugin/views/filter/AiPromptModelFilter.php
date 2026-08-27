@@ -34,7 +34,7 @@ final class AiPromptModelFilter extends InOperator {
    * {@inheritdoc}
    */
   public function getValueOptions(): array {
-    if (!isset($this->valueOptions)) {
+    if ($this->valueOptions === NULL) {
       $models = $this->database->select('ai_prompt_content', 'a')
         ->fields('a', ['model'])
         ->distinct()

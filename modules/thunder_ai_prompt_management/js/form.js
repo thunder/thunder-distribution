@@ -64,7 +64,7 @@
             return;
           }
           const container = sticky.closest('.gin-sticky-form-actions');
-          let spinner = container?.querySelector(':scope > .ai-prompt-test-form-spinner');
+          let spinner = container && container.querySelector(':scope > .ai-prompt-test-form-spinner');
           if (container && !spinner) {
             spinner = document.createElement('span');
             spinner.className = 'ai-prompt-test-form-spinner';
@@ -73,7 +73,9 @@
           }
           const observer = new MutationObserver(() => {
             sticky.disabled = button.disabled;
-            spinner?.classList.toggle('is-active', button.disabled);
+            if (spinner) {
+              spinner.classList.toggle('is-active', button.disabled);
+            }
           });
           observer.observe(button, { attributes: true, attributeFilter: ['disabled'] });
         });
