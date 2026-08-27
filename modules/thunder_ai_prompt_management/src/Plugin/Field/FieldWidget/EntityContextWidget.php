@@ -12,6 +12,7 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\thunder_ai_prompt_management\EntityContext;
 
 /**
  * Plugin implementation of the 'entity_context' widget.
@@ -101,7 +102,7 @@ final class EntityContextWidget extends WidgetBase implements ContainerFactoryPl
     foreach ($values as $type_id => $group) {
       $checked = array_filter($group['options'] ?? []);
       foreach ($checked as $bundle_id) {
-        $items[] = ['value' => $type_id . '.' . $bundle_id];
+        $items[] = ['value' => EntityContext::encode($type_id, $bundle_id)];
       }
     }
     return $items;
@@ -117,26 +118,11 @@ final class EntityContextWidget extends WidgetBase implements ContainerFactoryPl
    *   Map of entity type ID to selected bundle keys ('*' for all bundles).
    */
   protected function currentSelections(FieldItemListInterface $items): array {
-    $selected = [];
+    $values = [];
     foreach ($items as $item) {
-      [$type_id, $bundle_id] = self::decodeContext((string) $item->getValue()['value']);
-      $selected[$type_id][] = $bundle_id;
+      $values[] = (string) $item->getValue()['value'];
     }
-    return $selected;
-  }
-
-  /**
-   * Splits a stored "type.bundle" value into its parts.
-   *
-   * @param string $value
-   *   A value in the format produced by massageFormValues(): "type.bundle",
-   *   with "*" for the bundle meaning every bundle of that entity type.
-   *
-   * @return array{0: string, 1: string}
-   *   The entity type ID and bundle key.
-   */
-  public static function decodeContext(string $value): array {
-    return array_pad(explode('.', $value, 2), 2, '*');
+    return EntityContext::groupByType($values);
   }
 
   /**

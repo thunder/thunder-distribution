@@ -18,6 +18,7 @@ use Drupal\field_widget_actions\Attribute\FieldWidgetAction;
 use Drupal\field_widget_actions\FieldWidgetActionBase;
 use Drupal\thunder_ai_prompt_management\AIPromptInterface;
 use Drupal\thunder_ai_prompt_management\AIPromptRunner;
+use Drupal\thunder_ai_prompt_management\EntityContext;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -271,11 +272,7 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
     $entityTypeId = $fieldDefinition->getTargetEntityTypeId();
     // Base fields report no target bundle, so fall back to the entity.
     $bundle = $fieldDefinition->getTargetBundle() ?? $entity?->bundle();
-    // "*" means every bundle - see EntityContextWidget::massageFormValues().
-    $contexts = [$entityTypeId . '.*'];
-    if ($bundle) {
-      $contexts[] = $entityTypeId . '.' . $bundle;
-    }
+    $contexts = EntityContext::candidates($entityTypeId, $bundle ?: NULL);
 
     $cacheKey = $task . ':' . implode(',', $contexts);
     if (isset($this->promptsCache[$cacheKey])) {

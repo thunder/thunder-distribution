@@ -174,21 +174,11 @@ final class ThunderPromptSource implements PromptSourceInterface {
    *   Whether the prompt applies.
    */
   private function matchesContext(AIPrompt $prompt, ?string $entityType, ?string $bundle): bool {
-    if ($entityType === NULL || $bundle === NULL) {
-      return TRUE;
-    }
-    $contexts = [];
+    $values = [];
     foreach ($prompt->get('entity_context') as $item) {
-      $value = (string) $item->getValue()['value'];
-      if ($value !== '') {
-        $contexts[] = $value;
-      }
+      $values[] = (string) $item->getValue()['value'];
     }
-    if (!$contexts) {
-      return TRUE;
-    }
-    return in_array($entityType . '.*', $contexts, TRUE)
-      || in_array($entityType . '.' . $bundle, $contexts, TRUE);
+    return EntityContext::matches($values, $entityType, $bundle);
   }
 
 }

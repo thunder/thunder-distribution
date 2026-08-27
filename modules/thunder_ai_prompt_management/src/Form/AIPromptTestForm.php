@@ -12,7 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\ai\AiProviderPluginManager;
 use Drupal\thunder_ai_prompt_management\AIPromptInterface;
 use Drupal\thunder_ai_prompt_management\AIPromptRunner;
-use Drupal\thunder_ai_prompt_management\Plugin\Field\FieldWidget\EntityContextWidget;
+use Drupal\thunder_ai_prompt_management\EntityContext;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 /**
@@ -153,12 +153,11 @@ final class AIPromptTestForm extends FormBase {
    *   Map of entity type ID to allowed bundle keys ('*' for all bundles).
    */
   private function allowedContexts(AIPromptInterface $prompt): array {
-    $contexts = [];
+    $values = [];
     foreach ($prompt->get('entity_context') as $item) {
-      [$type_id, $bundle_id] = EntityContextWidget::decodeContext($item->getString());
-      $contexts[$type_id][] = $bundle_id;
+      $values[] = $item->getString();
     }
-    return $contexts;
+    return EntityContext::groupByType($values);
   }
 
   /**
