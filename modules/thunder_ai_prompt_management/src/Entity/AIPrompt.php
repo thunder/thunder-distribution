@@ -198,7 +198,7 @@ class AIPrompt extends EditorialContentEntityBase implements AIPromptInterface {
       ->setDisplayOptions('form', [
         'type' => 'string_textarea',
         'weight' => -5,
-        'rows' => 5,
+        'rows' => 10,
       ])
       ->setDisplayConfigurable('form', TRUE);
 

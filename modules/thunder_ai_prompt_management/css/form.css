@@ -128,7 +128,6 @@ fieldset.entity-context-widget {
   border-radius: var(--gin-border-m, 8px);
   overflow: auto;
   background-color: var(--gin-bg-input, #fff);
-  white-space: pre-wrap;
   word-break: break-word;
 }
 

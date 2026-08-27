@@ -58,7 +58,7 @@ content:
     weight: -3
     region: content
     settings:
-      rows: 5
+      rows: 10
       placeholder: ''
     third_party_settings: {  }
   entity_context:

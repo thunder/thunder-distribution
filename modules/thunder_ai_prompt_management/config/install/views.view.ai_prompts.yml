@@ -147,7 +147,7 @@ display:
           entity_type: ai_prompt_content
           entity_field: ai_task
           plugin_id: field
-          label: 'Prompt type'
+          label: 'AI Task'
           exclude: false
           alter:
             alter_text: false
@@ -566,7 +566,7 @@ display:
           exposed: true
           expose:
             operator_id: ''
-            label: 'Prompt type'
+            label: 'AI Task'
             description: ''
             use_operator: false
             operator: ai_task_op

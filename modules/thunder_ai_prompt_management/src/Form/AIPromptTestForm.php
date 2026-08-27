@@ -9,10 +9,13 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Markup;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\ai\AiProviderPluginManager;
 use Drupal\thunder_ai_prompt_management\AIPromptInterface;
 use Drupal\thunder_ai_prompt_management\AIPromptRunner;
 use Drupal\thunder_ai_prompt_management\EntityContext;
+use League\CommonMark\CommonMarkConverter;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 /**
@@ -35,6 +38,13 @@ final class AIPromptTestForm extends FormBase {
    */
   public function getFormId(): string {
     return 'thunder_ai_prompt_management_test_form';
+  }
+
+  /**
+   * Route title callback.
+   */
+  public function title(AIPromptInterface $ai_prompt_content): TranslatableMarkup {
+    return $this->t('Test %label', ['%label' => $ai_prompt_content->label()]);
   }
 
   /**
@@ -62,7 +72,7 @@ final class AIPromptTestForm extends FormBase {
       '#description' => $this->t('Used as the system prompt. Edit freely to refine it, then save it back to the prompt when you are happy with it.'),
       '#default_value' => $ai_prompt_content->get('prompt')->value,
       '#required' => TRUE,
-      '#rows' => 5,
+      '#rows' => 10,
     ];
     $form['prompt_settings']['model'] = [
       '#type' => 'select',
@@ -123,8 +133,8 @@ final class AIPromptTestForm extends FormBase {
         '#open' => TRUE,
         'text' => [
           '#type' => 'inline_template',
-          '#template' => '<pre class="ai-prompt-test-form__response">{{ text }}</pre>',
-          '#context' => ['text' => $response],
+          '#template' => '<div class="ai-prompt-test-form__response">{{ text }}</div>',
+          '#context' => ['text' => Markup::create((new CommonMarkConverter())->convert($response))],
         ],
       ];
     }
