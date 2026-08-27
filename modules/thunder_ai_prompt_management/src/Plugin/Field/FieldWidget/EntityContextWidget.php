@@ -46,7 +46,7 @@ final class EntityContextWidget extends WidgetBase implements ContainerFactoryPl
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state): array {
-    $selected = $this->currentSelections($items);
+    $selected = EntityContext::groupByType(EntityContext::valuesFromField($items));
 
     // A fieldset, so that #title and #description are rendered.
     $element['#type'] = 'fieldset';
@@ -105,19 +105,6 @@ final class EntityContextWidget extends WidgetBase implements ContainerFactoryPl
       }
     }
     return $items;
-  }
-
-  /**
-   * Parses the stored field values into a type -> selected bundle keys map.
-   *
-   * @param \Drupal\Core\Field\FieldItemListInterface $items
-   *   The field items.
-   *
-   * @return array<string, string[]>
-   *   Map of entity type ID to selected bundle keys ('*' for all bundles).
-   */
-  protected function currentSelections(FieldItemListInterface $items): array {
-    return EntityContext::groupByType(EntityContext::valuesFromField($items));
   }
 
   /**

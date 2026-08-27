@@ -68,7 +68,8 @@ final class AIPromptTestForm extends FormBase {
       '#title' => $this->t('Test context'),
       '#tree' => FALSE,
     ];
-    foreach ($this->allowedContexts($ai_prompt_content) as $type_id => $bundles) {
+    $values = EntityContext::valuesFromField($ai_prompt_content->get('entity_context'));
+    foreach (EntityContext::groupByType($values) as $type_id => $bundles) {
       $definition = $this->entityTypeManager->getDefinition($type_id, FALSE);
       if (!$definition) {
         continue;
@@ -147,20 +148,11 @@ final class AIPromptTestForm extends FormBase {
   }
 
   /**
-   * Groups the prompt's entity_context values by entity type.
-   *
-   * @return array<string, string[]>
-   *   Map of entity type ID to allowed bundle keys ('*' for all bundles).
-   */
-  private function allowedContexts(AIPromptInterface $prompt): array {
-    return EntityContext::groupByType(EntityContext::valuesFromField($prompt->get('entity_context')));
-  }
-
-  /**
    * Resolves the entity picked in whichever context selector was filled in.
    */
   private function resolveEntity(FormStateInterface $form_state, AIPromptInterface $prompt): ?ContentEntityInterface {
-    foreach (array_keys($this->allowedContexts($prompt)) as $type_id) {
+    $values = EntityContext::valuesFromField($prompt->get('entity_context'));
+    foreach (array_keys(EntityContext::groupByType($values)) as $type_id) {
       $id = $form_state->getValue('entity_' . $type_id);
       if (empty($id)) {
         continue;

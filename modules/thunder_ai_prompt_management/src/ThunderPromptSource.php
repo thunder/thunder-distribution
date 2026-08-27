@@ -36,7 +36,8 @@ final class ThunderPromptSource implements PromptSourceInterface {
 
     $by_task = [];
     foreach ($this->publishedPrompts() as $prompt) {
-      if (!$this->matchesContext($prompt, $entityType, $bundle)) {
+      $values = EntityContext::valuesFromField($prompt->get('entity_context'));
+      if (!EntityContext::matches($values, $entityType, $bundle)) {
         continue;
       }
       $cacheability->addCacheableDependency($prompt);
@@ -90,7 +91,8 @@ final class ThunderPromptSource implements PromptSourceInterface {
       if (!$prompt instanceof AIPrompt || !$prompt->isPublished()) {
         continue;
       }
-      if (!$this->matchesContext($prompt, $entityType, $bundle)) {
+      $values = EntityContext::valuesFromField($prompt->get('entity_context'));
+      if (!EntityContext::matches($values, $entityType, $bundle)) {
         continue;
       }
       $cacheability->addCacheableDependency($prompt);
@@ -156,25 +158,6 @@ final class ThunderPromptSource implements PromptSourceInterface {
       static fn ($prompt): bool => $prompt instanceof AIPrompt,
     );
     return $prompts;
-  }
-
-  /**
-   * Whether a prompt applies to the given entity type/bundle.
-   *
-   * Empty context matches everything; otherwise "type.*" or "type.bundle".
-   *
-   * @param \Drupal\thunder_ai_prompt_management\Entity\AIPrompt $prompt
-   *   The prompt.
-   * @param string|null $entityType
-   *   The entity type, or NULL to skip filtering.
-   * @param string|null $bundle
-   *   The bundle, or NULL to skip filtering.
-   *
-   * @return bool
-   *   Whether the prompt applies.
-   */
-  private function matchesContext(AIPrompt $prompt, ?string $entityType, ?string $bundle): bool {
-    return EntityContext::matches(EntityContext::valuesFromField($prompt->get('entity_context')), $entityType, $bundle);
   }
 
 }
