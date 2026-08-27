@@ -47,20 +47,19 @@ final class AIPromptForm extends ContentEntityForm {
       'link' => $this->entity->toLink($this->t('View'))->toString(),
     ];
 
-    switch ($result) {
-      case SAVED_NEW:
-        $this->messenger()->addStatus($this->t('New ai prompt %label has been created.', $message_args));
-        $this->logger('thunder_ai_prompt_management')->notice('New ai prompt %label has been created.', $logger_args);
-        break;
-
-      case SAVED_UPDATED:
-        $this->messenger()->addStatus($this->t('The ai prompt %label has been updated.', $message_args));
-        $this->logger('thunder_ai_prompt_management')->notice('The ai prompt %label has been updated.', $logger_args);
-        break;
-
-      default:
-        throw new \LogicException('Could not save the entity.');
-    }
+    [$status_message, $log_message] = match ($result) {
+      SAVED_NEW => [
+        $this->t('New ai prompt %label has been created.', $message_args),
+        'New ai prompt %label has been created.',
+      ],
+      SAVED_UPDATED => [
+        $this->t('The ai prompt %label has been updated.', $message_args),
+        'The ai prompt %label has been updated.',
+      ],
+      default => throw new \LogicException('Could not save the entity.'),
+    };
+    $this->messenger()->addStatus($status_message);
+    $this->logger('thunder_ai_prompt_management')->notice($log_message, $logger_args);
 
     $form_state->setRedirectUrl($this->entity->toUrl('collection'));
 

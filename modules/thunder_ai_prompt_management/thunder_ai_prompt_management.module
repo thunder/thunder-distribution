@@ -5,6 +5,8 @@
  * Hook implementations for the thunder_ai_prompt_management module.
  */
 
+declare(strict_types=1);
+
 /**
  * Implements hook_gin_content_form_routes_alter().
  *

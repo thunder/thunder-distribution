@@ -1,7 +1,7 @@
 name: 'Thunder ai prompt management'
 type: module
-description: '@todo Add description.'
-package: '@todo Add package'
+description: 'Manage reusable AI prompts, grouped by task, for content editing suggestions and the AI chatbot assistant.'
+package: 'Thunder Optional'
 core_version_requirement: ^10 || ^11
 dependencies:
   - ai:ai

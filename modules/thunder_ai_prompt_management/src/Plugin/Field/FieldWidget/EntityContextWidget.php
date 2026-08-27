@@ -118,11 +118,7 @@ final class EntityContextWidget extends WidgetBase implements ContainerFactoryPl
    *   Map of entity type ID to selected bundle keys ('*' for all bundles).
    */
   protected function currentSelections(FieldItemListInterface $items): array {
-    $values = [];
-    foreach ($items as $item) {
-      $values[] = (string) $item->getValue()['value'];
-    }
-    return EntityContext::groupByType($values);
+    return EntityContext::groupByType(EntityContext::valuesFromField($items));
   }
 
   /**

@@ -12,7 +12,7 @@ use Drupal\Core\DependencyInjection\ServiceModifierInterface;
  *
  * Via alter(), not a services.yml override, to avoid a hard dependency.
  */
-class ThunderAiPromptManagementServiceProvider implements ServiceModifierInterface {
+final class ThunderAiPromptManagementServiceProvider implements ServiceModifierInterface {
 
   /**
    * {@inheritdoc}

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Drupal\thunder_ai_prompt_management;
 
+use Drupal\Core\Field\FieldItemListInterface;
+
 /**
  * Encodes, decodes, and matches "entity_context" field values.
  *
@@ -11,6 +13,23 @@ namespace Drupal\thunder_ai_prompt_management;
  * "{entity_type_id}.*" to match every bundle of that entity type.
  */
 final class EntityContext {
+
+  /**
+   * Extracts the raw stored values from an entity_context field.
+   *
+   * @param \Drupal\Core\Field\FieldItemListInterface $items
+   *   The entity_context field items.
+   *
+   * @return string[]
+   *   The raw stored values.
+   */
+  public static function valuesFromField(FieldItemListInterface $items): array {
+    $values = [];
+    foreach ($items as $item) {
+      $values[] = (string) $item->getValue()['value'];
+    }
+    return $values;
+  }
 
   /**
    * Builds a stored value from an entity type and bundle.

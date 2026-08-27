@@ -153,11 +153,7 @@ final class AIPromptTestForm extends FormBase {
    *   Map of entity type ID to allowed bundle keys ('*' for all bundles).
    */
   private function allowedContexts(AIPromptInterface $prompt): array {
-    $values = [];
-    foreach ($prompt->get('entity_context') as $item) {
-      $values[] = $item->getString();
-    }
-    return EntityContext::groupByType($values);
+    return EntityContext::groupByType(EntityContext::valuesFromField($prompt->get('entity_context')));
   }
 
   /**
