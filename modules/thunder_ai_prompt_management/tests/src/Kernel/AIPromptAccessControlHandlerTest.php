@@ -13,7 +13,7 @@ use Drupal\user\Entity\User;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
- * Tests the access control handler for the ai prompt entity.
+ * Tests the access control handler for the AI prompt entity.
  *
  * @coversDefaultClass \Drupal\thunder_ai_prompt_management\AIPromptAccessControlHandler
  * @group Thunder
@@ -74,10 +74,10 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
   }
 
   /**
-   * Creates an ai task config entity.
+   * Creates an AI task config entity.
    *
    * @return \Drupal\thunder_ai_prompt_management\Entity\AiTask
-   *   The created ai task.
+   *   The created AI task.
    */
   protected function createTask(): AiTask {
     $task = AiTask::create([
@@ -90,13 +90,13 @@ class AIPromptAccessControlHandlerTest extends KernelTestBase {
   }
 
   /**
-   * Creates an ai prompt owned by the given user.
+   * Creates an AI prompt owned by the given user.
    *
    * @param int $owner_id
    *   The owner user ID.
    *
    * @return \Drupal\thunder_ai_prompt_management\Entity\AIPrompt
-   *   The created ai prompt.
+   *   The created AI prompt.
    */
   protected function createPrompt(int $owner_id): AIPrompt {
     $prompt = AIPrompt::create([

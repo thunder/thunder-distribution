@@ -4,7 +4,7 @@ dependencies:
   module:
     - thunder_ai_prompt_management
 id: ai_prompt_content_save_action
-label: 'Save ai prompts'
+label: 'Save AI prompts'
 type: ai_prompt_content
 plugin: entity:save_action:ai_prompt_content
 configuration: {  }

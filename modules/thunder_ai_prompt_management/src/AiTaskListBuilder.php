@@ -8,7 +8,7 @@ use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
 
 /**
- * Provides a listing of ai tasks.
+ * Provides a listing of AI tasks.
  */
 final class AiTaskListBuilder extends ConfigEntityListBuilder {
 

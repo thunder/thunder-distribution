@@ -1,11 +1,11 @@
 ai_prompt_content.add_form:
-  title: 'Add ai prompt'
+  title: 'Add AI prompt'
   route_name: entity.ai_prompt_content.add_form
   appears_on:
     - entity.ai_prompt_content.collection
 
 entity.ai_task.add_form:
   route_name: 'entity.ai_task.add_form'
-  title: 'Add ai task'
+  title: 'Add AI task'
   appears_on:
     - entity.ai_task.collection

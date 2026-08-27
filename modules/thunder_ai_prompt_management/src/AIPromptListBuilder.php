@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 /**
- * Supplies row operations for the ai prompt entity type.
+ * Supplies row operations for the AI prompt entity type.
  *
  * The admin listing itself is the "AI Prompts" view (views.view.ai_prompts);
  * this handler only backs its "Operations" bulk-form/entity_operations field
@@ -55,7 +55,7 @@ final class AIPromptListBuilder extends EntityListBuilder {
 
     if ($entity->access('update') && $this->isTestRouteAvailable()) {
       $operations['test'] = [
-        'title' => $this->t('Test prompt'),
+        'title' => $this->t('Test'),
         'weight' => 15,
         'url' => Url::fromRoute('entity.ai_prompt_content.test_form', ['ai_prompt_content' => $entity->id()]),
       ];

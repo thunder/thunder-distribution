@@ -1,11 +1,11 @@
 entity.ai_prompt_content.collection:
   title: 'AI Prompts'
-  description: 'List of ai prompts.'
+  description: 'List of AI prompts.'
   route_name: entity.ai_prompt_content.collection
   parent: system.admin_content
 
 entity.ai_task.overview:
-  title: AiTasks
+  title: 'AI Tasks'
   parent: system.admin_structure
-  description: 'List of ai tasks to extend site functionality.'
+  description: 'List of AI tasks to extend site functionality.'
   route_name: entity.ai_task.collection

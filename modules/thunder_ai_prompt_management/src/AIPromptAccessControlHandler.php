@@ -10,7 +10,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 
 /**
- * Access controller for the ai prompt entity.
+ * Access controller for the AI prompt entity.
  *
  * @see \Drupal\thunder_ai_prompt_management\Entity\AIPrompt
  */

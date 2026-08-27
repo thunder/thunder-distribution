@@ -14,7 +14,7 @@ entity.ai_task.collection:
   path: '/admin/structure/ai-task'
   defaults:
     _entity_list: 'ai_task'
-    _title: 'AiTask configuration'
+    _title: 'AI Task configuration'
   requirements:
     _permission: 'administer ai_task'
 
@@ -22,7 +22,7 @@ entity.ai_task.add_form:
   path: '/admin/structure/ai_task/add'
   defaults:
     _entity_form: 'ai_task.add'
-    _title: 'Add an ai task'
+    _title: 'Add an AI task'
   requirements:
     _permission: 'administer ai_task'
 
@@ -30,7 +30,7 @@ entity.ai_task.edit_form:
   path: '/admin/structure/ai-task/{ai_task}'
   defaults:
     _entity_form: 'ai_task.edit'
-    _title: 'Edit an ai task'
+    _title: 'Edit an AI task'
   requirements:
     _permission: 'administer ai_task'
 
@@ -38,6 +38,6 @@ entity.ai_task.delete_form:
   path: '/admin/structure/ai-task/{ai_task}/delete'
   defaults:
     _entity_form: 'ai_task.delete'
-    _title: 'Delete an ai task'
+    _title: 'Delete an AI task'
   requirements:
     _permission: 'administer ai_task'

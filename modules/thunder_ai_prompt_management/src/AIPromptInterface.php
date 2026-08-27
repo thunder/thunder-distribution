@@ -10,7 +10,7 @@ use Drupal\Core\Entity\EntityPublishedInterface;
 use Drupal\user\EntityOwnerInterface;
 
 /**
- * Provides an interface defining an ai prompt entity type.
+ * Provides an interface defining an AI prompt entity type.
  */
 interface AIPromptInterface extends ContentEntityInterface, EntityOwnerInterface, EntityChangedInterface, EntityPublishedInterface {
 

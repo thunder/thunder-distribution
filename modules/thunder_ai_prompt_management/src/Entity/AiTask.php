@@ -13,14 +13,14 @@ use Drupal\thunder_ai_prompt_management\AiTaskListBuilder;
 use Drupal\thunder_ai_prompt_management\Form\AiTaskForm;
 
 /**
- * Defines the ai task entity type.
+ * Defines the AI task entity type.
  */
 #[ConfigEntityType(
   id: 'ai_task',
-  label: new TranslatableMarkup('AiTask'),
-  label_collection: new TranslatableMarkup('AiTasks'),
-  label_singular: new TranslatableMarkup('ai task'),
-  label_plural: new TranslatableMarkup('ai tasks'),
+  label: new TranslatableMarkup('AI Task'),
+  label_collection: new TranslatableMarkup('AI Tasks'),
+  label_singular: new TranslatableMarkup('AI task'),
+  label_plural: new TranslatableMarkup('AI tasks'),
   config_prefix: 'ai_task',
   entity_keys: [
     'id' => 'id',
@@ -43,8 +43,8 @@ use Drupal\thunder_ai_prompt_management\Form\AiTaskForm;
   ],
   admin_permission: 'administer ai_task',
   label_count: [
-    'singular' => '@count ai task',
-    'plural' => '@count ai tasks',
+    'singular' => '@count AI task',
+    'plural' => '@count AI tasks',
   ],
   config_export: [
     'id',

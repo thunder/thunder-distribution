@@ -17,7 +17,7 @@ use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 /**
- * Form controller for the ai prompt entity edit forms.
+ * Form controller for the AI prompt entity edit forms.
  */
 final class AIPromptForm extends ContentEntityForm {
 
@@ -49,12 +49,12 @@ final class AIPromptForm extends ContentEntityForm {
 
     [$status_message, $log_message] = match ($result) {
       SAVED_NEW => [
-        $this->t('New ai prompt %label has been created.', $message_args),
-        'New ai prompt %label has been created.',
+        $this->t('New AI prompt %label has been created.', $message_args),
+        'New AI prompt %label has been created.',
       ],
       SAVED_UPDATED => [
-        $this->t('The ai prompt %label has been updated.', $message_args),
-        'The ai prompt %label has been updated.',
+        $this->t('The AI prompt %label has been updated.', $message_args),
+        'The AI prompt %label has been updated.',
       ],
       default => throw new \LogicException('Could not save the entity.'),
     };
@@ -76,7 +76,7 @@ final class AIPromptForm extends ContentEntityForm {
     $node = $this->entity;
 
     if (isset($form['ai_task']['widget'])) {
-      $form['ai_task']['widget']['#description'] = $this->t('The ai task this prompt is used for. Manage available tasks on the <a href=":url">AI Task configuration</a> page.', [
+      $form['ai_task']['widget']['#description'] = $this->t('The AI task this prompt is used for. Manage available tasks on the <a href=":url">AI Task configuration</a> page.', [
         ':url' => Url::fromRoute('entity.ai_task.collection')->toString(),
       ]);
     }

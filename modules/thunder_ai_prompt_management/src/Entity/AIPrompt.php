@@ -26,14 +26,14 @@ use Drupal\user\EntityOwnerTrait;
 use Drupal\views\EntityViewsData;
 
 /**
- * Defines the ai prompt entity class.
+ * Defines the AI prompt entity class.
  */
 #[ContentEntityType(
   id: 'ai_prompt_content',
   label: new TranslatableMarkup('AI Prompt'),
   label_collection: new TranslatableMarkup('AI Prompts'),
-  label_singular: new TranslatableMarkup('ai prompt'),
-  label_plural: new TranslatableMarkup('ai prompts'),
+  label_singular: new TranslatableMarkup('AI prompt'),
+  label_plural: new TranslatableMarkup('AI prompts'),
   entity_keys: [
     'id' => 'id',
     'revision' => 'revision_id',
@@ -77,8 +77,8 @@ use Drupal\views\EntityViewsData;
   revision_table: 'ai_prompt_content_revision',
   show_revision_ui: TRUE,
   label_count: [
-    'singular' => '@count ai prompts',
-    'plural' => '@count ai prompts',
+    'singular' => '@count AI prompt',
+    'plural' => '@count AI prompts',
   ],
   revision_metadata_keys: [
     'revision_user' => 'revision_uid',
@@ -173,7 +173,7 @@ class AIPrompt extends EditorialContentEntityBase implements AIPromptInterface {
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Authored on'))
-      ->setDescription(t('The time that the ai prompt was created.'))
+      ->setDescription(t('The time that the AI prompt was created.'))
       ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'timestamp',
@@ -188,7 +188,7 @@ class AIPrompt extends EditorialContentEntityBase implements AIPromptInterface {
 
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
-      ->setDescription(t('The time that the ai prompt was last edited.'));
+      ->setDescription(t('The time that the AI prompt was last edited.'));
 
     $fields['prompt'] = BaseFieldDefinition::create('string_long')
       ->setLabel(t('Prompt'))
@@ -204,7 +204,7 @@ class AIPrompt extends EditorialContentEntityBase implements AIPromptInterface {
 
     $fields['ai_task'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('AI Task'))
-      ->setDescription(t('The ai task this prompt is used for.'))
+      ->setDescription(t('The AI task this prompt is used for.'))
       ->setSetting('target_type', 'ai_task')
       ->setCardinality(1)
       ->setRevisionable(TRUE)

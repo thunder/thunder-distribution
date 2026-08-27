@@ -1,4 +1,4 @@
-name: 'Thunder ai prompt management'
+name: 'Thunder AI Prompt Management'
 type: module
 description: 'Manage reusable AI prompts, grouped by task, for content editing suggestions and the AI chatbot assistant.'
 package: 'Thunder Optional'

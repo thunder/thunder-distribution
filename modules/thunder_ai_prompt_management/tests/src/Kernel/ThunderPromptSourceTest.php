@@ -208,7 +208,7 @@ class ThunderPromptSourceTest extends KernelTestBase {
   }
 
   /**
-   * Creates an ai task config entity.
+   * Creates an AI task config entity.
    */
   private function createTask(string $id, string $label): void {
     AiTask::create([
@@ -219,7 +219,7 @@ class ThunderPromptSourceTest extends KernelTestBase {
   }
 
   /**
-   * Creates an ai prompt.
+   * Creates an AI prompt.
    */
   private function createPrompt(string $label, string $prompt, string $task, array $context = [], bool $published = TRUE): AIPrompt {
     $prompt = AIPrompt::create([

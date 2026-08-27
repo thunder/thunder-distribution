@@ -1,6 +1,6 @@
 thunder_ai_prompt_management.ai_task.*:
   type: config_entity
-  label: AiTask
+  label: 'AI Task'
   mapping:
     id:
       type: string
