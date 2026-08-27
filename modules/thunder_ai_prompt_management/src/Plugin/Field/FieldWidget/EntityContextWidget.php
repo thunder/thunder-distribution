@@ -7,25 +7,24 @@ namespace Drupal\thunder_ai_prompt_management\Plugin\Field\FieldWidget;
 use Drupal\Core\Entity\EditorialContentEntityBase;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Field\Attribute\FieldWidget;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\thunder_ai_prompt_management\EntityContext;
 
 /**
  * Plugin implementation of the 'entity_context' widget.
- *
- * @FieldWidget(
- *   id = "entity_context",
- *   label = @Translation("Entity context"),
- *   field_types = {
- *     "string"
- *   },
- *   multiple_values = TRUE
- * )
  */
+#[FieldWidget(
+  id: 'entity_context',
+  label: new TranslatableMarkup('Entity context'),
+  field_types: ['string'],
+  multiple_values: TRUE,
+)]
 final class EntityContextWidget extends WidgetBase implements ContainerFactoryPluginInterface {
 
   /**
