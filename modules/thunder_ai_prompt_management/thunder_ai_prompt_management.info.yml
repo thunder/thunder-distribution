@@ -5,6 +5,7 @@ package: 'Thunder Optional'
 core_version_requirement: ^10 || ^11
 dependencies:
   - ai:ai
+  - drupal:views
   - entity_blueprint:entity_blueprint
   - field_group:field_group
   - field_widget_actions:field_widget_actions
