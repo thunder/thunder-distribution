@@ -10,6 +10,7 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Render\Element\RenderElementBase;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
@@ -17,6 +18,7 @@ use Drupal\field_widget_actions\Attribute\FieldWidgetAction;
 use Drupal\field_widget_actions\FieldWidgetActionBase;
 use Drupal\thunder_ai_prompt_management\AIPromptInterface;
 use Drupal\thunder_ai_prompt_management\AIPromptRunner;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -44,21 +46,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 final class AiTaskSuggestion extends FieldWidgetActionBase {
 
   /**
-   * The entity type manager.
-   */
-  protected EntityTypeManagerInterface $entityTypeManager;
-
-  /**
-   * The current user.
-   */
-  protected AccountProxyInterface $currentUser;
-
-  /**
-   * The prompt runner.
-   */
-  protected AIPromptRunner $promptRunner;
-
-  /**
    * Per-request memoization of loadPrompts(), keyed by task/type/bundle.
    *
    * @var array<string, \Drupal\thunder_ai_prompt_management\AIPromptInterface[]>
@@ -68,12 +55,26 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
   /**
    * {@inheritdoc}
    */
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
+    MessengerInterface $messenger,
+    protected readonly EntityTypeManagerInterface $entityTypeManager,
+    protected readonly AccountProxyInterface $currentUser,
+    #[Autowire(service: 'thunder_ai_prompt_management.prompt_runner')]
+    protected readonly AIPromptRunner $promptRunner,
+  ) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $messenger);
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * FieldWidgetActionBase::create() doesn't autowire, so bypass it here.
+   */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
-    $instance->entityTypeManager = $container->get('entity_type.manager');
-    $instance->currentUser = $container->get('current_user');
-    $instance->promptRunner = $container->get('thunder_ai_prompt_management.prompt_runner');
-    return $instance;
+    return static::createInstanceAutowired($container, $configuration, $plugin_id, $plugin_definition);
   }
 
   /**
@@ -225,7 +226,7 @@ final class AiTaskSuggestion extends FieldWidgetActionBase {
       $entity->in_preview = TRUE;
     }
 
-    return $this->returnSuggestions($this->promptRunner->suggest($prompt, $entity), $selector);
+    return $this->returnSuggestions($this->promptRunner->suggest($prompt, $entity, ['field_widget_action']), $selector);
   }
 
   /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\thunder_ai_prompt_management\Form;
 
+use Drupal\Core\DependencyInjection\AutowireTrait;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
@@ -12,29 +13,22 @@ use Drupal\ai\AiProviderPluginManager;
 use Drupal\thunder_ai_prompt_management\AIPromptInterface;
 use Drupal\thunder_ai_prompt_management\AIPromptRunner;
 use Drupal\thunder_ai_prompt_management\Plugin\Field\FieldWidget\EntityContextWidget;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 /**
  * Runs an AI prompt against a real entity, for testing and refinement.
  */
 final class AIPromptTestForm extends FormBase {
 
+  use AutowireTrait;
+
   public function __construct(
     protected readonly EntityTypeManagerInterface $entityTypeManager,
+    #[Autowire(service: 'ai.provider')]
     protected readonly AiProviderPluginManager $providerPluginManager,
+    #[Autowire(service: 'thunder_ai_prompt_management.prompt_runner')]
     protected readonly AIPromptRunner $promptRunner,
   ) {}
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container): static {
-    return new static(
-      $container->get('entity_type.manager'),
-      $container->get('ai.provider'),
-      $container->get('thunder_ai_prompt_management.prompt_runner'),
-    );
-  }
 
   /**
    * {@inheritdoc}
@@ -49,7 +43,11 @@ final class AIPromptTestForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state, ?AIPromptInterface $ai_prompt_content = NULL): array {
     $form_state->set('ai_prompt_content', $ai_prompt_content);
 
-    $form['prompt_text'] = [
+    $form['prompt_settings'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Prompt settings'),
+    ];
+    $form['prompt_settings']['prompt_text'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Prompt text'),
       '#description' => $this->t('Used as the system prompt. Edit freely to refine it, then save it back to the prompt when you are happy with it.'),
@@ -57,8 +55,7 @@ final class AIPromptTestForm extends FormBase {
       '#required' => TRUE,
       '#rows' => 5,
     ];
-
-    $form['model'] = [
+    $form['prompt_settings']['model'] = [
       '#type' => 'select',
       '#title' => $this->t('Model'),
       '#options' => $this->providerPluginManager->getSimpleProviderModelOptions('chat', FALSE),
@@ -67,7 +64,8 @@ final class AIPromptTestForm extends FormBase {
     ];
 
     $form['contexts'] = [
-      '#type' => 'container',
+      '#type' => 'fieldset',
+      '#title' => $this->t('Test context'),
       '#tree' => FALSE,
     ];
     foreach ($this->allowedContexts($ai_prompt_content) as $type_id => $bundles) {

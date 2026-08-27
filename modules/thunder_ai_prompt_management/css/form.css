@@ -3,6 +3,15 @@
  * Styles for the ai prompt entity form.
  */
 
+/* Full-width fields, matching article's base-info/teaser sections. */
+.content-form__form-section.base-info .field--name-label .form-element {
+  width: 100%;
+}
+
+.content-form__form-section.prompt-content .field--name-prompt .form-element {
+  width: 100%;
+}
+
 /* Claro cards the fieldset itself, which puts the legend inside the card.
    Element selector needed: theme CSS loads after module CSS. */
 fieldset.entity-context-widget {

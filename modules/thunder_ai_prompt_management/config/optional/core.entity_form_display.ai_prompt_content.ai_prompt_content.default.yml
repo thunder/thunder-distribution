@@ -1,0 +1,92 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_group
+    - thunder_ai_prompt_management
+third_party_settings:
+  field_group:
+    group_basis:
+      children:
+        - label
+        - ai_task
+      label: ''
+      region: content
+      parent_name: ''
+      weight: -5
+      format_type: fieldset
+      format_settings:
+        classes: 'content-form__form-section base-info'
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+    group_prompt:
+      children:
+        - prompt
+        - entity_context
+      label: ''
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        classes: 'content-form__form-section prompt-content'
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+id: ai_prompt_content.ai_prompt_content.default
+targetEntityType: ai_prompt_content
+bundle: ai_prompt_content
+mode: default
+content:
+  label:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  ai_task:
+    type: options_select
+    weight: -4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  prompt:
+    type: string_textarea
+    weight: -3
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  entity_context:
+    type: entity_context
+    weight: -2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 15
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 100
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden: {  }

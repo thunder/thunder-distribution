@@ -87,7 +87,15 @@ final class AIPromptForm extends ContentEntityForm {
     if (!$default_model && $default = $this->providerPluginManager->getDefaultProviderForOperationType('chat')) {
       $default_model = $default['provider_id'] . '__' . $default['model_id'];
     }
-    $form['model'] = [
+    // A plain 'select' element doesn't support '#group' (only container-like
+    // types do), so wrap it to join the group_basis field_group fieldset.
+    $form['model_wrapper'] = [
+      '#type' => 'container',
+      '#tree' => FALSE,
+      '#weight' => 5,
+      '#group' => 'group_basis',
+    ];
+    $form['model_wrapper']['model'] = [
       '#type' => 'select',
       '#title' => $this->t('Model'),
       '#description' => $this->t('The AI provider model this prompt is intended for.'),
@@ -95,7 +103,6 @@ final class AIPromptForm extends ContentEntityForm {
       '#default_value' => $default_model,
       '#empty_option' => $this->t('- Select a model -'),
       '#required' => TRUE,
-      '#weight' => 5,
     ];
 
     $form['advanced']['#attributes']['class'][] = 'entity-meta';

@@ -26,7 +26,7 @@ final class AIPromptRunner {
   use StringTranslationTrait;
 
   /**
-   * Asks for several answers at once, so the editor has something to pick from.
+   * Asks for several candidate answers instead of one.
    */
   private const SUGGESTIONS_INSTRUCTION = <<<'TEXT'
 Answer with suggestions only. Do not repeat the task description and do not add
@@ -60,12 +60,14 @@ TEXT;
    * @param string|null $promptText
    *   Prompt text overriding the stored one, so callers can run edited but
    *   unsaved text. Defaults to the prompt entity's own text.
+   * @param string[] $tags
+   *   Operation tags identifying the calling context, for logging/metrics.
    *
    * @return string
    *   The generated text, or an empty string when the provider failed.
    */
-  public function run(AIPromptInterface $prompt, ?ContentEntityInterface $entity, ?string $promptText = NULL): string {
-    $response = $this->chat($prompt, $this->systemPrompt($prompt, $entity, $promptText));
+  public function run(AIPromptInterface $prompt, ?ContentEntityInterface $entity, ?string $promptText = NULL, array $tags = []): string {
+    $response = $this->chat($prompt, $this->systemPrompt($prompt, $entity, $promptText), $tags);
 
     return $response instanceof ChatMessage ? trim($response->getText()) : '';
   }
@@ -77,13 +79,15 @@ TEXT;
    *   The prompt to run.
    * @param \Drupal\Core\Entity\ContentEntityInterface|null $entity
    *   The entity to run against, or NULL to run without entity context.
+   * @param string[] $tags
+   *   Operation tags identifying the calling context, for logging/metrics.
    *
    * @return string[]
    *   The suggestions, or an empty array when the provider failed.
    */
-  public function suggest(AIPromptInterface $prompt, ?ContentEntityInterface $entity): array {
+  public function suggest(AIPromptInterface $prompt, ?ContentEntityInterface $entity, array $tags = []): array {
     $systemPrompt = $this->systemPrompt($prompt, $entity) . "\n\n" . self::SUGGESTIONS_INSTRUCTION;
-    $response = $this->chat($prompt, $systemPrompt);
+    $response = $this->chat($prompt, $systemPrompt, $tags);
     if (!$response instanceof ChatMessage) {
       return [];
     }
@@ -128,10 +132,17 @@ TEXT;
   /**
    * Sends one chat request against the prompt's configured model.
    *
+   * @param \Drupal\thunder_ai_prompt_management\AIPromptInterface $prompt
+   *   The prompt, supplying the configured model.
+   * @param string $systemPrompt
+   *   The fully built system prompt to send.
+   * @param string[] $tags
+   *   Operation tags identifying the calling context, for logging/metrics.
+   *
    * @return \Drupal\ai\OperationType\Chat\ChatMessage|null
    *   The normalized response, or NULL when the provider failed.
    */
-  private function chat(AIPromptInterface $prompt, string $systemPrompt): ?ChatMessage {
+  private function chat(AIPromptInterface $prompt, string $systemPrompt, array $tags = []): ?ChatMessage {
     try {
       $provider = $this->providerPluginManager->getSetProvider('chat', (string) $prompt->get('model')->value);
       // The chat API needs a user turn; instructions live in the system prompt.
@@ -139,7 +150,7 @@ TEXT;
       $input->setSystemPrompt($systemPrompt);
       $response = $provider['provider_id']->chat($input, $provider['model_id'], [
         'thunder_ai_prompt_management',
-        'field_widget_action',
+        ...$tags,
       ])->getNormalized();
 
       return $response instanceof ChatMessage ? $response : NULL;
