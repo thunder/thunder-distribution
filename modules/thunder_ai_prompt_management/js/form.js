@@ -57,14 +57,22 @@
    */
   Drupal.behaviors.aiPromptTestFormStickyProgress = {
     attach(context) {
-      once('ai-prompt-test-form-sticky-progress', '.ai-prompt-test-form [data-drupal-selector="edit-actions"]', context).forEach((actions) => {
+      once(
+        'ai-prompt-test-form-sticky-progress',
+        '.ai-prompt-test-form [data-drupal-selector="edit-actions"]',
+        context,
+      ).forEach((actions) => {
         actions.querySelectorAll('[data-drupal-selector]').forEach((button) => {
-          const sticky = document.querySelector(`[data-drupal-selector="gin-sticky-${button.dataset.drupalSelector}"]`);
+          const sticky = document.querySelector(
+            `[data-drupal-selector="gin-sticky-${button.dataset.drupalSelector}"]`,
+          );
           if (!sticky) {
             return;
           }
           const container = sticky.closest('.gin-sticky-form-actions');
-          let spinner = container && container.querySelector(':scope > .ai-prompt-test-form-spinner');
+          let spinner =
+            container &&
+            container.querySelector(':scope > .ai-prompt-test-form-spinner');
           if (container && !spinner) {
             spinner = document.createElement('span');
             spinner.className = 'ai-prompt-test-form-spinner';
@@ -77,7 +85,10 @@
               spinner.classList.toggle('is-active', button.disabled);
             }
           });
-          observer.observe(button, { attributes: true, attributeFilter: ['disabled'] });
+          observer.observe(button, {
+            attributes: true,
+            attributeFilter: ['disabled'],
+          });
         });
       });
     },
