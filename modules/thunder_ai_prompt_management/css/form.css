@@ -114,3 +114,71 @@ fieldset.entity-context-widget {
     gap: var(--gin-spacing-xs, 4px);
   }
 }
+
+/* Test-prompt form: match the edit form's full-width fields. */
+.ai-prompt-test-form textarea,
+.ai-prompt-test-form select {
+  width: 100%;
+}
+
+.ai-prompt-test-form__response {
+  max-height: 32rem;
+  padding: var(--gin-spacing-m, 16px);
+  border: 1px solid var(--gin-border-color-form-element, #d4d4d8);
+  border-radius: var(--gin-border-m, 8px);
+  overflow: auto;
+  background-color: var(--gin-bg-input, #fff);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Core's default Ajax throbber is a faint background icon Gin doesn't
+   restyle outside dialogs/media library, so it's easy to miss here. */
+@keyframes ai-prompt-test-form-throbber {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ai-prompt-test-form .ajax-progress {
+  display: inline-flex;
+  align-items: center;
+  margin-inline-start: var(--gin-spacing-s, 12px);
+}
+
+.ai-prompt-test-form .ajax-progress-throbber .throbber {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-inline-end: var(--gin-spacing-xs, 4px);
+  padding: 0;
+  border: 2px solid var(--gin-color-primary, #1473e6);
+  border-inline-end: 2px dotted transparent;
+  border-radius: 50%;
+  background: none;
+  animation: ai-prompt-test-form-throbber .75s linear infinite;
+}
+
+.ai-prompt-test-form .ajax-progress-throbber .message {
+  color: var(--gin-color-primary, #1473e6);
+  font-weight: var(--gin-font-weight-semibold, 600);
+}
+
+/* Gin's sticky-header button clones sit outside the real #actions
+   container, so they need their own loading indicator. js/form.js appends
+   this as a real sibling element and toggles ".is-active" on it — ::after
+   never paints on <input> elements, which is what the sticky buttons are. */
+.ai-prompt-test-form-spinner {
+  display: none;
+  width: 0.875rem;
+  height: 0.875rem;
+  margin-inline-start: var(--gin-spacing-s, 12px);
+  border: 2px solid var(--gin-color-primary, #1473e6);
+  border-inline-end: 2px dotted transparent;
+  border-radius: 50%;
+  animation: ai-prompt-test-form-throbber .75s linear infinite;
+}
+
+.ai-prompt-test-form-spinner.is-active {
+  display: inline-block;
+}

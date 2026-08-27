@@ -43,6 +43,15 @@ final class AIPromptTestForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state, ?AIPromptInterface $ai_prompt_content = NULL): array {
     $form_state->set('ai_prompt_content', $ai_prompt_content);
 
+    $form['#attributes']['class'][] = 'ai-prompt-test-form';
+    $form['#attached']['library'][] = 'thunder_ai_prompt_management/form';
+    $form['#prefix'] = '<div id="ai-prompt-test-form-wrapper">';
+    $form['#suffix'] = '</div>';
+
+    $form['status_messages'] = [
+      '#type' => 'status_messages',
+    ];
+
     $form['prompt_settings'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Prompt settings'),
@@ -89,11 +98,21 @@ final class AIPromptTestForm extends FormBase {
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Run test'),
+      '#ajax' => [
+        'callback' => '::ajaxRefreshForm',
+        'wrapper' => 'ai-prompt-test-form-wrapper',
+        'progress' => ['type' => 'throbber', 'message' => $this->t('Running the prompt…')],
+      ],
     ];
     $form['actions']['save'] = [
       '#type' => 'submit',
       '#value' => $this->t('Save prompt'),
       '#submit' => ['::savePrompt'],
+      '#ajax' => [
+        'callback' => '::ajaxRefreshForm',
+        'wrapper' => 'ai-prompt-test-form-wrapper',
+        'progress' => ['type' => 'throbber', 'message' => $this->t('Saving…')],
+      ],
     ];
 
     $response = $form_state->get('response');
@@ -104,12 +123,19 @@ final class AIPromptTestForm extends FormBase {
         '#open' => TRUE,
         'text' => [
           '#type' => 'inline_template',
-          '#template' => '<pre>{{ text }}</pre>',
+          '#template' => '<pre class="ai-prompt-test-form__response">{{ text }}</pre>',
           '#context' => ['text' => $response],
         ],
       ];
     }
 
+    return $form;
+  }
+
+  /**
+   * AJAX callback returning the rebuilt form after a submit or save.
+   */
+  public function ajaxRefreshForm(array &$form, FormStateInterface $form_state): array {
     return $form;
   }
 
