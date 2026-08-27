@@ -38,10 +38,11 @@ interface AiDisclosureWriterInterface {
   public function clearDigitalSourceType(string $realPath): bool;
 
   /**
-   * Checks whether the exiftool binary is available.
+   * Checks whether the underlying metadata tool is available.
    *
    * @return bool
-   *   TRUE if exiftool was found on PATH, FALSE otherwise.
+   *   TRUE if the tool is available and writes will be attempted,
+   *   FALSE if the writer will degrade to a no-op.
    */
   public function isAvailable(): bool;
 
@@ -56,5 +57,19 @@ interface AiDisclosureWriterInterface {
    *   embedded or it could not be read.
    */
   public function readDigitalSourceType(string $realPath): ?string;
+
+  /**
+   * Returns runtime requirement rows for this writer.
+   *
+   * Called from hook_runtime_requirements(). Each implementation reports
+   * its own tool-specific requirements (missing binary, wrong version,
+   * missing PHP extension, ...) so the hook stays tool-agnostic.
+   *
+   * @return array
+   *   An array of requirement rows keyed by requirement id, in the shape
+   *   documented for hook_runtime_requirements(). Empty when there is
+   *   nothing to report.
+   */
+  public function getRequirements(): array;
 
 }

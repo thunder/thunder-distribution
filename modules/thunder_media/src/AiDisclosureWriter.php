@@ -2,7 +2,10 @@
 
 namespace Drupal\thunder_media;
 
+use Drupal\Core\Extension\Requirement\RequirementSeverity;
 use Drupal\Core\Logger\LoggerChannelTrait;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\StringTranslation\TranslationInterface;
 use Symfony\Component\Process\Exception\ExceptionInterface;
 use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
@@ -13,11 +16,16 @@ use Symfony\Component\Process\Process;
 class AiDisclosureWriter implements AiDisclosureWriterInterface {
 
   use LoggerChannelTrait;
+  use StringTranslationTrait;
 
   /**
    * The exiftool binary path, FALSE if not found, or NULL if not resolved.
    */
   protected string|false|null $exiftoolPath = NULL;
+
+  public function __construct(TranslationInterface $stringTranslation) {
+    $this->stringTranslation = $stringTranslation;
+  }
 
   /**
    * {@inheritdoc}
@@ -38,6 +46,23 @@ class AiDisclosureWriter implements AiDisclosureWriterInterface {
    */
   public function isAvailable(): bool {
     return $this->findExiftool() !== FALSE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getRequirements(): array {
+    if ($this->isAvailable()) {
+      return [];
+    }
+    return [
+      'thunder_media_exiftool' => [
+        'title' => $this->t('Thunder Media: exiftool'),
+        'value' => $this->t('Not found'),
+        'description' => $this->t('The "exiftool" binary was not found on PATH. Images flagged via the "AI disclosure" field will not have AI-disclosure metadata embedded until it is installed.'),
+        'severity' => RequirementSeverity::Warning,
+      ],
+    ];
   }
 
   /**
