@@ -18,6 +18,9 @@ core.entity_form_display.media.image.default:
           group_credits:
             children:
               - field_digital_source_type
+    delete:
+      hidden:
+        field_digital_source_type: true
 core.entity_form_display.media.image.bulk_edit:
   expected_config: {}
   update_actions:
@@ -29,6 +32,9 @@ core.entity_form_display.media.image.bulk_edit:
           region: content
           settings: {}
           third_party_settings: {}
+    delete:
+      hidden:
+        field_digital_source_type: true
 core.entity_form_display.media.image.media_library:
   expected_config: {}
   update_actions:
@@ -40,3 +46,6 @@ core.entity_form_display.media.image.media_library:
           region: content
           settings: {}
           third_party_settings: {}
+    delete:
+      hidden:
+        field_digital_source_type: true
