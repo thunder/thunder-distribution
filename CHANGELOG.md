@@ -1,5 +1,13 @@
 # Changelog
 
+## [8.4.3](https://github.com/thunder/thunder-distribution/tree/8.4.3) 2026-08-31
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.4.2...8.4.3)
+
+- Remove the hidden `field_digital_source_type` entry from the image media form displays in the
+  `thunder_post_update_0007_add_ai_fields_to_image_media` update, so the field is not duplicated on
+  sites that already had it hidden before the update ran.
+
 ## [8.4.2](https://github.com/thunder/thunder-distribution/tree/8.4.2) 2026-08-31
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.4.1...8.4.2)
