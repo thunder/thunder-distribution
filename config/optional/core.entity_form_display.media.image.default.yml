@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.media.image.field_copyright
     - field.field.media.image.field_description
+    - field.field.media.image.field_digital_source_type
     - field.field.media.image.field_expires
     - field.field.media.image.field_image
     - field.field.media.image.field_source
@@ -14,6 +15,7 @@ dependencies:
     - datetime
     - field_group
     - focal_point
+    - options
     - tagify
     - text
 third_party_settings:
@@ -38,6 +40,7 @@ third_party_settings:
       children:
         - field_copyright
         - field_source
+        - field_digital_source_type
       label: ''
       region: content
       parent_name: ''
@@ -74,6 +77,12 @@ content:
     settings:
       rows: 5
       placeholder: ''
+    third_party_settings: {  }
+  field_digital_source_type:
+    type: options_select
+    weight: 6
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_expires:
     type: datetime_default
@@ -122,7 +131,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 6
+    weight: 7
     region: content
     settings:
       display_label: true

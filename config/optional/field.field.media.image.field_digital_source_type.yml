@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_digital_source_type
+    - media.type.image
+  module:
+    - options
+id: media.image.field_digital_source_type
+field_name: field_digital_source_type
+entity_type: media
+bundle: image
+label: 'AI disclosure'
+description: 'If this image was created or edited with the help of AI, select which applies. This is embedded into the image file as IPTC/XMP metadata on save.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

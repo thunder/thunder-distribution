@@ -140,6 +140,66 @@ GQL;
   }
 
   /**
+   * Tests the digitalSourceType field on the teaser image.
+   *
+   * @throws \GuzzleHttp\Exception\GuzzleException
+   */
+  public function testDigitalSourceType(): void {
+
+    $query = <<<GQL
+      query (\$path: String!) {
+        page(path: \$path) {
+          name
+          ... on Article {
+            teaser {
+              image {
+                name
+                digitalSourceType
+              }
+            }
+          }
+        }
+      }
+GQL;
+
+    $node = \Drupal::service('entity.repository')->loadEntityByUuid('node', '0bd5c257-2231-450f-b4c2-ab156af7b78d');
+    $variables = ['path' => $node->toUrl()->toString()];
+
+    // By default the demo fixture does not set the field, so it resolves
+    // to NULL.
+    $response = $this->query($query, Json::encode($variables));
+    $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
+    $this->assertEqualsCanonicalizing([
+      'name' => 'Burda Launches Open-Source CMS Thunder',
+      'teaser' => [
+        'image' => [
+          'name' => 'Thunder',
+          'digitalSourceType' => NULL,
+        ],
+      ],
+    ], $this->jsonDecode($response->getBody())['data']['page']);
+
+    // Set the AI disclosure and confirm it is exposed via the API. The
+    // upload-only lock would otherwise block this direct API change.
+    $this->config('thunder_media.settings')->set('ai_disclosure_upload_only', FALSE)->save();
+    $this->loadMediaByUuid('17965877-27b2-428f-8b8c-7dccba9786e5')
+      ->set('field_digital_source_type', 'trainedAlgorithmicMedia')
+      ->save();
+
+    $response = $this->query($query, Json::encode($variables));
+    $this->assertEquals(200, $response->getStatusCode(), 'Response not 200');
+    $this->assertEqualsCanonicalizing([
+      'name' => 'Burda Launches Open-Source CMS Thunder',
+      'teaser' => [
+        'image' => [
+          'name' => 'Thunder',
+          'digitalSourceType' => 'trainedAlgorithmicMedia',
+        ],
+      ],
+    ], $this->jsonDecode($response->getBody())['data']['page']);
+  }
+
+  /**
    * Validates that non-existing entity links do not generate a warning.
    */
   public function testNonExistingEntityLinks(): void {

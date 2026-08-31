@@ -77,6 +77,7 @@ class ContentTranslationTest extends ThunderTestBase {
       'field.field.media.twitter.field_author',
       'field.field.media.twitter.field_content',
       'field.field.media.twitter.field_url',
+      'field.field.media.image.field_digital_source_type',
     ];
     foreach (FieldConfig::loadMultiple() as $field) {
       if (in_array($field->getConfigDependencyName(), $whitelist)) {

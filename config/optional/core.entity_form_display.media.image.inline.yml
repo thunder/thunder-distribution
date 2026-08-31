@@ -5,6 +5,7 @@ dependencies:
     - core.entity_form_mode.media.inline
     - field.field.media.image.field_copyright
     - field.field.media.image.field_description
+    - field.field.media.image.field_digital_source_type
     - field.field.media.image.field_expires
     - field.field.media.image.field_image
     - field.field.media.image.field_source
@@ -149,6 +150,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_digital_source_type: true
   field_tags: true
   langcode: true
   moderation_state: true

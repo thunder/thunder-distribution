@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - options
+id: media.field_digital_source_type
+field_name: field_digital_source_type
+entity_type: media
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: trainedAlgorithmicMedia
+      label: 'Created with AI'
+    -
+      value: compositeWithTrainedAlgorithmicMedia
+      label: 'Edited with AI'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

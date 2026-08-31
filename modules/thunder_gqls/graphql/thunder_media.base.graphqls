@@ -62,6 +62,7 @@ type MediaImage implements Media & Image & Entity {
   description: String
   tags: [Tags]
   source: String
+  digitalSourceType: String
 }
 
 type MediaVideo implements Video & Media & Entity {

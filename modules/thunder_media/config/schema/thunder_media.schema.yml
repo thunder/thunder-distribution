@@ -1,6 +1,12 @@
 thunder_media.settings:
   type: config_object
   mapping:
+    ai_disclosure_upload_only:
+      type: boolean
+      label: 'Only allow the AI disclosure to be set on upload'
+    ai_disclosure_auto_detect:
+      type: boolean
+      label: 'Automatically detect AI disclosure on upload'
     enable_filefield_remove_button:
       type: boolean
       label: 'Enable remove button'

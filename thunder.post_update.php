@@ -243,3 +243,66 @@ function thunder_post_update_0006_remove_empty_media_items(array &$sandbox): ?Tr
 
   return $message;
 }
+
+/**
+ * Add "Edited with AI" and "Created with AI" fields to image media.
+ */
+function thunder_post_update_0007_add_ai_fields_to_image_media(): string {
+  // Creating the field below makes Drupal core's EntityDisplayRebuilder
+  // resave every view/form display of the "media" entity type (all
+  // bundles, not just "image"). Some sites still carry a "breakpoints"
+  // component setting left over from a long-removed widget/formatter
+  // version (e.g. an orphaned "image.slick" view mode from before Thunder
+  // dropped blazy/slick) that is no longer recognized by that component's
+  // current config schema, which makes the resave fail schema casting.
+  //
+  // Resave every such display *now*, before the field import triggers an
+  // uncatchable rebuild, and only strip "breakpoints" from a display that
+  // actually fails to save because of it. A display whose component still
+  // legitimately defines and uses "breakpoints" (e.g. a site that kept
+  // blazy/slick installed and configured) saves successfully on the first
+  // try and is never touched.
+  foreach (['entity_view_display', 'entity_form_display'] as $entity_type_id) {
+    $config_prefix = "core.$entity_type_id.media.";
+    $storage = \Drupal::entityTypeManager()->getStorage($entity_type_id);
+    foreach (\Drupal::configFactory()->listAll($config_prefix) as $config_name) {
+      $display = $storage->load(substr($config_name, strlen("core.$entity_type_id.")));
+      if (!$display) {
+        continue;
+      }
+      try {
+        $display->save();
+      }
+      // Schema casting deep inside Config::save() throws this for a
+      // component setting the active schema no longer defines; PHPStan
+      // cannot trace that dynamic call chain, so it wrongly reports the
+      // catch as dead.
+      // @phpstan-ignore-next-line
+      catch (\InvalidArgumentException $e) {
+        if (!str_contains($e->getMessage(), 'breakpoints')) {
+          throw $e;
+        }
+        foreach ($display->get('content') as $field_name => $component) {
+          if (is_array($component) && array_key_exists('breakpoints', $component['settings'] ?? [])) {
+            unset($component['settings']['breakpoints']);
+            $display->setComponent($field_name, $component);
+          }
+        }
+        $display->save();
+      }
+    }
+  }
+
+  /** @var \Drupal\update_helper\Updater $updater */
+  $updater = \Drupal::service('update_helper.updater');
+
+  // Import the field and place its widget.
+  try {
+    $updater->executeUpdate('thunder', 'thunder_post_update_0007_add_ai_fields_to_image_media');
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('thunder')->warning('Could not import the "field_digital_source_type" field: @message', ['@message' => $e->getMessage()]);
+  }
+
+  return $updater->logger()->output();
+}

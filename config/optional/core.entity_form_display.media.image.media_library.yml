@@ -5,6 +5,7 @@ dependencies:
     - core.entity_form_mode.media.media_library
     - field.field.media.image.field_copyright
     - field.field.media.image.field_description
+    - field.field.media.image.field_digital_source_type
     - field.field.media.image.field_expires
     - field.field.media.image.field_image
     - field.field.media.image.field_source
@@ -15,6 +16,7 @@ dependencies:
     - datetime
     - entity_reference_actions
     - image
+    - options
     - tagify
 id: media.image.media_library
 targetEntityType: media
@@ -28,6 +30,12 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_digital_source_type:
+    type: options_select
+    weight: 5
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_expires:
     type: datetime_default
