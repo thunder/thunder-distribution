@@ -10,7 +10,7 @@ interface AiDisclosureWriterInterface {
   /**
    * Base URI of the IPTC "Digital Source Type" controlled vocabulary.
    */
-  const BASE_URI = 'https://cv.iptc.org/newscodes/digitalsourcetype/';
+  const BASE_URI = 'http://cv.iptc.org/newscodes/digitalsourcetype/';
 
   /**
    * Writes a Digital Source Type term into the image at the given path.
