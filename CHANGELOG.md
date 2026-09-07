@@ -1,5 +1,11 @@
 # Changelog
 
+## [8.4.4](https://github.com/thunder/thunder-distribution/tree/8.4.4) 2026-09-07
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.4.3...8.4.4)
+
+- Fix digitalsourcetype uri scheme for AI images.
+
 ## [8.4.3](https://github.com/thunder/thunder-distribution/tree/8.4.3) 2026-08-31
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.4.2...8.4.3)
