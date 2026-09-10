@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.xymatic.field_aspect_ratio
     - field.field.media.xymatic.field_description
     - field.field.media.xymatic.field_media_xymatic
     - media.type.xymatic
@@ -66,6 +67,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  field_aspect_ratio: true
   name: true
   publish_on: true
   publish_state: true

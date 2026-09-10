@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.xymatic.field_aspect_ratio
     - field.field.media.xymatic.field_description
     - field.field.media.xymatic.field_media_xymatic
     - image.style.large
@@ -37,6 +38,7 @@ content:
     region: content
 hidden:
   created: true
+  field_aspect_ratio: true
   field_media_xymatic: true
   langcode: true
   name: true

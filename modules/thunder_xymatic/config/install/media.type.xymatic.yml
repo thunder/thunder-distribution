@@ -35,6 +35,7 @@ source_configuration:
   source_field: field_media_xymatic
   thumbnails_directory: 'public://xymatic_thumbnails/[date:custom:Y-m]'
 field_map:
+  aspectRatio: field_aspect_ratio
   default_name: name
   enabled: status
   summary: field_description

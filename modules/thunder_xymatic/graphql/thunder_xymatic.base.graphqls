@@ -15,4 +15,5 @@ type MediaXymatic implements Video & Media & Entity{
   fallbackMedia: Media
 
   src: String
+  aspectRatio: Float
 }

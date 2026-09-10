@@ -43,6 +43,10 @@ class ThunderXymaticSchemaExtension extends ThunderSchemaExtensionPluginBase {
     $this->addFieldResolverIfNotExists('MediaXymatic', 'src',
       $this->builder->produce('media_source_field')->map('media', $this->builder->fromParent())
     );
+
+    $this->addFieldResolverIfNotExists('MediaXymatic', 'aspectRatio',
+      $this->builder->fromPath('entity', 'field_aspect_ratio.value')
+    );
   }
 
 }

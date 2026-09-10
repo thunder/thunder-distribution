@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_aspect_ratio
+    - media.type.xymatic
+id: media.xymatic.field_aspect_ratio
+field_name: field_aspect_ratio
+entity_type: media
+bundle: xymatic
+label: 'Aspect ratio'
+description: 'Video aspect ratio (width / height). Values < 1 indicate portrait orientation.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float
