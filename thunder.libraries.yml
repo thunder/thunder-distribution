@@ -7,3 +7,8 @@ module.configure.form:
   css:
     theme:
       css/module-configure-form.css: {}
+
+media_library.gin:
+  css:
+    theme:
+      css/media-library.gin.css: {}
