@@ -1,5 +1,11 @@
 # Changelog
 
+## [8.4.5](https://github.com/thunder/thunder-distribution/tree/8.4.5) 2026-09-07
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.4.4...8.4.5)
+
+- Fix preview images in Gin
+
 ## [8.4.4](https://github.com/thunder/thunder-distribution/tree/8.4.4) 2026-09-07
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.4.3...8.4.4)
