@@ -48,7 +48,7 @@ class AutosaveFormTest extends ThunderJavascriptTestBase {
     $this->pressRejectButton();
     $term = $this->loadTermByUuid('35bdba6e-9b45-472a-8fda-11e7e69de71b');
 
-    $this->assertEquals('[{"value":"' . $term->id() . '","label":"' . $term->getName() . '","entity_id":"' . $term->id() . '","info_label":"","editable":false}]', $page->findField('field_tags')->getValue());
+    $this->assertEquals('[{"value":"' . $term->id() . '","label":"' . $term->getName() . '","entity_id":"' . $term->id() . '","info_label":"","editable":false,"parent_name":""}]', $page->findField('field_tags')->getValue());
     $this->assertEquals('Come to DrupalCon New Orleans', $page->findField('title[0][value]')->getValue());
     $this->assertSession()->elementNotExists('css', '.form-item--field-paragraphs-5-subform-field-text-0-value');
 
