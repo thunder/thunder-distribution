@@ -5,12 +5,15 @@ namespace Drupal\thunder_article;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Theme\ThemeManagerInterface;
+use Drupal\thunder\ActiveThemesTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Base for handler for node add/edit forms.
  */
 readonly class ThunderNodeFormHelper implements ContainerInjectionInterface {
+
+  use ActiveThemesTrait;
 
   /**
    * Constructs a ThunderNodeFormHelper object.
@@ -37,17 +40,6 @@ readonly class ThunderNodeFormHelper implements ContainerInjectionInterface {
     if (isset($this->getActiveThemes()['gin'])) {
       $form['#attached']['library'][] = 'thunder_article/article-form';
     }
-  }
-
-  /**
-   * Return current active theme including base themes.
-   */
-  public function getActiveThemes(): array {
-    $activeTheme = $this->themeManager->getActiveTheme();
-    $activeThemes = $activeTheme->getBaseThemeExtensions();
-    $activeThemes[$activeTheme->getName()] = $activeTheme;
-
-    return $activeThemes;
   }
 
 }

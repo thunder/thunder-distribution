@@ -14,6 +14,7 @@ use Drupal\content_moderation\ModerationInformationInterface;
 use Drupal\content_moderation\StateTransitionValidationInterface;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
+use Drupal\thunder\ActiveThemesTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -23,6 +24,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
 
+  use ActiveThemesTrait;
   use StringTranslationTrait;
 
   /**
@@ -113,17 +115,6 @@ class ThunderWorkflowFormHelper implements ContainerInjectionInterface {
       $this->createRevisionRevertButton($form, $entity);
     }
 
-  }
-
-  /**
-   * Return current active theme including base themes.
-   */
-  public function getActiveThemes(): array {
-    $activeTheme = $this->themeManager->getActiveTheme();
-    $activeThemes = $activeTheme->getBaseThemeExtensions();
-    $activeThemes[$activeTheme->getName()] = $activeTheme;
-
-    return $activeThemes;
   }
 
   /**
