@@ -1,5 +1,11 @@
 # Changelog
 
+## [8.4.6](https://github.com/thunder/thunder-distribution/tree/8.4.6) 2026-13-10
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.4.5...8.4.6)
+
+- Fix GraphQL config schema definition.
+
 ## [8.4.5](https://github.com/thunder/thunder-distribution/tree/8.4.5) 2026-09-07
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.4.4...8.4.5)
