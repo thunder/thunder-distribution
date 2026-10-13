@@ -1,0 +1,14 @@
+/*
+ * Gin keeps media library previews square with padding-block-end: 100%.
+ * Claro's min-height on the same element (added in Drupal 11.4.8 by
+ * https://www.drupal.org/i/3614246) is added on top of that padding and
+ * stretches the previews to twice their height. Reset it until Gin ships
+ * https://git.drupalcode.org/project/gin/-/work_items/3598621.
+ *
+ * Module and profile CSS is always aggregated before theme CSS, so the
+ * selectors need a higher specificity than Claro's to win.
+ */
+.media-library-item.media-library-item--grid .media-library-item__preview,
+.media-library-add-form__selected-media .media-library-item.media-library-item--small .media-library-item__preview {
+  min-height: 0;
+}
