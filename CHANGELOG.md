@@ -1,5 +1,11 @@
 # Changelog
 
+## [8.4.7](https://github.com/thunder/thunder-distribution/tree/8.4.7) 2026-12-11
+
+[Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.4.6...8.4.7)
+
+- Updated pathauto module and remove patch from [#3579655](https://drupal.org/i/3579655).
+
 ## [8.4.6](https://github.com/thunder/thunder-distribution/tree/8.4.6) 2026-13-10
 
 [Full Changelog](https://github.com/thunder/thunder-distribution/compare/8.4.5...8.4.6)
