@@ -42,9 +42,6 @@
             },
             "drupal/gin": {
                 "Issue #3583491: fix using null as an array offset is deprecated": "https://www.drupal.org/files/issues/2026-06-17/3583491.diff"
-            },
-            "drupal/pathauto": {
-                "Issue #3579655: Skip per-id pattern cache for new entities to avoid using NULL as an array offset (deprecated in PHP 8.5).": "https://www.drupal.org/files/issues/2026-06-17/3579655.diff"
             }
         }
     },
@@ -89,7 +86,7 @@
         "drupal/paragraphs": "^1.22",
         "drupal/paragraphs_features": "^2.2",
         "drupal/password_policy": "^4.0.3",
-        "drupal/pathauto": "^1.15",
+        "drupal/pathauto": "^1.16",
         "drupal/responsive_preview": "^2.3.2",
         "drupal/redirect": "^1.7",
         "drupal/scheduler": "^2.2.0",
